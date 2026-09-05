@@ -84,6 +84,38 @@ const SUPABASE_ANON_KEY = "sb_publishable_3CO8RH3_6TZY6Bjv3AthLA_6Nh_yPf-";
 // Nécessite le package "@supabase/supabase-js" (npm install @supabase/supabase-js) dans ton projet.
 import { createClient } from "@supabase/supabase-js";
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
+// Sur un vrai site déployé (Vercel), window.storage n'existe pas. Cet objet reproduit
+// exactement la même interface (get/set/list) mais persiste réellement les données dans
+// Supabase (table kv_store — voir supabase-function/kv_store_schema.sql pour la créer),
+// de sorte que le reste du code n'a besoin d'aucun autre changement.
+window.storage = {
+  async get(key, shared = false) {
+    const { data, error } = await supabase.from("kv_store").select("value").eq("key", key).maybeSingle();
+    if (error) throw error;
+    if (!data) throw new Error("not_found");
+    return { key, value: data.value, shared };
+  },
+  async set(key, value, shared = false) {
+    const { data: userData } = await supabase.auth.getUser();
+    const ownerId = userData && userData.user ? userData.user.id : null;
+    const { error } = await supabase.from("kv_store").upsert({ key, value, shared, owner_id: ownerId, updated_at: new Date().toISOString() });
+    if (error) throw error;
+    return { key, value, shared };
+  },
+  async delete(key, shared = false) {
+    const { error } = await supabase.from("kv_store").delete().eq("key", key);
+    if (error) throw error;
+    return { key, deleted: true, shared };
+  },
+  async list(prefix = "", shared = false) {
+    let query = supabase.from("kv_store").select("key");
+    if (prefix) query = query.like("key", `${prefix}%`);
+    const { data, error } = await query;
+    if (error) throw error;
+    return { keys: (data || []).map((r) => r.key), prefix, shared };
+  },
+};
 // ---- Configuration Firebase (notifications push — alertes d'anomalie, Business 1) ----
 // Nécessite le package "firebase" (npm install firebase) dans ton projet.
 import { initializeApp } from "firebase/app";
@@ -271,6 +303,11 @@ const TRANSLATIONS = {
     resetPwTitle: "Nouveau mot de passe", resetPwDesc: "Choisis un nouveau mot de passe pour ton compte.", resetPwNewPlaceholder: "Nouveau mot de passe", resetPwConfirmPlaceholder: "Confirmer le mot de passe",
     resetPwTooShort: "Le mot de passe doit contenir au moins 6 caractères.", resetPwMismatch: "Les deux mots de passe ne correspondent pas.", resetPwError: "Une erreur est survenue. Réessaie ou redemande un lien.",
     resetPwSubmit: "Valider", resetPwSuccessTitle: "Mot de passe mis à jour ✓", resetPwSuccessDesc: "Tu peux maintenant te connecter avec ton nouveau mot de passe.", resetPwBackToLogin: "Retour à la connexion",
+    accountSuspendedTitle: "Compte suspendu", accountSuspendedDesc: "Ton compte a été suspendu par un administrateur. Contacte le support pour plus d'informations.",
+    biometricUnlockBtn: "Déverrouiller avec empreinte / visage", biometricUnlockError: "Empreinte/visage non reconnu. Utilise ton code PIN.",
+    continueWithGoogle: "Continuer avec Google", orSeparator: "OU", googleLoginError: "Connexion avec Google impossible. Réessaie ou utilise ton identifiant.",
+    googleOnboardingTitle: "Finalise ton compte", googleOnboardingDesc: "Encore quelques infos sur ta boutique avant de commencer.", googleOnboardingSubmit: "Créer ma boutique",
+    legalConsentText: "En continuant, tu acceptes nos Conditions d'utilisation et notre Politique de confidentialité.",
     setNouvellesFonctionnalites: "Nouvelles fonctionnalités", setCommentUtiliserLaCaisseVocale: "Comment utiliser la caisse vocale ?", setDansLongletVenteAppuieDicter: "Dans l'onglet Vente, appuie sur « Dicter la vente » et énonce les produits et quantités à voix haute (ex : « 2 sacs de riz et 1 litre d'huile pour Oumar »). Vérifie le résultat proposé avant de l'ajouter au panier.",
     setCommentUtiliserLaVenteParPhoto: "Comment utiliser la vente par photo ?", setDansLongletVenteAppuiePhoto: "Dans l'onglet Vente, appuie sur « Photo produits », prends une ou plusieurs photos des articles posés sur le comptoir, puis coche dans la liste les produits présents pour les ajouter au panier.",
     setPourquoiLaPhotoEstObligatoire: "Pourquoi la photo d'un produit est-elle obligatoire ?", setLaPhotoPermetLaReconnaissance: "La photo permet de reconnaître visuellement le produit lors d'une vente par photo. Sans photo, un produit ne peut pas être identifié dans cette liste.",
@@ -5382,11 +5419,32 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
     if (p && shop) return `${p}_${shop}`;
     return p || shop;
   })();
+  // Connexion "Continuer avec Google" — utilise le fournisseur OAuth natif de
+  // Supabase (configuré côté dashboard, aucune clé secrète exposée ici).
+  const [googleLoginBusy, setGoogleLoginBusy] = useState(false);
+  const loginWithGoogle = async () => {
+    setGoogleLoginBusy(true);
+    setError("");
+    try {
+      const { error: oauthError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.origin },
+      });
+      if (oauthError) throw oauthError;
+      // La redirection vers Google se déclenche automatiquement ; l'utilisateur
+      // revient ensuite sur l'app déjà connecté, sans autre action ici.
+    } catch (err) {
+      setError(t(lang, "googleLoginError"));
+      setGoogleLoginBusy(false);
+    }
+  };
   const loginSubmit = async () => {
     setError("");
     if (adminMode) {
-      if (pin === ADMIN_PIN) onAdminLogin();
-      else setError(t(lang, "adminPinError"));
+      // Accès désactivé : le panneau admin intégré (PIN codé en dur) a été
+      // remplacé par un panneau séparé avec vraie authentification Supabase,
+      // pour des raisons de sécurité (voir supabase-function/admin-api).
+      setError(t(lang, "adminPinError"));
       return;
     }
     if (!username.trim() || !pin.trim()) {
@@ -5588,6 +5646,24 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
               {adminMode ? t(lang, "adminSpaceDesc") : t(lang, "loginSubtitle")}
             </p>
             {!adminMode && (
+              <>
+                <button
+                  onClick={loginWithGoogle}
+                  disabled={googleLoginBusy}
+                  className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2.5"
+                  style={{ background: "#15162C", color: "white", opacity: googleLoginBusy ? 0.6 : 1 }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20.5H24v7h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.6 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 15.5 4 8.2 8.8 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.5 0 10.5-2.1 14.3-5.6l-6.6-5.6C29.6 35.7 26.9 36.7 24 36.7c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C8.1 40.1 15.5 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20.5H24v7h11.3c-.8 2.3-2.2 4.3-4.1 5.7l6.6 5.6C40.9 36.6 44 30.9 44 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                  {googleLoginBusy ? t(lang, "wait") : t(lang, "continueWithGoogle")}
+                </button>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
+                  <span className="text-[11px] font-semibold" style={{ color: "#9B9DB0" }}>{t(lang, "orSeparator")}</span>
+                  <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
+                </div>
+              </>
+            )}
+            {!adminMode && (
               <div className="mb-3">
                 <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "identifier")}</label>
                 <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder={t(lang, "identifierPlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB" }} />
@@ -5617,6 +5693,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
             <button onClick={() => { setAdminMode(!adminMode); setError(""); setPin(""); }} className="w-full text-center text-[11px] mt-3 underline" style={{ color: "#A6A8BC" }}>
               {adminMode ? t(lang, "backToShop") : t(lang, "adminSpace")}
             </button>
+            <p className="text-center mt-4" style={{ fontSize: 10, color: "#A6A8BC", lineHeight: 1.5 }}>
+              {t(lang, "legalConsentText")}
+            </p>
             {!adminMode && (
               <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
                 <QrCode size={13} /> {t(lang, "loginAsEmployee")}
@@ -6774,6 +6853,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // tant que le chargement n'est pas terminé, pour ne jamais débloquer une fonctionnalité payante
   // par erreur avant confirmation du vrai palier.
   const [currentPlan, setCurrentPlan] = useState("free");
+  const [accountSuspended, setAccountSuspended] = useState(false);
   const planInfo = SUBSCRIPTION_PLANS[currentPlan] || SUBSCRIPTION_PLANS.free;
   // Date de création du compte (auth.users.created_at), utilisée pour le quota IA en deux
   // phases du palier Gratuit (10 messages/mois pendant les 30 premiers jours glissants, puis 5).
@@ -6849,10 +6929,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         if (userData.user.created_at) setAccountCreatedAt(userData.user.created_at);
         const { data: subRow } = await supabase
           .from("subscriptions")
-          .select("plan")
+          .select("plan, suspended")
           .eq("owner_id", userData.user.id)
           .single();
         if (!cancelled && subRow && subRow.plan) setCurrentPlan(subRow.plan);
+        if (!cancelled && subRow && subRow.suspended) setAccountSuspended(true);
       } catch (e) {
         // en cas d'échec (hors ligne, etc.), on reste sur "free" par sécurité — jamais
         // débloquer une fonctionnalité payante par défaut sans confirmation du serveur.
@@ -7050,6 +7131,75 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pendingLockAction, setPendingLockAction] = useState(null);
   const [lockPinInput, setLockPinInput] = useState("");
   const [lockPinError, setLockPinError] = useState("");
+  // ---- Empreinte digitale / reconnaissance faciale LOCALE (purement côté
+  // appareil, sans aucun serveur) comme raccourci au code PIN de verrouillage.
+  // Utilise WebAuthn en mode "platform authenticator" uniquement pour vérifier
+  // "c'est bien la même personne/le même appareil qui a activé cette option" —
+  // aucune donnée biométrique ni clé n'est jamais envoyée à un serveur, tout
+  // reste local au navigateur (stocké dans localStorage : juste l'identifiant
+  // de la clé créée localement, pas un vrai compte réseau).
+  const [biometricUnlockAvailable, setBiometricUnlockAvailable] = useState(false);
+  const [biometricUnlockBusy, setBiometricUnlockBusy] = useState(false);
+  useEffect(() => {
+    if (window.PublicKeyCredential && navigator.credentials) {
+      PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable?.().then((available) => {
+        if (available) setBiometricUnlockAvailable(true);
+      }).catch(() => {});
+    }
+  }, []);
+  const getOrCreateLocalBiometricCredential = async () => {
+    const storedId = window.localStorage.getItem("mb_biometric_credential_id");
+    if (storedId) return storedId;
+    // Première utilisation sur cet appareil : crée une clé purement locale,
+    // sans jamais la transmettre à un serveur (challenge et userID générés
+    // aléatoirement côté client, sans lien avec le compte réseau).
+    const randomChallenge = crypto.getRandomValues(new Uint8Array(32));
+    const randomUserId = crypto.getRandomValues(new Uint8Array(16));
+    const credential = await navigator.credentials.create({
+      publicKey: {
+        challenge: randomChallenge,
+        rp: { name: "Ma Boutique" },
+        user: { id: randomUserId, name: "verrouillage-local", displayName: "Verrouillage Ma Boutique" },
+        pubKeyCredParams: [{ type: "public-key", alg: -7 }, { type: "public-key", alg: -257 }],
+        authenticatorSelection: { authenticatorAttachment: "platform", userVerification: "required" },
+        timeout: 60000,
+      },
+    });
+    window.localStorage.setItem("mb_biometric_credential_id", credential.id);
+    return credential.id;
+  };
+  const unlockWithBiometrics = async () => {
+    setBiometricUnlockBusy(true);
+    setLockPinError("");
+    try {
+      const credentialId = await getOrCreateLocalBiometricCredential();
+      const b64 = credentialId.replace(/-/g, "+").replace(/_/g, "/");
+      const pad = b64.length % 4 ? "=".repeat(4 - (b64.length % 4)) : "";
+      const raw = atob(b64 + pad);
+      const idBytes = new Uint8Array(raw.length);
+      for (let i = 0; i < raw.length; i++) idBytes[i] = raw.charCodeAt(i);
+
+      const randomChallenge = crypto.getRandomValues(new Uint8Array(32));
+      await navigator.credentials.get({
+        publicKey: {
+          challenge: randomChallenge,
+          allowCredentials: [{ id: idBytes, type: "public-key" }],
+          userVerification: "required",
+          timeout: 60000,
+        },
+      });
+      // Le navigateur a confirmé l'empreinte/le visage : on déverrouille,
+      // exactement comme un code PIN correct.
+      setAmountsHidden(false);
+      setShowLockPinModal(false);
+      setLockPinInput("");
+      if (pendingLockAction) { pendingLockAction(); setPendingLockAction(null); }
+    } catch (err) {
+      setLockPinError(t(lang, "biometricUnlockError"));
+    } finally {
+      setBiometricUnlockBusy(false);
+    }
+  };
   const [showAllTopProducts, setShowAllTopProducts] = useState(false);
   const contentScrollRef = useRef(null);
   const paymentZoneRef = useRef(null);
@@ -7721,6 +7871,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     logAction(`${t(lang, "logCashFundUpdated")} : ${localizedNumber(parseFloat(fundInput))}`);
     setFundInput(""); setShowEditFund(false);
   };
+  // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
   // Vrai mot de passe de connexion (Supabase Auth), distinct du code PIN applicatif géré
   // juste en dessous. Envoie un email de réinitialisation standard via Supabase — aucun
   // backend custom nécessaire, c'est un mécanisme natif d'Auth.
@@ -8846,6 +8997,21 @@ Réponds en ${langLabel} uniquement.`;
   const cartProducts = products.filter((p) => p.name.toLowerCase().includes(cartSearch.toLowerCase()));
   const activeCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
   const cartTotal = activeCart ? activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0) : 0;
+  // Compte suspendu par un administrateur : bloque tout accès à l'app, avant
+  // même le rendu normal, quel que soit l'onglet ou l'état en cours.
+  if (accountSuspended) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <div style={{ maxWidth: 360, textAlign: "center" }}>
+          <div style={{ width: 64, height: 64, borderRadius: 32, background: "#fee2e2", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+            <Lock size={28} color="#e11d48" />
+          </div>
+          <p style={{ fontSize: 17, fontWeight: 700, color: CHARCOAL, marginBottom: 8 }}>{t(lang, "accountSuspendedTitle")}</p>
+          <p style={{ fontSize: 13, color: "#6B6D85" }}>{t(lang, "accountSuspendedDesc")}</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div dir="ltr" className="relative" style={{ background: isDesktop ? (darkMode ? "#050709" : "#e9edf3") : T.bg, color: T.text, fontFamily: "system-ui, sans-serif", display: isDesktop ? "flex" : "flex", flexDirection: isDesktop ? "row" : "column", height: "100vh", overflow: "hidden" }}>
       {isDesktop && (
@@ -10314,6 +10480,17 @@ Réponds en ${langLabel} uniquement.`;
                 {t(lang, "loginBtn")}
               </button>
             </div>
+            {biometricUnlockAvailable && (
+              <button
+                onClick={unlockWithBiometrics}
+                disabled={biometricUnlockBusy}
+                className="w-full mt-2.5 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
+                style={{ background: "transparent", color: INDIGO, border: `1px solid ${T.border}`, opacity: biometricUnlockBusy ? 0.6 : 1 }}
+              >
+                <Lock size={14} />
+                {biometricUnlockBusy ? t(lang, "wait") : t(lang, "biometricUnlockBtn")}
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -11613,6 +11790,128 @@ function PasswordResetScreen({ lang, onDone }) {
     </div>
   );
 }
+// ---------- GOOGLE ONBOARDING SCREEN ----------
+// Affiché une seule fois, juste après une première connexion "Continuer avec
+// Google" (aucun compte boutique existant pour cet utilisateur). Réutilise
+// les mêmes informations que l'inscription classique (nom boutique, secteur,
+// pays, devise, langue) — email et mot de passe sont déjà gérés par Google.
+function GoogleOnboardingScreen({ lang, setLang, onDone }) {
+  const [shopName, setShopName] = useState("");
+  const [secteur, setSecteur] = useState("");
+  const [pays, setPays] = useState("");
+  const [currency, setCurrency] = useState("");
+  const [errors, setErrors] = useState({});
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+
+  const fieldStyle = (hasError) => (hasError ? { borderColor: "#e11d48" } : {});
+  const secLabel = (s) => s[lang] || s.fr;
+  const countryLabel = (c) => (c.name && (c.name[lang] || c.name.en || c.name.fr)) || c.id;
+
+  const submit = async () => {
+    const errs = {};
+    if (!shopName.trim()) errs.shopName = true;
+    if (!secteur) errs.secteur = true;
+    if (!pays) errs.pays = true;
+    if (!currency) errs.currency = true;
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+
+    setBusy(true);
+    setError("");
+    try {
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData.user) { setError(t(lang, "genericError")); setBusy(false); return; }
+      const ownerId = userData.user.id;
+
+      // Code de verrouillage local par défaut (0000) — modifiable ensuite dans
+      // Paramètres, exactement comme pour un compte créé classiquement.
+      const { error: shopError } = await supabase.from("shop_data").upsert({
+        owner_id: ownerId,
+        shop_name: shopName.trim(),
+        data: {
+          ownerName: userData.user.user_metadata && userData.user.user_metadata.full_name ? userData.user.user_metadata.full_name : "",
+          sector: secteur,
+          country: pays,
+          lang,
+          lockPin: await hashPin("0000"),
+          products: [], sales: [], debts: [], debtEvents: [], expenses: [], cashFund: 0,
+          draftCarts: [], darkMode: false, showBalls: true, ballColor: "blue", currency,
+        },
+        updated_at: new Date().toISOString(),
+      });
+      if (shopError) { setError(`${t(lang, "genericError")} ${shopError.message}`); setBusy(false); return; }
+
+      const { error: subError } = await supabase.from("subscriptions").upsert({
+        owner_id: ownerId,
+        expires_at: null,
+        updated_at: new Date().toISOString(),
+      });
+      if (subError) { setError(`${t(lang, "genericError")} ${subError.message}`); setBusy(false); return; }
+
+      onDone(shopName.trim());
+    } catch (err) {
+      setError(t(lang, "genericError"));
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+      <div style={{ width: "100%", maxWidth: 380, background: "white", borderRadius: 20, padding: 28, boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}>
+        <p style={{ fontSize: 17, fontWeight: 700, color: "#15162C", marginBottom: 4 }}>{t(lang, "googleOnboardingTitle")}</p>
+        <p style={{ fontSize: 13, color: "#6B6D85", marginBottom: 20 }}>{t(lang, "googleOnboardingDesc")}</p>
+
+        <div className="mb-3">
+          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "shopName")}</label>
+          <input value={shopName} onChange={(e) => setShopName(e.target.value)} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(errors.shopName) }} />
+        </div>
+        <div className="mb-3">
+          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "sector")}</label>
+          <select value={secteur} onChange={(e) => setSecteur(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(errors.secteur) }}>
+            <option value="">{t(lang, "chooseSector")}</option>
+            {SECTORS.map((s, i) => <option key={i} value={secLabel(s)}>{secLabel(s)}</option>)}
+          </select>
+        </div>
+        <div className="mb-3">
+          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "country")}</label>
+          <SearchableSelect
+            value={pays}
+            onChange={(c) => { setPays(c); const found = COUNTRY_CURRENCY.find((x) => x.id === c); setCurrency(found ? found.currency || "" : ""); }}
+            options={COUNTRY_CURRENCY.map((c) => ({ value: c.id, label: countryLabel(c) }))}
+            placeholder={t(lang, "chooseCountry")}
+            searchPlaceholder={t(lang, "search")}
+            emptyLabel={t(lang, "noResults")}
+            hasError={errors.pays}
+            title={t(lang, "country")}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "currencyLabel")}</label>
+          <SearchableSelect
+            value={currency}
+            onChange={(c) => setCurrency(c)}
+            options={(() => {
+              const countryCurrencyId = (COUNTRY_CURRENCY.find((x) => x.id === pays) || {}).currency;
+              const top = CURRENCIES.filter((c) => c.id === countryCurrencyId);
+              const rest = CURRENCIES.filter((c) => c.id !== countryCurrencyId);
+              return [...top, ...rest].map((c) => ({ value: c.id, label: `${currencyLabel(c, lang)} (${c.symbol})` }));
+            })()}
+            placeholder={t(lang, "currencyLabel")}
+            searchPlaceholder={t(lang, "search")}
+            emptyLabel={t(lang, "noResults")}
+            hasError={errors.currency}
+            title={t(lang, "currencyLabel")}
+          />
+        </div>
+        {error && <p style={{ color: "#e11d48", fontSize: 12, marginBottom: 10 }}>{error}</p>}
+        <button onClick={submit} disabled={busy} style={{ width: "100%", padding: 12, borderRadius: 12, background: "#15162C", color: "white", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: busy ? 0.6 : 1 }}>
+          {busy ? t(lang, "wait") : t(lang, "googleOnboardingSubmit")}
+        </button>
+      </div>
+    </div>
+  );
+}
 export default function BoutiqueApp() {
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
@@ -11628,22 +11927,49 @@ export default function BoutiqueApp() {
     });
     return () => listener.subscription.unsubscribe();
   }, []);
+  // Détecte une connexion "Continuer avec Google" réussie pour un utilisateur
+  // qui n'a pas encore de boutique créée (première connexion via ce moyen) —
+  // déclenche alors le mini-onboarding dédié (nom boutique, secteur, pays...).
+  const [needsGoogleOnboarding, setNeedsGoogleOnboarding] = useState(false);
+  const [checkingGoogleOnboarding, setCheckingGoogleOnboarding] = useState(false);
+  const [googleSessionUser, setGoogleSessionUser] = useState(null);
+  useEffect(() => {
+    const { data: listener } = supabase.auth.onAuthStateChange(async (event, sessionData) => {
+      if (event !== "SIGNED_IN" || !sessionData || !sessionData.user) return;
+      // Ne concerne que les connexions via un fournisseur OAuth (Google) ; une
+      // connexion classique email/mot de passe passe déjà par AuthScreen.
+      const isOAuth = sessionData.user.app_metadata && sessionData.user.app_metadata.provider === "google";
+      if (!isOAuth) return;
+      setCheckingGoogleOnboarding(true);
+      const { data: shopRow } = await supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle();
+      if (!shopRow) {
+        setGoogleSessionUser(sessionData.user);
+        setNeedsGoogleOnboarding(true);
+      } else {
+        // Compte Google déjà existant : on connecte directement, sans repasser
+        // par l'onboarding ni par l'écran de connexion classique.
+        setSession({ type: "shop", username: sessionData.user.email, shopName: shopRow.shop_name });
+      }
+      setCheckingGoogleOnboarding(false);
+    });
+    return () => listener.subscription.unsubscribe();
+  }, []);
   useEffect(() => {
     const timer = setTimeout(() => setShowSplash(false), 2200);
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {
-    (async () => {
-      try {
-        const r = await window.storage.get("app-language", false);
-        if (r && r.value) { setLang(r.value); setLangChosen(true); }
-        else setLangChosen(false);
-      } catch (e) { setLangChosen(false); }
-    })();
+    // Persistance de la langue choisie via localStorage (fonctionne sur un vrai site déployé,
+    // contrairement à window.storage qui n'existe que dans l'environnement Claude Artifacts).
+    try {
+      const saved = window.localStorage.getItem("app-language");
+      if (saved) { setLang(saved); setLangChosen(true); }
+      else setLangChosen(false);
+    } catch (e) { setLangChosen(false); }
   }, []);
   const changeLang = (l) => {
     setLang(l);
-    window.storage.set("app-language", l, false).catch(() => {});
+    try { window.localStorage.setItem("app-language", l); } catch (e) {}
   };
   const chooseInitialLang = (l) => {
     changeLang(l);
@@ -11672,6 +11998,21 @@ export default function BoutiqueApp() {
   }
   if (passwordRecoveryMode) {
     return <PasswordResetScreen lang={lang} onDone={() => { setPasswordRecoveryMode(false); setSession(null); }} />;
+  }
+  if (checkingGoogleOnboarding) {
+    return <div style={{ minHeight: "100vh", background: "#F6F7FB" }} />;
+  }
+  if (needsGoogleOnboarding && googleSessionUser) {
+    return (
+      <GoogleOnboardingScreen
+        lang={lang}
+        setLang={changeLang}
+        onDone={(shopName) => {
+          setNeedsGoogleOnboarding(false);
+          setSession({ type: "shop", username: googleSessionUser.email, shopName });
+        }}
+      />
+    );
   }
   if (!session) {
     return (
