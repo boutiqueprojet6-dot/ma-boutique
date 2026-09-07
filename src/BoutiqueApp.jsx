@@ -4811,10 +4811,34 @@ function last30Days() {
   }
   return arr;
 }
+// Détecte si l'appareil est un vrai ordinateur (et non juste "une fenêtre large").
+// On se base d'abord sur le type d'appareil réel (user agent + support tactile),
+// et seulement si aucun signal fiable n'est disponible, on retombe sur la largeur
+// de l'écran comme dernier recours. Ça évite qu'un téléphone en mode paysage,
+// ou un navigateur qui rapporte une largeur inhabituelle au premier rendu,
+// ne soit pris à tort pour un ordinateur.
+function detectIsDesktop() {
+  if (typeof window === "undefined" || typeof navigator === "undefined") return false;
+
+  const ua = navigator.userAgent || "";
+  const isMobileUA = /Android|iPhone|iPad|iPod|Mobile|Windows Phone|IEMobile|Opera Mini/i.test(ua);
+  if (isMobileUA) return false; // le user agent dit clairement "mobile" -> jamais en mode ordinateur
+
+  const isDesktopUA = /Windows NT|Macintosh|Linux x86_64|X11/i.test(ua) && !/Android/i.test(ua);
+  const hasCoarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+  const hasFinePointer = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+
+  if (isDesktopUA && hasFinePointer && !hasCoarsePointer) return true;
+  if (hasCoarsePointer) return false; // écran tactile = pas un ordinateur, même large
+
+  // Dernier recours si rien n'est concluant : la largeur de la fenêtre.
+  return window.innerWidth >= 900;
+}
+
 function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 900 : false);
+  const [isDesktop, setIsDesktop] = useState(() => detectIsDesktop());
   useEffect(() => {
-    const onResize = () => setIsDesktop(window.innerWidth >= 900);
+    const onResize = () => setIsDesktop(detectIsDesktop());
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
