@@ -387,7 +387,7 @@ const TRANSLATIONS = {
     invalidEmail: "Entrez une adresse e-mail valide.",
     mustVerifyEmail: "Vérifiez votre e-mail avant de continuer.",
     wrongEmailCode: "Ce code est incorrect.",
-    demoCodeNotice: "Mode démo — envoi d'e-mail pas encore branché. Votre code est :",
+    demoCodeNotice: "Mode démo — envoi d'e-mail pas encore branché. Votre code est :", emailCodeSentNotice: "Un code de vérification a été envoyé à {email}. Vérifie ta boîte mail (et tes spams).",
     passwordExplainer: "Ton mot de passe sert à te connecter sur un appareil.",
     lockPinExplainer: "Ton code PIN protège tes données sensibles (solde, dettes).",
     firstName: "Prénom", lastName: "Nom",
@@ -5375,8 +5375,9 @@ function LanguagePickerScreen({ onChoose }) {
     </div>
   );
 }
-function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
-  const [screen, setScreen] = useState("login"); // login | onboarding | success | employee-scan
+function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogleOnboarding }) {
+  const [screen, setScreen] = useState(startInGoogleOnboarding ? "onboarding" : "login");
+  const [isGoogleFlow, setIsGoogleFlow] = useState(!!startInGoogleOnboarding);
   const [obStep, setObStep] = useState(1);
   const totalSteps = 4; // recap (étape 5) n'est pas comptée dans la barre de progression, comme avant
   // ---- login state ----
@@ -5389,7 +5390,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
   const [showObConfirmLockPin, setShowObConfirmLockPin] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const [adminMode, setAdminMode] = useState(false);
   // ---- onboarding state ----
   const [obPrenom, setObPrenom] = useState("");
   const [obNom, setObNom] = useState("");
@@ -5399,6 +5399,14 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
   const [obCurrency, setObCurrency] = useState("");
   const [obLang, setObLang] = useState(lang);
   const [obUsername, setObUsername] = useState("");
+  // Flux Google : récupère l'email réel de l'utilisateur déjà connecté, pour
+  // l'utiliser comme identifiant (étapes email/mot de passe déjà sautées).
+  useEffect(() => {
+    if (!startInGoogleOnboarding) return;
+    supabase.auth.getUser().then(({ data }) => {
+      if (data && data.user && data.user.email) setObUsername(data.user.email);
+    });
+  }, [startInGoogleOnboarding]);
   const [obPin, setObPin] = useState("");
   const [obConfirmPin, setObConfirmPin] = useState("");
   const [obLockPin, setObLockPin] = useState("");
@@ -5407,7 +5415,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
   const [createdShopName, setCreatedShopName] = useState("");
   // ---- email verification state ----
   const [obEmailCodeSent, setObEmailCodeSent] = useState(false);
-  const [obEmailCode, setObEmailCode] = useState(""); // le code généré (simulé pour l'instant)
   const [obEmailCodeInput, setObEmailCodeInput] = useState(""); // ce que l'utilisateur tape
   const [obEmailVerified, setObEmailVerified] = useState(false);
   const [obEmailCodeSending, setObEmailCodeSending] = useState(false);
@@ -5440,13 +5447,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
   };
   const loginSubmit = async () => {
     setError("");
-    if (adminMode) {
-      // Accès désactivé : le panneau admin intégré (PIN codé en dur) a été
-      // remplacé par un panneau séparé avec vraie authentification Supabase,
-      // pour des raisons de sécurité (voir supabase-function/admin-api).
-      setError(t(lang, "adminPinError"));
-      return;
-    }
     if (!username.trim() || !pin.trim()) {
       setError(t(lang, "fillIdentAndPin"));
       return;
@@ -5550,9 +5550,12 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
   };
   const obNext = async () => {
     if (!validateObStep(obStep)) return;
+    // Flux Google : l'email/mot de passe (étapes 2-3) n'ont pas de sens, Google
+    // gère déjà l'identité — on saute directement de l'étape 1 au récap final.
+    if (isGoogleFlow && obStep === 1) { setObStep(4); return; }
     if (obStep < totalSteps + 1) { setObStep(obStep + 1); return; } // +1 car l'étape récap (5) n'a pas de champs à valider ici
     // final submit — l'utilisateur est déjà connecté et confirmé via Supabase Auth à ce stade
-    // (voir verifyObEmailCode). On complète maintenant son profil boutique.
+    // (voir verifyObEmailCode, ou déjà via Google pour isGoogleFlow). On complète maintenant son profil boutique.
     setBusy(true);
     setError("");
     try {
@@ -5563,17 +5566,20 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
         return;
       }
       const ownerId = userData.user.id;
-      // L'utilisateur est arrivé ici via OTP (sans mot de passe) ; on définit maintenant
-      // son mot de passe réel — obPin, déjà validé comme mot de passe (8+ car., lettres+chiffres) —
-      // pour qu'il puisse se reconnecter directement par email + mot de passe la prochaine fois.
-      const { error: pwError } = await supabase.auth.updateUser({ password: obPin.trim() });
-      if (pwError) {
-        setError(`${t(lang, "genericError")} ${pwError.message}`);
-        setBusy(false);
-        return;
+      // Flux classique (email/OTP) : on définit le mot de passe choisi (obPin).
+      // Flux Google : l'authentification est déjà gérée par Google, aucun mot
+      // de passe supplémentaire à définir ici.
+      if (!isGoogleFlow) {
+        const { error: pwError } = await supabase.auth.updateUser({ password: obPin.trim() });
+        if (pwError) {
+          setError(`${t(lang, "genericError")} ${pwError.message}`);
+          setBusy(false);
+          return;
+        }
       }
       // Le PIN de verrouillage local (déverrouillage rapide de l'app une fois connecté) est
       // haché et stocké dans shop_data ; l'identité réelle du compte reste gérée par Supabase Auth.
+      // Pour le flux Google, un PIN par défaut est utilisé (modifiable ensuite dans Paramètres).
       const { error: shopError } = await supabase.from("shop_data").upsert({
         owner_id: ownerId,
         shop_name: obShopName.trim(),
@@ -5582,7 +5588,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
           sector: obSecteur,
           country: obPays,
           lang: obLang,
-          lockPin: await hashPin(obLockPin),
+          lockPin: await hashPin(isGoogleFlow ? "0000" : obLockPin),
           products: [], sales: [], debts: [], debtEvents: [], expenses: [], cashFund: 0,
           draftCarts: [], darkMode: false, showBalls: true, ballColor: "blue", currency: obCurrency,
         },
@@ -5611,7 +5617,10 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
     }
     setBusy(false);
   };
-  const obBack = () => { if (obStep > 1) setObStep(obStep - 1); };
+  const obBack = () => {
+    if (isGoogleFlow && obStep === 4) { setObStep(1); return; }
+    if (obStep > 1) setObStep(obStep - 1);
+  };
   const fieldStyle = (hasError) => ({
     borderColor: hasError ? CLAY : "#E7E8F1",
   });
@@ -5643,75 +5652,59 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
               ))}
             </div>
             <p className="text-sm font-medium mb-4" style={{ color: "#6B6D85" }}>
-              {adminMode ? t(lang, "adminSpaceDesc") : t(lang, "loginSubtitle")}
+              {t(lang, "loginSubtitle")}
             </p>
-            {!adminMode && (
-              <>
-                <button
-                  onClick={loginWithGoogle}
-                  disabled={googleLoginBusy}
-                  className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2.5"
-                  style={{ background: "#15162C", color: "white", opacity: googleLoginBusy ? 0.6 : 1 }}
-                >
-                  <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20.5H24v7h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.6 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 15.5 4 8.2 8.8 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.5 0 10.5-2.1 14.3-5.6l-6.6-5.6C29.6 35.7 26.9 36.7 24 36.7c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C8.1 40.1 15.5 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20.5H24v7h11.3c-.8 2.3-2.2 4.3-4.1 5.7l6.6 5.6C40.9 36.6 44 30.9 44 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
-                  {googleLoginBusy ? t(lang, "wait") : t(lang, "continueWithGoogle")}
-                </button>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
-                  <span className="text-[11px] font-semibold" style={{ color: "#9B9DB0" }}>{t(lang, "orSeparator")}</span>
-                  <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
-                </div>
-              </>
-            )}
-            {!adminMode && (
-              <div className="mb-3">
-                <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "identifier")}</label>
-                <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder={t(lang, "identifierPlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB" }} />
-              </div>
-            )}
+            <button
+              onClick={loginWithGoogle}
+              disabled={googleLoginBusy}
+              className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2.5"
+              style={{ background: "#15162C", color: "white", opacity: googleLoginBusy ? 0.75 : 1 }}
+            >
+              {googleLoginBusy ? (
+                <span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.35)", borderTopColor: "white", display: "inline-block", animation: "spin 0.7s linear infinite" }} />
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20.5H24v7h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.6 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 15.5 4 8.2 8.8 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.5 0 10.5-2.1 14.3-5.6l-6.6-5.6C29.6 35.7 26.9 36.7 24 36.7c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C8.1 40.1 15.5 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20.5H24v7h11.3c-.8 2.3-2.2 4.3-4.1 5.7l6.6 5.6C40.9 36.6 44 30.9 44 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
+              )}
+              {t(lang, "continueWithGoogle")}
+            </button>
+            <style>{"@keyframes spin { to { transform: rotate(360deg); } }"}</style>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
+              <span className="text-[11px] font-semibold" style={{ color: "#9B9DB0" }}>{t(lang, "orSeparator")}</span>
+              <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
+            </div>
+            <div className="mb-3">
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "identifier")}</label>
+              <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder={t(lang, "identifierPlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB" }} />
+            </div>
             <div className="mb-1">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{adminMode ? t(lang, "adminPinPlaceholder") : t(lang, "passwordPlaceholder")}</label>
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "passwordPlaceholder")}</label>
               <div className="relative">
                 <input value={pin} onChange={(e) => setPin(e.target.value)} type={showPin ? "text" : "password"} placeholder="••••••••" className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB" }} />
                 <button type="button" onClick={() => setShowPin(!showPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showPin ? "🙈" : "👁"}</button>
               </div>
             </div>
             {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
-            <button disabled={busy} onClick={loginSubmit} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: adminMode ? CLAY : "#15162C" }}>
-              {busy ? t(lang, "wait") : adminMode ? t(lang, "adminEnterBtn") : t(lang, "loginBtn")}
+            <button disabled={busy} onClick={loginSubmit} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: "#15162C" }}>
+              {busy ? t(lang, "wait") : t(lang, "loginBtn")}
             </button>
-            {!adminMode && (
-              <a
-                href={`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Bonjour, j'ai oublié le code PIN de mon compte Ma Boutique (identifiant : ${username || "à préciser"}). Peux-tu me le réinitialiser ?`)}`}
-                target="_blank" rel="noopener noreferrer"
-                className="block w-full text-center text-[11px] mt-3 underline"
-                style={{ color: CLAY }}
-              >
-                {t(lang, "forgotPin")}
-              </a>
-            )}
-            <button onClick={() => { setAdminMode(!adminMode); setError(""); setPin(""); }} className="w-full text-center text-[11px] mt-3 underline" style={{ color: "#A6A8BC" }}>
-              {adminMode ? t(lang, "backToShop") : t(lang, "adminSpace")}
-            </button>
+            <a
+              href={`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Bonjour, j'ai oublié le code PIN de mon compte Ma Boutique (identifiant : ${username || "à préciser"}). Peux-tu me le réinitialiser ?`)}`}
+              target="_blank" rel="noopener noreferrer"
+              className="block w-full text-center text-[11px] mt-3 underline"
+              style={{ color: CLAY }}
+            >
+              {t(lang, "forgotPin")}
+            </a>
             <p className="text-center mt-4" style={{ fontSize: 10, color: "#A6A8BC", lineHeight: 1.5 }}>
               {t(lang, "legalConsentText")}
             </p>
-            {!adminMode && (
-              <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
-                <QrCode size={13} /> {t(lang, "loginAsEmployee")}
-              </button>
-            )}
-            {!adminMode && (
-              <>
-                <p className="text-center text-sm mt-5" style={{ color: "#6B6D85" }}>
-                  {t(lang, "noAccountYet")}{" "}
-                  <button onClick={() => { setScreen("onboarding"); setObStep(1); }} className="font-bold" style={{ color: INDIGO }}>{t(lang, "createAccountBtn")}</button>
-                </p>
-                <button onClick={onDemo} className="w-full text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
-                  👀 {t(lang, "seeDemoBtn")}
-                </button>
-              </>
-            )}
+            <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
+              <QrCode size={13} /> {t(lang, "loginAsEmployee")}
+            </button>
+            <button onClick={onDemo} className="w-full text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
+              👀 {t(lang, "seeDemoBtn")}
+            </button>
           </div>
         </div>
       </div>
@@ -5847,6 +5840,12 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
   }
   // ================= SUCCESS SCREEN =================
   if (screen === "success") {
+    // Flux Google : l'utilisateur est déjà authentifié, inutile de lui
+    // redemander de se reconnecter — on entre directement dans l'app.
+    if (isGoogleFlow) {
+      onLogin(obUsername, createdShopName);
+      return null;
+    }
     return (
       <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: "#F6F7FB" }}>
         <div className="w-full max-w-sm md:max-w-md rounded-3xl bg-white p-9 text-center shadow-xl">
@@ -5872,14 +5871,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
           <span className="font-bold text-sm">{t(lang, "appName")}</span>
         </div>
         <div className="flex gap-3 items-end mb-2" style={{ height: 24 }}>
-          {[1, 2, 3, 4].map((i) => (
+          {(isGoogleFlow ? [1, 4] : [1, 2, 3, 4]).map((i) => (
             <div key={i} style={{ width: 4, height: i <= obStep ? 22 : 12, borderRadius: 3, background: i <= obStep ? (i === obStep ? "#15162C" : INDIGO) : "#E7E8F1", transition: "all .3s" }} />
           ))}
         </div>
         <p className="text-[11px] font-semibold uppercase tracking-wide mb-6" style={{ color: "#6B6D85" }}>
-          {obStep <= totalSteps
-            ? t(lang, "othEtapeObstepSurTotalsteps").replace("{obStep}", obStep).replace("{totalSteps}", totalSteps)
-            : t(lang, "obStep3Title")}
+          {isGoogleFlow
+            ? t(lang, "othEtapeObstepSurTotalsteps").replace("{obStep}", obStep === 1 ? "1" : "2").replace("{totalSteps}", "2")
+            : obStep <= totalSteps
+              ? t(lang, "othEtapeObstepSurTotalsteps").replace("{obStep}", obStep).replace("{totalSteps}", totalSteps)
+              : t(lang, "obStep3Title")}
         </p>
         {/* STEP 1 — Boutique */}
         {obStep === 1 && (
@@ -5965,7 +5966,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
             </div>
             <div className="flex flex-col items-center gap-2 mt-5 pt-4" style={{ borderTop: "1px solid #E7E8F1" }}>
               <button onClick={onDemo} className="text-[11px] font-semibold underline" style={{ color: INDIGO }}>👀 {t(lang, "seeDemoBtn")}</button>
-              <button onClick={() => { setScreen("login"); setAdminMode(true); }} className="text-[11px] underline" style={{ color: "#A6A8BC" }}>{t(lang, "adminSpace")}</button>
             </div>
           </div>
         )}
@@ -5998,11 +5998,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
             )}
             {obEmailCodeSent && !obEmailVerified && (
               <div className="mt-4">
-                {/* MODE DÉMO : le code est affiché ici car aucun envoi d'email réel n'est encore branché.
-                    À retirer dès qu'un vrai service d'envoi (ex: Supabase) sera connecté. */}
-                <div className="mb-3 px-3 py-2.5 rounded-xl text-xs" style={{ background: "#FFF8EC", color: "#8A6116" }}>
-                  {t(lang, "demoCodeNotice")} <span className="font-bold tracking-widest">{obEmailCode}</span>
-                </div>
+                <p className="text-xs mb-3" style={{ color: "#6B6D85" }}>
+                  {t(lang, "emailCodeSentNotice").replace("{email}", obUsername)}
+                </p>
                 <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "emailCodeLabel")}</label>
                 <input
                   value={obEmailCodeInput}
@@ -6110,15 +6108,17 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang }) {
               <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "country")}</span><span className="font-semibold">{(() => { const found = COUNTRY_CURRENCY.find((x) => x.id === obPays); return found ? countryLabel(found) : obPays; })()}</span></div>
               <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "currencyLabel")}</span><span className="font-semibold">{currencyLabel(CURRENCIES.find((c) => c.id === obCurrency), lang)}</span></div>
             </div>
-            <div className="py-3" style={{ borderTop: "1px solid #E7E8F1" }}>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "#6B6D85" }}>{t(lang, "recapAccount")}</span>
-                <button onClick={() => setObStep(3)} className="text-xs font-bold" style={{ color: INDIGO }}>{t(lang, "editBtn")}</button>
+            {!isGoogleFlow && (
+              <div className="py-3" style={{ borderTop: "1px solid #E7E8F1" }}>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "#6B6D85" }}>{t(lang, "recapAccount")}</span>
+                  <button onClick={() => setObStep(3)} className="text-xs font-bold" style={{ color: INDIGO }}>{t(lang, "editBtn")}</button>
+                </div>
+                <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "emailLabel")}</span><span className="font-semibold">{obUsername}</span></div>
+                <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "passwordPlaceholder")}</span><span className="font-semibold">••••</span></div>
+                <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "setCodePin")}</span><span className="font-semibold">••••</span></div>
               </div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "emailLabel")}</span><span className="font-semibold">{obUsername}</span></div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "passwordPlaceholder")}</span><span className="font-semibold">••••</span></div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "setCodePin")}</span><span className="font-semibold">••••</span></div>
-            </div>
+            )}
             {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
             <div className="flex gap-3 mt-5">
               <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: "#E7E8F1", color: "#15162C" }}>{t(lang, "backBtn")}</button>
@@ -11790,128 +11790,6 @@ function PasswordResetScreen({ lang, onDone }) {
     </div>
   );
 }
-// ---------- GOOGLE ONBOARDING SCREEN ----------
-// Affiché une seule fois, juste après une première connexion "Continuer avec
-// Google" (aucun compte boutique existant pour cet utilisateur). Réutilise
-// les mêmes informations que l'inscription classique (nom boutique, secteur,
-// pays, devise, langue) — email et mot de passe sont déjà gérés par Google.
-function GoogleOnboardingScreen({ lang, setLang, onDone }) {
-  const [shopName, setShopName] = useState("");
-  const [secteur, setSecteur] = useState("");
-  const [pays, setPays] = useState("");
-  const [currency, setCurrency] = useState("");
-  const [errors, setErrors] = useState({});
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
-
-  const fieldStyle = (hasError) => (hasError ? { borderColor: "#e11d48" } : {});
-  const secLabel = (s) => s[lang] || s.fr;
-  const countryLabel = (c) => (c.name && (c.name[lang] || c.name.en || c.name.fr)) || c.id;
-
-  const submit = async () => {
-    const errs = {};
-    if (!shopName.trim()) errs.shopName = true;
-    if (!secteur) errs.secteur = true;
-    if (!pays) errs.pays = true;
-    if (!currency) errs.currency = true;
-    setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
-
-    setBusy(true);
-    setError("");
-    try {
-      const { data: userData, error: userError } = await supabase.auth.getUser();
-      if (userError || !userData.user) { setError(t(lang, "genericError")); setBusy(false); return; }
-      const ownerId = userData.user.id;
-
-      // Code de verrouillage local par défaut (0000) — modifiable ensuite dans
-      // Paramètres, exactement comme pour un compte créé classiquement.
-      const { error: shopError } = await supabase.from("shop_data").upsert({
-        owner_id: ownerId,
-        shop_name: shopName.trim(),
-        data: {
-          ownerName: userData.user.user_metadata && userData.user.user_metadata.full_name ? userData.user.user_metadata.full_name : "",
-          sector: secteur,
-          country: pays,
-          lang,
-          lockPin: await hashPin("0000"),
-          products: [], sales: [], debts: [], debtEvents: [], expenses: [], cashFund: 0,
-          draftCarts: [], darkMode: false, showBalls: true, ballColor: "blue", currency,
-        },
-        updated_at: new Date().toISOString(),
-      });
-      if (shopError) { setError(`${t(lang, "genericError")} ${shopError.message}`); setBusy(false); return; }
-
-      const { error: subError } = await supabase.from("subscriptions").upsert({
-        owner_id: ownerId,
-        expires_at: null,
-        updated_at: new Date().toISOString(),
-      });
-      if (subError) { setError(`${t(lang, "genericError")} ${subError.message}`); setBusy(false); return; }
-
-      onDone(shopName.trim());
-    } catch (err) {
-      setError(t(lang, "genericError"));
-      setBusy(false);
-    }
-  };
-
-  return (
-    <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
-      <div style={{ width: "100%", maxWidth: 380, background: "white", borderRadius: 20, padding: 28, boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}>
-        <p style={{ fontSize: 17, fontWeight: 700, color: "#15162C", marginBottom: 4 }}>{t(lang, "googleOnboardingTitle")}</p>
-        <p style={{ fontSize: 13, color: "#6B6D85", marginBottom: 20 }}>{t(lang, "googleOnboardingDesc")}</p>
-
-        <div className="mb-3">
-          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "shopName")}</label>
-          <input value={shopName} onChange={(e) => setShopName(e.target.value)} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(errors.shopName) }} />
-        </div>
-        <div className="mb-3">
-          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "sector")}</label>
-          <select value={secteur} onChange={(e) => setSecteur(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(errors.secteur) }}>
-            <option value="">{t(lang, "chooseSector")}</option>
-            {SECTORS.map((s, i) => <option key={i} value={secLabel(s)}>{secLabel(s)}</option>)}
-          </select>
-        </div>
-        <div className="mb-3">
-          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "country")}</label>
-          <SearchableSelect
-            value={pays}
-            onChange={(c) => { setPays(c); const found = COUNTRY_CURRENCY.find((x) => x.id === c); setCurrency(found ? found.currency || "" : ""); }}
-            options={COUNTRY_CURRENCY.map((c) => ({ value: c.id, label: countryLabel(c) }))}
-            placeholder={t(lang, "chooseCountry")}
-            searchPlaceholder={t(lang, "search")}
-            emptyLabel={t(lang, "noResults")}
-            hasError={errors.pays}
-            title={t(lang, "country")}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "currencyLabel")}</label>
-          <SearchableSelect
-            value={currency}
-            onChange={(c) => setCurrency(c)}
-            options={(() => {
-              const countryCurrencyId = (COUNTRY_CURRENCY.find((x) => x.id === pays) || {}).currency;
-              const top = CURRENCIES.filter((c) => c.id === countryCurrencyId);
-              const rest = CURRENCIES.filter((c) => c.id !== countryCurrencyId);
-              return [...top, ...rest].map((c) => ({ value: c.id, label: `${currencyLabel(c, lang)} (${c.symbol})` }));
-            })()}
-            placeholder={t(lang, "currencyLabel")}
-            searchPlaceholder={t(lang, "search")}
-            emptyLabel={t(lang, "noResults")}
-            hasError={errors.currency}
-            title={t(lang, "currencyLabel")}
-          />
-        </div>
-        {error && <p style={{ color: "#e11d48", fontSize: 12, marginBottom: 10 }}>{error}</p>}
-        <button onClick={submit} disabled={busy} style={{ width: "100%", padding: 12, borderRadius: 12, background: "#15162C", color: "white", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: busy ? 0.6 : 1 }}>
-          {busy ? t(lang, "wait") : t(lang, "googleOnboardingSubmit")}
-        </button>
-      </div>
-    </div>
-  );
-}
 export default function BoutiqueApp() {
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
@@ -12002,18 +11880,6 @@ export default function BoutiqueApp() {
   if (checkingGoogleOnboarding) {
     return <div style={{ minHeight: "100vh", background: "#F6F7FB" }} />;
   }
-  if (needsGoogleOnboarding && googleSessionUser) {
-    return (
-      <GoogleOnboardingScreen
-        lang={lang}
-        setLang={changeLang}
-        onDone={(shopName) => {
-          setNeedsGoogleOnboarding(false);
-          setSession({ type: "shop", username: googleSessionUser.email, shopName });
-        }}
-      />
-    );
-  }
   if (!session) {
     return (
       <AuthScreen
@@ -12022,6 +11888,7 @@ export default function BoutiqueApp() {
         onLogin={(username, shopName, employee) => setSession({ type: "shop", username, shopName, employee: employee || null })}
         onAdminLogin={() => setSession({ type: "admin" })}
         onDemo={() => setSession({ type: "shop", username: "demo", shopName: "Boutique Démo (exemple)", isDemo: true })}
+        startInGoogleOnboarding={needsGoogleOnboarding}
       />
     );
   }
