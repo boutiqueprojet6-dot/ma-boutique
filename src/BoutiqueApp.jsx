@@ -9775,7 +9775,7 @@ Réponds en ${langLabel} uniquement.`;
             )}
           </div>
         )}
-        {tab === "debts" && !isActive && (
+        {false && tab === "debts" && !isActive && (
           <div className="rounded-xl p-6 text-center mt-4" style={{ background: T.card, color: T.text }}>
             <Lock size={28} style={{ color: OCHRE }} className="mx-auto mb-2" />
             <p className="text-sm font-semibold mb-1">{t(lang, "debtsPaywallTitle")}</p>
@@ -9785,7 +9785,7 @@ Réponds en ${langLabel} uniquement.`;
             </button>
           </div>
         )}
-        {tab === "debts" && isActive && (
+        {tab === "debts" && (
           <div className="space-y-2">
             {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} />}
             {unpaidDebts.length === 0 && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "noDebts")}</p>}
@@ -9831,7 +9831,7 @@ Réponds en ${langLabel} uniquement.`;
             ))}
           </div>
         )}
-        {tab === "stats" && !isActive && (
+        {false && tab === "stats" && !isActive && (
           <div className="rounded-xl p-6 text-center mt-4" style={{ background: T.card, color: T.text }}>
             <Lock size={28} style={{ color: OCHRE }} className="mx-auto mb-2" />
             <p className="text-sm font-semibold mb-1">{t(lang, "statsPaywallTitle")}</p>
@@ -9841,7 +9841,7 @@ Réponds en ${langLabel} uniquement.`;
             </button>
           </div>
         )}
-        {tab === "stats" && isActive && (
+        {tab === "stats" && (
           <div className="space-y-4">
             {benchmarkOptIn && (
               <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
@@ -10087,7 +10087,7 @@ Réponds en ${langLabel} uniquement.`;
             })}
           </div>
         )}
-        {tab === "history" && !isActive && (
+        {false && tab === "history" && !isActive && (
           <div className="rounded-xl p-6 text-center mt-4" style={{ background: T.card, color: T.text }}>
             <Lock size={28} style={{ color: OCHRE }} className="mx-auto mb-2" />
             <p className="text-sm font-semibold mb-1">{t(lang, "historyPaywallTitle")}</p>
@@ -10097,7 +10097,7 @@ Réponds en ${langLabel} uniquement.`;
             </button>
           </div>
         )}
-        {tab === "history" && isActive && (
+        {tab === "history" && (
           <div className="space-y-2">
             {transactions.length > 0 && <SearchBox value={historySearch} onChange={setHistorySearch} placeholder={t(lang, "searchProductClient")} />}
             {hasFeatureAccess("advancedHistory") ? (
