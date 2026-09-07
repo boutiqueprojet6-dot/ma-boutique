@@ -9236,7 +9236,7 @@ Réponds en ${langLabel} uniquement.`;
                 </div>
               </div>
             )}
-            {isActive ? (
+            {(
               <div className="rounded-2xl overflow-hidden p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center justify-between">
                   <div>
@@ -9282,20 +9282,6 @@ Réponds en ${langLabel} uniquement.`;
                     ))}
                   </div>
                 )}
-              </div>
-            ) : (
-              <div className="rounded-xl p-4 text-center" style={{ background: T.card, color: T.text }}>
-                <Lock size={22} style={{ color: OCHRE }} className="mx-auto mb-2" />
-                <p className="text-sm font-semibold mb-1">{t(lang, "cashPaywallTitle")}</p>
-                <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "cashPaywallDesc")}</p>
-                <button
-                  onClick={() => startLemonSqueezyCheckout("pro")}
-                  disabled={checkoutBusyPlanId !== null}
-                  className="inline-block text-xs font-semibold px-4 py-2 rounded-lg text-white disabled:opacity-60"
-                  style={{ background: GREEN }}
-                >
-                  {checkoutBusyPlanId === "pro" ? t(lang, "stripeCheckoutLoading") : t(lang, "upgradeCta")}
-                </button>
               </div>
             )}
             {showAddExpense && (
