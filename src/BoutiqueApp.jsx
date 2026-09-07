@@ -11959,6 +11959,86 @@ function BoutiqueAppInner() {
   );
 }
 
+// ---------------------------------------------------------------------------
+// Page "Politique de confidentialité" — nécessaire pour Google OAuth et,
+// plus tard, pour la fiche Play Store. Accessible à l'URL /privacy.
+// ---------------------------------------------------------------------------
+const PRIVACY_CONTACT_EMAIL = "boutiqueprojet6@gmail.com";
+const PRIVACY_APP_NAME = "Ma Boutique";
+
+function PrivacyPolicyScreen() {
+  const section = { fontSize: 18, marginTop: 28, marginBottom: 8 };
+  return (
+    <div
+      style={{
+        maxWidth: 720,
+        margin: "0 auto",
+        padding: "32px 20px 64px",
+        fontFamily: "system-ui, -apple-system, sans-serif",
+        color: "#1a1a1a",
+        lineHeight: 1.6,
+        background: "#fff",
+        minHeight: "100vh",
+      }}
+    >
+      <h1 style={{ fontSize: 28, marginBottom: 4 }}>Politique de confidentialité</h1>
+      <p style={{ color: "#666", marginBottom: 32 }}>
+        Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
+      </p>
+      <p>
+        La présente politique de confidentialité décrit comment{" "}
+        <strong>{PRIVACY_APP_NAME}</strong> ("l'application", "nous") collecte,
+        utilise et protège les informations des utilisateurs.
+      </p>
+      <h2 style={section}>1. Informations que nous collectons</h2>
+      <p>Lorsque vous utilisez {PRIVACY_APP_NAME}, nous pouvons collecter :</p>
+      <ul>
+        <li>Votre nom et adresse e-mail (via la connexion Google ou la création de compte)</li>
+        <li>Le nom de votre boutique</li>
+        <li>Les données que vous saisissez dans l'application (produits, ventes, dettes, dépenses)</li>
+      </ul>
+      <p>Nous ne collectons pas d'informations de paiement, de localisation précise, ni de données biométriques.</p>
+      <h2 style={section}>2. Utilisation des informations</h2>
+      <p>Les informations collectées servent uniquement à :</p>
+      <ul>
+        <li>Créer et sécuriser votre compte</li>
+        <li>Faire fonctionner les fonctionnalités de gestion de boutique (stock, ventes, dettes)</li>
+        <li>Synchroniser vos données entre vos appareils</li>
+        <li>Vous contacter en cas de besoin lié à votre compte</li>
+      </ul>
+      <p>Nous ne vendons ni ne partageons vos données avec des tiers à des fins publicitaires.</p>
+      <h2 style={section}>3. Stockage et sécurité</h2>
+      <p>
+        Vos données sont stockées de façon sécurisée via notre prestataire d'hébergement (Supabase).
+        Des mesures raisonnables sont prises pour protéger vos informations contre tout accès non autorisé.
+      </p>
+      <h2 style={section}>4. Connexion avec Google</h2>
+      <p>
+        Si vous choisissez de vous connecter avec votre compte Google, nous recevons uniquement votre nom
+        et votre adresse e-mail associés à ce compte, dans le seul but de créer et sécuriser votre profil
+        dans l'application.
+      </p>
+      <h2 style={section}>5. Conservation des données</h2>
+      <p>
+        Vos données sont conservées tant que votre compte est actif. Vous pouvez demander la suppression
+        de votre compte et de vos données à tout moment en nous contactant.
+      </p>
+      <h2 style={section}>6. Vos droits</h2>
+      <p>
+        Vous pouvez à tout moment demander l'accès, la correction ou la suppression de vos données
+        personnelles en nous contactant à l'adresse ci-dessous.
+      </p>
+      <h2 style={section}>7. Contact</h2>
+      <p>
+        Pour toute question concernant cette politique de confidentialité, contactez-nous à :{" "}
+        <a href={`mailto:${PRIVACY_CONTACT_EMAIL}`}>{PRIVACY_CONTACT_EMAIL}</a>
+      </p>
+      <h2 style={section}>8. Modifications</h2>
+      <p>Cette politique de confidentialité peut être mise à jour occasionnellement. Toute modification sera publiée sur cette page.</p>
+    </div>
+  );
+}
+
 // Point d'entrée réel du fichier : enveloppe l'app dans le filet anti-page-blanche
 // ci-dessus, et affiche aussi les erreurs qui surviennent hors du rendu React
 // (dans un clic, un useEffect asynchrone, etc.) sous forme d'alerte visible.
@@ -11972,6 +12052,12 @@ if (typeof window !== "undefined" && !window.__boutiqueErrorHooked) {
   });
 }
 export function BoutiqueAppSafe() {
+  // Route /privacy : affiche la politique de confidentialité, sans passer
+  // par le splash screen ni la connexion. Nécessaire pour Google OAuth et
+  // pour la future fiche Play Store.
+  if (typeof window !== "undefined" && window.location.pathname === "/privacy") {
+    return <PrivacyPolicyScreen />;
+  }
   return (
     <ErrorBoundary>
       <BoutiqueAppInner />
