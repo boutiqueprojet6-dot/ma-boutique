@@ -8714,6 +8714,16 @@ Réponds en ${langLabel} uniquement.`;
     observer.observe(target);
     return () => observer.disconnect();
   }, [tab, activeCartId, draftCarts]);
+  // ---- Export comptable PDF (Business 1) ----
+  // Déplacés ici (avant le "if (loading) return") car les Hooks React doivent TOUJOURS
+  // être appelés dans le même ordre à chaque rendu. Placés après un retour conditionnel,
+  // ils étaient sautés pendant le chargement puis appelés une fois "loading" passé à
+  // false : ce décalage de nombre de hooks entre deux rendus fait planter tout React
+  // (erreur #310) et vide l'écran — c'était la cause de la page blanche.
+  const [showAccountingExport, setShowAccountingExport] = useState(false);
+  const [accountingFrom, setAccountingFrom] = useState("");
+  const [accountingTo, setAccountingTo] = useState("");
+  const [accountingGenerating, setAccountingGenerating] = useState(false);
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen" style={{ background: darkMode ? "#0a0a14" : SAND, color: darkMode ? "#eceef5" : CHARCOAL }}>
@@ -8842,11 +8852,6 @@ Réponds en ${langLabel} uniquement.`;
     a.href = url; a.download = `${shopName}-historique.csv`; a.click();
     URL.revokeObjectURL(url);
   };
-  // ---- Export comptable PDF (Business 1) ----
-  const [showAccountingExport, setShowAccountingExport] = useState(false);
-  const [accountingFrom, setAccountingFrom] = useState("");
-  const [accountingTo, setAccountingTo] = useState("");
-  const [accountingGenerating, setAccountingGenerating] = useState(false);
   const generateAccountingReport = async () => {
     if (!accountingFrom || !accountingTo) return;
     setAccountingGenerating(true);
