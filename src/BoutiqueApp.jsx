@@ -11858,7 +11858,12 @@ function BoutiqueAppInner() {
   const [googleSessionUser, setGoogleSessionUser] = useState(null);
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange(async (event, sessionData) => {
-      if (event !== "SIGNED_IN" || !sessionData || !sessionData.user) return;
+      // "SIGNED_IN" = connexion Google qui vient d'avoir lieu.
+      // "INITIAL_SESSION" = session déjà existante retrouvée par Supabase au chargement
+      // de la page (ex: après le rechargement provoqué par l'invite "Ajouter à l'écran
+      // d'accueil" d'Android). Sans ce deuxième cas, un utilisateur Google déjà connecté
+      // se retrouvait renvoyé à l'écran de connexion après un simple rechargement.
+      if ((event !== "SIGNED_IN" && event !== "INITIAL_SESSION") || !sessionData || !sessionData.user) return;
       // Ne concerne que les connexions via un fournisseur OAuth (Google) ; une
       // connexion classique email/mot de passe passe déjà par AuthScreen.
       const isOAuth = sessionData.user.app_metadata && sessionData.user.app_metadata.provider === "google";
