@@ -11790,7 +11790,37 @@ function PasswordResetScreen({ lang, onDone }) {
     </div>
   );
 }
-export default function BoutiqueApp() {
+// ---- Filet de sécurité anti-page-blanche ----
+// Si un composant plante pendant le rendu (variable manquante, erreur JS, etc.),
+// React démonte tout et laisse un écran blanc sans aucun indice. Ce composant
+// intercepte l'erreur et l'affiche lisiblement à l'écran (message + pile d'appel)
+// pour pouvoir la diagnostiquer même sans accès à la console (ex: sur mobile).
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null, info: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  componentDidCatch(error, info) {
+    this.setState({ info });
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ minHeight: "100vh", background: "#1a1a1a", color: "#fff", padding: 16, fontFamily: "monospace", fontSize: 12, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+          <p style={{ color: "#ff6b6b", fontWeight: "bold", fontSize: 14, marginBottom: 10 }}>💥 Erreur attrapée :</p>
+          <p style={{ marginBottom: 10 }}>{String(this.state.error && (this.state.error.message || this.state.error))}</p>
+          <p style={{ color: "#888", fontSize: 10 }}>{this.state.error && this.state.error.stack}</p>
+          <p style={{ color: "#888", fontSize: 10, marginTop: 10 }}>{this.state.info && this.state.info.componentStack}</p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+function BoutiqueAppInner() {
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
@@ -11908,3 +11938,24 @@ export default function BoutiqueApp() {
     />
   );
 }
+
+// Point d'entrée réel du fichier : enveloppe l'app dans le filet anti-page-blanche
+// ci-dessus, et affiche aussi les erreurs qui surviennent hors du rendu React
+// (dans un clic, un useEffect asynchrone, etc.) sous forme d'alerte visible.
+if (typeof window !== "undefined" && !window.__boutiqueErrorHooked) {
+  window.__boutiqueErrorHooked = true;
+  window.addEventListener("error", (e) => {
+    alert("Erreur JS : " + (e.message || e) + "\n" + (e.filename ? e.filename + ":" + e.lineno : ""));
+  });
+  window.addEventListener("unhandledrejection", (e) => {
+    alert("Erreur (promesse) : " + (e.reason && (e.reason.message || e.reason)));
+  });
+}
+export function BoutiqueAppSafe() {
+  return (
+    <ErrorBoundary>
+      <BoutiqueAppInner />
+    </ErrorBoundary>
+  );
+}
+export { BoutiqueAppSafe as default };
