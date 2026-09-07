@@ -5577,7 +5577,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     // Flux Google : l'email/mot de passe (étapes 2-3) n'ont pas de sens, Google
     // gère déjà l'identité — on saute directement de l'étape 1 au récap final.
     if (isGoogleFlow && obStep === 1) { setObStep(4); return; }
-    if (obStep < totalSteps + 1) { setObStep(obStep + 1); return; } // +1 car l'étape récap (5) n'a pas de champs à valider ici
+    if (obStep < totalSteps) { setObStep(obStep + 1); return; } // l'étape récap est totalSteps (4) ; au-delà, on passe à la soumission finale
     // final submit — l'utilisateur est déjà connecté et confirmé via Supabase Auth à ce stade
     // (voir verifyObEmailCode, ou déjà via Google pour isGoogleFlow). On complète maintenant son profil boutique.
     setBusy(true);
@@ -5902,7 +5902,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         <p className="text-[11px] font-semibold uppercase tracking-wide mb-6" style={{ color: "#6B6D85" }}>
           {isGoogleFlow
             ? t(lang, "othEtapeObstepSurTotalsteps").replace("{obStep}", obStep === 1 ? "1" : "2").replace("{totalSteps}", "2")
-            : obStep <= totalSteps
+            : obStep < totalSteps
               ? t(lang, "othEtapeObstepSurTotalsteps").replace("{obStep}", obStep).replace("{totalSteps}", totalSteps)
               : t(lang, "obStep3Title")}
         </p>
