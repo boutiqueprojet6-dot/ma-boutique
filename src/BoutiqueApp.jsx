@@ -308,6 +308,8 @@ const TRANSLATIONS = {
     continueWithGoogle: "Continuer avec Google", orSeparator: "OU", googleLoginError: "Connexion avec Google impossible. Réessaie ou utilise ton identifiant.",
     googleOnboardingTitle: "Finalise ton compte", googleOnboardingDesc: "Encore quelques infos sur ta boutique avant de commencer.", googleOnboardingSubmit: "Créer ma boutique",
     legalConsentText: "En continuant, tu acceptes nos Conditions d'utilisation et notre Politique de confidentialité.",
+    otpSentMessage: "Nous avons envoyé un code à {email}.", otpCodePlaceholder: "Code à 6 chiffres", otpVerifyBtn: "Vérifier le code",
+    changeEmailLink: "Modifier l'adresse e-mail", wrongOtpCode: "Code incorrect ou expiré. Réessaie.",
     setNouvellesFonctionnalites: "Nouvelles fonctionnalités", setCommentUtiliserLaCaisseVocale: "Comment utiliser la caisse vocale ?", setDansLongletVenteAppuieDicter: "Dans l'onglet Vente, appuie sur « Dicter la vente » et énonce les produits et quantités à voix haute (ex : « 2 sacs de riz et 1 litre d'huile pour Oumar »). Vérifie le résultat proposé avant de l'ajouter au panier.",
     setCommentUtiliserLaVenteParPhoto: "Comment utiliser la vente par photo ?", setDansLongletVenteAppuiePhoto: "Dans l'onglet Vente, appuie sur « Photo produits », prends une ou plusieurs photos des articles posés sur le comptoir, puis coche dans la liste les produits présents pour les ajouter au panier.",
     setPourquoiLaPhotoEstObligatoire: "Pourquoi la photo d'un produit est-elle obligatoire ?", setLaPhotoPermetLaReconnaissance: "La photo permet de reconnaître visuellement le produit lors d'une vente par photo. Sans photo, un produit ne peut pas être identifié dans cette liste.",
@@ -543,6 +545,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "በጣት አሻራ / ፊት ክፈት", biometricUnlockError: "የጣት አሻራ/ፊት አልታወቀም። የፒን ኮድህን ተጠቀም።",
     continueWithGoogle: "በGoogle ቀጥል", orSeparator: "ወይም", googleLoginError: "በGoogle መግባት አልተቻለም። እንደገና ሞክር ወይም መለያህን ተጠቀም።",
     legalConsentText: "በመቀጠል፣ የአጠቃቀም ውሎቻችንን እና የግላዊነት ፖሊሲያችንን ትቀበላለህ።",
+    otpSentMessage: "ኮድ ወደ {email} ልከናል።", otpCodePlaceholder: "6 አሃዝ ኮድ", otpVerifyBtn: "ኮዱን አረጋግጥ",
+    changeEmailLink: "ኢሜይል አድራሻ ቀይር", wrongOtpCode: "የተሳሳተ ወይም ጊዜው ያለፈበት ኮድ። እንደገና ሞክር።",
     stripeCheckoutLoading: "በመጫን ላይ…", stripeCheckoutError: "ክፍያው መጀመር አልቻለም። ትንሽ ቆይተህ ደግመህ ሞክር።", stripeSimulationMsg: "የሙከራ ሁነታ፦ Stripe ክፍያ ገና አልተገናኘም። ከተዋቀረ በኋላ ይህ አዝራር ወደ {plan} ደረጃ ደህንነቱ የተጠበቀ ክፍያ ይወስድሃል።",
     productPhotoRequired: "የምርት ፎቶ ግዴታ ነው (ገንዘብ መቀበያ ላይ ለመለየት)።", productPhotoRequiredHint: "ገንዘብ መቀበያ ላይ ለመለየት ፎቶ ግዴታ ነው።",
     newSaleFeaturesTipTitle: "አዲስ፦ ፈጣን ሽያጭ", newSaleFeaturesTipVoice: "ሽያጭህን በድምጽ ተናገር ከመተየብ ይልቅ።", newSaleFeaturesTipCamera: "በጠረጴዛው ላይ ያሉትን እቃዎች ፎቶ አንሳ እና ምረጣቸው።",
@@ -687,6 +691,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Unlock with fingerprint / face", biometricUnlockError: "Fingerprint/face not recognized. Use your PIN code.",
     continueWithGoogle: "Continue with Google", orSeparator: "OR", googleLoginError: "Couldn't sign in with Google. Try again or use your login.",
     legalConsentText: "By continuing, you agree to our Terms of Use and Privacy Policy.",
+    otpSentMessage: "We sent a code to {email}.", otpCodePlaceholder: "6-digit code", otpVerifyBtn: "Verify code",
+    changeEmailLink: "Change email address", wrongOtpCode: "Incorrect or expired code. Try again.",
     stripeCheckoutLoading: "Loading…", stripeCheckoutError: "Payment couldn't start. Try again in a moment.", stripeSimulationMsg: "Test mode: Stripe payment isn't connected yet. Once set up, this button will take you to secure payment for the {plan} plan.",
     productPhotoRequired: "A product photo is required (for recognition at checkout).", productPhotoRequiredHint: "Photo required to enable recognition at checkout.",
     newSaleFeaturesTipTitle: "New: faster checkout", newSaleFeaturesTipVoice: "Dictate your sale out loud instead of typing.", newSaleFeaturesTipCamera: "Take a photo of the items on the counter and check them off.",
@@ -831,6 +837,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "I-unlock gamit ang fingerprint / mukha", biometricUnlockError: "Hindi nakilala ang fingerprint/mukha. Gamitin ang iyong PIN code.",
     continueWithGoogle: "Magpatuloy gamit ang Google", orSeparator: "O", googleLoginError: "Hindi makapag-sign in gamit ang Google. Subukan ulit o gamitin ang iyong login.",
     legalConsentText: "Sa pagpapatuloy, sumasang-ayon ka sa aming Mga Tuntunin ng Paggamit at Patakaran sa Privacy.",
+    otpSentMessage: "Nagpadala kami ng code sa {email}.", otpCodePlaceholder: "6-digit na code", otpVerifyBtn: "I-verify ang code",
+    changeEmailLink: "Baguhin ang email address", wrongOtpCode: "Maling o expired na code. Subukan ulit.",
     stripeCheckoutLoading: "Naglo-load…", stripeCheckoutError: "Hindi masimulan ang pagbabayad. Subukan muli sandali.", stripeSimulationMsg: "Test mode: hindi pa konektado ang bayad sa Stripe. Kapag naitakda na, dadalhin ka ng button na ito sa secure na pagbabayad para sa planong {plan}.",
     productPhotoRequired: "Kinakailangan ang larawan ng produkto (para sa pagkilala sa checkout).", productPhotoRequiredHint: "Kinakailangan ang larawan para paganahin ang pagkilala sa checkout.",
     newSaleFeaturesTipTitle: "Bago: mas mabilis na checkout", newSaleFeaturesTipVoice: "Sabihin ang iyong benta sa halip na mag-type.", newSaleFeaturesTipCamera: "Kunan ng larawan ang mga item sa counter at markahan sila.",
@@ -975,6 +983,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "వేలిముద్ర / ముఖంతో అన్‌లాక్ చేయండి", biometricUnlockError: "వేలిముద్ర/ముఖం గుర్తించబడలేదు. మీ PIN కోడ్‌ను ఉపయోగించండి.",
     continueWithGoogle: "Googleతో కొనసాగించండి", orSeparator: "లేదా", googleLoginError: "Googleతో సైన్ ఇన్ చేయడం సాధ్యం కాలేదు. మళ్లీ ప్రయత్నించండి లేదా మీ లాగిన్‌ను ఉపయోగించండి.",
     legalConsentText: "కొనసాగించడం ద్వారా, మీరు మా వినియోగ నిబంధనలు మరియు గోప్యతా విధానానికి అంగీకరిస్తున్నారు.",
+    otpSentMessage: "మేము {email}కి కోడ్ పంపాము.", otpCodePlaceholder: "6-అంకెల కోడ్", otpVerifyBtn: "కోడ్‌ను ధృవీకరించండి",
+    changeEmailLink: "ఇమెయిల్ చిరునామాను మార్చండి", wrongOtpCode: "తప్పు లేదా గడువు ముగిసిన కోడ్. మళ్లీ ప్రయత్నించండి.",
     stripeCheckoutLoading: "లోడ్ అవుతోంది…", stripeCheckoutError: "చెల్లింపు ప్రారంభించలేకపోయాము. కొద్దిసేపటిలో మళ్లీ ప్రయత్నించండి.", stripeSimulationMsg: "పరీక్ష మోడ్: Stripe చెల్లింపు ఇంకా కనెక్ట్ కాలేదు. కాన్ఫిగర్ చేసిన తర్వాత, ఈ బటన్ మిమ్మల్ని {plan} ప్లాన్ కోసం సురక్షిత చెల్లింపుకు తీసుకెళ్తుంది.",
     productPhotoRequired: "ఉత్పత్తి ఫోటో తప్పనిసరి (చెక్అవుట్‌లో గుర్తింపు కోసం).", productPhotoRequiredHint: "చెక్అవుట్‌లో గుర్తింపును ప్రారంభించడానికి ఫోటో తప్పనిసరి.",
     newSaleFeaturesTipTitle: "కొత్తది: వేగవంతమైన అమ్మకం", newSaleFeaturesTipVoice: "టైప్ చేయడానికి బదులుగా మీ అమ్మకాన్ని బిగ్గరగా చెప్పండి.", newSaleFeaturesTipCamera: "కౌంటర్‌పై ఉన్న వస్తువుల ఫోటో తీసి వాటిని ఎంచుకోండి.",
@@ -1119,6 +1129,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "ปลดล็อกด้วยลายนิ้วมือ / ใบหน้า", biometricUnlockError: "ไม่รู้จักลายนิ้วมือ/ใบหน้า ใช้รหัส PIN ของคุณ",
     continueWithGoogle: "ดำเนินการต่อด้วย Google", orSeparator: "หรือ", googleLoginError: "ไม่สามารถเข้าสู่ระบบด้วย Google ได้ ลองอีกครั้งหรือใช้ข้อมูลเข้าสู่ระบบของคุณ",
     legalConsentText: "การดำเนินการต่อถือว่าคุณยอมรับข้อกำหนดการใช้งานและนโยบายความเป็นส่วนตัวของเรา",
+    otpSentMessage: "เราส่งรหัสไปที่ {email} แล้ว", otpCodePlaceholder: "รหัส 6 หลัก", otpVerifyBtn: "ยืนยันรหัส",
+    changeEmailLink: "เปลี่ยนที่อยู่อีเมล", wrongOtpCode: "รหัสไม่ถูกต้องหรือหมดอายุ ลองอีกครั้ง",
     stripeCheckoutLoading: "กำลังโหลด…", stripeCheckoutError: "ไม่สามารถเริ่มการชำระเงินได้ ลองใหม่อีกครั้งในอีกสักครู่", stripeSimulationMsg: "โหมดทดสอบ: การชำระเงินผ่าน Stripe ยังไม่ได้เชื่อมต่อ เมื่อตั้งค่าแล้ว ปุ่มนี้จะพาคุณไปยังการชำระเงินที่ปลอดภัยสำหรับแพ็กเกจ {plan}",
     productPhotoRequired: "จำเป็นต้องมีรูปสินค้า (สำหรับการจดจำที่จุดชำระเงิน)", productPhotoRequiredHint: "จำเป็นต้องมีรูปเพื่อเปิดใช้งานการจดจำที่จุดชำระเงิน",
     newSaleFeaturesTipTitle: "ใหม่: การขายที่รวดเร็วขึ้น", newSaleFeaturesTipVoice: "พูดบอกการขายของคุณแทนการพิมพ์", newSaleFeaturesTipCamera: "ถ่ายรูปสินค้าที่วางบนเคาน์เตอร์แล้วเลือก",
@@ -1263,6 +1275,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Ubbil ak baaraam/kanam", biometricUnlockError: "Baaraam/kanam bi xamul. Jëfandikoo sa kod PIN.",
     continueWithGoogle: "Dugal ak Google", orSeparator: "WALLA", googleLoginError: "Mënutuñu dugg ak Google. Jéemaat walla jëfandikoo sa idantite.",
     legalConsentText: "Bu ngay dugal, dangay nangu sunuy Dogal yu jëfandikoo ak Politig bu sutura.",
+    otpSentMessage: "Yónee nañu la kod ci {email}.", otpCodePlaceholder: "Kod bu 6 xarala", otpVerifyBtn: "Wóoral kod bi",
+    changeEmailLink: "Soppi email bi", wrongOtpCode: "Kod bu bon walla bu jeex. Jéemaat.",
     stripeCheckoutLoading: "Di yónnee…", stripeCheckoutError: "Fey bi mënul a tambali. Jéemaat ci kanam.", stripeSimulationMsg: "Nataal seetlu: fey Stripe boolewul fekk. Bu ñu ko boole, bataŋ bii dana la yóbbu ci fey wu wóor ngir niveau {plan}.",
     productPhotoRequired: "Nataalu jumtukaay bi war na am (ngir xam ko ci kes bi).", productPhotoRequiredHint: "Nataal war na am ngir xam jumtukaay bi ci kes bi.",
     newSaleFeaturesTipTitle: "Bees: jaay bu gaaw", newSaleFeaturesTipVoice: "Wax jaay bi ak baat ci wàllu bindin.", newSaleFeaturesTipCamera: "Ja fɛn yi ci tabali bi te tànn leen.",
@@ -1407,6 +1421,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Odblokuj odciskiem palca / twarzą", biometricUnlockError: "Nie rozpoznano odcisku palca/twarzy. Użyj kodu PIN.",
     continueWithGoogle: "Kontynuuj z Google", orSeparator: "LUB", googleLoginError: "Nie udało się zalogować przez Google. Spróbuj ponownie lub użyj swojego identyfikatora.",
     legalConsentText: "Kontynuując, akceptujesz nasze Warunki korzystania i Politykę prywatności.",
+    otpSentMessage: "Wysłaliśmy kod na {email}.", otpCodePlaceholder: "6-cyfrowy kod", otpVerifyBtn: "Zweryfikuj kod",
+    changeEmailLink: "Zmień adres e-mail", wrongOtpCode: "Nieprawidłowy lub wygasły kod. Spróbuj ponownie.",
     stripeCheckoutLoading: "Ładowanie…", stripeCheckoutError: "Nie udało się rozpocząć płatności. Spróbuj ponownie za chwilę.", stripeSimulationMsg: "Tryb testowy: płatność Stripe nie jest jeszcze podłączona. Po skonfigurowaniu ten przycisk przeniesie Cię do bezpiecznej płatności za plan {plan}.",
     productPhotoRequired: "Zdjęcie produktu jest wymagane (do rozpoznawania przy kasie).", productPhotoRequiredHint: "Zdjęcie wymagane, aby włączyć rozpoznawanie przy kasie.",
     newSaleFeaturesTipTitle: "Nowość: szybsza sprzedaż", newSaleFeaturesTipVoice: "Podyktuj sprzedaż na głos zamiast pisać.", newSaleFeaturesTipCamera: "Zrób zdjęcie towarów na ladzie i zaznacz je.",
@@ -1551,6 +1567,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "فتح القفل ببصمة الإصبع / الوجه", biometricUnlockError: "لم يتم التعرف على البصمة/الوجه. استخدم رمز PIN الخاص بك.",
     continueWithGoogle: "المتابعة باستخدام Google", orSeparator: "أو", googleLoginError: "تعذر تسجيل الدخول باستخدام Google. أعد المحاولة أو استخدم معرّفك.",
     legalConsentText: "بالمتابعة، فإنك توافق على شروط الاستخدام وسياسة الخصوصية الخاصة بنا.",
+    otpSentMessage: "لقد أرسلنا رمزًا إلى {email}.", otpCodePlaceholder: "رمز مكوّن من 6 أرقام", otpVerifyBtn: "تحقق من الرمز",
+    changeEmailLink: "تغيير عنوان البريد الإلكتروني", wrongOtpCode: "رمز غير صحيح أو منتهي الصلاحية. أعد المحاولة.",
     stripeCheckoutLoading: "جارٍ التحميل…", stripeCheckoutError: "تعذر بدء الدفع. حاول مرة أخرى بعد قليل.", stripeSimulationMsg: "وضع الاختبار: لم يتم ربط الدفع عبر Stripe بعد. بمجرد إعداده، سيرسلك هذا الزر إلى الدفع الآمن لمستوى {plan}.",
     productPhotoRequired: "صورة المنتج إلزامية (للتعرف عليه عند الدفع).", productPhotoRequiredHint: "الصورة إلزامية لتفعيل التعرف عند الدفع.",
     newSaleFeaturesTipTitle: "جديد: بيع أسرع", newSaleFeaturesTipVoice: "أملِ عملية البيع بصوتك بدلاً من الكتابة.", newSaleFeaturesTipCamera: "التقط صورة للسلع الموضوعة على المنضدة ثم حدّدها.",
@@ -1695,6 +1713,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Desbloquear con huella / rostro", biometricUnlockError: "Huella/rostro no reconocido. Usa tu código PIN.",
     continueWithGoogle: "Continuar con Google", orSeparator: "O", googleLoginError: "No se pudo iniciar sesión con Google. Vuelve a intentarlo o usa tu identificador.",
     legalConsentText: "Al continuar, aceptas nuestros Términos de uso y nuestra Política de privacidad.",
+    otpSentMessage: "Enviamos un código a {email}.", otpCodePlaceholder: "Código de 6 dígitos", otpVerifyBtn: "Verificar código",
+    changeEmailLink: "Cambiar dirección de correo", wrongOtpCode: "Código incorrecto o caducado. Vuelve a intentarlo.",
     stripeCheckoutLoading: "Cargando…", stripeCheckoutError: "No se pudo iniciar el pago. Inténtalo de nuevo en un momento.", stripeSimulationMsg: "Modo de prueba: el pago con Stripe aún no está conectado. Una vez configurado, este botón te llevará al pago seguro para el plan {plan}.",
     productPhotoRequired: "La foto del producto es obligatoria (para el reconocimiento en caja).", productPhotoRequiredHint: "Foto obligatoria para activar el reconocimiento en caja.",
     newSaleFeaturesTipTitle: "Nuevo: venta más rápida", newSaleFeaturesTipVoice: "Dicta tu venta en voz alta en lugar de escribir.", newSaleFeaturesTipCamera: "Toma una foto de los artículos en el mostrador y márcalos.",
@@ -1839,6 +1859,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Desbloquear com impressão digital / rosto", biometricUnlockError: "Impressão digital/rosto não reconhecido. Use seu código PIN.",
     continueWithGoogle: "Continuar com o Google", orSeparator: "OU", googleLoginError: "Não foi possível entrar com o Google. Tente novamente ou use seu identificador.",
     legalConsentText: "Ao continuar, você concorda com nossos Termos de Uso e Política de Privacidade.",
+    otpSentMessage: "Enviamos um código para {email}.", otpCodePlaceholder: "Código de 6 dígitos", otpVerifyBtn: "Verificar código",
+    changeEmailLink: "Alterar endereço de e-mail", wrongOtpCode: "Código incorreto ou expirado. Tente novamente.",
     stripeCheckoutLoading: "A carregar…", stripeCheckoutError: "Não foi possível iniciar o pagamento. Tenta novamente daqui a pouco.", stripeSimulationMsg: "Modo de teste: o pagamento Stripe ainda não está ligado. Assim que estiver configurado, este botão vai levar-te ao pagamento seguro do plano {plan}.",
     productPhotoRequired: "A foto do produto é obrigatória (para reconhecimento no caixa).", productPhotoRequiredHint: "Foto obrigatória para ativar o reconhecimento no caixa.",
     newSaleFeaturesTipTitle: "Novo: venda mais rápida", newSaleFeaturesTipVoice: "Dite a sua venda em voz alta em vez de digitar.", newSaleFeaturesTipCamera: "Tire uma foto dos itens no balcão e marque-os.",
@@ -1983,6 +2005,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "使用指纹/面容解锁", biometricUnlockError: "无法识别指纹/面容。请使用您的PIN码。",
     continueWithGoogle: "使用 Google 继续", orSeparator: "或", googleLoginError: "无法使用 Google 登录。请重试或使用您的账号登录。",
     legalConsentText: "继续即表示您同意我们的使用条款和隐私政策。",
+    otpSentMessage: "我们已发送验证码至 {email}。", otpCodePlaceholder: "6位验证码", otpVerifyBtn: "验证代码",
+    changeEmailLink: "更改电子邮件地址", wrongOtpCode: "验证码错误或已过期，请重试。",
     stripeCheckoutLoading: "加载中…", stripeCheckoutError: "无法开始付款。请稍后再试。", stripeSimulationMsg: "测试模式：Stripe 付款尚未连接。设置完成后，此按钮将带你前往 {plan} 套餐的安全付款页面。",
     productPhotoRequired: "产品照片为必填项（用于结账识别）。", productPhotoRequiredHint: "结账识别功能需要照片。",
     newSaleFeaturesTipTitle: "新功能：更快结账", newSaleFeaturesTipVoice: "语音下单说出销售内容，而非打字。", newSaleFeaturesTipCamera: "拍摄柜台上的商品照片并勾选。",
@@ -2127,6 +2151,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Mở khóa bằng vân tay / khuôn mặt", biometricUnlockError: "Không nhận diện được vân tay/khuôn mặt. Hãy dùng mã PIN của bạn.",
     continueWithGoogle: "Tiếp tục với Google", orSeparator: "HOẶC", googleLoginError: "Không thể đăng nhập bằng Google. Vui lòng thử lại hoặc dùng tài khoản của bạn.",
     legalConsentText: "Bằng việc tiếp tục, bạn đồng ý với Điều khoản sử dụng và Chính sách quyền riêng tư của chúng tôi.",
+    otpSentMessage: "Chúng tôi đã gửi mã đến {email}.", otpCodePlaceholder: "Mã gồm 6 chữ số", otpVerifyBtn: "Xác minh mã",
+    changeEmailLink: "Đổi địa chỉ email", wrongOtpCode: "Mã không đúng hoặc đã hết hạn. Vui lòng thử lại.",
     stripeCheckoutLoading: "Đang tải…", stripeCheckoutError: "Không thể bắt đầu thanh toán. Thử lại sau một chút.", stripeSimulationMsg: "Chế độ thử nghiệm: thanh toán Stripe chưa được kết nối. Sau khi thiết lập, nút này sẽ đưa bạn đến trang thanh toán an toàn cho gói {plan}.",
     productPhotoRequired: "Ảnh sản phẩm là bắt buộc (để nhận diện tại quầy thanh toán).", productPhotoRequiredHint: "Cần có ảnh để bật tính năng nhận diện tại quầy thanh toán.",
     newSaleFeaturesTipTitle: "Mới: bán hàng nhanh hơn", newSaleFeaturesTipVoice: "Đọc đơn bán hàng của bạn thay vì gõ.", newSaleFeaturesTipCamera: "Chụp ảnh các mặt hàng trên quầy và chọn chúng.",
@@ -2271,6 +2297,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Mit Fingerabdruck / Gesicht entsperren", biometricUnlockError: "Fingerabdruck/Gesicht nicht erkannt. Verwende deinen PIN-Code.",
     continueWithGoogle: "Mit Google fortfahren", orSeparator: "ODER", googleLoginError: "Anmeldung mit Google nicht möglich. Versuche es erneut oder nutze deine Kennung.",
     legalConsentText: "Wenn du fortfährst, stimmst du unseren Nutzungsbedingungen und unserer Datenschutzrichtlinie zu.",
+    otpSentMessage: "Wir haben einen Code an {email} gesendet.", otpCodePlaceholder: "6-stelliger Code", otpVerifyBtn: "Code bestätigen",
+    changeEmailLink: "E-Mail-Adresse ändern", wrongOtpCode: "Falscher oder abgelaufener Code. Versuche es erneut.",
     stripeCheckoutLoading: "Wird geladen…", stripeCheckoutError: "Die Zahlung konnte nicht gestartet werden. Versuche es gleich noch einmal.", stripeSimulationMsg: "Testmodus: Stripe-Zahlung ist noch nicht angebunden. Sobald eingerichtet, führt dich dieser Button zur sicheren Zahlung für die Stufe {plan}.",
     productPhotoRequired: "Ein Produktfoto ist erforderlich (für die Erkennung an der Kasse).", productPhotoRequiredHint: "Foto erforderlich, um die Erkennung an der Kasse zu aktivieren.",
     newSaleFeaturesTipTitle: "Neu: Schnellerer Verkauf", newSaleFeaturesTipVoice: "Diktiere deinen Verkauf statt zu tippen.", newSaleFeaturesTipCamera: "Fotografiere die Artikel auf der Theke und hake sie ab.",
@@ -2415,6 +2443,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Разблокировать по отпечатку / лицу", biometricUnlockError: "Отпечаток/лицо не распознаны. Используйте PIN-код.",
     continueWithGoogle: "Продолжить с Google", orSeparator: "ИЛИ", googleLoginError: "Не удалось войти через Google. Попробуйте снова или используйте свой логин.",
     legalConsentText: "Продолжая, вы соглашаетесь с нашими Условиями использования и Политикой конфиденциальности.",
+    otpSentMessage: "Мы отправили код на {email}.", otpCodePlaceholder: "6-значный код", otpVerifyBtn: "Подтвердить код",
+    changeEmailLink: "Изменить адрес эл. почты", wrongOtpCode: "Неверный или истёкший код. Попробуйте снова.",
     stripeCheckoutLoading: "Загрузка…", stripeCheckoutError: "Не удалось начать оплату. Попробуйте ещё раз через мгновение.", stripeSimulationMsg: "Тестовый режим: оплата Stripe ещё не подключена. После настройки эта кнопка отправит вас на безопасную оплату тарифа {plan}.",
     productPhotoRequired: "Фото товара обязательно (для распознавания на кассе).", productPhotoRequiredHint: "Фото обязательно для включения распознавания на кассе.",
     newSaleFeaturesTipTitle: "Новое: более быстрая продажа", newSaleFeaturesTipVoice: "Продиктуйте продажу вслух вместо набора текста.", newSaleFeaturesTipCamera: "Сфотографируйте товары на прилавке и отметьте их.",
@@ -2559,6 +2589,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "फ़िंगरप्रिंट / चेहरे से अनलॉक करें", biometricUnlockError: "फ़िंगरप्रिंट/चेहरा पहचाना नहीं गया। अपने PIN कोड का उपयोग करें।",
     continueWithGoogle: "Google से जारी रखें", orSeparator: "या", googleLoginError: "Google से साइन इन नहीं हो सका। फिर से प्रयास करें या अपनी लॉगिन जानकारी का उपयोग करें।",
     legalConsentText: "जारी रखकर, आप हमारी उपयोग की शर्तों और गोपनीयता नीति से सहमत होते हैं।",
+    otpSentMessage: "हमने {email} पर एक कोड भेजा है।", otpCodePlaceholder: "6 अंकों का कोड", otpVerifyBtn: "कोड सत्यापित करें",
+    changeEmailLink: "ईमेल पता बदलें", wrongOtpCode: "गलत या समाप्त हो चुका कोड। फिर से प्रयास करें।",
     stripeCheckoutLoading: "लोड हो रहा है…", stripeCheckoutError: "भुगतान शुरू नहीं हो सका। थोड़ी देर में फिर कोशिश करो।", stripeSimulationMsg: "परीक्षण मोड: Stripe भुगतान अभी तक कनेक्ट नहीं हुआ है। सेटअप होने के बाद, यह बटन तुम्हें {plan} प्लान के सुरक्षित भुगतान पर ले जाएगा।",
     productPhotoRequired: "उत्पाद की फ़ोटो अनिवार्य है (चेकआउट पर पहचान के लिए)।", productPhotoRequiredHint: "चेकआउट पर पहचान सक्षम करने के लिए फ़ोटो अनिवार्य है।",
     newSaleFeaturesTipTitle: "नया: तेज़ बिक्री", newSaleFeaturesTipVoice: "टाइप करने के बजाय अपनी बिक्री ज़ोर से बोलें।", newSaleFeaturesTipCamera: "काउंटर पर रखे सामान की फ़ोटो लें और उन्हें चुनें।",
@@ -2703,6 +2735,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "கைரேகை / முகத்துடன் திறக்கவும்", biometricUnlockError: "கைரேகை/முகம் அடையாளம் காணப்படவில்லை. உங்கள் PIN குறியீட்டைப் பயன்படுத்தவும்.",
     continueWithGoogle: "Google உடன் தொடரவும்", orSeparator: "அல்லது", googleLoginError: "Google உடன் உள்நுழைய முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது உங்கள் லாகின் ஐப் பயன்படுத்தவும்.",
     legalConsentText: "தொடர்வதன் மூலம், எங்கள் பயன்பாட்டு விதிமுறைகள் மற்றும் தனியுரிமைக் கொள்கையை ஏற்கிறீர்கள்.",
+    otpSentMessage: "{email}க்கு ஒரு குறியீட்டை அனுப்பினோம்.", otpCodePlaceholder: "6-இலக்க குறியீடு", otpVerifyBtn: "குறியீட்டைச் சரிபார்க்கவும்",
+    changeEmailLink: "மின்னஞ்சல் முகவரியை மாற்றவும்", wrongOtpCode: "தவறான அல்லது காலாவதியான குறியீடு. மீண்டும் முயற்சிக்கவும்.",
     stripeCheckoutLoading: "ஏற்றுகிறது…", stripeCheckoutError: "பணம் செலுத்தலைத் தொடங்க முடியவில்லை. சிறிது நேரத்தில் மீண்டும் முயற்சிக்கவும்.", stripeSimulationMsg: "சோதனை முறை: Stripe பணம் செலுத்துதல் இன்னும் இணைக்கப்படவில்லை. அமைக்கப்பட்ட பிறகு, இந்த பொத்தான் {plan} திட்டத்திற்கான பாதுகாப்பான பணம் செலுத்துதலுக்கு உங்களை அழைத்துச் செல்லும்.",
     productPhotoRequired: "பொருளின் புகைப்படம் கட்டாயம் (கவுண்டரில் அடையாளம் காண).", productPhotoRequiredHint: "கவுண்டரில் அடையாளம் காண புகைப்படம் கட்டாயம்.",
     newSaleFeaturesTipTitle: "புதியது: விரைவான விற்பனை", newSaleFeaturesTipVoice: "தட்டச்சு செய்வதற்குப் பதிலாக விற்பனையை சத்தமாகச் சொல்லுங்கள்.", newSaleFeaturesTipCamera: "கவுண்டரில் உள்ள பொருட்களின் புகைப்படம் எடுத்து தேர்ந்தெடுங்கள்.",
@@ -2847,6 +2881,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "ফিঙ্গারপ্রিন্ট / মুখ দিয়ে আনলক করুন", biometricUnlockError: "ফিঙ্গারপ্রিন্ট/মুখ শনাক্ত হয়নি। আপনার PIN কোড ব্যবহার করুন।",
     continueWithGoogle: "Google দিয়ে চালিয়ে যান", orSeparator: "অথবা", googleLoginError: "Google দিয়ে সাইন ইন করা যায়নি। আবার চেষ্টা করুন অথবা আপনার লগইন ব্যবহার করুন।",
     legalConsentText: "চালিয়ে যাওয়ার মাধ্যমে, আপনি আমাদের ব্যবহারের শর্তাবলী এবং গোপনীয়তা নীতিতে সম্মত হচ্ছেন।",
+    otpSentMessage: "আমরা {email} এ একটি কোড পাঠিয়েছি।", otpCodePlaceholder: "৬-সংখ্যার কোড", otpVerifyBtn: "কোড যাচাই করুন",
+    changeEmailLink: "ইমেইল ঠিকানা পরিবর্তন করুন", wrongOtpCode: "ভুল বা মেয়াদোত্তীর্ণ কোড। আবার চেষ্টা করুন।",
     stripeCheckoutLoading: "লোড হচ্ছে…", stripeCheckoutError: "পেমেন্ট শুরু করা যায়নি। একটু পরে আবার চেষ্টা করো।", stripeSimulationMsg: "পরীক্ষা মোড: Stripe পেমেন্ট এখনও যুক্ত করা হয়নি। কনফিগার হলে, এই বোতাম তোমাকে {plan} স্তরের জন্য নিরাপদ পেমেন্টে নিয়ে যাবে।",
     productPhotoRequired: "পণ্যের ছবি বাধ্যতামূলক (ক্যাশে সনাক্তকরণের জন্য)।", productPhotoRequiredHint: "ক্যাশে সনাক্তকরণ চালু করতে ছবি বাধ্যতামূলক।",
     newSaleFeaturesTipTitle: "নতুন: দ্রুত বিক্রয়", newSaleFeaturesTipVoice: "টাইপ করার বদলে জোরে বলে বিক্রয় বলুন।", newSaleFeaturesTipCamera: "কাউন্টারে রাখা পণ্যের ছবি তুলুন এবং টিক দিন।",
@@ -2991,6 +3027,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "فنگر پرنٹ / چہرے سے کھولیں", biometricUnlockError: "فنگر پرنٹ/چہرہ پہچانا نہیں گیا۔ اپنا PIN کوڈ استعمال کریں۔",
     continueWithGoogle: "Google کے ساتھ جاری رکھیں", orSeparator: "یا", googleLoginError: "Google کے ساتھ سائن ان نہیں ہو سکا۔ دوبارہ کوشش کریں یا اپنا لاگ ان استعمال کریں۔",
     legalConsentText: "جاری رکھ کر، آپ ہماری شرائطِ استعمال اور رازداری کی پالیسی سے اتفاق کرتے ہیں۔",
+    otpSentMessage: "ہم نے {email} پر ایک کوڈ بھیجا ہے۔", otpCodePlaceholder: "6 ہندسوں کا کوڈ", otpVerifyBtn: "کوڈ کی تصدیق کریں",
+    changeEmailLink: "ای میل ایڈریس تبدیل کریں", wrongOtpCode: "غلط یا میعاد ختم کوڈ۔ دوبارہ کوشش کریں۔",
     stripeCheckoutLoading: "لوڈ ہو رہا ہے…", stripeCheckoutError: "ادائیگی شروع نہیں ہو سکی۔ تھوڑی دیر میں دوبارہ کوشش کریں۔", stripeSimulationMsg: "ٹیسٹ موڈ: Stripe ادائیگی ابھی منسلک نہیں ہے۔ ترتیب دینے کے بعد، یہ بٹن آپ کو {plan} پلان کی محفوظ ادائیگی پر لے جائے گا۔",
     productPhotoRequired: "پروڈکٹ کی تصویر لازمی ہے (چیک آؤٹ پر شناخت کے لیے)۔", productPhotoRequiredHint: "چیک آؤٹ پر شناخت فعال کرنے کے لیے تصویر لازمی ہے۔",
     newSaleFeaturesTipTitle: "نیا: تیز فروخت", newSaleFeaturesTipVoice: "ٹائپ کرنے کے بجائے اپنی فروخت بلند آواز میں بولیں۔", newSaleFeaturesTipCamera: "کاؤنٹر پر رکھی اشیاء کی تصویر لیں اور انہیں نشان زد کریں۔",
@@ -3135,6 +3173,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Buka kunci dengan sidik jari / wajah", biometricUnlockError: "Sidik jari/wajah tidak dikenali. Gunakan kode PIN Anda.",
     continueWithGoogle: "Lanjutkan dengan Google", orSeparator: "ATAU", googleLoginError: "Tidak dapat masuk dengan Google. Coba lagi atau gunakan info login Anda.",
     legalConsentText: "Dengan melanjutkan, Anda menyetujui Ketentuan Penggunaan dan Kebijakan Privasi kami.",
+    otpSentMessage: "Kami mengirim kode ke {email}.", otpCodePlaceholder: "Kode 6 digit", otpVerifyBtn: "Verifikasi kode",
+    changeEmailLink: "Ubah alamat email", wrongOtpCode: "Kode salah atau kedaluwarsa. Coba lagi.",
     stripeCheckoutLoading: "Memuat…", stripeCheckoutError: "Pembayaran tidak dapat dimulai. Coba lagi sesaat lagi.", stripeSimulationMsg: "Mode uji: pembayaran Stripe belum terhubung. Setelah disiapkan, tombol ini akan membawamu ke pembayaran aman untuk paket {plan}.",
     productPhotoRequired: "Foto produk wajib (untuk pengenalan saat checkout).", productPhotoRequiredHint: "Foto wajib untuk mengaktifkan pengenalan saat checkout.",
     newSaleFeaturesTipTitle: "Baru: checkout lebih cepat", newSaleFeaturesTipVoice: "Ucapkan penjualanmu daripada mengetik.", newSaleFeaturesTipCamera: "Ambil foto barang di meja dan centang.",
@@ -3279,6 +3319,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Parmak izi / yüz ile kilidi aç", biometricUnlockError: "Parmak izi/yüz tanınmadı. PIN kodunu kullan.",
     continueWithGoogle: "Google ile devam et", orSeparator: "VEYA", googleLoginError: "Google ile giriş yapılamadı. Tekrar dene veya kimliğini kullan.",
     legalConsentText: "Devam ederek Kullanım Şartlarımızı ve Gizlilik Politikamızı kabul etmiş olursun.",
+    otpSentMessage: "{email} adresine bir kod gönderdik.", otpCodePlaceholder: "6 haneli kod", otpVerifyBtn: "Kodu doğrula",
+    changeEmailLink: "E-posta adresini değiştir", wrongOtpCode: "Yanlış veya süresi dolmuş kod. Tekrar dene.",
     stripeCheckoutLoading: "Yükleniyor…", stripeCheckoutError: "Ödeme başlatılamadı. Biraz sonra tekrar dene.", stripeSimulationMsg: "Test modu: Stripe ödemesi henüz bağlı değil. Kurulduğunda, bu düğme seni {plan} planı için güvenli ödemeye götürecek.",
     productPhotoRequired: "Ürün fotoğrafı zorunludur (kasada tanıma için).", productPhotoRequiredHint: "Kasada tanımayı etkinleştirmek için fotoğraf zorunludur.",
     newSaleFeaturesTipTitle: "Yeni: daha hızlı satış", newSaleFeaturesTipVoice: "Yazmak yerine satışını sesli söyle.", newSaleFeaturesTipCamera: "Tezgahtaki ürünlerin fotoğrafını çek ve işaretle.",
@@ -3423,6 +3465,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "지문 / 얼굴로 잠금 해제", biometricUnlockError: "지문/얼굴을 인식하지 못했습니다. PIN 코드를 사용하세요.",
     continueWithGoogle: "Google로 계속하기", orSeparator: "또는", googleLoginError: "Google로 로그인할 수 없습니다. 다시 시도하거나 로그인 정보를 사용하세요.",
     legalConsentText: "계속 진행하면 이용약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.",
+    otpSentMessage: "{email}로 코드를 보냈습니다.", otpCodePlaceholder: "6자리 코드", otpVerifyBtn: "코드 확인",
+    changeEmailLink: "이메일 주소 변경", wrongOtpCode: "잘못되었거나 만료된 코드입니다. 다시 시도하세요.",
     stripeCheckoutLoading: "로딩 중…", stripeCheckoutError: "결제를 시작할 수 없습니다. 잠시 후 다시 시도하세요.", stripeSimulationMsg: "테스트 모드: Stripe 결제가 아직 연결되지 않았습니다. 설정이 완료되면 이 버튼을 통해 {plan} 요금제의 안전한 결제로 이동합니다.",
     productPhotoRequired: "제품 사진이 필수입니다 (계산 시 인식을 위해).", productPhotoRequiredHint: "계산 시 인식을 활성화하려면 사진이 필요합니다.",
     newSaleFeaturesTipTitle: "신규: 더 빠른 결제", newSaleFeaturesTipVoice: "입력 대신 판매 내용을 음성으로 말하세요.", newSaleFeaturesTipCamera: "카운터 위 상품 사진을 찍고 체크하세요.",
@@ -3567,6 +3611,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "指紋 / 顔でロック解除", biometricUnlockError: "指紋・顔が認識されませんでした。PINコードを使用してください。",
     continueWithGoogle: "Googleで続ける", orSeparator: "または", googleLoginError: "Googleでのログインに失敗しました。もう一度試すか、ログイン情報を使用してください。",
     legalConsentText: "続行することで、利用規約とプライバシーポリシーに同意したものとみなされます。",
+    otpSentMessage: "{email} にコードを送信しました。", otpCodePlaceholder: "6桁のコード", otpVerifyBtn: "コードを確認",
+    changeEmailLink: "メールアドレスを変更", wrongOtpCode: "コードが間違っているか期限切れです。もう一度お試しください。",
     stripeCheckoutLoading: "読み込み中…", stripeCheckoutError: "支払いを開始できませんでした。しばらくしてから再度お試しください。", stripeSimulationMsg: "テストモード：Stripe決済はまだ接続されていません。設定が完了すると、このボタンから{plan}プランの安全な決済に進めます。",
     productPhotoRequired: "商品写真は必須です（レジでの認識のため）。", productPhotoRequiredHint: "レジでの認識を有効にするには写真が必須です。",
     newSaleFeaturesTipTitle: "新機能：より速いレジ", newSaleFeaturesTipVoice: "入力の代わりに販売内容を声で伝えます。", newSaleFeaturesTipCamera: "カウンターの商品を撮影してチェックします。",
@@ -3711,6 +3757,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Sblocca con impronta / volto", biometricUnlockError: "Impronta/volto non riconosciuti. Usa il tuo codice PIN.",
     continueWithGoogle: "Continua con Google", orSeparator: "O", googleLoginError: "Impossibile accedere con Google. Riprova o usa il tuo identificativo.",
     legalConsentText: "Continuando, accetti i nostri Termini di utilizzo e la Informativa sulla privacy.",
+    otpSentMessage: "Abbiamo inviato un codice a {email}.", otpCodePlaceholder: "Codice a 6 cifre", otpVerifyBtn: "Verifica codice",
+    changeEmailLink: "Cambia indirizzo email", wrongOtpCode: "Codice errato o scaduto. Riprova.",
     stripeCheckoutLoading: "Caricamento…", stripeCheckoutError: "Impossibile avviare il pagamento. Riprova tra un momento.", stripeSimulationMsg: "Modalità test: il pagamento Stripe non è ancora collegato. Una volta configurato, questo pulsante ti porterà al pagamento sicuro per il piano {plan}.",
     productPhotoRequired: "La foto del prodotto è obbligatoria (per il riconoscimento alla cassa).", productPhotoRequiredHint: "Foto obbligatoria per attivare il riconoscimento alla cassa.",
     newSaleFeaturesTipTitle: "Novità: vendita più veloce", newSaleFeaturesTipVoice: "Detta la tua vendita ad alta voce invece di digitare.", newSaleFeaturesTipCamera: "Fotografa gli articoli sul bancone e spuntali.",
@@ -3777,6 +3825,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Ontgrendelen met vingerafdruk / gezicht", biometricUnlockError: "Vingerafdruk/gezicht niet herkend. Gebruik je pincode.",
     continueWithGoogle: "Doorgaan met Google", orSeparator: "OF", googleLoginError: "Inloggen met Google is mislukt. Probeer het opnieuw of gebruik je gegevens.",
     legalConsentText: "Door door te gaan, ga je akkoord met onze Gebruiksvoorwaarden en ons Privacybeleid.",
+    otpSentMessage: "We hebben een code gestuurd naar {email}.", otpCodePlaceholder: "6-cijferige code", otpVerifyBtn: "Code verifiëren",
+    changeEmailLink: "E-mailadres wijzigen", wrongOtpCode: "Onjuiste of verlopen code. Probeer het opnieuw.",
     stripeCheckoutLoading: "Laden…", stripeCheckoutError: "Betaling kon niet worden gestart. Probeer het zo weer.", stripeSimulationMsg: "Testmodus: Stripe-betaling is nog niet gekoppeld. Zodra ingesteld, brengt deze knop je naar de veilige betaling voor het abonnement {plan}.",
     productPhotoRequired: "Een productfoto is verplicht (voor herkenning bij afrekenen).", productPhotoRequiredHint: "Foto verplicht om herkenning bij afrekenen in te schakelen.",
     newSaleFeaturesTipTitle: "Nieuw: sneller afrekenen", newSaleFeaturesTipVoice: "Dicteer je verkoop hardop in plaats van te typen.", newSaleFeaturesTipCamera: "Maak een foto van de artikelen op de toonbank en vink ze aan.",
@@ -3917,6 +3967,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Fungua kwa alama ya kidole / uso", biometricUnlockError: "Alama ya kidole/uso hazikutambuliwa. Tumia nambari yako ya siri (PIN).",
     continueWithGoogle: "Endelea na Google", orSeparator: "AU", googleLoginError: "Imeshindwa kuingia kwa Google. Jaribu tena au tumia jina lako la kuingia.",
     legalConsentText: "Kwa kuendelea, unakubali Masharti yetu ya Matumizi na Sera ya Faragha.",
+    otpSentMessage: "Tumetuma msimbo kwa {email}.", otpCodePlaceholder: "Msimbo wa tarakimu 6", otpVerifyBtn: "Thibitisha msimbo",
+    changeEmailLink: "Badilisha anwani ya barua pepe", wrongOtpCode: "Msimbo si sahihi au umeisha muda. Jaribu tena.",
     stripeCheckoutLoading: "Inapakia…", stripeCheckoutError: "Malipo hayakuweza kuanza. Jaribu tena baada ya muda.", stripeSimulationMsg: "Hali ya jaribio: malipo ya Stripe hayajaunganishwa bado. Yakiwekwa, kitufe hiki kitakupeleka kwenye malipo salama ya mpango wa {plan}.",
     productPhotoRequired: "Picha ya bidhaa ni lazima (kwa utambuzi wakati wa malipo).", productPhotoRequiredHint: "Picha inahitajika kuwezesha utambuzi wakati wa malipo.",
     newSaleFeaturesTipTitle: "Mpya: mauzo ya haraka zaidi", newSaleFeaturesTipVoice: "Sema mauzo yako kwa sauti badala ya kuandika.", newSaleFeaturesTipCamera: "Piga picha ya bidhaa zilizo kwenye kaunta kisha uzichague.",
@@ -4061,6 +4113,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Buɗe da yatsa / fuska", biometricUnlockError: "Ba a gane yatsa/fuska ba. Yi amfani da lambar PIN naka.",
     continueWithGoogle: "Cigaba da Google", orSeparator: "KO", googleLoginError: "An kasa shiga da Google. Sake gwadawa ko yi amfani da shigarka.",
     legalConsentText: "Ta hanyar cigaba, ka amince da Sharuɗɗan Amfani da Manufar Sirri namu.",
+    otpSentMessage: "Mun aika lambar sirri zuwa {email}.", otpCodePlaceholder: "Lambar sirri mai lamba 6", otpVerifyBtn: "Tabbatar da lambar sirri",
+    changeEmailLink: "Canja adireshin imel", wrongOtpCode: "Lambar sirri ba daidai ba ko ta ƙare. Sake gwadawa.",
     stripeCheckoutLoading: "Ana lodawa…", stripeCheckoutError: "Ba a iya fara biya ba. Sake gwadawa nan ba da jimawa ba.", stripeSimulationMsg: "Yanayin gwaji: ba a haɗa biyan Stripe ba tukuna. Da zarar an saita, wannan maɓallin zai kai ka ga biyan lafiya na matakin {plan}.",
     productPhotoRequired: "Ana buƙatar hoton kaya (don gane shi a wurin biya).", productPhotoRequiredHint: "Ana buƙatar hoto don kunna ganewa a wurin biya.",
     newSaleFeaturesTipTitle: "Sabo: sayarwa mai sauri", newSaleFeaturesTipVoice: "Faɗi siyarwarka da murya maimakon rubutu.", newSaleFeaturesTipCamera: "Ɗauki hoton kayan da ke kan tebur sannan ka zaɓe su.",
@@ -4205,6 +4259,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Yɛlɛma ni bolokɔnɔ / ɲɛda ye", biometricUnlockError: "Bolokɔnɔ/ɲɛda ma dɔn. I ka gundo nimɔrɔ (PIN) baara la.",
     continueWithGoogle: "Taa ɲɛ ni Google ye", orSeparator: "WALA", googleLoginError: "Google donni ma se ka kɛ. A ɲininka kokura walima i ka dɔnniya baara la.",
     legalConsentText: "Ni i tagara ɲɛ, i sɔnna an ka Baarakɛcogo Sariyaw ni Gundo Politiki ma.",
+    otpSentMessage: "An ye kodi ci {email} ma.", otpCodePlaceholder: "Kodi min ye nimɔrɔ 6 ye", otpVerifyBtn: "Kodi sɛgɛsɛgɛ",
+    changeEmailLink: "Imeli ladamu Changer", wrongOtpCode: "Kodi ma bɛn walima a laban tuma dafara. A ɲininka kokura.",
     stripeCheckoutLoading: "A bɛ dòn…", stripeCheckoutError: "Wari sara ma se ka daminɛ. I ka a lajɛ tugun dɔɔnin kɔfɛ.", stripeSimulationMsg: "Kɔrɔbɔli waati: Stripe wari sara ma sɔrɔ fɔlɔ. Ni a labɛnna, bɔtɔn in bɛna i ci wari sara lakananen ma niveau {plan} kama.",
     productPhotoRequired: "Fɛn ja ka kan (walasa ka a dɔn jagoyɔrɔ la).", productPhotoRequiredHint: "Ja ka kan walasa ka dɔnnafɛn dɔn jagoyɔrɔ la.",
     newSaleFeaturesTipTitle: "Kura: feere teliya", newSaleFeaturesTipVoice: "I ka feere fɔ ni kumakan ye sɛbɛnni nɔ na.", newSaleFeaturesTipCamera: "Ja ta fɛn minnu bɛ tabali kan, i ka olu sugandi.",
@@ -4276,6 +4332,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Vula nge-fingerprint / ubuso", biometricUnlockError: "I-fingerprint/ubuso abutholakalanga. Sebenzisa ikhodi yakho ye-PIN.",
     continueWithGoogle: "Qhubeka nge-Google", orSeparator: "NOMA", googleLoginError: "Akukwazekanga ukungena nge-Google. Zama futhi noma usebenzise i-akhawunti yakho.",
     legalConsentText: "Ngokuqhubeka, uyavuma Imigomo Yokusetshenziswa neNqubomgomo Yobumfihlo yethu.",
+    otpSentMessage: "Sithumele ikhodi ku-{email}.", otpCodePlaceholder: "Ikhodi enezinombolo ezi-6", otpVerifyBtn: "Qinisekisa ikhodi",
+    changeEmailLink: "Shintsha ikheli le-imeyili", wrongOtpCode: "Ikhodi engalungile noma esiphelelwe yisikhathi. Zama futhi.",
     stripeCheckoutLoading: "Kuyalayishwa…", stripeCheckoutError: "Inkokhelo ayikwazanga ukuqala. Zama futhi ngemva kwesikhashana.", stripeSimulationMsg: "Imodi yokuhlola: inkokhelo ye-Stripe ayikaxhunywa. Uma isilungisiwe, le nkinobho izokuyisa ekukhokheleni okuphephile kohlelo lwe-{plan}.",
     productPhotoRequired: "Isithombe somkhiqizo siyadingeka (ukuze kubonakale ekhesheni).", productPhotoRequiredHint: "Isithombe siyadingeka ukuvula ukubonakala ekhesheni.",
     newSaleFeaturesTipTitle: "Okusha: ukuthengisa okusheshayo", newSaleFeaturesTipVoice: "Sho ukuthengisa kwakho ngezwi esikhundleni sokuthayipha.", newSaleFeaturesTipCamera: "Thatha isithombe sezimpahla ezisekhawuntini bese uzikhetha.",
@@ -4416,6 +4474,8 @@ const TRANSLATIONS = {
     biometricUnlockBtn: "Ṣí i pẹ̀lú ika ọwọ́ / ojú", biometricUnlockError: "A kò dá ika ọwọ́/ojú mọ̀. Lo kóòdù PIN rẹ.",
     continueWithGoogle: "Tẹ̀síwájú pẹ̀lú Google", orSeparator: "TÀBÍ", googleLoginError: "Kò ṣeé ṣe láti wọlé pẹ̀lú Google. Tún gbìyànjú tàbí lo ìwọlé rẹ.",
     legalConsentText: "Nípa títẹ̀síwájú, o gbà pẹ̀lú Àwọn Òfin Lílò àti Ìlànà Àṣírí wa.",
+    otpSentMessage: "A ti fi kóòdù ránṣẹ́ sí {email}.", otpCodePlaceholder: "Kóòdù nọ́mbà mẹ́fà", otpVerifyBtn: "Ṣàyẹ̀wò kóòdù",
+    changeEmailLink: "Yí àdírẹ́sì ímeèlì padà", wrongOtpCode: "Kóòdù tí kò tọ́ tàbí tí ó ti pé. Tún gbìyànjú.",
     stripeCheckoutLoading: "Ń kó jọ…", stripeCheckoutError: "Owo síse kò lè bẹ̀rẹ̀. Gbìyànjú lẹ́ẹ̀kansi láìpẹ́.", stripeSimulationMsg: "Ipò ìdánwò: owo Stripe kò tíì so pọ̀. Nígbà tí a bá ti ṣètò rẹ̀, bọ́tìnnì yìí yóò mú ọ lọ sí owo tí ó ní ààbò fún ètò {plan}.",
     productPhotoRequired: "Fọ́tò ọjà náà jẹ́ dandan (fún ìdámọ̀ ní àkókò ìsanwó).", productPhotoRequiredHint: "Fọ́tò jẹ́ dandan láti mú ìdámọ̀ ṣiṣẹ́ ní àkókò ìsanwó.",
     newSaleFeaturesTipTitle: "Tuntun: tità yíyára", newSaleFeaturesTipVoice: "So ọ̀rọ̀ títà rẹ dípò kíkọ.", newSaleFeaturesTipCamera: "Ya fọ́tò àwọn ọjà tó wà lórí tábìlì kí o sì yàn wọ́n.",
@@ -5494,6 +5554,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   // ---- login state ----
   const [username, setUsername] = useState("");
   const [pin, setPin] = useState("");
+  // ---- connexion sans mot de passe (code à 6 chiffres envoyé par e-mail, comme Google) ----
+  const [loginOtpSent, setLoginOtpSent] = useState(false);
+  const [loginOtpCode, setLoginOtpCode] = useState("");
+  const [loginOtpSending, setLoginOtpSending] = useState(false);
+  const [loginOtpVerifying, setLoginOtpVerifying] = useState(false);
   const [showPin, setShowPin] = useState(false);
   const [showObPin, setShowObPin] = useState(false);
   const [showObConfirmPin, setShowObConfirmPin] = useState(false);
@@ -5588,6 +5653,61 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       setError(`${t(lang, "genericError")} ${e && e.message ? e.message : ""}`);
     }
     setBusy(false);
+  };
+  // Connexion sans mot de passe : envoie un code à 6 chiffres par e-mail (comme Claude.ai).
+  // shouldCreateUser: true — si l'adresse n'a pas encore de compte Supabase Auth, Supabase
+  // en amorce un ; verifyLoginOtp() décide ensuite s'il s'agit d'une boutique existante
+  // (connexion directe) ou d'une première fois (direction l'onboarding, comme pour Google).
+  const sendLoginOtp = async () => {
+    setError("");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username.trim())) {
+      setError(t(lang, "invalidEmail"));
+      return;
+    }
+    setLoginOtpSending(true);
+    const { error: otpError } = await supabase.auth.signInWithOtp({
+      email: username.trim().toLowerCase(),
+      options: { shouldCreateUser: true, emailRedirectTo: window.location.origin },
+    });
+    setLoginOtpSending(false);
+    if (otpError) { setError(otpError.message); return; }
+    setLoginOtpSent(true);
+    setLoginOtpCode("");
+  };
+  const verifyLoginOtp = async () => {
+    setError("");
+    setLoginOtpVerifying(true);
+    const { data, error: verifyError } = await supabase.auth.verifyOtp({
+      email: username.trim().toLowerCase(),
+      token: loginOtpCode.trim(),
+      type: "email",
+    });
+    if (verifyError || !data.session) {
+      setError(t(lang, "wrongOtpCode"));
+      setLoginOtpVerifying(false);
+      return;
+    }
+    const { data: shopRow } = await supabase
+      .from("shop_data")
+      .select("shop_name")
+      .eq("owner_id", data.user.id)
+      .single();
+    setLoginOtpVerifying(false);
+    if (shopRow) {
+      onLogin(username.trim().toLowerCase(), shopRow.shop_name);
+    } else {
+      // Première connexion avec cette adresse : identité déjà vérifiée par e-mail, donc on
+      // saute directement au récapitulatif boutique, exactement comme pour "Continuer avec Google".
+      setIsGoogleFlow(true);
+      setObUsername(username.trim().toLowerCase());
+      setObStep(1);
+      setScreen("onboarding");
+    }
+  };
+  const changeLoginEmail = () => {
+    setLoginOtpSent(false);
+    setLoginOtpCode("");
+    setError("");
   };
   const validateObStep = (n) => {
     const errs = {};
@@ -5784,29 +5904,51 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               <span className="text-[11px] font-semibold" style={{ color: "#9B9DB0" }}>{t(lang, "orSeparator")}</span>
               <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
             </div>
-            <div className="mb-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "identifier")}</label>
-              <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder={t(lang, "identifierPlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB" }} />
-            </div>
-            <div className="mb-1">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "passwordPlaceholder")}</label>
-              <div className="relative">
-                <input value={pin} onChange={(e) => setPin(e.target.value)} type={showPin ? "text" : "password"} placeholder="••••••••" className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB" }} />
-                <button type="button" onClick={() => setShowPin(!showPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showPin ? "🙈" : "👁"}</button>
-              </div>
-            </div>
-            {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
-            <button disabled={busy} onClick={loginSubmit} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: "#15162C" }}>
-              {busy ? t(lang, "wait") : t(lang, "loginBtn")}
-            </button>
-            <a
-              href={`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Bonjour, j'ai oublié le code PIN de mon compte Shopnify (identifiant : ${username || "à préciser"}). Peux-tu me le réinitialiser ?`)}`}
-              target="_blank" rel="noopener noreferrer"
-              className="block w-full text-center text-[11px] mt-3 underline"
-              style={{ color: CLAY }}
-            >
-              {t(lang, "forgotPin")}
-            </a>
+            {!loginOtpSent ? (
+              <>
+                <div className="mb-1">
+                  <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "identifier")}</label>
+                  <input
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") sendLoginOtp(); }}
+                    placeholder={t(lang, "identifierPlaceholder")}
+                    type="email"
+                    className="w-full border rounded-xl px-3 py-2.5 text-sm"
+                    style={{ background: "#F6F7FB" }}
+                  />
+                </div>
+                {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
+                <button disabled={loginOtpSending} onClick={sendLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: "#15162C", opacity: loginOtpSending ? 0.75 : 1 }}>
+                  {loginOtpSending ? t(lang, "wait") : t(lang, "loginBtn")}
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="text-sm mb-3" style={{ color: "#6B6D85" }}>
+                  {t(lang, "otpSentMessage").replace("{email}", username.trim().toLowerCase())}
+                </p>
+                <div className="mb-1">
+                  <input
+                    value={loginOtpCode}
+                    onChange={(e) => setLoginOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    onKeyDown={(e) => { if (e.key === "Enter") verifyLoginOtp(); }}
+                    placeholder={t(lang, "otpCodePlaceholder")}
+                    inputMode="numeric"
+                    autoFocus
+                    className="w-full border rounded-xl px-3 py-2.5 text-sm text-center tracking-[0.3em] font-semibold"
+                    style={{ background: "#F6F7FB" }}
+                  />
+                </div>
+                {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
+                <button disabled={loginOtpVerifying || loginOtpCode.trim().length < 6} onClick={verifyLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: "#15162C", opacity: loginOtpVerifying || loginOtpCode.trim().length < 6 ? 0.6 : 1 }}>
+                  {loginOtpVerifying ? t(lang, "wait") : t(lang, "otpVerifyBtn")}
+                </button>
+                <button onClick={changeLoginEmail} className="block w-full text-center text-[11px] mt-3 underline" style={{ color: INDIGO }}>
+                  {t(lang, "changeEmailLink")}
+                </button>
+              </>
+            )}
             <p className="text-center mt-4" style={{ fontSize: 10, color: "#A6A8BC", lineHeight: 1.5 }}>
               {t(lang, "legalConsentText")}
             </p>
@@ -11937,31 +12079,36 @@ function BoutiqueAppInner() {
     });
     return () => listener.subscription.unsubscribe();
   }, []);
-  // Détecte une connexion "Continuer avec Google" réussie pour un utilisateur
-  // qui n'a pas encore de boutique créée (première connexion via ce moyen) —
-  // déclenche alors le mini-onboarding dédié (nom boutique, secteur, pays...).
+  // Détecte une connexion réussie via un moyen qui recharge la page — Google (OAuth)
+  // ou le bouton "Sign in" reçu par e-mail (lien magique) — pour un utilisateur qui n'a
+  // pas encore de boutique créée (première connexion via ce moyen) — déclenche alors le
+  // mini-onboarding dédié (nom boutique, secteur, pays...). La saisie du code à 6 chiffres
+  // directement dans l'app est gérée sans passer par ici (voir verifyLoginOtp dans AuthScreen).
   const [needsGoogleOnboarding, setNeedsGoogleOnboarding] = useState(false);
   const [checkingGoogleOnboarding, setCheckingGoogleOnboarding] = useState(false);
   const [googleSessionUser, setGoogleSessionUser] = useState(null);
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange(async (event, sessionData) => {
-      // "SIGNED_IN" = connexion Google qui vient d'avoir lieu.
+      // "SIGNED_IN" = connexion qui vient d'avoir lieu (Google, ou clic sur le lien "Sign in" reçu par e-mail).
       // "INITIAL_SESSION" = session déjà existante retrouvée par Supabase au chargement
       // de la page (ex: après le rechargement provoqué par l'invite "Ajouter à l'écran
-      // d'accueil" d'Android). Sans ce deuxième cas, un utilisateur Google déjà connecté
-      // se retrouvait renvoyé à l'écran de connexion après un simple rechargement.
+      // d'accueil" d'Android, ou après avoir cliqué le lien "Sign in" qui recharge la page).
+      // Sans ce deuxième cas, un utilisateur déjà connecté se retrouvait renvoyé à l'écran
+      // de connexion après un simple rechargement.
       if ((event !== "SIGNED_IN" && event !== "INITIAL_SESSION") || !sessionData || !sessionData.user) return;
-      // Ne concerne que les connexions via un fournisseur OAuth (Google) ; une
-      // connexion classique email/mot de passe passe déjà par AuthScreen.
-      const isOAuth = sessionData.user.app_metadata && sessionData.user.app_metadata.provider === "google";
-      if (!isOAuth) return;
+      // Concerne les connexions qui rechargent la page : Google (OAuth) et le lien
+      // magique par e-mail ("email"). La saisie du code à 6 chiffres dans l'app (sans
+      // rechargement) est déjà gérée directement par verifyLoginOtp dans AuthScreen.
+      const provider = sessionData.user.app_metadata && sessionData.user.app_metadata.provider;
+      const isPageReloadLogin = provider === "google" || provider === "email";
+      if (!isPageReloadLogin) return;
       setCheckingGoogleOnboarding(true);
       const { data: shopRow } = await supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle();
       if (!shopRow) {
         setGoogleSessionUser(sessionData.user);
         setNeedsGoogleOnboarding(true);
       } else {
-        // Compte Google déjà existant : on connecte directement, sans repasser
+        // Compte déjà existant : on connecte directement, sans repasser
         // par l'onboarding ni par l'écran de connexion classique.
         setSession({ type: "shop", username: sessionData.user.email, shopName: shopRow.shop_name });
       }
