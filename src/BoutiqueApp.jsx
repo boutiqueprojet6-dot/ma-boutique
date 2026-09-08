@@ -11961,7 +11961,7 @@ Réponds en ${langLabel} uniquement.`;
             return (
               <button
                 key={navItem.id}
-                onClick={() => setTab(navItem.id)}
+                onClick={() => { if (isPhotoReturnGuardActive()) return; setTab(navItem.id); }}
                 className="flex flex-col items-center gap-1 relative"
                 style={{ minWidth: 50 }}
               >
@@ -11999,7 +11999,7 @@ Réponds en ${langLabel} uniquement.`;
             const moreActive = ["history", "stats", "ai", "employees", "shopcompare", "cashreport", "calculator"].includes(tab);
             return (
               <button
-                onClick={() => setShowMoreMenu(true)}
+                onClick={() => { if (isPhotoReturnGuardActive()) return; setShowMoreMenu(true); }}
                 className="flex flex-col items-center gap-1 relative"
                 style={{ minWidth: 50 }}
               >
