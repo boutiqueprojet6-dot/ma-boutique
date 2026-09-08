@@ -7562,6 +7562,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pUnitsPerPack, setPUnitsPerPack] = useState("");
   const [pUnitPrice, setPUnitPrice] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
+  // Anti-clic-fantôme : sur Android Chrome, revenir de l'appareil photo natif (input file
+  // capture="environment") peut déclencher un clic fantôme sur l'élément situé à l'endroit
+  // où était le bouton "OK" natif — ici, ça tombait sur le bouton "fermer" du formulaire,
+  // qui se fermait tout seul juste après la prise de photo. On bloque les clics sur ce
+  // bouton pendant une courte fenêtre après le retour de la caméra.
+  const photoReturnGuardRef = useRef(0);
   const [eLabel, setELabel] = useState("");
   const [eAmount, setEAmount] = useState("");
   const [fundInput, setFundInput] = useState("");
@@ -8015,10 +8021,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const handlePhotoChange = async (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
+    // On arme la protection anti-clic-fantôme dès le retour de l'appareil photo,
+    // avant même le redimensionnement de l'image (le clic fantôme peut arriver
+    // immédiatement au retour dans l'app, pas seulement après le traitement).
+    photoReturnGuardRef.current = Date.now() + 700;
     setPhotoBusy(true);
     try { setPPhoto(await resizeImageFile(file, 400, 0.6)); } catch (err) {}
     setPhotoBusy(false);
   };
+  // À utiliser sur les boutons qui pourraient recevoir un clic fantôme juste après
+  // la fermeture de l'appareil photo natif (ex : bouton "fermer" du formulaire).
+  const isPhotoReturnGuardActive = () => Date.now() < photoReturnGuardRef.current;
   const handleShopPhotoChange = async (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -9576,7 +9589,7 @@ Réponds en ${langLabel} uniquement.`;
             <div className="px-4" style={{ minHeight: "100%", paddingBottom: 40, paddingTop: 20 }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-base" style={{ color: T.text }}>{t(lang, "newProduct")}</h3>
-              <button onClick={() => setShowAddProduct(false)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
+              <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
             </div>
             <input placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
             <input placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
