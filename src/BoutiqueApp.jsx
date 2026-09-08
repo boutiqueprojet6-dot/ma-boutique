@@ -9756,7 +9756,7 @@ Réponds en ${langLabel} uniquement.`;
                     </div>
                   );
                 })()}
-                {showNewSaleFeaturesTip && (
+                {false && showNewSaleFeaturesTip && (
                   <div className="rounded-2xl p-3.5 relative" style={{ background: darkMode ? "rgba(37,99,235,0.1)" : "#eff6ff", border: `1px solid ${darkMode ? "rgba(37,99,235,0.3)" : "#bfdbfe"}` }}>
                     <button onClick={dismissNewSaleFeaturesTip} className="absolute top-2.5 right-2.5"><X size={14} color={T.muted} /></button>
                     <p className="text-xs font-bold pr-5 mb-1.5" style={{ color: T.text }}>{t(lang, "newSaleFeaturesTipTitle")}</p>
@@ -9764,7 +9764,8 @@ Réponds en ${langLabel} uniquement.`;
                     <p className="text-[11px]" style={{ color: T.muted }}>📷 {t(lang, "newSaleFeaturesTipCamera")}</p>
                   </div>
                 )}
-                <div className="rounded-2xl p-3.5" style={{ background: darkMode ? "rgba(16,185,129,0.08)" : "#f0fdf4", border: `1px solid ${darkMode ? "rgba(16,185,129,0.25)" : "#bbf7d0"}` }}>
+                {false && (
+                  <div className="rounded-2xl p-3.5" style={{ background: darkMode ? "rgba(16,185,129,0.08)" : "#f0fdf4", border: `1px solid ${darkMode ? "rgba(16,185,129,0.25)" : "#bbf7d0"}` }}>
                     <button
                       onClick={startVoiceCartInput}
                       disabled={isVoiceCartListening}
@@ -9807,6 +9808,8 @@ Réponds en ${langLabel} uniquement.`;
                       </div>
                     )}
                   </div>
+                )}
+                {false && (
                 <button
                   onClick={openCameraCheckout}
                   className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm"
@@ -9814,6 +9817,7 @@ Réponds en ${langLabel} uniquement.`;
                 >
                   <Camera size={16} /> {t(lang, "cameraCheckoutStart")}
                 </button>
+                )}
                 {showCameraCheckout && (
                   <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowCameraCheckout(false)}>
                     <div className="w-full max-w-md rounded-t-3xl p-4 max-h-[85vh] overflow-y-auto" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
@@ -11723,14 +11727,6 @@ Réponds en ${langLabel} uniquement.`;
                       items: [
                         { q: t(lang, "setLassistantPeutMaiderAvecQuoi"), a: t(lang, "setDemandeluiTesVentesTonStock") },
                         { q: t(lang, "setPuisjeGarderPlusieursDiscussions"), a: t(lang, "setOuiAppuieSurLiconeHistorique") },
-                      ],
-                    },
-                    {
-                      cat: t(lang, "setNouvellesFonctionnalites"),
-                      items: [
-                        { q: t(lang, "setCommentUtiliserLaCaisseVocale"), a: t(lang, "setDansLongletVenteAppuieDicter") },
-                        { q: t(lang, "setCommentUtiliserLaVenteParPhoto"), a: t(lang, "setDansLongletVenteAppuiePhoto") },
-                        { q: t(lang, "setPourquoiLaPhotoEstObligatoire"), a: t(lang, "setLaPhotoPermetLaReconnaissance") },
                       ],
                     },
                     {
