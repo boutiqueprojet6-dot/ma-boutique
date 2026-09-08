@@ -9749,7 +9749,7 @@ Réponds en ${langLabel} uniquement.`;
             </div>
             <div className="mb-3">
               <label className="text-xs block mb-1" style={{ color: T.muted }}>{t(lang, "productPhoto")}</label>
-              <input ref={productPhotoInputRef} type="file" accept="image/*" capture="environment" onChange={handlePhotoChange} className="text-xs w-full" />
+              <input ref={productPhotoInputRef} type="file" accept="image/*" onChange={handlePhotoChange} className="text-xs w-full" />
               {photoBusy && <p className="text-[11px] mt-1" style={{ color: T.muted }}>{t(lang, "processing")}</p>}
               {pPhoto && !photoBusy && <img src={pPhoto} alt="Aperçu" className="w-16 h-16 rounded-lg object-cover mt-2" />}
               {!pPhoto && !photoBusy && <p className="text-[11px] mt-1" style={{ color: "#e11d48" }}>{t(lang, "productPhotoRequiredHint")}</p>}
@@ -9981,7 +9981,7 @@ Réponds en ${langLabel} uniquement.`;
                       <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "cameraCheckoutHint")}</p>
                       <label className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm mb-2 cursor-pointer" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", color: "white" }}>
                         <Camera size={16} /> {t(lang, "cameraCheckoutTakePhoto")}
-                        <input type="file" accept="image/*" capture="environment" className="hidden" onChange={addCameraCheckoutPhoto} />
+                        <input type="file" accept="image/*" className="hidden" onChange={addCameraCheckoutPhoto} />
                       </label>
                       {cameraCheckoutBusy && <p className="text-[11px] text-center mb-2" style={{ color: T.muted }}>{t(lang, "processing")}</p>}
                       {cameraCheckoutPhotos.length > 0 && (
