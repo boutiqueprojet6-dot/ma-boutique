@@ -47,6 +47,8 @@ import {
   QrCode,
   ScanLine,
   Calculator,
+  List,
+  LayoutGrid,
 } from "lucide-react";
 import {
   LineChart,
@@ -351,6 +353,7 @@ const TRANSLATIONS = {
     statsPaywallTitle: "Statistiques — version complète", historyPaywallTitle: "Historique complet — version complète",
     expiredFree: "Abonnement expiré — version gratuite active", freeLabel: "Version gratuite",
     cashFundTitle: "Fond de caisse", noProductFound: "Aucun produit trouvé.", cartTotal: "Total du panier",
+    saleViewList: "Vue liste", saleViewGrid: "Vue grille", outOfStock: "Épuisé",
     statsPaywallDesc: "Passe à la version payante pour voir tes courbes de ventes et tes meilleurs produits.",
     noSalesShort: "Pas encore de ventes.",
     cashPaywallDesc: "Suis ton argent réel en boutique : dépenses, retraits personnels, solde exact.",
@@ -629,6 +632,7 @@ const TRANSLATIONS = {
     statsPaywallTitle: "Statistics — full version", historyPaywallTitle: "Full history — full version",
     expiredFree: "Subscription expired — free version active", freeLabel: "Free version",
     cashFundTitle: "Cash fund", noProductFound: "No product found.", cartTotal: "Cart total",
+    saleViewList: "List view", saleViewGrid: "Grid view", outOfStock: "Out of stock",
     statsPaywallDesc: "Upgrade to the paid version to see your sales charts and best products.",
     noSalesShort: "No sales yet.",
     cashPaywallDesc: "Track your real shop money: expenses, personal withdrawals, exact balance.",
@@ -7611,6 +7615,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [partialPayInput, setPartialPayInput] = useState("");
   const [partialPayError, setPartialPayError] = useState("");
   const [cartSearch, setCartSearch] = useState("");
+  const [saleViewMode, setSaleViewMode] = useState("list"); // "list" ou "grid" — affichage des produits dans l'onglet Vente
   // Clé de stockage de la boutique actuellement affichée. Pour la boutique "principale"
   // (comportement historique, mono-boutique), la clé reste inchangée : shop:${username}.
   // Pour toute AUTRE boutique (multi-boutique, Business 2), la clé inclut son id, pour que
@@ -9875,7 +9880,30 @@ Réponds en ${langLabel} uniquement.`;
                     </div>
                   </div>
                 )}
-                <SearchBox value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} />
+                <div className="flex items-center gap-2">
+                  <div className="flex-1">
+                    <SearchBox value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} />
+                  </div>
+                  <div className="flex items-center rounded-xl overflow-hidden shrink-0" style={{ border: `1px solid ${T.border}` }}>
+                    <button
+                      onClick={() => setSaleViewMode("list")}
+                      aria-label={t(lang, "saleViewList")}
+                      className="w-10 h-10 flex items-center justify-center transition-colors"
+                      style={{ background: saleViewMode === "list" ? INDIGO : T.card, color: saleViewMode === "list" ? "white" : T.text }}
+                    >
+                      <List size={16} />
+                    </button>
+                    <button
+                      onClick={() => setSaleViewMode("grid")}
+                      aria-label={t(lang, "saleViewGrid")}
+                      className="w-10 h-10 flex items-center justify-center transition-colors"
+                      style={{ background: saleViewMode === "grid" ? INDIGO : T.card, color: saleViewMode === "grid" ? "white" : T.text }}
+                    >
+                      <LayoutGrid size={16} />
+                    </button>
+                  </div>
+                </div>
+                {saleViewMode === "list" ? (
                 <div className="rounded-2xl divide-y overflow-hidden" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   {cartProducts.length === 0 && <p className="text-xs text-center p-4" style={{ color: T.muted }}>{t(lang, "noProductFound")}</p>}
                   {cartProducts.map((p) => {
@@ -9888,9 +9916,13 @@ Réponds en ${langLabel} uniquement.`;
                       <div key={p.id} className="p-3">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2.5">
-                            <div className="rounded-xl flex items-center justify-center shrink-0" style={{ width: 36, height: 36, background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}>
-                              <span style={{ fontSize: 15 }}>📦</span>
-                            </div>
+                            {p.photo ? (
+                              <img src={p.photo} alt={p.name} className="w-9 h-9 rounded-xl object-cover shrink-0" />
+                            ) : (
+                              <div className="rounded-xl flex items-center justify-center shrink-0" style={{ width: 36, height: 36, background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}>
+                                <span style={{ fontSize: 15 }}>📦</span>
+                              </div>
+                            )}
                             <div>
                               <p className="text-sm font-bold">{p.name}</p>
                               <p className="text-[10px]" style={{ color: T.muted }}>{fcfa(p.price)} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · dispo : {localizedNumber(dispo)}</p>
@@ -9938,6 +9970,71 @@ Réponds en ${langLabel} uniquement.`;
                     );
                   })}
                 </div>
+                ) : (
+                <div className="grid grid-cols-2 gap-2.5">
+                  {cartProducts.length === 0 && <p className="text-xs text-center p-4 col-span-2" style={{ color: T.muted }}>{t(lang, "noProductFound")}</p>}
+                  {cartProducts.map((p) => {
+                    const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
+                    const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
+                    const dispo = p.quantity - reservedQty(p.id);
+                    const totalUnits = (p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0);
+                    const dispoUnits = totalUnits - reservedUnits(p.id);
+                    return (
+                      <div key={p.id} className="rounded-2xl overflow-hidden flex flex-col" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                        <div className="relative" style={{ aspectRatio: "1 / 1", background: darkMode ? T.input : "#dbeafe" }}>
+                          {p.photo ? (
+                            <img src={p.photo} alt={p.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center"><Package size={22} color={darkMode ? "#a8a29e" : "#2563eb"} /></div>
+                          )}
+                          {inCartPack && (
+                            <span className="absolute top-1.5 right-1.5 min-w-[20px] h-5 px-1 rounded-full text-[10px] font-extrabold text-white flex items-center justify-center" style={{ background: "#16a34a" }}>
+                              {inCartPack.qty}
+                            </span>
+                          )}
+                          {dispo <= 0 && (
+                            <div className="absolute inset-0 flex items-center justify-center" style={{ background: "rgba(0,0,0,0.45)" }}>
+                              <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full" style={{ background: "rgba(0,0,0,0.4)" }}>{t(lang, "outOfStock")}</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-2 flex-1 flex flex-col">
+                          <p className="text-xs font-bold truncate" style={{ color: T.text }}>{p.name}</p>
+                          <p className="text-[10px] mb-1.5" style={{ color: T.muted }}>{fcfa(p.price)}</p>
+                          <div className="mt-auto flex items-center gap-1.5">
+                            {inCartPack && (
+                              <button onClick={() => changeCartQty(activeCart.id, p, -1, "pack")} className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={12} /></button>
+                            )}
+                            <button
+                              onClick={() => changeCartQty(activeCart.id, p, 1, "pack")}
+                              disabled={dispo <= 0}
+                              className="flex-1 h-7 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
+                              style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)" }}
+                            >
+                              <Plus size={13} />
+                            </button>
+                          </div>
+                          {p.sellByUnit && (
+                            <div className="mt-1.5 flex items-center gap-1.5">
+                              {inCartUnit && (
+                                <button onClick={() => changeCartQty(activeCart.id, p, -1, "unit")} className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={10} /></button>
+                              )}
+                              <button
+                                onClick={() => changeCartQty(activeCart.id, p, 1, "unit")}
+                                disabled={dispoUnits <= 0}
+                                className="flex-1 h-6 rounded-full flex items-center justify-center gap-0.5 text-white text-[10px] font-bold disabled:opacity-30 active:scale-90 transition-transform"
+                                style={{ background: "linear-gradient(145deg, #ea580c, #c2410c)" }}
+                              >
+                                {inCartUnit ? inCartUnit.qty : 0} {t(lang, "sellUnit")} <Plus size={10} />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                )}
                 {activeCart.items.length > 0 && (
                 <div ref={paymentZoneRef} className="space-y-2">
                   <div className="rounded-2xl overflow-hidden" style={{ background: darkMode ? T.card : "linear-gradient(135deg, #eff6ff, #dbeafe)", boxShadow: darkMode ? "none" : "0 8px 18px rgba(37,99,235,0.15)" }}>
