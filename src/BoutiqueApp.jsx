@@ -4996,13 +4996,34 @@ function useIsDesktop() {
   return isDesktop;
 }
 function resizeImageFile(file, maxSize = 400, quality = 0.6) {
+  // createImageBitmap décode l'image hors du fil principal (accéléré matériellement
+  // sur la plupart des navigateurs mobiles), contrairement à <img>+canvas qui décode
+  // de façon synchrone et peut geler l'écran plusieurs secondes sur une photo très
+  // haute résolution (courant sur les téléphones récents, capteurs 48 à 108 Mpx).
+  // On se rabat sur la méthode classique si createImageBitmap n'est pas disponible
+  // ou échoue sur cet appareil.
+  if (typeof createImageBitmap === "function") {
+    return createImageBitmap(file).then((bitmap) => {
+      try {
+        let { width, height } = bitmap;
+        if (width > height && width > maxSize) { height = Math.round((height * maxSize) / width); width = maxSize; }
+        else if (height > maxSize) { width = Math.round((width * maxSize) / height); height = maxSize; }
+        const canvas = document.createElement("canvas");
+        canvas.width = width; canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(bitmap, 0, 0, width, height);
+        if (bitmap.close) bitmap.close();
+        return canvas.toDataURL("image/jpeg", quality);
+      } catch (err) {
+        if (bitmap.close) bitmap.close();
+        throw err;
+      }
+    }).catch(() => resizeImageFileLegacy(file, maxSize, quality));
+  }
+  return resizeImageFileLegacy(file, maxSize, quality);
+}
+function resizeImageFileLegacy(file, maxSize, quality) {
   return new Promise((resolve, reject) => {
-    // On utilise createObjectURL plutôt que FileReader.readAsDataURL : ce dernier
-    // encode le fichier ENTIER (plusieurs Mo en pleine résolution caméra) en une
-    // immense chaîne base64 avant même de le redimensionner, ce qui peut bloquer
-    // le fil principal plusieurs secondes sur un téléphone d'entrée de gamme et
-    // donner l'impression que l'écran est figé. createObjectURL est quasi instantané
-    // et ne duplique pas le fichier en mémoire.
     const objectUrl = URL.createObjectURL(file);
     const cleanup = () => URL.revokeObjectURL(objectUrl);
     const img = new Image();
