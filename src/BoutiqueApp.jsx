@@ -12184,7 +12184,19 @@ Réponds en ${langLabel} uniquement.`;
       )}
       </div>
       </div>
-      {photoDebugLog.length > 0 && (
+      {/* Bannière canari : confirme si CETTE version précise du code tourne vraiment
+          sur l'appareil, indépendamment de tout bug photo. À retirer plus tard. */}
+      <div
+        style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 99999,
+          background: "#dc2626", color: "#fff", textAlign: "center",
+          fontFamily: "monospace", fontSize: 11, fontWeight: "bold",
+          padding: "4px 0",
+        }}
+      >
+        BUILD-DEBUG-06
+      </div>
+      {(
         <div
           style={{
             position: "fixed", left: 8, right: 8, bottom: 8, zIndex: 9999,
@@ -12198,7 +12210,9 @@ Réponds en ${langLabel} uniquement.`;
             <strong style={{ color: "#fff" }}>Débogage photo (à retirer plus tard)</strong>
             <button onClick={() => setPhotoDebugLog([])} style={{ color: "#f87171", fontFamily: "monospace" }}>effacer</button>
           </div>
-          {photoDebugLog.map((line, i) => <div key={i}>{line}</div>)}
+          {photoDebugLog.length === 0
+            ? <div style={{ color: "#94a3b8" }}>En attente d'une action photo...</div>
+            : photoDebugLog.map((line, i) => <div key={i}>{line}</div>)}
         </div>
       )}
     </div>
