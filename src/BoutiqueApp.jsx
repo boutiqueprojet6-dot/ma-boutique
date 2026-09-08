@@ -7601,6 +7601,25 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pUnitsPerPack, setPUnitsPerPack] = useState("");
   const [pUnitPrice, setPUnitPrice] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
+  // ===== PANNEAU DE DÉBOGAGE TEMPORAIRE (photo produit) =====
+  // Affiche à l'écran, étape par étape, ce qui se passe pendant la prise de photo,
+  // pour diagnostiquer le gel sans avoir besoin d'un ordinateur/console distante.
+  // À retirer une fois le bug résolu.
+  const [photoDebugLog, setPhotoDebugLog] = useState([]);
+  const logPhotoDebug = (msg) => {
+    const line = `${new Date().toLocaleTimeString()} — ${msg}`;
+    setPhotoDebugLog((prev) => [...prev.slice(-24), line]);
+  };
+  useEffect(() => {
+    const onErr = (event) => logPhotoDebug(`ERREUR JS: ${event.message || event.error || "inconnue"}`);
+    const onRej = (event) => logPhotoDebug(`PROMESSE REJETÉE: ${(event.reason && event.reason.message) || event.reason || "inconnue"}`);
+    window.addEventListener("error", onErr);
+    window.addEventListener("unhandledrejection", onRej);
+    return () => {
+      window.removeEventListener("error", onErr);
+      window.removeEventListener("unhandledrejection", onRej);
+    };
+  }, []);
   // Filet de secours "brouillon produit" : sur Android, ouvrir l'appareil photo natif
   // (input file capture="environment") peut amener le système à décharger complètement
   // la page en arrière-plan pour libérer de la mémoire — surtout sur une appli aussi
@@ -8103,16 +8122,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     })();
   };
   const handlePhotoChange = async (e) => {
+    logPhotoDebug("onChange déclenché sur l'input photo");
     const file = e.target.files && e.target.files[0];
-    if (!file) return;
+    if (!file) { logPhotoDebug("Aucun fichier reçu (e.target.files vide)"); return; }
+    logPhotoDebug(`Fichier reçu: ${file.name || "?"} — ${Math.round(file.size / 1024)} Ko — ${file.type || "?"}`);
     // On arme la protection anti-clic-fantôme dès le retour de l'appareil photo,
     // avant même le redimensionnement de l'image (le clic fantôme peut arriver
     // immédiatement au retour dans l'app, pas seulement après le traitement).
     photoReturnGuardRef.current = Date.now() + 700;
     setPhotoBusy(true);
-    try { setPPhoto(await resizeImageFileWithTimeout(file, 400, 0.6)); }
-    catch (err) { setError(t(lang, "productPhotoRequired")); }
+    logPhotoDebug("Démarrage du redimensionnement...");
+    try {
+      const result = await resizeImageFileWithTimeout(file, 400, 0.6);
+      logPhotoDebug(`Redimensionnement terminé, taille finale: ${Math.round(result.length / 1024)} Ko`);
+      setPPhoto(result);
+    } catch (err) {
+      logPhotoDebug(`ÉCHEC du redimensionnement: ${(err && err.message) || err}`);
+      setError(t(lang, "productPhotoRequired"));
+    }
     setPhotoBusy(false);
+    logPhotoDebug("photoBusy remis à false (traitement terminé)");
   };
   // À utiliser sur les boutons qui pourraient recevoir un clic fantôme juste après
   // la fermeture de l'appareil photo natif (ex : bouton "fermer" du formulaire).
@@ -12155,6 +12184,23 @@ Réponds en ${langLabel} uniquement.`;
       )}
       </div>
       </div>
+      {photoDebugLog.length > 0 && (
+        <div
+          style={{
+            position: "fixed", left: 8, right: 8, bottom: 8, zIndex: 9999,
+            maxHeight: "40vh", overflowY: "auto",
+            background: "rgba(0,0,0,0.92)", color: "#4ade80",
+            fontFamily: "monospace", fontSize: 10, lineHeight: 1.5,
+            padding: "8px 10px", borderRadius: 10, border: "1px solid #22c55e",
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+            <strong style={{ color: "#fff" }}>Débogage photo (à retirer plus tard)</strong>
+            <button onClick={() => setPhotoDebugLog([])} style={{ color: "#f87171", fontFamily: "monospace" }}>effacer</button>
+          </div>
+          {photoDebugLog.map((line, i) => <div key={i}>{line}</div>)}
+        </div>
+      )}
     </div>
   );
 }
