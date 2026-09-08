@@ -7562,6 +7562,51 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pUnitsPerPack, setPUnitsPerPack] = useState("");
   const [pUnitPrice, setPUnitPrice] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
+  // Filet de secours "brouillon produit" : sur Android, ouvrir l'appareil photo natif
+  // (input file capture="environment") peut amener le système à décharger complètement
+  // la page en arrière-plan pour libérer de la mémoire — surtout sur une appli aussi
+  // volumineuse que celle-ci. Au retour, ce n'est pas un simple clic parasite : la page
+  // s'est rechargée depuis zéro, tout l'état React (onglet, formulaire ouvert, photo
+  // prise) est perdu, et "tab" redémarre à sa valeur par défaut ("dashboard" = accueil).
+  // On sauvegarde donc le formulaire "nouveau produit" en sessionStorage à chaque
+  // changement, et on le restaure automatiquement si l'appli redémarre alors qu'un
+  // brouillon récent existe (moins de 30 minutes).
+  const productDraftRestored = useRef(false);
+  useEffect(() => {
+    if (productDraftRestored.current) return;
+    productDraftRestored.current = true;
+    try {
+      const raw = window.sessionStorage.getItem("mb_product_draft_v1");
+      if (!raw) return;
+      const draft = JSON.parse(raw);
+      if (!draft || Date.now() - (draft.savedAt || 0) > 30 * 60 * 1000) {
+        window.sessionStorage.removeItem("mb_product_draft_v1");
+        return;
+      }
+      setPName(draft.pName || "");
+      setPQty(draft.pQty || "");
+      setPPrice(draft.pPrice || "");
+      setPCostPrice(draft.pCostPrice || "");
+      setPPhoto(draft.pPhoto || null);
+      setPSellByUnit(!!draft.pSellByUnit);
+      setPUnitsPerPack(draft.pUnitsPerPack || "");
+      setPUnitPrice(draft.pUnitPrice || "");
+      setTab("stock");
+      setShowAddProduct(true);
+    } catch (err) {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    try {
+      if (showAddProduct) {
+        window.sessionStorage.setItem("mb_product_draft_v1", JSON.stringify({
+          pName, pQty, pPrice, pCostPrice, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, savedAt: Date.now(),
+        }));
+      } else {
+        window.sessionStorage.removeItem("mb_product_draft_v1");
+      }
+    } catch (err) {}
+  }, [showAddProduct, pName, pQty, pPrice, pCostPrice, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice]);
   // Anti-clic-fantôme : sur Android Chrome, revenir de l'appareil photo natif (input file
   // capture="environment") peut déclencher un clic fantôme sur l'élément situé à l'endroit
   // où était le bouton "OK" natif — ici, ça tombait sur le bouton "fermer" du formulaire,
