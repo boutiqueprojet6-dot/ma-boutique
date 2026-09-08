@@ -4997,10 +4997,17 @@ function useIsDesktop() {
 }
 function resizeImageFile(file, maxSize = 400, quality = 0.6) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const img = new Image();
-      img.onload = () => {
+    // On utilise createObjectURL plutôt que FileReader.readAsDataURL : ce dernier
+    // encode le fichier ENTIER (plusieurs Mo en pleine résolution caméra) en une
+    // immense chaîne base64 avant même de le redimensionner, ce qui peut bloquer
+    // le fil principal plusieurs secondes sur un téléphone d'entrée de gamme et
+    // donner l'impression que l'écran est figé. createObjectURL est quasi instantané
+    // et ne duplique pas le fichier en mémoire.
+    const objectUrl = URL.createObjectURL(file);
+    const cleanup = () => URL.revokeObjectURL(objectUrl);
+    const img = new Image();
+    img.onload = () => {
+      try {
         let { width, height } = img;
         if (width > height && width > maxSize) { height = (height * maxSize) / width; width = maxSize; }
         else if (height > maxSize) { width = (width * maxSize) / height; height = maxSize; }
@@ -5008,14 +5015,25 @@ function resizeImageFile(file, maxSize = 400, quality = 0.6) {
         canvas.width = width; canvas.height = height;
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, width, height);
+        cleanup();
         resolve(canvas.toDataURL("image/jpeg", quality));
-      };
-      img.onerror = reject;
-      img.src = ev.target.result;
+      } catch (err) {
+        cleanup();
+        reject(err);
+      }
     };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+    img.onerror = (err) => { cleanup(); reject(err); };
+    img.src = objectUrl;
   });
+}
+// Empêche resizeImageFile de rester bloqué indéfiniment (ex: image corrompue ou
+// décodage anormalement long) : au-delà de 12s, on abandonne proprement plutôt
+// que de laisser l'écran figé sans retour pour l'utilisateur.
+function resizeImageFileWithTimeout(file, maxSize, quality, timeoutMs = 12000) {
+  return Promise.race([
+    resizeImageFile(file, maxSize, quality),
+    new Promise((_, reject) => setTimeout(() => reject(new Error("resize-timeout")), timeoutMs)),
+  ]);
 }
 function ZigzagStrip() {
   return (
@@ -8071,7 +8089,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // immédiatement au retour dans l'app, pas seulement après le traitement).
     photoReturnGuardRef.current = Date.now() + 700;
     setPhotoBusy(true);
-    try { setPPhoto(await resizeImageFile(file, 400, 0.6)); } catch (err) {}
+    try { setPPhoto(await resizeImageFileWithTimeout(file, 400, 0.6)); }
+    catch (err) { setError(t(lang, "productPhotoRequired")); }
     setPhotoBusy(false);
   };
   // À utiliser sur les boutons qui pourraient recevoir un clic fantôme juste après
@@ -8082,7 +8101,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (!file) return;
     setShopPhotoBusy(true);
     try {
-      const dataUrl = await resizeImageFile(file, 300, 0.6);
+      const dataUrl = await resizeImageFileWithTimeout(file, 300, 0.6);
       setShopPhoto(dataUrl);
       if (!isDemo) {
         const raw = await window.storage.get(`accounts:${username}`, true);
@@ -8564,7 +8583,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (!file) return;
     setCameraCheckoutBusy(true);
     try {
-      const resized = await resizeImageFile(file, 500, 0.6);
+      const resized = await resizeImageFileWithTimeout(file, 500, 0.6);
       setCameraCheckoutPhotos((prev) => [...prev, resized]);
     } catch (err) {}
     setCameraCheckoutBusy(false);
