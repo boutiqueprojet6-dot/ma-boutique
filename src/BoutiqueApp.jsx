@@ -7601,25 +7601,6 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pUnitsPerPack, setPUnitsPerPack] = useState("");
   const [pUnitPrice, setPUnitPrice] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
-  // ===== PANNEAU DE DÉBOGAGE TEMPORAIRE (photo produit) =====
-  // Affiche à l'écran, étape par étape, ce qui se passe pendant la prise de photo,
-  // pour diagnostiquer le gel sans avoir besoin d'un ordinateur/console distante.
-  // À retirer une fois le bug résolu.
-  const [photoDebugLog, setPhotoDebugLog] = useState([]);
-  const logPhotoDebug = (msg) => {
-    const line = `${new Date().toLocaleTimeString()} — ${msg}`;
-    setPhotoDebugLog((prev) => [...prev.slice(-24), line]);
-  };
-  useEffect(() => {
-    const onErr = (event) => logPhotoDebug(`ERREUR JS: ${event.message || event.error || "inconnue"}`);
-    const onRej = (event) => logPhotoDebug(`PROMESSE REJETÉE: ${(event.reason && event.reason.message) || event.reason || "inconnue"}`);
-    window.addEventListener("error", onErr);
-    window.addEventListener("unhandledrejection", onRej);
-    return () => {
-      window.removeEventListener("error", onErr);
-      window.removeEventListener("unhandledrejection", onRej);
-    };
-  }, []);
   // Filet de secours "brouillon produit" : sur Android, ouvrir l'appareil photo natif
   // (input file capture="environment") peut amener le système à décharger complètement
   // la page en arrière-plan pour libérer de la mémoire — surtout sur une appli aussi
@@ -8122,24 +8103,18 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     })();
   };
   const processPhotoFile = async (file, source = "onChange") => {
-    if (!file) { logPhotoDebug(`Aucun fichier reçu (source: ${source})`); return; }
-    logPhotoDebug(`Fichier reçu (${source}): ${file.name || "?"} — ${Math.round(file.size / 1024)} Ko — ${file.type || "?"}`);
+    if (!file) return;
     photoReturnGuardRef.current = Date.now() + 700;
     setPhotoBusy(true);
-    logPhotoDebug("Démarrage du redimensionnement...");
     try {
       const result = await resizeImageFileWithTimeout(file, 400, 0.6);
-      logPhotoDebug(`Redimensionnement terminé, taille finale: ${Math.round(result.length / 1024)} Ko`);
       setPPhoto(result);
     } catch (err) {
-      logPhotoDebug(`ÉCHEC du redimensionnement: ${(err && err.message) || err}`);
       setError(t(lang, "productPhotoRequired"));
     }
     setPhotoBusy(false);
-    logPhotoDebug("photoBusy remis à false (traitement terminé)");
   };
   const handlePhotoChange = async (e) => {
-    logPhotoDebug("onChange déclenché sur l'input photo");
     const file = e.target.files && e.target.files[0];
     await processPhotoFile(file, "onChange");
   };
@@ -8152,7 +8127,6 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const checkPendingPhoto = () => {
       const input = productPhotoInputRef.current;
       if (!input || !input.files || !input.files[0]) return;
-      logPhotoDebug("Photo détectée via le filet de secours (focus/visibilitychange)");
       const file = input.files[0];
       processPhotoFile(file, "filet-de-secours").then(() => { input.value = ""; });
     };
@@ -12208,37 +12182,6 @@ Réponds en ${langLabel} uniquement.`;
       )}
       </div>
       </div>
-      {/* Bannière canari : confirme si CETTE version précise du code tourne vraiment
-          sur l'appareil, indépendamment de tout bug photo. À retirer plus tard. */}
-      <div
-        style={{
-          position: "fixed", top: 0, left: 0, right: 0, zIndex: 99999,
-          background: "#dc2626", color: "#fff", textAlign: "center",
-          fontFamily: "monospace", fontSize: 11, fontWeight: "bold",
-          padding: "4px 0",
-        }}
-      >
-        BUILD-DEBUG-06
-      </div>
-      {(
-        <div
-          style={{
-            position: "fixed", left: 8, right: 8, bottom: 8, zIndex: 9999,
-            maxHeight: "40vh", overflowY: "auto",
-            background: "rgba(0,0,0,0.92)", color: "#4ade80",
-            fontFamily: "monospace", fontSize: 10, lineHeight: 1.5,
-            padding: "8px 10px", borderRadius: 10, border: "1px solid #22c55e",
-          }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-            <strong style={{ color: "#fff" }}>Débogage photo (à retirer plus tard)</strong>
-            <button onClick={() => setPhotoDebugLog([])} style={{ color: "#f87171", fontFamily: "monospace" }}>effacer</button>
-          </div>
-          {photoDebugLog.length === 0
-            ? <div style={{ color: "#94a3b8" }}>En attente d'une action photo...</div>
-            : photoDebugLog.map((line, i) => <div key={i}>{line}</div>)}
-        </div>
-      )}
     </div>
   );
 }
