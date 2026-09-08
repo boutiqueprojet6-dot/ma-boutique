@@ -8148,13 +8148,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // et bien présent dans input.files (bug navigateur connu). On vérifie donc
   // manuellement le contenu de l'input dès que l'onglet retrouve le focus.
   const productPhotoInputRef = useRef(null);
+  const cameraPhotoInputRef = useRef(null);
   useEffect(() => {
     const checkPendingPhoto = () => {
-      const input = productPhotoInputRef.current;
-      if (!input || !input.files || !input.files[0]) return;
-      logPhotoDebug("Photo détectée via le filet de secours (focus/visibilitychange)");
-      const file = input.files[0];
-      processPhotoFile(file, "filet-de-secours").then(() => { input.value = ""; });
+      [productPhotoInputRef, cameraPhotoInputRef].forEach((ref) => {
+        const input = ref.current;
+        if (!input || !input.files || !input.files[0]) return;
+        logPhotoDebug("Photo détectée via le filet de secours (focus/visibilitychange)");
+        const file = input.files[0];
+        processPhotoFile(file, "filet-de-secours").then(() => { input.value = ""; });
+      });
     };
     window.addEventListener("focus", checkPendingPhoto);
     document.addEventListener("visibilitychange", checkPendingPhoto);
@@ -9749,7 +9752,18 @@ Réponds en ${langLabel} uniquement.`;
             </div>
             <div className="mb-3">
               <label className="text-xs block mb-1" style={{ color: T.muted }}>{t(lang, "productPhoto")}</label>
-              <input ref={productPhotoInputRef} type="file" accept="image/*" onChange={handlePhotoChange} className="text-xs w-full" />
+              <div className="flex gap-2 items-center flex-wrap">
+                <button
+                  type="button"
+                  onClick={() => cameraPhotoInputRef.current && cameraPhotoInputRef.current.click()}
+                  className="text-xs px-3 py-2 rounded-lg font-semibold"
+                  style={{ background: T.accent || "#1B3A5C", color: "#fff" }}
+                >
+                  📷 Prendre une photo
+                </button>
+                <input ref={cameraPhotoInputRef} type="file" accept="image/*" capture="environment" onChange={handlePhotoChange} className="hidden" />
+                <input ref={productPhotoInputRef} type="file" accept="image/*" onChange={handlePhotoChange} className="text-xs" style={{ maxWidth: 180 }} />
+              </div>
               {photoBusy && <p className="text-[11px] mt-1" style={{ color: T.muted }}>{t(lang, "processing")}</p>}
               {pPhoto && !photoBusy && <img src={pPhoto} alt="Aperçu" className="w-16 h-16 rounded-lg object-cover mt-2" />}
               {!pPhoto && !photoBusy && <p className="text-[11px] mt-1" style={{ color: "#e11d48" }}>{t(lang, "productPhotoRequiredHint")}</p>}
