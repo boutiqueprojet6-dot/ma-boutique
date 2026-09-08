@@ -8121,14 +8121,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
     })();
   };
-  const handlePhotoChange = async (e) => {
-    logPhotoDebug("onChange déclenché sur l'input photo");
-    const file = e.target.files && e.target.files[0];
-    if (!file) { logPhotoDebug("Aucun fichier reçu (e.target.files vide)"); return; }
-    logPhotoDebug(`Fichier reçu: ${file.name || "?"} — ${Math.round(file.size / 1024)} Ko — ${file.type || "?"}`);
-    // On arme la protection anti-clic-fantôme dès le retour de l'appareil photo,
-    // avant même le redimensionnement de l'image (le clic fantôme peut arriver
-    // immédiatement au retour dans l'app, pas seulement après le traitement).
+  const processPhotoFile = async (file, source = "onChange") => {
+    if (!file) { logPhotoDebug(`Aucun fichier reçu (source: ${source})`); return; }
+    logPhotoDebug(`Fichier reçu (${source}): ${file.name || "?"} — ${Math.round(file.size / 1024)} Ko — ${file.type || "?"}`);
     photoReturnGuardRef.current = Date.now() + 700;
     setPhotoBusy(true);
     logPhotoDebug("Démarrage du redimensionnement...");
@@ -8143,6 +8138,32 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPhotoBusy(false);
     logPhotoDebug("photoBusy remis à false (traitement terminé)");
   };
+  const handlePhotoChange = async (e) => {
+    logPhotoDebug("onChange déclenché sur l'input photo");
+    const file = e.target.files && e.target.files[0];
+    await processPhotoFile(file, "onChange");
+  };
+  // Filet de secours : sur certains Android/Chrome, revenir de l'appareil photo natif
+  // ne déclenche jamais l'événement "change" de l'input, même si le fichier est bel
+  // et bien présent dans input.files (bug navigateur connu). On vérifie donc
+  // manuellement le contenu de l'input dès que l'onglet retrouve le focus.
+  const productPhotoInputRef = useRef(null);
+  useEffect(() => {
+    const checkPendingPhoto = () => {
+      const input = productPhotoInputRef.current;
+      if (!input || !input.files || !input.files[0]) return;
+      logPhotoDebug("Photo détectée via le filet de secours (focus/visibilitychange)");
+      const file = input.files[0];
+      processPhotoFile(file, "filet-de-secours").then(() => { input.value = ""; });
+    };
+    window.addEventListener("focus", checkPendingPhoto);
+    document.addEventListener("visibilitychange", checkPendingPhoto);
+    return () => {
+      window.removeEventListener("focus", checkPendingPhoto);
+      document.removeEventListener("visibilitychange", checkPendingPhoto);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // À utiliser sur les boutons qui pourraient recevoir un clic fantôme juste après
   // la fermeture de l'appareil photo natif (ex : bouton "fermer" du formulaire).
   const isPhotoReturnGuardActive = () => Date.now() < photoReturnGuardRef.current;
@@ -9728,7 +9749,7 @@ Réponds en ${langLabel} uniquement.`;
             </div>
             <div className="mb-3">
               <label className="text-xs block mb-1" style={{ color: T.muted }}>{t(lang, "productPhoto")}</label>
-              <input type="file" accept="image/*" capture="environment" onChange={handlePhotoChange} className="text-xs w-full" />
+              <input ref={productPhotoInputRef} type="file" accept="image/*" capture="environment" onChange={handlePhotoChange} className="text-xs w-full" />
               {photoBusy && <p className="text-[11px] mt-1" style={{ color: T.muted }}>{t(lang, "processing")}</p>}
               {pPhoto && !photoBusy && <img src={pPhoto} alt="Aperçu" className="w-16 h-16 rounded-lg object-cover mt-2" />}
               {!pPhoto && !photoBusy && <p className="text-[11px] mt-1" style={{ color: "#e11d48" }}>{t(lang, "productPhotoRequiredHint")}</p>}
