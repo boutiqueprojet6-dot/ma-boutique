@@ -8102,21 +8102,93 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
     })();
   };
-  const processPhotoFile = async (file, source = "onChange") => {
+  // ===== Recadrage de la photo produit =====
+  // L'utilisateur cadre lui-même la photo dans un carré (déplacement + zoom) avant
+  // qu'elle soit enregistrée, pour éviter qu'une photo haute ou large soit mal coupée
+  // par l'affichage en grille.
+  const CROP_SIZE = 280; // taille du cadre affiché à l'écran (px)
+  const CROP_OUTPUT = 500; // résolution de l'image carrée finale exportée (px)
+  const [cropModalFile, setCropModalFile] = useState(null);
+  const [cropObjectUrl, setCropObjectUrl] = useState(null);
+  const [cropNatural, setCropNatural] = useState({ w: 0, h: 0 });
+  const [cropZoom, setCropZoom] = useState(1);
+  const [cropOffset, setCropOffset] = useState({ x: 0, y: 0 });
+  const cropDragState = useRef(null);
+  const cropCoverScale = (cropNatural.w && cropNatural.h) ? Math.max(CROP_SIZE / cropNatural.w, CROP_SIZE / cropNatural.h) : 1;
+  const cropEffScale = cropCoverScale * cropZoom;
+  const clampCropOffset = (x, y, dispW, dispH) => ({
+    x: Math.min(0, Math.max(CROP_SIZE - dispW, x)),
+    y: Math.min(0, Math.max(CROP_SIZE - dispH, y)),
+  });
+  const openCropForFile = (file) => {
     if (!file) return;
     photoReturnGuardRef.current = Date.now() + 700;
+    const url = URL.createObjectURL(file);
+    setCropModalFile(file);
+    setCropObjectUrl(url);
+    setCropZoom(1);
+    setCropOffset({ x: 0, y: 0 });
+  };
+  const closeCropModal = () => {
+    if (cropObjectUrl) URL.revokeObjectURL(cropObjectUrl);
+    setCropModalFile(null);
+    setCropObjectUrl(null);
+    setCropNatural({ w: 0, h: 0 });
+    setCropZoom(1);
+    setCropOffset({ x: 0, y: 0 });
+  };
+  const onCropImgLoad = (e) => {
+    const w = e.target.naturalWidth, h = e.target.naturalHeight;
+    const coverScale = Math.max(CROP_SIZE / w, CROP_SIZE / h);
+    setCropNatural({ w, h });
+    setCropOffset({ x: (CROP_SIZE - w * coverScale) / 2, y: (CROP_SIZE - h * coverScale) / 2 });
+  };
+  const onCropZoomChange = (val) => {
+    const dispW = cropNatural.w * cropCoverScale * val;
+    const dispH = cropNatural.h * cropCoverScale * val;
+    setCropZoom(val);
+    setCropOffset((prev) => clampCropOffset(prev.x, prev.y, dispW, dispH));
+  };
+  const onCropPointerDown = (e) => {
+    cropDragState.current = { startX: e.clientX, startY: e.clientY, startOffsetX: cropOffset.x, startOffsetY: cropOffset.y };
+    e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const onCropPointerMove = (e) => {
+    if (!cropDragState.current) return;
+    const dx = e.clientX - cropDragState.current.startX;
+    const dy = e.clientY - cropDragState.current.startY;
+    const dispW = cropNatural.w * cropEffScale;
+    const dispH = cropNatural.h * cropEffScale;
+    setCropOffset(clampCropOffset(cropDragState.current.startOffsetX + dx, cropDragState.current.startOffsetY + dy, dispW, dispH));
+  };
+  const onCropPointerUp = () => { cropDragState.current = null; };
+  const confirmCrop = async () => {
+    if (!cropModalFile || !cropNatural.w) { closeCropModal(); return; }
+    const srcX = -cropOffset.x / cropEffScale;
+    const srcY = -cropOffset.y / cropEffScale;
+    const srcSize = CROP_SIZE / cropEffScale;
     setPhotoBusy(true);
     try {
-      const result = await resizeImageFileWithTimeout(file, 400, 0.6);
-      setPPhoto(result);
+      const bitmap = await Promise.race([
+        createImageBitmap(cropModalFile),
+        new Promise((_, rej) => setTimeout(() => rej(new Error("crop-timeout")), 12000)),
+      ]);
+      const canvas = document.createElement("canvas");
+      canvas.width = CROP_OUTPUT; canvas.height = CROP_OUTPUT;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(bitmap, srcX, srcY, srcSize, srcSize, 0, 0, CROP_OUTPUT, CROP_OUTPUT);
+      if (bitmap.close) bitmap.close();
+      setPPhoto(canvas.toDataURL("image/jpeg", 0.7));
     } catch (err) {
       setError(t(lang, "productPhotoRequired"));
     }
     setPhotoBusy(false);
+    closeCropModal();
   };
-  const handlePhotoChange = async (e) => {
+  const handlePhotoChange = (e) => {
     const file = e.target.files && e.target.files[0];
-    await processPhotoFile(file, "onChange");
+    e.target.value = "";
+    if (file) openCropForFile(file);
   };
   // Filet de secours : sur certains Android/Chrome, revenir de l'appareil photo natif
   // ne déclenche jamais l'événement "change" de l'input, même si le fichier est bel
@@ -8128,7 +8200,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const input = productPhotoInputRef.current;
       if (!input || !input.files || !input.files[0]) return;
       const file = input.files[0];
-      processPhotoFile(file, "filet-de-secours").then(() => { input.value = ""; });
+      input.value = "";
+      openCropForFile(file);
     };
     window.addEventListener("focus", checkPendingPhoto);
     document.addEventListener("visibilitychange", checkPendingPhoto);
@@ -9723,7 +9796,15 @@ Réponds en ${langLabel} uniquement.`;
             </div>
             <div className="mb-3">
               <label className="text-xs block mb-1" style={{ color: T.muted }}>{t(lang, "productPhoto")}</label>
-              <input ref={productPhotoInputRef} type="file" accept="image/*" onChange={handlePhotoChange} className="text-xs w-full" />
+              <button
+                type="button"
+                onClick={() => productPhotoInputRef.current && productPhotoInputRef.current.click()}
+                className="text-xs px-3 py-2 rounded-lg font-semibold"
+                style={{ background: T.accent || "#1B3A5C", color: "#fff" }}
+              >
+                🖼️ Choisir un fichier
+              </button>
+              <input ref={productPhotoInputRef} type="file" accept="image/*" onChange={handlePhotoChange} className="hidden" />
               <p className="text-[11px] mt-1" style={{ color: T.muted }}>
                 Prends la photo avec l'appli Appareil photo de ton téléphone, puis reviens ici et choisis-la depuis la galerie.
               </p>
@@ -12182,6 +12263,54 @@ Réponds en ${langLabel} uniquement.`;
       )}
       </div>
       </div>
+      {cropModalFile && (
+        <div
+          style={{
+            position: "fixed", inset: 0, zIndex: 100000, background: "rgba(0,0,0,0.85)",
+            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 16,
+          }}
+        >
+          <div style={{ color: "#fff", fontSize: 13, marginBottom: 10, fontWeight: 600 }}>Cadre ta photo</div>
+          <div
+            onPointerDown={onCropPointerDown}
+            onPointerMove={onCropPointerMove}
+            onPointerUp={onCropPointerUp}
+            onPointerLeave={onCropPointerUp}
+            style={{
+              width: CROP_SIZE, height: CROP_SIZE, borderRadius: 12, overflow: "hidden",
+              position: "relative", background: "#111", touchAction: "none", border: "2px solid #fff",
+            }}
+          >
+            <img
+              src={cropObjectUrl}
+              onLoad={onCropImgLoad}
+              alt=""
+              draggable={false}
+              style={{
+                position: "absolute",
+                left: cropOffset.x,
+                top: cropOffset.y,
+                width: cropNatural.w * cropEffScale,
+                height: cropNatural.h * cropEffScale,
+                maxWidth: "none",
+                userSelect: "none",
+                pointerEvents: "none",
+              }}
+            />
+          </div>
+          <input
+            type="range" min={1} max={3} step={0.01} value={cropZoom}
+            onChange={(e) => onCropZoomChange(parseFloat(e.target.value))}
+            style={{ width: CROP_SIZE, marginTop: 14 }}
+          />
+          <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
+            <button onClick={closeCropModal} style={{ padding: "10px 18px", borderRadius: 10, background: "#374151", color: "#fff", fontWeight: 600, fontSize: 13 }}>Annuler</button>
+            <button onClick={confirmCrop} disabled={photoBusy} style={{ padding: "10px 18px", borderRadius: 10, background: INDIGO, color: "#fff", fontWeight: 600, fontSize: 13, opacity: photoBusy ? 0.6 : 1 }}>
+              {photoBusy ? "Patiente..." : "Valider"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
