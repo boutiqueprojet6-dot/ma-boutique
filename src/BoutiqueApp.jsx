@@ -8233,7 +8233,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         account.shopPhoto = dataUrl;
         await window.storage.set(`accounts:${username}`, JSON.stringify(account), true);
       }
-    } catch (err) {}
+    } catch (err) {
+      // Avant : cette erreur était silencieusement ignorée — la photo s'affichait
+      // à l'écran (changement local déjà appliqué) sans jamais être vraiment
+      // enregistrée côté serveur si le réseau avait un souci à cet instant précis.
+      // L'utilisateur croyait avoir sauvegardé alors que rien n'était confirmé.
+      setError("La photo n'a pas pu être enregistrée (problème de connexion). Réessaie.");
+    }
     setShopPhotoBusy(false);
   };
   const addProduct = () => {
