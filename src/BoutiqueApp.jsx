@@ -9619,7 +9619,7 @@ Réponds en ${langLabel} uniquement.`;
           </button>
         </div>
       )}
-      <div ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-24"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
+      <div ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-36"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
         {tab === "dashboard" && (
           <div className="space-y-2">
             <div className="px-1 mb-1">
