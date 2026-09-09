@@ -9195,6 +9195,16 @@ Réponds en ${langLabel} uniquement.`;
     : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb" };
   const todaySales = sales.filter((s) => s.date.slice(0, 10) === todayKey());
   const todayTotal = todaySales.reduce((sum, s) => sum + s.total, 0);
+  const yesterdayKeyStr = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  const yesterdayTotal = sales.filter((s) => s.date.slice(0, 10) === yesterdayKeyStr).reduce((sum, s) => sum + s.total, 0);
+  const salesVsYesterdayPct = yesterdayTotal > 0
+    ? Math.round(((todayTotal - yesterdayTotal) / yesterdayTotal) * 100)
+    : (todayTotal > 0 ? 100 : null);
+  const topProductsToday = (() => {
+    const byProduct = {};
+    todaySales.forEach((s) => { byProduct[s.productName] = (byProduct[s.productName] || 0) + (s.qty || 0); });
+    return Object.entries(byProduct).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  })();
   const byMethod = getPaymentMethods(lang).map((m) => ({ ...m, total: todaySales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
   const lowStock = products.filter((p) => p.quantity <= lowStockThreshold);
   const restockForecast = (() => {
@@ -9614,11 +9624,30 @@ Réponds en ${langLabel} uniquement.`;
       <div ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-24"} style={{ position: "relative", zIndex: 1, overflowY: (showSettings || showAddProduct || showAddExpense || showEditFund || showLockPinModal) ? "hidden" : "auto", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
         {tab === "dashboard" && (
           <div className="space-y-2">
+            <div className="px-1 mb-1">
+              <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 Bonjour, {shopName || "Boutique"}</p>
+              <p className="text-[11px]" style={{ color: T.muted }}>
+                {new Date().toLocaleDateString(USE_ARABIC_DIGITS ? "ar-EG" : "fr-FR", { weekday: "long", day: "numeric", month: "long" })}
+              </p>
+            </div>
             <div className="rounded-2xl overflow-hidden" style={{ background: T.card, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)", border: darkMode ? "none" : `1px solid ${T.border}` }}>
               <div className="px-4 py-3 flex items-center justify-between">
                 <div>
                   <p className="text-[11px] font-semibold" style={{ color: T.muted }}>{t(lang, "todaySales")}</p>
-                  <p className="font-black tracking-tight" style={{ fontSize: 24, color: darkMode ? "#7fb2ff" : INDIGO, letterSpacing: -0.8, marginTop: 1 }}>{fcfa(todayTotal)}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-black tracking-tight" style={{ fontSize: 24, color: darkMode ? "#7fb2ff" : INDIGO, letterSpacing: -0.8, marginTop: 1 }}>{fcfa(todayTotal)}</p>
+                    {salesVsYesterdayPct !== null && (
+                      <span
+                        className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                        style={{
+                          color: salesVsYesterdayPct >= 0 ? "#16a34a" : "#dc2626",
+                          background: salesVsYesterdayPct >= 0 ? "#dcfce7" : "#fee2e2",
+                        }}
+                      >
+                        {salesVsYesterdayPct >= 0 ? "▲" : "▼"} {Math.abs(salesVsYesterdayPct)}% vs hier
+                      </span>
+                    )}
+                  </div>
                   <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>{localizedNumber(todaySales.length)} {t(lang, "articlesSold")}</p>
                 </div>
                 <div style={{ animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
@@ -9650,6 +9679,22 @@ Réponds en ${langLabel} uniquement.`;
                 })}
               </div>
             </div>
+            {topProductsToday.length > 0 && (
+              <div className="rounded-2xl p-3.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <p className="text-xs font-bold mb-2.5" style={{ color: T.text }}>🏆 Top produits du jour</p>
+                <div className="space-y-2">
+                  {topProductsToday.map(([name, qty], i) => (
+                    <div key={name} className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-black" style={{ color: T.muted, width: 14 }}>{i + 1}</span>
+                        <span className="text-xs font-semibold" style={{ color: T.text }}>{name}</span>
+                      </div>
+                      <span className="text-[11px] font-bold" style={{ color: T.muted }}>{localizedNumber(qty)} vendu(s)</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             {lowStock.length > 0 && (
               <div className="rounded-2xl p-3 flex items-center gap-2.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div style={{ animation: "floatSlow 2.1s ease-in-out infinite alternate" }}>
@@ -12150,7 +12195,7 @@ Réponds en ${langLabel} uniquement.`;
       {!isDesktop && (
       <div
         dir="ltr"
-        className="absolute bottom-0 left-0 right-0 flex justify-around items-end px-2 pb-2 pt-1"
+        className="fixed bottom-0 left-0 right-0 flex justify-around items-end px-2 pb-2 pt-1"
         style={{
           background: darkMode
             ? "linear-gradient(180deg, rgba(10,10,20,0) 0%, rgba(10,10,20,0.98) 30%)"
