@@ -7569,6 +7569,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showSettings, setShowSettings] = useState(false);
   const [settingsView, setSettingsView] = useState("menu");
   const [settingsField, setSettingsField] = useState(null);
+  const [settingsSearchQuery, setSettingsSearchQuery] = useState("");
   const [langSearchQuery, setLangSearchQuery] = useState("");
   const [oldPin, setOldPin] = useState("");
   const [newPin, setNewPin] = useState("");
@@ -9536,14 +9537,17 @@ Réponds en ${langLabel} uniquement.`;
         </div>
       )}
       <div
-        className="relative"
+        className="relative app-root"
         style={
           isDesktop
-            ? { flex: 1, height: "100vh", background: T.bg, position: "relative", overflow: "hidden" }
-            : { height: "100vh", position: "relative", overflow: "hidden" }
+            ? { flex: 1, height: "100vh", background: T.bg, position: "relative", overflow: "hidden", userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }
+            : { height: "100vh", position: "relative", overflow: "hidden", userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }
         }
+        onCopy={(e) => e.preventDefault()}
+        onCut={(e) => e.preventDefault()}
+        onContextMenu={(e) => e.preventDefault()}
       >
-      <style>{"@keyframes floatSlow { from { transform: translateY(-4px); } to { transform: translateY(4px); } } @keyframes aiSpin { to { transform: rotate(360deg); } }"}</style>
+      <style>{"@keyframes floatSlow { from { transform: translateY(-4px); } to { transform: translateY(4px); } } @keyframes aiSpin { to { transform: rotate(360deg); } } .app-root input, .app-root textarea { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }"}</style>
       {showBalls && <FloatingBalls dark={darkMode} colorId={ballColor} />}
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column" }}>
       {!isDesktop && (
@@ -11481,12 +11485,26 @@ Réponds en ${langLabel} uniquement.`;
                 </div>
                 <div style={{ color: "#5f6b7a", fontSize: 12.5 }}>Shopnify</div>
               </div>
-              <button onClick={() => { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setPinMsg(""); setOldPin(""); setNewPin(""); setConfirmNewPin(""); setConfirmReset(false); }}
+              <button onClick={() => { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setSettingsSearchQuery(""); setPinMsg(""); setOldPin(""); setNewPin(""); setConfirmNewPin(""); setConfirmReset(false); }}
                 style={{ background: "#161d27", border: "1px solid #232c38", borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: "#94a3b8", cursor: "pointer" }}>
                 <X size={16} />
               </button>
             </div>
             <div style={{ padding: "0 16px", display: "flex", flexDirection: "column", gap: 10 }}>
+              {settingsView === "menu" && !settingsField && (
+                <div style={{ position: "relative", marginBottom: 2 }}>
+                  <Search size={15} color="#5f6b7a" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)" }} />
+                  <input
+                    value={settingsSearchQuery}
+                    onChange={(e) => setSettingsSearchQuery(e.target.value)}
+                    placeholder="Rechercher un réglage..."
+                    style={{
+                      width: "100%", background: "#10151d", border: "1px solid #1c2530", borderRadius: 14,
+                      padding: "11px 12px 11px 36px", fontSize: 13.5, color: "#e5edf5", outline: "none",
+                    }}
+                  />
+                </div>
+              )}
               {settingsView === "menu" && !settingsField && [
                 // account : le PIN/mot de passe du compte PRINCIPAL reste exclusif au propriétaire ;
                 // un employé connecté n'a pas de compte principal à gérer ici.
@@ -11503,7 +11521,12 @@ Réponds en ${langLabel} uniquement.`;
                 { id: "about", label: t(lang, "setAPropos"), desc: t(lang, "setVersionDeveloppeur"), icon: Sparkles, accent: "#22d3ee" },
                 // zone de danger (réinitialiser les données) — toujours exclusif au propriétaire.
                 { id: "danger", label: t(lang, "dangerZone"), desc: t(lang, "setReinitialiserLesDonnees"), icon: AlertOctagon, accent: "#f87171", hidden: !!activeEmployee },
-              ].filter((s) => !s.hidden).map((s) => { const Icon = s.icon; return (
+              ].filter((s) => !s.hidden).filter((s) => {
+                if (!settingsSearchQuery.trim()) return true;
+                const norm = (str) => (str || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const q = norm(settingsSearchQuery);
+                return norm(s.label).includes(q) || norm(s.desc).includes(q);
+              }).map((s) => { const Icon = s.icon; return (
                 <button key={s.id} onClick={() => setSettingsView(s.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 16, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", textAlign: "left", width: "100%" }}>
                   <div style={{ width: 42, height: 42, borderRadius: 12, flexShrink: 0, background: `${s.accent}1a`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Icon size={19} color={s.accent} />
