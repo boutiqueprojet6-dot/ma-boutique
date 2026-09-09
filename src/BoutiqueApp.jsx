@@ -205,64 +205,56 @@ const ADMIN_WHATSAPP = "22300000000"; // à remplacer par ton vrai numéro, form
 const LEMONSQUEEZY_STORE_SUBDOMAIN = "TON-STORE"; // ex: "maboutique" si ton URL est maboutique.lemonsqueezy.com
 const LEMONSQUEEZY_VARIANT_IDS = {
   pro: "000000",
-  business1: "000000",
-  business2: "000000",
+  business: "000000",
 };
 // Endpoint backend (Supabase Edge Function, Vercel, etc.) optionnel : reçoit les webhooks
 // Lemon Squeezy ("order_created") et met à jour la table subscriptions automatiquement.
 // Tant que ce n'est pas branché, active les abonnements manuellement dans Supabase après
 // avoir reçu une notification de paiement par email de Lemon Squeezy.
 const LEMONSQUEEZY_WEBHOOK_ENDPOINT = "https://TON-BACKEND.example.com/lemonsqueezy-webhook";
-// ---- Paliers d'abonnement (Gratuit / Pro / Business 1 / Business 2) ----
+// ---- Paliers d'abonnement (Gratuit / Pro / Business) ----
 // Chaque palier hérite des fonctionnalités du précédent. maxEmployees: null = illimité.
 // aiMonthlyQuota: null = illimité, 0 = pas d'accès à l'IA.
+// Le nombre de ventes/jour est plafonné séparément (voir FREE_SALES_LIMIT_PER_DAY) : Gratuit
+// et tout palier payant expiré sont limités à 10 ventes/jour (remis à zéro chaque jour, sans
+// cumul), Pro et Business sont illimités en ventes tant que l'abonnement est actif.
 const SUBSCRIPTION_PLANS = {
   free: {
     id: "free",
     nameKey: "planFreeName",
     price: 0,
     maxEmployees: 0,
-    // Le palier Gratuit a un quota IA en deux phases : "trial" pendant les 30 premiers jours
-    // glissants après la création du compte, puis "ongoing" au-delà. Les autres paliers
-    // gardent un nombre simple (ou null = illimité, 0 = aucun accès).
-    aiMonthlyQuota: { trial: 10, ongoing: 5 },
+    aiMonthlyQuota: 30,
     maxShops: 1,
-    features: [],
+    features: ["anomalyAlerts"],
   },
   pro: {
     id: "pro",
     nameKey: "planProName",
     price: 20,
     maxEmployees: 3,
-    aiMonthlyQuota: 60,
+    aiMonthlyQuota: 500,
     maxShops: 1,
-    features: ["advancedHistory", "stockAlerts"],
+    features: ["advancedHistory", "stockAlerts", "anomalyAlerts"],
   },
-  business1: {
-    id: "business1",
-    nameKey: "planBusiness1Name",
-    price: 60,
-    maxEmployees: null,
-    aiMonthlyQuota: 300,
-    maxShops: 1,
-    features: ["advancedHistory", "stockAlerts", "shiftPermissions", "perEmployeeCashReport", "anomalyAlerts", "accountingExport"],
-  },
-  business2: {
-    id: "business2",
+  business: {
+    id: "business",
     nameKey: "planBusiness2Name",
-    price: 150,
+    price: 50,
     maxEmployees: null,
-    aiMonthlyQuota: 600,
+    aiMonthlyQuota: null,
     maxShops: null,
-    features: ["advancedHistory", "stockAlerts", "shiftPermissions", "perEmployeeCashReport", "anomalyAlerts", "accountingExport", "multiShop", "consolidatedView", "shopComparison", "supervisorRole", "salesGoals", "shopProfitabilityReport"],
+    features: ["advancedHistory", "stockAlerts", "anomalyAlerts", "shiftPermissions", "perEmployeeCashReport", "accountingExport", "multiShop", "consolidatedView", "shopComparison", "supervisorRole", "salesGoals", "shopProfitabilityReport"],
   },
 };
 // Ordre croissant, utile pour comparer deux paliers ("est-ce que ce plan est au moins Pro ?").
-const SUBSCRIPTION_PLAN_ORDER = ["free", "pro", "business1", "business2"];
+const SUBSCRIPTION_PLAN_ORDER = ["free", "pro", "business"];
+// Anciennes limites de stock, plus utilisées nulle part (le nombre de produits est
+// désormais illimité à tous les paliers) — conservées seulement au cas où on voudrait
+// réintroduire une limite plus tard.
 const FREE_PRODUCT_LIMIT = 20;
 const PRO_PRODUCT_LIMIT = 100;
-const FREE_SALES_LIMIT_PER_MONTH = 50;
-const PRO_SALES_LIMIT_PER_MONTH = 500;
+const FREE_SALES_LIMIT_PER_DAY = 10;
 const BALL_COLORS = [
   { id: "blue", label: "Cyan", swatch: "#00FFFF", light: "rgba(0,220,220,0.6)", dark: "rgba(0,255,255,0.95)" },
   { id: "teal", label: "Turquoise", swatch: "#14b8a6", light: "rgba(45,190,175,0.6)", dark: "rgba(120,235,220,1)" },
@@ -7154,16 +7146,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Date de création du compte (auth.users.created_at), utilisée pour le quota IA en deux
   // phases du palier Gratuit (10 messages/mois pendant les 30 premiers jours glissants, puis 5).
   const [accountCreatedAt, setAccountCreatedAt] = useState(null);
-  // Résout le vrai quota IA du mois en cours, quel que soit le format de aiMonthlyQuota
-  // (nombre simple pour Pro/Business, ou {trial, ongoing} pour le palier Gratuit).
-  const effectiveAiQuota = (() => {
-    const q = planInfo.aiMonthlyQuota;
-    if (q === null || typeof q === "number") return q;
-    // Objet {trial, ongoing} : on est encore en période d'essai si le compte a moins de 30 jours.
-    if (!accountCreatedAt) return q.ongoing; // par sécurité, tant que la date n'est pas connue
-    const daysSinceCreation = (Date.now() - new Date(accountCreatedAt).getTime()) / 86400000;
-    return daysSinceCreation < 30 ? q.trial : q.ongoing;
-  })();
+  // Quota IA du mois en cours pour le palier actuel (null = illimité, 0 = aucun accès,
+  // sinon un nombre simple — le palier Gratuit n'a plus de phase d'essai séparée).
+  const effectiveAiQuota = planInfo.aiMonthlyQuota;
   // Vrai si le palier actuel débloque cette fonctionnalité (ex: "advancedHistory", "multiShop").
   const hasFeatureAccess = (featureId) => planInfo.features.includes(featureId);
   // Vrai si le palier actuel est au moins celui demandé (ex: isPlanAtLeast("pro")).
@@ -7191,11 +7176,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     window.location.href = checkoutUrl;
   };
 
-  // Limite de stock effective pour le palier actuel (null = illimité, Business 1/2).
-  const activeProductLimit = () => {
-    const active = expiresAt && new Date(expiresAt) > new Date();
-    return !active ? FREE_PRODUCT_LIMIT : (currentPlan === "pro" ? PRO_PRODUCT_LIMIT : null);
-  };
+  // Limite de stock : plus aucune limite sur le nombre de produits, à aucun palier — seules
+  // les ventes/jour et les messages IA sont plafonnés désormais pour le palier Gratuit.
+  const activeProductLimit = () => null;
 
   // IDs des produits "gelés" : au-delà de la limite du palier actuel, les produits ajoutés
   // en premier (par ordre chronologique d'ajout, via l'horodatage préfixé dans leur id)
@@ -8249,10 +8232,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setError(t(lang, "productPhotoRequired"));
       return;
     }
-    const active = expiresAt && new Date(expiresAt) > new Date();
-    // Limite de stock selon le palier réel : Gratuit et Pro sont plafonnés,
-    // Business 1/2 restent illimités (déjà couverts par "active" ci-dessous).
-    const productLimit = !active ? FREE_PRODUCT_LIMIT : (currentPlan === "pro" ? PRO_PRODUCT_LIMIT : null);
+    // Plus de limite sur le nombre de produits, à aucun palier.
+    const productLimit = null;
     if (productLimit !== null && products.length >= productLimit) {
       setError(t(lang, "productLimitReached").replace("{n}", productLimit));
       return;
@@ -8796,25 +8777,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const updateCartMeta = (cartId, field, value) => {
     saveAll({ draftCarts: draftCarts.map((c) => (c.id === cartId ? { ...c, [field]: value } : c)) });
   };
-  // Bornes du cycle de 30 jours en cours, calculé à partir de la date de création du compte
-  // (comme un "mois d'abonnement" fixe qui se répète tous les 30 jours, pas le mois civil).
-  const currentBillingCycleStart = () => {
-    if (!accountCreatedAt) return null;
-    const created = new Date(accountCreatedAt).getTime();
-    const daysSince = Math.floor((Date.now() - created) / 86400000);
-    const cycleIndex = Math.floor(daysSince / 30);
-    return new Date(created + cycleIndex * 30 * 86400000);
-  };
 
   // Nombre de ventes (transactions distinctes, pas de lignes d'articles) déjà réalisées
-  // dans le cycle de 30 jours en cours — utilisé pour le plafond des paliers Gratuit et Pro.
-  const salesThisCycleCount = () => {
-    const cycleStart = currentBillingCycleStart();
-    if (!cycleStart) return 0;
+  // aujourd'hui — utilisé pour le plafond du palier Gratuit (et tout palier payant expiré).
+  // Se réinitialise naturellement chaque jour puisqu'on ne regarde que la date du jour :
+  // les ventes non utilisées d'hier ne se cumulent jamais sur aujourd'hui.
+  const salesTodayCount = () => {
+    const key = todayKey();
     const seen = new Set();
     sales.forEach((s) => {
-      const d = new Date(s.date);
-      if (d >= cycleStart) seen.add(s.transactionId);
+      if (s.date.slice(0, 10) === key) seen.add(s.transactionId);
     });
     return seen.size;
   };
@@ -8826,10 +8798,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setError(t(lang, "errCreditNeedsCustomer"));
       return;
     }
-    // Plafond de ventes selon le palier réel (Gratuit / Pro), sur un cycle de 30 jours ; Business 1/2 restent illimités.
+    // Plafond de ventes : 10/jour pour le palier Gratuit (et tout palier payant expiré),
+    // remis à zéro chaque jour sans jamais se cumuler. Pro et Business sont illimités en
+    // ventes tant que l'abonnement est actif.
     const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
-    const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_MONTH : (currentPlan === "pro" ? PRO_SALES_LIMIT_PER_MONTH : null);
-    if (salesLimit !== null && salesThisCycleCount() >= salesLimit) {
+    const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
+    if (salesLimit !== null && salesTodayCount() >= salesLimit) {
       setError(t(lang, "salesLimitReached").replace("{n}", salesLimit));
       return;
     }
@@ -9613,7 +9587,7 @@ Réponds en ${langLabel} uniquement.`;
         <div className="mx-4 mt-3 rounded-xl p-3 flex items-center justify-between gap-3" style={{ background: "#fdf2df" }}>
           <div>
             <p className="text-xs font-semibold" style={{ color: CHARCOAL }}>{expiresAt ? t(lang, "expiredFree") : t(lang, "freeLabel")}</p>
-            <p className="text-[11px] text-gray-500">Stock limité à {FREE_PRODUCT_LIMIT} produits, {FREE_SALES_LIMIT_PER_MONTH} ventes/30 jours. Dettes, statistiques, caisse et historique réservés à la version complète.</p>
+            <p className="text-[11px] text-gray-500">{FREE_SALES_LIMIT_PER_DAY} ventes/jour, {SUBSCRIPTION_PLANS.free.aiMonthlyQuota} messages IA/mois. Dettes, statistiques, caisse et historique réservés à la version complète.</p>
           </div>
           <button
             onClick={() => startLemonSqueezyCheckout("pro")}
@@ -10024,9 +9998,9 @@ Réponds en ${langLabel} uniquement.`;
                 </div>
                 {(() => {
                   const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
-                  const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_MONTH : (currentPlan === "pro" ? PRO_SALES_LIMIT_PER_MONTH : null);
+                  const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
                   if (salesLimit === null) return null;
-                  const used = salesThisCycleCount();
+                  const used = salesTodayCount();
                   const ratio = Math.min(1, used / salesLimit);
                   const nearLimit = ratio >= 0.8;
                   return (
@@ -11695,7 +11669,6 @@ Réponds en ${langLabel} uniquement.`;
                         <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 4 }}>
                           {plan.aiMonthlyQuota === 0 ? t(lang, "planNoAi")
                             : plan.aiMonthlyQuota === null ? t(lang, "planUnlimitedAi")
-                            : typeof plan.aiMonthlyQuota === "object" ? t(lang, "planFreeAiTrial").replace("{trial}", plan.aiMonthlyQuota.trial).replace("{ongoing}", plan.aiMonthlyQuota.ongoing)
                             : t(lang, "planLimitedAi").replace("{n}", plan.aiMonthlyQuota)}
                         </p>
                         {plan.maxShops !== 1 && (
