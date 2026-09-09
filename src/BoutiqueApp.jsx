@@ -8137,6 +8137,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCropNatural({ w: 0, h: 0 });
     setCropZoom(1);
     setCropOffset({ x: 0, y: 0 });
+    // Vide le champ fichier caché : sans ça, le filet de secours (focus/visibilitychange)
+    // retrouve la même photo "en attente" plus tard (ex: retour d'une notification) et
+    // rouvre le cadrage tout seul, ce qui bloque l'écran de façon imprévisible.
+    if (productPhotoInputRef.current) productPhotoInputRef.current.value = "";
   };
   const onCropImgLoad = (e) => {
     const w = e.target.naturalWidth, h = e.target.naturalHeight;
@@ -8267,8 +8271,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPName(""); setPQty(""); setPPrice(""); setPCostPrice(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setShowAddProduct(false);
     // Filet de sécurité immédiat : rétablit le défilement sans attendre le prochain
     // rendu, au cas où le nettoyage de l'effet de verrouillage serait retardé.
-    document.body.style.overflow = "";
-    document.documentElement.style.overflow = "";
+    forceUnlockScroll();
   };
   const adjustStock = (id, delta) => {
     // Produit gelé (stock au-delà de la limite du palier actuel) : ni modifiable ni ajustable.
@@ -9135,6 +9138,15 @@ Réponds en ${langLabel} uniquement.`;
     } catch (e) {}
     setBenchmarkLoading(false);
   };
+  // Déverrouille le défilement de la page et force un recalcul de mise en page :
+  // sur certains navigateurs mobiles, le défilement reste visuellement "gelé" après
+  // un changement d'overflow (surtout après une séquence photo/cadrage) tant qu'aucun
+  // reflow n'est déclenché explicitement.
+  const forceUnlockScroll = () => {
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+    void document.body.offsetHeight;
+  };
   useEffect(() => {
     const anyModalOpen = showSettings || showAddProduct || showAddExpense || showEditFund || showLockPinModal;
     if (anyModalOpen) {
@@ -9142,8 +9154,7 @@ Réponds en ${langLabel} uniquement.`;
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       return () => {
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
+        forceUnlockScroll();
         requestAnimationFrame(() => {
           if (contentScrollRef.current) contentScrollRef.current.scrollTop = savedScroll;
         });
@@ -9152,8 +9163,7 @@ Réponds en ${langLabel} uniquement.`;
     // Filet de sécurité : garantit que le défilement est toujours réactivé quand
     // aucune fenêtre modale n'est ouverte, même si un cas limite (fermeture rapide,
     // double rendu) a laissé le verrouillage précédent mal nettoyé.
-    document.body.style.overflow = "";
-    document.documentElement.style.overflow = "";
+    forceUnlockScroll();
   }, [showSettings, showAddProduct, showAddExpense, showEditFund, showLockPinModal]);
   useEffect(() => {
     if (tab !== "sale" || !activeCartId) {
@@ -9824,7 +9834,7 @@ Réponds en ${langLabel} uniquement.`;
             <div className="px-4" style={{ minHeight: "100%", paddingBottom: 40, paddingTop: 20 }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-base" style={{ color: T.text }}>{t(lang, "newProduct")}</h3>
-              <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
+              <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); forceUnlockScroll(); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
             </div>
             <input placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
             <input placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
