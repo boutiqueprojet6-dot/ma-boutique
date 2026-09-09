@@ -8269,9 +8269,6 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
     setPName(""); setPQty(""); setPPrice(""); setPCostPrice(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setShowAddProduct(false);
-    // Filet de sécurité immédiat : rétablit le défilement sans attendre le prochain
-    // rendu, au cas où le nettoyage de l'effet de verrouillage serait retardé.
-    forceUnlockScroll();
   };
   const adjustStock = (id, delta) => {
     // Produit gelé (stock au-delà de la limite du palier actuel) : ni modifiable ni ajustable.
@@ -9138,33 +9135,13 @@ Réponds en ${langLabel} uniquement.`;
     } catch (e) {}
     setBenchmarkLoading(false);
   };
-  // Déverrouille le défilement de la page et force un recalcul de mise en page :
-  // sur certains navigateurs mobiles, le défilement reste visuellement "gelé" après
-  // un changement d'overflow (surtout après une séquence photo/cadrage) tant qu'aucun
-  // reflow n'est déclenché explicitement.
-  const forceUnlockScroll = () => {
-    document.body.style.overflow = "";
-    document.documentElement.style.overflow = "";
-    void document.body.offsetHeight;
-  };
-  useEffect(() => {
-    const anyModalOpen = showSettings || showAddProduct || showAddExpense || showEditFund || showLockPinModal;
-    if (anyModalOpen) {
-      const savedScroll = contentScrollRef.current ? contentScrollRef.current.scrollTop : 0;
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-      return () => {
-        forceUnlockScroll();
-        requestAnimationFrame(() => {
-          if (contentScrollRef.current) contentScrollRef.current.scrollTop = savedScroll;
-        });
-      };
-    }
-    // Filet de sécurité : garantit que le défilement est toujours réactivé quand
-    // aucune fenêtre modale n'est ouverte, même si un cas limite (fermeture rapide,
-    // double rendu) a laissé le verrouillage précédent mal nettoyé.
-    forceUnlockScroll();
-  }, [showSettings, showAddProduct, showAddExpense, showEditFund, showLockPinModal]);
+  // Le défilement du contenu principal (onglets Accueil/Vente/Stock/Dettes) reste
+  // désormais toujours actif, sans verrouillage conditionnel — exactement comme
+  // Paramètres, qui a toujours bien fonctionné. Les fenêtres (Nouveau produit,
+  // Paramètres...) couvrent déjà tout l'écran par-dessus avec leur propre défilement
+  // indépendant, donc elles n'ont pas besoin de figer le fond pour bien s'afficher.
+  // (Ancien mécanisme de verrouillage retiré : il causait des blocages persistants
+  // du défilement après certaines séquences, notamment l'ajout de photo produit.)
   useEffect(() => {
     if (tab !== "sale" || !activeCartId) {
       setShowPaymentShortcut(false);
@@ -9638,7 +9615,7 @@ Réponds en ${langLabel} uniquement.`;
           </button>
         </div>
       )}
-      <div ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-24"} style={{ position: "relative", zIndex: 1, overflowY: (showSettings || showAddProduct || showAddExpense || showEditFund || showLockPinModal) ? "hidden" : "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
+      <div ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-24"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
         {tab === "dashboard" && (
           <div className="space-y-2">
             <div className="px-1 mb-1">
@@ -9834,7 +9811,7 @@ Réponds en ${langLabel} uniquement.`;
             <div className="px-4" style={{ minHeight: "100%", paddingBottom: 40, paddingTop: 20 }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-base" style={{ color: T.text }}>{t(lang, "newProduct")}</h3>
-              <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); forceUnlockScroll(); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
+              <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
             </div>
             <input placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
             <input placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
