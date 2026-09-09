@@ -8265,6 +8265,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
     setPName(""); setPQty(""); setPPrice(""); setPCostPrice(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setShowAddProduct(false);
+    // Filet de sécurité immédiat : rétablit le défilement sans attendre le prochain
+    // rendu, au cas où le nettoyage de l'effet de verrouillage serait retardé.
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
   };
   const adjustStock = (id, delta) => {
     // Produit gelé (stock au-delà de la limite du palier actuel) : ni modifiable ni ajustable.
@@ -9135,18 +9139,21 @@ Réponds en ${langLabel} uniquement.`;
     const anyModalOpen = showSettings || showAddProduct || showAddExpense || showEditFund || showLockPinModal;
     if (anyModalOpen) {
       const savedScroll = contentScrollRef.current ? contentScrollRef.current.scrollTop : 0;
-      const prevOverflow = document.body.style.overflow;
-      const prevHeight = document.documentElement.style.overflow;
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       return () => {
-        document.body.style.overflow = prevOverflow;
-        document.documentElement.style.overflow = prevHeight;
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
         requestAnimationFrame(() => {
           if (contentScrollRef.current) contentScrollRef.current.scrollTop = savedScroll;
         });
       };
     }
+    // Filet de sécurité : garantit que le défilement est toujours réactivé quand
+    // aucune fenêtre modale n'est ouverte, même si un cas limite (fermeture rapide,
+    // double rendu) a laissé le verrouillage précédent mal nettoyé.
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
   }, [showSettings, showAddProduct, showAddExpense, showEditFund, showLockPinModal]);
   useEffect(() => {
     if (tab !== "sale" || !activeCartId) {
