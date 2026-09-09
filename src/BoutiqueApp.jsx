@@ -8113,6 +8113,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [cropNatural, setCropNatural] = useState({ w: 0, h: 0 });
   const [cropZoom, setCropZoom] = useState(1);
   const [cropOffset, setCropOffset] = useState({ x: 0, y: 0 });
+  const [showProductPhotoPreview, setShowProductPhotoPreview] = useState(false);
   const cropDragState = useRef(null);
   const cropCoverScale = (cropNatural.w && cropNatural.h) ? Math.max(CROP_SIZE / cropNatural.w, CROP_SIZE / cropNatural.h) : 1;
   const cropEffScale = cropCoverScale * cropZoom;
@@ -9809,10 +9810,35 @@ Réponds en ${langLabel} uniquement.`;
                 Prends la photo avec l'appli Appareil photo de ton téléphone, puis reviens ici et choisis-la depuis la galerie.
               </p>
               {photoBusy && <p className="text-[11px] mt-1" style={{ color: T.muted }}>{t(lang, "processing")}</p>}
-              {pPhoto && !photoBusy && <img src={pPhoto} alt="Aperçu" className="w-16 h-16 rounded-lg object-cover mt-2" />}
+              {pPhoto && !photoBusy && (
+                <div style={{ position: "relative", display: "inline-block", marginTop: 8 }}>
+                  <img
+                    src={pPhoto}
+                    alt="Aperçu"
+                    onClick={() => setShowProductPhotoPreview(true)}
+                    className="w-16 h-16 rounded-lg object-cover"
+                    style={{ cursor: "pointer" }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setPPhoto(null)}
+                    aria-label="Retirer la photo"
+                    style={{
+                      position: "absolute", top: -6, right: -6, width: 20, height: 20, borderRadius: "50%",
+                      background: "#dc2626", color: "#fff", fontSize: 12, lineHeight: "18px", textAlign: "center",
+                      border: "2px solid #fff", padding: 0,
+                    }}
+                  >×</button>
+                </div>
+              )}
               {!pPhoto && !photoBusy && <p className="text-[11px] mt-1" style={{ color: "#e11d48" }}>{t(lang, "productPhotoRequiredHint")}</p>}
             </div>
-            <button onClick={addProduct} className="w-full py-3 rounded-lg text-white font-semibold text-sm mb-6" style={{ background: INDIGO }}>{t(lang, "save")}</button>
+            <button
+              onClick={addProduct}
+              disabled={!(pName.trim() && pQty && pPrice && pPhoto)}
+              className="w-full py-3 rounded-lg text-white font-semibold text-sm mb-6"
+              style={{ background: INDIGO, opacity: (pName.trim() && pQty && pPrice && pPhoto) ? 1 : 0.4 }}
+            >{t(lang, "save")}</button>
             </div>
           </div>
         )}
@@ -12309,6 +12335,17 @@ Réponds en ${langLabel} uniquement.`;
               {photoBusy ? "Patiente..." : "Valider"}
             </button>
           </div>
+        </div>
+      )}
+      {showProductPhotoPreview && pPhoto && (
+        <div
+          onClick={() => setShowProductPhotoPreview(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 100001, background: "rgba(0,0,0,0.9)",
+            display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+          }}
+        >
+          <img src={pPhoto} alt="Aperçu agrandi" style={{ maxWidth: "90%", maxHeight: "80%", borderRadius: 12, border: "2px solid #fff" }} />
         </div>
       )}
     </div>
