@@ -9764,24 +9764,26 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {(
-              <div className="rounded-2xl overflow-hidden p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+              <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: darkMode ? "linear-gradient(135deg, rgba(5,150,105,0.12), rgba(5,150,105,0.02))" : "linear-gradient(135deg, #ecfdf5, #ffffff)", border: darkMode ? "1px solid rgba(52,211,153,0.15)" : "1px solid #d1fae5", boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <p className="text-[11px] font-bold" style={{ color: T.muted }}>{t(lang, "cashBalance")}</p>
+                      <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: T.muted }}>{t(lang, "cashBalance")}</p>
                       <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 11, lineHeight: 1 }}>
                         {amountsHidden ? "🙈" : "👁️"}
                       </button>
                     </div>
-                    <p className="font-black tracking-tight" style={{ fontSize: 22, color: cashBalance < 0 ? CLAY : GREEN, letterSpacing: -0.5, marginTop: 1 }}>{maskAmount(fcfa(cashBalance))}</p>
+                    <p className="font-black tracking-tight" style={{ fontSize: 28, color: cashBalance < 0 ? CLAY : GREEN, letterSpacing: -0.8, marginTop: 2 }}>{maskAmount(fcfa(cashBalance))}</p>
                   </div>
-                  <div style={{ animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
-                    <span style={{ fontSize: 24 }}>🪙</span>
+                  <div className="rounded-2xl flex items-center justify-center" style={{ width: 52, height: 52, background: darkMode ? "rgba(52,211,153,0.15)" : "rgba(5,150,105,0.1)", animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
+                    <span style={{ fontSize: 26 }}>🪙</span>
                   </div>
                 </div>
-                <p className="text-[10px] mt-1.5" style={{ color: T.muted, lineHeight: 1.4 }}>{maskAmount(t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", fcfa(cashFund)).replace("{totalCashSales}", fcfa(totalCashSales)).replace("{totalExpenses}", fcfa(totalExpenses)))}</p>
+                <p className="text-[10px] mt-2" style={{ color: T.muted, lineHeight: 1.4 }}>{maskAmount(t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", fcfa(cashFund)).replace("{totalCashSales}", fcfa(totalCashSales)).replace("{totalExpenses}", fcfa(totalExpenses)))}</p>
                 {hasPermission("editCash") && (
-                  <button onClick={() => { setFundInput(String(cashFund)); setShowEditFund(true); }} className="text-[10px] underline mt-1" style={{ color: T.muted }}>{t(lang, "setCashFund")}</button>
+                  <button onClick={() => { setFundInput(String(cashFund)); setShowEditFund(true); }} className="inline-flex items-center gap-1 text-[11px] font-bold mt-2.5 px-3 py-1.5 rounded-full" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(5,150,105,0.08)", color: darkMode ? "#6ee7b7" : "#065f46" }}>
+                    <Wallet size={11} /> {t(lang, "setCashFund")}
+                  </button>
                 )}
                 {hasPermission("editCash") && (
                   <button onClick={() => { if (amountsHidden) { setPendingLockAction(() => () => setShowAddExpense(true)); setShowLockPinModal(true); } else setShowAddExpense(true); }} className="w-full mt-2.5 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white font-bold text-xs" style={{ background: CLAY }}>
@@ -9825,14 +9827,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {showEditFund && (
-              <div className="absolute inset-0 z-40 flex items-end" style={{ background: "rgba(43,36,32,0.5)" }}>
+              <div className="fixed inset-0 z-40 flex items-end" style={{ background: "rgba(43,36,32,0.5)" }}>
                 <div className="rounded-t-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "min(75vh, 520px)", overscrollBehavior: "contain" }}>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-sm">{t(lang, "cashFundTitle")}</h3>
                     <button onClick={() => setShowEditFund(false)}><X size={18} /></button>
                   </div>
                   <p className="text-xs mb-2" style={{ color: T.muted }}>{t(lang, "fundExplain")}</p>
-                  <p className="text-[11px] mb-3 rounded-lg p-2" style={{ background: T.input, color: T.text }}>{t(lang, "fundPrivate")}</p>
+                  <p className="text-[11px] mb-3 rounded-lg p-2 font-medium" style={{ background: darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#065f46", border: `1px solid ${darkMode ? "rgba(52,211,153,0.3)" : "#a7f3d0"}` }}>{t(lang, "fundPrivate")}</p>
                   <input placeholder={t(lang, "amountInCash")} type="number" value={fundInput} onChange={(e) => setFundInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" />
                   <button onClick={saveFund} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "save")}</button>
                 </div>
