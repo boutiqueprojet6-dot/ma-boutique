@@ -337,8 +337,9 @@ const TRANSLATIONS = {
     noSalesYet: "Aucune vente enregistrée pour le moment. Le graphique se construira dès ta première vente.",
     dateAxis: "Date", amountAxis: "Montant (FCFA)",
     newExpense: "Nouvelle dépense", amountOut: "Montant sorti de la caisse (FCFA)", reasonOpt: "Raison (facultatif)",
-    saveExpense: "Enregistrer la dépense", fundExplain: "Indique combien d'argent tu as physiquement en caisse en ce moment. L'appli calculera ton solde à partir de ce point.",
-    fundPrivate: "🔒 Ce montant reste privé, entre toi et l'appli. Ni l'administrateur ni personne d'autre ne peut le voir.",
+    saveExpense: "Enregistrer la dépense", fundExplain: "Indique combien d'argent tu as en caisse en ce moment. L'appli calculera ton solde à partir de ce point.",
+    fundPrivate: "🔒 Ce montant reste privé.",
+    appLockTitle: "Verrouillage de l'application", appLockDesc: "Demande ton code PIN ou ton empreinte/visage à chaque ouverture de l'appli.", appLockUnlockDesc: "Entre ton code PIN pour continuer",
     amountInCash: "Montant en caisse (FCFA)",
     searchClient: "Rechercher un client…", searchProductClient: "Rechercher un produit ou un client…",
     cashPaywallTitle: "Suivi de caisse — version complète", debtsPaywallTitle: "Suivi des dettes clients — version complète",
@@ -5762,6 +5763,12 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       if (!/^\d{4}$/.test(obLockPin.trim())) errs.lockPin = true;
       if (obConfirmLockPin.trim() !== obLockPin.trim() || !obConfirmLockPin.trim()) errs.confirmLockPin = true;
     }
+    if (n === 4 && isGoogleFlow) {
+      // Flux Google : le PIN de verrouillage local n'a pas pu être validé à l'étape 3
+      // (sautée), donc on le valide ici, juste avant la création du compte.
+      if (!/^\d{4}$/.test(obLockPin.trim())) errs.lockPin = true;
+      if (obConfirmLockPin.trim() !== obLockPin.trim() || !obConfirmLockPin.trim()) errs.confirmLockPin = true;
+    }
     setObErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -5854,7 +5861,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           sector: obSecteur,
           country: obPays,
           lang: obLang,
-          lockPin: await hashPin(isGoogleFlow ? "0000" : obLockPin),
+          lockPin: await hashPin(obLockPin),
           products: [], sales: [], debts: [], debtEvents: [], expenses: [], cashFund: 0,
           draftCarts: [], darkMode: false, showBalls: true, ballColor: "blue", currency: obCurrency,
         },
@@ -6405,6 +6412,31 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "emailLabel")}</span><span className="font-semibold">{obUsername}</span></div>
                 <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "passwordPlaceholder")}</span><span className="font-semibold">••••</span></div>
                 <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "setCodePin")}</span><span className="font-semibold">••••</span></div>
+              </div>
+            )}
+            {isGoogleFlow && (
+              <div className="py-3" style={{ borderTop: "1px solid #E7E8F1" }}>
+                {/* Google gère déjà l'identité (email/mot de passe), mais le PIN de
+                    verrouillage local est propre à cette appli : il doit être choisi
+                    par l'utilisateur, jamais fixé à une valeur par défaut. */}
+                <div className="mb-1 px-3 py-2.5 rounded-xl text-xs" style={{ background: "#FFF3ED", color: "#9A4A1F" }}>
+                  🔒 {t(lang, "lockPinExplainer")}
+                </div>
+                <div className="mb-3 mt-3">
+                  <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "lockPinPlaceholder")}</label>
+                  <div className="relative">
+                    <input value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.lockPin) }} />
+                    <button type="button" onClick={() => setShowObLockPin(!showObLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObLockPin ? "🙈" : "👁"}</button>
+                  </div>
+                  <p className="text-[11px] mt-1.5" style={{ color: "#A6A8BC" }}>{t(lang, "lockPinHint")}</p>
+                </div>
+                <div className="mb-2">
+                  <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "confirmLockPinPlaceholder")}</label>
+                  <div className="relative">
+                    <input value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.confirmLockPin) }} />
+                    <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
+                  </div>
+                </div>
               </div>
             )}
             {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
@@ -7457,6 +7489,90 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pendingLockAction, setPendingLockAction] = useState(null);
   const [lockPinInput, setLockPinInput] = useState("");
   const [lockPinError, setLockPinError] = useState("");
+  // ---- Verrouillage de l'application (comme WhatsApp) ----
+  // Réglage persisté par compte : si activé, l'app se verrouille à l'ouverture et
+  // à chaque retour au premier plan (ex: l'utilisateur change d'app puis revient).
+  // Réutilise le même code PIN que le masquage des montants privés, et le même
+  // système d'empreinte/visage local (WebAuthn) — pas de second code à retenir.
+  const [appLockEnabled, setAppLockEnabled] = useState(false);
+  const [appLockActive, setAppLockActive] = useState(false);
+  const [appLockPinInput, setAppLockPinInput] = useState("");
+  const [appLockError, setAppLockError] = useState("");
+  const [appLockBiometricBusy, setAppLockBiometricBusy] = useState(false);
+  useEffect(() => {
+    if (isDemo) return;
+    (async () => {
+      try {
+        const raw = await window.storage.get(`accounts:${username}`, true);
+        const account = raw ? JSON.parse(raw.value) : null;
+        const enabled = !!(account && account.appLockEnabled);
+        setAppLockEnabled(enabled);
+        // Verrouille dès l'ouverture si le réglage est activé et qu'un PIN existe.
+        if (enabled && account.lockPin) setAppLockActive(true);
+      } catch { /* pas de compte distant (ex: employé) : on laisse déverrouillé */ }
+    })();
+  }, [username, isDemo]);
+  useEffect(() => {
+    // Détecte le retour au premier plan (l'utilisateur avait quitté l'app puis
+    // revient) : c'est le moment où WhatsApp et les apps bancaires reverrouillent.
+    if (!appLockEnabled) return;
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") setAppLockActive(true);
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, [appLockEnabled]);
+  const verifyAppLockPin = async () => {
+    setAppLockError("");
+    if (isDemo) {
+      if (/^\d{4}$/.test(appLockPinInput.trim())) { setAppLockActive(false); setAppLockPinInput(""); }
+      else setAppLockError(t(lang, "wrongPin"));
+      return;
+    }
+    try {
+      const raw = await window.storage.get(`accounts:${username}`, true);
+      const account = raw ? JSON.parse(raw.value) : null;
+      if (!account || !account.lockPin || account.lockPin === appLockPinInput.trim()) {
+        setAppLockActive(false);
+        setAppLockPinInput("");
+      } else {
+        setAppLockError(t(lang, "wrongPin"));
+      }
+    } catch {
+      setAppLockError(t(lang, "wrongPin"));
+    }
+  };
+  const unlockAppWithBiometrics = async () => {
+    setAppLockBiometricBusy(true);
+    setAppLockError("");
+    try {
+      const credentialId = await getOrCreateLocalBiometricCredential();
+      const b64 = credentialId.replace(/-/g, "+").replace(/_/g, "/");
+      const pad = b64.length % 4 ? "=".repeat(4 - (b64.length % 4)) : "";
+      const raw = atob(b64 + pad);
+      const idBytes = new Uint8Array(raw.length);
+      for (let i = 0; i < raw.length; i++) idBytes[i] = raw.charCodeAt(i);
+      const randomChallenge = crypto.getRandomValues(new Uint8Array(32));
+      await navigator.credentials.get({
+        publicKey: { challenge: randomChallenge, allowCredentials: [{ id: idBytes, type: "public-key" }], userVerification: "required", timeout: 60000 },
+      });
+      setAppLockActive(false);
+      setAppLockPinInput("");
+    } catch {
+      setAppLockError(t(lang, "biometricUnlockError"));
+    } finally {
+      setAppLockBiometricBusy(false);
+    }
+  };
+  const toggleAppLock = async (next) => {
+    setAppLockEnabled(next);
+    if (isDemo) return;
+    try {
+      const raw = await window.storage.get(`accounts:${username}`, true);
+      const account = raw ? JSON.parse(raw.value) : {};
+      await window.storage.set(`accounts:${username}`, JSON.stringify({ ...account, appLockEnabled: next }), true);
+    } catch { /* stockage indisponible : le réglage reste actif pour la session en cours seulement */ }
+  };
   // ---- Empreinte digitale / reconnaissance faciale LOCALE (purement côté
   // appareil, sans aucun serveur) comme raccourci au code PIN de verrouillage.
   // Utilise WebAuthn en mode "platform authenticator" uniquement pour vérifier
@@ -9520,6 +9636,42 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   }
   return (
     <div dir="ltr" className="relative" style={{ background: isDesktop ? (darkMode ? "#050709" : "#e9edf3") : T.bg, color: T.text, fontFamily: "system-ui, sans-serif", display: isDesktop ? "flex" : "flex", flexDirection: isDesktop ? "row" : "column", height: "100vh", overflow: "hidden" }}>
+      {appLockActive && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-6" style={{ background: darkMode ? "#0a0d14" : "#F6F7FB" }}>
+          <div className="w-full max-w-xs rounded-2xl p-6 text-center" style={{ background: T.card }}>
+            <div style={{ fontSize: 36 }}>🔒</div>
+            <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{shopName}</p>
+            <p className="text-xs mt-1 mb-4" style={{ color: T.muted }}>{t(lang, "appLockUnlockDesc")}</p>
+            <input
+              value={appLockPinInput}
+              onChange={(e) => setAppLockPinInput(e.target.value.replace(/\D/g, "").slice(0, 4))}
+              onKeyDown={(e) => e.key === "Enter" && verifyAppLockPin()}
+              type="password"
+              inputMode="numeric"
+              maxLength={4}
+              autoFocus
+              placeholder="••••"
+              className="w-full border rounded-xl px-3 py-3 text-center text-2xl tracking-[0.5em] mb-2"
+              style={{ background: T.input, color: T.text, borderColor: T.border }}
+            />
+            {appLockError && <p className="text-xs mb-2" style={{ color: CLAY }}>{appLockError}</p>}
+            <button onClick={verifyAppLockPin} className="w-full py-2.5 rounded-xl text-sm font-semibold text-white mt-1" style={{ background: INDIGO }}>
+              {t(lang, "loginBtn")}
+            </button>
+            {biometricUnlockAvailable && (
+              <button
+                onClick={unlockAppWithBiometrics}
+                disabled={appLockBiometricBusy}
+                className="w-full mt-2.5 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
+                style={{ background: "transparent", color: INDIGO, border: `1px solid ${T.border}`, opacity: appLockBiometricBusy ? 0.6 : 1 }}
+              >
+                <Lock size={14} />
+                {appLockBiometricBusy ? t(lang, "wait") : t(lang, "biometricUnlockBtn")}
+              </button>
+            )}
+          </div>
+        </div>
+      )}
       {isDesktop && (
         <div className="shrink-0" style={{ width: 220, background: darkMode ? "#0a0d14" : INDIGO, height: "100vh", overflowY: "auto", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35 }}>
           <div className="flex items-center gap-2 px-2 mb-8">
@@ -11607,6 +11759,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <span style={{ display: "flex", alignItems: "center", gap: 6 }}>{item.right}<ChevronRight size={15} color="#3d4856" /></span>
                 </button>
               ))}
+              {settingsView === "account" && !settingsField && (
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", marginTop: 8 }}>
+                  <div style={{ paddingRight: 12 }}>
+                    <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "appLockTitle")}</div>
+                    <div style={{ color: "#5f6b7a", fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{t(lang, "appLockDesc")}</div>
+                  </div>
+                  <button onClick={() => toggleAppLock(!appLockEnabled)} style={{ width: 48, height: 28, borderRadius: 14, background: appLockEnabled ? "#22d3ee" : "#232c38", display: "flex", alignItems: "center", padding: "0 4px", justifyContent: appLockEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                    <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                  </button>
+                </div>
+              )}
               {settingsView === "appearance" && !settingsField && [
                 { id: "darkmode", label: t(lang, "darkMode"), right: darkMode ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "lang", label: t(lang, "language"), right: languageLabel(LANGUAGES.find((l) => l.id === lang) || LANGUAGES[0], lang) },
