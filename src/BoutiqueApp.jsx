@@ -9827,7 +9827,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {showEditFund && (
-              <div className="fixed inset-0 z-40 flex items-end" style={{ background: "rgba(43,36,32,0.5)" }}>
+              <div className="fixed inset-0 z-40 flex items-end" style={{ background: "rgba(0,0,0,0.6)" }}>
                 <div className="rounded-t-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "min(75vh, 520px)", overscrollBehavior: "contain" }}>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-sm">{t(lang, "cashFundTitle")}</h3>
@@ -9835,7 +9835,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                   <p className="text-xs mb-2" style={{ color: T.muted }}>{t(lang, "fundExplain")}</p>
                   <p className="text-[11px] mb-3 rounded-lg p-2 font-medium" style={{ background: darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#065f46", border: `1px solid ${darkMode ? "rgba(52,211,153,0.3)" : "#a7f3d0"}` }}>{t(lang, "fundPrivate")}</p>
-                  <input placeholder={t(lang, "amountInCash")} type="number" value={fundInput} onChange={(e) => setFundInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" />
+                  <input placeholder={t(lang, "amountInCash")} type="number" value={fundInput} onChange={(e) => setFundInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                   <button onClick={saveFund} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "save")}</button>
                 </div>
               </div>
