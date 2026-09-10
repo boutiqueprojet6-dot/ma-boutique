@@ -9827,8 +9827,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {showEditFund && (
-              <div className="fixed inset-0 z-40 flex items-end" style={{ background: "rgba(0,0,0,0.6)" }}>
-                <div className="rounded-t-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "min(75vh, 520px)", overscrollBehavior: "contain" }}>
+              <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+                <div className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-sm">{t(lang, "cashFundTitle")}</h3>
                     <button onClick={() => setShowEditFund(false)}><X size={18} /></button>
