@@ -289,7 +289,7 @@ const TRANSLATIONS = {
     productPhotoRequired: "Une photo du produit est obligatoire (pour la reconnaissance à la caisse).", productPhotoRequiredHint: "Photo obligatoire pour activer la reconnaissance à la caisse.",
     newSaleFeaturesTipTitle: "Nouveau : vente plus rapide", newSaleFeaturesTipVoice: "Dicte ta vente à voix haute au lieu de taper.", newSaleFeaturesTipCamera: "Prends une photo des articles posés sur le comptoir et coche-les.",
     productLimitReached: "Limite de {n} produits en stock atteinte pour ton palier. Passe à un palier supérieur pour un stock plus grand.", salesLimitReached: "Limite de {n} ventes atteinte pour ce cycle de 30 jours. Passe à un palier supérieur pour continuer à vendre.",
-    salesQuotaLabel: "Ventes (cycle de 30 jours)",
+    salesQuotaLabel: "Ventes (cycle de 30 jours)", salesDailyQuotaLabel: "Ventes du jour",
     productFrozenBadge: "Gelé", productFrozenMsg: "Produit gelé : passe à un palier supérieur pour l'utiliser à nouveau.",
     stripeCheckoutLoading: "Chargement…", stripeCheckoutError: "Le paiement n'a pas pu démarrer. Réessaie dans un instant.",
     stripeSimulationMsg: "Mode test : le paiement Stripe n'est pas encore branché. Une fois configuré, ce bouton t'enverra vers le paiement sécurisé pour le palier {plan}.",
@@ -10003,7 +10003,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div className="px-1">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-[11px]" style={{ color: nearLimit ? "#e11d48" : T.muted }}>
-                      {t(lang, "salesQuotaLabel")} : {used}/{salesLimit}
+                      {t(lang, "salesDailyQuotaLabel")} : {used}/{salesLimit}
                     </span>
                   </div>
                   <div className="h-1.5 rounded-full overflow-hidden" style={{ background: T.input }}>
