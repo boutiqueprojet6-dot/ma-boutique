@@ -399,7 +399,7 @@ const TRANSLATIONS = {
     passwordPlaceholder: "Mot de passe", confirmPasswordPlaceholder: "Confirmer le mot de passe",
     navMore: "Plus", moreOptionsTitle: "Plus d'options",
     calcTabLabel: "Calculatrice", calcClear: "AC", calcBackspace: "⌫",
-    calcSearchProduct: "Rechercher un produit…", calcNoProductFound: "Aucun produit trouvé", calcSearchToggle: "Produits",
+    calcSearchProduct: "Rechercher un produit…", calcNoProductFound: "Aucun produit trouvé", calcSearchToggle: "Produits", calcHistoryToggle: "Historique", calcHistoryTitle: "Historique des calculs", calcHistoryClear: "Effacer", calcHistoryEmpty: "Aucun calcul pour l'instant.",
     calcClearEntry: "CE/C", calcCost: "COÛT", calcSell: "VENTE", calcMargin: "MARGE", calcSetPercent: "SET %",
     voiceCartStart: "Dicter la vente", voiceCartApply: "Ajouter au panier", voiceCartCancel: "Annuler", voiceCartUnmatched: "Non reconnu", voiceCartNothingHeard: "Rien compris, réessaie.",
     cameraCheckoutStart: "Photo produits", cameraCheckoutTitle: "Vente par photo", cameraCheckoutHint: "Pose les articles sur le comptoir, prends une ou plusieurs photos, puis coche les produits présents.",
@@ -6729,6 +6729,8 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   const [marginMode, setMarginMode] = useState(null); // "cost" | "sell" | null
   const [showProductSearch, setShowProductSearch] = useState(false);
   const [productQuery, setProductQuery] = useState("");
+  const [history, setHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   const insertProductPrice = (price) => {
     setDisplay(String(price));
@@ -6898,6 +6900,11 @@ function CalculatorTab({ T, darkMode, lang, products }) {
     if (prevValue === null || operator === null) return;
     const result = compute(prevValue, inputValue, operator);
     if (!Number.isNaN(result)) setGrandTotal((gt) => gt + result);
+    // Historique : garde chaque calcul terminé par "=" (opération complète + résultat),
+    // le plus récent en premier. Limité à 50 entrées pour ne pas grossir indéfiniment.
+    if (!Number.isNaN(result)) {
+      setHistory((h) => [{ a: prevValue, op: operator, b: inputValue, result, date: new Date().toISOString() }, ...h].slice(0, 50));
+    }
     setDisplay(Number.isNaN(result) ? "Erreur" : String(Math.round(result * 1e10) / 1e10));
     setPrevValue(null);
     setOperator(null);
@@ -6968,6 +6975,13 @@ function CalculatorTab({ T, darkMode, lang, products }) {
           <Calculator size={16} color={darkMode ? "#34d399" : "#059669"} />
         </span>
         <p className="text-sm font-bold flex-1" style={{ color: T.text }}>{t(lang, "calcTabLabel")}</p>
+        <button
+          onClick={() => setShowHistory((v) => !v)}
+          className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
+          style={{ background: showHistory ? "linear-gradient(145deg, #10b981, #059669)" : (darkMode ? "rgba(255,255,255,0.08)" : "#e2e8f0"), color: showHistory ? "white" : T.text }}
+        >
+          <History size={12} /> {t(lang, "calcHistoryToggle")}
+        </button>
         {!!(products && products.length) && (
           <button
             onClick={() => setShowProductSearch((v) => !v)}
@@ -7007,6 +7021,39 @@ function CalculatorTab({ T, darkMode, lang, products }) {
               </button>
             ))}
           </div>
+        </div>
+      )}
+      {showHistory && (
+        <div className="rounded-2xl p-3 mb-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-xs font-bold" style={{ color: T.text }}>{t(lang, "calcHistoryTitle")}</p>
+            {history.length > 0 && (
+              <button onClick={() => setHistory([])} className="text-[11px] font-semibold" style={{ color: "#e11d48" }}>
+                {t(lang, "calcHistoryClear")}
+              </button>
+            )}
+          </div>
+          {history.length === 0 ? (
+            <p className="text-xs text-center py-2" style={{ color: T.muted }}>{t(lang, "calcHistoryEmpty")}</p>
+          ) : (
+            <div className="space-y-1 max-h-56 overflow-y-auto">
+              {history.map((entry, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setDisplay(String(entry.result)); setWaitingForNewValue(true); setShowHistory(false); }}
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-left"
+                  style={{ background: darkMode ? "rgba(255,255,255,0.05)" : "#f8fafc" }}
+                >
+                  <span className="text-xs truncate" style={{ color: T.muted }}>
+                    {toDisplayDigits(String(entry.a))} {entry.op} {toDisplayDigits(String(entry.b))}
+                  </span>
+                  <span className="text-sm font-bold shrink-0 ml-2" style={{ color: darkMode ? "#34d399" : "#059669" }}>
+                    {toDisplayDigits(String(Math.round(entry.result * 1e10) / 1e10))}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
       <div
@@ -8804,7 +8851,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
     const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
     if (salesLimit !== null && salesTodayCount() >= salesLimit) {
-      setError(t(lang, "salesLimitReached").replace("{n}", salesLimit));
+      // Au lieu d'un simple message d'erreur, on ouvre directement les paliers de
+      // paiement : le commerçant voit immédiatement comment débloquer plus de ventes.
+      setShowSettings(true);
+      setSettingsView("subscription");
       return;
     }
     setError("");
@@ -8931,13 +8981,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // aiMonthlyQuota === null : illimité. effectiveAiQuota résout aussi le cas du palier
     // Gratuit (10 messages/mois pendant les 30 premiers jours, puis 5 ensuite).
     if (effectiveAiQuota === 0) {
-      setAiLastFailed({ text: textToSend, isRetry });
-      setAiMessages([...aiMessages, { role: "user", content: textToSend }, { role: "assistant", content: t(lang, "aiNoAccessFree") }]);
+      // Au lieu d'un message dans le chat, on ouvre directement les paliers de paiement.
+      setShowSettings(true);
+      setSettingsView("subscription");
       return;
     }
     if (effectiveAiQuota !== null && aiUsageCount >= effectiveAiQuota) {
-      setAiLastFailed({ text: textToSend, isRetry });
-      setAiMessages([...aiMessages, { role: "user", content: textToSend }, { role: "assistant", content: t(lang, "aiQuotaReached").replace("{n}", effectiveAiQuota) }]);
+      // Même logique : la limite atteinte ouvre directement les paliers plutôt que
+      // d'afficher un message dans la conversation.
+      setShowSettings(true);
+      setSettingsView("subscription");
       return;
     }
     const userMsg = { role: "user", content: textToSend };
@@ -8949,7 +9002,18 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setAiLoading(true);
     setAiLastFailed(null);
     setAiFollowUps([]);
-    const langLabel = lang === "en" ? "English" : lang === "ar" ? "Arabic" : lang === "es" ? "Spanish" : lang === "pt" ? "Portuguese" : lang === "zh" ? "Chinese" : lang === "de" ? "German" : lang === "ru" ? "Russian" : lang === "ja" ? "Japanese" : lang === "ko" ? "Korean" : lang === "tr" ? "Turkish" : lang === "id" ? "Indonesian" : lang === "hi" ? "Hindi" : lang === "it" ? "Italian" : lang === "sw" ? "Swahili" : lang === "bn" ? "ইংরেজি" : lang === "ur" ? "انگریزی" : lang === "ha" ? "Turanci" : lang === "bm" ? "Angilɛkan" : "French";
+    // Table complète des 30 langues de l'app -> nom en anglais, pour instruire l'IA
+    // de façon fiable quel que soit le fournisseur qui répond. (Avant correction, il
+    // manquait 15 langues et 4 étaient mal mappées — ex: bengali pointait vers "anglais".)
+    const AI_LANG_NAMES = {
+      am: "Amharic", ar: "Arabic", bm: "Bambara", bn: "Bengali", de: "German",
+      en: "English", es: "Spanish", fr: "French", ha: "Hausa", hi: "Hindi",
+      id: "Indonesian", it: "Italian", nl: "Dutch", ja: "Japanese", ko: "Korean",
+      pl: "Polish", pt: "Portuguese", ru: "Russian", sw: "Swahili", ta: "Tamil",
+      te: "Telugu", th: "Thai", tl: "Tagalog", tr: "Turkish", ur: "Urdu",
+      vi: "Vietnamese", wo: "Wolof", yo: "Yoruba", zh: "Chinese", zu: "Zulu",
+    };
+    const langLabel = AI_LANG_NAMES[lang] || "French";
     const todaySalesSum = sales.filter((s) => s.date.slice(0, 10) === todayKey()).reduce((sum, s) => sum + s.total, 0);
     const topProd = Object.entries(
       sales.reduce((acc, s) => { acc[s.productName] = (acc[s.productName] || 0) + s.qty; return acc; }, {})
@@ -8959,7 +9023,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const debtSummary = debts.filter((d) => !d.paid).map((d) => `${d.customer}: ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n") || "Aucune";
     const cashSummary = `Fond de caisse: ${cashFund} ${CURRENT_CURRENCY.symbol}, Ventes espèces totales: ${sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}, Dépenses: ${expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}, Solde estimé: ${cashFund + sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0) - expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}`;
     const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => s.date.slice(0, 10) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
-    const systemPrompt = `Tu es l'assistant de la boutique "${shopName}". Tu es comme un ami de confiance qui s'y connaît en commerce et qui suit de près les affaires du boutiquier — pas un logiciel qui récite des chiffres. Réponds TOUJOURS en ${langLabel}.
+    const systemPrompt = `Tu es l'assistant de la boutique "${shopName}". Tu es comme un ami de confiance qui s'y connaît en commerce et qui suit de près les affaires du boutiquier — pas un logiciel qui récite des chiffres. Réponds par défaut en ${langLabel} (la langue choisie dans l'app), SAUF si le message de l'utilisateur est clairement écrit dans une autre langue — dans ce cas, réponds dans la langue utilisée par l'utilisateur plutôt qu'en ${langLabel}.
 TON ET PERSONNALITÉ:
 - Parle simplement, comme dans une vraie conversation entre commerçants, pas comme un rapport ou une notice
 - Évite les tournures robotiques du genre "Voici les informations demandées" ou "D'après les données fournies" — dis plutôt les choses directement, naturellement
@@ -9002,7 +9066,7 @@ DETTES CLIENTS:
 ${debtSummary}
 CAISSE:
 ${cashSummary}
-Réponds en ${langLabel} uniquement.`;
+Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question dans une autre langue — dans ce cas, réponds dans cette langue-là.`;
     try {
       const reply = await callClaudeApi(newMessages, systemPrompt);
       if (reply) {
@@ -9581,22 +9645,10 @@ Réponds en ${langLabel} uniquement.`;
           <p className="text-[11px] text-gray-600 mt-0.5">Tu peux tout explorer librement, mais rien n'est réellement sauvegardé. Crée un vrai compte quand le souci de stockage sera résolu.</p>
         </div>
       )}
-      {!isActive && (
-        <div className="mx-4 mt-3 rounded-xl p-3 flex items-center justify-between gap-3" style={{ background: "#fdf2df" }}>
-          <div>
-            <p className="text-xs font-semibold" style={{ color: CHARCOAL }}>{expiresAt ? t(lang, "expiredFree") : t(lang, "freeLabel")}</p>
-            <p className="text-[11px] text-gray-500">{FREE_SALES_LIMIT_PER_DAY} ventes/jour, {SUBSCRIPTION_PLANS.free.aiMonthlyQuota} messages IA/mois. Dettes, statistiques, caisse et historique réservés à la version complète.</p>
-          </div>
-          <button
-            onClick={() => startLemonSqueezyCheckout("pro")}
-            disabled={checkoutBusyPlanId !== null}
-            className="shrink-0 text-[11px] font-semibold px-3 py-2 rounded-lg text-white whitespace-nowrap disabled:opacity-60"
-            style={{ background: GREEN }}
-          >
-            {checkoutBusyPlanId === "pro" ? t(lang, "stripeCheckoutLoading") : t(lang, "upgradeCta")}
-          </button>
-        </div>
-      )}
+      {/* Le bandeau "Version gratuite" a été retiré d'ici : les limites (ventes/jour,
+          messages IA) sont maintenant affichées directement dans les onglets Vente et
+          Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
+          uniquement quand la limite est réellement atteinte. */}
       <div ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-40"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
         {tab === "dashboard" && (
           <div className="space-y-2">
@@ -9937,6 +9989,29 @@ Réponds en ${langLabel} uniquement.`;
         )}
         {tab === "sale" && hasPermission("sell") && (
           <div className="space-y-3">
+            {(() => {
+              // Barre de progression des ventes du jour, visible en permanence en haut de
+              // l'onglet Vente (pas seulement quand un panier est ouvert) pour que le
+              // commerçant voie toujours où il en est par rapport à sa limite gratuite.
+              const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
+              const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
+              if (salesLimit === null) return null;
+              const used = salesTodayCount();
+              const ratio = Math.min(1, used / salesLimit);
+              const nearLimit = ratio >= 0.8;
+              return (
+                <div className="px-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[11px]" style={{ color: nearLimit ? "#e11d48" : T.muted }}>
+                      {t(lang, "salesQuotaLabel")} : {used}/{salesLimit}
+                    </span>
+                  </div>
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: T.input }}>
+                    <div className="h-full rounded-full" style={{ width: `${ratio * 100}%`, background: nearLimit ? "#e11d48" : (darkMode ? "#34d399" : "#059669") }} />
+                  </div>
+                </div>
+              );
+            })()}
             {!activeCart && draftCarts.length === 0 && (
               <div className="rounded-3xl p-6 text-center" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div style={{ animation: "floatSlow 2.3s ease-in-out infinite alternate" }}>
@@ -9994,26 +10069,7 @@ Réponds en ${langLabel} uniquement.`;
                     <Trash2 size={12} /> {t(lang, "abandonCart")}
                   </button>
                 </div>
-                {(() => {
-                  const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
-                  const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
-                  if (salesLimit === null) return null;
-                  const used = salesTodayCount();
-                  const ratio = Math.min(1, used / salesLimit);
-                  const nearLimit = ratio >= 0.8;
-                  return (
-                    <div className="px-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[11px]" style={{ color: nearLimit ? "#e11d48" : T.muted }}>
-                          {t(lang, "salesQuotaLabel")} : {used}/{salesLimit}
-                        </span>
-                      </div>
-                      <div className="h-1 rounded-full overflow-hidden" style={{ background: T.input }}>
-                        <div className="h-full rounded-full" style={{ width: `${ratio * 100}%`, background: nearLimit ? "#e11d48" : (darkMode ? "#34d399" : "#059669") }} />
-                      </div>
-                    </div>
-                  );
-                })()}
+                {(() => { return null; /* Barre de progression déplacée en haut de l'onglet, toujours visible — voir plus haut. */ })()}
                 {false && showNewSaleFeaturesTip && (
                   <div className="rounded-2xl p-3.5 relative" style={{ background: darkMode ? "rgba(37,99,235,0.1)" : "#eff6ff", border: `1px solid ${darkMode ? "rgba(37,99,235,0.3)" : "#bfdbfe"}` }}>
                     <button onClick={dismissNewSaleFeaturesTip} className="absolute top-2.5 right-2.5"><X size={14} color={T.muted} /></button>
@@ -10858,6 +10914,27 @@ Réponds en ${langLabel} uniquement.`;
                 <Plus size={15} color={T.text} />
               </button>
             </div>
+            {(() => {
+              // Barre de progression des messages IA du mois, visible en permanence en
+              // haut de l'onglet Assistant. effectiveAiQuota === null : illimité (rien
+              // à afficher). effectiveAiQuota === 0 : pas d'accès du tout pour ce palier.
+              if (effectiveAiQuota === null) return null;
+              const used = Math.min(aiUsageCount, effectiveAiQuota);
+              const ratio = effectiveAiQuota > 0 ? Math.min(1, used / effectiveAiQuota) : 1;
+              const nearLimit = ratio >= 0.8;
+              return (
+                <div className="px-1 mb-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[11px]" style={{ color: nearLimit ? "#e11d48" : T.muted }}>
+                      {t(lang, "planLimitedAi").replace("{n}", effectiveAiQuota)} : {used}/{effectiveAiQuota}
+                    </span>
+                  </div>
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: T.input }}>
+                    <div className="h-full rounded-full" style={{ width: `${ratio * 100}%`, background: nearLimit ? "#e11d48" : (darkMode ? "#34d399" : "#059669") }} />
+                  </div>
+                </div>
+              );
+            })()}
             <div className="flex-1 overflow-y-auto space-y-3 pb-3" style={{ minHeight: 200 }}>
               {aiMessages.length === 0 && (
                 <div className="rounded-2xl p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
