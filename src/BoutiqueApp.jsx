@@ -8886,40 +8886,38 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     logAction(`${t(lang, "logSaleRecorded")} : ${cart.items.map((i) => `${i.productName} x${i.qty}`).join(", ")} — ${localizedNumber(total)} (${cart.payment === "credit" ? t(lang, "logPaymentCredit") : cart.payment === "cash" ? t(lang, "logPaymentCash") : cart.payment})`);
   };
   const callClaudeApi = async (msgHistory, systemPrompt) => {
+    // Appelle l'Edge Function Supabase "ai-assistant", qui appelle Gemini côté serveur
+    // (la clé API reste secrète, jamais exposée dans ce code frontend).
     const MAX_ATTEMPTS = 3;
     let lastErr = null;
+    // On sépare le dernier message (celui de l'utilisateur) du reste de l'historique,
+    // car l'Edge Function attend { prompt } plutôt qu'un tableau de messages.
+    const lastUserMessage = msgHistory[msgHistory.length - 1]?.content ?? "";
+    const history = msgHistory.slice(0, -1);
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000);
       try {
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          signal: controller.signal,
-          body: JSON.stringify({
-            model: "claude-sonnet-4-6",
-            max_tokens: 1500,
-            system: systemPrompt,
-            tools: [{ type: "web_search_20250305", name: "web_search" }],
-            messages: msgHistory,
-          }),
+        const { data, error } = await supabase.functions.invoke("ai-assistant", {
+          body: {
+            type: "custom",
+            // Le systemPrompt construit dans sendAiMessage est déjà complet et
+            // spécifique à Ma Boutique (données de stock, ventes, dettes, caisse...).
+            prompt: `${systemPrompt}\n\n${history.map((h) => `${h.role === "user" ? "Utilisateur" : "Assistant"}: ${h.content}`).join("\n")}\n\nUtilisateur: ${lastUserMessage}`,
+          },
         });
-        clearTimeout(timeoutId);
-        if (!response.ok) {
-          const retriable = response.status === 429 || response.status === 500 || response.status === 502 || response.status === 503 || response.status === 529;
+        if (error) {
+          const status = error?.context?.status;
+          const retriable = status === 429 || status === 500 || status === 502 || status === 503 || status === 529;
           if (retriable && attempt < MAX_ATTEMPTS) {
             await new Promise((r) => setTimeout(r, attempt * 1200));
             continue;
           }
-          throw new Error(`HTTP ${response.status}`);
+          throw error;
         }
-        const data = await response.json();
-        const reply = data.content ? data.content.filter((b) => b.type === "text").map((b) => b.text).join("\n").trim() : "";
+        const reply = (data?.result ?? "").trim();
         if (reply) return reply;
         if (attempt < MAX_ATTEMPTS) { await new Promise((r) => setTimeout(r, attempt * 800)); continue; }
         return null;
       } catch (e) {
-        clearTimeout(timeoutId);
         lastErr = e;
         if (attempt < MAX_ATTEMPTS) { await new Promise((r) => setTimeout(r, attempt * 1200)); continue; }
       }
