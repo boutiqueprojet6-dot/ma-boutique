@@ -12,7 +12,7 @@ export default defineConfig({
         name: "Shopnify",
         short_name: "Shopnify",
         description: "Application de gestion de boutique",
-        theme_color: "#f97316",
+        theme_color: "#1e3a8a",
         background_color: "#ffffff",
         display: "standalone",
         start_url: "/",
