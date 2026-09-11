@@ -340,6 +340,9 @@ const TRANSLATIONS = {
     saveExpense: "Enregistrer la dépense", fundExplain: "Indique combien d'argent tu as en caisse en ce moment. L'appli calculera ton solde à partir de ce point.",
     fundPrivate: "🔒 Ce montant reste privé.",
     appLockTitle: "Verrouillage de l'application", appLockDesc: "Demande ton code PIN ou ton empreinte/visage à chaque ouverture de l'appli.", appLockUnlockDesc: "Entre ton code PIN pour continuer",
+    forgotPinLink: "Code PIN oublié ?", forgotPinTitle: "Réinitialiser le code PIN",
+    forgotPinStartDesc: "On va envoyer un code de vérification à {email} pour confirmer que c'est bien toi.",
+    wrongCode: "Code incorrect.", invalidPin: "Le code PIN doit contenir exactement 4 chiffres.", pinMismatch: "Les deux codes ne correspondent pas.",
     amountInCash: "Montant en caisse (FCFA)",
     searchClient: "Rechercher un client…", searchProductClient: "Rechercher un produit ou un client…",
     cashPaywallTitle: "Suivi de caisse — version complète", debtsPaywallTitle: "Suivi des dettes clients — version complète",
@@ -5882,6 +5885,14 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         setBusy(false);
         return;
       }
+      // Le vrai système de vérification du PIN (verifyLockPin) et de son changement
+      // (changeLockPin) lisent/écrivent tous les deux via window.storage, à la clé
+      // accounts:<username> — pas via shop_data (Supabase). On écrit donc le PIN
+      // fraîchement créé au même endroit ici, sinon le PIN choisi à l'inscription
+      // n'est jamais retrouvé ensuite et la protection ne fonctionne pas.
+      try {
+        await window.storage.set(`accounts:${obUsername.trim().toLowerCase()}`, JSON.stringify({ lockPin: await hashPin(obLockPin) }), true);
+      } catch (e) { /* best-effort : le compte reste créé même si cette écriture échoue */ }
       setCreatedShopName(obShopName.trim());
       setLang(obLang);
       setScreen("success");
@@ -6138,7 +6149,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     // Flux Google : l'utilisateur est déjà authentifié, inutile de lui
     // redemander de se reconnecter — on entre directement dans l'app.
     if (isGoogleFlow) {
-      onLogin(obUsername, createdShopName);
+      onLogin(obUsername.trim().toLowerCase(), createdShopName);
       return null;
     }
     return (
@@ -7532,7 +7543,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     try {
       const raw = await window.storage.get(`accounts:${username}`, true);
       const account = raw ? JSON.parse(raw.value) : null;
-      if (!account || !account.lockPin || account.lockPin === appLockPinInput.trim()) {
+      if (!account || !account.lockPin) {
+        setAppLockActive(false);
+        setAppLockPinInput("");
+        return;
+      }
+      const enteredHash = await hashPin(appLockPinInput.trim());
+      if (enteredHash === account.lockPin) {
         setAppLockActive(false);
         setAppLockPinInput("");
       } else {
@@ -7572,6 +7589,86 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const account = raw ? JSON.parse(raw.value) : {};
       await window.storage.set(`accounts:${username}`, JSON.stringify({ ...account, appLockEnabled: next }), true);
     } catch { /* stockage indisponible : le réglage reste actif pour la session en cours seulement */ }
+  };
+  // ---- "Code PIN oublié ?" : réinitialisation par email (code à 6 chiffres) ----
+  // Accessible depuis les deux écrans de verrouillage et depuis Paramètres. La session
+  // Supabase reste active pendant que l'app est verrouillée (le verrouillage est une
+  // protection d'interface, pas une déconnexion) : on récupère donc l'email du compte
+  // déjà connecté automatiquement, sans jamais le redemander à l'utilisateur — on ne
+  // peut ainsi réinitialiser que le PIN de son propre compte, jamais celui d'un tiers.
+  const [showForgotPin, setShowForgotPin] = useState(false);
+  const [forgotPinStep, setForgotPinStep] = useState("start"); // start | code | newpin
+  const [forgotPinEmail, setForgotPinEmail] = useState("");
+  const [forgotPinCodeInput, setForgotPinCodeInput] = useState("");
+  const [forgotPinNewPin, setForgotPinNewPin] = useState("");
+  const [forgotPinConfirmPin, setForgotPinConfirmPin] = useState("");
+  const [forgotPinError, setForgotPinError] = useState("");
+  const [forgotPinBusy, setForgotPinBusy] = useState(false);
+  const openForgotPin = async () => {
+    setForgotPinError("");
+    setForgotPinStep("start");
+    setForgotPinCodeInput("");
+    setForgotPinNewPin("");
+    setForgotPinConfirmPin("");
+    setShowForgotPin(true);
+    if (isDemo) return;
+    try {
+      const { data } = await supabase.auth.getUser();
+      setForgotPinEmail(data && data.user ? data.user.email : "");
+    } catch { setForgotPinEmail(""); }
+  };
+  const sendForgotPinCode = async () => {
+    if (isDemo) { setForgotPinStep("code"); return; }
+    if (!forgotPinEmail) { setForgotPinError(t(lang, "genericError")); return; }
+    setForgotPinBusy(true);
+    setForgotPinError("");
+    const { error } = await supabase.auth.signInWithOtp({
+      email: forgotPinEmail,
+      options: { shouldCreateUser: false },
+    });
+    setForgotPinBusy(false);
+    if (error) { setForgotPinError(error.message); return; }
+    setForgotPinStep("code");
+  };
+  const verifyForgotPinCode = async () => {
+    if (isDemo) {
+      if (/^\d{4,6}$/.test(forgotPinCodeInput.trim())) { setForgotPinStep("newpin"); setForgotPinError(""); }
+      else setForgotPinError(t(lang, "wrongCode"));
+      return;
+    }
+    setForgotPinBusy(true);
+    setForgotPinError("");
+    const { data, error } = await supabase.auth.verifyOtp({
+      email: forgotPinEmail,
+      token: forgotPinCodeInput.trim(),
+      type: "email",
+    });
+    setForgotPinBusy(false);
+    if (error || !data.session) { setForgotPinError(t(lang, "wrongCode")); return; }
+    setForgotPinStep("newpin");
+  };
+  const submitForgotPinNewPin = async () => {
+    setForgotPinError("");
+    if (!/^\d{4}$/.test(forgotPinNewPin.trim())) { setForgotPinError(t(lang, "invalidPin")); return; }
+    if (forgotPinNewPin.trim() !== forgotPinConfirmPin.trim()) { setForgotPinError(t(lang, "pinMismatch")); return; }
+    if (isDemo) { setShowForgotPin(false); return; }
+    setForgotPinBusy(true);
+    try {
+      const raw = await window.storage.get(`accounts:${username}`, true);
+      const account = raw ? JSON.parse(raw.value) : {};
+      account.lockPin = await hashPin(forgotPinNewPin.trim());
+      await window.storage.set(`accounts:${username}`, JSON.stringify(account), true);
+      setShowForgotPin(false);
+      // Déverrouille immédiatement avec le PIN qui vient d'être défini, pour ne pas
+      // forcer l'utilisateur à le retaper aussitôt après l'avoir choisi.
+      setAppLockActive(false);
+      setShowLockPinModal(false);
+      setAmountsHidden(false);
+      if (pendingLockAction) { pendingLockAction(); setPendingLockAction(null); }
+    } catch (e) {
+      setForgotPinError(t(lang, "genericError"));
+    }
+    setForgotPinBusy(false);
   };
   // ---- Empreinte digitale / reconnaissance faciale LOCALE (purement côté
   // appareil, sans aucun serveur) comme raccourci au code PIN de verrouillage.
@@ -7913,6 +8010,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     return value;
   };
   const { isOnline, pendingCount, persistOffline } = useOfflineSync(resolveShopBeforeFlush);
+  // Écrit le blob boutique (produits, ventes, dettes, dépenses, réglages...) dans
+  // Supabase (table shop_data), en plus du canal window.storage existant. C'est la
+  // source fiable : elle fonctionne sur un vrai déploiement, contrairement à
+  // window.storage qui peut ne pas exister selon l'environnement d'hébergement.
+  // On préserve les autres champs du compte (ownerName, sector, lockPin, aiUsage...)
+  // en les relisant d'abord, plutôt que d'écraser toute la colonne "data".
+  const persistShopToSupabase = useCallback(async (merged) => {
+    if (isSecondaryShop) return { ok: false }; // pas encore supporté pour les boutiques secondaires
+    try {
+      const { data: userData } = await supabase.auth.getUser();
+      if (!userData || !userData.user) return { ok: false };
+      const ownerId = userData.user.id;
+      const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", ownerId).single();
+      const currentData = (row && row.data) || {};
+      const nextData = { ...currentData, ...merged };
+      const { error } = await supabase.from("shop_data").update({ data: nextData, updated_at: new Date().toISOString() }).eq("owner_id", ownerId);
+      return { ok: !error };
+    } catch (e) {
+      return { ok: false };
+    }
+  }, [isSecondaryShop]);
   const persist = useCallback(
     async (next) => {
       if (isDemo) { setSaving(true); setTimeout(() => setSaving(false), 300); return; }
@@ -7948,24 +8066,35 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // sinon elle est mise en file d'attente et rejouée automatiquement
       // dès que la connexion revient (voir useOfflineSync, résolveur de fusion).
       let cacheFailed = !cacheOk;
+      // Écriture prioritaire et fiable vers Supabase (voir persistShopToSupabase).
+      // En parallèle du canal window.storage ci-dessous, qui reste utile pour la
+      // fusion multi-appareils quand cette API est disponible.
+      let supabaseOk = false;
+      if (navigator.onLine) {
+        try {
+          const supaResult = await persistShopToSupabase(merged);
+          supabaseOk = supaResult.ok;
+        } catch (e) {}
+      }
       try {
         const result = await persistOffline(shopKey, JSON.stringify(merged), true);
         if (result && result.cacheFailed) cacheFailed = true;
-        // La base n'avance que si le serveur a réellement confirmé l'écriture.
-        // Tant qu'on est hors-ligne, on garde l'ancienne base pour que les
-        // prochaines ventes hors-ligne continuent à s'additionner correctement.
-        if (result && !result.queued) writeLocalCache(shopSyncBaseKey, merged);
+        // La base n'avance que si le serveur a réellement confirmé l'écriture
+        // (Supabase ou, à défaut, window.storage). Tant qu'aucun des deux n'a
+        // confirmé, on garde l'ancienne base pour que les prochaines ventes hors
+        // ligne continuent à s'additionner correctement.
+        if (supabaseOk || (result && !result.queued)) writeLocalCache(shopSyncBaseKey, merged);
         // Si on est hors ligne ET que le stockage local du téléphone est plein,
         // ce changement n'est confirmé nulle part : ni sur le serveur, ni de
         // façon fiable en attente localement. On le signale clairement plutôt
         // que de laisser l'échec passer inaperçu (ex : trop de photos produits).
-        if (cacheFailed && result && result.queued) {
+        if (cacheFailed && !supabaseOk && result && result.queued) {
           setError("Stockage plein sur ce téléphone : ce changement hors ligne risque de ne pas être conservé. Libère de l'espace (ex. supprime des photos produits) ou reconnecte-toi au réseau.");
         }
       } catch (e) { /* persistOffline gère déjà ses propres erreurs en interne */ }
       setSaving(false);
     },
-    [shopKey, shopSyncBaseKey, isDemo, persistOffline, applyShop, setError]
+    [shopKey, shopSyncBaseKey, isDemo, persistOffline, applyShop, setError, persistShopToSupabase]
   );
   useEffect(() => {
     if (isDemo) {
@@ -8022,13 +8151,44 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // 2) Rafraîchissement depuis le serveur si une connexion est disponible,
       //    pour récupérer d'éventuelles modifications faites depuis un autre
       //    appareil. On ne bloque jamais l'interface pour cette étape.
-      if (!navigator.onLine || !window.storage) {
+      if (!navigator.onLine) {
         if (!cachedShop) { applyShop(emptyShop, { expiresAt: null }, null); if (!readLocalCache(shopSyncBaseKey)) writeLocalCache(shopSyncBaseKey, emptyShop); setLoading(false); }
         return;
       }
       try {
         let shop = cachedShop || emptyShop;
         let shopConfirmed = false;
+        // Essai prioritaire via Supabase (shop_data) : c'est la source fiable,
+        // qui fonctionne sur un vrai déploiement (contrairement à window.storage,
+        // qui peut ne pas exister selon l'environnement d'hébergement — voir
+        // persistShopToSupabase ci-dessous pour la même logique côté écriture).
+        // On ne le fait pas encore pour les boutiques secondaires (multi-boutique),
+        // qui restent pour l'instant sur window.storage uniquement.
+        if (!isSecondaryShop) {
+          try {
+            const { data: userData } = await supabase.auth.getUser();
+            if (userData && userData.user) {
+              const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
+              if (row && row.data && Array.isArray(row.data.products)) {
+                const remoteShop = row.data;
+                const hasPending = readQueue().some((item) => item.key === shopKey);
+                if (hasPending) {
+                  const baseShop = readLocalCache(shopSyncBaseKey) || cachedShop || remoteShop;
+                  shop = mergeShop(baseShop, cachedShop || remoteShop, remoteShop);
+                  writeLocalCache(shopKey, shop);
+                } else {
+                  shop = remoteShop;
+                  writeLocalCache(shopKey, shop);
+                  shopConfirmed = true;
+                }
+              }
+            }
+          } catch (e) { /* Supabase indisponible : on retente via window.storage ci-dessous */ }
+        }
+        // Filet de sécurité historique (autre canal de synchro, notamment utilisé
+        // pour les boutiques secondaires) : on ne l'utilise que si Supabase n'a
+        // rien confirmé au-dessus, pour ne jamais écraser une version déjà fiable.
+        if (!shopConfirmed && window.storage) {
         try {
           const r = await window.storage.get(shopKey, true);
           if (r) {
@@ -8057,10 +8217,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
             }
           }
         } catch (e) {}
+        }
         let sub = cachedSub || { expiresAt: null };
-        try { const r2 = await window.storage.get(subKey, true); if (r2) { sub = JSON.parse(r2.value); writeLocalCache(subKey, sub); } } catch (e) {}
+        try { if (window.storage) { const r2 = await window.storage.get(subKey, true); if (r2) { sub = JSON.parse(r2.value); writeLocalCache(subKey, sub); } } } catch (e) {}
         let account = cachedAccount || null;
-        try { const r3 = await window.storage.get(`accounts:${username}`, true); if (r3) { account = JSON.parse(r3.value); writeLocalCache(`accounts:${username}`, account); } } catch (e) {}
+        try { if (window.storage) { const r3 = await window.storage.get(`accounts:${username}`, true); if (r3) { account = JSON.parse(r3.value); writeLocalCache(`accounts:${username}`, account); } } } catch (e) {}
         applyShop(shop, sub, account);
         // Version réellement confirmée par le serveur (pas juste une tentative
         // hors-ligne) : c'est la nouvelle base de référence pour les prochaines fusions.
@@ -8071,7 +8232,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         setLoading(false);
       }
     })();
-  }, [shopKey, subKey, shopSyncBaseKey, username, isDemo, applyShop]);
+  }, [shopKey, subKey, shopSyncBaseKey, username, isDemo, applyShop, isSecondaryShop]);
   const saveAll = (overrides) => {
     // Un ou plusieurs champs de réglages ont été explicitement modifiés : on
     // horodate le bloc de réglages, pour que la fusion multi-appareils sache
@@ -9668,6 +9829,77 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <Lock size={14} />
                 {appLockBiometricBusy ? t(lang, "wait") : t(lang, "biometricUnlockBtn")}
               </button>
+            )}
+            <button onClick={openForgotPin} className="text-xs font-semibold mt-3" style={{ color: T.muted, textDecoration: "underline" }}>
+              {t(lang, "forgotPinLink")}
+            </button>
+          </div>
+        </div>
+      )}
+      {showForgotPin && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+          <div className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card, color: T.text }}>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-bold text-sm">{t(lang, "forgotPinTitle")}</h3>
+              <button onClick={() => setShowForgotPin(false)}><X size={18} /></button>
+            </div>
+            {forgotPinStep === "start" && (
+              <>
+                <p className="text-xs mb-4" style={{ color: T.muted }}>
+                  {t(lang, "forgotPinStartDesc").replace("{email}", forgotPinEmail || "…")}
+                </p>
+                {forgotPinError && <p className="text-xs mb-2" style={{ color: CLAY }}>{forgotPinError}</p>}
+                <button onClick={sendForgotPinCode} disabled={forgotPinBusy} className="w-full py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: INDIGO, opacity: forgotPinBusy ? 0.6 : 1 }}>
+                  {forgotPinBusy ? t(lang, "wait") : t(lang, "sendCodeBtn")}
+                </button>
+              </>
+            )}
+            {forgotPinStep === "code" && (
+              <>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "emailCodeSentNotice").replace("{email}", forgotPinEmail)}</p>
+                <input
+                  value={forgotPinCodeInput}
+                  onChange={(e) => setForgotPinCodeInput(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                  inputMode="numeric"
+                  placeholder="••••••"
+                  className="w-full border rounded-xl px-3 py-2.5 text-center text-lg tracking-[0.4em] mb-2"
+                  style={{ background: T.input, color: T.text, borderColor: T.border }}
+                />
+                {forgotPinError && <p className="text-xs mb-2" style={{ color: CLAY }}>{forgotPinError}</p>}
+                <button onClick={verifyForgotPinCode} disabled={forgotPinBusy} className="w-full py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: INDIGO, opacity: forgotPinBusy ? 0.6 : 1 }}>
+                  {forgotPinBusy ? t(lang, "wait") : t(lang, "verifyCodeBtn")}
+                </button>
+                <button onClick={sendForgotPinCode} disabled={forgotPinBusy} className="w-full text-xs font-semibold mt-2.5" style={{ color: T.muted }}>
+                  {t(lang, "resendCodeBtn")}
+                </button>
+              </>
+            )}
+            {forgotPinStep === "newpin" && (
+              <>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "setNouveauCodePin")}</p>
+                <input
+                  value={forgotPinNewPin}
+                  onChange={(e) => setForgotPinNewPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  type="password"
+                  inputMode="numeric"
+                  placeholder={t(lang, "setNouveauCodePin")}
+                  className="w-full border rounded-xl px-3 py-2.5 text-center text-lg tracking-[0.4em] mb-2"
+                  style={{ background: T.input, color: T.text, borderColor: T.border }}
+                />
+                <input
+                  value={forgotPinConfirmPin}
+                  onChange={(e) => setForgotPinConfirmPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  type="password"
+                  inputMode="numeric"
+                  placeholder={t(lang, "setConfirmerLeCodePin")}
+                  className="w-full border rounded-xl px-3 py-2.5 text-center text-lg tracking-[0.4em] mb-2"
+                  style={{ background: T.input, color: T.text, borderColor: T.border }}
+                />
+                {forgotPinError && <p className="text-xs mb-2" style={{ color: CLAY }}>{forgotPinError}</p>}
+                <button onClick={submitForgotPinNewPin} disabled={forgotPinBusy} className="w-full py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: INDIGO, opacity: forgotPinBusy ? 0.6 : 1 }}>
+                  {forgotPinBusy ? t(lang, "wait") : t(lang, "updatePin")}
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -11320,6 +11552,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 {biometricUnlockBusy ? t(lang, "wait") : t(lang, "biometricUnlockBtn")}
               </button>
             )}
+            <button onClick={openForgotPin} className="text-xs font-semibold mt-3" style={{ color: T.muted, textDecoration: "underline" }}>
+              {t(lang, "forgotPinLink")}
+            </button>
           </div>
         </div>
       )}
@@ -12204,6 +12439,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   ))}
                   {lockPinMsg && <p style={{ color: lockPinMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11 }}>{lockPinMsg}</p>}
                   <button onClick={changeLockPin} style={{ background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", borderRadius: 12, padding: 12, fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "updatePin")}</button>
+                  <button onClick={openForgotPin} style={{ background: "none", border: "none", color: "#5f6b7a", fontSize: 11.5, textDecoration: "underline", cursor: "pointer", padding: 0 }}>{t(lang, "forgotPinLink")}</button>
                 </div>
               )}
               {settingsField === "darkmode" && (
