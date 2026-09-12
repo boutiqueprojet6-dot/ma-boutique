@@ -113,7 +113,11 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
-    detectSessionInUrl: true,
+    // Sur le web, Supabase doit lire l'URL au retour de Google (redirection classique).
+    // Dans l'app Capacitor, ce serait un doublon avec exchangeCodeForSession (appelé
+    // manuellement depuis l'écouteur de lien profond) — le code ne pouvant servir qu'une
+    // fois, les deux tentatives en parallèle provoquent l'erreur "invalid flow state".
+    detectSessionInUrl: !isCapacitorApp,
     flowType: "pkce",
     ...(isCapacitorApp ? { storage: capacitorAuthStorage } : {}),
   },
