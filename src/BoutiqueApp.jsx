@@ -13009,25 +13009,16 @@ function BoutiqueAppInner() {
   // la session courante quand l'utilisateur arrive via ce lien, avant même toute connexion.
   const [passwordRecoveryMode, setPasswordRecoveryMode] = useState(false);
   useEffect(() => {
-    const { data: listener } = supabase.auth.onAuthStateChange((event) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "PASSWORD_RECOVERY") setPasswordRecoveryMode(true);
+      // DIAGNOSTIC TEMPORAIRE — à retirer une fois le bug de déconnexion compris.
+      // Affiche l'événement exact envoyé par Supabase, pour savoir précisément ce qui
+      // se passe au moment où la session se perd (ou non).
+      if (typeof window !== "undefined" && window.Capacitor) {
+        alert("Auth event: " + event + " | session: " + (session ? "présente" : "absente"));
+      }
     });
     return () => listener.subscription.unsubscribe();
-  }, []);
-  // Dans l'app Capacitor (jamais sur le web), Supabase ne rafraîchit pas automatiquement
-  // le jeton de connexion quand l'app est en arrière-plan — sans ça, l'utilisateur est
-  // renvoyé à l'écran de connexion après avoir rouvert l'app, même s'il s'était déjà connecté.
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.Capacitor) return;
-    let removeListener = null;
-    supabase.auth.startAutoRefresh();
-    import("@capacitor/app").then(({ App: CapacitorApp }) => {
-      CapacitorApp.addListener("appStateChange", ({ isActive }) => {
-        if (isActive) supabase.auth.startAutoRefresh();
-        else supabase.auth.stopAutoRefresh();
-      }).then((handle) => { removeListener = handle; });
-    });
-    return () => { if (removeListener) removeListener.remove(); };
   }, []);
   // Détecte une connexion réussie via un moyen qui recharge la page — Google (OAuth)
   // ou le bouton "Sign in" reçu par e-mail (lien magique) — pour un utilisateur qui n'a
