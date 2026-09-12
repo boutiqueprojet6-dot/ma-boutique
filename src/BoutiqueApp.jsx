@@ -13040,12 +13040,21 @@ function BoutiqueAppInner() {
     let removeListener = null;
     import("@capacitor/app").then(({ App: CapacitorApp }) => {
       CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
-        if (!url || !url.startsWith("com.shopnify.app://login-callback")) return;
+        // DIAGNOSTIC TEMPORAIRE
+        alert("appUrlOpen reçu -> " + url);
+        if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
+          alert("URL ignorée : ne correspond pas au préfixe attendu");
+          return;
+        }
         try {
-          await supabase.auth.exchangeCodeForSession(url);
+          const { data, error } = await supabase.auth.exchangeCodeForSession(url);
+          if (error) {
+            alert("exchangeCodeForSession ERREUR : " + error.message);
+          } else {
+            alert("exchangeCodeForSession OK -> session " + (data && data.session ? "présente" : "absente"));
+          }
         } catch (e) {
-          // Rien à faire de spécial ici : si l'échange échoue, l'utilisateur reste
-          // simplement sur l'écran de connexion et peut réessayer.
+          alert("exchangeCodeForSession EXCEPTION : " + (e && e.message ? e.message : e));
         }
         const { Browser } = await import("@capacitor/browser");
         try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
