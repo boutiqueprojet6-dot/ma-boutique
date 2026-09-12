@@ -135,11 +135,14 @@ const firebaseConfig = {
 // Certificats Web push. Nécessaire pour que getToken() fonctionne sur le web.
 const FIREBASE_VAPID_KEY = "BMO3y7vQYcexHLN6EXAiS0y3igU6IWww0GWfqRom8xq-yO_n4WfukJrcGVd02VMqQPQgMoc1taPCtALPMoUcWD4";
 const firebaseApp = initializeApp(firebaseConfig);
-// getMessaging() échoue dans certains environnements (SSR, navigateurs sans support) — on
-// l'enveloppe pour que l'app continue de fonctionner même si les notifications ne sont pas
-// disponibles sur l'appareil de l'utilisateur.
+// getMessaging() échoue dans certains environnements (SSR, navigateurs sans support, app
+// Capacitor) — on l'enveloppe et on l'évite complètement dans l'app native, où les
+// notifications push web ne fonctionnent pas de toute façon.
+const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
 let firebaseMessaging = null;
-try { firebaseMessaging = getMessaging(firebaseApp); } catch (e) { /* notifications indisponibles ici */ }
+if (!isCapacitorApp) {
+  try { firebaseMessaging = getMessaging(firebaseApp); } catch (e) { /* notifications indisponibles ici */ }
+}
 const INDIGO = "#1B3A5C";
 const OCHRE = "#D4A017";
 const CLAY = "#B8562F";
