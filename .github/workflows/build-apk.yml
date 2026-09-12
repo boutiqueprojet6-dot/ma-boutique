@@ -30,6 +30,26 @@ jobs:
       - name: Add Android platform
         run: npx cap add android
 
+      - name: Configure deep link for Google OAuth
+        run: |
+          python3 - << 'EOF'
+          path = "android/app/src/main/AndroidManifest.xml"
+          with open(path, "r", encoding="utf-8") as f:
+              content = f.read()
+          new_intent_filter = """
+                  <intent-filter>
+                      <action android:name="android.intent.action.VIEW" />
+                      <category android:name="android.intent.category.DEFAULT" />
+                      <category android:name="android.intent.category.BROWSABLE" />
+                      <data android:scheme="com.shopnify.app" android:host="login-callback" />
+                  </intent-filter>
+          """
+          content = content.replace("</intent-filter>", "</intent-filter>" + new_intent_filter, 1)
+          with open(path, "w", encoding="utf-8") as f:
+              f.write(content)
+          print("Deep link ajouté avec succès")
+          EOF
+
       - name: Sync Capacitor
         run: npx cap sync android
 
