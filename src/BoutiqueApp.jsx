@@ -169,7 +169,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 // getMessaging() échoue dans certains environnements (SSR, navigateurs sans support, app
 // Capacitor) — on l'enveloppe et on l'évite complètement dans l'app native, où les
 // notifications push web ne fonctionnent pas de toute façon.
-const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+// (isCapacitorApp est déjà déclaré plus haut dans ce fichier, réutilisé ici.)
 let firebaseMessaging = null;
 if (!isCapacitorApp) {
   try { firebaseMessaging = getMessaging(firebaseApp); } catch (e) { /* notifications indisponibles ici */ }
