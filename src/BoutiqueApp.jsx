@@ -91,43 +91,21 @@ import { createClient } from "@supabase/supabase-js";
 // on utilise donc le stockage natif (@capacitor/preferences), bien plus fiable, pour
 // que la session de connexion survive vraiment à une mise en arrière-plan.
 const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
-if (typeof window !== "undefined") {
-  // DIAGNOSTIC TEMPORAIRE — vérifie si Capacitor est détecté au chargement du module.
-  alert("window.Capacitor existe ? " + (!!window.Capacitor) + " | isCapacitorApp = " + isCapacitorApp);
-}
 let capacitorAuthStorage;
 if (isCapacitorApp) {
   capacitorAuthStorage = {
     getItem: async (key) => {
-      try {
-        const { Preferences } = await import("@capacitor/preferences");
-        const { value } = await Preferences.get({ key });
-        // DIAGNOSTIC TEMPORAIRE
-        alert("Storage getItem(" + key + ") -> " + (value ? "trouvé (" + value.length + " car.)" : "RIEN"));
-        return value;
-      } catch (e) {
-        alert("Storage getItem ERREUR : " + (e && e.message ? e.message : e));
-        return null;
-      }
+      const { Preferences } = await import("@capacitor/preferences");
+      const { value } = await Preferences.get({ key });
+      return value;
     },
     setItem: async (key, value) => {
-      try {
-        const { Preferences } = await import("@capacitor/preferences");
-        await Preferences.set({ key, value });
-        // DIAGNOSTIC TEMPORAIRE
-        alert("Storage setItem(" + key + ") -> écrit (" + value.length + " car.)");
-      } catch (e) {
-        alert("Storage setItem ERREUR : " + (e && e.message ? e.message : e));
-      }
+      const { Preferences } = await import("@capacitor/preferences");
+      await Preferences.set({ key, value });
     },
     removeItem: async (key) => {
-      try {
-        const { Preferences } = await import("@capacitor/preferences");
-        await Preferences.remove({ key });
-        alert("Storage removeItem(" + key + ")");
-      } catch (e) {
-        alert("Storage removeItem ERREUR : " + (e && e.message ? e.message : e));
-      }
+      const { Preferences } = await import("@capacitor/preferences");
+      await Preferences.remove({ key });
     },
   };
 }
@@ -136,6 +114,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true,
+    flowType: "pkce",
     ...(isCapacitorApp ? { storage: capacitorAuthStorage } : {}),
   },
 });
@@ -5704,13 +5683,33 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     setGoogleLoginBusy(true);
     setError("");
     try {
-      const { error: oauthError } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: { redirectTo: window.location.origin },
-      });
-      if (oauthError) throw oauthError;
-      // La redirection vers Google se déclenche automatiquement ; l'utilisateur
-      // revient ensuite sur l'app déjà connecté, sans autre action ici.
+      const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+      if (isCapacitorApp) {
+        // Dans l'app native, la connexion Google DOIT s'ouvrir dans un vrai navigateur
+        // système (pas dans le WebView de l'app) — sinon Google la bloque ou, pire, la
+        // session créée reste coincée dans ce navigateur externe et ne revient jamais
+        // dans l'app. On récupère juste l'URL de connexion sans y naviguer nous-mêmes
+        // (skipBrowserRedirect), on l'ouvre nous-mêmes via le plugin Browser, et on capte
+        // le retour via un lien profond (voir l'écouteur "appUrlOpen" plus bas dans le code).
+        const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: "com.shopnify.app://login-callback",
+            skipBrowserRedirect: true,
+          },
+        });
+        if (oauthError) throw oauthError;
+        const { Browser } = await import("@capacitor/browser");
+        await Browser.open({ url: data.url });
+      } else {
+        const { error: oauthError } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: { redirectTo: window.location.origin },
+        });
+        if (oauthError) throw oauthError;
+        // La redirection vers Google se déclenche automatiquement ; l'utilisateur
+        // revient ensuite sur l'app déjà connecté, sans autre action ici.
+      }
     } catch (err) {
       setError(t(lang, "googleLoginError"));
       setGoogleLoginBusy(false);
@@ -13026,19 +13025,36 @@ function BoutiqueAppInner() {
   const [lang, setLang] = useState("fr");
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
   const [showSplash, setShowSplash] = useState(true);
+  // Reçoit le retour de la connexion Google dans l'app native : Google/Supabase renvoient
+  // vers "com.shopnify.app://login-callback?code=..." — Android déclenche alors cet
+  // événement avec cette URL. On échange ce code contre une vraie session Supabase, puis
+  // on referme le navigateur système ouvert pour la connexion. Une fois la session posée,
+  // l'écouteur onAuthStateChange plus bas (SIGNED_IN) prend le relais comme d'habitude.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    let removeListener = null;
+    import("@capacitor/app").then(({ App: CapacitorApp }) => {
+      CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
+        if (!url || !url.startsWith("com.shopnify.app://login-callback")) return;
+        try {
+          await supabase.auth.exchangeCodeForSession(url);
+        } catch (e) {
+          // Rien à faire de spécial ici : si l'échange échoue, l'utilisateur reste
+          // simplement sur l'écran de connexion et peut réessayer.
+        }
+        const { Browser } = await import("@capacitor/browser");
+        try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
+      }).then((handle) => { removeListener = handle; });
+    });
+    return () => { if (removeListener) removeListener.remove(); };
+  }, []);
   // Détecte le retour depuis le lien de réinitialisation de mot de passe envoyé par email
   // (supabase.auth.resetPasswordForEmail). Supabase émet l'événement PASSWORD_RECOVERY sur
   // la session courante quand l'utilisateur arrive via ce lien, avant même toute connexion.
   const [passwordRecoveryMode, setPasswordRecoveryMode] = useState(false);
   useEffect(() => {
-    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event) => {
       if (event === "PASSWORD_RECOVERY") setPasswordRecoveryMode(true);
-      // DIAGNOSTIC TEMPORAIRE — à retirer une fois le bug de déconnexion compris.
-      // Affiche l'événement exact envoyé par Supabase, pour savoir précisément ce qui
-      // se passe au moment où la session se perd (ou non).
-      if (typeof window !== "undefined" && window.Capacitor) {
-        alert("Auth event: " + event + " | session: " + (session ? "présente" : "absente"));
-      }
     });
     return () => listener.subscription.unsubscribe();
   }, []);
