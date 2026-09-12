@@ -85,7 +85,38 @@ const SUPABASE_ANON_KEY = "sb_publishable_3CO8RH3_6TZY6Bjv3AthLA_6Nh_yPf-";
 // Client Supabase, prêt à être importé partout dans l'app via `import { supabase } from "..."`.
 // Nécessite le package "@supabase/supabase-js" (npm install @supabase/supabase-js) dans ton projet.
 import { createClient } from "@supabase/supabase-js";
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Sur le web, on garde le comportement par défaut de Supabase (localStorage du navigateur).
+// Dans l'app Capacitor, le localStorage du WebView peut être effacé par le système
+// (gestion agressive de la batterie sur certains téléphones Android) sans prévenir —
+// on utilise donc le stockage natif (@capacitor/preferences), bien plus fiable, pour
+// que la session de connexion survive vraiment à une mise en arrière-plan.
+const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+let capacitorAuthStorage;
+if (isCapacitorApp) {
+  capacitorAuthStorage = {
+    getItem: async (key) => {
+      const { Preferences } = await import("@capacitor/preferences");
+      const { value } = await Preferences.get({ key });
+      return value;
+    },
+    setItem: async (key, value) => {
+      const { Preferences } = await import("@capacitor/preferences");
+      await Preferences.set({ key, value });
+    },
+    removeItem: async (key) => {
+      const { Preferences } = await import("@capacitor/preferences");
+      await Preferences.remove({ key });
+    },
+  };
+}
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    ...(isCapacitorApp ? { storage: capacitorAuthStorage } : {}),
+  },
+});
 // ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
 // Sur un vrai site déployé (Vercel), window.storage n'existe pas. Cet objet reproduit
 // exactement la même interface (get/set/list) mais persiste réellement les données dans
