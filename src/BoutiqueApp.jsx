@@ -95,17 +95,35 @@ let capacitorAuthStorage;
 if (isCapacitorApp) {
   capacitorAuthStorage = {
     getItem: async (key) => {
-      const { Preferences } = await import("@capacitor/preferences");
-      const { value } = await Preferences.get({ key });
-      return value;
+      try {
+        const { Preferences } = await import("@capacitor/preferences");
+        const { value } = await Preferences.get({ key });
+        // DIAGNOSTIC TEMPORAIRE
+        alert("Storage getItem(" + key + ") -> " + (value ? "trouvé (" + value.length + " car.)" : "RIEN"));
+        return value;
+      } catch (e) {
+        alert("Storage getItem ERREUR : " + (e && e.message ? e.message : e));
+        return null;
+      }
     },
     setItem: async (key, value) => {
-      const { Preferences } = await import("@capacitor/preferences");
-      await Preferences.set({ key, value });
+      try {
+        const { Preferences } = await import("@capacitor/preferences");
+        await Preferences.set({ key, value });
+        // DIAGNOSTIC TEMPORAIRE
+        alert("Storage setItem(" + key + ") -> écrit (" + value.length + " car.)");
+      } catch (e) {
+        alert("Storage setItem ERREUR : " + (e && e.message ? e.message : e));
+      }
     },
     removeItem: async (key) => {
-      const { Preferences } = await import("@capacitor/preferences");
-      await Preferences.remove({ key });
+      try {
+        const { Preferences } = await import("@capacitor/preferences");
+        await Preferences.remove({ key });
+        alert("Storage removeItem(" + key + ")");
+      } catch (e) {
+        alert("Storage removeItem ERREUR : " + (e && e.message ? e.message : e));
+      }
     },
   };
 }
