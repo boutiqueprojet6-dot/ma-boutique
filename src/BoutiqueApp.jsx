@@ -91,6 +91,10 @@ import { createClient } from "@supabase/supabase-js";
 // on utilise donc le stockage natif (@capacitor/preferences), bien plus fiable, pour
 // que la session de connexion survive vraiment à une mise en arrière-plan.
 const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+if (typeof window !== "undefined") {
+  // DIAGNOSTIC TEMPORAIRE — vérifie si Capacitor est détecté au chargement du module.
+  alert("window.Capacitor existe ? " + (!!window.Capacitor) + " | isCapacitorApp = " + isCapacitorApp);
+}
 let capacitorAuthStorage;
 if (isCapacitorApp) {
   capacitorAuthStorage = {
