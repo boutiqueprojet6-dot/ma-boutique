@@ -5691,6 +5691,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // dans l'app. On récupère juste l'URL de connexion sans y naviguer nous-mêmes
         // (skipBrowserRedirect), on l'ouvre nous-mêmes via le plugin Browser, et on capte
         // le retour via un lien profond (voir l'écouteur "appUrlOpen" plus bas dans le code).
+        alert("Étape 1 : demande de l'URL Google à Supabase...");
         const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
@@ -5699,8 +5700,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           },
         });
         if (oauthError) throw oauthError;
+        alert("Étape 2 : URL reçue -> " + (data && data.url ? data.url.slice(0, 80) + "..." : "AUCUNE URL"));
         const { Browser } = await import("@capacitor/browser");
+        alert("Étape 3 : plugin Browser chargé, ouverture en cours...");
         await Browser.open({ url: data.url });
+        alert("Étape 4 : Browser.open() terminé sans erreur");
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -5711,6 +5715,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // revient ensuite sur l'app déjà connecté, sans autre action ici.
       }
     } catch (err) {
+      alert("ERREUR loginWithGoogle : " + (err && err.message ? err.message : String(err)));
       setError(t(lang, "googleLoginError"));
       setGoogleLoginBusy(false);
     }
