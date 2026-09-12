@@ -5695,7 +5695,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // dans l'app. On récupère juste l'URL de connexion sans y naviguer nous-mêmes
         // (skipBrowserRedirect), on l'ouvre nous-mêmes via le plugin Browser, et on capte
         // le retour via un lien profond (voir l'écouteur "appUrlOpen" plus bas dans le code).
-        alert("Étape 1 : demande de l'URL Google à Supabase...");
         const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
@@ -5704,11 +5703,8 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           },
         });
         if (oauthError) throw oauthError;
-        alert("Étape 2 : URL reçue -> " + (data && data.url ? data.url.slice(0, 80) + "..." : "AUCUNE URL"));
         const { Browser } = await import("@capacitor/browser");
-        alert("Étape 3 : plugin Browser chargé, ouverture en cours...");
         await Browser.open({ url: data.url });
-        alert("Étape 4 : Browser.open() terminé sans erreur");
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -5719,7 +5715,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // revient ensuite sur l'app déjà connecté, sans autre action ici.
       }
     } catch (err) {
-      alert("ERREUR loginWithGoogle : " + (err && err.message ? err.message : String(err)));
       setError(t(lang, "googleLoginError"));
       setGoogleLoginBusy(false);
     }
@@ -13044,21 +13039,12 @@ function BoutiqueAppInner() {
     let removeListener = null;
     import("@capacitor/app").then(({ App: CapacitorApp }) => {
       CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
-        // DIAGNOSTIC TEMPORAIRE
-        alert("appUrlOpen reçu -> " + url);
-        if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
-          alert("URL ignorée : ne correspond pas au préfixe attendu");
-          return;
-        }
+        if (!url || !url.startsWith("com.shopnify.app://login-callback")) return;
         try {
-          const { data, error } = await supabase.auth.exchangeCodeForSession(url);
-          if (error) {
-            alert("exchangeCodeForSession ERREUR : " + error.message);
-          } else {
-            alert("exchangeCodeForSession OK -> session " + (data && data.session ? "présente" : "absente"));
-          }
+          await supabase.auth.exchangeCodeForSession(url);
         } catch (e) {
-          alert("exchangeCodeForSession EXCEPTION : " + (e && e.message ? e.message : e));
+          // Rien à faire de spécial ici : si l'échange échoue, l'utilisateur reste
+          // simplement sur l'écran de connexion et peut réessayer.
         }
         const { Browser } = await import("@capacitor/browser");
         try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
@@ -13100,16 +13086,27 @@ function BoutiqueAppInner() {
       const isPageReloadLogin = provider === "google" || provider === "email";
       if (!isPageReloadLogin) return;
       setCheckingGoogleOnboarding(true);
-      const { data: shopRow } = await supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle();
-      if (!shopRow) {
-        setGoogleSessionUser(sessionData.user);
-        setNeedsGoogleOnboarding(true);
-      } else {
-        // Compte déjà existant : on connecte directement, sans repasser
-        // par l'onboarding ni par l'écran de connexion classique.
-        setSession({ type: "shop", username: sessionData.user.email, shopName: shopRow.shop_name });
+      try {
+        // Filet de sécurité : si la requête réseau reste bloquée (ex: juste après un
+        // redémarrage à froid, le temps que la connexion se rétablisse), on abandonne
+        // au bout de 8 secondes plutôt que de laisser l'écran blanc affiché indéfiniment.
+        const shopRowPromise = supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle();
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Délai dépassé")), 8000));
+        const { data: shopRow } = await Promise.race([shopRowPromise, timeoutPromise]);
+        if (!shopRow) {
+          setGoogleSessionUser(sessionData.user);
+          setNeedsGoogleOnboarding(true);
+        } else {
+          // Compte déjà existant : on connecte directement, sans repasser
+          // par l'onboarding ni par l'écran de connexion classique.
+          setSession({ type: "shop", username: sessionData.user.email, shopName: shopRow.shop_name });
+        }
+      } catch (e) {
+        // En cas d'échec (réseau, délai dépassé...), on n'affiche plus rien de bloqué :
+        // l'utilisateur retombe simplement sur l'écran de connexion et peut réessayer.
+      } finally {
+        setCheckingGoogleOnboarding(false);
       }
-      setCheckingGoogleOnboarding(false);
     });
     return () => listener.subscription.unsubscribe();
   }, []);
