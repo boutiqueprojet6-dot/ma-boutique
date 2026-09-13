@@ -71,6 +71,20 @@ import { Scanner } from "@yudiel/react-qr-scanner";
 // "jspdf" (npm install jspdf) — inclut aussi la génération de graphiques simples en Canvas,
 // converti en image pour être inséré dans le PDF (jsPDF ne dessine pas de graphiques natifs).
 import jsPDF from "jspdf";
+// ---- Diagnostic temporaire : chronomètre de démarrage ----
+// Mesure le temps écoulé depuis le tout début du chargement de ce fichier (le plus lourd
+// de l'app) jusqu'à des étapes clés du démarrage à froid. Les résultats s'affichent en une
+// seule popup une fois l'accueil affiché, pour comprendre précisément où passent
+// les ~10 secondes observées au redémarrage — sans configuration de logs à distance.
+if (typeof window !== "undefined" && !window.__bootStart) {
+  window.__bootStart = performance.now();
+  window.__bootTimings = [];
+}
+function __mark(label) {
+  if (typeof window !== "undefined" && window.__bootStart) {
+    window.__bootTimings.push(label + " : " + Math.round(performance.now() - window.__bootStart) + "ms");
+  }
+}
 // ---- Configuration Supabase (backend réel) ----
 // Colle ici l'URL de ton projet et ta clé publique "anon" (Settings → API dans ton dashboard Supabase).
 // NE JAMAIS mettre la clé "service_role" (secrète) ici : seule la clé "anon public" est faite pour être
@@ -5106,6 +5120,16 @@ function ZigzagStrip() {
 // ===== Mode hors-ligne : cache local + file de synchronisation =====
 const OFFLINE_CACHE_PREFIX = "offline-cache:";
 const OFFLINE_QUEUE_KEY = "offline-sync-queue";
+// Miroir en arrière-plan vers le stockage natif (@capacitor/preferences), bien plus
+// fiable que le localStorage du WebView dans l'app Android — voir main.jsx, qui
+// recopie ce miroir dans localStorage au tout démarrage de l'app pour que le cache
+// soit disponible instantanément, sans attendre le réseau.
+function mirrorToNativeStorage(key, rawValue) {
+  if (typeof window === "undefined" || !window.Capacitor) return;
+  import("@capacitor/preferences").then(({ Preferences }) => {
+    Preferences.set({ key, value: rawValue }).catch(() => {});
+  });
+}
 function readLocalCache(key) {
   try {
     const raw = window.localStorage.getItem(OFFLINE_CACHE_PREFIX + key);
@@ -5117,7 +5141,12 @@ function readLocalCache(key) {
 // d'échouer silencieusement, ce qui pourrait faire perdre des changements
 // hors ligne — par ex. beaucoup de photos produits — sans aucun avertissement).
 function writeLocalCache(key, value) {
-  try { window.localStorage.setItem(OFFLINE_CACHE_PREFIX + key, JSON.stringify(value)); return true; }
+  try {
+    const raw = JSON.stringify(value);
+    window.localStorage.setItem(OFFLINE_CACHE_PREFIX + key, raw);
+    mirrorToNativeStorage(OFFLINE_CACHE_PREFIX + key, raw);
+    return true;
+  }
   catch (e) { return false; }
 }
 function readQueue() {
@@ -5127,7 +5156,11 @@ function readQueue() {
   } catch (e) { return []; }
 }
 function writeQueue(queue) {
-  try { window.localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue)); }
+  try {
+    const raw = JSON.stringify(queue);
+    window.localStorage.setItem(OFFLINE_QUEUE_KEY, raw);
+    mirrorToNativeStorage(OFFLINE_QUEUE_KEY, raw);
+  }
   catch (e) {}
 }
 // Empile une écriture en attente. Si une écriture pour la même clé existe déjà,
@@ -8192,12 +8225,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return;
     }
     (async () => {
+      __mark("ShopApp : début du chargement des données");
       const emptyShop = { products: [], sales: [], debts: [], expenses: [], cashFund: 0, draftCarts: [] };
       // 1) Démarrage instantané depuis le cache local, pour que l'app soit
       //    immédiatement utilisable même sans réseau (mode hors-ligne complet).
       const cachedShop = readLocalCache(shopKey);
       const cachedSub = readLocalCache(subKey);
       const cachedAccount = readLocalCache(`accounts:${username}`);
+      __mark("ShopApp : cache local lu -> " + (cachedShop ? "trouvé (" + (cachedShop.products || []).length + " produits)" : "VIDE"));
       if (cachedShop) {
         applyShop(cachedShop, cachedSub, cachedAccount);
         // On n'initialise la base QUE si elle n'existe pas encore (tout premier
@@ -8206,12 +8241,18 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // pas encore synchronisées, et on perdrait leur trace au moment de fusionner.
         if (!readLocalCache(shopSyncBaseKey)) writeLocalCache(shopSyncBaseKey, cachedShop);
         setLoading(false);
+        __mark("ShopApp : setLoading(false) depuis le cache -> accueil affiché");
       }
       // 2) Rafraîchissement depuis le serveur si une connexion est disponible,
       //    pour récupérer d'éventuelles modifications faites depuis un autre
       //    appareil. On ne bloque jamais l'interface pour cette étape.
       if (!navigator.onLine) {
         if (!cachedShop) { applyShop(emptyShop, { expiresAt: null }, null); if (!readLocalCache(shopSyncBaseKey)) writeLocalCache(shopSyncBaseKey, emptyShop); setLoading(false); }
+        __mark("ShopApp : hors-ligne, arrêt anticipé");
+        if (typeof window !== "undefined" && window.__bootTimings && !window.__bootSummaryShown) {
+          window.__bootSummaryShown = true;
+          alert("Chronomètre de démarrage :\n\n" + window.__bootTimings.join("\n"));
+        }
         return;
       }
       try {
@@ -8225,9 +8266,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // qui restent pour l'instant sur window.storage uniquement.
         if (!isSecondaryShop) {
           try {
+            __mark("ShopApp : avant getUser() réseau");
             const { data: userData } = await supabase.auth.getUser();
+            __mark("ShopApp : après getUser() réseau");
             if (userData && userData.user) {
+              __mark("ShopApp : avant requête shop_data réseau");
               const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
+              __mark("ShopApp : après requête shop_data réseau");
               if (row && row.data && Array.isArray(row.data.products)) {
                 const remoteShop = row.data;
                 const hasPending = readQueue().some((item) => item.key === shopKey);
@@ -8289,6 +8334,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         if (!cachedShop) setError("Chargement impossible. Vérifie ta connexion.");
       } finally {
         setLoading(false);
+        __mark("ShopApp : setLoading(false) final (après vérification réseau)");
+        // DIAGNOSTIC TEMPORAIRE — résumé complet en une seule popup, affiché une
+        // seule fois par démarrage de l'app, pour voir précisément où passe le temps.
+        if (typeof window !== "undefined" && window.__bootTimings && !window.__bootSummaryShown) {
+          window.__bootSummaryShown = true;
+          alert("Chronomètre de démarrage :\n\n" + window.__bootTimings.join("\n"));
+        }
       }
     })();
   }, [shopKey, subKey, shopSyncBaseKey, username, isDemo, applyShop, isSecondaryShop]);
@@ -13029,6 +13081,36 @@ function BoutiqueAppInner() {
   const [lang, setLang] = useState("fr");
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
   const [showSplash, setShowSplash] = useState(true);
+  // Masque l'écran de démarrage natif Android (image fixe, configuré avec
+  // launchAutoHide=false dans capacitor.config.json) dès qu'on sait quoi afficher —
+  // que ce soit l'accueil ou l'écran de connexion. Tant qu'il reste affiché, l'utilisateur
+  // voit une image franche à la place d'un éventuel blanc/chargement JS en dessous.
+  // Un filet de sécurité le masque de toute façon au bout de 4 secondes, pour ne
+  // jamais rester bloqué dessus en cas d'imprévu.
+  const [appReady, setAppReady] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    const timer = setTimeout(() => setAppReady(true), 4000);
+    return () => clearTimeout(timer);
+  }, []);
+  useEffect(() => {
+    if (!appReady || typeof window === "undefined" || !window.Capacitor) return;
+    __mark("Masquage du splash natif");
+    import("@capacitor/splash-screen").then(({ SplashScreen }) => {
+      SplashScreen.hide().catch(() => {});
+    }).catch(() => {});
+  }, [appReady]);
+  // Sur une toute première installation, le premier appel au stockage natif
+  // (@capacitor/preferences) peut être un peu lent à s'initialiser — assez pour que la
+  // connexion Google échoue si elle est tentée avant que ce mécanisme soit prêt. On le
+  // "réchauffe" dès le lancement de l'app, en arrière-plan, pour que le premier vrai
+  // appel (au moment de la connexion) soit déjà rapide.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    import("@capacitor/preferences").then(({ Preferences }) => {
+      Preferences.get({ key: "_warmup" }).catch(() => {});
+    });
+  }, []);
   // Reçoit le retour de la connexion Google dans l'app native : Google/Supabase renvoient
   // vers "com.shopnify.app://login-callback?code=..." — Android déclenche alors cet
   // événement avec cette URL. On échange ce code contre une vraie session Supabase, puis
@@ -13072,6 +13154,9 @@ function BoutiqueAppInner() {
   const [googleSessionUser, setGoogleSessionUser] = useState(null);
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange(async (event, sessionData) => {
+      // Dès qu'on a une première réponse de Supabase (peu importe le résultat : connecté
+      // ou non), on sait quoi afficher — inutile de garder le splash natif plus longtemps.
+      setAppReady(true);
       // "SIGNED_IN" = connexion qui vient d'avoir lieu (Google, ou clic sur le lien "Sign in" reçu par e-mail).
       // "INITIAL_SESSION" = session déjà existante retrouvée par Supabase au chargement
       // de la page (ex: après le rechargement provoqué par l'invite "Ajouter à l'écran
@@ -13085,14 +13170,47 @@ function BoutiqueAppInner() {
       const provider = sessionData.user.app_metadata && sessionData.user.app_metadata.provider;
       const isPageReloadLogin = provider === "google" || provider === "email";
       if (!isPageReloadLogin) return;
+      const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+      const CACHE_KEY = "shopnify_last_shop_cache";
+      __mark("Auth event reçu (" + event + ")");
+      // Dans l'app native, au redémarrage (INITIAL_SESSION), on affiche IMMÉDIATEMENT
+      // l'accueil avec le dernier nom de boutique connu (mis en cache localement),
+      // sans attendre la moindre requête réseau — un client pressé n'a aucune attente
+      // perceptible. La vérification auprès de Supabase se fait ensuite en silence,
+      // en arrière-plan, juste pour garder le cache à jour pour la prochaine fois.
+      if (isCapacitorApp && event === "INITIAL_SESSION") {
+        try {
+          __mark("Avant lecture du cache local");
+          const { Preferences } = await import("@capacitor/preferences");
+          const { value } = await Preferences.get({ key: CACHE_KEY });
+          __mark("Après lecture du cache local (" + (value ? "trouvé" : "vide") + ")");
+          if (value) {
+            const cached = JSON.parse(value);
+            if (cached.ownerId === sessionData.user.id) {
+              setSession({ type: "shop", username: cached.username, shopName: cached.shopName });
+              __mark("setSession() appelé depuis le cache -> accueil affiché");
+              // Vérification silencieuse en arrière-plan, sans jamais bloquer l'affichage.
+              supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle()
+                .then(({ data: shopRow }) => {
+                  if (shopRow) {
+                    Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: sessionData.user.email, shopName: shopRow.shop_name }) }).catch(() => {});
+                  }
+                }).catch(() => {});
+              return;
+            }
+          }
+        } catch (e) { /* pas de cache exploitable, on continue avec la vérification normale */ }
+      }
       setCheckingGoogleOnboarding(true);
       try {
         // Filet de sécurité : si la requête réseau reste bloquée (ex: juste après un
         // redémarrage à froid, le temps que la connexion se rétablisse), on abandonne
         // au bout de 8 secondes plutôt que de laisser l'écran blanc affiché indéfiniment.
+        __mark("Avant requête shop_data (pas de cache utilisable)");
         const shopRowPromise = supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle();
         const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Délai dépassé")), 8000));
         const { data: shopRow } = await Promise.race([shopRowPromise, timeoutPromise]);
+        __mark("Après requête shop_data");
         if (!shopRow) {
           setGoogleSessionUser(sessionData.user);
           setNeedsGoogleOnboarding(true);
@@ -13100,8 +13218,14 @@ function BoutiqueAppInner() {
           // Compte déjà existant : on connecte directement, sans repasser
           // par l'onboarding ni par l'écran de connexion classique.
           setSession({ type: "shop", username: sessionData.user.email, shopName: shopRow.shop_name });
+          if (isCapacitorApp) {
+            import("@capacitor/preferences").then(({ Preferences }) => {
+              Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: sessionData.user.email, shopName: shopRow.shop_name }) }).catch(() => {});
+            });
+          }
         }
       } catch (e) {
+        __mark("Erreur/délai dépassé pendant la requête shop_data");
         // En cas d'échec (réseau, délai dépassé...), on n'affiche plus rien de bloqué :
         // l'utilisateur retombe simplement sur l'écran de connexion et peut réessayer.
       } finally {
@@ -13111,7 +13235,11 @@ function BoutiqueAppInner() {
     return () => listener.subscription.unsubscribe();
   }, []);
   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 2200);
+    __mark("Composant monté, splash affiché (timer fixe 2200ms démarré)");
+    const timer = setTimeout(() => {
+      __mark("Fin du timer fixe du splash (2200ms écoulés)");
+      setShowSplash(false);
+    }, 2200);
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {
@@ -13156,7 +13284,12 @@ function BoutiqueAppInner() {
     return <PasswordResetScreen lang={lang} onDone={() => { setPasswordRecoveryMode(false); setSession(null); }} />;
   }
   if (checkingGoogleOnboarding) {
-    return <div style={{ minHeight: "100vh", background: "#F6F7FB" }} />;
+    return (
+      <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 36, height: 36, borderRadius: "50%", border: "4px solid #E2E8F0", borderTopColor: "#1B3A5C", animation: "spin 0.8s linear infinite" }} />
+        <style>{"@keyframes spin { to { transform: rotate(360deg); } }"}</style>
+      </div>
+    );
   }
   if (!session) {
     return (
