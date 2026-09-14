@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { Preferences } from "@capacitor/preferences";
 import {
   LayoutDashboard,
   Package,
@@ -109,16 +110,13 @@ let capacitorAuthStorage;
 if (isCapacitorApp) {
   capacitorAuthStorage = {
     getItem: async (key) => {
-      const { Preferences } = await import("@capacitor/preferences");
       const { value } = await Preferences.get({ key });
       return value;
     },
     setItem: async (key, value) => {
-      const { Preferences } = await import("@capacitor/preferences");
       await Preferences.set({ key, value });
     },
     removeItem: async (key) => {
-      const { Preferences } = await import("@capacitor/preferences");
       await Preferences.remove({ key });
     },
   };
@@ -5135,9 +5133,24 @@ function mirrorToNativeStorage(key, rawValue) {
   const previous = nativeMirrorQueues[key] || Promise.resolve();
   nativeMirrorQueues[key] = previous
     .catch(() => {})
-    .then(() => import("@capacitor/preferences"))
-    .then(({ Preferences }) => Preferences.set({ key, value: rawValue }))
+    .then(() => Preferences.set({ key, value: rawValue }))
     .catch(() => {});
+}
+// Filet de sécurité supplémentaire : recopie IMMÉDIATEMENT tout le cache actuellement
+// dans localStorage (déjà à jour, car cette écriture-là est synchrone) vers le stockage
+// natif. Appelé quand l'app passe en arrière-plan, au cas où le miroir asynchrone d'une
+// écriture très récente n'aurait pas encore eu le temps de se terminer avant qu'Android
+// ne tue potentiellement le processus.
+function flushAllCacheToNativeStorage() {
+  if (typeof window === "undefined" || !window.Capacitor) return;
+  try {
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const k = window.localStorage.key(i);
+      if (k && (k.startsWith(OFFLINE_CACHE_PREFIX) || k === OFFLINE_QUEUE_KEY)) {
+        mirrorToNativeStorage(k, window.localStorage.getItem(k));
+      }
+    }
+  } catch (e) { /* pas grave, filet de sécurité "best effort" */ }
 }
 function readLocalCache(key) {
   try {
@@ -5330,14 +5343,21 @@ function mergeProducts(baseList, localList, remoteList) {
   const baseMap = new Map((baseList || []).map((p) => [p.id, p]));
   const localMap = new Map((localList || []).map((p) => [p.id, p]));
   const remoteMap = new Map((remoteList || []).map((p) => [p.id, p]));
-  const ids = new Set([...baseMap.keys(), ...localMap.keys(), ...remoteMap.keys()]);
+  const ids = new Set([...localMap.keys(), ...remoteMap.keys()]);
   const result = [];
   ids.forEach((id) => {
     const b = baseMap.get(id);
     const l = localMap.get(id);
     const r = remoteMap.get(id);
-    if (l && !r) { result.push(l); return; } // nouveau produit local, ou supprimé côté serveur sans y toucher
-    if (r && !l) { if (!b) result.push(r); return; } // b existe : suppression locale volontaire, respectée
+    // Produit créé en local, pas encore connu du serveur (ou supprimé côté serveur).
+    if (l && !r) { result.push(l); return; }
+    // Un produit qui existe côté serveur est TOUJOURS conservé, même absent du cache
+    // local — celui-ci peut être incomplet ou périmé (ex: juste après un redémarrage
+    // à froid de l'app, avant que le cache natif ait eu le temps de se synchroniser).
+    // Autrement dit : cette fusion ne supprime plus jamais un produit "à la place de
+    // l'utilisateur" sur la seule foi d'une absence locale ambiguë. Une vraie
+    // suppression se fait toujours en étant connecté, directement contre le serveur.
+    if (r && !l) { result.push(r); return; }
     if (!l || !r) return;
     const additive = (field) => {
       const baseVal = (b && typeof b[field] === "number") ? b[field] : (l[field] ?? r[field] ?? 0);
@@ -13116,9 +13136,23 @@ function BoutiqueAppInner() {
   // appel (au moment de la connexion) soit déjà rapide.
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
-    import("@capacitor/preferences").then(({ Preferences }) => {
-      Preferences.get({ key: "_warmup" }).catch(() => {});
+    Preferences.get({ key: "_warmup" }).catch(() => {});
+  }, []);
+  // Filet de sécurité (Action 3 du diagnostic) : quand l'app passe en arrière-plan,
+  // Android peut tuer le processus à tout moment sans prévenir. On force alors une
+  // resynchronisation immédiate de tout le cache vers le stockage natif, au cas où
+  // une écriture très récente (juste avant la mise en arrière-plan) n'aurait pas
+  // encore eu le temps de se terminer — c'est ce qui causait la disparition
+  // occasionnelle de produits ajoutés juste avant une fermeture rapide de l'app.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    let removeListener = null;
+    import("@capacitor/app").then(({ App: CapacitorApp }) => {
+      CapacitorApp.addListener("appStateChange", ({ isActive }) => {
+        if (!isActive) flushAllCacheToNativeStorage();
+      }).then((handle) => { removeListener = handle; });
     });
+    return () => { if (removeListener) removeListener.remove(); };
   }, []);
   // Reçoit le retour de la connexion Google dans l'app native : Google/Supabase renvoient
   // vers "com.shopnify.app://login-callback?code=..." — Android déclenche alors cet
@@ -13190,7 +13224,6 @@ function BoutiqueAppInner() {
       if (isCapacitorApp && event === "INITIAL_SESSION") {
         try {
           __mark("Avant lecture du cache local");
-          const { Preferences } = await import("@capacitor/preferences");
           const { value } = await Preferences.get({ key: CACHE_KEY });
           __mark("Après lecture du cache local (" + (value ? "trouvé" : "vide") + ")");
           if (value) {
@@ -13228,9 +13261,7 @@ function BoutiqueAppInner() {
           // par l'onboarding ni par l'écran de connexion classique.
           setSession({ type: "shop", username: sessionData.user.email, shopName: shopRow.shop_name });
           if (isCapacitorApp) {
-            import("@capacitor/preferences").then(({ Preferences }) => {
-              Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: sessionData.user.email, shopName: shopRow.shop_name }) }).catch(() => {});
-            });
+            Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: sessionData.user.email, shopName: shopRow.shop_name }) }).catch(() => {});
           }
         }
       } catch (e) {
