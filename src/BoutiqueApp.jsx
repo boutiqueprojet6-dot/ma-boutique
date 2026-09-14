@@ -5124,11 +5124,20 @@ const OFFLINE_QUEUE_KEY = "offline-sync-queue";
 // fiable que le localStorage du WebView dans l'app Android — voir main.jsx, qui
 // recopie ce miroir dans localStorage au tout démarrage de l'app pour que le cache
 // soit disponible instantanément, sans attendre le réseau.
+// IMPORTANT : plusieurs écritures rapprochées sur la même clé peuvent se terminer
+// dans le désordre (le plugin natif est asynchrone) — sans précaution, une version
+// plus ANCIENNE pourrait finir d'écrire APRÈS une plus récente et donc "gagner" par
+// erreur, ce qui ferait réapparaître d'anciennes données au prochain démarrage. On
+// maintient donc une file d'attente par clé pour forcer l'ordre d'écriture.
+const nativeMirrorQueues = {};
 function mirrorToNativeStorage(key, rawValue) {
   if (typeof window === "undefined" || !window.Capacitor) return;
-  import("@capacitor/preferences").then(({ Preferences }) => {
-    Preferences.set({ key, value: rawValue }).catch(() => {});
-  });
+  const previous = nativeMirrorQueues[key] || Promise.resolve();
+  nativeMirrorQueues[key] = previous
+    .catch(() => {})
+    .then(() => import("@capacitor/preferences"))
+    .then(({ Preferences }) => Preferences.set({ key, value: rawValue }))
+    .catch(() => {});
 }
 function readLocalCache(key) {
   try {
