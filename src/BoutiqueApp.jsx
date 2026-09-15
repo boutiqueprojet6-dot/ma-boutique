@@ -5751,22 +5751,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     try {
       const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
       if (isCapacitorApp) {
-        // Dans l'app native, la connexion Google DOIT s'ouvrir dans un vrai navigateur
-        // système (pas dans le WebView de l'app) — sinon Google la bloque ou, pire, la
-        // session créée reste coincée dans ce navigateur externe et ne revient jamais
-        // dans l'app. On récupère juste l'URL de connexion sans y naviguer nous-mêmes
-        // (skipBrowserRedirect), on l'ouvre nous-mêmes via le plugin Browser, et on capte
-        // le retour via un lien profond (voir l'écouteur "appUrlOpen" plus bas dans le code).
-        const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
-          provider: "google",
-          options: {
-            redirectTo: "com.shopnify.app://login-callback",
-            skipBrowserRedirect: true,
-          },
-        });
+        // Dans l'app native, on utilise le vrai sélecteur de compte Google natif
+        // d'Android (Credential Manager) au lieu d'un navigateur externe — l'écran
+        // affiche alors le nom et le logo de Shopnify, comme n'importe quelle app
+        // native, plutôt que l'adresse technique du projet Supabase.
+        const { SocialLogin } = await import("@capgo/capacitor-social-login");
+        const res = await SocialLogin.login({ provider: "google", options: {} });
+        const idToken = res && res.result && res.result.idToken;
+        if (!idToken) throw new Error("Aucun jeton reçu de Google");
+        const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
         if (oauthError) throw oauthError;
-        const { Browser } = await import("@capacitor/browser");
-        await Browser.open({ url: data.url });
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -13137,6 +13131,19 @@ function BoutiqueAppInner() {
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
     Preferences.get({ key: "_warmup" }).catch(() => {});
+  }, []);
+  // Initialise le plugin de connexion Google native (une seule fois, au démarrage).
+  // Le "webClientId" est celui du client OAuth de type "Web application" — le même
+  // que celui déjà utilisé par Supabase — jamais celui de type "Android".
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    import("@capgo/capacitor-social-login").then(({ SocialLogin }) => {
+      SocialLogin.initialize({
+        google: {
+          webClientId: "431612912550-f2ruc6a90jhf3logj45nlpgkls40u6ts.apps.googleusercontent.com",
+        },
+      }).catch(() => {});
+    });
   }, []);
   // Filet de sécurité (Action 3 du diagnostic) : quand l'app passe en arrière-plan,
   // Android peut tuer le processus à tout moment sans prévenir. On force alors une
