@@ -5771,6 +5771,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // revient ensuite sur l'app déjà connecté, sans autre action ici.
       }
     } catch (err) {
+      alert("ERREUR Google natif : " + (err && err.message ? err.message : JSON.stringify(err)));
       setError(t(lang, "googleLoginError"));
       setGoogleLoginBusy(false);
     }
