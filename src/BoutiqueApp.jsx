@@ -5751,16 +5751,24 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     try {
       const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
       if (isCapacitorApp) {
-        // Dans l'app native, on utilise le vrai sélecteur de compte Google natif
-        // d'Android (Credential Manager) au lieu d'un navigateur externe — l'écran
-        // affiche alors le nom et le logo de Shopnify, comme n'importe quelle app
-        // native, plutôt que l'adresse technique du projet Supabase.
-        const { SocialLogin } = await import("@capgo/capacitor-social-login");
-        const res = await SocialLogin.login({ provider: "google", options: {} });
-        const idToken = res && res.result && res.result.idToken;
-        if (!idToken) throw new Error("Aucun jeton reçu de Google");
-        const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
+        // NOTE : la connexion Google *native* (écran "Shopnify" avec Credential
+        // Manager, via @capgo/capacitor-social-login) est prête dans le code mais
+        // volontairement mise de côté pour l'instant — elle exige que l'app OAuth
+        // soit "vérifiée" par Google pour fonctionner avec n'importe quel compte ;
+        // en attendant cette vérification, on utilise ce flux web (navigateur
+        // système + lien profond), qui fonctionne dès maintenant pour tout le
+        // monde, sans restriction. Voir le code de connexion natif conservé plus
+        // bas dans ce fichier pour le réactiver une fois la vérification obtenue.
+        const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: "com.shopnify.app://login-callback",
+            skipBrowserRedirect: true,
+          },
+        });
         if (oauthError) throw oauthError;
+        const { Browser } = await import("@capacitor/browser");
+        await Browser.open({ url: data.url });
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -5771,10 +5779,23 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // revient ensuite sur l'app déjà connecté, sans autre action ici.
       }
     } catch (err) {
-      alert("ERREUR Google natif : " + (err && err.message ? err.message : JSON.stringify(err)));
       setError(t(lang, "googleLoginError"));
       setGoogleLoginBusy(false);
     }
+  };
+  // ---- Connexion Google native (Credential Manager) — CONSERVÉE POUR PLUS TARD ----
+  // Fonctionnelle techniquement, mais désactivée tant que l'app OAuth n'est pas
+  // vérifiée par Google (sinon limitée à 100 comptes ajoutés manuellement comme
+  // testeurs). Une fois la vérification obtenue : remplacer le contenu du bloc
+  // `if (isCapacitorApp) { ... }` ci-dessus par ce code-ci.
+  // eslint-disable-next-line no-unused-vars
+  const loginWithGoogleNative_aReactiverPlusTard = async () => {
+    const { SocialLogin } = await import("@capgo/capacitor-social-login");
+    const res = await SocialLogin.login({ provider: "google", options: {} });
+    const idToken = res && res.result && res.result.idToken;
+    if (!idToken) throw new Error("Aucun jeton reçu de Google");
+    const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
+    if (oauthError) throw oauthError;
   };
   const loginSubmit = async () => {
     setError("");
@@ -13133,18 +13154,12 @@ function BoutiqueAppInner() {
     if (typeof window === "undefined" || !window.Capacitor) return;
     Preferences.get({ key: "_warmup" }).catch(() => {});
   }, []);
-  // Initialise le plugin de connexion Google native (une seule fois, au démarrage).
-  // Le "webClientId" est celui du client OAuth de type "Web application" — le même
-  // que celui déjà utilisé par Supabase — jamais celui de type "Android".
+  // Initialisation du plugin de connexion Google native — CONSERVÉE POUR PLUS TARD,
+  // désactivée pour l'instant (voir loginWithGoogleNative_aReactiverPlusTard plus haut).
+  // Pour réactiver une fois l'app vérifiée par Google : remettre le contenu original
+  // (SocialLogin.initialize({ google: { webClientId: "431612912550-f2ruc6a90jhf3logj45nlpgkls40u6ts.apps.googleusercontent.com", mode: "online" } })).
   useEffect(() => {
-    if (typeof window === "undefined" || !window.Capacitor) return;
-    import("@capgo/capacitor-social-login").then(({ SocialLogin }) => {
-      SocialLogin.initialize({
-        google: {
-          webClientId: "431612912550-f2ruc6a90jhf3logj45nlpgkls40u6ts.apps.googleusercontent.com",
-        },
-      }).catch(() => {});
-    });
+    // Désactivé volontairement.
   }, []);
   // Filet de sécurité (Action 3 du diagnostic) : quand l'app passe en arrière-plan,
   // Android peut tuer le processus à tout moment sans prévenir. On force alors une
