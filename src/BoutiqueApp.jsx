@@ -307,7 +307,7 @@ const FREE_PRODUCT_LIMIT = 20;
 const PRO_PRODUCT_LIMIT = 100;
 const FREE_SALES_LIMIT_PER_DAY = 10;
 const BALL_COLORS = [
-  { id: "blue", label: "Cyan", swatch: "#00FFFF", light: "rgba(0,220,220,0.6)", dark: "rgba(0,255,255,0.95)" },
+  { id: "blue", label: "Bleu", swatch: "#ADD8E6", light: "rgba(173,216,230,0.55)", dark: "rgba(173,216,230,0.9)" },
   { id: "teal", label: "Turquoise", swatch: "#14b8a6", light: "rgba(45,190,175,0.6)", dark: "rgba(120,235,220,1)" },
   { id: "purple", label: "Violet", swatch: "#8b5cf6", light: "rgba(150,120,240,0.6)", dark: "rgba(195,165,255,1)" },
   { id: "rose", label: "Rose", swatch: "#ec4899", light: "rgba(240,110,160,0.6)", dark: "rgba(255,165,205,1)" },
@@ -12038,7 +12038,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       )}
       {showSettings && (
         <div dir="ltr" className="absolute inset-0 z-40" style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
-          <div style={{ minHeight: "100%", background: T.bg, paddingBottom: 40 }}>
+          <div style={{ minHeight: "100%", background: T.bg, paddingBottom: 40, position: "relative", overflow: "hidden" }}>
+            {showBalls && <FloatingBalls dark={darkMode} colorId={ballColor} />}
+            <div style={{ position: "relative", zIndex: 1 }}>
             <div dir="ltr" style={{ display: "flex", alignItems: "center", gap: 12, padding: "22px 20px 14px" }}>
               {(settingsView !== "menu" || settingsField) ? (
                 <button onClick={() => { if (settingsField) setSettingsField(null); else setSettingsView("menu"); }}
@@ -12806,6 +12808,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   )}
                 </div>
               )}
+            </div>
             </div>
           </div>
         </div>
