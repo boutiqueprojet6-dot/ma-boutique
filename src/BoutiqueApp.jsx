@@ -10066,9 +10066,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {shopPhoto ? (
               <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/30" />
             ) : (
-              <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.15)" }}>
-                <Package size={16} color="white" />
-              </div>
+              <img
+                src={`data:image/jpeg;base64,${APP_LOGO_B64}`}
+                alt={shopName}
+                className="w-9 h-9 rounded-full object-cover border-2 border-white/30"
+              />
             )}
             <div className="min-w-0">
               <p className="text-white font-bold text-sm truncate">{shops.find((s) => s.id === activeShopId)?.name || shopName}</p>
@@ -10140,9 +10142,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {shopPhoto ? (
               <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/40" />
             ) : (
-              <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.15)" }}>
-                <Package size={16} color="white" />
-              </div>
+              <img
+                src={`data:image/jpeg;base64,${APP_LOGO_B64}`}
+                alt={shopName}
+                className="w-9 h-9 rounded-full object-cover border-2 border-white/40"
+              />
             )}
             <div>
               <h1 className="text-lg font-bold tracking-tight">{shops.find((s) => s.id === activeShopId)?.name || shopName}</h1>
@@ -10304,7 +10308,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {(
-              <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: darkMode ? "linear-gradient(135deg, rgba(5,150,105,0.12), rgba(5,150,105,0.02))" : "linear-gradient(135deg, #ecfdf5, #ffffff)", border: darkMode ? "1px solid rgba(52,211,153,0.15)" : "1px solid #d1fae5", boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+              <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-1.5">
@@ -11418,7 +11422,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               return (
                 <div key={txn.id} className="rounded-2xl p-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   <div className="mb-1">
-                    {txn.items.map((it) => (
+                    {(txn.items || [{ id: txn.id, productName: txn.productName, qty: txn.qty, unitPrice: txn.unitPrice }]).map((it) => (
                       <div key={it.id} className="flex items-center justify-between text-xs">
                         <span>{it.productName} x{it.qty}</span>
                         <span className="text-[10px]" style={{ color: T.muted }}>{fcfa(it.unitPrice)} / u</span>
