@@ -12037,19 +12037,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showSettings && (
-        <div dir="ltr" className="absolute inset-0 z-40" style={{ background: "rgba(4,7,12,0.85)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
-          <div style={{ minHeight: "100%", background: "radial-gradient(circle at 20% 0%, #0f1620 0%, #070a10 55%, #050709 100%)", paddingBottom: 40 }}>
+        <div dir="ltr" className="absolute inset-0 z-40" style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+          <div style={{ minHeight: "100%", background: T.bg, paddingBottom: 40 }}>
             <div dir="ltr" style={{ display: "flex", alignItems: "center", gap: 12, padding: "22px 20px 14px" }}>
               {(settingsView !== "menu" || settingsField) ? (
                 <button onClick={() => { if (settingsField) setSettingsField(null); else setSettingsView("menu"); }}
-                  style={{ background: "#161d27", border: "1px solid #232c38", borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: "#cbd5e1", cursor: "pointer", flexShrink: 0 }}>
+                  style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: T.muted, cursor: "pointer", flexShrink: 0 }}>
                   <ChevronLeft size={17} />
                 </button>
               ) : (
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: "radial-gradient(circle at 35% 30%, #00FFFF, #0891b2 70%)", boxShadow: "0 0 18px rgba(0,255,255,0.4)", flexShrink: 0 }} />
+                <img
+                  src="/icon-512.png"
+                  alt="Shopnify"
+                  style={{ width: 36, height: 36, borderRadius: 10, objectFit: "cover", boxShadow: "0 0 18px rgba(0,255,255,0.3)", flexShrink: 0 }}
+                />
               )}
               <div style={{ flex: 1 }}>
-                <div style={{ color: "#f1f5f9", fontSize: 18, fontWeight: 700 }}>
+                <div style={{ color: T.text, fontSize: 18, fontWeight: 700 }}>
                   {!settingsField && settingsView === "menu" && t(lang, "settingsTitle")}
                   {!settingsField && settingsView === "account" && t(lang, "manageAccount")}
                   {!settingsField && settingsView === "boutique" && (t(lang, "setBoutique"))}
@@ -12087,24 +12091,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "aiprefs" && (t(lang, "setPreferencesAssistant"))}
                   {settingsField === "alerts" && (t(lang, "setAlertes"))}
                 </div>
-                <div style={{ color: "#5f6b7a", fontSize: 12.5 }}>Shopnify</div>
+                <div style={{ color: T.muted, fontSize: 12.5 }}>Shopnify</div>
               </div>
               <button onClick={() => { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setSettingsSearchQuery(""); setPinMsg(""); setOldPin(""); setNewPin(""); setConfirmNewPin(""); setConfirmReset(false); }}
-                style={{ background: "#161d27", border: "1px solid #232c38", borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: "#94a3b8", cursor: "pointer" }}>
+                style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: T.muted, cursor: "pointer" }}>
                 <X size={16} />
               </button>
             </div>
             <div style={{ padding: "0 16px", display: "flex", flexDirection: "column", gap: 10 }}>
               {settingsView === "menu" && !settingsField && (
                 <div style={{ position: "relative", marginBottom: 2 }}>
-                  <Search size={15} color="#5f6b7a" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)" }} />
+                  <Search size={15} color={T.muted} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)" }} />
                   <input
                     value={settingsSearchQuery}
                     onChange={(e) => setSettingsSearchQuery(e.target.value)}
                     placeholder="Rechercher un réglage..."
                     style={{
-                      width: "100%", background: "#10151d", border: "1px solid #1c2530", borderRadius: 14,
-                      padding: "11px 12px 11px 36px", fontSize: 13.5, color: "#e5edf5", outline: "none",
+                      width: "100%", background: T.input, border: `1px solid ${T.border}`, borderRadius: 14,
+                      padding: "11px 12px 11px 36px", fontSize: 13.5, color: T.text, outline: "none",
                     }}
                   />
                 </div>
@@ -12121,7 +12125,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "donnees", label: t(lang, "setDonnees"), desc: t(lang, "setSauvegardeExportReinitialisation"), icon: Database, accent: "#60a5fa", hidden: !!activeEmployee },
                 { id: "ia", label: t(lang, "setAssistantIa"), desc: t(lang, "setRechercheWebHistorique"), icon: Bot, accent: "#f472b6" },
                 { id: "notifs", label: t(lang, "setNotifications"), desc: t(lang, "setStockDettesAbonnement"), icon: Bell, accent: "#fb923c" },
-                { id: "help", label: t(lang, "assistance"), desc: t(lang, "setSupportWhatsapp"), icon: HelpCircle, accent: "#94a3b8" },
+                { id: "help", label: t(lang, "assistance"), desc: t(lang, "setSupportWhatsapp"), icon: HelpCircle, accent: T.muted },
                 { id: "about", label: t(lang, "setAPropos"), desc: t(lang, "setVersionDeveloppeur"), icon: Sparkles, accent: "#22d3ee" },
                 // zone de danger (réinitialiser les données) — toujours exclusif au propriétaire.
                 { id: "danger", label: t(lang, "dangerZone"), desc: t(lang, "setReinitialiserLesDonnees"), icon: AlertOctagon, accent: "#f87171", hidden: !!activeEmployee },
@@ -12131,36 +12135,36 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 const q = norm(settingsSearchQuery);
                 return norm(s.label).includes(q) || norm(s.desc).includes(q);
               }).map((s) => { const Icon = s.icon; return (
-                <button key={s.id} onClick={() => setSettingsView(s.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 16, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", textAlign: "left", width: "100%" }}>
+                <button key={s.id} onClick={() => setSettingsView(s.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 16, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", textAlign: "left", width: "100%" }}>
                   <div style={{ width: 42, height: 42, borderRadius: 12, flexShrink: 0, background: `${s.accent}1a`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Icon size={19} color={s.accent} />
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ color: "#e5edf5", fontSize: 14.5, fontWeight: 600 }}>{s.label}</div>
-                    <div style={{ color: "#5f6b7a", fontSize: 12 }}>{s.desc}</div>
+                    <div style={{ color: T.text, fontSize: 14.5, fontWeight: 600 }}>{s.label}</div>
+                    <div style={{ color: T.muted, fontSize: 12 }}>{s.desc}</div>
                   </div>
-                  <ChevronRight size={17} color="#3d4856" />
+                  <ChevronRight size={17} color={T.muted} />
                 </button>
               );})}
               {settingsView === "account" && !settingsField && [
-                { id: "id", label: t(lang, "identifier"), right: <span style={{ color: "#5f6b7a", fontSize: 12 }}>{username}</span> },
-                { id: "photo", label: t(lang, "shopPhoto"), right: shopPhoto ? <img src={shopPhoto} alt="" style={{ width: 26, height: 26, borderRadius: "50%", objectFit: "cover" }} /> : <Camera size={14} color="#5f6b7a" /> },
-                { id: "name", label: t(lang, "shopName"), right: <span style={{ color: "#5f6b7a", fontSize: 12 }}>{shopName}</span> },
-                { id: "pin", label: t(lang, "setMotDePasse"), right: <span style={{ color: "#5f6b7a", fontSize: 12 }}>••••••••</span> },
-                { id: "lockpin", label: t(lang, "setCodePin"), right: <span style={{ color: "#5f6b7a", fontSize: 12 }}>••••</span> },
+                { id: "id", label: t(lang, "identifier"), right: <span style={{ color: T.muted, fontSize: 12 }}>{username}</span> },
+                { id: "photo", label: t(lang, "shopPhoto"), right: shopPhoto ? <img src={shopPhoto} alt="" style={{ width: 26, height: 26, borderRadius: "50%", objectFit: "cover" }} /> : <Camera size={14} color={T.muted} /> },
+                { id: "name", label: t(lang, "shopName"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopName}</span> },
+                { id: "pin", label: t(lang, "setMotDePasse"), right: <span style={{ color: T.muted, fontSize: 12 }}>••••••••</span> },
+                { id: "lockpin", label: t(lang, "setCodePin"), right: <span style={{ color: T.muted, fontSize: 12 }}>••••</span> },
               ].map((item) => (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", width: "100%" }}>
-                  <span style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{item.label}</span>
-                  <span style={{ display: "flex", alignItems: "center", gap: 6 }}>{item.right}<ChevronRight size={15} color="#3d4856" /></span>
+                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
+                  <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 6 }}>{item.right}<ChevronRight size={15} color={T.muted} /></span>
                 </button>
               ))}
               {settingsView === "account" && !settingsField && (
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", marginTop: 8 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, marginTop: 8 }}>
                   <div style={{ paddingRight: 12 }}>
-                    <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "appLockTitle")}</div>
-                    <div style={{ color: "#5f6b7a", fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{t(lang, "appLockDesc")}</div>
+                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "appLockTitle")}</div>
+                    <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{t(lang, "appLockDesc")}</div>
                   </div>
-                  <button onClick={() => toggleAppLock(!appLockEnabled)} style={{ width: 48, height: 28, borderRadius: 14, background: appLockEnabled ? "#22d3ee" : "#232c38", display: "flex", alignItems: "center", padding: "0 4px", justifyContent: appLockEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                  <button onClick={() => toggleAppLock(!appLockEnabled)} style={{ width: 48, height: 28, borderRadius: 14, background: appLockEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: appLockEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
                     <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
                   </button>
                 </div>
@@ -12174,12 +12178,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "currency", label: t(lang, "setDevise"), right: `${CURRENT_CURRENCY.symbol} ${currency}` },
                 ...(lang === "ar" ? [{ id: "digits", label: "الأرقام", right: arabicDigits ? "١٢٣" : "123" }] : []),
               ].map((item) => (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", width: "100%" }}>
-                  <span style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{item.label}</span>
+                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
+                  <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</span>
                   <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
                     {item.id === "ballcolor" && <span style={{ width: 16, height: 16, borderRadius: "50%", background: (BALL_COLORS.find((c) => c.id === ballColor) || BALL_COLORS[0]).swatch, display: "inline-block" }} />}
-                    {item.right && <span style={{ color: "#5f6b7a", fontSize: 12 }}>{item.right}</span>}
-                    <ChevronRight size={15} color="#3d4856" />
+                    {item.right && <span style={{ color: T.muted, fontSize: 12 }}>{item.right}</span>}
+                    <ChevronRight size={15} color={T.muted} />
                   </span>
                 </button>
               ))}
@@ -12188,10 +12192,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "categories", icon: Tag, label: t(lang, "setCategories"), desc: t(lang, "setProduitsRayons") },
                 { id: "threshold2", icon: AlertOctagon, label: t(lang, "setSeuilsDeStock"), desc: t(lang, "setAlerteStockBas") },
               ].map((item) => { const Icon = item.icon; return (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", width: "100%" }}>
+                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#34d3991a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#34d399" /></div>
-                  <div style={{ flex: 1 }}><div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: "#5f6b7a", fontSize: 11.5 }}>{item.desc}</div></div>
-                  <ChevronRight size={16} color="#3d4856" />
+                  <div style={{ flex: 1 }}><div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: T.muted, fontSize: 11.5 }}>{item.desc}</div></div>
+                  <ChevronRight size={16} color={T.muted} />
                 </button>
               );})}
               {settingsView === "finances" && !settingsField && [
@@ -12200,20 +12204,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "cashsettings", icon: Wallet, label: t(lang, "setCaisse"), desc: t(lang, "setFondDeCaisseDepenses") },
                 { id: "benchmark", icon: BarChart3, label: t(lang, "benchmarkTitle"), desc: benchmarkOptIn ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
               ].map((item) => { const Icon = item.icon; return (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", width: "100%" }}>
+                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#fbbf241a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#fbbf24" /></div>
-                  <div style={{ flex: 1 }}><div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: "#5f6b7a", fontSize: 11.5 }}>{item.desc}</div></div>
-                  <ChevronRight size={16} color="#3d4856" />
+                  <div style={{ flex: 1 }}><div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: T.muted, fontSize: 11.5 }}>{item.desc}</div></div>
+                  <ChevronRight size={16} color={T.muted} />
                 </button>
               );})}
               {settingsView === "employees" && !settingsField && (
                 <div>
-                  <p className="text-[11px] mb-4 rounded-lg p-2.5" style={{ background: "#10151d", color: "#94a3b8", border: "1px solid #1c2530" }}>
+                  <p className="text-[11px] mb-4 rounded-lg p-2.5" style={{ background: T.input, color: T.muted, border: `1px solid ${T.border}` }}>
                     {t(lang, "empIntro")}
                   </p>
                   {planInfo.maxEmployees !== null && employees.length >= planInfo.maxEmployees ? (
-                    <div className="w-full mb-4 py-3 rounded-xl text-center" style={{ background: "#1c2530" }}>
-                      <p className="text-xs font-semibold mb-1" style={{ color: "#e5edf5" }}>
+                    <div className="w-full mb-4 py-3 rounded-xl text-center" style={{ background: T.border }}>
+                      <p className="text-xs font-semibold mb-1" style={{ color: T.text }}>
                         {t(lang, "empLimitReached").replace("{n}", planInfo.maxEmployees).replace("{plan}", t(lang, planInfo.nameKey))}
                       </p>
                       <button onClick={() => setSettingsView("subscription")} className="text-xs font-bold underline" style={{ color: "#c084fc" }}>
@@ -12230,51 +12234,51 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </button>
                   )}
                   {employees.length === 0 && (
-                    <p className="text-sm text-center py-6" style={{ color: "#5f6b7a" }}>{t(lang, "empNoneYet")}</p>
+                    <p className="text-sm text-center py-6" style={{ color: T.muted }}>{t(lang, "empNoneYet")}</p>
                   )}
                   <div className="space-y-2">
                     {employees.map((emp) => (
-                      <div key={emp.id} style={{ background: "#10151d", border: "1px solid #1c2530", borderRadius: 14, padding: 14 }}>
+                      <div key={emp.id} style={{ background: T.input, border: `1px solid ${T.border}`, borderRadius: 14, padding: 14 }}>
                         <div className="flex items-center justify-between">
                           <div>
-                            <p style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{emp.name}</p>
-                            <p style={{ color: "#5f6b7a", fontSize: 12 }}>{EMPLOYEE_ROLES[emp.role] ? t(lang, EMPLOYEE_ROLES[emp.role].labelKey) : emp.role}</p>
+                            <p style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{emp.name}</p>
+                            <p style={{ color: T.muted, fontSize: 12 }}>{EMPLOYEE_ROLES[emp.role] ? t(lang, EMPLOYEE_ROLES[emp.role].labelKey) : emp.role}</p>
                           </div>
                           <span
                             className="text-[10px] font-bold px-2 py-1 rounded-full"
-                            style={{ background: emp.active ? "#16341f" : "#331414", color: emp.active ? "#4ade80" : "#f87171" }}
+                            style={{ background: emp.active ? (darkMode ? "#16341f" : "rgba(74,222,128,0.14)") : (darkMode ? "#331414" : "rgba(248,113,113,0.12)"), color: emp.active ? "#4ade80" : "#f87171" }}
                           >
                             {emp.active ? t(lang, "empActive") : t(lang, "empSuspended")}
                           </span>
                         </div>
                         <div className="flex gap-2 mt-3">
-                          <button onClick={() => generateEmployeeInvite(emp)} className="px-3 py-2 rounded-lg" style={{ background: "#1c2530", color: "#e5edf5" }} title={t(lang, "empShowQr")}>
+                          <button onClick={() => generateEmployeeInvite(emp)} className="px-3 py-2 rounded-lg" style={{ background: T.border, color: T.text }} title={t(lang, "empShowQr")}>
                             <QrCode size={14} />
                           </button>
-                          <button onClick={() => openEditEmployee(emp)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: "#1c2530", color: "#e5edf5" }}>
+                          <button onClick={() => openEditEmployee(emp)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: T.border, color: T.text }}>
                             {t(lang, "empEdit")}
                           </button>
-                          <button onClick={() => toggleEmployeeActive(emp.id)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: "#1c2530", color: emp.active ? "#f87171" : "#4ade80" }}>
+                          <button onClick={() => toggleEmployeeActive(emp.id)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: T.border, color: emp.active ? "#f87171" : "#4ade80" }}>
                             {emp.active ? t(lang, "empSuspend") : t(lang, "empReactivate")}
                           </button>
-                          <button onClick={() => removeEmployee(emp.id)} className="px-3 py-2 rounded-lg" style={{ background: "#1c2530", color: "#f87171" }}>
+                          <button onClick={() => removeEmployee(emp.id)} className="px-3 py-2 rounded-lg" style={{ background: T.border, color: "#f87171" }}>
                             <Trash2 size={14} />
                           </button>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs font-bold mt-6 mb-2" style={{ color: "#e5edf5" }}>{t(lang, "empActionLogTitle")}</p>
+                  <p className="text-xs font-bold mt-6 mb-2" style={{ color: T.text }}>{t(lang, "empActionLogTitle")}</p>
                   {actionLog.length === 0 ? (
-                    <p className="text-sm text-center py-4" style={{ color: "#5f6b7a" }}>{t(lang, "empNoActionsYet")}</p>
+                    <p className="text-sm text-center py-4" style={{ color: T.muted }}>{t(lang, "empNoActionsYet")}</p>
                   ) : (
                     <div className="space-y-1.5">
                       {actionLog.slice(0, 30).map((entry) => (
-                        <div key={entry.id} style={{ background: "#10151d", border: "1px solid #1c2530", borderRadius: 10, padding: "8px 12px" }}>
-                          <p style={{ color: "#e5edf5", fontSize: 12.5 }}>
+                        <div key={entry.id} style={{ background: T.input, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px" }}>
+                          <p style={{ color: T.text, fontSize: 12.5 }}>
                             <span style={{ fontWeight: 600 }}>{entry.actorName}</span> · {entry.action}
                           </p>
-                          <p style={{ color: "#5f6b7a", fontSize: 10.5 }}>{fullDate(entry.date)}</p>
+                          <p style={{ color: T.muted, fontSize: 10.5 }}>{fullDate(entry.date)}</p>
                         </div>
                       ))}
                     </div>
@@ -12283,31 +12287,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
               {settingsView === "subscription" && !settingsField && (
                 <div>
-                  <div style={{ background: "#10151d", border: "1px solid #1c2530", borderRadius: 16, padding: 16, marginBottom: 16, textAlign: "center" }}>
-                    <p style={{ color: "#94a3b8", fontSize: 11, fontWeight: 600, marginBottom: 4 }}>{t(lang, "planCurrentLabel")}</p>
-                    <p style={{ color: "#f1f5f9", fontSize: 22, fontWeight: 800 }}>{t(lang, planInfo.nameKey)}</p>
+                  <div style={{ background: T.input, border: `1px solid ${T.border}`, borderRadius: 16, padding: 16, marginBottom: 16, textAlign: "center" }}>
+                    <p style={{ color: T.muted, fontSize: 11, fontWeight: 600, marginBottom: 4 }}>{t(lang, "planCurrentLabel")}</p>
+                    <p style={{ color: T.text, fontSize: 22, fontWeight: 800 }}>{t(lang, planInfo.nameKey)}</p>
                   </div>
                   {SUBSCRIPTION_PLAN_ORDER.map((planId) => {
                     const plan = SUBSCRIPTION_PLANS[planId];
                     const isCurrent = planId === currentPlan;
                     return (
-                      <div key={planId} style={{ background: "#10151d", border: isCurrent ? "2px solid #c084fc" : "1px solid #1c2530", borderRadius: 16, padding: 16, marginBottom: 12 }}>
+                      <div key={planId} style={{ background: T.input, border: isCurrent ? "2px solid #c084fc" : `1px solid ${T.border}`, borderRadius: 16, padding: 16, marginBottom: 12 }}>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-                          <p style={{ color: "#f1f5f9", fontSize: 15, fontWeight: 700 }}>{t(lang, plan.nameKey)}</p>
+                          <p style={{ color: T.text, fontSize: 15, fontWeight: 700 }}>{t(lang, plan.nameKey)}</p>
                           <p style={{ color: "#c084fc", fontSize: 15, fontWeight: 800 }}>
                             {plan.price === 0 ? t(lang, "planFreeName") : `${plan.price}€/${t(lang, "planPerMonth")}`}
                           </p>
                         </div>
-                        <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 4 }}>
+                        <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>
                           {plan.maxEmployees === 0 ? t(lang, "planNoEmployees") : plan.maxEmployees === null ? t(lang, "planUnlimitedEmployees") : t(lang, "planMaxEmployees").replace("{n}", plan.maxEmployees)}
                         </p>
-                        <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 4 }}>
+                        <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>
                           {plan.aiMonthlyQuota === 0 ? t(lang, "planNoAi")
                             : plan.aiMonthlyQuota === null ? t(lang, "planUnlimitedAi")
                             : t(lang, "planLimitedAi").replace("{n}", plan.aiMonthlyQuota)}
                         </p>
                         {plan.maxShops !== 1 && (
-                          <p style={{ color: "#94a3b8", fontSize: 12, marginBottom: 4 }}>{t(lang, "planMultiShop")}</p>
+                          <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "planMultiShop")}</p>
                         )}
                         {isCurrent ? (
                           <div style={{ marginTop: 10, textAlign: "center", color: "#c084fc", fontSize: 12, fontWeight: 700 }}>{t(lang, "planCurrentBadge")}</div>
@@ -12329,38 +12333,38 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "export", icon: FileDown, label: t(lang, "setExporterLesDonnees"), desc: "CSV" },
                 { id: "resetdata", icon: RotateCcw, label: t(lang, "setReinitialiser"), desc: t(lang, "setEffacerToutesLesDonnees") },
               ].map((item) => { const Icon = item.icon; return (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", width: "100%" }}>
+                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#60a5fa1a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#60a5fa" /></div>
-                  <div style={{ flex: 1 }}><div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: "#5f6b7a", fontSize: 11.5 }}>{item.desc}</div></div>
-                  <ChevronRight size={16} color="#3d4856" />
+                  <div style={{ flex: 1 }}><div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: T.muted, fontSize: 11.5 }}>{item.desc}</div></div>
+                  <ChevronRight size={16} color={T.muted} />
                 </button>
               );})}
               {settingsView === "ia" && !settingsField && [
                 { id: "aiprefs", icon: MessageSquare, label: t(lang, "setPreferencesAssistant"), desc: t(lang, "setRechercheWebHistorique") },
               ].map((item) => { const Icon = item.icon; return (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", width: "100%" }}>
+                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#f472b61a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#f472b6" /></div>
-                  <div style={{ flex: 1 }}><div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: "#5f6b7a", fontSize: 11.5 }}>{item.desc}</div></div>
-                  <ChevronRight size={16} color="#3d4856" />
+                  <div style={{ flex: 1 }}><div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: T.muted, fontSize: 11.5 }}>{item.desc}</div></div>
+                  <ChevronRight size={16} color={T.muted} />
                 </button>
               );})}
               {settingsView === "notifs" && !settingsField && [
                 { id: "alerts", icon: BellRing, label: t(lang, "setAlertes"), desc: t(lang, "setStockDettesAbonnement") },
               ].map((item) => { const Icon = item.icon; return (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer", width: "100%" }}>
+                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#fb923c1a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#fb923c" /></div>
-                  <div style={{ flex: 1 }}><div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: "#5f6b7a", fontSize: 11.5 }}>{item.desc}</div></div>
-                  <ChevronRight size={16} color="#3d4856" />
+                  <div style={{ flex: 1 }}><div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</div><div style={{ color: T.muted, fontSize: 11.5 }}>{item.desc}</div></div>
+                  <ChevronRight size={16} color={T.muted} />
                 </button>
               );})}
               {settingsView === "notifs" && !settingsField && hasFeatureAccess("anomalyAlerts") && (
-                <div style={{ marginTop: 12, padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <p style={{ color: "#e5edf5", fontSize: 13, fontWeight: 600, marginBottom: 4 }}>{t(lang, "pushAnomalyTitle")}</p>
-                  <p style={{ color: "#5f6b7a", fontSize: 11.5, marginBottom: 10 }}>{t(lang, "pushAnomalyDesc")}</p>
+                <div style={{ marginTop: 12, padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <p style={{ color: T.text, fontSize: 13, fontWeight: 600, marginBottom: 4 }}>{t(lang, "pushAnomalyTitle")}</p>
+                  <p style={{ color: T.muted, fontSize: 11.5, marginBottom: 10 }}>{t(lang, "pushAnomalyDesc")}</p>
                   {pushPermission === "granted" ? (
                     <p style={{ color: "#4ade80", fontSize: 12, fontWeight: 600 }}>{t(lang, "pushEnabledBadge")}</p>
                   ) : pushPermission === "unsupported" ? (
-                    <p style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "pushUnsupported")}</p>
+                    <p style={{ color: T.muted, fontSize: 12 }}>{t(lang, "pushUnsupported")}</p>
                   ) : (
                     <button onClick={enablePushNotifications} style={{ background: "#fb923c1a", color: "#fb923c", border: "1px solid #fb923c33", borderRadius: 10, padding: "10px 14px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
                       {t(lang, "pushEnableBtn")}
@@ -12371,65 +12375,65 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {/* Boutique — Infos */}
               {settingsField === "shopinfo" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 8 }}>{t(lang, "setNomDeLaBoutique")}</div>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "setNomDeLaBoutique")}</div>
                     <div style={{ display: "flex", gap: 8 }}>
-                      <input value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: "#161d27", color: "#f1f5f9", border: "1px solid #2a3445", borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                      <input value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                       <button onClick={renameShop} style={{ background: "#34d399", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}>OK</button>
                     </div>
                     {shopNameMsg && <p style={{ color: "#34d399", fontSize: 11, marginTop: 6 }}>{shopNameMsg}</p>}
                   </div>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "setIdentifiantDeConnexion")}</div>
-                    <div style={{ color: "#f1f5f9", fontSize: 15, fontWeight: 600 }}>{username}</div>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setIdentifiantDeConnexion")}</div>
+                    <div style={{ color: T.text, fontSize: 15, fontWeight: 600 }}>{username}</div>
                   </div>
                 </div>
               )}
               {/* Boutique — Catégories */}
               {settingsField === "categories" && (
-                <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 8 }}>{t(lang, "setCategoriesDeProduits")}</div>
-                  <p style={{ color: "#e5edf5", fontSize: 13 }}>{t(lang, "setLesCategoriesSontDefiniesAutomatiquem")}</p>
+                <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "setCategoriesDeProduits")}</div>
+                  <p style={{ color: T.text, fontSize: 13 }}>{t(lang, "setLesCategoriesSontDefiniesAutomatiquem")}</p>
                   <div style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 8 }}>
                     {[...new Set(products.map((p) => p.name.split(" ")[0]))].slice(0, 8).map((cat, i) => (
                       <span key={i} style={{ background: "#34d3991a", color: "#34d399", borderRadius: 20, padding: "4px 12px", fontSize: 12, fontWeight: 600 }}>{cat}</span>
                     ))}
-                    {products.length === 0 && <span style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "setAucunProduitPourLinstant")}</span>}
+                    {products.length === 0 && <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setAucunProduitPourLinstant")}</span>}
                   </div>
                 </div>
               )}
               {/* Boutique — Seuil stock */}
               {settingsField === "threshold2" && (
-                <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 8 }}>{t(lang, "stockAlert")}</div>
+                <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "stockAlert")}</div>
                   <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: "#161d27", color: "#f1f5f9", border: "1px solid #2a3445", borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
-                    <span style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
+                    <input type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
-                  <p style={{ color: "#5f6b7a", fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
+                  <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
                 </div>
               )}
               {/* Finances — Paiement par défaut */}
               {settingsField === "defpayment" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "setChoisisLeModeDePaiement")}</p>
+                  <p style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setChoisisLeModeDePaiement")}</p>
                   {getPaymentMethods(lang).map((m) => (
-                    <button key={m.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", cursor: "pointer" }}>
-                      <span style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{m.label}</span>
+                    <button key={m.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer" }}>
+                      <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{m.label}</span>
                     </button>
                   ))}
                 </div>
               )}
               {/* Finances — Dettes */}
               {settingsField === "debtdelay" && (
-                <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 10 }}>{t(lang, "setResumeDesDettesImpayees")}</p>
+                <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <p style={{ color: T.muted, fontSize: 12, marginBottom: 10 }}>{t(lang, "setResumeDesDettesImpayees")}</p>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ color: "#e5edf5", fontSize: 13 }}>{t(lang, "setClientsAvecDettes")}</span>
+                    <span style={{ color: T.text, fontSize: 13 }}>{t(lang, "setClientsAvecDettes")}</span>
                     <span style={{ color: "#fbbf24", fontSize: 13, fontWeight: 700 }}>{localizedNumber(unpaidDebts.length)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ color: "#e5edf5", fontSize: 13 }}>{t(lang, "setTotalDu")}</span>
+                    <span style={{ color: T.text, fontSize: 13 }}>{t(lang, "setTotalDu")}</span>
                     <span style={{ color: "#f87171", fontSize: 13, fontWeight: 700 }}>{fcfa(totalOwed)}</span>
                   </div>
                 </div>
@@ -12437,19 +12441,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {/* Finances — Caisse */}
               {settingsField === "cashsettings" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "setFondDeCaisse")}</div>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setFondDeCaisse")}</div>
                     <div style={{ color: "#fbbf24", fontSize: 20, fontWeight: 700 }}>{fcfa(cashFund)}</div>
                     {hasPermission("editCash") && (
                       <button onClick={() => { setFundInput(String(cashFund)); setShowEditFund(true); setShowSettings(false); }} style={{ marginTop: 10, background: "#fbbf241a", color: "#fbbf24", border: "1px solid #fbbf2433", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{t(lang, "setCashFund")}</button>
                     )}
                   </div>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "setSoldeEstime")}</div>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setSoldeEstime")}</div>
                     <div style={{ color: cashBalance < 0 ? "#f87171" : "#34d399", fontSize: 20, fontWeight: 700 }}>{fcfa(cashBalance)}</div>
                   </div>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "setTotalDepenses")}</div>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setTotalDepenses")}</div>
                     <div style={{ color: "#f87171", fontSize: 16, fontWeight: 700 }}>{fcfa(totalExpenses)}</div>
                   </div>
                 </div>
@@ -12457,18 +12461,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {/* Finances — Benchmark communautaire */}
               {settingsField === "benchmark" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <div style={{ flex: 1, paddingRight: 12 }}>
-                      <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "benchmarkOptIn")}</div>
-                      <div style={{ color: "#5f6b7a", fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{t(lang, "benchmarkOptInDesc")}</div>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "benchmarkOptIn")}</div>
+                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{t(lang, "benchmarkOptInDesc")}</div>
                     </div>
-                    <button onClick={() => saveAll({ benchmarkOptIn: !benchmarkOptIn })} style={{ width: 48, height: 28, borderRadius: 14, background: benchmarkOptIn ? "#22d3ee" : "#232c38", display: "flex", alignItems: "center", padding: "0 4px", justifyContent: benchmarkOptIn ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                    <button onClick={() => saveAll({ benchmarkOptIn: !benchmarkOptIn })} style={{ width: 48, height: 28, borderRadius: 14, background: benchmarkOptIn ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: benchmarkOptIn ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
                       <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
                     </button>
                   </div>
                   {benchmarkOptIn && (
-                    <div style={{ padding: 12, borderRadius: 12, background: "#10151d", border: "1px solid #1c2530" }}>
-                      <div style={{ color: "#5f6b7a", fontSize: 11 }}>{t(lang, "setTuPeuxVoirLaComparaison")}</div>
+                    <div style={{ padding: 12, borderRadius: 12, background: T.input, border: `1px solid ${T.border}` }}>
+                      <div style={{ color: T.muted, fontSize: 11 }}>{t(lang, "setTuPeuxVoirLaComparaison")}</div>
                     </div>
                   )}
                 </div>
@@ -12476,7 +12480,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {/* Données — Export CSV */}
               {settingsField === "export" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "setExporteTesDonneesDeVentes")}</p>
+                  <p style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setExporteTesDonneesDeVentes")}</p>
                   <button onClick={() => {
                     const rows = [["Date","Produit","Qté","Prix unit.","Total","Paiement","Client"]];
                     sales.forEach((s) => rows.push([s.date, s.productName, s.qty, s.unitPrice, s.total, s.payment, s.customer || ""]));
@@ -12489,8 +12493,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   }} style={{ padding: "14px 16px", borderRadius: 14, background: "#60a5fa1a", border: "1px solid #60a5fa33", color: "#60a5fa", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
                     <FileDown size={18} /> {t(lang, "setTelechargerLesVentesCsv")}
                   </button>
-                  <div style={{ padding: 12, borderRadius: 12, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <div style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "setSaleslengthVentesProductslengthProdui").replace("{s}", localizedNumber(sales.length)).replace("{p}", localizedNumber(products.length))}</div>
+                  <div style={{ padding: 12, borderRadius: 12, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setSaleslengthVentesProductslengthProdui").replace("{s}", localizedNumber(sales.length)).replace("{p}", localizedNumber(products.length))}</div>
                   </div>
                 </div>
               )}
@@ -12506,7 +12510,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <p style={{ color: "#fca5a5", fontSize: 13, marginBottom: 14 }}>{t(lang, "resetConfirm")}</p>
                       <div style={{ display: "flex", gap: 8 }}>
                         <button onClick={resetShopData} style={{ flex: 1, padding: 12, borderRadius: 12, background: "linear-gradient(135deg,#f87171,#ef4444)", color: "white", fontSize: 13, fontWeight: 700, cursor: "pointer", border: "none" }}>{t(lang, "yesErase")}</button>
-                        <button onClick={() => setConfirmReset(false)} style={{ flex: 1, padding: 12, borderRadius: 12, background: "#161d27", border: "1px solid #232c38", color: "#cbd5e1", fontSize: 13, cursor: "pointer" }}>{t(lang, "cancel")}</button>
+                        <button onClick={() => setConfirmReset(false)} style={{ flex: 1, padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 13, cursor: "pointer" }}>{t(lang, "cancel")}</button>
                       </div>
                     </div>
                   )}
@@ -12515,18 +12519,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {/* IA — Préférences */}
               {settingsField === "aiprefs" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <div>
-                      <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "setRechercheWeb")}</div>
-                      <div style={{ color: "#5f6b7a", fontSize: 12, marginTop: 2 }}>{t(lang, "setPermettreALiaDeChercher")}</div>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "setRechercheWeb")}</div>
+                      <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setPermettreALiaDeChercher")}</div>
                     </div>
                     <div style={{ width: 48, height: 28, borderRadius: 14, background: "#22d3ee", display: "flex", alignItems: "center", padding: "0 4px", justifyContent: "flex-end" }}>
                       <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
                     </div>
                   </div>
-                  <div style={{ padding: 16, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{t(lang, "setHistoriqueDeConversation")}</div>
-                    <p style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "setAimessageslengthMessagesDansLaSession").replace("{n}", localizedNumber(aiMessages.length))}</p>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{t(lang, "setHistoriqueDeConversation")}</div>
+                    <p style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setAimessageslengthMessagesDansLaSession").replace("{n}", localizedNumber(aiMessages.length))}</p>
                     {aiMessages.length > 0 && (
                       <button onClick={() => setAiMessages([])} style={{ marginTop: 8, background: "#f472b61a", color: "#f472b6", border: "1px solid #f472b633", borderRadius: 10, padding: "7px 12px", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
                         {t(lang, "setEffacerLhistorique")}
@@ -12543,45 +12547,45 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     { label: t(lang, "setDettesImpayees"), desc: t(lang, "setUnpaiddebtslengthEnAttente").replace("{n}", localizedNumber(unpaidDebts.length)), active: unpaidDebts.length > 0, color: "#f87171" },
                     { label: t(lang, "setExpirationAbonnement"), desc: expiresAt ? fullDate(expiresAt) : (t(lang, "setVersionGratuite")), active: !!expiresAt, color: "#fbbf24" },
                   ].map((n, i) => (
-                    <div key={i} style={{ padding: "14px 16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div key={i} style={{ padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <div>
-                        <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{n.label}</div>
-                        <div style={{ color: "#5f6b7a", fontSize: 11.5, marginTop: 2 }}>{n.desc}</div>
+                        <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{n.label}</div>
+                        <div style={{ color: T.muted, fontSize: 11.5, marginTop: 2 }}>{n.desc}</div>
                       </div>
-                      <div style={{ width: 10, height: 10, borderRadius: "50%", background: n.active ? n.color : "#232c38", flexShrink: 0, boxShadow: n.active ? `0 0 8px ${n.color}` : "none" }} />
+                      <div style={{ width: 10, height: 10, borderRadius: "50%", background: n.active ? n.color : T.border, flexShrink: 0, boxShadow: n.active ? `0 0 8px ${n.color}` : "none" }} />
                     </div>
                   ))}
                 </div>
               )}
               {settingsField === "id" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "identifier")}</div>
-                  <div style={{ color: "#f1f5f9", fontSize: 17, fontWeight: 700 }}>{username}</div>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "identifier")}</div>
+                  <div style={{ color: T.text, fontSize: 17, fontWeight: 700 }}>{username}</div>
                 </div>
               )}
               {settingsField === "photo" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
-                    {shopPhoto ? <img src={shopPhoto} alt="" style={{ width: 56, height: 56, borderRadius: "50%", objectFit: "cover" }} /> : <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#1c2530", display: "flex", alignItems: "center", justifyContent: "center" }}><Camera size={20} color="#5f6b7a" /></div>}
-                    <input type="file" accept="image/*" onChange={handleShopPhotoChange} style={{ color: "#94a3b8", fontSize: 12, flex: 1 }} />
+                    {shopPhoto ? <img src={shopPhoto} alt="" style={{ width: 56, height: 56, borderRadius: "50%", objectFit: "cover" }} /> : <div style={{ width: 56, height: 56, borderRadius: "50%", background: T.border, display: "flex", alignItems: "center", justifyContent: "center" }}><Camera size={20} color={T.muted} /></div>}
+                    <input type="file" accept="image/*" onChange={handleShopPhotoChange} style={{ color: T.muted, fontSize: 12, flex: 1 }} />
                   </div>
-                  {shopPhotoBusy && <p style={{ color: "#5f6b7a", fontSize: 11 }}>{t(lang, "processing")}</p>}
+                  {shopPhotoBusy && <p style={{ color: T.muted, fontSize: 11 }}>{t(lang, "processing")}</p>}
                 </div>
               )}
               {settingsField === "name" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 8 }}>{t(lang, "shopName")}</div>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "shopName")}</div>
                   <div style={{ display: "flex", gap: 8 }}>
-                    <input value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: "#161d27", color: "#f1f5f9", border: "1px solid #2a3445", borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <input value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                     <button onClick={renameShop} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}>OK</button>
                   </div>
                   {shopNameMsg && <p style={{ color: shopNameMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11, marginTop: 6 }}>{shopNameMsg}</p>}
                 </div>
               )}
               {settingsField === "pin" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
                   {[{ v: oldPin, s: setOldPin, p: t(lang, "setAncienMotDePasse") }, { v: newPin, s: setNewPin, p: t(lang, "setNouveauMotDePasse") }, { v: confirmNewPin, s: setConfirmNewPin, p: t(lang, "setConfirmerLeMotDePasse") }].map((f, i) => (
-                    <input key={i} type="password" placeholder={f.p} value={f.v} onChange={(e) => f.s(e.target.value)} style={{ background: "#161d27", color: "#f1f5f9", border: "1px solid #2a3445", borderRadius: 10, padding: "10px 12px", fontSize: 14 }} />
+                    <input key={i} type="password" placeholder={f.p} value={f.v} onChange={(e) => f.s(e.target.value)} style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "10px 12px", fontSize: 14 }} />
                   ))}
                   {pinMsg && <p style={{ color: pinMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11 }}>{pinMsg}</p>}
                   <button onClick={changePassword} style={{ background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", borderRadius: 12, padding: 12, fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "updatePin")}</button>
@@ -12592,37 +12596,37 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
               {settingsField === "lockpin" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 11, lineHeight: 1.5 }}>{t(lang, "setCeCodeSertADemasquer")}</p>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ color: T.muted, fontSize: 11, lineHeight: 1.5 }}>{t(lang, "setCeCodeSertADemasquer")}</p>
                   {[{ v: oldLockPin, s: setOldLockPin, p: t(lang, "setAncienCodePin") }, { v: newLockPin, s: setNewLockPin, p: t(lang, "setNouveauCodePin") }, { v: confirmNewLockPin, s: setConfirmNewLockPin, p: t(lang, "setConfirmerLeCodePin") }].map((f, i) => (
-                    <input key={i} type="password" inputMode="numeric" maxLength={4} placeholder={f.p} value={f.v} onChange={(e) => f.s(e.target.value.replace(/\D/g, "").slice(0, 4))} style={{ background: "#161d27", color: "#f1f5f9", border: "1px solid #2a3445", borderRadius: 10, padding: "10px 12px", fontSize: 14 }} />
+                    <input key={i} type="password" inputMode="numeric" maxLength={4} placeholder={f.p} value={f.v} onChange={(e) => f.s(e.target.value.replace(/\D/g, "").slice(0, 4))} style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "10px 12px", fontSize: 14 }} />
                   ))}
                   {lockPinMsg && <p style={{ color: lockPinMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11 }}>{lockPinMsg}</p>}
                   <button onClick={changeLockPin} style={{ background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", borderRadius: 12, padding: 12, fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "updatePin")}</button>
-                  <button onClick={openForgotPin} style={{ background: "none", border: "none", color: "#5f6b7a", fontSize: 11.5, textDecoration: "underline", cursor: "pointer", padding: 0 }}>{t(lang, "forgotPinLink")}</button>
+                  <button onClick={openForgotPin} style={{ background: "none", border: "none", color: T.muted, fontSize: 11.5, textDecoration: "underline", cursor: "pointer", padding: 0 }}>{t(lang, "forgotPinLink")}</button>
                 </div>
               )}
               {settingsField === "darkmode" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
-                    <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "darkMode")}</div>
-                    <div style={{ color: "#5f6b7a", fontSize: 12, marginTop: 2 }}>{t(lang, "darkModeDesc")}</div>
+                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "darkMode")}</div>
+                    <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "darkModeDesc")}</div>
                   </div>
-                  <button onClick={() => saveAll({ darkMode: !darkMode })} style={{ width: 48, height: 28, borderRadius: 14, background: darkMode ? "#22d3ee" : "#232c38", display: "flex", alignItems: "center", padding: "0 4px", justifyContent: darkMode ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                  <button onClick={() => saveAll({ darkMode: !darkMode })} style={{ width: 48, height: 28, borderRadius: 14, background: darkMode ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: darkMode ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
                     <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
                   </button>
                 </div>
               )}
               {settingsField === "lang" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "chooseLanguage")}</p>
+                  <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "chooseLanguage")}</p>
                   <div className="relative">
-                    <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#5f6b7a" }} />
+                    <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: T.muted }} />
                     <input
                       value={langSearchQuery}
                       onChange={(e) => setLangSearchQuery(e.target.value)}
                       placeholder={t(lang, "search")}
-                      style={{ width: "100%", background: "#10151d", border: "1px solid #1c2530", borderRadius: 14, padding: "12px 14px 12px 36px", fontSize: 14, color: "#e5edf5" }}
+                      style={{ width: "100%", background: T.input, border: `1px solid ${T.border}`, borderRadius: 14, padding: "12px 14px 12px 36px", fontSize: 14, color: T.text }}
                     />
                   </div>
                   {LANGUAGES.filter((l) => {
@@ -12632,8 +12636,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     const native = l.label.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                     return translated.includes(q) || native.includes(q);
                   }).map((l) => (
-                    <button key={l.id} onClick={() => { const wasAr = lang === "ar"; setLang(l.id); if (l.id === "ar" && !wasAr) setShowArabicDigitsPrompt(true); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: lang === l.id ? "rgba(34,211,238,0.15)" : "#10151d", border: `1px solid ${lang === l.id ? "#22d3ee" : "#1c2530"}`, cursor: "pointer" }}>
-                      <span style={{ color: lang === l.id ? "#22d3ee" : "#e5edf5", fontSize: 14, fontWeight: 600 }}>{languageLabel(l, lang)}</span>
+                    <button key={l.id} onClick={() => { const wasAr = lang === "ar"; setLang(l.id); if (l.id === "ar" && !wasAr) setShowArabicDigitsPrompt(true); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: lang === l.id ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${lang === l.id ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
+                      <span style={{ color: lang === l.id ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{languageLabel(l, lang)}</span>
                       {lang === l.id && <Check size={16} color="#22d3ee" />}
                     </button>
                   ))}
@@ -12641,66 +12645,66 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
               {settingsField === "digits" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "arabicDigitsPromptDesc")}</p>
-                  <button onClick={() => saveAll({ arabicDigits: false })} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: !arabicDigits ? "rgba(34,211,238,0.15)" : "#10151d", border: `1px solid ${!arabicDigits ? "#22d3ee" : "#1c2530"}`, cursor: "pointer" }}>
-                    <span style={{ color: !arabicDigits ? "#22d3ee" : "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "useWesternDigitsBtn")}</span>
+                  <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "arabicDigitsPromptDesc")}</p>
+                  <button onClick={() => saveAll({ arabicDigits: false })} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: !arabicDigits ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${!arabicDigits ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
+                    <span style={{ color: !arabicDigits ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "useWesternDigitsBtn")}</span>
                     {!arabicDigits && <Check size={16} color="#22d3ee" />}
                   </button>
-                  <button onClick={() => saveAll({ arabicDigits: true })} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: arabicDigits ? "rgba(34,211,238,0.15)" : "#10151d", border: `1px solid ${arabicDigits ? "#22d3ee" : "#1c2530"}`, cursor: "pointer" }}>
-                    <span style={{ color: arabicDigits ? "#22d3ee" : "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "useArabicDigitsBtn")}</span>
+                  <button onClick={() => saveAll({ arabicDigits: true })} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: arabicDigits ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${arabicDigits ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
+                    <span style={{ color: arabicDigits ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "useArabicDigitsBtn")}</span>
                     {arabicDigits && <Check size={16} color="#22d3ee" />}
                   </button>
                 </div>
               )}
               {settingsField === "currency" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 4 }}>{t(lang, "setChoisisLaDeviseDeTa")}</p>
+                  <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setChoisisLaDeviseDeTa")}</p>
                   {CURRENCIES.map((c) => (
-                    <button key={c.id} onClick={() => saveAll({ currency: c.id })} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: currency === c.id ? "rgba(34,211,238,0.15)" : "#10151d", border: `1px solid ${currency === c.id ? "#22d3ee" : "#1c2530"}`, cursor: "pointer" }}>
-                      <span style={{ color: currency === c.id ? "#22d3ee" : "#e5edf5", fontSize: 14, fontWeight: 600 }}>{currencyLabel(c, lang)} <span style={{ color: "#5f6b7a", fontWeight: 400 }}>({c.symbol})</span></span>
+                    <button key={c.id} onClick={() => saveAll({ currency: c.id })} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: currency === c.id ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${currency === c.id ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
+                      <span style={{ color: currency === c.id ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{currencyLabel(c, lang)} <span style={{ color: T.muted, fontWeight: 400 }}>({c.symbol})</span></span>
                       {currency === c.id && <Check size={16} color="#22d3ee" />}
                     </button>
                   ))}
                 </div>
               )}
               {settingsField === "balls" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
-                    <div style={{ color: "#e5edf5", fontSize: 14, fontWeight: 600 }}>{t(lang, "animBalls")}</div>
-                    <div style={{ color: "#5f6b7a", fontSize: 12, marginTop: 2 }}>{t(lang, "setPetitesBoulesQuiFlottentEn")}</div>
+                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "animBalls")}</div>
+                    <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setPetitesBoulesQuiFlottentEn")}</div>
                   </div>
-                  <button onClick={() => saveAll({ showBalls: !showBalls })} style={{ width: 48, height: 28, borderRadius: 14, background: showBalls ? "#22d3ee" : "#232c38", display: "flex", alignItems: "center", padding: "0 4px", justifyContent: showBalls ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                  <button onClick={() => saveAll({ showBalls: !showBalls })} style={{ width: 48, height: 28, borderRadius: 14, background: showBalls ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: showBalls ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
                     <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
                   </button>
                 </div>
               )}
               {settingsField === "ballcolor" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 14 }}>{t(lang, "setChoisisLaCouleurDesBoules")}</p>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <p style={{ color: T.muted, fontSize: 12, marginBottom: 14 }}>{t(lang, "setChoisisLaCouleurDesBoules")}</p>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 12 }}>
                     {BALL_COLORS.map((c) => (
                       <button key={c.id} onClick={() => saveAll({ ballColor: c.id })} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, background: "none", border: "none", cursor: "pointer" }}>
-                        <span style={{ width: 40, height: 40, borderRadius: "50%", background: c.swatch, border: ballColor === c.id ? "3px solid #f1f5f9" : "3px solid transparent", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ width: 40, height: 40, borderRadius: "50%", background: c.swatch, border: ballColor === c.id ? `3px solid ${T.text}` : "3px solid transparent", display: "flex", alignItems: "center", justifyContent: "center" }}>
                           {ballColor === c.id && <Check size={15} color="white" />}
                         </span>
-                        <span style={{ color: "#5f6b7a", fontSize: 10 }}>{c.label}</span>
+                        <span style={{ color: T.muted, fontSize: 10 }}>{c.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
               )}
               {settingsField === "threshold" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                  <div style={{ color: "#5f6b7a", fontSize: 12, marginBottom: 8 }}>{t(lang, "stockAlert")}</div>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "stockAlert")}</div>
                   <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: "#161d27", color: "#f1f5f9", border: "1px solid #2a3445", borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
-                    <span style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
+                    <input type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                 </div>
               )}
               {settingsView === "help" && !settingsField && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: "#5f6b7a", fontSize: 13 }}>{t(lang, "setUneQuestionEcrisnousDirectement")}</p>
+                  <p style={{ color: T.muted, fontSize: 13 }}>{t(lang, "setUneQuestionEcrisnousDirectement")}</p>
                   <a href={`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Bonjour, j'ai une question sur mon compte Shopnify (identifiant : ${username}).`)}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", fontWeight: 700, fontSize: 14, textDecoration: "none" }}>
                     {t(lang, "contactSupport")}
                   </a>
@@ -12747,11 +12751,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     },
                   ].map((section, si) => (
                     <div key={si} style={{ marginTop: 6 }}>
-                      <p style={{ color: "#5f6b7a", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>{section.cat}</p>
+                      <p style={{ color: T.muted, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>{section.cat}</p>
                       {section.items.map((item, i) => (
-                        <div key={i} style={{ padding: "12px 14px", borderRadius: 12, background: "#10151d", border: "1px solid #1c2530", marginBottom: 8 }}>
-                          <p style={{ color: "#e5edf5", fontSize: 12.5, fontWeight: 600, marginBottom: 4 }}>{item.q}</p>
-                          <p style={{ color: "#5f6b7a", fontSize: 11.5, lineHeight: 1.5 }}>{item.a}</p>
+                        <div key={i} style={{ padding: "12px 14px", borderRadius: 12, background: T.input, border: `1px solid ${T.border}`, marginBottom: 8 }}>
+                          <p style={{ color: T.text, fontSize: 12.5, fontWeight: 600, marginBottom: 4 }}>{item.q}</p>
+                          <p style={{ color: T.muted, fontSize: 11.5, lineHeight: 1.5 }}>{item.a}</p>
                         </div>
                       ))}
                     </div>
@@ -12764,23 +12768,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <div style={{ width: 56, height: 56, borderRadius: 16, background: "radial-gradient(circle at 35% 30%, #00FFFF, #0891b2 70%)", margin: "0 auto 12px", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(0,255,255,0.35)" }}>
                       <Sparkles size={22} color="white" />
                     </div>
-                    <p style={{ color: "#f1f5f9", fontSize: 16, fontWeight: 700 }}>{t(lang, "appName")}</p>
-                    <p style={{ color: "#5f6b7a", fontSize: 12, marginTop: 2 }}>{t(lang, "setVersion")} 1.0</p>
+                    <p style={{ color: T.text, fontSize: 16, fontWeight: 700 }}>{t(lang, "appName")}</p>
+                    <p style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setVersion")} 1.0</p>
                   </div>
-                  <div style={{ padding: 14, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530" }}>
-                    <p style={{ color: "#cbd5e1", fontSize: 12.5, lineHeight: 1.6 }}>{t(lang, "setMaBoutiqueEstUneApplication")}</p>
+                  <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <p style={{ color: T.muted, fontSize: 12.5, lineHeight: 1.6 }}>{t(lang, "setMaBoutiqueEstUneApplication")}</p>
                   </div>
-                  <div style={{ padding: 14, borderRadius: 14, background: "#10151d", border: "1px solid #1c2530", display: "flex", flexDirection: "column", gap: 8 }}>
+                  <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 8 }}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "setDeveloppePour")}</span>
-                      <span style={{ color: "#e5edf5", fontSize: 12, fontWeight: 600 }}>{t(lang, "setBoutiquiersDuMondeEntier")}</span>
+                      <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setDeveloppePour")}</span>
+                      <span style={{ color: T.text, fontSize: 12, fontWeight: 600 }}>{t(lang, "setBoutiquiersDuMondeEntier")}</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span style={{ color: "#5f6b7a", fontSize: 12 }}>{t(lang, "setContact")}</span>
-                      <span style={{ color: "#e5edf5", fontSize: 12, fontWeight: 600 }}>WhatsApp</span>
+                      <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setContact")}</span>
+                      <span style={{ color: T.text, fontSize: 12, fontWeight: 600 }}>WhatsApp</span>
                     </div>
                   </div>
-                  <a href={`https://wa.me/${ADMIN_WHATSAPP}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: "#161d27", border: "1px solid #232c38", color: "#94a3b8", fontSize: 12, fontWeight: 600, textDecoration: "none" }}>
+                  <a href={`https://wa.me/${ADMIN_WHATSAPP}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, textDecoration: "none" }}>
                     {t(lang, "setContacterLeDeveloppeur")}
                   </a>
                 </div>
@@ -12796,7 +12800,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <p style={{ color: "#fca5a5", fontSize: 13, marginBottom: 14 }}>{t(lang, "resetConfirm")}</p>
                       <div style={{ display: "flex", gap: 8 }}>
                         <button onClick={resetShopData} style={{ flex: 1, padding: 12, borderRadius: 12, background: "linear-gradient(135deg, #f87171, #ef4444)", color: "white", fontSize: 13, fontWeight: 700, cursor: "pointer", border: "none" }}>{t(lang, "yesErase")}</button>
-                        <button onClick={() => setConfirmReset(false)} style={{ flex: 1, padding: 12, borderRadius: 12, background: "#161d27", border: "1px solid #232c38", color: "#cbd5e1", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{t(lang, "cancel")}</button>
+                        <button onClick={() => setConfirmReset(false)} style={{ flex: 1, padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{t(lang, "cancel")}</button>
                       </div>
                     </div>
                   )}
