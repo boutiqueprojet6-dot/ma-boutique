@@ -30,6 +30,11 @@ jobs:
       - name: Add Android platform
         run: npx cap add android
 
+      - name: Generate app icon
+        run: |
+          npm install --no-save @capacitor/assets
+          npx capacitor-assets generate --android --iconBackgroundColor '#082868' --iconBackgroundColorDark '#082868' --iconPath icon.png
+
       - name: Configure deep link for Google OAuth
         run: |
           python3 - << 'EOF'
