@@ -5588,38 +5588,27 @@ function GradientBackdrop() {
 }
 // ---------- AUTH SCREEN ----------
 function LanguagePickerScreen({ onChoose }) {
-  const options = [
-    { id: "fr", label: "Français", sub: "Continuer en français" },
-    { id: "en", label: "English", sub: "Continue in English" },
-    { id: "ar", label: "العربية", sub: "المتابعة بالعربية" },
-    { id: "es", label: "Español", sub: "Continuar en español" },
-    { id: "pt", label: "Português", sub: "Continuar em português" },
-    { id: "zh", label: "中文", sub: "以中文继续" },
-    { id: "zu", label: "isiZulu", sub: "Qhubeka ngesiZulu" },
-    { id: "vi", label: "Tiếng Việt", sub: "Tiếp tục bằng tiếng Việt" },
-    { id: "de", label: "Deutsch", sub: "Auf Deutsch fortfahren" },
-    { id: "ru", label: "Русский", sub: "Продолжить на русском" },
-    { id: "hi", label: "हिन्दी", sub: "हिन्दी में जारी रखें" },
-    { id: "ta", label: "தமிழ்", sub: "தமிழில் தொடரவும்" },
-    { id: "bn", label: "বাংলা", sub: "বাংলায় চালিয়ে যান" },
-    { id: "ur", label: "اردو", sub: "اردو میں جاری رکھیں" },
-    { id: "id", label: "Bahasa Indonesia", sub: "Lanjutkan dalam Bahasa Indonesia" },
-    { id: "tr", label: "Türkçe", sub: "Türkçe devam et" },
-    { id: "ko", label: "한국어", sub: "한국어로 계속하기" },
-    { id: "ja", label: "日本語", sub: "日本語で続ける" },
-    { id: "it", label: "Italiano", sub: "Continua in italiano" },
-    { id: "nl", label: "Nederlands", sub: "Doorgaan in het Nederlands" },
-    { id: "sw", label: "Kiswahili", sub: "Endelea kwa Kiswahili" },
-    { id: "ha", label: "Hausa", sub: "Ci gaba da Hausa" },
-    { id: "bm", label: "Bamanankan", sub: "Taa ɲɛ ni Bamanankan ye" },
-    { id: "tl", label: "Tagalog", sub: "Magpatuloy sa Tagalog" },
-    { id: "te", label: "తెలుగు", sub: "తెలుగులో కొనసాగించండి" },
-    { id: "th", label: "ไทย", sub: "ดำเนินการต่อเป็นภาษาไทย" },
-    { id: "wo", label: "Wolof", sub: "Jëm kanam ci Wolof" },
-    { id: "pl", label: "Polski", sub: "Kontynuuj w języku polskim" },
-    { id: "yo", label: "Yorùbá", sub: "Tẹ̀síwájú ní èdè Yorùbá" },
-    { id: "am", label: "አማርኛ", sub: "በአማርኛ ቀጥል" },
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+  // Détecte la langue du téléphone (ex: "fr-FR" -> "fr") et la fait
+  // correspondre à une langue supportée par l'app ; "en" par défaut sinon.
+  const systemLang = useMemo(() => {
+    const raw = (typeof navigator !== "undefined" && (navigator.language || (navigator.languages && navigator.languages[0]))) || "en";
+    const code = raw.slice(0, 2).toLowerCase();
+    return LANGUAGES.some((l) => l.id === code) ? code : "en";
+  }, []);
+  // Préchoisit la langue du système : mise en avant visuellement dès l'arrivée,
+  // même si l'utilisateur doit toujours taper dessus (ou une autre) pour continuer.
+  const [selected, setSelected] = useState(systemLang);
+  const filtered = LANGUAGES.filter((l) => {
+    const q = searchQuery.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (!q) return true;
+    const translated = languageLabel(l, systemLang).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const native = l.label.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return translated.includes(q) || native.includes(q);
+  });
+  // La langue du système remonte en tête de liste, pour la retrouver
+  // immédiatement même après une recherche.
+  const sorted = [...filtered].sort((a, b) => (a.id === systemLang ? -1 : b.id === systemLang ? 1 : 0));
   return (
     <div dir="ltr" className="min-h-screen flex items-center justify-center p-4" style={{ background: "#F6F7FB" }}>
       <div className="w-full max-w-sm rounded-3xl bg-white p-8 text-center shadow-xl max-h-[90vh] overflow-y-auto">
@@ -5627,20 +5616,29 @@ function LanguagePickerScreen({ onChoose }) {
           <svg width="26" height="26" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
           <span className="font-bold text-base" style={{ color: "#15162C" }}>Shopnify</span>
         </div>
-        <p className="text-sm font-semibold mb-1" style={{ color: "#15162C" }}>Choisis ta langue</p>
-        <p className="text-xs mb-6" style={{ color: "#6B6D85" }}>Choose your language · اختر لغتك</p>
+        <p className="text-sm font-semibold mb-4" style={{ color: "#15162C" }}>{t(systemLang, "chooseLanguage")}</p>
+        <div className="relative mb-4">
+          <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#A6A8BC" }} />
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={t(systemLang, "search")}
+            className="w-full border rounded-xl text-sm"
+            style={{ background: "#F6F7FB", padding: "12px 14px 12px 36px", borderColor: "#E7E8F1" }}
+          />
+        </div>
         <div className="flex flex-col gap-3">
-          {options.map((o) => (
+          {sorted.map((l) => (
             <button
-              key={o.id}
-              onClick={() => onChoose(o.id)}
+              key={l.id}
+              onClick={() => { setSelected(l.id); onChoose(l.id); }}
               className="w-full py-3.5 rounded-xl font-semibold text-sm border-2 transition"
-              style={{ borderColor: "#E7E8F1", color: "#15162C" }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#4F46E5"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E7E8F1"; }}
+              style={{ borderColor: selected === l.id ? "#4F46E5" : "#E7E8F1", background: selected === l.id ? "rgba(79,70,229,0.07)" : "transparent", color: "#15162C" }}
             >
-              {o.label}
-              <span className="block text-[11px] font-normal mt-0.5" style={{ color: "#A6A8BC" }}>{o.sub}</span>
+              {l.label}
+              {l.id !== systemLang && (
+                <span className="block text-[11px] font-normal mt-0.5" style={{ color: "#A6A8BC" }}>{languageLabel(l, systemLang)}</span>
+              )}
             </button>
           ))}
         </div>
@@ -5704,6 +5702,23 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     if (p && shop) return `${p}_${shop}`;
     return p || shop;
   })();
+  // ---- Détection "app installable" (PWA) : capte l'événement du navigateur,
+  // on l'affiche via un bouton dédié plutôt que le mini-menu du navigateur.
+  const [installPrompt, setInstallPrompt] = useState(null);
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+  const handleInstallClick = async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    await installPrompt.userChoice;
+    setInstallPrompt(null); // l'événement ne se redéclenche pas après un choix
+  };
   // Connexion "Continuer avec Google" — utilise le fournisseur OAuth natif de
   // Supabase (configuré côté dashboard, aucune clé secrète exposée ici).
   const [googleLoginBusy, setGoogleLoginBusy] = useState(false);
@@ -6037,6 +6052,15 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <p className="text-sm font-medium mb-4" style={{ color: "#6B6D85" }}>
               {t(lang, "loginSubtitle")}
             </p>
+            {installPrompt && (
+              <button
+                onClick={handleInstallClick}
+                className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2"
+                style={{ background: INDIGO, color: "white" }}
+              >
+                ⬇️ {lang === "fr" ? "Installer l'application" : "Install app"}
+              </button>
+            )}
             <button
               onClick={loginWithGoogle}
               disabled={googleLoginBusy}
@@ -8753,6 +8777,132 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     return { quantity: packs, looseUnits: loose };
   };
+  // ---- Partage d'un produit en image (pour WhatsApp, statuts, etc.) ----
+  // Génère une image "fiche produit" avec la photo, le nom, le prix, le nom de
+  // la boutique, et le logo + nom de l'app pour donner envie à d'autres de
+  // télécharger Shopnify. Utilise l'API de partage native si disponible,
+  // sinon télécharge l'image directement.
+  const shareProduct = async (p) => {
+    try {
+      const loadImage = (src) => new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1350;
+      const ctx = canvas.getContext("2d");
+      const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      bg.addColorStop(0, "#1e2a5e");
+      bg.addColorStop(1, "#0f1530");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Logo + nom de l'app en haut, pour que la fiche donne envie de
+      // télécharger Shopnify quand elle circule.
+      try {
+        const logoImg = await loadImage(`data:image/jpeg;base64,${APP_LOGO_B64}`);
+        const logoSize = 76;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(70 + logoSize / 2, 74 + logoSize / 2, logoSize / 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(logoImg, 70, 74, logoSize, logoSize);
+        ctx.restore();
+      } catch (e) {}
+      ctx.fillStyle = "#ffffff";
+      ctx.textBaseline = "middle";
+      ctx.font = "bold 42px system-ui, -apple-system, sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText("Shopnify", 70 + 76 + 22, 74 + 76 / 2);
+      // Carte photo produit, coins arrondis
+      const cardX = 70, cardY = 210, cardW = canvas.width - 140, cardH = 680;
+      const radius = 32;
+      const roundedRect = (x, y, w, h, r) => {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      };
+      ctx.save();
+      roundedRect(cardX, cardY, cardW, cardH, radius);
+      ctx.clip();
+      ctx.fillStyle = "#1c2340";
+      ctx.fillRect(cardX, cardY, cardW, cardH);
+      if (p.photo) {
+        try {
+          const photoImg = await loadImage(p.photo);
+          const scale = Math.max(cardW / photoImg.width, cardH / photoImg.height);
+          const sw = cardW / scale, sh = cardH / scale;
+          const sx = (photoImg.width - sw) / 2, sy = (photoImg.height - sh) / 2;
+          ctx.drawImage(photoImg, sx, sy, sw, sh, cardX, cardY, cardW, cardH);
+        } catch (e) {}
+      } else {
+        ctx.fillStyle = "#8B85F2";
+        ctx.font = "160px system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("📦", cardX + cardW / 2, cardY + cardH / 2);
+        ctx.textAlign = "left";
+      }
+      ctx.restore();
+      // Nom du produit (tronqué si trop long pour tenir sur la largeur)
+      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 58px system-ui, -apple-system, sans-serif";
+      let name = p.name || "";
+      while (ctx.measureText(name).width > cardW && name.length > 3) name = name.slice(0, -1);
+      if (name !== (p.name || "")) name += "…";
+      ctx.fillText(name, cardX, cardY + cardH + 90);
+      // Prix, bien mis en avant
+      ctx.fillStyle = "#34d399";
+      ctx.font = "bold 74px system-ui, -apple-system, sans-serif";
+      ctx.fillText(fcfa(p.price), cardX, cardY + cardH + 185);
+      // Nom de la boutique
+      if (shopName) {
+        ctx.fillStyle = "rgba(255,255,255,0.72)";
+        ctx.font = "36px system-ui, -apple-system, sans-serif";
+        let shopLine = `Vendu par ${shopName}`;
+        while (ctx.measureText(shopLine).width > cardW && shopLine.length > 3) shopLine = shopLine.slice(0, -1);
+        ctx.fillText(shopLine, cardX, cardY + cardH + 250);
+      }
+      // Bandeau bas : accroche pour faire connaître l'app
+      ctx.fillStyle = "rgba(255,255,255,0.08)";
+      ctx.fillRect(0, canvas.height - 130, canvas.width, 130);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 34px system-ui, -apple-system, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("📲 Gère ta boutique avec Shopnify", canvas.width / 2, canvas.height - 65);
+      ctx.textAlign = "left";
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const safeName = (p.name || "produit").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+        const file = new File([blob], `${safeName}.png`, { type: "image/png" });
+        const shareText = `${p.name} — ${fcfa(p.price)}${shopName ? ` chez ${shopName}` : ""}`;
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({ files: [file], title: p.name, text: shareText });
+            return;
+          } catch (e) {
+            // Partage annulé ou indisponible : on retombe sur le téléchargement ci-dessous.
+          }
+        }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${safeName}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }, "image/png");
+    } catch (e) {
+      // Le partage n'est pas une action critique : en cas d'échec on n'affiche
+      // pas d'erreur bloquante à l'utilisateur.
+    }
+  };
   const deleteProduct = (id) => {
     const targetProduct = products.find((pr) => pr.id === id);
     saveAll({ products: products.filter((p) => p.id !== id) });
@@ -10486,6 +10636,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => shareProduct(p)}
+                    className="w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{ background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}
+                    aria-label={t(lang, "shareProductBtn") || "Partager"}
+                  >
+                    <Send size={13} color={darkMode ? "#60a5fa" : "#2563eb"} />
+                  </button>
                   {hasPermission("editStock") && (
                     <button
                       onClick={() => setConfirmModal({ message: `Supprimer "${p.name}" du stock ?`, onConfirm: () => deleteProduct(p.id) })}
