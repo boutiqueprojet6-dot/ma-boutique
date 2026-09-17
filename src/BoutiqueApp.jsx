@@ -378,7 +378,7 @@ const TRANSLATIONS = {
     identifier: "E-mail", shopPhoto: "Photo de la boutique", shopName: "Nom de la boutique", email: "E-mail (facultatif)",
     changePin: "Changer le code PIN", oldPin: "Ancien code PIN", newPin: "Nouveau code PIN", confirmNewPin: "Confirmer le nouveau code PIN",
     updatePin: "Mettre à jour le code PIN", forgotPinSettings: "Code PIN complètement oublié ? Contacter l'assistance",
-    darkMode: "Mode sombre", darkModeDesc: "Fond noir avec les petites boules bleues éclairées",
+    darkMode: "Thème", darkModeDesc: "Système, clair ou sombre", themeSystem: "Système", themeLight: "Clair", themeDark: "Sombre",
     animBalls: "Boules animées", ballColor: "Couleur des boules", stockAlert: "Seuil d'alerte stock",
     stockAlertDesc: "unité(s) restante(s) déclenche l'alerte", contactSupport: "Contacter l'assistance sur WhatsApp",
     resetData: "Réinitialiser toutes mes données", resetConfirm: "Ceci efface définitivement ton stock, tes ventes, tes dettes et ta caisse. Ton compte reste actif. Confirmes-tu ?",
@@ -515,7 +515,7 @@ const TRANSLATIONS = {
     identifier: "ኢሜይል", shopPhoto: "የሱቅ ፎቶ", shopName: "የሱቅ ስም", email: "ኢሜይል (አማራጭ)",
     changePin: "የፒን ኮድ ቀይር", oldPin: "የቀድሞ ፒን ኮድ", newPin: "አዲስ ፒን ኮድ", confirmNewPin: "አዲሱን ፒን ኮድ አረጋግጥ",
     updatePin: "ፒን ኮድ አዘምን", forgotPinSettings: "ፒን ኮድህን ሙሉ በሙሉ ረሳህ? እገዛን አግኝ",
-    darkMode: "ጨለማ ገፅታ", darkModeDesc: "ጥቁር ዳራ ከትንንሽ የበራ ሰማያዊ ኳሶች ጋር",
+    darkMode: "ገጽታ", darkModeDesc: "ስርዓት፣ ብሩህ ወይም ጨለማ", themeSystem: "ስርዓት", themeLight: "ብሩህ", themeDark: "ጨለማ",
     animBalls: "ተንቀሳቃሽ ኳሶች", ballColor: "የኳስ ቀለም", stockAlert: "የክምችት ማንቂያ ገደብ",
     stockAlertDesc: "ቀሪ ዕቃ(ዎች) ማንቂያውን ያስነሳል", contactSupport: "በ WhatsApp እገዛን አግኝ",
     resetData: "ሁሉንም መረጃዬን ዳግም አስጀምር", resetConfirm: "ይህ ክምችትህን፣ ሽያጮችህን፣ ዕዳዎችህን እና ካዝናህን ለዘላለም ይሰርዛል። መለያህ ንቁ ሆኖ ይቆያል። ትፈቅዳለህ?",
@@ -661,7 +661,7 @@ const TRANSLATIONS = {
     identifier: "Email", shopPhoto: "Shop photo", shopName: "Shop name", email: "Email (optional)",
     changePin: "Change PIN", oldPin: "Old PIN", newPin: "New PIN", confirmNewPin: "Confirm new PIN",
     updatePin: "Update PIN", forgotPinSettings: "PIN completely forgotten? Contact support",
-    darkMode: "Dark mode", darkModeDesc: "Black background with glowing bubbles",
+    darkMode: "Theme", darkModeDesc: "System, light or dark", themeSystem: "System", themeLight: "Light", themeDark: "Dark",
     animBalls: "Animated bubbles", ballColor: "Bubble color", stockAlert: "Low stock threshold",
     stockAlertDesc: "unit(s) remaining triggers the alert", contactSupport: "Contact support on WhatsApp",
     resetData: "Reset all my data", resetConfirm: "This will permanently erase your stock, sales, debts and cash. Your account stays active. Confirm?",
@@ -808,7 +808,7 @@ const TRANSLATIONS = {
     identifier: "Email", shopPhoto: "Larawan ng tindahan", shopName: "Pangalan ng tindahan", email: "Email (opsyonal)",
     changePin: "Palitan ang PIN", oldPin: "Lumang PIN", newPin: "Bagong PIN", confirmNewPin: "Kumpirmahin ang bagong PIN",
     updatePin: "I-update ang PIN", forgotPinSettings: "Ganap na nakalimutan ang PIN? Kontakin ang suporta",
-    darkMode: "Dark mode", darkModeDesc: "Itim na background na may kumikinang na bubbles",
+    darkMode: "Tema", darkModeDesc: "System, maliwanag o madilim", themeSystem: "System", themeLight: "Maliwanag", themeDark: "Madilim",
     animBalls: "Animated bubbles", ballColor: "Kulay ng bubble", stockAlert: "Threshold ng mababang stock",
     stockAlertDesc: "piraso na natitira ang magpapaalarma", contactSupport: "Kontakin ang suporta sa WhatsApp",
     resetData: "I-reset ang lahat ng datos ko", resetConfirm: "Permanenteng mabubura ang iyong stock, benta, utang at cash. Mananatiling aktibo ang account mo. Kumpirmahin?",
@@ -954,7 +954,7 @@ const TRANSLATIONS = {
     identifier: "ఇమెయిల్", shopPhoto: "దుకాణం ఫోటో", shopName: "దుకాణం పేరు", email: "ఇమెయిల్ (ఐచ్ఛికం)",
     changePin: "PIN మార్చండి", oldPin: "పాత PIN", newPin: "కొత్త PIN", confirmNewPin: "కొత్త PINను నిర్ధారించండి",
     updatePin: "PIN అప్‌డేట్ చేయండి", forgotPinSettings: "PIN పూర్తిగా మర్చిపోయారా? సహాయాన్ని సంప్రదించండి",
-    darkMode: "డార్క్ మోడ్", darkModeDesc: "మెరుస్తున్న బుడగలతో నలుపు నేపథ్యం",
+    darkMode: "థీమ్", darkModeDesc: "సిస్టమ్, లైట్ లేదా డార్క్", themeSystem: "సిస్టమ్", themeLight: "లైట్", themeDark: "డార్క్",
     animBalls: "యానిమేటెడ్ బుడగలు", ballColor: "బుడగ రంగు", stockAlert: "తక్కువ స్టాక్ థ్రెషోల్డ్",
     stockAlertDesc: "మిగిలిన యూనిట్(లు) హెచ్చరికను ప్రేరేపిస్తాయి", contactSupport: "WhatsAppలో సహాయాన్ని సంప్రదించండి",
     resetData: "నా మొత్తం డేటాను రీసెట్ చేయండి", resetConfirm: "ఇది మీ స్టాక్, అమ్మకాలు, అప్పులు మరియు నగదును శాశ్వతంగా తొలగిస్తుంది. మీ ఖాతా యాక్టివ్‌గా ఉంటుంది. నిర్ధారించాలా?",
@@ -1100,7 +1100,7 @@ const TRANSLATIONS = {
     identifier: "อีเมล", shopPhoto: "รูปภาพร้าน", shopName: "ชื่อร้าน", email: "อีเมล (ไม่บังคับ)",
     changePin: "เปลี่ยนรหัส PIN", oldPin: "รหัส PIN เดิม", newPin: "รหัส PIN ใหม่", confirmNewPin: "ยืนยันรหัส PIN ใหม่",
     updatePin: "อัปเดตรหัส PIN", forgotPinSettings: "ลืมรหัส PIN ทั้งหมด? ติดต่อฝ่ายสนับสนุน",
-    darkMode: "โหมดมืด", darkModeDesc: "พื้นหลังสีดำพร้อมฟองสบู่เรืองแสง",
+    darkMode: "ธีม", darkModeDesc: "ระบบ, สว่าง หรือ มืด", themeSystem: "ระบบ", themeLight: "สว่าง", themeDark: "มืด",
     animBalls: "ฟองสบู่เคลื่อนไหว", ballColor: "สีฟองสบู่", stockAlert: "เกณฑ์แจ้งเตือนสต็อกต่ำ",
     stockAlertDesc: "หน่วยที่เหลือจะกระตุ้นการแจ้งเตือน", contactSupport: "ติดต่อฝ่ายสนับสนุนทาง WhatsApp",
     resetData: "รีเซ็ตข้อมูลทั้งหมดของฉัน", resetConfirm: "การดำเนินการนี้จะลบสต็อก การขาย หนี้สิน และเงินสดของคุณอย่างถาวร บัญชีของคุณจะยังคงใช้งานได้ ยืนยันหรือไม่?",
@@ -1246,7 +1246,7 @@ const TRANSLATIONS = {
     identifier: "Email", shopPhoto: "Nataal bitik bi", shopName: "Turu bitik bi", email: "Email (du sawar)",
     changePin: "Soppi PIN", oldPin: "PIN bu njëkk", newPin: "PIN bu bees", confirmNewPin: "Wone PIN bu bees bi",
     updatePin: "Update PIN bi", forgotPinSettings: "Fàtte nga sa PIN bépp? Jokkoo ak ndimbal",
-    darkMode: "Mode bu ñuul", darkModeDesc: "Fond bu ñuul ak bulle yu melax",
+    darkMode: "Nataal", darkModeDesc: "Sistem, leer walla ñuul", themeSystem: "Sistem", themeLight: "Leer", themeDark: "Ñuul",
     animBalls: "Bulle yu doxal", ballColor: "Melo bulle bi", stockAlert: "Seuil bu stock bu barele",
     stockAlertDesc: "unite(s) desë dina joxe alerte", contactSupport: "Jokkoo ak ndimbal ci WhatsApp",
     resetData: "Reset sama xibaar bépp", resetConfirm: "Loolu dina far sa stock, sa jaay, sa boor ak sa xaalis ba fàww. Sa compte dina des ci doxal. Wone?",
@@ -1392,7 +1392,7 @@ const TRANSLATIONS = {
     identifier: "E-mail", shopPhoto: "Zdjęcie sklepu", shopName: "Nazwa sklepu", email: "E-mail (opcjonalnie)",
     changePin: "Zmień PIN", oldPin: "Stary PIN", newPin: "Nowy PIN", confirmNewPin: "Potwierdź nowy PIN",
     updatePin: "Zaktualizuj PIN", forgotPinSettings: "Całkowicie zapomniałeś PIN-u? Skontaktuj się z pomocą",
-    darkMode: "Tryb ciemny", darkModeDesc: "Czarne tło z błyszczącymi bąbelkami",
+    darkMode: "Motyw", darkModeDesc: "Systemowy, jasny lub ciemny", themeSystem: "Systemowy", themeLight: "Jasny", themeDark: "Ciemny",
     animBalls: "Animowane bąbelki", ballColor: "Kolor bąbelka", stockAlert: "Próg niskiego stanu zapasów",
     stockAlertDesc: "pozostałych sztuk uruchomi alert", contactSupport: "Skontaktuj się z pomocą przez WhatsApp",
     resetData: "Zresetuj wszystkie moje dane", resetConfirm: "To trwale usunie Twoje zapasy, sprzedaż, długi i gotówkę. Twoje konto pozostanie aktywne. Potwierdzasz?",
@@ -1538,7 +1538,7 @@ const TRANSLATIONS = {
     identifier: "البريد الإلكتروني", shopPhoto: "صورة المتجر", shopName: "اسم المتجر", email: "البريد الإلكتروني (اختياري)",
     changePin: "تغيير الرمز السري", oldPin: "الرمز القديم", newPin: "الرمز الجديد", confirmNewPin: "تأكيد الرمز الجديد",
     updatePin: "تحديث الرمز السري", forgotPinSettings: "نسيت الرمز تماماً؟ تواصل مع الدعم",
-    darkMode: "الوضع الداكن", darkModeDesc: "خلفية سوداء مع كرات مضيئة",
+    darkMode: "المظهر", darkModeDesc: "النظام، فاتح أو داكن", themeSystem: "النظام", themeLight: "فاتح", themeDark: "داكن",
     animBalls: "الكرات المتحركة", ballColor: "لون الكرات", stockAlert: "حد تنبيه المخزون",
     stockAlertDesc: "وحدة (وحدات) متبقية يُفعّل التنبيه", contactSupport: "تواصل مع الدعم عبر واتساب",
     resetData: "إعادة تعيين كل بياناتي", resetConfirm: "سيتم حذف مخزونك ومبيعاتك وديونك وصندوقك نهائياً. حسابك يبقى نشطاً. هل تؤكد؟",
@@ -1684,7 +1684,7 @@ const TRANSLATIONS = {
     identifier: "Correo electrónico", shopPhoto: "Foto de la tienda", shopName: "Nombre de la tienda", email: "Correo electrónico (opcional)",
     changePin: "Cambiar código PIN", oldPin: "PIN anterior", newPin: "Nuevo PIN", confirmNewPin: "Confirmar nuevo PIN",
     updatePin: "Actualizar código PIN", forgotPinSettings: "¿Olvidaste completamente tu PIN? Contacta con soporte",
-    darkMode: "Modo oscuro", darkModeDesc: "Fondo negro con burbujas azules iluminadas",
+    darkMode: "Tema", darkModeDesc: "Sistema, claro u oscuro", themeSystem: "Sistema", themeLight: "Claro", themeDark: "Oscuro",
     animBalls: "Burbujas animadas", ballColor: "Color de las burbujas", stockAlert: "Umbral de alerta de stock",
     stockAlertDesc: "unidad(es) restante(s) activa la alerta", contactSupport: "Contactar con soporte por WhatsApp",
     resetData: "Reiniciar todos mis datos", resetConfirm: "Esto borrará permanentemente tu stock, ventas, deudas y caja. Tu cuenta seguirá activa. ¿Confirmas?",
@@ -1830,7 +1830,7 @@ const TRANSLATIONS = {
     identifier: "E-mail", shopPhoto: "Foto da loja", shopName: "Nome da loja", email: "E-mail (opcional)",
     changePin: "Alterar código PIN", oldPin: "PIN anterior", newPin: "Novo PIN", confirmNewPin: "Confirmar novo PIN",
     updatePin: "Atualizar código PIN", forgotPinSettings: "Esqueceu completamente seu PIN? Entre em contato com o suporte",
-    darkMode: "Modo escuro", darkModeDesc: "Fundo preto com bolhas azuis iluminadas",
+    darkMode: "Tema", darkModeDesc: "Sistema, claro ou escuro", themeSystem: "Sistema", themeLight: "Claro", themeDark: "Escuro",
     animBalls: "Bolhas animadas", ballColor: "Cor das bolhas", stockAlert: "Limite de alerta de estoque",
     stockAlertDesc: "unidade(s) restante(s) ativa o alerta", contactSupport: "Contatar o suporte pelo WhatsApp",
     resetData: "Reiniciar todos os meus dados", resetConfirm: "Isso apagará permanentemente seu estoque, vendas, dívidas e caixa. Sua conta continuará ativa. Confirma?",
@@ -1976,7 +1976,7 @@ const TRANSLATIONS = {
     identifier: "邮箱", shopPhoto: "店铺照片", shopName: "店铺名称", email: "邮箱（可选）",
     changePin: "修改密码", oldPin: "原密码", newPin: "新密码", confirmNewPin: "确认新密码",
     updatePin: "更新密码", forgotPinSettings: "彻底忘记密码了？联系客服",
-    darkMode: "深色模式", darkModeDesc: "黑色背景配蓝色发光气泡",
+    darkMode: "主题", darkModeDesc: "系统、浅色或深色", themeSystem: "系统", themeLight: "浅色", themeDark: "深色",
     animBalls: "动态气泡效果", ballColor: "气泡颜色", stockAlert: "库存预警阈值",
     stockAlertDesc: "件以下时触发提醒", contactSupport: "通过WhatsApp联系客服",
     resetData: "重置我的所有数据", resetConfirm: "此操作将永久删除你的库存、销售、赊账和账户余额记录。账号本身不会受影响。确认继续？",
@@ -2122,7 +2122,7 @@ const TRANSLATIONS = {
     identifier: "Email", shopPhoto: "Ảnh cửa hàng", shopName: "Tên cửa hàng", email: "Email (tùy chọn)",
     changePin: "Đổi mã PIN", oldPin: "Mã PIN cũ", newPin: "Mã PIN mới", confirmNewPin: "Xác nhận mã PIN mới",
     updatePin: "Cập nhật mã PIN", forgotPinSettings: "Hoàn toàn quên mã PIN? Liên hệ hỗ trợ",
-    darkMode: "Chế độ tối", darkModeDesc: "Nền đen với các quả bóng xanh lấp lánh",
+    darkMode: "Giao diện", darkModeDesc: "Hệ thống, sáng hoặc tối", themeSystem: "Hệ thống", themeLight: "Sáng", themeDark: "Tối",
     animBalls: "Bóng hoạt hình", ballColor: "Màu bóng", stockAlert: "Ngưỡng cảnh báo tồn kho",
     stockAlertDesc: "Cảnh báo sẽ kích hoạt khi còn lại số lượng này", contactSupport: "Liên hệ hỗ trợ qua WhatsApp",
     resetData: "Đặt lại toàn bộ dữ liệu của tôi", resetConfirm: "Thao tác này sẽ xóa vĩnh viễn kho hàng, doanh thu, công nợ và tiền mặt của bạn. Tài khoản vẫn sẽ hoạt động. Bạn có chắc chắn không?",
@@ -2268,7 +2268,7 @@ const TRANSLATIONS = {
     identifier: "E-Mail", shopPhoto: "Ladenfoto", shopName: "Name des Ladens", email: "E-Mail (optional)",
     changePin: "PIN ändern", oldPin: "Alter PIN", newPin: "Neuer PIN", confirmNewPin: "Neuen PIN bestätigen",
     updatePin: "PIN aktualisieren", forgotPinSettings: "PIN komplett vergessen? Kontaktiere den Support",
-    darkMode: "Dunkelmodus", darkModeDesc: "Schwarzer Hintergrund mit leuchtenden blauen Blasen",
+    darkMode: "Thema", darkModeDesc: "System, hell oder dunkel", themeSystem: "System", themeLight: "Hell", themeDark: "Dunkel",
     animBalls: "Animierte Blasen", ballColor: "Blasenfarbe", stockAlert: "Bestandswarnschwelle",
     stockAlertDesc: "Einheit(en) verbleibend löst Warnung aus", contactSupport: "Support über WhatsApp kontaktieren",
     resetData: "Alle meine Daten zurücksetzen", resetConfirm: "Dies löscht dauerhaft deinen Bestand, Verkäufe, Schulden und Kasse. Dein Konto bleibt aktiv. Bestätigen?",
@@ -2414,7 +2414,7 @@ const TRANSLATIONS = {
     identifier: "Email", shopPhoto: "Фото магазина", shopName: "Название магазина", email: "Email (необязательно)",
     changePin: "Изменить PIN-код", oldPin: "Старый PIN", newPin: "Новый PIN", confirmNewPin: "Подтвердите новый PIN",
     updatePin: "Обновить PIN-код", forgotPinSettings: "Совсем забыли PIN-код? Свяжитесь с поддержкой",
-    darkMode: "Тёмная тема", darkModeDesc: "Чёрный фон со светящимися синими шариками",
+    darkMode: "Тема", darkModeDesc: "Системная, светлая или тёмная", themeSystem: "Системная", themeLight: "Светлая", themeDark: "Тёмная",
     animBalls: "Анимированные шарики", ballColor: "Цвет шариков", stockAlert: "Порог оповещения о складе",
     stockAlertDesc: "ед. осталось — срабатывает оповещение", contactSupport: "Связаться с поддержкой через WhatsApp",
     resetData: "Сбросить все мои данные", resetConfirm: "Это навсегда удалит твой склад, продажи, долги и кассу. Аккаунт останется активным. Подтверждаешь?",
@@ -2560,7 +2560,7 @@ const TRANSLATIONS = {
     identifier: "ईमेल", shopPhoto: "दुकान की तस्वीर", shopName: "दुकान का नाम", email: "ईमेल (वैकल्पिक)",
     changePin: "पिन कोड बदलें", oldPin: "पुराना पिन", newPin: "नया पिन", confirmNewPin: "नए पिन की पुष्टि करें",
     updatePin: "पिन कोड अपडेट करें", forgotPinSettings: "पिन कोड पूरी तरह भूल गए? सहायता से संपर्क करें",
-    darkMode: "डार्क मोड", darkModeDesc: "चमकती नीली गेंदों के साथ काली पृष्ठभूमि",
+    darkMode: "थीम", darkModeDesc: "सिस्टम, हल्का या गहरा", themeSystem: "सिस्टम", themeLight: "हल्का", themeDark: "गहरा",
     animBalls: "एनिमेटेड गेंदें", ballColor: "गेंदों का रंग", stockAlert: "स्टॉक अलर्ट सीमा",
     stockAlertDesc: "यूनिट बचने पर अलर्ट सक्रिय होगा", contactSupport: "व्हाट्सएप पर सहायता से संपर्क करें",
     resetData: "मेरा सारा डेटा रीसेट करें", resetConfirm: "इससे आपका स्टॉक, बिक्री, उधारी और नकदी हमेशा के लिए मिट जाएगी। खाता सक्रिय रहेगा। क्या आप पुष्टि करते हैं?",
@@ -2706,7 +2706,7 @@ const TRANSLATIONS = {
     identifier: "மின்னஞ்சல்", shopPhoto: "கடை புகைப்படம்", shopName: "கடையின் பெயர்", email: "மின்னஞ்சல் (விருப்பம்)",
     changePin: "பின் குறியீட்டை மாற்று", oldPin: "பழைய பின்", newPin: "புதிய பின்", confirmNewPin: "புதிய பின்னை உறுதிப்படுத்தவும்",
     updatePin: "பின் குறியீட்டைப் புதுப்பிக்கவும்", forgotPinSettings: "பின் குறியீட்டை முற்றிலும் மறந்துவிட்டீர்களா? உதவியைத் தொடர்பு கொள்ளவும்",
-    darkMode: "இருண்ட பயன்முறை", darkModeDesc: "பிரகாசமான நீல பந்துகளுடன் கறுப்பு பின்னணி",
+    darkMode: "தீம்", darkModeDesc: "கணினி, வெளிர் அல்லது இருள்", themeSystem: "கணினி", themeLight: "வெளிர்", themeDark: "இருள்",
     animBalls: "அசைவூட்டப்பட்ட பந்துகள்", ballColor: "பந்துகளின் நிறம்", stockAlert: "இருப்பு எச்சரிக்கை வரம்பு",
     stockAlertDesc: "இவ்வளவு அலகுகள் மீதமிருக்கும்போது எச்சரிக்கை செயல்படும்", contactSupport: "வாட்ஸ்அப் மூலம் உதவியைத் தொடர்பு கொள்ளவும்",
     resetData: "என் அனைத்து தரவையும் மீட்டமைக்கவும்", resetConfirm: "இது உங்கள் இருப்பு, விற்பனை, கடன் மற்றும் பணத்தை நிரந்தரமாக அழிக்கும். கணக்கு செயலில் இருக்கும். நீங்கள் உறுதியாக இருக்கிறீர்களா?",
@@ -2852,7 +2852,7 @@ const TRANSLATIONS = {
     identifier: "ইমেইল", shopPhoto: "দোকানের ছবি", shopName: "দোকানের নাম", email: "ইমেইল (ঐচ্ছিক)",
     changePin: "পিন কোড পরিবর্তন করুন", oldPin: "পুরাতন পিন", newPin: "নতুন পিন", confirmNewPin: "নতুন পিন নিশ্চিত করুন",
     updatePin: "পিন কোড আপডেট করুন", forgotPinSettings: "পিন কোড সম্পূর্ণ ভুলে গেছেন? সহায়তার সাথে যোগাযোগ করুন",
-    darkMode: "ডার্ক মোড", darkModeDesc: "জ্বলজ্বলে নীল বলসহ কালো ব্যাকগ্রাউন্ড",
+    darkMode: "থিম", darkModeDesc: "সিস্টেম, হালকা বা গাঢ়", themeSystem: "সিস্টেম", themeLight: "হালকা", themeDark: "গাঢ়",
     animBalls: "অ্যানিমেটেড বল", ballColor: "বলের রঙ", stockAlert: "স্টক সতর্কতার সীমা",
     stockAlertDesc: "এই সংখ্যক ইউনিট বাকি থাকলে সতর্কতা সক্রিয় হবে", contactSupport: "হোয়াটসঅ্যাপে সহায়তার সাথে যোগাযোগ করুন",
     resetData: "আমার সব ডেটা রিসেট করুন", resetConfirm: "এতে আপনার স্টক, বিক্রয়, বাকি এবং নগদ চিরতরে মুছে যাবে। অ্যাকাউন্ট সক্রিয় থাকবে। আপনি কি নিশ্চিত?",
@@ -2998,7 +2998,7 @@ const TRANSLATIONS = {
     identifier: "ای میل", shopPhoto: "دکان کی تصویر", shopName: "دکان کا نام", email: "ای میل (اختیاری)",
     changePin: "پن کوڈ تبدیل کریں", oldPin: "پرانا پن", newPin: "نیا پن", confirmNewPin: "نئے پن کی تصدیق کریں",
     updatePin: "پن کوڈ اپ ڈیٹ کریں", forgotPinSettings: "پن کوڈ مکمل طور پر بھول گئے؟ معاونت سے رابطہ کریں",
-    darkMode: "ڈارک موڈ", darkModeDesc: "چمکتی نیلی گیندوں کے ساتھ سیاہ پس منظر",
+    darkMode: "تھیم", darkModeDesc: "سسٹم، ہلکا یا گہرا", themeSystem: "سسٹم", themeLight: "ہلکا", themeDark: "گہرا",
     animBalls: "متحرک گیندیں", ballColor: "گیندوں کا رنگ", stockAlert: "اسٹاک الرٹ کی حد",
     stockAlertDesc: "اتنی یونٹس باقی رہنے پر الرٹ فعال ہو گا", contactSupport: "واٹس ایپ پر معاونت سے رابطہ کریں",
     resetData: "میرا سارا ڈیٹا ری سیٹ کریں", resetConfirm: "اس سے آپ کا اسٹاک، فروخت، ادھار اور نقدی ہمیشہ کے لیے مٹ جائے گی۔ اکاؤنٹ فعال رہے گا۔ کیا آپ تصدیق کرتے ہیں؟",
@@ -3144,7 +3144,7 @@ const TRANSLATIONS = {
     identifier: "Email", shopPhoto: "Foto toko", shopName: "Nama toko", email: "Email (opsional)",
     changePin: "Ganti kode PIN", oldPin: "PIN lama", newPin: "PIN baru", confirmNewPin: "Konfirmasi PIN baru",
     updatePin: "Perbarui kode PIN", forgotPinSettings: "Benar-benar lupa kode PIN? Hubungi dukungan",
-    darkMode: "Mode gelap", darkModeDesc: "Latar hitam dengan bola biru bercahaya",
+    darkMode: "Tema", darkModeDesc: "Sistem, terang atau gelap", themeSystem: "Sistem", themeLight: "Terang", themeDark: "Gelap",
     animBalls: "Bola animasi", ballColor: "Warna bola", stockAlert: "Batas peringatan stok",
     stockAlertDesc: "unit tersisa — peringatan akan aktif", contactSupport: "Hubungi dukungan lewat WhatsApp",
     resetData: "Reset semua data saya", resetConfirm: "Ini akan menghapus stok, penjualan, utang, dan kasmu secara permanen. Akun tetap aktif. Yakin lanjutkan?",
@@ -3290,7 +3290,7 @@ const TRANSLATIONS = {
     identifier: "E-posta", shopPhoto: "Dükkan fotoğrafı", shopName: "Dükkan adı", email: "E-posta (isteğe bağlı)",
     changePin: "PIN kodunu değiştir", oldPin: "Eski PIN", newPin: "Yeni PIN", confirmNewPin: "Yeni PIN'i onayla",
     updatePin: "PIN kodunu güncelle", forgotPinSettings: "PIN kodunu tamamen mi unuttun? Destek ile iletişime geç",
-    darkMode: "Karanlık mod", darkModeDesc: "Parlayan mavi toplarla siyah arka plan",
+    darkMode: "Tema", darkModeDesc: "Sistem, açık veya koyu", themeSystem: "Sistem", themeLight: "Açık", themeDark: "Koyu",
     animBalls: "Animasyonlu toplar", ballColor: "Top rengi", stockAlert: "Stok uyarı eşiği",
     stockAlertDesc: "birim kaldığında uyarı devreye girer", contactSupport: "WhatsApp ile destek ile iletişime geç",
     resetData: "Tüm verilerimi sıfırla", resetConfirm: "Bu işlem stokunu, satışlarını, borçlarını ve kasanı kalıcı olarak silecek. Hesap aktif kalacak. Onaylıyor musun?",
@@ -3436,7 +3436,7 @@ const TRANSLATIONS = {
     identifier: "이메일", shopPhoto: "가게 사진", shopName: "가게 이름", email: "이메일 (선택 사항)",
     changePin: "PIN 코드 변경", oldPin: "이전 PIN", newPin: "새 PIN", confirmNewPin: "새 PIN 확인",
     updatePin: "PIN 코드 업데이트", forgotPinSettings: "PIN 코드를 완전히 잊으셨나요? 고객 지원에 문의하세요",
-    darkMode: "다크 모드", darkModeDesc: "빛나는 파란 구슬이 있는 검은 배경",
+    darkMode: "테마", darkModeDesc: "시스템, 라이트 또는 다크", themeSystem: "시스템", themeLight: "라이트", themeDark: "다크",
     animBalls: "애니메이션 구슬", ballColor: "구슬 색상", stockAlert: "재고 경고 기준",
     stockAlertDesc: "개 남으면 경고가 작동합니다", contactSupport: "왓츠앱으로 고객 지원에 문의하기",
     resetData: "모든 데이터 초기화", resetConfirm: "이렇게 하면 재고, 판매, 외상, 시재가 영구적으로 삭제됩니다. 계정은 계속 활성 상태입니다. 계속하시겠습니까?",
@@ -3582,7 +3582,7 @@ const TRANSLATIONS = {
     identifier: "メールアドレス", shopPhoto: "店舗写真", shopName: "店舗名", email: "メールアドレス（任意）",
     changePin: "PINコードを変更", oldPin: "以前のPIN", newPin: "新しいPIN", confirmNewPin: "新しいPINを確認",
     updatePin: "PINコードを更新", forgotPinSettings: "PINコードを完全に忘れましたか？サポートに連絡してください",
-    darkMode: "ダークモード", darkModeDesc: "光る青いボールが浮かぶ黒背景",
+    darkMode: "テーマ", darkModeDesc: "システム、ライトまたはダーク", themeSystem: "システム", themeLight: "ライト", themeDark: "ダーク",
     animBalls: "アニメーションボール", ballColor: "ボールの色", stockAlert: "在庫警告のしきい値",
     stockAlertDesc: "個以下になると警告が作動します", contactSupport: "WhatsAppでサポートに連絡",
     resetData: "すべてのデータをリセット", resetConfirm: "これにより在庫、売上、掛け売り、レジのデータが完全に削除されます。アカウントは有効なままです。よろしいですか？",
@@ -3728,7 +3728,7 @@ const TRANSLATIONS = {
     identifier: "Email", shopPhoto: "Foto del negozio", shopName: "Nome del negozio", email: "Email (facoltativo)",
     changePin: "Cambia PIN", oldPin: "Vecchio PIN", newPin: "Nuovo PIN", confirmNewPin: "Conferma nuovo PIN",
     updatePin: "Aggiorna PIN", forgotPinSettings: "PIN completamente dimenticato? Contatta l'assistenza",
-    darkMode: "Modalità scura", darkModeDesc: "Sfondo nero con bolle luminose",
+    darkMode: "Tema", darkModeDesc: "Sistema, chiaro o scuro", themeSystem: "Sistema", themeLight: "Chiaro", themeDark: "Scuro",
     animBalls: "Bolle animate", ballColor: "Colore delle bolle", stockAlert: "Soglia scorte basse",
     stockAlertDesc: "unità rimanenti attivano l'avviso", contactSupport: "Contatta l'assistenza su WhatsApp",
     resetData: "Reimposta tutti i miei dati", resetConfirm: "Questo cancellerà definitivamente magazzino, vendite, debiti e cassa. Il tuo account resta attivo. Confermi?",
@@ -3841,7 +3841,7 @@ const TRANSLATIONS = {
     paidBtn: "Betaald", confirmDelete: "Verwijdering bevestigen", noCancel: "Nee, annuleren", yesDelete: "Ja, verwijderen", deleteProductMsg: "\"{name}\" uit de voorraad verwijderen?", deleteExpenseMsg: "Deze uitgave van {amount} verwijderen?", abandonCartMsg: "Dit winkelmandje verlaten? Niet-afgeronde artikelen gaan verloren.", demoMode: "Demomodus — voorbeeldgegevens", demoNote: "Je kunt alles vrij verkennen, maar niets wordt echt opgeslagen. Maak een echt account aan zodra de opslag werkt.",
     freeVersion: "Gratis versie", freeVersionExpired: "Abonnement verlopen — gratis versie actief", freeVersionNote: "Voorraad beperkt tot {n} producten. Schulden, statistieken, kassa en geschiedenis zijn voorbehouden aan de volledige versie.", upgradeCta: "Overstappen naar betaald", paywallDebts: "Opvolging van klantschulden — volledige versie", paywallStats: "Statistieken — volledige versie", paywallHistory: "Volledige geschiedenis — volledige versie",
     paywallCash: "Kassabeheer — volledige versie", paywallPhoto: "📷 Een foto toevoegen — betaalde versie", paywallDesc: "Stap over naar de betaalde versie om deze functie te ontgrendelen.", identifier: "E-mail", shopPhoto: "Foto van de winkel", shopName: "Naam van de winkel", email: "E-mail (optioneel)", changePin: "PIN-code wijzigen", oldPin: "Oude PIN-code", newPin: "Nieuwe PIN-code", confirmNewPin: "Bevestig de nieuwe PIN-code", updatePin: "PIN-code bijwerken",
-    forgotPinSettings: "PIN-code helemaal vergeten? Neem contact op met ondersteuning", darkMode: "Donkere modus", darkModeDesc: "Zwarte achtergrond met verlichte blauwe bolletjes", animBalls: "Geanimeerde bolletjes", ballColor: "Kleur van de bolletjes", stockAlert: "Waarschuwingsdrempel voorraad", stockAlertDesc: "eenhe(i)d(en) resterend activeert de waarschuwing", contactSupport: "Contact opnemen met ondersteuning via WhatsApp", resetData: "Al mijn gegevens resetten",
+    forgotPinSettings: "PIN-code helemaal vergeten? Neem contact op met ondersteuning", darkMode: "Thema", darkModeDesc: "Systeem, licht of donker", themeSystem: "Systeem", themeLight: "Licht", themeDark: "Donker", animBalls: "Geanimeerde bolletjes", ballColor: "Kleur van de bolletjes", stockAlert: "Waarschuwingsdrempel voorraad", stockAlertDesc: "eenhe(i)d(en) resterend activeert de waarschuwing", contactSupport: "Contact opnemen met ondersteuning via WhatsApp", resetData: "Al mijn gegevens resetten",
     resetConfirm: "Dit wist definitief je voorraad, je verkopen, je schulden en je kassa. Je account blijft actief. Bevestig je dit?", yesErase: "Ja, alles wissen", savedOk: "Opgeslagen ✓", errorRetry: "Fout, probeer opnieuw.", updated: "Bijgewerkt ✓", emailSaved: "E-mail opgeslagen ✓", salesLast30: "Verkopen van de afgelopen 30 dagen", topProducts: "Best verkochte producten (hoeveelheid)", noSalesYet: "Nog geen verkoop geregistreerd. De grafiek wordt opgebouwd vanaf je eerste verkoop.",
     dateAxis: "Datum", amountAxis: "Bedrag (FCFA)", newExpense: "Nieuwe uitgave", amountOut: "Bedrag uit de kassa (FCFA)", reasonOpt: "Reden (optioneel)", saveExpense: "Uitgave opslaan", fundExplain: "Geef aan hoeveel geld je op dit moment fysiek in de kassa hebt. De app berekent je saldo vanaf dit punt.", fundPrivate: "🔒 Dit bedrag blijft privé, tussen jou en de app. Noch de beheerder, noch iemand anders kan het zien.", amountInCash: "Bedrag in kassa (FCFA)", searchClient: "Een klant zoeken…",
     searchProductClient: "Een product of klant zoeken…", cashPaywallTitle: "Kassabeheer — volledige versie", debtsPaywallTitle: "Opvolging van klantschulden — volledige versie", statsPaywallTitle: "Statistieken — volledige versie", historyPaywallTitle: "Volledige geschiedenis — volledige versie", expiredFree: "Abonnement verlopen — gratis versie actief", freeLabel: "Gratis versie", cashFundTitle: "Kassafonds", noProductFound: "Geen product gevonden.", cartTotal: "Totaal van het winkelmandje",
@@ -3938,7 +3938,7 @@ const TRANSLATIONS = {
     identifier: "Barua pepe", shopPhoto: "Picha ya duka", shopName: "Jina la duka", email: "Barua pepe (si lazima)",
     changePin: "Badilisha nambari ya siri", oldPin: "Nambari ya zamani", newPin: "Nambari mpya", confirmNewPin: "Thibitisha nambari mpya",
     updatePin: "Sasisha nambari ya siri", forgotPinSettings: "Umesahau nambari kabisa? Wasiliana na msaada",
-    darkMode: "Hali ya giza", darkModeDesc: "Mandhari nyeusi na mapovu yanayong'aa",
+    darkMode: "Mandhari", darkModeDesc: "Mfumo, mwanga au giza", themeSystem: "Mfumo", themeLight: "Mwanga", themeDark: "Giza",
     animBalls: "Mapovu yenye mchoro", ballColor: "Rangi ya mapovu", stockAlert: "Kiwango cha tahadhari ya bidhaa",
     stockAlertDesc: "vipande vilivyobaki huamsha tahadhari", contactSupport: "Wasiliana na msaada kupitia WhatsApp",
     resetData: "Weka upya data yangu yote", resetConfirm: "Hatua hii itafuta kabisa bidhaa, mauzo, madeni na fedha zako. Akaunti yako itabaki hai. Thibitisha?",
@@ -4084,7 +4084,7 @@ const TRANSLATIONS = {
     identifier: "Imel", shopPhoto: "Hoton shago", shopName: "Sunan shago", email: "Imel (ba tilas ba)",
     changePin: "Canja lambar PIN", oldPin: "Tsohuwar PIN", newPin: "Sabuwar PIN", confirmNewPin: "Tabbatar da sabuwar PIN",
     updatePin: "Sabunta lambar PIN", forgotPinSettings: "Ka manta lambar PIN gaba ɗaya? Tuntuɓi taimako",
-    darkMode: "Yanayin duhu", darkModeDesc: "Bango baƙi tare da ƙwallaye masu haske shudi",
+    darkMode: "Jigo", darkModeDesc: "Tsarin, haske ko duhu", themeSystem: "Tsarin", themeLight: "Haske", themeDark: "Duhu",
     animBalls: "Ƙwallaye masu motsi", ballColor: "Launin ƙwallaye", stockAlert: "Iyakar sanarwar kaya",
     stockAlertDesc: "Sanarwa za ta kunna idan yawan da ya rage ya kai wannan adadi", contactSupport: "Tuntuɓi taimako ta WhatsApp",
     resetData: "Sake fara duk bayanaina", resetConfirm: "Wannan zai goge kayanka, tallace-tallace, bashi da kuɗi har abada. Asusu zai ci gaba da aiki. Kana tabbata?",
@@ -4230,7 +4230,7 @@ const TRANSLATIONS = {
     identifier: "Imɛli", shopPhoto: "Butiki ja", shopName: "Butiki tɔgɔ", email: "Imɛli (wajibi tɛ)",
     changePin: "PIN nimɔrɔ Changé", oldPin: "PIN kɔrɔ", newPin: "PIN kura", confirmNewPin: "PIN kura jɛya",
     updatePin: "PIN nimɔrɔ kura", forgotPinSettings: "I ɲinɛna PIN nimɔrɔ kɔ pewu wa? Dɛmɛni sɛbɛn",
-    darkMode: "Cogo dibi", darkModeDesc: "Kɔgɔjɛ finman ni bulama manamanan yɛrɛyɛrɛlenw ye",
+    darkMode: "Nataal", darkModeDesc: "Sisitɛmu, kɛnɛ walima dibi", themeSystem: "Sisitɛmu", themeLight: "Kɛnɛ", themeDark: "Dibi",
     animBalls: "Bulama yɛlɛmalen", ballColor: "Bulama kulɛri", stockAlert: "Marifa kɔlɔsili dan",
     stockAlertDesc: "Kɔlɔsili bɛna wuli ni a hakɛ bɛnna nin ma", contactSupport: "Dɛmɛni sɛbɛn WhatsApp fɛ",
     resetData: "N ka kunnafoni bɛɛ lasegin", resetConfirm: "Nin bɛna i ka marifa, feerew, juru ni wari bɛɛ jɔsi fo abada. Jatebɔlan bɛna to baara la. I dalen b'a la wa?",
@@ -4344,7 +4344,7 @@ const TRANSLATIONS = {
     demoMode: "Imodi yedemo — idatha yesibonelo", demoNote: "Ungahlola konke ngokukhululekile, kodwa akukho lutho olulondolozwe ngempela. Dala i-akhawunti yangempela lapho ukugcinwa kusebenza.", freeVersion: "Inguqulo yamahhala", freeVersionExpired: "Ukubhalisela kuphelile — inguqulo yamahhala isebenza", freeVersionNote: "Isitoko sinqunyelwe imikhiqizo engu-{n}. Izikweletu, izibalo, ikheshi nomlando kugcinelwe inguqulo egcwele.", upgradeCta: "Yiya kokukhokhelwayo",
     paywallDebts: "Ukulandelela izikweletu zamakhasimende — inguqulo egcwele", paywallStats: "Izibalo — inguqulo egcwele", paywallHistory: "Umlando ogcwele — inguqulo egcwele", paywallCash: "Ukulandelela ikheshi — inguqulo egcwele", paywallPhoto: "📷 Engeza isithombe — inguqulo ekhokhelwayo", paywallDesc: "Yiya enguqulweni ekhokhelwayo ukuze uvule lesi sici.",
     identifier: "I-imeyili", shopPhoto: "Isithombe sesitolo", shopName: "Igama lesitolo", email: "I-imeyili (akuphoqelekile)", changePin: "Shintsha ikhodi ye-PIN", oldPin: "Ikhodi ye-PIN endala", newPin: "Ikhodi ye-PIN entsha", confirmNewPin: "Qinisekisa ikhodi ye-PIN entsha", updatePin: "Buyekeza ikhodi ye-PIN", forgotPinSettings: "Ukhohlwe ngokuphelele ikhodi ye-PIN? Xhumana nosizo",
-    darkMode: "Imodi emnyama", darkModeDesc: "Isizinda esimnyama namabhola aluhlaza akhanyayo amancane", animBalls: "Amabhola ahambisayo", ballColor: "Umbala wamabhola", stockAlert: "Umkhawulo wesexwayiso sesitoko", stockAlertDesc: "iyunithi(s) esele kuvusa isexwayiso", contactSupport: "Xhumana nosizo nge-WhatsApp", resetData: "Setha kabusha yonke idatha yami", resetConfirm: "Lokhu kususa ngokuphelele isitoko sakho, ukuthengisa kwakho, izikweletu zakho nekheshi lakho. I-akhawunti yakho isasebenza. Uyaqinisekisa?", yesErase: "Yebo, susa konke",
+    darkMode: "Itimu", darkModeDesc: "Uhlelo, okukhanyayo noma okumnyama", themeSystem: "Uhlelo", themeLight: "Okukhanyayo", themeDark: "Okumnyama", animBalls: "Amabhola ahambisayo", ballColor: "Umbala wamabhola", stockAlert: "Umkhawulo wesexwayiso sesitoko", stockAlertDesc: "iyunithi(s) esele kuvusa isexwayiso", contactSupport: "Xhumana nosizo nge-WhatsApp", resetData: "Setha kabusha yonke idatha yami", resetConfirm: "Lokhu kususa ngokuphelele isitoko sakho, ukuthengisa kwakho, izikweletu zakho nekheshi lakho. I-akhawunti yakho isasebenza. Uyaqinisekisa?", yesErase: "Yebo, susa konke",
     savedOk: "Kulondoloziwe ✓", errorRetry: "Iphutha, zama futhi.", updated: "Kubuyekeziwe ✓", emailSaved: "I-imeyili ilondoloziwe ✓", salesLast30: "Ukuthengisa kwezinsuku ezingu-30 ezedlule", topProducts: "Imikhiqizo ethengiswa kakhulu (inani)", noSalesYet: "Akukho kuthengisa okuqoshiwe okwamanje. Igrafu izokhiwa kusukela ekuthengiseni kwakho kokuqala.", dateAxis: "Usuku", amountAxis: "Inani (FCFA)",
     newExpense: "Isindleko esisha", amountOut: "Imali ephumile ekheshini (FCFA)", reasonOpt: "Isizathu (akuphoqelekile)", saveExpense: "Londoloza isindleko", fundExplain: "Bonisa ukuthi mangaki imali onayo ngokoqobo ekheshini njengamanje. Uhlelo luzobala ibhalansi yakho kusukela kulesi sikhathi.", fundPrivate: "🔒 Le mali ihlala iyimfihlo, phakathi kwakho nohlelo. Akekho umphathi noma omunye umuntu ongayibona.", amountInCash: "Imali ekheshini (FCFA)",
     searchClient: "Sesha ikhasimende…", searchProductClient: "Sesha umkhiqizo noma ikhasimende…", cashPaywallTitle: "Ukulandelela ikheshi — inguqulo egcwele", debtsPaywallTitle: "Ukulandelela izikweletu zamakhasimende — inguqulo egcwele", statsPaywallTitle: "Izibalo — inguqulo egcwele", historyPaywallTitle: "Umlando ogcwele — inguqulo egcwele", expiredFree: "Ukubhalisela kuphelile — inguqulo yamahhala isebenza", freeLabel: "Inguqulo yamahhala",
@@ -4445,7 +4445,7 @@ const TRANSLATIONS = {
     identifier: "Ímeèlì", shopPhoto: "Fọ́tò ilé ìtajà", shopName: "Orúkọ ilé ìtajà", email: "Ímeèlì (kìí ṣe dandan)",
     changePin: "Yí kóòdù PIN padà", oldPin: "Kóòdù PIN àtijọ́", newPin: "Kóòdù PIN tuntun", confirmNewPin: "Ẹ jẹ́rìí sí kóòdù PIN tuntun",
     updatePin: "Ṣàtúnṣe kóòdù PIN", forgotPinSettings: "Ṣé o gbàgbé kóòdù PIN pátápátá? Kàn sí ìrànlọ́wọ́",
-    darkMode: "Ipò dúdú", darkModeDesc: "Ìsàlẹ̀ dúdú pẹ̀lú àwọn ìṣú tí ń tàn",
+    darkMode: "Àdìrísí", darkModeDesc: "Ẹ̀rọ, ìmọ́lẹ̀ tàbí òkùnkùn", themeSystem: "Ẹ̀rọ", themeLight: "Ìmọ́lẹ̀", themeDark: "Òkùnkùn",
     animBalls: "Àwọn ìṣú tí ń gbéra", ballColor: "Àwọ̀ ìṣú", stockAlert: "Ààlà ìkìlọ̀ ọjà tó ń dín kù",
     stockAlertDesc: "ẹyọ tó kù ni ó ń mú ìkìlọ̀ jáde", contactSupport: "Kàn sí ìrànlọ́wọ́ lórí WhatsApp",
     resetData: "Bẹ̀rẹ̀ gbogbo data mi padà", resetConfirm: "Èyí yóò parẹ́ ọjà rẹ, títà rẹ, gbèsè rẹ àti owó rẹ pátápátá. Àkọọ́lẹ̀ rẹ yóò máa bá a lọ ní lílo. Ṣé o jẹ́rìí?",
@@ -5301,7 +5301,7 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits"];
 function sortByDate(list) {
   return [...(list || [])].sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
 }
@@ -5411,6 +5411,7 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     cashFund: winner.cashFund ?? 0,
     lowStockThreshold: winner.lowStockThreshold ?? 5,
     darkMode: !!winner.darkMode,
+    themeMode: winner.themeMode || (winner.darkMode ? "dark" : "system"),
     showBalls: winner.showBalls !== false,
     ballColor: winner.ballColor || "blue",
     currency: winner.currency || "XOF",
@@ -7110,8 +7111,8 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   const toDisplayDigits = (s) => (USE_ARABIC_DIGITS ? s.replace(/[0-9]/g, (d) => WESTERN_TO_ARABIC[d]) : s);
 
   return (
-    <div className="flex flex-col" style={{ minHeight: "calc(100vh - 160px)" }}>
-      <div className="flex items-center gap-2 mb-3">
+    <div className="flex flex-col" style={{ height: "calc(100vh - 160px)", overflow: "hidden" }}>
+      <div className="flex items-center gap-2 mb-2 shrink-0">
         <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(16,185,129,0.2)" : "rgba(16,185,129,0.1)" }}>
           <Calculator size={16} color={darkMode ? "#34d399" : "#059669"} />
         </span>
@@ -7134,7 +7135,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         )}
       </div>
       {showProductSearch && (
-        <div className="rounded-2xl p-3 mb-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+        <div className="rounded-2xl p-3 mb-2 shrink-0" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
           <div className="relative mb-2">
             <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: T.muted }} />
             <input
@@ -7149,7 +7150,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
           {productQuery.trim() && matchingProducts.length === 0 && (
             <p className="text-xs text-center py-2" style={{ color: T.muted }}>{t(lang, "calcNoProductFound")}</p>
           )}
-          <div className="space-y-1 max-h-56 overflow-y-auto">
+          <div className="space-y-1 max-h-40 overflow-y-auto">
             {matchingProducts.map((p) => (
               <button
                 key={p.id}
@@ -7165,7 +7166,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         </div>
       )}
       {showHistory && (
-        <div className="rounded-2xl p-3 mb-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+        <div className="rounded-2xl p-3 mb-2 shrink-0" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
           <div className="flex items-center justify-between mb-2">
             <p className="text-xs font-bold" style={{ color: T.text }}>{t(lang, "calcHistoryTitle")}</p>
             {history.length > 0 && (
@@ -7177,7 +7178,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
           {history.length === 0 ? (
             <p className="text-xs text-center py-2" style={{ color: T.muted }}>{t(lang, "calcHistoryEmpty")}</p>
           ) : (
-            <div className="space-y-1 max-h-56 overflow-y-auto">
+            <div className="space-y-1 max-h-40 overflow-y-auto">
               {history.map((entry, i) => (
                 <button
                   key={i}
@@ -7198,8 +7199,8 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         </div>
       )}
       <div
-        className="rounded-2xl p-5 mb-3 flex flex-col items-end justify-end relative"
-        style={{ background: T.card, minHeight: 90, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}
+        className="rounded-2xl p-3 flex flex-col items-end justify-end relative shrink-0"
+        style={{ background: T.card, height: 68, marginBottom: 8, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}
       >
         {memory !== null && (
           <span className="absolute top-2 left-3 text-[10px] font-bold" style={{ color: darkMode ? "#7fb2ff" : "#2563eb" }}>M</span>
@@ -7207,57 +7208,59 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         {settingTaxRate && (
           <span className="absolute top-2 right-3 text-[10px] font-bold" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>{t(lang, "calcSetPercent")}</span>
         )}
-        <span className="font-bold" style={{ color: T.text, fontSize: display.length > 9 ? 28 : 40, wordBreak: "break-all", textAlign: "right" }}>
+        <span className="font-bold" style={{ color: T.text, fontSize: display.length > 9 ? 24 : 34, wordBreak: "break-all", textAlign: "right" }}>
           {displayValue}
         </span>
       </div>
-      <div className="grid grid-cols-4 gap-2 mb-2">
-        {memoryRow.map((btn, i) => (
-          <button
-            key={i}
-            onClick={btn.action}
-            className="rounded-xl font-semibold text-xs flex items-center justify-center"
-            style={{ ...btnStyle(btn.type), height: 38 }}
-          >
-            {btn.label}
-          </button>
-        ))}
-      </div>
-      <div className="grid grid-cols-4 gap-2 mb-2">
-        {salesRow.map((btn, i) => (
-          <button
-            key={i}
-            onClick={btn.action}
-            className="rounded-xl font-semibold text-xs flex items-center justify-center"
-            style={{ ...btnStyle(btn.type), height: 38 }}
-          >
-            {btn.label}
-          </button>
-        ))}
-      </div>
-      <div className="grid grid-cols-3 gap-2 mb-2.5">
-        {taxRow.map((btn, i) => (
-          <button
-            key={i}
-            onClick={btn.action}
-            className="rounded-xl font-semibold text-xs flex items-center justify-center px-1"
-            style={{ ...btnStyle(btn.type), height: 38 }}
-          >
-            {btn.label}
-          </button>
-        ))}
-      </div>
-      <div className="grid grid-cols-4 gap-2.5">
-        {buttons.flat().map((btn, i) => (
-          <button
-            key={i}
-            onClick={btn.action}
-            className="rounded-2xl font-semibold text-lg flex items-center justify-center"
-            style={{ ...btnStyle(btn.type), height: 58, gridColumn: btn.span ? `span ${btn.span}` : undefined }}
-          >
-            {btn.type === "digit" && !btn.label.includes(".") ? toDisplayDigits(btn.label) : btn.label}
-          </button>
-        ))}
+      <div className="flex-1 flex flex-col gap-1.5" style={{ minHeight: 0 }}>
+        <div className="grid grid-cols-4 gap-1.5" style={{ flex: "38 1 0%", minHeight: 0 }}>
+          {memoryRow.map((btn, i) => (
+            <button
+              key={i}
+              onClick={btn.action}
+              className="rounded-xl font-semibold text-xs flex items-center justify-center"
+              style={{ ...btnStyle(btn.type), height: "100%" }}
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-4 gap-1.5" style={{ flex: "38 1 0%", minHeight: 0 }}>
+          {salesRow.map((btn, i) => (
+            <button
+              key={i}
+              onClick={btn.action}
+              className="rounded-xl font-semibold text-xs flex items-center justify-center"
+              style={{ ...btnStyle(btn.type), height: "100%" }}
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-3 gap-1.5" style={{ flex: "38 1 0%", minHeight: 0 }}>
+          {taxRow.map((btn, i) => (
+            <button
+              key={i}
+              onClick={btn.action}
+              className="rounded-xl font-semibold text-xs flex items-center justify-center px-1"
+              style={{ ...btnStyle(btn.type), height: "100%" }}
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-4 grid-rows-6 gap-1.5" style={{ flex: "348 1 0%", minHeight: 0 }}>
+          {buttons.flat().map((btn, i) => (
+            <button
+              key={i}
+              onClick={btn.action}
+              className="rounded-2xl font-semibold text-lg flex items-center justify-center"
+              style={{ ...btnStyle(btn.type), height: "100%", gridColumn: btn.span ? `span ${btn.span}` : undefined }}
+            >
+              {btn.type === "digit" && !btn.label.includes(".") ? toDisplayDigits(btn.label) : btn.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -7273,7 +7276,24 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [expenses, setExpenses] = useState([]);
   const [cashFund, setCashFund] = useState(0);
   const [lowStockThreshold, setLowStockThreshold] = useState(5);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
+  // "system" (suit le téléphone), "light" ou "dark" (choix figé par l'utilisateur).
+  const [themeMode, setThemeMode] = useState("system");
+  const [systemPrefersDark, setSystemPrefersDark] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e) => setSystemPrefersDark(e.matches);
+    if (mq.addEventListener) mq.addEventListener("change", handler);
+    else if (mq.addListener) mq.addListener(handler);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", handler);
+      else if (mq.removeListener) mq.removeListener(handler);
+    };
+  }, []);
+  useEffect(() => {
+    setDarkMode(themeMode === "system" ? systemPrefersDark : themeMode === "dark");
+  }, [themeMode, systemPrefersDark]);
   const [showBalls, setShowBalls] = useState(true);
   const [ballColor, setBallColor] = useState("blue");
   const [currency, setCurrency] = useState("XOF");
@@ -8068,7 +8088,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setExpenses(shop.expenses || []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
-    setDarkMode(!!shop.darkMode);
+    setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
     setShowBalls(shop.showBalls !== false);
     setBallColor(shop.ballColor || "blue");
     setCurrency(shop.currency || "XOF");
@@ -8366,6 +8386,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
       darkMode: overrides.darkMode ?? darkMode,
+      themeMode: overrides.themeMode ?? themeMode,
       showBalls: overrides.showBalls ?? showBalls,
       ballColor: overrides.ballColor ?? ballColor,
       draftCarts: overrides.draftCarts ?? draftCarts,
@@ -8386,6 +8407,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
     setDarkMode(next.darkMode);
+    setThemeMode(next.themeMode);
     setShowBalls(next.showBalls);
     setBallColor(next.ballColor);
     setDraftCarts(next.draftCarts);
@@ -9628,7 +9650,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const maskAmount = (text) => (amountsHidden ? "•••••" : text);
   const isActive = expiresAt && new Date(expiresAt) > new Date();
   const T = darkMode
-    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#9295ab", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
+    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
     : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb" };
   const todaySales = sales.filter((s) => s.date.slice(0, 10) === todayKey());
   const todayTotal = todaySales.reduce((sum, s) => sum + s.total, 0);
@@ -12017,7 +12039,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <img
                   src="/icon-512.png"
                   alt="Shopnify"
-                  style={{ width: 36, height: 36, borderRadius: 10, objectFit: "cover", boxShadow: "0 0 18px rgba(0,255,255,0.3)", flexShrink: 0 }}
+                  style={{ width: 52, height: 52, borderRadius: 14, objectFit: "cover", boxShadow: "0 0 18px rgba(0,255,255,0.3)", flexShrink: 0 }}
                 />
               )}
               <div style={{ flex: 1 }}>
@@ -12138,7 +12160,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
               {settingsView === "appearance" && !settingsField && [
-                { id: "darkmode", label: t(lang, "darkMode"), right: darkMode ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
+                { id: "darkmode", label: t(lang, "darkMode"), right: themeMode === "system" ? t(lang, "themeSystem") : themeMode === "dark" ? t(lang, "themeDark") : t(lang, "themeLight") },
                 { id: "lang", label: t(lang, "language"), right: languageLabel(LANGUAGES.find((l) => l.id === lang) || LANGUAGES[0], lang) },
                 { id: "balls", label: t(lang, "animBalls"), right: showBalls ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "ballcolor", label: t(lang, "ballColor"), right: null },
@@ -12575,14 +12597,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
               {settingsField === "darkmode" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <div>
-                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "darkMode")}</div>
-                    <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "darkModeDesc")}</div>
-                  </div>
-                  <button onClick={() => saveAll({ darkMode: !darkMode })} style={{ width: 48, height: 28, borderRadius: 14, background: darkMode ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: darkMode ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
-                    <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
-                  </button>
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ color: T.muted, fontSize: 12, lineHeight: 1.5 }}>{t(lang, "darkModeDesc")}</div>
+                  {[
+                    { id: "system", label: t(lang, "themeSystem") },
+                    { id: "light", label: t(lang, "themeLight") },
+                    { id: "dark", label: t(lang, "themeDark") },
+                  ].map((opt) => (
+                    <button
+                      key={opt.id}
+                      onClick={() => saveAll({ themeMode: opt.id })}
+                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", borderRadius: 12, background: themeMode === opt.id ? (darkMode ? "#1c2c3e" : "#dbeafe") : T.card, border: `1px solid ${themeMode === opt.id ? "#22d3ee" : T.border}`, cursor: "pointer" }}
+                    >
+                      <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{opt.label}</span>
+                      {themeMode === opt.id && <Check size={16} color="#22d3ee" />}
+                    </button>
+                  ))}
                 </div>
               )}
               {settingsField === "lang" && (
@@ -12858,7 +12888,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   className="font-bold transition-all"
                   style={{
                     fontSize: active ? 10 : 9,
-                    color: active ? navItem.grad[0] : darkMode ? "#4b5563" : "#94a3b8",
+                    color: active ? navItem.grad[0] : darkMode ? "#9295ab" : "#94a3b8",
                     marginTop: active ? 2 : 0,
                   }}
                 >
@@ -12888,9 +12918,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     transition: "all 0.2s cubic-bezier(0.34,1.56,0.64,1)",
                   }}
                 >
-                  <span style={{ fontSize: moreActive ? 22 : 18, color: moreActive ? "white" : darkMode ? "#6b7280" : "#94a3b8" }}>⋯</span>
+                  <span style={{ fontSize: moreActive ? 22 : 18, color: moreActive ? "white" : darkMode ? "#9295ab" : "#94a3b8" }}>⋯</span>
                 </div>
-                <span className="font-bold transition-all" style={{ fontSize: moreActive ? 10 : 9, color: moreActive ? "#64748b" : darkMode ? "#4b5563" : "#94a3b8", marginTop: moreActive ? 2 : 0 }}>
+                <span className="font-bold transition-all" style={{ fontSize: moreActive ? 10 : 9, color: moreActive ? "#64748b" : darkMode ? "#9295ab" : "#94a3b8", marginTop: moreActive ? 2 : 0 }}>
                   {t(lang, "navMore")}
                 </span>
               </button>
