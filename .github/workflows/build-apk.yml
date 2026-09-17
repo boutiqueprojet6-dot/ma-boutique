@@ -33,7 +33,7 @@ jobs:
       - name: Generate app icon
         run: |
           npm install --no-save @capacitor/assets
-          npx capacitor-assets generate --android --iconBackgroundColor '#082868' --iconBackgroundColorDark '#082868' --iconPath icon.png
+          npx capacitor-assets generate --android --iconBackgroundColor '#082868' --iconBackgroundColorDark '#082868' --assetPath .
 
       - name: Configure deep link for Google OAuth
         run: |
@@ -106,6 +106,20 @@ jobs:
           echo "${{ secrets.ANDROID_DEBUG_KEYSTORE }}" | base64 -d > ~/.android/debug.keystore
           echo "Certificat de signature stable installé"
 
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: shopnify-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
       - name: Sync Capacitor
         run: npx cap sync android
 
