@@ -10186,14 +10186,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <div className="space-y-2">
             <div className="px-1 mb-1">
               <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 Bonjour, {shopName || "Boutique"}</p>
-              <p className="text-[11px]" style={{ color: T.muted }}>
+              <p className="text-[11px]" style={{ color: T.text }}>
                 {new Date().toLocaleDateString(USE_ARABIC_DIGITS ? "ar-EG" : "fr-FR", { weekday: "long", day: "numeric", month: "long" })}
               </p>
             </div>
             <div className="rounded-2xl overflow-hidden" style={{ background: T.card, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)", border: darkMode ? "none" : `1px solid ${T.border}` }}>
               <div className="px-4 py-3 flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold" style={{ color: T.muted }}>{t(lang, "todaySales")}</p>
+                  <p className="text-[11px] font-semibold" style={{ color: T.text }}>{t(lang, "todaySales")}</p>
                   <div className="flex items-center gap-2">
                     <p className="font-black tracking-tight" style={{ fontSize: 24, color: darkMode ? "#7fb2ff" : INDIGO, letterSpacing: -0.8, marginTop: 1 }}>{fcfa(todayTotal)}</p>
                     {salesVsYesterdayPct !== null && (
@@ -10264,7 +10264,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
                 <div>
                   <p className="text-xs font-extrabold" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
-                  {lowStock.map((p) => <p key={p.id} className="text-[10px]" style={{ color: T.muted }}>{p.name} — {p.quantity} restant(s)</p>)}
+                  {lowStock.map((p) => <p key={p.id} className="text-[10px]" style={{ color: T.text }}>{p.name} — {p.quantity} restant(s)</p>)}
                 </div>
               </div>
             )}
@@ -10290,7 +10290,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold" style={{ color: T.muted }}>{t(lang, "clientDebts")}</p>
+                  <p className="text-[11px] font-semibold" style={{ color: T.text }}>{t(lang, "clientDebts")}</p>
                   <p className="font-black" style={{ fontSize: 16, color: darkMode ? CLAY : "#b8562f", marginTop: 1 }}>{fcfa(totalOwed)}</p>
                 </div>
               </div>
@@ -10300,7 +10300,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: T.muted }}>{t(lang, "cashBalance")}</p>
+                      <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: T.text }}>{t(lang, "cashBalance")}</p>
                       <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 11, lineHeight: 1 }}>
                         {amountsHidden ? "🙈" : "👁️"}
                       </button>
@@ -10324,7 +10324,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
                 {todayExpenses.length > 0 && (
                   <div className="mt-3 space-y-1.5">
-                    <p className="text-[10px] font-semibold" style={{ color: T.muted }}>{t(lang, "todayExpenses")}</p>
+                    <p className="text-[10px] font-semibold" style={{ color: T.text }}>{t(lang, "todayExpenses")}</p>
                     {todayExpenses.map((e) => (
                       <div key={e.id} className="flex items-center justify-between rounded-xl p-2" style={{ background: T.input }}>
                         <div className="flex items-center gap-2">
@@ -12888,7 +12888,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   className="font-bold transition-all"
                   style={{
                     fontSize: active ? 10 : 9,
-                    color: active ? navItem.grad[0] : darkMode ? "#9295ab" : "#94a3b8",
+                    color: active ? navItem.grad[0] : T.text,
                     marginTop: active ? 2 : 0,
                   }}
                 >
@@ -12920,7 +12920,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 >
                   <span style={{ fontSize: moreActive ? 22 : 18, color: moreActive ? "white" : darkMode ? "#9295ab" : "#94a3b8" }}>⋯</span>
                 </div>
-                <span className="font-bold transition-all" style={{ fontSize: moreActive ? 10 : 9, color: moreActive ? "#64748b" : darkMode ? "#9295ab" : "#94a3b8", marginTop: moreActive ? 2 : 0 }}>
+                <span className="font-bold transition-all" style={{ fontSize: moreActive ? 10 : 9, color: moreActive ? "#64748b" : T.text, marginTop: moreActive ? 2 : 0 }}>
                   {t(lang, "navMore")}
                 </span>
               </button>
