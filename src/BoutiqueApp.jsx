@@ -4955,6 +4955,60 @@ const COUNTRY_CURRENCY = [
   { id: "RD Congo", currency: "USD", name: { am: "ዲሞክራቲክ ኮንጎ ሪፐብሊክ", ar: "جمهورية الكونغو الديمقراطية", bm: "Kongo ka republiki demɔkratiki", bn: "কঙ্গো-কিনশাসা", de: "Kongo-Kinshasa", en: "DR Congo", yo: "DR Congo", es: "RD Congo", fr: "RD Congo", ha: "Jamhuriyar Dimokuraɗiyyar Kongo", hi: "कांगो - किंशासा", id: "Kongo - Kinshasa", it: "Congo - Kinshasa", nl: "Congo-Kinshasa", ja: "コンゴ民主共和国(キンシャサ)", ko: "콩고-킨샤사", pl: "Demokratyczna Republika Konga", pt: "RD Congo", ru: "Конго - Киншаса", sw: "Jamhuri ya Kidemokrasia ya Kongo", ta: "காங்கோ - கின்ஷாசா", te: "కాంగో- కిన్షాసా", th: "คองโก - กินชาซา", tl: "Congo - Kinshasa", tr: "Kongo - Kinşasa", ur: "کانگو - کنشاسا", vi: "Congo - Kinshasa", wo: "Kongo (R K D)", zh: "刚果（金）", zu: "i-Congo - Kinshasa" } },
   { id: "Autre", currency: null, name: { am: "ሌላ", ar: "أخرى", bm: "Dòon wɛrɛ", bn: "অন্যান্য", de: "Andere", en: "Other", yo: "Other", es: "Otro", fr: "Autre", ha: "Wani", hi: "अन्य", id: "Lainnya", it: "Altro", nl: "Andere", ja: "その他", ko: "기타", pl: "Inny", pt: "Outro", ru: "Другое", sw: "Nyingine", ta: "மற்றவை", te: "ఇతర", th: "อื่นๆ", tl: "Iba pa", tr: "Diğer", ur: "دیگر", vi: "Khác", wo: "Yeneen", zh: "Other", zu: "Okunye" } },
 ];
+// Indicatif téléphonique par pays (clé = id du pays ci-dessus). Utilisé pour
+// pré-remplir le numéro dès que le pays est choisi à l'inscription.
+const COUNTRY_DIAL_CODE = {
+  "Afghanistan": "+93", "Afrique du Sud": "+27", "Albanie": "+355", "Algérie": "+213", "Allemagne": "+49",
+  "Andorre": "+376", "Angola": "+244", "Antigua-et-Barbuda": "+1268", "Arabie saoudite": "+966", "Argentine": "+54",
+  "Arménie": "+374", "Australie": "+61", "Autriche": "+43", "Azerbaïdjan": "+994", "Bahamas": "+1242",
+  "Bahreïn": "+973", "Bangladesh": "+880", "Barbade": "+1246", "Belgique": "+32", "Belize": "+501",
+  "Bénin": "+229", "Bhoutan": "+975", "Biélorussie": "+375", "Birmanie": "+95", "Bolivie": "+591",
+  "Bosnie-Herzégovine": "+387", "Botswana": "+267", "Brésil": "+55", "Brunei": "+673", "Bulgarie": "+359",
+  "Burkina Faso": "+226", "Burundi": "+257", "Cambodge": "+855", "Cameroun": "+237", "Canada": "+1",
+  "Cap-Vert": "+238", "Chili": "+56", "Chine": "+86", "Chypre": "+357", "Colombie": "+57",
+  "Comores": "+269", "Congo-Brazzaville": "+242", "Corée du Nord": "+850", "Corée du Sud": "+82", "Costa Rica": "+506",
+  "Côte d'Ivoire": "+225", "Croatie": "+385", "Cuba": "+53", "Danemark": "+45", "Djibouti": "+253",
+  "Dominique": "+1767", "Égypte": "+20", "Émirats arabes unis": "+971", "Équateur": "+593", "Érythrée": "+291",
+  "Espagne": "+34", "Estonie": "+372", "Eswatini": "+268", "États-Unis": "+1", "Éthiopie": "+251",
+  "Fidji": "+679", "Finlande": "+358", "France": "+33", "Gabon": "+241", "Gambie": "+220",
+  "Géorgie": "+995", "Ghana": "+233", "Grèce": "+30", "Grenade": "+1473", "Guatemala": "+502",
+  "Guinée": "+224", "Guinée équatoriale": "+240", "Guinée-Bissau": "+245", "Guyana": "+592", "Haïti": "+509",
+  "Honduras": "+504", "Hongrie": "+36", "Îles Cook": "+682", "Îles Marshall": "+692", "Îles Salomon": "+677",
+  "Inde": "+91", "Indonésie": "+62", "Irak": "+964", "Iran": "+98", "Irlande": "+353",
+  "Islande": "+354", "Israël": "+972", "Italie": "+39", "Jamaïque": "+1876", "Japon": "+81",
+  "Jordanie": "+962", "Kazakhstan": "+7", "Kenya": "+254", "Kirghizistan": "+996", "Kiribati": "+686",
+  "Kosovo": "+383", "Koweït": "+965", "Laos": "+856", "Lesotho": "+266", "Lettonie": "+371",
+  "Liban": "+961", "Liberia": "+231", "Libye": "+218", "Liechtenstein": "+423", "Lituanie": "+370",
+  "Luxembourg": "+352", "Macédoine du Nord": "+389", "Madagascar": "+261", "Malaisie": "+60", "Malawi": "+265",
+  "Maldives": "+960", "Mali": "+223", "Malte": "+356", "Maroc": "+212", "Maurice": "+230",
+  "Mauritanie": "+222", "Mexique": "+52", "Micronésie": "+691", "Moldavie": "+373", "Monaco": "+377",
+  "Mongolie": "+976", "Monténégro": "+382", "Mozambique": "+258", "Namibie": "+264", "Nauru": "+674",
+  "Népal": "+977", "Nicaragua": "+505", "Niger": "+227", "Nigeria": "+234", "Norvège": "+47",
+  "Nouvelle-Zélande": "+64", "Oman": "+968", "Ouganda": "+256", "Ouzbékistan": "+998", "Pakistan": "+92",
+  "Palaos": "+680", "Palestine": "+970", "Panama": "+507", "Papouasie-Nouvelle-Guinée": "+675", "Paraguay": "+595",
+  "Pays-Bas": "+31", "Pérou": "+51", "Philippines": "+63", "Pologne": "+48", "Portugal": "+351",
+  "Qatar": "+974", "République centrafricaine": "+236", "République dominicaine": "+1809", "République tchèque": "+420", "Roumanie": "+40",
+  "Royaume-Uni": "+44", "Russie": "+7", "Rwanda": "+250", "Saint-Christophe-et-Niévès": "+1869", "Saint-Marin": "+378",
+  "Saint-Vincent-et-les-Grenadines": "+1784", "Sainte-Lucie": "+1758", "Salvador": "+503", "Samoa": "+685", "Sao Tomé-et-Principe": "+239",
+  "Sénégal": "+221", "Serbie": "+381", "Seychelles": "+248", "Sierra Leone": "+232", "Singapour": "+65",
+  "Slovaquie": "+421", "Slovénie": "+386", "Somalie": "+252", "Soudan": "+249", "Soudan du Sud": "+211",
+  "Sri Lanka": "+94", "Suède": "+46", "Suisse": "+41", "Suriname": "+597", "Syrie": "+963",
+  "Tadjikistan": "+992", "Taïwan": "+886", "Tanzanie": "+255", "Tchad": "+235", "Thaïlande": "+66",
+  "Timor oriental": "+670", "Togo": "+228", "Tonga": "+676", "Trinité-et-Tobago": "+1868", "Tunisie": "+216",
+  "Turkménistan": "+993", "Turquie": "+90", "Tuvalu": "+688", "Ukraine": "+380", "Uruguay": "+598",
+  "Vanuatu": "+678", "Vatican": "+379", "Venezuela": "+58", "Vietnam": "+84", "Yémen": "+967",
+  "Zambie": "+260", "Zimbabwe": "+263", "RD Congo": "+243",
+};
+// Petites chaînes d'interface ajoutées après coup : couvre les 29 langues
+// de LANGUAGES plutôt qu'un simple texte français, avec repli sur l'anglais
+// puis le français si une langue précise venait à manquer.
+const EXTRA_UI = {
+  phoneNumber: { fr: "Numéro de téléphone", en: "Phone number", ar: "رقم الهاتف", es: "Número de teléfono", pt: "Número de telefone", zh: "电话号码", vi: "Số điện thoại", de: "Telefonnummer", ru: "Номер телефона", hi: "फ़ोन नंबर", ta: "தொலைபேசி எண்", bn: "ফোন নম্বর", ur: "فون نمبر", id: "Nomor telepon", tr: "Telefon numarası", ko: "전화번호", ja: "電話番号", it: "Numero di telefono", nl: "Telefoonnummer", sw: "Nambari ya simu", ha: "Lambar waya", bm: "Telefɔni nimɔrɔ", tl: "Numero ng telepono", te: "ఫోన్ నంబర్", th: "หมายเลขโทรศัพท์", wo: "Limero telefon", pl: "Numer telefonu", yo: "Nọ́mbà fóònù", am: "የስልክ ቁጥር", zu: "Inombolo yocingo" },
+  shareProductBtn: { fr: "Partager le produit", en: "Share product", ar: "مشاركة المنتج", es: "Compartir producto", pt: "Partilhar produto", zh: "分享产品", vi: "Chia sẻ sản phẩm", de: "Produkt teilen", ru: "Поделиться товаром", hi: "उत्पाद साझा करें", ta: "பொருளைப் பகிரவும்", bn: "পণ্য শেয়ার করুন", ur: "پروڈکٹ شیئر کریں", id: "Bagikan produk", tr: "Ürünü paylaş", ko: "상품 공유", ja: "商品を共有", it: "Condividi il prodotto", nl: "Product delen", sw: "Shiriki bidhaa", ha: "Raba samfur", bm: "Fɛn tila", tl: "Ibahagi ang produkto", te: "ఉత్పత్తిని పంచుకోండి", th: "แชร์สินค้า", wo: "Séddoo jaaykatu", pl: "Udostępnij produkt", yo: "Pín ọjà náà", am: "ምርቱን አጋራ", zu: "Yabelana ngomkhiqizo" },
+  shareShowPhone: { fr: "Afficher mon numéro", en: "Show my number", ar: "إظهار رقمي", es: "Mostrar mi número", pt: "Mostrar meu número", zh: "显示我的号码", vi: "Hiện số của tôi", de: "Meine Nummer anzeigen", ru: "Показать мой номер", hi: "मेरा नंबर दिखाएं", ta: "என் எண்ணைக் காட்டு", bn: "আমার নম্বর দেখান", ur: "میرا نمبر دکھائیں", id: "Tampilkan nomor saya", tr: "Numaramı göster", ko: "내 번호 표시", ja: "自分の番号を表示", it: "Mostra il mio numero", nl: "Mijn nummer tonen", sw: "Onyesha nambari yangu", ha: "Nuna lambara", bm: "Ne ka telefɔni nimɔrɔ jira", tl: "Ipakita ang numero ko", te: "నా నంబర్ చూపించు", th: "แสดงหมายเลขของฉัน", wo: "Wone samay limero", pl: "Pokaż mój numer", yo: "Fi nọ́mbà mi hàn", am: "ቁጥሬን አሳይ", zu: "Bonisa inombolo yami" },
+  shareShowQty: { fr: "Afficher la quantité disponible", en: "Show available quantity", ar: "إظهار الكمية المتاحة", es: "Mostrar cantidad disponible", pt: "Mostrar quantidade disponível", zh: "显示可用数量", vi: "Hiện số lượng còn lại", de: "Verfügbare Menge anzeigen", ru: "Показать доступное количество", hi: "उपलब्ध मात्रा दिखाएं", ta: "கிடைக்கும் அளவைக் காட்டு", bn: "উপলব্ধ পরিমাণ দেখান", ur: "دستیاب مقدار دکھائیں", id: "Tampilkan stok tersedia", tr: "Mevcut miktarı göster", ko: "재고 수량 표시", ja: "在庫数を表示", it: "Mostra quantità disponibile", nl: "Beschikbare hoeveelheid tonen", sw: "Onyesha kiasi kilichopo", ha: "Nuna adadin da ake da shi", bm: "Fɛn caya jira", tl: "Ipakita ang available na dami", te: "అందుబాటులో ఉన్న పరిమాణాన్ని చూపించు", th: "แสดงจำนวนที่มี", wo: "Wone limu li am", pl: "Pokaż dostępną ilość", yo: "Fi iye tí ó wà hàn", am: "የቀረውን መጠን አሳይ", zu: "Bonisa inani elitholakalayo" },
+};
+const tx = (lang, key) => (EXTRA_UI[key] && (EXTRA_UI[key][lang] || EXTRA_UI[key].en || EXTRA_UI[key].fr)) || "";
 const SECTORS = [
   { fr: "Alimentation générale", en: "General food store", ar: "مواد غذائية عامة", vi: "Cửa hàng thực phẩm tổng hợp", bn: "সাধারণ খাদ্য দোকান", ha: "Kantin abinci na gaba ɗaya", bm: "Dumunikɛyɔrɔ (balo suguya bɛɛ)", ur: "عمومی خوراک کی دکان" },
   { fr: "Vêtements & mode", en: "Clothing & fashion", ar: "ملابس وموضة", vi: "Quần áo & thời trang", bn: "পোশাক ও ফ্যাশন", ha: "Tufafi da salo", bm: "Fani ni fasoya", ur: "لباس اور فیشن" },
@@ -5670,6 +5724,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   const [obPrenom, setObPrenom] = useState("");
   const [obNom, setObNom] = useState("");
   const [obShopName, setObShopName] = useState("");
+  const [obPhone, setObPhone] = useState("");
   const [obSecteur, setObSecteur] = useState("");
   const [obPays, setObPays] = useState("");
   const [obCurrency, setObCurrency] = useState("");
@@ -5866,6 +5921,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     const errs = {};
     if (n === 1) {
       if (!obShopName.trim()) errs.shopName = true;
+      // Numéro obligatoire : au moins 8 chiffres (indicatif possible), pour
+      // pouvoir être proposé ensuite comme contact sur les fiches produit.
+      if (obPhone.replace(/[^0-9]/g, "").length < 8) errs.phone = true;
       if (!obSecteur) errs.secteur = true;
       if (!obPays) errs.pays = true;
       if (!obCurrency) errs.currency = true;
@@ -5975,6 +6033,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         shop_name: obShopName.trim(),
         data: {
           ownerName: `${obPrenom.trim()} ${obNom.trim()}`.trim(),
+          phone: obPhone.trim(),
           sector: obSecteur,
           country: obPays,
           lang: obLang,
@@ -6331,6 +6390,17 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               <input value={obShopName} onChange={(e) => setObShopName(e.target.value)} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.shopName) }} />
             </div>
             <div className="mb-3">
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{tx(lang, "phoneNumber")}</label>
+              <input
+                type="tel"
+                value={obPhone}
+                onChange={(e) => setObPhone(e.target.value)}
+                placeholder="+225 07 00 00 00 00"
+                className="w-full border rounded-xl px-3 py-2.5 text-sm"
+                style={{ background: "#F6F7FB", ...fieldStyle(obErrors.phone) }}
+              />
+            </div>
+            <div className="mb-3">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "sector")}</label>
               <select value={obSecteur} onChange={(e) => setObSecteur(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.secteur) }}>
                 <option value="">{t(lang, "chooseSector")}</option>
@@ -6342,7 +6412,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "country")}</label>
                 <SearchableSelect
                   value={obPays}
-                  onChange={(c) => { setObPays(c); const found = COUNTRY_CURRENCY.find((x) => x.id === c); setObCurrency(found ? found.currency || "" : ""); }}
+                  onChange={(c) => {
+                    setObPays(c);
+                    const found = COUNTRY_CURRENCY.find((x) => x.id === c);
+                    setObCurrency(found ? found.currency || "" : "");
+                    // Préremplit l'indicatif du pays choisi, seulement si le
+                    // champ numéro est encore vide (on ne veut pas écraser un
+                    // numéro déjà saisi si l'utilisateur revient en arrière).
+                    const dial = COUNTRY_DIAL_CODE[c];
+                    if (dial && !obPhone.trim()) setObPhone(dial + " ");
+                  }}
                   options={COUNTRY_CURRENCY.map((c) => ({ value: c.id, label: countryLabel(c) }))}
                   placeholder={t(lang, "chooseCountry")}
                   searchPlaceholder={t(lang, "search")}
@@ -7321,6 +7400,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showBalls, setShowBalls] = useState(true);
   const [ballColor, setBallColor] = useState("blue");
   const [currency, setCurrency] = useState("XOF");
+  const [shopPhone, setShopPhone] = useState("");
   const [settingsUpdatedAt, setSettingsUpdatedAt] = useState(0);
   const [draftCarts, setDraftCarts] = useState([]);
   const [activeCartId, setActiveCartId] = useState(null);
@@ -8116,6 +8196,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setShowBalls(shop.showBalls !== false);
     setBallColor(shop.ballColor || "blue");
     setCurrency(shop.currency || "XOF");
+    setShopPhone(shop.phone || "");
     setSettingsUpdatedAt(shop.settingsUpdatedAt || 0);
     setAiConversations(shop.aiConversations || []);
     setDebtEvents(shop.debtEvents || []);
@@ -8780,9 +8861,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ---- Partage d'un produit en image (pour WhatsApp, statuts, etc.) ----
   // Génère une image "fiche produit" avec la photo, le nom, le prix, le nom de
   // la boutique, et le logo + nom de l'app pour donner envie à d'autres de
-  // télécharger Shopnify. Utilise l'API de partage native si disponible,
-  // sinon télécharge l'image directement.
-  const shareProduct = async (p) => {
+  // télécharger Shopnify. Le numéro et la quantité disponible sont facultatifs
+  // (choisis juste avant l'envoi). Utilise l'API de partage native si
+  // disponible, sinon télécharge l'image directement.
+  const APP_SHARE_URL = "https://ma-boutique-tawny.vercel.app";
+  const shareProduct = async (p, options) => {
+    const { includePhone = false, includeQty = false } = options || {};
     try {
       const loadImage = (src) => new Promise((resolve, reject) => {
         const img = new Image();
@@ -8790,15 +8874,34 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         img.onerror = reject;
         img.src = src;
       });
+      const loadImageCORS = (src) => new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+      // Rendu à double résolution (netteté "4K") : on garde toutes les
+      // coordonnées ci-dessous identiques, seul le canvas physique est 2x
+      // plus grand puis mis à l'échelle une fois pour toutes.
+      const RENDER_SCALE = 2;
       const canvas = document.createElement("canvas");
-      canvas.width = 1080;
-      canvas.height = 1350;
+      canvas.width = 1080 * RENDER_SCALE;
+      canvas.height = 1520 * RENDER_SCALE;
       const ctx = canvas.getContext("2d");
-      const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      ctx.scale(RENDER_SCALE, RENDER_SCALE);
+      const W = 1080, H = 1520;
+      const bg = ctx.createLinearGradient(0, 0, 0, H);
       bg.addColorStop(0, "#1e2a5e");
       bg.addColorStop(1, "#0f1530");
       ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, W, H);
+      // Halo doux derrière le logo, pour un rendu plus premium.
+      const halo = ctx.createRadialGradient(70 + 38, 74 + 38, 4, 70 + 38, 74 + 38, 90);
+      halo.addColorStop(0, "rgba(139,133,242,0.35)");
+      halo.addColorStop(1, "rgba(139,133,242,0)");
+      ctx.fillStyle = halo;
+      ctx.fillRect(0, 0, 220, 220);
       // Logo + nom de l'app en haut, pour que la fiche donne envie de
       // télécharger Shopnify quand elle circule.
       try {
@@ -8818,7 +8921,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ctx.textAlign = "left";
       ctx.fillText("Shopnify", 70 + 76 + 22, 74 + 76 / 2);
       // Carte photo produit, coins arrondis
-      const cardX = 70, cardY = 210, cardW = canvas.width - 140, cardH = 680;
+      const cardX = 70, cardY = 210, cardW = W - 140, cardH = 680;
       const radius = 32;
       const roundedRect = (x, y, w, h, r) => {
         ctx.beginPath();
@@ -8829,6 +8932,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ctx.arcTo(x, y, x + w, y, r);
         ctx.closePath();
       };
+      // Halo/bordure dégradée derrière la carte, puis ombre portée : un rendu
+      // plus "premium" qu'un simple rectangle plat.
+      const borderGrad = ctx.createLinearGradient(cardX, cardY, cardX + cardW, cardY + cardH);
+      borderGrad.addColorStop(0, "#8B85F2");
+      borderGrad.addColorStop(1, "#4F46E5");
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,0.45)";
+      ctx.shadowBlur = 40;
+      ctx.shadowOffsetY = 18;
+      roundedRect(cardX - 4, cardY - 4, cardW + 8, cardH + 8, radius + 4);
+      ctx.fillStyle = borderGrad;
+      ctx.fill();
+      ctx.restore();
       ctx.save();
       roundedRect(cardX, cardY, cardW, cardH, radius);
       ctx.clip();
@@ -8858,34 +8974,64 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       while (ctx.measureText(name).width > cardW && name.length > 3) name = name.slice(0, -1);
       if (name !== (p.name || "")) name += "…";
       ctx.fillText(name, cardX, cardY + cardH + 90);
-      // Prix, bien mis en avant
-      ctx.fillStyle = "#34d399";
+      // Prix, bien mis en avant, avec un dégradé pour un rendu plus soigné
+      const priceGrad = ctx.createLinearGradient(cardX, 0, cardX + 400, 0);
+      priceGrad.addColorStop(0, "#34d399");
+      priceGrad.addColorStop(1, "#6ee7b7");
+      ctx.fillStyle = priceGrad;
       ctx.font = "bold 74px system-ui, -apple-system, sans-serif";
       ctx.fillText(fcfa(p.price), cardX, cardY + cardH + 185);
-      // Nom de la boutique
-      if (shopName) {
-        ctx.fillStyle = "rgba(255,255,255,0.72)";
-        ctx.font = "36px system-ui, -apple-system, sans-serif";
-        let shopLine = `Vendu par ${shopName}`;
-        while (ctx.measureText(shopLine).width > cardW && shopLine.length > 3) shopLine = shopLine.slice(0, -1);
-        ctx.fillText(shopLine, cardX, cardY + cardH + 250);
-      }
-      // Bandeau bas : accroche pour faire connaître l'app
+      // Lignes complémentaires, sous le prix : boutique (toujours), puis
+      // quantité et numéro seulement si choisis pour cet envoi.
+      let infoY = cardY + cardH + 250;
+      const drawInfoLine = (text, opts) => {
+        ctx.fillStyle = (opts && opts.color) || "rgba(255,255,255,0.72)";
+        ctx.font = `${(opts && opts.bold) ? "bold " : ""}36px system-ui, -apple-system, sans-serif`;
+        let line = text;
+        while (ctx.measureText(line).width > cardW && line.length > 3) line = line.slice(0, -1);
+        ctx.fillText(line, cardX, infoY);
+        infoY += 55;
+      };
+      if (shopName) drawInfoLine(`Vendu par ${shopName}`);
+      if (includeQty) drawInfoLine(`📦 ${p.quantity ?? 0} disponible(s)`, { color: "#fbbf24" });
+      if (includePhone && shopPhone) drawInfoLine(`📞 ${shopPhone}`, { color: "#ffffff", bold: true });
+      // Bandeau bas : QR code vers l'app + accroche, pour donner envie de
+      // télécharger Shopnify à qui reçoit l'image.
+      const bandH = 260;
+      const bandY = H - bandH;
       ctx.fillStyle = "rgba(255,255,255,0.08)";
-      ctx.fillRect(0, canvas.height - 130, canvas.width, 130);
+      ctx.fillRect(0, bandY, W, bandH);
+      const qrSize = 170;
+      const qrX = cardX, qrY = bandY + (bandH - qrSize) / 2;
+      // Fond blanc avec marge : un QR a besoin de contraste net pour bien scanner.
+      const qrPad = 14;
       ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 34px system-ui, -apple-system, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("📲 Gère ta boutique avec Shopnify", canvas.width / 2, canvas.height - 65);
+      roundedRect(qrX - qrPad, qrY - qrPad, qrSize + qrPad * 2, qrSize + qrPad * 2, 16);
+      ctx.fill();
+      try {
+        const qrImg = await loadImageCORS(`https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=${encodeURIComponent(APP_SHARE_URL)}`);
+        ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+      } catch (e) {
+        // Pas d'accès réseau au moment du partage : on garde juste le cadre
+        // blanc plutôt que de bloquer tout le partage pour ça.
+      }
+      const textX = qrX + qrSize + qrPad * 2 + 30;
       ctx.textAlign = "left";
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 38px system-ui, -apple-system, sans-serif";
+      ctx.fillText("📲 Télécharge", textX, bandY + bandH / 2 - 30);
+      ctx.fillText("Shopnify", textX, bandY + bandH / 2 + 20);
+      ctx.fillStyle = "rgba(255,255,255,0.65)";
+      ctx.font = "28px system-ui, -apple-system, sans-serif";
+      ctx.fillText("Scanne le code ci-contre", textX, bandY + bandH / 2 + 65);
       canvas.toBlob(async (blob) => {
         if (!blob) return;
         const safeName = (p.name || "produit").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
         const file = new File([blob], `${safeName}.png`, { type: "image/png" });
-        const shareText = `${p.name} — ${fcfa(p.price)}${shopName ? ` chez ${shopName}` : ""}`;
+        const shareText = `${p.name} — ${fcfa(p.price)}${shopName ? ` chez ${shopName}` : ""}\n📲 ${APP_SHARE_URL}`;
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
-            await navigator.share({ files: [file], title: p.name, text: shareText });
+            await navigator.share({ files: [file], title: p.name, text: shareText, url: APP_SHARE_URL });
             return;
           } catch (e) {
             // Partage annulé ou indisponible : on retombe sur le téléchargement ci-dessous.
@@ -8902,6 +9048,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // Le partage n'est pas une action critique : en cas d'échec on n'affiche
       // pas d'erreur bloquante à l'utilisateur.
     }
+  };
+  // Options choisies juste avant l'envoi (numéro et quantité, facultatifs) :
+  // p contient le produit en cours de partage, ou null si le petit dialogue est fermé.
+  const [shareDialogProduct, setShareDialogProduct] = useState(null);
+  const [shareIncludePhone, setShareIncludePhone] = useState(false);
+  const [shareIncludeQty, setShareIncludeQty] = useState(false);
+  const confirmShareProduct = () => {
+    const p = shareDialogProduct;
+    setShareDialogProduct(null);
+    if (p) shareProduct(p, { includePhone: shareIncludePhone, includeQty: shareIncludeQty });
   };
   const deleteProduct = (id) => {
     const targetProduct = products.find((pr) => pr.id === id);
@@ -10508,6 +10664,28 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               </div>
             )}
+            {shareDialogProduct && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(43,36,32,0.5)" }}>
+                <div className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-bold text-sm">{tx(lang, "shareProductBtn")}</h3>
+                    <button onClick={() => setShareDialogProduct(null)}><X size={18} /></button>
+                  </div>
+                  <p className="text-xs mb-4" style={{ color: darkMode ? "#9AA0B4" : "#6B6D85" }}>{shareDialogProduct.name}</p>
+                  <label className="flex items-center gap-3 mb-3 cursor-pointer">
+                    <input type="checkbox" checked={shareIncludePhone} onChange={(e) => setShareIncludePhone(e.target.checked)} className="w-4 h-4" />
+                    <span className="text-sm">📞 {tx(lang, "shareShowPhone")} {shopPhone ? `(${shopPhone})` : ""}</span>
+                  </label>
+                  <label className="flex items-center gap-3 mb-5 cursor-pointer">
+                    <input type="checkbox" checked={shareIncludeQty} onChange={(e) => setShareIncludeQty(e.target.checked)} className="w-4 h-4" />
+                    <span className="text-sm">📦 {tx(lang, "shareShowQty")} ({shareDialogProduct.quantity ?? 0})</span>
+                  </label>
+                  <button onClick={confirmShareProduct} className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2" style={{ background: INDIGO }}>
+                    <Send size={14} /> {tx(lang, "shareProductBtn")}
+                  </button>
+                </div>
+              </div>
+            )}
             {showEditFund && (
               <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
                 <div className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
@@ -10637,10 +10815,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
                 <div className="flex items-center gap-3">
                   <button
-                    onClick={() => shareProduct(p)}
+                    onClick={() => { setShareIncludePhone(false); setShareIncludeQty(false); setShareDialogProduct(p); }}
                     className="w-8 h-8 rounded-full flex items-center justify-center"
                     style={{ background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}
-                    aria-label={t(lang, "shareProductBtn") || "Partager"}
+                    aria-label={tx(lang, "shareProductBtn")}
                   >
                     <Send size={13} color={darkMode ? "#60a5fa" : "#2563eb"} />
                   </button>
