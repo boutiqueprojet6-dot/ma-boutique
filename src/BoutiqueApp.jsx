@@ -10673,7 +10673,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="rounded-2xl overflow-hidden" style={{ background: T.card, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)", border: darkMode ? "none" : `1px solid ${T.border}` }}>
               <div className="px-4 py-3 flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold" style={{ color: T.text }}>{t(lang, "todaySales")}</p>
+                  <p className="text-sm font-extrabold" style={{ color: T.text }}>{t(lang, "todaySales")}</p>
                   <div className="flex items-center gap-2">
                     <p className="font-black tracking-tight" style={{ fontSize: 24, color: darkMode ? "#7fb2ff" : INDIGO, letterSpacing: -0.8, marginTop: 1 }}>{fcfa(todayTotal)}</p>
                     {salesVsYesterdayPct !== null && (
@@ -10696,7 +10696,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             </div>
             <div className="rounded-2xl p-3.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-              <p className="text-xs font-bold mb-2.5" style={{ color: T.text }}>{t(lang, "paymentBreakdown")}</p>
+              <p className="text-sm font-extrabold mb-2.5" style={{ color: T.text }}>{t(lang, "paymentBreakdown")}</p>
               <div className="space-y-2">
                 {byMethod.map((m, i) => {
                   const clrs = [
@@ -10736,15 +10736,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {lowStock.length > 0 && (
-              <div className="rounded-2xl p-3 flex items-center gap-2.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                <div style={{ animation: "floatSlow 2.1s ease-in-out infinite alternate" }}>
-                  <div className="rounded-xl flex items-center justify-center" style={{ width: 34, height: 34, background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5" }}>
-                    <span style={{ fontSize: 15 }}>⚠️</span>
+              <div className="rounded-2xl p-3.5 flex items-start gap-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <div style={{ animation: "floatSlow 2.1s ease-in-out infinite alternate", flexShrink: 0 }}>
+                  <div className="rounded-xl flex items-center justify-center" style={{ width: 38, height: 38, background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5" }}>
+                    <span style={{ fontSize: 17 }}>⚠️</span>
                   </div>
                 </div>
-                <div>
-                  <p className="text-xs font-extrabold" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
-                  {lowStock.map((p) => <p key={p.id} className="text-[10px]" style={{ color: T.text }}>{p.name} — {p.quantity} restant(s)</p>)}
+                <div className="min-w-0" style={{ flex: 1 }}>
+                  <p className="text-sm font-extrabold mb-1" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
+                  <div className="space-y-0.5">
+                    {lowStock.map((p) => <p key={p.id} className="text-xs" style={{ color: T.text }}>{p.name} — {p.quantity} restant(s)</p>)}
+                  </div>
                 </div>
               </div>
             )}
