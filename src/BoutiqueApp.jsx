@@ -5007,8 +5007,40 @@ const EXTRA_UI = {
   shareProductBtn: { fr: "Partager le produit", en: "Share product", ar: "مشاركة المنتج", es: "Compartir producto", pt: "Partilhar produto", zh: "分享产品", vi: "Chia sẻ sản phẩm", de: "Produkt teilen", ru: "Поделиться товаром", hi: "उत्पाद साझा करें", ta: "பொருளைப் பகிரவும்", bn: "পণ্য শেয়ার করুন", ur: "پروڈکٹ شیئر کریں", id: "Bagikan produk", tr: "Ürünü paylaş", ko: "상품 공유", ja: "商品を共有", it: "Condividi il prodotto", nl: "Product delen", sw: "Shiriki bidhaa", ha: "Raba samfur", bm: "Fɛn tila", tl: "Ibahagi ang produkto", te: "ఉత్పత్తిని పంచుకోండి", th: "แชร์สินค้า", wo: "Séddoo jaaykatu", pl: "Udostępnij produkt", yo: "Pín ọjà náà", am: "ምርቱን አጋራ", zu: "Yabelana ngomkhiqizo" },
   shareShowPhone: { fr: "Afficher mon numéro", en: "Show my number", ar: "إظهار رقمي", es: "Mostrar mi número", pt: "Mostrar meu número", zh: "显示我的号码", vi: "Hiện số của tôi", de: "Meine Nummer anzeigen", ru: "Показать мой номер", hi: "मेरा नंबर दिखाएं", ta: "என் எண்ணைக் காட்டு", bn: "আমার নম্বর দেখান", ur: "میرا نمبر دکھائیں", id: "Tampilkan nomor saya", tr: "Numaramı göster", ko: "내 번호 표시", ja: "自分の番号を表示", it: "Mostra il mio numero", nl: "Mijn nummer tonen", sw: "Onyesha nambari yangu", ha: "Nuna lambara", bm: "Ne ka telefɔni nimɔrɔ jira", tl: "Ipakita ang numero ko", te: "నా నంబర్ చూపించు", th: "แสดงหมายเลขของฉัน", wo: "Wone samay limero", pl: "Pokaż mój numer", yo: "Fi nọ́mbà mi hàn", am: "ቁጥሬን አሳይ", zu: "Bonisa inombolo yami" },
   shareShowQty: { fr: "Afficher la quantité disponible", en: "Show available quantity", ar: "إظهار الكمية المتاحة", es: "Mostrar cantidad disponible", pt: "Mostrar quantidade disponível", zh: "显示可用数量", vi: "Hiện số lượng còn lại", de: "Verfügbare Menge anzeigen", ru: "Показать доступное количество", hi: "उपलब्ध मात्रा दिखाएं", ta: "கிடைக்கும் அளவைக் காட்டு", bn: "উপলব্ধ পরিমাণ দেখান", ur: "دستیاب مقدار دکھائیں", id: "Tampilkan stok tersedia", tr: "Mevcut miktarı göster", ko: "재고 수량 표시", ja: "在庫数を表示", it: "Mostra quantità disponibile", nl: "Beschikbare hoeveelheid tonen", sw: "Onyesha kiasi kilichopo", ha: "Nuna adadin da ake da shi", bm: "Fɛn caya jira", tl: "Ipakita ang available na dami", te: "అందుబాటులో ఉన్న పరిమాణాన్ని చూపించు", th: "แสดงจำนวนที่มี", wo: "Wone limu li am", pl: "Pokaż dostępną ilość", yo: "Fi iye tí ó wà hàn", am: "የቀረውን መጠን አሳይ", zu: "Bonisa inani elitholakalayo" },
+  shareCardSettingsTitle: { fr: "Image de partage produit", en: "Product share image", ar: "صورة مشاركة المنتج", es: "Imagen para compartir producto", pt: "Imagem de partilha do produto", zh: "商品分享图片", vi: "Ảnh chia sẻ sản phẩm", de: "Produkt-Teilenbild", ru: "Изображение для товара", hi: "उत्पाद साझा छवि", ta: "பொருள் பகிர் படம்", bn: "পণ্য শেয়ার ছবি", ur: "پروڈکٹ شیئر تصویر", id: "Gambar bagikan produk", tr: "Ürün paylaşım görseli", ko: "상품 공유 이미지", ja: "商品共有画像", it: "Immagine di condivisione prodotto", nl: "Productdeelafbeelding", sw: "Picha ya kushiriki bidhaa", ha: "Hoton raba samfur", bm: "Fɛn tila ja", tl: "Larawan sa pagbahagi ng produkto", te: "ఉత్పత్తి షేర్ చిత్రం", th: "รูปแชร์สินค้า", wo: "Nataal séddoo jaaykatu", pl: "Obraz udostępniania produktu", yo: "Àwòrán pínpín ọjà", am: "የምርት ማጋሪያ ምስል", zu: "Isithombe sokwabelana ngomkhiqizo" },
+  shareCardSamplePname: { fr: "Nom du produit", en: "Product name", ar: "اسم المنتج", es: "Nombre del producto", pt: "Nome do produto", zh: "商品名称", vi: "Tên sản phẩm", de: "Produktname", ru: "Название товара", hi: "उत्पाद का नाम", ta: "பொருளின் பெயர்", bn: "পণ্যের নাম", ur: "پروڈکٹ کا نام", id: "Nama produk", tr: "Ürün adı", ko: "상품명", ja: "商品名", it: "Nome del prodotto", nl: "Productnaam", sw: "Jina la bidhaa", ha: "Sunan samfur", bm: "Fɛn tɔgɔ", tl: "Pangalan ng produkto", te: "ఉత్పత్తి పేరు", th: "ชื่อสินค้า", wo: "Turu jaaykatu", pl: "Nazwa produktu", yo: "Orúkọ ọjà", am: "የምርት ስም", zu: "Igama lomkhiqizo" },
+  shareCardStyle: { fr: "Style de l'image", en: "Image style", ar: "نمط الصورة", es: "Estilo de imagen", pt: "Estilo da imagem", zh: "图片样式", vi: "Kiểu ảnh", de: "Bildstil", ru: "Стиль изображения", hi: "छवि शैली", ta: "படத்தின் பாணி", bn: "ছবির স্টাইল", ur: "تصویر کا انداز", id: "Gaya gambar", tr: "Görsel stili", ko: "이미지 스타일", ja: "画像スタイル", it: "Stile immagine", nl: "Afbeeldingsstijl", sw: "Mtindo wa picha", ha: "Salon hoto", bm: "Ja cogoya", tl: "Estilo ng larawan", te: "చిత్ర శైలి", th: "สไตล์รูปภาพ", wo: "Aju nataal", pl: "Styl obrazu", yo: "Ọ̀nà àwòrán", am: "የምስል ዘይቤ", zu: "Isitayela sesithombe" },
+  shareCardAskToggle: { fr: "Toujours me demander avant l'envoi", en: "Always ask me before sending", ar: "اسألني دائمًا قبل الإرسال", es: "Preguntarme siempre antes de enviar", pt: "Perguntar sempre antes de enviar", zh: "每次发送前都询问我", vi: "Luôn hỏi tôi trước khi gửi", de: "Vor dem Senden immer fragen", ru: "Всегда спрашивать перед отправкой", hi: "भेजने से पहले हमेशा पूछें", ta: "அனுப்பும் முன் எப்போதும் கேளுங்கள்", bn: "পাঠানোর আগে সবসময় জিজ্ঞাসা করুন", ur: "بھیجنے سے پہلے ہمیشہ پوچھیں", id: "Selalu tanya sebelum mengirim", tr: "Göndermeden önce her zaman sor", ko: "보내기 전에 항상 물어보기", ja: "送信前に毎回確認する", it: "Chiedimi sempre prima di inviare", nl: "Altijd vragen voor het verzenden", sw: "Niulize kila wakati kabla ya kutuma", ha: "Ko yaushe ka tambaye ni kafin aikawa", bm: "Ne ka ɲininka tuma bɛɛ sani ci bila", tl: "Laging tanungin ako bago ipadala", te: "పంపే ముందు ఎల్లప్పుడూ నన్ను అడుగు", th: "ถามฉันทุกครั้งก่อนส่ง", wo: "Laaj ma sax balaa nga yónnee", pl: "Zawsze pytaj przed wysłaniem", yo: "Máa bèèrè lọ́wọ́ mi ṣáájú fífiránṣẹ́", am: "ከመላክ በፊት ሁልጊዜ ጠይቀኝ", zu: "Ngihlale ungibuza ngaphambi kokuthumela" },
+  shareCardKeepAll: { fr: "Garder ce style pour tous les produits", en: "Keep this style for all products", ar: "استخدام هذا النمط لجميع المنتجات", es: "Usar este estilo para todos los productos", pt: "Usar este estilo para todos os produtos", zh: "对所有商品使用此样式", vi: "Dùng kiểu này cho mọi sản phẩm", de: "Diesen Stil für alle Produkte beibehalten", ru: "Использовать этот стиль для всех товаров", hi: "सभी उत्पादों के लिए यह शैली रखें", ta: "இந்த பாணியை அனைத்து பொருட்களுக்கும் வைக்கவும்", bn: "সব পণ্যের জন্য এই স্টাইল রাখুন", ur: "تمام مصنوعات کے لیے یہ انداز رکھیں", id: "Gunakan gaya ini untuk semua produk", tr: "Bu stili tüm ürünler için kullan", ko: "모든 상품에 이 스타일 사용", ja: "すべての商品にこのスタイルを使う", it: "Usa questo stile per tutti i prodotti", nl: "Deze stijl voor alle producten gebruiken", sw: "Tumia mtindo huu kwa bidhaa zote", ha: "Yi amfani da wannan salon ga duk kayayyaki", bm: "Cogoya in mara fɛn bɛɛ ma", tl: "Gamitin ang estilong ito sa lahat ng produkto", te: "అన్ని ఉత్పత్తులకు ఈ శైలిని ఉంచండి", th: "ใช้สไตล์นี้กับสินค้าทั้งหมด", wo: "Jëfandikoo aju bii ci jaaykatu yépp", pl: "Zachowaj ten styl dla wszystkich produktów", yo: "Fi ọ̀nà yìí pamọ́ fún gbogbo ọjà", am: "ይህን ዘይቤ ለሁሉም ምርቶች ያቆዩ", zu: "Gcina lesi sitayela kuyo yonke imikhiqizo" },
+  shareCardPreview: { fr: "Aperçu", en: "Preview", ar: "معاينة", es: "Vista previa", pt: "Pré-visualização", zh: "预览", vi: "Xem trước", de: "Vorschau", ru: "Предпросмотр", hi: "पूर्वावलोकन", ta: "முன்னோட்டம்", bn: "প্রিভিউ", ur: "پیش منظر", id: "Pratinjau", tr: "Önizleme", ko: "미리보기", ja: "プレビュー", it: "Anteprima", nl: "Voorbeeld", sw: "Muhtasari", ha: "Duba kafin", bm: "Filɛli", tl: "Preview", te: "ప్రివ్యూ", th: "ตัวอย่าง", wo: "Xool bu jëkk", pl: "Podgląd", yo: "Àkíyèsí", am: "ቅድመ እይታ", zu: "Ukubuka kuqala" },
 };
 const tx = (lang, key) => (EXTRA_UI[key] && (EXTRA_UI[key][lang] || EXTRA_UI[key].en || EXTRA_UI[key].fr)) || "";
+EXTRA_UI.editProductTitle = { fr: "Modifier le produit", en: "Edit product", ar: "تعديل المنتج", es: "Editar producto", pt: "Editar produto", zh: "编辑商品", vi: "Chỉnh sửa sản phẩm", de: "Produkt bearbeiten", ru: "Изменить товар", hi: "उत्पाद संपादित करें", ta: "பொருளைத் திருத்து", bn: "পণ্য সম্পাদনা করুন", ur: "پروڈکٹ میں ترمیم کریں", id: "Edit produk", tr: "Ürünü düzenle", ko: "상품 수정", ja: "商品を編集", it: "Modifica prodotto", nl: "Product bewerken", sw: "Hariri bidhaa", ha: "Gyara samfur", bm: "Fɛn labɛn", tl: "I-edit ang produkto", te: "ఉత్పత్తిని సవరించండి", th: "แก้ไขสินค้า", wo: "Soppi jaaykatu", pl: "Edytuj produkt", yo: "Ṣàtúnṣe ọjà", am: "ምርቱን አርትዕ", zu: "Hlela umkhiqizo" };
+EXTRA_UI.logProductEdited = { fr: "Produit modifié", en: "Product edited", ar: "تم تعديل المنتج", es: "Producto editado", pt: "Produto editado", zh: "商品已编辑", vi: "Đã chỉnh sửa sản phẩm", de: "Produkt bearbeitet", ru: "Товар изменён", hi: "उत्पाद संपादित हुआ", ta: "பொருள் திருத்தப்பட்டது", bn: "পণ্য সম্পাদিত হয়েছে", ur: "پروڈکٹ میں ترمیم ہوئی", id: "Produk diedit", tr: "Ürün düzenlendi", ko: "상품 수정됨", ja: "商品を編集しました", it: "Prodotto modificato", nl: "Product bewerkt", sw: "Bidhaa imehaririwa", ha: "An gyara samfur", bm: "Fɛn labɛnna", tl: "Na-edit ang produkto", te: "ఉత్పత్తి సవరించబడింది", th: "แก้ไขสินค้าแล้ว", wo: "Jaaykatu soppiku na", pl: "Produkt zmodyfikowany", yo: "A ṣàtúnṣe ọjà", am: "ምርቱ ተስተካክሏል", zu: "Umkhiqizo uhleliwe" };
+// Palette de fonds proposés pour l'image de partage produit. "glossy" ajoute
+// un reflet diagonal pour un effet plus "3D" / brillant.
+const SHARE_CARD_STYLES = [
+  { id: "midnight", label: "Minuit", colors: ["#1e2a5e", "#0f1530"] },
+  { id: "emerald", label: "Émeraude", colors: ["#0f5132", "#022c22"] },
+  { id: "sunset", label: "Coucher de soleil", colors: ["#f97316", "#831843"] },
+  { id: "ocean", label: "Océan", colors: ["#0ea5e9", "#0c2d48"] },
+  { id: "royal", label: "Royal", colors: ["#8b5cf6", "#3b0764"] },
+  { id: "rosegold", label: "Or rose", colors: ["#f9a8d4", "#92400e"] },
+  { id: "ruby", label: "Rubis", colors: ["#e11d48", "#3f0d17"] },
+  { id: "forest", label: "Forêt", colors: ["#22c55e", "#052e16"] },
+  { id: "graphite", label: "Graphite", colors: ["#334155", "#0b0f19"] },
+  { id: "gold3d", label: "Or 3D", colors: ["#fde68a", "#78350f"], glossy: true },
+  { id: "chrome3d", label: "Chrome 3D", colors: ["#cbd5e1", "#0f172a"], glossy: true },
+  { id: "candy3d", label: "Candy 3D", colors: ["#f472b6", "#6366f1"], glossy: true },
+  { id: "sapphire3d", label: "Saphir 3D", colors: ["#38bdf8", "#0c1e3d"], glossy: true },
+  { id: "emerald3d", label: "Émeraude 3D", colors: ["#4ade80", "#052e16"], glossy: true },
+  { id: "amethyst3d", label: "Améthyste 3D", colors: ["#c084fc", "#3b0764"], glossy: true },
+  { id: "copper3d", label: "Cuivre 3D", colors: ["#fb923c", "#431407"], glossy: true },
+  { id: "obsidian3d", label: "Obsidienne 3D", colors: ["#64748b", "#020617"], glossy: true },
+  { id: "neon3d", label: "Néon 3D", colors: ["#22d3ee", "#701a75"], glossy: true },
+  { id: "ruby3d", label: "Rubis 3D", colors: ["#fb7185", "#4c0519"], glossy: true },
+];
+const shareCardStyleById = (id) => SHARE_CARD_STYLES.find((s) => s.id === id) || SHARE_CARD_STYLES[0];
 const SECTORS = [
   { fr: "Alimentation générale", en: "General food store", ar: "مواد غذائية عامة", vi: "Cửa hàng thực phẩm tổng hợp", bn: "সাধারণ খাদ্য দোকান", ha: "Kantin abinci na gaba ɗaya", bm: "Dumunikɛyɔrɔ (balo suguya bɛɛ)", ur: "عمومی خوراک کی دکان" },
   { fr: "Vêtements & mode", en: "Clothing & fashion", ar: "ملابس وموضة", vi: "Quần áo & thời trang", bn: "পোশাক ও ফ্যাশন", ha: "Tufafi da salo", bm: "Fani ni fasoya", ur: "لباس اور فیشن" },
@@ -5355,7 +5387,7 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime"];
 function sortByDate(list) {
   return [...(list || [])].sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
 }
@@ -7401,6 +7433,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [ballColor, setBallColor] = useState("blue");
   const [currency, setCurrency] = useState("XOF");
   const [shopPhone, setShopPhone] = useState("");
+  // Style choisi pour l'image de partage produit (fond/couleurs), et si on
+  // doit re-proposer le choix avant chaque envoi ou garder ce style partout.
+  const [shareCardStyleId, setShareCardStyleId] = useState("midnight");
+  const [shareCardAskEachTime, setShareCardAskEachTime] = useState(false);
   const [settingsUpdatedAt, setSettingsUpdatedAt] = useState(0);
   const [draftCarts, setDraftCarts] = useState([]);
   const [activeCartId, setActiveCartId] = useState(null);
@@ -8032,6 +8068,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [aiInput, setAiInput] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
+  // null = mode ajout ; sinon l'id du produit en cours de modification.
+  const [editingProductId, setEditingProductId] = useState(null);
   const [showAddExpense, setShowAddExpense] = useState(false);
   const [showEditFund, setShowEditFund] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -8197,6 +8235,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setBallColor(shop.ballColor || "blue");
     setCurrency(shop.currency || "XOF");
     setShopPhone(shop.phone || "");
+    setShareCardStyleId(shop.shareCardStyleId || "midnight");
+    setShareCardAskEachTime(!!shop.shareCardAskEachTime);
     setSettingsUpdatedAt(shop.settingsUpdatedAt || 0);
     setAiConversations(shop.aiConversations || []);
     setDebtEvents(shop.debtEvents || []);
@@ -8500,6 +8540,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       debtEvents: overrides.debtEvents ?? debtEvents,
       benchmarkOptIn: overrides.benchmarkOptIn ?? benchmarkOptIn,
       arabicDigits: overrides.arabicDigits ?? arabicDigits,
+      shareCardStyleId: overrides.shareCardStyleId ?? shareCardStyleId,
+      shareCardAskEachTime: overrides.shareCardAskEachTime ?? shareCardAskEachTime,
       activeCartId: overrides.activeCartId ?? activeCartId,
       employees: overrides.employees ?? employees,
       actionLog: overrides.actionLog ?? actionLog,
@@ -8522,6 +8564,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setDebtEvents(next.debtEvents);
     setBenchmarkOptIn(next.benchmarkOptIn);
     setArabicDigits(next.arabicDigits);
+    setShareCardStyleId(next.shareCardStyleId);
+    setShareCardAskEachTime(next.shareCardAskEachTime);
     setEmployees(next.employees);
     setActionLog(next.actionLog);
     setSettingsUpdatedAt(next.settingsUpdatedAt);
@@ -8803,13 +8847,35 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setError(t(lang, "productPhotoRequired"));
       return;
     }
+    setError("");
+    if (editingProductId) {
+      // Mode modification : on met à jour le produit existant en place,
+      // sans toucher à son id ni à ses ventes déjà enregistrées.
+      saveAll({
+        products: products.map((p) => p.id === editingProductId ? {
+          ...p,
+          name: pName.trim(),
+          quantity: parseInt(pQty, 10),
+          price: parseFloat(pPrice),
+          costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
+          photo: pPhoto,
+          sellByUnit: pSellByUnit,
+          unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
+          unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
+          updatedAt: Date.now(),
+        } : p),
+      });
+      logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}`);
+      setEditingProductId(null);
+      setPName(""); setPQty(""); setPPrice(""); setPCostPrice(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setShowAddProduct(false);
+      return;
+    }
     // Plus de limite sur le nombre de produits, à aucun palier.
     const productLimit = null;
     if (productLimit !== null && products.length >= productLimit) {
       setError(t(lang, "productLimitReached").replace("{n}", productLimit));
       return;
     }
-    setError("");
     const newProduct = {
       id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
       name: pName.trim(),
@@ -8828,6 +8894,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
     setPName(""); setPQty(""); setPPrice(""); setPCostPrice(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setShowAddProduct(false);
+  };
+  // Ouvre le formulaire déjà rempli avec les valeurs du produit, pour corriger
+  // une erreur de saisie (nom, quantité, prix, photo...) sans le recréer.
+  const openEditProduct = (p) => {
+    setEditingProductId(p.id);
+    setPName(p.name || "");
+    setPQty(String(p.quantity ?? ""));
+    setPPrice(String(p.price ?? ""));
+    setPCostPrice(p.costPrice != null ? String(p.costPrice) : "");
+    setPPhoto(p.photo || null);
+    setPSellByUnit(!!p.sellByUnit);
+    setPUnitsPerPack(p.unitsPerPack != null ? String(p.unitsPerPack) : "");
+    setPUnitPrice(p.unitPrice != null ? String(p.unitPrice) : "");
+    setError("");
+    setShowAddProduct(true);
   };
   const adjustStock = (id, delta) => {
     // Produit gelé (stock au-delà de la limite du palier actuel) : ni modifiable ni ajustable.
@@ -8866,7 +8947,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // disponible, sinon télécharge l'image directement.
   const APP_SHARE_URL = "https://ma-boutique-tawny.vercel.app";
   const shareProduct = async (p, options) => {
-    const { includePhone = false, includeQty = false } = options || {};
+    const { includePhone = false, includeQty = false, styleId } = options || {};
+    const cardStyle = shareCardStyleById(styleId || shareCardStyleId);
     try {
       const loadImage = (src) => new Promise((resolve, reject) => {
         const img = new Image();
@@ -8892,10 +8974,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ctx.scale(RENDER_SCALE, RENDER_SCALE);
       const W = 1080, H = 1520;
       const bg = ctx.createLinearGradient(0, 0, 0, H);
-      bg.addColorStop(0, "#1e2a5e");
-      bg.addColorStop(1, "#0f1530");
+      bg.addColorStop(0, cardStyle.colors[0]);
+      bg.addColorStop(1, cardStyle.colors[1]);
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, W, H);
+      if (cardStyle.glossy) {
+        // Reflet diagonal, pour un rendu plus "3D" / brillant sur les styles qui le proposent.
+        ctx.save();
+        ctx.globalAlpha = 0.16;
+        ctx.translate(W * 0.15, 0);
+        ctx.transform(1, 0, -0.55, 1, 0, 0);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, W * 0.35, H);
+        ctx.restore();
+        // Petit reflet spéculaire rond en haut à droite, comme une surface
+        // bombée qui accroche la lumière — renforce l'effet 3D/brillant.
+        const spec = ctx.createRadialGradient(W * 0.78, H * 0.1, 4, W * 0.78, H * 0.1, W * 0.22);
+        spec.addColorStop(0, "rgba(255,255,255,0.30)");
+        spec.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = spec;
+        ctx.fillRect(0, 0, W, H * 0.35);
+      }
       // Halo doux derrière le logo, pour un rendu plus premium.
       const halo = ctx.createRadialGradient(70 + 38, 74 + 38, 4, 70 + 38, 74 + 38, 90);
       halo.addColorStop(0, "rgba(139,133,242,0.35)");
@@ -8906,7 +9005,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // télécharger Shopnify quand elle circule.
       try {
         const logoImg = await loadImage(`data:image/jpeg;base64,${APP_LOGO_B64}`);
-        const logoSize = 76;
+        const logoSize = 92;
         ctx.save();
         ctx.beginPath();
         ctx.arc(70 + logoSize / 2, 74 + logoSize / 2, logoSize / 2, 0, Math.PI * 2);
@@ -8917,11 +9016,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       } catch (e) {}
       ctx.fillStyle = "#ffffff";
       ctx.textBaseline = "middle";
-      ctx.font = "bold 42px system-ui, -apple-system, sans-serif";
+      ctx.font = "bold 46px system-ui, -apple-system, sans-serif";
       ctx.textAlign = "left";
-      ctx.fillText("Shopnify", 70 + 76 + 22, 74 + 76 / 2);
+      ctx.fillText("Shopnify", 70 + 92 + 24, 74 + 92 / 2);
       // Carte photo produit, coins arrondis
-      const cardX = 70, cardY = 210, cardW = W - 140, cardH = 680;
+      const cardX = 70, cardY = 232, cardW = W - 140, cardH = 660;
       const radius = 32;
       const roundedRect = (x, y, w, h, r) => {
         ctx.beginPath();
@@ -8981,8 +9080,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ctx.fillStyle = priceGrad;
       ctx.font = "bold 74px system-ui, -apple-system, sans-serif";
       ctx.fillText(fcfa(p.price), cardX, cardY + cardH + 185);
-      // Lignes complémentaires, sous le prix : boutique (toujours), puis
-      // quantité et numéro seulement si choisis pour cet envoi.
+      // Ligne complémentaire, sous le prix : le nom de la boutique.
       let infoY = cardY + cardH + 250;
       const drawInfoLine = (text, opts) => {
         ctx.fillStyle = (opts && opts.color) || "rgba(255,255,255,0.72)";
@@ -8993,10 +9091,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         infoY += 55;
       };
       if (shopName) drawInfoLine(`Vendu par ${shopName}`);
-      if (includeQty) drawInfoLine(`📦 ${p.quantity ?? 0} disponible(s)`, { color: "#fbbf24" });
-      if (includePhone && shopPhone) drawInfoLine(`📞 ${shopPhone}`, { color: "#ffffff", bold: true });
-      // Bandeau bas : QR code vers l'app + accroche, pour donner envie de
-      // télécharger Shopnify à qui reçoit l'image.
+      // Bandeau bas : QR code vers l'app + accroche (structure inchangée),
+      // avec le numéro et/ou la quantité disponible ajoutés à droite du
+      // bandeau si choisis pour cet envoi.
       const bandH = 260;
       const bandY = H - bandH;
       ctx.fillStyle = "rgba(255,255,255,0.08)";
@@ -9024,6 +9121,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ctx.fillStyle = "rgba(255,255,255,0.65)";
       ctx.font = "28px system-ui, -apple-system, sans-serif";
       ctx.fillText("Scanne le code ci-contre", textX, bandY + bandH / 2 + 65);
+      if (includePhone || includeQty) {
+        // Numéro et/ou quantité, à droite du bandeau (à droite de l'image QR
+        // + accroche), alignés à droite du cadre.
+        ctx.textAlign = "right";
+        const rightX = W - 60;
+        const lines = [];
+        if (includeQty) lines.push({ text: `📦 ${p.quantity ?? 0} disponible(s)`, color: "#fbbf24" });
+        if (includePhone && shopPhone) lines.push({ text: `📞 ${shopPhone}`, color: "#ffffff" });
+        const lineH = 46;
+        let ry = bandY + bandH / 2 - ((lines.length - 1) * lineH) / 2;
+        lines.forEach((l) => {
+          ctx.fillStyle = l.color;
+          ctx.font = "bold 32px system-ui, -apple-system, sans-serif";
+          let line = l.text;
+          while (ctx.measureText(line).width > 320 && line.length > 3) line = line.slice(0, -1);
+          ctx.fillText(line, rightX, ry);
+          ry += lineH;
+        });
+        ctx.textAlign = "left";
+      }
       canvas.toBlob(async (blob) => {
         if (!blob) return;
         const safeName = (p.name || "produit").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
@@ -9054,10 +9171,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [shareDialogProduct, setShareDialogProduct] = useState(null);
   const [shareIncludePhone, setShareIncludePhone] = useState(false);
   const [shareIncludeQty, setShareIncludeQty] = useState(false);
+  const [shareDialogStyleId, setShareDialogStyleId] = useState("midnight");
   const confirmShareProduct = () => {
     const p = shareDialogProduct;
     setShareDialogProduct(null);
-    if (p) shareProduct(p, { includePhone: shareIncludePhone, includeQty: shareIncludeQty });
+    if (p) shareProduct(p, { includePhone: shareIncludePhone, includeQty: shareIncludeQty, styleId: shareCardAskEachTime ? shareDialogStyleId : undefined });
   };
   const deleteProduct = (id) => {
     const targetProduct = products.find((pr) => pr.id === id);
@@ -10287,6 +10405,48 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         </div>
       )}
+      {shareDialogProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(43,36,32,0.5)" }}>
+          <div className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-bold text-sm">{tx(lang, "shareProductBtn")}</h3>
+              <button onClick={() => setShareDialogProduct(null)}><X size={18} /></button>
+            </div>
+            <p className="text-xs mb-4" style={{ color: darkMode ? "#9AA0B4" : "#6B6D85" }}>{shareDialogProduct.name}</p>
+            <label className="flex items-center gap-3 mb-3 cursor-pointer">
+              <input type="checkbox" checked={shareIncludePhone} onChange={(e) => setShareIncludePhone(e.target.checked)} className="w-4 h-4" />
+              <span className="text-sm">📞 {tx(lang, "shareShowPhone")} {shopPhone ? `(${shopPhone})` : ""}</span>
+            </label>
+            <label className="flex items-center gap-3 mb-5 cursor-pointer">
+              <input type="checkbox" checked={shareIncludeQty} onChange={(e) => setShareIncludeQty(e.target.checked)} className="w-4 h-4" />
+              <span className="text-sm">📦 {tx(lang, "shareShowQty")} ({shareDialogProduct.quantity ?? 0})</span>
+            </label>
+            {shareCardAskEachTime && (
+              <div className="mb-5">
+                <p className="text-xs font-semibold mb-2" style={{ color: darkMode ? "#9AA0B4" : "#6B6D85" }}>{tx(lang, "shareCardStyle")}</p>
+                <div className="flex flex-wrap gap-2">
+                  {SHARE_CARD_STYLES.map((s) => (
+                    <button
+                      key={s.id}
+                      onClick={() => setShareDialogStyleId(s.id)}
+                      title={s.label}
+                      className="w-9 h-9 rounded-full"
+                      style={{
+                        background: `linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`,
+                        border: shareDialogStyleId === s.id ? "3px solid #ffffff" : "2px solid rgba(0,0,0,0.15)",
+                        boxShadow: shareDialogStyleId === s.id ? "0 0 0 2px #4F46E5" : "none",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+            <button onClick={confirmShareProduct} className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2" style={{ background: INDIGO }}>
+              <Send size={14} /> {tx(lang, "shareProductBtn")}
+            </button>
+          </div>
+        </div>
+      )}
       {showForgotPin && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card, color: T.text }}>
@@ -10456,17 +10616,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <div className="flex flex-col items-end gap-1">
             <div className="flex items-center gap-3">
               <button
-                onClick={async () => {
+                onClick={() => {
+                  // On ouvre l'écran immédiatement, comme un changement d'onglet
+                  // normal — la lecture de l'email (juste pour préremplir le
+                  // champ) se fait ensuite en arrière-plan, sans bloquer l'affichage.
                   setShopNameInput(shopName);
                   setEmailInput("");
-                  try {
-                    const raw = await window.storage.get(`accounts:${username}`, true);
-                    if (raw) { const account = JSON.parse(raw.value); setEmailInput(account.email || ""); }
-                  } catch (e) {}
                   setShowSettings(true);
+                  window.storage.get(`accounts:${username}`, true)
+                    .then((raw) => { if (raw) { const account = JSON.parse(raw.value); setEmailInput(account.email || ""); } })
+                    .catch(() => {});
                 }}
+                style={{ padding: 6 }}
               >
-                <Settings size={16} />
+                <Settings size={24} />
               </button>
             </div>
             <SavedBadge saving={saving} isOnline={isOnline} pendingCount={pendingCount} />
@@ -10664,28 +10827,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               </div>
             )}
-            {shareDialogProduct && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(43,36,32,0.5)" }}>
-                <div className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-sm">{tx(lang, "shareProductBtn")}</h3>
-                    <button onClick={() => setShareDialogProduct(null)}><X size={18} /></button>
-                  </div>
-                  <p className="text-xs mb-4" style={{ color: darkMode ? "#9AA0B4" : "#6B6D85" }}>{shareDialogProduct.name}</p>
-                  <label className="flex items-center gap-3 mb-3 cursor-pointer">
-                    <input type="checkbox" checked={shareIncludePhone} onChange={(e) => setShareIncludePhone(e.target.checked)} className="w-4 h-4" />
-                    <span className="text-sm">📞 {tx(lang, "shareShowPhone")} {shopPhone ? `(${shopPhone})` : ""}</span>
-                  </label>
-                  <label className="flex items-center gap-3 mb-5 cursor-pointer">
-                    <input type="checkbox" checked={shareIncludeQty} onChange={(e) => setShareIncludeQty(e.target.checked)} className="w-4 h-4" />
-                    <span className="text-sm">📦 {tx(lang, "shareShowQty")} ({shareDialogProduct.quantity ?? 0})</span>
-                  </label>
-                  <button onClick={confirmShareProduct} className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2" style={{ background: INDIGO }}>
-                    <Send size={14} /> {tx(lang, "shareProductBtn")}
-                  </button>
-                </div>
-              </div>
-            )}
             {showEditFund && (
               <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
                 <div className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
@@ -10706,8 +10847,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <div dir="ltr" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
             <div className="px-4" style={{ minHeight: "100%", paddingBottom: 40, paddingTop: 20 }}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-base" style={{ color: T.text }}>{t(lang, "newProduct")}</h3>
-              <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
+              <h3 className="font-bold text-base" style={{ color: T.text }}>{editingProductId ? (tx(lang, "editProductTitle")) : t(lang, "newProduct")}</h3>
+              <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); setEditingProductId(null); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
             </div>
             <input placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
             <input placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" />
@@ -10815,13 +10956,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
                 <div className="flex items-center gap-3">
                   <button
-                    onClick={() => { setShareIncludePhone(false); setShareIncludeQty(false); setShareDialogProduct(p); }}
+                    onClick={() => { setShareIncludePhone(false); setShareIncludeQty(false); setShareDialogStyleId(shareCardStyleId); setShareDialogProduct(p); }}
                     className="w-8 h-8 rounded-full flex items-center justify-center"
                     style={{ background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}
                     aria-label={tx(lang, "shareProductBtn")}
                   >
                     <Send size={13} color={darkMode ? "#60a5fa" : "#2563eb"} />
                   </button>
+                  {hasPermission("editStock") && (
+                    <button
+                      onClick={() => openEditProduct(p)}
+                      className="w-8 h-8 rounded-full flex items-center justify-center"
+                      style={{ background: darkMode ? "rgba(52,211,153,0.12)" : "#d1fae5" }}
+                      aria-label={tx(lang, "editProductTitle")}
+                    >
+                      <Edit3 size={13} color={darkMode ? "#34d399" : "#059669"} />
+                    </button>
+                  )}
                   {hasPermission("editStock") && (
                     <button
                       onClick={() => setConfirmModal({ message: `Supprimer "${p.name}" du stock ?`, onConfirm: () => deleteProduct(p.id) })}
@@ -12408,6 +12559,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "shopinfo" && (t(lang, "setInfosBoutique"))}
                   {settingsField === "categories" && (t(lang, "setCategories"))}
                   {settingsField === "threshold2" && t(lang, "stockAlert")}
+                  {settingsField === "sharecard" && tx(lang, "shareCardSettingsTitle")}
                   {settingsField === "defpayment" && (t(lang, "setPaiementParDefaut"))}
                   {settingsField === "debtdelay" && (t(lang, "setDettesClients"))}
                   {settingsField === "cashsettings" && (t(lang, "setCaisse"))}
@@ -12517,6 +12669,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "shopinfo", icon: Store, label: t(lang, "setInfosBoutique"), desc: t(lang, "setNomAdresseDevise") },
                 { id: "categories", icon: Tag, label: t(lang, "setCategories"), desc: t(lang, "setProduitsRayons") },
                 { id: "threshold2", icon: AlertOctagon, label: t(lang, "setSeuilsDeStock"), desc: t(lang, "setAlerteStockBas") },
+                { id: "sharecard", icon: Send, label: tx(lang, "shareCardSettingsTitle"), desc: tx(lang, "shareCardStyle") },
               ].map((item) => { const Icon = item.icon; return (
                 <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#34d3991a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#34d399" /></div>
@@ -12737,6 +12890,63 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                   <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
+                </div>
+              )}
+              {settingsField === "sharecard" && (
+                <div>
+                  <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "shareCardPreview")}</p>
+                  <div
+                    className="rounded-2xl p-4 mb-5 relative overflow-hidden"
+                    style={{ background: `linear-gradient(160deg, ${shareCardStyleById(shareCardStyleId).colors[0]}, ${shareCardStyleById(shareCardStyleId).colors[1]})` }}
+                  >
+                    {shareCardStyleById(shareCardStyleId).glossy && (
+                      <>
+                        <div style={{ position: "absolute", top: 0, left: "10%", width: "35%", height: "100%", background: "rgba(255,255,255,0.16)", transform: "skewX(-20deg)" }} />
+                        <div style={{ position: "absolute", top: "-10%", right: "-10%", width: "60%", height: "60%", background: "radial-gradient(circle, rgba(255,255,255,0.30), transparent 70%)" }} />
+                      </>
+                    )}
+                    <div className="flex items-center gap-2 mb-3" style={{ position: "relative" }}>
+                      <img src="/icon-192.png" alt="" style={{ width: 34, height: 34, borderRadius: "50%" }} />
+                      <span className="font-bold text-white text-sm">Shopnify</span>
+                    </div>
+                    <div className="rounded-xl flex items-center justify-center mb-3" style={{ position: "relative", height: 130, background: "rgba(0,0,0,0.25)", fontSize: 40 }}>📦</div>
+                    <div className="text-white font-bold text-sm" style={{ position: "relative" }}>{tx(lang, "shareCardSamplePname")}</div>
+                    <div className="font-bold text-base mb-2" style={{ position: "relative", background: "linear-gradient(90deg,#34d399,#6ee7b7)", WebkitBackgroundClip: "text", color: "transparent" }}>{fcfa(2500)}</div>
+                    {shopName && <div className="text-[11px] mb-3" style={{ position: "relative", color: "rgba(255,255,255,0.72)" }}>Vendu par {shopName}</div>}
+                    <div className="rounded-lg p-2 flex items-center justify-between gap-2" style={{ position: "relative", background: "rgba(255,255,255,0.08)" }}>
+                      <div className="flex items-center gap-2">
+                        <div style={{ width: 34, height: 34, background: "#fff", borderRadius: 6 }} />
+                        <div>
+                          <div className="text-white font-bold text-[10px]">📲 Télécharge Shopnify</div>
+                          <div className="text-[9px]" style={{ color: "rgba(255,255,255,0.65)" }}>Scanne le code ci-contre</div>
+                        </div>
+                      </div>
+                      <div className="text-right text-[9px] font-bold leading-tight" style={{ color: "#fbbf24" }}>📦 12<br /><span style={{ color: "#fff" }}>📞 {shopPhone || "+225…"}</span></div>
+                    </div>
+                  </div>
+                  <p className="text-xs font-semibold mb-2" style={{ color: T.muted }}>{tx(lang, "shareCardStyle")}</p>
+                  <div className="flex flex-wrap gap-3 mb-5">
+                    {SHARE_CARD_STYLES.map((s) => (
+                      <button
+                        key={s.id}
+                        onClick={() => saveAll({ shareCardStyleId: s.id })}
+                        title={s.label}
+                        className="w-10 h-10 rounded-full"
+                        style={{
+                          background: `linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`,
+                          border: shareCardStyleId === s.id ? `3px solid ${T.text}` : "2px solid rgba(0,0,0,0.15)",
+                          boxShadow: shareCardStyleId === s.id ? "0 0 0 2px #4F46E5" : "none",
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <label className="flex items-center justify-between p-3 rounded-xl cursor-pointer" style={{ background: T.input, border: `1px solid ${T.border}` }}>
+                    <span className="text-sm font-semibold" style={{ color: T.text }}>{tx(lang, "shareCardAskToggle")}</span>
+                    <input type="checkbox" checked={shareCardAskEachTime} onChange={(e) => saveAll({ shareCardAskEachTime: e.target.checked })} className="w-5 h-5" />
+                  </label>
+                  {!shareCardAskEachTime && (
+                    <p className="text-[11px] mt-2" style={{ color: T.muted }}>{tx(lang, "shareCardKeepAll")}</p>
+                  )}
                 </div>
               )}
               {/* Finances — Paiement par défaut */}
