@@ -5017,6 +5017,7 @@ const EXTRA_UI = {
 const tx = (lang, key) => (EXTRA_UI[key] && (EXTRA_UI[key][lang] || EXTRA_UI[key].en || EXTRA_UI[key].fr)) || "";
 EXTRA_UI.editProductTitle = { fr: "Modifier le produit", en: "Edit product", ar: "تعديل المنتج", es: "Editar producto", pt: "Editar produto", zh: "编辑商品", vi: "Chỉnh sửa sản phẩm", de: "Produkt bearbeiten", ru: "Изменить товар", hi: "उत्पाद संपादित करें", ta: "பொருளைத் திருத்து", bn: "পণ্য সম্পাদনা করুন", ur: "پروڈکٹ میں ترمیم کریں", id: "Edit produk", tr: "Ürünü düzenle", ko: "상품 수정", ja: "商品を編集", it: "Modifica prodotto", nl: "Product bewerken", sw: "Hariri bidhaa", ha: "Gyara samfur", bm: "Fɛn labɛn", tl: "I-edit ang produkto", te: "ఉత్పత్తిని సవరించండి", th: "แก้ไขสินค้า", wo: "Soppi jaaykatu", pl: "Edytuj produkt", yo: "Ṣàtúnṣe ọjà", am: "ምርቱን አርትዕ", zu: "Hlela umkhiqizo" };
 EXTRA_UI.logProductEdited = { fr: "Produit modifié", en: "Product edited", ar: "تم تعديل المنتج", es: "Producto editado", pt: "Produto editado", zh: "商品已编辑", vi: "Đã chỉnh sửa sản phẩm", de: "Produkt bearbeitet", ru: "Товар изменён", hi: "उत्पाद संपादित हुआ", ta: "பொருள் திருத்தப்பட்டது", bn: "পণ্য সম্পাদিত হয়েছে", ur: "پروڈکٹ میں ترمیم ہوئی", id: "Produk diedit", tr: "Ürün düzenlendi", ko: "상품 수정됨", ja: "商品を編集しました", it: "Prodotto modificato", nl: "Product bewerkt", sw: "Bidhaa imehaririwa", ha: "An gyara samfur", bm: "Fɛn labɛnna", tl: "Na-edit ang produkto", te: "ఉత్పత్తి సవరించబడింది", th: "แก้ไขสินค้าแล้ว", wo: "Jaaykatu soppiku na", pl: "Produkt zmodyfikowany", yo: "A ṣàtúnṣe ọjà", am: "ምርቱ ተስተካክሏል", zu: "Umkhiqizo uhleliwe" };
+EXTRA_UI.shareCardSamplePrice = { fr: "Prix du produit", en: "Product price", ar: "سعر المنتج", es: "Precio del producto", pt: "Preço do produto", zh: "商品价格", vi: "Giá sản phẩm", de: "Produktpreis", ru: "Цена товара", hi: "उत्पाद की कीमत", ta: "பொருளின் விலை", bn: "পণ্যের দাম", ur: "پروڈکٹ کی قیمت", id: "Harga produk", tr: "Ürün fiyatı", ko: "상품 가격", ja: "商品価格", it: "Prezzo del prodotto", nl: "Productprijs", sw: "Bei ya bidhaa", ha: "Kuɗin samfur", bm: "Fɛn sɔngɔ", tl: "Presyo ng produkto", te: "ఉత్పత్తి ధర", th: "ราคาสินค้า", wo: "Njëg jaaykatu", pl: "Cena produktu", yo: "Iye ọjà", am: "የምርት ዋጋ", zu: "Intengo yomkhiqizo" };
 // Palette de fonds proposés pour l'image de partage produit. "glossy" ajoute
 // un reflet diagonal pour un effet plus "3D" / brillant.
 const SHARE_CARD_STYLES = [
@@ -5387,7 +5388,7 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone"];
 function sortByDate(list) {
   return [...(list || [])].sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
 }
@@ -5503,6 +5504,7 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     currency: winner.currency || "XOF",
     benchmarkOptIn: !!winner.benchmarkOptIn,
     arabicDigits: !!winner.arabicDigits,
+    phone: winner.phone || "",
     settingsUpdatedAt: Math.max(localTs, remoteTs),
   };
 }
@@ -8087,6 +8089,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [lockPinMsg, setLockPinMsg] = useState("");
   const [shopNameInput, setShopNameInput] = useState("");
   const [shopNameMsg, setShopNameMsg] = useState("");
+  const [shopPhoneInput, setShopPhoneInput] = useState("");
+  const [shopPhoneMsg, setShopPhoneMsg] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [emailMsg, setEmailMsg] = useState("");
   const [confirmReset, setConfirmReset] = useState(false);
@@ -8542,6 +8546,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       arabicDigits: overrides.arabicDigits ?? arabicDigits,
       shareCardStyleId: overrides.shareCardStyleId ?? shareCardStyleId,
       shareCardAskEachTime: overrides.shareCardAskEachTime ?? shareCardAskEachTime,
+      phone: overrides.phone ?? shopPhone,
       activeCartId: overrides.activeCartId ?? activeCartId,
       employees: overrides.employees ?? employees,
       actionLog: overrides.actionLog ?? actionLog,
@@ -8566,6 +8571,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setArabicDigits(next.arabicDigits);
     setShareCardStyleId(next.shareCardStyleId);
     setShareCardAskEachTime(next.shareCardAskEachTime);
+    setShopPhone(next.phone);
     setEmployees(next.employees);
     setActionLog(next.actionLog);
     setSettingsUpdatedAt(next.settingsUpdatedAt);
@@ -8968,11 +8974,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // plus grand puis mis à l'échelle une fois pour toutes.
       const RENDER_SCALE = 2;
       const canvas = document.createElement("canvas");
-      canvas.width = 1080 * RENDER_SCALE;
-      canvas.height = 1520 * RENDER_SCALE;
+      const W = 1080, H = 1780;
+      canvas.width = W * RENDER_SCALE;
+      canvas.height = H * RENDER_SCALE;
       const ctx = canvas.getContext("2d");
       ctx.scale(RENDER_SCALE, RENDER_SCALE);
-      const W = 1080, H = 1520;
       const bg = ctx.createLinearGradient(0, 0, 0, H);
       bg.addColorStop(0, cardStyle.colors[0]);
       bg.addColorStop(1, cardStyle.colors[1]);
@@ -9019,8 +9025,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ctx.font = "bold 46px system-ui, -apple-system, sans-serif";
       ctx.textAlign = "left";
       ctx.fillText("Shopnify", 70 + 92 + 24, 74 + 92 / 2);
-      // Carte photo produit, coins arrondis
-      const cardX = 70, cardY = 232, cardW = W - 140, cardH = 660;
+      // Carte photo produit : carrée (1:1), pour ne jamais déformer une photo
+      // d'origine carrée — seul un léger recadrage "cover" s'applique si la
+      // photo importée n'est pas déjà carrée, jamais d'étirement.
+      const cardX = 70, cardY = 210, cardW = W - 140, cardH = cardW;
       const radius = 32;
       const roundedRect = (x, y, w, h, r) => {
         ctx.beginPath();
@@ -10432,9 +10440,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       title={s.label}
                       className="w-9 h-9 rounded-full"
                       style={{
-                        background: `linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`,
+                        backgroundImage: s.glossy
+                          ? `radial-gradient(circle at 32% 28%, rgba(255,255,255,0.75), transparent 45%), linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`
+                          : `linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`,
                         border: shareDialogStyleId === s.id ? "3px solid #ffffff" : "2px solid rgba(0,0,0,0.15)",
-                        boxShadow: shareDialogStyleId === s.id ? "0 0 0 2px #4F46E5" : "none",
+                        boxShadow: shareDialogStyleId === s.id ? "0 0 0 2px #4F46E5" : (s.glossy ? "0 2px 6px rgba(0,0,0,0.35)" : "none"),
                       }}
                     />
                   ))}
@@ -10621,6 +10631,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   // normal — la lecture de l'email (juste pour préremplir le
                   // champ) se fait ensuite en arrière-plan, sans bloquer l'affichage.
                   setShopNameInput(shopName);
+                  setShopPhoneInput(shopPhone);
                   setEmailInput("");
                   setShowSettings(true);
                   window.storage.get(`accounts:${username}`, true)
@@ -10931,30 +10942,53 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {filteredProducts.map((p) => {
               const frozen = isProductFrozen(p.id);
               return (
-              <div key={p.id} className="rounded-2xl p-3.5 flex items-center justify-between" style={{ background: frozen ? (darkMode ? "rgba(184,86,47,0.08)" : "#fffbeb") : T.card, border: frozen ? `1px solid ${darkMode ? "rgba(184,86,47,0.3)" : "#fde68a"}` : (darkMode ? "none" : `1px solid ${T.border}`), boxShadow: darkMode ? "none" : "0 6px 14px rgba(0,0,0,0.06)" }}>
-                <div className="flex items-center gap-3">
-                  {p.photo ? <img src={p.photo} alt={p.name} className="w-11 h-11 rounded-xl object-cover" /> : (
-                    <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: darkMode ? T.input : "#dbeafe" }}><Package size={17} color={darkMode ? "#a8a29e" : "#2563eb"} /></div>
-                  )}
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <p className="font-bold text-sm" style={{ color: T.text }}>{p.name}</p>
-                      {frozen && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5" style={{ background: darkMode ? "rgba(184,86,47,0.15)" : "#fef3c7", color: darkMode ? CLAY : "#b45309" }}>
-                          <Lock size={9} /> {t(lang, "productFrozenBadge")}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {t(lang, "othUnite")}</p>
-                    {p.sellByUnit && (
-                      <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>
-                        {fcfa(p.unitPrice)} / {t(lang, "sellUnit")} · {localizedNumber((p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0))} {t(lang, "unitsAvailable")}
-                      </p>
+              <div key={p.id} className="rounded-2xl p-3.5" style={{ background: frozen ? (darkMode ? "rgba(184,86,47,0.08)" : "#fffbeb") : T.card, border: frozen ? `1px solid ${darkMode ? "rgba(184,86,47,0.3)" : "#fde68a"}` : (darkMode ? "none" : `1px solid ${T.border}`), boxShadow: darkMode ? "none" : "0 6px 14px rgba(0,0,0,0.06)" }}>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-3 min-w-0" style={{ flex: 1 }}>
+                    {p.photo ? <img src={p.photo} alt={p.name} className="w-11 h-11 rounded-xl object-cover flex-shrink-0" /> : (
+                      <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: darkMode ? T.input : "#dbeafe" }}><Package size={17} color={darkMode ? "#a8a29e" : "#2563eb"} /></div>
                     )}
-                    {frozen && <p className="text-[10px] mt-0.5" style={{ color: darkMode ? CLAY : "#b45309" }}>{t(lang, "productFrozenMsg")}</p>}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <p
+                          className="font-bold text-sm"
+                          style={{ color: T.text, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+                        >{p.name}</p>
+                        {frozen && (
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 flex-shrink-0" style={{ background: darkMode ? "rgba(184,86,47,0.15)" : "#fef3c7", color: darkMode ? CLAY : "#b45309" }}>
+                            <Lock size={9} /> {t(lang, "productFrozenBadge")}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {t(lang, "othUnite")}</p>
+                      {p.sellByUnit && (
+                        <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>
+                          {fcfa(p.unitPrice)} / {t(lang, "sellUnit")} · {localizedNumber((p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0))} {t(lang, "unitsAvailable")}
+                        </p>
+                      )}
+                      {frozen && <p className="text-[10px] mt-0.5" style={{ color: darkMode ? CLAY : "#b45309" }}>{t(lang, "productFrozenMsg")}</p>}
+                    </div>
+                  </div>
+                  <div className="flex-shrink-0">
+                    {frozen ? (
+                      <span className="text-sm font-extrabold w-10 text-center block" style={{ color: T.muted }}>{localizedNumber(p.quantity)}</span>
+                    ) : hasPermission("editStock") ? (
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => adjustStock(p.id, -1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
+                        <span className="text-sm font-extrabold w-6 text-center" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
+                        <button onClick={() => adjustStock(p.id, 1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Plus size={14} /></button>
+                      </div>
+                    ) : (
+                      // Lecture seule (permission "editStock" absente) : la quantité reste visible,
+                      // utile en boutique pour répondre à un client, mais aucune action de modification.
+                      <span className="text-sm font-extrabold w-10 text-center block" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
+                    )}
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                {/* Actions secondaires (partager/modifier/supprimer) sur leur propre ligne,
+                    en dessous — évite d'encombrer la ligne principale, surtout avec un nom
+                    de produit long ou plusieurs boutons côte à côte. */}
+                <div className="flex items-center justify-end gap-2 mt-2.5 pt-2.5" style={{ borderTop: `1px solid ${T.border}` }}>
                   <button
                     onClick={() => { setShareIncludePhone(false); setShareIncludeQty(false); setShareDialogStyleId(shareCardStyleId); setShareDialogProduct(p); }}
                     className="w-8 h-8 rounded-full flex items-center justify-center"
@@ -10981,19 +11015,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     >
                       <Trash2 size={13} color={darkMode ? CLAY : "#e11d48"} />
                     </button>
-                  )}
-                  {frozen ? (
-                    <span className="text-sm font-extrabold w-10 text-center border-l pl-3" style={{ borderColor: T.border, color: T.muted }}>{localizedNumber(p.quantity)}</span>
-                  ) : hasPermission("editStock") ? (
-                    <div className="flex items-center gap-2 border-l pl-3" style={{ borderColor: T.border }}>
-                      <button onClick={() => adjustStock(p.id, -1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
-                      <span className="text-sm font-extrabold w-6 text-center" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
-                      <button onClick={() => adjustStock(p.id, 1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Plus size={14} /></button>
-                    </div>
-                  ) : (
-                    // Lecture seule (permission "editStock" absente) : la quantité reste visible,
-                    // utile en boutique pour répondre à un client, mais aucune action de modification.
-                    <span className="text-sm font-extrabold w-10 text-center border-l pl-3" style={{ borderColor: T.border, color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
                   )}
                 </div>
               </div>
@@ -12863,6 +12884,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {shopNameMsg && <p style={{ color: "#34d399", fontSize: 11, marginTop: 6 }}>{shopNameMsg}</p>}
                   </div>
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "phoneNumber")}</div>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <input
+                        type="tel"
+                        value={shopPhoneInput}
+                        onChange={(e) => setShopPhoneInput(e.target.value)}
+                        style={{ flex: 1, minWidth: 0, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }}
+                      />
+                      <button
+                        onClick={() => { saveAll({ phone: shopPhoneInput.trim() }); setShopPhoneMsg("✓"); }}
+                        style={{ background: "#34d399", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}
+                      >OK</button>
+                    </div>
+                    {shopPhoneMsg && <p style={{ color: "#34d399", fontSize: 11, marginTop: 6 }}>{shopPhoneMsg}</p>}
+                  </div>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setIdentifiantDeConnexion")}</div>
                     <div style={{ color: T.text, fontSize: 15, fontWeight: 600 }}>{username}</div>
                   </div>
@@ -12909,19 +12946,26 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <img src="/icon-192.png" alt="" style={{ width: 34, height: 34, borderRadius: "50%" }} />
                       <span className="font-bold text-white text-sm">Shopnify</span>
                     </div>
-                    <div className="rounded-xl flex items-center justify-center mb-3" style={{ position: "relative", height: 130, background: "rgba(0,0,0,0.25)", fontSize: 40 }}>📦</div>
+                    <div className="rounded-xl flex items-center justify-center mb-3" style={{ position: "relative", width: "100%", aspectRatio: "1 / 1", background: "rgba(0,0,0,0.25)", fontSize: 40, overflow: "hidden" }}>📦</div>
                     <div className="text-white font-bold text-sm" style={{ position: "relative" }}>{tx(lang, "shareCardSamplePname")}</div>
-                    <div className="font-bold text-base mb-2" style={{ position: "relative", background: "linear-gradient(90deg,#34d399,#6ee7b7)", WebkitBackgroundClip: "text", color: "transparent" }}>{fcfa(2500)}</div>
+                    <div className="font-bold text-base mb-2" style={{ position: "relative", background: "linear-gradient(90deg,#34d399,#6ee7b7)", WebkitBackgroundClip: "text", color: "transparent" }}>{tx(lang, "shareCardSamplePrice")}</div>
                     {shopName && <div className="text-[11px] mb-3" style={{ position: "relative", color: "rgba(255,255,255,0.72)" }}>Vendu par {shopName}</div>}
                     <div className="rounded-lg p-2 flex items-center justify-between gap-2" style={{ position: "relative", background: "rgba(255,255,255,0.08)" }}>
                       <div className="flex items-center gap-2">
-                        <div style={{ width: 34, height: 34, background: "#fff", borderRadius: 6 }} />
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=68x68&margin=0&data=${encodeURIComponent(APP_SHARE_URL)}`}
+                          alt="QR"
+                          style={{ width: 34, height: 34, background: "#fff", borderRadius: 6 }}
+                        />
                         <div>
                           <div className="text-white font-bold text-[10px]">📲 Télécharge Shopnify</div>
                           <div className="text-[9px]" style={{ color: "rgba(255,255,255,0.65)" }}>Scanne le code ci-contre</div>
                         </div>
                       </div>
-                      <div className="text-right text-[9px] font-bold leading-tight" style={{ color: "#fbbf24" }}>📦 12<br /><span style={{ color: "#fff" }}>📞 {shopPhone || "+225…"}</span></div>
+                      <div className="text-right text-[9px] font-bold leading-tight" style={{ color: "#fbbf24" }}>
+                        📦 12 disponible(s)
+                        {shopPhone && <><br /><span style={{ color: "#fff" }}>📞 {shopPhone}</span></>}
+                      </div>
                     </div>
                   </div>
                   <p className="text-xs font-semibold mb-2" style={{ color: T.muted }}>{tx(lang, "shareCardStyle")}</p>
@@ -12933,9 +12977,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         title={s.label}
                         className="w-10 h-10 rounded-full"
                         style={{
-                          background: `linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`,
+                          backgroundImage: s.glossy
+                            ? `radial-gradient(circle at 32% 28%, rgba(255,255,255,0.75), transparent 45%), linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`
+                            : `linear-gradient(135deg, ${s.colors[0]}, ${s.colors[1]})`,
                           border: shareCardStyleId === s.id ? `3px solid ${T.text}` : "2px solid rgba(0,0,0,0.15)",
-                          boxShadow: shareCardStyleId === s.id ? "0 0 0 2px #4F46E5" : "none",
+                          boxShadow: shareCardStyleId === s.id ? "0 0 0 2px #4F46E5" : (s.glossy ? "0 2px 6px rgba(0,0,0,0.35)" : "none"),
                         }}
                       />
                     ))}
