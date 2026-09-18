@@ -332,7 +332,7 @@ const TRANSLATIONS = {
     dangerZone: "Sécurité", language: "Langue",
     addProduct: "Ajouter un produit", save: "Enregistrer", cancel: "Annuler", search: "Rechercher…",
     todaySales: "Ventes aujourd'hui", articlesSold: "article(s) vendu(s)", paymentBreakdown: "Répartition par paiement",
-    cash: "Espèces", credit: "Crédit", mobilePayment: "Paiement mobile", card: "Carte bancaire", lowStock: "Stock faible", clientDebts: "Dettes clients",
+    cash: "Espèces", credit: "Crédit", mobilePayment: "Paiement mobile", card: "Carte bancaire", lowStock: "Stock faible", clientDebts: "Dettes clients", seeAllLowStock: "Voir tout ({n})", seeLessLowStock: "Voir moins",
     cashBalance: "Solde de caisse estimé", setCashFund: "Régler le fond de caisse", addExpense: "Ajouter une dépense",
     todayExpenses: "Dépenses aujourd'hui", noProduct: "Aucun produit. Ajoute ton premier article.",
     newProduct: "Nouveau produit", productName: "Nom du produit", quantity: "Quantité en stock",
@@ -490,7 +490,7 @@ const TRANSLATIONS = {
     dangerZone: "ደህንነት", language: "ቋንቋ",
     addProduct: "ምርት ጨምር", save: "አስቀምጥ", cancel: "ሰርዝ", search: "ፈልግ…",
     todaySales: "የዛሬ ሽያጭ", articlesSold: "የተሸጡ ዕቃዎች", paymentBreakdown: "በክፍያ ዓይነት ስርጭት",
-    cash: "ጥሬ ገንዘብ", credit: "ብድር", mobilePayment: "የሞባይል ክፍያ", card: "የባንክ ካርድ", lowStock: "ዝቅተኛ ክምችት", clientDebts: "የደንበኞች ዕዳ",
+    cash: "ጥሬ ገንዘብ", credit: "ብድር", mobilePayment: "የሞባይል ክፍያ", card: "የባንክ ካርድ", lowStock: "ዝቅተኛ ክምችት", clientDebts: "የደንበኞች ዕዳ", seeAllLowStock: "ሁሉንም ይመልከቱ ({n})", seeLessLowStock: "ትንሽ ይመልከቱ",
     cashBalance: "የተገመተ የካዝና ቀሪ ሂሳብ", setCashFund: "የካዝና መነሻ ገንዘብ አስተካክል", addExpense: "ወጪ ጨምር",
     todayExpenses: "የዛሬ ወጪዎች", noProduct: "ምንም ምርት የለም። የመጀመሪያ ዕቃህን ጨምር።",
     newProduct: "አዲስ ምርት", productName: "የምርት ስም", quantity: "በክምችት ያለ ብዛት",
@@ -636,7 +636,7 @@ const TRANSLATIONS = {
     dangerZone: "Security", language: "Language",
     addProduct: "Add a product", save: "Save", cancel: "Cancel", search: "Search…",
     todaySales: "Today's sales", articlesSold: "item(s) sold", paymentBreakdown: "Payment breakdown",
-    cash: "Cash", credit: "Credit", mobilePayment: "Mobile payment", card: "Card", lowStock: "Low stock", clientDebts: "Client debts",
+    cash: "Cash", credit: "Credit", mobilePayment: "Mobile payment", card: "Card", lowStock: "Low stock", clientDebts: "Client debts", seeAllLowStock: "See all ({n})", seeLessLowStock: "See less",
     cashBalance: "Estimated cash balance", setCashFund: "Set cash fund", addExpense: "Add an expense",
     todayExpenses: "Today's expenses", noProduct: "No products yet. Add your first item.",
     newProduct: "New product", productName: "Product name", quantity: "Quantity in stock",
@@ -783,7 +783,7 @@ const TRANSLATIONS = {
     dangerZone: "Seguridad", language: "Wika",
     addProduct: "Magdagdag ng produkto", save: "I-save", cancel: "Kanselahin", search: "Maghanap…",
     todaySales: "Benta ngayong araw", articlesSold: "item na naibenta", paymentBreakdown: "Breakdown ng bayad",
-    cash: "Cash", credit: "Utang", mobilePayment: "Mobile payment", card: "Card", lowStock: "Mababang stock", clientDebts: "Utang ng kliyente",
+    cash: "Cash", credit: "Utang", mobilePayment: "Mobile payment", card: "Card", lowStock: "Mababang stock", clientDebts: "Utang ng kliyente", seeAllLowStock: "Ipakita lahat ({n})", seeLessLowStock: "Ipakita ng kaunti",
     cashBalance: "Tinantyang balanse ng cash", setCashFund: "Itakda ang cash fund", addExpense: "Magdagdag ng gastos",
     todayExpenses: "Gastos ngayong araw", noProduct: "Wala pang produkto. Idagdag ang iyong unang item.",
     newProduct: "Bagong produkto", productName: "Pangalan ng produkto", quantity: "Dami sa stock",
@@ -929,7 +929,7 @@ const TRANSLATIONS = {
     dangerZone: "భద్రత", language: "భాష",
     addProduct: "ఉత్పత్తిని జోడించండి", save: "సేవ్ చేయండి", cancel: "రద్దు చేయండి", search: "శోధించండి…",
     todaySales: "ఈరోజు అమ్మకాలు", articlesSold: "అమ్ముడైన వస్తువు(లు)", paymentBreakdown: "చెల్లింపు విభజన",
-    cash: "నగదు", credit: "అప్పు", mobilePayment: "మొబైల్ చెల్లింపు", card: "కార్డ్", lowStock: "తక్కువ స్టాక్", clientDebts: "కస్టమర్ అప్పులు",
+    cash: "నగదు", credit: "అప్పు", mobilePayment: "మొబైల్ చెల్లింపు", card: "కార్డ్", lowStock: "తక్కువ స్టాక్", clientDebts: "కస్టమర్ అప్పులు", seeAllLowStock: "అన్నీ చూపించు ({n})", seeLessLowStock: "తక్కువ చూపించు",
     cashBalance: "అంచనా నగదు నిల్వ", setCashFund: "నగదు నిధిని సెట్ చేయండి", addExpense: "ఖర్చును జోడించండి",
     todayExpenses: "ఈరోజు ఖర్చులు", noProduct: "ఇంకా ఉత్పత్తులు లేవు. మీ మొదటి వస్తువును జోడించండి.",
     newProduct: "కొత్త ఉత్పత్తి", productName: "ఉత్పత్తి పేరు", quantity: "స్టాక్‌లో పరిమాణం",
@@ -1075,7 +1075,7 @@ const TRANSLATIONS = {
     dangerZone: "ความปลอดภัย", language: "ภาษา",
     addProduct: "เพิ่มสินค้า", save: "บันทึก", cancel: "ยกเลิก", search: "ค้นหา…",
     todaySales: "ยอดขายวันนี้", articlesSold: "รายการที่ขายแล้ว", paymentBreakdown: "สรุปการชำระเงิน",
-    cash: "เงินสด", credit: "เครดิต", mobilePayment: "ชำระผ่านมือถือ", card: "บัตร", lowStock: "สต็อกต่ำ", clientDebts: "หนี้ลูกค้า",
+    cash: "เงินสด", credit: "เครดิต", mobilePayment: "ชำระผ่านมือถือ", card: "บัตร", lowStock: "สต็อกต่ำ", clientDebts: "หนี้ลูกค้า", seeAllLowStock: "แสดงทั้งหมด ({n})", seeLessLowStock: "แสดงน้อยลง",
     cashBalance: "ยอดเงินสดโดยประมาณ", setCashFund: "ตั้งค่าเงินทุนสด", addExpense: "เพิ่มค่าใช้จ่าย",
     todayExpenses: "ค่าใช้จ่ายวันนี้", noProduct: "ยังไม่มีสินค้า เพิ่มสินค้าชิ้นแรกของคุณ",
     newProduct: "สินค้าใหม่", productName: "ชื่อสินค้า", quantity: "จำนวนในสต็อก",
@@ -1221,7 +1221,7 @@ const TRANSLATIONS = {
     dangerZone: "Kaaraange", language: "Làkk",
     addProduct: "Yokk article", save: "Denc", cancel: "Bàyyi", search: "Wut…",
     todaySales: "Jaayin tey", articlesSold: "article(s) jaay na", paymentBreakdown: "Ni fayement yi tàllale",
-    cash: "Xaalis", credit: "Boor", mobilePayment: "Fayement ci telefon", card: "Kart", lowStock: "Stock du barele", clientDebts: "Boor ay client yi",
+    cash: "Xaalis", credit: "Boor", mobilePayment: "Fayement ci telefon", card: "Kart", lowStock: "Stock du barele", clientDebts: "Boor ay client yi", seeAllLowStock: "Won lépp ({n})", seeLessLowStock: "Won tuuti",
     cashBalance: "Solde xaalis bu ñu waxtaan", setCashFund: "Tëj njël xaalis bi", addExpense: "Yokk depaas",
     todayExpenses: "Depaas tey", noProduct: "Amuñu benn article. Yokk sa article bu njëkk.",
     newProduct: "Article bu bees", productName: "Turu article bi", quantity: "Kayit ci stock bi",
@@ -1367,7 +1367,7 @@ const TRANSLATIONS = {
     dangerZone: "Bezpieczeństwo", language: "Język",
     addProduct: "Dodaj produkt", save: "Zapisz", cancel: "Anuluj", search: "Szukaj…",
     todaySales: "Sprzedaż dzisiaj", articlesSold: "sprzedanych artykułów", paymentBreakdown: "Podział płatności",
-    cash: "Gotówka", credit: "Kredyt", mobilePayment: "Płatność mobilna", card: "Karta", lowStock: "Niski stan zapasów", clientDebts: "Długi klientów",
+    cash: "Gotówka", credit: "Kredyt", mobilePayment: "Płatność mobilna", card: "Karta", lowStock: "Niski stan zapasów", clientDebts: "Długi klientów", seeAllLowStock: "Pokaż wszystko ({n})", seeLessLowStock: "Pokaż mniej",
     cashBalance: "Szacowane saldo gotówki", setCashFund: "Ustaw fundusz gotówkowy", addExpense: "Dodaj wydatek",
     todayExpenses: "Wydatki dzisiaj", noProduct: "Brak produktów. Dodaj swój pierwszy artykuł.",
     newProduct: "Nowy produkt", productName: "Nazwa produktu", quantity: "Ilość w magazynie",
@@ -1513,7 +1513,7 @@ const TRANSLATIONS = {
     dangerZone: "الأمان", language: "اللغة",
     addProduct: "إضافة منتج", save: "حفظ", cancel: "إلغاء", search: "بحث…",
     todaySales: "مبيعات اليوم", articlesSold: "منتج(ات) مباعة", paymentBreakdown: "التوزيع حسب الدفع",
-    cash: "نقداً", credit: "دين", mobilePayment: "دفع عبر الجوال", card: "بطاقة بنكية", lowStock: "مخزون منخفض", clientDebts: "ديون العملاء",
+    cash: "نقداً", credit: "دين", mobilePayment: "دفع عبر الجوال", card: "بطاقة بنكية", lowStock: "مخزون منخفض", clientDebts: "ديون العملاء", seeAllLowStock: "عرض الكل ({n})", seeLessLowStock: "عرض أقل",
     cashBalance: "رصيد الصندوق التقديري", setCashFund: "ضبط رصيد الصندوق", addExpense: "إضافة مصروف",
     todayExpenses: "مصاريف اليوم", noProduct: "لا يوجد منتج بعد. أضف أول منتج لك.",
     newProduct: "منتج جديد", productName: "اسم المنتج", quantity: "الكمية في المخزون",
@@ -1659,7 +1659,7 @@ const TRANSLATIONS = {
     dangerZone: "Seguridad", language: "Idioma",
     addProduct: "Añadir un producto", save: "Guardar", cancel: "Cancelar", search: "Buscar…",
     todaySales: "Ventas de hoy", articlesSold: "artículo(s) vendido(s)", paymentBreakdown: "Desglose por pago",
-    cash: "Efectivo", credit: "Crédito", mobilePayment: "Pago móvil", card: "Tarjeta", lowStock: "Stock bajo", clientDebts: "Deudas de clientes",
+    cash: "Efectivo", credit: "Crédito", mobilePayment: "Pago móvil", card: "Tarjeta", lowStock: "Stock bajo", clientDebts: "Deudas de clientes", seeAllLowStock: "Ver todo ({n})", seeLessLowStock: "Ver menos",
     cashBalance: "Saldo de caja estimado", setCashFund: "Configurar fondo de caja", addExpense: "Añadir un gasto",
     todayExpenses: "Gastos de hoy", noProduct: "Aún no hay productos. Añade tu primer artículo.",
     newProduct: "Nuevo producto", productName: "Nombre del producto", quantity: "Cantidad en stock",
@@ -1805,7 +1805,7 @@ const TRANSLATIONS = {
     dangerZone: "Segurança", language: "Idioma",
     addProduct: "Adicionar um produto", save: "Salvar", cancel: "Cancelar", search: "Buscar…",
     todaySales: "Vendas de hoje", articlesSold: "artigo(s) vendido(s)", paymentBreakdown: "Detalhamento por pagamento",
-    cash: "Dinheiro", credit: "Crédito", mobilePayment: "Pagamento móvel", card: "Cartão", lowStock: "Estoque baixo", clientDebts: "Dívidas de clientes",
+    cash: "Dinheiro", credit: "Crédito", mobilePayment: "Pagamento móvel", card: "Cartão", lowStock: "Estoque baixo", clientDebts: "Dívidas de clientes", seeAllLowStock: "Ver tudo ({n})", seeLessLowStock: "Ver menos",
     cashBalance: "Saldo de caixa estimado", setCashFund: "Configurar fundo de caixa", addExpense: "Adicionar uma despesa",
     todayExpenses: "Despesas de hoje", noProduct: "Ainda não há produtos. Adicione seu primeiro artigo.",
     newProduct: "Novo produto", productName: "Nome do produto", quantity: "Quantidade em estoque",
@@ -1951,7 +1951,7 @@ const TRANSLATIONS = {
     dangerZone: "安全", language: "语言",
     addProduct: "添加商品", save: "保存", cancel: "取消", search: "搜索…",
     todaySales: "今日销售额", articlesSold: "件已售出", paymentBreakdown: "收款方式明细",
-    cash: "现金", credit: "赊账", mobilePayment: "移动支付", card: "银行卡", lowStock: "库存不足", clientDebts: "客户欠款",
+    cash: "现金", credit: "赊账", mobilePayment: "移动支付", card: "银行卡", lowStock: "库存不足", clientDebts: "客户欠款", seeAllLowStock: "查看全部（{n}）", seeLessLowStock: "收起",
     cashBalance: "预估账户余额", setCashFund: "设置备用金", addExpense: "记一笔支出",
     todayExpenses: "今日支出", noProduct: "还没有商品，先添加你的第一件商品吧。",
     newProduct: "新增商品", productName: "商品名称", quantity: "库存数量",
@@ -2097,7 +2097,7 @@ const TRANSLATIONS = {
     dangerZone: "Bảo mật", language: "Ngôn ngữ",
     addProduct: "Thêm sản phẩm", save: "Lưu", cancel: "Hủy", search: "Tìm kiếm…",
     todaySales: "Doanh thu hôm nay", articlesSold: "Sản phẩm đã bán", paymentBreakdown: "Chi tiết thanh toán",
-    cash: "Tiền mặt", credit: "Công nợ", mobilePayment: "Thanh toán di động", card: "Thẻ", lowStock: "Sắp hết hàng", clientDebts: "Công nợ khách hàng",
+    cash: "Tiền mặt", credit: "Công nợ", mobilePayment: "Thanh toán di động", card: "Thẻ", lowStock: "Sắp hết hàng", clientDebts: "Công nợ khách hàng", seeAllLowStock: "Xem tất cả ({n})", seeLessLowStock: "Thu gọn",
     cashBalance: "Số dư tiền mặt ước tính", setCashFund: "Thiết lập quỹ tiền mặt", addExpense: "Thêm chi phí",
     todayExpenses: "Chi phí hôm nay", noProduct: "Chưa có sản phẩm nào. Hãy thêm sản phẩm đầu tiên của bạn.",
     newProduct: "Sản phẩm mới", productName: "Tên sản phẩm", quantity: "Số lượng trong kho",
@@ -2243,7 +2243,7 @@ const TRANSLATIONS = {
     dangerZone: "Sicherheit", language: "Sprache",
     addProduct: "Produkt hinzufügen", save: "Speichern", cancel: "Abbrechen", search: "Suchen…",
     todaySales: "Heutige Verkäufe", articlesSold: "Artikel verkauft", paymentBreakdown: "Zahlungsübersicht",
-    cash: "Bargeld", credit: "Kredit", mobilePayment: "Mobiles Bezahlen", card: "Karte", lowStock: "Niedriger Bestand", clientDebts: "Kundenschulden",
+    cash: "Bargeld", credit: "Kredit", mobilePayment: "Mobiles Bezahlen", card: "Karte", lowStock: "Niedriger Bestand", clientDebts: "Kundenschulden", seeAllLowStock: "Alle anzeigen ({n})", seeLessLowStock: "Weniger anzeigen",
     cashBalance: "Geschätzter Kassenstand", setCashFund: "Kassenbestand festlegen", addExpense: "Ausgabe hinzufügen",
     todayExpenses: "Heutige Ausgaben", noProduct: "Noch keine Produkte. Füge dein erstes Produkt hinzu.",
     newProduct: "Neues Produkt", productName: "Produktname", quantity: "Lagermenge",
@@ -2389,7 +2389,7 @@ const TRANSLATIONS = {
     dangerZone: "Безопасность", language: "Язык",
     addProduct: "Добавить товар", save: "Сохранить", cancel: "Отмена", search: "Поиск…",
     todaySales: "Продажи за сегодня", articlesSold: "товар(ов) продано", paymentBreakdown: "Разбивка по способу оплаты",
-    cash: "Наличные", credit: "В долг", mobilePayment: "Мобильный платёж", card: "Карта", lowStock: "Мало на складе", clientDebts: "Долги клиентов",
+    cash: "Наличные", credit: "В долг", mobilePayment: "Мобильный платёж", card: "Карта", lowStock: "Мало на складе", clientDebts: "Долги клиентов", seeAllLowStock: "Показать все ({n})", seeLessLowStock: "Показать меньше",
     cashBalance: "Примерный остаток в кассе", setCashFund: "Настроить кассовый фонд", addExpense: "Добавить расход",
     todayExpenses: "Расходы за сегодня", noProduct: "Товаров пока нет. Добавь свой первый товар.",
     newProduct: "Новый товар", productName: "Название товара", quantity: "Количество на складе",
@@ -2535,7 +2535,7 @@ const TRANSLATIONS = {
     dangerZone: "सुरक्षा", language: "भाषा",
     addProduct: "उत्पाद जोड़ें", save: "सहेजें", cancel: "रद्द करें", search: "खोजें…",
     todaySales: "आज की बिक्री", articlesSold: "वस्तु(एं) बिकीं", paymentBreakdown: "भुगतान का विवरण",
-    cash: "नकद", credit: "उधार", mobilePayment: "मोबाइल भुगतान", card: "कार्ड", lowStock: "स्टॉक कम है", clientDebts: "ग्राहकों की उधारी",
+    cash: "नकद", credit: "उधार", mobilePayment: "मोबाइल भुगतान", card: "कार्ड", lowStock: "स्टॉक कम है", clientDebts: "ग्राहकों की उधारी", seeAllLowStock: "सभी देखें ({n})", seeLessLowStock: "कम देखें",
     cashBalance: "अनुमानित नकद शेष", setCashFund: "नकद कोष सेट करें", addExpense: "खर्च जोड़ें",
     todayExpenses: "आज के खर्च", noProduct: "कोई उत्पाद नहीं है। अपना पहला उत्पाद जोड़ें।",
     newProduct: "नया उत्पाद", productName: "उत्पाद का नाम", quantity: "स्टॉक में मात्रा",
@@ -2681,7 +2681,7 @@ const TRANSLATIONS = {
     dangerZone: "பாதுகாப்பு", language: "மொழி",
     addProduct: "பொருள் சேர்க்கவும்", save: "சேமிக்கவும்", cancel: "ரத்துசெய்", search: "தேடு…",
     todaySales: "இன்றைய விற்பனை", articlesSold: "விற்கப்பட்ட பொருட்கள்", paymentBreakdown: "கட்டண விவரம்",
-    cash: "பணம்", credit: "கடன்", mobilePayment: "மொபைல் கட்டணம்", card: "அட்டை", lowStock: "குறைந்த இருப்பு", clientDebts: "வாடிக்கையாளர் கடன்கள்",
+    cash: "பணம்", credit: "கடன்", mobilePayment: "மொபைல் கட்டணம்", card: "அட்டை", lowStock: "குறைந்த இருப்பு", clientDebts: "வாடிக்கையாளர் கடன்கள்", seeAllLowStock: "அனைத்தையும் காட்டு ({n})", seeLessLowStock: "குறைவாகக் காட்டு",
     cashBalance: "மதிப்பிடப்பட்ட பண இருப்பு", setCashFund: "பண நிதியை அமைக்கவும்", addExpense: "செலவு சேர்க்கவும்",
     todayExpenses: "இன்றைய செலவுகள்", noProduct: "பொருட்கள் இல்லை. உங்கள் முதல் பொருளைச் சேர்க்கவும்.",
     newProduct: "புதிய பொருள்", productName: "பொருளின் பெயர்", quantity: "இருப்பில் அளவு",
@@ -2827,7 +2827,7 @@ const TRANSLATIONS = {
     dangerZone: "নিরাপত্তা", language: "ভাষা",
     addProduct: "পণ্য যোগ করুন", save: "সংরক্ষণ করুন", cancel: "বাতিল করুন", search: "খুঁজুন…",
     todaySales: "আজকের বিক্রয়", articlesSold: "বিক্রিত পণ্য", paymentBreakdown: "পেমেন্টের বিবরণ",
-    cash: "নগদ", credit: "বাকি", mobilePayment: "মোবাইল পেমেন্ট", card: "কার্ড", lowStock: "কম স্টক", clientDebts: "গ্রাহকের বাকি",
+    cash: "নগদ", credit: "বাকি", mobilePayment: "মোবাইল পেমেন্ট", card: "কার্ড", lowStock: "কম স্টক", clientDebts: "গ্রাহকের বাকি", seeAllLowStock: "সব দেখুন ({n})", seeLessLowStock: "কম দেখান",
     cashBalance: "আনুমানিক নগদ ব্যালেন্স", setCashFund: "নগদ তহবিল নির্ধারণ করুন", addExpense: "খরচ যোগ করুন",
     todayExpenses: "আজকের খরচ", noProduct: "কোনো পণ্য নেই। আপনার প্রথম পণ্য যোগ করুন।",
     newProduct: "নতুন পণ্য", productName: "পণ্যের নাম", quantity: "স্টকে পরিমাণ",
@@ -2973,7 +2973,7 @@ const TRANSLATIONS = {
     dangerZone: "سیکیورٹی", language: "زبان",
     addProduct: "پروڈکٹ شامل کریں", save: "محفوظ کریں", cancel: "منسوخ کریں", search: "تلاش کریں…",
     todaySales: "آج کی فروخت", articlesSold: "فروخت شدہ اشیاء", paymentBreakdown: "ادائیگی کی تفصیل",
-    cash: "نقد", credit: "ادھار", mobilePayment: "موبائل ادائیگی", card: "کارڈ", lowStock: "کم اسٹاک", clientDebts: "گاہکوں کا ادھار",
+    cash: "نقد", credit: "ادھار", mobilePayment: "موبائل ادائیگی", card: "کارڈ", lowStock: "کم اسٹاک", clientDebts: "گاہکوں کا ادھار", seeAllLowStock: "سب دیکھیں ({n})", seeLessLowStock: "کم دکھائیں",
     cashBalance: "تخمینی نقد بیلنس", setCashFund: "نقد فنڈ مقرر کریں", addExpense: "خرچہ شامل کریں",
     todayExpenses: "آج کے اخراجات", noProduct: "کوئی پروڈکٹ نہیں ہے۔ اپنی پہلی پروڈکٹ شامل کریں۔",
     newProduct: "نئی پروڈکٹ", productName: "پروڈکٹ کا نام", quantity: "اسٹاک میں مقدار",
@@ -3119,7 +3119,7 @@ const TRANSLATIONS = {
     dangerZone: "Keamanan", language: "Bahasa",
     addProduct: "Tambah produk", save: "Simpan", cancel: "Batal", search: "Cari…",
     todaySales: "Penjualan hari ini", articlesSold: "barang terjual", paymentBreakdown: "Rincian pembayaran",
-    cash: "Tunai", credit: "Kredit", mobilePayment: "Pembayaran seluler", card: "Kartu bank", lowStock: "Stok menipis", clientDebts: "Utang pelanggan",
+    cash: "Tunai", credit: "Kredit", mobilePayment: "Pembayaran seluler", card: "Kartu bank", lowStock: "Stok menipis", clientDebts: "Utang pelanggan", seeAllLowStock: "Tampilkan semua ({n})", seeLessLowStock: "Tampilkan lebih sedikit",
     cashBalance: "Perkiraan saldo kas", setCashFund: "Atur modal kas", addExpense: "Tambah pengeluaran",
     todayExpenses: "Pengeluaran hari ini", noProduct: "Belum ada produk. Tambahkan produk pertamamu.",
     newProduct: "Produk baru", productName: "Nama produk", quantity: "Jumlah stok",
@@ -3265,7 +3265,7 @@ const TRANSLATIONS = {
     dangerZone: "Güvenlik", language: "Dil",
     addProduct: "Ürün ekle", save: "Kaydet", cancel: "İptal", search: "Ara…",
     todaySales: "Bugünkü satışlar", articlesSold: "ürün satıldı", paymentBreakdown: "Ödeme dağılımı",
-    cash: "Nakit", credit: "Veresiye", mobilePayment: "Mobil ödeme", card: "Banka kartı", lowStock: "Stok az", clientDebts: "Müşteri borçları",
+    cash: "Nakit", credit: "Veresiye", mobilePayment: "Mobil ödeme", card: "Banka kartı", lowStock: "Stok az", clientDebts: "Müşteri borçları", seeAllLowStock: "Tümünü göster ({n})", seeLessLowStock: "Daha az göster",
     cashBalance: "Tahmini kasa bakiyesi", setCashFund: "Kasa fonunu ayarla", addExpense: "Gider ekle",
     todayExpenses: "Bugünkü giderler", noProduct: "Henüz ürün yok. İlk ürününü ekle.",
     newProduct: "Yeni ürün", productName: "Ürün adı", quantity: "Stoktaki miktar",
@@ -3411,7 +3411,7 @@ const TRANSLATIONS = {
     dangerZone: "보안", language: "언어",
     addProduct: "상품 추가", save: "저장", cancel: "취소", search: "검색…",
     todaySales: "오늘의 판매", articlesSold: "개 판매됨", paymentBreakdown: "결제 방식별 내역",
-    cash: "현금", credit: "외상", mobilePayment: "모바일 결제", card: "카드", lowStock: "재고 부족", clientDebts: "고객 외상",
+    cash: "현금", credit: "외상", mobilePayment: "모바일 결제", card: "카드", lowStock: "재고 부족", clientDebts: "고객 외상", seeAllLowStock: "전체 보기 ({n})", seeLessLowStock: "간략히 보기",
     cashBalance: "예상 시재 잔액", setCashFund: "시재 기금 설정", addExpense: "지출 추가",
     todayExpenses: "오늘의 지출", noProduct: "상품이 없습니다. 첫 상품을 추가하세요.",
     newProduct: "새 상품", productName: "상품명", quantity: "재고 수량",
@@ -3557,7 +3557,7 @@ const TRANSLATIONS = {
     dangerZone: "セキュリティ", language: "言語",
     addProduct: "商品を追加", save: "保存", cancel: "キャンセル", search: "検索…",
     todaySales: "本日の売上", articlesSold: "点販売", paymentBreakdown: "支払い方法別内訳",
-    cash: "現金", credit: "掛け売り", mobilePayment: "モバイル決済", card: "カード", lowStock: "在庫僅少", clientDebts: "顧客の掛け売り",
+    cash: "現金", credit: "掛け売り", mobilePayment: "モバイル決済", card: "カード", lowStock: "在庫僅少", clientDebts: "顧客の掛け売り", seeAllLowStock: "すべて表示（{n}）", seeLessLowStock: "表示を減らす",
     cashBalance: "レジの推定残高", setCashFund: "レジ資金を設定", addExpense: "経費を追加",
     todayExpenses: "本日の経費", noProduct: "商品がありません。最初の商品を追加しましょう。",
     newProduct: "新しい商品", productName: "商品名", quantity: "在庫数",
@@ -3703,7 +3703,7 @@ const TRANSLATIONS = {
     dangerZone: "Sicurezza", language: "Lingua",
     addProduct: "Aggiungi un prodotto", save: "Salva", cancel: "Annulla", search: "Cerca…",
     todaySales: "Vendite di oggi", articlesSold: "articolo/i venduto/i", paymentBreakdown: "Ripartizione per pagamento",
-    cash: "Contanti", credit: "Credito", mobilePayment: "Pagamento mobile", card: "Carta", lowStock: "Scorte basse", clientDebts: "Debiti clienti",
+    cash: "Contanti", credit: "Credito", mobilePayment: "Pagamento mobile", card: "Carta", lowStock: "Scorte basse", clientDebts: "Debiti clienti", seeAllLowStock: "Mostra tutto ({n})", seeLessLowStock: "Mostra meno",
     cashBalance: "Saldo cassa stimato", setCashFund: "Imposta il fondo cassa", addExpense: "Aggiungi una spesa",
     todayExpenses: "Spese di oggi", noProduct: "Nessun prodotto. Aggiungi il tuo primo articolo.",
     newProduct: "Nuovo prodotto", productName: "Nome del prodotto", quantity: "Quantità in magazzino",
@@ -3835,7 +3835,7 @@ const TRANSLATIONS = {
     appName: "Shopnify", tagline: "Beheer van voorraad, verkoop en schulden", chooseLanguage: "Kies je taal", login: "Inloggen", register: "Account aanmaken", shopNamePlaceholder: "Naam van de winkel", identifierPlaceholder: "jouw@email.com", pinPlaceholder: "PIN-code (4 cijfers)", confirmPinPlaceholder: "Bevestig de PIN-code", adminPinPlaceholder: "Beheerderscode", createAccountBtn: "Mijn account aanmaken", loginBtn: "Inloggen", adminEnterBtn: "Binnengaan (beheerder)", wait: "Even geduld…",
     privacyNote: "🔒 Je PIN-code en je winkelgegevens (voorraad, verkoop, kassa) blijven privé. Alleen jij kunt ze zien — zelfs de beheerder heeft er geen toegang toe.", forgotPin: "PIN-code vergeten?", adminSpace: "Beheerdersruimte", backToShop: "Terug naar winkelaccount", demoBtn: "👀 Demo bekijken (zonder account aan te maken)", navDashboard: "Start", navStock: "Voorraad", navSale: "Verkoop", navHistory: "Geschiedenis", navDebts: "Schulden", navStats: "Statistieken", navAI: "Assistent",
     aiTitle: "AI-assistent", aiPlaceholder: "Bijv.: Wat is mijn best verkochte product?", aiSend: "Verzenden", aiThinking: "Aan het nadenken…", aiWelcome: "Hallo! Ik ken je winkel. Stel me een vraag over je voorraad, je verkopen, je schulden of je kassa.", settingsTitle: "Instellingen", manageAccount: "Account beheren", interfaceTitle: "Interface", assistance: "Ondersteuning", dangerZone: "Beveiliging", language: "Taal", addProduct: "Een product toevoegen", save: "Opslaan",
-    cancel: "Annuleren", search: "Zoeken…", todaySales: "Verkopen vandaag", articlesSold: "artikel(en) verkocht", paymentBreakdown: "Verdeling per betaalmethode", cash: "Contant", credit: "Krediet", mobilePayment: "Mobiel betalen", card: "Bankkaart", lowStock: "Lage voorraad", clientDebts: "Klantschulden", cashBalance: "Geschat kassaldo", setCashFund: "Kassafonds instellen", addExpense: "Een uitgave toevoegen", todayExpenses: "Uitgaven vandaag",
+    cancel: "Annuleren", search: "Zoeken…", todaySales: "Verkopen vandaag", articlesSold: "artikel(en) verkocht", paymentBreakdown: "Verdeling per betaalmethode", cash: "Contant", credit: "Krediet", mobilePayment: "Mobiel betalen", card: "Bankkaart", lowStock: "Lage voorraad", clientDebts: "Klantschulden", seeAllLowStock: "Alles bekijken ({n})", seeLessLowStock: "Minder bekijken", cashBalance: "Geschat kassaldo", setCashFund: "Kassafonds instellen", addExpense: "Een uitgave toevoegen", todayExpenses: "Uitgaven vandaag",
     noProduct: "Geen product. Voeg je eerste artikel toe.", newProduct: "Nieuw product", productName: "Naam van het product", quantity: "Hoeveelheid in voorraad", unitPrice: "Eenheidsprijs (FCFA)", productPhoto: "Foto van het product (optioneel)", processing: "Afbeelding verwerken…", photoPaywall: "📷 Een foto toevoegen — betaalde versie", unlock: "Ontgrendelen", noCartYet: "Geen lopend winkelmandje. Komt er een klant aan? Start een nieuw winkelmandje.", newCart: "Nieuw winkelmandje",
     abandonCart: "Dit winkelmandje verlaten", cartContent: "Inhoud van het winkelmandje", paymentMethod: "Betaalmethode", clientName: "Naam van de klant", clientNameOpt: "Naam van de klant (optioneel)", amountGiven: "Bedrag gegeven door de klant (FCFA)", change: "Terug te geven wisselgeld", missing: "Er ontbreekt", finalizeSale: "Verkoop afronden", recentSales: "Recente verkopen", noDebts: "Geen lopende schulden.", noHistory: "Geen verkoop geregistreerd.", noResults: "Geen resultaat voor",
     paidBtn: "Betaald", confirmDelete: "Verwijdering bevestigen", noCancel: "Nee, annuleren", yesDelete: "Ja, verwijderen", deleteProductMsg: "\"{name}\" uit de voorraad verwijderen?", deleteExpenseMsg: "Deze uitgave van {amount} verwijderen?", abandonCartMsg: "Dit winkelmandje verlaten? Niet-afgeronde artikelen gaan verloren.", demoMode: "Demomodus — voorbeeldgegevens", demoNote: "Je kunt alles vrij verkennen, maar niets wordt echt opgeslagen. Maak een echt account aan zodra de opslag werkt.",
@@ -3913,7 +3913,7 @@ const TRANSLATIONS = {
     dangerZone: "Usalama", language: "Lugha",
     addProduct: "Ongeza bidhaa", save: "Hifadhi", cancel: "Ghairi", search: "Tafuta…",
     todaySales: "Mauzo ya leo", articlesSold: "bidhaa zilizouzwa", paymentBreakdown: "Mgawanyo wa malipo",
-    cash: "Fedha taslimu", credit: "Deni", mobilePayment: "Malipo ya simu", card: "Kadi", lowStock: "Bidhaa chache", clientDebts: "Madeni ya wateja",
+    cash: "Fedha taslimu", credit: "Deni", mobilePayment: "Malipo ya simu", card: "Kadi", lowStock: "Bidhaa chache", clientDebts: "Madeni ya wateja", seeAllLowStock: "Onyesha zote ({n})", seeLessLowStock: "Onyesha kidogo",
     cashBalance: "Salio la fedha linalokadiriwa", setCashFund: "Weka mtaji wa fedha", addExpense: "Ongeza gharama",
     todayExpenses: "Gharama za leo", noProduct: "Hakuna bidhaa bado. Ongeza bidhaa yako ya kwanza.",
     newProduct: "Bidhaa mpya", productName: "Jina la bidhaa", quantity: "Kiasi kilichopo",
@@ -4059,7 +4059,7 @@ const TRANSLATIONS = {
     dangerZone: "Tsaro", language: "Harshe",
     addProduct: "Ƙara kaya", save: "Ajiye", cancel: "Soke", search: "Nema…",
     todaySales: "Tallace-tallacen yau", articlesSold: "Kayan da aka sayar", paymentBreakdown: "Bayanin biyan kuɗi",
-    cash: "Kuɗi a hannu", credit: "Bashi", mobilePayment: "Biyan waya", card: "Kati", lowStock: "Ƙarancin kaya", clientDebts: "Bashin abokan ciniki",
+    cash: "Kuɗi a hannu", credit: "Bashi", mobilePayment: "Biyan waya", card: "Kati", lowStock: "Ƙarancin kaya", clientDebts: "Bashin abokan ciniki", seeAllLowStock: "Nuna duka ({n})", seeLessLowStock: "Nuna kaɗan",
     cashBalance: "Ƙimar kuɗin da ke hannu", setCashFund: "Saita asalin kuɗi", addExpense: "Ƙara kashewa",
     todayExpenses: "Kashe-kashen yau", noProduct: "Babu kaya. Ƙara kayanka na farko.",
     newProduct: "Sabon kaya", productName: "Sunan kaya", quantity: "Yawan a kaya",
@@ -4205,7 +4205,7 @@ const TRANSLATIONS = {
     dangerZone: "Kisi", language: "Kan",
     addProduct: "Fɛn fara", save: "Mara", cancel: "Dabila", search: "Ɲini…",
     todaySales: "Bi feerew", articlesSold: "Fɛnw feerelen", paymentBreakdown: "Wari sarali ɲɛfɔli",
-    cash: "Wari jɛlen", credit: "Juru", mobilePayment: "Telefɔni wari sarali", card: "Kart", lowStock: "Marifa dɔgɔyara", clientDebts: "Kiliyanw ka juru",
+    cash: "Wari jɛlen", credit: "Juru", mobilePayment: "Telefɔni wari sarali", card: "Kart", lowStock: "Marifa dɔgɔyara", clientDebts: "Kiliyanw ka juru", seeAllLowStock: "A bɛɛ jira ({n})", seeLessLowStock: "A dɔgɔya jira",
     cashBalance: "Wari jatelen dabɔlen", setCashFund: "Wari daminɛ latigɛ", addExpense: "Musaka fara",
     todayExpenses: "Bi musakaw", noProduct: "Fɛn si tɛ yen. I ka fɛn fɔlɔ fara.",
     newProduct: "Fɛn kura", productName: "Fɛn tɔgɔ", quantity: "A hakɛ marifa la",
@@ -4337,7 +4337,7 @@ const TRANSLATIONS = {
     appName: "Shopnify", tagline: "Ukuphathwa kwesitoko, ukuthengisa nezikweletu", chooseLanguage: "Khetha ulimi lwakho", login: "Ngena", register: "Dala i-akhawunti", shopNamePlaceholder: "Igama lesitolo", identifierPlaceholder: "wakho@email.com", pinPlaceholder: "Ikhodi ye-PIN (izinombolo ezi-4)", confirmPinPlaceholder: "Qinisekisa ikhodi ye-PIN", adminPinPlaceholder: "Ikhodi yomphathi", createAccountBtn: "Dala i-akhawunti yami", loginBtn: "Ngena", adminEnterBtn: "Ngena (umphathi)", wait: "Linda…", privacyNote: "🔒 Ikhodi yakho ye-PIN nedatha yesitolo sakho (isitoko, ukuthengisa, ikheshi) kuhlala kuyimfihlo. Nguwe kuphela ongakubona — ngisho nomphathi akakwazi ukufinyelela kukho.", forgotPin: "Ukhohlwe ikhodi ye-PIN?", adminSpace: "Isikhala somphathi", backToShop: "Buyela ku-akhawunti yesitolo", demoBtn: "👀 Bona idemo (ngaphandle kokudala i-akhawunti)",
     navDashboard: "Ekhaya", navStock: "Isitoko", navSale: "Ukuthengisa", navHistory: "Umlando", navDebts: "Izikweletu", navStats: "Izibalo", navAI: "Umsizi", aiTitle: "Umsizi we-AI", aiPlaceholder: "Isib: Yimuphi umkhiqizo wami othengisa kakhulu?", aiSend: "Thumela", aiThinking: "Iyacabanga…", aiWelcome: "Sawubona! Ngiyasazi isitolo sakho. Ngibuze umbuzo ngesitoko sakho, ukuthengisa kwakho, izikweletu zakho noma ikheshi lakho.",
     settingsTitle: "Izilungiselelo", manageAccount: "Phatha i-akhawunti", interfaceTitle: "Isixhumanisi", assistance: "Usizo", dangerZone: "Ukuphepha", language: "Ulimi", addProduct: "Engeza umkhiqizo", save: "Londoloza", cancel: "Khansela", search: "Sesha…",
-    todaySales: "Ukuthengisa kwanamuhla", articlesSold: "impahla ethengisiwe", paymentBreakdown: "Ukwahlukaniswa ngendlela yokukhokha", cash: "Ukheshi", credit: "Isikweletu", mobilePayment: "Ukukhokha ngeselula", card: "Ikhadi lasebhange", lowStock: "Isitoko esiphansi", clientDebts: "Izikweletu zamakhasimende", cashBalance: "Ibhalansi yekheshi elilinganiselwe", setCashFund: "Setha isisekelo sekheshi", addExpense: "Engeza isindleko", todayExpenses: "Izindleko zanamuhla",
+    todaySales: "Ukuthengisa kwanamuhla", articlesSold: "impahla ethengisiwe", paymentBreakdown: "Ukwahlukaniswa ngendlela yokukhokha", cash: "Ukheshi", credit: "Isikweletu", mobilePayment: "Ukukhokha ngeselula", card: "Ikhadi lasebhange", lowStock: "Isitoko esiphansi", clientDebts: "Izikweletu zamakhasimende", seeAllLowStock: "Bona konke ({n})", seeLessLowStock: "Bona kancane", cashBalance: "Ibhalansi yekheshi elilinganiselwe", setCashFund: "Setha isisekelo sekheshi", addExpense: "Engeza isindleko", todayExpenses: "Izindleko zanamuhla",
     noProduct: "Ayikho impahla. Engeza impahla yakho yokuqala.", newProduct: "Umkhiqizo omusha", productName: "Igama lomkhiqizo", quantity: "Inani elikhona esitokweni", unitPrice: "Intengo yeyunithi (FCFA)", productPhoto: "Isithombe somkhiqizo (akuphoqelekile)", processing: "Kucutshungulwa isithombe…", photoPaywall: "📷 Engeza isithombe — inguqulo ekhokhelwayo", unlock: "Vula",
     noCartYet: "Alikho ibhasikidi eliqhubekayo. Kufika ikhasimende? Qala ibhasikidi elisha.", newCart: "Ibhasikidi elisha", abandonCart: "Yeka lelibhasikidi", cartContent: "Okuqukethwe ebhasikidini", paymentMethod: "Indlela yokukhokha", clientName: "Igama lekhasimende", clientNameOpt: "Igama lekhasimende (akuphoqelekile)", amountGiven: "Imali enikezwe yikhasimende (FCFA)", change: "Ushintshi okumele ubuyiselwe", missing: "Kusilele", finalizeSale: "Qedela ukuthengisa", recentSales: "Ukuthengisa kwakamuva",
     noDebts: "Azikho izikweletu eziqhubekayo.", noHistory: "Akukho kuthengisa okuqoshiwe.", noResults: "Ayikho imiphumela ye", paidBtn: "Kukhokhiwe", confirmDelete: "Qinisekisa ukususa", noCancel: "Cha, khansela", yesDelete: "Yebo, susa", deleteProductMsg: "Susa \"{name}\" esitokweni?", deleteExpenseMsg: "Susa lesi sindleko se-{amount}?", abandonCartMsg: "Yeka lelibhasikidi? Izimpahla ezingaqedelwanga zizolahleka.",
@@ -4420,7 +4420,7 @@ const TRANSLATIONS = {
     dangerZone: "Aabo", language: "Èdè",
     addProduct: "Fi ọjà kún", save: "Fi pamọ́", cancel: "Fagilé", search: "Wá…",
     todaySales: "Títà òní", articlesSold: "ọjà tí a tà", paymentBreakdown: "Ìpínyà ọ̀nà ìsanwó",
-    cash: "Owó lọ́wọ́", credit: "Gbèsè", mobilePayment: "Ìsanwó fóònù", card: "Káàdì", lowStock: "Ọjà tó ń dín kù", clientDebts: "Gbèsè àwọn oníbàárà",
+    cash: "Owó lọ́wọ́", credit: "Gbèsè", mobilePayment: "Ìsanwó fóònù", card: "Káàdì", lowStock: "Ọjà tó ń dín kù", clientDebts: "Gbèsè àwọn oníbàárà", seeAllLowStock: "Fi gbogbo rẹ̀ hàn ({n})", seeLessLowStock: "Fi díẹ̀ hàn",
     cashBalance: "Ìwọ̀n owó tí ó kù (àpèsè)", setCashFund: "Ṣètò owó ìpìlẹ̀", addExpense: "Fi ìnáwó kún",
     todayExpenses: "Ìnáwó òní", noProduct: "Kò sí ọjà síbẹ̀. Fi ọjà rẹ àkọ́kọ́ kún.",
     newProduct: "Ọjà tuntun", productName: "Orúkọ ọjà", quantity: "Iye tí ó wà ní ọjà",
@@ -10065,6 +10065,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // ils étaient sautés pendant le chargement puis appelés une fois "loading" passé à
   // false : ce décalage de nombre de hooks entre deux rendus fait planter tout React
   // (erreur #310) et vide l'écran — c'était la cause de la page blanche.
+  const [showAllLowStock, setShowAllLowStock] = useState(false);
   const [showAccountingExport, setShowAccountingExport] = useState(false);
   const [accountingFrom, setAccountingFrom] = useState("");
   const [accountingTo, setAccountingTo] = useState("");
@@ -10097,7 +10098,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     return Object.entries(byProduct).sort((a, b) => b[1] - a[1]).slice(0, 3);
   })();
   const byMethod = getPaymentMethods(lang).map((m) => ({ ...m, total: todaySales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
-  const lowStock = products.filter((p) => p.quantity <= lowStockThreshold);
+  const lowStock = products.filter((p) => p.quantity <= lowStockThreshold).sort((a, b) => a.quantity - b.quantity);
+  const lowStockDisplayed = showAllLowStock ? lowStock : lowStock.slice(0, 5);
   const restockForecast = (() => {
     const cutoff = Date.now() - 14 * 86400000;
     const soldByProduct = {};
@@ -10745,8 +10747,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div className="min-w-0" style={{ flex: 1 }}>
                   <p className="text-sm font-extrabold mb-1" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
                   <div className="space-y-0.5">
-                    {lowStock.map((p) => <p key={p.id} className="text-xs" style={{ color: T.text }}>{p.name} — {p.quantity} restant(s)</p>)}
+                    {lowStockDisplayed.map((p) => <p key={p.id} className="text-xs" style={{ color: T.text }}>{p.name} — {p.quantity} restant(s)</p>)}
                   </div>
+                  {lowStock.length > 5 && (
+                    <button
+                      onClick={() => setShowAllLowStock((v) => !v)}
+                      className="text-xs font-bold mt-1.5"
+                      style={{ color: darkMode ? "#f0c869" : "#c2410c", background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                    >
+                      {showAllLowStock ? t(lang, "seeLessLowStock") : t(lang, "seeAllLowStock").replace("{n}", localizedNumber(lowStock.length))}
+                    </button>
+                  )}
                 </div>
               </div>
             )}
