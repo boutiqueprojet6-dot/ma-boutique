@@ -49,6 +49,8 @@ jobs:
                       <data android:scheme="com.shopnify.app" android:host="login-callback" />
                   </intent-filter>
           """
+          if "</intent-filter>" not in content:
+              raise SystemExit("ERREUR : aucune balise </intent-filter> trouvée dans le manifest, rien n'a été inséré.")
           content = content.replace("</intent-filter>", "</intent-filter>" + new_intent_filter, 1)
           with open(path, "w", encoding="utf-8") as f:
               f.write(content)
@@ -105,6 +107,40 @@ jobs:
           mkdir -p ~/.android
           echo "${{ secrets.ANDROID_DEBUG_KEYSTORE }}" | base64 -d > ~/.android/debug.keystore
           echo "Certificat de signature stable installé"
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      # ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
+      # Affiche dans les logs le contenu exact du manifest juste avant la compilation,
+      # pour vérifier que le lien profond Google OAuth est bien présent au moment du build
+      # (et pas seulement juste après l'étape qui l'ajoute, avant que "cap sync" ne s'exécute).
+      - name: Verify deep link is present before build
+        run: |
+          echo "----- Contenu complet de AndroidManifest.xml -----"
+          cat android/app/src/main/AndroidManifest.xml
+          echo "----------------------------------------------------"
+          if grep -q "login-callback" android/app/src/main/AndroidManifest.xml; then
+            echo "OK : le lien profond 'login-callback' est bien présent dans le manifest final."
+          else
+            echo "PROBLEME : le lien profond 'login-callback' est ABSENT du manifest final !"
+            exit 1
+          fi
+      # ---- FIN DIAGNOSTIC TEMPORAIRE ----
+
+      - name: Build APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: shopnify-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          overwrite: true
+
 
       - name: Sync Capacitor
         run: npx cap sync android
