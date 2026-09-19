@@ -24,11 +24,28 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install native push plugin (version alignée sur Capacitor)
+        run: |
+          MAJOR=$(node -p "require('@capacitor/core/package.json').version.split('.')[0]")
+          echo "Capacitor major = $MAJOR"
+          npm install --save "@capacitor/push-notifications@^$MAJOR.0.0"
+
       - name: Build web app
         run: npm run build
 
       - name: Add Android platform
         run: npx cap add android
+
+      - name: Add google-services.json (Firebase push)
+        env:
+          GSJ: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -z "$GSJ" ]; then
+            echo "ERREUR : le secret GOOGLE_SERVICES_JSON est vide ou absent."
+            exit 1
+          fi
+          printf '%s' "$GSJ" > android/app/google-services.json
+          echo "google-services.json installé"
 
       - name: Generate app icon
         run: |
@@ -55,6 +72,31 @@ jobs:
           with open(path, "w", encoding="utf-8") as f:
               f.write(content)
           print("Deep link ajouté avec succès")
+          EOF
+
+      - name: Add Android permissions (camera + notifications)
+        run: |
+          python3 - << 'EOF'
+          path = "android/app/src/main/AndroidManifest.xml"
+          with open(path, "r", encoding="utf-8") as f:
+              content = f.read()
+          if "<application" not in content:
+              raise SystemExit("ERREUR : balise <application> introuvable dans le manifest, rien n'a été inséré.")
+          lines = []
+          for perm in ["CAMERA", "POST_NOTIFICATIONS"]:
+              tag = "android.permission." + perm
+              if tag not in content:
+                  lines.append('<uses-permission android:name="' + tag + '" />')
+          if "android.hardware.camera" not in content:
+              lines.append('<uses-feature android:name="android.hardware.camera" android:required="false" />')
+          if lines:
+              block = "\n    ".join(lines) + "\n    "
+              content = content.replace("<application", block + "<application", 1)
+              with open(path, "w", encoding="utf-8") as f:
+                  f.write(content)
+              print("Permissions ajoutées : " + ", ".join(lines))
+          else:
+              print("Permissions déjà présentes, rien à ajouter")
           EOF
 
       - name: Configure MainActivity for native Google Sign-In
@@ -113,9 +155,10 @@ jobs:
 
       # ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
       # Affiche dans les logs le contenu exact du manifest juste avant la compilation,
-      # pour vérifier que le lien profond Google OAuth est bien présent au moment du build
-      # (et pas seulement juste après l'étape qui l'ajoute, avant que "cap sync" ne s'exécute).
-      - name: Verify deep link is present before build
+      # pour vérifier que le lien profond Google OAuth et les permissions sont bien présents
+      # au moment du build (et pas seulement juste après l'étape qui les ajoute, avant que
+      # "cap sync" ne s'exécute).
+      - name: Verify manifest before build
         run: |
           echo "----- Contenu complet de AndroidManifest.xml -----"
           cat android/app/src/main/AndroidManifest.xml
@@ -126,24 +169,21 @@ jobs:
             echo "PROBLEME : le lien profond 'login-callback' est ABSENT du manifest final !"
             exit 1
           fi
+          if [ -f android/app/google-services.json ]; then
+            echo "OK : google-services.json présent."
+          else
+            echo "PROBLEME : google-services.json ABSENT !"
+            exit 1
+          fi
+          for PERM in CAMERA POST_NOTIFICATIONS; do
+            if grep -q "android.permission.$PERM" android/app/src/main/AndroidManifest.xml; then
+              echo "OK : permission $PERM présente."
+            else
+              echo "PROBLEME : permission $PERM ABSENTE du manifest final !"
+              exit 1
+            fi
+          done
       # ---- FIN DIAGNOSTIC TEMPORAIRE ----
-
-      - name: Build APK
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: shopnify-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-          overwrite: true
-
-
-      - name: Sync Capacitor
-        run: npx cap sync android
 
       - name: Build APK
         run: |
