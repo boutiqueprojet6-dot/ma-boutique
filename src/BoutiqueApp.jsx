@@ -5838,7 +5838,14 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           },
         });
         if (oauthError) throw oauthError;
-        alert("Étape 2 : lien reçu, ouverture du navigateur...\nURL : " + data.url);
+        // Diagnostic : liste les clés de stockage liées à Supabase juste après la
+        // demande du lien, pour vérifier que le "code verifier" PKCE a bien été écrit.
+        const keysAfterStep2 = Object.keys(window.localStorage).filter((k) => k.startsWith("sb-"));
+        alert(
+          "Étape 2 : lien reçu, ouverture du navigateur...\n" +
+          "Clés localStorage 'sb-' présentes juste après : " + (keysAfterStep2.length ? keysAfterStep2.join(", ") : "AUCUNE") +
+          "\nURL : " + data.url
+        );
         const { Browser } = await import("@capacitor/browser");
         await Browser.open({ url: data.url });
         alert("Étape 3 : navigateur ouvert. En attente du retour vers l'app après connexion Google...");
@@ -13963,6 +13970,14 @@ function BoutiqueAppInner() {
           return;
         }
         try {
+          // Diagnostic : liste les clés de stockage liées à Supabase juste avant
+          // l'échange, pour comparer avec ce qui avait été écrit à l'étape 2 —
+          // si le "code verifier" a disparu entre-temps, ça le confirmera ici.
+          const keysBeforeExchange = Object.keys(window.localStorage).filter((k) => k.startsWith("sb-"));
+          alert(
+            "Avant l'échange — clés localStorage 'sb-' présentes : " +
+            (keysBeforeExchange.length ? keysBeforeExchange.join(", ") : "AUCUNE")
+          );
           const { data, error } = await supabase.auth.exchangeCodeForSession(url);
           if (error) {
             alert("Étape 5 : échec de l'échange du code contre une session.\nErreur : " + error.message);
