@@ -30,6 +30,104 @@ jobs:
           echo "Capacitor major = $MAJOR"
           npm install --save "@capacitor/push-notifications@^$MAJOR.0.0"
 
+      - name: Patch app for native push notifications
+        run: |
+          python3 - << 'EOF'
+          import os
+          OLD1 = r'''  const [pushPermission, setPushPermission] = useState(typeof Notification !== "undefined" ? Notification.permission : "unsupported");
+            const enablePushNotifications = async () => {
+              if (!firebaseMessaging || typeof Notification === "undefined") { setPushPermission("unsupported"); return; }
+          '''
+          NEW1 = r'''  // Dans l'APK Android (Capacitor), l'API web "Notification" + service worker n'existe pas dans la
+            // WebView : on utilise donc le plugin natif @capacitor/push-notifications (FCM Android).
+            // Sur le web (Vercel / navigateur), le fonctionnement d'origine (Firebase web + VAPID) est conservé.
+            const isNativeApp = typeof window !== "undefined" && !!window.Capacitor && typeof window.Capacitor.isNativePlatform === "function" && window.Capacitor.isNativePlatform();
+            const [pushPermission, setPushPermission] = useState(isNativeApp ? "default" : (typeof Notification !== "undefined" ? Notification.permission : "unsupported"));
+            // askPermission = true : appelé depuis le bouton (peut afficher la fenêtre d'autorisation Android 13+).
+            // askPermission = false : appelé au démarrage, n'enregistre l'appareil que si l'autorisation est déjà accordée.
+            const registerNativePush = async (askPermission) => {
+              try {
+                const { PushNotifications } = await import("@capacitor/push-notifications");
+                let perm = await PushNotifications.checkPermissions();
+                if (askPermission && (perm.receive === "prompt" || perm.receive === "prompt-with-rationale")) {
+                  perm = await PushNotifications.requestPermissions();
+                }
+                if (perm.receive !== "granted") {
+                  if (askPermission) setPushPermission("denied");
+                  return;
+                }
+                setPushPermission("granted");
+                if (!window.__nativePushListeners) {
+                  window.__nativePushListeners = true;
+                  // Reçoit le token FCM de cet appareil et l'enregistre dans Supabase (table push_tokens).
+                  await PushNotifications.addListener("registration", async (t) => {
+                    try {
+                      const { data: userData } = await supabase.auth.getUser();
+                      if (!userData || !userData.user || !t || !t.value) return;
+                      await supabase.from("push_tokens").upsert({ owner_id: userData.user.id, token: t.value }, { onConflict: "token" });
+                    } catch (e) { /* best-effort */ }
+                  });
+                  await PushNotifications.addListener("registrationError", (err) => {
+                    console.error("Échec de l'enregistrement push natif :", err && (err.error || err));
+                  });
+                  // Clic sur une notification d'anomalie : ouvre l'Historique avec le bon filtre.
+                  await PushNotifications.addListener("pushNotificationActionPerformed", (action) => {
+                    const d = action && action.notification && action.notification.data;
+                    const alertType = d && (d.alertType || d.alert_type);
+                    if (alertType) applyAlertTypeFilter(alertType);
+                  });
+                }
+                await PushNotifications.register();
+              } catch (e) {
+                console.error("Push natif indisponible :", e && (e.message || e));
+                if (askPermission) setPushPermission("unsupported");
+              }
+            };
+            const enablePushNotifications = async () => {
+              if (isNativeApp) { await registerNativePush(true); return; }
+              if (!firebaseMessaging || typeof Notification === "undefined") { setPushPermission("unsupported"); return; }
+          '''
+          OLD2 = r'''    // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, []);
+            const [debtsSearch, setDebtsSearch]'''
+          NEW2 = r'''    // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, []);
+            // APK Android : si l'autorisation de notification est déjà accordée, ré-enregistre l'appareil
+            // à chaque connexion / ouverture (le token FCM peut changer) et met à jour l'état du bouton.
+            useEffect(() => {
+              if (!isNativeApp) return;
+              const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
+                if (session && session.user && (event === "SIGNED_IN" || event === "INITIAL_SESSION")) registerNativePush(false);
+              });
+              return () => listener.subscription.unsubscribe();
+              // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, []);
+            const [debtsSearch, setDebtsSearch]'''
+          targets = []
+          for root, dirs, files in os.walk("."):
+              dirs[:] = [d for d in dirs if d not in ("node_modules", ".git", "android", "dist")]
+              if "BoutiqueApp.jsx" in files:
+                  targets.append(os.path.join(root, "BoutiqueApp.jsx"))
+          if not targets:
+              raise SystemExit("ERREUR : BoutiqueApp.jsx introuvable dans le depot.")
+          for path in targets:
+              with open(path, "r", encoding="utf-8", newline="") as f:
+                  s = f.read()
+              if "registerNativePush" in s:
+                  print(path + " : deja modifie, rien a faire")
+                  continue
+              crlf = "\r\n" in s
+              o1, n1, o2, n2 = OLD1, NEW1, OLD2, NEW2
+              if crlf:
+                  o1, n1, o2, n2 = [x.replace("\n", "\r\n") for x in (o1, n1, o2, n2)]
+              if s.count(o1) != 1 or s.count(o2) != 1:
+                  raise SystemExit("ERREUR : " + path + " ne correspond pas a la version attendue, aucune modification faite.")
+              s = s.replace(o1, n1, 1).replace(o2, n2, 1)
+              with open(path, "w", encoding="utf-8", newline="") as f:
+                  f.write(s)
+              print(path + " : notifications natives ajoutees")
+          EOF
+
       - name: Build web app
         run: npm run build
 
