@@ -5019,6 +5019,9 @@ const EXTRA_UI = {
   shareCardPreview: { fr: "Aperçu", en: "Preview", ar: "معاينة", es: "Vista previa", pt: "Pré-visualização", zh: "预览", vi: "Xem trước", de: "Vorschau", ru: "Предпросмотр", hi: "पूर्वावलोकन", ta: "முன்னோட்டம்", bn: "প্রিভিউ", ur: "پیش منظر", id: "Pratinjau", tr: "Önizleme", ko: "미리보기", ja: "プレビュー", it: "Anteprima", nl: "Voorbeeld", sw: "Muhtasari", ha: "Duba kafin", bm: "Filɛli", tl: "Preview", te: "ప్రివ్యూ", th: "ตัวอย่าง", wo: "Xool bu jëkk", pl: "Podgląd", yo: "Àkíyèsí", am: "ቅድመ እይታ", zu: "Ukubuka kuqala" },
 };
 const tx = (lang, key) => (EXTRA_UI[key] && (EXTRA_UI[key][lang] || EXTRA_UI[key].en || EXTRA_UI[key].fr)) || "";
+EXTRA_UI.histSaleCancelled = { fr: "Vente annulée", en: "Sale cancelled", es: "Venta cancelada", pt: "Venda cancelada", ar: "بيع ملغى" };
+EXTRA_UI.histExpenseDeleted = { fr: "Dépense supprimée", en: "Expense deleted", es: "Gasto eliminado", pt: "Despesa excluída", ar: "مصروف محذوف" };
+EXTRA_UI.histPermanentNote = { fr: "Historique permanent : les lignes ne peuvent pas être supprimées.", en: "Permanent history: entries cannot be deleted.", es: "Historial permanente: las entradas no se pueden eliminar.", pt: "Histórico permanente: os registros não podem ser excluídos.", ar: "سجل دائم: لا يمكن حذف أي عنصر." };
 EXTRA_UI.editProductTitle = { fr: "Modifier le produit", en: "Edit product", ar: "تعديل المنتج", es: "Editar producto", pt: "Editar produto", zh: "编辑商品", vi: "Chỉnh sửa sản phẩm", de: "Produkt bearbeiten", ru: "Изменить товар", hi: "उत्पाद संपादित करें", ta: "பொருளைத் திருத்து", bn: "পণ্য সম্পাদনা করুন", ur: "پروڈکٹ میں ترمیم کریں", id: "Edit produk", tr: "Ürünü düzenle", ko: "상품 수정", ja: "商品を編集", it: "Modifica prodotto", nl: "Product bewerken", sw: "Hariri bidhaa", ha: "Gyara samfur", bm: "Fɛn labɛn", tl: "I-edit ang produkto", te: "ఉత్పత్తిని సవరించండి", th: "แก้ไขสินค้า", wo: "Soppi jaaykatu", pl: "Edytuj produkt", yo: "Ṣàtúnṣe ọjà", am: "ምርቱን አርትዕ", zu: "Hlela umkhiqizo" };
 EXTRA_UI.logProductEdited = { fr: "Produit modifié", en: "Product edited", ar: "تم تعديل المنتج", es: "Producto editado", pt: "Produto editado", zh: "商品已编辑", vi: "Đã chỉnh sửa sản phẩm", de: "Produkt bearbeitet", ru: "Товар изменён", hi: "उत्पाद संपादित हुआ", ta: "பொருள் திருத்தப்பட்டது", bn: "পণ্য সম্পাদিত হয়েছে", ur: "پروڈکٹ میں ترمیم ہوئی", id: "Produk diedit", tr: "Ürün düzenlendi", ko: "상품 수정됨", ja: "商品を編集しました", it: "Prodotto modificato", nl: "Product bewerkt", sw: "Bidhaa imehaririwa", ha: "An gyara samfur", bm: "Fɛn labɛnna", tl: "Na-edit ang produkto", te: "ఉత్పత్తి సవరించబడింది", th: "แก้ไขสินค้าแล้ว", wo: "Jaaykatu soppiku na", pl: "Produkt zmodyfikowany", yo: "A ṣàtúnṣe ọjà", am: "ምርቱ ተስተካክሏል", zu: "Umkhiqizo uhleliwe" };
 EXTRA_UI.shareCardSamplePrice = { fr: "Prix du produit", en: "Product price", ar: "سعر المنتج", es: "Precio del producto", pt: "Preço do produto", zh: "商品价格", vi: "Giá sản phẩm", de: "Produktpreis", ru: "Цена товара", hi: "उत्पाद की कीमत", ta: "பொருளின் விலை", bn: "পণ্যের দাম", ur: "پروڈکٹ کی قیمت", id: "Harga produk", tr: "Ürün fiyatı", ko: "상품 가격", ja: "商品価格", it: "Prezzo del prodotto", nl: "Productprijs", sw: "Bei ya bidhaa", ha: "Kuɗin samfur", bm: "Fɛn sɔngɔ", tl: "Presyo ng produkto", te: "ఉత్పత్తి ధర", th: "ราคาสินค้า", wo: "Njëg jaaykatu", pl: "Cena produktu", yo: "Iye ọjà", am: "የምርት ዋጋ", zu: "Intengo yomkhiqizo" };
@@ -5541,6 +5544,7 @@ function mergeShop(baseShop, localShop, remoteShop) {
     expenses: sortByDate(mergeById(base.expenses, local.expenses, remote.expenses)),
     debts: mergeDebts(base.debts, local.debts, remote.debts),
     debtEvents: sortByDate(mergeById(base.debtEvents, local.debtEvents, remote.debtEvents)),
+    historyLog: sortByDate(mergeById(base.historyLog, local.historyLog, remote.historyLog)),
     draftCarts: mergeById(base.draftCarts, local.draftCarts, remote.draftCarts),
     aiConversations: mergeById(base.aiConversations, local.aiConversations, remote.aiConversations),
     employees: mergeById(base.employees, local.employees, remote.employees),
@@ -5568,15 +5572,18 @@ function SavedBadge({ saving, isOnline, pendingCount }) {
     </span>
   );
 }
-function SearchBox({ value, onChange, placeholder }) {
+function SearchBox({ value, onChange, placeholder, compact }) {
+  // compact : utilisé dans les barres d'outils (recherche + tri + vue). Pas de marge basse
+  // (sinon la ligne devient plus haute et les boutons voisins se décalent vers le bas) et
+  // même hauteur (h-10) que les boutons.
   return (
-    <div className="relative mb-3">
+    <div className={compact ? "relative" : "relative mb-3"}>
       <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white"
+        className={compact ? "w-full border rounded-xl pl-9 pr-3 h-10 text-sm bg-white" : "w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white"}
       />
     </div>
   );
@@ -7465,6 +7472,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [expiresAt, setExpiresAt] = useState(null);
   const [employees, setEmployees] = useState([]);
   const [actionLog, setActionLog] = useState([]);
+  // Journal d'historique PERMANENT (ajout seulement) : chaque vente, annulation de vente, dette,
+  // paiement de dette et dépense y est copié au moment où il a lieu. Aucune action de l'app ne
+  // supprime ni ne modifie ces lignes — l'onglet Historique lit ce journal.
+  const [historyLog, setHistoryLog] = useState([]);
   // ---- Session employé (fondation) ----
   // La session employé (PIN partagé ou compte Supabase) est maintenant branchée via le QR/code
   // d'invitation : si l'employé s'est connecté par ce biais, loginAsEmployee contient son objet
@@ -8442,6 +8453,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setSettingsUpdatedAt(shop.settingsUpdatedAt || 0);
     setAiConversations(shop.aiConversations || []);
     setDebtEvents(shop.debtEvents || []);
+    setHistoryLog(shop.historyLog || []);
     setBenchmarkOptIn(!!shop.benchmarkOptIn);
     setArabicDigits(!!shop.arabicDigits);
     setDraftCarts(shop.draftCarts || []);
@@ -8591,6 +8603,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setCurrency("XOF");
       setAiConversations([]);
       setDebtEvents([]);
+      setHistoryLog([]);
       setBenchmarkOptIn(false);
       setArabicDigits(false);
       setDraftCarts([]);
@@ -8740,6 +8753,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       currency: overrides.currency ?? currency,
       aiConversations: overrides.aiConversations ?? aiConversations,
       debtEvents: overrides.debtEvents ?? debtEvents,
+      historyLog: overrides.historyLog ?? historyLog,
       benchmarkOptIn: overrides.benchmarkOptIn ?? benchmarkOptIn,
       arabicDigits: overrides.arabicDigits ?? arabicDigits,
       shareCardStyleId: overrides.shareCardStyleId ?? shareCardStyleId,
@@ -8765,6 +8779,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCurrency(next.currency);
     setAiConversations(next.aiConversations);
     setDebtEvents(next.debtEvents);
+    setHistoryLog(next.historyLog);
     setBenchmarkOptIn(next.benchmarkOptIn);
     setArabicDigits(next.arabicDigits);
     setShareCardStyleId(next.shareCardStyleId);
@@ -8904,6 +8919,42 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // best-effort : l'entrée reste visible localement même si la persistance échoue.
       }
     })();
+  };
+  // ---- Journal d'historique permanent ----
+  // Fabrique une ligne du journal. `refId` relie la ligne à l'objet d'origine (vente, événement
+  // de dette, dépense) pour ne pas afficher deux fois les anciennes données déjà présentes.
+  const makeHistoryEntry = (type, fields) => ({
+    id: `h_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    type,
+    date: new Date().toISOString(),
+    actorId: activeEmployee ? activeEmployee.id : null,
+    actorName: activeEmployee ? activeEmployee.name : null,
+    ...fields,
+  });
+  const HISTORY_CATEGORY = { sale: "sale", saleCancelled: "sale", debtCreated: "debt", debtPaid: "debt", debtPartial: "debt", expense: "expense", expenseDeleted: "expense" };
+  // Données enregistrées avant l'existence du journal : converties au même format pour rester
+  // visibles dans l'historique, sans doublon avec les lignes déjà journalisées.
+  const deriveLegacyHistory = () => {
+    const logged = new Set(historyLog.map((h) => h.refId).filter(Boolean));
+    const out = [];
+    const txns = {};
+    sales.forEach((sl) => {
+      const key = sl.transactionId || sl.id;
+      if (logged.has(key)) return;
+      if (!txns[key]) txns[key] = { id: "legacy_" + key, refId: key, type: "sale", date: sl.date, amount: 0, customer: sl.customer || "", payment: sl.payment, change: sl.change ?? null, actorId: sl.actorId ?? null, actorName: sl.actorName ?? null, items: [] };
+      txns[key].items.push({ productName: sl.productName, qty: sl.qty, unitPrice: sl.unitPrice });
+      txns[key].amount += sl.total;
+    });
+    Object.values(txns).forEach((x) => out.push(x));
+    debtEvents.forEach((ev) => {
+      if (logged.has(ev.id)) return;
+      out.push({ id: "legacy_" + ev.id, refId: ev.id, type: ev.type === "paid" ? "debtPaid" : ev.type === "partialPayment" ? "debtPartial" : "debtCreated", date: ev.date, amount: ev.amount, customer: ev.customer || "", product: ev.product || "", source: ev.source || null, actorId: ev.actorId ?? null, actorName: ev.actorName ?? null });
+    });
+    expenses.forEach((ex) => {
+      if (logged.has(ex.id)) return;
+      out.push({ id: "legacy_" + ex.id, refId: ex.id, type: "expense", date: ex.date, amount: ex.amount, label: ex.label, actorId: ex.actorId ?? null, actorName: ex.actorName ?? null });
+    });
+    return out;
   };
   // ===== Recadrage de la photo produit =====
   // L'utilisateur cadre lui-même la photo dans un carré (déplacement + zoom) avant
@@ -9398,13 +9449,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       actorId: activeEmployee ? activeEmployee.id : null,
       actorName: activeEmployee ? activeEmployee.name : null,
     };
-    saveAll({ expenses: [...expenses, expense] });
+    saveAll({
+      expenses: [...expenses, expense],
+      historyLog: [...historyLog, makeHistoryEntry("expense", { refId: expense.id, date: expense.date, amount: expense.amount, label: expense.label })],
+    });
     logAction(`${t(lang, "logExpenseAdded")} : ${expense.label} — ${localizedNumber(expense.amount)}`);
     setELabel(""); setEAmount(""); setShowAddExpense(false);
+    setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
   };
   const deleteExpense = (id) => {
     const targetExpense = expenses.find((ex) => ex.id === id);
-    saveAll({ expenses: expenses.filter((e) => e.id !== id) });
+    // La dépense disparaît de la caisse, mais reste dans l'historique : on y ajoute une ligne
+    // "supprimée" (et, si la dépense date d'avant le journal, on la recopie d'abord).
+    const newHistory = [];
+    if (targetExpense) {
+      if (!historyLog.some((h) => h.refId === id)) {
+        newHistory.push(makeHistoryEntry("expense", { refId: id, date: targetExpense.date, amount: targetExpense.amount, label: targetExpense.label, actorId: targetExpense.actorId ?? null, actorName: targetExpense.actorName ?? null }));
+      }
+      newHistory.push(makeHistoryEntry("expenseDeleted", { refId: "del-" + id, amount: targetExpense.amount, label: targetExpense.label, originalDate: targetExpense.date }));
+    }
+    saveAll({ expenses: expenses.filter((e) => e.id !== id), historyLog: [...historyLog, ...newHistory] });
     if (targetExpense) logAction(`${t(lang, "logExpenseDeleted")} : ${targetExpense.label} — ${localizedNumber(targetExpense.amount)}`);
   };
   const saveFund = () => {
@@ -9412,6 +9476,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll({ cashFund: parseFloat(fundInput) });
     logAction(`${t(lang, "logCashFundUpdated")} : ${localizedNumber(parseFloat(fundInput))}`);
     setFundInput(""); setShowEditFund(false);
+    setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
   };
   // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
   // Vrai mot de passe de connexion (Supabase Auth), distinct du code PIN applicatif géré
@@ -9525,10 +9590,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const newPaidAmount = (d.paidAmount || 0) + amountNum;
     const fullyPaid = newPaidAmount >= d.amount;
     const nowIso = new Date().toISOString();
+    const payEventId = d.id + "-partialpay-" + Date.now();
     saveAll({
       debts: debts.map((x) => (x.id === d.id ? { ...x, paidAmount: newPaidAmount, paid: fullyPaid, updatedAt: Date.now() } : x)),
+      historyLog: [...historyLog, makeHistoryEntry(fullyPaid ? "debtPaid" : "debtPartial", { refId: payEventId, date: nowIso, amount: amountNum, customer: d.customer, product: d.product || "" })],
       debtEvents: [...debtEvents, {
-        id: d.id + "-partialpay-" + Date.now(),
+        id: payEventId,
         debtId: d.id,
         type: fullyPaid ? "paid" : "partialPayment",
         customer: d.customer,
@@ -9583,6 +9650,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         actorId: activeEmployee ? activeEmployee.id : null,
         actorName: activeEmployee ? activeEmployee.name : null,
       }],
+      // Dans l'historique, la ligne est datée du moment de l'ajout (elle apparaît donc tout en haut) ;
+      // la date de la dette saisie par l'utilisateur est conservée dans debtDate.
+      historyLog: [...historyLog, makeHistoryEntry("debtCreated", { refId: newDebtId + "-ev", amount: amountNum, customer: newDebtCustomer.trim(), product: newDebtProduct.trim(), source: "manual", debtDate: dateIso })],
     });
     logAction(`${t(lang, "debtCreatedEvent")} : ${newDebtCustomer.trim()} — ${localizedNumber(amountNum)}`);
     setShowAddDebtModal(false);
@@ -9617,7 +9687,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     } catch (e) { setEmailMsg("Erreur, réessaie."); }
   };
   const resetShopData = () => {
-    saveAll({ products: [], sales: [], debts: [], expenses: [], cashFund: 0, draftCarts: [], activeCartId: null });
+    // L'historique est permanent : avant de vider les ventes/dépenses, on recopie dans le journal
+    // ce qui n'y figurait pas encore, pour que rien ne disparaisse de l'onglet Historique.
+    saveAll({ products: [], sales: [], debts: [], expenses: [], cashFund: 0, draftCarts: [], activeCartId: null, historyLog: [...historyLog, ...deriveLegacyHistory()] });
     setConfirmReset(false);
     setShowSettings(false);
   };
@@ -9879,8 +9951,23 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll({ draftCarts: next, activeCartId: newCart.id });
   };
   const deleteCart = (cartId) => {
+    const cartToCancel = draftCarts.find((c) => c.id === cartId);
     const next = draftCarts.filter((c) => c.id !== cartId);
-    saveAll({ draftCarts: next, activeCartId: activeCartId === cartId ? (next[0] ? next[0].id : null) : activeCartId });
+    const overrides = { draftCarts: next, activeCartId: activeCartId === cartId ? (next[0] ? next[0].id : null) : activeCartId };
+    // Un panier abandonné avec des articles = une vente annulée : on la garde dans l'historique.
+    const hadItems = cartToCancel && cartToCancel.items && cartToCancel.items.length > 0;
+    if (hadItems) {
+      const cancelledTotal = cartToCancel.items.reduce((sum, it) => sum + it.qty * it.unitPrice, 0);
+      overrides.historyLog = [...historyLog, makeHistoryEntry("saleCancelled", {
+        refId: "cancel-" + cartId,
+        amount: cancelledTotal,
+        customer: (cartToCancel.customer || "").trim(),
+        payment: cartToCancel.payment || null,
+        items: cartToCancel.items.map((it) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice })),
+      })];
+    }
+    saveAll(overrides);
+    if (hadItems) logAction(`${tx(lang, "histSaleCancelled")} : ${cartToCancel.items.map((i) => `${i.productName} x${i.qty}`).join(", ")} — ${localizedNumber(overrides.historyLog[overrides.historyLog.length - 1].amount)}`);
   };
   const changeCartQty = (cartId, product, delta, mode = "pack") => {
     const cart = draftCarts.find((c) => c.id === cartId);
@@ -10002,6 +10089,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     });
     let nextDebts = debts;
     let nextDebtEvents = debtEvents;
+    const newHistory = [makeHistoryEntry("sale", {
+      refId: transactionId,
+      date: dateNow,
+      amount: total,
+      customer: cart.customer.trim(),
+      payment: cart.payment,
+      change: receivedNum !== null ? receivedNum - total : null,
+      items: cart.items.map((it) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice })),
+    })];
     if (cart.payment === "credit") {
       const newDebtId = Date.now().toString() + Math.random().toString(36).slice(2, 7) + "-debt";
       nextDebts = [...debts, {
@@ -10025,6 +10121,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         date: dateNow,
         source: "sale",
       }];
+      newHistory.push(makeHistoryEntry("debtCreated", { refId: newDebtId + "-ev", date: dateNow, amount: total, customer: cart.customer.trim(), product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", "), source: "sale" }));
     }
     const nextCarts = draftCarts.filter((c) => c.id !== cartId);
     saveAll({
@@ -10032,6 +10129,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       sales: [...sales, ...newSales],
       debts: nextDebts,
       debtEvents: nextDebtEvents,
+      historyLog: [...historyLog, ...newHistory],
       draftCarts: nextCarts,
       activeCartId: activeCartId === cartId ? (nextCarts[0] ? nextCarts[0].id : null) : activeCartId,
     });
@@ -10318,6 +10416,64 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const [accountingFrom, setAccountingFrom] = useState("");
   const [accountingTo, setAccountingTo] = useState("");
   const [accountingGenerating, setAccountingGenerating] = useState(false);
+  // ---- Bouton retour du téléphone (Android) ----
+  // Sans écouteur "backButton", le bouton retour du système ne fait rien dans l'app Capacitor.
+  // La fonction ci-dessous est réécrite à chaque rendu (elle voit donc toujours l'état actuel) :
+  // elle ferme ce qui est ouvert, du plus haut (fenêtre de confirmation) au plus bas (onglet),
+  // et renvoie true si elle a géré l'appui. Sinon, l'écouteur ferme l'application.
+  const backHandlerRef = useRef(null);
+  backHandlerRef.current = () => {
+    if (loading) return true;
+    if (appLockActive) return false;
+    if (confirmModal) { setConfirmModal(null); return true; }
+    if (confirmReset) { setConfirmReset(false); return true; }
+    if (confirmDeleteProduct) { setConfirmDeleteProduct(null); return true; }
+    if (confirmDeleteExpense) { setConfirmDeleteExpense(null); return true; }
+    if (confirmDeleteCart) { setConfirmDeleteCart(null); return true; }
+    if (showLockPinModal) { setShowLockPinModal(false); setLockPinInput(""); setLockPinError(""); setPendingLockAction(null); setLockPinReason("amounts"); return true; }
+    if (showForgotPin) { setShowForgotPin(false); return true; }
+    if (partialPayDebt) { setPartialPayDebt(null); setPartialPayInput(""); setPartialPayError(""); return true; }
+    if (showAddDebtModal) { setShowAddDebtModal(false); setNewDebtCustomer(""); setNewDebtAmount(""); setNewDebtProduct(""); setNewDebtDate(""); setNewDebtError(""); return true; }
+    if (shareDialogProduct) { setShareDialogProduct(null); return true; }
+    if (cropModalFile) { closeCropModal(); return true; }
+    if (showProductPhotoPreview) { setShowProductPhotoPreview(false); return true; }
+    if (showCameraCheckout) { setShowCameraCheckout(false); return true; }
+    if (showPaymentShortcut) { setShowPaymentShortcut(false); return true; }
+    if (showAccountingExport) { setShowAccountingExport(false); return true; }
+    if (showShopSwitcher) { setShowShopSwitcher(false); return true; }
+    if (qrEmployee || qrInvite) { setQrEmployee(null); setQrInvite(null); return true; }
+    if (showAddEmployee) { setShowAddEmployee(false); resetEmployeeForm(); return true; }
+    if (showAiHistory) { setShowAiHistory(false); return true; }
+    if (showMoreMenu) { setShowMoreMenu(false); return true; }
+    if (showSortMenu) { setShowSortMenu(false); return true; }
+    if (showAddExpense) { setShowAddExpense(false); return true; }
+    if (showEditFund) { setShowEditFund(false); return true; }
+    if (showAddProduct) {
+      if (isPhotoReturnGuardActive()) return true;
+      setShowAddProduct(false); setEditingProductId(null); return true;
+    }
+    if (showSettings) {
+      if (settingsField) setSettingsField(null);
+      else if (settingsView !== "menu") setSettingsView("menu");
+      else { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setSettingsSearchQuery(""); }
+      return true;
+    }
+    if (tab !== "dashboard") { setTab("dashboard"); return true; }
+    return false;
+  };
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    let handle = null;
+    let cancelled = false;
+    import("@capacitor/app").then(({ App: CapacitorApp }) => {
+      if (cancelled) return;
+      CapacitorApp.addListener("backButton", () => {
+        const handled = backHandlerRef.current ? backHandlerRef.current() : false;
+        if (!handled) CapacitorApp.exitApp();
+      }).then((h) => { if (cancelled) h.remove(); else handle = h; });
+    });
+    return () => { cancelled = true; if (handle) handle.remove(); };
+  }, []);
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen" style={{ background: darkMode ? "#0a0a14" : SAND, color: darkMode ? "#eceef5" : CHARCOAL }}>
@@ -10329,6 +10485,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   CURRENT_LANG = lang;
   USE_ARABIC_DIGITS = arabicDigits;
   const maskAmount = (text) => (amountsHidden ? "•••••" : text);
+  // Toute action sensible sur la caisse passe par ici : si les montants sont masqués, on demande
+  // d'abord le code PIN (ou l'empreinte), puis l'action s'exécute ; sinon elle s'exécute tout de suite.
+  const requireUnlock = (action) => {
+    if (amountsHidden) { setPendingLockAction(() => action); setShowLockPinModal(true); }
+    else action();
+  };
+  const openEditFund = () => { setFundInput(String(cashFund)); setShowEditFund(true); };
   const isActive = expiresAt && new Date(expiresAt) > new Date();
   const T = darkMode
     ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
@@ -10430,11 +10593,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // ---- Historique unifié (ventes + dettes + dépenses), avec filtres avancés ----
   // Chaque catégorie n'est incluse que si l'employé a la permission de la voir, pour rester
   // cohérent avec le reste des permissions déjà appliquées ailleurs dans l'app.
-  const historyRaw = [
-    ...(hasPermission("viewStock") || hasPermission("sell") ? sales.map((s) => ({ kind: "sale", date: s.date, amount: s.total, product: s.productName, customer: s.customer || "", data: s })) : []),
-    ...(hasPermission("viewDebts") ? debtEvents.map((ev) => ({ kind: "debt", date: ev.date, amount: ev.amount, product: ev.product || "", customer: ev.customer || "", data: ev })) : []),
-    ...(hasPermission("viewCash") ? expenses.map((e) => ({ kind: "expense", date: e.date, amount: e.amount, product: "", customer: "", data: e })) : []),
-  ];
+  const historyRaw = [...historyLog, ...deriveLegacyHistory()]
+    .filter((h) => {
+      const cat = HISTORY_CATEGORY[h.type];
+      if (cat === "sale") return hasPermission("viewStock") || hasPermission("sell");
+      if (cat === "debt") return hasPermission("viewDebts");
+      if (cat === "expense") return hasPermission("viewCash");
+      return false;
+    })
+    .map((h) => ({
+      kind: HISTORY_CATEGORY[h.type],
+      date: h.date,
+      amount: h.amount || 0,
+      product: h.items ? h.items.map((it) => it.productName).join(", ") : (h.product || ""),
+      customer: h.customer || "",
+      data: h,
+    }));
   const historyEntries = historyRaw.filter((entry) => {
     if (!histFilterKinds[entry.kind]) return false;
     if (histFilterFrom && entry.date.slice(0, 10) < histFilterFrom) return false;
@@ -10449,7 +10623,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const exportHistoryCsv = () => {
     const rows = [[t(lang, "histColDate"), t(lang, "histColType"), t(lang, "histColProduct"), t(lang, "histColCustomer"), t(lang, "histColAmount")]];
     historyEntries.forEach((entry) => {
-      const kindLabel = entry.kind === "sale" ? t(lang, "logSaleRecorded") : entry.kind === "debt" ? t(lang, "navDebts") : t(lang, "setCaisse");
+      const kindLabel = ({ sale: t(lang, "logSaleRecorded"), saleCancelled: tx(lang, "histSaleCancelled"), debtCreated: t(lang, "debtCreatedEvent"), debtPaid: t(lang, "debtPaidEvent"), debtPartial: t(lang, "partialPaymentEvent"), expense: t(lang, "histTypeExpense"), expenseDeleted: tx(lang, "histExpenseDeleted") })[entry.data.type] || entry.kind;
       rows.push([entry.date, kindLabel, entry.product, entry.customer, entry.amount]);
     });
     const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
@@ -11051,20 +11225,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         {amountsHidden ? "🙈" : "👁️"}
                       </button>
                     </div>
-                    <p className="font-black tracking-tight" style={{ fontSize: 28, color: cashBalance < 0 ? CLAY : GREEN, letterSpacing: -0.8, marginTop: 2 }}>{maskAmount(fcfa(cashBalance))}</p>
+                    <p className="font-black tracking-tight" style={{ fontSize: 28, color: amountsHidden ? T.muted : (cashBalance < 0 ? CLAY : GREEN), letterSpacing: amountsHidden ? 2 : -0.8, marginTop: 2 }}>{maskAmount(fcfa(cashBalance))}</p>
                   </div>
                   <div className="rounded-2xl flex items-center justify-center" style={{ width: 52, height: 52, background: darkMode ? "rgba(52,211,153,0.15)" : "rgba(5,150,105,0.1)", animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
                     <span style={{ fontSize: 26 }}>🪙</span>
                   </div>
                 </div>
-                <p className="text-[10px] mt-2" style={{ color: T.muted, lineHeight: 1.4 }}>{maskAmount(t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", fcfa(cashFund)).replace("{totalCashSales}", fcfa(totalCashSales)).replace("{totalExpenses}", fcfa(totalExpenses)))}</p>
+                <p className="text-[10px] mt-2" style={{ color: T.muted, lineHeight: 1.4 }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}</p>
                 {hasPermission("editCash") && (
-                  <button onClick={() => { setFundInput(String(cashFund)); setShowEditFund(true); }} className="inline-flex items-center gap-1 text-[11px] font-bold mt-2.5 px-3 py-1.5 rounded-full" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(5,150,105,0.08)", color: darkMode ? "#6ee7b7" : "#065f46" }}>
+                  <button onClick={() => requireUnlock(openEditFund)} className="inline-flex items-center gap-1 text-[11px] font-bold mt-2.5 px-3 py-1.5 rounded-full" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(5,150,105,0.08)", color: darkMode ? "#6ee7b7" : "#065f46" }}>
                     <Wallet size={11} /> {t(lang, "setCashFund")}
                   </button>
                 )}
                 {hasPermission("editCash") && (
-                  <button onClick={() => { if (amountsHidden) { setPendingLockAction(() => () => setShowAddExpense(true)); setShowLockPinModal(true); } else setShowAddExpense(true); }} className="w-full mt-2.5 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white font-bold text-xs" style={{ background: CLAY }}>
+                  <button onClick={() => requireUnlock(() => setShowAddExpense(true))} className="w-full mt-2.5 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white font-bold text-xs" style={{ background: CLAY }}>
                     <Plus size={14} /> {t(lang, "addExpense")}
                   </button>
                 )}
@@ -11080,9 +11254,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <span className="text-[11px] font-semibold" style={{ color: T.text }}>{e.label}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[11px] font-extrabold" style={{ color: CLAY }}>-{fcfa(e.amount)}</span>
+                          <span className="text-[11px] font-extrabold" style={{ color: CLAY }}>{amountsHidden ? "•••••" : `-${fcfa(e.amount)}`}</span>
                           {hasPermission("editCash") && (
-                            <button onClick={() => setConfirmModal({ message: `Supprimer cette dépense de ${fcfa(e.amount)} ?`, onConfirm: () => deleteExpense(e.id) })}><Trash2 size={12} color={T.muted} /></button>
+                            <button onClick={() => requireUnlock(() => setConfirmModal({ message: `Supprimer cette dépense de ${fcfa(e.amount)} ?`, onConfirm: () => deleteExpense(e.id) }))}><Trash2 size={12} color={T.muted} /></button>
                           )}
                         </div>
                       </div>
@@ -11203,8 +11377,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </button>
             )}
             {products.length > 0 && (
-              <div className="flex items-center gap-2">
-                <div className="flex-1"><SearchBox value={stockSearch} onChange={setStockSearch} placeholder={t(lang, "search")} /></div>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="flex-1"><SearchBox compact value={stockSearch} onChange={setStockSearch} placeholder={t(lang, "search")} /></div>
                 {renderSortButton()}
               </div>
             )}
@@ -11502,9 +11676,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                   </div>
                 )}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mb-3">
                   <div className="flex-1">
-                    <SearchBox value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} />
+                    <SearchBox compact value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} />
                   </div>
                   {renderSortButton()}
                   <div className="flex items-center rounded-xl overflow-hidden shrink-0" style={{ border: `1px solid ${T.border}` }}>
@@ -11536,55 +11710,55 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     const totalUnits = (p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0);
                     const dispoUnits = totalUnits - reservedUnits(p.id);
                     return (
-                      <div key={p.id} className="p-3">
+                      <div key={p.id} className="p-4">
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2.5">
+                          <div className="flex items-center gap-3">
                             {p.photo ? (
-                              <img src={p.photo} alt={p.name} className="w-9 h-9 rounded-xl object-cover shrink-0" />
+                              <img src={p.photo} alt={p.name} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                             ) : (
-                              <div className="rounded-xl flex items-center justify-center shrink-0" style={{ width: 36, height: 36, background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}>
-                                <span style={{ fontSize: 15 }}>📦</span>
+                              <div className="rounded-xl flex items-center justify-center shrink-0" style={{ width: 48, height: 48, background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}>
+                                <span style={{ fontSize: 20 }}>📦</span>
                               </div>
                             )}
                             <div>
-                              <p className="text-sm font-bold">{p.name}</p>
-                              <p className="text-[10px]" style={{ color: T.muted }}>{fcfa(p.price)} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · dispo : {localizedNumber(dispo)}</p>
+                              <p className="text-base font-bold">{p.name}</p>
+                              <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · dispo : {localizedNumber(dispo)}</p>
                             </div>
                           </div>
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2.5">
                             {inCartPack && (
                               <>
-                                <button onClick={() => changeCartQty(activeCart.id, p, -1, "pack")} className="w-8 h-8 rounded-full flex items-center justify-center active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
-                                <span className="text-sm font-extrabold w-5 text-center">{inCartPack.qty}</span>
+                                <button onClick={() => changeCartQty(activeCart.id, p, -1, "pack")} className="w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={18} /></button>
+                                <span className="text-base font-extrabold w-6 text-center">{inCartPack.qty}</span>
                               </>
                             )}
                             <button
                               onClick={() => changeCartQty(activeCart.id, p, 1, "pack")}
                               disabled={dispo <= 0}
-                              className="w-8 h-8 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
+                              className="w-10 h-10 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
                               style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)", boxShadow: "0 3px 8px rgba(37,99,235,0.4)" }}
                             >
-                              <Plus size={14} />
+                              <Plus size={18} />
                             </button>
                           </div>
                         </div>
                         {p.sellByUnit && (
-                          <div className="flex items-center justify-between mt-2 pl-11">
-                            <p className="text-[10px]" style={{ color: T.muted }}>{fcfa(p.unitPrice)} ({t(lang, "sellUnit")}) · dispo : {localizedNumber(Math.max(0, dispoUnits))}</p>
+                          <div className="flex items-center justify-between mt-2.5" style={{ paddingLeft: 60 }}>
+                            <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.unitPrice)} ({t(lang, "sellUnit")}) · dispo : {localizedNumber(Math.max(0, dispoUnits))}</p>
                             <div className="flex items-center gap-2">
                               {inCartUnit && (
                                 <>
-                                  <button onClick={() => changeCartQty(activeCart.id, p, -1, "unit")} className="w-6 h-6 rounded-full flex items-center justify-center active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={11} /></button>
-                                  <span className="text-xs font-extrabold w-5 text-center">{inCartUnit.qty}</span>
+                                  <button onClick={() => changeCartQty(activeCart.id, p, -1, "unit")} className="w-8 h-8 rounded-full flex items-center justify-center active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
+                                  <span className="text-sm font-extrabold w-5 text-center">{inCartUnit.qty}</span>
                                 </>
                               )}
                               <button
                                 onClick={() => changeCartQty(activeCart.id, p, 1, "unit")}
                                 disabled={dispoUnits <= 0}
-                                className="w-6 h-6 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
+                                className="w-8 h-8 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
                                 style={{ background: "linear-gradient(145deg, #ea580c, #c2410c)", boxShadow: "0 3px 8px rgba(234,88,12,0.4)" }}
                               >
-                                <Plus size={11} />
+                                <Plus size={14} />
                               </button>
                             </div>
                           </div>
@@ -11792,6 +11966,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           saveAll({
                             debts: debts.map((x) => (x.id === d.id ? { ...x, paid: true } : x)),
                             debtEvents: [...debtEvents, { id: d.id + "-paidev", debtId: d.id, type: "paid", customer: d.customer, amount: remainingDebt(d), product: d.product, date: new Date().toISOString(), actorId: activeEmployee ? activeEmployee.id : null, actorName: activeEmployee ? activeEmployee.name : null }],
+                            historyLog: [...historyLog, makeHistoryEntry("debtPaid", { refId: d.id + "-paidev", amount: remainingDebt(d), customer: d.customer, product: d.product || "" })],
                           });
                           logAction(`${t(lang, "logDebtSettled")} : ${d.customer} — ${localizedNumber(remainingDebt(d))}`);
                         } });
@@ -12084,7 +12259,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "history" && (
           <div className="space-y-2">
-            {transactions.length > 0 && <SearchBox value={historySearch} onChange={setHistorySearch} placeholder={t(lang, "searchProductClient")} />}
+            {historyRaw.length > 0 && <SearchBox value={historySearch} onChange={setHistorySearch} placeholder={t(lang, "searchProductClient")} />}
             {hasFeatureAccess("advancedHistory") ? (
               <div className="flex items-center gap-2">
                 <button onClick={() => setShowHistoryFilters(!showHistoryFilters)} className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-xl" style={{ background: historyFiltersActive ? INDIGO : T.input, color: historyFiltersActive ? "white" : T.text }}>
@@ -12154,68 +12329,91 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {historyEntries.length === 0 && !historyFiltersActive && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "noHistory")}</p>}
             {historyEntries.length === 0 && historyFiltersActive && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResultsFilters")}</p>}
+            {historyEntries.length > 0 && (
+              <p className="text-[10px] flex items-center justify-center gap-1 pt-1" style={{ color: T.muted }}>
+                <Lock size={10} /> {tx(lang, "histPermanentNote")}
+              </p>
+            )}
             {historyEntries.filter((entry) => {
               if (!historySearch.trim()) return true;
               const q = historySearch.toLowerCase();
               return entry.product.toLowerCase().includes(q) || entry.customer.toLowerCase().includes(q);
             }).map((entry) => {
+              const h = entry.data;
+              const cardStyle = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
+              const actorLabel = h.actorName ? h.actorName : "";
               if (entry.kind === "debt") {
-                const ev = entry.data;
-                const isPaid = ev.type === "paid";
-                const isPartial = ev.type === "partialPayment";
+                const isPaid = h.type === "debtPaid";
+                const isPartial = h.type === "debtPartial";
                 const evLabel = isPaid ? t(lang, "debtPaidEvent") : isPartial ? t(lang, "partialPaymentEvent") : t(lang, "debtCreatedEvent");
                 const evColor = (isPaid || isPartial) ? "#16a34a" : "#ea580c";
+                const showDebtDate = h.type === "debtCreated" && h.debtDate && h.debtDate.slice(0, 10) !== h.date.slice(0, 10);
+                const subtitle = [
+                  h.product,
+                  `${fullDate(h.date)} ${fullTime(h.date)}`,
+                  h.type === "debtCreated" && h.source ? (h.source === "manual" ? t(lang, "debtSourceManual") : t(lang, "debtSourceSale")) : "",
+                  showDebtDate ? `${t(lang, "histColDate")} : ${fullDate(h.debtDate)}` : "",
+                  actorLabel,
+                ].filter(Boolean).join(" · ");
                 return (
-                  <div key={ev.id} className="rounded-2xl p-3 flex items-center gap-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                  <div key={h.id} className="rounded-2xl p-3 flex items-center gap-3" style={cardStyle}>
                     <span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: (isPaid || isPartial) ? (darkMode ? "rgba(76,122,90,0.25)" : "#dcfce7") : (darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5") }}>
                       {(isPaid || isPartial) ? <Check size={14} color={darkMode ? "#8fd6a3" : "#16a34a"} /> : <Clock size={14} color={darkMode ? "#f0c869" : "#ea580c"} />}
                     </span>
                     <div className="flex-1">
-                      <p className="text-xs font-bold">{evLabel} — {ev.customer}</p>
-                      <p className="text-[10px]" style={{ color: T.muted }}>
-                        {ev.product} · {fullDate(ev.date)} {fullTime(ev.date)}
-                        {ev.type === "created" && ` · ${ev.source === "manual" ? t(lang, "debtSourceManual") : t(lang, "debtSourceSale")}`}
-                      </p>
+                      <p className="text-xs font-bold">{evLabel} — {h.customer}</p>
+                      <p className="text-[10px]" style={{ color: T.muted }}>{subtitle}</p>
                     </div>
-                    <span className="font-extrabold text-xs" style={{ color: evColor }}>{fcfa(ev.amount)}</span>
+                    <span className="font-extrabold text-xs" style={{ color: evColor }}>{fcfa(h.amount)}</span>
                   </div>
                 );
               }
               if (entry.kind === "expense") {
-                const e = entry.data;
+                const deleted = h.type === "expenseDeleted";
+                const subtitle = [
+                  `${fullDate(h.date)} ${fullTime(h.date)}`,
+                  deleted && h.originalDate ? `${t(lang, "histColDate")} : ${fullDate(h.originalDate)}` : "",
+                  actorLabel,
+                ].filter(Boolean).join(" · ");
                 return (
-                  <div key={e.id} className="rounded-2xl p-3 flex items-center gap-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                    <span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2" }}>
-                      <Wallet size={14} color={darkMode ? CLAY : "#e11d48"} />
+                  <div key={h.id} className="rounded-2xl p-3 flex items-center gap-3" style={cardStyle}>
+                    <span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: deleted ? T.input : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
+                      {deleted ? <Trash2 size={14} color={T.muted} /> : <Wallet size={14} color={darkMode ? CLAY : "#e11d48"} />}
                     </span>
                     <div className="flex-1">
-                      <p className="text-xs font-bold">{t(lang, "histTypeExpense")} — {e.label}</p>
-                      <p className="text-[10px]" style={{ color: T.muted }}>{fullDate(e.date)} {fullTime(e.date)}</p>
+                      <p className="text-xs font-bold">{deleted ? tx(lang, "histExpenseDeleted") : t(lang, "histTypeExpense")} — {h.label}</p>
+                      <p className="text-[10px]" style={{ color: T.muted }}>{subtitle}</p>
                     </div>
-                    <span className="font-extrabold text-xs" style={{ color: darkMode ? CLAY : "#e11d48" }}>-{fcfa(e.amount)}</span>
+                    <span className="font-extrabold text-xs" style={{ color: deleted ? T.muted : (darkMode ? CLAY : "#e11d48") }}>{deleted ? "" : "-"}{fcfa(h.amount)}</span>
                   </div>
                 );
               }
-              const txn = entry.data;
-              const methodLabel = getPaymentMethods(lang).find((m) => m.id === txn.payment)?.label || txn.payment;
+              const isCancelled = h.type === "saleCancelled";
+              const methodLabel = h.payment ? (getPaymentMethods(lang).find((m) => m.id === h.payment)?.label || h.payment) : "";
+              const cancelColor = darkMode ? CLAY : "#e11d48";
               return (
-                <div key={txn.id} className="rounded-2xl p-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                  <div className="mb-1">
-                    {(txn.items || [{ id: txn.id, productName: txn.productName, qty: txn.qty, unitPrice: txn.unitPrice }]).map((it) => (
-                      <div key={it.id} className="flex items-center justify-between text-xs">
+                <div key={h.id} className="rounded-2xl p-3" style={cardStyle}>
+                  {isCancelled && (
+                    <p className="text-[11px] font-bold flex items-center gap-1.5 mb-1.5" style={{ color: cancelColor }}>
+                      <X size={13} /> {tx(lang, "histSaleCancelled")}
+                    </p>
+                  )}
+                  <div className="mb-1" style={{ opacity: isCancelled ? 0.7 : 1 }}>
+                    {(h.items || []).map((it, idx) => (
+                      <div key={idx} className="flex items-center justify-between text-xs">
                         <span>{it.productName} x{it.qty}</span>
                         <span className="text-[10px]" style={{ color: T.muted }}>{fcfa(it.unitPrice)} / u</span>
                       </div>
                     ))}
                   </div>
                   <div className="flex items-center justify-between text-[10px] mt-1" style={{ color: T.muted }}>
-                    <span>{fullDate(txn.date)} à {fullTime(txn.date)}</span>
-                    <span className="font-extrabold text-xs" style={{ color: darkMode ? "#8fb4e8" : INDIGO }}>{fcfa(txn.total)}</span>
+                    <span>{fullDate(h.date)} à {fullTime(h.date)}{actorLabel ? ` · ${actorLabel}` : ""}</span>
+                    <span className="font-extrabold text-xs" style={{ color: isCancelled ? cancelColor : (darkMode ? "#8fb4e8" : INDIGO), textDecoration: isCancelled ? "line-through" : "none" }}>{fcfa(h.amount)}</span>
                   </div>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: T.input, color: T.text }}>{methodLabel}</span>
-                    {txn.customer && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(76,122,90,0.25)" : "#dcfce7", color: darkMode ? "#8fd6a3" : "#16a34a" }}>{txn.customer}</span>}
-                    {txn.change != null && txn.change >= 0 && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5", color: darkMode ? "#f0c869" : "#ea580c" }}>{t(lang, "othRendu")} {fcfa(txn.change)}</span>}
+                    {methodLabel && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: T.input, color: T.text }}>{methodLabel}</span>}
+                    {h.customer && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(76,122,90,0.25)" : "#dcfce7", color: darkMode ? "#8fd6a3" : "#16a34a" }}>{h.customer}</span>}
+                    {!isCancelled && h.change != null && h.change >= 0 && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5", color: darkMode ? "#f0c869" : "#ea580c" }}>{t(lang, "othRendu")} {fcfa(h.change)}</span>}
                   </div>
                 </div>
               );
@@ -13359,18 +13557,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setFondDeCaisse")}</div>
-                    <div style={{ color: "#fbbf24", fontSize: 20, fontWeight: 700 }}>{fcfa(cashFund)}</div>
+                    <div style={{ color: amountsHidden ? T.muted : "#fbbf24", fontSize: 20, fontWeight: 700 }}>{maskAmount(fcfa(cashFund))}</div>
                     {hasPermission("editCash") && (
-                      <button onClick={() => { setFundInput(String(cashFund)); setShowEditFund(true); setShowSettings(false); }} style={{ marginTop: 10, background: "#fbbf241a", color: "#fbbf24", border: "1px solid #fbbf2433", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{t(lang, "setCashFund")}</button>
+                      <button onClick={() => requireUnlock(() => { openEditFund(); setShowSettings(false); })} style={{ marginTop: 10, background: "#fbbf241a", color: "#fbbf24", border: "1px solid #fbbf2433", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{t(lang, "setCashFund")}</button>
                     )}
                   </div>
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
-                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setSoldeEstime")}</div>
-                    <div style={{ color: cashBalance < 0 ? "#f87171" : "#34d399", fontSize: 20, fontWeight: 700 }}>{fcfa(cashBalance)}</div>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4, display: "flex", alignItems: "center", gap: 6 }}>{t(lang, "setSoldeEstime")}
+                      <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 13, lineHeight: 1 }}>{amountsHidden ? "🙈" : "👁️"}</button>
+                    </div>
+                    <div style={{ color: amountsHidden ? T.muted : (cashBalance < 0 ? "#f87171" : "#34d399"), fontSize: 20, fontWeight: 700 }}>{maskAmount(fcfa(cashBalance))}</div>
                   </div>
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setTotalDepenses")}</div>
-                    <div style={{ color: "#f87171", fontSize: 16, fontWeight: 700 }}>{fcfa(totalExpenses)}</div>
+                    <div style={{ color: amountsHidden ? T.muted : "#f87171", fontSize: 16, fontWeight: 700 }}>{maskAmount(fcfa(totalExpenses))}</div>
                   </div>
                 </div>
               )}
