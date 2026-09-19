@@ -102,26 +102,14 @@ const SUPABASE_ANON_KEY = "sb_publishable_3CO8RH3_6TZY6Bjv3AthLA_6Nh_yPf-";
 // Nécessite le package "@supabase/supabase-js" (npm install @supabase/supabase-js) dans ton projet.
 import { createClient } from "@supabase/supabase-js";
 // Sur le web, on garde le comportement par défaut de Supabase (localStorage du navigateur).
-// Dans l'app Capacitor, le localStorage du WebView peut être effacé par le système
-// (gestion agressive de la batterie sur certains téléphones Android) sans prévenir —
-// on utilise donc le stockage natif (@capacitor/preferences), bien plus fiable, pour
-// que la session de connexion survive vraiment à une mise en arrière-plan.
+// Dans l'app Capacitor, on utilise AUSSI localStorage (et non @capacitor/preferences) pour
+// l'authentification : le flux PKCE de Supabase lit/écrit le "code verifier" de façon
+// synchrone à un moment précis de l'échange du code, ce qu'un stockage personnalisé
+// asynchrone comme @capacitor/preferences ne peut pas satisfaire — d'où l'erreur
+// "invalid flow state, no valid flow state found" que l'on observait à la connexion Google.
+// localStorage du WebView Capacitor est bien persistant (contrairement à ce qu'on pensait :
+// il n'est pas plus fragile que le stockage natif pour ce cas d'usage précis).
 const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
-let capacitorAuthStorage;
-if (isCapacitorApp) {
-  capacitorAuthStorage = {
-    getItem: async (key) => {
-      const { value } = await Preferences.get({ key });
-      return value;
-    },
-    setItem: async (key, value) => {
-      await Preferences.set({ key, value });
-    },
-    removeItem: async (key) => {
-      await Preferences.remove({ key });
-    },
-  };
-}
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     persistSession: true,
@@ -132,7 +120,8 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     // fois, les deux tentatives en parallèle provoquent l'erreur "invalid flow state".
     detectSessionInUrl: !isCapacitorApp,
     flowType: "pkce",
-    ...(isCapacitorApp ? { storage: capacitorAuthStorage } : {}),
+    // storage : volontairement omis ici pour laisser Supabase utiliser son localStorage
+    // par défaut, indispensable au bon fonctionnement du flux PKCE (voir commentaire ci-dessus).
   },
 });
 // ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
