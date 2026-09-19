@@ -13964,7 +13964,8 @@ function BoutiqueAppInner() {
     import("@capacitor/app").then(({ App: CapacitorApp }) => {
       CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
         // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
-        alert("Étape 4 : l'app a reçu un retour d'URL :\n" + url);
+        window.__appUrlOpenCallCount = (window.__appUrlOpenCallCount || 0) + 1;
+        alert("Étape 4 (appel n°" + window.__appUrlOpenCallCount + ") : l'app a reçu un retour d'URL :\n" + url);
         if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
           alert("Étape 4b : cette URL ne correspond pas au lien de connexion attendu, ignorée.");
           return;
