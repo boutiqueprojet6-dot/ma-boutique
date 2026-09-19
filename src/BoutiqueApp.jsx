@@ -102,14 +102,27 @@ const SUPABASE_ANON_KEY = "sb_publishable_3CO8RH3_6TZY6Bjv3AthLA_6Nh_yPf-";
 // Nécessite le package "@supabase/supabase-js" (npm install @supabase/supabase-js) dans ton projet.
 import { createClient } from "@supabase/supabase-js";
 // Sur le web, on garde le comportement par défaut de Supabase (localStorage du navigateur).
-// Dans l'app Capacitor, on utilise AUSSI localStorage (et non @capacitor/preferences) pour
-// l'authentification : le flux PKCE de Supabase lit/écrit le "code verifier" de façon
-// synchrone à un moment précis de l'échange du code, ce qu'un stockage personnalisé
-// asynchrone comme @capacitor/preferences ne peut pas satisfaire — d'où l'erreur
-// "invalid flow state, no valid flow state found" que l'on observait à la connexion Google.
-// localStorage du WebView Capacitor est bien persistant (contrairement à ce qu'on pensait :
-// il n'est pas plus fragile que le stockage natif pour ce cas d'usage précis).
+// Dans l'app Capacitor, on utilise @capacitor/preferences (stockage natif du système,
+// hors de la WebView) au lieu de localStorage pour le flux PKCE. Le localStorage de la
+// WebView peut être vidé quand Android tue le processus de l'app pendant que l'utilisateur
+// est sur l'écran de connexion Google (navigateur système ouvert en parallèle) — ce qui
+// faisait perdre le "code verifier" PKCE au retour et provoquait l'erreur "PKCE code
+// verifier not found in storage". Le stockage natif Preferences, lui, survit à ces coupures.
+// L'API storage de Supabase accepte un getItem/setItem/removeItem asynchrone (Promise) —
+// c'est le mécanisme prévu pour les environnements comme React Native/Capacitor.
 const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+const capacitorPreferencesStorage = {
+  async getItem(key) {
+    const { value } = await Preferences.get({ key });
+    return value;
+  },
+  async setItem(key, value) {
+    await Preferences.set({ key, value });
+  },
+  async removeItem(key) {
+    await Preferences.remove({ key });
+  },
+};
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     persistSession: true,
@@ -120,8 +133,9 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     // fois, les deux tentatives en parallèle provoquent l'erreur "invalid flow state".
     detectSessionInUrl: !isCapacitorApp,
     flowType: "pkce",
-    // storage : volontairement omis ici pour laisser Supabase utiliser son localStorage
-    // par défaut, indispensable au bon fonctionnement du flux PKCE (voir commentaire ci-dessus).
+    // Stockage natif Preferences dans l'app Capacitor (voir commentaire ci-dessus) ;
+    // localStorage par défaut du navigateur sur le web.
+    ...(isCapacitorApp ? { storage: capacitorPreferencesStorage } : {}),
   },
 });
 // ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
@@ -5828,8 +5842,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // système + lien profond), qui fonctionne dès maintenant pour tout le
         // monde, sans restriction. Voir le code de connexion natif conservé plus
         // bas dans ce fichier pour le réactiver une fois la vérification obtenue.
-        // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
-        alert("Étape 1 : demande de lien Google à Supabase...");
         const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
@@ -5838,18 +5850,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           },
         });
         if (oauthError) throw oauthError;
-        // Diagnostic : liste les clés de stockage liées à Supabase juste après la
-        // demande du lien, pour vérifier que le "code verifier" PKCE a bien été écrit.
-        const keysAfterStep2 = Object.keys(window.localStorage).filter((k) => k.startsWith("sb-"));
-        alert(
-          "Étape 2 : lien reçu, ouverture du navigateur...\n" +
-          "Clés localStorage 'sb-' présentes juste après : " + (keysAfterStep2.length ? keysAfterStep2.join(", ") : "AUCUNE") +
-          "\nURL : " + data.url
-        );
         const { Browser } = await import("@capacitor/browser");
         await Browser.open({ url: data.url });
-        alert("Étape 3 : navigateur ouvert. En attente du retour vers l'app après connexion Google...");
-        // ---- FIN DIAGNOSTIC TEMPORAIRE ----
+        // L'utilisateur revient ensuite dans l'app via le lien profond
+        // "com.shopnify.app://login-callback", géré par l'écouteur appUrlOpen plus bas,
+        // qui échange le code contre une session.
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -5860,8 +5865,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // revient ensuite sur l'app déjà connecté, sans autre action ici.
       }
     } catch (err) {
-      // ---- DIAGNOSTIC TEMPORAIRE : affiche l'erreur exacte au lieu du message générique ----
-      alert("Erreur pendant la connexion Google : " + (err && (err.message || JSON.stringify(err))));
       setError(t(lang, "googleLoginError"));
       setGoogleLoginBusy(false);
     }
@@ -13880,24 +13883,6 @@ class ErrorBoundary extends React.Component {
   }
 }
 function BoutiqueAppInner() {
-  // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
-  // Confirme, dès le démarrage, que cette version du code (avec le correctif localStorage
-  // pour le flux PKCE) est bien celle qui tourne, et que localStorage fonctionne réellement
-  // dans ce WebView (persiste une valeur test entre deux lectures immédiates).
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.Capacitor) return;
-    try {
-      window.localStorage.setItem("__diag_test", "ok-" + Date.now());
-      const readBack = window.localStorage.getItem("__diag_test");
-      alert(
-        "Marqueur de build : correctif localStorage (v2) actif.\n" +
-        "Test localStorage : " + (readBack ? "réussi (" + readBack + ")" : "ÉCHEC : rien lu après écriture")
-      );
-    } catch (e) {
-      alert("Marqueur de build : correctif localStorage (v2) actif.\nTest localStorage : ERREUR — " + (e && (e.message || e)));
-    }
-  }, []);
-  // ---- FIN DIAGNOSTIC TEMPORAIRE ----
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
@@ -13963,32 +13948,13 @@ function BoutiqueAppInner() {
     let removeListener = null;
     import("@capacitor/app").then(({ App: CapacitorApp }) => {
       CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
-        // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
-        window.__appUrlOpenCallCount = (window.__appUrlOpenCallCount || 0) + 1;
-        alert("Étape 4 (appel n°" + window.__appUrlOpenCallCount + ") : l'app a reçu un retour d'URL :\n" + url);
-        if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
-          alert("Étape 4b : cette URL ne correspond pas au lien de connexion attendu, ignorée.");
-          return;
-        }
+        if (!url || !url.startsWith("com.shopnify.app://login-callback")) return;
         try {
-          // Diagnostic : liste les clés de stockage liées à Supabase juste avant
-          // l'échange, pour comparer avec ce qui avait été écrit à l'étape 2 —
-          // si le "code verifier" a disparu entre-temps, ça le confirmera ici.
-          const keysBeforeExchange = Object.keys(window.localStorage).filter((k) => k.startsWith("sb-"));
-          alert(
-            "Avant l'échange — clés localStorage 'sb-' présentes : " +
-            (keysBeforeExchange.length ? keysBeforeExchange.join(", ") : "AUCUNE")
-          );
-          const { data, error } = await supabase.auth.exchangeCodeForSession(url);
-          if (error) {
-            alert("Étape 5 : échec de l'échange du code contre une session.\nErreur : " + error.message);
-          } else {
-            alert("Étape 5 : session créée avec succès pour " + (data && data.session && data.session.user && data.session.user.email));
-          }
+          const { error } = await supabase.auth.exchangeCodeForSession(url);
+          if (error) console.error("Échec de l'échange du code Google contre une session :", error.message);
         } catch (e) {
-          alert("Étape 5 : exception pendant l'échange du code.\nErreur : " + (e && (e.message || JSON.stringify(e))));
+          console.error("Exception pendant l'échange du code Google :", e && (e.message || e));
         }
-        // ---- FIN DIAGNOSTIC TEMPORAIRE ----
         const { Browser } = await import("@capacitor/browser");
         try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
       }).then((handle) => { removeListener = handle; });
