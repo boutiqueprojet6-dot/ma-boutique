@@ -13873,6 +13873,24 @@ class ErrorBoundary extends React.Component {
   }
 }
 function BoutiqueAppInner() {
+  // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
+  // Confirme, dès le démarrage, que cette version du code (avec le correctif localStorage
+  // pour le flux PKCE) est bien celle qui tourne, et que localStorage fonctionne réellement
+  // dans ce WebView (persiste une valeur test entre deux lectures immédiates).
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    try {
+      window.localStorage.setItem("__diag_test", "ok-" + Date.now());
+      const readBack = window.localStorage.getItem("__diag_test");
+      alert(
+        "Marqueur de build : correctif localStorage (v2) actif.\n" +
+        "Test localStorage : " + (readBack ? "réussi (" + readBack + ")" : "ÉCHEC : rien lu après écriture")
+      );
+    } catch (e) {
+      alert("Marqueur de build : correctif localStorage (v2) actif.\nTest localStorage : ERREUR — " + (e && (e.message || e)));
+    }
+  }, []);
+  // ---- FIN DIAGNOSTIC TEMPORAIRE ----
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
