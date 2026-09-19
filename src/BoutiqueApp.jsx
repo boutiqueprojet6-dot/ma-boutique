@@ -50,6 +50,7 @@ import {
   Calculator,
   List,
   LayoutGrid,
+  ArrowUpDown,
 } from "lucide-react";
 import {
   LineChart,
@@ -332,7 +333,7 @@ const TRANSLATIONS = {
     dangerZone: "Sécurité", language: "Langue",
     addProduct: "Ajouter un produit", save: "Enregistrer", cancel: "Annuler", search: "Rechercher…",
     todaySales: "Ventes aujourd'hui", articlesSold: "article(s) vendu(s)", paymentBreakdown: "Répartition par paiement",
-    cash: "Espèces", credit: "Crédit", mobilePayment: "Paiement mobile", card: "Carte bancaire", lowStock: "Stock faible", clientDebts: "Dettes clients", seeAllLowStock: "Voir tout ({n})", seeLessLowStock: "Voir moins",
+    cash: "Espèces", credit: "Crédit", mobilePayment: "Paiement mobile", card: "Carte bancaire", lowStock: "Stock faible", clientDebts: "Dettes clients", seeAllLowStock: "Voir tout ({n})", seeLessLowStock: "Voir moins", sortMenuTitle: "Trier par", sortAlpha: "Ordre alphabétique", sortMostSold: "Plus vendus", sortLeastSold: "Moins vendus", sortMostAvailable: "Plus disponible", sortLeastAvailable: "Moins disponible", sortDefault: "Ordre par défaut",
     cashBalance: "Solde de caisse estimé", setCashFund: "Régler le fond de caisse", addExpense: "Ajouter une dépense",
     todayExpenses: "Dépenses aujourd'hui", noProduct: "Aucun produit. Ajoute ton premier article.",
     newProduct: "Nouveau produit", productName: "Nom du produit", quantity: "Quantité en stock",
@@ -490,7 +491,7 @@ const TRANSLATIONS = {
     dangerZone: "ደህንነት", language: "ቋንቋ",
     addProduct: "ምርት ጨምር", save: "አስቀምጥ", cancel: "ሰርዝ", search: "ፈልግ…",
     todaySales: "የዛሬ ሽያጭ", articlesSold: "የተሸጡ ዕቃዎች", paymentBreakdown: "በክፍያ ዓይነት ስርጭት",
-    cash: "ጥሬ ገንዘብ", credit: "ብድር", mobilePayment: "የሞባይል ክፍያ", card: "የባንክ ካርድ", lowStock: "ዝቅተኛ ክምችት", clientDebts: "የደንበኞች ዕዳ", seeAllLowStock: "ሁሉንም ይመልከቱ ({n})", seeLessLowStock: "ትንሽ ይመልከቱ",
+    cash: "ጥሬ ገንዘብ", credit: "ብድር", mobilePayment: "የሞባይል ክፍያ", card: "የባንክ ካርድ", lowStock: "ዝቅተኛ ክምችት", clientDebts: "የደንበኞች ዕዳ", seeAllLowStock: "ሁሉንም ይመልከቱ ({n})", seeLessLowStock: "ትንሽ ይመልከቱ", sortMenuTitle: "በ ደርድር", sortAlpha: "በፊደል ቅደም ተከተል", sortMostSold: "በብዛት የተሸጡ", sortLeastSold: "አነስተኛ የተሸጡ", sortMostAvailable: "በብዛት ያለ", sortLeastAvailable: "አነስተኛ ያለ", sortDefault: "መደበኛ ቅደም ተከተል",
     cashBalance: "የተገመተ የካዝና ቀሪ ሂሳብ", setCashFund: "የካዝና መነሻ ገንዘብ አስተካክል", addExpense: "ወጪ ጨምር",
     todayExpenses: "የዛሬ ወጪዎች", noProduct: "ምንም ምርት የለም። የመጀመሪያ ዕቃህን ጨምር።",
     newProduct: "አዲስ ምርት", productName: "የምርት ስም", quantity: "በክምችት ያለ ብዛት",
@@ -636,7 +637,7 @@ const TRANSLATIONS = {
     dangerZone: "Security", language: "Language",
     addProduct: "Add a product", save: "Save", cancel: "Cancel", search: "Search…",
     todaySales: "Today's sales", articlesSold: "item(s) sold", paymentBreakdown: "Payment breakdown",
-    cash: "Cash", credit: "Credit", mobilePayment: "Mobile payment", card: "Card", lowStock: "Low stock", clientDebts: "Client debts", seeAllLowStock: "See all ({n})", seeLessLowStock: "See less",
+    cash: "Cash", credit: "Credit", mobilePayment: "Mobile payment", card: "Card", lowStock: "Low stock", clientDebts: "Client debts", seeAllLowStock: "See all ({n})", seeLessLowStock: "See less", sortMenuTitle: "Sort by", sortAlpha: "Alphabetical order", sortMostSold: "Best sellers", sortLeastSold: "Least sold", sortMostAvailable: "Most available", sortLeastAvailable: "Least available", sortDefault: "Default order",
     cashBalance: "Estimated cash balance", setCashFund: "Set cash fund", addExpense: "Add an expense",
     todayExpenses: "Today's expenses", noProduct: "No products yet. Add your first item.",
     newProduct: "New product", productName: "Product name", quantity: "Quantity in stock",
@@ -783,7 +784,7 @@ const TRANSLATIONS = {
     dangerZone: "Seguridad", language: "Wika",
     addProduct: "Magdagdag ng produkto", save: "I-save", cancel: "Kanselahin", search: "Maghanap…",
     todaySales: "Benta ngayong araw", articlesSold: "item na naibenta", paymentBreakdown: "Breakdown ng bayad",
-    cash: "Cash", credit: "Utang", mobilePayment: "Mobile payment", card: "Card", lowStock: "Mababang stock", clientDebts: "Utang ng kliyente", seeAllLowStock: "Ipakita lahat ({n})", seeLessLowStock: "Ipakita ng kaunti",
+    cash: "Cash", credit: "Utang", mobilePayment: "Mobile payment", card: "Card", lowStock: "Mababang stock", clientDebts: "Utang ng kliyente", seeAllLowStock: "Ipakita lahat ({n})", seeLessLowStock: "Ipakita ng kaunti", sortMenuTitle: "Ayusin ayon sa", sortAlpha: "Alpabetikong ayos", sortMostSold: "Pinakabenta", sortLeastSold: "Kaunti ang nabenta", sortMostAvailable: "Pinaka available", sortLeastAvailable: "Kaunti ang available", sortDefault: "Karaniwang ayos",
     cashBalance: "Tinantyang balanse ng cash", setCashFund: "Itakda ang cash fund", addExpense: "Magdagdag ng gastos",
     todayExpenses: "Gastos ngayong araw", noProduct: "Wala pang produkto. Idagdag ang iyong unang item.",
     newProduct: "Bagong produkto", productName: "Pangalan ng produkto", quantity: "Dami sa stock",
@@ -929,7 +930,7 @@ const TRANSLATIONS = {
     dangerZone: "భద్రత", language: "భాష",
     addProduct: "ఉత్పత్తిని జోడించండి", save: "సేవ్ చేయండి", cancel: "రద్దు చేయండి", search: "శోధించండి…",
     todaySales: "ఈరోజు అమ్మకాలు", articlesSold: "అమ్ముడైన వస్తువు(లు)", paymentBreakdown: "చెల్లింపు విభజన",
-    cash: "నగదు", credit: "అప్పు", mobilePayment: "మొబైల్ చెల్లింపు", card: "కార్డ్", lowStock: "తక్కువ స్టాక్", clientDebts: "కస్టమర్ అప్పులు", seeAllLowStock: "అన్నీ చూపించు ({n})", seeLessLowStock: "తక్కువ చూపించు",
+    cash: "నగదు", credit: "అప్పు", mobilePayment: "మొబైల్ చెల్లింపు", card: "కార్డ్", lowStock: "తక్కువ స్టాక్", clientDebts: "కస్టమర్ అప్పులు", seeAllLowStock: "అన్నీ చూపించు ({n})", seeLessLowStock: "తక్కువ చూపించు", sortMenuTitle: "క్రమం ద్వారా", sortAlpha: "అక్షర క్రమం", sortMostSold: "ఎక్కువగా అమ్ముడైనవి", sortLeastSold: "తక్కువగా అమ్ముడైనవి", sortMostAvailable: "ఎక్కువ లభ్యం", sortLeastAvailable: "తక్కువ లభ్యం", sortDefault: "సాధారణ క్రమం",
     cashBalance: "అంచనా నగదు నిల్వ", setCashFund: "నగదు నిధిని సెట్ చేయండి", addExpense: "ఖర్చును జోడించండి",
     todayExpenses: "ఈరోజు ఖర్చులు", noProduct: "ఇంకా ఉత్పత్తులు లేవు. మీ మొదటి వస్తువును జోడించండి.",
     newProduct: "కొత్త ఉత్పత్తి", productName: "ఉత్పత్తి పేరు", quantity: "స్టాక్‌లో పరిమాణం",
@@ -1075,7 +1076,7 @@ const TRANSLATIONS = {
     dangerZone: "ความปลอดภัย", language: "ภาษา",
     addProduct: "เพิ่มสินค้า", save: "บันทึก", cancel: "ยกเลิก", search: "ค้นหา…",
     todaySales: "ยอดขายวันนี้", articlesSold: "รายการที่ขายแล้ว", paymentBreakdown: "สรุปการชำระเงิน",
-    cash: "เงินสด", credit: "เครดิต", mobilePayment: "ชำระผ่านมือถือ", card: "บัตร", lowStock: "สต็อกต่ำ", clientDebts: "หนี้ลูกค้า", seeAllLowStock: "แสดงทั้งหมด ({n})", seeLessLowStock: "แสดงน้อยลง",
+    cash: "เงินสด", credit: "เครดิต", mobilePayment: "ชำระผ่านมือถือ", card: "บัตร", lowStock: "สต็อกต่ำ", clientDebts: "หนี้ลูกค้า", seeAllLowStock: "แสดงทั้งหมด ({n})", seeLessLowStock: "แสดงน้อยลง", sortMenuTitle: "เรียงตาม", sortAlpha: "ตามตัวอักษร", sortMostSold: "ขายดีที่สุด", sortLeastSold: "ขายน้อยที่สุด", sortMostAvailable: "มีสต็อกมากที่สุด", sortLeastAvailable: "มีสต็อกน้อยที่สุด", sortDefault: "ลำดับเริ่มต้น",
     cashBalance: "ยอดเงินสดโดยประมาณ", setCashFund: "ตั้งค่าเงินทุนสด", addExpense: "เพิ่มค่าใช้จ่าย",
     todayExpenses: "ค่าใช้จ่ายวันนี้", noProduct: "ยังไม่มีสินค้า เพิ่มสินค้าชิ้นแรกของคุณ",
     newProduct: "สินค้าใหม่", productName: "ชื่อสินค้า", quantity: "จำนวนในสต็อก",
@@ -1221,7 +1222,7 @@ const TRANSLATIONS = {
     dangerZone: "Kaaraange", language: "Làkk",
     addProduct: "Yokk article", save: "Denc", cancel: "Bàyyi", search: "Wut…",
     todaySales: "Jaayin tey", articlesSold: "article(s) jaay na", paymentBreakdown: "Ni fayement yi tàllale",
-    cash: "Xaalis", credit: "Boor", mobilePayment: "Fayement ci telefon", card: "Kart", lowStock: "Stock du barele", clientDebts: "Boor ay client yi", seeAllLowStock: "Won lépp ({n})", seeLessLowStock: "Won tuuti",
+    cash: "Xaalis", credit: "Boor", mobilePayment: "Fayement ci telefon", card: "Kart", lowStock: "Stock du barele", clientDebts: "Boor ay client yi", seeAllLowStock: "Won lépp ({n})", seeLessLowStock: "Won tuuti", sortMenuTitle: "Aar ci", sortAlpha: "Dëkkuwaay ciw baatu", sortMostSold: "Yi gën a jaay", sortLeastSold: "Yi gën a néew ci jaay", sortMostAvailable: "Yi gën a bari", sortLeastAvailable: "Yi gën a néew", sortDefault: "Aajowaayu njëkk",
     cashBalance: "Solde xaalis bu ñu waxtaan", setCashFund: "Tëj njël xaalis bi", addExpense: "Yokk depaas",
     todayExpenses: "Depaas tey", noProduct: "Amuñu benn article. Yokk sa article bu njëkk.",
     newProduct: "Article bu bees", productName: "Turu article bi", quantity: "Kayit ci stock bi",
@@ -1367,7 +1368,7 @@ const TRANSLATIONS = {
     dangerZone: "Bezpieczeństwo", language: "Język",
     addProduct: "Dodaj produkt", save: "Zapisz", cancel: "Anuluj", search: "Szukaj…",
     todaySales: "Sprzedaż dzisiaj", articlesSold: "sprzedanych artykułów", paymentBreakdown: "Podział płatności",
-    cash: "Gotówka", credit: "Kredyt", mobilePayment: "Płatność mobilna", card: "Karta", lowStock: "Niski stan zapasów", clientDebts: "Długi klientów", seeAllLowStock: "Pokaż wszystko ({n})", seeLessLowStock: "Pokaż mniej",
+    cash: "Gotówka", credit: "Kredyt", mobilePayment: "Płatność mobilna", card: "Karta", lowStock: "Niski stan zapasów", clientDebts: "Długi klientów", seeAllLowStock: "Pokaż wszystko ({n})", seeLessLowStock: "Pokaż mniej", sortMenuTitle: "Sortuj według", sortAlpha: "Kolejność alfabetyczna", sortMostSold: "Najlepiej sprzedające się", sortLeastSold: "Najsłabiej sprzedające się", sortMostAvailable: "Najwięcej dostępne", sortLeastAvailable: "Najmniej dostępne", sortDefault: "Domyślna kolejność",
     cashBalance: "Szacowane saldo gotówki", setCashFund: "Ustaw fundusz gotówkowy", addExpense: "Dodaj wydatek",
     todayExpenses: "Wydatki dzisiaj", noProduct: "Brak produktów. Dodaj swój pierwszy artykuł.",
     newProduct: "Nowy produkt", productName: "Nazwa produktu", quantity: "Ilość w magazynie",
@@ -1513,7 +1514,7 @@ const TRANSLATIONS = {
     dangerZone: "الأمان", language: "اللغة",
     addProduct: "إضافة منتج", save: "حفظ", cancel: "إلغاء", search: "بحث…",
     todaySales: "مبيعات اليوم", articlesSold: "منتج(ات) مباعة", paymentBreakdown: "التوزيع حسب الدفع",
-    cash: "نقداً", credit: "دين", mobilePayment: "دفع عبر الجوال", card: "بطاقة بنكية", lowStock: "مخزون منخفض", clientDebts: "ديون العملاء", seeAllLowStock: "عرض الكل ({n})", seeLessLowStock: "عرض أقل",
+    cash: "نقداً", credit: "دين", mobilePayment: "دفع عبر الجوال", card: "بطاقة بنكية", lowStock: "مخزون منخفض", clientDebts: "ديون العملاء", seeAllLowStock: "عرض الكل ({n})", seeLessLowStock: "عرض أقل", sortMenuTitle: "ترتيب حسب", sortAlpha: "الترتيب الأبجدي", sortMostSold: "الأكثر مبيعًا", sortLeastSold: "الأقل مبيعًا", sortMostAvailable: "الأكثر توفرًا", sortLeastAvailable: "الأقل توفرًا", sortDefault: "الترتيب الافتراضي",
     cashBalance: "رصيد الصندوق التقديري", setCashFund: "ضبط رصيد الصندوق", addExpense: "إضافة مصروف",
     todayExpenses: "مصاريف اليوم", noProduct: "لا يوجد منتج بعد. أضف أول منتج لك.",
     newProduct: "منتج جديد", productName: "اسم المنتج", quantity: "الكمية في المخزون",
@@ -1659,7 +1660,7 @@ const TRANSLATIONS = {
     dangerZone: "Seguridad", language: "Idioma",
     addProduct: "Añadir un producto", save: "Guardar", cancel: "Cancelar", search: "Buscar…",
     todaySales: "Ventas de hoy", articlesSold: "artículo(s) vendido(s)", paymentBreakdown: "Desglose por pago",
-    cash: "Efectivo", credit: "Crédito", mobilePayment: "Pago móvil", card: "Tarjeta", lowStock: "Stock bajo", clientDebts: "Deudas de clientes", seeAllLowStock: "Ver todo ({n})", seeLessLowStock: "Ver menos",
+    cash: "Efectivo", credit: "Crédito", mobilePayment: "Pago móvil", card: "Tarjeta", lowStock: "Stock bajo", clientDebts: "Deudas de clientes", seeAllLowStock: "Ver todo ({n})", seeLessLowStock: "Ver menos", sortMenuTitle: "Ordenar por", sortAlpha: "Orden alfabético", sortMostSold: "Más vendidos", sortLeastSold: "Menos vendidos", sortMostAvailable: "Más disponible", sortLeastAvailable: "Menos disponible", sortDefault: "Orden predeterminado",
     cashBalance: "Saldo de caja estimado", setCashFund: "Configurar fondo de caja", addExpense: "Añadir un gasto",
     todayExpenses: "Gastos de hoy", noProduct: "Aún no hay productos. Añade tu primer artículo.",
     newProduct: "Nuevo producto", productName: "Nombre del producto", quantity: "Cantidad en stock",
@@ -1805,7 +1806,7 @@ const TRANSLATIONS = {
     dangerZone: "Segurança", language: "Idioma",
     addProduct: "Adicionar um produto", save: "Salvar", cancel: "Cancelar", search: "Buscar…",
     todaySales: "Vendas de hoje", articlesSold: "artigo(s) vendido(s)", paymentBreakdown: "Detalhamento por pagamento",
-    cash: "Dinheiro", credit: "Crédito", mobilePayment: "Pagamento móvel", card: "Cartão", lowStock: "Estoque baixo", clientDebts: "Dívidas de clientes", seeAllLowStock: "Ver tudo ({n})", seeLessLowStock: "Ver menos",
+    cash: "Dinheiro", credit: "Crédito", mobilePayment: "Pagamento móvel", card: "Cartão", lowStock: "Estoque baixo", clientDebts: "Dívidas de clientes", seeAllLowStock: "Ver tudo ({n})", seeLessLowStock: "Ver menos", sortMenuTitle: "Ordenar por", sortAlpha: "Ordem alfabética", sortMostSold: "Mais vendidos", sortLeastSold: "Menos vendidos", sortMostAvailable: "Mais disponível", sortLeastAvailable: "Menos disponível", sortDefault: "Ordem padrão",
     cashBalance: "Saldo de caixa estimado", setCashFund: "Configurar fundo de caixa", addExpense: "Adicionar uma despesa",
     todayExpenses: "Despesas de hoje", noProduct: "Ainda não há produtos. Adicione seu primeiro artigo.",
     newProduct: "Novo produto", productName: "Nome do produto", quantity: "Quantidade em estoque",
@@ -1951,7 +1952,7 @@ const TRANSLATIONS = {
     dangerZone: "安全", language: "语言",
     addProduct: "添加商品", save: "保存", cancel: "取消", search: "搜索…",
     todaySales: "今日销售额", articlesSold: "件已售出", paymentBreakdown: "收款方式明细",
-    cash: "现金", credit: "赊账", mobilePayment: "移动支付", card: "银行卡", lowStock: "库存不足", clientDebts: "客户欠款", seeAllLowStock: "查看全部（{n}）", seeLessLowStock: "收起",
+    cash: "现金", credit: "赊账", mobilePayment: "移动支付", card: "银行卡", lowStock: "库存不足", clientDebts: "客户欠款", seeAllLowStock: "查看全部（{n}）", seeLessLowStock: "收起", sortMenuTitle: "排序方式", sortAlpha: "按字母顺序", sortMostSold: "销量最高", sortLeastSold: "销量最低", sortMostAvailable: "库存最多", sortLeastAvailable: "库存最少", sortDefault: "默认顺序",
     cashBalance: "预估账户余额", setCashFund: "设置备用金", addExpense: "记一笔支出",
     todayExpenses: "今日支出", noProduct: "还没有商品，先添加你的第一件商品吧。",
     newProduct: "新增商品", productName: "商品名称", quantity: "库存数量",
@@ -2097,7 +2098,7 @@ const TRANSLATIONS = {
     dangerZone: "Bảo mật", language: "Ngôn ngữ",
     addProduct: "Thêm sản phẩm", save: "Lưu", cancel: "Hủy", search: "Tìm kiếm…",
     todaySales: "Doanh thu hôm nay", articlesSold: "Sản phẩm đã bán", paymentBreakdown: "Chi tiết thanh toán",
-    cash: "Tiền mặt", credit: "Công nợ", mobilePayment: "Thanh toán di động", card: "Thẻ", lowStock: "Sắp hết hàng", clientDebts: "Công nợ khách hàng", seeAllLowStock: "Xem tất cả ({n})", seeLessLowStock: "Thu gọn",
+    cash: "Tiền mặt", credit: "Công nợ", mobilePayment: "Thanh toán di động", card: "Thẻ", lowStock: "Sắp hết hàng", clientDebts: "Công nợ khách hàng", seeAllLowStock: "Xem tất cả ({n})", seeLessLowStock: "Thu gọn", sortMenuTitle: "Sắp xếp theo", sortAlpha: "Thứ tự bảng chữ cái", sortMostSold: "Bán chạy nhất", sortLeastSold: "Bán ít nhất", sortMostAvailable: "Còn nhiều nhất", sortLeastAvailable: "Còn ít nhất", sortDefault: "Thứ tự mặc định",
     cashBalance: "Số dư tiền mặt ước tính", setCashFund: "Thiết lập quỹ tiền mặt", addExpense: "Thêm chi phí",
     todayExpenses: "Chi phí hôm nay", noProduct: "Chưa có sản phẩm nào. Hãy thêm sản phẩm đầu tiên của bạn.",
     newProduct: "Sản phẩm mới", productName: "Tên sản phẩm", quantity: "Số lượng trong kho",
@@ -2243,7 +2244,7 @@ const TRANSLATIONS = {
     dangerZone: "Sicherheit", language: "Sprache",
     addProduct: "Produkt hinzufügen", save: "Speichern", cancel: "Abbrechen", search: "Suchen…",
     todaySales: "Heutige Verkäufe", articlesSold: "Artikel verkauft", paymentBreakdown: "Zahlungsübersicht",
-    cash: "Bargeld", credit: "Kredit", mobilePayment: "Mobiles Bezahlen", card: "Karte", lowStock: "Niedriger Bestand", clientDebts: "Kundenschulden", seeAllLowStock: "Alle anzeigen ({n})", seeLessLowStock: "Weniger anzeigen",
+    cash: "Bargeld", credit: "Kredit", mobilePayment: "Mobiles Bezahlen", card: "Karte", lowStock: "Niedriger Bestand", clientDebts: "Kundenschulden", seeAllLowStock: "Alle anzeigen ({n})", seeLessLowStock: "Weniger anzeigen", sortMenuTitle: "Sortieren nach", sortAlpha: "Alphabetische Reihenfolge", sortMostSold: "Meistverkauft", sortLeastSold: "Am wenigsten verkauft", sortMostAvailable: "Am meisten verfügbar", sortLeastAvailable: "Am wenigsten verfügbar", sortDefault: "Standardreihenfolge",
     cashBalance: "Geschätzter Kassenstand", setCashFund: "Kassenbestand festlegen", addExpense: "Ausgabe hinzufügen",
     todayExpenses: "Heutige Ausgaben", noProduct: "Noch keine Produkte. Füge dein erstes Produkt hinzu.",
     newProduct: "Neues Produkt", productName: "Produktname", quantity: "Lagermenge",
@@ -2389,7 +2390,7 @@ const TRANSLATIONS = {
     dangerZone: "Безопасность", language: "Язык",
     addProduct: "Добавить товар", save: "Сохранить", cancel: "Отмена", search: "Поиск…",
     todaySales: "Продажи за сегодня", articlesSold: "товар(ов) продано", paymentBreakdown: "Разбивка по способу оплаты",
-    cash: "Наличные", credit: "В долг", mobilePayment: "Мобильный платёж", card: "Карта", lowStock: "Мало на складе", clientDebts: "Долги клиентов", seeAllLowStock: "Показать все ({n})", seeLessLowStock: "Показать меньше",
+    cash: "Наличные", credit: "В долг", mobilePayment: "Мобильный платёж", card: "Карта", lowStock: "Мало на складе", clientDebts: "Долги клиентов", seeAllLowStock: "Показать все ({n})", seeLessLowStock: "Показать меньше", sortMenuTitle: "Сортировать по", sortAlpha: "По алфавиту", sortMostSold: "Самые продаваемые", sortLeastSold: "Наименее продаваемые", sortMostAvailable: "Больше всего в наличии", sortLeastAvailable: "Меньше всего в наличии", sortDefault: "Порядок по умолчанию",
     cashBalance: "Примерный остаток в кассе", setCashFund: "Настроить кассовый фонд", addExpense: "Добавить расход",
     todayExpenses: "Расходы за сегодня", noProduct: "Товаров пока нет. Добавь свой первый товар.",
     newProduct: "Новый товар", productName: "Название товара", quantity: "Количество на складе",
@@ -2535,7 +2536,7 @@ const TRANSLATIONS = {
     dangerZone: "सुरक्षा", language: "भाषा",
     addProduct: "उत्पाद जोड़ें", save: "सहेजें", cancel: "रद्द करें", search: "खोजें…",
     todaySales: "आज की बिक्री", articlesSold: "वस्तु(एं) बिकीं", paymentBreakdown: "भुगतान का विवरण",
-    cash: "नकद", credit: "उधार", mobilePayment: "मोबाइल भुगतान", card: "कार्ड", lowStock: "स्टॉक कम है", clientDebts: "ग्राहकों की उधारी", seeAllLowStock: "सभी देखें ({n})", seeLessLowStock: "कम देखें",
+    cash: "नकद", credit: "उधार", mobilePayment: "मोबाइल भुगतान", card: "कार्ड", lowStock: "स्टॉक कम है", clientDebts: "ग्राहकों की उधारी", seeAllLowStock: "सभी देखें ({n})", seeLessLowStock: "कम देखें", sortMenuTitle: "इसके अनुसार क्रमबद्ध करें", sortAlpha: "वर्णानुक्रम", sortMostSold: "सबसे ज़्यादा बिकने वाले", sortLeastSold: "सबसे कम बिकने वाले", sortMostAvailable: "सबसे ज़्यादा उपलब्ध", sortLeastAvailable: "सबसे कम उपलब्ध", sortDefault: "डिफ़ॉल्ट क्रम",
     cashBalance: "अनुमानित नकद शेष", setCashFund: "नकद कोष सेट करें", addExpense: "खर्च जोड़ें",
     todayExpenses: "आज के खर्च", noProduct: "कोई उत्पाद नहीं है। अपना पहला उत्पाद जोड़ें।",
     newProduct: "नया उत्पाद", productName: "उत्पाद का नाम", quantity: "स्टॉक में मात्रा",
@@ -2681,7 +2682,7 @@ const TRANSLATIONS = {
     dangerZone: "பாதுகாப்பு", language: "மொழி",
     addProduct: "பொருள் சேர்க்கவும்", save: "சேமிக்கவும்", cancel: "ரத்துசெய்", search: "தேடு…",
     todaySales: "இன்றைய விற்பனை", articlesSold: "விற்கப்பட்ட பொருட்கள்", paymentBreakdown: "கட்டண விவரம்",
-    cash: "பணம்", credit: "கடன்", mobilePayment: "மொபைல் கட்டணம்", card: "அட்டை", lowStock: "குறைந்த இருப்பு", clientDebts: "வாடிக்கையாளர் கடன்கள்", seeAllLowStock: "அனைத்தையும் காட்டு ({n})", seeLessLowStock: "குறைவாகக் காட்டு",
+    cash: "பணம்", credit: "கடன்", mobilePayment: "மொபைல் கட்டணம்", card: "அட்டை", lowStock: "குறைந்த இருப்பு", clientDebts: "வாடிக்கையாளர் கடன்கள்", seeAllLowStock: "அனைத்தையும் காட்டு ({n})", seeLessLowStock: "குறைவாகக் காட்டு", sortMenuTitle: "வரிசைப்படுத்து", sortAlpha: "எழுத்து வரிசை", sortMostSold: "அதிகம் விற்பனையானவை", sortLeastSold: "குறைவாக விற்பனையானவை", sortMostAvailable: "அதிகம் இருப்பு", sortLeastAvailable: "குறைவாக இருப்பு", sortDefault: "இயல்பு வரிசை",
     cashBalance: "மதிப்பிடப்பட்ட பண இருப்பு", setCashFund: "பண நிதியை அமைக்கவும்", addExpense: "செலவு சேர்க்கவும்",
     todayExpenses: "இன்றைய செலவுகள்", noProduct: "பொருட்கள் இல்லை. உங்கள் முதல் பொருளைச் சேர்க்கவும்.",
     newProduct: "புதிய பொருள்", productName: "பொருளின் பெயர்", quantity: "இருப்பில் அளவு",
@@ -2827,7 +2828,7 @@ const TRANSLATIONS = {
     dangerZone: "নিরাপত্তা", language: "ভাষা",
     addProduct: "পণ্য যোগ করুন", save: "সংরক্ষণ করুন", cancel: "বাতিল করুন", search: "খুঁজুন…",
     todaySales: "আজকের বিক্রয়", articlesSold: "বিক্রিত পণ্য", paymentBreakdown: "পেমেন্টের বিবরণ",
-    cash: "নগদ", credit: "বাকি", mobilePayment: "মোবাইল পেমেন্ট", card: "কার্ড", lowStock: "কম স্টক", clientDebts: "গ্রাহকের বাকি", seeAllLowStock: "সব দেখুন ({n})", seeLessLowStock: "কম দেখান",
+    cash: "নগদ", credit: "বাকি", mobilePayment: "মোবাইল পেমেন্ট", card: "কার্ড", lowStock: "কম স্টক", clientDebts: "গ্রাহকের বাকি", seeAllLowStock: "সব দেখুন ({n})", seeLessLowStock: "কম দেখান", sortMenuTitle: "সাজান", sortAlpha: "বর্ণানুক্রমিক", sortMostSold: "সবচেয়ে বেশি বিক্রিত", sortLeastSold: "সবচেয়ে কম বিক্রিত", sortMostAvailable: "সবচেয়ে বেশি মজুত", sortLeastAvailable: "সবচেয়ে কম মজুত", sortDefault: "ডিফল্ট ক্রম",
     cashBalance: "আনুমানিক নগদ ব্যালেন্স", setCashFund: "নগদ তহবিল নির্ধারণ করুন", addExpense: "খরচ যোগ করুন",
     todayExpenses: "আজকের খরচ", noProduct: "কোনো পণ্য নেই। আপনার প্রথম পণ্য যোগ করুন।",
     newProduct: "নতুন পণ্য", productName: "পণ্যের নাম", quantity: "স্টকে পরিমাণ",
@@ -2973,7 +2974,7 @@ const TRANSLATIONS = {
     dangerZone: "سیکیورٹی", language: "زبان",
     addProduct: "پروڈکٹ شامل کریں", save: "محفوظ کریں", cancel: "منسوخ کریں", search: "تلاش کریں…",
     todaySales: "آج کی فروخت", articlesSold: "فروخت شدہ اشیاء", paymentBreakdown: "ادائیگی کی تفصیل",
-    cash: "نقد", credit: "ادھار", mobilePayment: "موبائل ادائیگی", card: "کارڈ", lowStock: "کم اسٹاک", clientDebts: "گاہکوں کا ادھار", seeAllLowStock: "سب دیکھیں ({n})", seeLessLowStock: "کم دکھائیں",
+    cash: "نقد", credit: "ادھار", mobilePayment: "موبائل ادائیگی", card: "کارڈ", lowStock: "کم اسٹاک", clientDebts: "گاہکوں کا ادھار", seeAllLowStock: "سب دیکھیں ({n})", seeLessLowStock: "کم دکھائیں", sortMenuTitle: "ترتیب دیں", sortAlpha: "حروفِ تہجی کی ترتیب", sortMostSold: "سب سے زیادہ فروخت", sortLeastSold: "سب سے کم فروخت", sortMostAvailable: "سب سے زیادہ دستیاب", sortLeastAvailable: "سب سے کم دستیاب", sortDefault: "پہلے سے طے شدہ ترتیب",
     cashBalance: "تخمینی نقد بیلنس", setCashFund: "نقد فنڈ مقرر کریں", addExpense: "خرچہ شامل کریں",
     todayExpenses: "آج کے اخراجات", noProduct: "کوئی پروڈکٹ نہیں ہے۔ اپنی پہلی پروڈکٹ شامل کریں۔",
     newProduct: "نئی پروڈکٹ", productName: "پروڈکٹ کا نام", quantity: "اسٹاک میں مقدار",
@@ -3119,7 +3120,7 @@ const TRANSLATIONS = {
     dangerZone: "Keamanan", language: "Bahasa",
     addProduct: "Tambah produk", save: "Simpan", cancel: "Batal", search: "Cari…",
     todaySales: "Penjualan hari ini", articlesSold: "barang terjual", paymentBreakdown: "Rincian pembayaran",
-    cash: "Tunai", credit: "Kredit", mobilePayment: "Pembayaran seluler", card: "Kartu bank", lowStock: "Stok menipis", clientDebts: "Utang pelanggan", seeAllLowStock: "Tampilkan semua ({n})", seeLessLowStock: "Tampilkan lebih sedikit",
+    cash: "Tunai", credit: "Kredit", mobilePayment: "Pembayaran seluler", card: "Kartu bank", lowStock: "Stok menipis", clientDebts: "Utang pelanggan", seeAllLowStock: "Tampilkan semua ({n})", seeLessLowStock: "Tampilkan lebih sedikit", sortMenuTitle: "Urutkan berdasarkan", sortAlpha: "Urutan abjad", sortMostSold: "Paling laris", sortLeastSold: "Paling sedikit terjual", sortMostAvailable: "Stok paling banyak", sortLeastAvailable: "Stok paling sedikit", sortDefault: "Urutan default",
     cashBalance: "Perkiraan saldo kas", setCashFund: "Atur modal kas", addExpense: "Tambah pengeluaran",
     todayExpenses: "Pengeluaran hari ini", noProduct: "Belum ada produk. Tambahkan produk pertamamu.",
     newProduct: "Produk baru", productName: "Nama produk", quantity: "Jumlah stok",
@@ -3265,7 +3266,7 @@ const TRANSLATIONS = {
     dangerZone: "Güvenlik", language: "Dil",
     addProduct: "Ürün ekle", save: "Kaydet", cancel: "İptal", search: "Ara…",
     todaySales: "Bugünkü satışlar", articlesSold: "ürün satıldı", paymentBreakdown: "Ödeme dağılımı",
-    cash: "Nakit", credit: "Veresiye", mobilePayment: "Mobil ödeme", card: "Banka kartı", lowStock: "Stok az", clientDebts: "Müşteri borçları", seeAllLowStock: "Tümünü göster ({n})", seeLessLowStock: "Daha az göster",
+    cash: "Nakit", credit: "Veresiye", mobilePayment: "Mobil ödeme", card: "Banka kartı", lowStock: "Stok az", clientDebts: "Müşteri borçları", seeAllLowStock: "Tümünü göster ({n})", seeLessLowStock: "Daha az göster", sortMenuTitle: "Sırala", sortAlpha: "Alfabetik sıra", sortMostSold: "En çok satılan", sortLeastSold: "En az satılan", sortMostAvailable: "En çok stokta olan", sortLeastAvailable: "En az stokta olan", sortDefault: "Varsayılan sıra",
     cashBalance: "Tahmini kasa bakiyesi", setCashFund: "Kasa fonunu ayarla", addExpense: "Gider ekle",
     todayExpenses: "Bugünkü giderler", noProduct: "Henüz ürün yok. İlk ürününü ekle.",
     newProduct: "Yeni ürün", productName: "Ürün adı", quantity: "Stoktaki miktar",
@@ -3411,7 +3412,7 @@ const TRANSLATIONS = {
     dangerZone: "보안", language: "언어",
     addProduct: "상품 추가", save: "저장", cancel: "취소", search: "검색…",
     todaySales: "오늘의 판매", articlesSold: "개 판매됨", paymentBreakdown: "결제 방식별 내역",
-    cash: "현금", credit: "외상", mobilePayment: "모바일 결제", card: "카드", lowStock: "재고 부족", clientDebts: "고객 외상", seeAllLowStock: "전체 보기 ({n})", seeLessLowStock: "간략히 보기",
+    cash: "현금", credit: "외상", mobilePayment: "모바일 결제", card: "카드", lowStock: "재고 부족", clientDebts: "고객 외상", seeAllLowStock: "전체 보기 ({n})", seeLessLowStock: "간략히 보기", sortMenuTitle: "정렬 기준", sortAlpha: "가나다순", sortMostSold: "가장 많이 팔린 순", sortLeastSold: "가장 적게 팔린 순", sortMostAvailable: "재고 많은 순", sortLeastAvailable: "재고 적은 순", sortDefault: "기본 순서",
     cashBalance: "예상 시재 잔액", setCashFund: "시재 기금 설정", addExpense: "지출 추가",
     todayExpenses: "오늘의 지출", noProduct: "상품이 없습니다. 첫 상품을 추가하세요.",
     newProduct: "새 상품", productName: "상품명", quantity: "재고 수량",
@@ -3557,7 +3558,7 @@ const TRANSLATIONS = {
     dangerZone: "セキュリティ", language: "言語",
     addProduct: "商品を追加", save: "保存", cancel: "キャンセル", search: "検索…",
     todaySales: "本日の売上", articlesSold: "点販売", paymentBreakdown: "支払い方法別内訳",
-    cash: "現金", credit: "掛け売り", mobilePayment: "モバイル決済", card: "カード", lowStock: "在庫僅少", clientDebts: "顧客の掛け売り", seeAllLowStock: "すべて表示（{n}）", seeLessLowStock: "表示を減らす",
+    cash: "現金", credit: "掛け売り", mobilePayment: "モバイル決済", card: "カード", lowStock: "在庫僅少", clientDebts: "顧客の掛け売り", seeAllLowStock: "すべて表示（{n}）", seeLessLowStock: "表示を減らす", sortMenuTitle: "並び替え", sortAlpha: "五十音順", sortMostSold: "売れ筋順", sortLeastSold: "売れていない順", sortMostAvailable: "在庫が多い順", sortLeastAvailable: "在庫が少ない順", sortDefault: "初期順",
     cashBalance: "レジの推定残高", setCashFund: "レジ資金を設定", addExpense: "経費を追加",
     todayExpenses: "本日の経費", noProduct: "商品がありません。最初の商品を追加しましょう。",
     newProduct: "新しい商品", productName: "商品名", quantity: "在庫数",
@@ -3703,7 +3704,7 @@ const TRANSLATIONS = {
     dangerZone: "Sicurezza", language: "Lingua",
     addProduct: "Aggiungi un prodotto", save: "Salva", cancel: "Annulla", search: "Cerca…",
     todaySales: "Vendite di oggi", articlesSold: "articolo/i venduto/i", paymentBreakdown: "Ripartizione per pagamento",
-    cash: "Contanti", credit: "Credito", mobilePayment: "Pagamento mobile", card: "Carta", lowStock: "Scorte basse", clientDebts: "Debiti clienti", seeAllLowStock: "Mostra tutto ({n})", seeLessLowStock: "Mostra meno",
+    cash: "Contanti", credit: "Credito", mobilePayment: "Pagamento mobile", card: "Carta", lowStock: "Scorte basse", clientDebts: "Debiti clienti", seeAllLowStock: "Mostra tutto ({n})", seeLessLowStock: "Mostra meno", sortMenuTitle: "Ordina per", sortAlpha: "Ordine alfabetico", sortMostSold: "Più venduti", sortLeastSold: "Meno venduti", sortMostAvailable: "Più disponibili", sortLeastAvailable: "Meno disponibili", sortDefault: "Ordine predefinito",
     cashBalance: "Saldo cassa stimato", setCashFund: "Imposta il fondo cassa", addExpense: "Aggiungi una spesa",
     todayExpenses: "Spese di oggi", noProduct: "Nessun prodotto. Aggiungi il tuo primo articolo.",
     newProduct: "Nuovo prodotto", productName: "Nome del prodotto", quantity: "Quantità in magazzino",
@@ -3835,7 +3836,7 @@ const TRANSLATIONS = {
     appName: "Shopnify", tagline: "Beheer van voorraad, verkoop en schulden", chooseLanguage: "Kies je taal", login: "Inloggen", register: "Account aanmaken", shopNamePlaceholder: "Naam van de winkel", identifierPlaceholder: "jouw@email.com", pinPlaceholder: "PIN-code (4 cijfers)", confirmPinPlaceholder: "Bevestig de PIN-code", adminPinPlaceholder: "Beheerderscode", createAccountBtn: "Mijn account aanmaken", loginBtn: "Inloggen", adminEnterBtn: "Binnengaan (beheerder)", wait: "Even geduld…",
     privacyNote: "🔒 Je PIN-code en je winkelgegevens (voorraad, verkoop, kassa) blijven privé. Alleen jij kunt ze zien — zelfs de beheerder heeft er geen toegang toe.", forgotPin: "PIN-code vergeten?", adminSpace: "Beheerdersruimte", backToShop: "Terug naar winkelaccount", demoBtn: "👀 Demo bekijken (zonder account aan te maken)", navDashboard: "Start", navStock: "Voorraad", navSale: "Verkoop", navHistory: "Geschiedenis", navDebts: "Schulden", navStats: "Statistieken", navAI: "Assistent",
     aiTitle: "AI-assistent", aiPlaceholder: "Bijv.: Wat is mijn best verkochte product?", aiSend: "Verzenden", aiThinking: "Aan het nadenken…", aiWelcome: "Hallo! Ik ken je winkel. Stel me een vraag over je voorraad, je verkopen, je schulden of je kassa.", settingsTitle: "Instellingen", manageAccount: "Account beheren", interfaceTitle: "Interface", assistance: "Ondersteuning", dangerZone: "Beveiliging", language: "Taal", addProduct: "Een product toevoegen", save: "Opslaan",
-    cancel: "Annuleren", search: "Zoeken…", todaySales: "Verkopen vandaag", articlesSold: "artikel(en) verkocht", paymentBreakdown: "Verdeling per betaalmethode", cash: "Contant", credit: "Krediet", mobilePayment: "Mobiel betalen", card: "Bankkaart", lowStock: "Lage voorraad", clientDebts: "Klantschulden", seeAllLowStock: "Alles bekijken ({n})", seeLessLowStock: "Minder bekijken", cashBalance: "Geschat kassaldo", setCashFund: "Kassafonds instellen", addExpense: "Een uitgave toevoegen", todayExpenses: "Uitgaven vandaag",
+    cancel: "Annuleren", search: "Zoeken…", todaySales: "Verkopen vandaag", articlesSold: "artikel(en) verkocht", paymentBreakdown: "Verdeling per betaalmethode", cash: "Contant", credit: "Krediet", mobilePayment: "Mobiel betalen", card: "Bankkaart", lowStock: "Lage voorraad", clientDebts: "Klantschulden", seeAllLowStock: "Alles bekijken ({n})", seeLessLowStock: "Minder bekijken", sortMenuTitle: "Sorteren op", sortAlpha: "Alfabetische volgorde", sortMostSold: "Meest verkocht", sortLeastSold: "Minst verkocht", sortMostAvailable: "Meest beschikbaar", sortLeastAvailable: "Minst beschikbaar", sortDefault: "Standaardvolgorde", cashBalance: "Geschat kassaldo", setCashFund: "Kassafonds instellen", addExpense: "Een uitgave toevoegen", todayExpenses: "Uitgaven vandaag",
     noProduct: "Geen product. Voeg je eerste artikel toe.", newProduct: "Nieuw product", productName: "Naam van het product", quantity: "Hoeveelheid in voorraad", unitPrice: "Eenheidsprijs (FCFA)", productPhoto: "Foto van het product (optioneel)", processing: "Afbeelding verwerken…", photoPaywall: "📷 Een foto toevoegen — betaalde versie", unlock: "Ontgrendelen", noCartYet: "Geen lopend winkelmandje. Komt er een klant aan? Start een nieuw winkelmandje.", newCart: "Nieuw winkelmandje",
     abandonCart: "Dit winkelmandje verlaten", cartContent: "Inhoud van het winkelmandje", paymentMethod: "Betaalmethode", clientName: "Naam van de klant", clientNameOpt: "Naam van de klant (optioneel)", amountGiven: "Bedrag gegeven door de klant (FCFA)", change: "Terug te geven wisselgeld", missing: "Er ontbreekt", finalizeSale: "Verkoop afronden", recentSales: "Recente verkopen", noDebts: "Geen lopende schulden.", noHistory: "Geen verkoop geregistreerd.", noResults: "Geen resultaat voor",
     paidBtn: "Betaald", confirmDelete: "Verwijdering bevestigen", noCancel: "Nee, annuleren", yesDelete: "Ja, verwijderen", deleteProductMsg: "\"{name}\" uit de voorraad verwijderen?", deleteExpenseMsg: "Deze uitgave van {amount} verwijderen?", abandonCartMsg: "Dit winkelmandje verlaten? Niet-afgeronde artikelen gaan verloren.", demoMode: "Demomodus — voorbeeldgegevens", demoNote: "Je kunt alles vrij verkennen, maar niets wordt echt opgeslagen. Maak een echt account aan zodra de opslag werkt.",
@@ -3913,7 +3914,7 @@ const TRANSLATIONS = {
     dangerZone: "Usalama", language: "Lugha",
     addProduct: "Ongeza bidhaa", save: "Hifadhi", cancel: "Ghairi", search: "Tafuta…",
     todaySales: "Mauzo ya leo", articlesSold: "bidhaa zilizouzwa", paymentBreakdown: "Mgawanyo wa malipo",
-    cash: "Fedha taslimu", credit: "Deni", mobilePayment: "Malipo ya simu", card: "Kadi", lowStock: "Bidhaa chache", clientDebts: "Madeni ya wateja", seeAllLowStock: "Onyesha zote ({n})", seeLessLowStock: "Onyesha kidogo",
+    cash: "Fedha taslimu", credit: "Deni", mobilePayment: "Malipo ya simu", card: "Kadi", lowStock: "Bidhaa chache", clientDebts: "Madeni ya wateja", seeAllLowStock: "Onyesha zote ({n})", seeLessLowStock: "Onyesha kidogo", sortMenuTitle: "Panga kwa", sortAlpha: "Mpangilio wa alfabeti", sortMostSold: "Zinazouzwa zaidi", sortLeastSold: "Zinazouzwa kidogo", sortMostAvailable: "Zilizopo zaidi", sortLeastAvailable: "Zilizopo kidogo", sortDefault: "Mpangilio wa kawaida",
     cashBalance: "Salio la fedha linalokadiriwa", setCashFund: "Weka mtaji wa fedha", addExpense: "Ongeza gharama",
     todayExpenses: "Gharama za leo", noProduct: "Hakuna bidhaa bado. Ongeza bidhaa yako ya kwanza.",
     newProduct: "Bidhaa mpya", productName: "Jina la bidhaa", quantity: "Kiasi kilichopo",
@@ -4059,7 +4060,7 @@ const TRANSLATIONS = {
     dangerZone: "Tsaro", language: "Harshe",
     addProduct: "Ƙara kaya", save: "Ajiye", cancel: "Soke", search: "Nema…",
     todaySales: "Tallace-tallacen yau", articlesSold: "Kayan da aka sayar", paymentBreakdown: "Bayanin biyan kuɗi",
-    cash: "Kuɗi a hannu", credit: "Bashi", mobilePayment: "Biyan waya", card: "Kati", lowStock: "Ƙarancin kaya", clientDebts: "Bashin abokan ciniki", seeAllLowStock: "Nuna duka ({n})", seeLessLowStock: "Nuna kaɗan",
+    cash: "Kuɗi a hannu", credit: "Bashi", mobilePayment: "Biyan waya", card: "Kati", lowStock: "Ƙarancin kaya", clientDebts: "Bashin abokan ciniki", seeAllLowStock: "Nuna duka ({n})", seeLessLowStock: "Nuna kaɗan", sortMenuTitle: "Tsara ta", sortAlpha: "Tsarin haruffa", sortMostSold: "Mafi sayarwa", sortLeastSold: "Mafi karancin sayarwa", sortMostAvailable: "Mafi yawa a hannu", sortLeastAvailable: "Mafi karanci a hannu", sortDefault: "Tsari na asali",
     cashBalance: "Ƙimar kuɗin da ke hannu", setCashFund: "Saita asalin kuɗi", addExpense: "Ƙara kashewa",
     todayExpenses: "Kashe-kashen yau", noProduct: "Babu kaya. Ƙara kayanka na farko.",
     newProduct: "Sabon kaya", productName: "Sunan kaya", quantity: "Yawan a kaya",
@@ -4205,7 +4206,7 @@ const TRANSLATIONS = {
     dangerZone: "Kisi", language: "Kan",
     addProduct: "Fɛn fara", save: "Mara", cancel: "Dabila", search: "Ɲini…",
     todaySales: "Bi feerew", articlesSold: "Fɛnw feerelen", paymentBreakdown: "Wari sarali ɲɛfɔli",
-    cash: "Wari jɛlen", credit: "Juru", mobilePayment: "Telefɔni wari sarali", card: "Kart", lowStock: "Marifa dɔgɔyara", clientDebts: "Kiliyanw ka juru", seeAllLowStock: "A bɛɛ jira ({n})", seeLessLowStock: "A dɔgɔya jira",
+    cash: "Wari jɛlen", credit: "Juru", mobilePayment: "Telefɔni wari sarali", card: "Kart", lowStock: "Marifa dɔgɔyara", clientDebts: "Kiliyanw ka juru", seeAllLowStock: "A bɛɛ jira ({n})", seeLessLowStock: "A dɔgɔya jira", sortMenuTitle: "A dilan ka bɔ", sortAlpha: "Sɛbɛnkolo cogo", sortMostSold: "Minnu feerelen ka ca", sortLeastSold: "Minnu feerelen ka dɔgɔ", sortMostAvailable: "Minnu ka ca", sortLeastAvailable: "Minnu ka dɔgɔ", sortDefault: "Cogo fɔlɔ",
     cashBalance: "Wari jatelen dabɔlen", setCashFund: "Wari daminɛ latigɛ", addExpense: "Musaka fara",
     todayExpenses: "Bi musakaw", noProduct: "Fɛn si tɛ yen. I ka fɛn fɔlɔ fara.",
     newProduct: "Fɛn kura", productName: "Fɛn tɔgɔ", quantity: "A hakɛ marifa la",
@@ -4337,7 +4338,7 @@ const TRANSLATIONS = {
     appName: "Shopnify", tagline: "Ukuphathwa kwesitoko, ukuthengisa nezikweletu", chooseLanguage: "Khetha ulimi lwakho", login: "Ngena", register: "Dala i-akhawunti", shopNamePlaceholder: "Igama lesitolo", identifierPlaceholder: "wakho@email.com", pinPlaceholder: "Ikhodi ye-PIN (izinombolo ezi-4)", confirmPinPlaceholder: "Qinisekisa ikhodi ye-PIN", adminPinPlaceholder: "Ikhodi yomphathi", createAccountBtn: "Dala i-akhawunti yami", loginBtn: "Ngena", adminEnterBtn: "Ngena (umphathi)", wait: "Linda…", privacyNote: "🔒 Ikhodi yakho ye-PIN nedatha yesitolo sakho (isitoko, ukuthengisa, ikheshi) kuhlala kuyimfihlo. Nguwe kuphela ongakubona — ngisho nomphathi akakwazi ukufinyelela kukho.", forgotPin: "Ukhohlwe ikhodi ye-PIN?", adminSpace: "Isikhala somphathi", backToShop: "Buyela ku-akhawunti yesitolo", demoBtn: "👀 Bona idemo (ngaphandle kokudala i-akhawunti)",
     navDashboard: "Ekhaya", navStock: "Isitoko", navSale: "Ukuthengisa", navHistory: "Umlando", navDebts: "Izikweletu", navStats: "Izibalo", navAI: "Umsizi", aiTitle: "Umsizi we-AI", aiPlaceholder: "Isib: Yimuphi umkhiqizo wami othengisa kakhulu?", aiSend: "Thumela", aiThinking: "Iyacabanga…", aiWelcome: "Sawubona! Ngiyasazi isitolo sakho. Ngibuze umbuzo ngesitoko sakho, ukuthengisa kwakho, izikweletu zakho noma ikheshi lakho.",
     settingsTitle: "Izilungiselelo", manageAccount: "Phatha i-akhawunti", interfaceTitle: "Isixhumanisi", assistance: "Usizo", dangerZone: "Ukuphepha", language: "Ulimi", addProduct: "Engeza umkhiqizo", save: "Londoloza", cancel: "Khansela", search: "Sesha…",
-    todaySales: "Ukuthengisa kwanamuhla", articlesSold: "impahla ethengisiwe", paymentBreakdown: "Ukwahlukaniswa ngendlela yokukhokha", cash: "Ukheshi", credit: "Isikweletu", mobilePayment: "Ukukhokha ngeselula", card: "Ikhadi lasebhange", lowStock: "Isitoko esiphansi", clientDebts: "Izikweletu zamakhasimende", seeAllLowStock: "Bona konke ({n})", seeLessLowStock: "Bona kancane", cashBalance: "Ibhalansi yekheshi elilinganiselwe", setCashFund: "Setha isisekelo sekheshi", addExpense: "Engeza isindleko", todayExpenses: "Izindleko zanamuhla",
+    todaySales: "Ukuthengisa kwanamuhla", articlesSold: "impahla ethengisiwe", paymentBreakdown: "Ukwahlukaniswa ngendlela yokukhokha", cash: "Ukheshi", credit: "Isikweletu", mobilePayment: "Ukukhokha ngeselula", card: "Ikhadi lasebhange", lowStock: "Isitoko esiphansi", clientDebts: "Izikweletu zamakhasimende", seeAllLowStock: "Bona konke ({n})", seeLessLowStock: "Bona kancane", sortMenuTitle: "Hlunga nge", sortAlpha: "Uhlelo lwezinhlamvu", sortMostSold: "Ezithengiswa kakhulu", sortLeastSold: "Ezithengiswa kancane", sortMostAvailable: "Ezitholakala kakhulu", sortLeastAvailable: "Ezitholakala kancane", sortDefault: "Uhlelo oluvamile", cashBalance: "Ibhalansi yekheshi elilinganiselwe", setCashFund: "Setha isisekelo sekheshi", addExpense: "Engeza isindleko", todayExpenses: "Izindleko zanamuhla",
     noProduct: "Ayikho impahla. Engeza impahla yakho yokuqala.", newProduct: "Umkhiqizo omusha", productName: "Igama lomkhiqizo", quantity: "Inani elikhona esitokweni", unitPrice: "Intengo yeyunithi (FCFA)", productPhoto: "Isithombe somkhiqizo (akuphoqelekile)", processing: "Kucutshungulwa isithombe…", photoPaywall: "📷 Engeza isithombe — inguqulo ekhokhelwayo", unlock: "Vula",
     noCartYet: "Alikho ibhasikidi eliqhubekayo. Kufika ikhasimende? Qala ibhasikidi elisha.", newCart: "Ibhasikidi elisha", abandonCart: "Yeka lelibhasikidi", cartContent: "Okuqukethwe ebhasikidini", paymentMethod: "Indlela yokukhokha", clientName: "Igama lekhasimende", clientNameOpt: "Igama lekhasimende (akuphoqelekile)", amountGiven: "Imali enikezwe yikhasimende (FCFA)", change: "Ushintshi okumele ubuyiselwe", missing: "Kusilele", finalizeSale: "Qedela ukuthengisa", recentSales: "Ukuthengisa kwakamuva",
     noDebts: "Azikho izikweletu eziqhubekayo.", noHistory: "Akukho kuthengisa okuqoshiwe.", noResults: "Ayikho imiphumela ye", paidBtn: "Kukhokhiwe", confirmDelete: "Qinisekisa ukususa", noCancel: "Cha, khansela", yesDelete: "Yebo, susa", deleteProductMsg: "Susa \"{name}\" esitokweni?", deleteExpenseMsg: "Susa lesi sindleko se-{amount}?", abandonCartMsg: "Yeka lelibhasikidi? Izimpahla ezingaqedelwanga zizolahleka.",
@@ -4420,7 +4421,7 @@ const TRANSLATIONS = {
     dangerZone: "Aabo", language: "Èdè",
     addProduct: "Fi ọjà kún", save: "Fi pamọ́", cancel: "Fagilé", search: "Wá…",
     todaySales: "Títà òní", articlesSold: "ọjà tí a tà", paymentBreakdown: "Ìpínyà ọ̀nà ìsanwó",
-    cash: "Owó lọ́wọ́", credit: "Gbèsè", mobilePayment: "Ìsanwó fóònù", card: "Káàdì", lowStock: "Ọjà tó ń dín kù", clientDebts: "Gbèsè àwọn oníbàárà", seeAllLowStock: "Fi gbogbo rẹ̀ hàn ({n})", seeLessLowStock: "Fi díẹ̀ hàn",
+    cash: "Owó lọ́wọ́", credit: "Gbèsè", mobilePayment: "Ìsanwó fóònù", card: "Káàdì", lowStock: "Ọjà tó ń dín kù", clientDebts: "Gbèsè àwọn oníbàárà", seeAllLowStock: "Fi gbogbo rẹ̀ hàn ({n})", seeLessLowStock: "Fi díẹ̀ hàn", sortMenuTitle: "To lẹsẹsẹ nípasẹ̀", sortAlpha: "Nípa àlfábẹ́ẹ̀tì", sortMostSold: "Tí ó ta jùlọ", sortLeastSold: "Tí ó ta díẹ̀", sortMostAvailable: "Tí ó pọ̀ jùlọ", sortLeastAvailable: "Tí ó kù díẹ̀", sortDefault: "Ìdásílẹ̀ àkọ́kọ́",
     cashBalance: "Ìwọ̀n owó tí ó kù (àpèsè)", setCashFund: "Ṣètò owó ìpìlẹ̀", addExpense: "Fi ìnáwó kún",
     todayExpenses: "Ìnáwó òní", noProduct: "Kò sí ọjà síbẹ̀. Fi ọjà rẹ àkọ́kọ́ kún.",
     newProduct: "Ọjà tuntun", productName: "Orúkọ ọjà", quantity: "Iye tí ó wà ní ọjà",
@@ -5205,6 +5206,19 @@ function ZigzagStrip() {
 // ===== Mode hors-ligne : cache local + file de synchronisation =====
 const OFFLINE_CACHE_PREFIX = "offline-cache:";
 const OFFLINE_QUEUE_KEY = "offline-sync-queue";
+// Onglet actif : persisté (localStorage + miroir natif ci-dessous) pour que quitter
+// l'app puis y revenir ne ramène pas systématiquement à l'accueil. Sur Android, le
+// localStorage de la WebView peut être effacé par le système même quand l'app reste
+// "installée" — d'où le même miroir vers @capacitor/preferences que pour le cache
+// hors-ligne, plus fiable.
+const LAST_TAB_KEY = "mb_last_tab";
+const VALID_TABS = ["dashboard", "sale", "stock", "debts", "history", "stats", "ai", "employees", "shopcompare", "cashreport", "calculator"];
+// Filet de secours dédié au stock : à chaque changement de la liste des produits,
+// on en garde une copie brute séparée (locale + miroir natif), écrite en tout
+// premier, avant même le pipeline de fusion/Supabase/window.storage ci-dessous.
+// Si ce pipeline échoue ou est interrompu (app tuée en pleine synchronisation),
+// cette copie reste disponible pour restaurer le stock au prochain démarrage.
+const PRODUCTS_BACKUP_PREFIX = "mb_products_backup:";
 // Miroir en arrière-plan vers le stockage natif (@capacitor/preferences), bien plus
 // fiable que le localStorage du WebView dans l'app Android — voir main.jsx, qui
 // recopie ce miroir dans localStorage au tout démarrage de l'app pour que le cache
@@ -5825,6 +5839,8 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // système + lien profond), qui fonctionne dès maintenant pour tout le
         // monde, sans restriction. Voir le code de connexion natif conservé plus
         // bas dans ce fichier pour le réactiver une fois la vérification obtenue.
+        // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
+        alert("Étape 1 : demande de lien Google à Supabase...");
         const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
@@ -5833,8 +5849,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           },
         });
         if (oauthError) throw oauthError;
+        alert("Étape 2 : lien reçu, ouverture du navigateur...\nURL : " + data.url);
         const { Browser } = await import("@capacitor/browser");
         await Browser.open({ url: data.url });
+        alert("Étape 3 : navigateur ouvert. En attente du retour vers l'app après connexion Google...");
+        // ---- FIN DIAGNOSTIC TEMPORAIRE ----
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -5845,6 +5864,8 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // revient ensuite sur l'app déjà connecté, sans autre action ici.
       }
     } catch (err) {
+      // ---- DIAGNOSTIC TEMPORAIRE : affiche l'erreur exacte au lieu du message générique ----
+      alert("Erreur pendant la connexion Google : " + (err && (err.message || JSON.stringify(err))));
       setError(t(lang, "googleLoginError"));
       setGoogleLoginBusy(false);
     }
@@ -7742,7 +7763,31 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [qrInvite, setQrInvite] = useState(null);
   const [qrInviteLoading, setQrInviteLoading] = useState(false);
   const [qrInviteError, setQrInviteError] = useState("");
-  const [tab, setTab] = useState("dashboard");
+  const [tab, setTab] = useState(() => {
+    try {
+      const saved = window.localStorage.getItem(LAST_TAB_KEY);
+      return VALID_TABS.includes(saved) ? saved : "dashboard";
+    } catch (e) { return "dashboard"; }
+  });
+  // Sauvegarde l'onglet actif à chaque changement, en local et en miroir natif.
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(LAST_TAB_KEY, tab);
+      mirrorToNativeStorage(LAST_TAB_KEY, tab);
+    } catch (e) {}
+  }, [tab]);
+  // Filet de sécurité au tout premier rendu après une relance de l'app : si le
+  // localStorage a été effacé par le système entre-temps (cas Android connu) mais
+  // que le miroir natif, lui, a survécu, on restaure le dernier onglet depuis là.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    Preferences.get({ key: LAST_TAB_KEY }).then(({ value }) => {
+      if (value && VALID_TABS.includes(value)) {
+        setTab((current) => (current === "dashboard" ? value : current));
+      }
+    }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [showMoreMenu, setShowMoreMenu] = useState(false);
   // Charge les données de comparaison dès qu'on arrive sur cet onglet (pas avant, pour ne pas
   // ralentir le reste de l'app inutilement pour les comptes qui ne l'utilisent jamais).
@@ -8217,6 +8262,84 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [partialPayError, setPartialPayError] = useState("");
   const [cartSearch, setCartSearch] = useState("");
   const [saleViewMode, setSaleViewMode] = useState("list"); // "list" ou "grid" — affichage des produits dans l'onglet Vente
+  // Tri des produits, partagé entre les onglets Stock et Vente (même logique, même
+  // sélection active) : alphabétique, plus/moins vendus, plus/moins disponibles, ou
+  // ordre par défaut (celui d'ajout). "mostSold"/"leastSold" utilisent les quantités
+  // totales vendues (toutes ventes confondues), pas seulement celles du jour.
+  const [productSortMode, setProductSortMode] = useState("default");
+  const [showSortMenu, setShowSortMenu] = useState(false);
+  const soldQtyByProductId = useMemo(() => {
+    const map = {};
+    sales.forEach((s) => { if (s.productId) map[s.productId] = (map[s.productId] || 0) + (s.qty || 0); });
+    return map;
+  }, [sales]);
+  const sortProductList = useCallback((list) => {
+    if (productSortMode === "default") return list;
+    const sorted = [...list];
+    switch (productSortMode) {
+      case "alpha":
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "mostSold":
+        sorted.sort((a, b) => (soldQtyByProductId[b.id] || 0) - (soldQtyByProductId[a.id] || 0));
+        break;
+      case "leastSold":
+        sorted.sort((a, b) => (soldQtyByProductId[a.id] || 0) - (soldQtyByProductId[b.id] || 0));
+        break;
+      case "mostAvailable":
+        sorted.sort((a, b) => b.quantity - a.quantity);
+        break;
+      case "leastAvailable":
+        sorted.sort((a, b) => a.quantity - b.quantity);
+        break;
+      default:
+        break;
+    }
+    return sorted;
+  }, [productSortMode, soldQtyByProductId]);
+  const SORT_OPTIONS = [
+    { id: "default", labelKey: "sortDefault" },
+    { id: "alpha", labelKey: "sortAlpha" },
+    { id: "mostSold", labelKey: "sortMostSold" },
+    { id: "leastSold", labelKey: "sortLeastSold" },
+    { id: "mostAvailable", labelKey: "sortMostAvailable" },
+    { id: "leastAvailable", labelKey: "sortLeastAvailable" },
+  ];
+  // Bouton + menu de tri, identiques et réutilisés dans les onglets Stock et Vente.
+  const renderSortButton = () => (
+    <div className="relative shrink-0">
+      <button
+        onClick={() => setShowSortMenu((v) => !v)}
+        aria-label={t(lang, "sortMenuTitle")}
+        className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors"
+        style={{ background: productSortMode !== "default" ? INDIGO : T.card, color: productSortMode !== "default" ? "white" : T.text, border: `1px solid ${productSortMode !== "default" ? INDIGO : T.border}` }}
+      >
+        <ArrowUpDown size={16} />
+      </button>
+      {showSortMenu && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setShowSortMenu(false)} />
+          <div
+            className="absolute right-0 mt-1.5 rounded-2xl overflow-hidden z-50"
+            style={{ minWidth: 200, background: darkMode ? "#16161f" : "white", border: `1px solid ${T.border}`, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+          >
+            <p className="text-[11px] font-bold px-3.5 pt-3 pb-1.5" style={{ color: T.muted }}>{t(lang, "sortMenuTitle")}</p>
+            {SORT_OPTIONS.map((opt) => (
+              <button
+                key={opt.id}
+                onClick={() => { setProductSortMode(opt.id); setShowSortMenu(false); }}
+                className="w-full text-left px-3.5 py-2.5 text-sm font-semibold flex items-center justify-between"
+                style={{ color: productSortMode === opt.id ? INDIGO : T.text, background: productSortMode === opt.id ? (darkMode ? "rgba(79,70,229,0.12)" : "rgba(79,70,229,0.06)") : "transparent" }}
+              >
+                {t(lang, opt.labelKey)}
+                {productSortMode === opt.id && <Check size={14} />}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
   // Clé de stockage de la boutique actuellement affichée. Pour la boutique "principale"
   // (comportement historique, mono-boutique), la clé reste inchangée : shop:${username}.
   // Pour toute AUTRE boutique (multi-boutique, Business 2), la clé inclut son id, pour que
@@ -8228,7 +8351,20 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Applique un objet "shop" (fusionné ou non) à tous les états React.
   // Réutilisé au chargement initial ET après chaque fusion automatique.
   const applyShop = useCallback((shop, sub, account) => {
-    setProducts(shop.products || []);
+    // Filet de secours : si la liste de produits reçue est vide/absente alors
+    // qu'une copie de secours existe pour cette boutique, on restaure celle-ci
+    // plutôt que d'afficher un stock vide qui n'en est peut-être pas un (ex :
+    // synchronisation interrompue). Un vrai vidage intentionnel (reset) met
+    // aussi à jour cette copie de secours, donc pas de faux positif possible.
+    let restoredProducts = shop.products || [];
+    if (restoredProducts.length === 0) {
+      try {
+        const backupRaw = window.localStorage.getItem(PRODUCTS_BACKUP_PREFIX + shopKey);
+        const backupProducts = backupRaw ? JSON.parse(backupRaw) : null;
+        if (Array.isArray(backupProducts) && backupProducts.length > 0) restoredProducts = backupProducts;
+      } catch (e) {}
+    }
+    setProducts(restoredProducts);
     setSales(shop.sales || []);
     setDebts(shop.debts || []);
     setExpenses(shop.expenses || []);
@@ -8253,7 +8389,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // useEffect dédié plus bas, qui se redéclenche automatiquement à chaque changement de boutique.
     if (sub) setExpiresAt(sub.expiresAt);
     if (account) setShopPhoto(account.shopPhoto || null);
-  }, []);
+  }, [shopKey]);
   // Résolveur appelé juste avant l'envoi d'une écriture mise en file d'attente
   // (typiquement au retour de connexion) : on relit l'état distant à cet
   // instant précis et on fusionne, plutôt que d'écraser aveuglément ce qu'un
@@ -8427,10 +8563,6 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (!navigator.onLine) {
         if (!cachedShop) { applyShop(emptyShop, { expiresAt: null }, null); if (!readLocalCache(shopSyncBaseKey)) writeLocalCache(shopSyncBaseKey, emptyShop); setLoading(false); }
         __mark("ShopApp : hors-ligne, arrêt anticipé");
-        if (typeof window !== "undefined" && window.__bootTimings && !window.__bootSummaryShown) {
-          window.__bootSummaryShown = true;
-          alert("Chronomètre de démarrage :\n\n" + window.__bootTimings.join("\n"));
-        }
         return;
       }
       try {
@@ -8513,16 +8645,20 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       } finally {
         setLoading(false);
         __mark("ShopApp : setLoading(false) final (après vérification réseau)");
-        // DIAGNOSTIC TEMPORAIRE — résumé complet en une seule popup, affiché une
-        // seule fois par démarrage de l'app, pour voir précisément où passe le temps.
-        if (typeof window !== "undefined" && window.__bootTimings && !window.__bootSummaryShown) {
-          window.__bootSummaryShown = true;
-          alert("Chronomètre de démarrage :\n\n" + window.__bootTimings.join("\n"));
-        }
       }
     })();
   }, [shopKey, subKey, shopSyncBaseKey, username, isDemo, applyShop, isSecondaryShop]);
   const saveAll = (overrides) => {
+    // Sauvegarde de secours dédiée au stock : écrite en tout premier, avant la
+    // mise à jour de l'état et avant tout le pipeline de fusion/réseau plus bas,
+    // pour capturer la nouvelle liste de produits même si la suite est interrompue.
+    if (overrides.products) {
+      try {
+        const raw = JSON.stringify(overrides.products);
+        window.localStorage.setItem(PRODUCTS_BACKUP_PREFIX + shopKey, raw);
+        mirrorToNativeStorage(PRODUCTS_BACKUP_PREFIX + shopKey, raw);
+      } catch (e) {}
+    }
     // Un ou plusieurs champs de réglages ont été explicitement modifiés : on
     // horodate le bloc de réglages, pour que la fusion multi-appareils sache
     // quelle version (locale ou distante) est la plus récente.
@@ -10098,7 +10234,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     return Object.entries(byProduct).sort((a, b) => b[1] - a[1]).slice(0, 3);
   })();
   const byMethod = getPaymentMethods(lang).map((m) => ({ ...m, total: todaySales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
-  const lowStock = products.filter((p) => p.quantity <= lowStockThreshold).sort((a, b) => a.quantity - b.quantity);
+  const lowStock = productSortMode === "default"
+    ? products.filter((p) => p.quantity <= lowStockThreshold).sort((a, b) => a.quantity - b.quantity)
+    : sortProductList(products.filter((p) => p.quantity <= lowStockThreshold));
   const lowStockDisplayed = showAllLowStock ? lowStock : lowStock.slice(0, 5);
   const restockForecast = (() => {
     const cutoff = Date.now() - 14 * 86400000;
@@ -10354,9 +10492,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     }
     setAccountingGenerating(false);
   };
-  const filteredProducts = products.filter((p) => p.name.toLowerCase().includes(stockSearch.toLowerCase()));
+  const filteredProducts = sortProductList(products.filter((p) => p.name.toLowerCase().includes(stockSearch.toLowerCase())));
   const filteredDebts = unpaidDebts.filter((d) => d.customer.toLowerCase().includes(debtsSearch.toLowerCase()));
-  const cartProducts = products.filter((p) => p.name.toLowerCase().includes(cartSearch.toLowerCase()));
+  const cartProducts = sortProductList(products.filter((p) => p.name.toLowerCase().includes(cartSearch.toLowerCase())));
   const activeCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
   const cartTotal = activeCart ? activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0) : 0;
   // Compte suspendu par un administrateur : bloque tout accès à l'app, avant
@@ -10745,7 +10883,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 </div>
                 <div className="min-w-0" style={{ flex: 1 }}>
-                  <p className="text-sm font-extrabold mb-1" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <p className="text-sm font-extrabold" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
+                    {renderSortButton()}
+                  </div>
                   <div className="space-y-0.5">
                     {lowStockDisplayed.map((p) => <p key={p.id} className="text-xs" style={{ color: T.text }}>{p.name} — {p.quantity} restant(s)</p>)}
                   </div>
@@ -10949,7 +11090,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <Plus size={16} /> {t(lang, "addProduct")}
               </button>
             )}
-            {products.length > 0 && <SearchBox value={stockSearch} onChange={setStockSearch} placeholder={t(lang, "search")} />}
+            {products.length > 0 && (
+              <div className="flex items-center gap-2">
+                <div className="flex-1"><SearchBox value={stockSearch} onChange={setStockSearch} placeholder={t(lang, "search")} /></div>
+                {renderSortButton()}
+              </div>
+            )}
             {products.length === 0 && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "noProduct")}</p>}
             {products.length > 0 && filteredProducts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResults")} "{stockSearch}".</p>}
             {filteredProducts.map((p) => {
@@ -11248,6 +11394,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div className="flex-1">
                     <SearchBox value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} />
                   </div>
+                  {renderSortButton()}
                   <div className="flex items-center rounded-xl overflow-hidden shrink-0" style={{ border: `1px solid ${T.border}` }}>
                     <button
                       onClick={() => setSaleViewMode("list")}
@@ -13802,13 +13949,23 @@ function BoutiqueAppInner() {
     let removeListener = null;
     import("@capacitor/app").then(({ App: CapacitorApp }) => {
       CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
-        if (!url || !url.startsWith("com.shopnify.app://login-callback")) return;
-        try {
-          await supabase.auth.exchangeCodeForSession(url);
-        } catch (e) {
-          // Rien à faire de spécial ici : si l'échange échoue, l'utilisateur reste
-          // simplement sur l'écran de connexion et peut réessayer.
+        // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
+        alert("Étape 4 : l'app a reçu un retour d'URL :\n" + url);
+        if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
+          alert("Étape 4b : cette URL ne correspond pas au lien de connexion attendu, ignorée.");
+          return;
         }
+        try {
+          const { data, error } = await supabase.auth.exchangeCodeForSession(url);
+          if (error) {
+            alert("Étape 5 : échec de l'échange du code contre une session.\nErreur : " + error.message);
+          } else {
+            alert("Étape 5 : session créée avec succès pour " + (data && data.session && data.session.user && data.session.user.email));
+          }
+        } catch (e) {
+          alert("Étape 5 : exception pendant l'échange du code.\nErreur : " + (e && (e.message || JSON.stringify(e))));
+        }
+        // ---- FIN DIAGNOSTIC TEMPORAIRE ----
         const { Browser } = await import("@capacitor/browser");
         try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
       }).then((handle) => { removeListener = handle; });
