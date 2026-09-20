@@ -1,5 +1,18 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, useMemo, useDeferredValue } from "react";
 import { Preferences } from "@capacitor/preferences";
+// Mode recherche/localisation (acheteur) : carte gratuite, sans clé API.
+// Nécessite `npm install react-leaflet leaflet` dans le projet.
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+// Correctif classique Leaflet + bundlers : les icônes par défaut ne se chargent pas
+// automatiquement depuis les assets du bundler, donc on pointe vers un CDN.
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
 import {
   CRITICAL_STATE_KEY,
   buildCriticalState,
@@ -5952,6 +5965,149 @@ function InstallBanner({ lang }) {
     </div>
   );
 }
+// ---------------------------------------------------------------------------
+// Mode recherche / localisation — accessible sans compte. Un acheteur tape un
+// produit, on interroge la fonction RPC search_products_nearby côté Supabase
+// (proximité calculée par formule de Haversine, pas besoin de PostGIS), et on
+// affiche les boutiques correspondantes sur une carte Leaflet + une liste.
+// ---------------------------------------------------------------------------
+function BuyerSearchScreen({ onBack }) {
+  const [query, setQuery] = useState("");
+  const [buyerPos, setBuyerPos] = useState(null);
+  const [geoStatus, setGeoStatus] = useState("idle"); // idle | locating | ready | error
+  const [results, setResults] = useState([]);
+  const [searching, setSearching] = useState(false);
+  const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    if (!navigator.geolocation) { setGeoStatus("error"); return; }
+    setGeoStatus("locating");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => { setBuyerPos({ lat: pos.coords.latitude, lng: pos.coords.longitude }); setGeoStatus("ready"); },
+      () => setGeoStatus("error"),
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }, []);
+
+  const runSearch = async () => {
+    if (!query.trim() || !buyerPos) return;
+    setSearching(true);
+    setSearched(true);
+    try {
+      const { data, error } = await supabase.rpc("search_products_nearby", {
+        p_search: query.trim(),
+        p_lat: buyerPos.lat,
+        p_lng: buyerPos.lng,
+        p_max_age_hours: 48,
+        p_limit: 30,
+      });
+      if (error) throw error;
+      setResults(data || []);
+    } catch (e) {
+      setResults([]);
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const freshnessLabel = (iso) => {
+    if (!iso) return "";
+    const hours = (Date.now() - new Date(iso).getTime()) / 3600000;
+    if (hours < 1) return "à l'instant";
+    if (hours < 24) return `il y a ${Math.round(hours)}h`;
+    return `il y a ${Math.round(hours / 24)}j`;
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "16px 16px 10px", background: "#fff", borderBottom: "1px solid #E5E7EB" }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", color: "#6B6D85", fontSize: 13, fontWeight: 600, marginBottom: 10, cursor: "pointer", padding: 0 }}>
+          ← Retour
+        </button>
+        <div style={{ fontSize: 18, fontWeight: 700, color: "#111827", marginBottom: 10 }}>Trouver un produit près de moi</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") runSearch(); }}
+            placeholder="Ex : riz, huile, sucre…"
+            style={{ flex: 1, border: "1px solid #E5E7EB", borderRadius: 12, padding: "12px 14px", fontSize: 14, outline: "none" }}
+          />
+          <button
+            onClick={runSearch}
+            disabled={searching || geoStatus !== "ready" || !query.trim()}
+            style={{ padding: "0 18px", borderRadius: 12, background: "#1B3A5C", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer", opacity: (geoStatus === "ready" && query.trim()) ? 1 : 0.5 }}
+          >
+            Chercher
+          </button>
+        </div>
+        {geoStatus === "locating" && <p style={{ fontSize: 12, color: "#6B6D85", marginTop: 8 }}>Localisation en cours…</p>}
+        {geoStatus === "error" && <p style={{ fontSize: 12, color: "#e11d48", marginTop: 8 }}>Localisation indisponible — autorise l'accès à ta position pour chercher des boutiques proches.</p>}
+      </div>
+
+      {buyerPos && (
+        <div style={{ height: 260, flexShrink: 0 }}>
+          <MapContainer center={[buyerPos.lat, buyerPos.lng]} zoom={13} style={{ height: "100%", width: "100%" }}>
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
+            <Marker position={[buyerPos.lat, buyerPos.lng]}>
+              <Popup>Toi</Popup>
+            </Marker>
+            {results.map((r, i) => (
+              <Marker key={`${r.owner_id}-${i}`} position={[r.latitude, r.longitude]}>
+                <Popup>
+                  <div style={{ minWidth: 160 }}>
+                    <div style={{ fontWeight: 700 }}>{r.shop_name}</div>
+                    <div>{r.product_name} — {r.price} </div>
+                    <div style={{ fontSize: 11, opacity: 0.7 }}>{freshnessLabel(r.last_synced_at)}</div>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
+      )}
+
+      <div style={{ flex: 1, overflowY: "auto", padding: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+        {searching && <p style={{ fontSize: 13, color: "#6B6D85" }}>Recherche…</p>}
+        {!searching && searched && results.length === 0 && (
+          <p style={{ fontSize: 13, color: "#6B6D85" }}>Aucune boutique trouvée avec ce produit près de toi pour le moment.</p>
+        )}
+        {results.map((r, i) => (
+          <div key={`${r.owner_id}-${i}`} style={{ background: "#fff", borderRadius: 16, padding: 14, border: "1px solid #E5E7EB", display: "flex", gap: 12 }}>
+            {r.photo_url ? (
+              <img src={r.photo_url} alt="" style={{ width: 56, height: 56, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+            ) : (
+              <div style={{ width: 56, height: 56, borderRadius: 12, background: "#F6F7FB", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>🏬</div>
+            )}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontWeight: 700, fontSize: 14, color: "#111827" }}>{r.shop_name}</div>
+              <div style={{ fontSize: 13, color: "#374151", marginTop: 2 }}>
+                {r.product_photo_url && <img src={r.product_photo_url} alt="" style={{ width: 18, height: 18, borderRadius: 4, objectFit: "cover", verticalAlign: "middle", marginRight: 5 }} />}
+                {r.product_name} — <strong>{r.price}</strong>
+              </div>
+              <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 3 }}>
+                {(r.distance_km || 0).toFixed(1)} km · mis à jour {freshnessLabel(r.last_synced_at)}
+              </div>
+              <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+                {r.phone && (
+                  <a href={`tel:${r.phone}`} style={{ fontSize: 12, fontWeight: 700, color: "#1B3A5C", border: "1px solid #E5E7EB", borderRadius: 10, padding: "6px 10px", textDecoration: "none" }}>
+                    📞 Appeler
+                  </a>
+                )}
+                {r.whatsapp_phone && (
+                  <a href={`https://wa.me/${r.whatsapp_phone}`} target="_blank" rel="noreferrer" style={{ fontSize: 12, fontWeight: 700, color: "#16a34a", border: "1px solid #E5E7EB", borderRadius: 10, padding: "6px 10px", textDecoration: "none" }}>
+                    WhatsApp
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogleOnboarding }) {
   const [screen, setScreen] = useState(startInGoogleOnboarding ? "onboarding" : "login");
   const [isGoogleFlow, setIsGoogleFlow] = useState(!!startInGoogleOnboarding);
@@ -6378,6 +6534,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <p className="text-center mt-4" style={{ fontSize: 10, color: "#A6A8BC", lineHeight: 1.5 }}>
               {t(lang, "legalConsentText")}
             </p>
+            <button onClick={() => setScreen("buyer-search")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
+              🔍 Trouver un produit près de moi
+            </button>
             <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
               <QrCode size={13} /> {t(lang, "loginAsEmployee")}
             </button>
@@ -6390,6 +6549,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     );
   }
   // ================= EMPLOYEE SCAN SCREEN =================
+  if (screen === "buyer-search") {
+    return <BuyerSearchScreen onBack={() => setScreen("login")} />;
+  }
   if (screen === "employee-scan") {
     // codeOverride permet d'appeler cette fonction directement avec un code décodé par la
     // caméra, sans dépendre de l'état empScanCode (utile pour le scan automatique).
@@ -7677,6 +7839,58 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [currency, setCurrency] = useState("XOF");
   const [shopCountry, setShopCountry] = useState(""); // pays du compte (pour le format de date)
   const [shopPhone, setShopPhone] = useState("");
+  // ---- Mode localisation / recherche acheteur ----
+  // Partage facultatif de la position de la boutique + numéro WhatsApp, et statut
+  // de la dernière publication du stock vers la table publique location_listings.
+  const [locationShared, setLocationShared] = useState(false);
+  const [shopWhatsapp, setShopWhatsapp] = useState("");
+  const [shopLat, setShopLat] = useState(null);
+  const [shopLng, setShopLng] = useState(null);
+  const [locationLastSyncedAt, setLocationLastSyncedAt] = useState(null);
+  const [publishingLocation, setPublishingLocation] = useState(false);
+  const [publishLocationMsg, setPublishLocationMsg] = useState("");
+  const publishLocationListing = async () => {
+    setPublishingLocation(true);
+    setPublishLocationMsg("");
+    try {
+      const { data: userData } = await supabase.auth.getUser();
+      if (!userData || !userData.user) throw new Error("no-user");
+      const pos = await new Promise((resolve, reject) => {
+        if (!navigator.geolocation) { reject(new Error("no-geo")); return; }
+        navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, timeout: 10000 });
+      });
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const productsSnapshot = products
+        .filter((p) => (p.quantity || 0) > 0)
+        .map((p) => ({ name: p.name, price: p.price, quantity: p.quantity, photo_url: p.photo || null }));
+      const { error } = await supabase.from("location_listings").upsert({
+        owner_id: userData.user.id,
+        shop_name: shopName,
+        photo_url: shopPhoto,
+        phone: shopPhone,
+        whatsapp_phone: shopWhatsapp,
+        latitude: lat,
+        longitude: lng,
+        location_shared: locationShared,
+        last_synced_at: new Date().toISOString(),
+        products: productsSnapshot,
+      });
+      if (error) throw error;
+      setShopLat(lat);
+      setShopLng(lng);
+      setLocationLastSyncedAt(new Date().toISOString());
+      setPublishLocationMsg("Publié ✓");
+    } catch (e) {
+      setPublishLocationMsg(
+        e && e.message === "no-geo" ? "Localisation non disponible sur cet appareil." :
+        e && e.code === 1 ? "Autorisation de localisation refusée." :
+        "Erreur, réessaie."
+      );
+    } finally {
+      setPublishingLocation(false);
+    }
+  };
   // Style choisi pour l'image de partage produit (fond/couleurs), et si on
   // doit re-proposer le choix avant chaque envoi ou garder ce style partout.
   const [shareCardStyleId, setShareCardStyleId] = useState("midnight");
@@ -11845,7 +12059,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             {topProductsToday.length > 0 && (
               <div className="rounded-2xl p-3.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                <p className="text-xs font-bold mb-2.5" style={{ color: T.text }}>🏆 Top produits du jour</p>
+                <p className="text-sm font-extrabold mb-2.5" style={{ color: T.text }}>🏆 Top produits du jour</p>
                 <div className="space-y-2">
                   {topProductsToday.map(([name, qty], i) => (
                     <div key={name} className="flex items-center justify-between">
@@ -11921,7 +12135,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold" style={{ color: T.text }}>{t(lang, "clientDebts")}</p>
+                  <p className="text-sm font-extrabold" style={{ color: T.text }}>{t(lang, "clientDebts")}</p>
                   <p className="font-black" style={{ fontSize: 16, color: darkMode ? CLAY : "#b8562f", marginTop: 1 }}>{fcfa(totalOwed)}</p>
                 </div>
               </div>
@@ -11931,7 +12145,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: T.text }}>{t(lang, "cashBalance")}</p>
+                      <p className="text-sm font-extrabold" style={{ color: T.text }}>{t(lang, "cashBalance")}</p>
                       <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 11, lineHeight: 1 }}>
                         {amountsHidden ? "🙈" : "👁️"}
                       </button>
@@ -13855,6 +14069,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "categories" && (t(lang, "setCategories"))}
                   {settingsField === "threshold2" && t(lang, "stockAlert")}
                   {settingsField === "sharecard" && tx(lang, "shareCardSettingsTitle")}
+                  {settingsField === "location" && "Mode localisation"}
                   {settingsField === "defpayment" && (t(lang, "setPaiementParDefaut"))}
                   {settingsField === "debtdelay" && (t(lang, "setDettesClients"))}
                   {settingsField === "cashsettings" && (t(lang, "setCaisse"))}
@@ -13979,6 +14194,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "categories", icon: Tag, label: t(lang, "setCategories"), desc: t(lang, "setProduitsRayons") },
                 { id: "threshold2", icon: AlertOctagon, label: t(lang, "setSeuilsDeStock"), desc: t(lang, "setAlerteStockBas") },
                 { id: "sharecard", icon: Send, label: tx(lang, "shareCardSettingsTitle"), desc: tx(lang, "shareCardStyle") },
+                { id: "location", icon: Store, label: "Mode localisation", desc: "Recherche produit à proximité" },
               ].map((item) => { const Icon = item.icon; return (
                 <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#34d3991a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#34d399" /></div>
@@ -14215,6 +14431,47 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                   <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
+                </div>
+              )}
+              {settingsField === "location" && (
+                <div>
+                  <div className="rounded-2xl p-4 mb-4" style={{ background: T.card, border: `1px solid ${T.border}` }}>
+                    <div className="flex items-center justify-between gap-3">
+                      <div style={{ flex: 1 }}>
+                        <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>Partager ma position</div>
+                        <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>
+                          Les acheteurs qui cherchent un produit près de chez eux verront ta boutique sur la carte, avec ton stock disponible.
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setLocationShared((v) => !v)}
+                        style={{ width: 48, height: 28, borderRadius: 14, background: locationShared ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: locationShared ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}
+                      >
+                        <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-xs mb-1.5" style={{ color: T.muted }}>Numéro WhatsApp (avec indicatif pays, ex: 223XXXXXXXX)</p>
+                  <input
+                    value={shopWhatsapp}
+                    onChange={(e) => setShopWhatsapp(e.target.value)}
+                    placeholder="223XXXXXXXX"
+                    style={{ width: "100%", background: T.input, border: `1px solid ${T.border}`, borderRadius: 14, padding: "12px 14px", fontSize: 14, color: T.text, outline: "none", marginBottom: 16 }}
+                  />
+                  <button
+                    onClick={publishLocationListing}
+                    disabled={publishingLocation || !locationShared}
+                    style={{ width: "100%", padding: "13px 0", borderRadius: 14, background: INDIGO, color: "white", fontWeight: 700, fontSize: 14, border: "none", cursor: locationShared ? "pointer" : "not-allowed", opacity: locationShared ? 1 : 0.5 }}
+                  >
+                    {publishingLocation ? "Publication…" : "Publier mon stock maintenant"}
+                  </button>
+                  {publishLocationMsg && <p className="text-xs mt-2" style={{ color: publishLocationMsg === "Publié ✓" ? "#34d399" : "#f87171" }}>{publishLocationMsg}</p>}
+                  {locationLastSyncedAt && (
+                    <p className="text-[11px] mt-2" style={{ color: T.muted }}>Dernière publication : {new Date(locationLastSyncedAt).toLocaleString()}</p>
+                  )}
+                  <p className="text-[11px] mt-4" style={{ color: T.muted, lineHeight: 1.5 }}>
+                    Astuce : republie ton stock régulièrement (surtout après avoir utilisé l'appli hors ligne) pour que les acheteurs voient des données à jour. Au-delà de 48h sans republication, ta boutique n'apparaît plus dans les résultats.
+                  </p>
                 </div>
               )}
               {settingsField === "sharecard" && (
