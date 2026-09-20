@@ -242,7 +242,6 @@ const EMPLOYEE_ROLES = {
 // Ce qui reste TOUJOURS exclusif au propriétaire, quel que soit le rôle de l'employé :
 // gérer les employés, changer mot de passe/PIN du compte principal, abonnement, export/suppression de données,
 // et voir le journal des actions des AUTRES employés (un employé ne voit que le sien).
-const ADMIN_WHATSAPP = "22300000000"; // à remplacer par ton vrai numéro, format 223XXXXXXXX
 // ---- Paiement Lemon Squeezy ----
 // Lemon Squeezy agit comme "Merchant of Record" : pas besoin d'entreprise enregistrée
 // pour vendre, et son Checkout hébergé peut être ouvert directement depuis le navigateur
@@ -5032,6 +5031,20 @@ EXTRA_UI.installBannerDesc = { am: "Shopnifyን ወደ መነሻ ማያ ገጽ�
 EXTRA_UI.installBannerBtn = { am: "ጫን", ar: "تثبيت", bm: "Sigi", bn: "ইনস্টল করুন", de: "Installieren", en: "Install", es: "Instalar", fr: "Installer", ha: "Sanya", hi: "इंस्टॉल करें", id: "Pasang", it: "Installa", nl: "Installeren", ja: "インストール", ko: "설치", pl: "Zainstaluj", pt: "Instalar", ru: "Установить", sw: "Sakinisha", ta: "நிறுவு", te: "ఇన్‌స్టాల్ చేయి", th: "ติดตั้ง", tl: "I-install", tr: "Yükle", ur: "انسٹال کریں", vi: "Cài đặt", wo: "Yokkal", yo: "Fi sórí ẹ̀rọ", zh: "安装", zu: "Faka" };
 EXTRA_UI.installBannerLater = { am: "በኋላ", ar: "لاحقًا", bm: "Tuma", bn: "পরে", de: "Später", en: "Later", es: "Más tarde", fr: "Plus tard", ha: "Daga baya", hi: "बाद में", id: "Nanti", it: "Più tardi", nl: "Later", ja: "あとで", ko: "나중에", pl: "Później", pt: "Mais tarde", ru: "Позже", sw: "Baadaye", ta: "பிறகு", te: "తర్వాత", th: "ไว้ทีหลัง", tl: "Mamaya na", tr: "Sonra", ur: "بعد میں", vi: "Để sau", wo: "Ginnaaw", yo: "Nígbà míì", zh: "稍后", zu: "Kamuva" };
 EXTRA_UI.installIosHint = { am: "በ iPhone ላይ፦ የማጋሪያ (Share) ቁልፉን ይጫኑ፣ ከዚያ “ወደ መነሻ ማያ ገጽ አክል” ይምረጡ።", ar: "على iPhone: اضغط على زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", bm: "iPhone kan na: Share bɔtɔn digi, o kɔfɛ i “Add to Home Screen” sugandi.", bn: "iPhone-এ: শেয়ার বোতামে চাপ দিন, তারপর “হোম স্ক্রিনে যোগ করুন” বেছে নিন।", de: "Auf dem iPhone: Tippe auf „Teilen“ und dann auf „Zum Home-Bildschirm“.", en: "On iPhone: tap the Share button, then “Add to Home Screen”.", es: "En iPhone: toca el botón Compartir y luego «Añadir a pantalla de inicio».", fr: "Sur iPhone : touche le bouton Partager, puis « Sur l'écran d'accueil ».", ha: "A iPhone: danna maɓallin Share, sannan ka zaɓi “Add to Home Screen”.", hi: "iPhone पर: शेयर बटन दबाएँ, फिर “होम स्क्रीन पर जोड़ें” चुनें।", id: "Di iPhone: ketuk tombol Bagikan, lalu pilih “Tambah ke Layar Utama”.", it: "Su iPhone: tocca il pulsante Condividi, poi «Aggiungi alla schermata Home».", nl: "Op iPhone: tik op de knop Deel en kies daarna ‘Zet op beginscherm’.", ja: "iPhoneの場合：共有ボタンをタップし、「ホーム画面に追加」を選んでください。", ko: "iPhone에서: 공유 버튼을 누른 다음 '홈 화면에 추가'를 선택하세요.", pl: "Na iPhonie: dotknij przycisku Udostępnij, a potem „Dodaj do ekranu głównego”.", pt: "No iPhone: toque no botão Compartilhar e depois em “Adicionar à Tela de Início”.", ru: "На iPhone: нажмите «Поделиться», затем «На экран „Домой“».", sw: "Kwenye iPhone: gusa kitufe cha Shiriki, kisha chagua “Ongeza kwenye Skrini ya Kwanza”.", ta: "iPhone-இல்: பகிர் பொத்தானைத் தொட்டு, பின்னர் “முகப்புத் திரையில் சேர்” என்பதைத் தேர்ந்தெடுக்கவும்.", te: "iPhone‌లో: షేర్ బటన్‌ను నొక్కి, ఆపై “హోమ్ స్క్రీన్‌కు జోడించు” ఎంచుకోండి.", th: "บน iPhone: แตะปุ่มแชร์ แล้วเลือก “เพิ่มไปยังหน้าจอโฮม”", tl: "Sa iPhone: pindutin ang Share button, tapos piliin ang “Add to Home Screen”.", tr: "iPhone'da: Paylaş düğmesine dokun, ardından “Ana Ekrana Ekle”yi seç.", ur: "iPhone پر: شیئر بٹن دبائیں، پھر “ہوم اسکرین میں شامل کریں” منتخب کریں۔", vi: "Trên iPhone: chạm nút Chia sẻ, rồi chọn “Thêm vào Màn hình chính”.", wo: "Ci iPhone: bësal bouton Share bi, gannaaw loolu tànn “Add to Home Screen”.", yo: "Lórí iPhone: tẹ bọ́tìnì Share, lẹ́yìn náà yan “Add to Home Screen”.", zh: "在 iPhone 上：点击“分享”按钮，然后选择“添加到主屏幕”。", zu: "ku-iPhone: cindezela inkinobho ethi Share, bese ukhetha “Add to Home Screen”." };
+EXTRA_UI.supportEmailDesc = { am: "የኢሜይል እገዛ", ar: "الدعم عبر البريد الإلكتروني", bm: "Dɛmɛ imɛli fɛ", bn: "ইমেইল সহায়তা", de: "E-Mail-Support", en: "Email support", es: "Asistencia por correo", fr: "Assistance par e-mail", ha: "Taimako ta imel", hi: "ईमेल सहायता", id: "Dukungan email", it: "Assistenza via e-mail", nl: "Ondersteuning via e-mail", ja: "メールサポート", ko: "이메일 지원", pl: "Pomoc e-mailem", pt: "Suporte por e-mail", ru: "Поддержка по e-mail", sw: "Msaada kwa barua pepe", ta: "மின்னஞ்சல் உதவி", te: "ఇమెయిల్ సహాయం", th: "ฝ่ายสนับสนุนทางอีเมล", tl: "Suporta sa email", tr: "E-posta desteği", ur: "ای میل معاونت", vi: "Hỗ trợ qua email", wo: "Ndimbal ci imeel", yo: "Ìrànlọ́wọ́ lórí ímeèlì", zh: "邮件支持", zu: "Usizo nge-imeyili" };
+EXTRA_UI.supportMsgPlaceholder = { am: "ችግርዎን ወይም ጥያቄዎን ይግለጹ…", ar: "اشرح مشكلتك أو سؤالك…", bm: "I ka gɛlɛya walima i ka ɲininkali sɛbɛn…", bn: "আপনার সমস্যা বা প্রশ্ন লিখুন…", de: "Beschreibe dein Problem oder deine Frage…", en: "Describe your problem or question…", es: "Describe tu problema o pregunta…", fr: "Décris ton problème ou ta question…", ha: "Bayyana matsalarka ko tambayarka…", hi: "अपनी समस्या या सवाल लिखें…", id: "Jelaskan masalah atau pertanyaanmu…", it: "Descrivi il tuo problema o la tua domanda…", nl: "Beschrijf je probleem of vraag…", ja: "問題や質問を書いてください…", ko: "문제나 질문을 적어 주세요…", pl: "Opisz swój problem lub pytanie…", pt: "Descreva seu problema ou dúvida…", ru: "Опишите вашу проблему или вопрос…", sw: "Eleza tatizo au swali lako…", ta: "உங்கள் பிரச்சினை அல்லது கேள்வியை எழுதுங்கள்…", te: "మీ సమస్య లేదా ప్రశ్నను రాయండి…", th: "อธิบายปัญหาหรือคำถามของคุณ…", tl: "Ilarawan ang iyong problema o tanong…", tr: "Sorununu veya merak ettiğini açıkla…", ur: "اپنا مسئلہ یا سوال لکھیں…", vi: "Hãy mô tả vấn đề hoặc câu hỏi của bạn…", wo: "Faral sa jafe-jafe walla sa laaj…", yo: "Ṣàlàyé ìṣòro tàbí ìbéèrè rẹ…", zh: "请描述你的问题或疑问…", zu: "Chaza inkinga noma umbuzo wakho…" };
+EXTRA_UI.supportReplyHint = { am: "በመለያዎ የኢሜይል አድራሻ በኢሜይል እንመልሳለን።", ar: "نردّ عليك بالبريد الإلكتروني على عنوان حسابك.", bm: "An bɛna jaabi di imɛli fɛ, i ka jatebɔ imɛli adiresi la.", bn: "আমরা আপনার অ্যাকাউন্টের ইমেইল ঠিকানায় ইমেইলে উত্তর দেব।", de: "Wir antworten per E-Mail an die Adresse deines Kontos.", en: "We reply by email, to your account's address.", es: "Respondemos por correo electrónico, a la dirección de tu cuenta.", fr: "Nous te répondons par e-mail, à l'adresse de ton compte.", ha: "Za mu amsa ta imel, zuwa adireshin asusunka.", hi: "हम आपके अकाउंट के ईमेल पते पर ईमेल से जवाब देंगे।", id: "Kami membalas lewat email, ke alamat akunmu.", it: "Rispondiamo via e-mail, all'indirizzo del tuo account.", nl: "We antwoorden per e-mail, op het adres van je account.", ja: "アカウントのメールアドレスに返信します。", ko: "계정 이메일 주소로 답변드립니다.", pl: "Odpowiadamy e-mailem na adres Twojego konta.", pt: "Respondemos por e-mail, no endereço da sua conta.", ru: "Мы ответим по e-mail на адрес вашего аккаунта.", sw: "Tunajibu kwa barua pepe, kwenye anwani ya akaunti yako.", ta: "உங்கள் கணக்கின் மின்னஞ்சல் முகவரிக்கு மின்னஞ்சலில் பதிலளிப்போம்.", te: "మీ ఖాతా ఇమెయిల్ చిరునామాకు ఇమెయిల్ ద్వారా సమాధానం ఇస్తాము.", th: "เราจะตอบกลับทางอีเมลไปยังที่อยู่อีเมลของบัญชีคุณ", tl: "Sasagot kami sa email, sa address ng iyong account.", tr: "E-posta ile, hesabının adresine yanıt veriyoruz.", ur: "ہم آپ کے اکاؤنٹ کے ای میل پتے پر ای میل سے جواب دیں گے۔", vi: "Chúng tôi trả lời qua email, đến địa chỉ email của tài khoản bạn.", wo: "Dinanu la tontu ci imeel, ci adrees bu sa compte.", yo: "A ó dá ọ lóhùn nípasẹ̀ ímeèlì, sí àdírẹ́sì àkọọ́lẹ̀ rẹ.", zh: "我们会通过电子邮件回复到你的账号邮箱。", zu: "Sizophendula nge-imeyili, ekheleni le-akhawunti yakho." };
+EXTRA_UI.supportAttachLabel = { am: "ፎቶ ወይም ቪዲዮ (አማራጭ)", ar: "صورة أو فيديو (اختياري)", bm: "Foto walima widewo (a tɛ wajibi ye)", bn: "ছবি বা ভিডিও (ঐচ্ছিক)", de: "Foto oder Video (optional)", en: "Photo or video (optional)", es: "Foto o vídeo (opcional)", fr: "Photo ou vidéo (facultatif)", ha: "Hoto ko bidiyo (na zaɓi)", hi: "फ़ोटो या वीडियो (वैकल्पिक)", id: "Foto atau video (opsional)", it: "Foto o video (facoltativo)", nl: "Foto of video (optioneel)", ja: "写真または動画（任意）", ko: "사진 또는 동영상 (선택)", pl: "Zdjęcie lub wideo (opcjonalnie)", pt: "Foto ou vídeo (opcional)", ru: "Фото или видео (необязательно)", sw: "Picha au video (si lazima)", ta: "புகைப்படம் அல்லது வீடியோ (விருப்பம்)", te: "ఫోటో లేదా వీడియో (ఐచ్ఛికం)", th: "รูปภาพหรือวิดีโอ (ไม่บังคับ)", tl: "Larawan o video (opsyonal)", tr: "Fotoğraf veya video (isteğe bağlı)", ur: "تصویر یا ویڈیو (اختیاری)", vi: "Ảnh hoặc video (không bắt buộc)", wo: "Nataal walla widewo (ndax bëgg)", yo: "Fọ́tò tàbí fídíò (kò jẹ́ dandan)", zh: "照片或视频（可选）", zu: "Isithombe noma ividiyo (akuphoqelekile)" };
+EXTRA_UI.supportAddFile = { am: "ፎቶ ወይም ቪዲዮ አክል", ar: "إضافة صورة أو فيديو", bm: "Foto walima widewo fara a kan", bn: "ছবি বা ভিডিও যোগ করুন", de: "Foto oder Video hinzufügen", en: "Add a photo or video", es: "Añadir una foto o un vídeo", fr: "Ajouter une photo ou une vidéo", ha: "Ƙara hoto ko bidiyo", hi: "फ़ोटो या वीडियो जोड़ें", id: "Tambahkan foto atau video", it: "Aggiungi una foto o un video", nl: "Foto of video toevoegen", ja: "写真または動画を追加", ko: "사진 또는 동영상 추가", pl: "Dodaj zdjęcie lub wideo", pt: "Adicionar uma foto ou um vídeo", ru: "Добавить фото или видео", sw: "Ongeza picha au video", ta: "புகைப்படம் அல்லது வீடியோவைச் சேர்", te: "ఫోటో లేదా వీడియో జోడించండి", th: "เพิ่มรูปภาพหรือวิดีโอ", tl: "Magdagdag ng larawan o video", tr: "Fotoğraf veya video ekle", ur: "تصویر یا ویڈیو شامل کریں", vi: "Thêm ảnh hoặc video", wo: "Yokk nataal walla widewo", yo: "Fi fọ́tò tàbí fídíò kún un", zh: "添加照片或视频", zu: "Engeza isithombe noma ividiyo" };
+EXTRA_UI.supportSendBtn = { am: "ላክ", ar: "إرسال", bm: "Ci", bn: "পাঠান", de: "Senden", en: "Send", es: "Enviar", fr: "Envoyer", ha: "Aika", hi: "भेजें", id: "Kirim", it: "Invia", nl: "Verzenden", ja: "送信", ko: "보내기", pl: "Wyślij", pt: "Enviar", ru: "Отправить", sw: "Tuma", ta: "அனுப்பு", te: "పంపండి", th: "ส่ง", tl: "Ipadala", tr: "Gönder", ur: "بھیجیں", vi: "Gửi", wo: "Yònnee", yo: "Fi ránṣẹ́", zh: "发送", zu: "Thumela" };
+EXTRA_UI.supportSending = { am: "በመላክ ላይ…", ar: "جارٍ الإرسال…", bm: "A bɛ ci…", bn: "পাঠানো হচ্ছে…", de: "Wird gesendet…", en: "Sending…", es: "Enviando…", fr: "Envoi en cours…", ha: "Ana aikawa…", hi: "भेजा जा रहा है…", id: "Mengirim…", it: "Invio in corso…", nl: "Bezig met verzenden…", ja: "送信中…", ko: "보내는 중…", pl: "Wysyłanie…", pt: "Enviando…", ru: "Отправка…", sw: "Inatuma…", ta: "அனுப்பப்படுகிறது…", te: "పంపుతోంది…", th: "กำลังส่ง…", tl: "Ipinapadala…", tr: "Gönderiliyor…", ur: "بھیجا جا رہا ہے…", vi: "Đang gửi…", wo: "Di yònnee…", yo: "Ń fi ránṣẹ́…", zh: "发送中…", zu: "Iyathunyelwa…" };
+EXTRA_UI.supportSentMsg = { am: "መልዕክቱ ተልኳል! በኢሜይል እንመልሳለን።", ar: "تم إرسال الرسالة! سنردّ عليك بالبريد الإلكتروني.", bm: "Cikan cira! An bɛna jaabi di imɛli fɛ.", bn: "বার্তা পাঠানো হয়েছে! আমরা ইমেইলে উত্তর দেব।", de: "Nachricht gesendet! Wir antworten per E-Mail.", en: "Message sent! We'll reply by email.", es: "¡Mensaje enviado! Te responderemos por correo electrónico.", fr: "Message envoyé ! Nous te répondrons par e-mail.", ha: "An aika saƙo! Za mu amsa ta imel.", hi: "संदेश भेज दिया गया! हम ईमेल से जवाब देंगे।", id: "Pesan terkirim! Kami akan membalas lewat email.", it: "Messaggio inviato! Ti risponderemo via e-mail.", nl: "Bericht verzonden! We antwoorden per e-mail.", ja: "送信しました！メールで返信します。", ko: "메시지를 보냈습니다! 이메일로 답변드리겠습니다.", pl: "Wiadomość wysłana! Odpowiemy e-mailem.", pt: "Mensagem enviada! Responderemos por e-mail.", ru: "Сообщение отправлено! Мы ответим по e-mail.", sw: "Ujumbe umetumwa! Tutajibu kwa barua pepe.", ta: "செய்தி அனுப்பப்பட்டது! மின்னஞ்சலில் பதிலளிப்போம்.", te: "సందేశం పంపబడింది! ఇమెయిల్ ద్వారా సమాధానం ఇస్తాము.", th: "ส่งข้อความแล้ว! เราจะตอบกลับทางอีเมล", tl: "Naipadala ang mensahe! Sasagot kami sa email.", tr: "Mesaj gönderildi! E-posta ile yanıt vereceğiz.", ur: "پیغام بھیج دیا گیا! ہم ای میل سے جواب دیں گے۔", vi: "Đã gửi tin nhắn! Chúng tôi sẽ trả lời qua email.", wo: "Bataaxal bi yónnee nañu ko! Dinanu tontu ci imeel.", yo: "A ti fi ìfiránṣẹ́ náà ránṣẹ́! A ó dáhùn nípasẹ̀ ímeèlì.", zh: "消息已发送！我们会通过电子邮件回复你。", zu: "Umyalezo uthunyelwe! Sizophendula nge-imeyili." };
+EXTRA_UI.supportNewMsg = { am: "ሌላ መልዕክት ላክ", ar: "إرسال رسالة أخرى", bm: "Cikan wɛrɛ ci", bn: "আরেকটি বার্তা পাঠান", de: "Weitere Nachricht senden", en: "Send another message", es: "Enviar otro mensaje", fr: "Envoyer un autre message", ha: "Aika wani saƙo", hi: "एक और संदेश भेजें", id: "Kirim pesan lain", it: "Invia un altro messaggio", nl: "Nog een bericht sturen", ja: "別のメッセージを送る", ko: "다른 메시지 보내기", pl: "Wyślij kolejną wiadomość", pt: "Enviar outra mensagem", ru: "Отправить ещё одно сообщение", sw: "Tuma ujumbe mwingine", ta: "மற்றொரு செய்தியை அனுப்பு", te: "మరో సందేశం పంపండి", th: "ส่งข้อความอื่น", tl: "Magpadala ng isa pang mensahe", tr: "Başka bir mesaj gönder", ur: "ایک اور پیغام بھیجیں", vi: "Gửi tin nhắn khác", wo: "Yònnee beneen bataaxal", yo: "Fi ìfiránṣẹ́ mìíràn ránṣẹ́", zh: "再发一条消息", zu: "Thumela omunye umyalezo" };
+EXTRA_UI.supportErrEmpty = { am: "ከመላክዎ በፊት መልዕክትዎን ይጻፉ።", ar: "اكتب رسالتك قبل الإرسال.", bm: "I ka cikan sɛbɛn sani i ka a ci.", bn: "পাঠানোর আগে আপনার বার্তা লিখুন।", de: "Schreibe deine Nachricht, bevor du sendest.", en: "Write your message before sending.", es: "Escribe tu mensaje antes de enviar.", fr: "Écris ton message avant d'envoyer.", ha: "Rubuta saƙonka kafin ka aika.", hi: "भेजने से पहले अपना संदेश लिखें।", id: "Tulis pesanmu sebelum mengirim.", it: "Scrivi il messaggio prima di inviare.", nl: "Schrijf je bericht voordat je verstuurt.", ja: "送信する前にメッセージを入力してください。", ko: "보내기 전에 메시지를 입력하세요.", pl: "Napisz wiadomość przed wysłaniem.", pt: "Escreva sua mensagem antes de enviar.", ru: "Напишите сообщение перед отправкой.", sw: "Andika ujumbe wako kabla ya kutuma.", ta: "அனுப்பும் முன் உங்கள் செய்தியை எழுதுங்கள்.", te: "పంపే ముందు మీ సందేశం రాయండి.", th: "เขียนข้อความก่อนส่ง", tl: "Isulat ang iyong mensahe bago ipadala.", tr: "Göndermeden önce mesajını yaz.", ur: "بھیجنے سے پہلے اپنا پیغام لکھیں۔", vi: "Hãy viết tin nhắn trước khi gửi.", wo: "Bindal sa bataaxal balaa nga koy yònnee.", yo: "Kọ ìfiránṣẹ́ rẹ kí o tó fi ránṣẹ́.", zh: "请先写下消息再发送。", zu: "Bhala umyalezo wakho ngaphambi kokuthumela." };
+EXTRA_UI.supportErrTooBig = { am: "ፋይሉ በጣም ትልቅ ነው (ቢበዛ 20 ሜባ)።", ar: "الملف كبير جدًا (20 ميغابايت كحد أقصى).", bm: "Fichɛ ka bon kojugu (20 MB ye a sanfɛ ye).", bn: "ফাইল অনেক বড় (সর্বোচ্চ ২০ এমবি)।", de: "Datei zu groß (maximal 20 MB).", en: "File too large (20 MB maximum).", es: "Archivo demasiado grande (máximo 20 MB).", fr: "Fichier trop lourd (20 Mo maximum).", ha: "Fayil ɗin ya yi girma da yawa (mafi yawa 20 MB).", hi: "फ़ाइल बहुत बड़ी है (अधिकतम 20 MB)।", id: "File terlalu besar (maksimal 20 MB).", it: "File troppo pesante (massimo 20 MB).", nl: "Bestand te groot (maximaal 20 MB).", ja: "ファイルが大きすぎます（最大20MB）。", ko: "파일이 너무 큽니다 (최대 20MB).", pl: "Plik jest za duży (maksymalnie 20 MB).", pt: "Arquivo muito grande (máximo 20 MB).", ru: "Файл слишком большой (максимум 20 МБ).", sw: "Faili ni kubwa mno (kiwango cha juu MB 20).", ta: "கோப்பு மிகப் பெரியது (அதிகபட்சம் 20 MB).", te: "ఫైల్ చాలా పెద్దది (గరిష్టంగా 20 MB).", th: "ไฟล์ใหญ่เกินไป (สูงสุด 20 MB)", tl: "Masyadong malaki ang file (hanggang 20 MB lang).", tr: "Dosya çok büyük (en fazla 20 MB).", ur: "فائل بہت بڑی ہے (زیادہ سے زیادہ 20 ایم بی)۔", vi: "Tệp quá lớn (tối đa 20 MB).", wo: "Fichier bi diis na lool (20 MB ngir gën).", yo: "Fáìlì náà tóbi jù (20 MB ni ó pọ̀ jù).", zh: "文件太大（最大 20 MB）。", zu: "Ifayela likhulu kakhulu (u-20 MB ubuningi)." };
+EXTRA_UI.supportErrTooMany = { am: "ቢበዛ 3 ፋይሎች።", ar: "3 ملفات كحد أقصى.", bm: "Fichɛ 3 ye a sanfɛ ye.", bn: "সর্বোচ্চ ৩টি ফাইল।", de: "Maximal 3 Dateien.", en: "3 files maximum.", es: "Máximo 3 archivos.", fr: "3 fichiers maximum.", ha: "Fayiloli 3 kawai a mafi yawa.", hi: "अधिकतम 3 फ़ाइलें।", id: "Maksimal 3 file.", it: "Massimo 3 file.", nl: "Maximaal 3 bestanden.", ja: "ファイルは最大3つまでです。", ko: "파일은 최대 3개입니다.", pl: "Maksymalnie 3 pliki.", pt: "Máximo de 3 arquivos.", ru: "Не более 3 файлов.", sw: "Kiwango cha juu ni faili 3.", ta: "அதிகபட்சம் 3 கோப்புகள்.", te: "గరిష్టంగా 3 ఫైళ్లు.", th: "สูงสุด 3 ไฟล์", tl: "Hanggang 3 file lang.", tr: "En fazla 3 dosya.", ur: "زیادہ سے زیادہ 3 فائلیں۔", vi: "Tối đa 3 tệp.", wo: "3 fichier rekk ngir gën.", yo: "Fáìlì mẹ́ta ni ó pọ̀ jù.", zh: "最多 3 个文件。", zu: "Amafayela angu-3 ubuningi." };
+EXTRA_UI.supportErrLimit = { am: "በቀን 3 መልዕክቶች ገደብ ደርሰዋል። ነገ እንደገና ይሞክሩ።", ar: "لقد بلغت الحد الأقصى وهو 3 رسائل في اليوم. حاول غدًا.", bm: "I sera cikan 3 sanga kɛ don o don ma. A lajɛ sini.", bn: "আপনি দিনে ৩টি বার্তার সীমায় পৌঁছে গেছেন। আগামীকাল আবার চেষ্টা করুন।", de: "Du hast das Limit von 3 Nachrichten pro Tag erreicht. Versuche es morgen erneut.", en: "You've reached the limit of 3 messages per day. Try again tomorrow.", es: "Has alcanzado el límite de 3 mensajes por día. Inténtalo mañana.", fr: "Tu as atteint la limite de 3 messages par jour. Réessaie demain.", ha: "Ka kai iyakar saƙonni 3 a rana. Sake gwadawa gobe.", hi: "आप रोज़ के 3 संदेशों की सीमा तक पहुँच गए हैं। कल फिर कोशिश करें।", id: "Kamu sudah mencapai batas 3 pesan per hari. Coba lagi besok.", it: "Hai raggiunto il limite di 3 messaggi al giorno. Riprova domani.", nl: "Je hebt de limiet van 3 berichten per dag bereikt. Probeer het morgen opnieuw.", ja: "1日3件の上限に達しました。明日もう一度お試しください。", ko: "하루 3건 제한에 도달했습니다. 내일 다시 시도하세요.", pl: "Osiągnięto limit 3 wiadomości dziennie. Spróbuj jutro.", pt: "Você atingiu o limite de 3 mensagens por dia. Tente novamente amanhã.", ru: "Вы достигли лимита в 3 сообщения в день. Попробуйте завтра.", sw: "Umefikia kikomo cha jumbe 3 kwa siku. Jaribu tena kesho.", ta: "ஒரு நாளைக்கு 3 செய்திகள் என்ற வரம்பை அடைந்துவிட்டீர்கள். நாளை மீண்டும் முயலுங்கள்.", te: "రోజుకు 3 సందేశాల పరిమితిని చేరుకున్నారు. రేపు మళ్లీ ప్రయత్నించండి.", th: "คุณส่งครบ 3 ข้อความต่อวันแล้ว โปรดลองใหม่พรุ่งนี้", tl: "Naabot mo na ang limitasyong 3 mensahe bawat araw. Subukan muli bukas.", tr: "Günlük 3 mesaj sınırına ulaştın. Yarın tekrar dene.", ur: "آپ روزانہ 3 پیغامات کی حد تک پہنچ گئے ہیں۔ کل دوبارہ کوشش کریں۔", vi: "Bạn đã đạt giới hạn 3 tin nhắn mỗi ngày. Hãy thử lại vào ngày mai.", wo: "Àgg nga ci limite 3 bataaxal ci bés. Jéemaat suba.", yo: "O ti dé ààlà ìfiránṣẹ́ mẹ́ta lójúmọ́. Gbìyànjú lẹ́ẹ̀kan sí i lọ́la.", zh: "你今天已达到每天 3 条消息的上限，请明天再试。", zu: "Ufinyelele umkhawulo wemilayezo emi-3 ngosuku. Zama futhi kusasa." };
+EXTRA_UI.supportErrGeneric = { am: "መላክ አልተቻለም። ግንኙነትዎን ያረጋግጡ እና እንደገና ይሞክሩ።", ar: "تعذّر الإرسال. تحقّق من اتصالك وحاول مجددًا.", bm: "A ma se ka ci. I ka jɛkulu lajɛ ka a fɔ kokura.", bn: "পাঠানো যায়নি। আপনার সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।", de: "Senden nicht möglich. Prüfe deine Verbindung und versuche es erneut.", en: "Couldn't send. Check your connection and try again.", es: "No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.", fr: "Envoi impossible. Vérifie ta connexion et réessaie.", ha: "Ba a iya aikawa ba. Duba haɗinka ka sake gwadawa.", hi: "भेजा नहीं जा सका। अपना कनेक्शन जाँचें और फिर कोशिश करें।", id: "Gagal mengirim. Periksa koneksimu lalu coba lagi.", it: "Invio non riuscito. Controlla la connessione e riprova.", nl: "Verzenden mislukt. Controleer je verbinding en probeer het opnieuw.", ja: "送信できませんでした。接続を確認して、もう一度お試しください。", ko: "보낼 수 없습니다. 연결을 확인하고 다시 시도하세요.", pl: "Nie udało się wysłać. Sprawdź połączenie i spróbuj ponownie.", pt: "Não foi possível enviar. Verifique sua conexão e tente novamente.", ru: "Не удалось отправить. Проверьте соединение и повторите попытку.", sw: "Imeshindikana kutuma. Angalia mtandao wako kisha ujaribu tena.", ta: "அனுப்ப முடியவில்லை. இணைப்பைச் சரிபார்த்து மீண்டும் முயலுங்கள்.", te: "పంపడం సాధ్యం కాలేదు. మీ కనెక్షన్‌ను తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.", th: "ส่งไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง", tl: "Hindi maipadala. Suriin ang koneksyon at subukan muli.", tr: "Gönderilemedi. Bağlantını kontrol edip tekrar dene.", ur: "بھیجا نہیں جا سکا۔ اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں۔", vi: "Không thể gửi. Hãy kiểm tra kết nối và thử lại.", wo: "Yónneewul. Xoolal sa connexion te jéemaat.", yo: "Kò ṣeé fi ránṣẹ́. Ṣàyẹ̀wò ìsopọ̀ rẹ kí o sì tún gbìyànjú.", zh: "发送失败。请检查网络后重试。", zu: "Ayikwazanga ukuthunyelwa. Hlola uxhumano lwakho uzame futhi." };
 EXTRA_UI.histExpenseDeleted = { fr: "Dépense supprimée", en: "Expense deleted", es: "Gasto eliminado", pt: "Despesa excluída", ar: "مصروف محذوف" };
 EXTRA_UI.histPermanentNote = { fr: "Historique permanent : les lignes ne peuvent pas être supprimées.", en: "Permanent history: entries cannot be deleted.", es: "Historial permanente: las entradas no se pueden eliminar.", pt: "Histórico permanente: os registros não podem ser excluídos.", ar: "سجل دائم: لا يمكن حذف أي عنصر." };
 EXTRA_UI.editProductTitle = { fr: "Modifier le produit", en: "Edit product", ar: "تعديل المنتج", es: "Editar producto", pt: "Editar produto", zh: "编辑商品", vi: "Chỉnh sửa sản phẩm", de: "Produkt bearbeiten", ru: "Изменить товар", hi: "उत्पाद संपादित करें", ta: "பொருளைத் திருத்து", bn: "পণ্য সম্পাদনা করুন", ur: "پروڈکٹ میں ترمیم کریں", id: "Edit produk", tr: "Ürünü düzenle", ko: "상품 수정", ja: "商品を編集", it: "Modifica prodotto", nl: "Product bewerken", sw: "Hariri bidhaa", ha: "Gyara samfur", bm: "Fɛn labɛn", tl: "I-edit ang produkto", te: "ఉత్పత్తిని సవరించండి", th: "แก้ไขสินค้า", wo: "Soppi jaaykatu", pl: "Edytuj produkt", yo: "Ṣàtúnṣe ọjà", am: "ምርቱን አርትዕ", zu: "Hlela umkhiqizo" };
@@ -8186,6 +8199,61 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showEditFund, setShowEditFund] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [settingsView, setSettingsView] = useState("menu");
+  // ---- Assistance : message + photo/vidéo FACULTATIVES, envoyé au support sans montrer son adresse ----
+  const [supportMsg, setSupportMsg] = useState("");
+  const [supportFiles, setSupportFiles] = useState([]);
+  const [supportBusy, setSupportBusy] = useState(false);
+  const [supportErr, setSupportErr] = useState("");
+  const [supportSent, setSupportSent] = useState(false);
+  const SUPPORT_MAX_FILES = 3;
+  const SUPPORT_MAX_BYTES = 20 * 1024 * 1024;
+  const pickSupportFiles = (e) => {
+    const picked = Array.from(e.target.files || []);
+    e.target.value = "";
+    setSupportErr("");
+    let next = [...supportFiles];
+    for (const f of picked) {
+      if (!/^(image|video)\//.test(f.type)) continue;
+      if (f.size > SUPPORT_MAX_BYTES) { setSupportErr(tx(lang, "supportErrTooBig")); continue; }
+      if (next.length >= SUPPORT_MAX_FILES) { setSupportErr(tx(lang, "supportErrTooMany")); break; }
+      next.push(f);
+    }
+    setSupportFiles(next);
+  };
+  const sendSupport = async () => {
+    setSupportErr("");
+    const text = supportMsg.trim();
+    if (!text) { setSupportErr(tx(lang, "supportErrEmpty")); return; }
+    if (isDemo) { setSupportErr(tx(lang, "supportErrGeneric")); return; }
+    setSupportBusy(true);
+    try {
+      const { data: u } = await supabase.auth.getUser();
+      const uid = u?.user?.id;
+      if (!uid) throw new Error("no user");
+      const uploaded = [];
+      for (const f of supportFiles) {
+        const safe = f.name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-80);
+        const path = `${uid}/${Date.now()}-${Math.random().toString(36).slice(2, 7)}-${safe}`;
+        const { error: upErr } = await supabase.storage.from("support-files").upload(path, f, { contentType: f.type, upsert: false });
+        if (upErr) throw upErr;
+        uploaded.push({ path, name: f.name, type: f.type, size: f.size });
+      }
+      const { data, error } = await supabase.functions.invoke("send-support-message", {
+        body: { message: text, attachments: uploaded, shopName, username },
+      });
+      if (error) {
+        if (error?.context?.status === 429) { setSupportErr(tx(lang, "supportErrLimit")); setSupportBusy(false); return; }
+        throw error;
+      }
+      if (!data?.ok) throw new Error("send failed");
+      setSupportMsg("");
+      setSupportFiles([]);
+      setSupportSent(true);
+    } catch (err) {
+      setSupportErr(tx(lang, "supportErrGeneric"));
+    }
+    setSupportBusy(false);
+  };
   const [settingsField, setSettingsField] = useState(null);
   const [settingsSearchQuery, setSettingsSearchQuery] = useState("");
   const [langSearchQuery, setLangSearchQuery] = useState("");
@@ -12008,8 +12076,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         {tab === "debts" && (
           <div className="space-y-2">
             {hasPermission("editDebts") && (
-              <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full flex items-center justify-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl text-white" style={{ background: INDIGO }}>
-                <Plus size={14} /> {t(lang, "debtAddBtn")}
+              <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full flex items-center justify-center gap-2 text-base font-extrabold px-4 py-4 rounded-2xl text-white active:scale-[0.98] transition-transform" style={{ background: INDIGO, boxShadow: "0 6px 16px rgba(27,58,92,0.28)" }}>
+                <Plus size={22} strokeWidth={2.5} /> {t(lang, "debtAddBtn")}
               </button>
             )}
             {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} />}
@@ -13229,7 +13297,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "donnees", label: t(lang, "setDonnees"), desc: t(lang, "setSauvegardeExportReinitialisation"), icon: Database, accent: "#60a5fa", hidden: !!activeEmployee },
                 { id: "ia", label: t(lang, "setAssistantIa"), desc: t(lang, "setRechercheWebHistorique"), icon: Bot, accent: "#f472b6" },
                 { id: "notifs", label: t(lang, "setNotifications"), desc: t(lang, "setStockDettesAbonnement"), icon: Bell, accent: "#fb923c" },
-                { id: "help", label: t(lang, "assistance"), desc: t(lang, "setSupportWhatsapp"), icon: HelpCircle, accent: T.muted },
+                { id: "help", label: t(lang, "assistance"), desc: tx(lang, "supportEmailDesc"), icon: HelpCircle, accent: T.muted },
                 { id: "about", label: t(lang, "setAPropos"), desc: t(lang, "setVersionDeveloppeur"), icon: Sparkles, accent: "#22d3ee" },
                 // zone de danger (réinitialiser les données) — toujours exclusif au propriétaire.
                 { id: "danger", label: t(lang, "dangerZone"), desc: t(lang, "setReinitialiserLesDonnees"), icon: AlertOctagon, accent: "#f87171", hidden: !!activeEmployee },
@@ -13899,9 +13967,34 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {settingsView === "help" && !settingsField && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <p style={{ color: T.muted, fontSize: 13 }}>{t(lang, "setUneQuestionEcrisnousDirectement")}</p>
-                  <a href={`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Bonjour, j'ai une question sur mon compte Shopnify (identifiant : ${username}).`)}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", fontWeight: 700, fontSize: 14, textDecoration: "none" }}>
-                    {t(lang, "contactSupport")}
-                  </a>
+                  {supportSent ? (
+                    <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, textAlign: "center" }}>
+                      <p style={{ color: "#34d399", fontSize: 14, fontWeight: 700, marginBottom: 10 }}>✓ {tx(lang, "supportSentMsg")}</p>
+                      <button onClick={() => setSupportSent(false)} style={{ background: "transparent", border: "none", color: T.muted, fontSize: 12, textDecoration: "underline", cursor: "pointer" }}>{tx(lang, "supportNewMsg")}</button>
+                    </div>
+                  ) : (
+                    <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                      <textarea value={supportMsg} onChange={(e) => { setSupportMsg(e.target.value); setSupportErr(""); }} maxLength={4000} rows={5} placeholder={tx(lang, "supportMsgPlaceholder")} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 12, padding: "10px 12px", fontSize: 14, resize: "vertical", fontFamily: "inherit" }} />
+                      <p style={{ color: T.muted, fontSize: 11 }}>{tx(lang, "supportReplyHint")}</p>
+                      <p style={{ color: T.muted, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportAttachLabel")}</p>
+                      {supportFiles.map((f, idx) => (
+                        <div key={idx} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "8px 10px", borderRadius: 10, background: T.card, border: `1px solid ${T.border}` }}>
+                          <span style={{ color: T.text, fontSize: 12, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{/^video\//.test(f.type) ? "🎬" : "🖼️"} {f.name} ({(f.size / 1024 / 1024).toFixed(1)} Mo)</span>
+                          <button onClick={() => setSupportFiles(supportFiles.filter((_, k) => k !== idx))} style={{ background: "transparent", border: "none", color: T.muted, cursor: "pointer", display: "flex" }}><X size={16} /></button>
+                        </div>
+                      ))}
+                      {supportFiles.length < SUPPORT_MAX_FILES && (
+                        <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: 10, borderRadius: 12, border: `1px dashed ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                          📎 {tx(lang, "supportAddFile")}
+                          <input type="file" accept="image/*,video/*" multiple onChange={pickSupportFiles} style={{ display: "none" }} />
+                        </label>
+                      )}
+                      {supportErr && <p style={{ color: "#f87171", fontSize: 12 }}>{supportErr}</p>}
+                      <button onClick={sendSupport} disabled={supportBusy} style={{ padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: supportBusy ? 0.6 : 1 }}>
+                        {supportBusy ? tx(lang, "supportSending") : tx(lang, "supportSendBtn")}
+                      </button>
+                    </div>
+                  )}
                   {[
                     {
                       cat: t(lang, "setPriseEnMain"),
@@ -13973,12 +14066,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                       <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setContact")}</span>
-                      <span style={{ color: T.text, fontSize: 12, fontWeight: 600 }}>WhatsApp</span>
+                      <span style={{ color: T.text, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportEmailDesc")}</span>
                     </div>
                   </div>
-                  <a href={`https://wa.me/${ADMIN_WHATSAPP}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, textDecoration: "none" }}>
+                  <button onClick={() => setSettingsView("help")} style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>
                     {t(lang, "setContacterLeDeveloppeur")}
-                  </a>
+                  </button>
                 </div>
               )}
               {settingsView === "danger" && !settingsField && (
