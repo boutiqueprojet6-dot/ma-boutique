@@ -10885,6 +10885,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     });
     return () => { cancelled = true; if (handle) handle.remove(); };
   }, []);
+  // ⚠️ Ces hooks DOIVENT rester avant tout "return" anticipé (loading, accountSuspended...) :
+  // React exige le même nombre de hooks à chaque rendu (sinon erreur #310).
+  const filteredProducts = useMemo(
+    () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredStockSearch.toLowerCase()))),
+    [products, deferredStockSearch, sortProductList]
+  );
+  const filteredDebts = useMemo(
+    () => debts.filter((d) => !d.paid).filter((d) => d.customer.toLowerCase().includes(deferredDebtsSearch.toLowerCase())),
+    [debts, deferredDebtsSearch]
+  );
+  const cartProducts = useMemo(
+    () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredCartSearch.toLowerCase()))),
+    [products, deferredCartSearch, sortProductList]
+  );
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen" style={{ background: darkMode ? "#0a0a14" : SAND, color: darkMode ? "#eceef5" : CHARCOAL }}>
@@ -11192,18 +11206,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     }
     setAccountingGenerating(false);
   };
-  const filteredProducts = useMemo(
-    () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredStockSearch.toLowerCase()))),
-    [products, deferredStockSearch, sortProductList]
-  );
-  const filteredDebts = useMemo(
-    () => unpaidDebts.filter((d) => d.customer.toLowerCase().includes(deferredDebtsSearch.toLowerCase())),
-    [unpaidDebts, deferredDebtsSearch]
-  );
-  const cartProducts = useMemo(
-    () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredCartSearch.toLowerCase()))),
-    [products, deferredCartSearch, sortProductList]
-  );
   const activeCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
   const cartTotal = activeCart ? activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0) : 0;
   // Compte suspendu par un administrateur : bloque tout accès à l'app, avant
