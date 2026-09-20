@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
+﻿import React, { useState, useEffect, useCallback, useRef, useMemo, useDeferredValue } from "react";
 import { Preferences } from "@capacitor/preferences";
 import {
   CRITICAL_STATE_KEY,
@@ -60,27 +60,33 @@ import {
   LayoutGrid,
   ArrowUpDown,
 } from "lucide-react";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-} from "recharts";
 // Génère le QR code de connexion employé. Nécessite le package "qrcode.react"
 // (npm install qrcode.react) — composant standard, largement utilisé, pas de logique QR maison.
 import { QRCodeSVG } from "qrcode.react";
 // Scanner QR par caméra (composant React prêt à l'emploi, gère l'accès caméra + décodage).
 // Nécessite le package "@yudiel/react-qr-scanner" (npm install @yudiel/react-qr-scanner).
-import { Scanner } from "@yudiel/react-qr-scanner";
 // Génération de PDF côté client (export comptable, Business 1). Nécessite le package
 // "jspdf" (npm install jspdf) — inclut aussi la génération de graphiques simples en Canvas,
 // converti en image pour être inséré dans le PDF (jsPDF ne dessine pas de graphiques natifs).
-import jsPDF from "jspdf";
+// jsPDF est chargé à la demande (voir generateAccountingReport) pour alléger le démarrage.
+// ---- Chargement à la demande des grosses bibliothèques (démarrage plus rapide) ----
+// recharts (graphiques) et le scanner QR ne sont téléchargés qu'au moment où un écran
+// en a besoin, au lieu d'alourdir le chargement initial de l'app.
+const RechartsModule = React.lazy(() =>
+  import("recharts").then((m) => ({ default: ({ children }) => children(m) }))
+);
+function RechartsLoader({ children, height = 160 }) {
+  return (
+    <React.Suspense
+      fallback={<div style={{ height, display: "flex", alignItems: "center", justifyContent: "center", opacity: 0.5, fontSize: 12 }}>…</div>}
+    >
+      <RechartsModule>{children}</RechartsModule>
+    </React.Suspense>
+  );
+}
+const Scanner = React.lazy(() =>
+  import("@yudiel/react-qr-scanner").then((m) => ({ default: m.Scanner }))
+);
 // ---- Diagnostic temporaire : chronomètre de démarrage ----
 // Mesure le temps écoulé depuis le tout début du chargement de ce fichier (le plus lourd
 // de l'app) jusqu'à des étapes clés du démarrage à froid. Les résultats s'affichent en une
@@ -147,6 +153,18 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   },
 });
 // ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
+// Lit l'utilisateur connecté depuis la session locale (aucun appel réseau, ~0 ms) au lieu de
+// getUserFast() qui fait un aller-retour serveur à chaque fois. Le jeton est
+// rafraîchi automatiquement par supabase-js ; en cas de session absente, on retombe sur getUser().
+async function getUserFast() {
+  try {
+    const { data } = await supabase.auth.getSession();
+    if (data && data.session && data.session.user) {
+      return { data: { user: data.session.user }, error: null };
+    }
+  } catch (e) { /* on retombe sur la méthode réseau */ }
+  return supabase.auth.getUser();
+}
 // Sur un vrai site déployé (Vercel), window.storage n'existe pas. Cet objet reproduit
 // exactement la même interface (get/set/list) mais persiste réellement les données dans
 // Supabase (table kv_store — voir supabase-function/kv_store_schema.sql pour la créer),
@@ -159,7 +177,7 @@ window.storage = {
     return { key, value: data.value, shared };
   },
   async set(key, value, shared = false) {
-    const { data: userData } = await supabase.auth.getUser();
+    const { data: userData } = await getUserFast();
     const ownerId = userData && userData.user ? userData.user.id : null;
     const { error } = await supabase.from("kv_store").upsert({ key, value, shared, owner_id: ownerId, updated_at: new Date().toISOString() });
     if (error) throw error;
@@ -180,8 +198,6 @@ window.storage = {
 };
 // ---- Configuration Firebase (notifications push — alertes d'anomalie, Business 1) ----
 // Nécessite le package "firebase" (npm install firebase) dans ton projet.
-import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
 const firebaseConfig = {
   apiKey: "AIzaSyBtX34GW_DCT30-YJzCtE7-7P1JWr0s9Vw",
   authDomain: "boutique-78836.firebaseapp.com",
@@ -194,14 +210,22 @@ const firebaseConfig = {
 // Clé VAPID générée dans Firebase Console → Paramètres du projet → Cloud Messaging →
 // Certificats Web push. Nécessaire pour que getToken() fonctionne sur le web.
 const FIREBASE_VAPID_KEY = "BMO3y7vQYcexHLN6EXAiS0y3igU6IWww0GWfqRom8xq-yO_n4WfukJrcGVd02VMqQPQgMoc1taPCtALPMoUcWD4";
-const firebaseApp = initializeApp(firebaseConfig);
-// getMessaging() échoue dans certains environnements (SSR, navigateurs sans support, app
-// Capacitor) — on l'enveloppe et on l'évite complètement dans l'app native, où les
-// notifications push web ne fonctionnent pas de toute façon.
-// (isCapacitorApp est déjà déclaré plus haut dans ce fichier, réutilisé ici.)
-let firebaseMessaging = null;
-if (!isCapacitorApp) {
-  try { firebaseMessaging = getMessaging(firebaseApp); } catch (e) { /* notifications indisponibles ici */ }
+// Firebase (notifications push web) n'est chargé qu'au moment où l'utilisateur active les
+// notifications, et jamais dans l'app native Capacitor (qui utilise le push natif).
+let firebaseMessagingPromise = null;
+function loadFirebaseMessaging() {
+  if (isCapacitorApp) return Promise.resolve(null);
+  if (!firebaseMessagingPromise) {
+    firebaseMessagingPromise = Promise.all([import("firebase/app"), import("firebase/messaging")])
+      .then(([appMod, msgMod]) => {
+        try {
+          const app = appMod.initializeApp(firebaseConfig);
+          return { messaging: msgMod.getMessaging(app), getToken: msgMod.getToken };
+        } catch (e) { return null; /* notifications indisponibles ici */ }
+      })
+      .catch(() => null);
+  }
+  return firebaseMessagingPromise;
 }
 const INDIGO = "#1B3A5C";
 const OCHRE = "#D4A017";
@@ -6377,6 +6401,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           <p className="text-base font-bold mb-2" style={{ color: "#15162C" }}>{t(lang, "empScanTitle")}</p>
           {empScanMode === "camera" && !empScanCameraError && (
             <div className="w-full aspect-square rounded-2xl overflow-hidden mb-4" style={{ background: "#0b0b12" }}>
+              <React.Suspense fallback={null}>
               <Scanner
                 onScan={(result) => {
                   if (empScanBusy) return;
@@ -6391,6 +6416,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 constraints={{ facingMode: "environment" }}
                 styles={{ container: { width: "100%", height: "100%" } }}
               />
+              </React.Suspense>
             </div>
           )}
           {(empScanMode === "manual" || empScanCameraError) && (
@@ -6918,6 +6944,7 @@ function AdminPanel({ onLogout }) {
               <p className="text-xs text-gray-400 text-center py-4">Pas encore de données.</p>
             ) : (
               <div dir="ltr">
+                <RechartsLoader>{({ ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line }) => (
                 <ResponsiveContainer width="100%" height={180}>
                   <LineChart data={stats.trend} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
@@ -6927,6 +6954,7 @@ function AdminPanel({ onLogout }) {
                     <Line type="monotone" dataKey="count" stroke={INDIGO} strokeWidth={2.5} dot={{ r: 3, fill: INDIGO }} />
                   </LineChart>
                 </ResponsiveContainer>
+                )}</RechartsLoader>
               </div>
             )}
           </div>
@@ -6937,6 +6965,7 @@ function AdminPanel({ onLogout }) {
               <p className="text-xs text-gray-400 text-center py-4">Pas encore de données.</p>
             ) : (
               <div dir="ltr">
+                <RechartsLoader>{({ ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar }) => (
                 <ResponsiveContainer width="100%" height={Math.max(120, stats.byCountry.length * 34)}>
                   <BarChart data={stats.byCountry} layout="vertical" margin={{ left: 5, right: 24 }}>
                     <XAxis type="number" tick={{ fontSize: 10 }} allowDecimals={false} />
@@ -6945,6 +6974,7 @@ function AdminPanel({ onLogout }) {
                     <Bar dataKey="count" fill={INDIGO} radius={[0, 4, 4, 0]} barSize={18} />
                   </BarChart>
                 </ResponsiveContainer>
+                )}</RechartsLoader>
               </div>
             )}
           </div>
@@ -6955,6 +6985,7 @@ function AdminPanel({ onLogout }) {
               <p className="text-xs text-gray-400 text-center py-4">Pas encore de données.</p>
             ) : (
               <div dir="ltr">
+                <RechartsLoader>{({ ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar }) => (
                 <ResponsiveContainer width="100%" height={Math.max(120, stats.byLang.length * 34)}>
                   <BarChart data={stats.byLang} layout="vertical" margin={{ left: 5, right: 24 }}>
                     <XAxis type="number" tick={{ fontSize: 10 }} allowDecimals={false} />
@@ -6963,6 +6994,7 @@ function AdminPanel({ onLogout }) {
                     <Bar dataKey="count" fill={OCHRE} radius={[0, 4, 4, 0]} barSize={18} />
                   </BarChart>
                 </ResponsiveContainer>
+                )}</RechartsLoader>
               </div>
             )}
           </div>
@@ -6973,6 +7005,7 @@ function AdminPanel({ onLogout }) {
               <p className="text-xs text-gray-400 text-center py-4">Pas encore de données.</p>
             ) : (
               <div dir="ltr">
+                <RechartsLoader>{({ ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar }) => (
                 <ResponsiveContainer width="100%" height={Math.max(120, stats.bySector.length * 34)}>
                   <BarChart data={stats.bySector} layout="vertical" margin={{ left: 5, right: 24 }}>
                     <XAxis type="number" tick={{ fontSize: 10 }} allowDecimals={false} />
@@ -6981,6 +7014,7 @@ function AdminPanel({ onLogout }) {
                     <Bar dataKey="count" fill={GREEN} radius={[0, 4, 4, 0]} barSize={18} />
                   </BarChart>
                 </ResponsiveContainer>
+                )}</RechartsLoader>
               </div>
             )}
           </div>
@@ -7622,7 +7656,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     let cancelled = false;
     (async () => {
       try {
-        const { data: userData } = await supabase.auth.getUser();
+        const { data: userData } = await getUserFast();
         if (!userData || !userData.user) return;
         if (userData.user.created_at) setAccountCreatedAt(userData.user.created_at);
         const { data: subRow } = await supabase
@@ -7674,7 +7708,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // Reçoit le token FCM de cet appareil et l'enregistre dans Supabase (table push_tokens).
         await PushNotifications.addListener("registration", async (t) => {
           try {
-            const { data: userData } = await supabase.auth.getUser();
+            const { data: userData } = await getUserFast();
             if (!userData || !userData.user || !t || !t.value) return;
             await supabase.from("push_tokens").upsert({ owner_id: userData.user.id, token: t.value }, { onConflict: "token" });
           } catch (e) { /* best-effort */ }
@@ -7697,14 +7731,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const enablePushNotifications = async () => {
     if (isNativeApp) { await registerNativePush(true); return; }
-    if (!firebaseMessaging || typeof Notification === "undefined") { setPushPermission("unsupported"); return; }
+    if (typeof Notification === "undefined") { setPushPermission("unsupported"); return; }
     try {
-      const permission = await Notification.requestPermission();
+      // La demande de permission part tout de suite (geste utilisateur), Firebase se charge en parallèle.
+      const permissionPromise = Notification.requestPermission();
+      const firebasePromise = loadFirebaseMessaging();
+      const permission = await permissionPromise;
       setPushPermission(permission);
       if (permission !== "granted") return;
-      const token = await getToken(firebaseMessaging, { vapidKey: FIREBASE_VAPID_KEY });
+      const fb = await firebasePromise;
+      if (!fb) { setPushPermission("unsupported"); return; }
+      const token = await fb.getToken(fb.messaging, { vapidKey: FIREBASE_VAPID_KEY });
       if (!token) return;
-      const { data: userData } = await supabase.auth.getUser();
+      const { data: userData } = await getUserFast();
       if (!userData || !userData.user) return;
       await supabase.from("push_tokens").upsert({ owner_id: userData.user.id, token }, { onConflict: "token" });
     } catch (e) {
@@ -7724,7 +7763,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const loadSalesGoals = async () => {
     if (!hasFeatureAccess("salesGoals")) return;
     try {
-      const { data: userData } = await supabase.auth.getUser();
+      const { data: userData } = await getUserFast();
       if (!userData || !userData.user) return;
       const { data: rows } = await supabase.from("sales_goals").select("shop_id, target_amount").eq("owner_id", userData.user.id).eq("month", currentMonthKey);
       if (rows) {
@@ -7736,7 +7775,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const saveSalesGoal = async (shopId, amount) => {
     try {
-      const { data: userData } = await supabase.auth.getUser();
+      const { data: userData } = await getUserFast();
       if (!userData || !userData.user) return;
       await supabase.from("sales_goals").upsert(
         { owner_id: userData.user.id, shop_id: shopId, month: currentMonthKey, target_amount: amount },
@@ -7787,7 +7826,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // pour savoir quelle boutique charger. Seul le SÉLECTEUR visuel reste réservé à multiShop.
     if (isDemo) return;
     try {
-      const { data: userData } = await supabase.auth.getUser();
+      const { data: userData } = await getUserFast();
       if (!userData || !userData.user) return;
       const { data: rows } = await supabase.from("shops").select("id, name, created_at").eq("owner_id", userData.user.id).order("created_at");
       if (rows) {
@@ -7803,7 +7842,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const addShop = async (name) => {
     if (!name.trim()) return;
     try {
-      const { data: userData } = await supabase.auth.getUser();
+      const { data: userData } = await getUserFast();
       if (!userData || !userData.user) return;
       const { data: newShop, error } = await supabase.from("shops").insert({ owner_id: userData.user.id, name: name.trim() }).select("id, name, created_at").single();
       if (!error && newShop) {
@@ -8155,7 +8194,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const thisMonth = new Date().toISOString().slice(0, 7);
     (async () => {
       try {
-        const { data: userData } = await supabase.auth.getUser();
+        const { data: userData } = await getUserFast();
         if (!userData || !userData.user) return;
         const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
         const usage = row && row.data && row.data.aiUsage;
@@ -8178,7 +8217,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setAiUsageCount(nextCount);
     if (isDemo) return;
     try {
-      const { data: userData } = await supabase.auth.getUser();
+      const { data: userData } = await getUserFast();
       if (!userData || !userData.user) return;
       const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
       const currentData = (row && row.data) || {};
@@ -8423,6 +8462,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [newDebtDate, setNewDebtDate] = useState("");
   const [newDebtError, setNewDebtError] = useState("");
   const [cartSearch, setCartSearch] = useState("");
+  // Versions "différées" des recherches : la frappe reste instantanée, le filtrage des
+  // longues listes se fait en priorité basse (pas de blocage même avec 1000 produits).
+  const deferredStockSearch = useDeferredValue(stockSearch);
+  const deferredDebtsSearch = useDeferredValue(debtsSearch);
+  const deferredCartSearch = useDeferredValue(cartSearch);
+  const deferredHistorySearch = useDeferredValue(historySearch);
   const [saleViewMode, setSaleViewMode] = useState("list"); // "list" ou "grid" — affichage des produits dans l'onglet Vente
   // Tri des produits, partagé entre les onglets Stock et Vente (même logique, même
   // sélection active) : alphabétique, plus/moins vendus, plus/moins disponibles, ou
@@ -8588,6 +8633,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const persistShopToSupabase = useCallback(async (merged) => {
     if (isSecondaryShop) return { ok: false }; // pas encore supporté pour les boutiques secondaires
     try {
+      // 1 seul aller-retour réseau : la fusion se fait côté Postgres (fonction save_shop_data)
+      const { data: updated, error: rpcError } = await supabase.rpc("save_shop_data", { p_data: merged });
+      if (!rpcError && updated === true) return { ok: true };
+      // Filet de sécurité : ancienne méthode si la fonction échoue ou ne trouve pas la ligne
       const { data: userData } = await supabase.auth.getUser();
       if (!userData || !userData.user) return { ok: false };
       const ownerId = userData.user.id;
@@ -8740,9 +8789,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // qui restent pour l'instant sur window.storage uniquement.
         if (!isSecondaryShop) {
           try {
-            __mark("ShopApp : avant getUser() réseau");
-            const { data: userData } = await supabase.auth.getUser();
-            __mark("ShopApp : après getUser() réseau");
+            __mark("ShopApp : avant getUserFast()");
+            const { data: userData } = await getUserFast();
+            __mark("ShopApp : après getUserFast()");
             if (userData && userData.user) {
               __mark("ShopApp : avant requête shop_data réseau");
               const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
@@ -8877,6 +8926,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setEmployees(next.employees);
     setActionLog(next.actionLog);
     setSettingsUpdatedAt(next.settingsUpdatedAt);
+    // ⚡ Flush IMMÉDIAT (pas d'attente du useEffect qui tourne après le rendu) : si
+    // Android tue le process dans les 100ms qui suivent une vente ou une modif de
+    // panier, l'onglet/panier doivent déjà être dans le stockage natif. On passe
+    // explicitement activeCartId/draftCarts en override car les refs miroirs de ces
+    // deux valeurs n'auront pas encore été mises à jour à ce stade (elles ne le sont
+    // qu'après le prochain rendu).
+    try { persistCriticalNow({ activeCartId: next.activeCartId, draftCarts: next.draftCarts }); } catch (e) {}
+    try { flushAllCacheToNativeStorage(); } catch (e) {}
     persist(next);
   };
   // ---- Gestion des employés (réservée au propriétaire) ----
@@ -8912,7 +8969,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     if (!editingEmployeeId && !/^\d{4,6}$/.test((pin || "").trim())) { setEmpError(t(lang, "empErrPin")); return; }
     const permissions = empRole === "personnalise" ? empCustomPerms : EMPLOYEE_ROLES[empRole].permissions;
-    const { data: userData } = await supabase.auth.getUser();
+    const { data: userData } = await getUserFast();
     if (!userData || !userData.user || !activeShopId) { setEmpError(t(lang, "genericError")); return; }
     if (editingEmployeeId) {
       const { error } = await supabase.from("employees").update({ name: empName.trim(), role: empRole, permissions, shift_schedule: empShiftSchedule }).eq("id", editingEmployeeId);
@@ -8998,7 +9055,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (!activeShopId) return;
     (async () => {
       try {
-        const { data: userData } = await supabase.auth.getUser();
+        const { data: userData } = await getUserFast();
         if (!userData || !userData.user) return;
         await supabase.from("action_log").insert({
           id: entry.id, owner_id: userData.user.id, shop_id: activeShopId,
@@ -10630,11 +10687,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   useEffect(() => { activeShopIdRef.current = activeShopId; }, [activeShopId]);
   // Construit l'état critique à partir des refs (toujours à jour) et l'écrit dans le
   // stockage natif. Non-bloquant pour l'UI : on ne bloque jamais un clic pour ça.
-  const persistCriticalNow = useCallback(() => {
+  const persistCriticalNow = useCallback((overrides) => {
     const state = buildCriticalState({
       tab: tabRef.current,
-      activeCartId: activeCartIdRef.current,
-      draftCarts: draftCartsRef.current,
+      // overrides permet de flusher IMMÉDIATEMENT une valeur qui vient tout juste
+      // de changer de façon synchrone (ex: dans saveAll), sans attendre que le
+      // useEffect qui met à jour les refs ait eu le temps de tourner après le
+      // rendu — sinon on écrirait l'ancienne valeur, ce qui annulerait l'intérêt
+      // d'un flush "immédiat".
+      activeCartId: overrides && "activeCartId" in overrides ? overrides.activeCartId : activeCartIdRef.current,
+      draftCarts: overrides && overrides.draftCarts ? overrides.draftCarts : draftCartsRef.current,
       showAddProduct: showAddProductRef.current,
       editingProductId: editingProductIdRef.current,
       showSettings: showSettingsRef.current,
@@ -10935,8 +10997,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   });
   const transactions = Object.values(transactionsMap).sort((a, b) => new Date(b.date) - new Date(a.date));
   const filteredTransactions = transactions.filter((t) => {
-    if (!historySearch.trim()) return true;
-    const q = historySearch.toLowerCase();
+    if (!deferredHistorySearch.trim()) return true;
+    const q = deferredHistorySearch.toLowerCase();
     return t.items.some((i) => i.productName.toLowerCase().includes(q)) || (t.customer && t.customer.toLowerCase().includes(q));
   });
   // ---- Historique unifié (ventes + dettes + dépenses), avec filtres avancés ----
@@ -11061,6 +11123,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       const barChartImg = barCanvas.toDataURL("image/png");
 
       // ---- Construction du PDF ----
+      const { default: jsPDF } = await import("jspdf");
       const doc = new jsPDF();
       let y = 20;
       doc.setFontSize(18);
@@ -11129,9 +11192,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     }
     setAccountingGenerating(false);
   };
-  const filteredProducts = sortProductList(products.filter((p) => p.name.toLowerCase().includes(stockSearch.toLowerCase())));
-  const filteredDebts = unpaidDebts.filter((d) => d.customer.toLowerCase().includes(debtsSearch.toLowerCase()));
-  const cartProducts = sortProductList(products.filter((p) => p.name.toLowerCase().includes(cartSearch.toLowerCase())));
+  const filteredProducts = useMemo(
+    () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredStockSearch.toLowerCase()))),
+    [products, deferredStockSearch, sortProductList]
+  );
+  const filteredDebts = useMemo(
+    () => unpaidDebts.filter((d) => d.customer.toLowerCase().includes(deferredDebtsSearch.toLowerCase())),
+    [unpaidDebts, deferredDebtsSearch]
+  );
+  const cartProducts = useMemo(
+    () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredCartSearch.toLowerCase()))),
+    [products, deferredCartSearch, sortProductList]
+  );
   const activeCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
   const cartTotal = activeCart ? activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0) : 0;
   // Compte suspendu par un administrateur : bloque tout accès à l'app, avant
@@ -12404,6 +12476,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <p className="text-xs py-4 text-center" style={{ color: T.muted }}>{t(lang, "noSalesYet")}</p>
               ) : (
                 <div dir="ltr">
+                <RechartsLoader>{({ ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line }) => (
                 <ResponsiveContainer width="100%" height={200}>
                   <LineChart data={trendData} margin={{ top: 5, right: 10, left: 0, bottom: 18 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke={darkMode ? "rgba(255,255,255,0.1)" : "#eee"} />
@@ -12413,6 +12486,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <Line type="monotone" dataKey="total" stroke={darkMode ? "#7fb2ff" : INDIGO} strokeWidth={2.5} dot={trendData.length <= 7 ? { r: 3, fill: darkMode ? "#7fb2ff" : INDIGO } : false} />
                   </LineChart>
                 </ResponsiveContainer>
+                )}</RechartsLoader>
                 </div>
               )}
             </div>
@@ -12421,6 +12495,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {topProducts.length === 0 && <p className="text-xs" style={{ color: T.muted }}>{t(lang, "noSalesShort")}</p>}
               {topProducts.length > 0 && (
                 <div dir="ltr">
+                <RechartsLoader>{({ ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar }) => (
                 <ResponsiveContainer width="100%" height={Math.max(200, topProducts.length * 50)}>
                   <BarChart data={topProducts} layout="vertical" margin={{ left: 5, right: 24 }}>
                     <XAxis type="number" tick={{ fontSize: 10, fill: T.text }} axisLine={{ stroke: T.border }} tickLine={{ stroke: T.border }} tickFormatter={(v) => localizedNumber(v)} allowDecimals={false} />
@@ -12429,6 +12504,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <Bar dataKey="qty" fill={OCHRE} radius={[0, 4, 4, 0]} barSize={22} />
                   </BarChart>
                 </ResponsiveContainer>
+                )}</RechartsLoader>
                 </div>
               )}
               {allTopProducts.length > TOP_PRODUCTS_LIMIT && (
@@ -12706,8 +12782,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </p>
             )}
             {historyEntries.filter((entry) => {
-              if (!historySearch.trim()) return true;
-              const q = historySearch.toLowerCase();
+              if (!deferredHistorySearch.trim()) return true;
+              const q = deferredHistorySearch.toLowerCase();
               return entry.product.toLowerCase().includes(q) || entry.customer.toLowerCase().includes(q);
             }).map((entry) => {
               const h = entry.data;
@@ -14753,11 +14829,11 @@ function BoutiqueAppInner() {
     return () => listener.subscription.unsubscribe();
   }, []);
   useEffect(() => {
-    __mark("Composant monté, splash affiché (timer fixe 2200ms démarré)");
+    __mark("Composant monté, splash affiché (timer 700ms démarré)");
     const timer = setTimeout(() => {
-      __mark("Fin du timer fixe du splash (2200ms écoulés)");
+      __mark("Fin du timer du splash (700ms écoulés)");
       setShowSplash(false);
-    }, 2200);
+    }, 700);
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {
