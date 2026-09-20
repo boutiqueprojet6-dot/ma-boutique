@@ -1,6 +1,14 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { Preferences } from "@capacitor/preferences";
 import {
+  CRITICAL_STATE_KEY,
+  buildCriticalState,
+  writeCriticalState,
+  readCriticalState,
+  clearCriticalState,
+  isStateFresh,
+} from "./backgroundPersistence";
+import {
   LayoutDashboard,
   Package,
   ShoppingCart,
@@ -5278,7 +5286,7 @@ function flushAllCacheToNativeStorage() {
   try {
     for (let i = 0; i < window.localStorage.length; i++) {
       const k = window.localStorage.key(i);
-      if (k && (k.startsWith(OFFLINE_CACHE_PREFIX) || k === OFFLINE_QUEUE_KEY)) {
+      if (k && (k.startsWith(OFFLINE_CACHE_PREFIX) || k === OFFLINE_QUEUE_KEY || k === LAST_TAB_KEY || k === CRITICAL_STATE_KEY)) {
         mirrorToNativeStorage(k, window.localStorage.getItem(k));
       }
     }
@@ -7445,6 +7453,13 @@ function CalculatorTab({ T, darkMode, lang, products }) {
 }
 // ---------- SHOP APP ----------
 function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, isDemo, lang, setLang }) {
+  // Nettoie l'état critique persisté avant de déconnecter : sinon, si un autre
+  // compte se connecte ensuite sur le même téléphone, il pourrait se retrouver
+  // restauré sur l'onglet/panier laissé par le compte précédent.
+  const handleLogoutClean = useCallback(() => {
+    clearCriticalState();
+    onLogout();
+  }, [onLogout]);
   const isDesktop = useIsDesktop();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -10071,6 +10086,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setError(t(lang, "errCreditNeedsCustomer"));
       return;
     }
+    // Montant reçu obligatoire pour un paiement en espèces (sinon impossible de calculer
+    // la monnaie à rendre, et le vendeur peut oublier de le saisir).
+    if (cart.payment === "cash" && (cart.received === "" || cart.received == null || isNaN(parseFloat(cart.received)))) {
+      setError(`${t(lang, "othIlManque")} : ${t(lang, "amountGiven")}`);
+      return;
+    }
     // Plafond de ventes : 10/jour pour le palier Gratuit (et tout palier payant expiré),
     // remis à zéro chaque jour sans jamais se cumuler. Pro et Business sont illimités en
     // ventes tant que l'abonnement est actif.
@@ -10531,6 +10552,219 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const [accountingFrom, setAccountingFrom] = useState("");
   const [accountingTo, setAccountingTo] = useState("");
   const [accountingGenerating, setAccountingGenerating] = useState(false);
+  // ============================================================
+  // PERSISTANCE CRITIQUE CONTRE LE KILL ANDROID EN ARRIÈRE-PLAN
+  // ============================================================
+  // Refs miroirs : permettent aux callbacks ci-dessous de toujours lire les
+  // valeurs à jour de l'état, sans avoir à les remettre dans les tableaux de
+  // dépendances des useEffect (ce qui recréerait les écouteurs sans arrêt).
+  const tabRef = useRef(tab);
+  const activeCartIdRef = useRef(activeCartId);
+  const draftCartsRef = useRef(draftCarts);
+  const showAddProductRef = useRef(showAddProduct);
+  const editingProductIdRef = useRef(editingProductId);
+  const showSettingsRef = useRef(showSettings);
+  const settingsViewRef = useRef(settingsView);
+  const settingsFieldRef = useRef(settingsField);
+  const showCameraCheckoutRef = useRef(showCameraCheckout);
+  const showAiHistoryRef = useRef(showAiHistory);
+  const showMoreMenuRef = useRef(showMoreMenu);
+  const showAddExpenseRef = useRef(showAddExpense);
+  const showEditFundRef = useRef(showEditFund);
+  const showAddDebtModalRef = useRef(showAddDebtModal);
+  const showAccountingExportRef = useRef(showAccountingExport);
+  const showShopSwitcherRef = useRef(showShopSwitcher);
+  const showForgotPinRef = useRef(showForgotPin);
+  const showHistoryFiltersRef = useRef(showHistoryFilters);
+  const histFilterKindsRef = useRef(histFilterKinds);
+  const histFilterFromRef = useRef(histFilterFrom);
+  const histFilterToRef = useRef(histFilterTo);
+  const histFilterProductRef = useRef(histFilterProduct);
+  const histFilterCustomerRef = useRef(histFilterCustomer);
+  const histFilterMinAmountRef = useRef(histFilterMinAmount);
+  const histFilterMaxAmountRef = useRef(histFilterMaxAmount);
+  const stockSearchRef = useRef(stockSearch);
+  const cartSearchRef = useRef(cartSearch);
+  const debtsSearchRef = useRef(debtsSearch);
+  const historySearchRef = useRef(historySearch);
+  const productSortModeRef = useRef(productSortMode);
+  const saleViewModeRef = useRef(saleViewMode);
+  const showAllLowStockRef = useRef(showAllLowStock);
+  const showAllTopProductsRef = useRef(showAllTopProducts);
+  const langRef = useRef(lang);
+  const activeShopIdRef = useRef(activeShopId);
+  useEffect(() => { tabRef.current = tab; }, [tab]);
+  useEffect(() => { activeCartIdRef.current = activeCartId; }, [activeCartId]);
+  useEffect(() => { draftCartsRef.current = draftCarts; }, [draftCarts]);
+  useEffect(() => { showAddProductRef.current = showAddProduct; }, [showAddProduct]);
+  useEffect(() => { editingProductIdRef.current = editingProductId; }, [editingProductId]);
+  useEffect(() => { showSettingsRef.current = showSettings; }, [showSettings]);
+  useEffect(() => { settingsViewRef.current = settingsView; }, [settingsView]);
+  useEffect(() => { settingsFieldRef.current = settingsField; }, [settingsField]);
+  useEffect(() => { showCameraCheckoutRef.current = showCameraCheckout; }, [showCameraCheckout]);
+  useEffect(() => { showAiHistoryRef.current = showAiHistory; }, [showAiHistory]);
+  useEffect(() => { showMoreMenuRef.current = showMoreMenu; }, [showMoreMenu]);
+  useEffect(() => { showAddExpenseRef.current = showAddExpense; }, [showAddExpense]);
+  useEffect(() => { showEditFundRef.current = showEditFund; }, [showEditFund]);
+  useEffect(() => { showAddDebtModalRef.current = showAddDebtModal; }, [showAddDebtModal]);
+  useEffect(() => { showAccountingExportRef.current = showAccountingExport; }, [showAccountingExport]);
+  useEffect(() => { showShopSwitcherRef.current = showShopSwitcher; }, [showShopSwitcher]);
+  useEffect(() => { showForgotPinRef.current = showForgotPin; }, [showForgotPin]);
+  useEffect(() => { showHistoryFiltersRef.current = showHistoryFilters; }, [showHistoryFilters]);
+  useEffect(() => { histFilterKindsRef.current = histFilterKinds; }, [histFilterKinds]);
+  useEffect(() => { histFilterFromRef.current = histFilterFrom; }, [histFilterFrom]);
+  useEffect(() => { histFilterToRef.current = histFilterTo; }, [histFilterTo]);
+  useEffect(() => { histFilterProductRef.current = histFilterProduct; }, [histFilterProduct]);
+  useEffect(() => { histFilterCustomerRef.current = histFilterCustomer; }, [histFilterCustomer]);
+  useEffect(() => { histFilterMinAmountRef.current = histFilterMinAmount; }, [histFilterMinAmount]);
+  useEffect(() => { histFilterMaxAmountRef.current = histFilterMaxAmount; }, [histFilterMaxAmount]);
+  useEffect(() => { stockSearchRef.current = stockSearch; }, [stockSearch]);
+  useEffect(() => { cartSearchRef.current = cartSearch; }, [cartSearch]);
+  useEffect(() => { debtsSearchRef.current = debtsSearch; }, [debtsSearch]);
+  useEffect(() => { historySearchRef.current = historySearch; }, [historySearch]);
+  useEffect(() => { productSortModeRef.current = productSortMode; }, [productSortMode]);
+  useEffect(() => { saleViewModeRef.current = saleViewMode; }, [saleViewMode]);
+  useEffect(() => { showAllLowStockRef.current = showAllLowStock; }, [showAllLowStock]);
+  useEffect(() => { showAllTopProductsRef.current = showAllTopProducts; }, [showAllTopProducts]);
+  useEffect(() => { langRef.current = lang; }, [lang]);
+  useEffect(() => { activeShopIdRef.current = activeShopId; }, [activeShopId]);
+  // Construit l'état critique à partir des refs (toujours à jour) et l'écrit dans le
+  // stockage natif. Non-bloquant pour l'UI : on ne bloque jamais un clic pour ça.
+  const persistCriticalNow = useCallback(() => {
+    const state = buildCriticalState({
+      tab: tabRef.current,
+      activeCartId: activeCartIdRef.current,
+      draftCarts: draftCartsRef.current,
+      showAddProduct: showAddProductRef.current,
+      editingProductId: editingProductIdRef.current,
+      showSettings: showSettingsRef.current,
+      settingsView: settingsViewRef.current,
+      settingsField: settingsFieldRef.current,
+      showCameraCheckout: showCameraCheckoutRef.current,
+      showAiHistory: showAiHistoryRef.current,
+      showMoreMenu: showMoreMenuRef.current,
+      showAddExpense: showAddExpenseRef.current,
+      showEditFund: showEditFundRef.current,
+      showAddDebtModal: showAddDebtModalRef.current,
+      showAccountingExport: showAccountingExportRef.current,
+      showShopSwitcher: showShopSwitcherRef.current,
+      showForgotPin: showForgotPinRef.current,
+      showHistoryFilters: showHistoryFiltersRef.current,
+      histFilterKinds: histFilterKindsRef.current,
+      histFilterFrom: histFilterFromRef.current,
+      histFilterTo: histFilterToRef.current,
+      histFilterProduct: histFilterProductRef.current,
+      histFilterCustomer: histFilterCustomerRef.current,
+      histFilterMinAmount: histFilterMinAmountRef.current,
+      histFilterMaxAmount: histFilterMaxAmountRef.current,
+      stockSearch: stockSearchRef.current,
+      cartSearch: cartSearchRef.current,
+      debtsSearch: debtsSearchRef.current,
+      historySearch: historySearchRef.current,
+      productSortMode: productSortModeRef.current,
+      saleViewMode: saleViewModeRef.current,
+      showAllLowStock: showAllLowStockRef.current,
+      showAllTopProducts: showAllTopProductsRef.current,
+      lang: langRef.current,
+      username,
+      shopName,
+      activeShopId: activeShopIdRef.current,
+    });
+    return writeCriticalState(state); // retourne la Promise, pour pouvoir l'attendre si besoin
+  }, [username, shopName]);
+  // Sauvegarde dès qu'un état "visible à l'écran" change — c'est ce qui protège contre
+  // un kill Android qui surviendrait À TOUT MOMENT, pas seulement à la mise en arrière-plan.
+  useEffect(() => {
+    persistCriticalNow();
+  }, [
+    tab, activeCartId, draftCarts.length, showAddProduct, editingProductId,
+    showSettings, settingsView, settingsField, showCameraCheckout,
+    showAiHistory, showMoreMenu, showAddExpense, showEditFund,
+    showAddDebtModal, showAccountingExport, showShopSwitcher, showForgotPin,
+    showHistoryFilters, productSortMode, saleViewMode, lang, activeShopId,
+    persistCriticalNow,
+  ]);
+  // ---- Restauration au montage : lit l'état critique AVANT de faire quoi que ce
+  // soit d'autre, pour retomber exactement là où le boutiquier était (onglet,
+  // panier en cours, modal ouverte), même si Android a tué le process entre-temps.
+  useEffect(() => {
+    if (isDemo) return;
+    let cancelled = false;
+    (async () => {
+      const state = await readCriticalState();
+      if (cancelled || !state || !isStateFresh(state)) return;
+      // On ne restaure en détail que si c'est bien le même compte / la même boutique
+      // (sinon on ne restaure que rien : un autre compte vient peut-être de se connecter).
+      if (state.username !== username || state.activeShopId !== activeShopId) return;
+      if (VALID_TABS.includes(state.tab)) setTab(state.tab);
+      if (state.activeCartId) setActiveCartId(state.activeCartId);
+      if (state.showAddProduct) setShowAddProduct(true);
+      if (state.editingProductId) setEditingProductId(state.editingProductId);
+      if (state.showSettings) {
+        setShowSettings(true);
+        if (state.settingsView) setSettingsView(state.settingsView);
+        if (state.settingsField) setSettingsField(state.settingsField);
+      }
+      if (state.showCameraCheckout) setShowCameraCheckout(true);
+      if (state.showAiHistory) setShowAiHistory(true);
+      if (state.showAddExpense) setShowAddExpense(true);
+      if (state.showEditFund) setShowEditFund(true);
+      if (state.showAddDebtModal) setShowAddDebtModal(true);
+      if (state.showAccountingExport) setShowAccountingExport(true);
+      if (state.showHistoryFilters) {
+        setShowHistoryFilters(true);
+        if (state.histFilterKinds) setHistFilterKinds(state.histFilterKinds);
+        if (state.histFilterFrom) setHistFilterFrom(state.histFilterFrom);
+        if (state.histFilterTo) setHistFilterTo(state.histFilterTo);
+        if (state.histFilterProduct) setHistFilterProduct(state.histFilterProduct);
+        if (state.histFilterCustomer) setHistFilterCustomer(state.histFilterCustomer);
+        if (state.histFilterMinAmount) setHistFilterMinAmount(state.histFilterMinAmount);
+        if (state.histFilterMaxAmount) setHistFilterMaxAmount(state.histFilterMaxAmount);
+      }
+      if (state.stockSearch) setStockSearch(state.stockSearch);
+      if (state.cartSearch) setCartSearch(state.cartSearch);
+      if (state.debtsSearch) setDebtsSearch(state.debtsSearch);
+      if (state.historySearch) setHistorySearch(state.historySearch);
+      if (state.productSortMode) setProductSortMode(state.productSortMode);
+      if (state.saleViewMode) setSaleViewMode(state.saleViewMode);
+      if (typeof state.showAllLowStock === "boolean") setShowAllLowStock(state.showAllLowStock);
+      if (typeof state.showAllTopProducts === "boolean") setShowAllTopProducts(state.showAllTopProducts);
+    })();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDemo]);
+  // ---- Filet de sécurité maximal : à CHAQUE signal de sortie possible (l'app passe
+  // en arrière-plan, la page est gelée par le système, l'onglet navigateur se ferme),
+  // on force une dernière écriture immédiate — au cas où le dernier changement d'état
+  // n'aurait pas encore eu le temps d'être persisté avant qu'Android ne tue le process.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const flush = () => { persistCriticalNow(); flushAllCacheToNativeStorage(); };
+    const onVisibility = () => { if (document.visibilityState === "hidden") flush(); };
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("pagehide", flush);
+    window.addEventListener("beforeunload", flush);
+    document.addEventListener("freeze", flush);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pagehide", flush);
+      window.removeEventListener("beforeunload", flush);
+      document.removeEventListener("freeze", flush);
+    };
+  }, [persistCriticalNow]);
+  // ---- Filet Capacitor natif : sur Android, "appStateChange" (isActive: false) est le
+  // signal le plus fiable qu'on est en train de passer en arrière-plan. On ATTEND que
+  // l'écriture native soit bien terminée avant de laisser l'événement se terminer.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.Capacitor) return;
+    let removeListener = null;
+    import("@capacitor/app").then(({ App: CapacitorApp }) => {
+      CapacitorApp.addListener("appStateChange", async ({ isActive }) => {
+        if (!isActive) { await persistCriticalNow(); flushAllCacheToNativeStorage(); }
+      }).then((handle) => { removeListener = handle; });
+    });
+    return () => { if (removeListener) removeListener.remove(); };
+  }, [persistCriticalNow]);
   // ---- Bouton retour du téléphone (Android) ----
   // Sans écouteur "backButton", le bouton retour du système ne fait rien dans l'app Capacitor.
   // La fonction ci-dessous est réécrite à chaque rendu (elle voit donc toujours l'état actuel) :
@@ -11122,7 +11356,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <Settings size={17} />
             {t(lang, "settingsTitle")}
           </button>
-          <button onClick={onLogout} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <button onClick={handleLogoutClean} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
             <LogOut size={17} />
             {t(lang, "othDeconnexion")}
           </button>
@@ -12010,8 +12244,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                     {activeCart.payment === "cash" && (
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
-                        <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")}</label>
-                        <input type="number" value={activeCart.received} onChange={(e) => updateCartMeta(activeCart.id, "received", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" placeholder="Ex : 5000" />
+                        <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
+                        <input required type="number" value={activeCart.received} onChange={(e) => updateCartMeta(activeCart.id, "received", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a" }} placeholder="Ex : 5000" />
                         {activeCart.received !== "" && (() => {
                           const change = parseFloat(activeCart.received) - cartTotal;
                           if (isNaN(change)) return null;
@@ -14089,7 +14323,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </div>
                     </div>
                   )}
-                  <button onClick={onLogout} style={{ padding: "14px 16px", borderRadius: 14, background: T.card, border: `1px solid ${T.border}`, color: T.text, fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
+                  <button onClick={handleLogoutClean} style={{ padding: "14px 16px", borderRadius: 14, background: T.card, border: `1px solid ${T.border}`, color: T.text, fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
                     <LogOut size={17} color={T.muted} /> {t(lang, "othDeconnexion")}
                   </button>
                 </div>
