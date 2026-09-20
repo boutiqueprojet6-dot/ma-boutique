@@ -11598,8 +11598,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <p className="text-sm font-extrabold" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
                     {renderSortButton()}
                   </div>
-                  <div className="space-y-0.5">
-                    {lowStockDisplayed.map((p) => <p key={p.id} className="text-xs" style={{ color: T.text }}>{p.name} — {p.quantity} restant(s)</p>)}
+                  {/* Liste numérotée : n° · nom du produit · pastille de quantité (rouge = épuisé, orange = critique) */}
+                  <div className="mt-1">
+                    {lowStockDisplayed.map((p, idx) => {
+                      const isOut = p.quantity <= 0;
+                      const isCritical = !isOut && p.quantity <= Math.max(1, Math.floor(lowStockThreshold / 2));
+                      const badgeBg = isOut ? (darkMode ? "rgba(225,29,72,0.25)" : "#ffe4e6") : isCritical ? (darkMode ? "rgba(212,160,23,0.25)" : "#ffedd5") : (darkMode ? "rgba(255,255,255,0.08)" : "#fef9c3");
+                      const badgeColor = isOut ? (darkMode ? "#fda4af" : "#e11d48") : isCritical ? (darkMode ? "#f0c869" : "#c2410c") : (darkMode ? "#f0c869" : "#a16207");
+                      return (
+                        <div key={p.id} className="flex items-center gap-2.5 py-1.5" style={{ borderTop: idx === 0 ? "none" : `1px solid ${T.border}` }}>
+                          <span className="flex items-center justify-center text-[10px] font-extrabold flex-shrink-0" style={{ width: 20, height: 20, borderRadius: 10, background: darkMode ? "rgba(255,255,255,0.08)" : "#f3f4f6", color: T.muted }}>{localizedNumber(idx + 1)}</span>
+                          <span className="text-xs font-semibold min-w-0 flex-1 truncate" style={{ color: T.text }}>{p.name}</span>
+                          <span title={`${p.quantity} restant(s)`} className="text-xs font-extrabold flex-shrink-0 px-2 py-0.5 rounded-full" style={{ background: badgeBg, color: badgeColor, minWidth: 30, textAlign: "center" }}>{localizedNumber(p.quantity)}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                   {lowStock.length > 5 && (
                     <button
