@@ -5019,7 +5019,19 @@ const EXTRA_UI = {
   shareCardPreview: { fr: "Aperçu", en: "Preview", ar: "معاينة", es: "Vista previa", pt: "Pré-visualização", zh: "预览", vi: "Xem trước", de: "Vorschau", ru: "Предпросмотр", hi: "पूर्वावलोकन", ta: "முன்னோட்டம்", bn: "প্রিভিউ", ur: "پیش منظر", id: "Pratinjau", tr: "Önizleme", ko: "미리보기", ja: "プレビュー", it: "Anteprima", nl: "Voorbeeld", sw: "Muhtasari", ha: "Duba kafin", bm: "Filɛli", tl: "Preview", te: "ప్రివ్యూ", th: "ตัวอย่าง", wo: "Xool bu jëkk", pl: "Podgląd", yo: "Àkíyèsí", am: "ቅድመ እይታ", zu: "Ukubuka kuqala" },
 };
 const tx = (lang, key) => (EXTRA_UI[key] && (EXTRA_UI[key][lang] || EXTRA_UI[key].en || EXTRA_UI[key].fr)) || "";
-EXTRA_UI.histSaleCancelled = { fr: "Vente annulée", en: "Sale cancelled", es: "Venta cancelada", pt: "Venda cancelada", ar: "بيع ملغى" };
+EXTRA_UI.histSaleCancelled = { am: "ሽያጭ ተሰርዟል", ar: "بيع ملغى", bm: "Feereli dabilalen", bn: "বিক্রি বাতিল", de: "Verkauf storniert", en: "Sale cancelled", es: "Venta anulada", fr: "Vente annulée", ha: "An soke sayarwa", hi: "बिक्री रद्द", id: "Penjualan dibatalkan", it: "Vendita annullata", nl: "Verkoop geannuleerd", ja: "販売取り消し", ko: "판매 취소됨", pl: "Sprzedaż anulowana", pt: "Venda cancelada", ru: "Продажа отменена", sw: "Mauzo yameghairiwa", ta: "விற்பனை ரத்து", te: "అమ్మకం రద్దయింది", th: "ยกเลิกการขายแล้ว", tl: "Nakansela ang benta", tr: "Satış iptal edildi", ur: "فروخت منسوخ", vi: "Đơn bán đã hủy", wo: "Jaay bi neenu na", yo: "A ti fagilé títà", zh: "销售已取消", zu: "Ukuthengisa kukhanseliwe" };
+EXTRA_UI.histStockRestored = { am: "ክምችት ተመልሷል", ar: "أُعيد المخزون", bm: "Marifa segira a yɔrɔ", bn: "স্টক ফিরিয়ে আনা হয়েছে", de: "Bestand wiederhergestellt", en: "Stock restored", es: "Stock restablecido", fr: "Stock remis en place", ha: "An mayar da kaya", hi: "स्टॉक वापस जोड़ा गया", id: "Stok dikembalikan", it: "Scorte ripristinate", nl: "Voorraad hersteld", ja: "在庫を戻しました", ko: "재고 복원됨", pl: "Stan magazynowy przywrócony", pt: "Estoque restabelecido", ru: "Остатки восстановлены", sw: "Bidhaa zimerudishwa", ta: "இருப்பு மீட்கப்பட்டது", te: "స్టాక్ తిరిగి చేర్చబడింది", th: "คืนสต็อกแล้ว", tl: "Naibalik ang stock", tr: "Stok geri yüklendi", ur: "اسٹاک بحال کر دیا گیا", vi: "Đã hoàn lại tồn kho", wo: "Stock bi délsi na", yo: "A ti dá ọjà padà", zh: "库存已恢复", zu: "Isitoko sibuyisiwe" };
+EXTRA_UI.histDebtRemoved = { am: "ተያያዥ ዕዳ ተሰርዟል", ar: "أُلغي الدين المرتبط", bm: "Juru minɛn dabilalen", bn: "যুক্ত বাকি বাতিল", de: "Zugehörige Schuld storniert", en: "Linked debt cancelled", es: "Deuda vinculada anulada", fr: "Dette liée annulée", ha: "An soke bashin da ke da alaƙa", hi: "जुड़ा उधार रद्द", id: "Utang terkait dibatalkan", it: "Debito collegato annullato", nl: "Bijbehorende schuld geannuleerd", ja: "関連する未払いを取り消しました", ko: "연결된 외상 취소됨", pl: "Powiązany dług anulowany", pt: "Dívida associada cancelada", ru: "Связанный долг отменён", sw: "Deni husika limeghairiwa", ta: "தொடர்புடைய கடன் ரத்து", te: "సంబంధిత బాకీ రద్దయింది", th: "ยกเลิกหนี้ที่เกี่ยวข้องแล้ว", tl: "Nakansela ang kaugnay na utang", tr: "Bağlı borç iptal edildi", ur: "جڑا ہوا ادھار منسوخ", vi: "Đã hủy khoản nợ liên quan", wo: "Boor bi ci jaay bi neenu na", yo: "A ti fagilé gbèsè tó so mọ́ ọn", zh: "关联欠款已取消", zu: "Isikweletu esixhumene sikhanseliwe" };
+EXTRA_UI.cancelSaleBtn = { am: "ሽያጩን ሰርዝ", ar: "إلغاء البيع", bm: "Feereli dabila", bn: "বিক্রি বাতিল করুন", de: "Verkauf stornieren", en: "Cancel sale", es: "Anular venta", fr: "Annuler la vente", ha: "Soke sayarwa", hi: "बिक्री रद्द करें", id: "Batalkan penjualan", it: "Annulla vendita", nl: "Verkoop annuleren", ja: "販売を取り消す", ko: "판매 취소", pl: "Anuluj sprzedaż", pt: "Cancelar venda", ru: "Отменить продажу", sw: "Ghairi mauzo", ta: "விற்பனையை ரத்து செய்", te: "అమ్మకాన్ని రద్దు చేయండి", th: "ยกเลิกการขาย", tl: "Kanselahin ang benta", tr: "Satışı iptal et", ur: "فروخت منسوخ کریں", vi: "Hủy đơn bán", wo: "Neenal jaay bi", yo: "Fagilé títà", zh: "取消销售", zu: "Khansela ukuthengisa" };
+EXTRA_UI.cancelSaleConfirmMsg = { am: "ይህን ሽያጭ መሰረዝ ይፈልጋሉ? መጠኖቹ ወደ ክምችት ይመለሳሉ፣ መሰረዙም በታሪክ ውስጥ ይመዘገባል።", ar: "هل تريد إلغاء هذا البيع؟ ستعود الكميات إلى المخزون وسيُسجَّل الإلغاء في السجل.", bm: "Feereli in dabila wa? Marifaw hakɛ na segin marifa la, dabila na sɛbɛn Tariku kɔnɔ.", bn: "এই বিক্রি বাতিল করবেন? পরিমাণগুলো আবার স্টকে ফিরে যাবে এবং বাতিলের তথ্য ইতিহাসে লেখা থাকবে।", de: "Diesen Verkauf stornieren? Die Mengen kommen zurück ins Lager und die Stornierung wird im Verlauf vermerkt.", en: "Cancel this sale? The quantities will go back into stock and the cancellation will be recorded in History.", es: "¿Anular esta venta? Las cantidades volverán al stock y la anulación quedará registrada en el Historial.", fr: "Annuler cette vente ? Les quantités seront remises en stock et l'annulation sera notée dans l'Historique.", ha: "A soke wannan sayarwa? Adadin zai koma cikin kaya, kuma za a rubuta soke a Tarihi.", hi: "क्या यह बिक्री रद्द करें? मात्राएँ वापस स्टॉक में जुड़ जाएँगी और रद्द करने की जानकारी इतिहास में दर्ज होगी।", id: "Batalkan penjualan ini? Jumlahnya akan kembali ke stok dan pembatalan dicatat di Riwayat.", it: "Annullare questa vendita? Le quantità torneranno in magazzino e l'annullamento sarà registrato nella Cronologia.", nl: "Deze verkoop annuleren? De hoeveelheden gaan terug naar de voorraad en de annulering wordt in de Geschiedenis vermeld.", ja: "この販売を取り消しますか？数量は在庫に戻り、取り消しは履歴に記録されます。", ko: "이 판매를 취소할까요? 수량이 재고로 돌아가고 취소 내역이 기록에 남습니다.", pl: "Anulować tę sprzedaż? Ilości wrócą do magazynu, a anulowanie zostanie odnotowane w Historii.", pt: "Cancelar esta venda? As quantidades voltarão ao estoque e o cancelamento será registrado no Histórico.", ru: "Отменить эту продажу? Количество вернётся на склад, а отмена будет записана в Историю.", sw: "Ghairi mauzo haya? Kiasi kitarudi kwenye bidhaa zilizopo na kughairi kutarekodiwa kwenye Historia.", ta: "இந்த விற்பனையை ரத்து செய்யவா? அளவுகள் மீண்டும் இருப்பில் சேரும், ரத்து விவரம் வரலாற்றில் பதிவாகும்.", te: "ఈ అమ్మకాన్ని రద్దు చేయాలా? పరిమాణాలు తిరిగి స్టాక్‌లో చేరతాయి, రద్దు వివరాలు చరిత్రలో నమోదవుతాయి.", th: "ยกเลิกการขายนี้ไหม? จำนวนสินค้าจะกลับเข้าสต็อก และการยกเลิกจะถูกบันทึกในประวัติ", tl: "Kanselahin ang bentang ito? Babalik sa stock ang mga dami at itatala ang pagkansela sa Kasaysayan.", tr: "Bu satış iptal edilsin mi? Miktarlar stoğa geri dönecek ve iptal Geçmiş'e kaydedilecek.", ur: "کیا یہ فروخت منسوخ کریں؟ مقداریں دوبارہ اسٹاک میں شامل ہو جائیں گی اور منسوخی ہسٹری میں درج ہو گی۔", vi: "Hủy đơn bán này? Số lượng sẽ được trả lại kho và việc hủy sẽ được ghi vào Lịch sử.", wo: "Neenal jaay bii? Yàppu yi dinañu délsi ci stock bi te dinañu ko bind ci Jaar-jaar bi.", yo: "Ṣé kí a fagilé títà yìí? Iye ọjà yóò padà sí àkójọ ọjà, a ó sì kọ ìfagilé náà sí Ìtàn.", zh: "取消这笔销售？数量将退回库存，取消记录会写入历史。", zu: "Khansela lokhu kuthengisa? Amanani azobuyela esitokweni futhi ukukhansela kuzobhalwa kuMlando." };
+EXTRA_UI.cancelSaleConfirmYes = { am: "አዎ፣ ሰርዝ", ar: "نعم، إلغاء", bm: "Awɔ, dabila", bn: "হ্যাঁ, বাতিল করুন", de: "Ja, stornieren", en: "Yes, cancel", es: "Sí, anular", fr: "Oui, annuler", ha: "Eh, soke", hi: "हाँ, रद्द करें", id: "Ya, batalkan", it: "Sì, annulla", nl: "Ja, annuleren", ja: "はい、取り消す", ko: "예, 취소", pl: "Tak, anuluj", pt: "Sim, cancelar", ru: "Да, отменить", sw: "Ndiyo, ghairi", ta: "ஆம், ரத்து செய்", te: "అవును, రద్దు చేయండి", th: "ใช่ ยกเลิก", tl: "Oo, kanselahin", tr: "Evet, iptal et", ur: "ہاں، منسوخ کریں", vi: "Có, hủy", wo: "Waaw, neenal", yo: "Bẹ́ẹ̀ni, fagilé", zh: "是，取消", zu: "Yebo, khansela" };
+EXTRA_UI.cancelSaleKeep = { am: "አይ፣ ይቆይ", ar: "لا، إبقاء", bm: "Ayi, to a la", bn: "না, রাখুন", de: "Nein, behalten", en: "No, keep it", es: "No, conservar", fr: "Non, garder", ha: "A'a, bar shi", hi: "नहीं, रहने दें", id: "Tidak, simpan", it: "No, mantieni", nl: "Nee, behouden", ja: "いいえ、残す", ko: "아니요, 유지", pl: "Nie, zostaw", pt: "Não, manter", ru: "Нет, оставить", sw: "Hapana, acha", ta: "இல்லை, வை", te: "వద్దు, ఉంచండి", th: "ไม่ เก็บไว้", tl: "Hindi, panatilihin", tr: "Hayır, kalsın", ur: "نہیں، رہنے دیں", vi: "Không, giữ lại", wo: "Déedéet, bàyyil", yo: "Rárá, fi sílẹ̀", zh: "否，保留", zu: "Cha, gcina" };
+EXTRA_UI.cancelSaleDebtPaid = { am: "መሰረዝ አይቻልም፦ ከዚህ ሽያጭ ጋር የተያያዘው ዕዳ አስቀድሞ (በከፊል ወይም ሙሉ በሙሉ) ተከፍሏል።", ar: "لا يمكن الإلغاء: الدين المرتبط بهذا البيع سُدِّد بالفعل (جزئيًا أو كليًا).", bm: "A tɛ se ka dabila: feereli in juru sarala kaban (dɔ walima bɛɛ).", bn: "বাতিল করা যাবে না: এই বিক্রির সাথে যুক্ত বাকি আগেই (আংশিক বা পুরো) পরিশোধ হয়েছে।", de: "Stornierung nicht möglich: Die zu diesem Verkauf gehörende Schuld wurde bereits (teilweise oder vollständig) bezahlt.", en: "Can't cancel: the debt linked to this sale has already been paid (partly or fully).", es: "No se puede anular: la deuda vinculada a esta venta ya se pagó (en parte o por completo).", fr: "Annulation impossible : la dette liée à cette vente a déjà été payée (en partie ou en totalité).", ha: "Ba za a iya sokewa ba: bashin da ke da alaƙa da wannan sayarwa an riga an biya shi (wani ɓangare ko duka).", hi: "रद्द नहीं हो सकती: इस बिक्री से जुड़ा उधार पहले ही (आंशिक या पूरा) चुकाया जा चुका है।", id: "Tidak bisa dibatalkan: utang yang terkait penjualan ini sudah dibayar (sebagian atau seluruhnya).", it: "Impossibile annullare: il debito collegato a questa vendita è già stato pagato (in parte o per intero).", nl: "Annuleren niet mogelijk: de schuld die bij deze verkoop hoort is al (deels of volledig) betaald.", ja: "取り消せません：この販売に紐づく未払い（ツケ）はすでに支払われています（一部または全額）。", ko: "취소할 수 없음: 이 판매와 연결된 외상이 이미 (일부 또는 전액) 결제되었습니다.", pl: "Nie można anulować: dług powiązany z tą sprzedażą został już spłacony (częściowo lub w całości).", pt: "Não é possível cancelar: a dívida ligada a esta venda já foi paga (em parte ou totalmente).", ru: "Отмена невозможна: долг по этой продаже уже оплачен (частично или полностью).", sw: "Haiwezekani kughairi: deni la mauzo haya tayari limelipwa (kwa sehemu au kikamilifu).", ta: "ரத்து செய்ய முடியாது: இந்த விற்பனையுடன் தொடர்புடைய கடன் ஏற்கெனவே (பகுதியாகவோ முழுமையாகவோ) செலுத்தப்பட்டுள்ளது.", te: "రద్దు చేయలేం: ఈ అమ్మకానికి సంబంధించిన బాకీ ఇప్పటికే (కొంత లేదా పూర్తిగా) చెల్లించబడింది.", th: "ยกเลิกไม่ได้: หนี้ที่เชื่อมกับการขายนี้ถูกชำระแล้ว (บางส่วนหรือทั้งหมด)", tl: "Hindi makansela: ang utang na kaugnay ng bentang ito ay nabayaran na (bahagya o buo).", tr: "İptal edilemez: bu satışa bağlı borç zaten ödendi (kısmen veya tamamen).", ur: "منسوخ نہیں ہو سکتی: اس فروخت سے جڑا ادھار پہلے ہی (جزوی یا مکمل) ادا ہو چکا ہے۔", vi: "Không thể hủy: khoản nợ gắn với đơn bán này đã được trả (một phần hoặc toàn bộ).", wo: "Manul a neenu: boor bi ci jaay bii fay nañu ko ba noppi (ci wàll walla yépp).", yo: "A kò lè fagilé: gbèsè tó so mọ́ títà yìí ti san tẹ́lẹ̀ (lápá kan tàbí pátápátá).", zh: "无法取消：这笔销售关联的欠款已付款（部分或全部）。", zu: "Akukwazi ukukhanselwa: isikweletu esixhumene nalokhu kuthengisa sesikhokhiwe (ingxenye noma lonke)." };
+EXTRA_UI.installBannerTitle = { am: "መተግበሪያውን ጫን", ar: "تثبيت التطبيق", bm: "Porogaramu sigi", bn: "অ্যাপ ইনস্টল করুন", de: "App installieren", en: "Install the app", es: "Instalar la aplicación", fr: "Installer l'application", ha: "Sanya manhajar", hi: "ऐप इंस्टॉल करें", id: "Pasang aplikasi", it: "Installa l'app", nl: "App installeren", ja: "アプリをインストール", ko: "앱 설치", pl: "Zainstaluj aplikację", pt: "Instalar o aplicativo", ru: "Установить приложение", sw: "Sakinisha programu", ta: "செயலியை நிறுவவும்", te: "యాప్‌ను ఇన్‌స్టాల్ చేయండి", th: "ติดตั้งแอป", tl: "I-install ang app", tr: "Uygulamayı yükle", ur: "ایپ انسٹال کریں", vi: "Cài đặt ứng dụng", wo: "Yokkal appli bi", yo: "Fi ohun èlò náà sórí ẹ̀rọ", zh: "安装应用", zu: "Faka uhlelo lokusebenza" };
+EXTRA_UI.installBannerDesc = { am: "Shopnifyን ወደ መነሻ ማያ ገጽዎ ያክሉ፤ እንደ እውነተኛ መተግበሪያ በአንድ ንክኪ ይከፈታል።", ar: "أضف Shopnify إلى شاشتك الرئيسية لفتحه بلمسة واحدة مثل أي تطبيق حقيقي.", bm: "Shopnify bla i ka ekran fɔlɔ kan walasa i k'a da kelen na, i n'a fɔ porogaramu.", bn: "Shopnify হোম স্ক্রিনে যোগ করুন, আসল অ্যাপের মতো এক ট্যাপে খুলুন।", de: "Füge Shopnify deinem Home-Bildschirm hinzu und öffne es mit einem Tipp – wie eine echte App.", en: "Add Shopnify to your home screen to open it in one tap, like a real app.", es: "Añade Shopnify a tu pantalla de inicio para abrirla con un toque, como una app de verdad.", fr: "Ajoute Shopnify à ton écran d'accueil pour l'ouvrir en un clic, comme une vraie application.", ha: "Ƙara Shopnify a allon gida don buɗe shi da taɓawa ɗaya, kamar ainihin manhaja.", hi: "Shopnify को होम स्क्रीन पर जोड़ें और असली ऐप की तरह एक टैप में खोलें।", id: "Tambahkan Shopnify ke layar utama agar bisa dibuka sekali ketuk, seperti aplikasi sungguhan.", it: "Aggiungi Shopnify alla schermata Home per aprirlo con un tocco, come una vera app.", nl: "Zet Shopnify op je beginscherm en open het met één tik, net als een echte app.", ja: "Shopnifyをホーム画面に追加すれば、本物のアプリのようにワンタップで開けます。", ko: "Shopnify를 홈 화면에 추가하면 진짜 앱처럼 한 번에 열 수 있어요.", pl: "Dodaj Shopnify do ekranu głównego, aby otwierać go jednym dotknięciem jak prawdziwą aplikację.", pt: "Adicione o Shopnify à sua tela inicial para abrir com um toque, como um aplicativo de verdade.", ru: "Добавьте Shopnify на главный экран, чтобы открывать его в одно касание, как настоящее приложение.", sw: "Weka Shopnify kwenye skrini ya kwanza ili uifungue kwa mguso mmoja, kama programu halisi.", ta: "Shopnify-ஐ முகப்புத் திரையில் சேர்த்து, உண்மையான செயலி போல ஒரே தொடுதலில் திறக்கவும்.", te: "Shopnifyను హోమ్ స్క్రీన్‌కు జోడించి, నిజమైన యాప్‌లా ఒక్క ట్యాప్‌తో తెరవండి.", th: "เพิ่ม Shopnify ไว้บนหน้าจอโฮมเพื่อเปิดได้ในแตะเดียว เหมือนแอปจริง", tl: "Idagdag ang Shopnify sa home screen para mabuksan sa isang tap, parang totoong app.", tr: "Shopnify'ı ana ekranına ekle, gerçek bir uygulama gibi tek dokunuşla aç.", ur: "Shopnify کو ہوم اسکرین پر شامل کریں اور اصل ایپ کی طرح ایک ٹیپ میں کھولیں۔", vi: "Thêm Shopnify vào màn hình chính để mở chỉ với một chạm, như một ứng dụng thật.", wo: "Yokk Shopnify ci ekran bu njëkk bi ngir ubbi ko ci benn laal, ni benn appli bu dëgg.", yo: "Fi Shopnify kún ojú-ìwé ilé rẹ kí o lè ṣí i pẹ̀lú ìfọwọ́kan kan, bí àpù gidi.", zh: "将 Shopnify 添加到主屏幕，像真正的应用一样一键打开。", zu: "Faka i-Shopnify esikrinini sasekhaya ukuze uyivule ngokuthinta okukodwa, njengohlelo lokusebenza langempela." };
+EXTRA_UI.installBannerBtn = { am: "ጫን", ar: "تثبيت", bm: "Sigi", bn: "ইনস্টল করুন", de: "Installieren", en: "Install", es: "Instalar", fr: "Installer", ha: "Sanya", hi: "इंस्टॉल करें", id: "Pasang", it: "Installa", nl: "Installeren", ja: "インストール", ko: "설치", pl: "Zainstaluj", pt: "Instalar", ru: "Установить", sw: "Sakinisha", ta: "நிறுவு", te: "ఇన్‌స్టాల్ చేయి", th: "ติดตั้ง", tl: "I-install", tr: "Yükle", ur: "انسٹال کریں", vi: "Cài đặt", wo: "Yokkal", yo: "Fi sórí ẹ̀rọ", zh: "安装", zu: "Faka" };
+EXTRA_UI.installBannerLater = { am: "በኋላ", ar: "لاحقًا", bm: "Tuma", bn: "পরে", de: "Später", en: "Later", es: "Más tarde", fr: "Plus tard", ha: "Daga baya", hi: "बाद में", id: "Nanti", it: "Più tardi", nl: "Later", ja: "あとで", ko: "나중에", pl: "Później", pt: "Mais tarde", ru: "Позже", sw: "Baadaye", ta: "பிறகு", te: "తర్వాత", th: "ไว้ทีหลัง", tl: "Mamaya na", tr: "Sonra", ur: "بعد میں", vi: "Để sau", wo: "Ginnaaw", yo: "Nígbà míì", zh: "稍后", zu: "Kamuva" };
+EXTRA_UI.installIosHint = { am: "በ iPhone ላይ፦ የማጋሪያ (Share) ቁልፉን ይጫኑ፣ ከዚያ “ወደ መነሻ ማያ ገጽ አክል” ይምረጡ።", ar: "على iPhone: اضغط على زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", bm: "iPhone kan na: Share bɔtɔn digi, o kɔfɛ i “Add to Home Screen” sugandi.", bn: "iPhone-এ: শেয়ার বোতামে চাপ দিন, তারপর “হোম স্ক্রিনে যোগ করুন” বেছে নিন।", de: "Auf dem iPhone: Tippe auf „Teilen“ und dann auf „Zum Home-Bildschirm“.", en: "On iPhone: tap the Share button, then “Add to Home Screen”.", es: "En iPhone: toca el botón Compartir y luego «Añadir a pantalla de inicio».", fr: "Sur iPhone : touche le bouton Partager, puis « Sur l'écran d'accueil ».", ha: "A iPhone: danna maɓallin Share, sannan ka zaɓi “Add to Home Screen”.", hi: "iPhone पर: शेयर बटन दबाएँ, फिर “होम स्क्रीन पर जोड़ें” चुनें।", id: "Di iPhone: ketuk tombol Bagikan, lalu pilih “Tambah ke Layar Utama”.", it: "Su iPhone: tocca il pulsante Condividi, poi «Aggiungi alla schermata Home».", nl: "Op iPhone: tik op de knop Deel en kies daarna ‘Zet op beginscherm’.", ja: "iPhoneの場合：共有ボタンをタップし、「ホーム画面に追加」を選んでください。", ko: "iPhone에서: 공유 버튼을 누른 다음 '홈 화면에 추가'를 선택하세요.", pl: "Na iPhonie: dotknij przycisku Udostępnij, a potem „Dodaj do ekranu głównego”.", pt: "No iPhone: toque no botão Compartilhar e depois em “Adicionar à Tela de Início”.", ru: "На iPhone: нажмите «Поделиться», затем «На экран „Домой“».", sw: "Kwenye iPhone: gusa kitufe cha Shiriki, kisha chagua “Ongeza kwenye Skrini ya Kwanza”.", ta: "iPhone-இல்: பகிர் பொத்தானைத் தொட்டு, பின்னர் “முகப்புத் திரையில் சேர்” என்பதைத் தேர்ந்தெடுக்கவும்.", te: "iPhone‌లో: షేర్ బటన్‌ను నొక్కి, ఆపై “హోమ్ స్క్రీన్‌కు జోడించు” ఎంచుకోండి.", th: "บน iPhone: แตะปุ่มแชร์ แล้วเลือก “เพิ่มไปยังหน้าจอโฮม”", tl: "Sa iPhone: pindutin ang Share button, tapos piliin ang “Add to Home Screen”.", tr: "iPhone'da: Paylaş düğmesine dokun, ardından “Ana Ekrana Ekle”yi seç.", ur: "iPhone پر: شیئر بٹن دبائیں، پھر “ہوم اسکرین میں شامل کریں” منتخب کریں۔", vi: "Trên iPhone: chạm nút Chia sẻ, rồi chọn “Thêm vào Màn hình chính”.", wo: "Ci iPhone: bësal bouton Share bi, gannaaw loolu tànn “Add to Home Screen”.", yo: "Lórí iPhone: tẹ bọ́tìnì Share, lẹ́yìn náà yan “Add to Home Screen”.", zh: "在 iPhone 上：点击“分享”按钮，然后选择“添加到主屏幕”。", zu: "ku-iPhone: cindezela inkinobho ethi Share, bese ukhetha “Add to Home Screen”." };
 EXTRA_UI.histExpenseDeleted = { fr: "Dépense supprimée", en: "Expense deleted", es: "Gasto eliminado", pt: "Despesa excluída", ar: "مصروف محذوف" };
 EXTRA_UI.histPermanentNote = { fr: "Historique permanent : les lignes ne peuvent pas être supprimées.", en: "Permanent history: entries cannot be deleted.", es: "Historial permanente: las entradas no se pueden eliminar.", pt: "Histórico permanente: os registros não podem ser excluídos.", ar: "سجل دائم: لا يمكن حذف أي عنصر." };
 EXTRA_UI.editProductTitle = { fr: "Modifier le produit", en: "Edit product", ar: "تعديل المنتج", es: "Editar producto", pt: "Editar produto", zh: "编辑商品", vi: "Chỉnh sửa sản phẩm", de: "Produkt bearbeiten", ru: "Изменить товар", hi: "उत्पाद संपादित करें", ta: "பொருளைத் திருத்து", bn: "পণ্য সম্পাদনা করুন", ur: "پروڈکٹ میں ترمیم کریں", id: "Edit produk", tr: "Ürünü düzenle", ko: "상품 수정", ja: "商品を編集", it: "Modifica prodotto", nl: "Product bewerken", sw: "Hariri bidhaa", ha: "Gyara samfur", bm: "Fɛn labɛn", tl: "I-edit ang produkto", te: "ఉత్పత్తిని సవరించండి", th: "แก้ไขสินค้า", wo: "Soppi jaaykatu", pl: "Edytuj produkt", yo: "Ṣàtúnṣe ọjà", am: "ምርቱን አርትዕ", zu: "Hlela umkhiqizo" };
@@ -5758,6 +5770,81 @@ function LanguagePickerScreen({ onChoose }) {
     </div>
   );
 }
+// ===== Installation de l'app (PWA) : proposée automatiquement à l'ouverture du site =====
+// L'événement `beforeinstallprompt` ne se déclenche qu'une seule fois, souvent avant que
+// l'écran de connexion soit affiché : on le capte donc ici, au chargement du fichier, et on
+// le partage avec tous les écrans. Le navigateur exige un vrai appui de l'utilisateur pour
+// lancer l'installation : la bannière propose donc un seul bouton « Installer ».
+const INSTALL_DISMISS_KEY = "installBannerDismissedAt";
+const INSTALL_REASK_MS = 24 * 60 * 60 * 1000; // si l'utilisateur dit « Plus tard », on repropose après 24 h
+let deferredInstallEvent = null;
+const installListeners = new Set();
+const notifyInstall = () => installListeners.forEach((fn) => fn());
+if (typeof window !== "undefined") {
+  window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredInstallEvent = e; notifyInstall(); });
+  window.addEventListener("appinstalled", () => { deferredInstallEvent = null; notifyInstall(); });
+}
+const isAppInstalled = () => {
+  try {
+    // Dans l'application native (Capacitor / APK), il n'y a rien à installer : pas de bannière.
+    if (window.Capacitor && typeof window.Capacitor.isNativePlatform === "function" && window.Capacitor.isNativePlatform()) return true;
+    return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  } catch (e) { return false; }
+};
+// iPhone/iPad : pas d'événement d'installation, on affiche donc une petite explication.
+const isIosDevice = () => {
+  try {
+    const ua = navigator.userAgent || "";
+    return /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  } catch (e) { return false; }
+};
+const installDismissedRecently = () => {
+  try {
+    const v = parseInt(window.localStorage.getItem(INSTALL_DISMISS_KEY) || "0", 10);
+    return !!v && Date.now() - v < INSTALL_REASK_MS;
+  } catch (e) { return false; }
+};
+function useInstallPrompt() {
+  const [, force] = useState(0);
+  useEffect(() => {
+    const fn = () => force((n) => n + 1);
+    installListeners.add(fn);
+    return () => { installListeners.delete(fn); };
+  }, []);
+  const install = async () => {
+    const e = deferredInstallEvent;
+    if (!e) return;
+    try { e.prompt(); await e.userChoice; } catch (err) {}
+    deferredInstallEvent = null; // l'événement ne se redéclenche pas après un choix
+    notifyInstall();
+  };
+  const dismiss = () => {
+    try { window.localStorage.setItem(INSTALL_DISMISS_KEY, String(Date.now())); } catch (e) {}
+    notifyInstall();
+  };
+  const installed = isAppInstalled();
+  return {
+    canInstall: !!deferredInstallEvent && !installed,
+    showIosHint: !deferredInstallEvent && !installed && isIosDevice(),
+    dismissed: installDismissedRecently(),
+    install,
+    dismiss,
+  };
+}
+function InstallBanner({ lang }) {
+  const { canInstall, showIosHint, dismissed, install, dismiss } = useInstallPrompt();
+  if (dismissed || (!canInstall && !showIosHint)) return null;
+  return (
+    <div style={{ position: "fixed", left: 12, right: 12, bottom: "calc(12px + env(safe-area-inset-bottom, 0px))", zIndex: 9999, maxWidth: 480, margin: "0 auto", background: "#15162C", color: "white", borderRadius: 18, padding: "14px 14px 12px", boxShadow: "0 12px 32px rgba(0,0,0,0.35)" }}>
+      <p style={{ fontWeight: 800, fontSize: 14, marginBottom: 2 }}>📲 {tx(lang, "installBannerTitle")}</p>
+      <p style={{ fontSize: 12, opacity: 0.8, marginBottom: 10, lineHeight: 1.4 }}>{canInstall ? tx(lang, "installBannerDesc") : tx(lang, "installIosHint")}</p>
+      <div style={{ display: "flex", gap: 8 }}>
+        <button onClick={dismiss} style={{ flex: 1, padding: "10px 0", borderRadius: 12, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.12)", color: "white", border: "none", cursor: "pointer" }}>{tx(lang, "installBannerLater")}</button>
+        {canInstall && <button onClick={install} style={{ flex: 2, padding: "10px 0", borderRadius: 12, fontSize: 13, fontWeight: 800, background: INDIGO, color: "white", border: "none", cursor: "pointer" }}>{tx(lang, "installBannerBtn")}</button>}
+      </div>
+    </div>
+  );
+}
 function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogleOnboarding }) {
   const [screen, setScreen] = useState(startInGoogleOnboarding ? "onboarding" : "login");
   const [isGoogleFlow, setIsGoogleFlow] = useState(!!startInGoogleOnboarding);
@@ -5811,23 +5898,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     if (p && shop) return `${p}_${shop}`;
     return p || shop;
   })();
-  // ---- Détection "app installable" (PWA) : capte l'événement du navigateur,
-  // on l'affiche via un bouton dédié plutôt que le mini-menu du navigateur.
-  const [installPrompt, setInstallPrompt] = useState(null);
-  useEffect(() => {
-    const handler = (e) => {
-      e.preventDefault();
-      setInstallPrompt(e);
-    };
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
-  const handleInstallClick = async () => {
-    if (!installPrompt) return;
-    installPrompt.prompt();
-    await installPrompt.userChoice;
-    setInstallPrompt(null); // l'événement ne se redéclenche pas après un choix
-  };
+  // ---- App installable (PWA) : la bannière InstallBanner la propose automatiquement ;
+  // ce bouton ne sert que de solution de secours si l'utilisateur a choisi « Plus tard ».
+  const { canInstall: canInstallApp, dismissed: installDismissed, install: handleInstallClick } = useInstallPrompt();
   // Connexion "Continuer avec Google" — utilise le fournisseur OAuth natif de
   // Supabase (configuré côté dashboard, aucune clé secrète exposée ici).
   const [googleLoginBusy, setGoogleLoginBusy] = useState(false);
@@ -6122,13 +6195,13 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <p className="text-sm font-medium mb-4" style={{ color: "#6B6D85" }}>
               {t(lang, "loginSubtitle")}
             </p>
-            {installPrompt && (
+            {canInstallApp && installDismissed && (
               <button
                 onClick={handleInstallClick}
                 className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2"
                 style={{ background: INDIGO, color: "white" }}
               >
-                ⬇️ {lang === "fr" ? "Installer l'application" : "Install app"}
+                ⬇️ {tx(lang, "installBannerTitle")}
               </button>
             )}
             <button
@@ -7362,9 +7435,18 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const isDesktop = useIsDesktop();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
-  const [sales, setSales] = useState([]);
+  // Ventes : on garde TOUTES les ventes, y compris annulées (marquées `cancelled`), pour que
+  // l'annulation se propage bien à la fusion multi-appareils. `sales` ne contient que les
+  // ventes valides : tout le reste de l'app (stats, caisse, IA...) continue de l'utiliser tel quel.
+  const [allSales, setAllSales] = useState([]);
+  const sales = useMemo(() => allSales.filter((x) => !x.cancelled), [allSales]);
+  const setSales = setAllSales;
   const [debts, setDebts] = useState([]);
-  const [debtEvents, setDebtEvents] = useState([]);
+  // Même principe que pour les ventes : les événements d'une dette liée à une vente annulée
+  // sont marqués `cancelled` (et non supprimés) ; `debtEvents` ne garde que les valides.
+  const [allDebtEvents, setAllDebtEvents] = useState([]);
+  const debtEvents = useMemo(() => allDebtEvents.filter((x) => !x.cancelled), [allDebtEvents]);
+  const setDebtEvents = setAllDebtEvents;
   const [expenses, setExpenses] = useState([]);
   const [cashFund, setCashFund] = useState(0);
   const [lowStockThreshold, setLowStockThreshold] = useState(5);
@@ -8664,7 +8746,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const settingsChanged = SETTINGS_KEYS.some((k) => Object.prototype.hasOwnProperty.call(overrides, k));
     const next = {
       products: overrides.products ?? products,
-      sales: overrides.sales ?? sales,
+      sales: overrides.sales ?? allSales,
       debts: overrides.debts ?? debts,
       expenses: overrides.expenses ?? expenses,
       cashFund: overrides.cashFund ?? cashFund,
@@ -8676,7 +8758,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       draftCarts: overrides.draftCarts ?? draftCarts,
       currency: overrides.currency ?? currency,
       aiConversations: overrides.aiConversations ?? aiConversations,
-      debtEvents: overrides.debtEvents ?? debtEvents,
+      debtEvents: overrides.debtEvents ?? allDebtEvents,
       historyLog: overrides.historyLog ?? historyLog,
       benchmarkOptIn: overrides.benchmarkOptIn ?? benchmarkOptIn,
       arabicDigits: overrides.arabicDigits ?? arabicDigits,
@@ -9482,7 +9564,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll({
       debts: debts.map((x) => (x.id === d.id ? { ...x, paidAmount: newPaidAmount, paid: fullyPaid, updatedAt: Date.now() } : x)),
       historyLog: [...historyLog, makeHistoryEntry(fullyPaid ? "debtPaid" : "debtPartial", { refId: payEventId, date: nowIso, amount: amountNum, customer: d.customer, product: d.product || "" })],
-      debtEvents: [...debtEvents, {
+      debtEvents: [...allDebtEvents, {
         id: payEventId,
         debtId: d.id,
         type: fullyPaid ? "paid" : "partialPayment",
@@ -9526,7 +9608,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         updatedAt: Date.now(),
         source: "manual",
       }],
-      debtEvents: [...debtEvents, {
+      debtEvents: [...allDebtEvents, {
         id: newDebtId + "-ev",
         debtId: newDebtId,
         type: "created",
@@ -9907,8 +9989,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const salesTodayCount = () => {
     const key = todayKey();
     const seen = new Set();
-    sales.forEach((s) => {
-      if (s.date.slice(0, 10) === key) seen.add(s.transactionId);
+    // allSales (et non sales) : une vente annulée compte quand même dans la limite du jour.
+    allSales.forEach((s) => {
+      if (s.date.slice(0, 10) === key) seen.add(s.transactionId || s.id);
     });
     return seen.size;
   };
@@ -9949,6 +10032,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         qty: it.qty,
         unitPrice: it.unitPrice,
         total: it.qty * it.unitPrice,
+        // Mode de vente (colis / à l'unité) : nécessaire pour remettre le bon stock si la vente est annulée.
+        mode: it.mode || "pack",
         costPrice: product && product.costPrice != null ? product.costPrice : null,
         payment: cart.payment,
         customer: cart.customer.trim() || null,
@@ -9998,8 +10083,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         paidAmount: 0,
         updatedAt: Date.now(),
         source: "sale",
+        transactionId,
       }];
-      nextDebtEvents = [...debtEvents, {
+      nextDebtEvents = [...allDebtEvents, {
         id: newDebtId + "-ev",
         debtId: newDebtId,
         type: "created",
@@ -10008,13 +10094,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", "),
         date: dateNow,
         source: "sale",
+        transactionId,
       }];
       newHistory.push(makeHistoryEntry("debtCreated", { refId: newDebtId + "-ev", date: dateNow, amount: total, customer: cart.customer.trim(), product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", "), source: "sale" }));
     }
     const nextCarts = draftCarts.filter((c) => c.id !== cartId);
     saveAll({
       products: nextProducts,
-      sales: [...sales, ...newSales],
+      sales: [...allSales, ...newSales],
       debts: nextDebts,
       debtEvents: nextDebtEvents,
       historyLog: [...historyLog, ...newHistory],
@@ -10022,6 +10109,78 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       activeCartId: activeCartId === cartId ? (nextCarts[0] ? nextCarts[0].id : null) : activeCartId,
     });
     logAction(`${t(lang, "logSaleRecorded")} : ${cart.items.map((i) => `${i.productName} x${i.qty}`).join(", ")} — ${localizedNumber(total)} (${cart.payment === "credit" ? t(lang, "logPaymentCredit") : cart.payment === "cash" ? t(lang, "logPaymentCash") : cart.payment})`);
+  };
+  // ---- Annulation d'une vente récente ----
+  // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
+  // entre appareils), le stock est remis comme avant, une éventuelle dette liée est retirée, et
+  // tout est noté dans l'Historique permanent.
+  const [cancelSaleConfirmId, setCancelSaleConfirmId] = useState(null);
+  const [cancelSaleError, setCancelSaleError] = useState("");
+  const cancelSale = (txnId) => {
+    const lines = sales.filter((x) => (x.transactionId || x.id) === txnId);
+    if (lines.length === 0) { setCancelSaleConfirmId(null); return; }
+    const first = lines[0];
+    // Un employé ne peut annuler que ses propres ventes.
+    if (activeEmployee && (first.actorId || null) !== activeEmployee.id) return;
+    const total = lines.reduce((sum, x) => sum + x.total, 0);
+    let linkedDebt = null;
+    if (first.payment === "credit") {
+      linkedDebt = debts.find((d) => d.transactionId === txnId)
+        || debts.find((d) => d.source === "sale" && d.date === first.date && (d.customer || "").trim() === (first.customer || "").trim() && d.amount === total)
+        || null;
+      // Si le client a déjà payé (même en partie), on ne peut pas simplement effacer la dette.
+      if (linkedDebt && (linkedDebt.paid || (linkedDebt.paidAmount || 0) > 0)) {
+        setCancelSaleError(tx(lang, "cancelSaleDebtPaid"));
+        return;
+      }
+    }
+    const nowMs = Date.now();
+    const nextAllSales = allSales.map((x) => ((x.transactionId || x.id) === txnId ? { ...x, cancelled: true, cancelledAt: new Date(nowMs).toISOString(), updatedAt: nowMs } : x));
+    // Remise en stock : colis rendus tels quels ; unités détail rendues aux unités détachées,
+    // puis regroupées en colis complets (opération inverse de deductUnitStock).
+    const nextProducts = products.map((p) => {
+      const mine = lines.filter((x) => x.productId === p.id);
+      if (mine.length === 0) return p;
+      let packsBack = 0;
+      let unitsBack = 0;
+      mine.forEach((x) => { if (x.mode === "unit") unitsBack += x.qty; else packsBack += x.qty; });
+      const updated = { ...p };
+      if (packsBack) updated.quantity = (updated.quantity || 0) + packsBack;
+      if (unitsBack) {
+        const perPack = updated.unitsPerPack || 1;
+        const loose = (updated.looseUnits || 0) + unitsBack;
+        updated.quantity = (updated.quantity || 0) + Math.floor(loose / perPack);
+        updated.looseUnits = loose % perPack;
+      }
+      updated.updatedAt = Date.now();
+      return updated;
+    });
+    const itemsForHistory = lines.map((x) => ({ productName: x.productName, qty: x.qty, unitPrice: x.unitPrice }));
+    const newHistory = [];
+    // Vente ancienne jamais journalisée : on l'y inscrit d'abord, pour qu'elle reste visible.
+    if (!historyLog.some((h) => h.refId === txnId)) {
+      newHistory.push(makeHistoryEntry("sale", { refId: txnId, date: first.date, amount: total, customer: (first.customer || "").trim(), payment: first.payment, change: first.change ?? null, actorId: first.actorId ?? null, actorName: first.actorName ?? null, items: itemsForHistory }));
+    }
+    newHistory.push(makeHistoryEntry("saleCancelled", {
+      refId: "cancel-" + txnId,
+      originalRef: txnId,
+      originalDate: first.date,
+      amount: total,
+      customer: (first.customer || "").trim(),
+      payment: first.payment || null,
+      items: itemsForHistory,
+      restocked: true,
+      debtCancelled: !!linkedDebt,
+    }));
+    const overrides = { products: nextProducts, sales: nextAllSales, historyLog: [...historyLog, ...newHistory] };
+    if (linkedDebt) {
+      overrides.debts = debts.filter((d) => d.id !== linkedDebt.id);
+      overrides.debtEvents = allDebtEvents.map((e) => (e.debtId === linkedDebt.id ? { ...e, cancelled: true, updatedAt: nowMs } : e));
+    }
+    setCancelSaleConfirmId(null);
+    setCancelSaleError("");
+    saveAll(overrides);
+    logAction(`${tx(lang, "histSaleCancelled")} : ${lines.map((x) => `${x.productName} x${x.qty}`).join(", ")} — ${localizedNumber(total)}`);
   };
   const callClaudeApi = async (msgHistory, systemPrompt) => {
     // Appelle l'Edge Function Supabase "ai-assistant", qui appelle Gemini côté serveur
@@ -10468,7 +10627,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const transactionsMap = {};
   sales.forEach((s) => {
     const key = s.transactionId || s.id;
-    if (!transactionsMap[key]) transactionsMap[key] = { id: key, date: s.date, payment: s.payment, customer: s.customer, change: s.change, items: [], total: 0 };
+    if (!transactionsMap[key]) transactionsMap[key] = { id: key, date: s.date, payment: s.payment, customer: s.customer, change: s.change, actorId: s.actorId ?? null, items: [], total: 0 };
     transactionsMap[key].items.push(s);
     transactionsMap[key].total += s.total;
   });
@@ -10481,6 +10640,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // ---- Historique unifié (ventes + dettes + dépenses), avec filtres avancés ----
   // Chaque catégorie n'est incluse que si l'employé a la permission de la voir, pour rester
   // cohérent avec le reste des permissions déjà appliquées ailleurs dans l'app.
+  // Ventes annulées (par leur référence) : la ligne d'origine reste dans l'historique, marquée comme annulée.
+  const cancelledSaleRefs = new Set(historyLog.filter((h) => h.type === "saleCancelled" && h.originalRef).map((h) => h.originalRef));
   const historyRaw = [...historyLog, ...deriveLegacyHistory()]
     .filter((h) => {
       const cat = HISTORY_CATEGORY[h.type];
@@ -11802,14 +11963,34 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {transactions.length > 0 && !activeCart && (
               <div>
                 <p className="text-xs font-bold mb-2 mt-4" style={{ color: T.text }}>{t(lang, "recentSales")}</p>
-                {transactions.slice(0, 5).map((t) => (
-                  <div key={t.id} className="rounded-2xl p-3 mb-2" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: T.text }}>{t.items.map((i) => i.productName).join(", ")}</span>
-                      <span className="font-bold" style={{ color: T.text }}>{fcfa(t.total)}</span>
+                {transactions.slice(0, 5).map((txn) => {
+                  // Un employé ne voit le bouton d'annulation que sur ses propres ventes.
+                  const canCancel = !activeEmployee || txn.actorId === activeEmployee.id;
+                  const confirming = cancelSaleConfirmId === txn.id;
+                  return (
+                    <div key={txn.id} className="rounded-2xl p-3 mb-2" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                      <div className="flex justify-between text-sm">
+                        <span style={{ color: T.text }}>{txn.items.map((i) => i.productName).join(", ")}</span>
+                        <span className="font-bold" style={{ color: T.text }}>{fcfa(txn.total)}</span>
+                      </div>
+                      {canCancel && !confirming && (
+                        <button onClick={() => { setCancelSaleConfirmId(txn.id); setCancelSaleError(""); }} className="mt-2 text-[11px] font-semibold flex items-center gap-1" style={{ color: darkMode ? CLAY : "#e11d48" }}>
+                          <X size={12} /> {tx(lang, "cancelSaleBtn")}
+                        </button>
+                      )}
+                      {confirming && (
+                        <div className="mt-2 rounded-xl p-2.5" style={{ background: T.input }}>
+                          <p className="text-[11px] mb-2" style={{ color: T.text }}>{tx(lang, "cancelSaleConfirmMsg")}</p>
+                          {cancelSaleError && <p className="text-[11px] mb-2" style={{ color: CLAY }}>{cancelSaleError}</p>}
+                          <div className="flex gap-2">
+                            <button onClick={() => { setCancelSaleConfirmId(null); setCancelSaleError(""); }} className="flex-1 py-2 rounded-lg text-[11px] font-semibold border" style={{ borderColor: T.border, color: T.text }}>{tx(lang, "cancelSaleKeep")}</button>
+                            <button onClick={() => cancelSale(txn.id)} className="flex-1 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#e11d48" }}>{tx(lang, "cancelSaleConfirmYes")}</button>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -11853,7 +12034,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         const openConfirm = () => setConfirmModal({ message: t(lang, "confirmMarkPaid"), onConfirm: () => {
                           saveAll({
                             debts: debts.map((x) => (x.id === d.id ? { ...x, paid: true } : x)),
-                            debtEvents: [...debtEvents, { id: d.id + "-paidev", debtId: d.id, type: "paid", customer: d.customer, amount: remainingDebt(d), product: d.product, date: new Date().toISOString(), actorId: activeEmployee ? activeEmployee.id : null, actorName: activeEmployee ? activeEmployee.name : null }],
+                            debtEvents: [...allDebtEvents, { id: d.id + "-paidev", debtId: d.id, type: "paid", customer: d.customer, amount: remainingDebt(d), product: d.product, date: new Date().toISOString(), actorId: activeEmployee ? activeEmployee.id : null, actorName: activeEmployee ? activeEmployee.name : null }],
                             historyLog: [...historyLog, makeHistoryEntry("debtPaid", { refId: d.id + "-paidev", amount: remainingDebt(d), customer: d.customer, product: d.product || "" })],
                           });
                           logAction(`${t(lang, "logDebtSettled")} : ${d.customer} — ${localizedNumber(remainingDebt(d))}`);
@@ -12276,7 +12457,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 );
               }
-              const isCancelled = h.type === "saleCancelled";
+              const isCancelledEntry = h.type === "saleCancelled";
+              const wasCancelled = h.type === "sale" && cancelledSaleRefs.has(h.refId);
+              const isCancelled = isCancelledEntry || wasCancelled;
               const methodLabel = h.payment ? (getPaymentMethods(lang).find((m) => m.id === h.payment)?.label || h.payment) : "";
               const cancelColor = darkMode ? CLAY : "#e11d48";
               return (
@@ -12295,12 +12478,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     ))}
                   </div>
                   <div className="flex items-center justify-between text-[10px] mt-1" style={{ color: T.muted }}>
-                    <span>{fullDate(h.date)} à {fullTime(h.date)}{actorLabel ? ` · ${actorLabel}` : ""}</span>
+                    <span>{fullDate(h.date)} à {fullTime(h.date)}{actorLabel ? ` · ${actorLabel}` : ""}{isCancelledEntry && h.originalDate ? ` · ${t(lang, "histColDate")} : ${fullDate(h.originalDate)}` : ""}</span>
                     <span className="font-extrabold text-xs" style={{ color: isCancelled ? cancelColor : (darkMode ? "#8fb4e8" : INDIGO), textDecoration: isCancelled ? "line-through" : "none" }}>{fcfa(h.amount)}</span>
                   </div>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     {methodLabel && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: T.input, color: T.text }}>{methodLabel}</span>}
                     {h.customer && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(76,122,90,0.25)" : "#dcfce7", color: darkMode ? "#8fd6a3" : "#16a34a" }}>{h.customer}</span>}
+                    {isCancelledEntry && h.restocked && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(76,122,90,0.25)" : "#dcfce7", color: darkMode ? "#8fd6a3" : "#16a34a" }}>{tx(lang, "histStockRestored")}</span>}
+                    {isCancelledEntry && h.debtCancelled && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5", color: darkMode ? "#f0c869" : "#ea580c" }}>{tx(lang, "histDebtRemoved")}</span>}
                     {!isCancelled && h.change != null && h.change >= 0 && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5", color: darkMode ? "#f0c869" : "#ea580c" }}>{t(lang, "othRendu")} {fcfa(h.change)}</span>}
                   </div>
                 </div>
@@ -14296,6 +14481,8 @@ function BoutiqueAppInner() {
   }
   if (!session) {
     return (
+      <>
+      <InstallBanner lang={lang} />
       <AuthScreen
         lang={lang}
         setLang={changeLang}
@@ -14304,12 +14491,15 @@ function BoutiqueAppInner() {
         onDemo={() => setSession({ type: "shop", username: "demo", shopName: "Boutique Démo (exemple)", isDemo: true })}
         startInGoogleOnboarding={needsGoogleOnboarding}
       />
+      </>
     );
   }
   if (session.type === "admin") {
     return <AdminPanel onLogout={() => setSession(null)} />;
   }
   return (
+    <>
+    <InstallBanner lang={lang} />
     <ShopApp
       username={session.username}
       shopName={session.shopName}
@@ -14320,6 +14510,7 @@ function BoutiqueAppInner() {
       lang={lang}
       setLang={changeLang}
     />
+    </>
   );
 }
 
