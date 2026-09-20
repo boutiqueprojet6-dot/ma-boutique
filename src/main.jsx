@@ -5,9 +5,46 @@ import "./index.css";
 
 const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
 
+// Bandeau "Mise à jour disponible" affiché par-dessus l'app, injecté directement
+// dans le DOM (pas de composant React ici : main.jsx tourne avant le montage,
+// et on veut que ça marche même si BoutiqueApp plante).
+function showUpdateBanner(onReload) {
+  if (document.getElementById("sw-update-banner")) return; // déjà affiché
+  const banner = document.createElement("div");
+  banner.id = "sw-update-banner";
+  banner.style.cssText = `
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999999;
+    background: #1a1a1a; color: #fff; padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; font-family: system-ui, -apple-system, sans-serif; font-size: 14px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+  `;
+  banner.innerHTML = `
+    <span>Une nouvelle version de l'app est disponible.</span>
+    <button id="sw-update-btn" style="
+      background: #fff; color: #1a1a1a; border: none; border-radius: 6px;
+      padding: 8px 14px; font-weight: 600; font-size: 14px; cursor: pointer;
+      white-space: nowrap;
+    ">Mettre à jour</button>
+  `;
+  document.body.appendChild(banner);
+  document.getElementById("sw-update-btn").onclick = () => {
+    banner.remove();
+    onReload();
+  };
+}
+
 if (!isCapacitorApp && "serviceWorker" in navigator) {
   import("virtual:pwa-register").then(({ registerSW }) => {
-    registerSW({ immediate: true });
+    const updateSW = registerSW({
+      immediate: true,
+      onOfflineReady() {
+        console.log("App prête pour le mode hors-ligne");
+      },
+      onNeedRefresh() {
+        showUpdateBanner(() => updateSW(true)); // true = recharge la page après activation
+      },
+    });
   });
 }
 
@@ -20,13 +57,6 @@ function renderApp() {
 }
 
 if (isCapacitorApp) {
-  // Le cache des données de la boutique (produits, ventes, stock...) est normalement
-  // stocké dans le localStorage du WebView, qui n'est pas fiable dans l'app native —
-  // exactement le même problème déjà rencontré et corrigé pour la session de connexion.
-  // On le recopie donc depuis le stockage natif (bien plus fiable, voir writeLocalCache
-  // dans BoutiqueApp.jsx qui l'alimente en parallèle) juste avant de monter l'app, pour
-  // que le cache soit déjà présent dès le tout premier rendu — sans quoi l'app attendrait
-  // une requête réseau complète avant de pouvoir afficher quoi que ce soit.
   import("@capacitor/preferences").then(async ({ Preferences }) => {
     try {
       const { keys } = await Preferences.keys();
