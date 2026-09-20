@@ -5772,8 +5772,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   const [loginOtpSending, setLoginOtpSending] = useState(false);
   const [loginOtpVerifying, setLoginOtpVerifying] = useState(false);
   const [showPin, setShowPin] = useState(false);
-  const [showObPin, setShowObPin] = useState(false);
-  const [showObConfirmPin, setShowObConfirmPin] = useState(false);
   const [showObLockPin, setShowObLockPin] = useState(false);
   const [showObConfirmLockPin, setShowObConfirmLockPin] = useState(false);
   const [error, setError] = useState("");
@@ -5796,8 +5794,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       if (data && data.user && data.user.email) setObUsername(data.user.email);
     });
   }, [startInGoogleOnboarding]);
-  const [obPin, setObPin] = useState("");
-  const [obConfirmPin, setObConfirmPin] = useState("");
   const [obLockPin, setObLockPin] = useState("");
   const [obConfirmLockPin, setObConfirmLockPin] = useState("");
   const [obErrors, setObErrors] = useState({});
@@ -5890,39 +5886,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
     if (oauthError) throw oauthError;
   };
-  const loginSubmit = async () => {
-    setError("");
-    if (!username.trim() || !pin.trim()) {
-      setError(t(lang, "fillIdentAndPin"));
-      return;
-    }
-    setBusy(true);
-    try {
-      const { data, error: authError } = await supabase.auth.signInWithPassword({
-        email: username.trim().toLowerCase(),
-        password: pin.trim(),
-      });
-      if (authError || !data.user) {
-        setError(t(lang, "wrongPin"));
-        setBusy(false);
-        return;
-      }
-      const { data: shopRow, error: shopError } = await supabase
-        .from("shop_data")
-        .select("shop_name")
-        .eq("owner_id", data.user.id)
-        .single();
-      if (shopError || !shopRow) {
-        setError(t(lang, "genericError"));
-        setBusy(false);
-        return;
-      }
-      onLogin(username.trim().toLowerCase(), shopRow.shop_name);
-    } catch (e) {
-      setError(`${t(lang, "genericError")} ${e && e.message ? e.message : ""}`);
-    }
-    setBusy(false);
-  };
   // Connexion sans mot de passe : envoie un code à 6 chiffres par e-mail (comme Claude.ai).
   // shouldCreateUser: true — si l'adresse n'a pas encore de compte Supabase Auth, Supabase
   // en amorce un ; verifyLoginOtp() décide ensuite s'il s'agit d'une boutique existante
@@ -5994,8 +5957,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       if (!obEmailVerified) errs.emailNotVerified = true;
     }
     if (n === 3) {
-      if (obPin.trim().length < 8 || !/[a-zA-Z]/.test(obPin) || !/[0-9]/.test(obPin)) errs.pin = true;
-      if (obConfirmPin.trim() !== obPin.trim() || !obConfirmPin.trim()) errs.confirmPin = true;
       if (!/^\d{4}$/.test(obLockPin.trim())) errs.lockPin = true;
       if (obConfirmLockPin.trim() !== obLockPin.trim() || !obConfirmLockPin.trim()) errs.confirmLockPin = true;
     }
@@ -6075,17 +6036,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         return;
       }
       const ownerId = userData.user.id;
-      // Flux classique (email/OTP) : on définit le mot de passe choisi (obPin).
-      // Flux Google : l'authentification est déjà gérée par Google, aucun mot
-      // de passe supplémentaire à définir ici.
-      if (!isGoogleFlow) {
-        const { error: pwError } = await supabase.auth.updateUser({ password: obPin.trim() });
-        if (pwError) {
-          setError(`${t(lang, "genericError")} ${pwError.message}`);
-          setBusy(false);
-          return;
-        }
-      }
       // Le PIN de verrouillage local (déverrouillage rapide de l'app une fois connecté) est
       // haché et stocké dans shop_data ; l'identité réelle du compte reste gérée par Supabase Auth.
       // Pour le flux Google, un PIN par défaut est utilisé (modifiable ensuite dans Paramètres).
@@ -6604,32 +6554,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </div>
           </div>
         )}
-        {/* STEP 3 — Mot de passe + Code PIN */}
+        {/* STEP 3 — Code PIN */}
         {obStep === 3 && (
           <div>
-            <h2 className="text-lg font-bold mb-1" style={{ fontFamily: "serif", color: "#15162C" }}>{t(lang, "obStep2Title")}</h2>
-            <p className="text-xs mb-5" style={{ color: "#6B6D85" }}>{t(lang, "obStep2Desc")}</p>
-            {/* Bloc mot de passe */}
-            <div className="mb-1 px-3 py-2.5 rounded-xl text-xs" style={{ background: "#EEF0FE", color: "#3F37C9" }}>
-              🔑 {t(lang, "passwordExplainer")}
-            </div>
-            <div className="mb-3 mt-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "passwordPlaceholder")}</label>
-              <div className="relative">
-                <input value={obPin} onChange={(e) => setObPin(e.target.value)} type={showObPin ? "text" : "password"} placeholder="••••••••" className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.pin) }} />
-                <button type="button" onClick={() => setShowObPin(!showObPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObPin ? "🙈" : "👁"}</button>
-              </div>
-              <p className="text-[11px] mt-1.5" style={{ color: "#A6A8BC" }}>{t(lang, "pinHint")}</p>
-            </div>
-            <div className="mb-2">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "confirmPasswordPlaceholder")}</label>
-              <div className="relative">
-                <input value={obConfirmPin} onChange={(e) => setObConfirmPin(e.target.value)} type={showObConfirmPin ? "text" : "password"} placeholder="••••••••" className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.confirmPin) }} />
-                <button type="button" onClick={() => setShowObConfirmPin(!showObConfirmPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObConfirmPin ? "🙈" : "👁"}</button>
-              </div>
-            </div>
-            {/* Bloc code PIN */}
-            <div className="mb-1 mt-5 pt-4 px-3 py-2.5 rounded-xl text-xs" style={{ borderTop: "1px solid #E7E8F1", background: "#FFF3ED", color: "#9A4A1F" }}>
+            <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "serif", color: "#15162C" }}>{t(lang, "setCodePin")}</h2>
+            <div className="mb-1 px-3 py-2.5 rounded-xl text-xs" style={{ background: "#FFF3ED", color: "#9A4A1F" }}>
               🔒 {t(lang, "lockPinExplainer")}
             </div>
             <div className="mb-3 mt-3">
@@ -6684,7 +6613,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   <button onClick={() => setObStep(3)} className="text-xs font-bold" style={{ color: INDIGO }}>{t(lang, "editBtn")}</button>
                 </div>
                 <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "emailLabel")}</span><span className="font-semibold">{obUsername}</span></div>
-                <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "passwordPlaceholder")}</span><span className="font-semibold">••••</span></div>
                 <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "setCodePin")}</span><span className="font-semibold">••••</span></div>
               </div>
             )}
@@ -8179,10 +8107,6 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [settingsField, setSettingsField] = useState(null);
   const [settingsSearchQuery, setSettingsSearchQuery] = useState("");
   const [langSearchQuery, setLangSearchQuery] = useState("");
-  const [oldPin, setOldPin] = useState("");
-  const [newPin, setNewPin] = useState("");
-  const [confirmNewPin, setConfirmNewPin] = useState("");
-  const [pinMsg, setPinMsg] = useState("");
   const [oldLockPin, setOldLockPin] = useState("");
   const [newLockPin, setNewLockPin] = useState("");
   const [confirmNewLockPin, setConfirmNewLockPin] = useState("");
@@ -9479,42 +9403,6 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
   };
   // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
-  // Vrai mot de passe de connexion (Supabase Auth), distinct du code PIN applicatif géré
-  // juste en dessous. Envoie un email de réinitialisation standard via Supabase — aucun
-  // backend custom nécessaire, c'est un mécanisme natif d'Auth.
-  const [resetEmailBusy, setResetEmailBusy] = useState(false);
-  const [resetEmailMsg, setResetEmailMsg] = useState("");
-  const sendPasswordResetEmail = async () => {
-    if (isDemo) { setResetEmailMsg(t(lang, "resetEmailDemoDisabled")); return; }
-    setResetEmailBusy(true);
-    setResetEmailMsg("");
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(username.trim().toLowerCase());
-      if (error) throw error;
-      setResetEmailMsg(t(lang, "resetEmailSent"));
-    } catch (err) {
-      setResetEmailMsg(t(lang, "resetEmailError"));
-    } finally {
-      setResetEmailBusy(false);
-    }
-  };
-  const changePassword = async () => {
-    setPinMsg("");
-    if (isDemo) { setPinMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
-    if (!oldPin.trim() || !newPin.trim() || !confirmNewPin.trim()) { setPinMsg("Remplis les trois champs."); return; }
-    if (newPin.trim() !== confirmNewPin.trim()) { setPinMsg("Le nouveau code et sa confirmation ne correspondent pas."); return; }
-    try {
-      const raw = await window.storage.get(`accounts:${username}`, true);
-      const account = raw ? JSON.parse(raw.value) : null;
-      const oldHash = await hashPin(oldPin.trim());
-      const isLegacyPlainPin = account && account.pin === oldPin.trim();
-      if (!account || (account.pin !== oldHash && !isLegacyPlainPin)) { setPinMsg("Ancien code PIN incorrect."); return; }
-      account.pin = await hashPin(newPin.trim());
-      await window.storage.set(`accounts:${username}`, JSON.stringify(account), true);
-      setPinMsg("Code PIN mis à jour ✓");
-      setOldPin(""); setNewPin(""); setConfirmNewPin("");
-    } catch (e) { setPinMsg("Erreur, réessaie."); }
-  };
   const changeLockPin = async () => {
     setLockPinMsg("");
     if (isDemo) { setLockPinMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
@@ -13100,7 +12988,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "id" && t(lang, "identifier")}
                   {settingsField === "photo" && t(lang, "shopPhoto")}
                   {settingsField === "name" && t(lang, "shopName")}
-                  {settingsField === "pin" && (t(lang, "setMotDePasse"))}
+                  {settingsField === "phone" && tx(lang, "phoneNumber")}
                   {settingsField === "lockpin" && (t(lang, "setCodePin"))}
                   {settingsField === "darkmode" && t(lang, "darkMode")}
                   {settingsField === "balls" && t(lang, "animBalls")}
@@ -13124,7 +13012,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
                 <div style={{ color: T.muted, fontSize: 12.5 }}>Shopnify</div>
               </div>
-              <button onClick={() => { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setSettingsSearchQuery(""); setPinMsg(""); setOldPin(""); setNewPin(""); setConfirmNewPin(""); setConfirmReset(false); }}
+              <button onClick={() => { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setSettingsSearchQuery(""); setConfirmReset(false); }}
                 style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: T.muted, cursor: "pointer" }}>
                 <X size={16} />
               </button>
@@ -13181,7 +13069,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "id", label: t(lang, "identifier"), right: <span style={{ color: T.muted, fontSize: 12 }}>{username}</span> },
                 { id: "photo", label: t(lang, "shopPhoto"), right: shopPhoto ? <img src={shopPhoto} alt="" style={{ width: 26, height: 26, borderRadius: "50%", objectFit: "cover" }} /> : <Camera size={14} color={T.muted} /> },
                 { id: "name", label: t(lang, "shopName"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopName}</span> },
-                { id: "pin", label: t(lang, "setMotDePasse"), right: <span style={{ color: T.muted, fontSize: 12 }}>••••••••</span> },
+                { id: "phone", label: tx(lang, "phoneNumber"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopPhone || "—"}</span> },
                 { id: "lockpin", label: t(lang, "setCodePin"), right: <span style={{ color: T.muted, fontSize: 12 }}>••••</span> },
               ].map((item) => (
                 <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
@@ -13698,17 +13586,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {shopNameMsg && <p style={{ color: shopNameMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11, marginTop: 6 }}>{shopNameMsg}</p>}
                 </div>
               )}
-              {settingsField === "pin" && (
-                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
-                  {[{ v: oldPin, s: setOldPin, p: t(lang, "setAncienMotDePasse") }, { v: newPin, s: setNewPin, p: t(lang, "setNouveauMotDePasse") }, { v: confirmNewPin, s: setConfirmNewPin, p: t(lang, "setConfirmerLeMotDePasse") }].map((f, i) => (
-                    <input key={i} type="password" placeholder={f.p} value={f.v} onChange={(e) => f.s(e.target.value)} style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "10px 12px", fontSize: 14 }} />
-                  ))}
-                  {pinMsg && <p style={{ color: pinMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11 }}>{pinMsg}</p>}
-                  <button onClick={changePassword} style={{ background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", borderRadius: 12, padding: 12, fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "updatePin")}</button>
-                  <button onClick={sendPasswordResetEmail} disabled={resetEmailBusy} style={{ background: "transparent", border: "none", color: "#f87171", fontSize: 11, textAlign: "center", textDecoration: "underline", cursor: "pointer", opacity: resetEmailBusy ? 0.6 : 1 }}>
-                    {resetEmailBusy ? t(lang, "stripeCheckoutLoading") : t(lang, "forgotPinSettings")}
-                  </button>
-                  {resetEmailMsg && <p style={{ color: resetEmailMsg === t(lang, "resetEmailSent") ? "#34d399" : "#f87171", fontSize: 11, textAlign: "center" }}>{resetEmailMsg}</p>}
+              {settingsField === "phone" && (
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "phoneNumber")}</div>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <input type="tel" inputMode="tel" value={shopPhoneInput} onChange={(e) => { setShopPhoneInput(e.target.value); setShopPhoneMsg(""); }} style={{ flex: 1, minWidth: 0, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <button onClick={() => { saveAll({ phone: shopPhoneInput.trim() }); setShopPhoneMsg("✓"); }} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}>OK</button>
+                  </div>
+                  {shopPhoneMsg && <p style={{ color: "#34d399", fontSize: 11, marginTop: 6 }}>{shopPhoneMsg}</p>}
                 </div>
               )}
               {settingsField === "lockpin" && (
@@ -13866,8 +13751,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {
                       cat: t(lang, "setCompteAbonnement"),
                       items: [
-                        { q: t(lang, "setJaiOublieMonMotDe"), a: t(lang, "setAppuieSurCodePinOublie") },
-                        { q: t(lang, "setQuelleEstLaDifference"), a: t(lang, "setLaReponseDifference") },
                         { q: t(lang, "setCommentDebloquerLesFonctionnalitesPay"), a: t(lang, "setContacteLeSupportPourOrganiser") },
                         { q: t(lang, "setMesDonneesSontellesEnSecurite"), a: t(lang, "setTonMotDePasseNest") },
                         { q: t(lang, "setPuisjeChangerLaDeviseDe"), a: t(lang, "setOuiAToutMomentDans") },
@@ -14161,72 +14044,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   );
 }
 // ---------- ROOT ----------
-// ---------- PASSWORD RESET SCREEN ----------
-// Affiché quand l'utilisateur arrive via le lien reçu par email (resetPasswordForEmail).
-// Lui permet de choisir un nouveau mot de passe pour finaliser la réinitialisation.
-function PasswordResetScreen({ lang, onDone }) {
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [msg, setMsg] = useState("");
-  const [done, setDone] = useState(false);
-
-  const submit = async () => {
-    setMsg("");
-    if (newPassword.trim().length < 6) { setMsg(t(lang, "resetPwTooShort")); return; }
-    if (newPassword.trim() !== confirmPassword.trim()) { setMsg(t(lang, "resetPwMismatch")); return; }
-    setBusy(true);
-    try {
-      const { error } = await supabase.auth.updateUser({ password: newPassword.trim() });
-      if (error) throw error;
-      setDone(true);
-      await supabase.auth.signOut();
-    } catch (err) {
-      setMsg(t(lang, "resetPwError"));
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  return (
-    <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
-      <div style={{ width: "100%", maxWidth: 360, background: "white", borderRadius: 20, padding: 28, boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}>
-        {done ? (
-          <>
-            <p style={{ fontSize: 16, fontWeight: 700, color: CHARCOAL, marginBottom: 8, textAlign: "center" }}>{t(lang, "resetPwSuccessTitle")}</p>
-            <p style={{ fontSize: 13, color: "#6B6D85", marginBottom: 20, textAlign: "center" }}>{t(lang, "resetPwSuccessDesc")}</p>
-            <button onClick={onDone} style={{ width: "100%", padding: 12, borderRadius: 12, background: INDIGO, color: "white", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer" }}>
-              {t(lang, "resetPwBackToLogin")}
-            </button>
-          </>
-        ) : (
-          <>
-            <p style={{ fontSize: 16, fontWeight: 700, color: CHARCOAL, marginBottom: 4, textAlign: "center" }}>{t(lang, "resetPwTitle")}</p>
-            <p style={{ fontSize: 13, color: "#6B6D85", marginBottom: 20, textAlign: "center" }}>{t(lang, "resetPwDesc")}</p>
-            <input
-              type="password"
-              placeholder={t(lang, "resetPwNewPlaceholder")}
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              style={{ width: "100%", border: "1px solid #E4E5F0", borderRadius: 12, padding: "12px 14px", fontSize: 14, marginBottom: 10 }}
-            />
-            <input
-              type="password"
-              placeholder={t(lang, "resetPwConfirmPlaceholder")}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              style={{ width: "100%", border: "1px solid #E4E5F0", borderRadius: 12, padding: "12px 14px", fontSize: 14, marginBottom: 10 }}
-            />
-            {msg && <p style={{ color: "#e11d48", fontSize: 12, marginBottom: 10, textAlign: "center" }}>{msg}</p>}
-            <button onClick={submit} disabled={busy} style={{ width: "100%", padding: 12, borderRadius: 12, background: INDIGO, color: "white", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: busy ? 0.6 : 1 }}>
-              {busy ? t(lang, "stripeCheckoutLoading") : t(lang, "resetPwSubmit")}
-            </button>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
 // ---- Filet de sécurité anti-page-blanche ----
 // Si un composant plante pendant le rendu (variable manquante, erreur JS, etc.),
 // React démonte tout et laisse un écran blanc sans aucun indice. Ce composant
@@ -14335,16 +14152,6 @@ function BoutiqueAppInner() {
       }).then((handle) => { removeListener = handle; });
     });
     return () => { if (removeListener) removeListener.remove(); };
-  }, []);
-  // Détecte le retour depuis le lien de réinitialisation de mot de passe envoyé par email
-  // (supabase.auth.resetPasswordForEmail). Supabase émet l'événement PASSWORD_RECOVERY sur
-  // la session courante quand l'utilisateur arrive via ce lien, avant même toute connexion.
-  const [passwordRecoveryMode, setPasswordRecoveryMode] = useState(false);
-  useEffect(() => {
-    const { data: listener } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY") setPasswordRecoveryMode(true);
-    });
-    return () => listener.subscription.unsubscribe();
   }, []);
   // Détecte une connexion réussie via un moyen qui recharge la page — Google (OAuth)
   // ou le bouton "Sign in" reçu par e-mail (lien magique) — pour un utilisateur qui n'a
@@ -14478,9 +14285,6 @@ function BoutiqueAppInner() {
   }
   if (!langChosen) {
     return <LanguagePickerScreen onChoose={chooseInitialLang} />;
-  }
-  if (passwordRecoveryMode) {
-    return <PasswordResetScreen lang={lang} onDone={() => { setPasswordRecoveryMode(false); setSession(null); }} />;
   }
   if (checkingGoogleOnboarding) {
     return (
