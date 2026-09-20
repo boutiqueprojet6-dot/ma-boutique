@@ -4777,6 +4777,7 @@ const CURRENCIES = [
 ];
 let CURRENT_CURRENCY = CURRENCIES.find((c) => c.id === "XOF") || CURRENCIES[0];
 let CURRENT_LANG = "fr";
+let CURRENT_COUNTRY = ""; // pays du compte (ex. "Mali"), sert au format de date
 const currencyLabel = (c, lg) => {
   const l = lg || CURRENT_LANG;
   return (c && c.label && (c.label[l] || c.label.en || c.label.fr)) || (c ? c.id : "");
@@ -5125,8 +5126,19 @@ function getPaymentMethods(lang) {
     { id: "credit", label: t(lang, "credit") },
   ];
 }
+// Nombres et montants : séparateur de milliers selon la langue/pays (15 000 en français,
+// 15,000 en anglais, 15.000 en allemand ou en espagnol, 1,50,000 en Inde...). Les chiffres
+// suivent le réglage "chiffres arabes". Le formateur est mis en cache par locale (rapide même
+// avec de longues listes).
+const __numberFormatCache = {};
 function localizedNumber(n) {
-  return Math.round(n).toLocaleString(USE_ARABIC_DIGITS ? "ar-EG" : "fr-FR");
+  // Bambara / wolof : les montants s'écrivent à la française (15 000) au Mali et au Sénégal.
+  const loc = CURRENT_LANG === "bm" || CURRENT_LANG === "wo"
+    ? "fr-FR-u-nu-" + (USE_ARABIC_DIGITS ? "arab" : "latn")
+    : getAppLocale();
+  let f = __numberFormatCache[loc];
+  if (!f) f = __numberFormatCache[loc] = new Intl.NumberFormat(loc, { maximumFractionDigits: 0 });
+  return f.format(Math.round(n));
 }
 async function hashPin(pin) {
   const data = new TextEncoder().encode("boutique-salt-v1:" + pin.trim());
@@ -5140,17 +5152,67 @@ function fcfa(n) {
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
 }
+// ---- Format de date ET de nombre selon la LANGUE de l'app et le PAYS du compte ----
+// Chaque langue/pays a sa façon d'écrire la date (ex. 20/09/2026 en France ou au Mali,
+// 09/20/2026 aux États-Unis, 2026-09-20 au Canada français, 2026/9/20 au Japon...).
+// On laisse le navigateur (Intl) appliquer les bons ordres jour/mois/année, noms de mois et
+// format 12 h/24 h ; on choisit simplement la bonne "locale" à partir de la langue + du pays.
+const COUNTRY_REGION = {"Afghanistan": "AF", "Afrique du Sud": "ZA", "Albanie": "AL", "Algérie": "DZ", "Allemagne": "DE", "Andorre": "AD", "Angola": "AO", "Antigua-et-Barbuda": "AG", "Arabie saoudite": "SA", "Argentine": "AR", "Arménie": "AM", "Australie": "AU", "Autriche": "AT", "Azerbaïdjan": "AZ", "Bahamas": "BS", "Bahreïn": "BH", "Bangladesh": "BD", "Barbade": "BB", "Belgique": "BE", "Belize": "BZ", "Bénin": "BJ", "Bhoutan": "BT", "Biélorussie": "BY", "Birmanie": "MM", "Bolivie": "BO", "Bosnie-Herzégovine": "BA", "Botswana": "BW", "Brésil": "BR", "Brunei": "BN", "Bulgarie": "BG", "Burkina Faso": "BF", "Burundi": "BI", "Cambodge": "KH", "Cameroun": "CM", "Canada": "CA", "Cap-Vert": "CV", "Chili": "CL", "Chine": "CN", "Chypre": "CY", "Colombie": "CO", "Comores": "KM", "Congo-Brazzaville": "CG", "Corée du Nord": "KP", "Corée du Sud": "KR", "Costa Rica": "CR", "Côte d'Ivoire": "CI", "Croatie": "HR", "Cuba": "CU", "Danemark": "DK", "Djibouti": "DJ", "Dominique": "DM", "Égypte": "EG", "Émirats arabes unis": "AE", "Équateur": "EC", "Érythrée": "ER", "Espagne": "ES", "Estonie": "EE", "Eswatini": "SZ", "États-Unis": "US", "Éthiopie": "ET", "Fidji": "FJ", "Finlande": "FI", "France": "FR", "Gabon": "GA", "Gambie": "GM", "Géorgie": "GE", "Ghana": "GH", "Grèce": "GR", "Grenade": "GD", "Guatemala": "GT", "Guinée": "GN", "Guinée équatoriale": "GQ", "Guinée-Bissau": "GW", "Guyana": "GY", "Haïti": "HT", "Honduras": "HN", "Hongrie": "HU", "Îles Cook": "CK", "Îles Marshall": "MH", "Îles Salomon": "SB", "Inde": "IN", "Indonésie": "ID", "Irak": "IQ", "Iran": "IR", "Irlande": "IE", "Islande": "IS", "Israël": "IL", "Italie": "IT", "Jamaïque": "JM", "Japon": "JP", "Jordanie": "JO", "Kazakhstan": "KZ", "Kenya": "KE", "Kirghizistan": "KG", "Kiribati": "KI", "Kosovo": "XK", "Koweït": "KW", "Laos": "LA", "Lesotho": "LS", "Lettonie": "LV", "Liban": "LB", "Liberia": "LR", "Libye": "LY", "Liechtenstein": "LI", "Lituanie": "LT", "Luxembourg": "LU", "Macédoine du Nord": "MK", "Madagascar": "MG", "Malaisie": "MY", "Malawi": "MW", "Maldives": "MV", "Mali": "ML", "Malte": "MT", "Maroc": "MA", "Maurice": "MU", "Mauritanie": "MR", "Mexique": "MX", "Micronésie": "FM", "Moldavie": "MD", "Monaco": "MC", "Mongolie": "MN", "Monténégro": "ME", "Mozambique": "MZ", "Namibie": "NA", "Nauru": "NR", "Népal": "NP", "Nicaragua": "NI", "Niger": "NE", "Nigeria": "NG", "Norvège": "NO", "Nouvelle-Zélande": "NZ", "Oman": "OM", "Ouganda": "UG", "Ouzbékistan": "UZ", "Pakistan": "PK", "Palaos": "PW", "Palestine": "PS", "Panama": "PA", "Papouasie-Nouvelle-Guinée": "PG", "Paraguay": "PY", "Pays-Bas": "NL", "Pérou": "PE", "Philippines": "PH", "Pologne": "PL", "Portugal": "PT", "Qatar": "QA", "République centrafricaine": "CF", "République dominicaine": "DO", "République tchèque": "CZ", "Roumanie": "RO", "Royaume-Uni": "GB", "Russie": "RU", "Rwanda": "RW", "Saint-Christophe-et-Niévès": "KN", "Saint-Marin": "SM", "Saint-Vincent-et-les-Grenadines": "VC", "Sainte-Lucie": "LC", "Salvador": "SV", "Samoa": "WS", "Sao Tomé-et-Principe": "ST", "Sénégal": "SN", "Serbie": "RS", "Seychelles": "SC", "Sierra Leone": "SL", "Singapour": "SG", "Slovaquie": "SK", "Slovénie": "SI", "Somalie": "SO", "Soudan": "SD", "Soudan du Sud": "SS", "Sri Lanka": "LK", "Suède": "SE", "Suisse": "CH", "Suriname": "SR", "Syrie": "SY", "Tadjikistan": "TJ", "Taïwan": "TW", "Tanzanie": "TZ", "Tchad": "TD", "Thaïlande": "TH", "Timor oriental": "TL", "Togo": "TG", "Tonga": "TO", "Trinité-et-Tobago": "TT", "Tunisie": "TN", "Turkménistan": "TM", "Turquie": "TR", "Tuvalu": "TV", "Ukraine": "UA", "Uruguay": "UY", "Vanuatu": "VU", "Vatican": "VA", "Venezuela": "VE", "Vietnam": "VN", "Yémen": "YE", "Zambie": "ZM", "Zimbabwe": "ZW", "RD Congo": "CD"};
+const DATE_LOCALE_BY_LANG = {
+  am: "am-ET", ar: "ar", bm: "bm", bn: "bn-BD", de: "de-DE", en: "en-GB", es: "es", fr: "fr-FR",
+  ha: "ha", hi: "hi-IN", id: "id-ID", it: "it-IT", ja: "ja-JP", ko: "ko-KR", nl: "nl-NL", pl: "pl-PL",
+  pt: "pt-PT", ru: "ru-RU", sw: "sw", ta: "ta-IN", te: "te-IN", th: "th-TH", tl: "fil-PH", tr: "tr-TR",
+  ur: "ur-PK", vi: "vi-VN", wo: "wo", yo: "yo", zh: "zh-CN", zu: "zu",
+};
+// Pays pour lesquels une même langue s'écrit différemment (sinon : la locale par défaut de la langue).
+const DATE_REGION_VARIANTS = {
+  en: ["US", "CA", "PH", "AU", "NZ", "ZA", "IN", "IE", "SG"], // ailleurs : jour/mois/année (en-GB)
+  fr: ["CA", "CH", "BE", "LU"],
+  es: ["ES", "MX", "AR", "CL", "CO", "PE", "VE", "UY", "PY", "BO", "EC", "GT", "HN", "NI", "PA", "CR", "SV", "DO", "CU"],
+  pt: ["BR", "PT", "AO", "MZ", "CV", "GW", "ST", "TL"],
+  nl: ["BE"],
+  zh: ["TW", "HK"],
+  ar: ["DZ", "TN", "MA", "LY", "EG", "SA", "AE", "IQ", "JO", "LB", "SY", "KW", "QA", "BH", "OM", "YE", "SD", "MR", "PS", "SO", "DJ", "KM"],
+};
+const __dateLocaleCache = {};
+function getAppLocale() {
+  const key = CURRENT_LANG + "|" + CURRENT_COUNTRY + "|" + (USE_ARABIC_DIGITS ? "a" : "l");
+  if (__dateLocaleCache[key]) return __dateLocaleCache[key];
+  const region = COUNTRY_REGION[CURRENT_COUNTRY] || "";
+  const variants = DATE_REGION_VARIANTS[CURRENT_LANG];
+  const candidates = [];
+  if (region && variants && variants.indexOf(region) !== -1) candidates.push(CURRENT_LANG + "-" + region);
+  if (DATE_LOCALE_BY_LANG[CURRENT_LANG]) candidates.push(DATE_LOCALE_BY_LANG[CURRENT_LANG]);
+  // Langues sans données de date dans le navigateur (ex. bambara, wolof selon l'appareil) : on
+  // retombe sur le français ; pour les autres, sur le jour/mois/année international.
+  candidates.push(CURRENT_LANG === "bm" || CURRENT_LANG === "wo" ? "fr-FR" : "en-GB");
+  let base = "fr-FR";
+  for (let i = 0; i < candidates.length; i++) {
+    try { if (Intl.DateTimeFormat.supportedLocalesOf([candidates[i]]).length) { base = candidates[i]; break; } } catch (e) { /* on essaie la suivante */ }
+  }
+  // Chiffres : ceux choisis dans les réglages (latins par défaut, arabes si l'option est activée),
+  // pour que la date reste cohérente avec les montants. Arabe : calendrier grégorien imposé
+  // (sinon l'Arabie saoudite afficherait le calendrier hégirien).
+  const ext = (CURRENT_LANG === "ar" ? "-u-ca-gregory" : "-u") + "-nu-" + (USE_ARABIC_DIGITS ? "arab" : "latn");
+  return (__dateLocaleCache[key] = base + ext);
+}
 function dayLabel(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString(USE_ARABIC_DIGITS ? "ar-EG" : "fr-FR", { day: "2-digit", month: "2-digit" });
+  // Étiquette courte des graphiques : on retire les marques de direction (arabe/hébreu) qui
+  // décaleraient l'affichage dans un conteneur gauche→droite.
+  return d.toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit" }).replace(/[\u200e\u200f\u061c]/g, "");
 }
 function fullDate(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString(USE_ARABIC_DIGITS ? "ar-EG" : "fr-FR");
+  return d.toLocaleDateString(getAppLocale());
+}
+function fullDateLong(iso) {
+  const d = iso ? new Date(iso) : new Date();
+  return d.toLocaleDateString(getAppLocale(), { weekday: "long", day: "numeric", month: "long" });
 }
 function fullTime(iso) {
   const d = new Date(iso);
-  return d.toLocaleTimeString(USE_ARABIC_DIGITS ? "ar-EG" : "fr-FR", { hour: "2-digit", minute: "2-digit" });
+  return d.toLocaleTimeString(getAppLocale(), { hour: "2-digit", minute: "2-digit" });
 }
 function last30Days() {
   const arr = [];
@@ -6617,7 +6679,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "emailLabel")}</label>
               <input
                 value={obUsername}
-                onChange={(e) => { setObUsername(e.target.value); setObEmailVerified(false); setObEmailCodeSent(false); setObEmailCodeInput(""); }}
+                onChange={(e) => { setObUsername(e.target.value); setObEmailVerified(false); setObEmailCodeSent(false); setObEmailCodeInput(""); setObOtpError(""); }}
                 placeholder={t(lang, "emailPlaceholder")}
                 type="email"
                 disabled={obEmailVerified}
@@ -6634,6 +6696,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               >
                 {obEmailCodeSending ? t(lang, "wait") : (obEmailCodeSent ? t(lang, "resendCodeBtn") : t(lang, "sendCodeBtn"))}
               </button>
+            )}
+            {/* Raison réelle du refus d'envoi (limite d'envois, adresse non autorisée…) : avant, l'erreur
+                était reçue mais jamais affichée, donc l'utilisateur ne voyait simplement rien se passer. */}
+            {obOtpError && !obErrors.emailCode && (
+              <p className="text-xs mt-2" style={{ color: CLAY }}>{t(lang, "genericError")} {obOtpError}</p>
             )}
             {obEmailCodeSent && !obEmailVerified && (
               <div className="mt-4">
@@ -7078,7 +7145,36 @@ function AdminPanel({ onLogout }) {
 }
 // ---------- CALCULATOR TAB ----------
 function CalculatorTab({ T, darkMode, lang, products }) {
-  const [display, setDisplay] = useState("0");
+  const [display, setDisplayRaw] = useState("0");
+  // Opération complète affichée à l'écran (ex : « 5000 + 300 × ») : on la garde pour que les nombres
+  // déjà saisis ne disparaissent pas quand on appuie sur un opérateur.
+  const [expression, setExpression] = useState("");
+  // Opération terminée par « = » (ex : « 5000 + 300 = »), affichée en petit au-dessus du résultat.
+  const [lastOperation, setLastOperation] = useState("");
+  // true = le nombre affiché est une saisie/valeur « vivante » à ajouter à la suite de l'opération ;
+  // false = on vient d'appuyer sur un opérateur et on attend le nombre suivant.
+  const [entryLive, setEntryLive] = useState(true);
+  const setDisplay = (value) => { setDisplayRaw(value); setEntryLive(true); };
+  // Hauteur réellement disponible sous l'en-tête et au-dessus de la barre de navigation : la calculatrice
+  // (touches comprises) s'y adapte pour tenir en un seul écran, sans défilement.
+  const rootRef = useRef(null);
+  const [availHeight, setAvailHeight] = useState(null);
+  useEffect(() => {
+    const measure = () => {
+      const el = rootRef.current;
+      if (!el) return;
+      // Position du haut de la calculatrice dans la page, indépendante du défilement actuel.
+      let scroller = el.parentElement;
+      while (scroller && !/(auto|scroll)/.test(window.getComputedStyle(scroller).overflowY)) scroller = scroller.parentElement;
+      const top = el.getBoundingClientRect().top + (scroller ? scroller.scrollTop : 0);
+      const NAV_RESERVE = 120; // barre de navigation du bas + marge
+      setAvailHeight(Math.max(Math.floor(window.innerHeight - top - NAV_RESERVE), 380));
+    };
+    measure();
+    const timer = setTimeout(measure, 300); // 2e mesure une fois la mise en page stabilisée
+    window.addEventListener("resize", measure);
+    return () => { clearTimeout(timer); window.removeEventListener("resize", measure); };
+  }, []);
   const [prevValue, setPrevValue] = useState(null);
   const [operator, setOperator] = useState(null);
   const [waitingForNewValue, setWaitingForNewValue] = useState(false);
@@ -7106,6 +7202,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
     : [];
 
   const inputDigit = (digit) => {
+    setLastOperation("");
     if (waitingForNewValue) {
       setDisplay(String(digit));
       setWaitingForNewValue(false);
@@ -7116,6 +7213,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
 
   // "00" et "000" ajoutent deux ou trois zéros d'un coup — pratique pour les gros montants (FCFA).
   const inputZeros = (zeros) => {
+    setLastOperation("");
     if (waitingForNewValue) {
       setDisplay("0");
       setWaitingForNewValue(false);
@@ -7126,6 +7224,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   };
 
   const inputDecimal = () => {
+    setLastOperation("");
     if (waitingForNewValue) {
       setDisplay("0.");
       setWaitingForNewValue(false);
@@ -7143,6 +7242,8 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   // ON/AC : réinitialise complètement la calculatrice (comme allumer l'appareil).
   const clearAll = () => {
     setDisplay("0");
+    setExpression("");
+    setLastOperation("");
     setPrevValue(null);
     setOperator(null);
     setWaitingForNewValue(false);
@@ -7243,17 +7344,44 @@ function CalculatorTab({ T, darkMode, lang, products }) {
     }
   };
 
+  // Nombre écrit dans l'opération affichée (négatif entre parenthèses : 5000 + (-3)).
+  const fmtOperand = (s) => {
+    const n = parseFloat(s);
+    if (Number.isNaN(n)) return s;
+    return n < 0 ? `(${n})` : String(n);
+  };
+
   const performOperator = (nextOperator) => {
     const inputValue = parseFloat(display);
+    if (Number.isNaN(inputValue)) return;
+    setLastOperation("");
+    // Deux opérateurs d'affilée (ex : « 5000 + » puis « × ») : on remplace simplement l'opérateur.
+    if (operator && waitingForNewValue && !entryLive) {
+      setExpression((e) => e.replace(/\s[+\-×÷]$/, ` ${nextOperator}`));
+      setOperator(nextOperator);
+      return;
+    }
+    const operandText = fmtOperand(display);
+    let keepEntryLive = false;
     if (prevValue === null) {
       setPrevValue(inputValue);
+      setExpression(`${operandText} ${nextOperator}`);
     } else if (operator) {
       const result = compute(prevValue, inputValue, operator);
-      setDisplay(Number.isNaN(result) ? "Erreur" : String(Math.round(result * 1e10) / 1e10));
-      setPrevValue(Number.isNaN(result) ? null : result);
+      if (Number.isNaN(result)) {
+        setDisplay("Erreur");
+        setPrevValue(null);
+        setExpression("");
+        keepEntryLive = true;
+      } else {
+        setDisplay(String(Math.round(result * 1e10) / 1e10));
+        setPrevValue(result);
+        setExpression((e) => `${e} ${operandText} ${nextOperator}`);
+      }
     }
     setWaitingForNewValue(true);
     setOperator(nextOperator);
+    setEntryLive(keepEntryLive);
   };
 
   // GT (Grand Total) : cumule chaque résultat obtenu par "=" ; un appui sur GT affiche/rappelle ce cumul.
@@ -7261,13 +7389,16 @@ function CalculatorTab({ T, darkMode, lang, products }) {
     const inputValue = parseFloat(display);
     if (prevValue === null || operator === null) return;
     const result = compute(prevValue, inputValue, operator);
+    const fullExpression = `${expression} ${fmtOperand(display)} =`;
     if (!Number.isNaN(result)) setGrandTotal((gt) => gt + result);
     // Historique : garde chaque calcul terminé par "=" (opération complète + résultat),
     // le plus récent en premier. Limité à 50 entrées pour ne pas grossir indéfiniment.
     if (!Number.isNaN(result)) {
-      setHistory((h) => [{ a: prevValue, op: operator, b: inputValue, result, date: new Date().toISOString() }, ...h].slice(0, 50));
+      setHistory((h) => [{ a: prevValue, op: operator, b: inputValue, result, expr: fullExpression, date: new Date().toISOString() }, ...h].slice(0, 50));
     }
     setDisplay(Number.isNaN(result) ? "Erreur" : String(Math.round(result * 1e10) / 1e10));
+    setExpression("");
+    setLastOperation(Number.isNaN(result) ? "" : fullExpression);
     setPrevValue(null);
     setOperator(null);
     setWaitingForNewValue(true);
@@ -7329,9 +7460,15 @@ function CalculatorTab({ T, darkMode, lang, products }) {
     ? display.replace(/[0-9]/g, (d) => WESTERN_TO_ARABIC[d])
     : display;
   const toDisplayDigits = (s) => (USE_ARABIC_DIGITS ? s.replace(/[0-9]/g, (d) => WESTERN_TO_ARABIC[d]) : s);
+  // Ligne principale de l'écran : toute l'opération en cours (« 5000 + 300 ») ; sinon simplement le nombre.
+  const rawLine = expression
+    ? `${expression}${entryLive ? " " + (display.startsWith("-") ? `(${display})` : display) : ""}`
+    : display;
+  const lineText = toDisplayDigits(rawLine.length > 28 ? "…" + rawLine.slice(-27) : rawLine);
+  const lineFontSize = rawLine.length <= 9 ? 34 : rawLine.length <= 13 ? 24 : rawLine.length <= 19 ? 19 : 15;
 
   return (
-    <div className="flex flex-col" style={{ height: "calc(100vh - 160px)", overflow: "hidden" }}>
+    <div ref={rootRef} className="flex flex-col" style={{ height: availHeight || "calc(100vh - 300px)", overflow: "hidden" }}>
       <div className="flex items-center gap-2 mb-2 shrink-0">
         <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(16,185,129,0.2)" : "rgba(16,185,129,0.1)" }}>
           <Calculator size={16} color={darkMode ? "#34d399" : "#059669"} />
@@ -7407,7 +7544,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
                   style={{ background: darkMode ? "#1c1c28" : "#f8fafc" }}
                 >
                   <span className="text-xs truncate" style={{ color: T.muted }}>
-                    {toDisplayDigits(String(entry.a))} {entry.op} {toDisplayDigits(String(entry.b))}
+                    {entry.expr ? toDisplayDigits(entry.expr.replace(/ =$/, "")) : `${toDisplayDigits(String(entry.a))} ${entry.op} ${toDisplayDigits(String(entry.b))}`}
                   </span>
                   <span className="text-sm font-bold shrink-0 ml-2" style={{ color: darkMode ? "#34d399" : "#059669" }}>
                     {toDisplayDigits(String(Math.round(entry.result * 1e10) / 1e10))}
@@ -7420,7 +7557,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
       )}
       <div
         className="rounded-2xl p-3 flex flex-col items-end justify-end relative shrink-0"
-        style={{ background: T.card, height: 68, marginBottom: 8, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}
+        style={{ background: T.card, height: 88, marginBottom: 8, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}
       >
         {memory !== null && (
           <span className="absolute top-2 left-3 text-[10px] font-bold" style={{ color: darkMode ? "#7fb2ff" : "#2563eb" }}>M</span>
@@ -7428,8 +7565,13 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         {settingTaxRate && (
           <span className="absolute top-2 right-3 text-[10px] font-bold" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>{t(lang, "calcSetPercent")}</span>
         )}
-        <span className="font-bold" style={{ color: T.text, fontSize: display.length > 9 ? 24 : 34, wordBreak: "break-all", textAlign: "right" }}>
-          {displayValue}
+        {lastOperation && (
+          <span dir="ltr" className="text-[11px] font-semibold" style={{ color: T.muted, whiteSpace: "nowrap", overflow: "hidden", maxWidth: "100%", textAlign: "right", paddingLeft: 20 }}>
+            {toDisplayDigits(lastOperation.length > 34 ? "…" + lastOperation.slice(-33) : lastOperation)}
+          </span>
+        )}
+        <span dir="ltr" className="font-bold" style={{ color: T.text, fontSize: lineFontSize, whiteSpace: "nowrap", overflow: "hidden", maxWidth: "100%", textAlign: "right" }}>
+          {lineText}
         </span>
       </div>
       <div className="flex-1 flex flex-col gap-1.5" style={{ minHeight: 0 }}>
@@ -7533,6 +7675,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showBalls, setShowBalls] = useState(true);
   const [ballColor, setBallColor] = useState("blue");
   const [currency, setCurrency] = useState("XOF");
+  const [shopCountry, setShopCountry] = useState(""); // pays du compte (pour le format de date)
   const [shopPhone, setShopPhone] = useState("");
   // Style choisi pour l'image de partage produit (fond/couleurs), et si on
   // doit re-proposer le choix avant chaque envoi ou garder ce style partout.
@@ -8319,6 +8462,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [shopNameMsg, setShopNameMsg] = useState("");
   const [shopPhoneInput, setShopPhoneInput] = useState("");
   const [shopPhoneMsg, setShopPhoneMsg] = useState("");
+  // ---- Profil saisi à l'inscription, modifiable dans « Gérer le compte » ----
+  const [ownerFirstName, setOwnerFirstName] = useState("");
+  const [ownerLastName, setOwnerLastName] = useState("");
+  const [ownerFirstInput, setOwnerFirstInput] = useState("");
+  const [ownerLastInput, setOwnerLastInput] = useState("");
+  const [ownerNameMsg, setOwnerNameMsg] = useState("");
+  const [shopSector, setShopSector] = useState("");
+  const [sectorMsg, setSectorMsg] = useState("");
+  const [countrySearchQuery, setCountrySearchQuery] = useState("");
+  const [countryMsg, setCountryMsg] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [emailMsg, setEmailMsg] = useState("");
   const [confirmReset, setConfirmReset] = useState(false);
@@ -8581,7 +8734,40 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setShowBalls(shop.showBalls !== false);
     setBallColor(shop.ballColor || "blue");
     setCurrency(shop.currency || "XOF");
+    // Pays du compte : gardé aussi en local, pour que le format de date reste correct même
+    // au démarrage hors ligne (les copies de secours de la boutique ne contiennent pas le pays).
+    {
+      let ctry = shop.country || "";
+      try {
+        const ck = "mb_shop_country:" + shopKey;
+        if (ctry) window.localStorage.setItem(ck, ctry);
+        else ctry = window.localStorage.getItem(ck) || "";
+      } catch (e) { /* stockage indisponible : on garde la valeur reçue */ }
+      if (ctry) setShopCountry(ctry);
+    }
     setShopPhone(shop.phone || "");
+    // Profil saisi à l'inscription (prénom, nom, secteur) : lu depuis shop_data. Copie locale de
+    // secours (comme pour le pays) car les copies hors ligne de la boutique ne contiennent pas ces champs.
+    {
+      const profKey = "mb_shop_profile:" + shopKey;
+      let prof = null;
+      if (shop.ownerName !== undefined || shop.ownerFirstName !== undefined || shop.sector !== undefined) {
+        const parts = String(shop.ownerName || "").trim().split(/\s+/).filter(Boolean);
+        prof = {
+          first: shop.ownerFirstName !== undefined ? shop.ownerFirstName : (parts[0] || ""),
+          last: shop.ownerLastName !== undefined ? shop.ownerLastName : parts.slice(1).join(" "),
+          sector: shop.sector || "",
+        };
+        try { window.localStorage.setItem(profKey, JSON.stringify(prof)); } catch (e) { /* stockage indisponible */ }
+      } else {
+        try { const rawProf = window.localStorage.getItem(profKey); if (rawProf) prof = JSON.parse(rawProf); } catch (e) { /* rien à restaurer */ }
+      }
+      if (prof) {
+        setOwnerFirstName(prof.first || "");
+        setOwnerLastName(prof.last || "");
+        setShopSector(prof.sector || "");
+      }
+    }
     setShareCardStyleId(shop.shareCardStyleId || "midnight");
     setShareCardAskEachTime(!!shop.shareCardAskEachTime);
     setSettingsUpdatedAt(shop.settingsUpdatedAt || 0);
@@ -9777,13 +9963,99 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (isDemo) { onRenameShop && onRenameShop(shopNameInput.trim() || shopName); setShopNameMsg("Nom mis à jour ✓ (mode démo, non sauvegardé)"); return; }
     if (!shopNameInput.trim()) return;
     try {
+      const newName = shopNameInput.trim();
       const raw = await window.storage.get(`accounts:${username}`, true);
       const account = raw ? JSON.parse(raw.value) : { shopName: username };
-      account.shopName = shopNameInput.trim();
+      account.shopName = newName;
       await window.storage.set(`accounts:${username}`, JSON.stringify(account), true);
-      onRenameShop && onRenameShop(shopNameInput.trim());
+      // La connexion relit le nom dans shop_data.shop_name : sans cette écriture, l'ancien nom
+      // revenait à la reconnexion. (Boutiques secondaires : leur nom vit ailleurs, on n'y touche pas.)
+      if (!isSecondaryShop) {
+        const saved = await saveProfileFields({}, newName);
+        if (!saved.ok) { setShopNameMsg("Erreur, réessaie."); return; }
+        if (isCapacitorApp) {
+          // Cache du démarrage rapide de l'app native : évite de réafficher l'ancien nom au prochain lancement.
+          try {
+            const { value } = await Preferences.get({ key: "shopnify_last_shop_cache" });
+            if (value) {
+              const cached = JSON.parse(value);
+              cached.shopName = newName;
+              await Preferences.set({ key: "shopnify_last_shop_cache", value: JSON.stringify(cached) });
+            }
+          } catch (e) { /* pas grave : le cache se rafraîchit tout seul au prochain démarrage */ }
+        }
+      }
+      onRenameShop && onRenameShop(newName);
       setShopNameMsg("Nom mis à jour ✓");
     } catch (e) { setShopNameMsg("Erreur, réessaie."); }
+  };
+  // Enregistre les infos de profil saisies à l'inscription (prénom, nom, secteur, pays) dans
+  // shop_data : relit la ligne, fusionne, réécrit — sans toucher aux produits, ventes, PIN, etc.
+  // `newShopName` met aussi à jour la colonne shop_name. Nécessite une connexion.
+  const saveProfileFields = async (patch, newShopName) => {
+    if (isDemo) return { ok: true };
+    try {
+      const { data: userData } = await getUserFast();
+      if (!userData || !userData.user) return { ok: false };
+      const ownerId = userData.user.id;
+      const update = { updated_at: new Date().toISOString() };
+      if (Object.keys(patch).length > 0) {
+        const { data: row, error: readError } = await supabase.from("shop_data").select("data").eq("owner_id", ownerId).single();
+        if (readError || !row) return { ok: false };
+        update.data = { ...(row.data || {}), ...patch };
+      }
+      if (newShopName) update.shop_name = newShopName;
+      const { error } = await supabase.from("shop_data").update(update).eq("owner_id", ownerId);
+      return { ok: !error };
+    } catch (e) { return { ok: false }; }
+  };
+  // Met à jour la copie hors ligne de la boutique avec les champs de profil modifiés, pour que le
+  // prochain démarrage à froid (avant la réponse du serveur) n'affiche pas l'ancienne valeur.
+  const patchShopCache = (patch) => {
+    try {
+      const cachedShopNow = readLocalCache(shopKey);
+      if (cachedShopNow) writeLocalCache(shopKey, { ...cachedShopNow, ...patch });
+    } catch (e) { /* pas grave : le serveur reste la source de vérité */ }
+  };
+  // Copie locale du profil (lue par applyShop quand le cache hors ligne n'a pas ces champs).
+  const cacheProfileLocally = (first, last, sector) => {
+    try { window.localStorage.setItem("mb_shop_profile:" + shopKey, JSON.stringify({ first, last, sector })); } catch (e) { /* pas grave */ }
+  };
+  // Le secteur est enregistré sous forme de libellé (dans la langue de l'inscription) : on le retrouve
+  // quelle que soit la langue d'origine pour l'afficher / le cocher dans la langue actuelle.
+  const sectorLabelOf = (value) => {
+    const found = SECTORS.find((x) => Object.values(x).includes(value));
+    return found ? (found[lang] || found.fr) : (value || "");
+  };
+  const countryLabelOf = (c) => (c && c.name && (c.name[lang] || c.name.en || c.name.fr)) || (c ? c.id : "");
+  const saveOwnerName = async () => {
+    const first = ownerFirstInput.trim();
+    const last = ownerLastInput.trim();
+    const saved = await saveProfileFields({ ownerName: `${first} ${last}`.trim(), ownerFirstName: first, ownerLastName: last });
+    if (!saved.ok) { setOwnerNameMsg("Erreur, réessaie."); return; }
+    setOwnerFirstName(first);
+    setOwnerLastName(last);
+    cacheProfileLocally(first, last, shopSector);
+    patchShopCache({ ownerName: `${first} ${last}`.trim(), ownerFirstName: first, ownerLastName: last });
+    setOwnerNameMsg("✓");
+  };
+  const saveSector = async (sectorValue) => {
+    setSectorMsg("");
+    const saved = await saveProfileFields({ sector: sectorValue });
+    if (!saved.ok) { setSectorMsg("Erreur, réessaie."); return; }
+    setShopSector(sectorValue);
+    cacheProfileLocally(ownerFirstName, ownerLastName, sectorValue);
+    patchShopCache({ sector: sectorValue });
+    setSectorMsg("✓");
+  };
+  const saveCountry = async (countryId) => {
+    setCountryMsg("");
+    const saved = await saveProfileFields({ country: countryId });
+    if (!saved.ok) { setCountryMsg("Erreur, réessaie."); return; }
+    setShopCountry(countryId);
+    try { window.localStorage.setItem("mb_shop_country:" + shopKey, countryId); } catch (e) { /* pas grave */ }
+    patchShopCache({ country: countryId });
+    setCountryMsg("✓");
   };
   const saveEmail = async () => {
     setEmailMsg("");
@@ -10908,6 +11180,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   }
   CURRENT_CURRENCY = CURRENCIES.find((c) => c.id === currency) || CURRENCIES[0];
   CURRENT_LANG = lang;
+  CURRENT_COUNTRY = shopCountry;
   USE_ARABIC_DIGITS = arabicDigits;
   const maskAmount = (text) => (amountsHidden ? "•••••" : text);
   // Toute action sensible sur la caisse passe par ici : si les montants sont masqués, on demande
@@ -11518,7 +11791,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="px-1 mb-1">
               <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 Bonjour, {shopName || "Boutique"}</p>
               <p className="text-[11px]" style={{ color: T.text }}>
-                {new Date().toLocaleDateString(USE_ARABIC_DIGITS ? "ar-EG" : "fr-FR", { weekday: "long", day: "numeric", month: "long" })}
+                {fullDateLong()}
               </p>
             </div>
             <div className="rounded-2xl overflow-hidden" style={{ background: T.card, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)", border: darkMode ? "none" : `1px solid ${T.border}` }}>
@@ -12310,7 +12583,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                     <div>
                       <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "clientName")} {activeCart.payment !== "credit" ? `(${t(lang, "othFacultatif")})` : ""}</label>
-                      <input value={activeCart.customer} onChange={(e) => updateCartMeta(activeCart.id, "customer", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5" placeholder="Ex : Fatoumata Traoré" />
+                      <input value={activeCart.customer} onChange={(e) => updateCartMeta(activeCart.id, "customer", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5" />
                       {activeCart.payment === "credit" && activeCart.customer.trim() && (() => {
                         const trust = getCustomerTrust(activeCart.customer);
                         if (!trust) return null;
@@ -12332,7 +12605,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {activeCart.payment === "cash" && (
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
                         <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
-                        <input required type="number" value={activeCart.received} onChange={(e) => updateCartMeta(activeCart.id, "received", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a" }} placeholder="Ex : 5000" />
+                        <input required type="number" value={activeCart.received} onChange={(e) => updateCartMeta(activeCart.id, "received", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a" }} />
                         {activeCart.received !== "" && (() => {
                           const change = parseFloat(activeCart.received) - cartTotal;
                           if (isNaN(change)) return null;
@@ -13566,6 +13839,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "id" && t(lang, "identifier")}
                   {settingsField === "photo" && t(lang, "shopPhoto")}
                   {settingsField === "name" && t(lang, "shopName")}
+                  {settingsField === "ownername" && `${t(lang, "firstName")} · ${t(lang, "lastName")}`}
+                  {settingsField === "sector" && t(lang, "sector")}
+                  {settingsField === "country" && t(lang, "country")}
                   {settingsField === "phone" && tx(lang, "phoneNumber")}
                   {settingsField === "lockpin" && (t(lang, "setCodePin"))}
                   {settingsField === "darkmode" && t(lang, "darkMode")}
@@ -13644,13 +13920,27 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </button>
               );})}
               {settingsView === "account" && !settingsField && [
-                { id: "id", label: t(lang, "identifier"), right: <span style={{ color: T.muted, fontSize: 12 }}>{username}</span> },
+                // E-mail : identité de connexion (vérifiée à l'inscription), donc lecture seule.
+                { id: "id", label: t(lang, "identifier"), right: <span style={{ display: "flex", alignItems: "center", gap: 5, color: T.muted, fontSize: 12 }}><Lock size={11} />{username}</span> },
                 { id: "photo", label: t(lang, "shopPhoto"), right: shopPhoto ? <img src={shopPhoto} alt="" style={{ width: 26, height: 26, borderRadius: "50%", objectFit: "cover" }} /> : <Camera size={14} color={T.muted} /> },
+                { id: "ownername", label: `${t(lang, "firstName")} · ${t(lang, "lastName")}`, right: <span style={{ color: T.muted, fontSize: 12 }}>{`${ownerFirstName} ${ownerLastName}`.trim() || "—"}</span> },
                 { id: "name", label: t(lang, "shopName"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopName}</span> },
                 { id: "phone", label: tx(lang, "phoneNumber"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopPhone || "—"}</span> },
+                { id: "sector", label: t(lang, "sector"), right: <span style={{ color: T.muted, fontSize: 12, maxWidth: 160, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{sectorLabelOf(shopSector) || "—"}</span> },
+                { id: "country", label: t(lang, "country"), right: <span style={{ color: T.muted, fontSize: 12 }}>{countryLabelOf(COUNTRY_CURRENCY.find((c) => c.id === shopCountry)) || shopCountry || "—"}</span> },
+                { id: "lang", label: t(lang, "language"), right: <span style={{ color: T.muted, fontSize: 12 }}>{languageLabel(LANGUAGES.find((l) => l.id === lang) || LANGUAGES[0], lang)}</span> },
+                { id: "currency", label: t(lang, "setDevise"), right: <span style={{ color: T.muted, fontSize: 12 }}>{`${CURRENT_CURRENCY.symbol} ${currency}`}</span> },
                 { id: "lockpin", label: t(lang, "setCodePin"), right: <span style={{ color: T.muted, fontSize: 12 }}>••••</span> },
               ].map((item) => (
-                <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
+                <button key={item.id} onClick={() => {
+                  // Préremplit le champ avec la valeur actuelle à chaque ouverture (évite d'afficher une saisie périmée).
+                  if (item.id === "ownername") { setOwnerFirstInput(ownerFirstName); setOwnerLastInput(ownerLastName); setOwnerNameMsg(""); }
+                  if (item.id === "name") { setShopNameInput(shopName); setShopNameMsg(""); }
+                  if (item.id === "phone") { setShopPhoneInput(shopPhone); setShopPhoneMsg(""); }
+                  if (item.id === "sector") setSectorMsg("");
+                  if (item.id === "country") { setCountryMsg(""); setCountrySearchQuery(""); }
+                  setSettingsField(item.id);
+                }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{item.label}</span>
                   <span style={{ display: "flex", alignItems: "center", gap: 6 }}>{item.right}<ChevronRight size={15} color={T.muted} /></span>
                 </button>
@@ -14142,7 +14432,64 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {settingsField === "id" && (
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "identifier")}</div>
-                  <div style={{ color: T.text, fontSize: 17, fontWeight: 700 }}>{username}</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, color: T.text, fontSize: 17, fontWeight: 700 }}><Lock size={15} color={T.muted} />{username}</div>
+                </div>
+              )}
+              {settingsField === "ownername" && (
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 6 }}>{t(lang, "firstName")}</div>
+                    <input value={ownerFirstInput} onChange={(e) => { setOwnerFirstInput(e.target.value); setOwnerNameMsg(""); }} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                  </div>
+                  <div>
+                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 6 }}>{t(lang, "lastName")}</div>
+                    <input value={ownerLastInput} onChange={(e) => { setOwnerLastInput(e.target.value); setOwnerNameMsg(""); }} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                  </div>
+                  <button onClick={saveOwnerName} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "10px 14px", fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "save")}</button>
+                  {ownerNameMsg && <p style={{ color: ownerNameMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11 }}>{ownerNameMsg}</p>}
+                </div>
+              )}
+              {settingsField === "sector" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {sectorMsg && <p style={{ color: sectorMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 12 }}>{sectorMsg}</p>}
+                  {SECTORS.map((sec, idx) => {
+                    const label = sec[lang] || sec.fr;
+                    const selected = sectorLabelOf(shopSector) === label;
+                    return (
+                      <button key={idx} onClick={() => saveSector(label)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: selected ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${selected ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
+                        <span style={{ color: selected ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600, textAlign: "left" }}>{label}</span>
+                        {selected && <Check size={16} color="#22d3ee" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {settingsField === "country" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div className="relative">
+                    <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: T.muted }} />
+                    <input
+                      value={countrySearchQuery}
+                      onChange={(e) => setCountrySearchQuery(e.target.value)}
+                      placeholder={t(lang, "search")}
+                      style={{ width: "100%", background: T.input, border: `1px solid ${T.border}`, borderRadius: 14, padding: "12px 14px 12px 36px", fontSize: 14, color: T.text }}
+                    />
+                  </div>
+                  {countryMsg && <p style={{ color: countryMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 12 }}>{countryMsg}</p>}
+                  {COUNTRY_CURRENCY.filter((c) => {
+                    const q = countrySearchQuery.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    if (!q) return true;
+                    const norm = (str) => (str || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    return norm(countryLabelOf(c)).includes(q) || norm(c.id).includes(q);
+                  }).map((c) => {
+                    const selected = shopCountry === c.id;
+                    return (
+                      <button key={c.id} onClick={() => saveCountry(c.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: selected ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${selected ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
+                        <span style={{ color: selected ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{countryLabelOf(c)}</span>
+                        {selected && <Check size={16} color="#22d3ee" />}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
               {settingsField === "photo" && (
