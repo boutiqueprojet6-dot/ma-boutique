@@ -1,5 +1,7 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, useMemo, useDeferredValue } from "react";
 import { Preferences } from "@capacitor/preferences";
+import { registerPlugin } from "@capacitor/core";
+const SalesWidget = registerPlugin("SalesWidget");
 import {
   CRITICAL_STATE_KEY,
   buildCriticalState,
@@ -11283,6 +11285,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb" };
   const todaySales = sales.filter((s) => s.date.slice(0, 10) === todayKey());
   const todayTotal = todaySales.reduce((sum, s) => sum + s.total, 0);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.Capacitor?.isNativePlatform?.()) {
+      SalesWidget.update({
+        total: fcfa(todayTotal),
+        count: todaySales.length,
+      }).catch(() => {});
+    }
+  }, [todayTotal, todaySales.length]);
   const yesterdayKeyStr = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
   const yesterdayTotal = sales.filter((s) => s.date.slice(0, 10) === yesterdayKeyStr).reduce((sum, s) => sum + s.total, 0);
   const salesVsYesterdayPct = yesterdayTotal > 0
