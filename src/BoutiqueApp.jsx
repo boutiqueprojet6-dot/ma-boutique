@@ -5116,6 +5116,27 @@ EXTRA_UI.histPermanentNote = { fr: "Historique permanent : les lignes ne peuvent
 EXTRA_UI.editProductTitle = { fr: "Modifier le produit", en: "Edit product", ar: "تعديل المنتج", es: "Editar producto", pt: "Editar produto", zh: "编辑商品", vi: "Chỉnh sửa sản phẩm", de: "Produkt bearbeiten", ru: "Изменить товар", hi: "उत्पाद संपादित करें", ta: "பொருளைத் திருத்து", bn: "পণ্য সম্পাদনা করুন", ur: "پروڈکٹ میں ترمیم کریں", id: "Edit produk", tr: "Ürünü düzenle", ko: "상품 수정", ja: "商品を編集", it: "Modifica prodotto", nl: "Product bewerken", sw: "Hariri bidhaa", ha: "Gyara samfur", bm: "Fɛn labɛn", tl: "I-edit ang produkto", te: "ఉత్పత్తిని సవరించండి", th: "แก้ไขสินค้า", wo: "Soppi jaaykatu", pl: "Edytuj produkt", yo: "Ṣàtúnṣe ọjà", am: "ምርቱን አርትዕ", zu: "Hlela umkhiqizo" };
 EXTRA_UI.logProductEdited = { fr: "Produit modifié", en: "Product edited", ar: "تم تعديل المنتج", es: "Producto editado", pt: "Produto editado", zh: "商品已编辑", vi: "Đã chỉnh sửa sản phẩm", de: "Produkt bearbeitet", ru: "Товар изменён", hi: "उत्पाद संपादित हुआ", ta: "பொருள் திருத்தப்பட்டது", bn: "পণ্য সম্পাদিত হয়েছে", ur: "پروڈکٹ میں ترمیم ہوئی", id: "Produk diedit", tr: "Ürün düzenlendi", ko: "상품 수정됨", ja: "商品を編集しました", it: "Prodotto modificato", nl: "Product bewerkt", sw: "Bidhaa imehaririwa", ha: "An gyara samfur", bm: "Fɛn labɛnna", tl: "Na-edit ang produkto", te: "ఉత్పత్తి సవరించబడింది", th: "แก้ไขสินค้าแล้ว", wo: "Jaaykatu soppiku na", pl: "Produkt zmodyfikowany", yo: "A ṣàtúnṣe ọjà", am: "ምርቱ ተስተካክሏል", zu: "Umkhiqizo uhleliwe" };
 EXTRA_UI.shareCardSamplePrice = { fr: "Prix du produit", en: "Product price", ar: "سعر المنتج", es: "Precio del producto", pt: "Preço do produto", zh: "商品价格", vi: "Giá sản phẩm", de: "Produktpreis", ru: "Цена товара", hi: "उत्पाद की कीमत", ta: "பொருளின் விலை", bn: "পণ্যের দাম", ur: "پروڈکٹ کی قیمت", id: "Harga produk", tr: "Ürün fiyatı", ko: "상품 가격", ja: "商品価格", it: "Prezzo del prodotto", nl: "Productprijs", sw: "Bei ya bidhaa", ha: "Kuɗin samfur", bm: "Fɛn sɔngɔ", tl: "Presyo ng produkto", te: "ఉత్పత్తి ధర", th: "ราคาสินค้า", wo: "Njëg jaaykatu", pl: "Cena produktu", yo: "Iye ọjà", am: "የምርት ዋጋ", zu: "Intengo yomkhiqizo" };
+EXTRA_UI.cashPeriodToday = { am: "ዛሬ", ar: "اليوم", bm: "Bi", bn: "আজ", de: "Heute", en: "Today", es: "Hoy", fr: "Aujourd'hui", ha: "Yau", hi: "आज", id: "Hari ini", it: "Oggi", ja: "今日", ko: "오늘", nl: "Vandaag", pl: "Dzisiaj", pt: "Hoje", ru: "Сегодня", sw: "Leo", ta: "இன்று", te: "ఈ రోజు", th: "วันนี้", tl: "Ngayon", tr: "Bugün", ur: "آج", vi: "Hôm nay", wo: "Tey", yo: "Òní", zh: "今天", zu: "Namuhla" };
+EXTRA_UI.cashPeriod7 = { am: "7 ቀናት", ar: "7 أيام", bm: "Don 7", bn: "7 দিন", de: "7 Tage", en: "7 days", es: "7 días", fr: "7 jours", ha: "Kwanaki 7", hi: "7 दिन", id: "7 hari", it: "7 giorni", ja: "7日間", ko: "7일", nl: "7 dagen", pl: "7 dni", pt: "7 dias", ru: "7 дней", sw: "Siku 7", ta: "7 நாட்கள்", te: "7 రోజులు", th: "7 วัน", tl: "7 araw", tr: "7 gün", ur: "7 دن", vi: "7 ngày", wo: "7 fan", yo: "Ọjọ́ 7", zh: "7天", zu: "Izinsuku eziyi-7" };
+EXTRA_UI.cashPeriod30 = { am: "30 ቀናት", ar: "30 يومًا", bm: "Don 30", bn: "30 দিন", de: "30 Tage", en: "30 days", es: "30 días", fr: "30 jours", ha: "Kwanaki 30", hi: "30 दिन", id: "30 hari", it: "30 giorni", ja: "30日間", ko: "30일", nl: "30 dagen", pl: "30 dni", pt: "30 dias", ru: "30 дней", sw: "Siku 30", ta: "30 நாட்கள்", te: "30 రోజులు", th: "30 วัน", tl: "30 araw", tr: "30 gün", ur: "30 دن", vi: "30 ngày", wo: "30 fan", yo: "Ọjọ́ 30", zh: "30天", zu: "Izinsuku eziyi-30" };
+EXTRA_UI.cashPeriodAll = { am: "ሁሉም", ar: "الكل", bm: "Bɛɛ", bn: "সব", de: "Alle", en: "All", es: "Todo", fr: "Tout", ha: "Duka", hi: "सब", id: "Semua", it: "Tutto", ja: "すべて", ko: "전체", nl: "Alles", pl: "Wszystko", pt: "Tudo", ru: "Всё", sw: "Zote", ta: "அனைத்தும்", te: "అన్నీ", th: "ทั้งหมด", tl: "Lahat", tr: "Tümü", ur: "سب", vi: "Tất cả", wo: "Lépp", yo: "Gbogbo rẹ̀", zh: "全部", zu: "Konke" };
+EXTRA_UI.cashIn = { am: "የገባ ጥሬ ገንዘብ", ar: "المقبوضات النقدية", bm: "Wari jɛlen sɔrɔlen", bn: "নগদ আয়", de: "Bareinnahmen", en: "Cash in", es: "Entradas en efectivo", fr: "Entrées espèces", ha: "Kuɗin da suka shiga", hi: "नकद आय", id: "Pemasukan tunai", it: "Entrate in contanti", ja: "現金収入", ko: "현금 수입", nl: "Contante inkomsten", pl: "Wpływy gotówkowe", pt: "Entradas em dinheiro", ru: "Поступления наличными", sw: "Fedha taslimu iliyoingia", ta: "ரொக்க வரவு", te: "నగదు ఆదాయం", th: "เงินสดรับ", tl: "Pumasok na cash", tr: "Nakit girişler", ur: "نقد آمدن", vi: "Thu tiền mặt", wo: "Xaalis bu duggu", yo: "Owó tó wọlé", zh: "现金收入", zu: "Imali engenile" };
+EXTRA_UI.cashNet = { am: "ተጣራ", ar: "الصافي", bm: "Net", bn: "নিট", de: "Netto", en: "Net", es: "Neto", fr: "Net", ha: "Ragowar kuɗi", hi: "शुद्ध", id: "Bersih", it: "Netto", ja: "差引", ko: "순액", nl: "Netto", pl: "Netto", pt: "Líquido", ru: "Итого", sw: "Jumla halisi", ta: "நிகர", te: "నికర", th: "สุทธิ", tl: "Net", tr: "Net", ur: "خالص", vi: "Ròng", wo: "Net", yo: "Àpapọ̀ ìyókù", zh: "净额", zu: "Okusele" };
+EXTRA_UI.cashTopExpenses = { am: "ዋና ወጪዎች", ar: "أهم المصروفات", bm: "Musaka belebeleba", bn: "প্রধান খরচ", de: "Größte Ausgaben", en: "Top expenses", es: "Principales gastos", fr: "Principales dépenses", ha: "Manyan kashe-kashe", hi: "प्रमुख खर्च", id: "Pengeluaran terbesar", it: "Spese principali", ja: "主な支出", ko: "주요 지출", nl: "Grootste uitgaven", pl: "Największe wydatki", pt: "Principais despesas", ru: "Основные расходы", sw: "Matumizi makubwa", ta: "முக்கிய செலவுகள்", te: "ప్రధాన ఖర్చులు", th: "รายจ่ายหลัก", tl: "Pinakamalalaking gastos", tr: "Başlıca giderler", ur: "اہم اخراجات", vi: "Khoản chi lớn nhất", wo: "Depaas yu gën a mag", yo: "Àwọn ìnáwó tó pọ̀ jù", zh: "主要支出", zu: "Izindleko ezinkulu" };
+EXTRA_UI.cashJournal = { am: "የገንዘብ ማስቀመጫ እንቅስቃሴ", ar: "حركات الصندوق", bm: "Kɛsi kɛtaw", bn: "ক্যাশের লেনদেন", de: "Kassenbewegungen", en: "Cash movements", es: "Movimientos de caja", fr: "Mouvements de caisse", ha: "Motsin kuɗi", hi: "गल्ले की गतिविधियाँ", id: "Mutasi kas", it: "Movimenti di cassa", ja: "現金の動き", ko: "현금 내역", nl: "Kasbewegingen", pl: "Ruchy w kasie", pt: "Movimentos de caixa", ru: "Движение по кассе", sw: "Miamala ya fedha", ta: "கல்லா நடவடிக்கைகள்", te: "గల్లా కదలికలు", th: "รายการเคลื่อนไหวของเงินสด", tl: "Galaw ng kaha", tr: "Kasa hareketleri", ur: "گلے کی نقل و حرکت", vi: "Biến động quỹ", wo: "Yëngu-yëngu kes bi", yo: "Ìrìn owó ẹrọ", zh: "现金流水", zu: "Ukuhamba kwemali yekheshi" };
+EXTRA_UI.cashEmpty = { am: "በዚህ ጊዜ ምንም እንቅስቃሴ የለም።", ar: "لا توجد حركات في هذه الفترة.", bm: "Foyi ma kɛ nin waati in na.", bn: "এই সময়ে কোনো লেনদেন নেই।", de: "Keine Bewegungen in diesem Zeitraum.", en: "No movements in this period.", es: "Sin movimientos en este período.", fr: "Aucun mouvement sur cette période.", ha: "Babu wani motsi a wannan lokacin.", hi: "इस अवधि में कोई लेन-देन नहीं।", id: "Tidak ada transaksi pada periode ini.", it: "Nessun movimento in questo periodo.", ja: "この期間の取引はありません。", ko: "이 기간에 내역이 없습니다.", nl: "Geen bewegingen in deze periode.", pl: "Brak ruchów w tym okresie.", pt: "Nenhum movimento neste período.", ru: "Нет операций за этот период.", sw: "Hakuna miamala katika kipindi hiki.", ta: "இந்தக் காலத்தில் எந்தப் பரிவர்த்தனையும் இல்லை.", te: "ఈ కాలంలో లావాదేవీలు లేవు.", th: "ไม่มีรายการในช่วงนี้", tl: "Walang galaw sa panahong ito.", tr: "Bu dönemde hareket yok.", ur: "اس مدت میں کوئی لین دین نہیں۔", vi: "Không có giao dịch trong kỳ này.", wo: "Amul dara ci diir bii.", yo: "Kò sí ìrìn owó ní àkókò yìí.", zh: "此期间没有记录。", zu: "Azikho izinguquko kule nkathi." };
+EXTRA_UI.cashSeeMore = { am: "ተጨማሪ ይመልከቱ", ar: "عرض المزيد", bm: "A caman jira", bn: "আরও দেখুন", de: "Mehr anzeigen", en: "See more", es: "Ver más", fr: "Voir plus", ha: "Duba ƙari", hi: "और देखें", id: "Lihat lainnya", it: "Mostra altro", ja: "もっと見る", ko: "더 보기", nl: "Meer tonen", pl: "Pokaż więcej", pt: "Ver mais", ru: "Показать ещё", sw: "Ona zaidi", ta: "மேலும் காட்டு", te: "మరిన్ని చూడండి", th: "ดูเพิ่มเติม", tl: "Tingnan pa", tr: "Daha fazla göster", ur: "مزید دیکھیں", vi: "Xem thêm", wo: "Gën a ci gis", yo: "Wo síi", zh: "查看更多", zu: "Bona okuningi" };
+EXTRA_UI.cashCountBtn = { am: "ገንዘብ ቁጠር", ar: "عدّ الصندوق", bm: "Kɛsi jate", bn: "ক্যাশ গুনুন", de: "Kasse zählen", en: "Count the cash", es: "Contar la caja", fr: "Compter la caisse", ha: "Ƙirga kuɗin da ke hannu", hi: "गल्ला गिनें", id: "Hitung kas", it: "Conta la cassa", ja: "レジを数える", ko: "금고 세기", nl: "Kas tellen", pl: "Przelicz kasę", pt: "Contar o caixa", ru: "Пересчитать кассу", sw: "Hesabu fedha za kasha", ta: "கல்லாவை எண்ணு", te: "గల్లా లెక్కించండి", th: "นับเงินในลิ้นชัก", tl: "Bilangin ang kaha", tr: "Kasayı say", ur: "گلا گنیں", vi: "Kiểm quỹ", wo: "Waññ kes bi", yo: "Ka owó ẹrọ", zh: "清点现金", zu: "Bala ikheshi" };
+EXTRA_UI.cashCountHint = { am: "በገንዘብ ማስቀመጫዎ ያለውን ገንዘብ ቆጥረው ከተገመተው ቀሪ ጋር ያወዳድሩ።", ar: "عُدّ المال الموجود في صندوقك وقارنه بالرصيد المقدَّر.", bm: "Wari min bɛ i ka kɛsi kɔnɔ, a jate ka a suman ni jatelen dabɔlen ye.", bn: "আপনার ক্যাশবাক্সের টাকা গুনে আনুমানিক ব্যালেন্সের সঙ্গে মিলিয়ে দেখুন।", de: "Zähle das Geld in deiner Kasse und vergleiche es mit dem geschätzten Saldo.", en: "Count the money in your till to compare it with the estimated balance.", es: "Cuenta el dinero de tu caja para compararlo con el saldo estimado.", fr: "Compte l'argent présent dans ta caisse pour le comparer au solde estimé.", ha: "Ƙirga kuɗin da ke hannunka ka kwatanta da ƙiyasin ma'auni.", hi: "अपने गल्ले के पैसे गिनकर अनुमानित शेष से मिलाएँ।", id: "Hitung uang di laci kasmu lalu bandingkan dengan saldo perkiraan.", it: "Conta i soldi nella tua cassa per confrontarli con il saldo stimato.", ja: "レジのお金を数えて、推定残高と比べましょう。", ko: "금고 안의 돈을 세어 예상 잔액과 비교하세요.", nl: "Tel het geld in je kassa en vergelijk het met het geschatte saldo.", pl: "Przelicz pieniądze w kasie i porównaj je z szacowanym saldem.", pt: "Conte o dinheiro do seu caixa para compará-lo ao saldo estimado.", ru: "Пересчитайте деньги в кассе и сравните с расчётным остатком.", sw: "Hesabu pesa zilizo kwenye kasha lako uzilinganishe na salio linalokadiriwa.", ta: "உங்கள் கல்லாவில் உள்ள பணத்தை எண்ணி மதிப்பிட்ட இருப்புடன் ஒப்பிடுங்கள்.", te: "మీ గల్లాలోని డబ్బును లెక్కించి అంచనా నిల్వతో పోల్చండి.", th: "นับเงินในลิ้นชักแล้วเทียบกับยอดคงเหลือโดยประมาณ", tl: "Bilangin ang pera sa kaha at ihambing sa tantiyang balanse.", tr: "Kasandaki parayı say ve tahmini bakiyeyle karşılaştır.", ur: "اپنے گلے کی رقم گن کر تخمینی بیلنس سے ملائیں۔", vi: "Đếm tiền trong quỹ rồi so với số dư ước tính.", wo: "Waññal xaalis bi nekk ci sa kes, nga méngale ko ak solde bi ñu waxtaan.", yo: "Ka owó tó wà lọ́wọ́ rẹ kí o fi wé ìṣirò ìyókù tí a fojú díwọ̀n.", zh: "清点钱箱里的现金，并与预计余额对比。", zu: "Bala imali ekheshini lakho uyiqhathanise nebhalansi elinganiselwe." };
+EXTRA_UI.cashCountedLabel = { am: "የተቆጠረ ገንዘብ", ar: "المبلغ المعدود", bm: "Wari jatelen", bn: "গোনা নগদ", de: "Gezähltes Bargeld", en: "Counted cash", es: "Dinero contado", fr: "Argent compté", ha: "Kuɗin da aka ƙirga", hi: "गिना हुआ नकद", id: "Uang yang dihitung", it: "Contanti contati", ja: "数えた現金", ko: "센 금액", nl: "Geteld geld", pl: "Przeliczona gotówka", pt: "Dinheiro contado", ru: "Пересчитанная сумма", sw: "Pesa zilizohesabiwa", ta: "எண்ணிய பணம்", te: "లెక్కించిన నగదు", th: "เงินสดที่นับได้", tl: "Nabilang na pera", tr: "Sayılan nakit", ur: "گنی ہوئی نقدی", vi: "Số tiền đã đếm", wo: "Xaalis bi nga waññ", yo: "Owó tí a kà", zh: "清点金额", zu: "Imali ebaliwe" };
+EXTRA_UI.cashGapOver = { am: "ትርፍ", ar: "فائض", bm: "A ka bon", bn: "উদ্বৃত্ত", de: "Überschuss", en: "Surplus", es: "Excedente", fr: "Excédent", ha: "Ƙari", hi: "अधिशेष", id: "Kelebihan", it: "Eccedenza", ja: "過剰", ko: "초과", nl: "Overschot", pl: "Nadwyżka", pt: "Excedente", ru: "Излишек", sw: "Ziada", ta: "மிகை", te: "అధికం", th: "เกิน", tl: "Sobra", tr: "Fazla", ur: "اضافی رقم", vi: "Thừa", wo: "Lu ël", yo: "Ìpọ̀jù", zh: "溢余", zu: "Okweqile" };
+EXTRA_UI.cashGapShort = { am: "ጉድለት", ar: "عجز", bm: "A ma dafa", bn: "ঘাটতি", de: "Fehlbetrag", en: "Shortage", es: "Faltante", fr: "Manque", ha: "Rashi", hi: "कमी", id: "Kekurangan", it: "Ammanco", ja: "不足", ko: "부족", nl: "Tekort", pl: "Niedobór", pt: "Falta", ru: "Недостача", sw: "Pungufu", ta: "பற்றாக்குறை", te: "లోటు", th: "ขาด", tl: "Kulang", tr: "Eksik", ur: "کمی", vi: "Thiếu", wo: "Lu ñaqu", yo: "Àìtó", zh: "短缺", zu: "Okushodayo" };
+EXTRA_UI.cashGapOk = { am: "ገንዘቡ ትክክል ነው ✓", ar: "الصندوق مضبوط ✓", bm: "Kɛsi ka ɲi ✓", bn: "ক্যাশ ঠিক আছে ✓", de: "Die Kasse stimmt ✓", en: "The till is balanced ✓", es: "La caja cuadra ✓", fr: "La caisse est juste ✓", ha: "Kuɗin sun daidaita ✓", hi: "गल्ला सही है ✓", id: "Kas sudah pas ✓", it: "La cassa torna ✓", ja: "レジは合っています ✓", ko: "금고가 맞습니다 ✓", nl: "De kas klopt ✓", pl: "Kasa się zgadza ✓", pt: "O caixa está certo ✓", ru: "Касса сходится ✓", sw: "Fedha zinalingana ✓", ta: "கல்லா சரியாக உள்ளது ✓", te: "గల్లా సరిగ్గా ఉంది ✓", th: "ยอดตรงกัน ✓", tl: "Tugma ang kaha ✓", tr: "Kasa tutuyor ✓", ur: "گلا درست ہے ✓", vi: "Quỹ khớp ✓", wo: "Kes bi baax na ✓", yo: "Owó náà péye ✓", zh: "现金无误 ✓", zu: "Ikheshi lilungile ✓" };
+EXTRA_UI.cashAdjustBtn = { am: "ቀሪውን ወደዚህ መጠን አስተካክል", ar: "اضبط الرصيد على هذا المبلغ", bm: "Jate yɛlɛma ka kɛ nin ye", bn: "ব্যালেন্স এই পরিমাণে সমন্বয় করুন", de: "Saldo auf diesen Betrag anpassen", en: "Adjust balance to this amount", es: "Ajustar el saldo a este monto", fr: "Ajuster le solde à ce montant", ha: "Daidaita ma'auni zuwa wannan adadi", hi: "शेष को इस राशि पर समायोजित करें", id: "Sesuaikan saldo ke jumlah ini", it: "Adegua il saldo a questo importo", ja: "残高をこの金額に調整", ko: "잔액을 이 금액으로 조정", nl: "Saldo aanpassen naar dit bedrag", pl: "Dostosuj saldo do tej kwoty", pt: "Ajustar o saldo para este valor", ru: "Скорректировать остаток на эту сумму", sw: "Rekebisha salio liwe kiasi hiki", ta: "இருப்பை இந்தத் தொகைக்கு சரிசெய்", te: "నిల్వను ఈ మొత్తానికి సర్దుబాటు చేయండి", th: "ปรับยอดเป็นจำนวนนี้", tl: "Ayusin ang balanse sa halagang ito", tr: "Bakiyeyi bu tutara ayarla", ur: "بیلنس کو اس رقم پر ایڈجسٹ کریں", vi: "Điều chỉnh số dư theo số tiền này", wo: "Yeesalal solde bi ci xaalis bii", yo: "Ṣàtúnṣe ìyókù sí iye yìí", zh: "将余额调整为此金额", zu: "Lungisa ibhalansi ibe yile mali" };
+EXTRA_UI.cashProfitTitle = { am: "የዛሬ የተገመተ ትርፍ", ar: "الربح التقديري لليوم", bm: "Bi tɔnɔ jatelen dabɔlen", bn: "আজকের আনুমানিক লাভ", de: "Geschätzter Gewinn heute", en: "Estimated profit today", es: "Beneficio estimado de hoy", fr: "Bénéfice estimé du jour", ha: "Ƙiyasin ribar yau", hi: "आज का अनुमानित लाभ", id: "Perkiraan laba hari ini", it: "Guadagno stimato di oggi", ja: "今日の推定利益", ko: "오늘의 예상 이익", nl: "Geschatte winst vandaag", pl: "Szacowany zysk dzisiaj", pt: "Lucro estimado de hoje", ru: "Ожидаемая прибыль за сегодня", sw: "Faida inayokadiriwa ya leo", ta: "இன்றைய மதிப்பிட்ட லாபம்", te: "ఈ రోజు అంచనా లాభం", th: "กำไรโดยประมาณวันนี้", tl: "Tantiyang tubo ngayon", tr: "Bugünün tahmini kârı", ur: "آج کا تخمینی منافع", vi: "Lợi nhuận ước tính hôm nay", wo: "Tabax bu ñu waxtaan tey", yo: "Èrè tí a fojú díwọ̀n lónìí", zh: "今日预计利润", zu: "Inzuzo elinganiselwe yanamuhla" };
+EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
+EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseigne le prix d'achat de tes produits pour voir ton bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
+EXTRA_UI.cashMargin = { am: "በሽያጭ ላይ ያለ ህዳግ", ar: "هامش المبيعات", bm: "Tɔnɔ feerew kan", bn: "বিক্রয়ের মার্জিন", de: "Marge auf Verkäufe", en: "Margin on sales", es: "Margen sobre ventas", fr: "Marge sur les ventes", ha: "Ribar da ke kan tallace-tallace", hi: "बिक्री पर मार्जिन", id: "Margin penjualan", it: "Margine sulle vendite", ja: "売上の粗利", ko: "판매 마진", nl: "Marge op verkopen", pl: "Marża na sprzedaży", pt: "Margem sobre vendas", ru: "Маржа с продаж", sw: "Kiwango cha faida kwenye mauzo", ta: "விற்பனை மீதான வரம்பு", te: "అమ్మకాలపై మార్జిన్", th: "กำไรขั้นต้นจากการขาย", tl: "Margin sa benta", tr: "Satış marjı", ur: "فروخت پر مارجن", vi: "Biên lợi nhuận bán hàng", wo: "Tabax ci jaay yi", yo: "Èrè lórí títà", zh: "销售毛利", zu: "Inzuzo ekuthengisweni" };
 // Palette de fonds proposés pour l'image de partage produit. "glossy" ajoute
 // un reflet diagonal pour un effet plus "3D" / brillant.
 const SHARE_CARD_STYLES = [
@@ -5370,7 +5391,7 @@ const OFFLINE_QUEUE_KEY = "offline-sync-queue";
 // "installée" — d'où le même miroir vers @capacitor/preferences que pour le cache
 // hors-ligne, plus fiable.
 const LAST_TAB_KEY = "mb_last_tab";
-const VALID_TABS = ["dashboard", "sale", "stock", "debts", "history", "stats", "ai", "employees", "shopcompare", "cashreport", "calculator"];
+const VALID_TABS = ["dashboard", "sale", "stock", "debts", "cash", "history", "stats", "ai", "employees", "shopcompare", "cashreport", "calculator"];
 // Filet de secours dédié au stock : à chaque changement de la liste des produits,
 // on en garde une copie brute séparée (locale + miroir natif), écrite en tout
 // premier, avant même le pipeline de fusion/Supabase/window.storage ci-dessous.
@@ -8482,6 +8503,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [editingProductId, setEditingProductId] = useState(null);
   const [showAddExpense, setShowAddExpense] = useState(false);
   const [showEditFund, setShowEditFund] = useState(false);
+  // Onglet Caisse : période affichée, longueur du journal, fenêtre de comptage.
+  const [cashPeriod, setCashPeriod] = useState("today");
+  const [cashJournalLimit, setCashJournalLimit] = useState(20);
+  const [showCashCount, setShowCashCount] = useState(false);
+  const [cashCountInput, setCashCountInput] = useState("");
   const [showSettings, setShowSettings] = useState(false);
   const [settingsView, setSettingsView] = useState("menu");
   // ---- Assistance : message + photo/vidéo FACULTATIVES, envoyé au support sans montrer son adresse ----
@@ -9899,6 +9925,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setFundInput(""); setShowEditFund(false);
     setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
   };
+  // Comptage de caisse : l'utilisateur a compté l'argent réellement présent ; on recale le fond de
+  // caisse de l'écart pour que le solde estimé corresponde exactement à ce qu'il a compté.
+  const adjustCashToCount = () => {
+    const counted = parseFloat(cashCountInput);
+    if (isNaN(counted)) return;
+    const gap = counted - cashBalance;
+    if (gap === 0) return;
+    const newFund = cashFund + gap;
+    saveAll({ cashFund: newFund });
+    logAction(`${t(lang, "logCashFundUpdated")} : ${localizedNumber(newFund)}`);
+    setCashCountInput(""); setShowCashCount(false);
+    setAmountsHidden(true);
+  };
   // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
   const changeLockPin = async () => {
     setLockPinMsg("");
@@ -11220,6 +11259,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     if (showSortMenu) { setShowSortMenu(false); return true; }
     if (showAddExpense) { setShowAddExpense(false); return true; }
     if (showEditFund) { setShowEditFund(false); return true; }
+    if (showCashCount) { setShowCashCount(false); return true; }
     if (showAddProduct) {
       if (isPhotoReturnGuardActive()) return true;
       setShowAddProduct(false); setEditingProductId(null); return true;
@@ -11361,6 +11401,51 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
   const cashBalance = cashFund + totalCashSales - totalExpenses;
   const todayExpenses = expenses.filter((e) => e.date.slice(0, 10) === todayKey());
+
+  const cashCardStyle = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
+  // Bénéfice estimé du jour (accueil) : marge des ventes dont le prix d'achat est connu, moins les dépenses du jour.
+  const todayProfit = (() => {
+    let margin = 0, costed = 0;
+    todaySales.forEach((s) => { if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; } });
+    const exp = todayExpenses.reduce((sum, e) => sum + e.amount, 0);
+    return { margin, costed, exp, net: margin - exp };
+  })();
+  const cashCountVal = parseFloat(cashCountInput);
+  const cashCountGap = isNaN(cashCountVal) ? null : cashCountVal - cashBalance;
+  // Onglet Caisse : tout est calculé uniquement quand l'onglet est ouvert.
+  const cashView = tab === "cash" ? (() => {
+    const start = cashPeriod === "today" ? todayKey()
+      : cashPeriod === "7" ? new Date(Date.now() - 6 * 86400000).toISOString().slice(0, 10)
+      : cashPeriod === "30" ? new Date(Date.now() - 29 * 86400000).toISOString().slice(0, 10)
+      : "0000-00-00";
+    const inPeriod = (iso) => String(iso).slice(0, 10) >= start;
+    const pSales = sales.filter((s) => inPeriod(s.date));
+    const pExpenses = expenses.filter((e) => inPeriod(e.date));
+    const cashInTotal = pSales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0);
+    const outTotal = pExpenses.reduce((sum, e) => sum + e.amount, 0);
+    const salesTotal = pSales.reduce((sum, s) => sum + s.total, 0);
+    const byMethodP = getPaymentMethods(lang).map((m) => ({ ...m, total: pSales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
+    const debtIn = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + (ev.amount || 0), 0);
+    const groups = {};
+    pExpenses.forEach((e) => {
+      const k = String(e.label || "").trim().toLowerCase();
+      if (!groups[k]) groups[k] = { label: e.label, total: 0, count: 0 };
+      groups[k].total += e.amount; groups[k].count += 1;
+    });
+    const topExp = Object.values(groups).sort((a, b) => b.total - a.total).slice(0, 5);
+    const txn = {};
+    pSales.filter((s) => s.payment === "cash").forEach((s) => {
+      const k = s.transactionId || s.id;
+      if (!txn[k]) txn[k] = { id: "s-" + k, kind: "sale", date: s.date, amount: 0, names: [], actorName: s.actorName || null };
+      txn[k].amount += s.total;
+      if (s.productName && txn[k].names.indexOf(s.productName) === -1) txn[k].names.push(s.productName);
+    });
+    const journal = [
+      ...Object.values(txn),
+      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", date: e.date, amount: e.amount, label: e.label, expenseId: e.id, actorName: e.actorName || null })),
+    ].sort((a, b) => new Date(b.date) - new Date(a.date));
+    return { cashIn: cashInTotal, out: outTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal };
+  })() : null;
   const days = last30Days();
   const firstSaleDate = sales.length > 0
     ? sales.map((s) => s.date.slice(0, 10)).sort()[0]
@@ -11781,6 +11866,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               { id: "sale", label: t(lang, "navSale"), icon: ShoppingCart, hidden: !hasBasePermission("sell") },
               { id: "stock", label: t(lang, "navStock"), icon: Package, hidden: !hasPermission("viewStock") },
               { id: "debts", label: t(lang, "navDebts"), icon: Users, hidden: !hasPermission("viewDebts") },
+              { id: "cash", label: t(lang, "setCaisse"), icon: Wallet, hidden: !hasPermission("viewCash") },
               { id: "history", label: t(lang, "navHistory"), icon: History },
               { id: "stats", label: t(lang, "navStats"), icon: BarChart3, hidden: !hasPermission("viewStats") },
               { id: "ai", label: t(lang, "navAI"), icon: Bot },
@@ -12030,83 +12116,94 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               </div>
             )}
-            {(
-              <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+            {hasPermission("viewStats") && (todaySales.length > 0 || todayExpenses.length > 0) && (
+              <div className="rounded-2xl p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center justify-between">
-                  <div>
+                  <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
-                      <p className="text-sm font-extrabold" style={{ color: T.text }}>{t(lang, "cashBalance")}</p>
+                      <p className="text-sm font-extrabold" style={{ color: T.text }}>{tx(lang, "cashProfitTitle")}</p>
                       <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 11, lineHeight: 1 }}>
                         {amountsHidden ? "🙈" : "👁️"}
                       </button>
                     </div>
-                    <p className="font-black tracking-tight" style={{ fontSize: 28, color: amountsHidden ? T.muted : (cashBalance < 0 ? CLAY : GREEN), letterSpacing: amountsHidden ? 2 : -0.8, marginTop: 2 }}>{maskAmount(fcfa(cashBalance))}</p>
+                    {todayProfit.costed > 0 ? (
+                      <p className="font-black tracking-tight" style={{ fontSize: 26, color: amountsHidden ? T.muted : (todayProfit.net < 0 ? CLAY : GREEN), letterSpacing: amountsHidden ? 2 : -0.8, marginTop: 2 }}>{maskAmount(fcfa(todayProfit.net))}</p>
+                    ) : (
+                      <p className="text-[11px] mt-1" style={{ color: T.muted, lineHeight: 1.4 }}>{tx(lang, "cashProfitNoCost")}</p>
+                    )}
                   </div>
-                  <div className="rounded-2xl flex items-center justify-center" style={{ width: 52, height: 52, background: darkMode ? "rgba(52,211,153,0.15)" : "rgba(5,150,105,0.1)", animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
-                    <span style={{ fontSize: 26 }}>🪙</span>
+                  <div className="rounded-2xl flex items-center justify-center" style={{ width: 48, height: 48, background: darkMode ? "rgba(52,211,153,0.15)" : "rgba(5,150,105,0.1)", flexShrink: 0 }}>
+                    <span style={{ fontSize: 24 }}>📈</span>
                   </div>
                 </div>
-                <p className="text-[10px] mt-2" style={{ color: T.muted, lineHeight: 1.4 }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}</p>
-                {hasPermission("editCash") && (
-                  <button onClick={() => requireUnlock(openEditFund)} className="inline-flex items-center gap-1 text-[11px] font-bold mt-2.5 px-3 py-1.5 rounded-full" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(5,150,105,0.08)", color: darkMode ? "#6ee7b7" : "#065f46" }}>
-                    <Wallet size={11} /> {t(lang, "setCashFund")}
-                  </button>
-                )}
-                {hasPermission("editCash") && (
-                  <button onClick={() => requireUnlock(() => setShowAddExpense(true))} className="w-full mt-2.5 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white font-bold text-xs" style={{ background: CLAY }}>
-                    <Plus size={14} /> {t(lang, "addExpense")}
-                  </button>
-                )}
-                {todayExpenses.length > 0 && (
-                  <div className="mt-3 space-y-1.5">
-                    <p className="text-[10px] font-semibold" style={{ color: T.text }}>{t(lang, "todayExpenses")}</p>
-                    {todayExpenses.map((e) => (
-                      <div key={e.id} className="flex items-center justify-between rounded-xl p-2" style={{ background: T.input }}>
-                        <div className="flex items-center gap-2">
-                          <div className="rounded-lg flex items-center justify-center" style={{ width: 24, height: 24, background: darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2" }}>
-                            <span style={{ fontSize: 11 }}>🗑️</span>
-                          </div>
-                          <span className="text-[11px] font-semibold" style={{ color: T.text }}>{e.label}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[11px] font-extrabold" style={{ color: CLAY }}>{amountsHidden ? "•••••" : `-${fcfa(e.amount)}`}</span>
-                          {hasPermission("editCash") && (
-                            <button onClick={() => requireUnlock(() => setConfirmModal({ message: `Supprimer cette dépense de ${fcfa(e.amount)} ?`, onConfirm: () => deleteExpense(e.id) }))}><Trash2 size={12} color={T.muted} /></button>
-                          )}
-                        </div>
-                      </div>
-                    ))}
+                {todayProfit.costed > 0 && (
+                  <div className="mt-2.5 pt-2 space-y-1" style={{ borderTop: `1px solid ${T.border}` }}>
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span style={{ color: T.muted }}>{tx(lang, "cashMargin")}</span>
+                      <span className="font-bold" style={{ color: T.text }}>{maskAmount(fcfa(todayProfit.margin))}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span style={{ color: T.muted }}>{t(lang, "cashReportExpenses")}</span>
+                      <span className="font-bold" style={{ color: CLAY }}>{amountsHidden ? "•••••" : `-${fcfa(todayProfit.exp)}`}</span>
+                    </div>
+                    <p className="text-[10px] pt-0.5" style={{ color: T.muted }}>{tx(lang, "cashProfitNote")}</p>
                   </div>
                 )}
               </div>
             )}
-            {showAddExpense && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(43,36,32,0.5)" }}>
-                <div className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-sm">{t(lang, "newExpense")}</h3>
-                    <button onClick={() => setShowAddExpense(false)}><X size={18} /></button>
-                  </div>
-                  <input placeholder={t(lang, "amountOut")} type="number" value={eAmount} onChange={(e) => setEAmount(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-                  <input placeholder={t(lang, "reasonOpt")} value={eLabel} onChange={(e) => setELabel(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-                  <button onClick={addExpense} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: CLAY }}>{t(lang, "saveExpense")}</button>
-                </div>
+          </div>
+        )}
+        {showAddExpense && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(43,36,32,0.5)" }}>
+            <div className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-sm">{t(lang, "newExpense")}</h3>
+                <button onClick={() => setShowAddExpense(false)}><X size={18} /></button>
               </div>
-            )}
-            {showEditFund && (
-              <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
-                <div className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-sm">{t(lang, "cashFundTitle")}</h3>
-                    <button onClick={() => setShowEditFund(false)}><X size={18} /></button>
-                  </div>
-                  <p className="text-xs mb-2" style={{ color: T.muted }}>{t(lang, "fundExplain")}</p>
-                  <p className="text-[11px] mb-3 rounded-lg p-2 font-medium" style={{ background: darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#065f46", border: `1px solid ${darkMode ? "rgba(52,211,153,0.3)" : "#a7f3d0"}` }}>{t(lang, "fundPrivate")}</p>
-                  <input placeholder={t(lang, "amountInCash")} type="number" value={fundInput} onChange={(e) => setFundInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-                  <button onClick={saveFund} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "save")}</button>
-                </div>
+              <input placeholder={t(lang, "amountOut")} type="number" value={eAmount} onChange={(e) => setEAmount(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <input placeholder={t(lang, "reasonOpt")} value={eLabel} onChange={(e) => setELabel(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <button onClick={addExpense} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: CLAY }}>{t(lang, "saveExpense")}</button>
+            </div>
+          </div>
+        )}
+        {showEditFund && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+            <div className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-sm">{t(lang, "cashFundTitle")}</h3>
+                <button onClick={() => setShowEditFund(false)}><X size={18} /></button>
               </div>
-            )}
+              <p className="text-xs mb-2" style={{ color: T.muted }}>{t(lang, "fundExplain")}</p>
+              <p className="text-[11px] mb-3 rounded-lg p-2 font-medium" style={{ background: darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#065f46", border: `1px solid ${darkMode ? "rgba(52,211,153,0.3)" : "#a7f3d0"}` }}>{t(lang, "fundPrivate")}</p>
+              <input placeholder={t(lang, "amountInCash")} type="number" value={fundInput} onChange={(e) => setFundInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <button onClick={saveFund} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "save")}</button>
+            </div>
+          </div>
+        )}
+        {showCashCount && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(0,0,0,0.6)" }}>
+            <div className="w-full rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 380, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-sm">{tx(lang, "cashCountBtn")}</h3>
+                <button onClick={() => setShowCashCount(false)}><X size={18} /></button>
+              </div>
+              <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "cashCountHint")}</p>
+              <div className="flex items-center justify-between rounded-lg p-2.5 mb-3 text-xs" style={{ background: T.input }}>
+                <span style={{ color: T.muted }}>{t(lang, "setSoldeEstime")}</span>
+                <span className="font-extrabold">{maskAmount(fcfa(cashBalance))}</span>
+              </div>
+              <input type="number" inputMode="decimal" placeholder={tx(lang, "cashCountedLabel")} value={cashCountInput} onChange={(e) => setCashCountInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, border: `1px solid ${T.border}` }} />
+              {cashCountGap !== null && (
+                <div className="rounded-lg p-2.5 mb-3 text-xs font-bold text-center" style={{ background: cashCountGap === 0 ? (darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5") : (darkMode ? "rgba(184,86,47,0.18)" : "#fef2f2"), color: cashCountGap === 0 ? (darkMode ? "#6ee7b7" : "#065f46") : CLAY }}>
+                  {cashCountGap === 0
+                    ? tx(lang, "cashGapOk")
+                    : `${cashCountGap > 0 ? tx(lang, "cashGapOver") : tx(lang, "cashGapShort")} : ${cashCountGap > 0 ? "+" : "-"}${fcfa(Math.abs(cashCountGap))}`}
+                </div>
+              )}
+              {cashCountGap !== null && cashCountGap !== 0 && hasPermission("editCash") && (
+                <button onClick={adjustCashToCount} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "cashAdjustBtn")}</button>
+              )}
+            </div>
           </div>
         )}
         {tab === "stock" && showAddProduct && (
@@ -13040,6 +13137,155 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })}
+          </div>
+        )}
+        {tab === "cash" && hasPermission("viewCash") && cashView && (
+          <div className="space-y-2">
+            {(
+              <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-extrabold" style={{ color: T.text }}>{t(lang, "cashBalance")}</p>
+                      <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 11, lineHeight: 1 }}>
+                        {amountsHidden ? "🙈" : "👁️"}
+                      </button>
+                    </div>
+                    <p className="font-black tracking-tight" style={{ fontSize: 28, color: amountsHidden ? T.muted : (cashBalance < 0 ? CLAY : GREEN), letterSpacing: amountsHidden ? 2 : -0.8, marginTop: 2 }}>{maskAmount(fcfa(cashBalance))}</p>
+                  </div>
+                  <div className="rounded-2xl flex items-center justify-center" style={{ width: 52, height: 52, background: darkMode ? "rgba(52,211,153,0.15)" : "rgba(5,150,105,0.1)", animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
+                    <span style={{ fontSize: 26 }}>🪙</span>
+                  </div>
+                </div>
+                <p className="text-[10px] mt-2" style={{ color: T.muted, lineHeight: 1.4 }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}</p>
+                {hasPermission("editCash") && (
+                  <button onClick={() => requireUnlock(openEditFund)} className="inline-flex items-center gap-1 text-[11px] font-bold mt-2.5 px-3 py-1.5 rounded-full" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(5,150,105,0.08)", color: darkMode ? "#6ee7b7" : "#065f46" }}>
+                    <Wallet size={11} /> {t(lang, "setCashFund")}
+                  </button>
+                )}
+                {hasPermission("editCash") && (
+                  <button onClick={() => requireUnlock(() => setShowAddExpense(true))} className="w-full mt-2.5 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white font-bold text-xs" style={{ background: CLAY }}>
+                    <Plus size={14} /> {t(lang, "addExpense")}
+                  </button>
+                )}
+                {hasPermission("editCash") && (
+                  <button onClick={() => requireUnlock(() => { setCashCountInput(""); setShowCashCount(true); })} className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-xs" style={{ background: "transparent", color: T.text, border: `1px solid ${T.border}` }}>
+                    <Wallet size={14} /> {tx(lang, "cashCountBtn")}
+                  </button>
+                )}
+              </div>
+            )}
+            <div className="flex gap-1.5">
+              {[["today", "cashPeriodToday"], ["7", "cashPeriod7"], ["30", "cashPeriod30"], ["all", "cashPeriodAll"]].map(([pid, pkey]) => (
+                <button key={pid} onClick={() => { setCashPeriod(pid); setCashJournalLimit(20); }} className="flex-1 py-2 rounded-xl text-[11px] font-bold" style={{ background: cashPeriod === pid ? (darkMode ? "#3b5b8a" : INDIGO) : T.card, color: cashPeriod === pid ? "white" : T.text, border: cashPeriod === pid ? "1px solid transparent" : `1px solid ${T.border}` }}>
+                  {tx(lang, pkey)}
+                </button>
+              ))}
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { label: tx(lang, "cashIn"), value: cashView.cashIn, sign: "+", color: darkMode ? "#8fd6a3" : "#16a34a" },
+                { label: t(lang, "cashReportExpenses"), value: cashView.out, sign: "-", color: CLAY },
+                { label: tx(lang, "cashNet"), value: cashView.cashIn - cashView.out, sign: "", color: (cashView.cashIn - cashView.out) < 0 ? CLAY : (darkMode ? "#8fd6a3" : "#16a34a") },
+              ].map((tile, ti) => (
+                <div key={ti} className="rounded-2xl p-2.5" style={cashCardStyle}>
+                  <p className="text-[10px] font-semibold" style={{ color: T.muted, lineHeight: 1.25 }}>{tile.label}</p>
+                  <p className="text-[13px] font-extrabold mt-1" style={{ color: amountsHidden ? T.muted : tile.color, wordBreak: "break-word" }}>{amountsHidden ? "•••••" : `${tile.value < 0 ? "-" : tile.sign}${fcfa(Math.abs(tile.value))}`}</p>
+                </div>
+              ))}
+            </div>
+            {(cashView.salesTotal > 0 || cashView.debtIn > 0) && (
+              <div className="rounded-2xl p-3.5" style={cashCardStyle}>
+                <p className="text-sm font-extrabold mb-2.5">{t(lang, "paymentBreakdown")}</p>
+                <div className="space-y-2.5">
+                  {cashView.byMethod.map((m) => {
+                    const pct = cashView.salesTotal > 0 ? Math.round((m.total / cashView.salesTotal) * 100) : 0;
+                    const mcolor = m.id === "cash" ? "#16a34a" : m.id === "mobile" ? "#2563eb" : m.id === "card" ? "#ea580c" : "#0284c7";
+                    return (
+                      <div key={m.id}>
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-2">
+                            <span style={{ fontSize: 13 }}>{m.id === "cash" ? "💵" : m.id === "mobile" ? "📱" : m.id === "card" ? "💳" : "📋"}</span>
+                            <span className="text-xs font-semibold">{m.label}</span>
+                          </div>
+                          <span className="text-xs font-extrabold">{maskAmount(fcfa(m.total))} <span className="text-[10px] font-semibold" style={{ color: T.muted }}>· {localizedNumber(pct)}%</span></span>
+                        </div>
+                        <div style={{ height: 5, borderRadius: 3, background: T.input }}>
+                          <div style={{ width: `${pct}%`, height: 5, borderRadius: 3, background: mcolor }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                {cashView.debtIn > 0 && (
+                  <div className="flex items-center justify-between text-xs pt-2 mt-2.5" style={{ borderTop: `1px solid ${T.border}` }}>
+                    <span style={{ color: T.muted }}>{t(lang, "cashReportDebtPayments")}</span>
+                    <span className="font-bold" style={{ color: darkMode ? "#8fd6a3" : "#16a34a" }}>{amountsHidden ? "•••••" : `+${fcfa(cashView.debtIn)}`}</span>
+                  </div>
+                )}
+              </div>
+            )}
+            {cashView.topExp.length > 0 && (
+              <div className="rounded-2xl p-3.5" style={cashCardStyle}>
+                <p className="text-sm font-extrabold mb-2.5">{tx(lang, "cashTopExpenses")}</p>
+                <div className="space-y-2.5">
+                  {cashView.topExp.map((g, gi) => (
+                    <div key={gi}>
+                      <div className="flex items-center justify-between mb-1 gap-2">
+                        <span className="text-xs font-semibold min-w-0 truncate">{g.label}{g.count > 1 ? ` ×${localizedNumber(g.count)}` : ""}</span>
+                        <span className="text-xs font-extrabold flex-shrink-0" style={{ color: amountsHidden ? T.muted : CLAY }}>{amountsHidden ? "•••••" : `-${fcfa(g.total)}`}</span>
+                      </div>
+                      <div style={{ height: 5, borderRadius: 3, background: T.input }}>
+                        <div style={{ width: `${Math.max(4, Math.round((g.total / cashView.topExp[0].total) * 100))}%`, height: 5, borderRadius: 3, background: CLAY }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="rounded-2xl p-3.5" style={cashCardStyle}>
+              <p className="text-sm font-extrabold mb-2.5">{tx(lang, "cashJournal")}</p>
+              {cashView.journal.length === 0 ? (
+                <p className="text-xs py-3 text-center" style={{ color: T.muted }}>{tx(lang, "cashEmpty")}</p>
+              ) : (
+                <div className="space-y-1.5">
+                  {cashView.journal.slice(0, cashJournalLimit).map((m, idx, arr) => {
+                    const dayKey = String(m.date).slice(0, 10);
+                    const showDay = idx === 0 || String(arr[idx - 1].date).slice(0, 10) !== dayKey;
+                    const isSale = m.kind === "sale";
+                    return (
+                      <React.Fragment key={m.id}>
+                        {showDay && (
+                          <p className="text-[10px] font-bold pt-1.5" style={{ color: T.muted }}>{dayKey === todayKey() ? tx(lang, "cashPeriodToday") : fullDate(m.date)}</p>
+                        )}
+                        <div className="flex items-center justify-between rounded-xl p-2 gap-2" style={{ background: T.input }}>
+                          <div className="flex items-center gap-2 min-w-0">
+                            <div className="rounded-lg flex items-center justify-center flex-shrink-0" style={{ width: 28, height: 28, background: isSale ? (darkMode ? "rgba(52,211,153,0.15)" : "#dcfce7") : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
+                              <span style={{ fontSize: 13 }}>{isSale ? "💵" : "🧾"}</span>
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-[11px] font-semibold truncate">{isSale ? (m.names.length ? m.names.join(", ") : t(lang, "navSale")) : m.label}</p>
+                              <p className="text-[10px]" style={{ color: T.muted }}>{fullTime(m.date)}{m.actorName ? ` · ${m.actorName}` : ""}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <span className="text-[11px] font-extrabold" style={{ color: amountsHidden ? T.muted : (isSale ? (darkMode ? "#8fd6a3" : "#16a34a") : CLAY) }}>{amountsHidden ? "•••••" : `${isSale ? "+" : "-"}${fcfa(m.amount)}`}</span>
+                            {!isSale && hasPermission("editCash") && (
+                              <button onClick={() => requireUnlock(() => setConfirmModal({ message: `Supprimer cette dépense de ${fcfa(m.amount)} ?`, onConfirm: () => deleteExpense(m.expenseId) }))}><Trash2 size={13} color={T.muted} /></button>
+                            )}
+                          </div>
+                        </div>
+                      </React.Fragment>
+                    );
+                  })}
+                  {cashView.journal.length > cashJournalLimit && (
+                    <button onClick={() => setCashJournalLimit((v) => v + 20)} className="w-full text-xs font-bold pt-2" style={{ color: darkMode ? "#7fb2ff" : INDIGO, background: "none", border: "none" }}>
+                      {tx(lang, "cashSeeMore")}
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         )}
         {tab === "cashreport" && (
@@ -14750,35 +14996,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
               {settingsView === "help" && !settingsField && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: T.muted, fontSize: 13 }}>{t(lang, "setUneQuestionEcrisnousDirectement")}</p>
-                  {supportSent ? (
-                    <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, textAlign: "center" }}>
-                      <p style={{ color: "#34d399", fontSize: 14, fontWeight: 700, marginBottom: 10 }}>✓ {tx(lang, "supportSentMsg")}</p>
-                      <button onClick={() => setSupportSent(false)} style={{ background: "transparent", border: "none", color: T.muted, fontSize: 12, textDecoration: "underline", cursor: "pointer" }}>{tx(lang, "supportNewMsg")}</button>
-                    </div>
-                  ) : (
-                    <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
-                      <textarea value={supportMsg} onChange={(e) => { setSupportMsg(e.target.value); setSupportErr(""); }} maxLength={4000} rows={5} placeholder={tx(lang, "supportMsgPlaceholder")} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 12, padding: "10px 12px", fontSize: 14, resize: "vertical", fontFamily: "inherit" }} />
-                      <p style={{ color: T.muted, fontSize: 11 }}>{tx(lang, "supportReplyHint")}</p>
-                      <p style={{ color: T.muted, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportAttachLabel")}</p>
-                      {supportFiles.map((f, idx) => (
-                        <div key={idx} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "8px 10px", borderRadius: 10, background: T.card, border: `1px solid ${T.border}` }}>
-                          <span style={{ color: T.text, fontSize: 12, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{/^video\//.test(f.type) ? "🎬" : "🖼️"} {f.name} ({(f.size / 1024 / 1024).toFixed(1)} Mo)</span>
-                          <button onClick={() => setSupportFiles(supportFiles.filter((_, k) => k !== idx))} style={{ background: "transparent", border: "none", color: T.muted, cursor: "pointer", display: "flex" }}><X size={16} /></button>
-                        </div>
-                      ))}
-                      {supportFiles.length < SUPPORT_MAX_FILES && (
-                        <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: 10, borderRadius: 12, border: `1px dashed ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
-                          📎 {tx(lang, "supportAddFile")}
-                          <input type="file" accept="image/*,video/*" multiple onChange={pickSupportFiles} style={{ display: "none" }} />
-                        </label>
-                      )}
-                      {supportErr && <p style={{ color: "#f87171", fontSize: 12 }}>{supportErr}</p>}
-                      <button onClick={sendSupport} disabled={supportBusy} style={{ padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: supportBusy ? 0.6 : 1 }}>
-                        {supportBusy ? tx(lang, "supportSending") : tx(lang, "supportSendBtn")}
-                      </button>
-                    </div>
-                  )}
                   {[
                     {
                       cat: t(lang, "setPriseEnMain"),
@@ -14829,6 +15046,37 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       ))}
                     </div>
                   ))}
+                  <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ color: T.muted, fontSize: 13 }}>{t(lang, "setUneQuestionEcrisnousDirectement")}</p>
+                  {supportSent ? (
+                    <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, textAlign: "center" }}>
+                      <p style={{ color: "#34d399", fontSize: 14, fontWeight: 700, marginBottom: 10 }}>✓ {tx(lang, "supportSentMsg")}</p>
+                      <button onClick={() => setSupportSent(false)} style={{ background: "transparent", border: "none", color: T.muted, fontSize: 12, textDecoration: "underline", cursor: "pointer" }}>{tx(lang, "supportNewMsg")}</button>
+                    </div>
+                  ) : (
+                    <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                      <textarea value={supportMsg} onChange={(e) => { setSupportMsg(e.target.value); setSupportErr(""); }} maxLength={4000} rows={5} placeholder={tx(lang, "supportMsgPlaceholder")} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 12, padding: "10px 12px", fontSize: 14, resize: "vertical", fontFamily: "inherit" }} />
+                      <p style={{ color: T.muted, fontSize: 11 }}>{tx(lang, "supportReplyHint")}</p>
+                      <p style={{ color: T.muted, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportAttachLabel")}</p>
+                      {supportFiles.map((f, idx) => (
+                        <div key={idx} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "8px 10px", borderRadius: 10, background: T.card, border: `1px solid ${T.border}` }}>
+                          <span style={{ color: T.text, fontSize: 12, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{/^video\//.test(f.type) ? "🎬" : "🖼️"} {f.name} ({(f.size / 1024 / 1024).toFixed(1)} Mo)</span>
+                          <button onClick={() => setSupportFiles(supportFiles.filter((_, k) => k !== idx))} style={{ background: "transparent", border: "none", color: T.muted, cursor: "pointer", display: "flex" }}><X size={16} /></button>
+                        </div>
+                      ))}
+                      {supportFiles.length < SUPPORT_MAX_FILES && (
+                        <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: 10, borderRadius: 12, border: `1px dashed ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                          📎 {tx(lang, "supportAddFile")}
+                          <input type="file" accept="image/*,video/*" multiple onChange={pickSupportFiles} style={{ display: "none" }} />
+                        </label>
+                      )}
+                      {supportErr && <p style={{ color: "#f87171", fontSize: 12 }}>{supportErr}</p>}
+                      <button onClick={sendSupport} disabled={supportBusy} style={{ padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: supportBusy ? 0.6 : 1 }}>
+                        {supportBusy ? tx(lang, "supportSending") : tx(lang, "supportSendBtn")}
+                      </button>
+                    </div>
+                  )}
+                  </div>
                 </div>
               )}
               {settingsView === "about" && !settingsField && (
@@ -14939,6 +15187,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             { id: "sale", label: t(lang, "navSale"), emoji: "🛒", grad: ["#2563eb","#1d4ed8"], hidden: !hasBasePermission("sell") },
             { id: "stock", label: t(lang, "navStock"), emoji: "📦", grad: ["#0891b2","#0e7490"], hidden: !hasPermission("viewStock") },
             { id: "debts", label: t(lang, "navDebts"), emoji: "👥", grad: ["#dc2626","#b91c1c"], hidden: !hasPermission("viewDebts") },
+            { id: "cash", label: t(lang, "setCaisse"), emoji: "💵", grad: ["#059669","#047857"], hidden: !hasPermission("viewCash") },
           ].filter((navItem) => !navItem.hidden).map((navItem) => {
             const active = tab === navItem.id;
             return (
