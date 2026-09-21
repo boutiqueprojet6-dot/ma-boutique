@@ -282,87 +282,79 @@ jobs:
           </LinearLayout>
           EOF
 
-          cat > android/app/src/main/java/com/shopnify/app/SalesWidgetProvider.kt << 'EOF'
-          package com.shopnify.app
+          cat > android/app/src/main/java/com/shopnify/app/SalesWidgetProvider.java << 'EOF'
+          package com.shopnify.app;
 
-          import android.appwidget.AppWidgetManager
-          import android.appwidget.AppWidgetProvider
-          import android.content.ComponentName
-          import android.content.Context
-          import android.content.SharedPreferences
-          import android.widget.RemoteViews
+          import android.appwidget.AppWidgetManager;
+          import android.appwidget.AppWidgetProvider;
+          import android.content.ComponentName;
+          import android.content.Context;
+          import android.content.SharedPreferences;
+          import android.widget.RemoteViews;
 
-          class SalesWidgetProvider : AppWidgetProvider() {
+          public class SalesWidgetProvider extends AppWidgetProvider {
 
-              companion object {
-                  const val PREFS_NAME = "MaBoutiqueWidgetPrefs"
-                  const val KEY_TOTAL = "todayTotal"
-                  const val KEY_COUNT = "todayCount"
+              public static final String PREFS_NAME = "MaBoutiqueWidgetPrefs";
+              public static final String KEY_TOTAL = "todayTotal";
+              public static final String KEY_COUNT = "todayCount";
 
-                  fun updateAllWidgets(context: Context) {
-                      val manager = AppWidgetManager.getInstance(context)
-                      val ids = manager.getAppWidgetIds(
-                          ComponentName(context, SalesWidgetProvider::class.java)
-                      )
-                      for (id in ids) {
-                          updateWidget(context, manager, id)
-                      }
-                  }
-
-                  fun updateWidget(context: Context, manager: AppWidgetManager, widgetId: Int) {
-                      val prefs: SharedPreferences =
-                          context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                      val total = prefs.getString(KEY_TOTAL, "0 FCFA") ?: "0 FCFA"
-                      val count = prefs.getInt(KEY_COUNT, 0)
-
-                      val views = RemoteViews(context.packageName, R.layout.sales_widget)
-                      views.setTextViewText(R.id.widget_amount, total)
-                      views.setTextViewText(R.id.widget_count, "$count article(s) vendu(s)")
-
-                      manager.updateAppWidget(widgetId, views)
+              public static void updateAllWidgets(Context context) {
+                  AppWidgetManager manager = AppWidgetManager.getInstance(context);
+                  int[] ids = manager.getAppWidgetIds(new ComponentName(context, SalesWidgetProvider.class));
+                  for (int id : ids) {
+                      updateWidget(context, manager, id);
                   }
               }
 
-              override fun onUpdate(
-                  context: Context,
-                  appWidgetManager: AppWidgetManager,
-                  appWidgetIds: IntArray
-              ) {
-                  for (id in appWidgetIds) {
-                      updateWidget(context, appWidgetManager, id)
+              public static void updateWidget(Context context, AppWidgetManager manager, int widgetId) {
+                  SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                  String total = prefs.getString(KEY_TOTAL, "0 FCFA");
+                  int count = prefs.getInt(KEY_COUNT, 0);
+
+                  RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.sales_widget);
+                  views.setTextViewText(R.id.widget_amount, total);
+                  views.setTextViewText(R.id.widget_count, count + " article(s) vendu(s)");
+
+                  manager.updateAppWidget(widgetId, views);
+              }
+
+              @Override
+              public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+                  for (int id : appWidgetIds) {
+                      updateWidget(context, appWidgetManager, id);
                   }
               }
           }
           EOF
 
-          cat > android/app/src/main/java/com/shopnify/app/SalesWidgetPlugin.kt << 'EOF'
-          package com.shopnify.app
+          cat > android/app/src/main/java/com/shopnify/app/SalesWidgetPlugin.java << 'EOF'
+          package com.shopnify.app;
 
-          import android.content.Context
-          import com.getcapacitor.Plugin
-          import com.getcapacitor.PluginCall
-          import com.getcapacitor.PluginMethod
-          import com.getcapacitor.annotation.CapacitorPlugin
+          import android.content.Context;
+          import android.content.SharedPreferences;
+          import com.getcapacitor.Plugin;
+          import com.getcapacitor.PluginCall;
+          import com.getcapacitor.PluginMethod;
+          import com.getcapacitor.annotation.CapacitorPlugin;
 
           @CapacitorPlugin(name = "SalesWidget")
-          class SalesWidgetPlugin : Plugin() {
+          public class SalesWidgetPlugin extends Plugin {
 
               @PluginMethod
-              fun update(call: PluginCall) {
-                  val total = call.getString("total") ?: "0 FCFA"
-                  val count = call.getInt("count") ?: 0
+              public void update(PluginCall call) {
+                  String total = call.getString("total", "0 FCFA");
+                  Integer countInt = call.getInt("count", 0);
+                  int count = countInt != null ? countInt : 0;
 
-                  val prefs = context.getSharedPreferences(
-                      SalesWidgetProvider.PREFS_NAME,
-                      Context.MODE_PRIVATE
-                  )
+                  SharedPreferences prefs = getContext().getSharedPreferences(
+                          SalesWidgetProvider.PREFS_NAME, Context.MODE_PRIVATE);
                   prefs.edit()
-                      .putString(SalesWidgetProvider.KEY_TOTAL, total)
-                      .putInt(SalesWidgetProvider.KEY_COUNT, count)
-                      .apply()
+                          .putString(SalesWidgetProvider.KEY_TOTAL, total)
+                          .putInt(SalesWidgetProvider.KEY_COUNT, count)
+                          .apply();
 
-                  SalesWidgetProvider.updateAllWidgets(context)
-                  call.resolve()
+                  SalesWidgetProvider.updateAllWidgets(getContext());
+                  call.resolve();
               }
           }
           EOF
