@@ -11260,6 +11260,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredCartSearch.toLowerCase()))),
     [products, deferredCartSearch, sortProductList]
   );
+  const todaySalesForWidget = sales.filter((s) => s.date.slice(0, 10) === todayKey());
+  const todayTotalForWidget = todaySalesForWidget.reduce((sum, s) => sum + s.total, 0);
+  // Correction : ce useEffect était auparavant placé APRÈS le "if (loading) return"
+  // ci-dessous, ce qui faisait que React l'appelait un rendu sur deux (pas lors du
+  // rendu "Chargement…", oui une fois les données chargées) → erreur React #310
+  // ("Rendered more hooks than during the previous render"). Tous les hooks doivent
+  // être appelés à chaque rendu, donc on le place avant tout retour anticipé.
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.Capacitor?.isNativePlatform?.()) {
+      SalesWidget.update({
+        total: fcfa(todayTotalForWidget),
+        count: todaySalesForWidget.length,
+      }).catch(() => {});
+    }
+  }, [todayTotalForWidget, todaySalesForWidget.length]);
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen" style={{ background: darkMode ? "#0a0a14" : SAND, color: darkMode ? "#eceef5" : CHARCOAL }}>
@@ -11285,14 +11300,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb" };
   const todaySales = sales.filter((s) => s.date.slice(0, 10) === todayKey());
   const todayTotal = todaySales.reduce((sum, s) => sum + s.total, 0);
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.Capacitor?.isNativePlatform?.()) {
-      SalesWidget.update({
-        total: fcfa(todayTotal),
-        count: todaySales.length,
-      }).catch(() => {});
-    }
-  }, [todayTotal, todaySales.length]);
   const yesterdayKeyStr = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
   const yesterdayTotal = sales.filter((s) => s.date.slice(0, 10) === yesterdayKeyStr).reduce((sum, s) => sum + s.total, 0);
   const salesVsYesterdayPct = yesterdayTotal > 0
