@@ -17,7 +17,9 @@
     "@yudiel/react-qr-scanner": "^2.0.8",
     "jspdf": "^2.5.1",
     "@supabase/supabase-js": "^2.45.4",
-    "firebase": "^10.14.1"
+    "firebase": "^10.14.1",
+    "react-leaflet": "^4.2.1",
+    "leaflet": "^1.9.4"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
