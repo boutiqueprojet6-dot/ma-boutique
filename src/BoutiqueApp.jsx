@@ -416,7 +416,7 @@ const TRANSLATIONS = {
     darkMode: "Thème", darkModeDesc: "Système, clair ou sombre", themeSystem: "Système", themeLight: "Clair", themeDark: "Sombre",
     animBalls: "Boules animées", ballColor: "Couleur des boules", stockAlert: "Seuil d'alerte stock",
     stockAlertDesc: "unité(s) restante(s) déclenche l'alerte", contactSupport: "Contacter l'assistance sur WhatsApp",
-    resetData: "Réinitialiser toutes mes données", resetConfirm: "Ceci efface définitivement ton stock, tes ventes, tes dettes et ta caisse. Ton compte reste actif. Confirmes-tu ?", logoutConfirm: "Tu vas être déconnecté(e) de ce compte. Confirmes-tu ?", yesLogout: "Oui, me déconnecter",
+    resetData: "Réinitialiser toutes mes données", resetConfirm: "Ceci efface définitivement ton stock, tes ventes, tes dettes et ta caisse. Ton compte reste actif. Confirmes-tu ?", logoutConfirm: "Tu vas être déconnecté(e) de ce compte. Confirmes-tu ?", yesLogout: "Oui, me déconnecter", digitsHint: "chiffres attendus",
     yesErase: "Oui, tout effacer", savedOk: "Enregistré ✓", errorRetry: "Erreur, réessaie.",
     updated: "Mis à jour ✓", emailSaved: "E-mail enregistré ✓",
     salesLast30: "Ventes des 30 derniers jours", topProducts: "Produits les plus vendus (quantité)",
@@ -699,7 +699,7 @@ const TRANSLATIONS = {
     darkMode: "Theme", darkModeDesc: "System, light or dark", themeSystem: "System", themeLight: "Light", themeDark: "Dark",
     animBalls: "Animated bubbles", ballColor: "Bubble color", stockAlert: "Low stock threshold",
     stockAlertDesc: "unit(s) remaining triggers the alert", contactSupport: "Contact support on WhatsApp",
-    resetData: "Reset all my data", resetConfirm: "This will permanently erase your stock, sales, debts and cash. Your account stays active. Confirm?", logoutConfirm: "You're about to be logged out of this account. Confirm?", yesLogout: "Yes, log me out",
+    resetData: "Reset all my data", resetConfirm: "This will permanently erase your stock, sales, debts and cash. Your account stays active. Confirm?", logoutConfirm: "You're about to be logged out of this account. Confirm?", yesLogout: "Yes, log me out", digitsHint: "digits expected",
     yesErase: "Yes, erase everything", savedOk: "Saved ✓", errorRetry: "Error, please retry.",
     updated: "Updated ✓", emailSaved: "Email saved ✓",
     salesLast30: "Sales over the last 30 days", topProducts: "Best-selling products (quantity)",
@@ -5035,6 +5035,37 @@ const COUNTRY_DIAL_CODE = {
   "Vanuatu": "+678", "Vatican": "+379", "Venezuela": "+58", "Vietnam": "+84", "Yémen": "+967",
   "Zambie": "+260", "Zimbabwe": "+263", "RD Congo": "+243",
 };
+// Nombre de chiffres attendu dans le numéro national (hors indicatif pays), pour les pays
+// où ce format est fixe et bien établi — utilisé pour valider la longueur du numéro saisi
+// à l'inscription et dans les Paramètres. Liste volontairement partielle (priorité donnée
+// à l'Afrique francophone, cœur de cible actuel, et aux grands pays internationaux) : les
+// pays absents de cette liste passent par une validation générique (8 à 14 chiffres au
+// total, indicatif compris) plutôt qu'une règle inventée qui pourrait bloquer un numéro
+// pourtant valide.
+const COUNTRY_PHONE_DIGITS = {
+  "Mali": 8, "Sénégal": 9, "Côte d'Ivoire": 10, "Burkina Faso": 8, "Niger": 8, "Togo": 8,
+  "Guinée": 9, "Mauritanie": 8, "Tchad": 8, "Cameroun": 9, "Gabon": 8, "Congo-Brazzaville": 9,
+  "RD Congo": 9, "Maroc": 9, "Algérie": 9, "Tunisie": 8, "Ghana": 9, "Nigeria": 10, "Kenya": 9,
+  "France": 9, "Belgique": 9, "Suisse": 9, "Luxembourg": 9, "Royaume-Uni": 10, "Allemagne": 10,
+  "Espagne": 9, "Italie": 10, "Portugal": 9, "Pays-Bas": 9,
+  "États-Unis": 10, "Canada": 10, "Chine": 11, "Inde": 10, "Émirats arabes unis": 9, "Arabie saoudite": 9, "Égypte": 10,
+};
+// Retourne { dial, national, totalDigits } pour un pays connu de COUNTRY_PHONE_DIGITS,
+// ou null si le pays est absent (validation générique utilisée à la place).
+function phoneDigitsInfo(country) {
+  const dial = COUNTRY_DIAL_CODE[country];
+  const national = COUNTRY_PHONE_DIGITS[country];
+  if (!dial || !national) return null;
+  return { dial, national, totalDigits: dial.replace(/\D/g, "").length + national };
+}
+// Vérifie juste une longueur raisonnable au global (8 à 15 chiffres, indicatif compris —
+// borne haute de la norme internationale E.164). Le pays choisi ne sert qu'à préremplir
+// l'indicatif et afficher un indice à titre d'aide ; l'utilisateur reste libre de mettre
+// le numéro d'un autre pays sans que ça soit bloqué.
+function isPhoneLengthValid(phone) {
+  const digitCount = (phone || "").replace(/\D/g, "").length;
+  return digitCount >= 8 && digitCount <= 15;
+}
 // Petites chaînes d'interface ajoutées après coup : couvre les 29 langues
 // de LANGUAGES plutôt qu'un simple texte français, avec repli sur l'anglais
 // puis le français si une langue précise venait à manquer.
@@ -5740,7 +5771,8 @@ function SearchBox({ value, onChange, placeholder, compact }) {
     </div>
   );
 }
-function SearchableSelect({ value, onChange, options, placeholder, searchPlaceholder, hasError, emptyLabel, title }) {
+function SearchableSelect({ value, onChange, options, placeholder, searchPlaceholder, hasError, emptyLabel, title, darkMode }) {
+  const AT = themePalette(darkMode);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   useEffect(() => {
@@ -5759,7 +5791,7 @@ function SearchableSelect({ value, onChange, options, placeholder, searchPlaceho
         type="button"
         onClick={() => setOpen(true)}
         className="w-full border rounded-xl px-3 py-2.5 text-sm text-left flex items-center justify-between"
-        style={{ background: "#F6F7FB", borderColor: hasError ? "#E4572E" : "#E7E8F1" }}
+        style={{ background: AT.input, color: AT.text, borderColor: hasError ? "#E4572E" : AT.border }}
       >
         <span className={selected ? "" : "text-gray-400"} style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {selected ? selected.label : placeholder}
@@ -5767,12 +5799,12 @@ function SearchableSelect({ value, onChange, options, placeholder, searchPlaceho
         <ChevronRight size={14} className="text-gray-400 flex-shrink-0 ml-1" />
       </button>
       {open && (
-        <div className="fixed inset-0 z-50 bg-white flex flex-col" style={{ animation: "fadeIn 0.15s ease" }}>
-          <div className="flex items-center gap-2 px-4 py-3 border-b flex-shrink-0" style={{ borderColor: "#E7E8F1" }}>
-            <button type="button" onClick={close} className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "#F6F7FB", color: "#6B6D85" }}>
+        <div className="fixed inset-0 z-50 flex flex-col" style={{ animation: "fadeIn 0.15s ease", background: AT.card }}>
+          <div className="flex items-center gap-2 px-4 py-3 border-b flex-shrink-0" style={{ borderColor: AT.border }}>
+            <button type="button" onClick={close} className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: AT.input, color: AT.muted }}>
               <ChevronLeft size={18} />
             </button>
-            {title && <span className="font-semibold text-sm" style={{ color: "#15162C" }}>{title}</span>}
+            {title && <span className="font-semibold text-sm" style={{ color: AT.text }}>{title}</span>}
           </div>
           <div className="relative p-3 flex-shrink-0">
             <Search size={14} className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -5781,7 +5813,7 @@ function SearchableSelect({ value, onChange, options, placeholder, searchPlaceho
               onChange={(e) => setQuery(e.target.value)}
               placeholder={searchPlaceholder}
               className="w-full border rounded-xl pl-9 pr-3 py-2.5 text-sm"
-              style={{ background: "#F6F7FB", borderColor: "#E7E8F1" }}
+              style={{ background: AT.input, color: AT.text, borderColor: AT.border }}
             />
           </div>
           <div className="flex-1 overflow-y-auto pb-4">
@@ -5794,7 +5826,7 @@ function SearchableSelect({ value, onChange, options, placeholder, searchPlaceho
                 type="button"
                 onClick={() => { onChange(o.value); close(); }}
                 className="w-full text-left px-4 py-3 text-sm flex items-center justify-between"
-                style={{ background: o.value === value ? "#EEF0FE" : "transparent" }}
+                style={{ background: o.value === value ? (darkMode ? "rgba(79,70,229,0.22)" : "#EEF0FE") : "transparent", color: AT.text }}
               >
                 <span>{o.label}</span>
                 {o.value === value && <Check size={14} color="#3F37C9" />}
@@ -5851,7 +5883,8 @@ function GradientBackdrop() {
   );
 }
 // ---------- AUTH SCREEN ----------
-function LanguagePickerScreen({ onChoose }) {
+function LanguagePickerScreen({ onChoose, darkMode }) {
+  const AT = themePalette(darkMode);
   const [searchQuery, setSearchQuery] = useState("");
   // Détecte la langue du téléphone (ex: "fr-FR" -> "fr") et la fait
   // correspondre à une langue supportée par l'app ; "en" par défaut sinon.
@@ -5874,21 +5907,21 @@ function LanguagePickerScreen({ onChoose }) {
   // immédiatement même après une recherche.
   const sorted = [...filtered].sort((a, b) => (a.id === systemLang ? -1 : b.id === systemLang ? 1 : 0));
   return (
-    <div dir="ltr" className="min-h-screen flex items-center justify-center p-4" style={{ background: "#F6F7FB" }}>
-      <div className="w-full max-w-sm rounded-3xl bg-white p-8 text-center shadow-xl max-h-[90vh] overflow-y-auto">
+    <div dir="ltr" className="min-h-screen flex items-center justify-center p-4" style={{ background: AT.bg }}>
+      <div className="w-full max-w-sm rounded-3xl p-8 text-center shadow-xl max-h-[90vh] overflow-y-auto" style={{ background: AT.card }}>
         <div className="flex items-center justify-center gap-2 mb-5">
           <svg width="26" height="26" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
-          <span className="font-bold text-base" style={{ color: "#15162C" }}>Shopnify</span>
+          <span className="font-bold text-base" style={{ color: AT.text }}>Shopnify</span>
         </div>
-        <p className="text-sm font-semibold mb-4" style={{ color: "#15162C" }}>{t(systemLang, "chooseLanguage")}</p>
+        <p className="text-sm font-semibold mb-4" style={{ color: AT.text }}>{t(systemLang, "chooseLanguage")}</p>
         <div className="relative mb-4">
-          <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#A6A8BC" }} />
+          <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: AT.muted }} />
           <input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t(systemLang, "search")}
             className="w-full border rounded-xl text-sm"
-            style={{ background: "#F6F7FB", padding: "12px 14px 12px 36px", borderColor: "#E7E8F1" }}
+            style={{ background: AT.input, color: AT.text, padding: "12px 14px 12px 36px", borderColor: AT.border }}
           />
         </div>
         <div className="flex flex-col gap-3">
@@ -5897,11 +5930,11 @@ function LanguagePickerScreen({ onChoose }) {
               key={l.id}
               onClick={() => { setSelected(l.id); onChoose(l.id); }}
               className="w-full py-3.5 rounded-xl font-semibold text-sm border-2 transition"
-              style={{ borderColor: selected === l.id ? "#4F46E5" : "#E7E8F1", background: selected === l.id ? "rgba(79,70,229,0.07)" : "transparent", color: "#15162C" }}
+              style={{ borderColor: selected === l.id ? "#4F46E5" : AT.border, background: selected === l.id ? (darkMode ? "rgba(79,70,229,0.22)" : "rgba(79,70,229,0.07)") : "transparent", color: AT.text }}
             >
               {l.label}
               {l.id !== systemLang && (
-                <span className="block text-[11px] font-normal mt-0.5" style={{ color: "#A6A8BC" }}>{languageLabel(l, systemLang)}</span>
+                <span className="block text-[11px] font-normal mt-0.5" style={{ color: AT.muted }}>{languageLabel(l, systemLang)}</span>
               )}
             </button>
           ))}
@@ -6159,9 +6192,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     const errs = {};
     if (n === 1) {
       if (!obShopName.trim()) errs.shopName = true;
-      // Numéro obligatoire : au moins 8 chiffres (indicatif possible), pour
-      // pouvoir être proposé ensuite comme contact sur les fiches produit.
-      if (obPhone.replace(/[^0-9]/g, "").length < 8) errs.phone = true;
+      // Numéro obligatoire, avec le bon nombre de chiffres pour le pays choisi
+      // quand on le connaît précisément (sinon règle générique 8-14 chiffres).
+      if (!isPhoneLengthValid(obPhone)) errs.phone = true;
       if (!obSecteur) errs.secteur = true;
       if (!obPays) errs.pays = true;
       if (!obCurrency) errs.currency = true;
@@ -6328,7 +6361,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           <div className="px-7 py-7 md:w-3/5 md:overflow-y-auto" style={{ maxHeight: "90vh", background: AT.card }}>
             <div className="flex justify-start gap-2 mb-4 overflow-x-auto" style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none" }}>
               {LANGUAGES.map((l) => (
-                <button key={l.id} onClick={() => setLang(l.id)} className="flex-shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full border" style={{ borderColor: INDIGO, background: lang === l.id ? INDIGO : AT.card, color: lang === l.id ? "white" : INDIGO }}>
+                <button key={l.id} onClick={() => setLang(l.id)} className="flex-shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full border" style={{ borderColor: darkMode ? "#8B85F2" : INDIGO, background: lang === l.id ? (darkMode ? "#4F46E5" : INDIGO) : AT.card, color: lang === l.id ? "white" : (darkMode ? "#8B85F2" : INDIGO) }}>
                   {l.label}
                 </button>
               ))}
@@ -6349,7 +6382,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               onClick={loginWithGoogle}
               disabled={googleLoginBusy}
               className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2.5"
-              style={{ background: "#15162C", color: "white", opacity: googleLoginBusy ? 0.75 : 1 }}
+              style={{ background: darkMode ? "#4F46E5" : "#15162C", color: "white", opacity: googleLoginBusy ? 0.75 : 1 }}
             >
               {googleLoginBusy ? (
                 <span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.35)", borderTopColor: "white", display: "inline-block", animation: "spin 0.7s linear infinite" }} />
@@ -6379,7 +6412,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   />
                 </div>
                 {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
-                <button disabled={loginOtpSending} onClick={sendLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: "#15162C", opacity: loginOtpSending ? 0.75 : 1 }}>
+                <button disabled={loginOtpSending} onClick={sendLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: darkMode ? "#4F46E5" : "#15162C", opacity: loginOtpSending ? 0.75 : 1 }}>
                   {loginOtpSending ? t(lang, "wait") : t(lang, "loginBtn")}
                 </button>
               </>
@@ -6401,10 +6434,10 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   />
                 </div>
                 {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
-                <button disabled={loginOtpVerifying || loginOtpCode.trim().length < 6} onClick={verifyLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: "#15162C", opacity: loginOtpVerifying || loginOtpCode.trim().length < 6 ? 0.6 : 1 }}>
+                <button disabled={loginOtpVerifying || loginOtpCode.trim().length < 6} onClick={verifyLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: darkMode ? "#4F46E5" : "#15162C", opacity: loginOtpVerifying || loginOtpCode.trim().length < 6 ? 0.6 : 1 }}>
                   {loginOtpVerifying ? t(lang, "wait") : t(lang, "otpVerifyBtn")}
                 </button>
-                <button onClick={changeLoginEmail} className="block w-full text-center text-[11px] mt-3 underline" style={{ color: INDIGO }}>
+                <button onClick={changeLoginEmail} className="block w-full text-center text-[11px] mt-3 underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
                   {t(lang, "changeEmailLink")}
                 </button>
               </>
@@ -6412,10 +6445,10 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <p className="text-center mt-4" style={{ fontSize: 10, color: AT.muted, lineHeight: 1.5 }}>
               {t(lang, "legalConsentText")}
             </p>
-            <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
+            <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
               <QrCode size={13} /> {t(lang, "loginAsEmployee")}
             </button>
-            <button onClick={onDemo} className="w-full text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
+            <button onClick={onDemo} className="w-full text-center text-[11px] mt-3 font-semibold underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
               👀 {t(lang, "seeDemoBtn")}
             </button>
           </div>
@@ -6489,12 +6522,12 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       setEmpScanBusy(false);
     };
     return (
-      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: "#F6F7FB" }}>
-        <div className="w-full max-w-sm rounded-3xl overflow-hidden shadow-xl p-7 text-center" style={{ background: "white", boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}>
-          <button onClick={() => setScreen("login")} className="mb-4 flex items-center gap-1 text-xs font-semibold" style={{ color: "#6B6D85" }}>
+      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
+        <div className="w-full max-w-sm rounded-3xl overflow-hidden shadow-xl p-7 text-center" style={{ background: AT.card, boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}>
+          <button onClick={() => setScreen("login")} className="mb-4 flex items-center gap-1 text-xs font-semibold" style={{ color: AT.muted }}>
             <ChevronLeft size={15} /> {t(lang, "backToShop")}
           </button>
-          <p className="text-base font-bold mb-2" style={{ color: "#15162C" }}>{t(lang, "empScanTitle")}</p>
+          <p className="text-base font-bold mb-2" style={{ color: AT.text }}>{t(lang, "empScanTitle")}</p>
           {empScanMode === "camera" && !empScanCameraError && (
             <div className="w-full aspect-square rounded-2xl overflow-hidden mb-4" style={{ background: "#0b0b12" }}>
               <React.Suspense fallback={null}>
@@ -6516,14 +6549,14 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </div>
           )}
           {(empScanMode === "manual" || empScanCameraError) && (
-            <div className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 mb-4" style={{ background: "#F6F7FB", border: "2px dashed #E7E8F1" }}>
-              <ScanLine size={48} style={{ color: "#A6A8BC" }} />
+            <div className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 mb-4" style={{ background: AT.input, border: `2px dashed ${AT.border}` }}>
+              <ScanLine size={48} style={{ color: AT.muted }} />
             </div>
           )}
           <button
             onClick={() => { setEmpScanMode(empScanMode === "camera" ? "manual" : "camera"); setEmpScanCameraError(false); setEmpScanError(""); }}
             className="text-[11px] font-semibold underline mb-3"
-            style={{ color: INDIGO }}
+            style={{ color: darkMode ? "#8B85F2" : INDIGO }}
           >
             {empScanMode === "camera" ? t(lang, "empManualCodeLabel") : t(lang, "empScanTitle")}
           </button>
@@ -6536,13 +6569,13 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 inputMode="numeric"
                 maxLength={6}
                 className="w-full border rounded-xl px-3 py-2.5 text-sm tracking-widest text-center mb-3"
-                style={{ background: "#F6F7FB", borderColor: empScanError ? CLAY : "#E7E8F1" }}
+                style={{ background: AT.input, color: AT.text, borderColor: empScanError ? CLAY : AT.border }}
               />
               <button
                 onClick={() => verifyEmployeeCode()}
                 disabled={empScanBusy || empScanCode.length !== 6}
                 className="w-full py-2.5 rounded-xl text-white font-semibold text-sm"
-                style={{ background: INDIGO, opacity: empScanBusy || empScanCode.length !== 6 ? 0.6 : 1 }}
+                style={{ background: darkMode ? "#4F46E5" : INDIGO, opacity: empScanBusy || empScanCode.length !== 6 ? 0.6 : 1 }}
               >
                 {empScanBusy ? t(lang, "wait") : t(lang, "loginBtn")}
               </button>
@@ -6562,14 +6595,14 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       return null;
     }
     return (
-      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: "#F6F7FB" }}>
-        <div className="w-full max-w-sm md:max-w-md rounded-3xl bg-white p-9 text-center shadow-xl">
+      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
+        <div className="w-full max-w-sm md:max-w-md rounded-3xl p-9 text-center shadow-xl" style={{ background: AT.card }}>
           <div className="w-16 h-16 rounded-full border-[3px] flex items-center justify-center mx-auto mb-5 text-2xl" style={{ borderColor: GREEN, color: GREEN }}>✓</div>
-          <h1 className="text-xl font-bold mb-2" style={{ color: "#15162C" }}>{t(lang, "accountCreatedTitle")}</h1>
-          <p className="text-sm mb-6" style={{ color: "#6B6D85", lineHeight: 1.6 }}>
+          <h1 className="text-xl font-bold mb-2" style={{ color: AT.text }}>{t(lang, "accountCreatedTitle")}</h1>
+          <p className="text-sm mb-6" style={{ color: AT.muted, lineHeight: 1.6 }}>
             {t(lang, "accountCreatedDesc").replace("{shop}", createdShopName)}
           </p>
-          <button onClick={() => { setScreen("login"); setUsername(obUsername); setPin(""); }} className="w-full py-3 rounded-xl text-white font-semibold text-sm" style={{ background: INDIGO }}>
+          <button onClick={() => { setScreen("login"); setUsername(obUsername); setPin(""); }} className="w-full py-3 rounded-xl text-white font-semibold text-sm" style={{ background: darkMode ? "#4F46E5" : INDIGO }}>
             {t(lang, "goToLogin")}
           </button>
         </div>
@@ -6578,19 +6611,19 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   }
   // ================= ONBOARDING SCREEN =================
   return (
-    <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: "#F6F7FB" }}>
-      <div className="w-full max-w-lg md:max-w-2xl rounded-3xl bg-white p-7 md:p-10 relative shadow-xl">
-        <button onClick={() => setScreen("login")} className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ background: "#F6F7FB", color: "#6B6D85" }}>✕</button>
+    <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
+      <div className="w-full max-w-lg md:max-w-2xl rounded-3xl p-7 md:p-10 relative shadow-xl" style={{ background: AT.card }}>
+        <button onClick={() => setScreen("login")} className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ background: AT.input, color: AT.muted }}>✕</button>
         <div className="flex items-center gap-2 mb-4">
           <svg width="18" height="18" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
           <span className="font-bold text-sm">{t(lang, "appName")}</span>
         </div>
         <div className="flex gap-3 items-end mb-2" style={{ height: 24 }}>
           {(isGoogleFlow ? [1, 4] : [1, 2, 3, 4]).map((i) => (
-            <div key={i} style={{ width: 4, height: i <= obStep ? 22 : 12, borderRadius: 3, background: i <= obStep ? (i === obStep ? "#15162C" : INDIGO) : "#E7E8F1", transition: "all .3s" }} />
+            <div key={i} style={{ width: 4, height: i <= obStep ? 22 : 12, borderRadius: 3, background: i <= obStep ? (i === obStep ? AT.text : INDIGO) : AT.border, transition: "all .3s" }} />
           ))}
         </div>
-        <p className="text-[11px] font-semibold uppercase tracking-wide mb-6" style={{ color: "#6B6D85" }}>
+        <p className="text-[11px] font-semibold uppercase tracking-wide mb-6" style={{ color: AT.muted }}>
           {isGoogleFlow
             ? t(lang, "othEtapeObstepSurTotalsteps").replace("{obStep}", obStep === 1 ? "1" : "2").replace("{totalSteps}", "2")
             : obStep < totalSteps
@@ -6600,66 +6633,73 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         {/* STEP 1 — Boutique */}
         {obStep === 1 && (
           <div>
-            <h2 className="text-lg font-bold mb-1" style={{ fontFamily: "serif", color: "#15162C" }}>{t(lang, "obStep1Title")}</h2>
-            <p className="text-xs mb-5" style={{ color: "#6B6D85" }}>{t(lang, "obStep1Desc")}</p>
+            <h2 className="text-lg font-bold mb-1" style={{ fontFamily: "serif", color: AT.text }}>{t(lang, "obStep1Title")}</h2>
+            <p className="text-xs mb-5" style={{ color: AT.muted }}>{t(lang, "obStep1Desc")}</p>
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "firstName")}</label>
-                <input value={obPrenom} onChange={(e) => setObPrenom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB" }} />
+                <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "firstName")}</label>
+                <input value={obPrenom} onChange={(e) => setObPrenom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text }} />
               </div>
               <div>
-                <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "lastName")}</label>
-                <input value={obNom} onChange={(e) => setObNom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB" }} />
+                <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "lastName")}</label>
+                <input value={obNom} onChange={(e) => setObNom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text }} />
               </div>
             </div>
             <div className="mb-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "shopName")}</label>
-              <input value={obShopName} onChange={(e) => setObShopName(e.target.value)} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.shopName) }} />
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "shopName")}</label>
+              <input value={obShopName} onChange={(e) => setObShopName(e.target.value)} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.shopName) }} />
             </div>
             <div className="mb-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{tx(lang, "phoneNumber")}</label>
-              <input
-                type="tel"
-                value={obPhone}
-                onChange={(e) => setObPhone(e.target.value)}
-                placeholder="+225 07 00 00 00 00"
-                className="w-full border rounded-xl px-3 py-2.5 text-sm"
-                style={{ background: "#F6F7FB", ...fieldStyle(obErrors.phone) }}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "sector")}</label>
-              <select value={obSecteur} onChange={(e) => setObSecteur(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.secteur) }}>
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "sector")}</label>
+              <select value={obSecteur} onChange={(e) => setObSecteur(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.secteur) }}>
                 <option value="">{t(lang, "chooseSector")}</option>
                 {SECTORS.map((s, i) => <option key={i} value={secLabel(s)}>{secLabel(s)}</option>)}
               </select>
             </div>
+            <div className="mb-3">
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "country")}</label>
+              <SearchableSelect
+                darkMode={darkMode}
+                value={obPays}
+                onChange={(c) => {
+                  setObPays(c);
+                  const found = COUNTRY_CURRENCY.find((x) => x.id === c);
+                  setObCurrency(found ? found.currency || "" : "");
+                  // Préremplit l'indicatif du pays choisi, seulement si le
+                  // champ numéro est encore vide (on ne veut pas écraser un
+                  // numéro déjà saisi si l'utilisateur revient en arrière).
+                  const dial = COUNTRY_DIAL_CODE[c];
+                  if (dial && !obPhone.trim()) setObPhone(dial + " ");
+                }}
+                options={COUNTRY_CURRENCY.map((c) => ({ value: c.id, label: countryLabel(c) }))}
+                placeholder={t(lang, "chooseCountry")}
+                searchPlaceholder={t(lang, "search")}
+                emptyLabel={t(lang, "noResults")}
+                hasError={obErrors.pays}
+                title={t(lang, "country")}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{tx(lang, "phoneNumber")}</label>
+              <input
+                type="tel"
+                value={obPhone}
+                onChange={(e) => setObPhone(e.target.value)}
+                placeholder={obPays && COUNTRY_DIAL_CODE[obPays] ? `${COUNTRY_DIAL_CODE[obPays]} ...` : "+225 07 00 00 00 00"}
+                className="w-full border rounded-xl px-3 py-2.5 text-sm"
+                style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.phone) }}
+              />
+              {phoneDigitsInfo(obPays) && (
+                <p className="text-[11px] mt-1" style={{ color: AT.muted }}>
+                  {phoneDigitsInfo(obPays).dial} + {phoneDigitsInfo(obPays).national} {t(lang, "digitsHint")}
+                </p>
+              )}
+            </div>
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "country")}</label>
+                <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "language")}</label>
                 <SearchableSelect
-                  value={obPays}
-                  onChange={(c) => {
-                    setObPays(c);
-                    const found = COUNTRY_CURRENCY.find((x) => x.id === c);
-                    setObCurrency(found ? found.currency || "" : "");
-                    // Préremplit l'indicatif du pays choisi, seulement si le
-                    // champ numéro est encore vide (on ne veut pas écraser un
-                    // numéro déjà saisi si l'utilisateur revient en arrière).
-                    const dial = COUNTRY_DIAL_CODE[c];
-                    if (dial && !obPhone.trim()) setObPhone(dial + " ");
-                  }}
-                  options={COUNTRY_CURRENCY.map((c) => ({ value: c.id, label: countryLabel(c) }))}
-                  placeholder={t(lang, "chooseCountry")}
-                  searchPlaceholder={t(lang, "search")}
-                  emptyLabel={t(lang, "noResults")}
-                  hasError={obErrors.pays}
-                  title={t(lang, "country")}
-                />
-              </div>
-              <div>
-                <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "language")}</label>
-                <SearchableSelect
+                  darkMode={darkMode}
                   value={obLang}
                   onChange={(l) => setObLang(l)}
                   options={LANGUAGES.map((l) => ({ value: l.id, label: languageLabel(l, lang) }))}
@@ -6669,24 +6709,25 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   title={t(lang, "language")}
                 />
               </div>
-            </div>
-            <div className="mb-2">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "currencyLabel")}</label>
-              <SearchableSelect
-                value={obCurrency}
-                onChange={(c) => setObCurrency(c)}
-                options={(() => {
-                  const countryCurrencyId = (COUNTRY_CURRENCY.find((x) => x.id === obPays) || {}).currency;
-                  const top = CURRENCIES.filter((c) => c.id === countryCurrencyId);
-                  const rest = CURRENCIES.filter((c) => c.id !== countryCurrencyId);
-                  return [...top, ...rest].map((c) => ({ value: c.id, label: `${currencyLabel(c, lang)} (${c.symbol})` }));
-                })()}
-                placeholder={t(lang, "chooseCurrency")}
-                searchPlaceholder={t(lang, "search")}
-                emptyLabel={t(lang, "noResults")}
-                hasError={obErrors.currency}
-                title={t(lang, "currencyLabel")}
-              />
+              <div>
+                <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "currencyLabel")}</label>
+                <SearchableSelect
+                  darkMode={darkMode}
+                  value={obCurrency}
+                  onChange={(c) => setObCurrency(c)}
+                  options={(() => {
+                    const countryCurrencyId = (COUNTRY_CURRENCY.find((x) => x.id === obPays) || {}).currency;
+                    const top = CURRENCIES.filter((c) => c.id === countryCurrencyId);
+                    const rest = CURRENCIES.filter((c) => c.id !== countryCurrencyId);
+                    return [...top, ...rest].map((c) => ({ value: c.id, label: `${currencyLabel(c, lang)} (${c.symbol})` }));
+                  })()}
+                  placeholder={t(lang, "chooseCurrency")}
+                  searchPlaceholder={t(lang, "search")}
+                  emptyLabel={t(lang, "noResults")}
+                  hasError={obErrors.currency}
+                  title={t(lang, "currencyLabel")}
+                />
+              </div>
             </div>
             {obCurrency && (
               <div className="inline-flex items-center gap-2 mt-1 px-3 py-1.5 rounded-full text-xs font-semibold" style={{ background: "#EEF0FE", color: "#3F37C9" }}>
@@ -6699,7 +6740,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <div className="flex gap-3 mt-6">
               <button onClick={obNext} className="flex-1 py-3 rounded-xl text-white font-semibold text-sm" style={{ background: "#4F46E5" }}>{t(lang, "continueBtn")}</button>
             </div>
-            <div className="flex flex-col items-center gap-2 mt-5 pt-4" style={{ borderTop: "1px solid #E7E8F1" }}>
+            <div className="flex flex-col items-center gap-2 mt-5 pt-4" style={{ borderTop: `1px solid ${AT.border}` }}>
               <button onClick={onDemo} className="text-[11px] font-semibold underline" style={{ color: INDIGO }}>👀 {t(lang, "seeDemoBtn")}</button>
             </div>
           </div>
@@ -6707,10 +6748,10 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         {/* STEP 2 — Email */}
         {obStep === 2 && (
           <div>
-            <h2 className="text-lg font-bold mb-1" style={{ fontFamily: "serif", color: "#15162C" }}>{obEmailCodeSent ? t(lang, "obStepEmailTitleVerify") : t(lang, "obStepEmailTitle")}</h2>
-            <p className="text-xs mb-5" style={{ color: "#6B6D85" }}>{obEmailCodeSent ? t(lang, "obStepEmailDescVerify") : t(lang, "obStepEmailDesc")}</p>
+            <h2 className="text-lg font-bold mb-1" style={{ fontFamily: "serif", color: AT.text }}>{obEmailCodeSent ? t(lang, "obStepEmailTitleVerify") : t(lang, "obStepEmailTitle")}</h2>
+            <p className="text-xs mb-5" style={{ color: AT.muted }}>{obEmailCodeSent ? t(lang, "obStepEmailDescVerify") : t(lang, "obStepEmailDesc")}</p>
             <div className="mb-1">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "emailLabel")}</label>
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "emailLabel")}</label>
               <input
                 value={obUsername}
                 onChange={(e) => { setObUsername(e.target.value); setObEmailVerified(false); setObEmailCodeSent(false); setObEmailCodeInput(""); setObOtpError(""); }}
@@ -6718,7 +6759,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 type="email"
                 disabled={obEmailVerified}
                 className="w-full border rounded-xl px-3 py-2.5 text-sm"
-                style={{ background: obEmailVerified ? "#F0FBF4" : "#F6F7FB", ...fieldStyle(obErrors.username) }}
+                style={{ background: obEmailVerified ? "#F0FBF4" : AT.input, color: obEmailVerified ? "#166534" : AT.text, ...fieldStyle(obErrors.username) }}
               />
             </div>
             {!obEmailVerified && (
@@ -6738,10 +6779,10 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             )}
             {obEmailCodeSent && !obEmailVerified && (
               <div className="mt-4">
-                <p className="text-xs mb-3" style={{ color: "#6B6D85" }}>
+                <p className="text-xs mb-3" style={{ color: AT.muted }}>
                   {t(lang, "emailCodeSentNotice").replace("{email}", obUsername)}
                 </p>
-                <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "emailCodeLabel")}</label>
+                <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "emailCodeLabel")}</label>
                 <input
                   value={obEmailCodeInput}
                   onChange={(e) => setObEmailCodeInput(e.target.value.replace(/\D/g, "").slice(0, 6))}
@@ -6749,7 +6790,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   inputMode="numeric"
                   maxLength={6}
                   className="w-full border rounded-xl px-3 py-2.5 text-sm tracking-widest text-center"
-                  style={{ background: "#F6F7FB", ...fieldStyle(obErrors.emailCode) }}
+                  style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.emailCode) }}
                 />
                 {obErrors.emailCode && <p className="text-xs mt-2" style={{ color: CLAY }}>{t(lang, "wrongEmailCode")}</p>}
                 <button onClick={verifyObEmailCode} className="w-full mt-3 py-2.5 rounded-xl text-white font-semibold text-sm" style={{ background: "#4F46E5" }}>
@@ -6770,7 +6811,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             )}
             {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
             <div className="flex gap-3 mt-6">
-              <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: "#E7E8F1", color: "#15162C" }}>{t(lang, "backBtn")}</button>
+              <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: AT.border, color: AT.text }}>{t(lang, "backBtn")}</button>
               <button onClick={obNext} className="flex-1 py-3 rounded-xl text-white font-semibold text-sm" style={{ background: "#4F46E5" }}>{t(lang, "continueBtn")}</button>
             </div>
           </div>
@@ -6778,29 +6819,29 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         {/* STEP 3 — Code PIN */}
         {obStep === 3 && (
           <div>
-            <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "serif", color: "#15162C" }}>{t(lang, "setCodePin")}</h2>
+            <h2 className="text-lg font-bold mb-4" style={{ fontFamily: "serif", color: AT.text }}>{t(lang, "setCodePin")}</h2>
             <div className="mb-1 px-3 py-2.5 rounded-xl text-xs" style={{ background: "#FFF3ED", color: "#9A4A1F" }}>
               🔒 {t(lang, "lockPinExplainer")}
             </div>
             <div className="mb-3 mt-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "lockPinPlaceholder")}</label>
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinPlaceholder")}</label>
               <div className="relative">
-                <input value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.lockPin) }} />
-                <button type="button" onClick={() => setShowObLockPin(!showObLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObLockPin ? "🙈" : "👁"}</button>
+                <input value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.lockPin) }} />
+                <button type="button" onClick={() => setShowObLockPin(!showObLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObLockPin ? "🙈" : "👁"}</button>
               </div>
-              <p className="text-[11px] mt-1.5" style={{ color: "#A6A8BC" }}>{t(lang, "lockPinHint")}</p>
+              <p className="text-[11px] mt-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinHint")}</p>
             </div>
             <div className="mb-2">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "confirmLockPinPlaceholder")}</label>
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "confirmLockPinPlaceholder")}</label>
               <div className="relative">
-                <input value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.confirmLockPin) }} />
-                <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
+                <input value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.confirmLockPin) }} />
+                <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
               </div>
             </div>
-            <p className="text-[11px] mt-2" style={{ color: "#A6A8BC" }}>{t(lang, "privacyNote")}</p>
+            <p className="text-[11px] mt-2" style={{ color: AT.muted }}>{t(lang, "privacyNote")}</p>
             {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
             <div className="flex gap-3 mt-5">
-              <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: "#E7E8F1", color: "#15162C" }}>{t(lang, "backBtn")}</button>
+              <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: AT.border, color: AT.text }}>{t(lang, "backBtn")}</button>
               <button onClick={obNext} className="flex-1 py-3 rounded-xl text-white font-semibold text-sm" style={{ background: "#4F46E5" }}>{t(lang, "continueBtn")}</button>
             </div>
           </div>
@@ -6808,37 +6849,37 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         {/* STEP 4 — Récap */}
         {obStep === 4 && (
           <div>
-            <h2 className="text-lg font-bold mb-1" style={{ fontFamily: "serif", color: "#15162C" }}>{t(lang, "obStep3Title")}</h2>
-            <p className="text-xs mb-5" style={{ color: "#6B6D85" }}>{t(lang, "obStep3Desc")}</p>
-            <div className="py-3" style={{ borderTop: "1px solid #E7E8F1" }}>
+            <h2 className="text-lg font-bold mb-1" style={{ fontFamily: "serif", color: AT.text }}>{t(lang, "obStep3Title")}</h2>
+            <p className="text-xs mb-5" style={{ color: AT.muted }}>{t(lang, "obStep3Desc")}</p>
+            <div className="py-3" style={{ borderTop: `1px solid ${AT.border}` }}>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "#6B6D85" }}>{t(lang, "recapYou")}</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: AT.muted }}>{t(lang, "recapYou")}</span>
                 <button onClick={() => setObStep(1)} className="text-xs font-bold" style={{ color: INDIGO }}>{t(lang, "editBtn")}</button>
               </div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "recapFullName")}</span><span className="font-semibold">{obPrenom} {obNom}</span></div>
+              <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "recapFullName")}</span><span className="font-semibold">{obPrenom} {obNom}</span></div>
             </div>
-            <div className="py-3" style={{ borderTop: "1px solid #E7E8F1" }}>
+            <div className="py-3" style={{ borderTop: `1px solid ${AT.border}` }}>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "#6B6D85" }}>{t(lang, "recapShop")}</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: AT.muted }}>{t(lang, "recapShop")}</span>
                 <button onClick={() => setObStep(1)} className="text-xs font-bold" style={{ color: INDIGO }}>{t(lang, "editBtn")}</button>
               </div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "shopName")}</span><span className="font-semibold">{obShopName}</span></div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "sector")}</span><span className="font-semibold">{obSecteur || "—"}</span></div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "country")}</span><span className="font-semibold">{(() => { const found = COUNTRY_CURRENCY.find((x) => x.id === obPays); return found ? countryLabel(found) : obPays; })()}</span></div>
-              <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "currencyLabel")}</span><span className="font-semibold">{currencyLabel(CURRENCIES.find((c) => c.id === obCurrency), lang)}</span></div>
+              <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "shopName")}</span><span className="font-semibold">{obShopName}</span></div>
+              <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "sector")}</span><span className="font-semibold">{obSecteur || "—"}</span></div>
+              <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "country")}</span><span className="font-semibold">{(() => { const found = COUNTRY_CURRENCY.find((x) => x.id === obPays); return found ? countryLabel(found) : obPays; })()}</span></div>
+              <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "currencyLabel")}</span><span className="font-semibold">{currencyLabel(CURRENCIES.find((c) => c.id === obCurrency), lang)}</span></div>
             </div>
             {!isGoogleFlow && (
-              <div className="py-3" style={{ borderTop: "1px solid #E7E8F1" }}>
+              <div className="py-3" style={{ borderTop: `1px solid ${AT.border}` }}>
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "#6B6D85" }}>{t(lang, "recapAccount")}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: AT.muted }}>{t(lang, "recapAccount")}</span>
                   <button onClick={() => setObStep(3)} className="text-xs font-bold" style={{ color: INDIGO }}>{t(lang, "editBtn")}</button>
                 </div>
-                <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "emailLabel")}</span><span className="font-semibold">{obUsername}</span></div>
-                <div className="flex justify-between text-sm py-1"><span style={{ color: "#6B6D85" }}>{t(lang, "setCodePin")}</span><span className="font-semibold">••••</span></div>
+                <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "emailLabel")}</span><span className="font-semibold">{obUsername}</span></div>
+                <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "setCodePin")}</span><span className="font-semibold">••••</span></div>
               </div>
             )}
             {isGoogleFlow && (
-              <div className="py-3" style={{ borderTop: "1px solid #E7E8F1" }}>
+              <div className="py-3" style={{ borderTop: `1px solid ${AT.border}` }}>
                 {/* Google gère déjà l'identité (email/mot de passe), mais le PIN de
                     verrouillage local est propre à cette appli : il doit être choisi
                     par l'utilisateur, jamais fixé à une valeur par défaut. */}
@@ -6846,25 +6887,25 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   🔒 {t(lang, "lockPinExplainer")}
                 </div>
                 <div className="mb-3 mt-3">
-                  <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "lockPinPlaceholder")}</label>
+                  <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinPlaceholder")}</label>
                   <div className="relative">
-                    <input value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.lockPin) }} />
-                    <button type="button" onClick={() => setShowObLockPin(!showObLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObLockPin ? "🙈" : "👁"}</button>
+                    <input value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.lockPin) }} />
+                    <button type="button" onClick={() => setShowObLockPin(!showObLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObLockPin ? "🙈" : "👁"}</button>
                   </div>
-                  <p className="text-[11px] mt-1.5" style={{ color: "#A6A8BC" }}>{t(lang, "lockPinHint")}</p>
+                  <p className="text-[11px] mt-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinHint")}</p>
                 </div>
                 <div className="mb-2">
-                  <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "confirmLockPinPlaceholder")}</label>
+                  <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "confirmLockPinPlaceholder")}</label>
                   <div className="relative">
-                    <input value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: "#F6F7FB", ...fieldStyle(obErrors.confirmLockPin) }} />
-                    <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: "#A6A8BC" }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
+                    <input value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.confirmLockPin) }} />
+                    <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
                   </div>
                 </div>
               </div>
             )}
             {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
             <div className="flex gap-3 mt-5">
-              <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: "#E7E8F1", color: "#15162C" }}>{t(lang, "backBtn")}</button>
+              <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: AT.border, color: AT.text }}>{t(lang, "backBtn")}</button>
               <button disabled={busy} onClick={obNext} className="flex-1 py-3 rounded-xl text-white font-semibold text-sm" style={{ background: "#4F46E5" }}>{busy ? t(lang, "wait") : t(lang, "createAccountBtn")}</button>
             </div>
           </div>
@@ -13982,7 +14023,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   // Préremplit le champ avec la valeur actuelle à chaque ouverture (évite d'afficher une saisie périmée).
                   if (item.id === "ownername") { setOwnerFirstInput(ownerFirstName); setOwnerLastInput(ownerLastName); setOwnerNameMsg(""); }
                   if (item.id === "name") { setShopNameInput(shopName); setShopNameMsg(""); }
-                  if (item.id === "phone") { setShopPhoneInput(shopPhone); setShopPhoneMsg(""); }
+                  if (item.id === "phone") { setShopPhoneInput(shopPhone || (shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : "")); setShopPhoneMsg(""); }
                   if (item.id === "sector") setSectorMsg("");
                   if (item.id === "country") { setCountryMsg(""); setCountrySearchQuery(""); }
                   setSettingsField(item.id);
@@ -14561,10 +14602,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "phoneNumber")}</div>
                   <div style={{ display: "flex", gap: 8 }}>
-                    <input type="tel" inputMode="tel" value={shopPhoneInput} onChange={(e) => { setShopPhoneInput(e.target.value); setShopPhoneMsg(""); }} style={{ flex: 1, minWidth: 0, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
-                    <button onClick={() => { saveAll({ phone: shopPhoneInput.trim() }); setShopPhoneMsg("✓"); }} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}>OK</button>
+                    <input type="tel" inputMode="tel" value={shopPhoneInput} onChange={(e) => { setShopPhoneInput(e.target.value); setShopPhoneMsg(""); }} placeholder={shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? `${COUNTRY_DIAL_CODE[shopCountry]} ...` : ""} style={{ flex: 1, minWidth: 0, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <button onClick={() => {
+                      if (!isPhoneLengthValid(shopPhoneInput)) { setShopPhoneMsg(t(lang, "digitsHint")); return; }
+                      saveAll({ phone: shopPhoneInput.trim() }); setShopPhoneMsg("✓");
+                    }} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}>OK</button>
                   </div>
-                  {shopPhoneMsg && <p style={{ color: "#34d399", fontSize: 11, marginTop: 6 }}>{shopPhoneMsg}</p>}
+                  {phoneDigitsInfo(shopCountry) && (
+                    <p style={{ color: T.muted, fontSize: 11, marginTop: 6 }}>
+                      {phoneDigitsInfo(shopCountry).dial} + {phoneDigitsInfo(shopCountry).national} {t(lang, "digitsHint")}
+                    </p>
+                  )}
+                  {shopPhoneMsg && <p style={{ color: shopPhoneMsg === "✓" ? "#34d399" : "#f87171", fontSize: 11, marginTop: 6 }}>{shopPhoneMsg}</p>}
                 </div>
               )}
               {settingsField === "lockpin" && (
@@ -15294,7 +15343,7 @@ function BoutiqueAppInner() {
     return <div style={{ minHeight: "100vh", background: themePalette(authDark).bg }} />;
   }
   if (!langChosen) {
-    return <LanguagePickerScreen onChoose={chooseInitialLang} />;
+    return <LanguagePickerScreen onChoose={chooseInitialLang} darkMode={authDark} />;
   }
   if (checkingGoogleOnboarding) {
     return (
