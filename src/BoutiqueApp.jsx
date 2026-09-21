@@ -7770,9 +7770,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const handler = (e) => setSystemPrefersDark(e.matches);
     if (mq.addEventListener) mq.addEventListener("change", handler);
     else if (mq.addListener) mq.addListener(handler);
+    // Filet de sécurité : si le thème du téléphone change pendant que l'app est en arrière-plan
+    // (écran éteint, app minimisée), le WebView met en pause le JS et l'événement "change"
+    // ci-dessus n'est jamais reçu — au réveil, matchMedia().matches est déjà à jour mais aucun
+    // événement n'a prévenu React. On relit donc la valeur à chaque retour au premier plan.
+    const resync = () => { if (!document.hidden) setSystemPrefersDark(mq.matches); };
+    document.addEventListener("visibilitychange", resync);
+    let removeAppListener = null;
+    let cancelled = false;
+    if (window.Capacitor) {
+      import("@capacitor/app").then(({ App: CapacitorApp }) => {
+        if (cancelled) return;
+        CapacitorApp.addListener("appStateChange", ({ isActive }) => { if (isActive) resync(); })
+          .then((h) => { if (cancelled) h.remove(); else removeAppListener = h; });
+      });
+    }
     return () => {
+      cancelled = true;
       if (mq.removeEventListener) mq.removeEventListener("change", handler);
       else if (mq.removeListener) mq.removeListener(handler);
+      document.removeEventListener("visibilitychange", resync);
+      if (removeAppListener) removeAppListener.remove();
     };
   }, []);
   useEffect(() => {
@@ -8510,6 +8528,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [cashCountInput, setCashCountInput] = useState("");
   const [showSettings, setShowSettings] = useState(false);
   const [settingsView, setSettingsView] = useState("menu");
+  // Remonte tout en haut de l'écran Paramètres à chaque changement de sous-écran (ex : Assistance),
+  // pour ne pas laisser la fenêtre à la position où elle était sur l'écran précédent.
+  const settingsScrollRef = useRef(null);
+  useEffect(() => {
+    if (settingsScrollRef.current) settingsScrollRef.current.scrollTop = 0;
+  }, [settingsView, settingsField]);
   // ---- Assistance : message + photo/vidéo FACULTATIVES, envoyé au support sans montrer son adresse ----
   const [supportMsg, setSupportMsg] = useState("");
   const [supportFiles, setSupportFiles] = useState([]);
@@ -9852,7 +9876,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         const shareText = `${p.name} — ${fcfa(p.price)}${shopName ? ` chez ${shopName}` : ""}\n📲 ${APP_SHARE_URL}`;
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
-            await navigator.share({ files: [file], title: p.name, text: shareText, url: APP_SHARE_URL });
+            // Le lien est déjà à la fin de shareText : on ne le remet pas dans "url",
+            // sinon WhatsApp l'affiche deux fois dans la légende.
+            await navigator.share({ files: [file], title: p.name, text: shareText });
             return;
           } catch (e) {
             // Partage annulé ou indisponible : on retombe sur le téléchargement ci-dessous.
@@ -11866,7 +11892,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               { id: "sale", label: t(lang, "navSale"), icon: ShoppingCart, hidden: !hasBasePermission("sell") },
               { id: "stock", label: t(lang, "navStock"), icon: Package, hidden: !hasPermission("viewStock") },
               { id: "debts", label: t(lang, "navDebts"), icon: Users, hidden: !hasPermission("viewDebts") },
-              { id: "cash", label: t(lang, "setCaisse"), icon: Wallet, hidden: !hasPermission("viewCash") },
               { id: "history", label: t(lang, "navHistory"), icon: History },
               { id: "stats", label: t(lang, "navStats"), icon: BarChart3, hidden: !hasPermission("viewStats") },
               { id: "ai", label: t(lang, "navAI"), icon: Bot },
@@ -12116,41 +12141,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               </div>
             )}
-            {hasPermission("viewStats") && (todaySales.length > 0 || todayExpenses.length > 0) && (
-              <div className="rounded-2xl p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                <div className="flex items-center justify-between">
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <p className="text-sm font-extrabold" style={{ color: T.text }}>{tx(lang, "cashProfitTitle")}</p>
-                      <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 11, lineHeight: 1 }}>
-                        {amountsHidden ? "🙈" : "👁️"}
-                      </button>
-                    </div>
-                    {todayProfit.costed > 0 ? (
-                      <p className="font-black tracking-tight" style={{ fontSize: 26, color: amountsHidden ? T.muted : (todayProfit.net < 0 ? CLAY : GREEN), letterSpacing: amountsHidden ? 2 : -0.8, marginTop: 2 }}>{maskAmount(fcfa(todayProfit.net))}</p>
-                    ) : (
-                      <p className="text-[11px] mt-1" style={{ color: T.muted, lineHeight: 1.4 }}>{tx(lang, "cashProfitNoCost")}</p>
-                    )}
-                  </div>
-                  <div className="rounded-2xl flex items-center justify-center" style={{ width: 48, height: 48, background: darkMode ? "rgba(52,211,153,0.15)" : "rgba(5,150,105,0.1)", flexShrink: 0 }}>
-                    <span style={{ fontSize: 24 }}>📈</span>
-                  </div>
-                </div>
-                {todayProfit.costed > 0 && (
-                  <div className="mt-2.5 pt-2 space-y-1" style={{ borderTop: `1px solid ${T.border}` }}>
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span style={{ color: T.muted }}>{tx(lang, "cashMargin")}</span>
-                      <span className="font-bold" style={{ color: T.text }}>{maskAmount(fcfa(todayProfit.margin))}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span style={{ color: T.muted }}>{t(lang, "cashReportExpenses")}</span>
-                      <span className="font-bold" style={{ color: CLAY }}>{amountsHidden ? "•••••" : `-${fcfa(todayProfit.exp)}`}</span>
-                    </div>
-                    <p className="text-[10px] pt-0.5" style={{ color: T.muted }}>{tx(lang, "cashProfitNote")}</p>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         )}
         {showAddExpense && (
@@ -12208,7 +12198,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "stock" && showAddProduct && (
           <div dir="ltr" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
-            <div className="px-4" style={{ minHeight: "100%", paddingBottom: 40, paddingTop: 20 }}>
+            <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-base" style={{ color: T.text }}>{editingProductId ? (tx(lang, "editProductTitle")) : t(lang, "newProduct")}</h3>
               <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); setEditingProductId(null); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
@@ -12284,8 +12274,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         {tab === "stock" && !showAddProduct && (
           <div className="space-y-3">
             {hasPermission("editStock") && (
-              <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-white font-extrabold text-sm" style={{ background: darkMode ? INDIGO : "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: darkMode ? "none" : "0 10px 18px rgba(37,99,235,0.32)" }}>
-                <Plus size={16} /> {t(lang, "addProduct")}
+              <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
+                <Plus size={20} /> {t(lang, "addProduct")}
               </button>
             )}
             {products.length > 0 && (
@@ -12871,8 +12861,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         {tab === "debts" && (
           <div className="space-y-2">
             {hasPermission("editDebts") && (
-              <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full flex items-center justify-center gap-2 text-base font-extrabold px-4 py-4 rounded-2xl text-white active:scale-[0.98] transition-transform" style={{ background: INDIGO, boxShadow: "0 6px 16px rgba(27,58,92,0.28)" }}>
-                <Plus size={22} strokeWidth={2.5} /> {t(lang, "debtAddBtn")}
+              <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
+                <Plus size={20} /> {t(lang, "debtAddBtn")}
               </button>
             )}
             {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} />}
@@ -14154,7 +14144,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showSettings && (
-        <div dir="ltr" className="absolute inset-0 z-40" style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+        <div dir="ltr" className="absolute inset-0 z-40" ref={settingsScrollRef} style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
           <div style={{ minHeight: "100%", background: T.bg, paddingBottom: 40, position: "relative", overflow: "hidden" }}>
             {showBalls && <FloatingBalls dark={darkMode} colorId={ballColor} />}
             <div style={{ position: "relative", zIndex: 1 }}>
@@ -15187,7 +15177,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             { id: "sale", label: t(lang, "navSale"), emoji: "🛒", grad: ["#2563eb","#1d4ed8"], hidden: !hasBasePermission("sell") },
             { id: "stock", label: t(lang, "navStock"), emoji: "📦", grad: ["#0891b2","#0e7490"], hidden: !hasPermission("viewStock") },
             { id: "debts", label: t(lang, "navDebts"), emoji: "👥", grad: ["#dc2626","#b91c1c"], hidden: !hasPermission("viewDebts") },
-            { id: "cash", label: t(lang, "setCaisse"), emoji: "💵", grad: ["#059669","#047857"], hidden: !hasPermission("viewCash") },
           ].filter((navItem) => !navItem.hidden).map((navItem) => {
             const active = tab === navItem.id;
             return (
@@ -15228,7 +15217,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             );
           })}
           {(() => {
-            const moreActive = ["history", "stats", "ai", "employees", "shopcompare", "cashreport", "calculator"].includes(tab);
+            const moreActive = ["history", "stats", "ai", "employees", "shopcompare", "cashreport", "calculator", "cash"].includes(tab);
             return (
               <button
                 onClick={() => { if (isPhotoReturnGuardActive()) return; setShowMoreMenu(true); }}
@@ -15278,6 +15267,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "employees", label: t(lang, "empTabLabel"), icon: Users, grad: ["#0ea5e9","#0369a1"], hidden: !!activeEmployee },
                 { id: "shopcompare", label: t(lang, "shopCompareTabLabel"), icon: BarChart3, grad: ["#c084fc","#9333ea"], hidden: !hasFeatureAccess("shopComparison") || !!activeEmployee },
                 { id: "cashreport", label: t(lang, "cashReportTabLabel"), icon: Wallet, grad: ["#fbbf24","#d97706"], hidden: !hasFeatureAccess("perEmployeeCashReport") || !!activeEmployee },
+                { id: "cash", label: t(lang, "setCaisse"), icon: Wallet, grad: ["#059669","#047857"], hidden: !hasPermission("viewCash") },
                 { id: "calculator", label: t(lang, "calcTabLabel"), icon: Calculator, grad: ["#10b981","#059669"] },
               ].filter((item) => !item.hidden).map((item) => {
                 const Icon = item.icon;
