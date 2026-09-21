@@ -172,7 +172,7 @@ jobs:
           print("Deep link ajouté avec succès")
           EOF
 
-      - name: Add Android permissions (camera + notifications)
+      - name: Add Android permissions (camera + notifications + location)
         run: |
           python3 - << 'EOF'
           path = "android/app/src/main/AndroidManifest.xml"
@@ -181,7 +181,7 @@ jobs:
           if "<application" not in content:
               raise SystemExit("ERREUR : balise <application> introuvable dans le manifest, rien n'a été inséré.")
           lines = []
-          for perm in ["CAMERA", "POST_NOTIFICATIONS"]:
+          for perm in ["CAMERA", "POST_NOTIFICATIONS", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]:
               tag = "android.permission." + perm
               if tag not in content:
                   lines.append('<uses-permission android:name="' + tag + '" />')
@@ -273,7 +273,7 @@ jobs:
             echo "PROBLEME : google-services.json ABSENT !"
             exit 1
           fi
-          for PERM in CAMERA POST_NOTIFICATIONS; do
+          for PERM in CAMERA POST_NOTIFICATIONS ACCESS_FINE_LOCATION ACCESS_COARSE_LOCATION; do
             if grep -q "android.permission.$PERM" android/app/src/main/AndroidManifest.xml; then
               echo "OK : permission $PERM présente."
             else
