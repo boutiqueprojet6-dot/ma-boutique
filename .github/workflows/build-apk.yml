@@ -197,6 +197,178 @@ jobs:
               print("Permissions déjà présentes, rien à ajouter")
           EOF
 
+      - name: Add widget receiver to manifest
+        run: |
+          python3 - << 'EOF'
+          path = "android/app/src/main/AndroidManifest.xml"
+          with open(path, "r", encoding="utf-8") as f:
+              content = f.read()
+          receiver_block = '''
+                  <receiver
+                      android:name=".SalesWidgetProvider"
+                      android:exported="false">
+                      <intent-filter>
+                          <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                      </intent-filter>
+                      <meta-data
+                          android:name="android.appwidget.provider"
+                          android:resource="@xml/sales_widget_info" />
+                  </receiver>
+          '''
+          if "</application>" not in content:
+              raise SystemExit("ERREUR : balise </application> introuvable dans le manifest.")
+          if "SalesWidgetProvider" in content:
+              print("Receiver deja present, rien a faire")
+          else:
+              content = content.replace("</application>", receiver_block + "    </application>", 1)
+              with open(path, "w", encoding="utf-8") as f:
+                  f.write(content)
+              print("Receiver du widget ajoute avec succes")
+          EOF
+
+      - name: Add widget resources (Ventes du jour)
+        run: |
+          mkdir -p android/app/src/main/res/xml
+          mkdir -p android/app/src/main/res/layout
+          mkdir -p android/app/src/main/java/com/shopnify/app
+
+          cat > android/app/src/main/res/xml/sales_widget_info.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+              android:minWidth="180dp"
+              android:minHeight="110dp"
+              android:updatePeriodMillis="1800000"
+              android:initialLayout="@layout/sales_widget"
+              android:resizeMode="horizontal|vertical"
+              android:widgetCategory="home_screen"
+              android:previewImage="@mipmap/ic_launcher" />
+          EOF
+
+          cat > android/app/src/main/res/layout/sales_widget.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="12dp"
+              android:background="#1B3A5C">
+
+              <TextView
+                  android:id="@+id/widget_label"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Ventes du jour"
+                  android:textColor="#FFFFFF"
+                  android:textSize="12sp" />
+
+              <TextView
+                  android:id="@+id/widget_amount"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="0 FCFA"
+                  android:textColor="#FFFFFF"
+                  android:textSize="22sp"
+                  android:textStyle="bold"
+                  android:layout_marginTop="4dp" />
+
+              <TextView
+                  android:id="@+id/widget_count"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="0 article(s) vendu(s)"
+                  android:textColor="#CCCCCC"
+                  android:textSize="10sp"
+                  android:layout_marginTop="2dp" />
+          </LinearLayout>
+          EOF
+
+          cat > android/app/src/main/java/com/shopnify/app/SalesWidgetProvider.kt << 'EOF'
+          package com.shopnify.app
+
+          import android.appwidget.AppWidgetManager
+          import android.appwidget.AppWidgetProvider
+          import android.content.ComponentName
+          import android.content.Context
+          import android.content.SharedPreferences
+          import android.widget.RemoteViews
+
+          class SalesWidgetProvider : AppWidgetProvider() {
+
+              companion object {
+                  const val PREFS_NAME = "MaBoutiqueWidgetPrefs"
+                  const val KEY_TOTAL = "todayTotal"
+                  const val KEY_COUNT = "todayCount"
+
+                  fun updateAllWidgets(context: Context) {
+                      val manager = AppWidgetManager.getInstance(context)
+                      val ids = manager.getAppWidgetIds(
+                          ComponentName(context, SalesWidgetProvider::class.java)
+                      )
+                      for (id in ids) {
+                          updateWidget(context, manager, id)
+                      }
+                  }
+
+                  fun updateWidget(context: Context, manager: AppWidgetManager, widgetId: Int) {
+                      val prefs: SharedPreferences =
+                          context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                      val total = prefs.getString(KEY_TOTAL, "0 FCFA") ?: "0 FCFA"
+                      val count = prefs.getInt(KEY_COUNT, 0)
+
+                      val views = RemoteViews(context.packageName, R.layout.sales_widget)
+                      views.setTextViewText(R.id.widget_amount, total)
+                      views.setTextViewText(R.id.widget_count, "$count article(s) vendu(s)")
+
+                      manager.updateAppWidget(widgetId, views)
+                  }
+              }
+
+              override fun onUpdate(
+                  context: Context,
+                  appWidgetManager: AppWidgetManager,
+                  appWidgetIds: IntArray
+              ) {
+                  for (id in appWidgetIds) {
+                      updateWidget(context, appWidgetManager, id)
+                  }
+              }
+          }
+          EOF
+
+          cat > android/app/src/main/java/com/shopnify/app/SalesWidgetPlugin.kt << 'EOF'
+          package com.shopnify.app
+
+          import android.content.Context
+          import com.getcapacitor.Plugin
+          import com.getcapacitor.PluginCall
+          import com.getcapacitor.PluginMethod
+          import com.getcapacitor.annotation.CapacitorPlugin
+
+          @CapacitorPlugin(name = "SalesWidget")
+          class SalesWidgetPlugin : Plugin() {
+
+              @PluginMethod
+              fun update(call: PluginCall) {
+                  val total = call.getString("total") ?: "0 FCFA"
+                  val count = call.getInt("count") ?: 0
+
+                  val prefs = context.getSharedPreferences(
+                      SalesWidgetProvider.PREFS_NAME,
+                      Context.MODE_PRIVATE
+                  )
+                  prefs.edit()
+                      .putString(SalesWidgetProvider.KEY_TOTAL, total)
+                      .putInt(SalesWidgetProvider.KEY_COUNT, count)
+                      .apply()
+
+                  SalesWidgetProvider.updateAllWidgets(context)
+                  call.resolve()
+              }
+          }
+          EOF
+
+          echo "Fichiers du widget crees avec succes"
+
       - name: Configure MainActivity for native Google Sign-In
         run: |
           mkdir -p android/app/src/main/java/com/shopnify/app
@@ -215,6 +387,14 @@ jobs:
           // ModifiedMainActivityForSocialLoginPlugin est indispensable au bon fonctionnement
           // du plugin @capgo/capacitor-social-login (connexion Google native).
           public class MainActivity extends BridgeActivity implements ModifiedMainActivityForSocialLoginPlugin {
+
+              @Override
+              public void onCreate(android.os.Bundle savedInstanceState) {
+                  // Widget "Ventes du jour" : enregistre le plugin natif qui permet au JS
+                  // d'écrire les données lues par le widget d'écran d'accueil.
+                  registerPlugin(SalesWidgetPlugin.class);
+                  super.onCreate(savedInstanceState);
+              }
 
               @Override
               public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -281,6 +461,12 @@ jobs:
               exit 1
             fi
           done
+          if grep -q "SalesWidgetProvider" android/app/src/main/AndroidManifest.xml; then
+            echo "OK : le receiver du widget est bien présent dans le manifest final."
+          else
+            echo "PROBLEME : le receiver du widget est ABSENT du manifest final !"
+            exit 1
+          fi
       # ---- FIN DIAGNOSTIC TEMPORAIRE ----
 
       - name: Build APK
@@ -295,3 +481,4 @@ jobs:
           name: shopnify-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           overwrite: true
+
