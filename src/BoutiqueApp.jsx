@@ -1,18 +1,5 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, useMemo, useDeferredValue } from "react";
 import { Preferences } from "@capacitor/preferences";
-// Mode recherche/localisation (acheteur) : carte gratuite, sans clé API.
-// Nécessite `npm install react-leaflet leaflet` dans le projet.
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-// Correctif classique Leaflet + bundlers : les icônes par défaut ne se chargent pas
-// automatiquement depuis les assets du bundler, donc on pointe vers un CDN.
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
 import {
   CRITICAL_STATE_KEY,
   buildCriticalState,
@@ -429,7 +416,7 @@ const TRANSLATIONS = {
     darkMode: "Thème", darkModeDesc: "Système, clair ou sombre", themeSystem: "Système", themeLight: "Clair", themeDark: "Sombre",
     animBalls: "Boules animées", ballColor: "Couleur des boules", stockAlert: "Seuil d'alerte stock",
     stockAlertDesc: "unité(s) restante(s) déclenche l'alerte", contactSupport: "Contacter l'assistance sur WhatsApp",
-    resetData: "Réinitialiser toutes mes données", resetConfirm: "Ceci efface définitivement ton stock, tes ventes, tes dettes et ta caisse. Ton compte reste actif. Confirmes-tu ?",
+    resetData: "Réinitialiser toutes mes données", resetConfirm: "Ceci efface définitivement ton stock, tes ventes, tes dettes et ta caisse. Ton compte reste actif. Confirmes-tu ?", logoutConfirm: "Tu vas être déconnecté(e) de ce compte. Confirmes-tu ?", yesLogout: "Oui, me déconnecter",
     yesErase: "Oui, tout effacer", savedOk: "Enregistré ✓", errorRetry: "Erreur, réessaie.",
     updated: "Mis à jour ✓", emailSaved: "E-mail enregistré ✓",
     salesLast30: "Ventes des 30 derniers jours", topProducts: "Produits les plus vendus (quantité)",
@@ -712,7 +699,7 @@ const TRANSLATIONS = {
     darkMode: "Theme", darkModeDesc: "System, light or dark", themeSystem: "System", themeLight: "Light", themeDark: "Dark",
     animBalls: "Animated bubbles", ballColor: "Bubble color", stockAlert: "Low stock threshold",
     stockAlertDesc: "unit(s) remaining triggers the alert", contactSupport: "Contact support on WhatsApp",
-    resetData: "Reset all my data", resetConfirm: "This will permanently erase your stock, sales, debts and cash. Your account stays active. Confirm?",
+    resetData: "Reset all my data", resetConfirm: "This will permanently erase your stock, sales, debts and cash. Your account stays active. Confirm?", logoutConfirm: "You're about to be logged out of this account. Confirm?", yesLogout: "Yes, log me out",
     yesErase: "Yes, erase everything", savedOk: "Saved ✓", errorRetry: "Error, please retry.",
     updated: "Updated ✓", emailSaved: "Email saved ✓",
     salesLast30: "Sales over the last 30 days", topProducts: "Best-selling products (quantity)",
@@ -4632,46 +4619,6 @@ const LANGUAGES = [
   { id: "zh", label: "中文", name: { am: "ቻይንኛ", ar: "الصينية", bm: "siniwakan", bn: "চীনা", de: "Chinesisch", en: "Chinese", yo: "Chinese", es: "chino", fr: "chinois", ha: "Harshen Sinanci", hi: "चीनी", id: "Tionghoa", it: "cinese", nl: "荷兰语", ja: "中国語", ko: "중국어", pl: "chiński", pt: "chinês", ru: "китайский", sw: "Kichina", ta: "சீனம்", te: "చైనీస్", th: "จีน", tl: "Chinese", tr: "Çince", ur: "چینی", vi: "Tiếng Trung", wo: "Sinuwaa", zh: "中文", zu: "祖鲁语" } },  // Chinois
   { id: "zu", label: "isiZulu", name: { am: "ዙሉኛ", ar: "الزولو", bm: "zulukan", bn: "জুলু", de: "Zulu", en: "Zulu", yo: "Zulu", es: "zulú", fr: "zoulou", ha: "Harshen Zulu", hi: "ज़ुलू", id: "Zulu", it: "zulu", nl: "Zoeloe", ja: "ズールー語", ko: "줄루어", pl: "zulu", pt: "zulu", ru: "зулу", sw: "Kizulu", ta: "ஜுலு", te: "జూలూ", th: "ซูลู", tl: "Zulu", tr: "Zuluca", ur: "زولو", vi: "Tiếng Zulu", wo: "Zulu", zh: "祖鲁语", zu: "isiZulu" } },  // Zoulou
 ];
-// Table de traduction dédiée au mode recherche/localisation (30 langues, cf. LANGUAGES ci-dessus).
-const LOCATION_I18N = {
-  back: { am: "ተመለስ", ar: "رجوع", bm: "Segin kɔ", bn: "ফিরে যান", de: "Zurück", en: "Back", es: "Volver", fr: "Retour", ha: "Koma baya", hi: "वापस", id: "Kembali", it: "Indietro", nl: "Terug", ja: "戻る", ko: "뒤로", pl: "Wstecz", pt: "Voltar", ru: "Назад", sw: "Rudi", ta: "திரும்பு", te: "వెనక్కి", th: "ย้อนกลับ", tl: "Bumalik", tr: "Geri", ur: "واپس", vi: "Quay lại", wo: "Dellu", yo: "Padà", zh: "返回", zu: "Buyela" },
-  title: { am: "በአቅራቢያዬ ምርት ፈልግ", ar: "ابحث عن منتج بالقرب مني", bm: "Ɲini fɛn min bɛ n gɛrɛfɛ", bn: "আমার কাছে পণ্য খুঁজুন", de: "Produkt in meiner Nähe finden", en: "Find a product near me", es: "Buscar un producto cerca de mí", fr: "Trouver un produit près de moi", ha: "Nemo kaya kusa da ni", hi: "मेरे पास कोई उत्पाद खोजें", id: "Cari produk di dekat saya", it: "Trova un prodotto vicino a me", nl: "Product in mijn buurt vinden", ja: "近くの商品を探す", ko: "내 근처 상품 찾기", pl: "Znajdź produkt w pobliżu", pt: "Encontrar um produto perto de mim", ru: "Найти товар рядом со мной", sw: "Tafuta bidhaa karibu nami", ta: "என் அருகில் ஒரு பொருளைத் தேடு", te: "నా దగ్గర ఉత్పత్తిని వెతకండి", th: "ค้นหาสินค้าใกล้ฉัน", tl: "Maghanap ng produkto malapit sa akin", tr: "Yakınımdaki ürünü bul", ur: "میرے قریب پروڈکٹ تلاش کریں", vi: "Tìm sản phẩm gần tôi", wo: "Wut jën bu jege ma", yo: "Wa ọja tó wà nítòsí mi", zh: "查找我附近的商品", zu: "Thola umkhiqizo oseduze nami" },
-  searchPlaceholder: { am: "ለምሳሌ፡ ሩዝ፣ ዘይት፣ ስኳር…", ar: "مثال: أرز، زيت، سكر…", bm: "Misali : malo, tulu, sukaro…", bn: "উদাহরণ: চাল, তেল, চিনি…", de: "Z. B.: Reis, Öl, Zucker…", en: "E.g.: rice, oil, sugar…", es: "Ej.: arroz, aceite, azúcar…", fr: "Ex : riz, huile, sucre…", ha: "Misali: shinkafa, mai, sukari…", hi: "उदा: चावल, तेल, चीनी…", id: "Cth: beras, minyak, gula…", it: "Es.: riso, olio, zucchero…", nl: "Bijv.: rijst, olie, suiker…", ja: "例：米、油、砂糖…", ko: "예: 쌀, 기름, 설탕…", pl: "Np.: ryż, olej, cukier…", pt: "Ex.: arroz, óleo, açúcar…", ru: "Напр.: рис, масло, сахар…", sw: "Mf.: mchele, mafuta, sukari…", ta: "எ.கா: அரிசி, எண்ணெய், சர்க்கரை…", te: "ఉదా: బియ్యం, నూనె, చక్కెర…", th: "เช่น: ข้าว, น้ำมัน, น้ำตาล…", tl: "Hal.: bigas, langis, asukal…", tr: "Örn: pirinç, yağ, şeker…", ur: "مثال: چاول، تیل، چینی…", vi: "VD: gạo, dầu, đường…", wo: "Misaal: ceeb, diw, suukar…", yo: "Bii: iresi, epo, ṣuga…", zh: "例如：大米、食用油、糖…", zu: "Isb.: irayisi, uwoyela, ushukela…" },
-  searchBtn: { am: "ፈልግ", ar: "بحث", bm: "Ɲini", bn: "খুঁজুন", de: "Suchen", en: "Search", es: "Buscar", fr: "Chercher", ha: "Nema", hi: "खोजें", id: "Cari", it: "Cerca", nl: "Zoeken", ja: "検索", ko: "검색", pl: "Szukaj", pt: "Buscar", ru: "Искать", sw: "Tafuta", ta: "தேடு", te: "వెతకండి", th: "ค้นหา", tl: "Maghanap", tr: "Ara", ur: "تلاش کریں", vi: "Tìm", wo: "Wut", yo: "Wá", zh: "搜索", zu: "Sesha" },
-  locating: { am: "አካባቢ በመፈለግ ላይ…", ar: "جارٍ تحديد الموقع…", bm: "Yɔrɔ ka ɲinini bɛ kɛra…", bn: "অবস্থান খোঁজা হচ্ছে…", de: "Standort wird ermittelt…", en: "Locating…", es: "Localizando…", fr: "Localisation en cours…", ha: "Ana neman wuri…", hi: "स्थान खोजा जा रहा है…", id: "Mencari lokasi…", it: "Localizzazione in corso…", nl: "Locatie zoeken…", ja: "位置情報を取得中…", ko: "위치 확인 중…", pl: "Ustalanie lokalizacji…", pt: "Localizando…", ru: "Определение местоположения…", sw: "Inatafuta mahali…", ta: "இருப்பிடம் கண்டறியப்படுகிறது…", te: "స్థానాన్ని గుర్తిస్తోంది…", th: "กำลังค้นหาตำแหน่ง…", tl: "Hinahanap ang lokasyon…", tr: "Konum belirleniyor…", ur: "مقام تلاش کیا جا رہا ہے…", vi: "Đang định vị…", wo: "Di wut fu nga nekk…", yo: "Ń wa ipò rẹ…", zh: "正在定位…", zu: "Iyathungatha indawo…" },
-  errDenied: { am: "የአካባቢ ፈቃድ ተከልክሏል። ለዚህ ጣቢያ በአሳሽ/ስልክ ቅንብሮች ውስጥ አንቃው፣ ከዚያ እንደገና ሞክር።", ar: "تم رفض إذن الموقع. فعّله من إعدادات المتصفح/الهاتف لهذا الموقع ثم أعد المحاولة.", bm: "Yɔrɔ yamaruya banna. A yamaruya navigateur wala telefɔni la, ka segin ka a lajɛ.", bn: "অবস্থানের অনুমতি প্রত্যাখ্যাত হয়েছে। ব্রাউজার/ফোনের সেটিংসে এটি চালু করুন, তারপর আবার চেষ্টা করুন।", de: "Standortzugriff verweigert. Aktiviere ihn in den Browser-/Telefoneinstellungen für diese Seite und versuche es erneut.", en: "Location permission denied. Enable it in your browser/phone settings for this site, then try again.", es: "Permiso de ubicación denegado. Actívalo en la configuración del navegador/teléfono para este sitio y vuelve a intentarlo.", fr: "Autorisation de localisation refusée. Active-la dans les paramètres du navigateur/téléphone pour ce site, puis réessaie.", ha: "An ƙi izinin wuri. Kunna shi a saitunan burauzar/wayarka don wannan shafin, sannan sake gwadawa.", hi: "स्थान की अनुमति अस्वीकृत। इस साइट के लिए ब्राउज़र/फ़ोन सेटिंग में इसे चालू करें, फिर पुनः प्रयास करें.", id: "Izin lokasi ditolak. Aktifkan di pengaturan browser/ponsel untuk situs ini, lalu coba lagi.", it: "Permesso di localizzazione negato. Attivalo nelle impostazioni del browser/telefono per questo sito, poi riprova.", nl: "Locatietoestemming geweigerd. Schakel dit in bij de browser-/telefooninstellingen voor deze site en probeer opnieuw.", ja: "位置情報の許可が拒否されました。ブラウザ／端末の設定でこのサイトに許可を出してから、もう一度お試しください。", ko: "위치 권한이 거부되었습니다. 브라우저/휴대폰 설정에서 이 사이트에 대해 허용한 후 다시 시도하세요.", pl: "Odmówiono dostępu do lokalizacji. Włącz go w ustawieniach przeglądarki/telefonu dla tej strony i spróbuj ponownie.", pt: "Permissão de localização negada. Ative-a nas configurações do navegador/telefone para este site e tente novamente.", ru: "В доступе к местоположению отказано. Включите его в настройках браузера/телефона для этого сайта и повторите попытку.", sw: "Ruhusa ya mahali imekataliwa. Iwashe kwenye mipangilio ya kivinjari/simu kwa tovuti hii, kisha jaribu tena.", ta: "இருப்பிட அனுமதி மறுக்கப்பட்டது. இந்த தளத்திற்கு உலாவி/மொபைல் அமைப்புகளில் அதை இயக்கி, மீண்டும் முயற்சிக்கவும்.", te: "లొకేషన్ అనుమతి తిరస్కరించబడింది. ఈ సైట్ కోసం బ్రౌజర్/ఫోన్ సెట్టింగ్‌లలో దీన్ని ఆన్ చేసి, మళ్ళీ ప్రయత్నించండి.", th: "ปฏิเสธการขออนุญาตตำแหน่ง เปิดใช้งานในการตั้งค่าเบราว์เซอร์/โทรศัพท์สำหรับเว็บไซต์นี้ แล้วลองอีกครั้ง", tl: "Tinanggihan ang pahintulot sa lokasyon. I-enable ito sa settings ng browser/telepono para sa site na ito, pagkatapos ay subukan ulit.", tr: "Konum izni reddedildi. Bu site için tarayıcı/telefon ayarlarından etkinleştirip tekrar dene.", ur: "مقام کی اجازت مسترد۔ اس سائٹ کے لیے براؤزر/فون کی ترتیبات میں اسے فعال کریں، پھر دوبارہ کوشش کریں۔", vi: "Quyền truy cập vị trí bị từ chối. Hãy bật trong cài đặt trình duyệt/điện thoại cho trang này rồi thử lại.", wo: "Bañ nañu ñu jokkoo ak fu nga nekk. Ubbil ko ci paramèetar navigateur/telefon bi ngir sàit bi, wax ci lu bees.", yo: "A kọ igbanilaaye ipo. Ṣí i ní ètò aṣàwárí/fóònù fún ojú-òpó yìí, lẹ́yìn náà tún gbìyànjú.", zh: "位置权限被拒绝。请在浏览器/手机设置中为此网站开启定位权限，然后重试。", zu: "Imvume yendawo yenqatshiwe. Yivule kuzilungiselelo zesiphequluli/ucingo kule sayithi, bese uzama futhi." },
-  errUnavailable: { am: "አካባቢ አይገኝም — ስልክ ላይ ጂፒኤስ/አካባቢ መስተካከል ጋር ማብራት እንዳለ አረጋግጥ።", ar: "الموقع غير متاح — تأكد من تفعيل GPS/الموقع على الهاتف.", bm: "Yɔrɔ tɛ sɔrɔ — lajɛ ni GPS/yɔrɔ bɛ yɛlɛma i la telefɔni kan.", bn: "অবস্থান পাওয়া যাচ্ছে না — ফোনে GPS/অবস্থান চালু আছে কিনা দেখুন।", de: "Standort nicht verfügbar — prüfe, ob GPS/Standort auf dem Telefon aktiviert ist.", en: "Location unavailable — check that GPS/location is enabled on your phone.", es: "Ubicación no disponible: comprueba que el GPS/ubicación esté activado en el teléfono.", fr: "Position indisponible — vérifie que le GPS/localisation est activé sur le téléphone.", ha: "Ba a samu wuri ba — tabbatar da cewa GPS/wuri yana kunne a wayar.", hi: "स्थान उपलब्ध नहीं — जाँचें कि फ़ोन में GPS/लोकेशन चालू है।", id: "Lokasi tidak tersedia — pastikan GPS/lokasi diaktifkan di ponsel.", it: "Posizione non disponibile — verifica che GPS/posizione sia attivo sul telefono.", nl: "Locatie niet beschikbaar — controleer of gps/locatie op de telefoon is ingeschakeld.", ja: "位置情報が取得できません。端末のGPS／位置情報がオンになっているか確認してください。", ko: "위치를 확인할 수 없습니다 — 휴대폰의 GPS/위치 기능이 켜져 있는지 확인하세요.", pl: "Lokalizacja niedostępna — sprawdź, czy GPS/lokalizacja jest włączona w telefonie.", pt: "Localização indisponível — verifique se o GPS/localização está ativado no telefone.", ru: "Местоположение недоступно — проверьте, включены ли GPS/геолокация на телефоне.", sw: "Mahali hayapatikani — hakikisha GPS/mahali imewashwa kwenye simu.", ta: "இருப்பிடம் கிடைக்கவில்லை — மொபைலில் GPS/இருப்பிடம் இயக்கப்பட்டுள்ளதா எனச் சரிபார்க்கவும்.", te: "లొకేషన్ అందుబాటులో లేదు — ఫోన్‌లో GPS/లొకేషన్ ఆన్ చేయబడిందో లేదో తనిఖీ చేయండి.", th: "ไม่พบตำแหน่ง — ตรวจสอบว่าเปิด GPS/ตำแหน่งบนโทรศัพท์แล้ว", tl: "Hindi available ang lokasyon — tiyaking naka-on ang GPS/lokasyon sa telepono.", tr: "Konum kullanılamıyor — telefonda GPS/konumun açık olduğundan emin ol.", ur: "مقام دستیاب نہیں — چیک کریں کہ فون پر GPS/لوکیشن آن ہے۔", vi: "Không có vị trí — kiểm tra xem GPS/định vị đã bật trên điện thoại chưa.", wo: "Fu nga nekk gisul — seetal ndax GPS/fu nga nekk dafa ubbeeku ci telefon bi.", yo: "A kò rí ipò rẹ — ṣàyẹ̀wò pé GPS/ipò ti ń ṣiṣẹ́ lórí fóònù rẹ.", zh: "无法获取位置 — 请检查手机的GPS/定位是否已开启。", zu: "Indawo ayitholakali — qinisekisa ukuthi i-GPS/indawo ivuliwe kucingo." },
-  errTimeout: { am: "የአካባቢ ጥያቄ ጊዜው አልፏል። እንደገና ሞክር።", ar: "انتهت مهلة طلب الموقع. أعد المحاولة.", bm: "Yɔrɔ ɲinini waati banna. Segin ka a lajɛ.", bn: "অবস্থান অনুরোধের সময় শেষ। আবার চেষ্টা করুন।", de: "Standortanfrage abgelaufen. Versuche es erneut.", en: "The location request timed out. Try again.", es: "La solicitud de ubicación caducó. Vuelve a intentarlo.", fr: "La demande de localisation a expiré. Réessaie.", ha: "Buƙatar wurin ta ƙare lokaci. Sake gwadawa.", hi: "स्थान अनुरोध का समय समाप्त हो गया। पुनः प्रयास करें.", id: "Permintaan lokasi habis waktu. Coba lagi.", it: "Richiesta di posizione scaduta. Riprova.", nl: "Locatieverzoek verlopen. Probeer opnieuw.", ja: "位置情報の取得がタイムアウトしました。もう一度お試しください。", ko: "위치 요청 시간이 초과되었습니다. 다시 시도하세요.", pl: "Upłynął limit czasu żądania lokalizacji. Spróbuj ponownie.", pt: "A solicitação de localização expirou. Tente novamente.", ru: "Истекло время запроса местоположения. Повторите попытку.", sw: "Ombi la mahali limeisha muda. Jaribu tena.", ta: "இருப்பிடக் கோரிக்கை நேரம் முடிந்தது. மீண்டும் முயற்சிக்கவும்.", te: "లొకేషన్ అభ్యర్థన గడువు ముగిసింది. మళ్ళీ ప్రయత్నించండి.", th: "คำขอตำแหน่งหมดเวลา ลองอีกครั้ง", tl: "Nag-timeout ang kahilingan sa lokasyon. Subukan ulit.", tr: "Konum isteği zaman aşımına uğradı. Tekrar dene.", ur: "مقام کی درخواست کا وقت ختم ہوگیا۔ دوبارہ کوشش کریں۔", vi: "Yêu cầu định vị đã hết thời gian. Thử lại.", wo: "Ñaan bi fu nga nekk jaw na waxtu. Wax ci lu bees.", yo: "Ìbéèrè ipò ti kọjá àkókò. Tún gbìyànjú.", zh: "定位请求超时，请重试。", zu: "Isicelo sendawo siphelelwe yisikhathi. Zama futhi." },
-  errUnsupported: { am: "አሳሽህ አካባቢ ማግኘትን አይደግፍም።", ar: "متصفحك لا يدعم تحديد الموقع الجغرافي.", bm: "I navigateur tɛ se ka yɔrɔ dɔn.", bn: "আপনার ব্রাউজার জিওলোকেশন সমর্থন করে না।", de: "Dein Browser unterstützt keine Geolokalisierung.", en: "Your browser doesn't support geolocation.", es: "Tu navegador no admite geolocalización.", fr: "Ton navigateur ne prend pas en charge la géolocalisation.", ha: "Burauzarka ba ya goyon bayan ƙayyade wuri.", hi: "आपका ब्राउज़र जियोलोकेशन का समर्थन नहीं करता।", id: "Browser Anda tidak mendukung geolokasi.", it: "Il tuo browser non supporta la geolocalizzazione.", nl: "Je browser ondersteunt geen geolocatie.", ja: "お使いのブラウザは位置情報に対応していません。", ko: "브라우저가 위치 정보 기능을 지원하지 않습니다.", pl: "Twoja przeglądarka nie obsługuje geolokalizacji.", pt: "Seu navegador não suporta geolocalização.", ru: "Ваш браузер не поддерживает геолокацию.", sw: "Kivinjari chako hakitumii huduma ya mahali.", ta: "உங்கள் உலாவி புவியிடத்தை ஆதரிக்காது.", te: "మీ బ్రౌజర్ జియోలొకేషన్‌కు మద్దతు ఇవ్వదు.", th: "เบราว์เซอร์ของคุณไม่รองรับการระบุตำแหน่ง", tl: "Hindi sinusuportahan ng browser mo ang geolocation.", tr: "Tarayıcın coğrafi konumu desteklemiyor.", ur: "آپ کا براؤزر جیو لوکیشن کو سپورٹ نہیں کرتا۔", vi: "Trình duyệt của bạn không hỗ trợ định vị.", wo: "Navigateur bi doo mën a jokkoo ak géolocalisation.", yo: "Aṣàwárí rẹ kò ṣètìlẹyìn ìpinnu ipò.", zh: "您的浏览器不支持地理定位。", zu: "Isiphequluli sakho asisekeli indawo yemephu." },
-  errGeneric: { am: "አካባቢ አይገኝም — በአቅራቢያ ያሉ ሱቆችን ለመፈለግ ወደ አካባቢህ መድረሻ ፍቀድ።", ar: "الموقع غير متاح — اسمح بالوصول إلى موقعك للبحث عن المتاجر القريبة.", bm: "Yɔrɔ tɛ sɔrɔ — a to i ka yɔrɔ dɔn walasa ka butigi minnu bɛ i gɛrɛfɛ ɲini.", bn: "অবস্থান পাওয়া যাচ্ছে না — কাছাকাছি দোকান খুঁজতে আপনার অবস্থানে প্রবেশাধিকার দিন।", de: "Standort nicht verfügbar — erlaube den Zugriff auf deinen Standort, um Läden in der Nähe zu finden.", en: "Location unavailable — allow access to your location to find nearby shops.", es: "Ubicación no disponible: permite el acceso a tu ubicación para buscar tiendas cercanas.", fr: "Localisation indisponible — autorise l'accès à ta position pour chercher des boutiques proches.", ha: "Ba a samu wuri ba — bada izinin shiga wurinka don neman shaguna kusa.", hi: "स्थान उपलब्ध नहीं — पास की दुकानें खोजने के लिए अपने स्थान तक पहुँच की अनुमति दें।", id: "Lokasi tidak tersedia — izinkan akses lokasi untuk mencari toko terdekat.", it: "Posizione non disponibile — consenti l'accesso alla tua posizione per cercare negozi vicini.", nl: "Locatie niet beschikbaar — geef toegang tot je locatie om winkels in de buurt te vinden.", ja: "位置情報が利用できません。近くの店を探すには位置情報へのアクセスを許可してください。", ko: "위치를 사용할 수 없습니다 — 근처 상점을 찾으려면 위치 접근을 허용하세요.", pl: "Lokalizacja niedostępna — zezwól na dostęp do lokalizacji, aby znaleźć pobliskie sklepy.", pt: "Localização indisponível — permita o acesso à sua localização para buscar lojas próximas.", ru: "Местоположение недоступно — разрешите доступ к геопозиции, чтобы найти магазины поблизости.", sw: "Mahali hayapatikani — ruhusu ufikiaji wa mahali ulipo ili kutafuta maduka ya karibu.", ta: "இருப்பிடம் கிடைக்கவில்லை — அருகிலுள்ள கடைகளைத் தேட உங்கள் இருப்பிட அணுகலை அனுமதிக்கவும்.", te: "లొకేషన్ అందుబాటులో లేదు — సమీప దుకాణాలను వెతకడానికి మీ లొకేషన్ యాక్సెస్‌ను అనుమతించండి.", th: "ไม่พบตำแหน่ง — อนุญาตให้เข้าถึงตำแหน่งของคุณเพื่อค้นหาร้านค้าใกล้เคียง", tl: "Hindi available ang lokasyon — payagan ang access sa lokasyon mo para maghanap ng malapit na tindahan.", tr: "Konum kullanılamıyor — yakındaki mağazaları bulmak için konumuna erişime izin ver.", ur: "مقام دستیاب نہیں — قریبی دکانیں تلاش کرنے کے لیے اپنے مقام تک رسائی کی اجازت دیں۔", vi: "Không có vị trí — cho phép truy cập vị trí để tìm cửa hàng gần đó.", wo: "Fu nga nekk gisul — may ñu jàppale sa position ngir wut boutik yu jege.", yo: "A kò rí ipò rẹ — fàyè gba ìwọlé sí ipò rẹ láti wa àwọn ilé ìtajà tí ó súnmọ́.", zh: "无法获取位置 — 允许访问你的位置以查找附近的商店。", zu: "Indawo ayitholakali — vumela ukufinyelela endaweni yakho ukuze uthole izitolo eziseduze." },
-  retry: { am: "እንደገና ሞክር", ar: "إعادة المحاولة", bm: "Segin ka a lajɛ", bn: "আবার চেষ্টা করুন", de: "Erneut versuchen", en: "Retry", es: "Reintentar", fr: "Réessayer", ha: "Sake gwadawa", hi: "पुनः प्रयास करें", id: "Coba lagi", it: "Riprova", nl: "Opnieuw proberen", ja: "再試行", ko: "다시 시도", pl: "Spróbuj ponownie", pt: "Tentar novamente", ru: "Повторить", sw: "Jaribu tena", ta: "மீண்டும் முயற்சி", te: "మళ్ళీ ప్రయత్నించు", th: "ลองอีกครั้ง", tl: "Subukan ulit", tr: "Tekrar dene", ur: "دوبارہ کوشش کریں", vi: "Thử lại", wo: "Wax ci lu bees", yo: "Tún gbìyànjú", zh: "重试", zu: "Zama futhi" },
-  you: { am: "አንተ", ar: "أنت", bm: "I", bn: "তুমি", de: "Du", en: "You", es: "Tú", fr: "Toi", ha: "Kai", hi: "तुम", id: "Kamu", it: "Tu", nl: "Jij", ja: "あなた", ko: "나", pl: "Ty", pt: "Você", ru: "Ты", sw: "Wewe", ta: "நீ", te: "నువ్వు", th: "คุณ", tl: "Ikaw", tr: "Sen", ur: "آپ", vi: "Bạn", wo: "Yaw", yo: "Ìwọ", zh: "你", zu: "Wena" },
-  searchingResults: { am: "በመፈለግ ላይ…", ar: "جارٍ البحث…", bm: "Ɲinini bɛ kɛra…", bn: "খোঁজা হচ্ছে…", de: "Suche läuft…", en: "Searching…", es: "Buscando…", fr: "Recherche…", ha: "Ana nema…", hi: "खोजा जा रहा है…", id: "Mencari…", it: "Ricerca in corso…", nl: "Zoeken…", ja: "検索中…", ko: "검색 중…", pl: "Wyszukiwanie…", pt: "Buscando…", ru: "Поиск…", sw: "Inatafuta…", ta: "தேடுகிறது…", te: "వెతుకుతోంది…", th: "กำลังค้นหา…", tl: "Naghahanap…", tr: "Aranıyor…", ur: "تلاش جاری ہے…", vi: "Đang tìm…", wo: "Di wut…", yo: "Ń wá…", zh: "搜索中…", zu: "Iyasesha…" },
-  noResults: { am: "በአቅራቢያህ ይህን ምርት ያለው ሱቅ አልተገኘም።", ar: "لم يتم العثور على متجر بهذا المنتج بالقرب منك في الوقت الحالي.", bm: "Butigi si ma sɔrɔ min bɛ fɛn nin feere i gɛrɛfɛ sisan.", bn: "এই মুহূর্তে আপনার কাছাকাছি এই পণ্যসহ কোনো দোকান পাওয়া যায়নি।", de: "Derzeit kein Laden mit diesem Produkt in deiner Nähe gefunden.", en: "No shop found nearby with this product right now.", es: "No se encontró ninguna tienda cercana con este producto por ahora.", fr: "Aucune boutique trouvée avec ce produit près de toi pour le moment.", ha: "Babu shago da aka samu kusa da kai da wannan kayan a yanzu.", hi: "अभी आपके पास इस उत्पाद वाली कोई दुकान नहीं मिली।", id: "Belum ada toko terdekat yang ditemukan dengan produk ini.", it: "Al momento nessun negozio vicino trovato con questo prodotto.", nl: "Op dit moment geen winkel in de buurt gevonden met dit product.", ja: "現在、近くにこの商品を扱う店は見つかりませんでした。", ko: "지금은 이 상품을 가진 근처 상점을 찾지 못했습니다.", pl: "Obecnie nie znaleziono pobliskiego sklepu z tym produktem.", pt: "Nenhuma loja próxima encontrada com este produto no momento.", ru: "Сейчас поблизости не найдено магазинов с этим товаром.", sw: "Hakuna duka lililopatikana karibu na wewe lenye bidhaa hii kwa sasa.", ta: "இந்தப் பொருளுடன் அருகில் எந்த கடையும் இப்போது கிடைக்கவில்லை.", te: "ప్రస్తుతం ఈ ఉత్పత్తితో సమీప దుకాణం ఏదీ కనుగొనబడలేదు.", th: "ไม่พบร้านค้าใกล้เคียงที่มีสินค้านี้ในขณะนี้", tl: "Walang natagpuang tindahang malapit na may produktong ito sa ngayon.", tr: "Şu anda yakınında bu ürüne sahip bir mağaza bulunamadı.", ur: "اس وقت آپ کے قریب اس پروڈکٹ والی کوئی دکان نہیں ملی۔", vi: "Hiện chưa tìm thấy cửa hàng nào gần bạn có sản phẩm này.", wo: "Amul boutik gis nañu bu jege ak jën bii tey.", yo: "A kò rí ilé ìtajà kankan nítòsí rẹ pẹ̀lú ọjà yìí ní báyìí.", zh: "目前附近没有找到有这个产品的商店。", zu: "Ayikho isitolo esitholakele eduze nomkhiqizo lona njengamanje." },
-  call: { am: "ደውል", ar: "اتصال", bm: "Wele", bn: "কল করুন", de: "Anrufen", en: "Call", es: "Llamar", fr: "Appeler", ha: "Kira", hi: "कॉल करें", id: "Telepon", it: "Chiama", nl: "Bellen", ja: "電話する", ko: "전화하기", pl: "Zadzwoń", pt: "Ligar", ru: "Позвонить", sw: "Piga simu", ta: "அழை", te: "కాల్ చేయి", th: "โทร", tl: "Tumawag", tr: "Ara", ur: "کال کریں", vi: "Gọi", wo: "Woote", yo: "Pè", zh: "拨打电话", zu: "Shayela" },
-  justNow: { am: "አሁን", ar: "الآن", bm: "Sisan", bn: "এইমাত্র", de: "gerade eben", en: "just now", es: "ahora mismo", fr: "à l'instant", ha: "yanzu", hi: "अभी", id: "baru saja", it: "proprio ora", nl: "zojuist", ja: "たった今", ko: "방금", pl: "przed chwilą", pt: "agora mesmo", ru: "только что", sw: "sasa hivi", ta: "இப்போதுதான்", te: "ఇప్పుడే", th: "เมื่อสักครู่", tl: "ngayon lang", tr: "az önce", ur: "ابھی ابھی", vi: "vừa xong", wo: "leegi leegi", yo: "nísinsìnyí", zh: "刚刚", zu: "khona manje" },
-  hoursAgo: { am: "ከ{n} ሰዓት በፊት", ar: "قبل {n} ساعة", bm: "lɛrɛ {n} tɛmɛnen", bn: "{n} ঘণ্টা আগে", de: "vor {n} Std.", en: "{n}h ago", es: "hace {n}h", fr: "il y a {n}h", ha: "awa {n} da suka wuce", hi: "{n} घंटे पहले", id: "{n} jam lalu", it: "{n}h fa", nl: "{n}u geleden", ja: "{n}時間前", ko: "{n}시간 전", pl: "{n} godz. temu", pt: "há {n}h", ru: "{n} ч назад", sw: "saa {n} zilizopita", ta: "{n} மணி நேரத்திற்கு முன்", te: "{n} గంటల క్రితం", th: "{n} ชม.ที่แล้ว", tl: "{n}oras nakalipas", tr: "{n} saat önce", ur: "{n} گھنٹے پہلے", vi: "{n} giờ trước", wo: "{n} waxtu ci ginaw", yo: "wákàtí {n} sẹ́yìn", zh: "{n}小时前", zu: "{n}h edlule" },
-  daysAgo: { am: "ከ{n} ቀናት በፊት", ar: "قبل {n} يوم", bm: "tile {n} tɛmɛnen", bn: "{n} দিন আগে", de: "vor {n} Tagen", en: "{n}d ago", es: "hace {n}d", fr: "il y a {n}j", ha: "kwana {n} da suka wuce", hi: "{n} दिन पहले", id: "{n} hari lalu", it: "{n}gg fa", nl: "{n}d geleden", ja: "{n}日前", ko: "{n}일 전", pl: "{n} dni temu", pt: "há {n}d", ru: "{n} дн. назад", sw: "siku {n} zilizopita", ta: "{n} நாட்களுக்கு முன்", te: "{n} రోజుల క్రితం", th: "{n} วันที่แล้ว", tl: "{n}araw nakalipas", tr: "{n} gün önce", ur: "{n} دن پہلے", vi: "{n} ngày trước", wo: "fan {n} ci ginaw", yo: "ọjọ́ {n} sẹ́yìn", zh: "{n}天前", zu: "{n}d edlule" },
-  updated: { am: "የተዘመነው", ar: "تم التحديث", bm: "kɔrɔlen", bn: "হালনাগাদ", de: "aktualisiert", en: "updated", es: "actualizado", fr: "mis à jour", ha: "an sabunta", hi: "अपडेट किया गया", id: "diperbarui", it: "aggiornato", nl: "bijgewerkt", ja: "更新", ko: "업데이트", pl: "zaktualizowano", pt: "atualizado", ru: "обновлено", sw: "imesasishwa", ta: "புதுப்பிக்கப்பட்டது", te: "నవీకరించబడింది", th: "อัปเดตแล้ว", tl: "na-update", tr: "güncellendi", ur: "اپ ڈیٹ کیا گیا", vi: "đã cập nhật", wo: "yeesalees na", yo: "ti ṣe imudojuiwọn", zh: "更新于", zu: "kubuyekeziwe" },
-  settingsTitle: { am: "የአካባቢ ሁነታ", ar: "وضع الموقع", bm: "Yɔrɔ mode", bn: "অবস্থান মোড", de: "Standort-Modus", en: "Location mode", es: "Modo de ubicación", fr: "Mode localisation", ha: "Yanayin wuri", hi: "स्थान मोड", id: "Mode lokasi", it: "Modalità posizione", nl: "Locatiemodus", ja: "位置情報モード", ko: "위치 모드", pl: "Tryb lokalizacji", pt: "Modo de localização", ru: "Режим геолокации", sw: "Hali ya mahali", ta: "இருப்பிட முறை", te: "లొకేషన్ మోడ్", th: "โหมดตำแหน่ง", tl: "Mode ng lokasyon", tr: "Konum modu", ur: "لوکیشن موڈ", vi: "Chế độ vị trí", wo: "Mode fu nga nekk", yo: "Ipò ipò", zh: "位置模式", zu: "Imodi yendawo" },
-  settingsDesc: { am: "በአቅራቢያ ምርት ፈልግ", ar: "البحث عن منتج قريب", bm: "Fɛn ɲinini i gɛrɛfɛ", bn: "কাছাকাছি পণ্য অনুসন্ধান", de: "Produktsuche in der Nähe", en: "Nearby product search", es: "Búsqueda de productos cercanos", fr: "Recherche produit à proximité", ha: "Neman kaya kusa", hi: "नज़दीकी उत्पाद खोज", id: "Pencarian produk terdekat", it: "Ricerca prodotti vicini", nl: "Producten in de buurt zoeken", ja: "近くの商品検索", ko: "근처 상품 검색", pl: "Wyszukiwanie pobliskich produktów", pt: "Busca de produtos próximos", ru: "Поиск товаров поблизости", sw: "Utafutaji wa bidhaa za karibu", ta: "அருகிலுள்ள பொருள் தேடல்", te: "సమీప ఉత్పత్తి శోధన", th: "ค้นหาสินค้าใกล้เคียง", tl: "Paghahanap ng malapit na produkto", tr: "Yakındaki ürün araması", ur: "قریبی پروڈکٹ تلاش", vi: "Tìm sản phẩm gần đó", wo: "Wut jën yu jege", yo: "Àwárí ọjà nítòsí", zh: "附近商品搜索", zu: "Ukusesha okhiqizo oseduze" },
-  shareToggleTitle: { am: "አካባቢዬን አጋራ", ar: "مشاركة موقعي", bm: "N ka yɔrɔ tila", bn: "আমার অবস্থান শেয়ার করুন", de: "Meinen Standort teilen", en: "Share my location", es: "Compartir mi ubicación", fr: "Partager ma position", ha: "Raba wurina", hi: "मेरा स्थान साझा करें", id: "Bagikan lokasi saya", it: "Condividi la mia posizione", nl: "Mijn locatie delen", ja: "位置情報を共有する", ko: "내 위치 공유", pl: "Udostępnij moją lokalizację", pt: "Compartilhar minha localização", ru: "Поделиться моей геопозицией", sw: "Shiriki mahali nilipo", ta: "என் இருப்பிடத்தைப் பகிர்", te: "నా లొకేషన్‌ను షేర్ చేయండి", th: "แชร์ตำแหน่งของฉัน", tl: "Ibahagi ang lokasyon ko", tr: "Konumumu paylaş", ur: "میرا مقام شیئر کریں", vi: "Chia sẻ vị trí của tôi", wo: "Séddoo sama position", yo: "Pín ipò mi", zh: "分享我的位置", zu: "Yabelana ngendawo yami" },
-  shareToggleDesc: { am: "በአቅራቢያቸው ምርት የሚፈልጉ ገዢዎች ሱቅህን በካርታ ላይ ከሚገኘው ክምችትህ ጋር ያያሉ።", ar: "سيرى المشترون الذين يبحثون عن منتج بالقرب منهم متجرك على الخريطة مع المخزون المتاح.", bm: "Sannikɛlaw minnu bɛ fɛn ɲini u gɛrɛfɛ bɛna i ka butigi ye kartu kan, ni fɛn minnu bɛ sɔrɔ.", bn: "যেসব ক্রেতা কাছাকাছি পণ্য খুঁজছেন তারা মানচিত্রে আপনার দোকান এবং উপলব্ধ স্টক দেখতে পাবেন।", de: "Käufer, die ein Produkt in ihrer Nähe suchen, sehen deinen Laden mit verfügbarem Bestand auf der Karte.", en: "Buyers searching for a nearby product will see your shop on the map, with your available stock.", es: "Los compradores que busquen un producto cerca verán tu tienda en el mapa, con tu stock disponible.", fr: "Les acheteurs qui cherchent un produit près de chez eux verront ta boutique sur la carte, avec ton stock disponible.", ha: "Masu siye da ke neman kaya kusa da su za su ga shagonka a taswira, tare da kayanka da ake da su.", hi: "पास के उत्पाद की तलाश कर रहे खरीदार आपकी दुकान को मानचित्र पर उपलब्ध स्टॉक सहित देखेंगे।", id: "Pembeli yang mencari produk terdekat akan melihat tokomu di peta, lengkap dengan stok yang tersedia.", it: "Gli acquirenti che cercano un prodotto vicino vedranno il tuo negozio sulla mappa, con lo stock disponibile.", nl: "Kopers die een product in de buurt zoeken, zien jouw winkel op de kaart, met je beschikbare voorraad.", ja: "近くの商品を探している購入者が、地図上であなたのお店と在庫状況を確認できるようになります。", ko: "근처 상품을 찾는 구매자가 지도에서 재고와 함께 당신의 가게를 볼 수 있습니다.", pl: "Kupujący szukający pobliskiego produktu zobaczą Twój sklep na mapie wraz z dostępnym asortymentem.", pt: "Compradores que buscam um produto próximo verão sua loja no mapa, com o estoque disponível.", ru: "Покупатели, ищущие товар поблизости, увидят ваш магазин на карте вместе с доступным ассортиментом.", sw: "Wanunuzi wanaotafuta bidhaa karibu watauona duka lako kwenye ramani, pamoja na bidhaa zilizopo.", ta: "அருகிலுள்ள பொருளைத் தேடும் வாங்குபவர்கள் உங்கள் கடையை வரைபடத்தில், கிடைக்கும் இருப்புடன் காண்பார்கள்.", te: "సమీప ఉత్పత్తిని వెతుకుతున్న కొనుగోలుదారులు మీ దుకాణాన్ని మ్యాప్‌లో, అందుబాటులో ఉన్న స్టాక్‌తో చూస్తారు.", th: "ผู้ซื้อที่ค้นหาสินค้าใกล้เคียงจะเห็นร้านของคุณบนแผนที่ พร้อมสต็อกที่มีอยู่", tl: "Makikita ng mga mamimiling naghahanap ng malapit na produkto ang tindahan mo sa mapa, kasama ang available na stock.", tr: "Yakınlarında bir ürün arayan alıcılar mağazanı haritada, mevcut stokla birlikte görecek.", ur: "قریبی پروڈکٹ تلاش کرنے والے خریدار آپ کی دکان نقشے پر دستیاب اسٹاک کے ساتھ دیکھیں گے۔", vi: "Người mua tìm sản phẩm gần đó sẽ thấy cửa hàng của bạn trên bản đồ, cùng với hàng có sẵn.", wo: "Ñi wuti jën yu jege dinañu gis sa boutik ci kartu bi, ak sa jën yi am.", yo: "Àwọn oníbàárà tó ń wá ọjà nítòsí wọn yóò rí ilé ìtajà rẹ lórí máàpù, pẹ̀lú ọjà tí ó wà.", zh: "寻找附近商品的买家会在地图上看到你的商店以及可用库存。", zu: "Abathengi abafuna umkhiqizo oseduze bazobona isitolo sakho kumephu, kanye nempahla etholakalayo." },
-  whatsappLabel: { am: "የWhatsApp ቁጥር (ከሀገር ኮድ ጋር፣ ለምሳሌ 223XXXXXXXX)", ar: "رقم واتساب (مع رمز الدولة، مثال: 223XXXXXXXX)", bm: "WhatsApp nimɔrɔ (jamana kodu ni, misali 223XXXXXXXX)", bn: "হোয়াটসঅ্যাপ নম্বর (দেশ কোডসহ, উদা: 223XXXXXXXX)", de: "WhatsApp-Nummer (mit Ländervorwahl, z. B. 223XXXXXXXX)", en: "WhatsApp number (with country code, e.g. 223XXXXXXXX)", es: "Número de WhatsApp (con código de país, ej: 223XXXXXXXX)", fr: "Numéro WhatsApp (avec indicatif pays, ex: 223XXXXXXXX)", ha: "Lambar WhatsApp (tare da lambar ƙasa, misali 223XXXXXXXX)", hi: "WhatsApp नंबर (देश कोड सहित, उदा: 223XXXXXXXX)", id: "Nomor WhatsApp (dengan kode negara, cth: 223XXXXXXXX)", it: "Numero WhatsApp (con prefisso internazionale, es: 223XXXXXXXX)", nl: "WhatsApp-nummer (met landcode, bijv. 223XXXXXXXX)", ja: "WhatsApp番号（国番号付き、例：223XXXXXXXX）", ko: "WhatsApp 번호(국가번호 포함, 예: 223XXXXXXXX)", pl: "Numer WhatsApp (z numerem kierunkowym kraju, np. 223XXXXXXXX)", pt: "Número do WhatsApp (com código do país, ex: 223XXXXXXXX)", ru: "Номер WhatsApp (с кодом страны, напр. 223XXXXXXXX)", sw: "Nambari ya WhatsApp (na msimbo wa nchi, mf. 223XXXXXXXX)", ta: "WhatsApp எண் (நாட்டுக் குறியீட்டுடன், எ.கா: 223XXXXXXXX)", te: "WhatsApp నంబర్ (దేశ కోడ్‌తో, ఉదా: 223XXXXXXXX)", th: "หมายเลข WhatsApp (พร้อมรหัสประเทศ เช่น 223XXXXXXXX)", tl: "Numero ng WhatsApp (may country code, hal: 223XXXXXXXX)", tr: "WhatsApp numarası (ülke koduyla, örn: 223XXXXXXXX)", ur: "واٹس ایپ نمبر (ملکی کوڈ کے ساتھ، مثال: 223XXXXXXXX)", vi: "Số WhatsApp (kèm mã quốc gia, VD: 223XXXXXXXX)", wo: "Limero WhatsApp (ak kod réew, misaal 223XXXXXXXX)", yo: "Nọ́mba WhatsApp (pẹ̀lú kóòdù orílẹ̀-èdè, bii 223XXXXXXXX)", zh: "WhatsApp号码（含国家代码，例：223XXXXXXXX）", zu: "Inombolo ye-WhatsApp (ngekhodi yezwe, isb 223XXXXXXXX)" },
-  publishing: { am: "በማተም ላይ…", ar: "جارٍ النشر…", bm: "Bɔli bɛ kɛra…", bn: "প্রকাশ করা হচ্ছে…", de: "Wird veröffentlicht…", en: "Publishing…", es: "Publicando…", fr: "Publication…", ha: "Ana wallafawa…", hi: "प्रकाशित हो रहा है…", id: "Mempublikasikan…", it: "Pubblicazione…", nl: "Publiceren…", ja: "公開中…", ko: "게시 중…", pl: "Publikowanie…", pt: "Publicando…", ru: "Публикация…", sw: "Inachapisha…", ta: "வெளியிடப்படுகிறது…", te: "ప్రచురిస్తోంది…", th: "กำลังเผยแพร่…", tl: "Inila-publish…", tr: "Yayınlanıyor…", ur: "شائع ہو رہا ہے…", vi: "Đang đăng…", wo: "Di génne…", yo: "Ń tẹ̀jáde…", zh: "发布中…", zu: "Iyashicilela…" },
-  publishBtn: { am: "አሁን ክምችቴን አትም", ar: "انشر مخزوني الآن", bm: "Bɔ n ka fɛn dilan sisan", bn: "এখনই আমার স্টক প্রকাশ করুন", de: "Meinen Bestand jetzt veröffentlichen", en: "Publish my stock now", es: "Publicar mi stock ahora", fr: "Publier mon stock maintenant", ha: "Wallafa kayana yanzu", hi: "अभी मेरा स्टॉक प्रकाशित करें", id: "Publikasikan stok saya sekarang", it: "Pubblica il mio stock ora", nl: "Mijn voorraad nu publiceren", ja: "今すぐ在庫を公開する", ko: "지금 재고 게시하기", pl: "Opublikuj mój asortyment teraz", pt: "Publicar meu estoque agora", ru: "Опубликовать мой ассортимент сейчас", sw: "Chapisha bidhaa zangu sasa", ta: "என் இருப்பை இப்போது வெளியிடு", te: "నా స్టాక్‌ను ఇప్పుడే ప్రచురించు", th: "เผยแพร่สต็อกของฉันตอนนี้", tl: "I-publish ang stock ko ngayon", tr: "Stoğumu şimdi yayınla", ur: "ابھی میرا اسٹاک شائع کریں", vi: "Đăng kho hàng ngay", wo: "Génne sama jën léegi", yo: "Tẹ ọjà mi jáde báyìí", zh: "立即发布我的库存", zu: "Shicilela impahla yami manje" },
-  publishedOk: { am: "ታትሟል ✓", ar: "تم النشر ✓", bm: "Bɔra ✓", bn: "প্রকাশিত ✓", de: "Veröffentlicht ✓", en: "Published ✓", es: "Publicado ✓", fr: "Publié ✓", ha: "An wallafa ✓", hi: "प्रकाशित ✓", id: "Dipublikasikan ✓", it: "Pubblicato ✓", nl: "Gepubliceerd ✓", ja: "公開しました ✓", ko: "게시됨 ✓", pl: "Opublikowano ✓", pt: "Publicado ✓", ru: "Опубликовано ✓", sw: "Imechapishwa ✓", ta: "வெளியிடப்பட்டது ✓", te: "ప్రచురించబడింది ✓", th: "เผยแพร่แล้ว ✓", tl: "Na-publish ✓", tr: "Yayınlandı ✓", ur: "شائع ہوگیا ✓", vi: "Đã đăng ✓", wo: "Génne na ✓", yo: "Ti tẹ̀jáde ✓", zh: "已发布 ✓", zu: "Kushicilelwe ✓" },
-  lastPublish: { am: "የመጨረሻ ህትመት፡", ar: "آخر نشر:", bm: "Bɔli laban:", bn: "সর্বশেষ প্রকাশ:", de: "Letzte Veröffentlichung:", en: "Last published:", es: "Última publicación:", fr: "Dernière publication :", ha: "Wallafawa ta ƙarshe:", hi: "अंतिम प्रकाशन:", id: "Terakhir dipublikasikan:", it: "Ultima pubblicazione:", nl: "Laatst gepubliceerd:", ja: "最終公開：", ko: "마지막 게시:", pl: "Ostatnia publikacja:", pt: "Última publicação:", ru: "Последняя публикация:", sw: "Uchapishaji wa mwisho:", ta: "கடைசியாக வெளியிடப்பட்டது:", te: "చివరిసారి ప్రచురించబడింది:", th: "เผยแพร่ล่าสุด:", tl: "Huling na-publish:", tr: "Son yayınlama:", ur: "آخری اشاعت:", vi: "Đăng lần cuối:", wo: "Génne bu mujj:", yo: "Ìgbà tí ó kẹ́hìn tí a tẹ̀jáde:", zh: "上次发布：", zu: "Kushicilelwe kokugcina:" },
-  tip: { am: "ምክር፡ ገዢዎች ወቅታዊ መረጃ እንዲያዩ ክምችትህን በመደበኛነት እንደገና አትም (በተለይ መስመር ውጭ ከተጠቀምክ በኋላ)። ከ48 ሰዓት ያለ ዳግም ህትመት በኋላ ሱቅህ ከውጤቶቹ ይጠፋል።", ar: "نصيحة: أعد نشر مخزونك بانتظام (خاصة بعد استخدام التطبيق دون اتصال) حتى يرى المشترون بيانات محدثة. بعد 48 ساعة دون إعادة نشر، لن يظهر متجرك في النتائج.", bm: "Ladili: i ka fɛn dilan bɔ tuma tuma (kɔsɛbɛ ni i ye porogaramu kɛ ni ɛntɛrinɛti tɛ), walasa sannikɛlaw ka kunnafoni kura ye. Ni lɛrɛ 48 tɛmɛna ka i ka butigi tɛ bɔ tugun, a tɛna sɔrɔ jaabi kɔnɔ.", bn: "টিপস: ক্রেতারা যেন হালনাগাদ তথ্য দেখেন সেজন্য নিয়মিত আপনার স্টক প্রকাশ করুন (বিশেষত অফলাইনে অ্যাপ ব্যবহারের পর)। ৪৮ ঘণ্টা পুনঃপ্রকাশ না হলে আপনার দোকান ফলাফল থেকে বাদ পড়বে।", de: "Tipp: Veröffentliche deinen Bestand regelmäßig neu (besonders nach Offline-Nutzung der App), damit Käufer aktuelle Daten sehen. Ohne erneute Veröffentlichung innerhalb von 48 Std. erscheint dein Laden nicht mehr in den Ergebnissen.", en: "Tip: republish your stock regularly (especially after using the app offline) so buyers see up-to-date data. After 48h without republishing, your shop no longer appears in results.", es: "Consejo: vuelve a publicar tu stock con regularidad (sobre todo tras usar la app sin conexión) para que los compradores vean datos actualizados. Pasadas 48h sin republicar, tu tienda deja de aparecer en los resultados.", fr: "Astuce : republie ton stock régulièrement (surtout après avoir utilisé l'appli hors ligne) pour que les acheteurs voient des données à jour. Au-delà de 48h sans republication, ta boutique n'apparaît plus dans les résultats.", ha: "Shawara: sake wallafa kayanka akai-akai (musamman bayan amfani da app ba tare da intanet ba) don masu siye su ga sabbin bayanai. Bayan awa 48 ba tare da sake wallafawa ba, shagonka ba zai ƙara bayyana a sakamakon ba.", hi: "सुझाव: खरीदारों को अद्यतन डेटा दिखे, इसके लिए अपना स्टॉक नियमित रूप से पुनः प्रकाशित करें (खासकर ऑफ़लाइन ऐप उपयोग के बाद)। 48 घंटे बिना पुनः प्रकाशन के आपकी दुकान परिणामों में नहीं दिखेगी।", id: "Tips: publikasikan ulang stok Anda secara rutin (terutama setelah menggunakan aplikasi secara offline) agar pembeli melihat data terbaru. Setelah 48 jam tanpa republikasi, toko Anda tidak lagi muncul di hasil pencarian.", it: "Suggerimento: ripubblica regolarmente il tuo stock (soprattutto dopo aver usato l'app offline) così gli acquirenti vedono dati aggiornati. Dopo 48h senza ripubblicazione, il tuo negozio non compare più nei risultati.", nl: "Tip: publiceer je voorraad regelmatig opnieuw (vooral na offline gebruik van de app) zodat kopers actuele gegevens zien. Na 48u zonder herpublicatie verschijnt je winkel niet meer in de resultaten.", ja: "ヒント：購入者が最新の情報を見られるよう、定期的に在庫を再公開してください（特にオフラインでアプリを使った後）。48時間再公開しないと、検索結果にお店が表示されなくなります。", ko: "팁: 구매자가 최신 정보를 볼 수 있도록 재고를 정기적으로 다시 게시하세요(특히 오프라인 사용 후). 48시간 동안 재게시하지 않으면 상점이 검색 결과에서 사라집니다.", pl: "Wskazówka: publikuj swój asortyment regularnie (zwłaszcza po korzystaniu z aplikacji offline), aby kupujący widzieli aktualne dane. Po 48h bez ponownej publikacji Twój sklep zniknie z wyników.", pt: "Dica: republique seu estoque regularmente (especialmente após usar o app offline) para que os compradores vejam dados atualizados. Após 48h sem republicar, sua loja não aparece mais nos resultados.", ru: "Совет: публикуйте свой ассортимент регулярно (особенно после использования приложения офлайн), чтобы покупатели видели актуальные данные. Через 48 ч без повторной публикации магазин исчезнет из результатов.", sw: "Kidokezo: chapisha upya bidhaa zako mara kwa mara (hasa baada ya kutumia app bila mtandao) ili wanunuzi waone data mpya. Baada ya saa 48 bila kuchapisha upya, duka lako halitaonekana tena kwenye matokeo.", ta: "குறிப்பு: வாங்குபவர்கள் புதுப்பித்த தரவைக் காண, உங்கள் இருப்பை தொடர்ந்து மீண்டும் வெளியிடவும் (குறிப்பாக ஆஃப்லைனில் பயன்படுத்திய பிறகு). 48 மணி நேரம் மீண்டும் வெளியிடாவிட்டால், உங்கள் கடை முடிவுகளில் தோன்றாது.", te: "చిట్కా: కొనుగోలుదారులు తాజా డేటాను చూసేలా మీ స్టాక్‌ను క్రమం తప్పకుండా మళ్ళీ ప్రచురించండి (ముఖ్యంగా ఆఫ్‌లైన్‌లో యాప్ ఉపయోగించిన తర్వాత). 48 గంటలు మళ్ళీ ప్రచురించకపోతే, మీ దుకాణం ఫలితాల్లో కనిపించదు.", th: "เคล็ดลับ: เผยแพร่สต็อกของคุณใหม่เป็นประจำ (โดยเฉพาะหลังใช้แอปแบบออฟไลน์) เพื่อให้ผู้ซื้อเห็นข้อมูลล่าสุด หากไม่เผยแพร่ใหม่ภายใน 48 ชม. ร้านของคุณจะไม่ปรากฏในผลลัพธ์อีกต่อไป", tl: "Tip: i-publish ulit ang stock mo nang regular (lalo na pagkatapos gumamit ng app offline) para makita ng mga mamimili ang up-to-date na data. Pagkalipas ng 48 oras na walang re-publish, mawawala ang tindahan mo sa resulta.", tr: "İpucu: alıcıların güncel veri görmesi için stoğunu düzenli olarak yeniden yayınla (özellikle uygulamayı çevrimdışı kullandıktan sonra). 48 saat yeniden yayınlama yapılmazsa mağazan sonuçlarda görünmez olur.", ur: "تجویز: خریداروں کو تازہ ترین ڈیٹا دکھانے کے لیے اپنا اسٹاک باقاعدگی سے دوبارہ شائع کریں (خاص طور پر ایپ آف لائن استعمال کرنے کے بعد)۔ 48 گھنٹے بغیر دوبارہ اشاعت کے آپ کی دکان نتائج میں نظر نہیں آئے گی۔", vi: "Mẹo: đăng lại kho hàng thường xuyên (đặc biệt sau khi dùng ứng dụng ngoại tuyến) để người mua thấy dữ liệu mới nhất. Sau 48 giờ không đăng lại, cửa hàng của bạn sẽ không còn hiện trong kết quả.", wo: "Xalaat: génne sa jën bu yaatu waxtu wu ne (rawatina bu nga jëfandikoo app bi ci lu amul internet). Su amul 48h ci génne, boutik bi du gis ci résultat yi.", yo: "Ìmọ̀ràn: máa tún tẹ ọjà rẹ jáde déédéé (pàápàá lẹ́yìn lílo app náà láìsí ìntánẹ́ẹ̀tì) kí àwọn oníbàárà lè rí àlàyé tuntun. Tí wákàtí 48 bá kọjá láìsí àtúntẹ̀jáde, ilé ìtajà rẹ kò ní farahàn mọ́ nínú àbájáde.", zh: "提示：请定期重新发布你的库存（尤其是离线使用应用后），以便买家看到最新数据。超过48小时未重新发布，你的商店将不再出现在搜索结果中。", zu: "Icebo: shicilela impahla yakho njalo (ikakhulukazi ngemva kokusebenzisa uhlelo lokusebenza ungaxhunyiwe) ukuze abathengi babone idatha yakamuva. Ngemva kwamahora angu-48 ngaphandle kokushicilela kabusha, isitolo sakho ngeke sisavela emiphumeleni." },
-  geoNoDevice: { am: "በዚህ መሳሪያ ላይ አካባቢ አይገኝም።", ar: "الموقع غير متاح على هذا الجهاز.", bm: "Yɔrɔ tɛ sɔrɔ minanw in kan.", bn: "এই ডিভাইসে অবস্থান পাওয়া যায় না।", de: "Standort auf diesem Gerät nicht verfügbar.", en: "Location not available on this device.", es: "Ubicación no disponible en este dispositivo.", fr: "Localisation non disponible sur cet appareil.", ha: "Ba a samu wuri a wannan na'urar ba.", hi: "इस डिवाइस पर स्थान उपलब्ध नहीं।", id: "Lokasi tidak tersedia di perangkat ini.", it: "Posizione non disponibile su questo dispositivo.", nl: "Locatie niet beschikbaar op dit apparaat.", ja: "この端末では位置情報が利用できません。", ko: "이 기기에서는 위치를 사용할 수 없습니다.", pl: "Lokalizacja niedostępna na tym urządzeniu.", pt: "Localização não disponível neste dispositivo.", ru: "Геолокация недоступна на этом устройстве.", sw: "Mahali hayapatikani kwenye kifaa hiki.", ta: "இந்தச் சாதனத்தில் இருப்பிடம் கிடைக்கவில்லை.", te: "ఈ పరికరంలో లొకేషన్ అందుబాటులో లేదు.", th: "ไม่มีตำแหน่งบนอุปกรณ์นี้", tl: "Hindi available ang lokasyon sa device na ito.", tr: "Bu cihazda konum kullanılamıyor.", ur: "اس ڈیوائس پر مقام دستیاب نہیں۔", vi: "Không có vị trí trên thiết bị này.", wo: "Fu nga nekk gisul ci jumtukaay bi.", yo: "Kò sí ipò tó wà lórí ẹ̀rọ yìí.", zh: "此设备不支持定位。", zu: "Indawo ayitholakali kule divayisi." },
-  geoDenied: { am: "የአካባቢ ፈቃድ ተከልክሏል።", ar: "تم رفض إذن الموقع.", bm: "Yɔrɔ yamaruya banna.", bn: "অবস্থানের অনুমতি প্রত্যাখ্যাত।", de: "Standortzugriff verweigert.", en: "Location permission denied.", es: "Permiso de ubicación denegado.", fr: "Autorisation de localisation refusée.", ha: "An ƙi izinin wuri.", hi: "स्थान अनुमति अस्वीकृत।", id: "Izin lokasi ditolak.", it: "Permesso di posizione negato.", nl: "Locatietoestemming geweigerd.", ja: "位置情報の許可が拒否されました。", ko: "위치 권한이 거부되었습니다.", pl: "Odmówiono dostępu do lokalizacji.", pt: "Permissão de localização negada.", ru: "В доступе к геолокации отказано.", sw: "Ruhusa ya mahali imekataliwa.", ta: "இருப்பிட அனுமதி மறுக்கப்பட்டது.", te: "లొకేషన్ అనుమతి తిరస్కరించబడింది.", th: "ปฏิเสธสิทธิ์การเข้าถึงตำแหน่ง", tl: "Tinanggihan ang pahintulot sa lokasyon.", tr: "Konum izni reddedildi.", ur: "مقام کی اجازت مسترد۔", vi: "Quyền vị trí bị từ chối.", wo: "Bañ nañu jokkoo ak fu nga nekk.", yo: "A kọ ìgbanilaaye ipo.", zh: "位置权限被拒绝。", zu: "Imvume yendawo yenqatshiwe." },
-  geoErrRetry: { am: "ስህተት፣ እንደገና ሞክር።", ar: "خطأ، أعد المحاولة.", bm: "Fili kɛra, segin ka a lajɛ.", bn: "ত্রুটি, আবার চেষ্টা করুন।", de: "Fehler, versuche es erneut.", en: "Error, try again.", es: "Error, vuelve a intentarlo.", fr: "Erreur, réessaie.", ha: "Kuskure, sake gwadawa.", hi: "त्रुटि, पुनः प्रयास करें।", id: "Kesalahan, coba lagi.", it: "Errore, riprova.", nl: "Fout, probeer opnieuw.", ja: "エラーが発生しました。もう一度お試しください。", ko: "오류, 다시 시도하세요.", pl: "Błąd, spróbuj ponownie.", pt: "Erro, tente novamente.", ru: "Ошибка, повторите попытку.", sw: "Hitilafu, jaribu tena.", ta: "பிழை, மீண்டும் முயற்சிக்கவும்.", te: "లోపం, మళ్ళీ ప్రయత్నించండి.", th: "เกิดข้อผิดพลาด ลองอีกครั้ง", tl: "Error, subukan ulit.", tr: "Hata, tekrar dene.", ur: "خرابی، دوبارہ کوشش کریں۔", vi: "Lỗi, thử lại.", wo: "Njumte, wax ci lu bees.", yo: "Àṣìṣe, tún gbìyànjú.", zh: "出错了，请重试。", zu: "Iphutha, zama futhi." },
-};
-function tl(lang, key, vars) {
-  let s = (LOCATION_I18N[key] && (LOCATION_I18N[key][lang] || LOCATION_I18N[key].fr)) || key;
-  if (vars) Object.keys(vars).forEach((k) => { s = s.replace("{" + k + "}", vars[k]); });
-  return s;
-}
 const CURRENCIES = [
   { id: "AED", label: { am: "የተባበሩት አረብ ኤምሬትስ ድርሃም", ar: "درهم إماراتي", bm: "arabu mara kafoli Diram", bn: "সংযুক্ত আরব আমিরাত দিরহাম", de: "VAE-Dirham", en: "United Arab Emirates Dirham", yo: "United Arab Emirates Dirham", es: "dírham de los Emiratos Árabes Unidos", fr: "dirham des Émirats arabes unis", ha: "Kuɗin Haɗaɗɗiyar Daular Larabawa", hi: "संयुक्त अरब अमीरात दिरहाम", id: "Dirham Uni Emirat Arab", it: "dirham degli Emirati Arabi Uniti", nl: "Verenigde Arabische Emiraten-dirham", ja: "アラブ首長国連邦ディルハム", ko: "아랍에미리트 디르함", pl: "dirham ZEA", pt: "Dirham dos Emirados Árabes Unidos", ru: "дирхам ОАЭ", sw: "Dirham ya Falme za Kiarabu", ta: "ஐக்கிய அரபு எமிரேட்ஸ் திர்ஹாம்", te: "యునైటెడ్ ఆరబ్ ఎమిరేట్స్ దిరామ్", th: "เดอร์แฮมสหรัฐอาหรับเอมิเรตส์", tl: "United Arab Emirates Dirham", tr: "Birleşik Arap Emirlikleri dirhemi", ur: "متحدہ عرب اماراتی درہم", vi: "Dirham UAE", wo: "United Arab Emirates Dirham", zh: "阿联酋迪拉姆", zu: "i-Dirham yase-United Arab Emirates" }, symbol: "د.إ", after: false },
   { id: "AFN", label: { am: "የአፍጋኒስታን አፍጋኒ", ar: "أفغاني", bm: "Afghan Afghani", bn: "আফগান আফগানি", de: "Afghanischer Afghani", en: "Afghan Afghani", yo: "Afghan Afghani", es: "afgani afgano", fr: "afghani afghan", ha: "Afghani na ƙasar Afghanistan", hi: "अफ़गान अफ़गानी", id: "Afgani Afganistan", it: "afghani", nl: "Afghaanse afghani", ja: "アフガニスタン アフガニー", ko: "아프가니스탄 아프가니", pl: "afgani afgańskie", pt: "Afegane afegão", ru: "афгани", sw: "Afghani ya Afghanistan", ta: "ஆஃப்கான் ஆஃப்கானி", te: "ఆఫ్ఘాన్ ఆఫ్ఘాని", th: "อัฟกานิอัฟกานิสถาน", tl: "Afghan Afghani", tr: "Afganistan afganisi", ur: "افغان افغانی", vi: "Afghani Afghanistan", wo: "Afghan Afghani", zh: "阿富汗尼", zu: "i-Afghan Afghani" }, symbol: "؋", after: false },
@@ -5581,6 +5528,39 @@ function useOfflineSync(resolveBeforeFlush) {
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
 const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone"];
+// ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
+// On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
+// "light" / "dark" / "system"), pour que l'écran de connexion garde la même ambiance. Pour un
+// premier lancement sans aucun choix enregistré, on suit directement le thème du système.
+function getStoredThemeMode() {
+  try {
+    return window.localStorage.getItem("app-theme-mode") || "system";
+  } catch (e) {
+    return "system";
+  }
+}
+function systemPrefersDarkNow() {
+  try {
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  } catch (e) {
+    return false;
+  }
+}
+function getInitialDarkPreference() {
+  const mode = getStoredThemeMode();
+  if (mode === "dark") return true;
+  if (mode === "light") return false;
+  return systemPrefersDarkNow();
+}
+function setStoredThemeMode(mode) {
+  try { window.localStorage.setItem("app-theme-mode", mode); } catch (e) {}
+}
+// Palette partagée entre ShopApp et AuthScreen, pour une transition visuelle cohérente.
+function themePalette(darkMode) {
+  return darkMode
+    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
+    : { bg: "#F6F7FB", card: "white", text: "#0f172a", muted: "#6B6D85", input: "#F6F7FB", nav: "white", border: "#E4E5F0" };
+}
 function sortByDate(list) {
   return [...(list || [])].sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
 }
@@ -6005,186 +5985,8 @@ function InstallBanner({ lang }) {
     </div>
   );
 }
-// ---------------------------------------------------------------------------
-// Mode recherche / localisation — accessible sans compte. Un acheteur tape un
-// produit, on interroge la fonction RPC search_products_nearby côté Supabase
-// (proximité calculée par formule de Haversine, pas besoin de PostGIS), et on
-// affiche les boutiques correspondantes sur une carte Leaflet + une liste.
-// ---------------------------------------------------------------------------
-function BuyerSearchScreen({ onBack, lang }) {
-  const [query, setQuery] = useState("");
-  const [buyerPos, setBuyerPos] = useState(null);
-  const [geoStatus, setGeoStatus] = useState("idle"); // idle | locating | ready | error
-  const [geoErrorCode, setGeoErrorCode] = useState(null); // 1=refus, 2=indisponible, 3=délai dépassé
-  const [results, setResults] = useState([]);
-  const [searching, setSearching] = useState(false);
-  const [searched, setSearched] = useState(false);
-
-  const requestLocation = useCallback(async () => {
-    setGeoStatus("locating");
-    setGeoErrorCode(null);
-    const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
-    if (isCapacitorApp) {
-      // Dans l'app native (Capacitor), l'API web navigator.geolocation ne déclenche pas
-      // toujours correctement la demande d'autorisation native Android/iOS — on passe par
-      // le plugin officiel @capacitor/geolocation, qui gère lui-même la permission runtime.
-      try {
-        const { Geolocation } = await import("@capacitor/geolocation");
-        const perm = await Geolocation.requestPermissions();
-        if (perm.location !== "granted" && perm.coarseLocation !== "granted") {
-          setGeoStatus("error"); setGeoErrorCode(1); return;
-        }
-        const pos = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 10000 });
-        setBuyerPos({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        setGeoStatus("ready");
-      } catch (e) {
-        setGeoStatus("error"); setGeoErrorCode(null);
-      }
-      return;
-    }
-    if (!navigator.geolocation) { setGeoStatus("error"); setGeoErrorCode("unsupported"); return; }
-    navigator.geolocation.getCurrentPosition(
-      (pos) => { setBuyerPos({ lat: pos.coords.latitude, lng: pos.coords.longitude }); setGeoStatus("ready"); },
-      (err) => { setGeoStatus("error"); setGeoErrorCode(err ? err.code : null); },
-      { enableHighAccuracy: true, timeout: 10000 }
-    );
-  }, []);
-
-  useEffect(() => { requestLocation(); }, [requestLocation]);
-
-  const runSearch = async () => {
-    if (!query.trim() || !buyerPos) return;
-    setSearching(true);
-    setSearched(true);
-    try {
-      const { data, error } = await supabase.rpc("search_products_nearby", {
-        p_search: query.trim(),
-        p_lat: buyerPos.lat,
-        p_lng: buyerPos.lng,
-        p_max_age_hours: 48,
-        p_limit: 30,
-      });
-      if (error) throw error;
-      setResults(data || []);
-    } catch (e) {
-      setResults([]);
-    } finally {
-      setSearching(false);
-    }
-  };
-
-  const freshnessLabel = (iso) => {
-    if (!iso) return "";
-    const hours = (Date.now() - new Date(iso).getTime()) / 3600000;
-    if (hours < 1) return tl(lang, "justNow");
-    if (hours < 24) return tl(lang, "hoursAgo", { n: Math.round(hours) });
-    return tl(lang, "daysAgo", { n: Math.round(hours / 24) });
-  };
-
-  return (
-    <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", flexDirection: "column" }}>
-      <div style={{ padding: "16px 16px 10px", background: "#fff", borderBottom: "1px solid #E5E7EB" }}>
-        <button onClick={onBack} style={{ background: "none", border: "none", color: "#6B6D85", fontSize: 13, fontWeight: 600, marginBottom: 10, cursor: "pointer", padding: 0 }}>
-          ← {tl(lang, "back")}
-        </button>
-        <div style={{ fontSize: 18, fontWeight: 700, color: "#111827", marginBottom: 10 }}>{tl(lang, "title")}</div>
-        <div style={{ display: "flex", gap: 8 }}>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => { if (e.key === "Enter") runSearch(); }}
-            placeholder={tl(lang, "searchPlaceholder")}
-            style={{ flex: 1, border: "1px solid #E5E7EB", borderRadius: 12, padding: "12px 14px", fontSize: 14, outline: "none" }}
-          />
-          <button
-            onClick={runSearch}
-            disabled={searching || geoStatus !== "ready" || !query.trim()}
-            style={{ padding: "0 18px", borderRadius: 12, background: "#1B3A5C", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer", opacity: (geoStatus === "ready" && query.trim()) ? 1 : 0.5 }}
-          >
-            {tl(lang, "searchBtn")}
-          </button>
-        </div>
-        {geoStatus === "locating" && <p style={{ fontSize: 12, color: "#6B6D85", marginTop: 8 }}>{tl(lang, "locating")}</p>}
-        {geoStatus === "error" && (
-          <div style={{ marginTop: 8 }}>
-            <p style={{ fontSize: 12, color: "#e11d48" }}>
-              {geoErrorCode === 1 && tl(lang, "errDenied")}
-              {geoErrorCode === 2 && tl(lang, "errUnavailable")}
-              {geoErrorCode === 3 && tl(lang, "errTimeout")}
-              {geoErrorCode === "unsupported" && tl(lang, "errUnsupported")}
-              {![1, 2, 3, "unsupported"].includes(geoErrorCode) && tl(lang, "errGeneric")}
-            </p>
-            <button onClick={requestLocation} style={{ marginTop: 6, fontSize: 12, fontWeight: 700, color: "#1B3A5C", background: "none", border: "1px solid #E5E7EB", borderRadius: 10, padding: "6px 12px", cursor: "pointer" }}>
-              {tl(lang, "retry")}
-            </button>
-          </div>
-        )}
-      </div>
-
-      {buyerPos && (
-        <div style={{ height: 260, flexShrink: 0 }}>
-          <MapContainer center={[buyerPos.lat, buyerPos.lng]} zoom={13} style={{ height: "100%", width: "100%" }}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
-            <Marker position={[buyerPos.lat, buyerPos.lng]}>
-              <Popup>{tl(lang, "you")}</Popup>
-            </Marker>
-            {results.map((r, i) => (
-              <Marker key={`${r.owner_id}-${i}`} position={[r.latitude, r.longitude]}>
-                <Popup>
-                  <div style={{ minWidth: 160 }}>
-                    <div style={{ fontWeight: 700 }}>{r.shop_name}</div>
-                    <div>{r.product_name} — {r.price} </div>
-                    <div style={{ fontSize: 11, opacity: 0.7 }}>{freshnessLabel(r.last_synced_at)}</div>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-        </div>
-      )}
-
-      <div style={{ flex: 1, overflowY: "auto", padding: 16, display: "flex", flexDirection: "column", gap: 10 }}>
-        {searching && <p style={{ fontSize: 13, color: "#6B6D85" }}>{tl(lang, "searchingResults")}</p>}
-        {!searching && searched && results.length === 0 && (
-          <p style={{ fontSize: 13, color: "#6B6D85" }}>{tl(lang, "noResults")}</p>
-        )}
-        {results.map((r, i) => (
-          <div key={`${r.owner_id}-${i}`} style={{ background: "#fff", borderRadius: 16, padding: 14, border: "1px solid #E5E7EB", display: "flex", gap: 12 }}>
-            {r.photo_url ? (
-              <img src={r.photo_url} alt="" style={{ width: 56, height: 56, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
-            ) : (
-              <div style={{ width: 56, height: 56, borderRadius: 12, background: "#F6F7FB", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>🏬</div>
-            )}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontWeight: 700, fontSize: 14, color: "#111827" }}>{r.shop_name}</div>
-              <div style={{ fontSize: 13, color: "#374151", marginTop: 2 }}>
-                {r.product_photo_url && <img src={r.product_photo_url} alt="" style={{ width: 18, height: 18, borderRadius: 4, objectFit: "cover", verticalAlign: "middle", marginRight: 5 }} />}
-                {r.product_name} — <strong>{r.price}</strong>
-              </div>
-              <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 3 }}>
-                {(r.distance_km || 0).toFixed(1)} km · {tl(lang, "updated")} {freshnessLabel(r.last_synced_at)}
-              </div>
-              <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-                {r.phone && (
-                  <a href={`tel:${r.phone}`} style={{ fontSize: 12, fontWeight: 700, color: "#1B3A5C", border: "1px solid #E5E7EB", borderRadius: 10, padding: "6px 10px", textDecoration: "none" }}>
-                    📞 {tl(lang, "call")}
-                  </a>
-                )}
-                {r.whatsapp_phone && (
-                  <a href={`https://wa.me/${r.whatsapp_phone}`} target="_blank" rel="noreferrer" style={{ fontSize: 12, fontWeight: 700, color: "#16a34a", border: "1px solid #E5E7EB", borderRadius: 10, padding: "6px 10px", textDecoration: "none" }}>
-                    WhatsApp
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogleOnboarding }) {
+function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogleOnboarding, darkMode }) {
+  const AT = themePalette(darkMode);
   const [screen, setScreen] = useState(startInGoogleOnboarding ? "onboarding" : "login");
   const [isGoogleFlow, setIsGoogleFlow] = useState(!!startInGoogleOnboarding);
   const [obStep, setObStep] = useState(1);
@@ -6507,7 +6309,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   // ================= LOGIN SCREEN =================
   if (screen === "login") {
     return (
-      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: "#F6F7FB" }}>
+      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
         <div className="w-full max-w-md md:max-w-3xl lg:max-w-4xl rounded-3xl overflow-hidden shadow-xl md:flex md:items-stretch" style={{ boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}>
           {/* Dark brand panel */}
           <div className="px-7 py-8 text-white md:w-2/5 md:flex md:flex-col md:justify-center" style={{ background: "radial-gradient(120% 100% at 0% 0%, #272A56 0%, #12132A 60%)" }}>
@@ -6522,16 +6324,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               ))}
             </div>
           </div>
-          {/* Light form panel */}
-          <div className="bg-white px-7 py-7 md:w-3/5 md:overflow-y-auto" style={{ maxHeight: "90vh" }}>
+          {/* Form panel (thème clair/sombre selon la préférence mémorisée) */}
+          <div className="px-7 py-7 md:w-3/5 md:overflow-y-auto" style={{ maxHeight: "90vh", background: AT.card }}>
             <div className="flex justify-start gap-2 mb-4 overflow-x-auto" style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none" }}>
               {LANGUAGES.map((l) => (
-                <button key={l.id} onClick={() => setLang(l.id)} className="flex-shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full border" style={{ borderColor: INDIGO, background: lang === l.id ? INDIGO : "white", color: lang === l.id ? "white" : INDIGO }}>
+                <button key={l.id} onClick={() => setLang(l.id)} className="flex-shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full border" style={{ borderColor: INDIGO, background: lang === l.id ? INDIGO : AT.card, color: lang === l.id ? "white" : INDIGO }}>
                   {l.label}
                 </button>
               ))}
             </div>
-            <p className="text-sm font-medium mb-4" style={{ color: "#6B6D85" }}>
+            <p className="text-sm font-medium mb-4" style={{ color: AT.muted }}>
               {t(lang, "loginSubtitle")}
             </p>
             {canInstallApp && installDismissed && (
@@ -6558,14 +6360,14 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </button>
             <style>{"@keyframes spin { to { transform: rotate(360deg); } }"}</style>
             <div className="flex items-center gap-3 mb-3">
-              <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
-              <span className="text-[11px] font-semibold" style={{ color: "#9B9DB0" }}>{t(lang, "orSeparator")}</span>
-              <div className="flex-1 h-px" style={{ background: "#E4E5F0" }} />
+              <div className="flex-1 h-px" style={{ background: AT.border }} />
+              <span className="text-[11px] font-semibold" style={{ color: AT.muted }}>{t(lang, "orSeparator")}</span>
+              <div className="flex-1 h-px" style={{ background: AT.border }} />
             </div>
             {!loginOtpSent ? (
               <>
                 <div className="mb-1">
-                  <label className="text-xs font-semibold block mb-1.5" style={{ color: "#6B6D85" }}>{t(lang, "identifier")}</label>
+                  <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "identifier")}</label>
                   <input
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -6573,7 +6375,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                     placeholder={t(lang, "identifierPlaceholder")}
                     type="email"
                     className="w-full border rounded-xl px-3 py-2.5 text-sm"
-                    style={{ background: "#F6F7FB" }}
+                    style={{ background: AT.input, color: AT.text, borderColor: AT.border }}
                   />
                 </div>
                 {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
@@ -6583,7 +6385,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               </>
             ) : (
               <>
-                <p className="text-sm mb-3" style={{ color: "#6B6D85" }}>
+                <p className="text-sm mb-3" style={{ color: AT.muted }}>
                   {t(lang, "otpSentMessage").replace("{email}", username.trim().toLowerCase())}
                 </p>
                 <div className="mb-1">
@@ -6595,7 +6397,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                     inputMode="numeric"
                     autoFocus
                     className="w-full border rounded-xl px-3 py-2.5 text-sm text-center tracking-[0.3em] font-semibold"
-                    style={{ background: "#F6F7FB" }}
+                    style={{ background: AT.input, color: AT.text, borderColor: AT.border }}
                   />
                 </div>
                 {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
@@ -6607,12 +6409,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 </button>
               </>
             )}
-            <p className="text-center mt-4" style={{ fontSize: 10, color: "#A6A8BC", lineHeight: 1.5 }}>
+            <p className="text-center mt-4" style={{ fontSize: 10, color: AT.muted, lineHeight: 1.5 }}>
               {t(lang, "legalConsentText")}
             </p>
-            <button onClick={() => setScreen("buyer-search")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
-              🔍 {tl(lang, "title")}
-            </button>
             <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: INDIGO }}>
               <QrCode size={13} /> {t(lang, "loginAsEmployee")}
             </button>
@@ -6625,9 +6424,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     );
   }
   // ================= EMPLOYEE SCAN SCREEN =================
-  if (screen === "buyer-search") {
-    return <BuyerSearchScreen onBack={() => setScreen("login")} lang={lang} />;
-  }
   if (screen === "employee-scan") {
     // codeOverride permet d'appeler cette fonction directement avec un code décodé par la
     // caméra, sans dépendre de l'état empScanCode (utile pour le scan automatique).
@@ -7870,8 +7666,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Nettoie l'état critique persisté avant de déconnecter : sinon, si un autre
   // compte se connecte ensuite sur le même téléphone, il pourrait se retrouver
   // restauré sur l'onglet/panier laissé par le compte précédent.
-  const handleLogoutClean = useCallback(() => {
+  // Termine aussi la session Supabase elle-même et vide le cache local de "dernière
+  // boutique" (Capacitor Preferences) : sans ça, la session restait valide en coulisses
+  // et rouvrir l'appli reconnectait automatiquement sur l'ancien compte.
+  const handleLogoutClean = useCallback(async () => {
     clearCriticalState();
+    try { await supabase.auth.signOut(); } catch (e) { /* déconnexion locale quand même */ }
+    try {
+      const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+      if (isCapacitorApp) await Preferences.remove({ key: "shopnify_last_shop_cache" });
+    } catch (e) { /* pas grave si le cache ne peut pas être vidé */ }
     onLogout();
   }, [onLogout]);
   const isDesktop = useIsDesktop();
@@ -7909,74 +7713,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   }, []);
   useEffect(() => {
     setDarkMode(themeMode === "system" ? systemPrefersDark : themeMode === "dark");
+    // Mémorise le choix pour que l'écran de connexion (hors compte) adopte la même ambiance
+    // la prochaine fois qu'il s'affiche (déconnexion, nouvel appareil déjà utilisé, etc.).
+    setStoredThemeMode(themeMode);
   }, [themeMode, systemPrefersDark]);
   const [showBalls, setShowBalls] = useState(true);
   const [ballColor, setBallColor] = useState("blue");
   const [currency, setCurrency] = useState("XOF");
   const [shopCountry, setShopCountry] = useState(""); // pays du compte (pour le format de date)
   const [shopPhone, setShopPhone] = useState("");
-  // ---- Mode localisation / recherche acheteur ----
-  // Partage facultatif de la position de la boutique + numéro WhatsApp, et statut
-  // de la dernière publication du stock vers la table publique location_listings.
-  const [locationShared, setLocationShared] = useState(false);
-  const [shopWhatsapp, setShopWhatsapp] = useState("");
-  const [shopLat, setShopLat] = useState(null);
-  const [shopLng, setShopLng] = useState(null);
-  const [locationLastSyncedAt, setLocationLastSyncedAt] = useState(null);
-  const [publishingLocation, setPublishingLocation] = useState(false);
-  const [publishLocationMsg, setPublishLocationMsg] = useState("");
-  const getCurrentPositionCrossPlatform = async () => {
-    const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
-    if (isCapacitorApp) {
-      const { Geolocation } = await import("@capacitor/geolocation");
-      const perm = await Geolocation.requestPermissions();
-      if (perm.location !== "granted" && perm.coarseLocation !== "granted") throw new Error("no-geo");
-      return await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 10000 });
-    }
-    return new Promise((resolve, reject) => {
-      if (!navigator.geolocation) { reject(new Error("no-geo")); return; }
-      navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, timeout: 10000 });
-    });
-  };
-  const publishLocationListing = async () => {
-    setPublishingLocation(true);
-    setPublishLocationMsg("");
-    try {
-      const { data: userData } = await supabase.auth.getUser();
-      if (!userData || !userData.user) throw new Error("no-user");
-      const pos = await getCurrentPositionCrossPlatform();
-      const lat = pos.coords.latitude;
-      const lng = pos.coords.longitude;
-      const productsSnapshot = products
-        .filter((p) => (p.quantity || 0) > 0)
-        .map((p) => ({ name: p.name, price: p.price, quantity: p.quantity, photo_url: p.photo || null }));
-      const { error } = await supabase.from("location_listings").upsert({
-        owner_id: userData.user.id,
-        shop_name: shopName,
-        photo_url: shopPhoto,
-        phone: shopPhone,
-        whatsapp_phone: shopWhatsapp,
-        latitude: lat,
-        longitude: lng,
-        location_shared: locationShared,
-        last_synced_at: new Date().toISOString(),
-        products: productsSnapshot,
-      });
-      if (error) throw error;
-      setShopLat(lat);
-      setShopLng(lng);
-      setLocationLastSyncedAt(new Date().toISOString());
-      setPublishLocationMsg(tl(lang, "publishedOk"));
-    } catch (e) {
-      setPublishLocationMsg(
-        e && e.message === "no-geo" ? tl(lang, "geoNoDevice") :
-        e && e.code === 1 ? tl(lang, "geoDenied") :
-        tl(lang, "geoErrRetry")
-      );
-    } finally {
-      setPublishingLocation(false);
-    }
-  };
   // Style choisi pour l'image de partage produit (fond/couleurs), et si on
   // doit re-proposer le choix avant chaque envoi ou garder ce style partout.
   const [shareCardStyleId, setShareCardStyleId] = useState("midnight");
@@ -8775,6 +8520,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [emailInput, setEmailInput] = useState("");
   const [emailMsg, setEmailMsg] = useState("");
   const [confirmReset, setConfirmReset] = useState(false);
+  const [confirmLogout, setConfirmLogout] = useState(false);
   const [confirmDeleteProduct, setConfirmDeleteProduct] = useState(null);
   const [confirmDeleteExpense, setConfirmDeleteExpense] = useState(null);
   const [confirmDeleteCart, setConfirmDeleteCart] = useState(null);
@@ -12003,7 +11749,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <Settings size={17} />
             {t(lang, "settingsTitle")}
           </button>
-          <button onClick={handleLogoutClean} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <button onClick={() => { if (window.confirm(t(lang, "logoutConfirm"))) handleLogoutClean(); }} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
             <LogOut size={17} />
             {t(lang, "othDeconnexion")}
           </button>
@@ -14155,7 +13901,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "categories" && (t(lang, "setCategories"))}
                   {settingsField === "threshold2" && t(lang, "stockAlert")}
                   {settingsField === "sharecard" && tx(lang, "shareCardSettingsTitle")}
-                  {settingsField === "location" && tl(lang, "settingsTitle")}
                   {settingsField === "defpayment" && (t(lang, "setPaiementParDefaut"))}
                   {settingsField === "debtdelay" && (t(lang, "setDettesClients"))}
                   {settingsField === "cashsettings" && (t(lang, "setCaisse"))}
@@ -14167,7 +13912,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
                 <div style={{ color: T.muted, fontSize: 12.5 }}>Shopnify</div>
               </div>
-              <button onClick={() => { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setSettingsSearchQuery(""); setConfirmReset(false); }}
+              <button onClick={() => { setShowSettings(false); setSettingsView("menu"); setSettingsField(null); setSettingsSearchQuery(""); setConfirmReset(false); setConfirmLogout(false); }}
                 style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: T.muted, cursor: "pointer" }}>
                 <X size={16} />
               </button>
@@ -14280,7 +14025,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "categories", icon: Tag, label: t(lang, "setCategories"), desc: t(lang, "setProduitsRayons") },
                 { id: "threshold2", icon: AlertOctagon, label: t(lang, "setSeuilsDeStock"), desc: t(lang, "setAlerteStockBas") },
                 { id: "sharecard", icon: Send, label: tx(lang, "shareCardSettingsTitle"), desc: tx(lang, "shareCardStyle") },
-                { id: "location", icon: Store, label: tl(lang, "settingsTitle"), desc: tl(lang, "settingsDesc") },
               ].map((item) => { const Icon = item.icon; return (
                 <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#34d3991a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#34d399" /></div>
@@ -14517,47 +14261,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                   <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
-                </div>
-              )}
-              {settingsField === "location" && (
-                <div>
-                  <div className="rounded-2xl p-4 mb-4" style={{ background: T.card, border: `1px solid ${T.border}` }}>
-                    <div className="flex items-center justify-between gap-3">
-                      <div style={{ flex: 1 }}>
-                        <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{tl(lang, "shareToggleTitle")}</div>
-                        <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>
-                          {tl(lang, "shareToggleDesc")}
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setLocationShared((v) => !v)}
-                        style={{ width: 48, height: 28, borderRadius: 14, background: locationShared ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: locationShared ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}
-                      >
-                        <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
-                      </button>
-                    </div>
-                  </div>
-                  <p className="text-xs mb-1.5" style={{ color: T.muted }}>{tl(lang, "whatsappLabel")}</p>
-                  <input
-                    value={shopWhatsapp}
-                    onChange={(e) => setShopWhatsapp(e.target.value)}
-                    placeholder="223XXXXXXXX"
-                    style={{ width: "100%", background: T.input, border: `1px solid ${T.border}`, borderRadius: 14, padding: "12px 14px", fontSize: 14, color: T.text, outline: "none", marginBottom: 16 }}
-                  />
-                  <button
-                    onClick={publishLocationListing}
-                    disabled={publishingLocation || !locationShared}
-                    style={{ width: "100%", padding: "13px 0", borderRadius: 14, background: INDIGO, color: "white", fontWeight: 700, fontSize: 14, border: "none", cursor: locationShared ? "pointer" : "not-allowed", opacity: locationShared ? 1 : 0.5 }}
-                  >
-                    {publishingLocation ? tl(lang, "publishing") : tl(lang, "publishBtn")}
-                  </button>
-                  {publishLocationMsg && <p className="text-xs mt-2" style={{ color: publishLocationMsg === tl(lang, "publishedOk") ? "#34d399" : "#f87171" }}>{publishLocationMsg}</p>}
-                  {locationLastSyncedAt && (
-                    <p className="text-[11px] mt-2" style={{ color: T.muted }}>{tl(lang, "lastPublish")} {new Date(locationLastSyncedAt).toLocaleString()}</p>
-                  )}
-                  <p className="text-[11px] mt-4" style={{ color: T.muted, lineHeight: 1.5 }}>
-                    {tl(lang, "tip")}
-                  </p>
                 </div>
               )}
               {settingsField === "sharecard" && (
@@ -15104,9 +14807,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </div>
                     </div>
                   )}
-                  <button onClick={handleLogoutClean} style={{ padding: "14px 16px", borderRadius: 14, background: T.card, border: `1px solid ${T.border}`, color: T.text, fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
-                    <LogOut size={17} color={T.muted} /> {t(lang, "othDeconnexion")}
-                  </button>
+                  {!confirmLogout ? (
+                    <button onClick={() => setConfirmLogout(true)} style={{ padding: "14px 16px", borderRadius: 14, background: T.card, border: `1px solid ${T.border}`, color: T.text, fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
+                      <LogOut size={17} color={T.muted} /> {t(lang, "othDeconnexion")}
+                    </button>
+                  ) : (
+                    <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                      <p style={{ color: T.muted, fontSize: 13, marginBottom: 14 }}>{t(lang, "logoutConfirm")}</p>
+                      <div style={{ display: "flex", gap: 8 }}>
+                        <button onClick={handleLogoutClean} style={{ flex: 1, padding: 12, borderRadius: 12, background: "linear-gradient(135deg, #f87171, #ef4444)", color: "white", fontSize: 13, fontWeight: 700, cursor: "pointer", border: "none" }}>{t(lang, "yesLogout")}</button>
+                        <button onClick={() => setConfirmLogout(false)} style={{ flex: 1, padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{t(lang, "cancel")}</button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -15371,6 +15084,10 @@ function BoutiqueAppInner() {
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
+  // Thème (clair/sombre) pour tout ce qui est affiché avant qu'un compte soit chargé
+  // (écran de connexion, onboarding, écrans de chargement) : reprend le dernier choix fait
+  // dans un compte s'il existe, sinon suit directement le thème du système dès le premier lancement.
+  const [authDark] = useState(getInitialDarkPreference);
   const [showSplash, setShowSplash] = useState(true);
   // Masque l'écran de démarrage natif Android (image fixe, configuré avec
   // launchAutoHide=false dans capacitor.config.json) dès qu'on sait quoi afficher —
@@ -15574,14 +15291,14 @@ function BoutiqueAppInner() {
     );
   }
   if (langChosen === null) {
-    return <div style={{ minHeight: "100vh", background: "#F6F7FB" }} />;
+    return <div style={{ minHeight: "100vh", background: themePalette(authDark).bg }} />;
   }
   if (!langChosen) {
     return <LanguagePickerScreen onChoose={chooseInitialLang} />;
   }
   if (checkingGoogleOnboarding) {
     return (
-      <div style={{ minHeight: "100vh", background: "#F6F7FB", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ minHeight: "100vh", background: themePalette(authDark).bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ width: 36, height: 36, borderRadius: "50%", border: "4px solid #E2E8F0", borderTopColor: "#1B3A5C", animation: "spin 0.8s linear infinite" }} />
         <style>{"@keyframes spin { to { transform: rotate(360deg); } }"}</style>
       </div>
@@ -15594,6 +15311,7 @@ function BoutiqueAppInner() {
       <AuthScreen
         lang={lang}
         setLang={changeLang}
+        darkMode={authDark}
         onLogin={(username, shopName, employee) => setSession({ type: "shop", username, shopName, employee: employee || null })}
         onAdminLogin={() => setSession({ type: "admin" })}
         onDemo={() => setSession({ type: "shop", username: "demo", shopName: "Boutique Démo (exemple)", isDemo: true })}
