@@ -4899,10 +4899,19 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // système + lien profond), qui fonctionne dès maintenant pour tout le
         // monde, sans restriction. Voir le code de connexion natif conservé plus
         // bas dans ce fichier pour le réactiver une fois la vérification obtenue.
+        // On passe par une page de callback HTTPS intermédiaire (au lieu de rediriger
+        // directement vers com.shopnify.app://login-callback) : certains navigateurs
+        // Android refusent d'ouvrir un schéma personnalisé à la suite d'une redirection
+        // OAuth et affichent une erreur au lieu de transmettre à l'app — l'utilisateur
+        // se retrouve alors renvoyé à l'écran de connexion sans que l'app ne reçoive
+        // jamais rien. La redirection HTTPS, elle, fonctionne dans tous les navigateurs ;
+        // c'est ensuite cette page web qui rouvre l'app via le lien profond.
+        // ⚠️ Cette URL doit être ajoutée dans Supabase → Authentication → URL
+        // Configuration → Redirect URLs : https://ma-boutique-tawny.vercel.app/auth-callback.html
         const { data, error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
-            redirectTo: "com.shopnify.app://login-callback",
+            redirectTo: "https://ma-boutique-tawny.vercel.app/auth-callback.html",
             skipBrowserRedirect: true,
           },
         });
@@ -14309,21 +14318,20 @@ function BoutiqueAppInner() {
     let removeListener = null;
     import("@capacitor/app").then(({ App: CapacitorApp }) => {
       CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
-        // DEBUG TEMPORAIRE : confirme que le lien profond arrive bien jusqu'ici.
-        // Si cette alerte n'apparaît JAMAIS après le choix du compte Google, le
-        // problème est que l'app ne reçoit pas du tout le retour (lien profond mal
-        // enregistré côté Android : vérifier l'intent-filter du scheme
-        // "com.shopnify.app" dans AndroidManifest.xml, et que cette URL exacte est
-        // bien dans Supabase → Authentication → URL Configuration → Redirect URLs).
-        alert("appUrlOpen reçu : " + url);
-        if (!url || !url.startsWith("com.shopnify.app://login-callback")) return;
+        console.log("[OAuth] appUrlOpen reçu :", url);
+        if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
+          console.warn("[OAuth] URL inattendue, ignorée");
+          return;
+        }
         try {
           const { error } = await supabase.auth.exchangeCodeForSession(url);
-          // DEBUG TEMPORAIRE : rend l'erreur visible sur le téléphone (avant, elle
-          // partait seulement dans console.error, invisible sans câble USB + debug).
-          if (error) alert("Échec de l'échange du code Google : " + error.message);
+          if (error) {
+            console.error("[OAuth] Échec de l'échange du code Google :", error);
+          } else {
+            console.log("[OAuth] Session échangée avec succès");
+          }
         } catch (e) {
-          alert("Exception pendant l'échange du code Google : " + (e && (e.message || String(e))));
+          console.error("[OAuth] Exception pendant l'échange du code Google :", e);
         }
         const { Browser } = await import("@capacitor/browser");
         try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
@@ -14387,12 +14395,20 @@ function BoutiqueAppInner() {
           }
         } catch (e) { /* pas de cache exploitable, on continue avec la vérification normale */ }
       }
-      setCheckingGoogleOnboarding(true);
+      // Avant : on attendait la réponse de shop_data (ou le délai de 8 s) AVANT de poser
+      // la session. Si la requête était lente, échouait, ou si le délai était dépassé,
+      // aucun setSession n'était jamais appelé — alors qu'une session Google/e-mail
+      // valide existait déjà à ce moment-là. Résultat : l'utilisateur se retrouvait
+      // silencieusement renvoyé à l'écran de connexion après une connexion pourtant
+      // réussie. On sépare maintenant les deux : la session est posée tout de suite,
+      // et le nom de la boutique est complété dès que la requête répond.
+      __mark("Avant requête shop_data (pas de cache utilisable)");
       try {
         // Filet de sécurité : si la requête réseau reste bloquée (ex: juste après un
         // redémarrage à froid, le temps que la connexion se rétablisse), on abandonne
-        // au bout de 8 secondes plutôt que de laisser l'écran blanc affiché indéfiniment.
-        __mark("Avant requête shop_data (pas de cache utilisable)");
+        // au bout de 8 secondes plutôt que de laisser l'écran de chargement indéfiniment
+        // — mais (contrairement à avant) l'utilisateur atterrit sur l'accueil, pas sur
+        // l'écran de connexion, puisque sa session est déjà valide.
         const shopRowPromise = supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle();
         const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Délai dépassé")), 8000));
         const { data: shopRow } = await Promise.race([shopRowPromise, timeoutPromise]);
@@ -14409,9 +14425,12 @@ function BoutiqueAppInner() {
           }
         }
       } catch (e) {
-        __mark("Erreur/délai dépassé pendant la requête shop_data");
-        // En cas d'échec (réseau, délai dépassé...), on n'affiche plus rien de bloqué :
-        // l'utilisateur retombe simplement sur l'écran de connexion et peut réessayer.
+        __mark("Erreur pendant la requête shop_data — session posée quand même");
+        // Échec réseau ponctuel : on a quand même une session Supabase valide, donc on
+        // affiche l'accueil (ShopApp affiche déjà "Chargement de la boutique…" tant que
+        // shopName est vide) plutôt que de renvoyer l'utilisateur au login. Le nom de la
+        // boutique sera récupéré au prochain lancement ou à la prochaine action réseau.
+        setSession({ type: "shop", username: sessionData.user.email, shopName: "" });
       } finally {
         setCheckingGoogleOnboarding(false);
       }
