@@ -1,6 +1,16 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, useMemo, useDeferredValue } from "react";
 import { Preferences } from "@capacitor/preferences";
 import { registerPlugin } from "@capacitor/core";
+// Import STATIQUE (et non plus dynamique via import()) : @capacitor/app et
+// @capacitor/browser importent tous les deux depuis @capacitor/core, qui est déjà
+// importé statiquement juste au-dessus. Les charger dynamiquement à 5-7 endroits
+// différents du fichier forçait Vite/Rollup à créer un chunk séparé pour eux, avec
+// une dépendance circulaire entre ce chunk et le chunk principal (tous deux dépendent
+// de @capacitor/core). C'est cette boucle qui provoquait l'erreur
+// "Cannot access '_' before initialization" juste après le retour de la connexion
+// Google (le tout premier moment où ce chunk était sollicité en conditions réelles).
+import { App as CapacitorApp } from "@capacitor/app";
+import { Browser } from "@capacitor/browser";
 const SalesWidget = registerPlugin("SalesWidget");
 import {
   CRITICAL_STATE_KEY,
@@ -4916,7 +4926,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           },
         });
         if (oauthError) throw oauthError;
-        const { Browser } = await import("@capacitor/browser");
         await Browser.open({ url: data.url });
         // Le navigateur système est bien ouvert : on débloque le bouton tout de
         // suite (avant, il ne se débloquait qu'en cas d'erreur, d'où le blocage
@@ -6590,11 +6599,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     let removeAppListener = null;
     let cancelled = false;
     if (window.Capacitor) {
-      import("@capacitor/app").then(({ App: CapacitorApp }) => {
-        if (cancelled) return;
+      if (!cancelled) {
         CapacitorApp.addListener("appStateChange", ({ isActive }) => { if (isActive) resync(); })
           .then((h) => { if (cancelled) h.remove(); else removeAppListener = h; });
-      });
+      }
     }
     return () => {
       cancelled = true;
@@ -10093,11 +10101,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
     let removeListener = null;
-    import("@capacitor/app").then(({ App: CapacitorApp }) => {
-      CapacitorApp.addListener("appStateChange", async ({ isActive }) => {
-        if (!isActive) { await persistCriticalNow(); flushAllCacheToNativeStorage(); }
-      }).then((handle) => { removeListener = handle; });
-    });
+    CapacitorApp.addListener("appStateChange", async ({ isActive }) => {
+      if (!isActive) { await persistCriticalNow(); flushAllCacheToNativeStorage(); }
+    }).then((handle) => { removeListener = handle; });
     return () => { if (removeListener) removeListener.remove(); };
   }, [persistCriticalNow]);
   // ---- Bouton retour du téléphone (Android) ----
@@ -10149,13 +10155,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     if (typeof window === "undefined" || !window.Capacitor) return;
     let handle = null;
     let cancelled = false;
-    import("@capacitor/app").then(({ App: CapacitorApp }) => {
-      if (cancelled) return;
+    if (!cancelled) {
       CapacitorApp.addListener("backButton", () => {
         const handled = backHandlerRef.current ? backHandlerRef.current() : false;
         if (!handled) CapacitorApp.exitApp();
       }).then((h) => { if (cancelled) h.remove(); else handle = h; });
-    });
+    }
     return () => { cancelled = true; if (handle) handle.remove(); };
   }, []);
   // ⚠️ Ces hooks DOIVENT rester avant tout "return" anticipé (loading, accountSuspended...) :
@@ -14301,11 +14306,9 @@ function BoutiqueAppInner() {
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
     let removeListener = null;
-    import("@capacitor/app").then(({ App: CapacitorApp }) => {
-      CapacitorApp.addListener("appStateChange", ({ isActive }) => {
-        if (!isActive) flushAllCacheToNativeStorage();
-      }).then((handle) => { removeListener = handle; });
-    });
+    CapacitorApp.addListener("appStateChange", ({ isActive }) => {
+      if (!isActive) flushAllCacheToNativeStorage();
+    }).then((handle) => { removeListener = handle; });
     return () => { if (removeListener) removeListener.remove(); };
   }, []);
   // Reçoit le retour de la connexion Google dans l'app native : Google/Supabase renvoient
@@ -14316,27 +14319,24 @@ function BoutiqueAppInner() {
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
     let removeListener = null;
-    import("@capacitor/app").then(({ App: CapacitorApp }) => {
-      CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
-        console.log("[OAuth] appUrlOpen reçu :", url);
-        if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
-          console.warn("[OAuth] URL inattendue, ignorée");
-          return;
+    CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
+      console.log("[OAuth] appUrlOpen reçu :", url);
+      if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
+        console.warn("[OAuth] URL inattendue, ignorée");
+        return;
+      }
+      try {
+        const { error } = await supabase.auth.exchangeCodeForSession(url);
+        if (error) {
+          console.error("[OAuth] Échec de l'échange du code Google :", error);
+        } else {
+          console.log("[OAuth] Session échangée avec succès");
         }
-        try {
-          const { error } = await supabase.auth.exchangeCodeForSession(url);
-          if (error) {
-            console.error("[OAuth] Échec de l'échange du code Google :", error);
-          } else {
-            console.log("[OAuth] Session échangée avec succès");
-          }
-        } catch (e) {
-          console.error("[OAuth] Exception pendant l'échange du code Google :", e);
-        }
-        const { Browser } = await import("@capacitor/browser");
-        try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
-      }).then((handle) => { removeListener = handle; });
-    });
+      } catch (e) {
+        console.error("[OAuth] Exception pendant l'échange du code Google :", e);
+      }
+      try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
+    }).then((handle) => { removeListener = handle; });
     return () => { if (removeListener) removeListener.remove(); };
   }, []);
   // Détecte une connexion réussie via un moyen qui recharge la page — Google (OAuth)
