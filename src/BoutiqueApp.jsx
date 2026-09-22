@@ -14309,12 +14309,21 @@ function BoutiqueAppInner() {
     let removeListener = null;
     import("@capacitor/app").then(({ App: CapacitorApp }) => {
       CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
+        // DEBUG TEMPORAIRE : confirme que le lien profond arrive bien jusqu'ici.
+        // Si cette alerte n'apparaît JAMAIS après le choix du compte Google, le
+        // problème est que l'app ne reçoit pas du tout le retour (lien profond mal
+        // enregistré côté Android : vérifier l'intent-filter du scheme
+        // "com.shopnify.app" dans AndroidManifest.xml, et que cette URL exacte est
+        // bien dans Supabase → Authentication → URL Configuration → Redirect URLs).
+        alert("appUrlOpen reçu : " + url);
         if (!url || !url.startsWith("com.shopnify.app://login-callback")) return;
         try {
           const { error } = await supabase.auth.exchangeCodeForSession(url);
-          if (error) console.error("Échec de l'échange du code Google contre une session :", error.message);
+          // DEBUG TEMPORAIRE : rend l'erreur visible sur le téléphone (avant, elle
+          // partait seulement dans console.error, invisible sans câble USB + debug).
+          if (error) alert("Échec de l'échange du code Google : " + error.message);
         } catch (e) {
-          console.error("Exception pendant l'échange du code Google :", e && (e.message || e));
+          alert("Exception pendant l'échange du code Google : " + (e && (e.message || String(e))));
         }
         const { Browser } = await import("@capacitor/browser");
         try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
