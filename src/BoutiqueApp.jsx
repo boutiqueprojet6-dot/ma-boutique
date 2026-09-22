@@ -8543,12 +8543,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [cashCountInput, setCashCountInput] = useState("");
   const [showSettings, setShowSettings] = useState(false);
   const [settingsView, setSettingsView] = useState("menu");
-  // Remonte tout en haut de l'écran Paramètres à chaque changement de sous-écran (ex : Assistance),
-  // pour ne pas laisser la fenêtre à la position où elle était sur l'écran précédent.
   const settingsScrollRef = useRef(null);
-  useEffect(() => {
-    if (settingsScrollRef.current) settingsScrollRef.current.scrollTop = 0;
-  }, [settingsView, settingsField]);
   // ---- Assistance : message + photo/vidéo FACULTATIVES, envoyé au support sans montrer son adresse ----
   const [supportMsg, setSupportMsg] = useState("");
   const [supportFiles, setSupportFiles] = useState([]);
@@ -8605,6 +8600,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setSupportBusy(false);
   };
   const [settingsField, setSettingsField] = useState(null);
+  // Remonte tout en haut de l'écran Paramètres à chaque changement de sous-écran (ex : Assistance),
+  // pour ne pas laisser la fenêtre à la position où elle était sur l'écran précédent.
+  useEffect(() => {
+    if (settingsScrollRef.current) settingsScrollRef.current.scrollTop = 0;
+  }, [settingsView, settingsField]);
   const [settingsSearchQuery, setSettingsSearchQuery] = useState("");
   const [langSearchQuery, setLangSearchQuery] = useState("");
   const [oldLockPin, setOldLockPin] = useState("");
