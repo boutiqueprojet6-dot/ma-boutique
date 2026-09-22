@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Connexion…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body style="font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#15162C;color:white;">
+  <p id="msg">Connexion en cours…</p>
+  <script>
+    // Récupère tout ce que Supabase a mis dans l'URL (code, state, error…) et le
+    // retransmet tel quel vers l'app via le schéma personnalisé. Cette étape HTTPS
+    // intermédiaire existe car certains navigateurs Android refusent d'ouvrir un
+    // schéma personnalisé directement à la suite d'une redirection OAuth.
+    var qs = location.search || "";
+    var hash = location.hash || "";
+    var deepLink = "com.shopnify.app://login-callback" + qs + hash;
+    location.replace(deepLink);
+    setTimeout(function () {
+      document.getElementById("msg").innerHTML =
+        'Si l\'application ne s\'est pas rouverte automatiquement, ' +
+        '<a href="' + deepLink + '" style="color:#8B9CFF">appuie ici</a>.';
+    }, 1500);
+  </script>
+</body>
+</html>
