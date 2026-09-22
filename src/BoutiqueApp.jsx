@@ -4909,9 +4909,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         if (oauthError) throw oauthError;
         const { Browser } = await import("@capacitor/browser");
         await Browser.open({ url: data.url });
-        // L'utilisateur revient ensuite dans l'app via le lien profond
-        // "com.shopnify.app://login-callback", géré par l'écouteur appUrlOpen plus bas,
-        // qui échange le code contre une session.
+        // Le navigateur système est bien ouvert : on débloque le bouton tout de
+        // suite (avant, il ne se débloquait qu'en cas d'erreur, d'où le blocage
+        // définitif si le retour par lien profond n'arrivait jamais). Le reste de
+        // la connexion se fait via l'écouteur appUrlOpen plus bas, qui échange
+        // le code contre une session.
+        setGoogleLoginBusy(false);
+        // Filet de sécurité : si l'utilisateur ferme le navigateur système sans
+        // se connecter (annulation), on s'assure que le bouton reste débloqué.
+        // (événement du plugin @capacitor/browser lui-même, pas de @capacitor/app)
+        try { Browser.addListener("browserFinished", () => setGoogleLoginBusy(false)); } catch (e) { /* pas grave */ }
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -5149,8 +5156,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   // ================= LOGIN SCREEN =================
   if (screen === "login") {
     return (
-      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
-        <div className="w-full max-w-md md:max-w-3xl lg:max-w-4xl rounded-3xl overflow-hidden shadow-xl md:flex md:items-stretch" style={{ boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}>
+      <div
+        dir="ltr"
+        className="min-h-screen flex items-center justify-center p-4 md:p-8"
+        style={{ background: AT.bg, userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }}
+        onCopy={(e) => e.preventDefault()}
+        onCut={(e) => e.preventDefault()}
+        onContextMenu={(e) => e.preventDefault()}
+      >
+        <style>{".login-screen-guard input, .login-screen-guard textarea { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }"}</style>
+        <div className="w-full max-w-md md:max-w-3xl lg:max-w-4xl rounded-3xl overflow-hidden shadow-xl md:flex md:items-stretch login-screen-guard" style={{ boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}>
           {/* Dark brand panel */}
           <div className="px-7 py-8 text-white md:w-2/5 md:flex md:flex-col md:justify-center" style={{ background: "radial-gradient(120% 100% at 0% 0%, #272A56 0%, #12132A 60%)" }}>
             <div className="flex items-center gap-2 mb-4">
