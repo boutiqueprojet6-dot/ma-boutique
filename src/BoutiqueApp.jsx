@@ -14321,19 +14321,24 @@ function BoutiqueAppInner() {
     let removeListener = null;
     CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
       console.log("[OAuth] appUrlOpen reçu :", url);
+      alert("DEBUG 1/3 : appUrlOpen reçu\n" + url);
       if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
         console.warn("[OAuth] URL inattendue, ignorée");
+        alert("DEBUG : URL inattendue, ignorée\n" + url);
         return;
       }
       try {
         const { error } = await supabase.auth.exchangeCodeForSession(url);
         if (error) {
           console.error("[OAuth] Échec de l'échange du code Google :", error);
+          alert("DEBUG 2/3 : échange du code ÉCHOUÉ\n" + (error.message || JSON.stringify(error)));
         } else {
           console.log("[OAuth] Session échangée avec succès");
+          alert("DEBUG 2/3 : échange du code RÉUSSI");
         }
       } catch (e) {
         console.error("[OAuth] Exception pendant l'échange du code Google :", e);
+        alert("DEBUG 2/3 : EXCEPTION pendant l'échange\n" + (e && (e.message || e)));
       }
       try { await Browser.close(); } catch (e) { /* déjà fermé, sans importance */ }
     }).then((handle) => { removeListener = handle; });
@@ -14352,6 +14357,9 @@ function BoutiqueAppInner() {
       // Dès qu'on a une première réponse de Supabase (peu importe le résultat : connecté
       // ou non), on sait quoi afficher — inutile de garder le splash natif plus longtemps.
       setAppReady(true);
+      if (typeof window !== "undefined" && window.Capacitor) {
+        alert("DEBUG 3/3 : événement auth reçu = " + event + "\nuser présent : " + (sessionData && sessionData.user ? "oui" : "non"));
+      }
       // "SIGNED_IN" = connexion qui vient d'avoir lieu (Google, ou clic sur le lien "Sign in" reçu par e-mail).
       // "INITIAL_SESSION" = session déjà existante retrouvée par Supabase au chargement
       // de la page (ex: après le rechargement provoqué par l'invite "Ajouter à l'écran
@@ -14426,6 +14434,9 @@ function BoutiqueAppInner() {
         }
       } catch (e) {
         __mark("Erreur pendant la requête shop_data — session posée quand même");
+        if (typeof window !== "undefined" && window.Capacitor) {
+          alert("DEBUG : erreur requête shop_data\n" + (e && (e.message || JSON.stringify(e))));
+        }
         // Échec réseau ponctuel : on a quand même une session Supabase valide, donc on
         // affiche l'accueil (ShopApp affiche déjà "Chargement de la boutique…" tant que
         // shopName est vide) plutôt que de renvoyer l'utilisateur au login. Le nom de la
