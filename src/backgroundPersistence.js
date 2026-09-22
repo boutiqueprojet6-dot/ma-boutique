@@ -10,6 +10,13 @@
 // natif AVANT de regarder localStorage.
 // ============================================================
 
+// Import STATIQUE (et non plus dynamique via import()) : @capacitor/preferences
+// est déjà importé statiquement dans BoutiqueApp.jsx, et dépend lui aussi de
+// @capacitor/core. Le charger dynamiquement ICI en plus créait le même cycle
+// de chunks Vite/Rollup que celui qui causait "Cannot access '_' before
+// initialization" avec @capacitor/app et @capacitor/browser.
+import { Preferences } from "@capacitor/preferences";
+
 // Clé unique qui regroupe TOUT l'état critique de l'app.
 // Un seul JSON = une seule écriture native = pas de course asynchrone.
 export const CRITICAL_STATE_KEY = "mb_critical_state_v2";
@@ -105,6 +112,59 @@ export function buildCriticalState({
   };
 }
 
+// Écrit l'état critique dans le stockage NATIF (survit au kill Android).
+// On attend la Promise pour être sûr que l'écriture est terminée.
+export async function writeCriticalState(state) {
+  if (typeof window === "undefined") return;
+  const raw = JSON.stringify(state);
+  // 1) localStorage (rapide, mais peut être vidé par Android)
+  try { window.localStorage.setItem(CRITICAL_STATE_KEY, raw); } catch (e) {}
+  // 2) Stockage natif Capacitor (survit au kill process)
+  if (window.Capacitor) {
+    try {
+      await Preferences.set({ key: CRITICAL_STATE_KEY, value: raw });
+    } catch (e) { /* best effort */ }
+  }
+}
+
+// Lit l'état critique. Priorité : NATIF > localStorage.
+// Retourne null si rien de valide.
+export async function readCriticalState() {
+  if (typeof window === "undefined") return null;
+  if (window.Capacitor) {
+    try {
+      const { value } = await Preferences.get({ key: CRITICAL_STATE_KEY });
+      if (value) {
+        const parsed = JSON.parse(value);
+        if (parsed && parsed.savedAt) return parsed;
+      }
+    } catch (e) {}
+  }
+  try {
+    const raw = window.localStorage.getItem(CRITICAL_STATE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.savedAt) return parsed;
+    }
+  } catch (e) {}
+  return null;
+}
+
+// Supprime l'état critique (à appeler à la déconnexion).
+export async function clearCriticalState() {
+  try { window.localStorage.removeItem(CRITICAL_STATE_KEY); } catch (e) {}
+  if (window.Capacitor) {
+    try {
+      await Preferences.remove({ key: CRITICAL_STATE_KEY });
+    } catch (e) {}
+  }
+}
+
+// Vérifie si l'état sauvegardé est encore frais (< 24h).
+export function isStateFresh(state, maxAgeMs = 24 * 60 * 60 * 1000) {
+  if (!state || !state.savedAt) return false;
+  return Date.now() - state.savedAt < maxAgeMs;
+}
 // Écrit l'état critique dans le stockage NATIF (survit au kill Android).
 // On attend la Promise pour être sûr que l'écriture est terminée.
 export async function writeCriticalState(state) {
