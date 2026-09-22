@@ -5137,6 +5137,17 @@ EXTRA_UI.cashProfitTitle = { am: "የዛሬ የተገመተ ትርፍ", ar: "ا�
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
 EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseigne le prix d'achat de tes produits pour voir ton bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
 EXTRA_UI.cashMargin = { am: "በሽያጭ ላይ ያለ ህዳግ", ar: "هامش المبيعات", bm: "Tɔnɔ feerew kan", bn: "বিক্রয়ের মার্জিন", de: "Marge auf Verkäufe", en: "Margin on sales", es: "Margen sobre ventas", fr: "Marge sur les ventes", ha: "Ribar da ke kan tallace-tallace", hi: "बिक्री पर मार्जिन", id: "Margin penjualan", it: "Margine sulle vendite", ja: "売上の粗利", ko: "판매 마진", nl: "Marge op verkopen", pl: "Marża na sprzedaży", pt: "Margem sobre vendas", ru: "Маржа с продаж", sw: "Kiwango cha faida kwenye mauzo", ta: "விற்பனை மீதான வரம்பு", te: "అమ్మకాలపై మార్జిన్", th: "กำไรขั้นต้นจากการขาย", tl: "Margin sa benta", tr: "Satış marjı", ur: "فروخت پر مارجن", vi: "Biên lợi nhuận bán hàng", wo: "Tabax ci jaay yi", yo: "Èrè lórí títà", zh: "销售毛利", zu: "Inzuzo ekuthengisweni" };
+EXTRA_UI.cashCountConfirmBtn = { am: "ቆጠራውን አስቀምጥ", ar: "حفظ العدّ", bm: "Jate mara", bn: "গণনা সংরক্ষণ করুন", de: "Zählung speichern", en: "Save the count", es: "Guardar el conteo", fr: "Enregistrer le comptage", ha: "Ajiye ƙirgawa", hi: "गिनती सहेजें", id: "Simpan hitungan", it: "Salva il conteggio", ja: "カウントを保存", ko: "계수 저장", nl: "Telling opslaan", pl: "Zapisz przeliczenie", pt: "Salvar a contagem", ru: "Сохранить пересчёт", sw: "Hifadhi hesabu", ta: "எண்ணிக்கையை சேமி", te: "లెక్కను భద్రపరచండి", th: "บันทึกการนับ", tl: "I-save ang bilang", tr: "Sayımı kaydet", ur: "گنتی محفوظ کریں", vi: "Lưu lần đếm", wo: "Denc waññ bi", yo: "Fi kika pamọ́", zh: "保存清点", zu: "Londoloza ukubala" };
+EXTRA_UI.cashCountSaveNoAdjust = { am: "ሳታስተካክል አስቀምጥ", ar: "حفظ دون تعديل", bm: "Jate ni ma yɛlɛma", bn: "সমন্বয় ছাড়াই সংরক্ষণ করুন", de: "Ohne Anpassung speichern", en: "Save without adjusting", es: "Guardar sin ajustar", fr: "Enregistrer sans ajuster", ha: "Ajiye ba tare da daidaitawa ba", hi: "बिना समायोजन के सहेजें", id: "Simpan tanpa menyesuaikan", it: "Salva senza adeguare", ja: "調整せず保存", ko: "조정 없이 저장", nl: "Opslaan zonder aan te passen", pl: "Zapisz bez korekty", pt: "Salvar sem ajustar", ru: "Сохранить без корректировки", sw: "Hifadhi bila kurekebisha", ta: "சரிசெய்யாமல் சேமி", te: "సర్దుబాటు లేకుండా భద్రపరచండి", th: "บันทึกโดยไม่ปรับยอด", tl: "I-save nang hindi inaayos", tr: "Ayarlamadan kaydet", ur: "ایڈجسٹ کیے بغیر محفوظ کریں", vi: "Lưu mà không điều chỉnh", wo: "Denc bu ñu daanul", yo: "Fi pamọ́ láì ṣàtúnṣe", zh: "保存但不调整", zu: "Londoloza ngaphandle kokulungisa" };
+EXTRA_UI.cashReliability = { am: "የገንዘብ ማስቀመጫ አስተማማኝነት", ar: "موثوقية الصندوق", bm: "Kɛsi la dannaya", bn: "ক্যাশের নির্ভরযোগ্যতা", de: "Kassenzuverlässigkeit", en: "Cash reliability", es: "Fiabilidad de caja", fr: "Fiabilité de caisse", ha: "Amincin kuɗi", hi: "गल्ले की विश्वसनीयता", id: "Keandalan kas", it: "Affidabilità cassa", ja: "レジの信頼性", ko: "금고 신뢰도", nl: "Kasbetrouwbaarheid", pl: "Wiarygodność kasy", pt: "Confiabilidade do caixa", ru: "Надёжность кассы", sw: "Uaminifu wa kasha", ta: "கல்லா நம்பகத்தன்மை", te: "గల్లా విశ్వసనీయత", th: "ความน่าเชื่อถือของเงินสด", tl: "Pagiging maaasahan ng kaha", tr: "Kasa güvenilirliği", ur: "گلے کی وشوسنییتا", vi: "Độ tin cậy của quỹ", wo: "Wóoluwaay kes bi", yo: "Ìgbẹ́kẹ̀lé owó ẹrọ", zh: "现金可靠性", zu: "Ukwethembeka kwekheshi" };
+EXTRA_UI.cashReliabilityCount = { am: "በዚህ ጊዜ ውስጥ ቆጠራዎች", ar: "عمليات عدّ في هذه الفترة", bm: "jatew min kɛra nin waati in na", bn: "এই সময়ে গণনা", de: "Zählungen in diesem Zeitraum", en: "counts in this period", es: "conteos en este período", fr: "comptages sur la période", ha: "ƙirge-ƙirge a wannan lokacin", hi: "इस अवधि में गिनतियाँ", id: "hitungan pada periode ini", it: "conteggi in questo periodo", ja: "この期間のカウント回数", ko: "이 기간의 계수 횟수", nl: "tellingen in deze periode", pl: "przeliczeń w tym okresie", pt: "contagens neste período", ru: "пересчётов за период", sw: "hesabu katika kipindi hiki", ta: "இந்த காலத்தில் எண்ணிக்கைகள்", te: "ఈ కాలంలో లెక్కలు", th: "จำนวนการนับในช่วงนี้", tl: "bilang sa panahong ito", tr: "bu dönemdeki sayımlar", ur: "اس مدت میں گنتیاں", vi: "lần đếm trong kỳ này", wo: "waññ yi ci diir bii", yo: "àwọn kika ní àkókò yìí", zh: "本期清点次数", zu: "ukubala kule nkathi" };
+EXTRA_UI.cashReliabilityLastGap = { am: "የመጨረሻ ልዩነት", ar: "آخر فرق", bm: "Danfara laban", bn: "সর্বশেষ পার্থক্য", de: "Letzte Abweichung", en: "Last gap", es: "Última diferencia", fr: "Dernier écart", ha: "Bambancin ƙarshe", hi: "अंतिम अंतर", id: "Selisih terakhir", it: "Ultimo scarto", ja: "直近の差異", ko: "최근 차이", nl: "Laatste verschil", pl: "Ostatnia różnica", pt: "Última diferença", ru: "Последнее расхождение", sw: "Tofauti ya mwisho", ta: "கடைசி வேறுபாடு", te: "చివరి తేడా", th: "ส่วนต่างล่าสุด", tl: "Huling pagkakaiba", tr: "Son fark", ur: "آخری فرق", vi: "Chênh lệch gần nhất", wo: "Farata bu mujj", yo: "Ìyàtọ̀ tí ó kẹ́yìn", zh: "最近差额", zu: "Umehluko wokugcina" };
+EXTRA_UI.cashReliabilityNone = { am: "በዚህ ጊዜ ውስጥ ምንም ቆጠራ የለም።", ar: "لا يوجد عدّ في هذه الفترة.", bm: "Foyi ma jate nin waati in na.", bn: "এই সময়ে কোনো গণনা নেই।", de: "Keine Zählung in diesem Zeitraum.", en: "No count in this period.", es: "Sin conteos en este período.", fr: "Aucun comptage sur cette période.", ha: "Babu wata ƙirgawa a wannan lokacin.", hi: "इस अवधि में कोई गिनती नहीं।", id: "Tidak ada hitungan pada periode ini.", it: "Nessun conteggio in questo periodo.", ja: "この期間のカウントはありません。", ko: "이 기간에 계수 기록이 없습니다.", nl: "Geen telling in deze periode.", pl: "Brak przeliczeń w tym okresie.", pt: "Nenhuma contagem neste período.", ru: "Нет пересчётов за этот период.", sw: "Hakuna hesabu katika kipindi hiki.", ta: "இந்த காலத்தில் எண்ணிக்கை இல்லை.", te: "ఈ కాలంలో లెక్కింపు లేదు.", th: "ไม่มีการนับในช่วงนี้", tl: "Walang bilang sa panahong ito.", tr: "Bu dönemde sayım yok.", ur: "اس مدت میں کوئی گنتی نہیں۔", vi: "Không có lần đếm nào trong kỳ này.", wo: "Amul waññ ci diir bii.", yo: "Kò sí kika ní àkókò yìí.", zh: "此期间没有清点记录。", zu: "Akukho kubala kule nkathi." };
+EXTRA_UI.cashReliabilityPerfect = { am: "ገንዘብ ሁልጊዜ ትክክል ነው ✓", ar: "الصندوق مضبوط دائمًا ✓", bm: "Kɛsi bɛ dafa tuma bɛɛ ✓", bn: "ক্যাশ সবসময় ঠিক ✓", de: "Kasse stimmt immer ✓", en: "Cash always balanced ✓", es: "Caja siempre cuadrada ✓", fr: "Caisse toujours juste ✓", ha: "Kuɗi koyaushe sun daidaita ✓", hi: "गल्ला हमेशा सही ✓", id: "Kas selalu pas ✓", it: "Cassa sempre corretta ✓", ja: "レジは常に合っています ✓", ko: "금고가 항상 맞습니다 ✓", nl: "Kas altijd kloppend ✓", pl: "Kasa zawsze się zgadza ✓", pt: "Caixa sempre certo ✓", ru: "Касса всегда сходится ✓", sw: "Kasha linalingana kila wakati ✓", ta: "கல்லா எப்போதும் சரி ✓", te: "గల్లా ఎప్పుడూ సరిగ్గా ఉంది ✓", th: "ยอดตรงเสมอ ✓", tl: "Palaging tumutugma ang kaha ✓", tr: "Kasa hep tutuyor ✓", ur: "گلا ہمیشہ درست ✓", vi: "Quỹ luôn khớp ✓", wo: "Kes bi dafa mat ba tey ✓", yo: "Owó máa ń pé nígbà gbogbo ✓", zh: "现金始终无误 ✓", zu: "Ikheshi lihlala lilingana ✓" };
+EXTRA_UI.cashTrend = { am: "የገንዘብ አዝማሚያ", ar: "اتجاه الصندوق", bm: "Kɛsi ka taama", bn: "ক্যাশের প্রবণতা", de: "Kassentrend", en: "Cash trend", es: "Tendencia de caja", fr: "Tendance de caisse", ha: "Yanayin kuɗi", hi: "गल्ले का रुझान", id: "Tren kas", it: "Andamento cassa", ja: "レジの推移", ko: "금고 추세", nl: "Kastrend", pl: "Trend kasy", pt: "Tendência do caixa", ru: "Динамика кассы", sw: "Mwelekeo wa kasha", ta: "கல்லா போக்கு", te: "గల్లా ధోరణి", th: "แนวโน้มเงินสด", tl: "Takbo ng kaha", tr: "Kasa eğilimi", ur: "گلے کا رجحان", vi: "Xu hướng quỹ", wo: "Yoon kes bi", yo: "Ìrìn owó ẹrọ", zh: "现金趋势", zu: "Ukuthambekela kwekheshi" };
+EXTRA_UI.cashProfitPeriod = { am: "የተገመተ ትርፍ", ar: "الربح التقديري", bm: "Tɔnɔ jatelen dabɔlen", bn: "আনুমানিক লাভ", de: "Geschätzter Gewinn", en: "Estimated profit", es: "Beneficio estimado", fr: "Bénéfice estimé", ha: "Ƙiyasin riba", hi: "अनुमानित लाभ", id: "Perkiraan laba", it: "Guadagno stimato", ja: "推定利益", ko: "예상 이익", nl: "Geschatte winst", pl: "Szacowany zysk", pt: "Lucro estimado", ru: "Ожидаемая прибыль", sw: "Faida inayokadiriwa", ta: "மதிப்பிட்ட லாபம்", te: "అంచనా లాభం", th: "กำไรโดยประมาณ", tl: "Tantiyang tubo", tr: "Tahmini kâr", ur: "تخمینی منافع", vi: "Lợi nhuận ước tính", wo: "Tabax bu ñu waxtaan", yo: "Èrè tí a fojú díwọ̀n", zh: "预计利润", zu: "Inzuzo elinganiselwe" };
+EXTRA_UI.cashProfitNoCostPeriod = { am: "የዚህን ጊዜ ትርፍ ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى ربحك لهذه الفترة.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka nin waati tɔnɔ ye.", bn: "এই সময়ের লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn für diesen Zeitraum zu sehen.", en: "Set your products' purchase price to see your profit for this period.", es: "Indica el precio de compra de tus productos para ver tu beneficio de este período.", fr: "Renseigne le prix d'achat de tes produits pour voir ton bénéfice sur cette période.", ha: "Saka farashin sayen kayanka don ganin ribar wannan lokacin.", hi: "इस अवधि का लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat laba periode ini.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno di questo periodo.", ja: "この期間の利益を見るには商品の仕入れ価格を入力してください。", ko: "이 기간의 이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst voor deze periode te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk za ten okres.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro deste período.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль за этот период.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida ya kipindi hiki.", ta: "இந்த காலத்தின் லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "ఈ కాలానికి లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไรของช่วงนี้", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo sa panahong ito.", tr: "Bu dönemin kârını görmek için ürünlerinin alış fiyatını gir.", ur: "اس مدت کا منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận kỳ này.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis tabax bu diir bii.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè àkókò yìí.", zh: "填写商品进价即可查看本期利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo yale nkathi." };
+EXTRA_UI.cashOverview = { fr: "Vue d'ensemble", en: "Overview", es: "Resumen", pt: "Visão geral", de: "Überblick", it: "Panoramica", nl: "Overzicht", pl: "Przegląd", ru: "Обзор", tr: "Genel bakış", ar: "نظرة عامة", hi: "अवलोकन", bn: "সংক্ষিপ্ত বিবরণ", ur: "جائزہ", ta: "கண்ணோட்டம்", te: "అవలోకనం", th: "ภาพรวม", zh: "概览", ja: "概要", ko: "개요", id: "Ringkasan", vi: "Tổng quan", tl: "Pangkalahatang-ideya", sw: "Muhtasari", ha: "Bayyani", yo: "Àkópọ̀", zu: "Uhlolojikelele", am: "አጠቃላይ እይታ", bm: "Yɛrɛkajira", wo: "Melokaani" };
 // Palette de fonds proposés pour l'image de partage produit. "glossy" ajoute
 // un reflet diagonal pour un effet plus "3D" / brillant.
 const SHARE_CARD_STYLES = [
@@ -5748,6 +5759,7 @@ function mergeShop(baseShop, localShop, remoteShop) {
     products: mergeProducts(base.products, local.products, remote.products),
     sales: sortByDate(mergeById(base.sales, local.sales, remote.sales)),
     expenses: sortByDate(mergeById(base.expenses, local.expenses, remote.expenses)),
+    cashCounts: sortByDate(mergeById(base.cashCounts, local.cashCounts, remote.cashCounts)),
     debts: mergeDebts(base.debts, local.debts, remote.debts),
     debtEvents: sortByDate(mergeById(base.debtEvents, local.debtEvents, remote.debtEvents)),
     historyLog: sortByDate(mergeById(base.historyLog, local.historyLog, remote.historyLog)),
@@ -7758,6 +7770,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const debtEvents = useMemo(() => allDebtEvents.filter((x) => !x.cancelled), [allDebtEvents]);
   const setDebtEvents = setAllDebtEvents;
   const [expenses, setExpenses] = useState([]);
+  // Historique des comptages de caisse (fiabilité) : chaque comptage garde le solde attendu,
+  // le montant compté et l'écart, même quand aucun ajustement n'est fait.
+  const [cashCounts, setCashCounts] = useState([]);
   const [cashFund, setCashFund] = useState(0);
   const [lowStockThreshold, setLowStockThreshold] = useState(5);
   const [darkMode, setDarkMode] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
@@ -8867,6 +8882,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setSales(shop.sales || []);
     setDebts(shop.debts || []);
     setExpenses(shop.expenses || []);
+    setCashCounts(shop.cashCounts || []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
     setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
@@ -9058,6 +9074,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setSales(demoSales);
       setDebts([{ id: "debt1", customer: "Moussa Koné", amount: 1500, product: "Savon x3", date: new Date(now - 90000000).toISOString(), paid: false }]);
       setExpenses([{ id: "e1", label: t(lang, "othTransportMarchandise"), amount: 2000, date: new Date(now - 3600000).toISOString() }]);
+      setCashCounts([]);
       setCashFund(10000);
       setLowStockThreshold(5);
       setDarkMode(false);
@@ -9206,6 +9223,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       sales: overrides.sales ?? allSales,
       debts: overrides.debts ?? debts,
       expenses: overrides.expenses ?? expenses,
+      cashCounts: overrides.cashCounts ?? cashCounts,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
       darkMode: overrides.darkMode ?? darkMode,
@@ -9231,6 +9249,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setSales(next.sales);
     setDebts(next.debts);
     setExpenses(next.expenses);
+    setCashCounts(next.cashCounts || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
     setDarkMode(next.darkMode);
@@ -9951,19 +9970,34 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setFundInput(""); setShowEditFund(false);
     setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
   };
-  // Comptage de caisse : l'utilisateur a compté l'argent réellement présent ; on recale le fond de
-  // caisse de l'écart pour que le solde estimé corresponde exactement à ce qu'il a compté.
-  const adjustCashToCount = () => {
+  // Comptage de caisse : on garde toujours une trace du comptage (solde attendu, montant compté,
+  // écart), même quand l'utilisateur ne corrige rien — c'est ce qui alimente la fiabilité de caisse
+  // affichée dans l'onglet Caisse. L'ajustement du fond de caisse, lui, reste optionnel.
+  const recordCashCount = (thenAdjust) => {
     const counted = parseFloat(cashCountInput);
     if (isNaN(counted)) return;
     const gap = counted - cashBalance;
-    if (gap === 0) return;
-    const newFund = cashFund + gap;
-    saveAll({ cashFund: newFund });
-    logAction(`${t(lang, "logCashFundUpdated")} : ${localizedNumber(newFund)}`);
+    const entry = {
+      id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
+      date: new Date().toISOString(),
+      expected: cashBalance,
+      counted,
+      gap,
+      adjusted: !!(thenAdjust && gap !== 0),
+      actorId: activeEmployee ? activeEmployee.id : null,
+      actorName: activeEmployee ? activeEmployee.name : null,
+    };
+    if (thenAdjust && gap !== 0) {
+      const newFund = cashFund + gap;
+      saveAll({ cashFund: newFund, cashCounts: [...cashCounts, entry] });
+      logAction(`${t(lang, "logCashFundUpdated")} : ${localizedNumber(newFund)}`);
+    } else {
+      saveAll({ cashCounts: [...cashCounts, entry] });
+    }
     setCashCountInput(""); setShowCashCount(false);
     setAmountsHidden(true);
   };
+  const adjustCashToCount = () => recordCashCount(true);
   // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
   const changeLockPin = async () => {
     setLockPinMsg("");
@@ -11470,7 +11504,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       ...Object.values(txn),
       ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", date: e.date, amount: e.amount, label: e.label, expenseId: e.id, actorName: e.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
-    return { cashIn: cashInTotal, out: outTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal };
+    // Bénéfice de la période : marge des ventes dont le prix d'achat est connu, moins les dépenses.
+    let margin = 0, costed = 0;
+    pSales.forEach((sl) => { if (sl.costPrice != null) { margin += sl.total - sl.costPrice * sl.qty; costed++; } });
+    const profit = { margin, costed, net: margin - outTotal };
+    // Fiabilité de caisse : comptages faits sur la période, et le dernier écart constaté (période confondue).
+    const pCounts = cashCounts.filter((c) => inPeriod(c.date));
+    const lastCount = cashCounts.length > 0 ? [...cashCounts].sort((a, b) => new Date(b.date) - new Date(a.date))[0] : null;
+    // Tendance : flux net (espèces − dépenses) des 7 derniers jours, pour un coup d'œil visuel.
+    const trend7 = last30Days().slice(-7).map((day) => {
+      const dSales = sales.filter((sl) => sl.date.slice(0, 10) === day && sl.payment === "cash").reduce((sum, sl) => sum + sl.total, 0);
+      const dExp = expenses.filter((e) => e.date.slice(0, 10) === day).reduce((sum, e) => sum + e.amount, 0);
+      return { day, net: dSales - dExp };
+    });
+    const journalWithCounts = [
+      ...journal,
+      ...pCounts.map((c) => ({ id: "c-" + c.id, kind: "count", date: c.date, gap: c.gap, counted: c.counted, adjusted: c.adjusted, actorName: c.actorName || null })),
+    ].sort((a, b) => new Date(b.date) - new Date(a.date));
+    return { cashIn: cashInTotal, out: outTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, reliability: { count: pCounts.length, lastGap: lastCount ? lastCount.gap : null }, trend7 };
   })() : null;
   const days = last30Days();
   const firstSaleDate = sales.length > 0
@@ -12190,8 +12241,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     : `${cashCountGap > 0 ? tx(lang, "cashGapOver") : tx(lang, "cashGapShort")} : ${cashCountGap > 0 ? "+" : "-"}${fcfa(Math.abs(cashCountGap))}`}
                 </div>
               )}
-              {cashCountGap !== null && cashCountGap !== 0 && hasPermission("editCash") && (
-                <button onClick={adjustCashToCount} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "cashAdjustBtn")}</button>
+              {cashCountGap !== null && hasPermission("editCash") && (
+                <div className="space-y-2">
+                  {cashCountGap !== 0 && (
+                    <button onClick={adjustCashToCount} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "cashAdjustBtn")}</button>
+                  )}
+                  <button onClick={() => recordCashCount(false)} className="w-full py-3 rounded-lg font-semibold text-sm" style={{ background: cashCountGap === 0 ? INDIGO : "transparent", color: cashCountGap === 0 ? "white" : T.text, border: cashCountGap === 0 ? "none" : `1px solid ${T.border}` }}>
+                    {tx(lang, cashCountGap === 0 ? "cashCountConfirmBtn" : "cashCountSaveNoAdjust")}
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -13132,39 +13190,62 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         {tab === "cash" && hasPermission("viewCash") && cashView && (
           <div className="space-y-2">
             {(
-              <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+              <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: cashBalance < 0 ? (darkMode ? "linear-gradient(135deg, #3a1f1f, #241010)" : "linear-gradient(135deg, #b8562f, #92400e)") : (darkMode ? "linear-gradient(135deg, #0f2f26, #08201a)" : "linear-gradient(135deg, #059669, #047857)"), boxShadow: darkMode ? "none" : `0 10px 22px ${cashBalance < 0 ? "rgba(184,86,47,0.28)" : "rgba(5,150,105,0.28)"}` }}>
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <p className="text-sm font-extrabold" style={{ color: T.text }}>{t(lang, "cashBalance")}</p>
+                      <p className="text-xs font-bold" style={{ color: "rgba(255,255,255,0.75)" }}>{t(lang, "cashBalance")}</p>
                       <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 11, lineHeight: 1 }}>
                         {amountsHidden ? "🙈" : "👁️"}
                       </button>
                     </div>
-                    <p className="font-black tracking-tight" style={{ fontSize: 28, color: amountsHidden ? T.muted : (cashBalance < 0 ? CLAY : GREEN), letterSpacing: amountsHidden ? 2 : -0.8, marginTop: 2 }}>{maskAmount(fcfa(cashBalance))}</p>
+                    <p className="font-black tracking-tight" style={{ fontSize: 30, color: "white", letterSpacing: amountsHidden ? 2 : -0.8, marginTop: 2 }}>{maskAmount(fcfa(cashBalance))}</p>
                   </div>
-                  <div className="rounded-2xl flex items-center justify-center" style={{ width: 52, height: 52, background: darkMode ? "rgba(52,211,153,0.15)" : "rgba(5,150,105,0.1)", animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
+                  <div className="rounded-2xl flex items-center justify-center" style={{ width: 52, height: 52, background: "rgba(255,255,255,0.15)", animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
                     <span style={{ fontSize: 26 }}>🪙</span>
                   </div>
                 </div>
-                <p className="text-[10px] mt-2" style={{ color: T.muted, lineHeight: 1.4 }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}</p>
+                <p className="text-[10px] mt-2" style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.4 }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}</p>
                 {hasPermission("editCash") && (
-                  <button onClick={() => requireUnlock(openEditFund)} className="inline-flex items-center gap-1 text-[11px] font-bold mt-2.5 px-3 py-1.5 rounded-full" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(5,150,105,0.08)", color: darkMode ? "#6ee7b7" : "#065f46" }}>
-                    <Wallet size={11} /> {t(lang, "setCashFund")}
-                  </button>
-                )}
-                {hasPermission("editCash") && (
-                  <button onClick={() => requireUnlock(() => setShowAddExpense(true))} className="w-full mt-2.5 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white font-bold text-xs" style={{ background: CLAY }}>
-                    <Plus size={14} /> {t(lang, "addExpense")}
-                  </button>
-                )}
-                {hasPermission("editCash") && (
-                  <button onClick={() => requireUnlock(() => { setCashCountInput(""); setShowCashCount(true); })} className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-xs" style={{ background: "transparent", color: T.text, border: `1px solid ${T.border}` }}>
-                    <Wallet size={14} /> {tx(lang, "cashCountBtn")}
-                  </button>
+                  <div className="grid grid-cols-3 gap-2 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
+                    <button onClick={() => requireUnlock(openEditFund)} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.12)" }}>
+                      <Wallet size={16} color="white" />
+                      <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{t(lang, "setCashFund")}</span>
+                    </button>
+                    <button onClick={() => requireUnlock(() => setShowAddExpense(true))} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.12)" }}>
+                      <Plus size={16} color="white" />
+                      <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{t(lang, "addExpense")}</span>
+                    </button>
+                    <button onClick={() => requireUnlock(() => { setCashCountInput(""); setShowCashCount(true); })} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.12)" }}>
+                      <span style={{ fontSize: 16, lineHeight: 1 }}>🔎</span>
+                      <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{tx(lang, "cashCountBtn")}</span>
+                    </button>
+                  </div>
                 )}
               </div>
             )}
+            <div className="rounded-2xl p-3.5" style={cashCardStyle}>
+              <p className="text-[11px] font-bold mb-2" style={{ color: T.muted }}>{tx(lang, "cashTrend")}</p>
+              <div className="flex items-end gap-1.5" style={{ height: 56 }}>
+                {(() => {
+                  const maxAbs = Math.max(1, ...cashView.trend7.map((d) => Math.abs(d.net)));
+                  return cashView.trend7.map((d, di) => {
+                    const h = Math.max(3, Math.round((Math.abs(d.net) / maxAbs) * 48));
+                    const isToday = d.day === todayKey();
+                    return (
+                      <div key={di} className="flex-1 flex flex-col items-center justify-end" style={{ height: 48 }}>
+                        <div title={`${fcfa(d.net)}`} style={{ width: "100%", maxWidth: 18, height: h, borderRadius: 4, background: d.net < 0 ? CLAY : (isToday ? (darkMode ? "#34d399" : "#059669") : (darkMode ? "#2f6b52" : "#a7e0c4")) }} />
+                      </div>
+                    );
+                  });
+                })()}
+              </div>
+              <div className="flex justify-between mt-1">
+                {cashView.trend7.map((d, di) => (
+                  <span key={di} className="flex-1 text-center text-[9px]" style={{ color: T.muted }}>{new Date(d.day).toLocaleDateString(lang, { weekday: "narrow" })}</span>
+                ))}
+              </div>
+            </div>
             <div className="flex gap-1.5">
               {[["today", "cashPeriodToday"], ["7", "cashPeriod7"], ["30", "cashPeriod30"], ["all", "cashPeriodAll"]].map(([pid, pkey]) => (
                 <button key={pid} onClick={() => { setCashPeriod(pid); setCashJournalLimit(20); }} className="flex-1 py-2 rounded-xl text-[11px] font-bold" style={{ background: cashPeriod === pid ? (darkMode ? "#3b5b8a" : INDIGO) : T.card, color: cashPeriod === pid ? "white" : T.text, border: cashPeriod === pid ? "1px solid transparent" : `1px solid ${T.border}` }}>
@@ -13172,6 +13253,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </button>
               ))}
             </div>
+            <p className="text-[11px] font-bold px-0.5" style={{ color: T.muted }}>{tx(lang, "cashOverview")}</p>
             <div className="grid grid-cols-3 gap-2">
               {[
                 { label: tx(lang, "cashIn"), value: cashView.cashIn, sign: "+", color: darkMode ? "#8fd6a3" : "#16a34a" },
@@ -13183,6 +13265,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <p className="text-[13px] font-extrabold mt-1" style={{ color: amountsHidden ? T.muted : tile.color, wordBreak: "break-word" }}>{amountsHidden ? "•••••" : `${tile.value < 0 ? "-" : tile.sign}${fcfa(Math.abs(tile.value))}`}</p>
                 </div>
               ))}
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="rounded-2xl p-3" style={cashCardStyle}>
+                <p className="text-[10px] font-semibold" style={{ color: T.muted }}>{tx(lang, "cashProfitPeriod")}</p>
+                {cashView.profit.costed > 0 ? (
+                  <p className="text-[15px] font-extrabold mt-1" style={{ color: amountsHidden ? T.muted : (cashView.profit.net < 0 ? CLAY : (darkMode ? "#8fd6a3" : "#16a34a")) }}>{amountsHidden ? "•••••" : fcfa(cashView.profit.net)}</p>
+                ) : (
+                  <p className="text-[10px] mt-1.5" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "cashProfitNoCostPeriod")}</p>
+                )}
+              </div>
+              <div className="rounded-2xl p-3" style={cashCardStyle}>
+                <p className="text-[10px] font-semibold" style={{ color: T.muted }}>{tx(lang, "cashReliability")}</p>
+                {cashView.reliability.count > 0 ? (
+                  <>
+                    <p className="text-[15px] font-extrabold mt-1" style={{ color: T.text }}>{localizedNumber(cashView.reliability.count)} <span className="text-[10px] font-semibold" style={{ color: T.muted }}>{tx(lang, "cashReliabilityCount")}</span></p>
+                    {cashView.reliability.lastGap !== null && (
+                      <p className="text-[10px] mt-0.5" style={{ color: cashView.reliability.lastGap === 0 ? (darkMode ? "#8fd6a3" : "#16a34a") : CLAY }}>
+                        {cashView.reliability.lastGap === 0 ? tx(lang, "cashReliabilityPerfect") : `${tx(lang, "cashReliabilityLastGap")} : ${cashView.reliability.lastGap > 0 ? "+" : "-"}${fcfa(Math.abs(cashView.reliability.lastGap))}`}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-[10px] mt-1.5" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "cashReliabilityNone")}</p>
+                )}
+              </div>
             </div>
             {(cashView.salesTotal > 0 || cashView.debtIn > 0) && (
               <div className="rounded-2xl p-3.5" style={cashCardStyle}>
@@ -13243,6 +13350,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     const dayKey = String(m.date).slice(0, 10);
                     const showDay = idx === 0 || String(arr[idx - 1].date).slice(0, 10) !== dayKey;
                     const isSale = m.kind === "sale";
+                    const isCount = m.kind === "count";
                     return (
                       <React.Fragment key={m.id}>
                         {showDay && (
@@ -13250,17 +13358,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         )}
                         <div className="flex items-center justify-between rounded-xl p-2 gap-2" style={{ background: T.input }}>
                           <div className="flex items-center gap-2 min-w-0">
-                            <div className="rounded-lg flex items-center justify-center flex-shrink-0" style={{ width: 28, height: 28, background: isSale ? (darkMode ? "rgba(52,211,153,0.15)" : "#dcfce7") : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
-                              <span style={{ fontSize: 13 }}>{isSale ? "💵" : "🧾"}</span>
+                            <div className="rounded-lg flex items-center justify-center flex-shrink-0" style={{ width: 28, height: 28, background: isCount ? (darkMode ? "rgba(59,91,138,0.25)" : "#e0e7ff") : isSale ? (darkMode ? "rgba(52,211,153,0.15)" : "#dcfce7") : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
+                              <span style={{ fontSize: 13 }}>{isCount ? "🔎" : isSale ? "💵" : "🧾"}</span>
                             </div>
                             <div className="min-w-0">
-                              <p className="text-[11px] font-semibold truncate">{isSale ? (m.names.length ? m.names.join(", ") : t(lang, "navSale")) : m.label}</p>
+                              <p className="text-[11px] font-semibold truncate">{isCount ? tx(lang, "cashCountBtn") : isSale ? (m.names.length ? m.names.join(", ") : t(lang, "navSale")) : m.label}</p>
                               <p className="text-[10px]" style={{ color: T.muted }}>{fullTime(m.date)}{m.actorName ? ` · ${m.actorName}` : ""}</p>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 flex-shrink-0">
-                            <span className="text-[11px] font-extrabold" style={{ color: amountsHidden ? T.muted : (isSale ? (darkMode ? "#8fd6a3" : "#16a34a") : CLAY) }}>{amountsHidden ? "•••••" : `${isSale ? "+" : "-"}${fcfa(m.amount)}`}</span>
-                            {!isSale && hasPermission("editCash") && (
+                            {isCount ? (
+                              <span className="text-[11px] font-extrabold" style={{ color: amountsHidden ? T.muted : (m.gap === 0 ? (darkMode ? "#8fd6a3" : "#16a34a") : CLAY) }}>
+                                {amountsHidden ? "•••••" : (m.gap === 0 ? tx(lang, "cashGapOk") : `${m.gap > 0 ? "+" : "-"}${fcfa(Math.abs(m.gap))}`)}
+                              </span>
+                            ) : (
+                              <span className="text-[11px] font-extrabold" style={{ color: amountsHidden ? T.muted : (isSale ? (darkMode ? "#8fd6a3" : "#16a34a") : CLAY) }}>{amountsHidden ? "•••••" : `${isSale ? "+" : "-"}${fcfa(m.amount)}`}</span>
+                            )}
+                            {!isSale && !isCount && hasPermission("editCash") && (
                               <button onClick={() => requireUnlock(() => setConfirmModal({ message: `Supprimer cette dépense de ${fcfa(m.amount)} ?`, onConfirm: () => deleteExpense(m.expenseId) }))}><Trash2 size={13} color={T.muted} /></button>
                             )}
                           </div>
@@ -14197,7 +14311,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "sharecard" && tx(lang, "shareCardSettingsTitle")}
                   {settingsField === "defpayment" && (t(lang, "setPaiementParDefaut"))}
                   {settingsField === "debtdelay" && (t(lang, "setDettesClients"))}
-                  {settingsField === "cashsettings" && (t(lang, "setCaisse"))}
                   {settingsField === "benchmark" && t(lang, "benchmarkTitle")}
                   {settingsField === "export" && (t(lang, "setExporterLesDonnees"))}
                   {settingsField === "resetdata" && (t(lang, "setReinitialiser"))}
@@ -14329,7 +14442,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {settingsView === "finances" && !settingsField && [
                 { id: "defpayment", icon: CreditCard, label: t(lang, "setPaiementParDefaut"), desc: "Espèces, Mobile Money" },
                 { id: "debtdelay", icon: Clock, label: t(lang, "setDettesClients"), desc: t(lang, "setDelaiDeRelance") },
-                { id: "cashsettings", icon: Wallet, label: t(lang, "setCaisse"), desc: t(lang, "setFondDeCaisseDepenses") },
                 { id: "benchmark", icon: BarChart3, label: t(lang, "benchmarkTitle"), desc: benchmarkOptIn ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
               ].map((item) => { const Icon = item.icon; return (
                 <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
@@ -14649,27 +14761,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
               {/* Finances — Caisse */}
-              {settingsField === "cashsettings" && (
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
-                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setFondDeCaisse")}</div>
-                    <div style={{ color: amountsHidden ? T.muted : "#fbbf24", fontSize: 20, fontWeight: 700 }}>{maskAmount(fcfa(cashFund))}</div>
-                    {hasPermission("editCash") && (
-                      <button onClick={() => requireUnlock(() => { openEditFund(); setShowSettings(false); })} style={{ marginTop: 10, background: "#fbbf241a", color: "#fbbf24", border: "1px solid #fbbf2433", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{t(lang, "setCashFund")}</button>
-                    )}
-                  </div>
-                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
-                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4, display: "flex", alignItems: "center", gap: 6 }}>{t(lang, "setSoldeEstime")}
-                      <button onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }} style={{ fontSize: 13, lineHeight: 1 }}>{amountsHidden ? "🙈" : "👁️"}</button>
-                    </div>
-                    <div style={{ color: amountsHidden ? T.muted : (cashBalance < 0 ? "#f87171" : "#34d399"), fontSize: 20, fontWeight: 700 }}>{maskAmount(fcfa(cashBalance))}</div>
-                  </div>
-                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
-                    <div style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setTotalDepenses")}</div>
-                    <div style={{ color: amountsHidden ? T.muted : "#f87171", fontSize: 16, fontWeight: 700 }}>{maskAmount(fcfa(totalExpenses))}</div>
-                  </div>
-                </div>
-              )}
               {/* Finances — Benchmark communautaire */}
               {settingsField === "benchmark" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
