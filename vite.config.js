@@ -11,6 +11,14 @@ export default defineConfig({
       includeAssets: ["favicon.ico", "icon-192.png", "icon-512.png"],
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        // Par défaut, le Service Worker intercepte TOUTE navigation directe
+        // vers n'importe quelle URL et sert index.html à la place (comportement
+        // normal pour une SPA classique). Mais auth-callback.html doit rester
+        // une vraie page indépendante (elle contient le code qui rouvre
+        // l'app Android après la connexion Google) — sinon c'est toujours
+        // l'app React (index.html) qui s'affiche à sa place, et le lien
+        // profond n'est jamais déclenché.
+        navigateFallbackDenylist: [/^\/auth-callback\.html$/],
       },
       manifest: {
         name: "Shopnify",
