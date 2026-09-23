@@ -168,10 +168,6 @@ jobs:
                           <data android:scheme="com.shopnify.app" android:host="login-callback" />
                       </intent-filter>
           """
-              # On cible explicitement l'intent-filter qui contient le LAUNCHER (l'activité
-              # principale), et non "le premier </intent-filter> du fichier" : si un plugin ou
-              # une version de cap sync insère un autre intent-filter avant, l'ancienne méthode
-              # plaçait le deep link au mauvais endroit (silencieusement, sans erreur de build).
               pattern = r'(<category android:name="android\.intent\.category\.LAUNCHER"\s*/>\s*</intent-filter>)'
               if not re.search(pattern, content):
                   raise SystemExit("ERREUR : intent-filter LAUNCHER introuvable dans le manifest, rien n'a ete insere.")
@@ -429,14 +425,16 @@ jobs:
           echo "${{ secrets.ANDROID_DEBUG_KEYSTORE }}" | base64 -d > ~/.android/debug.keystore
           echo "Certificat de signature stable installé"
 
+      - name: Show SHA256 fingerprint (pour assetlinks.json)
+        run: |
+          echo "----- Empreinte SHA256 de la clé de signature -----"
+          keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android | grep "SHA256:"
+          echo "-----------------------------------------------------"
+          echo "Copie la valeur ci-dessus (sans 'SHA256: ') dans public/.well-known/assetlinks.json"
+
       - name: Sync Capacitor
         run: npx cap sync android
 
-      # ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
-      # Affiche dans les logs le contenu exact du manifest juste avant la compilation,
-      # pour vérifier que le lien profond Google OAuth et les permissions sont bien présents
-      # au moment du build (et pas seulement juste après l'étape qui les ajoute, avant que
-      # "cap sync" ne s'exécute).
       - name: Verify manifest before build
         run: |
           echo "----- Contenu complet de AndroidManifest.xml -----"
@@ -468,7 +466,6 @@ jobs:
             echo "PROBLEME : le receiver du widget est ABSENT du manifest final !"
             exit 1
           fi
-      # ---- FIN DIAGNOSTIC TEMPORAIRE ----
 
       - name: Build APK
         run: |
@@ -507,5 +504,3 @@ jobs:
           name: merged-manifest-dump
           path: merged_manifest_dump.txt
           overwrite: true
-
-
