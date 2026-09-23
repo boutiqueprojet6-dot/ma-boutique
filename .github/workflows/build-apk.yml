@@ -476,6 +476,24 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug
 
+      - name: Verify deep link survived the Gradle manifest merger
+        run: |
+          AAPT=$(find "$ANDROID_HOME" -name "aapt" -type f 2>/dev/null | sort -V | tail -1)
+          if [ -z "$AAPT" ]; then
+            echo "PROBLEME : aapt introuvable, impossible de verifier le manifest final."
+            exit 1
+          fi
+          echo "aapt utilise : $AAPT"
+          echo "----- Manifest COMPILE (apres fusion Gradle) -----"
+          $AAPT dump xmltree android/app/build/outputs/apk/debug/app-debug.apk AndroidManifest.xml > merged_manifest_dump.txt
+          cat merged_manifest_dump.txt
+          echo "---------------------------------------------------"
+          if grep -q "login-callback" merged_manifest_dump.txt; then
+            echo "OK : le lien profond 'login-callback' est bien present dans l'APK COMPILE."
+          else
+            echo "PROBLEME : le lien profond 'login-callback' est ABSENT de l'APK COMPILE (supprime pendant la fusion Gradle) !"
+          fi
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
@@ -483,5 +501,11 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           overwrite: true
 
+      - name: Upload merged manifest dump
+        uses: actions/upload-artifact@v4
+        with:
+          name: merged-manifest-dump
+          path: merged_manifest_dump.txt
+          overwrite: true
 
 
