@@ -14311,18 +14311,20 @@ function BoutiqueAppInner() {
     }).then((handle) => { removeListener = handle; });
     return () => { if (removeListener) removeListener.remove(); };
   }, []);
-  // Reçoit le retour de la connexion Google dans l'app native : Google/Supabase renvoient
-  // vers "com.shopnify.app://login-callback?code=..." — Android déclenche alors cet
-  // événement avec cette URL. On échange ce code contre une vraie session Supabase, puis
-  // on referme le navigateur système ouvert pour la connexion. Une fois la session posée,
-  // l'écouteur onAuthStateChange plus bas (SIGNED_IN) prend le relais comme d'habitude.
+  // Reçoit le retour de la connexion Google dans l'app native : grâce à l'App Link HTTPS
+  // vérifié (voir assetlinks.json), Android ouvre directement l'app quand Google/Supabase
+  // renvoient vers "https://ma-boutique-tawny.vercel.app/auth-callback.html?code=..." —
+  // au lieu de charger cette page dans un navigateur. On échange ce code contre une vraie
+  // session Supabase, puis on referme le navigateur système ouvert pour la connexion.
+  // Une fois la session posée, l'écouteur onAuthStateChange plus bas (SIGNED_IN) prend le
+  // relais comme d'habitude.
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
     let removeListener = null;
     CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
       console.log("[OAuth] appUrlOpen reçu :", url);
       alert("DEBUG 1/3 : appUrlOpen reçu\n" + url);
-      if (!url || !url.startsWith("com.shopnify.app://login-callback")) {
+      if (!url || !url.startsWith("https://ma-boutique-tawny.vercel.app/auth-callback.html")) {
         console.warn("[OAuth] URL inattendue, ignorée");
         alert("DEBUG : URL inattendue, ignorée\n" + url);
         return;
