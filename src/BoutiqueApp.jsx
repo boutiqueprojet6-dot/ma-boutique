@@ -136,16 +136,30 @@ import { createClient } from "@supabase/supabase-js";
 // verifier not found in storage". Le stockage natif Preferences, lui, survit à ces coupures.
 // L'API storage de Supabase accepte un getItem/setItem/removeItem asynchrone (Promise) —
 // c'est le mécanisme prévu pour les environnements comme React Native/Capacitor.
-const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+//
+// IMPORTANT : window.Capacitor peut ne pas encore être injecté au tout premier
+// instant où ce script s'exécute (notamment lors d'un démarrage à froid déclenché
+// par le App Link Google) — si on ne vérifiait qu'une seule fois ici, l'app risquait
+// de basculer silencieusement sur le localStorage classique (vide) au lieu du
+// stockage natif Preferences (où se trouve le vrai "code_verifier" PKCE), causant
+// l'erreur "invalid flow state, no valid flow state found" à l'échange du code.
+// On vérifie donc window.Capacitor À CHAQUE appel, pas une fois pour toutes.
+function nativeBridgeReady() {
+  return typeof window !== "undefined" && !!window.Capacitor;
+}
+const isCapacitorApp = nativeBridgeReady();
 const capacitorPreferencesStorage = {
   async getItem(key) {
+    if (!nativeBridgeReady()) return typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
     const { value } = await Preferences.get({ key });
     return value;
   },
   async setItem(key, value) {
+    if (!nativeBridgeReady()) { if (typeof window !== "undefined") window.localStorage.setItem(key, value); return; }
     await Preferences.set({ key, value });
   },
   async removeItem(key) {
+    if (!nativeBridgeReady()) { if (typeof window !== "undefined") window.localStorage.removeItem(key); return; }
     await Preferences.remove({ key });
   },
 };
@@ -159,9 +173,11 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     // fois, les deux tentatives en parallèle provoquent l'erreur "invalid flow state".
     detectSessionInUrl: !isCapacitorApp,
     flowType: "pkce",
-    // Stockage natif Preferences dans l'app Capacitor (voir commentaire ci-dessus) ;
-    // localStorage par défaut du navigateur sur le web.
-    ...(isCapacitorApp ? { storage: capacitorPreferencesStorage } : {}),
+    // Cet adaptateur est utilisé dans TOUS les cas maintenant (web compris) : il se
+    // comporte comme localStorage sur le web (repli automatique ci-dessus), et comme
+    // le stockage natif Preferences dans l'app — sans dépendre d'une détection figée
+    // au chargement du script.
+    storage: capacitorPreferencesStorage,
   },
 });
 // ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
