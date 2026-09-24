@@ -15,10 +15,12 @@ export default defineConfig({
         // vers n'importe quelle URL et sert index.html à la place (comportement
         // normal pour une SPA classique). Mais auth-callback.html doit rester
         // une vraie page indépendante (elle contient le code qui rouvre
-        // l'app Android après la connexion Google) — sinon c'est toujours
-        // l'app React (index.html) qui s'affiche à sa place, et le lien
-        // profond n'est jamais déclenché.
-        navigateFallbackDenylist: [/^\/auth-callback\.html$/],
+        // l'app Android après la connexion Google), et /.well-known/assetlinks.json
+        // doit lui aussi rester intact : c'est le fichier qu'Android va chercher
+        // lui-même en arrière-plan pour vérifier le App Link (sans ça, la
+        // vérification échoue silencieusement et Android refuse d'ouvrir l'app
+        // automatiquement).
+        navigateFallbackDenylist: [/^\/auth-callback\.html$/, /^\/\.well-known\//],
       },
       manifest: {
         name: "Shopnify",
