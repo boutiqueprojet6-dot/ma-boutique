@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.shopnify.app",
+      "sha256_cert_fingerprints": [
+        "D8:87:7B:26:02:5F:21:77:E6:3A:08:41:F7:A6:1E:18:61:B8:84:48:D3:25:03:3F:67:44:62:93:06:F9:44:56"
+      ]
+    }
+  }
+]
