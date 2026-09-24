@@ -4926,6 +4926,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           },
         });
         if (oauthError) throw oauthError;
+        try {
+          const { keys } = await Preferences.keys();
+          const verifierKeys = keys.filter((k) => k.includes("code-verifier") || k.includes("code_verifier"));
+          alert("DEBUG 0/3 : juste avant l'ouverture du navigateur\nClés verifier trouvées : " + JSON.stringify(verifierKeys));
+        } catch (e) {}
         await Browser.open({ url: data.url });
         // Le navigateur système est bien ouvert : on débloque le bouton tout de
         // suite (avant, il ne se débloquait qu'en cas d'erreur, d'où le blocage
@@ -14330,6 +14335,16 @@ function BoutiqueAppInner() {
         return;
       }
       try {
+        // DEBUG TEMPORAIRE : on regarde ce qui est réellement stocké dans les
+        // Preferences natives juste avant l'échange, pour voir si le
+        // "code_verifier" PKCE écrit par signInWithOAuth est bien encore là.
+        try {
+          const { keys } = await Preferences.keys();
+          const verifierKeys = keys.filter((k) => k.includes("code-verifier") || k.includes("code_verifier"));
+          alert("DEBUG 1.5/3 : clés de stockage trouvées\n" + JSON.stringify(keys) + "\n\nClés verifier : " + JSON.stringify(verifierKeys));
+        } catch (e) {
+          alert("DEBUG 1.5/3 : erreur lecture des clés\n" + (e && (e.message || e)));
+        }
         const { error } = await supabase.auth.exchangeCodeForSession(url);
         if (error) {
           console.error("[OAuth] Échec de l'échange du code Google :", error);
