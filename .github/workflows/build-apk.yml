@@ -150,31 +150,35 @@ jobs:
           npm install --no-save @capacitor/assets
           npx capacitor-assets generate --android --iconBackgroundColor '#082868' --iconBackgroundColorDark '#082868' --assetPath .
 
-      - name: Configure deep link for Google OAuth
+      - name: Configure deep link for Google OAuth (HTTPS App Link)
         run: |
           python3 - << 'EOF'
           import re
           path = "android/app/src/main/AndroidManifest.xml"
           with open(path, "r", encoding="utf-8") as f:
               content = f.read()
-          if "login-callback" in content:
-              print("Deep link deja present, rien a faire")
+          if "auth-callback" in content and 'android:autoVerify="true"' in content:
+              print("App Link deja present, rien a faire")
           else:
               new_if = """
-                      <intent-filter android:autoVerify="false">
+                      <intent-filter android:autoVerify="true">
                           <action android:name="android.intent.action.VIEW" />
                           <category android:name="android.intent.category.DEFAULT" />
                           <category android:name="android.intent.category.BROWSABLE" />
-                          <data android:scheme="com.shopnify.app" android:host="login-callback" />
+                          <data android:scheme="https" android:host="ma-boutique-tawny.vercel.app" android:pathPrefix="/auth-callback.html" />
                       </intent-filter>
           """
+              # On cible explicitement l'intent-filter qui contient le LAUNCHER (l'activité
+              # principale), et non "le premier </intent-filter> du fichier" : si un plugin ou
+              # une version de cap sync insère un autre intent-filter avant, l'ancienne méthode
+              # plaçait le deep link au mauvais endroit (silencieusement, sans erreur de build).
               pattern = r'(<category android:name="android\.intent\.category\.LAUNCHER"\s*/>\s*</intent-filter>)'
               if not re.search(pattern, content):
                   raise SystemExit("ERREUR : intent-filter LAUNCHER introuvable dans le manifest, rien n'a ete insere.")
               content = re.sub(pattern, r'\1' + new_if, content, count=1)
               with open(path, "w", encoding="utf-8") as f:
                   f.write(content)
-              print("Deep link ajoute avec succes, juste apres le LAUNCHER")
+              print("App Link HTTPS ajoute avec succes, juste apres le LAUNCHER")
           EOF
 
       - name: Add Android permissions (camera + notifications + location)
@@ -435,15 +439,20 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
+      # ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème de connexion résolu ----
+      # Affiche dans les logs le contenu exact du manifest juste avant la compilation,
+      # pour vérifier que le lien profond Google OAuth et les permissions sont bien présents
+      # au moment du build (et pas seulement juste après l'étape qui les ajoute, avant que
+      # "cap sync" ne s'exécute).
       - name: Verify manifest before build
         run: |
           echo "----- Contenu complet de AndroidManifest.xml -----"
           cat android/app/src/main/AndroidManifest.xml
           echo "----------------------------------------------------"
-          if grep -q "login-callback" android/app/src/main/AndroidManifest.xml; then
-            echo "OK : le lien profond 'login-callback' est bien présent dans le manifest final."
+          if grep -q "auth-callback.html" android/app/src/main/AndroidManifest.xml; then
+            echo "OK : l'App Link 'auth-callback.html' est bien présent dans le manifest final."
           else
-            echo "PROBLEME : le lien profond 'login-callback' est ABSENT du manifest final !"
+            echo "PROBLEME : l'App Link 'auth-callback.html' est ABSENT du manifest final !"
             exit 1
           fi
           if [ -f android/app/google-services.json ]; then
@@ -466,6 +475,7 @@ jobs:
             echo "PROBLEME : le receiver du widget est ABSENT du manifest final !"
             exit 1
           fi
+      # ---- FIN DIAGNOSTIC TEMPORAIRE ----
 
       - name: Build APK
         run: |
@@ -485,10 +495,10 @@ jobs:
           $AAPT dump xmltree android/app/build/outputs/apk/debug/app-debug.apk AndroidManifest.xml > merged_manifest_dump.txt
           cat merged_manifest_dump.txt
           echo "---------------------------------------------------"
-          if grep -q "login-callback" merged_manifest_dump.txt; then
-            echo "OK : le lien profond 'login-callback' est bien present dans l'APK COMPILE."
+          if grep -q "auth-callback.html" merged_manifest_dump.txt; then
+            echo "OK : l'App Link 'auth-callback.html' est bien present dans l'APK COMPILE."
           else
-            echo "PROBLEME : le lien profond 'login-callback' est ABSENT de l'APK COMPILE (supprime pendant la fusion Gradle) !"
+            echo "PROBLEME : l'App Link 'auth-callback.html' est ABSENT de l'APK COMPILE (supprime pendant la fusion Gradle) !"
           fi
 
       - name: Upload APK
@@ -504,3 +514,5 @@ jobs:
           name: merged-manifest-dump
           path: merged_manifest_dump.txt
           overwrite: true
+
+
