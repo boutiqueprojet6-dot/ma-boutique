@@ -148,6 +148,15 @@ function nativeBridgeReady() {
   return typeof window !== "undefined" && !!window.Capacitor;
 }
 const isCapacitorApp = nativeBridgeReady();
+// Pour detectSessionInUrl spécifiquement, on ne se fie plus à une détection à
+// l'exécution (même vérifiée à chaque appel comme ci-dessus pour le stockage) :
+// cette option est lue UNE SEULE FOIS, à la création du client, tout au début du
+// chargement du script — le moment le plus à risque pour une éventuelle course
+// avec l'injection de window.Capacitor. On utilise donc une constante figée à la
+// COMPILATION (VITE_CAPACITOR_BUILD, définie uniquement dans le build Android via
+// GitHub Actions, jamais dans le build web Vercel) : c'est fiable à 100%, quel que
+// soit l'état du pont Capacitor à l'instant précis de l'exécution.
+const isCapacitorBuild = import.meta.env.VITE_CAPACITOR_BUILD === "true";
 const capacitorPreferencesStorage = {
   async getItem(key) {
     if (!nativeBridgeReady()) return typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
@@ -171,7 +180,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     // Dans l'app Capacitor, ce serait un doublon avec exchangeCodeForSession (appelé
     // manuellement depuis l'écouteur de lien profond) — le code ne pouvant servir qu'une
     // fois, les deux tentatives en parallèle provoquent l'erreur "invalid flow state".
-    detectSessionInUrl: !isCapacitorApp,
+    detectSessionInUrl: !isCapacitorBuild,
     flowType: "pkce",
     // Cet adaptateur est utilisé dans TOUS les cas maintenant (web compris) : il se
     // comporte comme localStorage sur le web (repli automatique ci-dessus), et comme
@@ -14348,6 +14357,15 @@ function BoutiqueAppInner() {
   // session Supabase, puis on referme le navigateur système ouvert pour la connexion.
   // Une fois la session posée, l'écouteur onAuthStateChange plus bas (SIGNED_IN) prend le
   // relais comme d'habitude.
+  //
+  // GARDE-FOU ANTI-DOUBLE-TRAITEMENT : un code Google/Supabase ne peut être échangé
+  // qu'UNE SEULE FOIS (le serveur détruit l'état de flux après le premier échange
+  // réussi ou même après une première tentative). Si jamais cet écouteur était
+  // déclenché deux fois pour le même lien profond (redémarrage à froid créant une
+  // seconde instance de l'app, événement dupliqué par le pont Capacitor, etc.), on
+  // ignore silencieusement la deuxième tentative avec le même code plutôt que de
+  // provoquer une erreur "invalid flow state" trompeuse.
+  const processedOAuthCodesRef = useRef(new Set());
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
     let removeListener = null;
@@ -14359,6 +14377,15 @@ function BoutiqueAppInner() {
         alert("DEBUG : URL inattendue, ignorée\n" + url);
         return;
       }
+      const codeMatch = url.match(/[?&]code=([^&]+)/);
+      const oauthCode = codeMatch ? codeMatch[1] : null;
+      if (oauthCode && processedOAuthCodesRef.current.has(oauthCode)) {
+        console.warn("[OAuth] Code déjà traité, on ignore cette tentative en double :", oauthCode);
+        alert("DEBUG : code déjà traité, tentative en double ignorée");
+        try { await Browser.close(); } catch (e) {}
+        return;
+      }
+      if (oauthCode) processedOAuthCodesRef.current.add(oauthCode);
       try {
         // DEBUG TEMPORAIRE : on regarde ce qui est réellement stocké dans les
         // Preferences natives juste avant l'échange, pour voir si le
