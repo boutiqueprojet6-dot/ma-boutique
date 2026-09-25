@@ -129,6 +129,8 @@ jobs:
           EOF
 
       - name: Build web app
+        env:
+          VITE_CAPACITOR_BUILD: "true"
         run: npm run build
 
       - name: Add Android platform
