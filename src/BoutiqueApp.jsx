@@ -180,6 +180,15 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     storage: capacitorPreferencesStorage,
   },
 });
+// DEBUG TEMPORAIRE : confirme si l'app a bien été détectée comme app native
+// (Capacitor) dès le tout premier chargement du script — si ce n'est pas le cas,
+// detectSessionInUrl serait resté sur "true" par erreur, ce qui pourrait
+// provoquer une double consommation du code Google.
+if (typeof window !== "undefined") {
+  setTimeout(() => {
+    alert("DEBUG BOOT : isCapacitorApp au chargement = " + isCapacitorApp + "\nwindow.Capacitor présent = " + !!window.Capacitor);
+  }, 0);
+}
 // ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
 // Lit l'utilisateur connecté depuis la session locale (aucun appel réseau, ~0 ms) au lieu de
 // getUserFast() qui fait un aller-retour serveur à chaque fois. Le jeton est
