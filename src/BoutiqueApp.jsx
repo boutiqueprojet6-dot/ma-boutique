@@ -1,4 +1,9 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, useMemo, useDeferredValue } from "react";
+// createPortal : sert à faire sortir certains boutons flottants (démasquer/masquer la
+// caisse, raccourci de paiement) du conteneur de défilement principal, qui a son propre
+// z-index. Sans ça, ces boutons restent "piégés" dans cette pile d'empilement et peuvent
+// se retrouver visuellement sous la barre de navigation du bas malgré un z-index plus élevé.
+import { createPortal } from "react-dom";
 import { Preferences } from "@capacitor/preferences";
 import { registerPlugin } from "@capacitor/core";
 // Import STATIQUE (et non plus dynamique via import()) : @capacitor/app et
@@ -148,6 +153,96 @@ function nativeBridgeReady() {
   return typeof window !== "undefined" && !!window.Capacitor;
 }
 const isCapacitorApp = nativeBridgeReady();
+// ---- Effets sonores (clic, vente réussie, erreur) ----
+// Générés directement via l'API Web Audio (oscillateurs), sans aucun fichier audio à
+// héberger ni à télécharger — ça marche à l'identique sur le web et dans l'app Capacitor.
+// Un seul AudioContext est créé et réutilisé pour tous les sons (en créer un nouveau à
+// chaque son est coûteux, et certains navigateurs limitent le nombre de contextes actifs).
+let sharedAudioCtx = null;
+function getSharedAudioCtx() {
+  if (typeof window === "undefined") return null;
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  if (!sharedAudioCtx) sharedAudioCtx = new Ctx();
+  // Sur mobile, le contexte démarre (ou repasse) en "suspended" tant qu'aucune interaction
+  // utilisateur directe n'a eu lieu : on le relance à chaque son, sans effet si déjà actif.
+  if (sharedAudioCtx.state === "suspended") sharedAudioCtx.resume().catch(() => {});
+  return sharedAudioCtx;
+}
+function playTone(freq, duration, { type = "sine", gain = 0.12, delay = 0 } = {}) {
+  const ctx = getSharedAudioCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  const startAt = ctx.currentTime + delay;
+  // Montée/descente en rampe (plutôt qu'un son qui démarre/s'arrête net) pour éviter
+  // le petit "clic" de discontinuité audio et sonner plus doux.
+  gainNode.gain.setValueAtTime(0.0001, startAt);
+  gainNode.gain.linearRampToValueAtTime(gain, startAt + 0.008);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+  osc.connect(gainNode);
+  gainNode.connect(ctx.destination);
+  osc.start(startAt);
+  osc.stop(startAt + duration + 0.02);
+}
+// Réglage utilisateur : sons et vibrations activés par défaut, mais désactivables
+// (interrupteur à brancher dans Paramètres > Interface, via window.__boutiqueFxMuted).
+function fxEnabled() {
+  return typeof window === "undefined" || window.__boutiqueFxMuted !== true;
+}
+function playSound(kind) {
+  if (!fxEnabled()) return;
+  try {
+    if (kind === "click") {
+      playTone(880, 0.045, { type: "sine", gain: 0.05 });
+    } else if (kind === "success") {
+      // Petit arpège montant (do-mi-sol) : sonne comme une petite récompense, pas une alarme.
+      playTone(523.25, 0.13, { gain: 0.09 });
+      playTone(659.25, 0.13, { gain: 0.1, delay: 0.09 });
+      playTone(783.99, 0.24, { gain: 0.11, delay: 0.18 });
+    } else if (kind === "error") {
+      playTone(220, 0.16, { type: "square", gain: 0.07 });
+      playTone(174.61, 0.22, { type: "square", gain: 0.07, delay: 0.11 });
+    }
+  } catch (e) {
+    // Web Audio indisponible/bloqué (permissions navigateur, etc.) : le son n'est qu'un
+    // agrément, jamais bloquant — on ignore silencieusement plutôt que de faire échouer l'action.
+  }
+}
+// ---- Retour haptique (vibration) ----
+// Dans l'app Capacitor : plugin natif Haptics (retour bien plus fin — impact léger/moyen,
+// notifications succès/erreur — qu'une simple vibration web). Nécessite
+// "npm install @capacitor/haptics". Chargé à la demande (comme recharts/le scanner QR plus
+// haut) pour ne pas alourdir le démarrage, et jamais importé du tout sur le web.
+// Sur le web/PWA : repli sur navigator.vibrate, qui ne connaît que des durées simples.
+let hapticsLoadPromise = null;
+function loadHaptics() {
+  if (!isCapacitorApp) return Promise.resolve(null);
+  if (!hapticsLoadPromise) {
+    hapticsLoadPromise = import("@capacitor/haptics").catch(() => null);
+  }
+  return hapticsLoadPromise;
+}
+function triggerHaptic(style = "medium") {
+  if (!fxEnabled()) return;
+  if (isCapacitorApp) {
+    loadHaptics().then((mod) => {
+      if (!mod || !mod.Haptics) return;
+      const { Haptics, ImpactStyle, NotificationType } = mod;
+      if (style === "success" || style === "error" || style === "warning") {
+        Haptics.notification({ type: NotificationType[style[0].toUpperCase() + style.slice(1)] }).catch(() => {});
+      } else {
+        const map = { light: ImpactStyle.Light, medium: ImpactStyle.Medium, heavy: ImpactStyle.Heavy };
+        Haptics.impact({ style: map[style] || ImpactStyle.Medium }).catch(() => {});
+      }
+    });
+  } else if (typeof navigator !== "undefined" && navigator.vibrate) {
+    const patterns = { light: 10, medium: 18, heavy: 32, success: [14, 40, 14], error: [30, 60, 30] };
+    navigator.vibrate(patterns[style] || 18);
+  }
+}
 // Pour detectSessionInUrl spécifiquement, on ne se fie plus à une détection à
 // l'exécution (même vérifiée à chaque appel comme ci-dessus pour le stockage) :
 // cette option est lue UNE SEULE FOIS, à la création du client, tout au début du
@@ -498,7 +593,7 @@ const TRANSLATIONS = {
     restockForecast: "Prévision de réapprovisionnement", daysLeft: "jour(s) restant(s)", suggestedOrder: "Suggestion : commander environ", trustExcellent: "Excellent payeur", trustGood: "Bon payeur", trustOk: "Payeur correct", trustWatch: "À surveiller", trustHistory: "dette(s) réglée(s) sur", voiceListening: "Je vous écoute…", voiceNotSupported: "Dictée vocale non disponible sur cet appareil", benchmarkTitle: "Comparaison anonyme", benchmarkOptIn: "Comparer ma boutique anonymement", benchmarkOptInDesc: "Partagez vos moyennes de vente de façon anonyme pour voir comment vous vous situez par rapport à des boutiques similaires. Aucune donnée personnelle ou identifiable n'est partagée.", benchmarkYourShop: "Votre boutique", benchmarkAverage: "Moyenne des boutiques similaires", benchmarkNotEnough: "Pas encore assez de boutiques dans votre devise pour comparer.", avgDailySales: "Ventes moyennes/jour",
     arabicDigitsPromptTitle: "Chiffres arabes ou occidentaux ?", arabicDigitsPromptDesc: "Voulez-vous afficher les montants et dates avec les chiffres arabo-indiens (١٢٣) ou les chiffres occidentaux (123), les plus utilisés dans le commerce au quotidien ?", useArabicDigitsBtn: "Chiffres arabes (١٢٣)", useWesternDigitsBtn: "Chiffres occidentaux (123)",
     setBoutique: "Boutique", setVentesFinances: "Ventes & finances", setDonnees: "Données", setAssistantIa: "Assistant IA", setAPropos: "À propos", setCodePin: "Code PIN", setDevise: "Devise", setInfosBoutique: "Infos boutique", setCategories: "Catégories", setPaiementParDefaut: "Paiement par défaut", setDettesClients: "Dettes clients", setCaisse: "Caisse", setExporterLesDonnees: "Exporter les données", setReinitialiser: "Réinitialiser", setPreferencesAssistant: "Préférences assistant", setAlertes: "Alertes", setProfilPinPhoto: "Profil, PIN, photo", setNomCategoriesSeuils: "Nom, catégories, seuils", setModeSombreLangueBoules: "Mode sombre, langue, boules", setPaiementDettesCaisse: "Paiement, dettes, caisse", setSauvegardeExportReinitialisation: "Sauvegarde, export, réinitialisation", setRechercheWebHistorique: "Recherche web, historique", setNotifications: "Notifications", setStockDettesAbonnement: "Stock, dettes, abonnement", setVersionDeveloppeur: "Version, développeur", setReinitialiserLesDonnees: "Supprimer les données, déconnexion", setActive: "Activé", setDesactive: "Désactivé", setNomAdresseDevise: "Nom, adresse, devise", setProduitsRayons: "Produits & rayons", setSeuilsDeStock: "Seuils de stock", setAlerteStockBas: "Alerte stock bas", setDelaiDeRelance: "Délai de relance", setEffacerToutesLesDonnees: "Effacer toutes les données", setNomDeLaBoutique: "Nom de la boutique", setIdentifiantDeConnexion: "Identifiant de connexion", setCategoriesDeProduits: "Catégories de produits", setLesCategoriesSontDefiniesAutomatiquem: "Les catégories sont définies automatiquement d'après les noms de vos produits. Cette fonctionnalité sera enrichie dans une prochaine version.", setAucunProduitPourLinstant: "Aucun produit pour l'instant.", setActuellementLowstocklengthProduitsEnD: "Actuellement : {n} produit(s) en dessous du seuil.", setChoisisLeModeDePaiement: "Choisissez le mode de paiement par défaut lors d'une vente.", setResumeDesDettesImpayees: "Résumé des dettes impayées", setClientsAvecDettes: "Clients avec dettes", setTotalDu: "Total dû", setSoldeEstime: "Solde estimé", setTuPeuxVoirLaComparaison: "Vous pouvez voir la comparaison dans l'onglet Statistiques.", setExporteTesDonneesDeVentes: "Exportez vos données de ventes en fichier CSV.", setTelechargerLesVentesCsv: "Télécharger les ventes (CSV)", setSaleslengthVentesProductslengthProdui: "{s} ventes · {p} produits", setRechercheWeb: "Recherche web", setPermettreALiaDeChercher: "Permettre à l'IA de chercher sur internet", setHistoriqueDeConversation: "Historique de conversation", setAimessageslengthMessagesDansLaSession: "{n} message(s) dans la session actuelle.", setEffacerLhistorique: "Effacer l'historique", setAlerteStockFaible: "Alerte stock faible", setSeDeclencheEnDessousDe: "Se déclenche en dessous de {n} unités", setDettesImpayees: "Dettes impayées", setUnpaiddebtslengthEnAttente: "{n} en attente", setExpirationAbonnement: "Expiration abonnement", setVersionGratuite: "Version gratuite", setCeCodeSertADemasquer: "Ce code sert à démasquer vos montants privés (solde de caisse, dépenses, confirmation de dettes).", setAncienCodePin: "Ancien code PIN", setNouveauCodePin: "Nouveau code PIN", setConfirmerLeCodePin: "Confirmer le code PIN", setChoisisLaDeviseDeTa: "Choisissez la devise de votre boutique. Entrez vos prix directement dans cette devise — aucune conversion automatique.", setPetitesBoulesQuiFlottentEn: "Petites boules qui flottent en arrière-plan", setChoisisLaCouleurDesBoules: "Choisissez la couleur des boules.", setUneQuestionEcrisnousDirectement: "Une question ? Écris-nous directement.", setPriseEnMain: "Prise en main", setCommentAjouterMonPremierProduit: "Comment ajouter mon premier produit ?", setVaDansLongletStockAppuie: "Allez dans l'onglet Stock, appuyez sur le bouton « + », remplissez le nom, la quantité et le prix. Vous pouvez aussi ajouter une photo.", setCommentEnregistrerUneVente: "Comment enregistrer une vente ?", setVaDansLongletVenteDemarre: "Allez dans l'onglet Vente, démarrez un nouveau panier, ajoutez les produits vendus avec leurs quantités, choisissez un mode de paiement, puis finalisez.", setPuisjeGererPlusieursClientsEn: "Puis-je gérer plusieurs clients en même temps ?", setOuiTuPeuxOuvrirPlusieurs: "Oui — vous pouvez ouvrir plusieurs paniers en même temps dans l'onglet Vente, un par client, et les finaliser l'un après l'autre.", setDettesVentesACredit: "Dettes & ventes à crédit", setCommentEnregistrerUneVenteA: "Comment enregistrer une vente à crédit ?", setLorsDeLaFinalisationDune: "Lors de la finalisation d'une vente, choisissez « Crédit » comme mode de paiement et indiquez le nom du client — elle s'ajoute automatiquement dans Dettes.", setCommentMarquerUneDetteComme: "Comment marquer une dette comme payée ?", setDansLongletDettesAppuieSur: "Dans l'onglet Dettes, appuyez sur « Payé » à côté du nom du client, puis confirmez. Ça reste visible pour toujours dans l'Historique.", setCestQuoiLeScoreDe: "C'est quoi le score de confiance client ?", setQuandTuTapesLeNom: "Quand vous tapez le nom d'un client pour une vente à crédit, l'appli affiche s'il rembourse fiablement ses dettes passées, basé sur votre propre historique.", setCaisseDepenses: "Caisse & dépenses", setCommentReglerMonFondDe: "Comment régler mon fond de caisse de départ ?", setSurLeTableauDeBord: "Sur le tableau de bord, appuyez sur « Régler le fond de caisse » et indiquez le montant que vous avez physiquement en caisse maintenant.", setCommentEnregistrerUneDepense: "Comment enregistrer une dépense ?", setAppuieSurAjouterUneDepense: "Appuyez sur « Ajouter une dépense » sur le tableau de bord, indiquez le montant sorti de la caisse et une raison facultative.", setLassistantPeutMaiderAvecQuoi: "L'assistant peut m'aider avec quoi ?", setDemandeluiTesVentesTonStock: "Demandez-lui vos ventes, votre stock, vos dettes, ou des conseils business — il connaît les vraies données de votre boutique. Vous pouvez aussi parler au lieu de taper avec le bouton micro.", setPuisjeGarderPlusieursDiscussions: "Puis-je garder plusieurs discussions ?", setOuiAppuieSurLiconeHistorique: "Oui — appuyez sur l'icône historique pour voir vos discussions passées, épinglez celles qui comptent, renommez-les ou supprimez-les.", setCompteAbonnement: "Compte & abonnement", setCommentDebloquerLesFonctionnalitesPay: "Comment débloquer les fonctionnalités payantes ?", setContacteLeSupportPourOrganiser: "Contactez le support pour organiser le paiement ; votre compte est activé manuellement ensuite.", setMesDonneesSontellesEnSecurite: "Mes données sont-elles en sécurité ?", setTonMotDePasseNest: "Votre mot de passe n'est jamais stocké en clair, et vos données de ventes/stock restent liées uniquement à votre compte.", setPuisjeChangerLaDeviseDe: "Puis-je changer la devise de ma boutique plus tard ?", setOuiAToutMomentDans: "Oui, à tout moment dans Paramètres > Interface > Devise. Les montants s'affichent simplement dans la nouvelle devise, sans conversion.", setVersion: "Version", setMaBoutiqueEstUneApplication: "Shopnify est une application simple de gestion de boutique, pensée pour les commerçants — suivez votre stock, vos ventes, vos dettes et votre caisse, dans votre langue et votre devise.", setDeveloppePour: "Développé pour", setBoutiquiersDuMondeEntier: "Boutiquiers du monde entier", setContact: "Contact", setContacterLeDeveloppeur: "Contacter le développeur",
-    othEtapeObstepSurTotalsteps: "Étape {obStep} sur {totalSteps}", othRemplisCorrectementTousLesChamps: "Remplissez correctement tous les champs (surlignés en rouge).", othTransportMarchandise: "Transport marchandise", othJeNaiPasTrouveDe: "Je n'ai pas trouvé de réponse. Reformulez votre question, ou appuyez sur réessayer ci-dessous.", othSouciDeConnexionApresPlusieurs: "Souci de connexion après plusieurs tentatives. Appuyez sur réessayer ci-dessous.", othDeconnexion: "Déconnexion", othFondDeCaisseFcfacashfundVentes: "Fond de caisse {cashFund} + ventes espèces {totalCashSales} − dépenses {totalExpenses}", othUnite: "unité", othAppuieCidessousPourCommencerA: "Appuyez ci-dessous pour commencer à vendre", othLocalizednumbertodaysaleslengthVentes: "{n} vente(s) aujourd'hui", othPanierDe: "Panier de :", othFacultatif: "facultatif", othEncoreDus: "encore dû(s)", othIlManque: "Il manque", othQuestceQueJaiVenduAujourdhui: "Qu'est-ce que j'ai vendu aujourd'hui ?", othQuelProduitEstPresqueEpuise: "Quel produit est presque épuisé ?", othQuiMeDoitDeLargent: "Qui me doit de l'argent ?", othQuelEstMonMeilleurProduit: "Quel est mon meilleur produit ?", othDesConseilsPourAugmenterMes: "Des conseils pour augmenter mes ventes", othResumeDeMaSemaine: "Résumé de ma semaine", othEtSiJaugmentaisMesPrix: "Et si j'augmentais mes prix de 10% ?", othReessayer: "Réessayer", othEntreTonCodePin: "Entrez votre code PIN", othPourVoirLesMontantsPrives: "Pour voir les montants privés", unmaskCashFloatingBtn: "Démasquer les données", maskCashFloatingBtn: "Masquer les données", othRendu: "Rendu :", errCreditNeedsCustomer: "Indiquez le nom du client pour une vente à crédit.", histColDate: "Date", histColType: "Type", histColProduct: "Produit", histColCustomer: "Client", histColAmount: "Montant", histFiltersBtn: "Filtres", histFilterFromLabel: "Du", histFilterToLabel: "Au", histFilterProductLabel: "Produit", histFilterCustomerLabel: "Client", histFilterMinAmountLabel: "Montant min", histFilterMaxAmountLabel: "Montant max", histFilterReset: "Réinitialiser", histExportBtn: "Exporter (CSV)", histTypeSale: "Ventes", histTypeDebt: "Dettes", histTypeExpense: "Dépenses", noResultsFilters: "Aucun résultat pour ces filtres.", planFreeName: "Gratuit", planProName: "Pro", planBusiness2Name: "Business", planMenuLabel: "Abonnement", planCurrentLabel: "Votre palier actuel", planPerMonth: "mois", planNoEmployees: "Pas d'employés", planUnlimitedEmployees: "Employés illimités", planMaxEmployees: "{n} employés max", planNoAi: "Pas d'assistant IA", planUnlimitedAi: "Assistant IA illimité", planLimitedAi: "Assistant IA ({n} messages/mois)", planMultiShop: "Plusieurs boutiques", planCurrentBadge: "✓ Palier actuel", planChooseBtn: "Choisir ce palier", empLimitReached: "Votre palier {plan} permet {n} employé(s) maximum. Passez à un palier supérieur pour en ajouter plus.", histFiltersProBadge: "Filtres avancés et export — passez à Pro pour débloquer", switchShopBtn: "Changer de boutique", switchShopTitle: "Vos boutiques", newShopNameLabel: "Nom de la nouvelle boutique", shopCompareTabLabel: "Comparaison", shopCompareRevenue: "CA", shopCompareStock: "Stock", shopCompareDebts: "Dettes", cashReportTabLabel: "Rapport de caisse", cashReportOwner: "Propriétaire", cashReportTotalSales: "Total ventes", cashReportCash: "Espèces", cashReportMobile: "Mobile Money", cashReportCard: "Carte", cashReportExpenses: "Dépenses", cashReportDebtPayments: "Paiements de dettes", empShiftLabel: "Plages horaires", empShiftEnable: "Activer", empShiftDisable: "Désactiver", empShiftAddSlot: "Ajouter un créneau", empDayMon: "Lundi", empDayTue: "Mardi", empDayWed: "Mercredi", empDayThu: "Jeudi", empDayFri: "Vendredi", empDaySat: "Samedi", empDaySun: "Dimanche", empOutsideShiftTitle: "Hors de vos heures de travail", empOutsideShiftDesc: "Vous ne pouvez pas encaisser de vente en dehors de vos heures déclarées. Contactez votre responsable si besoin.", accountingExportBtn: "Export comptable", accountingPeriodLabel: "Période", accountingGeneratedBy: "Généré par", accountingSummaryTitle: "Résumé", accountingNetProfit: "Bénéfice net", accountingRevenueChartTitle: "Évolution du chiffre d'affaires", accountingComparisonChartTitle: "Ventes vs Dépenses", accountingSalesTableTitle: "Détail des ventes", accountingExpensesTableTitle: "Détail des dépenses", accountingGenerateBtn: "Générer le PDF", logAccountingExport: "Export comptable généré", productCostPrice: "Prix d'achat (optionnel)", roleSupervisorLabel: "Superviseur", roleSupervisorDesc: "Voit toutes les boutiques, ne modifie rien.", salesGoalLabel: "Objectif du mois", salesGoalSetBtn: "Fixer un objectif", pushAnomalyTitle: "Alertes d'activité inhabituelle", pushAnomalyDesc: "Reçois une notification si une action inhabituelle est détectée (annulations en série, caisse vidée, etc.).", pushEnabledBadge: "✓ Activées", pushUnsupported: "Non disponible sur cet appareil/navigateur.", pushEnableBtn: "Activer les notifications", logProductAdded: "Produit ajouté", logStockAdjusted: "Stock ajusté", logProductDeleted: "Produit supprimé", logExpenseAdded: "Dépense enregistrée", logExpenseDeleted: "Dépense supprimée", logCashFundUpdated: "Fond de caisse modifié", logSaleRecorded: "Vente", logDebtSettled: "Dette soldée", logPartialPayment: "Paiement partiel", logPaymentCash: "espèces", logPaymentCredit: "à crédit",
+    othEtapeObstepSurTotalsteps: "Étape {obStep} sur {totalSteps}", othRemplisCorrectementTousLesChamps: "Remplissez correctement tous les champs (surlignés en rouge).", othTransportMarchandise: "Transport marchandise", othJeNaiPasTrouveDe: "Je n'ai pas trouvé de réponse. Reformulez votre question, ou appuyez sur réessayer ci-dessous.", othSouciDeConnexionApresPlusieurs: "Souci de connexion après plusieurs tentatives. Appuyez sur réessayer ci-dessous.", othDeconnexion: "Déconnexion", othFondDeCaisseFcfacashfundVentes: "Fond de caisse {cashFund} + ventes espèces {totalCashSales} − dépenses {totalExpenses}", othUnite: "unité", othAppuieCidessousPourCommencerA: "Appuyez ci-dessous pour commencer à vendre", othLocalizednumbertodaysaleslengthVentes: "{n} vente(s) aujourd'hui", othPanierDe: "Panier de :", othFacultatif: "facultatif", othEncoreDus: "encore dû(s)", othIlManque: "Il manque", othQuestceQueJaiVenduAujourdhui: "Qu'est-ce que j'ai vendu aujourd'hui ?", othQuelProduitEstPresqueEpuise: "Quel produit est presque épuisé ?", othQuiMeDoitDeLargent: "Qui me doit de l'argent ?", othQuelEstMonMeilleurProduit: "Quel est mon meilleur produit ?", othDesConseilsPourAugmenterMes: "Des conseils pour augmenter mes ventes", othResumeDeMaSemaine: "Résumé de ma semaine", othEtSiJaugmentaisMesPrix: "Et si j'augmentais mes prix de 10% ?", othReessayer: "Réessayer", othEntreTonCodePin: "Entrez votre code PIN", othPourVoirLesMontantsPrives: "Pour voir les montants privés", unmaskCashFloatingBtn: "Démasquer les données", maskCashFloatingBtn: "Masquer les données", othRendu: "Rendu :", errCreditNeedsCustomer: "Indiquez le nom du client pour une vente à crédit.", histColDate: "Date", histColType: "Type", histColProduct: "Produit", histColCustomer: "Client", histColAmount: "Montant", histFiltersBtn: "Filtres", histFilterFromLabel: "Du", histFilterToLabel: "Au", histFilterProductLabel: "Produit", histFilterCustomerLabel: "Client", histFilterMinAmountLabel: "Montant min", histFilterMaxAmountLabel: "Montant max", histFilterReset: "Réinitialiser", histExportBtn: "Exporter (CSV)", histTypeSale: "Ventes", histTypeDebt: "Dettes", histTypeExpense: "Dépenses", noResultsFilters: "Aucun résultat pour ces filtres.", planFreeName: "Gratuit", planProName: "Pro", planBusiness2Name: "Business", planMenuLabel: "Abonnement", planCurrentLabel: "Votre palier actuel", planPerMonth: "mois", planNoEmployees: "Pas d'employés", planUnlimitedEmployees: "Employés illimités", planMaxEmployees: "{n} employés max", planNoAi: "Pas d'assistant IA", planUnlimitedAi: "Assistant IA illimité", planLimitedAi: "Assistant IA ({n} messages/mois)", planMultiShop: "Plusieurs boutiques", planCurrentBadge: "✓ Palier actuel", planChooseBtn: "Choisir ce palier", empLimitReached: "Votre palier {plan} permet {n} employé(s) maximum. Passez à un palier supérieur pour en ajouter plus.", histFiltersProBadge: "Filtres avancés et export — passez à Pro pour débloquer", switchShopBtn: "Changer de boutique", switchShopTitle: "Vos boutiques", newShopNameLabel: "Nom de la nouvelle boutique", shopCompareTabLabel: "Comparaison", shopCompareRevenue: "CA", shopCompareStock: "Stock", shopCompareDebts: "Dettes", cashReportTabLabel: "Rapport de caisse", cashReportOwner: "Propriétaire", cashReportTotalSales: "Total ventes", cashReportCash: "Espèces", cashReportMobile: "Mobile Money", cashReportCard: "Carte", cashReportExpenses: "Dépenses", cashReportDebtPayments: "Paiements de dettes", empShiftLabel: "Plages horaires", empShiftEnable: "Activer", empShiftDisable: "Désactiver", empShiftAddSlot: "Ajouter un créneau", empDayMon: "Lundi", empDayTue: "Mardi", empDayWed: "Mercredi", empDayThu: "Jeudi", empDayFri: "Vendredi", empDaySat: "Samedi", empDaySun: "Dimanche", empOutsideShiftTitle: "Hors de vos heures de travail", empOutsideShiftDesc: "Vous ne pouvez pas encaisser de vente en dehors de vos heures déclarées. Contactez votre responsable si besoin.", accountingExportBtn: "Export comptable", accountingPeriodLabel: "Période", accountingGeneratedBy: "Généré par", accountingSummaryTitle: "Résumé", accountingNetProfit: "Bénéfice net", accountingRevenueChartTitle: "Évolution du chiffre d'affaires", accountingComparisonChartTitle: "Ventes vs Dépenses", accountingSalesTableTitle: "Détail des ventes", accountingExpensesTableTitle: "Détail des dépenses", accountingGenerateBtn: "Générer le PDF", logAccountingExport: "Export comptable généré", productCostPrice: "Prix d'achat (optionnel)", roleSupervisorLabel: "Superviseur", roleSupervisorDesc: "Voit toutes les boutiques, ne modifie rien.", salesGoalLabel: "Objectif du mois", salesGoalSetBtn: "Fixer un objectif", pushAnomalyTitle: "Alertes d'activité inhabituelle", pushAnomalyDesc: "Reçois une notification si une action inhabituelle est détectée (annulations en série, caisse vidée, etc.).", pushEnabledBadge: "✓ Activées", pushUnsupported: "Non disponible sur cet appareil/navigateur.", pushEnableBtn: "Activer les notifications", logProductAdded: "Produit ajouté", logStockAdjusted: "Stock ajusté", logProductDeleted: "Produit supprimé", logExpenseAdded: "Dépense enregistrée", logExpenseDeleted: "Dépense supprimée", logCashFundUpdated: "Fond de caisse modifié", logSaleRecorded: "Vente", logDebtSettled: "Dette soldée", logPartialPayment: "Paiement partiel", logPaymentCash: "espèces", logPaymentCredit: "à crédit", saleSuccessLabel: "Vente réussie !",
     empTabLabel: "Employés", empIntro: "Créez un compte pour chaque employé et choisissez ce qu'il peut faire. Vous seul(e) pouvez gérer les employés, l'abonnement et les données de la boutique.", empAddBtn: "Ajouter un employé", empNoneYet: "Aucun employé pour l'instant.", empActive: "Actif", empSuspended: "Suspendu", empEdit: "Modifier", empSuspend: "Suspendre", empReactivate: "Réactiver", empActionLogTitle: "Journal des actions récentes", empNoActionsYet: "Aucune action enregistrée pour l'instant.", empEditTitle: "Modifier l'employé", empAddTitle: "Ajouter un employé", empNameLabel: "Nom de l'employé", empPinLabel: "Code PIN de l'employé (4 à 6 chiffres)", empRoleLabel: "Rôle", empPermissionsLabel: "Permissions", empSave: "Enregistrer", empAdd: "Ajouter", empErrName: "Entrez le nom de l'employé.", empErrPin: "Le code PIN doit contenir entre 4 et 6 chiffres.", empErrPinUsed: "Ce code PIN est déjà utilisé par un autre employé. Choisissez-en un autre.", roleVendeurLabel: "Vendeur", roleVendeurDesc: "Vend et consulte le stock/dettes, sans les modifier.", roleGerantLabel: "Gérant", roleGerantDesc: "Gère l'activité quotidienne au complet : ventes, stock, dettes, caisse, statistiques.", rolePersoLabel: "Personnalisé", rolePersoDesc: "Choisissez précisément ce que cet employé peut faire.", permSell: "Enregistrer des ventes", permViewStock: "Consulter le stock", permEditStock: "Modifier le stock", permViewDebts: "Consulter les dettes clients", permEditDebts: "Gérer les dettes clients (marquer payé, etc.)", permViewCash: "Voir la caisse et le solde", permEditCash: "Modifier la caisse (dépenses, fond de caisse)", permViewStats: "Voir les statistiques", empShowQr: "Voir le QR de connexion", empQrModalTitle: "QR de connexion", empQrModalDesc: "Cet employé scanne ce code depuis l'écran de connexion pour accéder à la boutique. La connexion par QR sera activée prochainement.", empQrClose: "Fermer", loginAsEmployee: "Se connecter en tant qu'employé", empScanTitle: "Scanner votre QR", empManualCodeLabel: "Ou entrez ce code sur PC", empRetryInvite: "Réessayer", empScanInvalidCode: "Ce code est invalide, déjà utilisé, ou a expiré.",
   },
   am: {
@@ -6626,6 +6721,112 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   );
 }
 // ---------- SHOP APP ----------
+// ---------------------------------------------------------------------------
+// Overlay de célébration affiché ~2 secondes après une vente finalisée : combine
+// confettis (divs colorés animés en CSS, aucune dépendance externe), une coche animée,
+// une bannière avec le montant, et une légère pulsation/brillance sur tout l'écran.
+// Volontairement léger (pas de canvas, pas de librairie) pour ne pas ralentir l'app.
+// ---------------------------------------------------------------------------
+function SaleSuccessOverlay({ amount, formatAmount, label, darkMode }) {
+  const confettiColors = ["#16a34a", "#fbbf24", "#3b82f6", "#ef4444", "#a855f7", "#22d3ee"];
+  const confettiPieces = useMemo(
+    () =>
+      Array.from({ length: 24 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        delay: Math.random() * 0.25,
+        duration: 1.1 + Math.random() * 0.7,
+        color: confettiColors[i % confettiColors.length],
+        rotate: Math.random() * 360,
+        size: 6 + Math.random() * 6,
+      })),
+    []
+  );
+  return (
+    <div
+      className="fixed inset-0 flex items-center justify-center pointer-events-none"
+      style={{ zIndex: 100050, animation: "saleFxPulse 1.1s ease-out" }}
+    >
+      {/* Légère brillance/pulsation sur tout l'écran, derrière le reste */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "radial-gradient(circle, rgba(22,163,74,0.22) 0%, rgba(22,163,74,0) 65%)",
+          animation: "saleFxGlow 1.1s ease-out",
+        }}
+      />
+      {/* Confettis */}
+      {confettiPieces.map((c) => (
+        <div
+          key={c.id}
+          className="absolute top-0"
+          style={{
+            left: `${c.left}%`,
+            width: c.size,
+            height: c.size * 0.5,
+            background: c.color,
+            borderRadius: 2,
+            transform: `rotate(${c.rotate}deg)`,
+            animation: `saleFxFall ${c.duration}s ease-in ${c.delay}s forwards`,
+            opacity: 0,
+          }}
+        />
+      ))}
+      {/* Coche animée + bannière avec le montant */}
+      <div
+        className="flex flex-col items-center gap-3 px-8 py-6 rounded-3xl"
+        style={{
+          background: darkMode ? "rgba(15,23,42,0.95)" : "rgba(255,255,255,0.97)",
+          boxShadow: "0 20px 50px rgba(0,0,0,0.35)",
+          animation: "saleFxBannerIn 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+        }}
+      >
+        <div
+          className="flex items-center justify-center rounded-full"
+          style={{
+            width: 64,
+            height: 64,
+            background: "linear-gradient(135deg, #16a34a, #15803d)",
+            boxShadow: "0 10px 24px rgba(22,163,74,0.5)",
+            animation: "saleFxCheckPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.15s both",
+          }}
+        >
+          <Check size={34} color="#fff" strokeWidth={3.5} />
+        </div>
+        <p className="font-extrabold text-base" style={{ color: darkMode ? "#f1f5f9" : "#0f172a" }}>
+          {label}
+        </p>
+        <p className="font-extrabold text-2xl" style={{ color: "#16a34a" }}>
+          {formatAmount}
+        </p>
+      </div>
+      <style>{`
+        @keyframes saleFxFall {
+          0% { opacity: 1; transform: translateY(-10px) rotate(0deg); }
+          100% { opacity: 0; transform: translateY(70vh) rotate(320deg); }
+        }
+        @keyframes saleFxBannerIn {
+          0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes saleFxCheckPop {
+          0% { transform: scale(0); }
+          100% { transform: scale(1); }
+        }
+        @keyframes saleFxGlow {
+          0% { opacity: 0; }
+          25% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        @keyframes saleFxPulse {
+          0% { transform: scale(1); }
+          12% { transform: scale(1.015); }
+          100% { transform: scale(1); }
+        }
+      `}</style>
+    </div>
+  );
+}
 function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, isDemo, lang, setLang }) {
   // Nettoie l'état critique persisté avant de déconnecter : sinon, si un autre
   // compte se connecte ensuite sur le même téléphone, il pourrait se retrouver
@@ -6713,6 +6914,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [settingsUpdatedAt, setSettingsUpdatedAt] = useState(0);
   const [draftCarts, setDraftCarts] = useState([]);
   const [activeCartId, setActiveCartId] = useState(null);
+  // Overlay de célébration affiché brièvement après une vente finalisée avec succès
+  // (confettis + coche animée + bannière avec le montant + pulsation de l'écran) — voir
+  // finalizeCart plus bas et le composant SaleSuccessOverlay tout en bas du fichier.
+  const [saleSuccessOverlay, setSaleSuccessOverlay] = useState(null);
+  useEffect(() => {
+    if (!saleSuccessOverlay) return;
+    const timer = setTimeout(() => setSaleSuccessOverlay(null), 2200);
+    return () => clearTimeout(timer);
+  }, [saleSuccessOverlay]);
   const [expiresAt, setExpiresAt] = useState(null);
   const [employees, setEmployees] = useState([]);
   const [actionLog, setActionLog] = useState([]);
@@ -7151,7 +7361,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setAppLockError("");
     if (isDemo) {
       if (/^\d{4}$/.test(appLockPinInput.trim())) { setAppLockActive(false); setAppLockPinInput(""); }
-      else setAppLockError(t(lang, "wrongPin"));
+      else { playSound("error"); triggerHaptic("error"); setAppLockError(t(lang, "wrongPin")); }
       return;
     }
     try {
@@ -7167,9 +7377,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         setAppLockActive(false);
         setAppLockPinInput("");
       } else {
+        playSound("error"); triggerHaptic("error");
         setAppLockError(t(lang, "wrongPin"));
       }
     } catch {
+      playSound("error"); triggerHaptic("error");
       setAppLockError(t(lang, "wrongPin"));
     }
   };
@@ -8931,6 +9143,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         if (pendingLockAction) { pendingLockAction(); setPendingLockAction(null); } setPendingLockActionType(null);
         setLockPinReason("amounts");
       } else {
+        playSound("error"); triggerHaptic("error");
         setLockPinError(t(lang, "wrongPin"));
       }
       return;
@@ -8949,6 +9162,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       const enteredHash = await hashPin(lockPinInput.trim());
       if (enteredHash !== account.lockPin) {
+        playSound("error"); triggerHaptic("error");
         setLockPinError(t(lang, "wrongPin"));
         return;
       }
@@ -9509,12 +9723,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const cart = draftCarts.find((c) => c.id === cartId);
     if (!cart || cart.items.length === 0) return;
     if (cart.payment === "credit" && !cart.customer.trim()) {
+      playSound("error"); triggerHaptic("error");
       setError(t(lang, "errCreditNeedsCustomer"));
       return;
     }
     // Montant reçu obligatoire pour un paiement en espèces (sinon impossible de calculer
     // la monnaie à rendre, et le vendeur peut oublier de le saisir).
     if (cart.payment === "cash" && (cart.received === "" || cart.received == null || isNaN(parseFloat(cart.received)))) {
+      playSound("error"); triggerHaptic("error");
       setError(`${t(lang, "othIlManque")} : ${t(lang, "amountGiven")}`);
       return;
     }
@@ -9624,6 +9840,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       activeCartId: activeCartId === cartId ? (nextCarts[0] ? nextCarts[0].id : null) : activeCartId,
     });
     logAction(`${t(lang, "logSaleRecorded")} : ${cart.items.map((i) => `${i.productName} x${i.qty}`).join(", ")} — ${localizedNumber(total)} (${cart.payment === "credit" ? t(lang, "logPaymentCredit") : cart.payment === "cash" ? t(lang, "logPaymentCash") : cart.payment})`);
+    playSound("success");
+    triggerHaptic("success");
+    setSaleSuccessOverlay({ amount: total, id: transactionId });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -11016,14 +11235,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       {isDemo && (
         <div className="mx-4 mt-3 rounded-xl p-3" style={{ background: "#e5f0e8" }}>
           <p className="text-xs font-semibold" style={{ color: GREEN }}>👀 {t(lang, "demoMode")}</p>
-          <p className="text-[11px] text-gray-600 mt-0.5">Tu peux tout explorer librement, mais rien n'est réellement sauvegardé. Crée un vrai compte quand le souci de stockage sera résolu.</p>
+          <p className="text-[11px] text-gray-600 mt-0.5">Vous pouvez tout explorer librement, mais rien n'est réellement sauvegardé. Créez un vrai compte quand le souci de stockage sera résolu.</p>
         </div>
       )}
       {/* Le bandeau "Version gratuite" a été retiré d'ici : les limites (ventes/jour,
           messages IA) sont maintenant affichées directement dans les onglets Vente et
           Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
           uniquement quand la limite est réellement atteinte. */}
-      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-40"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
+      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
+      {/* pb-56 (au lieu de pb-40) : laisse assez d'espace en bas pour que le dernier élément
+          d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
+          "Démasquer les données" quand on scrolle tout en bas. */}
         {tab === "dashboard" && (
           <div className="space-y-2">
             <div className="px-1 mb-1">
@@ -12311,15 +12533,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           </div>
         )}
-        {tab === "cash" && hasPermission("viewCash") && cashView && (
+        {tab === "cash" && hasPermission("viewCash") && cashView && typeof document !== "undefined" && createPortal(
           <button
             onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }}
             className="font-bold"
             style={{
               position: "fixed",
               right: 16,
-              bottom: "calc(78px + env(safe-area-inset-bottom, 0px))",
-              zIndex: 30,
+              // Remonté pour dégager toute la hauteur de la barre de navigation du bas
+              // (icône + libellé + marge de sécurité de l'écran) : avant, 78px suffisait
+              // à peine et le bouton passait à moitié sous la barre sur beaucoup de téléphones.
+              bottom: "calc(96px + env(safe-area-inset-bottom, 0px))",
+              zIndex: 9999,
               display: "flex",
               alignItems: "center",
               gap: 6,
@@ -12334,7 +12559,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           >
             <span style={{ fontSize: 14 }}>{amountsHidden ? "🙈" : "👁️"}</span>
             {amountsHidden ? t(lang, "unmaskCashFloatingBtn") : t(lang, "maskCashFloatingBtn")}
-          </button>
+          </button>,
+          document.body
         )}
         {tab === "cashreport" && (
           <div>
@@ -14170,13 +14396,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         </div>
       )}
-      {showPaymentShortcut && activeCart && (
+      {showPaymentShortcut && activeCart && typeof document !== "undefined" && createPortal(
         <button
           onClick={() => paymentZoneRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}
-          className="absolute left-1/2 flex items-center gap-2 px-5 py-3 rounded-full text-white font-extrabold text-sm z-30 active:scale-95"
+          className="fixed left-1/2 flex items-center gap-2 px-5 py-3 rounded-full text-white font-extrabold text-sm active:scale-95"
           style={{
-            bottom: isDesktop ? 24 : 100,
+            // Même correction que le bouton "Démasquer les données" : en position fixe
+            // à l'intérieur du conteneur de défilement, ce bouton pouvait se retrouver
+            // sous la barre de navigation du bas malgré son z-index. Le portail le fait
+            // sortir de ce conteneur, et la valeur de "bottom" est relevée pour bien
+            // dégager la barre de navigation sur mobile.
+            bottom: isDesktop ? 24 : "calc(96px + env(safe-area-inset-bottom, 0px))",
             transform: "translateX(-50%)",
+            zIndex: 9999,
             background: "linear-gradient(135deg, #16a34a, #15803d)",
             boxShadow: "0 10px 24px rgba(22,163,74,0.45)",
             transition: "opacity 0.25s ease, transform 0.25s ease",
@@ -14185,7 +14417,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         >
           <span style={{ fontSize: 16 }}>💳</span>
           {t(lang, "paymentShortcut")} — {fcfa(cartTotal)}
-        </button>
+        </button>,
+        document.body
+      )}
+      {saleSuccessOverlay && typeof document !== "undefined" && createPortal(
+        <SaleSuccessOverlay
+          amount={saleSuccessOverlay.amount}
+          formatAmount={fcfa(saleSuccessOverlay.amount)}
+          label={t(lang, "saleSuccessLabel")}
+          darkMode={darkMode}
+        />,
+        document.body
       )}
       <style>{"@keyframes shortcutIn { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }"}</style>
       {!isDesktop && (
@@ -14497,6 +14739,21 @@ function BoutiqueAppInner() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+  // ---- Clic léger global sur les boutons (son + vibration très légère) ----
+  // Un seul écouteur délégué sur le document plutôt qu'un ajout manuel sur chacun des
+  // centaines de boutons de l'app : on écoute la phase de capture (avant que le bouton
+  // ne déclenche son propre onClick), et on remonte jusqu'au <button> le plus proche du
+  // point cliqué. Les boutons désactivés ne jouent rien (ce n'est pas une vraie action).
+  useEffect(() => {
+    const onPointerDown = (e) => {
+      const btn = e.target.closest && e.target.closest("button");
+      if (!btn || btn.disabled) return;
+      playSound("click");
+      triggerHaptic("light");
+    };
+    document.addEventListener("pointerdown", onPointerDown, { capture: true, passive: true });
+    return () => document.removeEventListener("pointerdown", onPointerDown, { capture: true });
   }, []);
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
