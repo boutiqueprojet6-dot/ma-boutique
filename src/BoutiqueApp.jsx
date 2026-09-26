@@ -338,7 +338,7 @@ const LEMONSQUEEZY_WEBHOOK_ENDPOINT = "https://TON-BACKEND.example.com/lemonsque
 // Chaque palier hérite des fonctionnalités du précédent. maxEmployees: null = illimité.
 // aiMonthlyQuota: null = illimité, 0 = pas d'accès à l'IA.
 // Le nombre de ventes/jour est plafonné séparément (voir FREE_SALES_LIMIT_PER_DAY) : Gratuit
-// et tout palier payant expiré sont limités à 10 ventes/jour (remis à zéro chaque jour, sans
+// et tout palier payant expiré sont limités à 30 ventes/jour (remis à zéro chaque jour, sans
 // cumul), Pro et Business sont illimités en ventes tant que l'abonnement est actif.
 const SUBSCRIPTION_PLANS = {
   free: {
@@ -376,7 +376,7 @@ const SUBSCRIPTION_PLAN_ORDER = ["free", "pro", "business"];
 // réintroduire une limite plus tard.
 const FREE_PRODUCT_LIMIT = 20;
 const PRO_PRODUCT_LIMIT = 100;
-const FREE_SALES_LIMIT_PER_DAY = 10;
+const FREE_SALES_LIMIT_PER_DAY = 30;
 const BALL_COLORS = [
   { id: "blue", label: "Bleu", swatch: "#ADD8E6", light: "rgba(173,216,230,0.55)", dark: "rgba(173,216,230,0.9)" },
   { id: "teal", label: "Turquoise", swatch: "#14b8a6", light: "rgba(45,190,175,0.6)", dark: "rgba(120,235,220,1)" },
@@ -3918,6 +3918,8 @@ EXTRA_UI.installBannerDesc = { am: "Shopnifyን ወደ መነሻ ማያ ገጽ�
 EXTRA_UI.installBannerBtn = { am: "ጫን", ar: "تثبيت", bm: "Sigi", bn: "ইনস্টল করুন", de: "Installieren", en: "Install", es: "Instalar", fr: "Installer", ha: "Sanya", hi: "इंस्टॉल करें", id: "Pasang", it: "Installa", nl: "Installeren", ja: "インストール", ko: "설치", pl: "Zainstaluj", pt: "Instalar", ru: "Установить", sw: "Sakinisha", ta: "நிறுவு", te: "ఇన్‌స్టాల్ చేయి", th: "ติดตั้ง", tl: "I-install", tr: "Yükle", ur: "انسٹال کریں", vi: "Cài đặt", wo: "Yokkal", yo: "Fi sórí ẹ̀rọ", zh: "安装", zu: "Faka" };
 EXTRA_UI.installBannerLater = { am: "በኋላ", ar: "لاحقًا", bm: "Tuma", bn: "পরে", de: "Später", en: "Later", es: "Más tarde", fr: "Plus tard", ha: "Daga baya", hi: "बाद में", id: "Nanti", it: "Più tardi", nl: "Later", ja: "あとで", ko: "나중에", pl: "Później", pt: "Mais tarde", ru: "Позже", sw: "Baadaye", ta: "பிறகு", te: "తర్వాత", th: "ไว้ทีหลัง", tl: "Mamaya na", tr: "Sonra", ur: "بعد میں", vi: "Để sau", wo: "Ginnaaw", yo: "Nígbà míì", zh: "稍后", zu: "Kamuva" };
 EXTRA_UI.installIosHint = { am: "በ iPhone ላይ፦ የማጋሪያ (Share) ቁልፉን ይጫኑ፣ ከዚያ “ወደ መነሻ ማያ ገጽ አክል” ይምረጡ።", ar: "على iPhone: اضغط على زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", bm: "iPhone kan na: Share bɔtɔn digi, o kɔfɛ i “Add to Home Screen” sugandi.", bn: "iPhone-এ: শেয়ার বোতামে চাপ দিন, তারপর “হোম স্ক্রিনে যোগ করুন” বেছে নিন।", de: "Auf dem iPhone: Tippe auf „Teilen“ und dann auf „Zum Home-Bildschirm“.", en: "On iPhone: tap the Share button, then “Add to Home Screen”.", es: "En iPhone: toca el botón Compartir y luego «Añadir a pantalla de inicio».", fr: "Sur iPhone : touchez le bouton Partager, puis « Sur l'écran d'accueil ».", ha: "A iPhone: danna maɓallin Share, sannan ka zaɓi “Add to Home Screen”.", hi: "iPhone पर: शेयर बटन दबाएँ, फिर “होम स्क्रीन पर जोड़ें” चुनें।", id: "Di iPhone: ketuk tombol Bagikan, lalu pilih “Tambah ke Layar Utama”.", it: "Su iPhone: tocca il pulsante Condividi, poi «Aggiungi alla schermata Home».", nl: "Op iPhone: tik op de knop Deel en kies daarna ‘Zet op beginscherm’.", ja: "iPhoneの場合：共有ボタンをタップし、「ホーム画面に追加」を選んでください。", ko: "iPhone에서: 공유 버튼을 누른 다음 '홈 화면에 추가'를 선택하세요.", pl: "Na iPhonie: dotknij przycisku Udostępnij, a potem „Dodaj do ekranu głównego”.", pt: "No iPhone: toque no botão Compartilhar e depois em “Adicionar à Tela de Início”.", ru: "На iPhone: нажмите «Поделиться», затем «На экран „Домой“».", sw: "Kwenye iPhone: gusa kitufe cha Shiriki, kisha chagua “Ongeza kwenye Skrini ya Kwanza”.", ta: "iPhone-இல்: பகிர் பொத்தானைத் தொட்டு, பின்னர் “முகப்புத் திரையில் சேர்” என்பதைத் தேர்ந்தெடுக்கவும்.", te: "iPhone‌లో: షేర్ బటన్‌ను నొక్కి, ఆపై “హోమ్ స్క్రీన్‌కు జోడించు” ఎంచుకోండి.", th: "บน iPhone: แตะปุ่มแชร์ แล้วเลือก “เพิ่มไปยังหน้าจอโฮม”", tl: "Sa iPhone: pindutin ang Share button, tapos piliin ang “Add to Home Screen”.", tr: "iPhone'da: Paylaş düğmesine dokun, ardından “Ana Ekrana Ekle”yi seç.", ur: "iPhone پر: شیئر بٹن دبائیں، پھر “ہوم اسکرین میں شامل کریں” منتخب کریں۔", vi: "Trên iPhone: chạm nút Chia sẻ, rồi chọn “Thêm vào Màn hình chính”.", wo: "Ci iPhone: bësal bouton Share bi, gannaaw loolu tànn “Add to Home Screen”.", yo: "Lórí iPhone: tẹ bọ́tìnì Share, lẹ́yìn náà yan “Add to Home Screen”.", zh: "在 iPhone 上：点击“分享”按钮，然后选择“添加到主屏幕”。", zu: "ku-iPhone: cindezela inkinobho ethi Share, bese ukhetha “Add to Home Screen”." };
+EXTRA_UI.installIosOtherHint = { am: "በ iPhone ላይ፣ ይህን መተግበሪያ ለመጫን በ Safari ውስጥ ይክፈቱት።", ar: "على iPhone، افتح هذا الرابط في متصفح Safari لتتمكن من تثبيت التطبيق.", bm: "iPhone kan na, Safari kɔnɔ i ka nin lien nin dayɛlɛ walasa ka porogaramu sigi.", bn: "iPhone-এ, অ্যাপটি ইনস্টল করতে এই লিংকটি Safari-তে খুলুন।", de: "Öffne diesen Link auf dem iPhone in Safari, um die App installieren zu können.", en: "On iPhone, open this link in Safari to be able to install the app.", es: "En iPhone, abre este enlace en Safari para poder instalar la aplicación.", fr: "Sur iPhone, ouvrez ce lien dans Safari pour pouvoir installer l'application.", ha: "A iPhone, buɗe wannan hanyar haɗi a cikin Safari domin ka iya sanya manhajar.", hi: "iPhone पर, ऐप इंस्टॉल करने के लिए इस लिंक को Safari में खोलें।", id: "Di iPhone, buka tautan ini di Safari agar bisa memasang aplikasi.", it: "Su iPhone, apri questo link in Safari per poter installare l'app.", ja: "iPhoneでは、アプリをインストールするためにこのリンクをSafariで開いてください。", ko: "iPhone에서 앱을 설치하려면 이 링크를 Safari에서 열어주세요.", nl: "Open deze link op je iPhone in Safari om de app te kunnen installeren.", pl: "Na iPhonie otwórz ten link w przeglądarce Safari, aby móc zainstalować aplikację.", pt: "No iPhone, abra este link no Safari para conseguir instalar o aplicativo.", ru: "На iPhone откройте эту ссылку в Safari, чтобы установить приложение.", sw: "Kwenye iPhone, fungua kiungo hiki kwenye Safari ili uweze kusakinisha programu.", ta: "iPhone-இல், செயலியை நிறுவ இந்த இணைப்பை Safari-இல் திறக்கவும்.", te: "iPhone‌లో, యాప్‌ను ఇన్‌స్టాల్ చేయడానికి ఈ లింక్‌ను Safariలో తెరవండి.", th: "บน iPhone ให้เปิดลิงก์นี้ใน Safari เพื่อให้สามารถติดตั้งแอปได้", tl: "Sa iPhone, buksan ang link na ito sa Safari para ma-install ang app.", tr: "iPhone'da, uygulamayı yükleyebilmek için bu bağlantıyı Safari'de aç.", ur: "آئی فون پر، ایپ انسٹال کرنے کے لیے یہ لنک Safari میں کھولیں۔", vi: "Trên iPhone, hãy mở liên kết này trong Safari để có thể cài đặt ứng dụng.", wo: "Ci iPhone, ubbil lien bii ci Safari ngir man a yokkal appli bi.", yo: "Lórí iPhone, ṣí ìjápọ̀ yìí nínú Safari kí o le fi àpù náà sórí ẹ̀rọ.", zh: "在 iPhone 上，请在 Safari 中打开此链接才能安装应用。", zu: "ku-iPhone, vula lesi sixhumanisi ku-Safari ukuze ukwazi ukufaka uhlelo lokusebenza." };
+EXTRA_UI.installMacSafariHint = { am: "በ Mac ላይ፣ በ Safari ውስጥ ካለው ፋይል ምናሌ ውስጥ “ወደ Dock አክል”ን ይምረጡ።", ar: "على Mac، من قائمة \"ملف\" في Safari، اختر \"إضافة إلى Dock\".", bm: "Mac kan na, Safari ka File menu kɔnɔ, i ka \"Add to Dock\" sugandi.", bn: "Mac-এ, Safari-এর File মেনু থেকে “Add to Dock” বেছে নিন।", de: "Auf dem Mac: Wähle im Safari-Menü „Ablage“ die Option „Zum Dock hinzufügen“.", en: "On Mac: in Safari's File menu, choose “Add to Dock”.", es: "En Mac: en el menú Archivo de Safari, elige «Añadir al Dock».", fr: "Sur Mac : dans le menu Fichier de Safari, choisissez « Ajouter au Dock ».", ha: "A Mac: a menu File na Safari, zaɓi “Add to Dock”.", hi: "Mac पर: Safari के File मेनू में जाकर “Add to Dock” चुनें।", id: "Di Mac: di menu File Safari, pilih “Add to Dock”.", it: "Su Mac: nel menu File di Safari, scegli «Aggiungi al Dock».", ja: "Macでは：Safariの「ファイル」メニューから「Dockに追加」を選んでください。", ko: "Mac에서: Safari의 파일 메뉴에서 '독에 추가'를 선택하세요.", nl: "Op de Mac: kies in het Archief-menu van Safari voor ‘Zet in Dock’.", pl: "Na Macu: w menu Plik przeglądarki Safari wybierz „Dodaj do Docka”.", pt: "No Mac: no menu Arquivo do Safari, escolha “Adicionar ao Dock”.", ru: "На Mac: в меню «Файл» Safari выберите «Добавить в Dock».", sw: "Kwenye Mac: kwenye menyu ya File ya Safari, chagua “Add to Dock”.", ta: "Mac-இல்: Safari-இன் File மெனுவில், “Add to Dock” என்பதைத் தேர்ந்தெடுக்கவும்.", te: "Mac‌లో: Safari File మెనూలో “Add to Dock” ఎంచుకోండి.", th: "บน Mac: ในเมนู File ของ Safari ให้เลือก “Add to Dock”", tl: "Sa Mac: sa File menu ng Safari, piliin ang “Add to Dock”.", tr: "Mac'te: Safari'nin Dosya menüsünden “Dock'a Ekle”yi seç.", ur: "میک پر: Safari کے File مینو میں سے “Add to Dock” منتخب کریں۔", vi: "Trên Mac: trong menu File của Safari, chọn “Add to Dock”.", wo: "Ci Mac: ci menu File bu Safari, tànn “Add to Dock”.", yo: "Lórí Mac: nínú àtòjọ File Safari, yan “Add to Dock”.", zh: "在 Mac 上：在 Safari 的“文件”菜单中选择“添加到程序坞”。", zu: "ku-Mac: kumenyu ye-File ye-Safari, khetha ku-“Add to Dock”." };
 EXTRA_UI.supportEmailDesc = { am: "የኢሜይል እገዛ", ar: "الدعم عبر البريد الإلكتروني", bm: "Dɛmɛ imɛli fɛ", bn: "ইমেইল সহায়তা", de: "E-Mail-Support", en: "Email support", es: "Asistencia por correo", fr: "Assistance par e-mail", ha: "Taimako ta imel", hi: "ईमेल सहायता", id: "Dukungan email", it: "Assistenza via e-mail", nl: "Ondersteuning via e-mail", ja: "メールサポート", ko: "이메일 지원", pl: "Pomoc e-mailem", pt: "Suporte por e-mail", ru: "Поддержка по e-mail", sw: "Msaada kwa barua pepe", ta: "மின்னஞ்சல் உதவி", te: "ఇమెయిల్ సహాయం", th: "ฝ่ายสนับสนุนทางอีเมล", tl: "Suporta sa email", tr: "E-posta desteği", ur: "ای میل معاونت", vi: "Hỗ trợ qua email", wo: "Ndimbal ci imeel", yo: "Ìrànlọ́wọ́ lórí ímeèlì", zh: "邮件支持", zu: "Usizo nge-imeyili" };
 EXTRA_UI.supportMsgPlaceholder = { am: "ችግርዎን ወይም ጥያቄዎን ይግለጹ…", ar: "اشرح مشكلتك أو سؤالك…", bm: "I ka gɛlɛya walima i ka ɲininkali sɛbɛn…", bn: "আপনার সমস্যা বা প্রশ্ন লিখুন…", de: "Beschreibe dein Problem oder deine Frage…", en: "Describe your problem or question…", es: "Describe tu problema o pregunta…", fr: "Décrivez votre problème ou votre question…", ha: "Bayyana matsalarka ko tambayarka…", hi: "अपनी समस्या या सवाल लिखें…", id: "Jelaskan masalah atau pertanyaanmu…", it: "Descrivi il tuo problema o la tua domanda…", nl: "Beschrijf je probleem of vraag…", ja: "問題や質問を書いてください…", ko: "문제나 질문을 적어 주세요…", pl: "Opisz swój problem lub pytanie…", pt: "Descreva seu problema ou dúvida…", ru: "Опишите вашу проблему или вопрос…", sw: "Eleza tatizo au swali lako…", ta: "உங்கள் பிரச்சினை அல்லது கேள்வியை எழுதுங்கள்…", te: "మీ సమస్య లేదా ప్రశ్నను రాయండి…", th: "อธิบายปัญหาหรือคำถามของคุณ…", tl: "Ilarawan ang iyong problema o tanong…", tr: "Sorununu veya merak ettiğini açıkla…", ur: "اپنا مسئلہ یا سوال لکھیں…", vi: "Hãy mô tả vấn đề hoặc câu hỏi của bạn…", wo: "Faral sa jafe-jafe walla sa laaj…", yo: "Ṣàlàyé ìṣòro tàbí ìbéèrè rẹ…", zh: "请描述你的问题或疑问…", zu: "Chaza inkinga noma umbuzo wakho…" };
 EXTRA_UI.supportReplyHint = { am: "በመለያዎ የኢሜይል አድራሻ በኢሜይል እንመልሳለን።", ar: "نردّ عليك بالبريد الإلكتروني على عنوان حسابك.", bm: "An bɛna jaabi di imɛli fɛ, i ka jatebɔ imɛli adiresi la.", bn: "আমরা আপনার অ্যাকাউন্টের ইমেইল ঠিকানায় ইমেইলে উত্তর দেব।", de: "Wir antworten per E-Mail an die Adresse deines Kontos.", en: "We reply by email, to your account's address.", es: "Respondemos por correo electrónico, a la dirección de tu cuenta.", fr: "Nous vous répondons par e-mail, à l'adresse de votre compte.", ha: "Za mu amsa ta imel, zuwa adireshin asusunka.", hi: "हम आपके अकाउंट के ईमेल पते पर ईमेल से जवाब देंगे।", id: "Kami membalas lewat email, ke alamat akunmu.", it: "Rispondiamo via e-mail, all'indirizzo del tuo account.", nl: "We antwoorden per e-mail, op het adres van je account.", ja: "アカウントのメールアドレスに返信します。", ko: "계정 이메일 주소로 답변드립니다.", pl: "Odpowiadamy e-mailem na adres Twojego konta.", pt: "Respondemos por e-mail, no endereço da sua conta.", ru: "Мы ответим по e-mail на адрес вашего аккаунта.", sw: "Tunajibu kwa barua pepe, kwenye anwani ya akaunti yako.", ta: "உங்கள் கணக்கின் மின்னஞ்சல் முகவரிக்கு மின்னஞ்சலில் பதிலளிப்போம்.", te: "మీ ఖాతా ఇమెయిల్ చిరునామాకు ఇమెయిల్ ద్వారా సమాధానం ఇస్తాము.", th: "เราจะตอบกลับทางอีเมลไปยังที่อยู่อีเมลของบัญชีคุณ", tl: "Sasagot kami sa email, sa address ng iyong account.", tr: "E-posta ile, hesabının adresine yanıt veriyoruz.", ur: "ہم آپ کے اکاؤنٹ کے ای میل پتے پر ای میل سے جواب دیں گے۔", vi: "Chúng tôi trả lời qua email, đến địa chỉ email của tài khoản bạn.", wo: "Dinanu la tontu ci imeel, ci adrees bu sa compte.", yo: "A ó dá ọ lóhùn nípasẹ̀ ímeèlì, sí àdírẹ́sì àkọọ́lẹ̀ rẹ.", zh: "我们会通过电子邮件回复到你的账号邮箱。", zu: "Sizophendula nge-imeyili, ekheleni le-akhawunti yakho." };
@@ -4815,6 +4817,29 @@ const isIosDevice = () => {
     return /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   } catch (e) { return false; }
 };
+// Sur iOS, tous les navigateurs (Chrome, Firefox, apps avec navigateur intégré...) utilisent le
+// même moteur que Safari, mais seul le vrai Safari propose « Sur l'écran d'accueil » dans son
+// bouton Partager. On distingue donc le vrai Safari des autres via les marqueurs propres à
+// chaque navigateur tiers présents dans le user agent (absents chez le vrai Safari).
+const isIosOtherBrowser = () => {
+  try {
+    if (!isIosDevice()) return false;
+    const ua = navigator.userAgent || "";
+    return /CriOS|FxiOS|EdgiOS|OPiOS|mercury|FBAN|FBAV|Instagram|Line\/|MicroMessenger|GSA\//i.test(ua);
+  } catch (e) { return false; }
+};
+// Même situation sur Mac : Safari ne déclenche jamais `beforeinstallprompt` (contrairement à
+// Chrome/Edge sur le même Mac), on affiche donc une explication manuelle (menu Fichier > « Ajouter
+// au Dock »). On distingue le vrai Safari des autres navigateurs desktop via leurs tokens propres,
+// tous absents chez le vrai Safari (qui inclut toujours "Safari/" dans son user agent).
+const isMacSafariDesktop = () => {
+  try {
+    if (!detectIsDesktop()) return false;
+    const ua = navigator.userAgent || "";
+    if (!/Macintosh/i.test(ua)) return false;
+    return /Safari\//.test(ua) && !/Chrome\/|Chromium\/|Edg\/|OPR\//i.test(ua);
+  } catch (e) { return false; }
+};
 const installDismissedRecently = () => {
   try {
     const v = parseInt(window.localStorage.getItem(INSTALL_DISMISS_KEY) || "0", 10);
@@ -4840,21 +4865,36 @@ function useInstallPrompt() {
     notifyInstall();
   };
   const installed = isAppInstalled();
+  const onIos = !deferredInstallEvent && !installed && isIosDevice();
   return {
     canInstall: !!deferredInstallEvent && !installed,
-    showIosHint: !deferredInstallEvent && !installed && isIosDevice(),
+    // Vrai Safari sur iOS : le bouton Partager permet l'installation, on explique comment.
+    showIosHint: onIos && !isIosOtherBrowser(),
+    // iOS mais navigateur tiers (Chrome, Firefox, in-app browser...) : ce bouton Partager-là
+    // n'installe rien, il faut d'abord rouvrir le lien dans Safari.
+    showIosOtherBrowserHint: onIos && isIosOtherBrowser(),
+    // Mac + Safari : même limitation que sur iPhone, mais l'installation se fait via le menu
+    // Fichier > « Ajouter au Dock » plutôt que le bouton Partager.
+    showMacSafariHint: !deferredInstallEvent && !installed && !onIos && isMacSafariDesktop(),
     dismissed: installDismissedRecently(),
     install,
     dismiss,
   };
 }
 function InstallBanner({ lang }) {
-  const { canInstall, showIosHint, dismissed, install, dismiss } = useInstallPrompt();
-  if (dismissed || (!canInstall && !showIosHint)) return null;
+  const { canInstall, showIosHint, showIosOtherBrowserHint, showMacSafariHint, dismissed, install, dismiss } = useInstallPrompt();
+  if (dismissed || (!canInstall && !showIosHint && !showIosOtherBrowserHint && !showMacSafariHint)) return null;
+  const desc = canInstall
+    ? tx(lang, "installBannerDesc")
+    : showIosOtherBrowserHint
+    ? tx(lang, "installIosOtherHint")
+    : showMacSafariHint
+    ? tx(lang, "installMacSafariHint")
+    : tx(lang, "installIosHint");
   return (
     <div style={{ position: "fixed", left: 12, right: 12, bottom: "calc(12px + env(safe-area-inset-bottom, 0px))", zIndex: 9999, maxWidth: 480, margin: "0 auto", background: "#15162C", color: "white", borderRadius: 18, padding: "14px 14px 12px", boxShadow: "0 12px 32px rgba(0,0,0,0.35)" }}>
       <p style={{ fontWeight: 800, fontSize: 14, marginBottom: 2 }}>📲 {tx(lang, "installBannerTitle")}</p>
-      <p style={{ fontSize: 12, opacity: 0.8, marginBottom: 10, lineHeight: 1.4 }}>{canInstall ? tx(lang, "installBannerDesc") : tx(lang, "installIosHint")}</p>
+      <p style={{ fontSize: 12, opacity: 0.8, marginBottom: 10, lineHeight: 1.4 }}>{desc}</p>
       <div style={{ display: "flex", gap: 8 }}>
         <button onClick={dismiss} style={{ flex: 1, padding: "10px 0", borderRadius: 12, fontSize: 13, fontWeight: 600, background: "rgba(255,255,255,0.12)", color: "white", border: "none", cursor: "pointer" }}>{tx(lang, "installBannerLater")}</button>
         {canInstall && <button onClick={install} style={{ flex: 2, padding: "10px 0", borderRadius: 12, fontSize: 13, fontWeight: 800, background: INDIGO, color: "white", border: "none", cursor: "pointer" }}>{tx(lang, "installBannerBtn")}</button>}
