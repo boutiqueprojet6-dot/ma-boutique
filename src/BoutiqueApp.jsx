@@ -4904,6 +4904,9 @@ function InstallBanner({ lang }) {
 }
 function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogleOnboarding, darkMode }) {
   const AT = themePalette(darkMode);
+  // Sur ordinateur, l'écran de connexion remplit tout l'écran (comme le reste de l'app une
+  // fois connecté) au lieu de rester une petite carte flottante entourée de vide.
+  const isDesktop = useIsDesktop();
   const [screen, setScreen] = useState(startInGoogleOnboarding ? "onboarding" : "login");
   const [isGoogleFlow, setIsGoogleFlow] = useState(!!startInGoogleOnboarding);
   const [obStep, setObStep] = useState(1);
@@ -5243,16 +5246,22 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     return (
       <div
         dir="ltr"
-        className="min-h-screen flex items-center justify-center p-4 md:p-8"
+        className={isDesktop ? "h-screen w-screen flex items-stretch" : "min-h-screen flex items-center justify-center p-4 md:p-8"}
         style={{ background: AT.bg, userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }}
         onCopy={(e) => e.preventDefault()}
         onCut={(e) => e.preventDefault()}
         onContextMenu={(e) => e.preventDefault()}
       >
         <style>{".login-screen-guard input, .login-screen-guard textarea { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }"}</style>
-        <div className="w-full max-w-md md:max-w-3xl lg:max-w-4xl rounded-3xl overflow-hidden shadow-xl md:flex md:items-stretch login-screen-guard" style={{ boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}>
+        <div
+          className={isDesktop ? "w-full flex items-stretch login-screen-guard" : "w-full max-w-md md:max-w-3xl lg:max-w-4xl rounded-3xl overflow-hidden shadow-xl md:flex md:items-stretch login-screen-guard"}
+          style={isDesktop ? undefined : { boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}
+        >
           {/* Dark brand panel */}
-          <div className="px-7 py-8 text-white md:w-2/5 md:flex md:flex-col md:justify-center" style={{ background: "radial-gradient(120% 100% at 0% 0%, #272A56 0%, #12132A 60%)" }}>
+          <div
+            className={isDesktop ? "px-16 text-white w-2/5 flex flex-col justify-center" : "px-7 py-8 text-white md:w-2/5 md:flex md:flex-col md:justify-center"}
+            style={{ background: "radial-gradient(120% 100% at 0% 0%, #272A56 0%, #12132A 60%)" }}
+          >
             <div className="flex items-center gap-2 mb-4">
               <svg width="24" height="24" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
               <span className="font-bold text-sm tracking-wide">{t(lang, "appName")}</span>
@@ -5265,7 +5274,13 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </div>
           </div>
           {/* Form panel (thème clair/sombre selon la préférence mémorisée) */}
-          <div className="px-7 py-7 md:w-3/5 md:overflow-y-auto" style={{ maxHeight: "90vh", background: AT.card }}>
+          <div
+            className={isDesktop ? "px-16 py-10 w-3/5 overflow-y-auto flex flex-col justify-center" : "px-7 py-7 md:w-3/5 md:overflow-y-auto"}
+            style={{ maxHeight: isDesktop ? "100vh" : "90vh", background: AT.card }}
+          >
+            {/* Largeur du formulaire limitée même sur grand écran, pour rester lisible :
+                seul le fond (panneaux de marque + formulaire) remplit tout l'écran. */}
+            <div className="w-full max-w-md mx-auto">
             <div className="flex justify-start gap-2 mb-4 overflow-x-auto" style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none" }}>
               {LANGUAGES.map((l) => (
                 <button key={l.id} onClick={() => setLang(l.id)} className="flex-shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full border" style={{ borderColor: darkMode ? "#8B85F2" : INDIGO, background: lang === l.id ? (darkMode ? "#4F46E5" : INDIGO) : AT.card, color: lang === l.id ? "white" : (darkMode ? "#8B85F2" : INDIGO) }}>
@@ -5358,6 +5373,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <button onClick={onDemo} className="w-full text-center text-[11px] mt-3 font-semibold underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
               👀 {t(lang, "seeDemoBtn")}
             </button>
+            </div>
           </div>
         </div>
       </div>
@@ -10859,8 +10875,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {isDesktop && (
-        <div className="shrink-0" style={{ width: 220, background: darkMode ? "#0a0d14" : INDIGO, height: "100vh", overflowY: "auto", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35 }}>
-          <div className="flex items-center gap-2 px-2 mb-8">
+        <div className="shrink-0" style={{ width: 220, background: darkMode ? "#0a0d14" : INDIGO, height: "100vh", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35 }}>
+          <div className="flex items-center gap-2 px-2 mb-8 shrink-0">
             {shopPhoto ? (
               <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/30" />
             ) : (
@@ -10880,15 +10896,26 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
             </div>
           </div>
-          <div className="flex flex-col gap-1 flex-1">
+          {/* Liste complète des onglets (y compris ceux regroupés sous "Plus" sur mobile,
+              où la place manque) : sur ordinateur, autant tout afficher directement.
+              Cette zone scrolle seule si la liste dépasse la hauteur de l'écran, pour que
+              Paramètres et Déconnexion, juste en dessous, restent toujours visibles. */}
+          <div className="flex flex-col gap-1 flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
             {[
               { id: "dashboard", label: t(lang, "navDashboard"), icon: LayoutDashboard },
               { id: "sale", label: t(lang, "navSale"), icon: ShoppingCart, hidden: !hasBasePermission("sell") },
               { id: "stock", label: t(lang, "navStock"), icon: Package, hidden: !hasPermission("viewStock") },
               { id: "debts", label: t(lang, "navDebts"), icon: Users, hidden: !hasPermission("viewDebts") },
+              { id: "cash", label: t(lang, "setCaisse"), icon: Wallet, hidden: !hasPermission("viewCash") },
               { id: "history", label: t(lang, "navHistory"), icon: History },
               { id: "stats", label: t(lang, "navStats"), icon: BarChart3, hidden: !hasPermission("viewStats") },
               { id: "ai", label: t(lang, "navAI"), icon: Bot },
+              { id: "calculator", label: t(lang, "calcTabLabel"), icon: Calculator },
+              // La gestion des employés reste TOUJOURS exclusive au propriétaire, quel que
+              // soit le rôle de l'employé connecté (même un Gérant ne la voit pas).
+              { id: "employees", label: t(lang, "empTabLabel"), icon: Users, hidden: !!activeEmployee },
+              { id: "shopcompare", label: t(lang, "shopCompareTabLabel"), icon: BarChart3, hidden: !hasFeatureAccess("shopComparison") || !!activeEmployee },
+              { id: "cashreport", label: t(lang, "cashReportTabLabel"), icon: Wallet, hidden: !hasFeatureAccess("perEmployeeCashReport") || !!activeEmployee },
             ].filter((item) => !item.hidden).map((item) => {
               const Icon = item.icon;
               const active = tab === item.id;
@@ -10896,7 +10923,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <button
                   key={item.id}
                   onClick={() => { setTab(item.id); setShowAddProduct(false); }}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0"
                   style={{
                     background: active ? "rgba(255,255,255,0.15)" : "transparent",
                     color: active ? "white" : "rgba(255,255,255,0.65)",
@@ -10908,14 +10935,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               );
             })}
           </div>
-          <button onClick={() => setShowSettings(true)} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold" style={{ color: "rgba(255,255,255,0.65)" }}>
-            <Settings size={17} />
-            {t(lang, "settingsTitle")}
-          </button>
-          <button onClick={() => { if (window.confirm(t(lang, "logoutConfirm"))) handleLogoutClean(); }} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
-            <LogOut size={17} />
-            {t(lang, "othDeconnexion")}
-          </button>
+          <div className="shrink-0">
+            <button onClick={() => setShowSettings(true)} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold w-full" style={{ color: "rgba(255,255,255,0.65)" }}>
+              <Settings size={17} />
+              {t(lang, "settingsTitle")}
+            </button>
+            <button onClick={() => { if (window.confirm(t(lang, "logoutConfirm"))) handleLogoutClean(); }} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold w-full" style={{ color: "rgba(255,255,255,0.5)" }}>
+              <LogOut size={17} />
+              {t(lang, "othDeconnexion")}
+            </button>
+          </div>
         </div>
       )}
       <div
