@@ -4662,7 +4662,7 @@ function SearchableSelect({ value, onChange, options, placeholder, searchPlaceho
               style={{ background: AT.input, color: AT.text, borderColor: AT.border }}
             />
           </div>
-          <div className="flex-1 overflow-y-auto pb-4">
+          <div data-kbscroll="true" className="flex-1 overflow-y-auto pb-4">
             {filtered.length === 0 && (
               <div className="px-3 py-6 text-sm text-gray-400 text-center">{emptyLabel}</div>
             )}
@@ -4754,7 +4754,7 @@ function LanguagePickerScreen({ onChoose, darkMode }) {
   const sorted = [...filtered].sort((a, b) => (a.id === systemLang ? -1 : b.id === systemLang ? 1 : 0));
   return (
     <div dir="ltr" className="min-h-screen flex items-center justify-center p-4" style={{ background: AT.bg }}>
-      <div className="w-full max-w-sm rounded-3xl p-8 text-center shadow-xl max-h-[90vh] overflow-y-auto" style={{ background: AT.card }}>
+      <div data-kbscroll="true" className="w-full max-w-sm rounded-3xl p-8 text-center shadow-xl max-h-[90vh] overflow-y-auto" style={{ background: AT.card }}>
         <div className="flex items-center justify-center gap-2 mb-5">
           <svg width="26" height="26" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
           <span className="font-bold text-base" style={{ color: AT.text }}>Shopnify</span>
@@ -5274,7 +5274,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </div>
           </div>
           {/* Form panel (thème clair/sombre selon la préférence mémorisée) */}
-          <div
+          <div data-kbscroll="true"
             className={isDesktop ? "px-16 py-10 w-3/5 overflow-y-auto flex flex-col justify-center" : "px-7 py-7 md:w-3/5 md:overflow-y-auto"}
             style={{ maxHeight: isDesktop ? "100vh" : "90vh", background: AT.card }}
           >
@@ -6505,7 +6505,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
           {productQuery.trim() && matchingProducts.length === 0 && (
             <p className="text-xs text-center py-2" style={{ color: T.muted }}>{t(lang, "calcNoProductFound")}</p>
           )}
-          <div className="space-y-1 max-h-40 overflow-y-auto">
+          <div data-kbscroll="true" className="space-y-1 max-h-40 overflow-y-auto">
             {matchingProducts.map((p) => (
               <button
                 key={p.id}
@@ -6533,7 +6533,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
           {history.length === 0 ? (
             <p className="text-xs text-center py-2" style={{ color: T.muted }}>{t(lang, "calcHistoryEmpty")}</p>
           ) : (
-            <div className="space-y-1 max-h-40 overflow-y-auto">
+            <div data-kbscroll="true" className="space-y-1 max-h-40 overflow-y-auto">
               {history.map((entry, i) => (
                 <button
                   key={i}
@@ -10764,7 +10764,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       )}
       {shareDialogProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(43,36,32,0.5)" }}>
-          <div className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+          <div data-kbscroll="true" className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-bold text-sm">{tx(lang, "shareProductBtn")}</h3>
               <button onClick={() => setShareDialogProduct(null)}><X size={18} /></button>
@@ -10900,7 +10900,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               où la place manque) : sur ordinateur, autant tout afficher directement.
               Cette zone scrolle seule si la liste dépasse la hauteur de l'écran, pour que
               Paramètres et Déconnexion, juste en dessous, restent toujours visibles. */}
-          <div className="flex flex-col gap-1 flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
+          <div data-kbscroll="true" className="flex flex-col gap-1 flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
             {[
               { id: "dashboard", label: t(lang, "navDashboard"), icon: LayoutDashboard },
               { id: "sale", label: t(lang, "navSale"), icon: ShoppingCart, hidden: !hasBasePermission("sell") },
@@ -11023,7 +11023,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           messages IA) sont maintenant affichées directement dans les onglets Vente et
           Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
           uniquement quand la limite est réellement atteinte. */}
-      <div ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-40"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
+      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-40"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
         {tab === "dashboard" && (
           <div className="space-y-2">
             <div className="px-1 mb-1">
@@ -11168,7 +11168,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {showAddExpense && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(43,36,32,0.5)" }}>
-            <div className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+            <div data-kbscroll="true" className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-bold text-sm">{t(lang, "newExpense")}</h3>
                 <button onClick={() => setShowAddExpense(false)}><X size={18} /></button>
@@ -11181,7 +11181,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {showEditFund && (
           <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
-            <div className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+            <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-bold text-sm">{t(lang, "cashFundTitle")}</h3>
                 <button onClick={() => setShowEditFund(false)}><X size={18} /></button>
@@ -11194,7 +11194,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         )}
         {tab === "stock" && showAddProduct && (
-          <div dir="ltr" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+          <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
             <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-base" style={{ color: T.text }}>{editingProductId ? (tx(lang, "editProductTitle")) : t(lang, "newProduct")}</h3>
@@ -11521,7 +11521,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
                 {showCameraCheckout && (
                   <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowCameraCheckout(false)}>
-                    <div className="w-full max-w-md rounded-t-3xl p-4 max-h-[85vh] overflow-y-auto" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
+                    <div data-kbscroll="true" className="w-full max-w-md rounded-t-3xl p-4 max-h-[85vh] overflow-y-auto" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center justify-between mb-3">
                         <p className="text-sm font-bold" style={{ color: T.text }}>{t(lang, "cameraCheckoutTitle")}</p>
                         <button onClick={() => setShowCameraCheckout(false)}><X size={18} color={T.muted} /></button>
@@ -12595,7 +12595,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })()}
-            <div className="flex-1 overflow-y-auto space-y-3 pb-3" style={{ minHeight: 200 }}>
+            <div data-kbscroll="true" className="flex-1 overflow-y-auto space-y-3 pb-3" style={{ minHeight: 200 }}>
               {aiMessages.length === 0 && (
                 <div className="rounded-2xl p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   <div className="flex items-start gap-2">
@@ -12745,7 +12745,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <Plus size={16} color={darkMode ? "#7fb2ff" : INDIGO} />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-2">
+          <div data-kbscroll="true" className="flex-1 overflow-y-auto px-4 py-3 space-y-2">
             {aiConversations.length === 0 && (
               <p className="text-xs text-center mt-8" style={{ color: T.muted }}>{t(lang, "noConversations")}</p>
             )}
@@ -12834,7 +12834,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       )}
       {showAddEmployee && (
         <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
-          <div className="w-full max-w-sm rounded-2xl p-6 max-h-[85vh] overflow-y-auto" style={{ background: T.card }}>
+          <div data-kbscroll="true" className="w-full max-w-sm rounded-2xl p-6 max-h-[85vh] overflow-y-auto" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{editingEmployeeId ? t(lang, "empEditTitle") : t(lang, "empAddTitle")}</p>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "empNameLabel")}</label>
             <input
@@ -13202,7 +13202,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showSettings && (
-        <div dir="ltr" className="absolute inset-0 z-40" ref={settingsScrollRef} style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+        <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-40" ref={settingsScrollRef} style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
           <div style={{ position: "sticky", top: 0, zIndex: 20, background: T.bg }}>
             <div dir="ltr" style={{ display: "flex", alignItems: "center", gap: 12, padding: "22px 20px 14px" }}>
               {(settingsView !== "menu" || settingsField) ? (
@@ -14425,6 +14425,79 @@ class ErrorBoundary extends React.Component {
   }
 }
 function BoutiqueAppInner() {
+  // ---- Défilement au clavier (flèches) sur ordinateur, valable pour tout l'écran ----
+  // (connexion, app, admin, calculatrice, modales...) : plusieurs écrans mettent leur zone
+  // défilante dans une div interne (racine en height:100vh/overflow:hidden, ou modale en
+  // max-height + overflow-y:auto) plutôt que sur la page elle-même. Le navigateur n'envoie
+  // les flèches qu'à l'élément qui a le focus clavier (le <body> par défaut, non défilable) :
+  // la molette marche donc, mais pas les flèches. On détecte, sous le centre de l'écran, le
+  // conteneur marqué data-kbscroll="true" réellement visible (elementFromPoint respecte les
+  // superpositions : modale au-dessus du contenu, etc.) et on le défile nous-mêmes.
+  useEffect(() => {
+    const ARROW_KEYS = ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
+    const SCROLL_STEP = 80;
+    const NON_NAV_TYPES = ["checkbox", "radio", "button", "submit", "file", "hidden", "range", "color"];
+    const isFieldTarget = (el) =>
+      !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA") && !NON_NAV_TYPES.includes(el.type);
+    const isTypingTarget = (el) => {
+      if (!el) return false;
+      const tag = el.tagName;
+      return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable;
+    };
+    const onKeyDown = (e) => {
+      if (!ARROW_KEYS.includes(e.key)) return;
+      const active = document.activeElement;
+
+      // ---- Navigation entre champs d'un même formulaire (haut/bas) ----
+      // Ex : "Ajouter un produit", "Ajouter une dépense", fiche employé, etc. On ne
+      // détourne pas gauche/droite (déplacement du curseur dans le texte, comportement
+      // natif conservé) ni les champs cases à cocher/fichier/etc.
+      if ((e.key === "ArrowDown" || e.key === "ArrowUp") && isFieldTarget(active)) {
+        // Dans une zone de texte multi-lignes, on ne change de champ qu'une fois arrivé
+        // en haut/bas du texte, pour laisser le curseur se déplacer normalement dedans.
+        if (active.tagName === "TEXTAREA") {
+          const beforeHasNewline = active.value.slice(0, active.selectionStart).includes("\n");
+          const afterHasNewline = active.value.slice(active.selectionEnd).includes("\n");
+          if (e.key === "ArrowUp" && beforeHasNewline) return;
+          if (e.key === "ArrowDown" && afterHasNewline) return;
+        }
+        const container = active.closest("[data-kbscroll]") || document.body;
+        const fields = Array.from(container.querySelectorAll("input, textarea")).filter(
+          (el) => !el.disabled && el.offsetParent !== null && !NON_NAV_TYPES.includes(el.type)
+        );
+        const idx = fields.indexOf(active);
+        if (idx !== -1) {
+          e.preventDefault();
+          const next = fields[e.key === "ArrowDown" ? idx + 1 : idx - 1];
+          if (next) {
+            next.focus();
+            if (next.type !== "number" && typeof next.setSelectionRange === "function") {
+              const len = next.value.length;
+              try { next.setSelectionRange(len, len); } catch (err) {}
+            }
+          }
+          return;
+        }
+      }
+
+      // ---- Défilement de la page ----
+      if (isTypingTarget(active)) return;
+      const centerEl = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2);
+      const scroller = centerEl && centerEl.closest("[data-kbscroll]");
+      if (!scroller) return;
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        if (scroller.scrollHeight <= scroller.clientHeight) return;
+        e.preventDefault();
+        scroller.scrollTop += e.key === "ArrowDown" ? SCROLL_STEP : -SCROLL_STEP;
+      } else {
+        if (scroller.scrollWidth <= scroller.clientWidth) return;
+        e.preventDefault();
+        scroller.scrollLeft += e.key === "ArrowRight" ? SCROLL_STEP : -SCROLL_STEP;
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
