@@ -30,6 +30,7 @@ import {
   Package,
   ShoppingCart,
   Users,
+  User,
   Plus,
   Minus,
   Lock,
