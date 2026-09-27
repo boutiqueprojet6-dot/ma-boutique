@@ -221,7 +221,7 @@ let hapticsLoadPromise = null;
 function loadHaptics() {
   if (!isCapacitorApp) return Promise.resolve(null);
   if (!hapticsLoadPromise) {
-    hapticsLoadPromise = import("@capacitor/haptics").catch(() => null);
+    hapticsLoadPromise = import(/* @vite-ignore */ "@capacitor/haptics").catch(() => null);
   }
   return hapticsLoadPromise;
 }
