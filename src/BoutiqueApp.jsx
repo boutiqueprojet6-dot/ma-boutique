@@ -4297,16 +4297,31 @@ function useIsDesktop() {
 // bottom: 0" remonte au-dessus du clavier au lieu de disparaître derrière, et finit
 // par recouvrir le champ en cours de remplissage (ex. montant reçu lors d'une vente).
 function useKeyboardOpen() {
-  const [keyboardOpen, setKeyboardOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [viewportShrunk, setViewportShrunk] = useState(false);
+  const hasVisualViewport = typeof window !== "undefined" && !!window.visualViewport;
   useEffect(() => {
     const isTextField = (el) => el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.type !== "checkbox" && el.type !== "radio" && el.type !== "button" && el.type !== "range";
-    const onFocusIn = (e) => { if (isTextField(e.target)) setKeyboardOpen(true); };
-    const onFocusOut = (e) => { if (isTextField(e.target)) setTimeout(() => { if (!isTextField(document.activeElement)) setKeyboardOpen(false); }, 50); };
+    const onFocusIn = (e) => { if (isTextField(e.target)) setIsFocused(true); };
+    const onFocusOut = (e) => { if (isTextField(e.target)) setTimeout(() => { if (!isTextField(document.activeElement)) setIsFocused(false); }, 50); };
     document.addEventListener("focusin", onFocusIn);
     document.addEventListener("focusout", onFocusOut);
-    return () => { document.removeEventListener("focusin", onFocusIn); document.removeEventListener("focusout", onFocusOut); };
+    // Sur Android, fermer le clavier (bouton retour du téléphone, flèche du clavier…) ne retire
+    // pas toujours le focus du champ : le seul focus/blur ne suffit donc pas, sinon la barre du
+    // bas reste cachée alors que le clavier a disparu. On vérifie en plus la hauteur réelle de
+    // l'écran visible, qui rétrécit quand le clavier s'affiche et revient à la normale dès qu'il
+    // se ferme, focus ou non sur le champ.
+    const vv = window.visualViewport;
+    const onViewportChange = () => { if (vv) setViewportShrunk(window.innerHeight - vv.height > 120); };
+    if (vv) { vv.addEventListener("resize", onViewportChange); onViewportChange(); }
+    return () => {
+      document.removeEventListener("focusin", onFocusIn);
+      document.removeEventListener("focusout", onFocusOut);
+      if (vv) vv.removeEventListener("resize", onViewportChange);
+    };
   }, []);
-  return keyboardOpen;
+  // Sans l'API visualViewport (vieux navigateurs), on retombe sur le seul focus.
+  return hasVisualViewport ? (isFocused && viewportShrunk) : isFocused;
 }
 function resizeImageFile(file, maxSize = 400, quality = 0.6) {
   // createImageBitmap décode l'image hors du fil principal (accéléré matériellement
@@ -7083,7 +7098,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // par erreur avant confirmation du vrai palier.
   const [currentPlan, setCurrentPlan] = useState("free");
   const [accountSuspended, setAccountSuspended] = useState(false);
-  const planInfo = SUBSCRIPTION_PLANS[currentPlan] || SUBSCRIPTION_PLANS.free;
+  // ---- Mode test développeur ----
+  // Simule un palier localement (Gratuit / Pro / Business) pour tester les fonctionnalités
+  // payantes avant la mise en ligne du vrai paiement. Ne touche JAMAIS à Supabase ni au vrai
+  // abonnement — purement local, non persisté (revient au vrai palier au rechargement de
+  // l'app). Se débloque en tapant 7 fois sur "Version 1.0" dans Réglages > À propos.
+  const [testPlanOverride, setTestPlanOverride] = useState(null);
+  const [devModeUnlocked, setDevModeUnlocked] = useState(false);
+  const [devTapCount, setDevTapCount] = useState(0);
+  const effectivePlan = testPlanOverride || currentPlan;
+  const planInfo = SUBSCRIPTION_PLANS[effectivePlan] || SUBSCRIPTION_PLANS.free;
   // Date de création du compte (auth.users.created_at), utilisée pour le quota IA en deux
   // phases du palier Gratuit (10 messages/mois pendant les 30 premiers jours glissants, puis 5).
   const [accountCreatedAt, setAccountCreatedAt] = useState(null);
@@ -7093,7 +7117,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Vrai si le palier actuel débloque cette fonctionnalité (ex: "advancedHistory", "multiShop").
   const hasFeatureAccess = (featureId) => planInfo.features.includes(featureId);
   // Vrai si le palier actuel est au moins celui demandé (ex: isPlanAtLeast("pro")).
-  const isPlanAtLeast = (planId) => SUBSCRIPTION_PLAN_ORDER.indexOf(currentPlan) >= SUBSCRIPTION_PLAN_ORDER.indexOf(planId);
+  const isPlanAtLeast = (planId) => SUBSCRIPTION_PLAN_ORDER.indexOf(effectivePlan) >= SUBSCRIPTION_PLAN_ORDER.indexOf(planId);
 
   // ---- Paiement Lemon Squeezy (fondations) ----
   // Remplace l'ancien lien WhatsApp. Contrairement à Stripe, le Checkout Lemon Squeezy est
@@ -11377,6 +11401,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           "Démasquer les données" quand on scrolle tout en bas. */}
         {tab === "dashboard" && (
           <div className="space-y-2">
+            {testPlanOverride && (
+              <div onClick={() => setTestPlanOverride(null)} className="rounded-xl px-3 py-2" style={{ background: "rgba(168,85,247,0.14)", border: "1px dashed #a855f7", cursor: "pointer" }}>
+                <p style={{ color: "#a855f7", fontSize: 11, fontWeight: 700, textAlign: "center" }}>
+                  🧪 Mode test — palier simulé : {t(lang, SUBSCRIPTION_PLANS[testPlanOverride].nameKey)} (appuyez pour revenir au réel)
+                </p>
+              </div>
+            )}
             <div className="px-1 mb-1">
               <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 Bonjour, {shopName || "Boutique"}</p>
               <p className="text-[11px]" style={{ color: T.text }}>
@@ -11408,6 +11439,30 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               </div>
             </div>
+            {hasFeatureAccess("shopProfitabilityReport") && (
+              <div className="rounded-2xl p-3.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <p className="text-sm font-extrabold" style={{ color: T.text }}>{tx(lang, "cashProfitTitle")}</p>
+                {todayProfit.costed > 0 ? (
+                  <>
+                    <p
+                      onClick={() => { if (amountsHidden) setShowLockPinModal(true); }}
+                      className="font-black tracking-tight mt-1"
+                      style={{
+                        fontSize: 22,
+                        color: amountsHidden ? T.muted : (todayProfit.net < 0 ? CLAY : (darkMode ? "#8fd6a3" : "#16a34a")),
+                        letterSpacing: -0.6,
+                        cursor: amountsHidden ? "pointer" : "default",
+                      }}
+                    >
+                      {maskAmount(fcfa(todayProfit.net))}
+                    </p>
+                    <p className="text-[10px] mt-1" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "cashProfitNote")}</p>
+                  </>
+                ) : (
+                  <p className="text-[11px] mt-1.5" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "cashProfitNoCost")}</p>
+                )}
+              </div>
+            )}
             <div className="rounded-2xl p-3.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
               <p className="text-sm font-extrabold mb-2.5" style={{ color: T.text }}>{t(lang, "paymentBreakdown")}</p>
               <div className="space-y-2">
@@ -12701,7 +12756,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           </div>
         )}
-        {tab === "cash" && hasPermission("viewCash") && cashView && typeof document !== "undefined" && createPortal(
+        {tab === "cash" && hasPermission("viewCash") && cashView && !showLockPinModal && typeof document !== "undefined" && createPortal(
           <button
             onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }}
             className="font-bold"
@@ -14590,8 +14645,51 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <Sparkles size={22} color="white" />
                     </div>
                     <p style={{ color: T.text, fontSize: 16, fontWeight: 700 }}>{t(lang, "appName")}</p>
-                    <p style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setVersion")} 1.0</p>
+                    <p
+                      onClick={() => {
+                        const next = devTapCount + 1;
+                        setDevTapCount(next);
+                        if (next >= 7) { setDevModeUnlocked(true); setDevTapCount(0); }
+                      }}
+                      style={{ color: T.muted, fontSize: 12, marginTop: 2, cursor: "pointer", userSelect: "none" }}
+                    >
+                      {t(lang, "setVersion")} 1.0
+                    </p>
                   </div>
+                  {devModeUnlocked && (
+                    <div style={{ padding: 14, borderRadius: 14, background: T.input, border: "1px dashed #c084fc", display: "flex", flexDirection: "column", gap: 8 }}>
+                      <p style={{ color: "#a855f7", fontSize: 12, fontWeight: 700 }}>🧪 Mode test (développeur)</p>
+                      <p style={{ color: T.muted, fontSize: 11, lineHeight: 1.4 }}>
+                        Simule un palier pour tester ses fonctionnalités, sans toucher au vrai abonnement ni au paiement. Revient au palier réel à la fermeture de l'application.
+                      </p>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        {SUBSCRIPTION_PLAN_ORDER.map((planId) => (
+                          <button
+                            key={planId}
+                            onClick={() => setTestPlanOverride(testPlanOverride === planId ? null : planId)}
+                            style={{
+                              flex: 1,
+                              padding: "8px 4px",
+                              borderRadius: 10,
+                              fontSize: 11,
+                              fontWeight: 700,
+                              border: (testPlanOverride || currentPlan) === planId ? "2px solid #a855f7" : `1px solid ${T.border}`,
+                              background: (testPlanOverride || currentPlan) === planId ? "rgba(168,85,247,0.12)" : T.card,
+                              color: T.text,
+                              cursor: "pointer",
+                            }}
+                          >
+                            {t(lang, SUBSCRIPTION_PLANS[planId].nameKey)}
+                          </button>
+                        ))}
+                      </div>
+                      {testPlanOverride && (
+                        <button onClick={() => setTestPlanOverride(null)} style={{ padding: 8, borderRadius: 10, background: "transparent", border: `1px solid ${T.border}`, color: T.muted, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                          Revenir au palier réel ({t(lang, SUBSCRIPTION_PLANS[currentPlan].nameKey)})
+                        </button>
+                      )}
+                    </div>
+                  )}
                   <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                     <p style={{ color: T.muted, fontSize: 12.5, lineHeight: 1.6 }}>{t(lang, "setMaBoutiqueEstUneApplication")}</p>
                   </div>
