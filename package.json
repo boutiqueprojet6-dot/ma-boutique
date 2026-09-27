@@ -34,6 +34,7 @@
     "@capacitor/browser": "^6.0.3",
     "@capacitor/splash-screen": "^6.0.3",
     "@capacitor/push-notifications": "^6.0.0",
+    "@capacitor/haptics": "^6.1.2",
     "@capgo/capacitor-social-login": "^6.0.0"
   }
 }
