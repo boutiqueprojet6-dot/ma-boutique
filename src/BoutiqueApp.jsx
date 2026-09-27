@@ -46,7 +46,7 @@ import {
   Camera,
   ChevronLeft,
   ChevronRight,
-  User,
+  Volume2,
   Palette,
   HelpCircle,
   AlertOctagon,
@@ -153,7 +153,7 @@ function nativeBridgeReady() {
   return typeof window !== "undefined" && !!window.Capacitor;
 }
 const isCapacitorApp = nativeBridgeReady();
-// ---- Effets sonores (clic, vente réussie, erreur) ----
+// ---- Effets sonores (clic, vente réussie, erreur) — plusieurs variantes au choix ----
 // Générés directement via l'API Web Audio (oscillateurs), sans aucun fichier audio à
 // héberger ni à télécharger — ça marche à l'identique sur le web et dans l'app Capacitor.
 // Un seul AudioContext est créé et réutilisé pour tous les sons (en créer un nouveau à
@@ -187,25 +187,67 @@ function playTone(freq, duration, { type = "sine", gain = 0.12, delay = 0 } = {}
   osc.start(startAt);
   osc.stop(startAt + duration + 0.02);
 }
-// Réglage utilisateur : sons et vibrations activés par défaut, mais désactivables
-// (interrupteur à brancher dans Paramètres > Interface, via window.__boutiqueFxMuted).
-function fxEnabled() {
-  return typeof window === "undefined" || window.__boutiqueFxMuted !== true;
-}
-function playSound(kind) {
-  if (!fxEnabled()) return;
-  try {
-    if (kind === "click") {
-      playTone(880, 0.045, { type: "sine", gain: 0.05 });
-    } else if (kind === "success") {
-      // Petit arpège montant (do-mi-sol) : sonne comme une petite récompense, pas une alarme.
+// Chaque catégorie (clic / succès / erreur) propose plusieurs variantes, choisissables
+// séparément dans Paramètres > Interface > Sons et vibrations. `id` est ce qui est
+// persisté (soundChoice.click / .success / .error), `label` est affiché à l'utilisateur.
+const SOUND_VARIANTS = {
+  click: [
+    { id: "soft", label: "Doux", play: () => playTone(880, 0.045, { type: "sine", gain: 0.05 }) },
+    { id: "crisp", label: "Net", play: () => playTone(1200, 0.03, { type: "square", gain: 0.035 }) },
+    { id: "low", label: "Grave", play: () => playTone(520, 0.05, { type: "sine", gain: 0.06 }) },
+    { id: "wood", label: "Bois", play: () => playTone(300, 0.035, { type: "triangle", gain: 0.08 }) },
+  ],
+  success: [
+    { id: "arpeggio", label: "Arpège", play: () => {
       playTone(523.25, 0.13, { gain: 0.09 });
       playTone(659.25, 0.13, { gain: 0.1, delay: 0.09 });
       playTone(783.99, 0.24, { gain: 0.11, delay: 0.18 });
-    } else if (kind === "error") {
+    } },
+    { id: "bell", label: "Cloche", play: () => {
+      playTone(1046.5, 0.5, { type: "sine", gain: 0.09 });
+      playTone(1318.51, 0.45, { type: "sine", gain: 0.06, delay: 0.02 });
+    } },
+    { id: "ding", label: "Ding", play: () => playTone(1046.5, 0.3, { type: "sine", gain: 0.11 }) },
+    { id: "fanfare", label: "Fanfare", play: () => {
+      playTone(523.25, 0.09, { gain: 0.09 });
+      playTone(659.25, 0.09, { gain: 0.09, delay: 0.08 });
+      playTone(783.99, 0.09, { gain: 0.1, delay: 0.16 });
+      playTone(1046.5, 0.22, { gain: 0.12, delay: 0.24 });
+    } },
+  ],
+  error: [
+    { id: "buzz", label: "Buzz", play: () => {
       playTone(220, 0.16, { type: "square", gain: 0.07 });
       playTone(174.61, 0.22, { type: "square", gain: 0.07, delay: 0.11 });
-    }
+    } },
+    { id: "alert", label: "Alerte", play: () => {
+      playTone(440, 0.08, { type: "square", gain: 0.06 });
+      playTone(440, 0.08, { type: "square", gain: 0.06, delay: 0.12 });
+      playTone(440, 0.08, { type: "square", gain: 0.06, delay: 0.24 });
+    } },
+    { id: "thud", label: "Grave", play: () => playTone(150, 0.28, { type: "triangle", gain: 0.09 }) },
+  ],
+};
+const DEFAULT_SOUND_CHOICE = { click: "soft", success: "arpeggio", error: "buzz" };
+// Réglages utilisateur, indépendants l'un de l'autre : sons activés/désactivés, et
+// vibrations activées/désactivées (Paramètres > Interface > Sons et vibrations). Pilotés
+// depuis des variables globales plutôt que du state React car playSound()/triggerHaptic()
+// sont des fonctions globales, appelées y compris hors de React (ex. l'écouteur de clic
+// délégué tout en bas de BoutiqueAppInner).
+function soundsFxEnabled() {
+  return typeof window === "undefined" || window.__boutiqueSoundsMuted !== true;
+}
+function hapticsFxEnabled() {
+  return typeof window === "undefined" || window.__boutiqueHapticsMuted !== true;
+}
+function playSound(kind) {
+  if (!soundsFxEnabled()) return;
+  try {
+    const variants = SOUND_VARIANTS[kind];
+    if (!variants) return;
+    const chosenId = (typeof window !== "undefined" && window.__boutiqueSoundChoice && window.__boutiqueSoundChoice[kind]) || DEFAULT_SOUND_CHOICE[kind];
+    const variant = variants.find((v) => v.id === chosenId) || variants[0];
+    variant.play();
   } catch (e) {
     // Web Audio indisponible/bloqué (permissions navigateur, etc.) : le son n'est qu'un
     // agrément, jamais bloquant — on ignore silencieusement plutôt que de faire échouer l'action.
@@ -226,7 +268,7 @@ function loadHaptics() {
   return hapticsLoadPromise;
 }
 function triggerHaptic(style = "medium") {
-  if (!fxEnabled()) return;
+  if (!hapticsFxEnabled()) return;
   if (isCapacitorApp) {
     loadHaptics().then((mod) => {
       if (!mod || !mod.Haptics) return;
@@ -592,7 +634,7 @@ const TRANSLATIONS = {
     payInstallmentBtn: "Payer une tranche", payInstallmentTitle: "Paiement partiel", installmentAmountPlaceholder: "Montant reçu", alreadyPaid: "Déjà payé", remainingToPay: "Reste à payer", invalidAmount: "Montant invalide.", amountExceedsDebt: "Ce montant dépasse ce qui reste dû.", confirmBtn: "Confirmer", partialPaymentEvent: "Paiement partiel", debtAddBtn: "Ajouter une dette", debtAddTitle: "Ajouter une dette", debtCustomerPlaceholder: "Nom du client", debtAmountPlaceholder: "Montant", debtProductPlaceholder: "Description (optionnel)", debtDateLabel: "Date", errDebtCustomer: "Indiquez le nom du client.", errDebtAmount: "Indiquez un montant valide.", debtSourceManual: "Ajoutée manuellement", debtSourceSale: "Depuis une vente", debtSinceLabel: "Depuis le",
     restockForecast: "Prévision de réapprovisionnement", daysLeft: "jour(s) restant(s)", suggestedOrder: "Suggestion : commander environ", trustExcellent: "Excellent payeur", trustGood: "Bon payeur", trustOk: "Payeur correct", trustWatch: "À surveiller", trustHistory: "dette(s) réglée(s) sur", voiceListening: "Je vous écoute…", voiceNotSupported: "Dictée vocale non disponible sur cet appareil", benchmarkTitle: "Comparaison anonyme", benchmarkOptIn: "Comparer ma boutique anonymement", benchmarkOptInDesc: "Partagez vos moyennes de vente de façon anonyme pour voir comment vous vous situez par rapport à des boutiques similaires. Aucune donnée personnelle ou identifiable n'est partagée.", benchmarkYourShop: "Votre boutique", benchmarkAverage: "Moyenne des boutiques similaires", benchmarkNotEnough: "Pas encore assez de boutiques dans votre devise pour comparer.", avgDailySales: "Ventes moyennes/jour",
     arabicDigitsPromptTitle: "Chiffres arabes ou occidentaux ?", arabicDigitsPromptDesc: "Voulez-vous afficher les montants et dates avec les chiffres arabo-indiens (١٢٣) ou les chiffres occidentaux (123), les plus utilisés dans le commerce au quotidien ?", useArabicDigitsBtn: "Chiffres arabes (١٢٣)", useWesternDigitsBtn: "Chiffres occidentaux (123)",
-    setBoutique: "Boutique", setVentesFinances: "Ventes & finances", setDonnees: "Données", setAssistantIa: "Assistant IA", setAPropos: "À propos", setCodePin: "Code PIN", setDevise: "Devise", setInfosBoutique: "Infos boutique", setCategories: "Catégories", setPaiementParDefaut: "Paiement par défaut", setDettesClients: "Dettes clients", setCaisse: "Caisse", setExporterLesDonnees: "Exporter les données", setReinitialiser: "Réinitialiser", setPreferencesAssistant: "Préférences assistant", setAlertes: "Alertes", setProfilPinPhoto: "Profil, PIN, photo", setNomCategoriesSeuils: "Nom, catégories, seuils", setModeSombreLangueBoules: "Mode sombre, langue, boules", setPaiementDettesCaisse: "Paiement, dettes, caisse", setSauvegardeExportReinitialisation: "Sauvegarde, export, réinitialisation", setRechercheWebHistorique: "Recherche web, historique", setNotifications: "Notifications", setStockDettesAbonnement: "Stock, dettes, abonnement", setVersionDeveloppeur: "Version, développeur", setReinitialiserLesDonnees: "Supprimer les données, déconnexion", setActive: "Activé", setDesactive: "Désactivé", setNomAdresseDevise: "Nom, adresse, devise", setProduitsRayons: "Produits & rayons", setSeuilsDeStock: "Seuils de stock", setAlerteStockBas: "Alerte stock bas", setDelaiDeRelance: "Délai de relance", setEffacerToutesLesDonnees: "Effacer toutes les données", setNomDeLaBoutique: "Nom de la boutique", setIdentifiantDeConnexion: "Identifiant de connexion", setCategoriesDeProduits: "Catégories de produits", setLesCategoriesSontDefiniesAutomatiquem: "Les catégories sont définies automatiquement d'après les noms de vos produits. Cette fonctionnalité sera enrichie dans une prochaine version.", setAucunProduitPourLinstant: "Aucun produit pour l'instant.", setActuellementLowstocklengthProduitsEnD: "Actuellement : {n} produit(s) en dessous du seuil.", setChoisisLeModeDePaiement: "Choisissez le mode de paiement par défaut lors d'une vente.", setResumeDesDettesImpayees: "Résumé des dettes impayées", setClientsAvecDettes: "Clients avec dettes", setTotalDu: "Total dû", setSoldeEstime: "Solde estimé", setTuPeuxVoirLaComparaison: "Vous pouvez voir la comparaison dans l'onglet Statistiques.", setExporteTesDonneesDeVentes: "Exportez vos données de ventes en fichier CSV.", setTelechargerLesVentesCsv: "Télécharger les ventes (CSV)", setSaleslengthVentesProductslengthProdui: "{s} ventes · {p} produits", setRechercheWeb: "Recherche web", setPermettreALiaDeChercher: "Permettre à l'IA de chercher sur internet", setHistoriqueDeConversation: "Historique de conversation", setAimessageslengthMessagesDansLaSession: "{n} message(s) dans la session actuelle.", setEffacerLhistorique: "Effacer l'historique", setAlerteStockFaible: "Alerte stock faible", setSeDeclencheEnDessousDe: "Se déclenche en dessous de {n} unités", setDettesImpayees: "Dettes impayées", setUnpaiddebtslengthEnAttente: "{n} en attente", setExpirationAbonnement: "Expiration abonnement", setVersionGratuite: "Version gratuite", setCeCodeSertADemasquer: "Ce code sert à démasquer vos montants privés (solde de caisse, dépenses, confirmation de dettes).", setAncienCodePin: "Ancien code PIN", setNouveauCodePin: "Nouveau code PIN", setConfirmerLeCodePin: "Confirmer le code PIN", setChoisisLaDeviseDeTa: "Choisissez la devise de votre boutique. Entrez vos prix directement dans cette devise — aucune conversion automatique.", setPetitesBoulesQuiFlottentEn: "Petites boules qui flottent en arrière-plan", setSonsVibrations: "Sons et vibrations", setSonsVibrationsDesc: "Clic léger, sons de succès/erreur et vibrations dans l'application", setChoisisLaCouleurDesBoules: "Choisissez la couleur des boules.", setUneQuestionEcrisnousDirectement: "Une question ? Écris-nous directement.", setPriseEnMain: "Prise en main", setCommentAjouterMonPremierProduit: "Comment ajouter mon premier produit ?", setVaDansLongletStockAppuie: "Allez dans l'onglet Stock, appuyez sur le bouton « + », remplissez le nom, la quantité et le prix. Vous pouvez aussi ajouter une photo.", setCommentEnregistrerUneVente: "Comment enregistrer une vente ?", setVaDansLongletVenteDemarre: "Allez dans l'onglet Vente, démarrez un nouveau panier, ajoutez les produits vendus avec leurs quantités, choisissez un mode de paiement, puis finalisez.", setPuisjeGererPlusieursClientsEn: "Puis-je gérer plusieurs clients en même temps ?", setOuiTuPeuxOuvrirPlusieurs: "Oui — vous pouvez ouvrir plusieurs paniers en même temps dans l'onglet Vente, un par client, et les finaliser l'un après l'autre.", setDettesVentesACredit: "Dettes & ventes à crédit", setCommentEnregistrerUneVenteA: "Comment enregistrer une vente à crédit ?", setLorsDeLaFinalisationDune: "Lors de la finalisation d'une vente, choisissez « Crédit » comme mode de paiement et indiquez le nom du client — elle s'ajoute automatiquement dans Dettes.", setCommentMarquerUneDetteComme: "Comment marquer une dette comme payée ?", setDansLongletDettesAppuieSur: "Dans l'onglet Dettes, appuyez sur « Payé » à côté du nom du client, puis confirmez. Ça reste visible pour toujours dans l'Historique.", setCestQuoiLeScoreDe: "C'est quoi le score de confiance client ?", setQuandTuTapesLeNom: "Quand vous tapez le nom d'un client pour une vente à crédit, l'appli affiche s'il rembourse fiablement ses dettes passées, basé sur votre propre historique.", setCaisseDepenses: "Caisse & dépenses", setCommentReglerMonFondDe: "Comment régler mon fond de caisse de départ ?", setSurLeTableauDeBord: "Sur le tableau de bord, appuyez sur « Régler le fond de caisse » et indiquez le montant que vous avez physiquement en caisse maintenant.", setCommentEnregistrerUneDepense: "Comment enregistrer une dépense ?", setAppuieSurAjouterUneDepense: "Appuyez sur « Ajouter une dépense » sur le tableau de bord, indiquez le montant sorti de la caisse et une raison facultative.", setLassistantPeutMaiderAvecQuoi: "L'assistant peut m'aider avec quoi ?", setDemandeluiTesVentesTonStock: "Demandez-lui vos ventes, votre stock, vos dettes, ou des conseils business — il connaît les vraies données de votre boutique. Vous pouvez aussi parler au lieu de taper avec le bouton micro.", setPuisjeGarderPlusieursDiscussions: "Puis-je garder plusieurs discussions ?", setOuiAppuieSurLiconeHistorique: "Oui — appuyez sur l'icône historique pour voir vos discussions passées, épinglez celles qui comptent, renommez-les ou supprimez-les.", setCompteAbonnement: "Compte & abonnement", setCommentDebloquerLesFonctionnalitesPay: "Comment débloquer les fonctionnalités payantes ?", setContacteLeSupportPourOrganiser: "Contactez le support pour organiser le paiement ; votre compte est activé manuellement ensuite.", setMesDonneesSontellesEnSecurite: "Mes données sont-elles en sécurité ?", setTonMotDePasseNest: "Votre mot de passe n'est jamais stocké en clair, et vos données de ventes/stock restent liées uniquement à votre compte.", setPuisjeChangerLaDeviseDe: "Puis-je changer la devise de ma boutique plus tard ?", setOuiAToutMomentDans: "Oui, à tout moment dans Paramètres > Interface > Devise. Les montants s'affichent simplement dans la nouvelle devise, sans conversion.", setVersion: "Version", setMaBoutiqueEstUneApplication: "Shopnify est une application simple de gestion de boutique, pensée pour les commerçants — suivez votre stock, vos ventes, vos dettes et votre caisse, dans votre langue et votre devise.", setDeveloppePour: "Développé pour", setBoutiquiersDuMondeEntier: "Boutiquiers du monde entier", setContact: "Contact", setContacterLeDeveloppeur: "Contacter le développeur",
+    setBoutique: "Boutique", setVentesFinances: "Ventes & finances", setDonnees: "Données", setAssistantIa: "Assistant IA", setAPropos: "À propos", setCodePin: "Code PIN", setDevise: "Devise", setInfosBoutique: "Infos boutique", setCategories: "Catégories", setPaiementParDefaut: "Paiement par défaut", setDettesClients: "Dettes clients", setCaisse: "Caisse", setExporterLesDonnees: "Exporter les données", setReinitialiser: "Réinitialiser", setPreferencesAssistant: "Préférences assistant", setAlertes: "Alertes", setProfilPinPhoto: "Profil, PIN, photo", setNomCategoriesSeuils: "Nom, catégories, seuils", setModeSombreLangueBoules: "Mode sombre, langue, boules", setPaiementDettesCaisse: "Paiement, dettes, caisse", setSauvegardeExportReinitialisation: "Sauvegarde, export, réinitialisation", setRechercheWebHistorique: "Recherche web, historique", setNotifications: "Notifications", setStockDettesAbonnement: "Stock, dettes, abonnement", setVersionDeveloppeur: "Version, développeur", setReinitialiserLesDonnees: "Supprimer les données, déconnexion", setActive: "Activé", setDesactive: "Désactivé", setNomAdresseDevise: "Nom, adresse, devise", setProduitsRayons: "Produits & rayons", setSeuilsDeStock: "Seuils de stock", setAlerteStockBas: "Alerte stock bas", setDelaiDeRelance: "Délai de relance", setEffacerToutesLesDonnees: "Effacer toutes les données", setNomDeLaBoutique: "Nom de la boutique", setIdentifiantDeConnexion: "Identifiant de connexion", setCategoriesDeProduits: "Catégories de produits", setLesCategoriesSontDefiniesAutomatiquem: "Les catégories sont définies automatiquement d'après les noms de vos produits. Cette fonctionnalité sera enrichie dans une prochaine version.", setAucunProduitPourLinstant: "Aucun produit pour l'instant.", setActuellementLowstocklengthProduitsEnD: "Actuellement : {n} produit(s) en dessous du seuil.", setChoisisLeModeDePaiement: "Choisissez le mode de paiement par défaut lors d'une vente.", setResumeDesDettesImpayees: "Résumé des dettes impayées", setClientsAvecDettes: "Clients avec dettes", setTotalDu: "Total dû", setSoldeEstime: "Solde estimé", setTuPeuxVoirLaComparaison: "Vous pouvez voir la comparaison dans l'onglet Statistiques.", setExporteTesDonneesDeVentes: "Exportez vos données de ventes en fichier CSV.", setTelechargerLesVentesCsv: "Télécharger les ventes (CSV)", setSaleslengthVentesProductslengthProdui: "{s} ventes · {p} produits", setRechercheWeb: "Recherche web", setPermettreALiaDeChercher: "Permettre à l'IA de chercher sur internet", setHistoriqueDeConversation: "Historique de conversation", setAimessageslengthMessagesDansLaSession: "{n} message(s) dans la session actuelle.", setEffacerLhistorique: "Effacer l'historique", setAlerteStockFaible: "Alerte stock faible", setSeDeclencheEnDessousDe: "Se déclenche en dessous de {n} unités", setDettesImpayees: "Dettes impayées", setUnpaiddebtslengthEnAttente: "{n} en attente", setExpirationAbonnement: "Expiration abonnement", setVersionGratuite: "Version gratuite", setCeCodeSertADemasquer: "Ce code sert à démasquer vos montants privés (solde de caisse, dépenses, confirmation de dettes).", setAncienCodePin: "Ancien code PIN", setNouveauCodePin: "Nouveau code PIN", setConfirmerLeCodePin: "Confirmer le code PIN", setChoisisLaDeviseDeTa: "Choisissez la devise de votre boutique. Entrez vos prix directement dans cette devise — aucune conversion automatique.", setPetitesBoulesQuiFlottentEn: "Petites boules qui flottent en arrière-plan", setSonsVibrations: "Sons", setSonsVibrationsDesc: "Clic léger et sons de succès/erreur dans l'application", setVibrations: "Vibrations", setVibrationsDesc: "Vibration sur les actions importantes (vente réussie, erreur, PIN)", setSonClic: "Son de clic", setSonVenteReussie: "Son de vente réussie", setSonErreur: "Son d'erreur", setChoisirUnSon: "Choisissez un son.", noProductsEmptySubtitle: "Appuyez ci-dessous pour ajouter votre premier produit.", noDebtsEmptySubtitle: "Appuyez ci-dessous pour ajouter une dette.", setChoisisLaCouleurDesBoules: "Choisissez la couleur des boules.", setUneQuestionEcrisnousDirectement: "Une question ? Écris-nous directement.", setPriseEnMain: "Prise en main", setCommentAjouterMonPremierProduit: "Comment ajouter mon premier produit ?", setVaDansLongletStockAppuie: "Allez dans l'onglet Stock, appuyez sur le bouton « + », remplissez le nom, la quantité et le prix. Vous pouvez aussi ajouter une photo.", setCommentEnregistrerUneVente: "Comment enregistrer une vente ?", setVaDansLongletVenteDemarre: "Allez dans l'onglet Vente, démarrez un nouveau panier, ajoutez les produits vendus avec leurs quantités, choisissez un mode de paiement, puis finalisez.", setPuisjeGererPlusieursClientsEn: "Puis-je gérer plusieurs clients en même temps ?", setOuiTuPeuxOuvrirPlusieurs: "Oui — vous pouvez ouvrir plusieurs paniers en même temps dans l'onglet Vente, un par client, et les finaliser l'un après l'autre.", setDettesVentesACredit: "Dettes & ventes à crédit", setCommentEnregistrerUneVenteA: "Comment enregistrer une vente à crédit ?", setLorsDeLaFinalisationDune: "Lors de la finalisation d'une vente, choisissez « Crédit » comme mode de paiement et indiquez le nom du client — elle s'ajoute automatiquement dans Dettes.", setCommentMarquerUneDetteComme: "Comment marquer une dette comme payée ?", setDansLongletDettesAppuieSur: "Dans l'onglet Dettes, appuyez sur « Payé » à côté du nom du client, puis confirmez. Ça reste visible pour toujours dans l'Historique.", setCestQuoiLeScoreDe: "C'est quoi le score de confiance client ?", setQuandTuTapesLeNom: "Quand vous tapez le nom d'un client pour une vente à crédit, l'appli affiche s'il rembourse fiablement ses dettes passées, basé sur votre propre historique.", setCaisseDepenses: "Caisse & dépenses", setCommentReglerMonFondDe: "Comment régler mon fond de caisse de départ ?", setSurLeTableauDeBord: "Sur le tableau de bord, appuyez sur « Régler le fond de caisse » et indiquez le montant que vous avez physiquement en caisse maintenant.", setCommentEnregistrerUneDepense: "Comment enregistrer une dépense ?", setAppuieSurAjouterUneDepense: "Appuyez sur « Ajouter une dépense » sur le tableau de bord, indiquez le montant sorti de la caisse et une raison facultative.", setLassistantPeutMaiderAvecQuoi: "L'assistant peut m'aider avec quoi ?", setDemandeluiTesVentesTonStock: "Demandez-lui vos ventes, votre stock, vos dettes, ou des conseils business — il connaît les vraies données de votre boutique. Vous pouvez aussi parler au lieu de taper avec le bouton micro.", setPuisjeGarderPlusieursDiscussions: "Puis-je garder plusieurs discussions ?", setOuiAppuieSurLiconeHistorique: "Oui — appuyez sur l'icône historique pour voir vos discussions passées, épinglez celles qui comptent, renommez-les ou supprimez-les.", setCompteAbonnement: "Compte & abonnement", setCommentDebloquerLesFonctionnalitesPay: "Comment débloquer les fonctionnalités payantes ?", setContacteLeSupportPourOrganiser: "Contactez le support pour organiser le paiement ; votre compte est activé manuellement ensuite.", setMesDonneesSontellesEnSecurite: "Mes données sont-elles en sécurité ?", setTonMotDePasseNest: "Votre mot de passe n'est jamais stocké en clair, et vos données de ventes/stock restent liées uniquement à votre compte.", setPuisjeChangerLaDeviseDe: "Puis-je changer la devise de ma boutique plus tard ?", setOuiAToutMomentDans: "Oui, à tout moment dans Paramètres > Interface > Devise. Les montants s'affichent simplement dans la nouvelle devise, sans conversion.", setVersion: "Version", setMaBoutiqueEstUneApplication: "Shopnify est une application simple de gestion de boutique, pensée pour les commerçants — suivez votre stock, vos ventes, vos dettes et votre caisse, dans votre langue et votre devise.", setDeveloppePour: "Développé pour", setBoutiquiersDuMondeEntier: "Boutiquiers du monde entier", setContact: "Contact", setContacterLeDeveloppeur: "Contacter le développeur",
     othEtapeObstepSurTotalsteps: "Étape {obStep} sur {totalSteps}", othRemplisCorrectementTousLesChamps: "Remplissez correctement tous les champs (surlignés en rouge).", othTransportMarchandise: "Transport marchandise", othJeNaiPasTrouveDe: "Je n'ai pas trouvé de réponse. Reformulez votre question, ou appuyez sur réessayer ci-dessous.", othSouciDeConnexionApresPlusieurs: "Souci de connexion après plusieurs tentatives. Appuyez sur réessayer ci-dessous.", othDeconnexion: "Déconnexion", othFondDeCaisseFcfacashfundVentes: "Fond de caisse {cashFund} + ventes espèces {totalCashSales} − dépenses {totalExpenses}", othUnite: "unité", othAppuieCidessousPourCommencerA: "Appuyez ci-dessous pour commencer à vendre", othLocalizednumbertodaysaleslengthVentes: "{n} vente(s) aujourd'hui", othPanierDe: "Panier de :", othFacultatif: "facultatif", othEncoreDus: "encore dû(s)", othIlManque: "Il manque", othQuestceQueJaiVenduAujourdhui: "Qu'est-ce que j'ai vendu aujourd'hui ?", othQuelProduitEstPresqueEpuise: "Quel produit est presque épuisé ?", othQuiMeDoitDeLargent: "Qui me doit de l'argent ?", othQuelEstMonMeilleurProduit: "Quel est mon meilleur produit ?", othDesConseilsPourAugmenterMes: "Des conseils pour augmenter mes ventes", othResumeDeMaSemaine: "Résumé de ma semaine", othEtSiJaugmentaisMesPrix: "Et si j'augmentais mes prix de 10% ?", othReessayer: "Réessayer", othEntreTonCodePin: "Entrez votre code PIN", othPourVoirLesMontantsPrives: "Pour voir les montants privés", unmaskCashFloatingBtn: "Démasquer les données", maskCashFloatingBtn: "Masquer les données", othRendu: "Rendu :", errCreditNeedsCustomer: "Indiquez le nom du client pour une vente à crédit.", histColDate: "Date", histColType: "Type", histColProduct: "Produit", histColCustomer: "Client", histColAmount: "Montant", histFiltersBtn: "Filtres", histFilterFromLabel: "Du", histFilterToLabel: "Au", histFilterProductLabel: "Produit", histFilterCustomerLabel: "Client", histFilterMinAmountLabel: "Montant min", histFilterMaxAmountLabel: "Montant max", histFilterReset: "Réinitialiser", histExportBtn: "Exporter (CSV)", histTypeSale: "Ventes", histTypeDebt: "Dettes", histTypeExpense: "Dépenses", noResultsFilters: "Aucun résultat pour ces filtres.", planFreeName: "Gratuit", planProName: "Pro", planBusiness2Name: "Business", planMenuLabel: "Abonnement", planCurrentLabel: "Votre palier actuel", planPerMonth: "mois", planNoEmployees: "Pas d'employés", planUnlimitedEmployees: "Employés illimités", planMaxEmployees: "{n} employés max", planNoAi: "Pas d'assistant IA", planUnlimitedAi: "Assistant IA illimité", planLimitedAi: "Assistant IA ({n} messages/mois)", planMultiShop: "Plusieurs boutiques", planCurrentBadge: "✓ Palier actuel", planChooseBtn: "Choisir ce palier", empLimitReached: "Votre palier {plan} permet {n} employé(s) maximum. Passez à un palier supérieur pour en ajouter plus.", histFiltersProBadge: "Filtres avancés et export — passez à Pro pour débloquer", switchShopBtn: "Changer de boutique", switchShopTitle: "Vos boutiques", newShopNameLabel: "Nom de la nouvelle boutique", shopCompareTabLabel: "Comparaison", shopCompareRevenue: "CA", shopCompareStock: "Stock", shopCompareDebts: "Dettes", cashReportTabLabel: "Rapport de caisse", cashReportOwner: "Propriétaire", cashReportTotalSales: "Total ventes", cashReportCash: "Espèces", cashReportMobile: "Mobile Money", cashReportCard: "Carte", cashReportExpenses: "Dépenses", cashReportDebtPayments: "Paiements de dettes", empShiftLabel: "Plages horaires", empShiftEnable: "Activer", empShiftDisable: "Désactiver", empShiftAddSlot: "Ajouter un créneau", empDayMon: "Lundi", empDayTue: "Mardi", empDayWed: "Mercredi", empDayThu: "Jeudi", empDayFri: "Vendredi", empDaySat: "Samedi", empDaySun: "Dimanche", empOutsideShiftTitle: "Hors de vos heures de travail", empOutsideShiftDesc: "Vous ne pouvez pas encaisser de vente en dehors de vos heures déclarées. Contactez votre responsable si besoin.", accountingExportBtn: "Export comptable", accountingPeriodLabel: "Période", accountingGeneratedBy: "Généré par", accountingSummaryTitle: "Résumé", accountingNetProfit: "Bénéfice net", accountingRevenueChartTitle: "Évolution du chiffre d'affaires", accountingComparisonChartTitle: "Ventes vs Dépenses", accountingSalesTableTitle: "Détail des ventes", accountingExpensesTableTitle: "Détail des dépenses", accountingGenerateBtn: "Générer le PDF", logAccountingExport: "Export comptable généré", productCostPrice: "Prix d'achat (optionnel)", roleSupervisorLabel: "Superviseur", roleSupervisorDesc: "Voit toutes les boutiques, ne modifie rien.", salesGoalLabel: "Objectif du mois", salesGoalSetBtn: "Fixer un objectif", pushAnomalyTitle: "Alertes d'activité inhabituelle", pushAnomalyDesc: "Reçois une notification si une action inhabituelle est détectée (annulations en série, caisse vidée, etc.).", pushEnabledBadge: "✓ Activées", pushUnsupported: "Non disponible sur cet appareil/navigateur.", pushEnableBtn: "Activer les notifications", logProductAdded: "Produit ajouté", logStockAdjusted: "Stock ajusté", logProductDeleted: "Produit supprimé", logExpenseAdded: "Dépense enregistrée", logExpenseDeleted: "Dépense supprimée", logCashFundUpdated: "Fond de caisse modifié", logSaleRecorded: "Vente", logDebtSettled: "Dette soldée", logPartialPayment: "Paiement partiel", logPaymentCash: "espèces", logPaymentCredit: "à crédit", saleSuccessLabel: "Vente réussie !",
     empTabLabel: "Employés", empIntro: "Créez un compte pour chaque employé et choisissez ce qu'il peut faire. Vous seul(e) pouvez gérer les employés, l'abonnement et les données de la boutique.", empAddBtn: "Ajouter un employé", empNoneYet: "Aucun employé pour l'instant.", empActive: "Actif", empSuspended: "Suspendu", empEdit: "Modifier", empSuspend: "Suspendre", empReactivate: "Réactiver", empActionLogTitle: "Journal des actions récentes", empNoActionsYet: "Aucune action enregistrée pour l'instant.", empEditTitle: "Modifier l'employé", empAddTitle: "Ajouter un employé", empNameLabel: "Nom de l'employé", empPinLabel: "Code PIN de l'employé (4 à 6 chiffres)", empRoleLabel: "Rôle", empPermissionsLabel: "Permissions", empSave: "Enregistrer", empAdd: "Ajouter", empErrName: "Entrez le nom de l'employé.", empErrPin: "Le code PIN doit contenir entre 4 et 6 chiffres.", empErrPinUsed: "Ce code PIN est déjà utilisé par un autre employé. Choisissez-en un autre.", roleVendeurLabel: "Vendeur", roleVendeurDesc: "Vend et consulte le stock/dettes, sans les modifier.", roleGerantLabel: "Gérant", roleGerantDesc: "Gère l'activité quotidienne au complet : ventes, stock, dettes, caisse, statistiques.", rolePersoLabel: "Personnalisé", rolePersoDesc: "Choisissez précisément ce que cet employé peut faire.", permSell: "Enregistrer des ventes", permViewStock: "Consulter le stock", permEditStock: "Modifier le stock", permViewDebts: "Consulter les dettes clients", permEditDebts: "Gérer les dettes clients (marquer payé, etc.)", permViewCash: "Voir la caisse et le solde", permEditCash: "Modifier la caisse (dépenses, fond de caisse)", permViewStats: "Voir les statistiques", empShowQr: "Voir le QR de connexion", empQrModalTitle: "QR de connexion", empQrModalDesc: "Cet employé scanne ce code depuis l'écran de connexion pour accéder à la boutique. La connexion par QR sera activée prochainement.", empQrClose: "Fermer", loginAsEmployee: "Se connecter en tant qu'employé", empScanTitle: "Scanner votre QR", empManualCodeLabel: "Ou entrez ce code sur PC", empRetryInvite: "Réessayer", empScanInvalidCode: "Ce code est invalide, déjà utilisé, ou a expiré.",
   },
@@ -4498,7 +4540,7 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice"];
 // ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
 // On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
 // "light" / "dark" / "system"), pour que l'écran de connexion garde la même ambiance. Pour un
@@ -4644,6 +4686,8 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     themeMode: winner.themeMode || (winner.darkMode ? "dark" : "system"),
     showBalls: winner.showBalls !== false,
     soundsEnabled: winner.soundsEnabled !== false,
+    hapticsEnabled: winner.hapticsEnabled !== false,
+    soundChoice: { ...DEFAULT_SOUND_CHOICE, ...(winner.soundChoice || {}) },
     ballColor: winner.ballColor || "blue",
     currency: winner.currency || "XOF",
     benchmarkOptIn: !!winner.benchmarkOptIn,
@@ -6904,15 +6948,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setStoredThemeMode(themeMode);
   }, [themeMode, systemPrefersDark]);
   const [showBalls, setShowBalls] = useState(true);
-  // Interrupteur "Sons et vibrations" (Paramètres > Interface) : synchronisé, comme les
-  // autres réglages, entre appareils. window.__boutiqueFxMuted est le vrai interrupteur lu
+  // Interrupteurs "Sons" et "Vibrations" (Paramètres > Interface > Sons et vibrations) :
+  // indépendants l'un de l'autre, synchronisés comme les autres réglages entre appareils.
+  // window.__boutiqueSoundsMuted / __boutiqueHapticsMuted sont les vrais interrupteurs lus
   // par playSound()/triggerHaptic() tout en haut du fichier — ces fonctions sont globales
   // (appelées bien en dehors de React, ex. l'écouteur de clic délégué) donc on les pilote
-  // depuis ce state via un simple effet plutôt que de leur passer le state directement.
+  // depuis ces states via de simples effets plutôt que de leur passer le state directement.
   const [soundsEnabled, setSoundsEnabled] = useState(true);
+  const [hapticsEnabled, setHapticsEnabled] = useState(true);
+  // Son choisi pour chaque catégorie (clic / succès / erreur) — voir SOUND_VARIANTS tout
+  // en haut du fichier pour la liste des choix possibles par catégorie.
+  const [soundChoice, setSoundChoice] = useState(DEFAULT_SOUND_CHOICE);
   useEffect(() => {
-    if (typeof window !== "undefined") window.__boutiqueFxMuted = !soundsEnabled;
+    if (typeof window !== "undefined") window.__boutiqueSoundsMuted = !soundsEnabled;
   }, [soundsEnabled]);
+  useEffect(() => {
+    if (typeof window !== "undefined") window.__boutiqueHapticsMuted = !hapticsEnabled;
+  }, [hapticsEnabled]);
+  useEffect(() => {
+    if (typeof window !== "undefined") window.__boutiqueSoundChoice = soundChoice;
+  }, [soundChoice]);
   const [ballColor, setBallColor] = useState("blue");
   const [currency, setCurrency] = useState("XOF");
   const [shopCountry, setShopCountry] = useState(""); // pays du compte (pour le format de date)
@@ -7581,6 +7636,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const contentScrollRef = useRef(null);
   const paymentZoneRef = useRef(null);
   const [showPaymentShortcut, setShowPaymentShortcut] = useState(false);
+  // Champ "montant reçu" (paiement espèces) : quand il manque au moment de finaliser,
+  // on le surligne en rouge et on y scrolle, exactement comme les champs obligatoires
+  // non remplis ailleurs dans l'app (écran d'inscription, etc.).
+  const receivedInputRef = useRef(null);
+  const [receivedFieldError, setReceivedFieldError] = useState(false);
   const [aiMessages, setAiMessages] = useState([]);
   // ---- Quota mensuel IA (selon le palier d'abonnement) ----
   // aiUsageMonth = "YYYY-MM" du mois en cours suivi ; aiUsageCount = nb de messages envoyés ce mois-ci.
@@ -8003,6 +8063,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
     setShowBalls(shop.showBalls !== false);
     setSoundsEnabled(shop.soundsEnabled !== false);
+    setHapticsEnabled(shop.hapticsEnabled !== false);
+    setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(shop.soundChoice || {}) });
     setBallColor(shop.ballColor || "blue");
     setCurrency(shop.currency || "XOF");
     // Pays du compte : gardé aussi en local, pour que le format de date reste correct même
@@ -8196,6 +8258,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setDarkMode(false);
       setShowBalls(true);
       setSoundsEnabled(true);
+      setHapticsEnabled(true);
+      setSoundChoice(DEFAULT_SOUND_CHOICE);
       setBallColor("blue");
       setCurrency("XOF");
       setAiConversations([]);
@@ -8347,6 +8411,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       themeMode: overrides.themeMode ?? themeMode,
       showBalls: overrides.showBalls ?? showBalls,
       soundsEnabled: overrides.soundsEnabled ?? soundsEnabled,
+      hapticsEnabled: overrides.hapticsEnabled ?? hapticsEnabled,
+      soundChoice: overrides.soundChoice ?? soundChoice,
       ballColor: overrides.ballColor ?? ballColor,
       draftCarts: overrides.draftCarts ?? draftCarts,
       currency: overrides.currency ?? currency,
@@ -8374,6 +8440,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setThemeMode(next.themeMode);
     setShowBalls(next.showBalls);
     setSoundsEnabled(next.soundsEnabled);
+    setHapticsEnabled(next.hapticsEnabled);
+    setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(next.soundChoice || {}) });
     setBallColor(next.ballColor);
     setDraftCarts(next.draftCarts);
     setActiveCartId(next.activeCartId);
@@ -9742,12 +9810,18 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return;
     }
     // Montant reçu obligatoire pour un paiement en espèces (sinon impossible de calculer
-    // la monnaie à rendre, et le vendeur peut oublier de le saisir).
+    // la monnaie à rendre, et le vendeur peut oublier de le saisir). On surligne le champ
+    // en rouge et on y scrolle, comme pour les autres champs obligatoires de l'app —
+    // sinon le vendeur ne voit pas pourquoi le bouton "ne répond pas" et continue d'appuyer.
     if (cart.payment === "cash" && (cart.received === "" || cart.received == null || isNaN(parseFloat(cart.received)))) {
       playSound("error"); triggerHaptic("error");
       setError(`${t(lang, "othIlManque")} : ${t(lang, "amountGiven")}`);
+      setReceivedFieldError(true);
+      receivedInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      receivedInputRef.current?.focus();
       return;
     }
+    setReceivedFieldError(false);
     // Plafond de ventes : 10/jour pour le palier Gratuit (et tout palier payant expiré),
     // remis à zéro chaque jour sans jamais se cumuler. Pro et Business sont illimités en
     // ventes tant que l'abonnement est actif.
@@ -11507,7 +11581,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "stock" && !showAddProduct && (
           <div className="space-y-3">
-            {hasPermission("editStock") && (
+            {hasPermission("editStock") && products.length === 0 && (
+              <div className="rounded-3xl p-6 text-center" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <div style={{ animation: "floatSlow 2.3s ease-in-out infinite alternate" }}>
+                  <div style={{ fontSize: 52 }}>📦</div>
+                </div>
+                <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{t(lang, "setAucunProduitPourLinstant")}</p>
+                <p className="text-xs mt-1" style={{ color: T.muted }}>{t(lang, "noProductsEmptySubtitle")}</p>
+                <button onClick={() => setShowAddProduct(true)} className="w-full mt-5 flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
+                  <Plus size={20} /> {t(lang, "addProduct")}
+                </button>
+              </div>
+            )}
+            {hasPermission("editStock") && products.length > 0 && (
               <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
                 <Plus size={20} /> {t(lang, "addProduct")}
               </button>
@@ -12030,7 +12116,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {activeCart.payment === "cash" && (
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
                         <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
-                        <input required type="number" value={activeCart.received} onChange={(e) => updateCartMeta(activeCart.id, "received", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a" }} />
+                        <input ref={receivedInputRef} required type="number" value={activeCart.received} onChange={(e) => { updateCartMeta(activeCart.id, "received", e.target.value); if (error) setError(""); if (receivedFieldError) setReceivedFieldError(false); }} className="w-full border-2 rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a", borderColor: receivedFieldError ? "#e11d48" : "transparent" }} />
                         {activeCart.received !== "" && (() => {
                           const change = parseFloat(activeCart.received) - cartTotal;
                           if (isNaN(change)) return null;
@@ -12038,6 +12124,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           return <p className="text-sm font-extrabold mt-2" style={{ color: "#16a34a" }}>💰 {t(lang, "change")} : {fcfa(change)}</p>;
                         })()}
                       </div>
+                    )}
+                    {error && (
+                      <p className="text-xs font-bold text-center" style={{ color: "#e11d48" }}>{error}</p>
                     )}
                     <button onClick={() => finalizeCart(activeCart.id)} className="w-full py-4 rounded-2xl text-white font-extrabold text-base flex items-center justify-center gap-2 active:scale-97 transition-transform" style={{ background: "linear-gradient(135deg, #16a34a, #15803d)", boxShadow: "0 12px 22px rgba(22,163,74,0.4)" }}>
                       ✅ {t(lang, "finalizeSale")} — {fcfa(cartTotal)}
@@ -12094,13 +12183,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "debts" && (
           <div className="space-y-2">
-            {hasPermission("editDebts") && (
+            {hasPermission("editDebts") && unpaidDebts.length === 0 && (
+              <div className="rounded-3xl p-6 text-center" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <div style={{ animation: "floatSlow 2.3s ease-in-out infinite alternate" }}>
+                  <div style={{ fontSize: 52 }}>🧾</div>
+                </div>
+                <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{t(lang, "noDebts")}</p>
+                <p className="text-xs mt-1" style={{ color: T.muted }}>{t(lang, "noDebtsEmptySubtitle")}</p>
+                <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full mt-5 flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
+                  <Plus size={20} /> {t(lang, "debtAddBtn")}
+                </button>
+              </div>
+            )}
+            {hasPermission("editDebts") && unpaidDebts.length > 0 && (
               <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
                 <Plus size={20} /> {t(lang, "debtAddBtn")}
               </button>
             )}
             {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} />}
-            {unpaidDebts.length === 0 && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "noDebts")}</p>}
             {unpaidDebts.length > 0 && filteredDebts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>Aucun résultat pour "{debtsSearch}".</p>}
             {filteredDebts.map((d) => (
               <div key={d.id} className="rounded-2xl p-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
@@ -13483,6 +13583,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "darkmode" && t(lang, "darkMode")}
                   {settingsField === "balls" && t(lang, "animBalls")}
                   {settingsField === "sounds" && t(lang, "setSonsVibrations")}
+                  {settingsField === "haptics" && t(lang, "setVibrations")}
+                  {settingsField === "soundclick" && t(lang, "setSonClic")}
+                  {settingsField === "soundsuccess" && t(lang, "setSonVenteReussie")}
+                  {settingsField === "sounderror" && t(lang, "setSonErreur")}
                   {settingsField === "ballcolor" && t(lang, "ballColor")}
                   {settingsField === "threshold" && t(lang, "stockAlert")}
                   {settingsField === "lang" && t(lang, "language")}
@@ -13603,6 +13707,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "lang", label: t(lang, "language"), right: languageLabel(LANGUAGES.find((l) => l.id === lang) || LANGUAGES[0], lang) },
                 { id: "balls", label: t(lang, "animBalls"), right: showBalls ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "sounds", label: t(lang, "setSonsVibrations"), right: soundsEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
+                { id: "haptics", label: t(lang, "setVibrations"), right: hapticsEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "ballcolor", label: t(lang, "ballColor"), right: null },
                 { id: "threshold", label: t(lang, "stockAlert"), right: lowStockThreshold },
                 { id: "currency", label: t(lang, "setDevise"), right: `${CURRENT_CURRENCY.symbol} ${currency}` },
@@ -14242,16 +14347,79 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
               {settingsField === "sounds" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "setSonsVibrations")}</div>
+                      <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setSonsVibrationsDesc")}</div>
+                    </div>
+                    <button onClick={() => saveAll({ soundsEnabled: !soundsEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: soundsEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: soundsEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                      <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                    </button>
+                  </div>
+                  {/* Un son au choix pour chaque catégorie : taper une ligne ouvre la liste des
+                      variantes disponibles (voir settingsField "soundclick"/"soundsuccess"/"sounderror"
+                      juste plus bas), qui restent accessibles même si "Sons" est désactivé, pour que
+                      l'utilisateur puisse préparer son choix avant de réactiver. */}
+                  {[
+                    { field: "soundclick", kind: "click", label: t(lang, "setSonClic") },
+                    { field: "soundsuccess", kind: "success", label: t(lang, "setSonVenteReussie") },
+                    { field: "sounderror", kind: "error", label: t(lang, "setSonErreur") },
+                  ].map((row) => {
+                    const chosen = SOUND_VARIANTS[row.kind].find((v) => v.id === soundChoice[row.kind]) || SOUND_VARIANTS[row.kind][0];
+                    return (
+                      <button key={row.field} onClick={() => setSettingsField(row.field)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer" }}>
+                        <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{row.label}</span>
+                        <span style={{ display: "flex", alignItems: "center", gap: 6, color: T.muted, fontSize: 13 }}>
+                          {chosen.label}
+                          <ChevronRight size={16} color={T.muted} />
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {settingsField === "haptics" && (
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
-                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "setSonsVibrations")}</div>
-                    <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setSonsVibrationsDesc")}</div>
+                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "setVibrations")}</div>
+                    <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setVibrationsDesc")}</div>
                   </div>
-                  <button onClick={() => saveAll({ soundsEnabled: !soundsEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: soundsEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: soundsEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                  <button onClick={() => saveAll({ hapticsEnabled: !hapticsEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: hapticsEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: hapticsEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
                     <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
                   </button>
                 </div>
               )}
+              {(settingsField === "soundclick" || settingsField === "soundsuccess" || settingsField === "sounderror") && (() => {
+                const kind = settingsField === "soundclick" ? "click" : settingsField === "soundsuccess" ? "success" : "error";
+                return (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "setChoisirUnSon")}</p>
+                    {SOUND_VARIANTS[kind].map((v) => (
+                      <button
+                        key={v.id}
+                        onClick={() => {
+                          // On joue la variante immédiatement (aperçu), qu'elle soit déjà
+                          // sélectionnée ou non — ça sert aussi de simple bouton "Écouter".
+                          v.play();
+                          setSoundChoice((prev) => {
+                            const next = { ...prev, [kind]: v.id };
+                            saveAll({ soundChoice: next });
+                            return next;
+                          });
+                        }}
+                        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: soundChoice[kind] === v.id ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${soundChoice[kind] === v.id ? "#22d3ee" : T.border}`, cursor: "pointer" }}
+                      >
+                        <span style={{ color: soundChoice[kind] === v.id ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{v.label}</span>
+                        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                          <Volume2 size={16} color={T.muted} />
+                          {soundChoice[kind] === v.id && <Check size={16} color="#22d3ee" />}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                );
+              })()}
               {settingsField === "ballcolor" && (
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <p style={{ color: T.muted, fontSize: 12, marginBottom: 14 }}>{t(lang, "setChoisisLaCouleurDesBoules")}</p>
