@@ -15289,20 +15289,41 @@ function BoutiqueAppInner() {
     let removeListener = null;
     CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
       console.log("[OAuth] appUrlOpen reçu :", url);
-      if (!url || !url.startsWith("https://ma-boutique-tawny.vercel.app/auth-callback.html")) {
+      // Le retour de Google peut arriver sous deux formes : le schéma personnalisé
+      // (com.shopnify.app://login-callback?code=…, ouvert par la page auth-callback.html)
+      // ou directement l'URL https de callback (si Android l'ouvre en "App Link").
+      const isOAuthCallback = !!url && (
+        url.startsWith("com.shopnify.app://") ||
+        url.startsWith("https://ma-boutique-tawny.vercel.app/auth-callback.html")
+      );
+      if (!isOAuthCallback) {
         console.warn("[OAuth] URL inattendue, ignorée");
         return;
       }
-      const codeMatch = url.match(/[?&]code=([^&]+)/);
-      const oauthCode = codeMatch ? codeMatch[1] : null;
-      if (oauthCode && processedOAuthCodesRef.current.has(oauthCode)) {
+      let oauthCode = null;
+      let oauthErrorMsg = null;
+      try {
+        const parsed = new URL(url);
+        oauthCode = parsed.searchParams.get("code");
+        oauthErrorMsg = parsed.searchParams.get("error_description") || parsed.searchParams.get("error");
+      } catch (e) {
+        const codeMatch = url.match(/[?&]code=([^&#]+)/);
+        oauthCode = codeMatch ? decodeURIComponent(codeMatch[1]) : null;
+      }
+      if (!oauthCode) {
+        console.error("[OAuth] Aucun code dans le lien de retour :", oauthErrorMsg || url);
+        try { await Browser.close(); } catch (e) {}
+        return;
+      }
+      if (processedOAuthCodesRef.current.has(oauthCode)) {
         console.warn("[OAuth] Code déjà traité, on ignore cette tentative en double :", oauthCode);
         try { await Browser.close(); } catch (e) {}
         return;
       }
-      if (oauthCode) processedOAuthCodesRef.current.add(oauthCode);
+      processedOAuthCodesRef.current.add(oauthCode);
       try {
-        const { error } = await supabase.auth.exchangeCodeForSession(url);
+        // exchangeCodeForSession attend le CODE seul (pas l'URL complète).
+        const { error } = await supabase.auth.exchangeCodeForSession(oauthCode);
         if (error) {
           console.error("[OAuth] Échec de l'échange du code Google :", error);
         } else {
