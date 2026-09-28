@@ -10760,6 +10760,25 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     }
     return () => { cancelled = true; if (handle) handle.remove(); };
   }, []);
+  // ---- Bouton retour du téléphone (PWA installée hors Capacitor) ----
+  // Sans ceci, Chrome n'a aucun historique de navigation à "défaire" quand on ouvre un
+  // écran/fenêtre en PWA (l'app ne change jamais d'URL), donc le bouton retour ferme
+  // directement l'app au lieu de revenir à l'écran précédent. On simule une entrée
+  // d'historique à chaque écran ouvert, et on réutilise la même logique de fermeture
+  // que pour l'APK (backHandlerRef, déjà défini plus haut).
+  useEffect(() => {
+    if (typeof window === "undefined" || window.Capacitor) return;
+    const isPwaStandalone = window.matchMedia && window.matchMedia("(display-mode: standalone)").matches;
+    if (!isPwaStandalone) return;
+    window.history.pushState({ pwaGuard: true }, "");
+    const onPopState = () => {
+      const handled = backHandlerRef.current ? backHandlerRef.current() : false;
+      if (handled) window.history.pushState({ pwaGuard: true }, "");
+      // sinon (rien à fermer, déjà à l'accueil) : on laisse l'app se fermer normalement
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
   // ⚠️ Ces hooks DOIVENT rester avant tout "return" anticipé (loading, accountSuspended...) :
   // React exige le même nombre de hooks à chaque rendu (sinon erreur #310).
   const filteredProducts = useMemo(
@@ -11699,9 +11718,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <input placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <input placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <textarea placeholder={t(lang, "productDescription")} value={pDescription} onChange={(e) => setPDescription(e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2 text-sm mb-3 resize-none" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-            {hasFeatureAccess("shopProfitabilityReport") && (
-              <input placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-            )}
+            <input placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
               <label className="flex items-center justify-between cursor-pointer">
                 <span className="text-xs font-semibold" style={{ color: T.text }}>{t(lang, "sellByUnitToggle")}</span>
@@ -12845,7 +12862,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           </div>
         )}
-        {tab === "cash" && hasPermission("viewCash") && cashView && !showLockPinModal && typeof document !== "undefined" && createPortal(
+        {tab === "cash" && hasPermission("viewCash") && cashView && !showLockPinModal && !showMoreMenu && typeof document !== "undefined" && createPortal(
           <button
             onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }}
             className="font-bold"
