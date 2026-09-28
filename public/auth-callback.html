@@ -1,56 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<title>Connexion en cours...</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Shopnify</title>
 <style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #0f1424;
-    color: #eef1fb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    text-align: center;
-    padding: 24px;
-    box-sizing: border-box;
-  }
-  .card { max-width: 340px; }
-  p { color: #9aa4c4; font-size: 14px; line-height: 1.5; }
-  a.btn {
-    display: none;
-    margin-top: 20px;
-    background: white;
-    color: #0f1424;
-    text-decoration: none;
-    padding: 14px 24px;
-    border-radius: 12px;
-    font-weight: 600;
-  }
+  :root { color-scheme: light dark; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #0f0f14; color: #f4f4f5; }
+  .card { width: min(92vw, 380px); padding: 28px 22px; border-radius: 18px; background: #1b1b24; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+  h1 { font-size: 20px; margin: 0 0 8px; }
+  p { font-size: 14px; line-height: 1.5; margin: 0 0 18px; color: #c4c4cc; }
+  a.btn { display: block; padding: 14px 16px; border-radius: 12px; background: #c084fc; color: #14101a; font-weight: 700; font-size: 15px; text-decoration: none; }
+  #hint { display: none; margin: 14px 0 0; font-size: 12px; color: #9a9aa5; }
 </style>
 </head>
 <body>
   <div class="card">
-    <p id="msg">Connexion en cours...</p>
-    <a class="btn" id="btn" href="#">Ouvrir Shopnify</a>
+    <h1>Connexion réussie</h1>
+    <p id="msg">Retour vers l'application Shopnify…</p>
+    <a id="open" class="btn" href="#">Ouvrir Shopnify</a>
+    <p id="hint">Si l'application ne s'ouvre pas, appuyez sur le bouton ci-dessus.</p>
   </div>
-  <script>
-    // Ce fichier n'est atteint QUE si Android n'a pas reconnu le App Link
-    // (vérification assetlinks.json échouée, ou navigateur qui ne le supporte
-    // pas). Dans le cas normal, Android ouvre l'app directement sans jamais
-    // charger cette page.
-    var full = (window.location.search || "") + (window.location.hash || "");
-    var appUrl = "https://ma-boutique-tawny.vercel.app/auth-callback.html" + full;
-    setTimeout(function () {
-      document.getElementById("msg").textContent =
-        "Si l'application ne s'ouvre pas automatiquement :";
-      var btn = document.getElementById("btn");
-      btn.href = appUrl;
-      btn.style.display = "inline-block";
-    }, 1200);
-  </script>
+<script>
+(function () {
+  // À adapter si l'identifiant de l'application (appId dans capacitor.config) est différent.
+  var APP_SCHEME = "com.shopnify.app";
+  var APP_PACKAGE = "com.shopnify.app";
+
+  // Le code (ou l'erreur) renvoyé par Supabase/Google arrive dans la query string.
+  var query = window.location.search || "";
+  var isAndroid = /Android/i.test(navigator.userAgent || "");
+
+  // Sur Android/Chrome, une URL "intent://" est la méthode la plus fiable pour rouvrir une app ;
+  // ailleurs, on utilise directement le schéma personnalisé.
+  var target = isAndroid
+    ? "intent://login-callback" + query + "#Intent;scheme=" + APP_SCHEME + ";package=" + APP_PACKAGE + ";end"
+    : APP_SCHEME + "://login-callback" + query;
+
+  var btn = document.getElementById("open");
+  btn.setAttribute("href", target);
+
+  // Tentative automatique (Chrome peut la bloquer faute de geste de l'utilisateur :
+  // le bouton reste alors le moyen sûr de rouvrir l'application).
+  setTimeout(function () { window.location.href = target; }, 250);
+  setTimeout(function () { document.getElementById("hint").style.display = "block"; }, 1800);
+})();
+</script>
 </body>
 </html>
