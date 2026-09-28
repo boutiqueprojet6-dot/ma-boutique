@@ -509,6 +509,11 @@ const SUBSCRIPTION_PLANS = {
 };
 // Ordre croissant, utile pour comparer deux paliers ("est-ce que ce plan est au moins Pro ?").
 const SUBSCRIPTION_PLAN_ORDER = ["free", "pro", "business"];
+// Fonctionnalités réellement verrouillées par palier et affichées dans l'écran Abonnement
+// (clé de traduction : EXTRA_UI["feat_" + id]). "stockAlerts" et "consolidatedView" sont
+// volontairement absentes : déclarées dans les paliers mais ne verrouillent rien pour l'instant.
+// "multiShop" est affichée à part (ligne "Plusieurs boutiques").
+const PLAN_FEATURE_DISPLAY = ["anomalyAlerts", "advancedHistory", "shiftPermissions", "perEmployeeCashReport", "accountingExport", "shopComparison", "supervisorRole", "salesGoals", "shopProfitabilityReport"];
 // Anciennes limites de stock, plus utilisées nulle part (le nombre de produits est
 // désormais illimité à tous les paliers) — conservées seulement au cas où on voudrait
 // réintroduire une limite plus tard.
@@ -4090,6 +4095,18 @@ EXTRA_UI.cashSeeMore = { am: "ተጨማሪ ይመልከቱ", ar: "عرض الم�
 EXTRA_UI.cashCountBtn = { am: "ገንዘብ ቁጠር", ar: "عدّ الصندوق", bm: "Kɛsi jate", bn: "ক্যাশ গুনুন", de: "Kasse zählen", en: "Count the cash", es: "Contar la caja", fr: "Compter la caisse", ha: "Ƙirga kuɗin da ke hannu", hi: "गल्ला गिनें", id: "Hitung kas", it: "Conta la cassa", ja: "レジを数える", ko: "금고 세기", nl: "Kas tellen", pl: "Przelicz kasę", pt: "Contar o caixa", ru: "Пересчитать кассу", sw: "Hesabu fedha za kasha", ta: "கல்லாவை எண்ணு", te: "గల్లా లెక్కించండి", th: "นับเงินในลิ้นชัก", tl: "Bilangin ang kaha", tr: "Kasayı say", ur: "گلا گنیں", vi: "Kiểm quỹ", wo: "Waññ kes bi", yo: "Ka owó ẹrọ", zh: "清点现金", zu: "Bala ikheshi" };
 EXTRA_UI.cashGapOk = { am: "ገንዘቡ ትክክል ነው ✓", ar: "الصندوق مضبوط ✓", bm: "Kɛsi ka ɲi ✓", bn: "ক্যাশ ঠিক আছে ✓", de: "Die Kasse stimmt ✓", en: "The till is balanced ✓", es: "La caja cuadra ✓", fr: "La caisse est juste ✓", ha: "Kuɗin sun daidaita ✓", hi: "गल्ला सही है ✓", id: "Kas sudah pas ✓", it: "La cassa torna ✓", ja: "レジは合っています ✓", ko: "금고가 맞습니다 ✓", nl: "De kas klopt ✓", pl: "Kasa się zgadza ✓", pt: "O caixa está certo ✓", ru: "Касса сходится ✓", sw: "Fedha zinalingana ✓", ta: "கல்லா சரியாக உள்ளது ✓", te: "గల్లా సరిగ్గా ఉంది ✓", th: "ยอดตรงกัน ✓", tl: "Tugma ang kaha ✓", tr: "Kasa tutuyor ✓", ur: "گلا درست ہے ✓", vi: "Quỹ khớp ✓", wo: "Kes bi baax na ✓", yo: "Owó náà péye ✓", zh: "现金无误 ✓", zu: "Ikheshi lilungile ✓" };
 EXTRA_UI.cashProfitTitle = { am: "የዛሬ የተገመተ ትርፍ", ar: "الربح التقديري لليوم", bm: "Bi tɔnɔ jatelen dabɔlen", bn: "আজকের আনুমানিক লাভ", de: "Geschätzter Gewinn heute", en: "Estimated profit today", es: "Beneficio estimado de hoy", fr: "Bénéfice estimé du jour", ha: "Ƙiyasin ribar yau", hi: "आज का अनुमानित लाभ", id: "Perkiraan laba hari ini", it: "Guadagno stimato di oggi", ja: "今日の推定利益", ko: "오늘의 예상 이익", nl: "Geschatte winst vandaag", pl: "Szacowany zysk dzisiaj", pt: "Lucro estimado de hoje", ru: "Ожидаемая прибыль за сегодня", sw: "Faida inayokadiriwa ya leo", ta: "இன்றைய மதிப்பிட்ட லாபம்", te: "ఈ రోజు అంచనా లాభం", th: "กำไรโดยประมาณวันนี้", tl: "Tantiyang tubo ngayon", tr: "Bugünün tahmini kârı", ur: "آج کا تخمینی منافع", vi: "Lợi nhuận ước tính hôm nay", wo: "Tabax bu ñu waxtaan tey", yo: "Èrè tí a fojú díwọ̀n lónìí", zh: "今日预计利润", zu: "Inzuzo elinganiselwe yanamuhla" };
+EXTRA_UI.planFeatIncludesPrev = { fr: "Tout le palier {plan}, plus :", en: "Everything in {plan}, plus:" };
+EXTRA_UI.planFeatSalesLimited = { fr: "30 ventes maximum par jour", en: "Up to 30 sales per day" };
+EXTRA_UI.planFeatSalesUnlimited = { fr: "Ventes illimitées", en: "Unlimited sales" };
+EXTRA_UI.feat_anomalyAlerts = { fr: "Alertes d'activité inhabituelle", en: "Unusual activity alerts" };
+EXTRA_UI.feat_advancedHistory = { fr: "Historique avancé : filtres détaillés et export CSV", en: "Advanced history: detailed filters and CSV export" };
+EXTRA_UI.feat_shiftPermissions = { fr: "Horaires de travail des employés", en: "Employee work schedules" };
+EXTRA_UI.feat_perEmployeeCashReport = { fr: "Rapport de caisse par employé", en: "Cash report per employee" };
+EXTRA_UI.feat_accountingExport = { fr: "Export comptable en PDF", en: "Accounting export (PDF)" };
+EXTRA_UI.feat_shopComparison = { fr: "Comparaison des boutiques", en: "Shop comparison" };
+EXTRA_UI.feat_supervisorRole = { fr: "Rôle de superviseur", en: "Supervisor role" };
+EXTRA_UI.feat_salesGoals = { fr: "Objectifs de vente mensuels", en: "Monthly sales goals" };
+EXTRA_UI.feat_shopProfitabilityReport = { fr: "Rapport de rentabilité : prix d'achat, marge et bénéfice", en: "Profitability report: cost price, margin and profit" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
 EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseignez le prix d'achat de vos produits pour voir votre bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
 EXTRA_UI.cashMargin = { am: "በሽያጭ ላይ ያለ ህዳግ", ar: "هامش المبيعات", bm: "Tɔnɔ feerew kan", bn: "বিক্রয়ের মার্জিন", de: "Marge auf Verkäufe", en: "Margin on sales", es: "Margen sobre ventas", fr: "Marge sur les ventes", ha: "Ribar da ke kan tallace-tallace", hi: "बिक्री पर मार्जिन", id: "Margin penjualan", it: "Margine sulle vendite", ja: "売上の粗利", ko: "판매 마진", nl: "Marge op verkopen", pl: "Marża na sprzedaży", pt: "Margem sobre vendas", ru: "Маржа с продаж", sw: "Kiwango cha faida kwenye mauzo", ta: "விற்பனை மீதான வரம்பு", te: "అమ్మకాలపై మార్జిన్", th: "กำไรขั้นต้นจากการขาย", tl: "Margin sa benta", tr: "Satış marjı", ur: "فروخت پر مارجن", vi: "Biên lợi nhuận bán hàng", wo: "Tabax ci jaay yi", yo: "Èrè lórí títà", zh: "销售毛利", zu: "Inzuzo ekuthengisweni" };
@@ -4450,6 +4467,38 @@ function flushAllCacheToNativeStorage() {
       }
     }
   } catch (e) { /* pas grave, filet de sécurité "best effort" */ }
+}
+// Enregistre un fichier texte (ex. CSV). Sur mobile (WebView Android / iOS), le classique
+// <a download> sur une URL blob est souvent ignoré sans aucune erreur : on passe donc d'abord
+// par la feuille de partage native quand elle est disponible (Enregistrer dans Fichiers,
+// Drive, WhatsApp, e-mail…). Sinon (ordinateur), téléchargement classique — avec le lien
+// attaché au document et libéré avec un délai, sinon certains navigateurs annulent le
+// téléchargement. Renvoie true si l'opération a été lancée (ou annulée par l'utilisateur).
+async function saveTextFile(content, filename, mime = "text/csv") {
+  const blob = new Blob(["\uFEFF" + content], { type: mime + ";charset=utf-8" });
+  const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+  if (isMobile && typeof File !== "undefined" && navigator.canShare && navigator.share) {
+    try {
+      const file = new File([blob], filename, { type: mime });
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: filename });
+        return true;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return true; // l'utilisateur a fermé la feuille de partage
+    }
+  }
+  try {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { try { document.body.removeChild(a); URL.revokeObjectURL(url); } catch (e) {} }, 1500);
+    return true;
+  } catch (e) { return false; }
 }
 function readLocalCache(key) {
   try {
@@ -10968,11 +11017,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       rows.push([entry.date, kindLabel, entry.product, entry.customer, entry.amount]);
     });
     const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
-    const blob = new Blob(["\uFEFF" + csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = `${shopName}-historique.csv`; a.click();
-    URL.revokeObjectURL(url);
+    saveTextFile(csv, `${shopName}-historique.csv`);
   };
   const generateAccountingReport = async () => {
     if (!accountingFrom || !accountingTo) return;
@@ -13998,9 +14043,33 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             : plan.aiMonthlyQuota === null ? t(lang, "planUnlimitedAi")
                             : t(lang, "planLimitedAi").replace("{n}", plan.aiMonthlyQuota)}
                         </p>
+                        <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>
+                          {planId === "free" ? tx(lang, "planFeatSalesLimited") : tx(lang, "planFeatSalesUnlimited")}
+                        </p>
                         {plan.maxShops !== 1 && (
                           <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "planMultiShop")}</p>
                         )}
+                        {(() => {
+                          const prevId = SUBSCRIPTION_PLAN_ORDER[SUBSCRIPTION_PLAN_ORDER.indexOf(planId) - 1];
+                          const prev = prevId ? SUBSCRIPTION_PLANS[prevId] : null;
+                          const feats = plan.features.filter((f) => PLAN_FEATURE_DISPLAY.includes(f) && !(prev && prev.features.includes(f)));
+                          if (feats.length === 0) return null;
+                          return (
+                            <div style={{ marginTop: 10, paddingTop: 10, borderTop: `1px solid ${T.border}` }}>
+                              {prev && (
+                                <p style={{ color: T.text, fontSize: 12, fontWeight: 700, marginBottom: 6 }}>
+                                  {tx(lang, "planFeatIncludesPrev").replace("{plan}", t(lang, prev.nameKey))}
+                                </p>
+                              )}
+                              {feats.map((f) => (
+                                <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 6 }}>
+                                  <Check size={14} color="#c084fc" style={{ flexShrink: 0, marginTop: 1 }} />
+                                  <p style={{ color: T.text, fontSize: 12.5, lineHeight: 1.4 }}>{tx(lang, "feat_" + f)}</p>
+                                </div>
+                              ))}
+                            </div>
+                          );
+                        })()}
                         {isCurrent ? (
                           <div style={{ marginTop: 10, textAlign: "center", color: "#c084fc", fontSize: 12, fontWeight: 700 }}>{t(lang, "planCurrentBadge")}</div>
                         ) : (
@@ -14236,11 +14305,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     const rows = [["Date","Produit","Qté","Prix unit.","Total","Paiement","Client"]];
                     sales.forEach((s) => rows.push([s.date, s.productName, s.qty, s.unitPrice, s.total, s.payment, s.customer || ""]));
                     const csv = rows.map((r) => r.join(";")).join("\n");
-                    const blob = new Blob([csv], { type: "text/csv" });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement("a");
-                    a.href = url; a.download = `${shopName}-ventes.csv`; a.click();
-                    URL.revokeObjectURL(url);
+                    saveTextFile(csv, `${shopName}-ventes.csv`);
                   }} style={{ padding: "14px 16px", borderRadius: 14, background: "#60a5fa1a", border: "1px solid #60a5fa33", color: "#60a5fa", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
                     <FileDown size={18} /> {t(lang, "setTelechargerLesVentesCsv")}
                   </button>
