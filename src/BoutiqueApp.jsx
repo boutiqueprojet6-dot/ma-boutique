@@ -4404,6 +4404,11 @@ const OFFLINE_QUEUE_KEY = "offline-sync-queue";
 // localStorage de la WebView peut être effacé par le système même quand l'app reste
 // "installée" — d'où le même miroir vers @capacitor/preferences que pour le cache
 // hors-ligne, plus fiable.
+// ⚠️ MODE TEST DÉVELOPPEUR (simulation de palier Pro/Business, voir Réglages > À propos).
+// Purement côté client : à METTRE SUR false AVANT LA MISE EN LIGNE du vrai paiement, sinon
+// n'importe quel utilisateur qui découvrirait le geste (7 appuis) pourrait se donner accès
+// aux fonctions payantes gratuitement.
+const DEV_TEST_MODE_ENABLED = true;
 const LAST_TAB_KEY = "mb_last_tab";
 const VALID_TABS = ["dashboard", "sale", "stock", "debts", "cash", "history", "stats", "ai", "employees", "shopcompare", "cashreport", "calculator"];
 // Filet de secours dédié au stock : à chaque changement de la liste des produits,
@@ -7101,12 +7106,51 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ---- Mode test développeur ----
   // Simule un palier localement (Gratuit / Pro / Business) pour tester les fonctionnalités
   // payantes avant la mise en ligne du vrai paiement. Ne touche JAMAIS à Supabase ni au vrai
-  // abonnement — purement local, non persisté (revient au vrai palier au rechargement de
-  // l'app). Se débloque en tapant 7 fois sur "Version 1.0" dans Réglages > À propos.
-  const [testPlanOverride, setTestPlanOverride] = useState(null);
-  const [devModeUnlocked, setDevModeUnlocked] = useState(false);
+  // abonnement. Le choix est conservé entre les redémarrages de l'app (localStorage + miroir
+  // natif), par compte, jusqu'à ce que vous le désactiviez vous-même (bandeau du tableau de
+  // bord ou panneau Réglages > À propos). Se débloque en tapant 7 fois sur "Version 1.0".
+  const devTestKey = `mb_dev_test_mode:${username}`;
+  const readDevTest = () => {
+    try {
+      const raw = window.localStorage.getItem(devTestKey);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  };
+  const [testPlanOverride, setTestPlanOverride] = useState(() => {
+    const saved = DEV_TEST_MODE_ENABLED ? readDevTest() : null;
+    return saved && SUBSCRIPTION_PLAN_ORDER.includes(saved.plan) ? saved.plan : null;
+  });
+  const [devModeUnlocked, setDevModeUnlocked] = useState(() => {
+    const saved = DEV_TEST_MODE_ENABLED ? readDevTest() : null;
+    return !!(saved && saved.unlocked);
+  });
   const [devTapCount, setDevTapCount] = useState(0);
-  const effectivePlan = testPlanOverride || currentPlan;
+  const devTestHydratedRef = useRef(false);
+  // Écrit à chaque changement (sauf au tout premier rendu, pour ne pas écraser une valeur
+  // que le miroir natif pourrait encore restaurer ci-dessous).
+  useEffect(() => {
+    if (!devTestHydratedRef.current) { devTestHydratedRef.current = true; return; }
+    try {
+      const raw = JSON.stringify({ plan: testPlanOverride, unlocked: devModeUnlocked });
+      window.localStorage.setItem(devTestKey, raw);
+      mirrorToNativeStorage(devTestKey, raw);
+    } catch (e) {}
+  }, [testPlanOverride, devModeUnlocked]);
+  // Filet de sécurité Android : si le localStorage a été vidé par le système mais que le
+  // miroir natif a survécu, on restaure le choix depuis là (même principe que l'onglet actif).
+  useEffect(() => {
+    if (!DEV_TEST_MODE_ENABLED || typeof window === "undefined" || !window.Capacitor) return;
+    Preferences.get({ key: devTestKey }).then(({ value }) => {
+      if (!value) return;
+      try {
+        const saved = JSON.parse(value);
+        if (saved && SUBSCRIPTION_PLAN_ORDER.includes(saved.plan)) setTestPlanOverride((cur) => cur || saved.plan);
+        if (saved && saved.unlocked) setDevModeUnlocked(true);
+      } catch (e) {}
+    }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const effectivePlan = (DEV_TEST_MODE_ENABLED && !isDemo && testPlanOverride) || currentPlan;
   const planInfo = SUBSCRIPTION_PLANS[effectivePlan] || SUBSCRIPTION_PLANS.free;
   // Date de création du compte (auth.users.created_at), utilisée pour le quota IA en deux
   // phases du palier Gratuit (10 messages/mois pendant les 30 premiers jours glissants, puis 5).
@@ -11401,7 +11445,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           "Démasquer les données" quand on scrolle tout en bas. */}
         {tab === "dashboard" && (
           <div className="space-y-2">
-            {testPlanOverride && (
+            {DEV_TEST_MODE_ENABLED && testPlanOverride && (
               <div onClick={() => setTestPlanOverride(null)} className="rounded-xl px-3 py-2" style={{ background: "rgba(168,85,247,0.14)", border: "1px dashed #a855f7", cursor: "pointer" }}>
                 <p style={{ color: "#a855f7", fontSize: 11, fontWeight: 700, textAlign: "center" }}>
                   🧪 Mode test — palier simulé : {t(lang, SUBSCRIPTION_PLANS[testPlanOverride].nameKey)} (appuyez pour revenir au réel)
@@ -14649,14 +14693,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       onClick={() => {
                         const next = devTapCount + 1;
                         setDevTapCount(next);
-                        if (next >= 7) { setDevModeUnlocked(true); setDevTapCount(0); }
+                        if (DEV_TEST_MODE_ENABLED && next >= 7) { setDevModeUnlocked(true); setDevTapCount(0); }
                       }}
                       style={{ color: T.muted, fontSize: 12, marginTop: 2, cursor: "pointer", userSelect: "none" }}
                     >
                       {t(lang, "setVersion")} 1.0
                     </p>
                   </div>
-                  {devModeUnlocked && (
+                  {DEV_TEST_MODE_ENABLED && devModeUnlocked && (
                     <div style={{ padding: 14, borderRadius: 14, background: T.input, border: "1px dashed #c084fc", display: "flex", flexDirection: "column", gap: 8 }}>
                       <p style={{ color: "#a855f7", fontSize: 12, fontWeight: 700 }}>🧪 Mode test (développeur)</p>
                       <p style={{ color: T.muted, fontSize: 11, lineHeight: 1.4 }}>
