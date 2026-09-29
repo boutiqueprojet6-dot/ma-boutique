@@ -626,6 +626,7 @@ const TRANSLATIONS = {
     recapYou: "Vous", recapShop: "Boutique", recapAccount: "Compte", recapFullName: "Nom complet",
     navMore: "Plus", moreOptionsTitle: "Plus d'options",
     calcTabLabel: "Calculatrice", calcClear: "AC", calcBackspace: "⌫",
+    calcHelpToggle: "Aide", calcHelpTitle: "Guide des touches", calcHelpText: "GT : additionne chaque résultat obtenu avec « = » ; appuyez pour voir le total.\nMRC : rappelle le nombre en mémoire ; un second appui l'efface.\nM+ / M- : ajoute ou soustrait le nombre affiché à la mémoire.\n{cost} / {sell} / {margin} : calcul de marge en 3 étapes — entrez le prix d'achat puis {cost}, le prix de vente puis {sell}, puis {margin} pour le pourcentage.\n√ : racine carrée du nombre affiché.\nTAX (0%) : appuyez pour définir votre taux de taxe, puis « = » pour valider.\nTAX+ / TAX- : ajoute ou retire cette taxe au montant affiché.\nCE/C efface la saisie en cours ; {clear} réinitialise l'écran (la mémoire M et le total GT restent actifs jusqu'à leur propre effacement).",
     calcSearchProduct: "Rechercher un produit…", calcNoProductFound: "Aucun produit trouvé", calcSearchToggle: "Produits", calcHistoryToggle: "Historique", calcHistoryTitle: "Historique des calculs", calcHistoryClear: "Effacer", calcHistoryEmpty: "Aucun calcul pour l'instant.",
     calcClearEntry: "CE/C", calcCost: "COÛT", calcSell: "VENTE", calcMargin: "MARGE", calcSetPercent: "SET %",
     voiceCartStart: "Dicter la vente", voiceCartApply: "Ajouter au panier", voiceCartCancel: "Annuler", voiceCartUnmatched: "Non reconnu", voiceCartNothingHeard: "Rien compris, réessayez.",
@@ -724,6 +725,7 @@ const TRANSLATIONS = {
     recapYou: "አንተ", recapShop: "ሱቅ", recapAccount: "መለያ", recapFullName: "ሙሉ ስም",
     navMore: "ተጨማሪ", moreOptionsTitle: "ተጨማሪ አማራጮች",
     calcTabLabel: "ካልኩሌተር", calcClear: "አጽዳ", calcBackspace: "⌫",
+    calcHelpToggle: "እገዛ", calcHelpTitle: "የቁልፎች መመሪያ", calcHelpText: "ጂቲ፦ በ«=» የተገኘውን እያንዳንዱን ውጤት ይደምራል፤ ተጫኑት ድምሩን ለማየት።\nኤምአርሲ፦ በማህደረ ትውስታ ያለውን ቁጥር ያስታውሳል፤ ዳግም ሲጫኑት ያጠፋዋል።\nኤም+ / ኤም-፦ የሚታየውን ቁጥር ወደ ማህደረ ትውስታ ይጨምራል ወይም ይቀንሳል።\n{cost} / {sell} / {margin}፦ የትርፍ ስሌት በ3 ደረጃ — የግዢ ዋጋን አስገብተው {cost} ይጫኑ፣ የሽያጭ ዋጋን አስገብተው {sell} ይጫኑ፣ ከዚያ {margin} ለመቶኛው ይጫኑ።\n√፦ የሚታየውን ቁጥር ስኩዌር ሩት።\nTAX (0%)፦ የግብር መጠንዎን ለማዘጋጀት ይጫኑ፣ ከዚያ «=»።\nTAX+ / TAX-፦ ይህን ግብር ወደ/ከሚታየው መጠን ይጨምራል ወይም ያስወግዳል።\nCE/C የአሁኑን ግቤት ያጠፋል፤ {clear} ማያ ገጹን ዳግም ያስጀምራል (M እና GT ራሳቸው እስኪጠፉ ድረስ ይቆያሉ)።",
     productLimitReached: "የደረጃህ የ{n} ምርት ክምችት ገደብ ላይ ደርሷል። ትልቅ ክምችት ለማግኘት ወደ ከፍተኛ ደረጃ አሻግር።", productFrozenBadge: "የቀዘቀዘ", productFrozenMsg: "ምርት ቀዝቅዟል፦ እንደገና ለመጠቀም ወደ ከፍተኛ ደረጃ አሻግር።",
     biometricUnlockBtn: "በጣት አሻራ / ፊት ክፈት", biometricUnlockError: "የጣት አሻራ/ፊት አልታወቀም። የፒን ኮድህን ተጠቀም።",
     continueWithGoogle: "በGoogle ቀጥል", orSeparator: "ወይም", googleLoginError: "በGoogle መግባት አልተቻለም። እንደገና ሞክር ወይም መለያህን ተጠቀም።",
@@ -830,6 +832,7 @@ const TRANSLATIONS = {
     recapYou: "You", recapShop: "Shop", recapAccount: "Account", recapFullName: "Full name",
     navMore: "More", moreOptionsTitle: "More options",
     calcTabLabel: "Calculator", calcClear: "C", calcBackspace: "⌫",
+    calcHelpToggle: "Help", calcHelpTitle: "Key guide", calcHelpText: "GT: adds up each result from \"=\"; press to see the running total.\nMRC: recalls the number in memory; press again to clear it.\nM+ / M-: adds or subtracts the shown number to/from memory.\n{cost} / {sell} / {margin}: 3-step margin calc — enter the cost then {cost}, the price then {sell}, then {margin} for the percentage.\n√: square root of the shown number.\nTAX (0%): press to set your tax rate, then \"=\" to confirm.\nTAX+ / TAX-: adds or removes that tax from the shown amount.\nCE/C clears the current entry; {clear} resets the screen (memory M and the GT total stay active until cleared separately).",
     productLimitReached: "Limit of {n} products in stock reached for your plan. Upgrade to a higher plan for more stock.", productFrozenBadge: "Frozen", productFrozenMsg: "Frozen product: upgrade to a higher plan to use it again.",
     biometricUnlockBtn: "Unlock with fingerprint / face", biometricUnlockError: "Fingerprint/face not recognized. Use your PIN code.",
     continueWithGoogle: "Continue with Google", orSeparator: "OR", googleLoginError: "Couldn't sign in with Google. Try again or use your login.",
@@ -934,6 +937,7 @@ const TRANSLATIONS = {
     recapYou: "Ikaw", recapShop: "Tindahan", recapAccount: "Account", recapFullName: "Buong pangalan",
     navMore: "Higit pa", moreOptionsTitle: "Higit pang opsyon",
     calcTabLabel: "Kalkulator", calcClear: "I-clear", calcBackspace: "⌫",
+    calcHelpToggle: "Tulong", calcHelpTitle: "Gabay sa mga Key", calcHelpText: "GT: idinaragdag ang bawat resulta mula sa \"=\"; pindutin para makita ang kabuuan.\nMRC: ibinabalik ang naka-memorya na numero; pindutin ulit para burahin ito.\nM+ / M-: idinaragdag o ibinabawas ang ipinapakitang numero sa memorya.\n{cost} / {sell} / {margin}: 3-hakbang na pagkuha ng margin — ilagay ang gastos pagkatapos {cost}, ang presyo pagkatapos {sell}, tapos {margin} para sa porsyento.\n√: square root ng ipinapakitang numero.\nTAX (0%): pindutin para itakda ang tax rate, tapos \"=\" para kumpirmahin.\nTAX+ / TAX-: idinaragdag o inaalis ang tax na iyon sa ipinapakitang halaga.\nCE/C binubura ang kasalukuyang entry; {clear} ini-reset ang screen (mananatiling aktibo ang memory M at ang GT hanggang sa hiwalay na burahin ang mga ito).",
     productLimitReached: "Naabot na ang limitasyong {n} produkto sa stock para sa iyong plano. Mag-upgrade sa mas mataas na plano para sa mas maraming stock.", productFrozenBadge: "Nakafreeze", productFrozenMsg: "Nakafreeze na produkto: mag-upgrade sa mas mataas na plano para magamit muli.",
     biometricUnlockBtn: "I-unlock gamit ang fingerprint / mukha", biometricUnlockError: "Hindi nakilala ang fingerprint/mukha. Gamitin ang iyong PIN code.",
     continueWithGoogle: "Magpatuloy gamit ang Google", orSeparator: "O", googleLoginError: "Hindi makapag-sign in gamit ang Google. Subukan ulit o gamitin ang iyong login.",
@@ -1038,6 +1042,7 @@ const TRANSLATIONS = {
     recapYou: "మీరు", recapShop: "దుకాణం", recapAccount: "ఖాతా", recapFullName: "పూర్తి పేరు",
     navMore: "మరిన్ని", moreOptionsTitle: "మరిన్ని ఎంపికలు",
     calcTabLabel: "కాలిక్యులేటర్", calcClear: "క్లియర్", calcBackspace: "⌫",
+    calcHelpToggle: "సహాయం", calcHelpTitle: "కీల గైడ్", calcHelpText: "GT: \"=\" నుండి వచ్చిన ప్రతి ఫలితాన్ని కూడుతుంది; మొత్తం చూడటానికి నొక్కండి.\nMRC: మెమరీలో ఉన్న సంఖ్యను గుర్తుచేస్తుంది; మళ్లీ నొక్కితే తొలగిస్తుంది.\nM+ / M-: ప్రదర్శించిన సంఖ్యను మెమరీకి కలుపుతుంది లేదా తీసివేస్తుంది.\n{cost} / {sell} / {margin}: 3-దశల మార్జిన్ లెక్క — ఖర్చు నమోదు చేసి {cost} నొక్కండి, ధర నమోదు చేసి {sell} నొక్కండి, తర్వాత శాతానికి {margin} నొక్కండి.\n√: ప్రదర్శించిన సంఖ్య వర్గమూలం.\nTAX (0%): మీ పన్ను రేటు సెట్ చేయడానికి నొక్కండి, తర్వాత నిర్ధారించడానికి \"=\".\nTAX+ / TAX-: ఆ పన్నును ప్రదర్శించిన మొత్తానికి కలుపుతుంది లేదా తీసివేస్తుంది.\nCE/C ప్రస్తుత నమోదును తొలగిస్తుంది; {clear} స్క్రీన్‌ను రీసెట్ చేస్తుంది (మెమరీ M మరియు GT మొత్తం విడిగా తొలగించే వరకు యాక్టివ్‌గా ఉంటాయి).",
     productLimitReached: "మీ ప్లాన్ కోసం {n} ఉత్పత్తుల స్టాక్ పరిమితి చేరుకుంది. ఎక్కువ స్టాక్ కోసం అధిక ప్లాన్‌కు మారండి.", productFrozenBadge: "స్తంభింపజేయబడింది", productFrozenMsg: "ఉత్పత్తి స్తంభింపజేయబడింది: మళ్లీ ఉపయోగించడానికి అధిక ప్లాన్‌కు మారండి.",
     biometricUnlockBtn: "వేలిముద్ర / ముఖంతో అన్‌లాక్ చేయండి", biometricUnlockError: "వేలిముద్ర/ముఖం గుర్తించబడలేదు. మీ PIN కోడ్‌ను ఉపయోగించండి.",
     continueWithGoogle: "Googleతో కొనసాగించండి", orSeparator: "లేదా", googleLoginError: "Googleతో సైన్ ఇన్ చేయడం సాధ్యం కాలేదు. మళ్లీ ప్రయత్నించండి లేదా మీ లాగిన్‌ను ఉపయోగించండి.",
@@ -1142,6 +1147,7 @@ const TRANSLATIONS = {
     recapYou: "คุณ", recapShop: "ร้าน", recapAccount: "บัญชี", recapFullName: "ชื่อเต็ม",
     navMore: "เพิ่มเติม", moreOptionsTitle: "ตัวเลือกเพิ่มเติม",
     calcTabLabel: "เครื่องคิดเลข", calcClear: "ล้าง", calcBackspace: "⌫",
+    calcHelpToggle: "ช่วยเหลือ", calcHelpTitle: "คู่มือปุ่ม", calcHelpText: "GT: รวมผลลัพธ์ทุกครั้งที่กด \"=\" กดเพื่อดูยอดรวม\nMRC: เรียกตัวเลขในหน่วยความจำ กดอีกครั้งเพื่อลบ\nM+ / M-: บวกหรือลบตัวเลขที่แสดงเข้าหน่วยความจำ\n{cost} / {sell} / {margin}: คำนวณกำไร 3 ขั้นตอน — ใส่ต้นทุนแล้วกด {cost} ใส่ราคาขายแล้วกด {sell} จากนั้นกด {margin} เพื่อดูเปอร์เซ็นต์\n√: รากที่สองของตัวเลขที่แสดง\nTAX (0%): กดเพื่อตั้งอัตราภาษี แล้วกด \"=\" เพื่อยืนยัน\nTAX+ / TAX-: บวกหรือลบภาษีนั้นออกจากยอดที่แสดง\nCE/C ลบค่าที่กำลังป้อน; {clear} รีเซ็ตหน้าจอ (หน่วยความจำ M และยอดรวม GT จะยังทำงานอยู่จนกว่าจะลบแยกต่างหาก)",
     productLimitReached: "ถึงขีดจำกัดสินค้าคงคลัง {n} รายการสำหรับแพ็กเกจของคุณแล้ว อัปเกรดเป็นแพ็กเกจที่สูงขึ้นเพื่อสต็อกที่มากขึ้น", productFrozenBadge: "ถูกระงับ", productFrozenMsg: "สินค้าถูกระงับ: อัปเกรดเป็นแพ็กเกจที่สูงขึ้นเพื่อใช้งานอีกครั้ง",
     biometricUnlockBtn: "ปลดล็อกด้วยลายนิ้วมือ / ใบหน้า", biometricUnlockError: "ไม่รู้จักลายนิ้วมือ/ใบหน้า ใช้รหัส PIN ของคุณ",
     continueWithGoogle: "ดำเนินการต่อด้วย Google", orSeparator: "หรือ", googleLoginError: "ไม่สามารถเข้าสู่ระบบด้วย Google ได้ ลองอีกครั้งหรือใช้ข้อมูลเข้าสู่ระบบของคุณ",
@@ -1246,6 +1252,7 @@ const TRANSLATIONS = {
     recapYou: "Yow", recapShop: "Bitik", recapAccount: "Compte", recapFullName: "Tur ak sant",
     navMore: "Yeneen", moreOptionsTitle: "Yeneen option yi",
     calcTabLabel: "Rekno", calcClear: "Fitu", calcBackspace: "⌫",
+    calcHelpToggle: "Ndimbal", calcHelpTitle: "Ndigal bataaxal yi", calcHelpText: "GT: dafay yokk résultat bu nekk bu ñu am ci « = » ; bësal ko ngir gis limu mu wóor.\nMRC: dafay wone limu mu nekk ci mémwaar ; su ñu ko bësal ñaareelu yoon dafay far ko.\nM+ / M-: dafay yokk walla wàññi limu mu feeñ ci mémwaar.\n{cost} / {sell} / {margin}: xayma marj ci 3 tallif — bind njëg gi njëkk bësal {cost}, njëg jaay gi bësal {sell}, noonu bësal {margin} ngir am pourcentage bi.\n√: racine carrée bu limu mu feeñ.\nTAX (0%): bësal ngir jël taux taxe bi, noonu « = » ngir wéral ko.\nTAX+ / TAX-: dafay yokk walla wàññi taxe boobu ci limu mu feeñ.\nCE/C dafay far li ñu bind léegi ; {clear} dafay tambali ekran bi (mémwaar M ak GT du far lu leen jekk fa mu ñu ko far ci boppam).",
     productLimitReached: "Dañuñu {n} marsandiis ci stock bi ngir sa niveau. Wàcce ci beneen niveau bu kawe ngir am stock bu bare.", productFrozenBadge: "Tàqal", productFrozenMsg: "Jumtukaay tàqal na: wàcce ci beneen niveau bu kawe ngir jëfandikoo ko yeneen.",
     biometricUnlockBtn: "Ubbil ak baaraam/kanam", biometricUnlockError: "Baaraam/kanam bi xamul. Jëfandikoo sa kod PIN.",
     continueWithGoogle: "Dugal ak Google", orSeparator: "WALLA", googleLoginError: "Mënutuñu dugg ak Google. Jéemaat walla jëfandikoo sa idantite.",
@@ -1350,6 +1357,7 @@ const TRANSLATIONS = {
     recapYou: "Państwo", recapShop: "Sklep", recapAccount: "Konto", recapFullName: "Imię i nazwisko",
     navMore: "Więcej", moreOptionsTitle: "Więcej opcji",
     calcTabLabel: "Kalkulator", calcClear: "Wyczyść", calcBackspace: "⌫",
+    calcHelpToggle: "Pomoc", calcHelpTitle: "Przewodnik po klawiszach", calcHelpText: "GT: sumuje każdy wynik uzyskany przez \"=\"; naciśnij, aby zobaczyć sumę.\nMRC: przywołuje liczbę z pamięci; drugie naciśnięcie ją kasuje.\nM+ / M-: dodaje lub odejmuje wyświetlaną liczbę do/z pamięci.\n{cost} / {sell} / {margin}: obliczanie marży w 3 krokach — wpisz koszt, naciśnij {cost}, wpisz cenę sprzedaży, naciśnij {sell}, potem {margin}, aby zobaczyć procent.\n√: pierwiastek kwadratowy wyświetlanej liczby.\nTAX (0%): naciśnij, aby ustawić stawkę podatku, potem \"=\", aby zatwierdzić.\nTAX+ / TAX-: dodaje lub odejmuje ten podatek od wyświetlanej kwoty.\nCE/C czyści bieżący wpis; {clear} resetuje ekran (pamięć M i suma GT pozostają aktywne, dopóki nie zostaną osobno wyczyszczone).",
     productLimitReached: "Osiągnięto limit {n} produktów w magazynie dla Państwa planu. Proszę przejść na wyższy plan, aby zwiększyć zapas.", productFrozenBadge: "Zamrożone", productFrozenMsg: "Produkt zamrożony: przejdź na wyższy plan, aby znów go używać.",
     biometricUnlockBtn: "Odblokuj odciskiem palca / twarzą", biometricUnlockError: "Nie rozpoznano odcisku palca/twarzy. Użyj kodu PIN.",
     continueWithGoogle: "Kontynuuj z Google", orSeparator: "LUB", googleLoginError: "Nie udało się zalogować przez Google. Spróbuj ponownie lub użyj swojego identyfikatora.",
@@ -1454,6 +1462,7 @@ const TRANSLATIONS = {
     recapYou: "أنت", recapShop: "المتجر", recapAccount: "الحساب", recapFullName: "الاسم الكامل",
     navMore: "المزيد", moreOptionsTitle: "خيارات إضافية",
     calcTabLabel: "الآلة الحاسبة", calcClear: "مسح", calcBackspace: "⌫",
+    calcHelpToggle: "مساعدة", calcHelpTitle: "دليل الأزرار", calcHelpText: "GT: يجمع كل نتيجة تحصل عليها بالضغط على «=»؛ اضغط لعرض المجموع.\nMRC: يستدعي الرقم المحفوظ في الذاكرة؛ اضغط مرة أخرى لمسحه.\nM+ / M-: يضيف أو يطرح الرقم المعروض من الذاكرة.\n{cost} / {sell} / {margin}: حساب الهامش في 3 خطوات — أدخل سعر الشراء ثم اضغط {cost}، ثم سعر البيع واضغط {sell}، ثم اضغط {margin} لمعرفة النسبة.\n√: الجذر التربيعي للرقم المعروض.\nTAX (0%): اضغط لضبط نسبة الضريبة، ثم «=» للتأكيد.\nTAX+ / TAX-: يضيف أو يزيل هذه الضريبة من المبلغ المعروض.\nCE/C يمسح الإدخال الحالي؛ {clear} يعيد ضبط الشاشة (تبقى الذاكرة M ومجموع GT نشطين حتى يتم مسحهما بشكل منفصل).",
     productLimitReached: "تم بلوغ حد {n} منتج في المخزون لمستواك. انتقل إلى مستوى أعلى للحصول على مخزون أكبر.", productFrozenBadge: "مجمّد", productFrozenMsg: "منتج مجمّد: انتقل إلى مستوى أعلى لاستخدامه مجددًا.",
     biometricUnlockBtn: "فتح القفل ببصمة الإصبع / الوجه", biometricUnlockError: "لم يتم التعرف على البصمة/الوجه. استخدم رمز PIN الخاص بك.",
     continueWithGoogle: "المتابعة باستخدام Google", orSeparator: "أو", googleLoginError: "تعذر تسجيل الدخول باستخدام Google. أعد المحاولة أو استخدم معرّفك.",
@@ -1558,6 +1567,7 @@ const TRANSLATIONS = {
     recapYou: "Usted", recapShop: "Tienda", recapAccount: "Cuenta", recapFullName: "Nombre completo",
     navMore: "Más", moreOptionsTitle: "Más opciones",
     calcTabLabel: "Calculadora", calcClear: "Borrar", calcBackspace: "⌫",
+    calcHelpToggle: "Ayuda", calcHelpTitle: "Guía de teclas", calcHelpText: "GT: suma cada resultado obtenido con \"=\"; pulsa para ver el total acumulado.\nMRC: recupera el número en memoria; pulsa de nuevo para borrarlo.\nM+ / M-: suma o resta el número mostrado a la memoria.\n{cost} / {sell} / {margin}: cálculo de margen en 3 pasos — introduce el costo y pulsa {cost}, el precio de venta y pulsa {sell}, luego {margin} para el porcentaje.\n√: raíz cuadrada del número mostrado.\nTAX (0%): pulsa para fijar tu tasa de impuesto, luego \"=\" para confirmar.\nTAX+ / TAX-: suma o quita ese impuesto al monto mostrado.\nCE/C borra la entrada actual; {clear} reinicia la pantalla (la memoria M y el total GT siguen activos hasta que los borres por separado).",
     productLimitReached: "Límite de {n} productos en stock alcanzado para su plan. Pase a un plan superior para más stock.", productFrozenBadge: "Congelado", productFrozenMsg: "Producto congelado: pase a un plan superior para volver a usarlo.",
     biometricUnlockBtn: "Desbloquear con huella / rostro", biometricUnlockError: "Huella/rostro no reconocido. Use su código PIN.",
     continueWithGoogle: "Continuar con Google", orSeparator: "O", googleLoginError: "No se pudo iniciar sesión con Google. Vuelva a intentarlo o use su identificador.",
@@ -1662,6 +1672,7 @@ const TRANSLATIONS = {
     recapYou: "Você", recapShop: "Loja", recapAccount: "Conta", recapFullName: "Nome completo",
     navMore: "Mais", moreOptionsTitle: "Mais opções",
     calcTabLabel: "Calculadora", calcClear: "Limpar", calcBackspace: "⌫",
+    calcHelpToggle: "Ajuda", calcHelpTitle: "Guia das teclas", calcHelpText: "GT: soma cada resultado obtido com \"=\"; toque para ver o total acumulado.\nMRC: recupera o número na memória; toque de novo para apagá-lo.\nM+ / M-: soma ou subtrai o número exibido da memória.\n{cost} / {sell} / {margin}: cálculo de margem em 3 etapas — digite o custo e toque em {cost}, o preço de venda e toque em {sell}, depois {margin} para a porcentagem.\n√: raiz quadrada do número exibido.\nTAX (0%): toque para definir sua taxa de imposto, depois \"=\" para confirmar.\nTAX+ / TAX-: soma ou remove esse imposto do valor exibido.\nCE/C apaga a entrada atual; {clear} reinicia a tela (a memória M e o total GT continuam ativos até serem apagados separadamente).",
     productLimitReached: "Limite de {n} produtos em stock atingido para o seu plano. Passe a um plano superior para mais stock.", productFrozenBadge: "Congelado", productFrozenMsg: "Produto congelado: passe a um plano superior para o usar novamente.",
     biometricUnlockBtn: "Desbloquear com impressão digital / rosto", biometricUnlockError: "Impressão digital/rosto não reconhecido. Use seu código PIN.",
     continueWithGoogle: "Continuar com o Google", orSeparator: "OU", googleLoginError: "Não foi possível entrar com o Google. Tente novamente ou use seu identificador.",
@@ -1766,6 +1777,7 @@ const TRANSLATIONS = {
     recapYou: "个人信息", recapShop: "店铺信息", recapAccount: "账号信息", recapFullName: "姓名",
     navMore: "更多", moreOptionsTitle: "更多选项",
     calcTabLabel: "计算器", calcClear: "清除", calcBackspace: "⌫",
+    calcHelpToggle: "帮助", calcHelpTitle: "按键指南", calcHelpText: "GT：累加每次按「=」得到的结果；按一下可查看累计总额。\nMRC：调出内存中的数字；再按一次可清除。\nM+ / M-：将显示的数字加到或从内存中减去。\n{cost} / {sell} / {margin}：三步计算利润率——输入成本后按{cost}，输入售价后按{sell}，再按{margin}查看百分比。\n√：显示数字的平方根。\nTAX (0%)：按此设置税率，然后按「=」确认。\nTAX+ / TAX-：在显示金额上加上或去掉该税率。\nCE/C 清除当前输入；{clear} 重置屏幕（内存M和GT总额会保持不变，直到单独清除）。",
     productLimitReached: "已达到你的套餐库存产品数量上限（{n}件）。升级到更高套餐以获得更多库存。", productFrozenBadge: "已冻结", productFrozenMsg: "产品已冻结：升级到更高套餐以再次使用。",
     biometricUnlockBtn: "使用指纹/面容解锁", biometricUnlockError: "无法识别指纹/面容。请使用您的PIN码。",
     continueWithGoogle: "使用 Google 继续", orSeparator: "或", googleLoginError: "无法使用 Google 登录。请重试或使用您的账号登录。",
@@ -1870,6 +1882,7 @@ const TRANSLATIONS = {
     recapYou: "Bạn", recapShop: "Cửa hàng", recapAccount: "Tài khoản", recapFullName: "Họ và tên",
     navMore: "Thêm", moreOptionsTitle: "Tùy chọn khác",
     calcTabLabel: "Máy tính", calcClear: "Xóa", calcBackspace: "⌫",
+    calcHelpToggle: "Trợ giúp", calcHelpTitle: "Hướng dẫn các phím", calcHelpText: "GT: cộng dồn mỗi kết quả có được từ \"=\"; nhấn để xem tổng cộng.\nMRC: gọi lại số đã lưu trong bộ nhớ; nhấn lần nữa để xóa.\nM+ / M-: cộng hoặc trừ số đang hiển thị vào bộ nhớ.\n{cost} / {sell} / {margin}: tính lợi nhuận qua 3 bước — nhập giá vốn rồi nhấn {cost}, nhập giá bán rồi nhấn {sell}, sau đó nhấn {margin} để xem phần trăm.\n√: căn bậc hai của số đang hiển thị.\nTAX (0%): nhấn để đặt thuế suất, sau đó nhấn \"=\" để xác nhận.\nTAX+ / TAX-: cộng hoặc trừ thuế đó vào số tiền đang hiển thị.\nCE/C xóa số đang nhập; {clear} đặt lại màn hình (bộ nhớ M và tổng GT vẫn giữ nguyên cho đến khi được xóa riêng).",
     productLimitReached: "Đã đạt giới hạn {n} sản phẩm trong kho cho gói của bạn. Nâng cấp lên gói cao hơn để có thêm kho hàng.", productFrozenBadge: "Đã đóng băng", productFrozenMsg: "Sản phẩm đã đóng băng: nâng cấp lên gói cao hơn để sử dụng lại.",
     biometricUnlockBtn: "Mở khóa bằng vân tay / khuôn mặt", biometricUnlockError: "Không nhận diện được vân tay/khuôn mặt. Hãy dùng mã PIN của bạn.",
     continueWithGoogle: "Tiếp tục với Google", orSeparator: "HOẶC", googleLoginError: "Không thể đăng nhập bằng Google. Vui lòng thử lại hoặc dùng tài khoản của bạn.",
@@ -1974,6 +1987,7 @@ const TRANSLATIONS = {
     recapYou: "Sie", recapShop: "Laden", recapAccount: "Konto", recapFullName: "Vollständiger Name",
     navMore: "Mehr", moreOptionsTitle: "Weitere Optionen",
     calcTabLabel: "Taschenrechner", calcClear: "Löschen", calcBackspace: "⌫",
+    calcHelpToggle: "Hilfe", calcHelpTitle: "Tastenanleitung", calcHelpText: "GT: summiert jedes mit \"=\" erhaltene Ergebnis; drücken zeigt die Gesamtsumme.\nMRC: ruft die gespeicherte Zahl ab; erneutes Drücken löscht sie.\nM+ / M-: addiert oder subtrahiert die angezeigte Zahl zum/vom Speicher.\n{cost} / {sell} / {margin}: Margenberechnung in 3 Schritten — Einkaufspreis eingeben, dann {cost}, Verkaufspreis eingeben, dann {sell}, dann {margin} für den Prozentsatz.\n√: Quadratwurzel der angezeigten Zahl.\nTAX (0%): drücken, um den Steuersatz festzulegen, dann \"=\" zum Bestätigen.\nTAX+ / TAX-: addiert oder entfernt diese Steuer vom angezeigten Betrag.\nCE/C löscht die aktuelle Eingabe; {clear} setzt den Bildschirm zurück (Speicher M und GT-Summe bleiben aktiv, bis sie separat gelöscht werden).",
     productLimitReached: "Limit von {n} Produkten für Ihre Stufe erreicht. Wechseln Sie zu einer höheren Stufe für mehr Lagerplatz.", productFrozenBadge: "Eingefroren", productFrozenMsg: "Produkt eingefroren: Wechseln Sie zu einer höheren Stufe, um es wieder zu nutzen.",
     biometricUnlockBtn: "Mit Fingerabdruck / Gesicht entsperren", biometricUnlockError: "Fingerabdruck/Gesicht nicht erkannt. Verwenden Sie Ihren PIN-Code.",
     continueWithGoogle: "Mit Google fortfahren", orSeparator: "ODER", googleLoginError: "Anmeldung mit Google nicht möglich. Versuchen Sie es erneut oder nutzen Sie Ihre Kennung.",
@@ -2078,6 +2092,7 @@ const TRANSLATIONS = {
     recapYou: "Вы", recapShop: "Магазин", recapAccount: "Аккаунт", recapFullName: "Полное имя",
     navMore: "Ещё", moreOptionsTitle: "Дополнительные опции",
     calcTabLabel: "Калькулятор", calcClear: "Очистить", calcBackspace: "⌫",
+    calcHelpToggle: "Помощь", calcHelpTitle: "Гид по клавишам", calcHelpText: "GT: суммирует каждый результат, полученный через «=»; нажмите, чтобы увидеть итог.\nMRC: вызывает число из памяти; повторное нажатие удаляет его.\nM+ / M-: прибавляет или вычитает отображаемое число из памяти.\n{cost} / {sell} / {margin}: расчёт наценки в 3 шага — введите себестоимость и нажмите {cost}, цену продажи и нажмите {sell}, затем {margin} для процента.\n√: квадратный корень из отображаемого числа.\nTAX (0%): нажмите, чтобы задать ставку налога, затем «=» для подтверждения.\nTAX+ / TAX-: прибавляет или убирает этот налог из отображаемой суммы.\nCE/C очищает текущий ввод; {clear} сбрасывает экран (память M и итог GT остаются активными, пока их не очистят отдельно).",
     productLimitReached: "Достигнут лимит {n} товаров на складе для вашего тарифа. Перейдите на более высокий тариф для большего запаса.", productFrozenBadge: "Заморожено", productFrozenMsg: "Товар заморожен: перейдите на более высокий тариф, чтобы снова его использовать.",
     biometricUnlockBtn: "Разблокировать по отпечатку / лицу", biometricUnlockError: "Отпечаток/лицо не распознаны. Используйте PIN-код.",
     continueWithGoogle: "Продолжить с Google", orSeparator: "ИЛИ", googleLoginError: "Не удалось войти через Google. Попробуйте снова или используйте свой логин.",
@@ -2182,6 +2197,7 @@ const TRANSLATIONS = {
     recapYou: "आप", recapShop: "दुकान", recapAccount: "खाता", recapFullName: "पूरा नाम",
     navMore: "और", moreOptionsTitle: "अतिरिक्त विकल्प",
     calcTabLabel: "कैलकुलेटर", calcClear: "साफ़ करें", calcBackspace: "⌫",
+    calcHelpToggle: "सहायता", calcHelpTitle: "बटन गाइड", calcHelpText: "GT: \"=\" से मिले हर परिणाम को जोड़ता है; कुल देखने के लिए दबाएँ।\nMRC: मेमोरी में सेव नंबर वापस लाता है; दोबारा दबाने पर मिटा देता है।\nM+ / M-: दिखाए गए नंबर को मेमोरी में जोड़ता या घटाता है।\n{cost} / {sell} / {margin}: 3 चरणों में मार्जिन गणना — लागत डालकर {cost} दबाएँ, बिक्री मूल्य डालकर {sell} दबाएँ, फिर प्रतिशत के लिए {margin} दबाएँ।\n√: दिखाए गए नंबर का वर्गमूल।\nTAX (0%): अपनी कर दर सेट करने के लिए दबाएँ, फिर पुष्टि के लिए \"=\"।\nTAX+ / TAX-: दिखाई गई राशि में वह कर जोड़ता या हटाता है।\nCE/C वर्तमान प्रविष्टि मिटाता है; {clear} स्क्रीन रीसेट करता है (मेमोरी M और GT कुल अलग से मिटाए जाने तक सक्रिय रहते हैं)।",
     productLimitReached: "तुम्हारे प्लान के लिए {n} उत्पादों की स्टॉक सीमा पूरी हो गई है। अधिक स्टॉक के लिए उच्च प्लान पर जाओ।", productFrozenBadge: "रुका हुआ", productFrozenMsg: "उत्पाद रुका हुआ: फिर से उपयोग करने के लिए उच्च प्लान पर जाओ।",
     biometricUnlockBtn: "फ़िंगरप्रिंट / चेहरे से अनलॉक करें", biometricUnlockError: "फ़िंगरप्रिंट/चेहरा पहचाना नहीं गया। अपने PIN कोड का उपयोग करें।",
     continueWithGoogle: "Google से जारी रखें", orSeparator: "या", googleLoginError: "Google से साइन इन नहीं हो सका। फिर से प्रयास करें या अपनी लॉगिन जानकारी का उपयोग करें।",
@@ -2286,6 +2302,7 @@ const TRANSLATIONS = {
     recapYou: "நீங்கள்", recapShop: "கடை", recapAccount: "கணக்கு", recapFullName: "முழு பெயர்",
     navMore: "மேலும்", moreOptionsTitle: "கூடுதல் விருப்பங்கள்",
     calcTabLabel: "கால்குலேட்டர்", calcClear: "அழி", calcBackspace: "⌫",
+    calcHelpToggle: "உதவி", calcHelpTitle: "பொத்தான் வழிகாட்டி", calcHelpText: "GT: \"=\" மூலம் கிடைக்கும் ஒவ்வொரு முடிவையும் கூட்டுகிறது; மொத்தத்தைக் காண அழுத்தவும்.\nMRC: நினைவகத்தில் உள்ள எண்ணை நினைவுபடுத்துகிறது; மீண்டும் அழுத்தினால் அழிக்கிறது.\nM+ / M-: காட்டப்படும் எண்ணை நினைவகத்தில் கூட்டுகிறது அல்லது கழிக்கிறது.\n{cost} / {sell} / {margin}: 3 படிகளில் லாப கணக்கீடு — விலையை உள்ளிட்டு {cost} அழுத்தவும், விற்பனை விலையை உள்ளிட்டு {sell} அழுத்தவும், பின்னர் சதவீதத்திற்கு {margin} அழுத்தவும்.\n√: காட்டப்படும் எண்ணின் வர்க்கமூலம்.\nTAX (0%): உங்கள் வரி விகிதத்தை அமைக்க அழுத்தவும், பின்னர் உறுதிப்படுத்த \"=\".\nTAX+ / TAX-: அந்த வரியை காட்டப்படும் தொகையுடன் கூட்டுகிறது அல்லது கழிக்கிறது.\nCE/C தற்போதைய உள்ளீட்டை அழிக்கிறது; {clear} திரையை மீட்டமைக்கிறது (M நினைவகமும் GT மொத்தமும் தனித்தனியாக அழிக்கும் வரை செயலில் இருக்கும்).",
     productLimitReached: "உங்கள் திட்டத்திற்கான {n} பொருட்கள் இருப்பு வரம்பை எட்டிவிட்டீர்கள். அதிக இருப்புக்கு உயர் திட்டத்திற்கு மாறவும்.", productFrozenBadge: "முடக்கப்பட்டது", productFrozenMsg: "பொருள் முடக்கப்பட்டது: மீண்டும் பயன்படுத்த உயர் திட்டத்திற்கு மாறவும்.",
     biometricUnlockBtn: "கைரேகை / முகத்துடன் திறக்கவும்", biometricUnlockError: "கைரேகை/முகம் அடையாளம் காணப்படவில்லை. உங்கள் PIN குறியீட்டைப் பயன்படுத்தவும்.",
     continueWithGoogle: "Google உடன் தொடரவும்", orSeparator: "அல்லது", googleLoginError: "Google உடன் உள்நுழைய முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது உங்கள் லாகின் ஐப் பயன்படுத்தவும்.",
@@ -2390,6 +2407,7 @@ const TRANSLATIONS = {
     recapYou: "আপনি", recapShop: "দোকান", recapAccount: "অ্যাকাউন্ট", recapFullName: "পুরো নাম",
     navMore: "আরও", moreOptionsTitle: "অতিরিক্ত বিকল্প",
     calcTabLabel: "ক্যালকুলেটর", calcClear: "মুছুন", calcBackspace: "⌫",
+    calcHelpToggle: "সাহায্য", calcHelpTitle: "বোতাম গাইড", calcHelpText: "GT: \"=\" থেকে পাওয়া প্রতিটি ফলাফল যোগ করে; মোট দেখতে চাপুন।\nMRC: মেমোরিতে থাকা সংখ্যা ফিরিয়ে আনে; আবার চাপলে মুছে ফেলে।\nM+ / M-: প্রদর্শিত সংখ্যা মেমোরিতে যোগ বা বিয়োগ করে।\n{cost} / {sell} / {margin}: ৩ ধাপে মার্জিন হিসাব — ক্রয়মূল্য দিয়ে {cost} চাপুন, বিক্রয়মূল্য দিয়ে {sell} চাপুন, তারপর শতাংশের জন্য {margin} চাপুন।\n√: প্রদর্শিত সংখ্যার বর্গমূল।\nTAX (0%): আপনার কর হার নির্ধারণ করতে চাপুন, তারপর নিশ্চিত করতে \"=\"।\nTAX+ / TAX-: প্রদর্শিত পরিমাণে সেই কর যোগ বা বাদ দেয়।\nCE/C বর্তমান এন্ট্রি মুছে ফেলে; {clear} স্ক্রিন রিসেট করে (M মেমোরি এবং GT মোট আলাদাভাবে মুছে ফেলা না হওয়া পর্যন্ত সক্রিয় থাকে)।",
     productLimitReached: "তোমার স্তরের জন্য {n} পণ্যের সীমা পূর্ণ হয়েছে। বড় স্টকের জন্য উচ্চতর স্তরে যাও।", productFrozenBadge: "স্থগিত", productFrozenMsg: "পণ্য স্থগিত: আবার ব্যবহার করতে উচ্চতর স্তরে যাও।",
     biometricUnlockBtn: "ফিঙ্গারপ্রিন্ট / মুখ দিয়ে আনলক করুন", biometricUnlockError: "ফিঙ্গারপ্রিন্ট/মুখ শনাক্ত হয়নি। আপনার PIN কোড ব্যবহার করুন।",
     continueWithGoogle: "Google দিয়ে চালিয়ে যান", orSeparator: "অথবা", googleLoginError: "Google দিয়ে সাইন ইন করা যায়নি। আবার চেষ্টা করুন অথবা আপনার লগইন ব্যবহার করুন।",
@@ -2494,6 +2512,7 @@ const TRANSLATIONS = {
     recapYou: "آپ", recapShop: "دکان", recapAccount: "اکاؤنٹ", recapFullName: "مکمل نام",
     navMore: "مزید", moreOptionsTitle: "اضافی اختیارات",
     calcTabLabel: "کیلکولیٹر", calcClear: "صاف کریں", calcBackspace: "⌫",
+    calcHelpToggle: "مدد", calcHelpTitle: "بٹنوں کی رہنمائی", calcHelpText: "GT: \"=\" سے حاصل ہونے والے ہر نتیجے کو جمع کرتا ہے؛ کل دیکھنے کے لیے دبائیں۔\nMRC: میموری میں محفوظ نمبر واپس لاتا ہے؛ دوبارہ دبانے پر مٹا دیتا ہے۔\nM+ / M-: دکھائے گئے نمبر کو میموری میں جمع یا منہا کرتا ہے۔\n{cost} / {sell} / {margin}: 3 مراحل میں منافع کا حساب — لاگت درج کر کے {cost} دبائیں، فروخت کی قیمت درج کر کے {sell} دبائیں، پھر فیصد کے لیے {margin} دبائیں۔\n√: دکھائے گئے نمبر کا جذرِ تربیعی۔\nTAX (0%): اپنی ٹیکس کی شرح مقرر کرنے کے لیے دبائیں، پھر تصدیق کے لیے \"=\"۔\nTAX+ / TAX-: دکھائی گئی رقم میں وہ ٹیکس جمع یا کم کرتا ہے۔\nCE/C موجودہ اندراج مٹاتا ہے؛ {clear} اسکرین دوبارہ ترتیب دیتا ہے (میموری M اور GT کل الگ سے مٹائے جانے تک فعال رہتے ہیں)۔",
     productLimitReached: "آپ کے پلان کے لیے {n} پروڈکٹس اسٹاک کی حد پوری ہو گئی۔ زیادہ اسٹاک کے لیے اعلیٰ پلان پر جائیں۔", productFrozenBadge: "منجمد", productFrozenMsg: "پروڈکٹ منجمد: دوبارہ استعمال کرنے کے لیے اعلیٰ پلان پر جائیں۔",
     biometricUnlockBtn: "فنگر پرنٹ / چہرے سے کھولیں", biometricUnlockError: "فنگر پرنٹ/چہرہ پہچانا نہیں گیا۔ اپنا PIN کوڈ استعمال کریں۔",
     continueWithGoogle: "Google کے ساتھ جاری رکھیں", orSeparator: "یا", googleLoginError: "Google کے ساتھ سائن ان نہیں ہو سکا۔ دوبارہ کوشش کریں یا اپنا لاگ ان استعمال کریں۔",
@@ -2598,6 +2617,7 @@ const TRANSLATIONS = {
     recapYou: "Kamu", recapShop: "Toko", recapAccount: "Akun", recapFullName: "Nama lengkap",
     navMore: "Lainnya", moreOptionsTitle: "Opsi tambahan",
     calcTabLabel: "Kalkulator", calcClear: "Hapus", calcBackspace: "⌫",
+    calcHelpToggle: "Bantuan", calcHelpTitle: "Panduan Tombol", calcHelpText: "GT: menjumlahkan setiap hasil dari \"=\"; tekan untuk melihat totalnya.\nMRC: memanggil kembali angka di memori; tekan lagi untuk menghapusnya.\nM+ / M-: menambah atau mengurangi angka yang ditampilkan ke memori.\n{cost} / {sell} / {margin}: hitung margin dalam 3 langkah — masukkan harga modal lalu tekan {cost}, harga jual lalu tekan {sell}, lalu {margin} untuk persentasenya.\n√: akar kuadrat dari angka yang ditampilkan.\nTAX (0%): tekan untuk mengatur tarif pajak, lalu \"=\" untuk konfirmasi.\nTAX+ / TAX-: menambah atau menghapus pajak itu dari jumlah yang ditampilkan.\nCE/C menghapus input saat ini; {clear} mengatur ulang layar (memori M dan total GT tetap aktif sampai dihapus secara terpisah).",
     productLimitReached: "Batas {n} produk stok tercapai untuk paketmu. Tingkatkan ke paket lebih tinggi untuk stok lebih besar.", productFrozenBadge: "Dibekukan", productFrozenMsg: "Produk dibekukan: tingkatkan ke paket lebih tinggi untuk menggunakannya lagi.",
     biometricUnlockBtn: "Buka kunci dengan sidik jari / wajah", biometricUnlockError: "Sidik jari/wajah tidak dikenali. Gunakan kode PIN Anda.",
     continueWithGoogle: "Lanjutkan dengan Google", orSeparator: "ATAU", googleLoginError: "Tidak dapat masuk dengan Google. Coba lagi atau gunakan info login Anda.",
@@ -2702,6 +2722,7 @@ const TRANSLATIONS = {
     recapYou: "Sen", recapShop: "Dükkan", recapAccount: "Hesap", recapFullName: "Ad soyad",
     navMore: "Daha fazla", moreOptionsTitle: "Ek seçenekler",
     calcTabLabel: "Hesap makinesi", calcClear: "Temizle", calcBackspace: "⌫",
+    calcHelpToggle: "Yardım", calcHelpTitle: "Tuş Kılavuzu", calcHelpText: "GT: \"=\" ile elde edilen her sonucu toplar; toplamı görmek için basın.\nMRC: bellekteki sayıyı geri çağırır; tekrar basınca siler.\nM+ / M-: görüntülenen sayıyı belleğe ekler veya çıkarır.\n{cost} / {sell} / {margin}: 3 adımda kâr marjı hesabı — maliyeti girip {cost}'a basın, satış fiyatını girip {sell}'e basın, sonra yüzdeyi görmek için {margin}'a basın.\n√: görüntülenen sayının karekökü.\nTAX (0%): vergi oranınızı ayarlamak için basın, sonra onaylamak için \"=\".\nTAX+ / TAX-: bu vergiyi görüntülenen tutara ekler veya çıkarır.\nCE/C geçerli girişi siler; {clear} ekranı sıfırlar (M belleği ve GT toplamı ayrı ayrı silinene kadar etkin kalır).",
     productLimitReached: "Planın için {n} ürünlük stok sınırına ulaşıldı. Daha fazla stok için üst plana geç.", productFrozenBadge: "Donduruldu", productFrozenMsg: "Ürün donduruldu: tekrar kullanmak için üst plana geç.",
     biometricUnlockBtn: "Parmak izi / yüz ile kilidi aç", biometricUnlockError: "Parmak izi/yüz tanınmadı. PIN kodunu kullan.",
     continueWithGoogle: "Google ile devam et", orSeparator: "VEYA", googleLoginError: "Google ile giriş yapılamadı. Tekrar dene veya kimliğini kullan.",
@@ -2806,6 +2827,7 @@ const TRANSLATIONS = {
     recapYou: "본인", recapShop: "가게", recapAccount: "계정", recapFullName: "성명",
     navMore: "더보기", moreOptionsTitle: "추가 옵션",
     calcTabLabel: "계산기", calcClear: "지우기", calcBackspace: "⌫",
+    calcHelpToggle: "도움말", calcHelpTitle: "버튼 가이드", calcHelpText: "GT: \"=\"로 얻은 결과를 계속 더합니다; 누르면 누적 합계를 볼 수 있습니다.\nMRC: 메모리에 저장된 숫자를 불러옵니다; 다시 누르면 지워집니다.\nM+ / M-: 표시된 숫자를 메모리에 더하거나 뺍니다.\n{cost} / {sell} / {margin}: 3단계 마진 계산 — 원가를 입력하고 {cost}를 누른 후, 판매가를 입력하고 {sell}을 누르고, {margin}을 눌러 퍼센트를 확인합니다.\n√: 표시된 숫자의 제곱근.\nTAX (0%): 세율을 설정하려면 누르고, \"=\"로 확인합니다.\nTAX+ / TAX-: 표시된 금액에 그 세금을 더하거나 뺍니다.\nCE/C는 현재 입력을 지우고, {clear}는 화면을 초기화합니다(메모리 M과 GT 합계는 따로 지울 때까지 유지됩니다).",
     productLimitReached: "요금제의 재고 상품 한도({n}개)에 도달했습니다. 더 많은 재고를 위해 상위 요금제로 전환하세요.", productFrozenBadge: "동결됨", productFrozenMsg: "동결된 제품: 다시 사용하려면 상위 요금제로 전환하세요.",
     biometricUnlockBtn: "지문 / 얼굴로 잠금 해제", biometricUnlockError: "지문/얼굴을 인식하지 못했습니다. PIN 코드를 사용하세요.",
     continueWithGoogle: "Google로 계속하기", orSeparator: "또는", googleLoginError: "Google로 로그인할 수 없습니다. 다시 시도하거나 로그인 정보를 사용하세요.",
@@ -2910,6 +2932,7 @@ const TRANSLATIONS = {
     recapYou: "あなた", recapShop: "店舗", recapAccount: "アカウント", recapFullName: "氏名",
     navMore: "その他", moreOptionsTitle: "その他のオプション",
     calcTabLabel: "電卓", calcClear: "クリア", calcBackspace: "⌫",
+    calcHelpToggle: "ヘルプ", calcHelpTitle: "キーガイド", calcHelpText: "GT：「=」で得た結果を合計します。押すと累計を表示します。\nMRC：メモリの数値を呼び出します。もう一度押すと消去します。\nM+ / M-：表示中の数値をメモリに加算または減算します。\n{cost} / {sell} / {margin}：3ステップで利益率を計算——原価を入力して{cost}、売値を入力して{sell}、その後{margin}でパーセントを表示します。\n√：表示中の数値の平方根。\nTAX (0%)：税率を設定するには押してから「=」で確定します。\nTAX+ / TAX-：表示中の金額にその税を加算または除去します。\nCE/Cは現在の入力を消去し、{clear}は画面をリセットします（メモリMとGT合計は個別に消去するまで有効です）。",
     productLimitReached: "あなたのプランの在庫商品数上限（{n}点）に達しました。上位プランに変更すると在庫を増やせます。", productFrozenBadge: "凍結中", productFrozenMsg: "凍結中の商品：再度使用するには上位プランに変更してください。",
     biometricUnlockBtn: "指紋 / 顔でロック解除", biometricUnlockError: "指紋・顔が認識されませんでした。PINコードを使用してください。",
     continueWithGoogle: "Googleで続ける", orSeparator: "または", googleLoginError: "Googleでのログインに失敗しました。もう一度試すか、ログイン情報を使用してください。",
@@ -3014,6 +3037,7 @@ const TRANSLATIONS = {
     recapYou: "Tu", recapShop: "Negozio", recapAccount: "Account", recapFullName: "Nome completo",
     navMore: "Altro", moreOptionsTitle: "Altre opzioni",
     calcTabLabel: "Calcolatrice", calcClear: "Cancella", calcBackspace: "⌫",
+    calcHelpToggle: "Aiuto", calcHelpTitle: "Guida ai tasti", calcHelpText: "GT: somma ogni risultato ottenuto con \"=\"; premi per vedere il totale.\nMRC: richiama il numero in memoria; premi di nuovo per cancellarlo.\nM+ / M-: aggiunge o sottrae il numero visualizzato alla memoria.\n{cost} / {sell} / {margin}: calcolo del margine in 3 passaggi — inserisci il costo e premi {cost}, il prezzo di vendita e premi {sell}, poi {margin} per la percentuale.\n√: radice quadrata del numero visualizzato.\nTAX (0%): premi per impostare l'aliquota fiscale, poi \"=\" per confermare.\nTAX+ / TAX-: aggiunge o rimuove quella tassa dall'importo visualizzato.\nCE/C cancella l'inserimento corrente; {clear} azzera lo schermo (la memoria M e il totale GT restano attivi finché non li cancelli separatamente).",
     productLimitReached: "Limite di {n} prodotti in magazzino raggiunto per il suo piano. Passi a un piano superiore per più magazzino.", productFrozenBadge: "Congelato", productFrozenMsg: "Prodotto congelato: passa a un piano superiore per usarlo di nuovo.",
     biometricUnlockBtn: "Sblocca con impronta / volto", biometricUnlockError: "Impronta/volto non riconosciuti. Usi il suo codice PIN.",
     continueWithGoogle: "Continua con Google", orSeparator: "O", googleLoginError: "Impossibile accedere con Google. Riprovi o usi il suo identificativo.",
@@ -3065,6 +3089,7 @@ const TRANSLATIONS = {
     lockPinExplainer: "Uw pincode beschermt uw gevoelige gegevens (saldo, schulden).", obStep3Title: "Een laatste blik", obStep3Desc: "Controleer uw gegevens voordat u uw winkel aanmaakt.", firstName: "Voornaam", lastName: "Achternaam", sector: "Activiteitensector", chooseSector: "Kies een sector…", country: "Land", chooseCountry: "Kies een land…", currencyLabel: "Munteenheid", chooseCurrency: "Kies een munteenheid…", currencyPreselected: "Vooraf ingevulde munteenheid:", continueBtn: "Doorgaan",
     backBtn: "Terug", editBtn: "Wijzigen", lockPinPlaceholder: "PIN-code (4 cijfers)", confirmLockPinPlaceholder: "Bevestig de PIN-code", lockPinHint: "Deze code dient alleen om uw privébedragen weer te geven (saldo, schulden...).", recapYou: "U", recapShop: "Winkel", recapAccount: "Account", recapFullName: "Volledige naam", navMore: "Meer", moreOptionsTitle: "Meer opties", paymentShortcut: "Verkoop bekijken", sellByUnitToggle: "Ook per eenheid verkopen", sellByUnitHint: "Bijv.: een pak koekjes dat ook per koekje wordt verkocht.", unitsPerPack: "Eenheden per pak (bijv.: 10)", unitSalePrice: "Prijs per eenheid (FCFA)", sellPack: "Pak", sellUnit: "Eenheid", unitsAvailable: "eenhe(i)d(en) beschikbaar", notEnoughUnits: "Niet genoeg eenheden op voorraad.",
     calcTabLabel: "Rekenmachine", calcClear: "Wissen", calcBackspace: "⌫",
+    calcHelpToggle: "Help", calcHelpTitle: "Toetsengids", calcHelpText: "GT: telt elk resultaat op dat je met \"=\" krijgt; druk om het totaal te zien.\nMRC: haalt het getal in het geheugen op; nogmaals drukken wist het.\nM+ / M-: telt het weergegeven getal op bij of trekt het af van het geheugen.\n{cost} / {sell} / {margin}: margeberekening in 3 stappen — voer de kostprijs in en druk op {cost}, de verkoopprijs en druk op {sell}, dan {margin} voor het percentage.\n√: vierkantswortel van het weergegeven getal.\nTAX (0%): druk om je belastingtarief in te stellen, dan \"=\" om te bevestigen.\nTAX+ / TAX-: telt die belasting op bij of trekt hem af van het weergegeven bedrag.\nCE/C wist de huidige invoer; {clear} reset het scherm (geheugen M en het GT-totaal blijven actief tot ze apart worden gewist).",
     productLimitReached: "Limiet van {n} producten op voorraad bereikt voor uw abonnement. Upgrade naar een hoger abonnement voor meer voorraad.", productFrozenBadge: "Bevroren", productFrozenMsg: "Product bevroren: upgrade naar een hoger abonnement om het weer te gebruiken.",
     biometricUnlockBtn: "Ontgrendelen met vingerafdruk / gezicht", biometricUnlockError: "Vingerafdruk/gezicht niet herkend. Gebruik uw pincode.",
     continueWithGoogle: "Doorgaan met Google", orSeparator: "OF", googleLoginError: "Inloggen met Google is mislukt. Probeer het opnieuw of gebruik uw gegevens.",
@@ -3165,6 +3190,7 @@ const TRANSLATIONS = {
     recapYou: "Wewe", recapShop: "Duka", recapAccount: "Akaunti", recapFullName: "Jina kamili",
     navMore: "Zaidi", moreOptionsTitle: "Chaguo zaidi",
     calcTabLabel: "Kikokotoo", calcClear: "Futa", calcBackspace: "⌫",
+    calcHelpToggle: "Msaada", calcHelpTitle: "Mwongozo wa Vitufe", calcHelpText: "GT: hujumlisha kila jibu unalopata kwa \"=\"; bonyeza kuona jumla.\nMRC: hurejesha nambari iliyohifadhiwa kwenye kumbukumbu; bonyeza tena kuifuta.\nM+ / M-: huongeza au kutoa nambari inayoonyeshwa kwenye kumbukumbu.\n{cost} / {sell} / {margin}: hesabu ya faida kwa hatua 3 — weka gharama kisha bonyeza {cost}, bei ya kuuza kisha bonyeza {sell}, kisha {margin} kupata asilimia.\n√: mzizi wa mraba wa nambari inayoonyeshwa.\nTAX (0%): bonyeza kuweka kiwango chako cha kodi, kisha \"=\" kuthibitisha.\nTAX+ / TAX-: huongeza au kuondoa kodi hiyo kwenye kiasi kinachoonyeshwa.\nCE/C hufuta kilichoandikwa sasa; {clear} huweka upya skrini (kumbukumbu M na jumla ya GT hubaki hai mpaka zifutwe kando).",
     productLimitReached: "Kikomo cha bidhaa {n} kwenye stoo kimefikiwa kwa mpango wako. Panda mpango wa juu kwa stoo kubwa zaidi.", productFrozenBadge: "Imegandishwa", productFrozenMsg: "Bidhaa imegandishwa: panda mpango wa juu ili kuitumia tena.",
     biometricUnlockBtn: "Fungua kwa alama ya kidole / uso", biometricUnlockError: "Alama ya kidole/uso hazikutambuliwa. Tumia nambari yako ya siri (PIN).",
     continueWithGoogle: "Endelea na Google", orSeparator: "AU", googleLoginError: "Imeshindwa kuingia kwa Google. Jaribu tena au tumia jina lako la kuingia.",
@@ -3269,6 +3295,7 @@ const TRANSLATIONS = {
     recapYou: "Kai", recapShop: "Shago", recapAccount: "Asusu", recapFullName: "Cikakken suna",
     navMore: "Ƙari", moreOptionsTitle: "Ƙarin zaɓuɓɓuka",
     calcTabLabel: "Na'urar lissafi", calcClear: "Share", calcBackspace: "⌫",
+    calcHelpToggle: "Taimako", calcHelpTitle: "Jagorar Maballi", calcHelpText: "GT: yana tara kowane sakamako da aka samu ta \"=\"; latsa don ganin jimillar.\nMRC: yana kiran lambar da ke cikin ma'ajiya; latsa sau biyu yana share ta.\nM+ / M-: yana ƙara ko cire lambar da ake nunawa a ma'ajiya.\n{cost} / {sell} / {margin}: lissafin riba a matakai 3 — shigar da farashin siyan sannan latsa {cost}, farashin sayarwa sannan latsa {sell}, sannan latsa {margin} don ganin kaso.\n√: tushen murabba'i na lambar da ake nunawa.\nTAX (0%): latsa don saita adadin haraji, sannan \"=\" don tabbatarwa.\nTAX+ / TAX-: yana ƙara ko cire wannan haraji daga adadin da ake nunawa.\nCE/C yana share abin da ake rubutawa yanzu; {clear} yana sake saita allon (ma'ajiyar M da jimillar GT za su kasance kamar yadda suke har sai an share su daban).",
     productLimitReached: "An kai iyakar {n} na kayayyaki a hannun jari don matakinka. Ka tafi mataki mafi girma don ƙarin kaya.", productFrozenBadge: "An Daskare", productFrozenMsg: "An daskare kayan: ka tafi mataki mafi girma don sake amfani da shi.",
     biometricUnlockBtn: "Buɗe da yatsa / fuska", biometricUnlockError: "Ba a gane yatsa/fuska ba. Yi amfani da lambar PIN naka.",
     continueWithGoogle: "Cigaba da Google", orSeparator: "KO", googleLoginError: "An kasa shiga da Google. Sake gwadawa ko yi amfani da shigarka.",
@@ -3373,6 +3400,7 @@ const TRANSLATIONS = {
     recapYou: "I", recapShop: "Butiki", recapAccount: "Jatebɔlan", recapFullName: "Tɔgɔ dafalen",
     navMore: "Wɛrɛw", moreOptionsTitle: "Sugandi wɛrɛw",
     calcTabLabel: "Jatebɔli", calcClear: "Fitini", calcBackspace: "⌫",
+    calcHelpToggle: "Dɛmɛ", calcHelpTitle: "Bɔtɔnw ɲɛfɔli", calcHelpText: "GT: a bɛ jaabi minnu bɛ sɔrɔ ni «=» ye lajɛ; i bɛ se ka bɛɛ lajɛlen ye ni i y'a digi.\nMRC: a bɛ jateminɛ nimɔrɔ segin ka na; ni i y'a digi tugun a bɛ jɔsi.\nM+ / M-: a bɛ jateminɛ kelen fara nimɔrɔ min bɛ jira kan wala k'a bɔ a la.\n{cost} / {sell} / {margin}: tɔnɔ jateminɛ ni fɛɛrɛ 3 ye — i ka sɔngɔ sɛbɛn ka {cost} digi, feere sɔngɔ sɛbɛn ka {sell} digi, o kɔ {margin} digi walasa ka pursanta ye.\n√: nimɔrɔ min bɛ jira sinsin lakika.\nTAX (0%): i bɛ se ka i ka nafolo sara hakɛ sigi ni i y'a digi, o kɔ «=» ka a jɛya.\nTAX+ / TAX-: o nafolo sara bɛ fara sɔngɔ min bɛ jira kan wala k'a bɔ a la.\nCE/C bɛ min sɛbɛnnen na sisan jɔsi; {clear} bɛ ekran lasegin a daminɛ ma (M jateminɛ ni GT bɛɛlajɛlen bɛ to senfɛ fo ka jɔsi u yɛrɛ ma).",
     productLimitReached: "I ka fɛn {n} dan sera ka dan i ka niveau la. I ka niveau kɔrɔ ta walasa fɛn caman ka don.", productFrozenBadge: "A Sigiyalen", productFrozenMsg: "Fɛn sigiyalen don : i ka niveau kɔrɔ ta walasa ka a baara kɛ tugun.",
     biometricUnlockBtn: "Yɛlɛma ni bolokɔnɔ / ɲɛda ye", biometricUnlockError: "Bolokɔnɔ/ɲɛda ma dɔn. I ka gundo nimɔrɔ (PIN) baara la.",
     continueWithGoogle: "Taa ɲɛ ni Google ye", orSeparator: "WALA", googleLoginError: "Google donni ma se ka kɛ. A ɲininka kokura walima i ka dɔnniya baara la.",
@@ -3425,6 +3453,7 @@ const TRANSLATIONS = {
     firstName: "Igama", lastName: "Isibongo", sector: "Umkhakha womsebenzi", chooseSector: "Khetha umkhakha…", country: "Izwe", chooseCountry: "Khetha izwe…", currencyLabel: "Uhlobo lwemali", chooseCurrency: "Khetha uhlobo lwemali…", currencyPreselected: "Uhlobo lwemali oselugcwalisiwe:", continueBtn: "Qhubeka", backBtn: "Emuva", editBtn: "Hlela", lockPinPlaceholder: "Ikhodi ye-PIN (izinombolo ezi-4)", confirmLockPinPlaceholder: "Qinisekisa ikhodi ye-PIN", lockPinHint: "Le khodi isetshenziselwa kuphela ukubonisa izinani zakho eziyimfihlo (ibhalansi, izikweletu...).",
     recapYou: "Wena", recapShop: "Isitolo", recapAccount: "I-akhawunti", recapFullName: "Igama eliphelele", navMore: "Okunye", moreOptionsTitle: "Okunye okuzokhethwa", paymentShortcut: "Bona ukuthengisa", sellByUnitToggle: "Thengisa nangeyunithi", sellByUnitHint: "Isib: iphakethe lamabhisikidi elithengiswa nangebhisikidi ngalinye.", unitsPerPack: "Amayunithi ngephakethe (isib: 10)", unitSalePrice: "Intengo yeyunithi (FCFA)", sellPack: "Iphakethe", sellUnit: "Iyunithi", unitsAvailable: "amayunithi akhona", notEnoughUnits: "Awekho amayunithi anele esitokweni.", qtySold: "Inani elithengisiwe", showMoreProducts: "Bona yonke imikhiqizo ({n})", showLessProducts: "Bona kancane",
     calcTabLabel: "Isibali", calcClear: "Sula", calcBackspace: "⌫",
+    calcHelpToggle: "Usizo", calcHelpTitle: "Umhlahlandlela wezinkinobho", calcHelpText: "GT: ihlanganisa yonke impendulo etholwa ngo-\"=\"; cindezela ukuze ubone isamba.\nMRC: ibuyisa inombolo esemgqeni wokukhumbula; cindezela futhi ukuze uyisule.\nM+ / M-: yengeza noma isuse inombolo ebonisiwe kumemori.\n{cost} / {sell} / {margin}: ukubala inzuzo ngezinyathelo ezi-3 — faka izindleko bese ucindezela {cost}, intengo yokuthengisa bese ucindezela {sell}, bese {margin} ukubona iphesenti.\n√: impande yesikwele yenombolo ebonisiwe.\nTAX (0%): cindezela ukuze usethe izinga lentela, bese \"=\" ukuqinisekisa.\nTAX+ / TAX-: yengeza noma isuse leyo ntela emalini ebonisiwe.\nCE/C isula okufakiwe manje; {clear} isetha kabusha isikrini (imemori M kanye nesamba se-GT ziyahlala zisebenza kuze kube yilapho zisulwa ngokwehlukana).",
     productLimitReached: "Umkhawulo we-{n} yemikhiqizo esitokwini ufinyelelwe kuhlelo lwakho. Nyukela kuhlelo eliphakeme ukuze uthole isitoko esikhulu.", productFrozenBadge: "Kuqandisiwe", productFrozenMsg: "Umkhiqizo uqandisiwe: nyukela kuhlelo eliphakeme ukuze uwusebenzise futhi.",
     biometricUnlockBtn: "Vula nge-fingerprint / ubuso", biometricUnlockError: "I-fingerprint/ubuso abutholakalanga. Sebenzisa ikhodi yakho ye-PIN.",
     continueWithGoogle: "Qhubeka nge-Google", orSeparator: "NOMA", googleLoginError: "Akukwazekanga ukungena nge-Google. Zama futhi noma usebenzise i-akhawunti yakho.",
@@ -3525,6 +3554,7 @@ const TRANSLATIONS = {
     recapYou: "Ìwọ", recapShop: "Ilé ìtajà", recapAccount: "Àkọọ́lẹ̀", recapFullName: "Orúkọ kíkún",
     navMore: "Síwájú sí i", moreOptionsTitle: "Àṣàyàn síwájú sí i",
     calcTabLabel: "Ẹ̀rọ ìṣírò", calcClear: "Nu", calcBackspace: "⌫",
+    calcHelpToggle: "Ìrànlọ́wọ́", calcHelpTitle: "Ìtọ́sọ́nà bọ́tìnnì", calcHelpText: "GT: ó máa ń kó gbogbo àbájáde tí a rí pẹ̀lú \"=\" jọ; tẹ̀ ẹ́ láti rí àpapọ̀.\nMRC: ó máa ń rántí nọ́mbà tó wà nínú ìrántí; tí o bá tẹ̀ ẹ́ lẹ́ẹ̀kejì ó máa ń parẹ́ ẹ.\nM+ / M-: ó máa ń fi nọ́mbà tó farahàn kún tàbí yọ kúrò nínú ìrántí.\n{cost} / {sell} / {margin}: ìṣírò èrè ní ìgbésẹ̀ 3 — tẹ owó rírà sínú, tẹ {cost}, tẹ owó títà, tẹ {sell}, lẹ́yìn náà tẹ {margin} láti rí ìdá-ọgọ́rùn-ún.\n√: gbòǹgbò onígun mẹ́rin ti nọ́mbà tó farahàn.\nTAX (0%): tẹ̀ ẹ́ láti tò iye owó orí rẹ, lẹ́yìn náà \"=\" láti jẹ́rìí sí i.\nTAX+ / TAX-: ó máa ń fi owó orí náà kún tàbí yọ kúrò lára iye owó tó farahàn.\nCE/C máa ń pa ohun tí a ń kọ nísinsìnyí rẹ́; {clear} máa ń tún ojú-ìwé bẹ̀rẹ̀ (ìrántí M àti àpapọ̀ GT máa ń dúró bí wọ́n ṣe wà títí tí wọ́n á fi parẹ́ lọ́tọ̀ọ̀tọ̀).",
     productLimitReached: "Àwọn ọjà {n} tí ó pọ̀jù ni a ti dé fún ipele rẹ. Yí padà sí ipele tí ó ga jù láti ní ọjà tí ó pọ̀ síi.", productFrozenBadge: "Dídi", productFrozenMsg: "Ọjà dídi: yí padà sí ipele tí ó ga jù láti tún lò ó.",
     biometricUnlockBtn: "Ṣí i pẹ̀lú ika ọwọ́ / ojú", biometricUnlockError: "A kò dá ika ọwọ́/ojú mọ̀. Lo kóòdù PIN rẹ.",
     continueWithGoogle: "Tẹ̀síwájú pẹ̀lú Google", orSeparator: "TÀBÍ", googleLoginError: "Kò ṣeé ṣe láti wọlé pẹ̀lú Google. Tún gbìyànjú tàbí lo ìwọlé rẹ.",
@@ -6436,6 +6466,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   const [productQuery, setProductQuery] = useState("");
   const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
+  const [showCalcHelp, setShowCalcHelp] = useState(false);
 
   const insertProductPrice = (price) => {
     setDisplay(String(price));
@@ -6722,6 +6753,14 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         </span>
         <p className="text-sm font-bold flex-1" style={{ color: T.text }}>{t(lang, "calcTabLabel")}</p>
         <button
+          onClick={() => setShowCalcHelp((v) => !v)}
+          className="w-7 h-7 rounded-full flex items-center justify-center"
+          style={{ background: showCalcHelp ? "linear-gradient(145deg, #10b981, #059669)" : (darkMode ? "#232333" : "#e2e8f0"), color: showCalcHelp ? "white" : T.text }}
+          aria-label={t(lang, "calcHelpToggle")}
+        >
+          <HelpCircle size={14} />
+        </button>
+        <button
           onClick={() => setShowHistory((v) => !v)}
           className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
           style={{ background: showHistory ? "linear-gradient(145deg, #10b981, #059669)" : (darkMode ? "#232333" : "#e2e8f0"), color: showHistory ? "white" : T.text }}
@@ -6767,6 +6806,18 @@ function CalculatorTab({ T, darkMode, lang, products }) {
               </button>
             ))}
           </div>
+        </div>
+      )}
+      {showCalcHelp && (
+        <div className="rounded-2xl p-3 mb-2 shrink-0 overflow-y-auto" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)", maxHeight: 220 }}>
+          <p className="text-xs font-bold mb-2" style={{ color: T.text }}>{t(lang, "calcHelpTitle")}</p>
+          <p className="text-xs leading-relaxed" style={{ color: T.muted, whiteSpace: "pre-line" }}>
+            {t(lang, "calcHelpText")
+              .replace(/\{cost\}/g, t(lang, "calcCost"))
+              .replace(/\{sell\}/g, t(lang, "calcSell"))
+              .replace(/\{margin\}/g, t(lang, "calcMargin"))
+              .replace(/\{clear\}/g, t(lang, "calcClear"))}
+          </p>
         </div>
       )}
       {showHistory && (
@@ -10269,6 +10320,34 @@ CE QUE TU PEUX FAIRE:
 - Faire des calculs (marges, seuils de rentabilité, projections simples) à partir des données ci-dessous
 - Chercher sur internet des informations utiles et actuelles (prix de référence, tendances, actualités économiques locales) si la question le demande
 - Faire des simulations "Et si...?" (ex: et si j'augmente un prix, et si j'achète plus de stock, et si je réduis mes dépenses) en te basant sur les vraies données ci-dessous pour donner une estimation chiffrée concrète, pas juste une réponse vague
+- Guider le boutiquier pas à pas pour utiliser n'importe quelle fonctionnalité de l'application (voir la liste complète ci-dessous)
+GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand il demande comment faire quelque chose) :
+- Onglets principaux : Accueil (tableau de bord), Stock, Vente, Historique, Dettes, Stats, Assistant (toi). Le menu « Plus » donne accès aux autres écrans, dont l'onglet Caisse.
+- Tableau de bord (Accueil) : voir les ventes du jour, fixer un objectif de ventes du mois, carte « Stock faible » (regroupe les produits dont la quantité est sous le seuil d'alerte défini dans Paramètres > Boutique, ce seuil est modifiable et n'est pas figé à 5 ; par défaut l'affichage se limite aux 5 produits les plus faibles, le bouton « Voir tout » / « Voir moins » affiche ou réduit la liste, et le bouton de tri permet de la trier), rapport de caisse (pour les comptes multi-boutiques : ventes par propriétaire, espèces, Mobile Money, carte, dépenses, paiements de dettes), alertes d'activité inhabituelle (annulations en série, caisse vidée, etc.). Le fond de caisse et les dépenses ne se gèrent plus sur l'Accueil : tout se fait dans l'onglet Caisse.
+- Onglet Caisse (menu « Plus ») : tableau de bord complet de la caisse. En haut : le solde de caisse estimé et trois actions rapides : « Régler le fond de caisse » (indiquer le montant réellement en caisse), « Ajouter une dépense » (montant + raison facultative) et « Compter la caisse » (saisir le montant compté ; l'application indique l'écart, ou « La caisse est juste » s'il n'y en a pas). Plus bas : mini-graphique de tendance sur 7 jours, sélecteur de période (Aujourd'hui / 7 jours / 30 jours / Tout), entrées espèces, dépenses et net, bénéfice estimé et marge sur les ventes (calculés uniquement avec les produits dont le prix d'achat est renseigné), fiabilité de la caisse (historique des comptages et dernier écart), répartition par mode de paiement, principales dépenses et journal des mouvements (ventes, dépenses, comptages) avec « Voir plus ». Les collaborateurs ont besoin de la permission « Voir la caisse » ou « Modifier la caisse » pour l'utiliser.
+- Stock : ajouter/modifier/supprimer un produit (bouton « + », nom, quantité, prix, prix d'achat optionnel, photo) ; les catégories sont définies automatiquement d'après les noms de produits ; seuil d'alerte de stock bas configurable dans les paramètres. Un bouton « Trier par » permet d'ordonner la liste : ordre alphabétique, plus vendus, moins vendus, plus disponible, moins disponible, ou ordre par défaut (les mêmes options existent dans l'onglet Vente et sur la carte « Stock faible » de l'Accueil ; « plus/moins vendus » se base sur les quantités totales vendues).
+- Vente : démarrer un panier, plusieurs paniers simultanés possibles (un par client) ; modes de paiement espèces / Mobile Money / carte / crédit ; une vente à crédit demande le nom du client et s'ajoute automatiquement dans Dettes ; un score de confiance client s'affiche à la saisie du nom pour une vente à crédit, basé sur l'historique de remboursement ; calcul automatique du rendu. Le bouton « Trier par » y trie aussi la liste des produits. Annuler une vente récente (vente de test ou client qui se rétracte) : dans l'onglet Vente, ouvrir la vente concernée dans les ventes récentes et appuyer sur « Annuler la vente », puis confirmer ; les quantités sont remises en stock et l'annulation est notée dans l'Historique (« Vente annulée »). L'annulation est impossible si la dette liée à cette vente a déjà été payée, même en partie. Une vente annulée compte quand même dans la limite de ventes par jour du palier Gratuit.
+- Historique : filtres (dates, produit, client, montant min/max), export CSV (les filtres avancés et l'export sont réservés au palier Pro et au-dessus).
+- Dettes : marquer une dette comme payée (bouton « Payé » à côté du nom du client) ou enregistrer un paiement partiel (bouton « Payer une tranche ») ; reste visible pour toujours dans l'Historique. Le bouton « Ajouter une dette » permet aussi d'enregistrer une dette manuellement.
+- Stats : comparaison entre boutiques (chiffre d'affaires, stock, dettes) pour les comptes multi-boutiques.
+- Paramètres > Boutique : nom/adresse/devise (la devise est changeable à tout moment, sans conversion automatique des montants déjà saisis), catégories de produits, seuils de stock et délai de relance.
+- Paramètres > Ventes & finances : mode de paiement par défaut, résumé des dettes impayées (la gestion de la caisse se fait dans l'onglet Caisse).
+- Paramètres > Données : export CSV des ventes, réinitialisation/suppression de toutes les données de la boutique.
+- Paramètres > Assistant IA : activer/désactiver la recherche web pour l'assistant, consulter ou effacer l'historique de conversation.
+- Paramètres > Code PIN : code à 4-6 chiffres qui sert à démasquer les montants privés (solde de caisse, dépenses, confirmation de dettes) via le bouton flottant « Démasquer les données ».
+- Paramètres > Interface : mode sombre, changement de langue (une trentaine de langues disponibles), couleur des petites boules flottantes en arrière-plan.
+- Paramètres > Notifications : alertes d'activité inhabituelle, sons (clic, vente réussie, erreur), vibrations sur les actions importantes.
+- Compte : dans « Gérer le compte », on peut consulter et modifier ses informations, dont le numéro de mobile saisi à l'inscription.
+- Aide et assistance : l'écran Aide contient les questions-réponses, et tout en bas un formulaire d'assistance par e-mail : écrire son problème ou sa question, joindre une photo ou une vidéo (facultatif, 3 fichiers maximum, 20 Mo par fichier), puis « Envoyer ». La réponse arrive par e-mail à l'adresse du compte. Limite de 3 messages par jour. L'adresse du support n'est pas affichée à l'utilisateur.
+- Installation : l'application peut s'installer sur l'écran d'accueil (bannière « Installer l'application » proposée à l'ouverture quand c'est possible ; sur iPhone : bouton Partager puis « Sur l'écran d'accueil » depuis Safari) et fonctionne hors connexion : les ventes faites hors ligne sont synchronisées à la reconnexion.
+- Compte & abonnement : paliers Gratuit / Pro / Business. Le palier Gratuit a une limite de produits en stock, une limite de ventes par jour, aucun collaborateur, un accès Assistant IA limité (quelques messages par mois) et pas de multi-boutique. Les paliers supérieurs débloquent davantage de produits, des collaborateurs, un Assistant IA illimité, les filtres avancés et l'export dans l'Historique, l'export comptable en PDF (résumé, bénéfice net, graphique d'évolution du chiffre d'affaires, ventes vs dépenses, détail des ventes et des dépenses) et la gestion de plusieurs boutiques. Le déblocage d'un palier payant se fait en contactant le support ; l'activation est ensuite faite manuellement.
+- Collaborateurs (comptes employés, selon le palier) : chaque collaborateur a son propre code PIN de connexion (4 à 6 chiffres). Rôles disponibles : Vendeur (vend et consulte le stock/les dettes sans les modifier), Gérant (gère toute l'activité quotidienne : ventes, stock, dettes, caisse, statistiques), Superviseur (voit toutes les boutiques, ne modifie rien), Personnalisé (permissions choisies une à une : enregistrer des ventes, consulter/modifier le stock, consulter/gérer les dettes clients, voir/modifier la caisse, voir les statistiques). On peut définir des plages horaires de travail par collaborateur (il ne peut alors pas encaisser de vente en dehors de ses heures déclarées) et consulter un journal des actions récentes des collaborateurs.
+- Onglet Calculatrice (menu « Plus ») : calculatrice avec mémoire (touches GT, MRC, M+, M-), un calcul de marge en 3 touches (COÛT, VENTE, MARGE), une racine carrée (√) et des touches de taxe (TAX, TAX+, TAX-) pour ajouter/retirer une taxe préréglée. Un bouton « ? » en haut de l'écran ouvre un petit guide qui explique à quoi sert chaque touche spéciale. La touche « Produits » permet d'insérer directement le prix d'un article du Stock, et « Historique » garde les derniers calculs.
+- Multi-boutiques (selon le palier) : changer de boutique, comparer les boutiques (chiffre d'affaires, stock, dettes), rapport de caisse consolidé entre boutiques/propriétaires.
+RÈGLE IMPORTANTE SUR LA DISPONIBILITÉ DES FONCTIONNALITÉS :
+- Tu connais précisément tout ce que l'application propose (voir le guide ci-dessus). Si le boutiquier demande comment faire quelque chose qui EXISTE dans l'application, explique-lui les étapes exactes (onglet, bouton, écran concerné) pour le faire.
+- Si le boutiquier demande une fonctionnalité qui n'existe PAS dans l'application (rien dans le guide ci-dessus n'y correspond, même de loin), dis-le-lui clairement et simplement, sans inventer de fonctionnalité, de bouton ou d'écran qui n'existe pas.
+- Ne dis JAMAIS qu'une fonctionnalité n'est pas disponible si elle figure dans le guide ci-dessus, et n'invente JAMAIS qu'une fonctionnalité existe si elle n'y figure pas. Sois précis : mieux vaut dire honnêtement que tu n'es pas sûr d'un détail que d'affirmer quelque chose de faux sur ce que l'application peut ou ne peut pas faire.
 RÈGLES DE FORMATAGE IMPORTANTES:
 - N'utilise JAMAIS les étoiles (*mot* ou **mot**) pour mettre en valeur des mots
 - Pour mettre en gras, utilise les balises HTML: <b>mot</b>
