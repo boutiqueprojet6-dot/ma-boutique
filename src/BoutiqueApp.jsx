@@ -10848,7 +10848,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // que pour l'APK (backHandlerRef, déjà défini plus haut).
   useEffect(() => {
     if (typeof window === "undefined" || window.Capacitor) return;
-    const isPwaStandalone = window.matchMedia && window.matchMedia("(display-mode: standalone)").matches;
+    // Détection élargie : certains téléphones/installations (PWA ajoutée via le menu
+    // Chrome plutôt que via un vrai prompt d'installation) ne rapportent pas forcément
+    // "standalone" strict, mais un mode voisin ("minimal-ui", "fullscreen"...), ou bien
+    // seulement le referrer "android-app://" (WebAPK). On les couvre tous, sinon ce garde-fou
+    // ne se pose jamais et le tout premier retour ferme l'app au lieu de revenir en arrière.
+    const isPwaStandalone =
+      (window.matchMedia && (
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.matchMedia("(display-mode: minimal-ui)").matches ||
+        window.matchMedia("(display-mode: fullscreen)").matches ||
+        window.matchMedia("(display-mode: window-controls-overlay)").matches
+      )) ||
+      window.navigator.standalone === true ||
+      (typeof document !== "undefined" && document.referrer.startsWith("android-app://"));
     if (!isPwaStandalone) return;
     window.history.pushState({ pwaGuard: true }, "");
     const onPopState = () => {
