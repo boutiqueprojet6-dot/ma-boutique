@@ -7879,6 +7879,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [supportBusy, setSupportBusy] = useState(false);
   const [supportErr, setSupportErr] = useState("");
   const [supportSent, setSupportSent] = useState(false);
+  const [showSupportForm, setShowSupportForm] = useState(false);
   const SUPPORT_MAX_FILES = 3;
   const SUPPORT_MAX_BYTES = 20 * 1024 * 1024;
   const pickSupportFiles = (e) => {
@@ -14731,36 +14732,48 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       ))}
                     </div>
                   ))}
-                  <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ color: T.muted, fontSize: 13 }}>{t(lang, "setUneQuestionEcrisnousDirectement")}</p>
-                  {supportSent ? (
-                    <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, textAlign: "center" }}>
-                      <p style={{ color: "#34d399", fontSize: 14, fontWeight: 700, marginBottom: 10 }}>✓ {tx(lang, "supportSentMsg")}</p>
-                      <button onClick={() => setSupportSent(false)} style={{ background: "transparent", border: "none", color: T.muted, fontSize: 12, textDecoration: "underline", cursor: "pointer" }}>{tx(lang, "supportNewMsg")}</button>
+                  <div style={{ marginTop: 14 }}>
+                    <button onClick={() => setShowSupportForm(true)} style={{ width: "100%", padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, color: T.text, fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+                      <HelpCircle size={16} /> {t(lang, "setUneQuestionEcrisnousDirectement")}
+                    </button>
+                  </div>
+                </div>
+              )}
+              {settingsView === "help" && showSupportForm && (
+                <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-50" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+                  <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="font-bold text-base" style={{ color: T.text }}>{t(lang, "assistance")}</h3>
+                      <button onClick={() => setShowSupportForm(false)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
                     </div>
-                  ) : (
-                    <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
-                      <textarea value={supportMsg} onChange={(e) => { setSupportMsg(e.target.value); setSupportErr(""); }} maxLength={4000} rows={5} placeholder={tx(lang, "supportMsgPlaceholder")} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 12, padding: "10px 12px", fontSize: 14, resize: "vertical", fontFamily: "inherit" }} />
-                      <p style={{ color: T.muted, fontSize: 11 }}>{tx(lang, "supportReplyHint")}</p>
-                      <p style={{ color: T.muted, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportAttachLabel")}</p>
-                      {supportFiles.map((f, idx) => (
-                        <div key={idx} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "8px 10px", borderRadius: 10, background: T.card, border: `1px solid ${T.border}` }}>
-                          <span style={{ color: T.text, fontSize: 12, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{/^video\//.test(f.type) ? "🎬" : "🖼️"} {f.name} ({(f.size / 1024 / 1024).toFixed(1)} Mo)</span>
-                          <button onClick={() => setSupportFiles(supportFiles.filter((_, k) => k !== idx))} style={{ background: "transparent", border: "none", color: T.muted, cursor: "pointer", display: "flex" }}><X size={16} /></button>
-                        </div>
-                      ))}
-                      {supportFiles.length < SUPPORT_MAX_FILES && (
-                        <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: 10, borderRadius: 12, border: `1px dashed ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
-                          📎 {tx(lang, "supportAddFile")}
-                          <input type="file" accept="image/*,video/*" multiple onChange={pickSupportFiles} style={{ display: "none" }} />
-                        </label>
-                      )}
-                      {supportErr && <p style={{ color: "#f87171", fontSize: 12 }}>{supportErr}</p>}
-                      <button onClick={sendSupport} disabled={supportBusy} style={{ padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: supportBusy ? 0.6 : 1 }}>
-                        {supportBusy ? tx(lang, "supportSending") : tx(lang, "supportSendBtn")}
-                      </button>
-                    </div>
-                  )}
+                    {supportSent ? (
+                      <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, textAlign: "center" }}>
+                        <p style={{ color: "#34d399", fontSize: 14, fontWeight: 700, marginBottom: 10 }}>✓ {tx(lang, "supportSentMsg")}</p>
+                        <button onClick={() => setSupportSent(false)} style={{ background: "transparent", border: "none", color: T.muted, fontSize: 12, textDecoration: "underline", cursor: "pointer" }}>{tx(lang, "supportNewMsg")}</button>
+                      </div>
+                    ) : (
+                      <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                        <textarea value={supportMsg} onChange={(e) => { setSupportMsg(e.target.value); setSupportErr(""); }} maxLength={4000} rows={5} placeholder={tx(lang, "supportMsgPlaceholder")} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 12, padding: "10px 12px", fontSize: 14, resize: "vertical", fontFamily: "inherit" }} />
+                        <p style={{ color: T.muted, fontSize: 11 }}>{tx(lang, "supportReplyHint")}</p>
+                        <p style={{ color: T.muted, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportAttachLabel")}</p>
+                        {supportFiles.map((f, idx) => (
+                          <div key={idx} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "8px 10px", borderRadius: 10, background: T.card, border: `1px solid ${T.border}` }}>
+                            <span style={{ color: T.text, fontSize: 12, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{/^video\//.test(f.type) ? "🎬" : "🖼️"} {f.name} ({(f.size / 1024 / 1024).toFixed(1)} Mo)</span>
+                            <button onClick={() => setSupportFiles(supportFiles.filter((_, k) => k !== idx))} style={{ background: "transparent", border: "none", color: T.muted, cursor: "pointer", display: "flex" }}><X size={16} /></button>
+                          </div>
+                        ))}
+                        {supportFiles.length < SUPPORT_MAX_FILES && (
+                          <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: 10, borderRadius: 12, border: `1px dashed ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                            📎 {tx(lang, "supportAddFile")}
+                            <input type="file" accept="image/*,video/*" multiple onChange={pickSupportFiles} style={{ display: "none" }} />
+                          </label>
+                        )}
+                        {supportErr && <p style={{ color: "#f87171", fontSize: 12 }}>{supportErr}</p>}
+                        <button onClick={sendSupport} disabled={supportBusy} style={{ padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", opacity: supportBusy ? 0.6 : 1 }}>
+                          {supportBusy ? tx(lang, "supportSending") : tx(lang, "supportSendBtn")}
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -14829,8 +14842,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <span style={{ color: T.text, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportEmailDesc")}</span>
                     </div>
                   </div>
-                  <button onClick={() => setSettingsView("help")} style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>
-                    {t(lang, "setContacterLeDeveloppeur")}
+                  <button onClick={() => { setSettingsView("help"); setShowSupportForm(true); }} style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>
+                    {t(lang, "setUneQuestionEcrisnousDirectement")}
                   </button>
                 </div>
               )}
