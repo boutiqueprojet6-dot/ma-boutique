@@ -153,6 +153,23 @@ import { createClient } from "@supabase/supabase-js";
 function nativeBridgeReady() {
   return typeof window !== "undefined" && !!window.Capacitor;
 }
+// IMPORTANT : `window.Capacitor` existe aussi en dehors de l'app native (PWA/site web),
+// car @capacitor/core l'injecte automatiquement dès qu'il est importé (ex. via
+// @capacitor/preferences, @capacitor/push-notifications...), même en mode web pur
+// (window.Capacitor.platform === "web" dans ce cas). Donc `!!window.Capacitor` seul NE
+// PERMET PAS de savoir si on tourne réellement dans l'app native Android/iOS — seul
+// `isNativePlatform()` le permet. À utiliser partout où le comportement doit être
+// strictement réservé à l'app native (bouton retour, cycle de vie natif, etc.) —
+// nativeBridgeReady() ci-dessus reste correct pour le pont de stockage (Preferences
+// fonctionne aussi en web).
+function isNativePlatformNow() {
+  return (
+    typeof window !== "undefined" &&
+    !!window.Capacitor &&
+    typeof window.Capacitor.isNativePlatform === "function" &&
+    window.Capacitor.isNativePlatform()
+  );
+}
 const isCapacitorApp = nativeBridgeReady();
 // ---- Effets sonores (clic, vente réussie, erreur) — plusieurs variantes au choix ----
 // Générés directement via l'API Web Audio (oscillateurs), sans aucun fichier audio à
@@ -10838,7 +10855,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // signal le plus fiable qu'on est en train de passer en arrière-plan. On ATTEND que
   // l'écriture native soit bien terminée avant de laisser l'événement se terminer.
   useEffect(() => {
-    if (typeof window === "undefined" || !window.Capacitor) return;
+    if (!isNativePlatformNow()) return;
     let removeListener = null;
     CapacitorApp.addListener("appStateChange", async ({ isActive }) => {
       if (!isActive) { await persistCriticalNow(); flushAllCacheToNativeStorage(); }
@@ -10891,7 +10908,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     return false;
   };
   useEffect(() => {
-    if (typeof window === "undefined" || !window.Capacitor) return;
+    if (!isNativePlatformNow()) return;
     let handle = null;
     let cancelled = false;
     if (!cancelled) {
@@ -10909,8 +10926,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // d'historique à chaque écran ouvert, et on réutilise la même logique de fermeture
   // que pour l'APK (backHandlerRef, déjà défini plus haut).
   useEffect(() => {
-    pwaBackDebugLog("effet monté, Capacitor=" + !!(typeof window !== "undefined" && window.Capacitor));
-    if (typeof window === "undefined" || window.Capacitor) return;
+    pwaBackDebugLog("effet monté, isNativePlatform=" + isNativePlatformNow());
+    if (isNativePlatformNow()) return;
     // Détection élargie : certains téléphones/installations (PWA ajoutée via le menu
     // Chrome plutôt que via un vrai prompt d'installation) ne rapportent pas forcément
     // "standalone" strict, mais un mode voisin ("minimal-ui", "fullscreen"...), ou bien
