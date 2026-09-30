@@ -10956,10 +10956,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     }
     const onPopState = () => {
       pwaBackDebugLog("popstate reçu, hash=" + window.location.hash);
+      // On repose IMMÉDIATEMENT une nouvelle garde, AVANT même de savoir s'il y a quelque
+      // chose à fermer. Sur certains WebAPK Android, la couche native semble décider de
+      // fermer l'activité au moment même du retour, sans attendre la réaction de notre JS —
+      // reposer en premier réduit la fenêtre de course où aucune entrée n'existe encore
+      // (ce qui expliquait que seul le tout premier niveau de retour fonctionnait).
+      window.history.pushState({ pwaGuard: true }, "", guardHash);
       const handled = backHandlerRef.current ? backHandlerRef.current() : false;
       pwaBackDebugLog("handled=" + handled);
-      if (handled) window.history.pushState({ pwaGuard: true }, "", guardHash);
-      // sinon (rien à fermer, déjà à l'accueil) : on laisse l'app se fermer normalement
+      if (!handled) {
+        // Rien à fermer (déjà à l'accueil) : on annule la garde qu'on vient de poser par
+        // précaution, et on laisse vraiment sortir (2 crans : la garde posée, puis la sortie réelle).
+        window.history.go(-2);
+      }
     };
     window.addEventListener("popstate", onPopState);
     return () => {
