@@ -10947,21 +10947,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     // native de Chrome : si l'URL ne change pas, elle considère qu'on est resté sur la
     // start_url "racine" et ferme directement l'app au retour, sans même déclencher popstate.
     // En ajoutant un hash, on force une vraie entrée d'historique navigable, que Chrome délègue
-    // correctement au JS.
+    // correctement au JS. On utilise un hash DIFFÉRENT à chaque poussée (compteur incrémental)
+    // plutôt que de réutiliser toujours "#pwa-guard" : certains retours consécutifs très
+    // rapprochés semblaient ignorés silencieusement (aucun popstate journalisé, l'app se
+    // fermait directement) un retour sur deux — cohérent avec un pushState vers une URL jugée
+    // identique à la précédente et donc traité comme un doublon sans effet par la couche native.
+    let guardCounter = 0;
+    const nextGuardHash = () => "#pwa-guard-" + ++guardCounter;
     pwaBackDebugLog("mount: isPwaStandalone=" + isPwaStandalone + " hash=" + window.location.hash);
-    const guardHash = "#pwa-guard";
-    if (window.location.hash !== guardHash) {
-      window.history.pushState({ pwaGuard: true }, "", guardHash);
-      pwaBackDebugLog("garde posé, hash=" + window.location.hash);
-    }
+    const firstGuardHash = nextGuardHash();
+    window.history.pushState({ pwaGuard: true }, "", firstGuardHash);
+    pwaBackDebugLog("garde posé, hash=" + window.location.hash);
     const onPopState = () => {
       pwaBackDebugLog("popstate reçu, hash=" + window.location.hash);
-      // On repose IMMÉDIATEMENT une nouvelle garde, AVANT même de savoir s'il y a quelque
-      // chose à fermer. Sur certains WebAPK Android, la couche native semble décider de
-      // fermer l'activité au moment même du retour, sans attendre la réaction de notre JS —
-      // reposer en premier réduit la fenêtre de course où aucune entrée n'existe encore
-      // (ce qui expliquait que seul le tout premier niveau de retour fonctionnait).
-      window.history.pushState({ pwaGuard: true }, "", guardHash);
+      // On repose IMMÉDIATEMENT une nouvelle garde (hash inédit), AVANT même de savoir s'il y
+      // a quelque chose à fermer. Sur certains WebAPK Android, la couche native semble décider
+      // de fermer l'activité au moment même du retour, sans attendre la réaction de notre JS —
+      // reposer en premier réduit la fenêtre de course où aucune entrée n'existe encore.
+      window.history.pushState({ pwaGuard: true }, "", nextGuardHash());
       const handled = backHandlerRef.current ? backHandlerRef.current() : false;
       pwaBackDebugLog("handled=" + handled);
       if (!handled) {
@@ -10973,7 +10976,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     window.addEventListener("popstate", onPopState);
     return () => {
       window.removeEventListener("popstate", onPopState);
-      if (window.location.hash === guardHash) {
+      if (window.location.hash.startsWith("#pwa-guard")) {
         window.history.replaceState(null, "", window.location.pathname + window.location.search);
       }
     };
