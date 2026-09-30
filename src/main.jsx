@@ -3,7 +3,17 @@ import ReactDOM from "react-dom/client";
 import BoutiqueApp from "./BoutiqueApp.jsx";
 import "./index.css";
 
-const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+// IMPORTANT : window.Capacitor existe aussi en dehors de l'app native (PWA/site web),
+// car @capacitor/core l'injecte automatiquement dès qu'il est importé par un plugin
+// (ex. @capacitor/preferences, @capacitor/push-notifications), même en mode web pur.
+// Donc `!!window.Capacitor` seul ne suffit pas à détecter l'app native — seul
+// isNativePlatform() le permet. Sans ce correctif, isCapacitorApp était aussi vrai sur
+// la PWA, ce qui empêchait l'enregistrement du service worker et toute mise à jour.
+const isCapacitorApp =
+  typeof window !== "undefined" &&
+  !!window.Capacitor &&
+  typeof window.Capacitor.isNativePlatform === "function" &&
+  window.Capacitor.isNativePlatform();
 
 // Bandeau "Mise à jour disponible" affiché par-dessus l'app, injecté directement
 // dans le DOM (pas de composant React ici : main.jsx tourne avant le montage,
