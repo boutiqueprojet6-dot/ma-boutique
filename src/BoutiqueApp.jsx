@@ -10862,10 +10862,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       )) ||
       window.navigator.standalone === true ||
       (typeof document !== "undefined" && document.referrer.startsWith("android-app://"));
+    // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème identifié ----
+    alert(
+      "DIAG retour PWA — isPwaStandalone=" + isPwaStandalone +
+      " | display-mode standalone=" + (window.matchMedia ? window.matchMedia("(display-mode: standalone)").matches : "n/a") +
+      " | referrer=" + (typeof document !== "undefined" ? document.referrer : "n/a") +
+      " | history.length=" + window.history.length
+    );
     if (!isPwaStandalone) return;
     window.history.pushState({ pwaGuard: true }, "");
+    alert("DIAG retour PWA — garde posé, history.length=" + window.history.length);
     const onPopState = () => {
       const handled = backHandlerRef.current ? backHandlerRef.current() : false;
+      alert("DIAG retour PWA — popstate reçu, handled=" + handled + ", history.length=" + window.history.length);
       if (handled) window.history.pushState({ pwaGuard: true }, "");
       // sinon (rien à fermer, déjà à l'accueil) : on laisse l'app se fermer normalement
     };
