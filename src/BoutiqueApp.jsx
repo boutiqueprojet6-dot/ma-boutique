@@ -10862,24 +10862,28 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       )) ||
       window.navigator.standalone === true ||
       (typeof document !== "undefined" && document.referrer.startsWith("android-app://"));
-    // ---- DIAGNOSTIC TEMPORAIRE : à retirer une fois le problème identifié ----
-    alert(
-      "DIAG retour PWA — isPwaStandalone=" + isPwaStandalone +
-      " | display-mode standalone=" + (window.matchMedia ? window.matchMedia("(display-mode: standalone)").matches : "n/a") +
-      " | referrer=" + (typeof document !== "undefined" ? document.referrer : "n/a") +
-      " | history.length=" + window.history.length
-    );
     if (!isPwaStandalone) return;
-    window.history.pushState({ pwaGuard: true }, "");
-    alert("DIAG retour PWA — garde posé, history.length=" + window.history.length);
+    // 🛡️ Sur un WebAPK Android, un pushState avec URL inchangée est ignoré par la couche
+    // native de Chrome : si l'URL ne change pas, elle considère qu'on est resté sur la
+    // start_url "racine" et ferme directement l'app au retour, sans même déclencher popstate.
+    // En ajoutant un hash, on force une vraie entrée d'historique navigable, que Chrome délègue
+    // correctement au JS.
+    const guardHash = "#pwa-guard";
+    if (window.location.hash !== guardHash) {
+      window.history.pushState({ pwaGuard: true }, "", guardHash);
+    }
     const onPopState = () => {
       const handled = backHandlerRef.current ? backHandlerRef.current() : false;
-      alert("DIAG retour PWA — popstate reçu, handled=" + handled + ", history.length=" + window.history.length);
-      if (handled) window.history.pushState({ pwaGuard: true }, "");
+      if (handled) window.history.pushState({ pwaGuard: true }, "", guardHash);
       // sinon (rien à fermer, déjà à l'accueil) : on laisse l'app se fermer normalement
     };
     window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
+    return () => {
+      window.removeEventListener("popstate", onPopState);
+      if (window.location.hash === guardHash) {
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
+    };
   }, []);
   // ⚠️ Ces hooks DOIVENT rester avant tout "return" anticipé (loading, accountSuspended...) :
   // React exige le même nombre de hooks à chaque rendu (sinon erreur #310).
