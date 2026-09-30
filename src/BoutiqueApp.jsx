@@ -7032,6 +7032,68 @@ function SaleSuccessOverlay({ amount, formatAmount, label, darkMode }) {
     </div>
   );
 }
+// ---- DIAGNOSTIC TEMPORAIRE : bouton retour PWA ----
+// alert() ne s'affiche pas dans ce contexte PWA/WebAPK installé, donc on journalise dans
+// localStorage à la place, ce qui survit même si l'app se ferme, et on l'affiche dans un
+// petit panneau visible à l'écran (à retirer une fois le problème résolu).
+function pwaBackDebugLog(msg) {
+  try {
+    const key = "pwaBackDebugLog";
+    const arr = JSON.parse(localStorage.getItem(key) || "[]");
+    const time = new Date().toTimeString().slice(0, 8);
+    arr.push(time + " " + msg);
+    while (arr.length > 40) arr.shift();
+    localStorage.setItem(key, JSON.stringify(arr));
+  } catch (e) {
+    // ignore
+  }
+}
+function PwaBackDebugPanel() {
+  const [lines, setLines] = useState([]);
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const refresh = () => {
+      try {
+        setLines(JSON.parse(localStorage.getItem("pwaBackDebugLog") || "[]"));
+      } catch (e) {
+        setLines([]);
+      }
+    };
+    refresh();
+    const id = setInterval(refresh, 1000);
+    return () => clearInterval(id);
+  }, []);
+  if (!visible) {
+    return (
+      <button onClick={() => setVisible(true)} style={{ position: "fixed", bottom: 4, right: 4, zIndex: 99999, fontSize: 10, padding: "2px 6px", opacity: 0.5 }}>
+        debug
+      </button>
+    );
+  }
+  return (
+    <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, maxHeight: "35vh", overflowY: "auto", background: "rgba(0,0,0,0.85)", color: "#0f0", fontSize: 10, fontFamily: "monospace", padding: 6, zIndex: 99999, whiteSpace: "pre-wrap" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+        <b style={{ color: "#fff" }}>PWA back debug ({lines.length})</b>
+        <span>
+          <button
+            onClick={() => {
+              localStorage.removeItem("pwaBackDebugLog");
+              setLines([]);
+            }}
+            style={{ marginRight: 8, fontSize: 10 }}
+          >
+            vider
+          </button>
+          <button onClick={() => setVisible(false)} style={{ fontSize: 10 }}>
+            cacher
+          </button>
+        </span>
+      </div>
+      {lines.length === 0 ? <div>(vide)</div> : lines.map((l, i) => <div key={i}>{l}</div>)}
+    </div>
+  );
+}
+
 function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, isDemo, lang, setLang }) {
   // Nettoie l'état critique persisté avant de déconnecter : sinon, si un autre
   // compte se connecte ensuite sur le même téléphone, il pourrait se retrouver
@@ -10847,6 +10909,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // d'historique à chaque écran ouvert, et on réutilise la même logique de fermeture
   // que pour l'APK (backHandlerRef, déjà défini plus haut).
   useEffect(() => {
+    pwaBackDebugLog("effet monté, Capacitor=" + !!(typeof window !== "undefined" && window.Capacitor));
     if (typeof window === "undefined" || window.Capacitor) return;
     // Détection élargie : certains téléphones/installations (PWA ajoutée via le menu
     // Chrome plutôt que via un vrai prompt d'installation) ne rapportent pas forcément
@@ -10868,12 +10931,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     // start_url "racine" et ferme directement l'app au retour, sans même déclencher popstate.
     // En ajoutant un hash, on force une vraie entrée d'historique navigable, que Chrome délègue
     // correctement au JS.
+    pwaBackDebugLog("mount: isPwaStandalone=" + isPwaStandalone + " hash=" + window.location.hash);
     const guardHash = "#pwa-guard";
     if (window.location.hash !== guardHash) {
       window.history.pushState({ pwaGuard: true }, "", guardHash);
+      pwaBackDebugLog("garde posé, hash=" + window.location.hash);
     }
     const onPopState = () => {
+      pwaBackDebugLog("popstate reçu, hash=" + window.location.hash);
       const handled = backHandlerRef.current ? backHandlerRef.current() : false;
+      pwaBackDebugLog("handled=" + handled);
       if (handled) window.history.pushState({ pwaGuard: true }, "", guardHash);
       // sinon (rien à fermer, déjà à l'accueil) : on laisse l'app se fermer normalement
     };
@@ -11309,6 +11376,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   }
   return (
     <div dir="ltr" className="relative" style={{ background: isDesktop ? (darkMode ? "#050709" : "#e9edf3") : T.bg, color: T.text, fontFamily: "system-ui, sans-serif", display: isDesktop ? "flex" : "flex", flexDirection: isDesktop ? "row" : "column", height: "100vh", overflow: "hidden" }}>
+      <PwaBackDebugPanel />
       {appLockActive && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-6" style={{ background: darkMode ? "#0a0d14" : "#F6F7FB" }}>
           <div className="w-full max-w-xs rounded-2xl p-6 text-center" style={{ background: T.card }}>
