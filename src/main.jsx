@@ -44,6 +44,18 @@ if (!isCapacitorApp && "serviceWorker" in navigator) {
       onNeedRefresh() {
         showUpdateBanner(() => updateSW(true)); // true = recharge la page après activation
       },
+      onRegisteredSW(swUrl, registration) {
+        // Une PWA peut rester ouverte des heures/jours sans jamais revérifier s'il existe
+        // une nouvelle version. On force une vérification toutes les 30 minutes, et une
+        // dès que l'app redevient visible (l'utilisateur rouvre l'app) pour ne jamais
+        // rester bloqué sur une ancienne version.
+        if (!registration) return;
+        const checkForUpdate = () => registration.update().catch(() => {});
+        setInterval(checkForUpdate, 30 * 60 * 1000);
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === "visible") checkForUpdate();
+        });
+      },
     });
   });
 }
