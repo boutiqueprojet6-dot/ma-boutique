@@ -4904,7 +4904,7 @@ function SearchBox({ value, onChange, placeholder, compact }) {
   return (
     <div className={compact ? "relative" : "relative mb-3"}>
       <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-      <input
+      <input autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
@@ -4950,7 +4950,7 @@ function SearchableSelect({ value, onChange, options, placeholder, searchPlaceho
           </div>
           <div className="relative p-3 flex-shrink-0">
             <Search size={14} className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
+            <input autoComplete="off"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={searchPlaceholder}
@@ -5058,7 +5058,7 @@ function LanguagePickerScreen({ onChoose, darkMode }) {
         <p className="text-sm font-semibold mb-4" style={{ color: AT.text }}>{t(systemLang, "chooseLanguage")}</p>
         <div className="relative mb-4">
           <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: AT.muted }} />
-          <input
+          <input autoComplete="off"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t(systemLang, "search")}
@@ -5619,7 +5619,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               <>
                 <div className="mb-1">
                   <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "identifier")}</label>
-                  <input
+                  <input autoComplete="off"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") sendLoginOtp(); }}
@@ -5640,7 +5640,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   {t(lang, "otpSentMessage").replace("{email}", username.trim().toLowerCase())}
                 </p>
                 <div className="mb-1">
-                  <input
+                  <input autoComplete="off"
                     value={loginOtpCode}
                     onChange={(e) => setLoginOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                     onKeyDown={(e) => { if (e.key === "Enter") verifyLoginOtp(); }}
@@ -5781,7 +5781,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           </button>
           {(empScanMode === "manual" || empScanCameraError) && (
             <>
-              <input
+              <input autoComplete="off"
                 value={empScanCode}
                 onChange={(e) => { setEmpScanCode(e.target.value.replace(/\D/g, "").slice(0, 6)); setEmpScanError(""); }}
                 placeholder="••••••"
@@ -5857,16 +5857,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
                 <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "firstName")}</label>
-                <input value={obPrenom} onChange={(e) => setObPrenom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text }} />
+                <input autoComplete="off" value={obPrenom} onChange={(e) => setObPrenom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text }} />
               </div>
               <div>
                 <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "lastName")}</label>
-                <input value={obNom} onChange={(e) => setObNom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text }} />
+                <input autoComplete="off" value={obNom} onChange={(e) => setObNom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text }} />
               </div>
             </div>
             <div className="mb-3">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "shopName")}</label>
-              <input value={obShopName} onChange={(e) => setObShopName(e.target.value)} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.shopName) }} />
+              <input autoComplete="off" value={obShopName} onChange={(e) => setObShopName(e.target.value)} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.shopName) }} />
             </div>
             <div className="mb-3">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "sector")}</label>
@@ -5900,7 +5900,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </div>
             <div className="mb-3">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{tx(lang, "phoneNumber")}</label>
-              <input
+              <input autoComplete="off"
                 type="tel"
                 value={obPhone}
                 onChange={(e) => setObPhone(e.target.value)}
@@ -5971,7 +5971,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <p className="text-xs mb-5" style={{ color: AT.muted }}>{obEmailCodeSent ? t(lang, "obStepEmailDescVerify") : t(lang, "obStepEmailDesc")}</p>
             <div className="mb-1">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "emailLabel")}</label>
-              <input
+              <input autoComplete="off"
                 value={obUsername}
                 onChange={(e) => { setObUsername(e.target.value); setObEmailVerified(false); setObEmailCodeSent(false); setObEmailCodeInput(""); setObOtpError(""); }}
                 placeholder={t(lang, "emailPlaceholder")}
@@ -6002,7 +6002,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   {t(lang, "emailCodeSentNotice").replace("{email}", obUsername)}
                 </p>
                 <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "emailCodeLabel")}</label>
-                <input
+                <input autoComplete="off"
                   value={obEmailCodeInput}
                   onChange={(e) => setObEmailCodeInput(e.target.value.replace(/\D/g, "").slice(0, 6))}
                   placeholder="••••••"
@@ -6045,7 +6045,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <div className="mb-3 mt-3">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinPlaceholder")}</label>
               <div className="relative">
-                <input value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.lockPin) }} />
+                <input autoComplete="off" value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.lockPin) }} />
                 <button type="button" onClick={() => setShowObLockPin(!showObLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObLockPin ? "🙈" : "👁"}</button>
               </div>
               <p className="text-[11px] mt-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinHint")}</p>
@@ -6053,7 +6053,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <div className="mb-2">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "confirmLockPinPlaceholder")}</label>
               <div className="relative">
-                <input value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.confirmLockPin) }} />
+                <input autoComplete="off" value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.confirmLockPin) }} />
                 <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
               </div>
             </div>
@@ -6108,7 +6108,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 <div className="mb-3 mt-3">
                   <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinPlaceholder")}</label>
                   <div className="relative">
-                    <input value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.lockPin) }} />
+                    <input autoComplete="off" value={obLockPin} onChange={(e) => setObLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.lockPin) }} />
                     <button type="button" onClick={() => setShowObLockPin(!showObLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObLockPin ? "🙈" : "👁"}</button>
                   </div>
                   <p className="text-[11px] mt-1.5" style={{ color: AT.muted }}>{t(lang, "lockPinHint")}</p>
@@ -6116,7 +6116,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 <div className="mb-2">
                   <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "confirmLockPinPlaceholder")}</label>
                   <div className="relative">
-                    <input value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.confirmLockPin) }} />
+                    <input autoComplete="off" value={obConfirmLockPin} onChange={(e) => setObConfirmLockPin(e.target.value.replace(/\D/g, "").slice(0, 4))} type={showObConfirmLockPin ? "text" : "password"} inputMode="numeric" placeholder="••••" maxLength={4} className="w-full border rounded-xl px-3 py-2.5 text-sm pr-10" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.confirmLockPin) }} />
                     <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
                   </div>
                 </div>
@@ -6422,8 +6422,8 @@ function AdminPanel({ onLogout }) {
               {resetFor === s.username && (
                 <div className="mt-2 p-3 rounded-lg" style={{ background: SAND }}>
                   <p className="text-[11px] text-gray-500 mb-2">Nouveau code PIN pour {s.shopName}</p>
-                  <input type="password" placeholder="Nouveau code PIN" value={resetPin} onChange={(e) => setResetPin(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
-                  <input type="password" placeholder="Confirmer le code PIN" value={resetConfirm} onChange={(e) => setResetConfirm(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
+                  <input autoComplete="off" type="password" placeholder="Nouveau code PIN" value={resetPin} onChange={(e) => setResetPin(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
+                  <input autoComplete="off" type="password" placeholder="Confirmer le code PIN" value={resetConfirm} onChange={(e) => setResetConfirm(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2 bg-white" />
                   {resetMsg && <p className="text-[11px] mb-2" style={{ color: resetMsg.startsWith("Nouveau code") ? GREEN : CLAY }}>{resetMsg}</p>}
                   <button onClick={() => resetPassword(s.username)} className="w-full py-2 rounded-lg text-white font-semibold text-xs" style={{ background: INDIGO }}>Réinitialiser</button>
                 </div>
@@ -6798,7 +6798,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         <div className="rounded-2xl p-3 mb-2 shrink-0" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
           <div className="relative mb-2">
             <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: T.muted }} />
-            <input
+            <input autoComplete="off"
               autoFocus
               value={productQuery}
               onChange={(e) => setProductQuery(e.target.value)}
@@ -11344,7 +11344,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div style={{ fontSize: 36 }}>🔒</div>
             <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{shopName}</p>
             <p className="text-xs mt-1 mb-4" style={{ color: T.muted }}>{t(lang, "appLockUnlockDesc")}</p>
-            <input
+            <input autoComplete="off"
               value={appLockPinInput}
               onChange={(e) => setAppLockPinInput(e.target.value.replace(/\D/g, "").slice(0, 4))}
               onKeyDown={(e) => e.key === "Enter" && verifyAppLockPin()}
@@ -11442,7 +11442,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {forgotPinStep === "code" && (
               <>
                 <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "emailCodeSentNotice").replace("{email}", forgotPinEmail)}</p>
-                <input
+                <input autoComplete="off"
                   value={forgotPinCodeInput}
                   onChange={(e) => setForgotPinCodeInput(e.target.value.replace(/\D/g, "").slice(0, 6))}
                   inputMode="numeric"
@@ -11462,7 +11462,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {forgotPinStep === "newpin" && (
               <>
                 <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "setNouveauCodePin")}</p>
-                <input
+                <input autoComplete="off"
                   value={forgotPinNewPin}
                   onChange={(e) => setForgotPinNewPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
                   type="password"
@@ -11471,7 +11471,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   className="w-full border rounded-xl px-3 py-2.5 text-center text-lg tracking-[0.4em] mb-2"
                   style={{ background: T.input, color: T.text, borderColor: T.border }}
                 />
-                <input
+                <input autoComplete="off"
                   value={forgotPinConfirmPin}
                   onChange={(e) => setForgotPinConfirmPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
                   type="password"
@@ -11822,8 +11822,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <h3 className="font-bold text-sm">{t(lang, "newExpense")}</h3>
                 <button onClick={() => setShowAddExpense(false)}><X size={18} /></button>
               </div>
-              <input placeholder={t(lang, "amountOut")} type="number" value={eAmount} onChange={(e) => setEAmount(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-              <input placeholder={t(lang, "reasonOpt")} value={eLabel} onChange={(e) => setELabel(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <input autoComplete="off" placeholder={t(lang, "amountOut")} type="number" value={eAmount} onChange={(e) => setEAmount(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <input autoComplete="off" placeholder={t(lang, "reasonOpt")} value={eLabel} onChange={(e) => setELabel(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
               <button onClick={addExpense} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: CLAY }}>{t(lang, "saveExpense")}</button>
             </div>
           </div>
@@ -11837,7 +11837,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
               <p className="text-xs mb-2" style={{ color: T.muted }}>{t(lang, "fundExplain")}</p>
               <p className="text-[11px] mb-3 rounded-lg p-2 font-medium" style={{ background: darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#065f46", border: `1px solid ${darkMode ? "rgba(52,211,153,0.3)" : "#a7f3d0"}` }}>{t(lang, "fundPrivate")}</p>
-              <input placeholder={t(lang, "amountInCash")} type="number" value={fundInput} onChange={(e) => setFundInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <input autoComplete="off" placeholder={t(lang, "amountInCash")} type="number" value={fundInput} onChange={(e) => setFundInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
               <button onClick={saveFund} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "save")}</button>
             </div>
           </div>
@@ -11849,11 +11849,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <h3 className="font-bold text-base" style={{ color: T.text }}>{editingProductId ? (tx(lang, "editProductTitle")) : t(lang, "newProduct")}</h3>
               <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); setEditingProductId(null); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
             </div>
-            <input placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-            <input placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-            <input placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            <input autoComplete="off" placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            <input autoComplete="off" placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <textarea placeholder={t(lang, "productDescription")} value={pDescription} onChange={(e) => setPDescription(e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2 text-sm mb-3 resize-none" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-            <input placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            <input autoComplete="off" placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
               <label className="flex items-center justify-between cursor-pointer">
                 <span className="text-xs font-semibold" style={{ color: T.text }}>{t(lang, "sellByUnitToggle")}</span>
@@ -11864,8 +11864,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {pSellByUnit && (
                 <div className="mt-3 flex flex-col gap-2">
                   <p className="text-[11px]" style={{ color: T.muted }}>{t(lang, "sellByUnitHint")}</p>
-                  <input placeholder={t(lang, "unitsPerPack")} type="number" value={pUnitsPerPack} onChange={(e) => setPUnitsPerPack(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-                  <input placeholder={t(lang, "unitSalePrice")} type="number" value={pUnitPrice} onChange={(e) => setPUnitPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                  <input autoComplete="off" placeholder={t(lang, "unitsPerPack")} type="number" value={pUnitsPerPack} onChange={(e) => setPUnitsPerPack(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                  <input autoComplete="off" placeholder={t(lang, "unitSalePrice")} type="number" value={pUnitPrice} onChange={(e) => setPUnitPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                 </div>
               )}
             </div>
@@ -12437,7 +12437,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                     <div>
                       <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "clientName")} {activeCart.payment !== "credit" ? `(${t(lang, "othFacultatif")})` : ""}</label>
-                      <input value={activeCart.customer} onChange={(e) => updateCartMeta(activeCart.id, "customer", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                      <input autoComplete="off" value={activeCart.customer} onChange={(e) => updateCartMeta(activeCart.id, "customer", e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                       {activeCart.payment === "credit" && activeCart.customer.trim() && (() => {
                         const trust = getCustomerTrust(activeCart.customer);
                         if (!trust) return null;
@@ -12459,7 +12459,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {activeCart.payment === "cash" && (
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
                         <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
-                        <input ref={receivedInputRef} required type="number" value={activeCart.received} onChange={(e) => { updateCartMeta(activeCart.id, "received", e.target.value); if (error) setError(""); if (receivedFieldError) setReceivedFieldError(false); }} className="w-full border-2 rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a", borderColor: receivedFieldError ? "#e11d48" : "transparent" }} />
+                        <input autoComplete="off" ref={receivedInputRef} required type="number" value={activeCart.received} onChange={(e) => { updateCartMeta(activeCart.id, "received", e.target.value); if (error) setError(""); if (receivedFieldError) setReceivedFieldError(false); }} className="w-full border-2 rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a", borderColor: receivedFieldError ? "#e11d48" : "transparent" }} />
                         {activeCart.received !== "" && (() => {
                           const change = parseFloat(activeCart.received) - cartTotal;
                           if (isNaN(change)) return null;
@@ -12789,7 +12789,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <div className="mt-2 pt-2" style={{ borderTop: `1px solid ${T.border}` }}>
                       {editingGoalShopId === s.id ? (
                         <div className="flex items-center gap-2">
-                          <input type="number" value={goalInput} onChange={(e) => setGoalInput(e.target.value)} className="flex-1 border rounded-lg px-2 py-1 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+                          <input autoComplete="off" type="number" value={goalInput} onChange={(e) => setGoalInput(e.target.value)} className="flex-1 border rounded-lg px-2 py-1 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
                           <button onClick={() => saveSalesGoal(s.id, parseFloat(goalInput) || 0)} className="text-[11px] font-semibold" style={{ color: INDIGO }}>{t(lang, "empSave")}</button>
                         </div>
                       ) : salesGoals[s.id] ? (
@@ -13121,29 +13121,29 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className="text-[10px] font-semibold block mb-1" style={{ color: T.muted }}>{t(lang, "histFilterFromLabel")}</label>
-                    <input type="date" value={histFilterFrom} onChange={(e) => setHistFilterFrom(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+                    <input autoComplete="off" type="date" value={histFilterFrom} onChange={(e) => setHistFilterFrom(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
                   </div>
                   <div>
                     <label className="text-[10px] font-semibold block mb-1" style={{ color: T.muted }}>{t(lang, "histFilterToLabel")}</label>
-                    <input type="date" value={histFilterTo} onChange={(e) => setHistFilterTo(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+                    <input autoComplete="off" type="date" value={histFilterTo} onChange={(e) => setHistFilterTo(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
                   </div>
                 </div>
                 <div>
                   <label className="text-[10px] font-semibold block mb-1" style={{ color: T.muted }}>{t(lang, "histFilterProductLabel")}</label>
-                  <input value={histFilterProduct} onChange={(e) => setHistFilterProduct(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+                  <input autoComplete="off" value={histFilterProduct} onChange={(e) => setHistFilterProduct(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
                 </div>
                 <div>
                   <label className="text-[10px] font-semibold block mb-1" style={{ color: T.muted }}>{t(lang, "histFilterCustomerLabel")}</label>
-                  <input value={histFilterCustomer} onChange={(e) => setHistFilterCustomer(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+                  <input autoComplete="off" value={histFilterCustomer} onChange={(e) => setHistFilterCustomer(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className="text-[10px] font-semibold block mb-1" style={{ color: T.muted }}>{t(lang, "histFilterMinAmountLabel")}</label>
-                    <input type="number" value={histFilterMinAmount} onChange={(e) => setHistFilterMinAmount(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+                    <input autoComplete="off" type="number" value={histFilterMinAmount} onChange={(e) => setHistFilterMinAmount(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
                   </div>
                   <div>
                     <label className="text-[10px] font-semibold block mb-1" style={{ color: T.muted }}>{t(lang, "histFilterMaxAmountLabel")}</label>
-                    <input type="number" value={histFilterMaxAmount} onChange={(e) => setHistFilterMaxAmount(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+                    <input autoComplete="off" type="number" value={histFilterMaxAmount} onChange={(e) => setHistFilterMaxAmount(e.target.value)} className="w-full border rounded-lg px-2 py-1.5 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
                   </div>
                 </div>
                 {historyFiltersActive && (
@@ -13288,7 +13288,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })()}
-            <div data-kbscroll="true" className="flex-1 overflow-y-auto space-y-3 pb-3" style={{ minHeight: 200, paddingBottom: isDesktop ? 12 : "calc(160px + env(safe-area-inset-bottom, 0px))" }}>
+            <div data-kbscroll="true" className="flex-1 overflow-y-auto space-y-3 pb-3" style={{ minHeight: 200, paddingBottom: isDesktop ? 12 : "calc(160px + env(safe-area-inset-bottom, 0px))", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
               {aiMessages.length === 0 && (
                 <div className="rounded-2xl p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   <div className="flex items-start gap-2">
@@ -13418,6 +13418,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 placeholder={isListening ? t(lang, "voiceListening") : t(lang, "aiPlaceholder")}
                 className="flex-1 border rounded-xl px-3 py-2 text-sm"
                 style={{ background: T.card, color: T.text, borderColor: T.border }}
+                // Sans ces attributs, le clavier Android (Gboard) ne sait pas à quoi sert ce
+                // champ et applique ses heuristiques par défaut : comme c'est un simple champ
+                // texte dans une appli qui contient aussi des champs mot de passe/PIN ailleurs,
+                // il propose par précaution ses raccourcis de remplissage automatique (clé =
+                // mots de passe, carte = moyens de paiement, repère = adresses) juste au-dessus
+                // du clavier. En précisant explicitement qu'il s'agit d'un champ de texte libre
+                // sans rapport avec ces catégories, on empêche cette bande de suggestions
+                // de s'afficher pour ce champ.
+                type="text"
+                autoComplete="off"
+                autoCorrect="on"
+                autoCapitalize="sentences"
+                name="ai_question"
               />
               <button
                 onClick={() => sendAiMessage()}
@@ -13494,7 +13507,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div style={{ fontSize: 36 }}>🔒</div>
             <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{t(lang, "othEntreTonCodePin")}</p>
             <p className="text-xs mt-1 mb-4" style={{ color: T.muted }}>{lockPinReason === "delete" ? t(lang, "resetConfirm") : t(lang, "othPourVoirLesMontantsPrives")}</p>
-            <input
+            <input autoComplete="off"
               value={lockPinInput}
               onChange={(e) => setLockPinInput(e.target.value.replace(/\D/g, "").slice(0, 4))}
               onKeyDown={(e) => e.key === "Enter" && verifyLockPin()}
@@ -13537,7 +13550,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <div data-kbscroll="true" className="w-full max-w-sm rounded-2xl p-6 max-h-[85vh] overflow-y-auto" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{editingEmployeeId ? t(lang, "empEditTitle") : t(lang, "empAddTitle")}</p>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "empNameLabel")}</label>
-            <input
+            <input autoComplete="off"
               value={empName}
               onChange={(e) => setEmpName(e.target.value)}
               placeholder="Ex : Aïcha Diallo"
@@ -13547,7 +13560,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {!editingEmployeeId && (
               <>
                 <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "empPinLabel")}</label>
-                <input
+                <input autoComplete="off"
                   value={empPinInput}
                   onChange={(e) => setEmpPinInput(e.target.value.replace(/\D/g, "").slice(0, 6))}
                   type="password"
@@ -13622,7 +13635,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <p className="text-[11px] font-semibold mb-1" style={{ color: T.text }}>{t(lang, dayLabelKey)}</p>
                         {(empShiftSchedule[dayKey] || []).map((slot, idx) => (
                           <div key={idx} className="flex items-center gap-1.5 mb-1">
-                            <input
+                            <input autoComplete="off"
                               type="time"
                               value={slot.from}
                               onChange={(e) => {
@@ -13634,7 +13647,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                               style={{ background: T.card, borderColor: T.border, color: T.text }}
                             />
                             <span className="text-[10px]" style={{ color: T.muted }}>-</span>
-                            <input
+                            <input autoComplete="off"
                               type="time"
                               value={slot.to}
                               onChange={(e) => {
@@ -13680,9 +13693,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <div className="w-full max-w-sm rounded-2xl p-6" style={{ background: T.card }} onClick={(e) => e.stopPropagation()}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{t(lang, "accountingExportBtn")}</p>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "histFilterFromLabel")}</label>
-            <input type="date" value={accountingFrom} onChange={(e) => setAccountingFrom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mb-3" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+            <input autoComplete="off" type="date" value={accountingFrom} onChange={(e) => setAccountingFrom(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mb-3" style={{ background: T.input, borderColor: T.border, color: T.text }} />
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "histFilterToLabel")}</label>
-            <input type="date" value={accountingTo} onChange={(e) => setAccountingTo(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mb-4" style={{ background: T.input, borderColor: T.border, color: T.text }} />
+            <input autoComplete="off" type="date" value={accountingTo} onChange={(e) => setAccountingTo(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm mb-4" style={{ background: T.input, borderColor: T.border, color: T.text }} />
             <button
               onClick={generateAccountingReport}
               disabled={!accountingFrom || !accountingTo || accountingGenerating}
@@ -13715,7 +13728,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "newShopNameLabel")}</label>
             <div className="flex gap-2">
-              <input
+              <input autoComplete="off"
                 value={newShopNameInput}
                 onChange={(e) => setNewShopNameInput(e.target.value)}
                 className="flex-1 border rounded-xl px-3 py-2.5 text-sm"
@@ -13775,7 +13788,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <div className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-1" style={{ color: T.text }}>{t(lang, "payInstallmentTitle")}</p>
             <p className="text-xs mb-4" style={{ color: T.muted }}>{partialPayDebt.customer} — {t(lang, "remainingToPay")}: {fcfa(remainingDebt(partialPayDebt))}</p>
-            <input
+            <input autoComplete="off"
               value={partialPayInput}
               onChange={(e) => setPartialPayInput(e.target.value.replace(/[^0-9.,]/g, ""))}
               onKeyDown={(e) => e.key === "Enter" && submitPartialPayment()}
@@ -13802,7 +13815,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{t(lang, "debtAddTitle")}</p>
-            <input
+            <input autoComplete="off"
               value={newDebtCustomer}
               onChange={(e) => setNewDebtCustomer(e.target.value)}
               type="text"
@@ -13811,7 +13824,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2"
               style={{ background: T.input, color: T.text, borderColor: T.border }}
             />
-            <input
+            <input autoComplete="off"
               value={newDebtAmount}
               onChange={(e) => setNewDebtAmount(e.target.value.replace(/[^0-9.,]/g, ""))}
               type="text"
@@ -13820,7 +13833,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2"
               style={{ background: T.input, color: T.text, borderColor: T.border }}
             />
-            <input
+            <input autoComplete="off"
               value={newDebtProduct}
               onChange={(e) => setNewDebtProduct(e.target.value)}
               type="text"
@@ -13829,7 +13842,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               style={{ background: T.input, color: T.text, borderColor: T.border }}
             />
             <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>{t(lang, "debtDateLabel")}</label>
-            <input
+            <input autoComplete="off"
               value={newDebtDate}
               onChange={(e) => setNewDebtDate(e.target.value)}
               type="date"
@@ -13853,7 +13866,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         <div className="absolute inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-5" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-3" style={{ color: T.text }}>{t(lang, "renameConvTitle")}</p>
-            <input
+            <input autoComplete="off"
               value={renameInput}
               onChange={(e) => setRenameInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && confirmRenameConv()}
@@ -13975,7 +13988,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div style={{ padding: "0 16px 12px" }}>
                 <div style={{ position: "relative", marginBottom: 2 }}>
                   <Search size={15} color={T.muted} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)" }} />
-                  <input
+                  <input autoComplete="off"
                     value={settingsSearchQuery}
                     onChange={(e) => setSettingsSearchQuery(e.target.value)}
                     placeholder="Rechercher un réglage..."
@@ -14297,7 +14310,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "setNomDeLaBoutique")}</div>
                     <div style={{ display: "flex", gap: 8 }}>
-                      <input value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                      <input autoComplete="off" value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                       <button onClick={renameShop} style={{ background: "#34d399", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}>OK</button>
                     </div>
                     {shopNameMsg && <p style={{ color: "#34d399", fontSize: 11, marginTop: 6 }}>{shopNameMsg}</p>}
@@ -14305,7 +14318,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "phoneNumber")}</div>
                     <div style={{ display: "flex", gap: 8 }}>
-                      <input
+                      <input autoComplete="off"
                         type="tel"
                         value={shopPhoneInput}
                         onChange={(e) => setShopPhoneInput(e.target.value)}
@@ -14342,7 +14355,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "stockAlert")}</div>
                   <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <input autoComplete="off" type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                     <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                   <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
@@ -14545,11 +14558,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
                   <div>
                     <div style={{ color: T.muted, fontSize: 12, marginBottom: 6 }}>{t(lang, "firstName")}</div>
-                    <input value={ownerFirstInput} onChange={(e) => { setOwnerFirstInput(e.target.value); setOwnerNameMsg(""); }} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <input autoComplete="off" value={ownerFirstInput} onChange={(e) => { setOwnerFirstInput(e.target.value); setOwnerNameMsg(""); }} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                   </div>
                   <div>
                     <div style={{ color: T.muted, fontSize: 12, marginBottom: 6 }}>{t(lang, "lastName")}</div>
-                    <input value={ownerLastInput} onChange={(e) => { setOwnerLastInput(e.target.value); setOwnerNameMsg(""); }} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <input autoComplete="off" value={ownerLastInput} onChange={(e) => { setOwnerLastInput(e.target.value); setOwnerNameMsg(""); }} style={{ width: "100%", background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                   </div>
                   <button onClick={saveOwnerName} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "10px 14px", fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "save")}</button>
                   {ownerNameMsg && <p style={{ color: ownerNameMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11 }}>{ownerNameMsg}</p>}
@@ -14574,7 +14587,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <div className="relative">
                     <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: T.muted }} />
-                    <input
+                    <input autoComplete="off"
                       value={countrySearchQuery}
                       onChange={(e) => setCountrySearchQuery(e.target.value)}
                       placeholder={t(lang, "search")}
@@ -14611,7 +14624,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "shopName")}</div>
                   <div style={{ display: "flex", gap: 8 }}>
-                    <input value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <input autoComplete="off" value={shopNameInput} onChange={(e) => setShopNameInput(e.target.value)} style={{ flex: 1, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                     <button onClick={renameShop} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "8px 14px", fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer" }}>OK</button>
                   </div>
                   {shopNameMsg && <p style={{ color: shopNameMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11, marginTop: 6 }}>{shopNameMsg}</p>}
@@ -14621,7 +14634,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "phoneNumber")}</div>
                   <div style={{ display: "flex", gap: 8 }}>
-                    <input type="tel" inputMode="tel" value={shopPhoneInput} onChange={(e) => { setShopPhoneInput(e.target.value); setShopPhoneMsg(""); }} placeholder={shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? `${COUNTRY_DIAL_CODE[shopCountry]} ...` : ""} style={{ flex: 1, minWidth: 0, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <input autoComplete="off" type="tel" inputMode="tel" value={shopPhoneInput} onChange={(e) => { setShopPhoneInput(e.target.value); setShopPhoneMsg(""); }} placeholder={shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? `${COUNTRY_DIAL_CODE[shopCountry]} ...` : ""} style={{ flex: 1, minWidth: 0, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                     <button onClick={() => {
                       if (!isPhoneLengthValid(shopPhoneInput)) { setShopPhoneMsg(t(lang, "digitsHint")); return; }
                       saveAll({ phone: shopPhoneInput.trim() }); setShopPhoneMsg("✓");
@@ -14639,7 +14652,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
                   <p style={{ color: T.muted, fontSize: 11, lineHeight: 1.5 }}>{t(lang, "setCeCodeSertADemasquer")}</p>
                   {[{ v: oldLockPin, s: setOldLockPin, p: t(lang, "setAncienCodePin") }, { v: newLockPin, s: setNewLockPin, p: t(lang, "setNouveauCodePin") }, { v: confirmNewLockPin, s: setConfirmNewLockPin, p: t(lang, "setConfirmerLeCodePin") }].map((f, i) => (
-                    <input key={i} type="password" inputMode="numeric" maxLength={4} placeholder={f.p} value={f.v} onChange={(e) => f.s(e.target.value.replace(/\D/g, "").slice(0, 4))} style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "10px 12px", fontSize: 14 }} />
+                    <input autoComplete="off" key={i} type="password" inputMode="numeric" maxLength={4} placeholder={f.p} value={f.v} onChange={(e) => f.s(e.target.value.replace(/\D/g, "").slice(0, 4))} style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "10px 12px", fontSize: 14 }} />
                   ))}
                   {lockPinMsg && <p style={{ color: lockPinMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 11 }}>{lockPinMsg}</p>}
                   <button onClick={changeLockPin} style={{ background: "linear-gradient(135deg, #22d3ee, #0891b2)", color: "#0a0a0a", borderRadius: 12, padding: 12, fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "updatePin")}</button>
@@ -14670,7 +14683,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>{t(lang, "chooseLanguage")}</p>
                   <div className="relative">
                     <Search size={14} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: T.muted }} />
-                    <input
+                    <input autoComplete="off"
                       value={langSearchQuery}
                       onChange={(e) => setLangSearchQuery(e.target.value)}
                       placeholder={t(lang, "search")}
@@ -14819,7 +14832,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                   <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{t(lang, "stockAlert")}</div>
                   <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <input autoComplete="off" type="number" min="1" value={lowStockThreshold} onChange={(e) => saveAll({ lowStockThreshold: parseInt(e.target.value, 10) || 1 })} style={{ width: 80, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
                     <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                 </div>
@@ -15238,7 +15251,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               }}
             />
           </div>
-          <input
+          <input autoComplete="off"
             type="range" min={1} max={3} step={0.01} value={cropZoom}
             onChange={(e) => onCropZoomChange(parseFloat(e.target.value))}
             style={{ width: CROP_SIZE, marginTop: 14 }}
