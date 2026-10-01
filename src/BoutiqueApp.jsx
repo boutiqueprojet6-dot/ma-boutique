@@ -15312,6 +15312,38 @@ class ErrorBoundary extends React.Component {
   }
 }
 function BoutiqueAppInner() {
+  // ---- Empêche la page (html/body) de défiler elle-même ----
+  // Sans ça, quand on tape dans un champ (ex. la barre de recherche) et que le clavier
+  // virtuel apparaît sur mobile, certains navigateurs/WebView font défiler la PAGE entière
+  // pour amener le champ dans la zone visible restante — ce qui pousse aussi l'en-tête du
+  // haut (titre, bouton réglages, badge de synchro) hors de l'écran. En verrouillant html/
+  // body (position fixed, hauteur 100%, overflow hidden), on force tout le défilement à se
+  // faire DANS nos propres conteneurs internes (ceux marqués data-kbscroll="true"), dont
+  // l'en-tête est exclu : il reste donc toujours visible, et seul le contenu en dessous
+  // (liste, résultats de recherche…) défile derrière le clavier.
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      bodyPosition: body.style.position,
+      bodyWidth: body.style.width,
+      bodyHeight: body.style.height,
+    };
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.width = "100%";
+    body.style.height = "100%";
+    return () => {
+      html.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.position = prev.bodyPosition;
+      body.style.width = prev.bodyWidth;
+      body.style.height = prev.bodyHeight;
+    };
+  }, []);
   // ---- Défilement au clavier (flèches) sur ordinateur, valable pour tout l'écran ----
   // (connexion, app, admin, calculatrice, modales...) : plusieurs écrans mettent leur zone
   // défilante dans une div interne (racine en height:100vh/overflow:hidden, ou modale en
