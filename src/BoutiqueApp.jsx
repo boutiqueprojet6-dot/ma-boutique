@@ -7049,67 +7049,6 @@ function SaleSuccessOverlay({ amount, formatAmount, label, darkMode }) {
     </div>
   );
 }
-// ---- DIAGNOSTIC TEMPORAIRE : bouton retour PWA ----
-// alert() ne s'affiche pas dans ce contexte PWA/WebAPK installé, donc on journalise dans
-// localStorage à la place, ce qui survit même si l'app se ferme, et on l'affiche dans un
-// petit panneau visible à l'écran (à retirer une fois le problème résolu).
-function pwaBackDebugLog(msg) {
-  try {
-    const key = "pwaBackDebugLog";
-    const arr = JSON.parse(localStorage.getItem(key) || "[]");
-    const time = new Date().toTimeString().slice(0, 8);
-    arr.push(time + " " + msg);
-    while (arr.length > 40) arr.shift();
-    localStorage.setItem(key, JSON.stringify(arr));
-  } catch (e) {
-    // ignore
-  }
-}
-function PwaBackDebugPanel() {
-  const [lines, setLines] = useState([]);
-  const [visible, setVisible] = useState(true);
-  useEffect(() => {
-    const refresh = () => {
-      try {
-        setLines(JSON.parse(localStorage.getItem("pwaBackDebugLog") || "[]"));
-      } catch (e) {
-        setLines([]);
-      }
-    };
-    refresh();
-    const id = setInterval(refresh, 1000);
-    return () => clearInterval(id);
-  }, []);
-  if (!visible) {
-    return (
-      <button onClick={() => setVisible(true)} style={{ position: "fixed", bottom: 4, right: 4, zIndex: 99999, fontSize: 10, padding: "2px 6px", opacity: 0.5 }}>
-        debug
-      </button>
-    );
-  }
-  return (
-    <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, maxHeight: "35vh", overflowY: "auto", background: "rgba(0,0,0,0.85)", color: "#0f0", fontSize: 10, fontFamily: "monospace", padding: 6, zIndex: 99999, whiteSpace: "pre-wrap" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-        <b style={{ color: "#fff" }}>PWA back debug ({lines.length})</b>
-        <span>
-          <button
-            onClick={() => {
-              localStorage.removeItem("pwaBackDebugLog");
-              setLines([]);
-            }}
-            style={{ marginRight: 8, fontSize: 10 }}
-          >
-            vider
-          </button>
-          <button onClick={() => setVisible(false)} style={{ fontSize: 10 }}>
-            cacher
-          </button>
-        </span>
-      </div>
-      {lines.length === 0 ? <div>(vide)</div> : lines.map((l, i) => <div key={i}>{l}</div>)}
-    </div>
-  );
-}
 
 function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, isDemo, lang, setLang }) {
   // Nettoie l'état critique persisté avant de déconnecter : sinon, si un autre
@@ -10961,19 +10900,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       for (let i = 0; i < diff; i++) {
         window.history.pushState({ pwaGuard: true }, "", "#pwa-" + Date.now() + "-" + i);
       }
-      pwaBackDebugLog("ouverture détectée, +" + diff + " entrée(s), profondeur=" + pwaBackDepth);
     }
     pwaBackDepthRef.current = pwaBackDepth;
   }, [pwaBackDepth]);
   useEffect(() => {
-    pwaBackDebugLog("effet popstate monté, isNativePlatform=" + isNativePlatformNow());
     if (isNativePlatformNow() || !isPwaStandaloneNow()) return;
     const onPopState = () => {
-      pwaBackDebugLog("popstate reçu (consommation), hash=" + window.location.hash);
       // On NE repousse RIEN ici : on consomme juste l'entrée déjà dépilée par le navigateur,
       // et on met à jour l'état React en conséquence.
-      const handled = backHandlerRef.current ? backHandlerRef.current() : false;
-      pwaBackDebugLog("handled=" + handled);
+      if (backHandlerRef.current) backHandlerRef.current();
       pwaBackDepthRef.current = Math.max(0, pwaBackDepthRef.current - 1);
     };
     window.addEventListener("popstate", onPopState);
@@ -11403,7 +11338,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   }
   return (
     <div dir="ltr" className="relative" style={{ background: isDesktop ? (darkMode ? "#050709" : "#e9edf3") : T.bg, color: T.text, fontFamily: "system-ui, sans-serif", display: isDesktop ? "flex" : "flex", flexDirection: isDesktop ? "row" : "column", height: "100vh", overflow: "hidden" }}>
-      <PwaBackDebugPanel />
       {appLockActive && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-6" style={{ background: darkMode ? "#0a0d14" : "#F6F7FB" }}>
           <div className="w-full max-w-xs rounded-2xl p-6 text-center" style={{ background: T.card }}>
