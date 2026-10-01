@@ -10922,66 +10922,62 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // ---- Bouton retour du téléphone (PWA installée hors Capacitor) ----
   // Sans ceci, Chrome n'a aucun historique de navigation à "défaire" quand on ouvre un
   // écran/fenêtre en PWA (l'app ne change jamais d'URL), donc le bouton retour ferme
-  // directement l'app au lieu de revenir à l'écran précédent. On simule une entrée
-  // d'historique à chaque écran ouvert, et on réutilise la même logique de fermeture
-  // que pour l'APK (backHandlerRef, déjà défini plus haut).
+  // directement l'app au lieu de revenir à l'écran précédent.
+  //
+  // ⚠️ IMPORTANT : Chromium a une protection anti-"back button hijacking" qui ignore (et
+  // laisse directement fermer l'activité WebAPK) un pushState fait EN RÉACTION à un
+  // popstate (le classique "garde qu'on repousse après chaque retour"), même si ce pushState
+  // réussit en apparence. Donc on ne repousse JAMAIS rien dans le gestionnaire popstate :
+  // on pousse une entrée d'historique UNIQUEMENT au moment où un écran/fenêtre s'ouvre
+  // (donc en réaction à une action utilisateur normale, pas à un retour), et popstate se
+  // contente de consommer une entrée déjà là en mettant à jour l'état React (backHandlerRef).
+  const isPwaStandaloneNow = () =>
+    (window.matchMedia && (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.matchMedia("(display-mode: minimal-ui)").matches ||
+      window.matchMedia("(display-mode: fullscreen)").matches ||
+      window.matchMedia("(display-mode: window-controls-overlay)").matches
+    )) ||
+    window.navigator.standalone === true ||
+    (typeof document !== "undefined" && document.referrer.startsWith("android-app://"));
+  // "Profondeur" = nombre de niveaux actuellement ouverts, dans le même ordre de priorité
+  // que backHandlerRef ci-dessus (chaque fenêtre/modale = +1, Paramètres peut aller jusqu'à +3).
+  const pwaBackDepth =
+    (confirmModal ? 1 : 0) + (confirmReset ? 1 : 0) + (confirmDeleteProduct ? 1 : 0) +
+    (confirmDeleteExpense ? 1 : 0) + (confirmDeleteCart ? 1 : 0) + (showLockPinModal ? 1 : 0) +
+    (showForgotPin ? 1 : 0) + (partialPayDebt ? 1 : 0) + (showAddDebtModal ? 1 : 0) +
+    (shareDialogProduct ? 1 : 0) + (cropModalFile ? 1 : 0) + (showProductPhotoPreview ? 1 : 0) +
+    (showCameraCheckout ? 1 : 0) + (showPaymentShortcut ? 1 : 0) + (showAccountingExport ? 1 : 0) +
+    (showShopSwitcher ? 1 : 0) + ((qrEmployee || qrInvite) ? 1 : 0) + (showAddEmployee ? 1 : 0) +
+    (showAiHistory ? 1 : 0) + (showMoreMenu ? 1 : 0) + (showSortMenu ? 1 : 0) +
+    (showAddExpense ? 1 : 0) + (showEditFund ? 1 : 0) + (showAddProduct ? 1 : 0) +
+    (showSettings ? (settingsField ? 3 : settingsView !== "menu" ? 2 : 1) : 0) +
+    (tab !== "dashboard" ? 1 : 0);
+  const pwaBackDepthRef = useRef(0);
   useEffect(() => {
-    pwaBackDebugLog("effet monté, isNativePlatform=" + isNativePlatformNow());
-    if (isNativePlatformNow()) return;
-    // Détection élargie : certains téléphones/installations (PWA ajoutée via le menu
-    // Chrome plutôt que via un vrai prompt d'installation) ne rapportent pas forcément
-    // "standalone" strict, mais un mode voisin ("minimal-ui", "fullscreen"...), ou bien
-    // seulement le referrer "android-app://" (WebAPK). On les couvre tous, sinon ce garde-fou
-    // ne se pose jamais et le tout premier retour ferme l'app au lieu de revenir en arrière.
-    const isPwaStandalone =
-      (window.matchMedia && (
-        window.matchMedia("(display-mode: standalone)").matches ||
-        window.matchMedia("(display-mode: minimal-ui)").matches ||
-        window.matchMedia("(display-mode: fullscreen)").matches ||
-        window.matchMedia("(display-mode: window-controls-overlay)").matches
-      )) ||
-      window.navigator.standalone === true ||
-      (typeof document !== "undefined" && document.referrer.startsWith("android-app://"));
-    if (!isPwaStandalone) return;
-    // 🛡️ Sur un WebAPK Android, un pushState avec URL inchangée est ignoré par la couche
-    // native de Chrome : si l'URL ne change pas, elle considère qu'on est resté sur la
-    // start_url "racine" et ferme directement l'app au retour, sans même déclencher popstate.
-    // En ajoutant un hash, on force une vraie entrée d'historique navigable, que Chrome délègue
-    // correctement au JS. On utilise un hash DIFFÉRENT à chaque poussée (compteur incrémental)
-    // plutôt que de réutiliser toujours "#pwa-guard" : certains retours consécutifs très
-    // rapprochés semblaient ignorés silencieusement (aucun popstate journalisé, l'app se
-    // fermait directement) un retour sur deux — cohérent avec un pushState vers une URL jugée
-    // identique à la précédente et donc traité comme un doublon sans effet par la couche native.
-    let guardCounter = 0;
-    const nextGuardHash = () => "#pwa-guard-" + ++guardCounter;
-    pwaBackDebugLog("mount: isPwaStandalone=" + isPwaStandalone + " hash=" + window.location.hash);
-    const firstGuardHash = nextGuardHash();
-    window.history.pushState({ pwaGuard: true }, "", firstGuardHash);
-    pwaBackDebugLog("garde posé, hash=" + window.location.hash);
+    if (isNativePlatformNow() || !isPwaStandaloneNow()) return;
+    if (pwaBackDepth > pwaBackDepthRef.current) {
+      const diff = pwaBackDepth - pwaBackDepthRef.current;
+      for (let i = 0; i < diff; i++) {
+        window.history.pushState({ pwaGuard: true }, "", "#pwa-" + Date.now() + "-" + i);
+      }
+      pwaBackDebugLog("ouverture détectée, +" + diff + " entrée(s), profondeur=" + pwaBackDepth);
+    }
+    pwaBackDepthRef.current = pwaBackDepth;
+  }, [pwaBackDepth]);
+  useEffect(() => {
+    pwaBackDebugLog("effet popstate monté, isNativePlatform=" + isNativePlatformNow());
+    if (isNativePlatformNow() || !isPwaStandaloneNow()) return;
     const onPopState = () => {
-      pwaBackDebugLog("popstate reçu, hash=" + window.location.hash);
-      // On évalue d'abord s'il y a quelque chose à fermer, SANS repousser la garde tout de
-      // suite : on teste ici l'hypothèse que la couche native WebAPK ignore/ne comptabilise
-      // pas un pushState fait de façon strictement synchrone, dans le même tick que
-      // l'événement popstate lui-même (protection anti-piège à historique). On repousse donc
-      // juste après, dans un micro-délai séparé.
+      pwaBackDebugLog("popstate reçu (consommation), hash=" + window.location.hash);
+      // On NE repousse RIEN ici : on consomme juste l'entrée déjà dépilée par le navigateur,
+      // et on met à jour l'état React en conséquence.
       const handled = backHandlerRef.current ? backHandlerRef.current() : false;
       pwaBackDebugLog("handled=" + handled);
-      if (handled) {
-        setTimeout(() => {
-          window.history.pushState({ pwaGuard: true }, "", nextGuardHash());
-          pwaBackDebugLog("garde re-posé (différé), hash=" + window.location.hash);
-        }, 0);
-      }
-      // sinon (rien à fermer, déjà à l'accueil) : on laisse l'app se fermer normalement
+      pwaBackDepthRef.current = Math.max(0, pwaBackDepthRef.current - 1);
     };
     window.addEventListener("popstate", onPopState);
-    return () => {
-      window.removeEventListener("popstate", onPopState);
-      if (window.location.hash.startsWith("#pwa-guard")) {
-        window.history.replaceState(null, "", window.location.pathname + window.location.search);
-      }
-    };
+    return () => window.removeEventListener("popstate", onPopState);
   }, []);
   // ⚠️ Ces hooks DOIVENT rester avant tout "return" anticipé (loading, accountSuspended...) :
   // React exige le même nombre de hooks à chaque rendu (sinon erreur #310).
