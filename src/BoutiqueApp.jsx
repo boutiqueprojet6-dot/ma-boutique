@@ -4363,6 +4363,15 @@ function useIsDesktop() {
 function useKeyboardOpen() {
   const [isFocused, setIsFocused] = useState(false);
   const [viewportShrunk, setViewportShrunk] = useState(false);
+  // Hauteur réelle (en px) occupée par le clavier, mesurée via visualViewport. Sert à
+  // positionner "à la main" les éléments position:fixed ancrés en bas (barre de saisie
+  // de l'assistant IA, etc.) : sur certains WebView Android/Capacitor, un simple
+  // "position: fixed; bottom: 0" NE suit PAS automatiquement le clavier (il reste calé
+  // sur le bas de l'écran "layout", qui ne rétrécit pas), et se retrouve donc caché
+  // derrière le clavier au lieu de flotter juste au-dessus. En recalculant nous-mêmes
+  // ce décalage à partir de visualViewport, on s'assure que la barre reste toujours
+  // visible, quel que soit le comportement de resize du navigateur/WebView.
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const hasVisualViewport = typeof window !== "undefined" && !!window.visualViewport;
   useEffect(() => {
     const isTextField = (el) => el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.type !== "checkbox" && el.type !== "radio" && el.type !== "button" && el.type !== "range";
@@ -4376,16 +4385,45 @@ function useKeyboardOpen() {
     // l'écran visible, qui rétrécit quand le clavier s'affiche et revient à la normale dès qu'il
     // se ferme, focus ou non sur le champ.
     const vv = window.visualViewport;
-    const onViewportChange = () => { if (vv) setViewportShrunk(window.innerHeight - vv.height > 120); };
-    if (vv) { vv.addEventListener("resize", onViewportChange); onViewportChange(); }
+    const onViewportChange = () => {
+      if (!vv) return;
+      const shrink = window.innerHeight - vv.height - vv.offsetTop;
+      setViewportShrunk(shrink > 120);
+      setKeyboardHeight(Math.max(0, Math.round(shrink)));
+    };
+    if (vv) { vv.addEventListener("resize", onViewportChange); vv.addEventListener("scroll", onViewportChange); onViewportChange(); }
     return () => {
       document.removeEventListener("focusin", onFocusIn);
       document.removeEventListener("focusout", onFocusOut);
-      if (vv) vv.removeEventListener("resize", onViewportChange);
+      if (vv) { vv.removeEventListener("resize", onViewportChange); vv.removeEventListener("scroll", onViewportChange); }
     };
   }, []);
   // Sans l'API visualViewport (vieux navigateurs), on retombe sur le seul focus.
-  return hasVisualViewport ? (isFocused && viewportShrunk) : isFocused;
+  const open = hasVisualViewport ? (isFocused && viewportShrunk) : isFocused;
+  return { open, height: hasVisualViewport ? keyboardHeight : 0 };
+}
+// Hauteur réellement visible de l'écran (via visualViewport), qui rétrécit quand le
+// clavier virtuel apparaît. Remplace le "100vh" statique du conteneur racine mobile :
+// avec un "100vh" fixe, le conteneur garde sa pleine hauteur même quand le clavier
+// mange une partie de l'écran, ce qui laisse un vide en bas (ou pousse les barres
+// "position: fixed; bottom: 0" derrière le clavier, selon le WebView). En pilotant la
+// hauteur du conteneur nous-mêmes, tout ce qui est positionné en absolute à l'intérieur
+// (barre de saisie de l'assistant IA, etc.) reste naturellement ancré juste au-dessus
+// du clavier, sans calcul manuel supplémentaire.
+function useVisibleHeight() {
+  const [height, setHeight] = useState(() => (typeof window !== "undefined" ? window.innerHeight : 800));
+  useEffect(() => {
+    const vv = window.visualViewport;
+    const update = () => setHeight(vv ? vv.height : window.innerHeight);
+    update();
+    if (vv) { vv.addEventListener("resize", update); vv.addEventListener("scroll", update); }
+    window.addEventListener("resize", update);
+    return () => {
+      if (vv) { vv.removeEventListener("resize", update); vv.removeEventListener("scroll", update); }
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+  return height;
 }
 function resizeImageFile(file, maxSize = 400, quality = 0.6) {
   // createImageBitmap décode l'image hors du fil principal (accéléré matériellement
@@ -7067,7 +7105,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     onLogout();
   }, [onLogout]);
   const isDesktop = useIsDesktop();
-  const keyboardOpen = useKeyboardOpen();
+  const { open: keyboardOpen } = useKeyboardOpen();
+  const visibleHeight = useVisibleHeight();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   // Ventes : on garde TOUTES les ventes, y compris annulées (marquées `cancelled`), pour que
@@ -11567,7 +11606,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         style={
           isDesktop
             ? { flex: 1, height: "100vh", background: T.bg, position: "relative", overflow: "hidden", userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }
-            : { height: "100vh", position: "relative", overflow: "hidden", userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }
+            : { height: visibleHeight, position: "relative", overflow: "hidden", userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }
         }
         onCopy={(e) => e.preventDefault()}
         onCut={(e) => e.preventDefault()}
@@ -13397,8 +13436,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             <div className="flex gap-2 pt-2" style={{
               background: T.bg,
-              position: isDesktop ? "sticky" : "fixed",
-              bottom: isDesktop ? 0 : (keyboardOpen ? "calc(8px + env(safe-area-inset-bottom, 0px))" : "calc(112px + env(safe-area-inset-bottom, 0px))"),
+              // "absolute" (plutôt que "fixed") + le conteneur app-root dont la hauteur
+              // suit désormais la hauteur réellement visible (useVisibleHeight) : la barre
+              // reste ainsi ancrée au vrai bas de l'écran visible, juste au-dessus du
+              // clavier, même sur les WebView où "fixed; bottom: 0" ne suit pas le clavier.
+              position: isDesktop ? "sticky" : "absolute",
+              bottom: isDesktop ? 0 : (keyboardOpen ? "8px" : "calc(112px + env(safe-area-inset-bottom, 0px))"),
               left: isDesktop ? "auto" : 16,
               right: isDesktop ? "auto" : 16,
               zIndex: isDesktop ? "auto" : 5,
