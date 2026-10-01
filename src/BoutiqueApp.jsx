@@ -13007,7 +13007,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               // Remonté pour dégager toute la hauteur de la barre de navigation du bas
               // (icône + libellé + marge de sécurité de l'écran) : avant, 78px suffisait
               // à peine et le bouton passait à moitié sous la barre sur beaucoup de téléphones.
-              bottom: "calc(96px + env(safe-area-inset-bottom, 0px))",
+              // 96px ne suffisait toujours pas quand l'icône active de la barre est en version
+              // "élevée" (52px + translateY(-6px) au lieu de 44px) : on remonte encore un peu
+              // pour garder un vrai espace visible au-dessus de la barre dans tous les cas.
+              bottom: "calc(112px + env(safe-area-inset-bottom, 0px))",
               zIndex: 9999,
               display: "flex",
               alignItems: "center",
@@ -13395,7 +13398,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="flex gap-2 pt-2" style={{
               background: T.bg,
               position: isDesktop ? "sticky" : "fixed",
-              bottom: isDesktop ? 0 : (keyboardOpen ? "calc(8px + env(safe-area-inset-bottom, 0px))" : "calc(96px + env(safe-area-inset-bottom, 0px))"),
+              bottom: isDesktop ? 0 : (keyboardOpen ? "calc(8px + env(safe-area-inset-bottom, 0px))" : "calc(112px + env(safe-area-inset-bottom, 0px))"),
               left: isDesktop ? "auto" : 16,
               right: isDesktop ? "auto" : 16,
               zIndex: isDesktop ? "auto" : 5,
@@ -15033,7 +15036,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             // sous la barre de navigation du bas malgré son z-index. Le portail le fait
             // sortir de ce conteneur, et la valeur de "bottom" est relevée pour bien
             // dégager la barre de navigation sur mobile.
-            bottom: isDesktop ? 24 : "calc(96px + env(safe-area-inset-bottom, 0px))",
+            bottom: isDesktop ? 24 : "calc(112px + env(safe-area-inset-bottom, 0px))",
             transform: "translateX(-50%)",
             zIndex: 9999,
             background: "linear-gradient(135deg, #16a34a, #15803d)",
