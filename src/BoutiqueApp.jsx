@@ -10960,18 +10960,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     pwaBackDebugLog("garde posé, hash=" + window.location.hash);
     const onPopState = () => {
       pwaBackDebugLog("popstate reçu, hash=" + window.location.hash);
-      // On repose IMMÉDIATEMENT une nouvelle garde (hash inédit), AVANT même de savoir s'il y
-      // a quelque chose à fermer. Sur certains WebAPK Android, la couche native semble décider
-      // de fermer l'activité au moment même du retour, sans attendre la réaction de notre JS —
-      // reposer en premier réduit la fenêtre de course où aucune entrée n'existe encore.
-      window.history.pushState({ pwaGuard: true }, "", nextGuardHash());
+      // On évalue d'abord s'il y a quelque chose à fermer, SANS repousser la garde tout de
+      // suite : on teste ici l'hypothèse que la couche native WebAPK ignore/ne comptabilise
+      // pas un pushState fait de façon strictement synchrone, dans le même tick que
+      // l'événement popstate lui-même (protection anti-piège à historique). On repousse donc
+      // juste après, dans un micro-délai séparé.
       const handled = backHandlerRef.current ? backHandlerRef.current() : false;
       pwaBackDebugLog("handled=" + handled);
-      if (!handled) {
-        // Rien à fermer (déjà à l'accueil) : on annule la garde qu'on vient de poser par
-        // précaution, et on laisse vraiment sortir (2 crans : la garde posée, puis la sortie réelle).
-        window.history.go(-2);
+      if (handled) {
+        setTimeout(() => {
+          window.history.pushState({ pwaGuard: true }, "", nextGuardHash());
+          pwaBackDebugLog("garde re-posé (différé), hash=" + window.location.hash);
+        }, 0);
       }
+      // sinon (rien à fermer, déjà à l'accueil) : on laisse l'app se fermer normalement
     };
     window.addEventListener("popstate", onPopState);
     return () => {
