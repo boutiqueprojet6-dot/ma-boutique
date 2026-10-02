@@ -4910,6 +4910,7 @@ function mergeShop(baseShop, localShop, remoteShop) {
     historyLog: sortByDate(mergeById(base.historyLog, local.historyLog, remote.historyLog)),
     draftCarts: mergeById(base.draftCarts, local.draftCarts, remote.draftCarts),
     aiConversations: mergeById(base.aiConversations, local.aiConversations, remote.aiConversations),
+    aiMemoryNotes: mergeById(base.aiMemoryNotes, local.aiMemoryNotes, remote.aiMemoryNotes),
     employees: mergeById(base.employees, local.employees, remote.employees),
     actionLog: sortByDate(mergeById(base.actionLog, local.actionLog, remote.actionLog)),
     activeCartId: local.activeCartId ?? remote.activeCartId ?? null,
@@ -6801,7 +6802,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   const lineFontSize = rawLine.length <= 9 ? 34 : rawLine.length <= 13 ? 24 : rawLine.length <= 19 ? 19 : 15;
 
   return (
-    <div ref={rootRef} className="flex flex-col" style={{ height: availHeight || "calc(100vh - 300px)", overflow: "hidden" }}>
+    <div ref={rootRef} className="flex flex-col relative" style={{ height: availHeight || "calc(100vh - 300px)", overflow: "hidden" }}>
       <div className="flex items-center gap-2 mb-2 shrink-0">
         <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(16,185,129,0.2)" : "rgba(16,185,129,0.1)" }}>
           <Calculator size={16} color={darkMode ? "#34d399" : "#059669"} />
@@ -6864,15 +6865,32 @@ function CalculatorTab({ T, darkMode, lang, products }) {
         </div>
       )}
       {showCalcHelp && (
-        <div className="rounded-2xl p-3 mb-2 shrink-0 overflow-y-auto" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)", maxHeight: 220 }}>
-          <p className="text-xs font-bold mb-2" style={{ color: T.text }}>{t(lang, "calcHelpTitle")}</p>
-          <p className="text-xs leading-relaxed" style={{ color: T.muted, whiteSpace: "pre-line" }}>
-            {t(lang, "calcHelpText")
-              .replace(/\{cost\}/g, t(lang, "calcCost"))
-              .replace(/\{sell\}/g, t(lang, "calcSell"))
-              .replace(/\{margin\}/g, t(lang, "calcMargin"))
-              .replace(/\{clear\}/g, t(lang, "calcClear"))}
-          </p>
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.55)" }}
+          onClick={() => setShowCalcHelp(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="rounded-2xl p-4 w-full flex flex-col"
+            style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: "0 12px 40px rgba(0,0,0,0.35)", maxWidth: 420, maxHeight: "75%" }}
+          >
+            <div className="flex items-center justify-between mb-3 shrink-0">
+              <p className="text-sm font-bold" style={{ color: T.text }}>{t(lang, "calcHelpTitle")}</p>
+              <button onClick={() => setShowCalcHelp(false)} className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}>
+                <X size={16} />
+              </button>
+            </div>
+            <div data-kbscroll="true" style={{ overflowY: "auto" }}>
+              <p className="text-xs leading-relaxed" style={{ color: T.muted, whiteSpace: "pre-line" }}>
+                {t(lang, "calcHelpText")
+                  .replace(/\{cost\}/g, t(lang, "calcCost"))
+                  .replace(/\{sell\}/g, t(lang, "calcSell"))
+                  .replace(/\{margin\}/g, t(lang, "calcMargin"))
+                  .replace(/\{clear\}/g, t(lang, "calcClear"))}
+              </p>
+            </div>
+          </div>
         </div>
       )}
       {showHistory && (
@@ -7955,6 +7973,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const [aiLastFailed, setAiLastFailed] = useState(null);
   const [aiConversations, setAiConversations] = useState([]);
+  // Mémoire longue de l'assistant IA : petites notes ("ne fais plus X", "il préfère Y")
+  // apprises au fil des conversations, pour que l'IA tienne compte des préférences du
+  // boutiquier même dans une toute nouvelle conversation (pas seulement dans l'historique
+  // des messages en cours). Chaque note { id, text, createdAt } est injectée dans le
+  // prompt système de chaque appel, et l'IA peut en ajouter de nouvelles via un marqueur
+  // caché dans sa réponse (voir <!--MEMORY:--> dans sendAiMessage).
+  const [aiMemoryNotes, setAiMemoryNotes] = useState([]);
   const [currentConvId, setCurrentConvId] = useState(null);
   const [showAiHistory, setShowAiHistory] = useState(false);
   const [renamingConvId, setRenamingConvId] = useState(null);
@@ -8042,7 +8067,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // pour ne pas laisser la fenêtre à la position où elle était sur l'écran précédent.
   useEffect(() => {
     if (settingsScrollRef.current) settingsScrollRef.current.scrollTop = 0;
-  }, [settingsView, settingsField]);
+  }, [settingsView, settingsField, showSupportForm]);
   const [settingsSearchQuery, setSettingsSearchQuery] = useState("");
   const [langSearchQuery, setLangSearchQuery] = useState("");
   const [oldLockPin, setOldLockPin] = useState("");
@@ -8372,6 +8397,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setShareCardAskEachTime(!!shop.shareCardAskEachTime);
     setSettingsUpdatedAt(shop.settingsUpdatedAt || 0);
     setAiConversations(shop.aiConversations || []);
+    setAiMemoryNotes(shop.aiMemoryNotes || []);
     setDebtEvents(shop.debtEvents || []);
     setHistoryLog(shop.historyLog || []);
     setBenchmarkOptIn(!!shop.benchmarkOptIn);
@@ -8684,6 +8710,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       draftCarts: overrides.draftCarts ?? draftCarts,
       currency: overrides.currency ?? currency,
       aiConversations: overrides.aiConversations ?? aiConversations,
+      aiMemoryNotes: overrides.aiMemoryNotes ?? aiMemoryNotes,
       debtEvents: overrides.debtEvents ?? allDebtEvents,
       historyLog: overrides.historyLog ?? historyLog,
       benchmarkOptIn: overrides.benchmarkOptIn ?? benchmarkOptIn,
@@ -8714,6 +8741,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setActiveCartId(next.activeCartId);
     setCurrency(next.currency);
     setAiConversations(next.aiConversations);
+    setAiMemoryNotes(next.aiMemoryNotes || []);
     setDebtEvents(next.debtEvents);
     setHistoryLog(next.historyLog);
     setBenchmarkOptIn(next.benchmarkOptIn);
@@ -10359,7 +10387,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const debtSummary = debts.filter((d) => !d.paid).map((d) => `${d.customer}: ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n") || "Aucune";
     const cashSummary = `Fond de caisse: ${cashFund} ${CURRENT_CURRENCY.symbol}, Ventes espèces totales: ${sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}, Dépenses: ${expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}, Solde estimé: ${cashFund + sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0) - expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}`;
     const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => s.date.slice(0, 10) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
+    const memoryNotesText = aiMemoryNotes.length > 0
+      ? aiMemoryNotes.map((n) => `- ${n.text}`).join("\n")
+      : "Aucune pour l'instant.";
     const systemPrompt = `Tu es l'assistant de la boutique "${shopName}". Tu es comme un ami de confiance qui s'y connaît en commerce et qui suit de près les affaires du boutiquier — pas un logiciel qui récite des chiffres. Réponds par défaut en ${langLabel} (la langue choisie dans l'app), SAUF si le message de l'utilisateur est clairement écrit dans une autre langue — dans ce cas, réponds dans la langue utilisée par l'utilisateur plutôt qu'en ${langLabel}.
+CE QUE LE BOUTIQUIER T'A DÉJÀ DEMANDÉ DE RETENIR (respecte ces consignes dans TOUTES tes réponses, même dans une toute nouvelle conversation) :
+${memoryNotesText}
 TON ET PERSONNALITÉ:
 - Parle simplement, comme dans une vraie conversation entre commerçants, pas comme un rapport ou une notice
 - Évite les tournures robotiques du genre "Voici les informations demandées" ou "D'après les données fournies" — dis plutôt les choses directement, naturellement
@@ -10411,6 +10444,10 @@ RÈGLES DE FORMATAGE IMPORTANTES:
 - Pour souligner, utilise: <u>mot</u>
 - Pour mettre en couleur importante, utilise: <span style="color:#00CCCC">mot</span>
 - Pas de markdown, uniquement du HTML simple pour le formatage
+- Dès que tu dois présenter un bilan de caisse, un inventaire, ou comparer plus de deux articles, génère IMMÉDIATEMENT un tableau HTML (balises <table>, <tr>, <td>, avec un léger style inline du type style="border-collapse:collapse" sur la table et style="border:1px solid #ccc;padding:4px 8px" sur chaque cellule pour qu'il reste lisible). Utilise toujours les colonnes, dans cet ordre : Article | Quantité | Prix Unitaire | Total (adapte les en-têtes à la langue de la réponse)
+- Lorsqu'on te demande de vérifier une rentabilité, d'appliquer une remise complexe ou de calculer un bilan, décompose ton calcul étape par étape de manière verticale (une opération par ligne, avec <br> entre chaque), en utilisant des symboles arithmétiques clairs (×, ÷, %, ±) plutôt que des mots ("x" ou "divisé par")
+- Pour toute formule, calcul de marge ou de TVA, utilise toujours un rendu avec de vrais caractères (ex: 15%, a/b, x², ±) et non du code de formatage brut : tout doit être immédiatement lisible tel quel dans le message
+- INTERDICTION ABSOLUE DE LaTeX : n'utilise JAMAIS de syntaxe LaTeX, sous aucune forme, nulle part dans tes réponses — ni délimiteurs ($, $$, \\(, \\[), ni commandes (\\frac, \\times, \\sqrt, \\cdot, etc.), ni aucun autre balisage mathématique non interprété. Même pour des formules complexes, écris toujours directement en texte normal avec de vrais caractères (ex: "a/b" au lieu de "\\frac{a}{b}", "×" au lieu de "\\times", "√x" au lieu de "\\sqrt{x}")
 - Structure tes réponses pour qu'elles soient agréables à lire, comme un vrai message bien écrit, pas un bloc compact :
   • Pour un saut de ligne simple, utilise <br>
   • Pour séparer deux paragraphes ou deux idées, utilise <br><br>
@@ -10418,7 +10455,8 @@ RÈGLES DE FORMATAGE IMPORTANTES:
   • Pour une réponse en plusieurs étapes numérotées, utilise "1. ", "2. " etc. en début de ligne avec <br> entre chaque
 - N'ajoute cette structure que quand ça aide vraiment la lecture : une réponse courte en une phrase n'a pas besoin d'être découpée artificiellement
 - Reste concis et pratique, chaleureux et naturel, comme si tu parlais à un commerçant que tu connais bien
-- À la toute fin de CHAQUE réponse, sur une nouvelle ligne, ajoute exactement ce format (rien d'autre après) : <!--FOLLOWUPS: Question courte 1 ||| Question courte 2--> avec 1 ou 2 questions de suivi courtes et pertinentes que le boutiquier pourrait vouloir poser ensuite, dans la langue de la réponse. Si aucune question de suivi naturelle n'existe, mets <!--FOLLOWUPS:--> vide
+- À la toute fin de CHAQUE réponse, sur une nouvelle ligne, ajoute exactement ce format (rien d'autre après) : <!--FOLLOWUPS: Question courte 1 ||| Question courte 2--> avec 1 ou 2 questions de suivi courtes et pertinentes que le boutiquier pourrait vouloir poser ensuite, dans la langue de la réponse. IMPORTANT : ces questions sont envoyées telles quelles, au nom du boutiquier, dès qu'il appuie dessus — formule-les donc comme si c'était LUI qui te les posait (à la première personne : "Quels sont mes produits les plus vendus cette semaine ?", "Dois-je vérifier mon stock faible ?"), JAMAIS comme si tu t'adressais à lui ("Voulez-vous connaître...", "Souhaitez-vous vérifier..."). Si aucune question de suivi naturelle n'existe, mets <!--FOLLOWUPS:--> vide
+- MÉMOIRE : si le boutiquier exprime une préférence durable sur ta façon de répondre — il n'aime pas quelque chose que tu as fait, te demande de ne plus répéter telle chose, préfère un style, un format, une habitude particulière, etc. — retiens-le pour toutes les prochaines réponses (y compris dans une future conversation). Pour cela, ajoute juste avant le <!--FOLLOWUPS:--> une ligne au format exact <!--MEMORY: la consigne reformulée simplement--> (une seule par réponse, à la 3e personne et dans la langue de la réponse, ex: <!--MEMORY: Ne plus utiliser d'emoji dans les réponses-->). N'ajoute cette ligne QUE quand le boutiquier vient d'exprimer une vraie préférence durable à ce moment précis de la conversation — jamais pour une remarque ponctuelle, une simple question, ou une préférence déjà présente dans "CE QUE LE BOUTIQUIER T'A DÉJÀ DEMANDÉ DE RETENIR" ci-dessus. Sinon, ne mets pas cette ligne du tout
 Voici les données actuelles de la boutique:
 STOCK:
 ${stockSummary || "Aucun produit"}
@@ -10437,9 +10475,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       if (reply) {
         incrementAiUsage(); // comptabilise ce message dans le quota mensuel du palier
         const followMatch = reply.match(/<!--FOLLOWUPS:(.*?)-->/s);
-        const cleanReply = reply.replace(/<!--FOLLOWUPS:.*?-->/s, "").trim();
+        const memoryMatch = reply.match(/<!--MEMORY:\s*(.*?)-->/s);
+        const cleanReply = reply.replace(/<!--MEMORY:.*?-->/s, "").replace(/<!--FOLLOWUPS:.*?-->/s, "").trim();
         const follows = followMatch ? followMatch[1].split("|||").map((q) => q.trim()).filter(Boolean) : [];
         setAiFollowUps(follows);
+        const newMemoryText = memoryMatch ? memoryMatch[1].trim() : "";
+        let nextMemory = aiMemoryNotes;
+        if (newMemoryText) {
+          // On évite les doublons quasi identiques (même texte, insensible à la casse/accents).
+          const normalize = (s) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          const alreadyKnown = aiMemoryNotes.some((n) => normalize(n.text) === normalize(newMemoryText));
+          if (!alreadyKnown) {
+            nextMemory = [...aiMemoryNotes, { id: `mem_${Date.now()}${Math.random().toString(36).slice(2, 7)}`, text: newMemoryText, createdAt: new Date().toISOString() }];
+          }
+        }
         const finalMessages = [...newMessages, { role: "assistant", content: cleanReply }];
         setAiMessages(finalMessages);
         const title = (currentConvId
@@ -10452,7 +10501,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         const nextConvs = existing
           ? aiConversations.map((c) => (c.id === convId ? updatedConv : c))
           : [updatedConv, ...aiConversations];
-        saveAll({ aiConversations: nextConvs });
+        saveAll({ aiConversations: nextConvs, aiMemoryNotes: nextMemory });
       } else {
         setAiLastFailed(textToSend);
         setAiMessages([...newMessages, { role: "assistant", content: t(lang, "othJeNaiPasTrouveDe") }]);
@@ -14935,13 +14984,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                   ))}
                   <div style={{ marginTop: 14 }}>
-                    <button onClick={() => setShowSupportForm(true)} style={{ width: "100%", padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, color: T.text, fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+                    <button onClick={() => setShowSupportForm(true)} style={{ width: "100%", padding: 14, borderRadius: 14, background: "linear-gradient(135deg, #22d3ee, #0891b2)", border: "none", color: "#06222a", fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxShadow: "0 4px 14px rgba(8,145,178,0.35)" }}>
                       <HelpCircle size={16} /> {t(lang, "setUneQuestionEcrisnousDirectement")}
                     </button>
                   </div>
                 </div>
               )}
-              {settingsView === "help" && showSupportForm && (
+              {(settingsView === "help" || settingsView === "about") && showSupportForm && (
                 <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-50" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
                   <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
                     <div className="flex items-center justify-between mb-4">
@@ -15044,7 +15093,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <span style={{ color: T.text, fontSize: 12, fontWeight: 600 }}>{tx(lang, "supportEmailDesc")}</span>
                     </div>
                   </div>
-                  <button onClick={() => { setSettingsView("help"); setShowSupportForm(true); }} style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>
+                  <button onClick={() => setShowSupportForm(true)} style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 12, background: "linear-gradient(135deg, #22d3ee, #0891b2)", border: "none", color: "#06222a", fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%", boxShadow: "0 4px 14px rgba(8,145,178,0.35)" }}>
                     {t(lang, "setUneQuestionEcrisnousDirectement")}
                   </button>
                 </div>
