@@ -643,7 +643,7 @@ const TRANSLATIONS = {
     recapYou: "Vous", recapShop: "Boutique", recapAccount: "Compte", recapFullName: "Nom complet",
     navMore: "Plus", moreOptionsTitle: "Plus d'options",
     calcTabLabel: "Calculatrice", calcClear: "AC", calcBackspace: "⌫",
-    calcHelpToggle: "Aide", calcHelpTitle: "Guide des touches", calcHelpText: "GT : additionne chaque résultat obtenu avec « = » ; appuyez pour voir le total.\nMRC : rappelle le nombre en mémoire ; un second appui l'efface.\nM+ / M- : ajoute ou soustrait le nombre affiché à la mémoire.\n{cost} / {sell} / {margin} : calcul de marge en 3 étapes — entrez le prix d'achat puis {cost}, le prix de vente puis {sell}, puis {margin} pour le pourcentage.\n√ : racine carrée du nombre affiché.\nTAX (0%) : appuyez pour définir votre taux de taxe, puis « = » pour valider.\nTAX+ / TAX- : ajoute ou retire cette taxe au montant affiché.\nCE/C efface la saisie en cours ; {clear} réinitialise l'écran (la mémoire M et le total GT restent actifs jusqu'à leur propre effacement).",
+    calcHelpToggle: "Aide", calcHelpTitle: "Guide des touches", calcHelpText: "GT : Grand Total — additionne automatiquement chaque résultat obtenu avec « = ». Appuyez sur GT pour afficher le cumul, pratique pour totaliser plusieurs articles ou clients à la suite.\nMRC : 1er appui, affiche la valeur en mémoire ; 2e appui, l'efface.\nM+ : ajoute à la mémoire le nombre affiché.\nM- : soustrait de la mémoire le nombre affiché.\n{cost} / {sell} / {margin} : renseignez deux valeurs sur trois (prix d'achat, prix de vente, marge en % du prix de vente) — la troisième se calcule automatiquement. Entrez le prix d'achat puis {cost}, le prix de vente puis {sell}, puis {margin} pour le pourcentage.\nTAX (0%) : définit le taux de taxe utilisé ; entrez le taux puis appuyez sur cette touche.\nTAX+ : ajoute la taxe au montant affiché (hors taxe → TTC).\nTAX- : retire la taxe du montant affiché (TTC → hors taxe).\n√ : racine carrée du nombre affiché.\n% : pourcentage (ex. 200 + 15% = 230 ; 200 − 15% = 170).\n± : change le signe du nombre affiché.\n+  −  ×  ÷ : opérations de base ; « = » calcule le résultat et l'ajoute au Grand Total.\n00 / 000 : ajoutent deux ou trois zéros d'un coup.\nCE/C : efface uniquement la saisie en cours.\nRetour arrière : supprime le dernier chiffre saisi.\n{clear} : réinitialise tout l'écran (la mémoire M et le total GT restent actifs jusqu'à leur propre effacement).",
     calcSearchProduct: "Rechercher un produit…", calcNoProductFound: "Aucun produit trouvé", calcSearchToggle: "Produits", calcHistoryToggle: "Historique", calcHistoryTitle: "Historique des calculs", calcHistoryClear: "Effacer", calcHistoryEmpty: "Aucun calcul pour l'instant.",
     calcClearEntry: "CE/C", calcCost: "COÛT", calcSell: "VENTE", calcMargin: "MARGE", calcSetPercent: "SET %",
     voiceCartStart: "Dicter la vente", voiceCartApply: "Ajouter au panier", voiceCartCancel: "Annuler", voiceCartUnmatched: "Non reconnu", voiceCartNothingHeard: "Rien compris, réessayez.",
@@ -6866,30 +6866,38 @@ function CalculatorTab({ T, darkMode, lang, products }) {
       )}
       {showCalcHelp && (
         <div
-          className="absolute inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: "rgba(0,0,0,0.55)" }}
-          onClick={() => setShowCalcHelp(false)}
+          className="absolute inset-0 z-50 flex flex-col"
+          style={{ background: T.card }}
         >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="rounded-2xl p-4 w-full flex flex-col"
-            style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: "0 12px 40px rgba(0,0,0,0.35)", maxWidth: 420, maxHeight: "75%" }}
-          >
-            <div className="flex items-center justify-between mb-3 shrink-0">
-              <p className="text-sm font-bold" style={{ color: T.text }}>{t(lang, "calcHelpTitle")}</p>
-              <button onClick={() => setShowCalcHelp(false)} className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}>
-                <X size={16} />
-              </button>
-            </div>
-            <div data-kbscroll="true" style={{ overflowY: "auto" }}>
-              <p className="text-xs leading-relaxed" style={{ color: T.muted, whiteSpace: "pre-line" }}>
+          <div className="flex items-center justify-between px-4 py-3 shrink-0" style={{ borderBottom: `1px solid ${T.border}` }}>
+            <p className="text-base font-bold" style={{ color: T.text }}>{t(lang, "calcHelpTitle")}</p>
+            <button onClick={() => setShowCalcHelp(false)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}>
+              <X size={18} />
+            </button>
+          </div>
+          <div data-kbscroll="true" className="flex-1 overflow-y-auto p-3">
+            <table className="w-full text-xs" style={{ borderCollapse: "collapse" }}>
+              <tbody>
                 {t(lang, "calcHelpText")
                   .replace(/\{cost\}/g, t(lang, "calcCost"))
                   .replace(/\{sell\}/g, t(lang, "calcSell"))
                   .replace(/\{margin\}/g, t(lang, "calcMargin"))
-                  .replace(/\{clear\}/g, t(lang, "calcClear"))}
-              </p>
-            </div>
+                  .replace(/\{clear\}/g, t(lang, "calcClear"))
+                  .split("\n")
+                  .filter((line) => line.trim().length > 0)
+                  .map((line, i) => {
+                    const idx = line.indexOf(":");
+                    const key = idx >= 0 ? line.slice(0, idx).trim() : line.trim();
+                    const desc = idx >= 0 ? line.slice(idx + 1).trim() : "";
+                    return (
+                      <tr key={i} style={{ background: i % 2 === 0 ? "transparent" : (darkMode ? "#1c1c28" : "#f8fafc") }}>
+                        <td className="font-bold align-top whitespace-nowrap" style={{ color: T.text, padding: "8px 10px", borderBottom: `1px solid ${T.border}`, width: 1 }}>{key}</td>
+                        <td className="align-top leading-relaxed" style={{ color: T.muted, padding: "8px 10px", borderBottom: `1px solid ${T.border}` }}>{desc}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
           </div>
         </div>
       )}
