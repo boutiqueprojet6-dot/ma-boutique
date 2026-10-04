@@ -16,6 +16,7 @@ import { registerPlugin } from "@capacitor/core";
 // Google (le tout premier moment où ce chunk était sollicité en conditions réelles).
 import { App as CapacitorApp } from "@capacitor/app";
 import { Browser } from "@capacitor/browser";
+import { Keyboard } from "@capacitor/keyboard";
 const SalesWidget = registerPlugin("SalesWidget");
 import {
   CRITICAL_STATE_KEY,
@@ -5363,7 +5364,15 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     setGoogleLoginBusy(true);
     setError("");
     try {
-      const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
+      // ⚠️ isNativePlatformNow() et non !!window.Capacitor : ce dernier existe aussi en
+      // plein navigateur web (shim injecté automatiquement par @capacitor/core dès qu'un
+      // module Capacitor est importé — voir le commentaire sur isNativePlatformNow() plus
+      // haut dans ce fichier). Sur iPhone, l'app tourne uniquement en web (Safari, onglet ou
+      // écran d'accueil, aucune app native) : avec !!window.Capacitor, ce test valait TOUJOURS
+      // vrai à tort, ce qui envoyait la connexion Google dans la branche "app native" ci-dessous
+      // (Browser.open) au lieu de la redirection web normale — Browser.open y ouvre une
+      // popup (window.open) que Safari bloque silencieusement, d'où "rien ne se passe au tap".
+      const isCapacitorApp = isNativePlatformNow();
       if (isCapacitorApp) {
         // NOTE : la connexion Google *native* (écran "Shopnify" avec Credential
         // Manager, via @capgo/capacitor-social-login) est prête dans le code mais
@@ -5929,7 +5938,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   // ================= ONBOARDING SCREEN =================
   return (
     <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
-      <div className="w-full max-w-lg md:max-w-2xl rounded-3xl p-7 md:p-10 relative shadow-xl" style={{ background: AT.card }}>
+      <div data-kbscroll="true" className="w-full max-w-lg md:max-w-2xl rounded-3xl p-7 md:p-10 relative shadow-xl max-h-[90vh] overflow-y-auto" style={{ background: AT.card, WebkitOverflowScrolling: "touch", overscrollBehavior: "contain" }}>
         <button onClick={() => setScreen("login")} className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ background: AT.input, color: AT.muted }}>✕</button>
         <div className="flex items-center gap-2 mb-4">
           <svg width="18" height="18" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
@@ -8018,8 +8027,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const [showAllTopProducts, setShowAllTopProducts] = useState(false);
   const contentScrollRef = useRef(null);
-  const paymentZoneRef = useRef(null);
   const [showPaymentShortcut, setShowPaymentShortcut] = useState(false);
+  // Le résumé du panier + le paiement s'affichent désormais dans une fenêtre dédiée
+  // (ouverte par le bouton flottant "Voir la vente"), plutôt qu'en faisant défiler la
+  // page jusqu'en bas — le bouton reste donc visible tant que le panier n'est pas vide.
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
   // Champ "montant reçu" (paiement espèces) : quand il manque au moment de finaliser,
   // on le surligne en rouge et on y scrolle, exactement comme les champs obligatoires
   // non remplis ailleurs dans l'app (écran d'inscription, etc.).
@@ -10556,6 +10568,12 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Paramètres > Interface : mode sombre, changement de langue (une trentaine de langues disponibles), couleur des petites boules flottantes en arrière-plan.
 - Paramètres > Notifications : alertes d'activité inhabituelle, sons (clic, vente réussie, erreur, ajout au panier), vibrations sur les actions importantes.
 - Onglet Vente, retour tactile/visuel à l'ajout d'un produit (liste ET grille) : (1) toute la carte produit se comprime légèrement pendant que le doigt reste appuyé dessus (onPointerDown), puis rebondit élastiquement (effet "ressort", dépasse légèrement sa taille normale avant de se stabiliser) au relâchement ; (2) en appuyant sur le bouton « + » (pack ou unité), un petit jeton rond portant la photo du produit (ou "+1" sans photo) part de ce bouton et vole, selon une trajectoire courbe, jusqu'à l'icône "Vente" de la barre de navigation du bas, en rétrécissant et en s'estompant en cours de route ; à son arrivée, cette icône fait un petit "saut" (pulsation). (3) Un son joue à chaque ajout, réglable dans Paramètres > Notifications > son « Ajout au panier » (3 variantes : Pop, Caisse enregistreuse, Clochette ; « Pop » par défaut) — les sons de l'app sont synthétisés (Web Audio), donc des taps très rapprochés sur le même produit ne coupent jamais le son précédent. Ces trois mécanismes (rebond de carte, jeton volant, son) sont indépendants et peuvent coexister sans se marcher dessus ; si un futur changement retouche l'un des trois, vérifier qu'il ne duplique pas ce qui existe déjà ici plutôt que d'ajouter un quatrième effet parallèle.
+- IMPORTANT, à bien avoir en tête pour tout bug "iPhone" : il n'existe PAS d'app native iOS. Sur iPhone, l'app s'utilise soit dans un onglet Safari normal, soit via une icône ajoutée à l'écran d'accueil (PWA standalone) — les deux cas sont utilisés en pratique. Le code contient bien des API Capacitor (@capacitor/app, @capacitor/browser, @capacitor/preferences, @capacitor/keyboard) mais celles-ci ne font rien tant qu'elles ne tournent pas dans une vraie coquille native (gardées derrière isNativePlatformNow()) — elles ne peuvent donc PAS être la solution à un problème observé sur iPhone (probablement prévues/utiles pour une app Android native, à vérifier si besoin).
+- Google Sign-In ne faisait rien au tap sur iPhone (corrigé) : la fonction de connexion Google utilisait le test !!window.Capacitor pour décider si elle tournait dans une app native — or cet objet existe AUSSI en plein navigateur web (shim auto-injecté par @capacitor/core), donc ce test valait toujours vrai à tort sur iPhone (web pur, sans app native), envoyant la connexion dans la branche "app native" (Browser.open, qui ouvre une popup que Safari bloque silencieusement) au lieu de la redirection web normale. Remplacé par isNativePlatformNow(), le seul test fiable (déjà utilisé ailleurs dans le fichier, voir son commentaire explicatif) — tout code futur qui doit distinguer "vraie app native" de "web" doit utiliser isNativePlatformNow(), jamais window.Capacitor seul.
+- Zoom automatique de Safari sur champ de saisie (iPhone) : un champ dont la taille de police est inférieure à 16px déclenche un zoom automatique de toute la page quand il reçoit le focus (comportement natif de Safari, pas un bug de l'app) — observé comme un champ qui "saute" tout en haut de l'écran avec un grand vide en dessous, ou une barre ancrée en bas (ex. saisie de l'Assistant IA) qui apparaît ailleurs le temps que la page se stabilise. Beaucoup de champs utilisaient du texte à 14px (classe Tailwind text-sm), sous le seuil de 16px. Corrigé par une règle CSS globale (mobile uniquement) qui force tous les input/textarea/select à 16px, ce qui désactive ce zoom à la source.
+- Connexion "Continuer avec Google" ne fonctionnant pas sur iPhone (signalé, pas encore résolu) : le flux actuel (fonction de connexion Google, autour de signInWithOAuth/Browser.open/appUrlOpen) passe par le navigateur système + une page de callback HTTPS intermédiaire (ma-boutique-tawny.vercel.app/auth-callback.html) qui rouvre l'app via un lien profond (schéma com.shopnify.app) — ce choix est explicitement documenté dans le code comme ayant été fait pour contourner un comportement d'Android (refus d'ouvrir un schéma personnalisé après redirection OAuth), et ne semble jamais avoir été vérifié spécifiquement sur iOS. Pistes à vérifier côté natif (hors de ce fichier JS, donc non vérifiables ni corrigeables d'ici) : le schéma d'URL personnalisé est-il bien déclaré dans l'Info.plist du projet iOS (CFBundleURLTypes) ? Le comportement observé est-il "rien ne se passe au tap", "Safari s'ouvre puis reste bloqué dessus sans revenir à l'app", ou "une erreur s'affiche" ?
+- Écran d'inscription (étape 1/2, "infos boutique" : prénom, nom, nom de la boutique, secteur, pays, téléphone, langue, devise) : corrigé un bug où, sur certains téléphones (constaté sur iPhone) avec un formulaire long et/ou le clavier ouvert, le bouton « Suivant » devenait inatteignable car l'écran ne défilait pas (la carte était verticalement centrée sans défilement propre). La carte d'inscription défile maintenant correctement en interne si son contenu dépasse la hauteur de l'écran.
+- Onglet Vente, bouton flottant « Voir la vente » : visible en permanence dès que le panier actif contient au moins un article (il ne se cache plus automatiquement en défilant). Au tap, il ouvre une fenêtre (bottom-sheet, avec en-tête et bouton de fermeture) contenant le résumé du panier et le paiement (mode de paiement, nom du client, montant donné, bouton « Finaliser la vente ») — ce n'est plus une section qu'on atteignait en faisant défiler la page jusqu'en bas. La liste de produits réserve un espace supplémentaire en bas lorsque ce bouton est affiché, pour que le dernier produit reste visible au-dessus de lui.
 - Compte : dans « Gérer le compte », on peut consulter et modifier ses informations, dont le numéro de mobile saisi à l'inscription.
 - Aide et assistance : l'écran Aide contient les questions-réponses, et tout en bas un formulaire d'assistance par e-mail : écrire son problème ou sa question, joindre une photo ou une vidéo (facultatif, 3 fichiers maximum, 20 Mo par fichier), puis « Envoyer ». La réponse arrive par e-mail à l'adresse du compte. Limite de 3 messages par jour. L'adresse du support n'est pas affichée à l'utilisateur.
 - Installation : l'application peut s'installer sur l'écran d'accueil (bannière « Installer l'application » proposée à l'ouverture quand c'est possible ; sur iPhone : bouton Partager puis « Sur l'écran d'accueil » depuis Safari) et fonctionne hors connexion : les ventes faites hors ligne sont synchronisées à la reconnexion.
@@ -10734,19 +10752,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       return;
     }
     const currentCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
-    if (!currentCart || currentCart.items.length === 0) {
-      setShowPaymentShortcut(false);
-      return;
-    }
-    const scrollRoot = contentScrollRef.current;
-    const target = paymentZoneRef.current;
-    if (!scrollRoot || !target) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowPaymentShortcut(!entry.isIntersecting),
-      { root: scrollRoot, threshold: 0 }
-    );
-    observer.observe(target);
-    return () => observer.disconnect();
+    setShowPaymentShortcut(!!currentCart && currentCart.items.length > 0);
   }, [tab, activeCartId, draftCarts]);
   // ---- Export comptable PDF (Business 1) ----
   // Déplacés ici (avant le "if (loading) return") car les Hooks React doivent TOUJOURS
@@ -11040,7 +11046,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     if (cropModalFile) { closeCropModal(); return true; }
     if (showProductPhotoPreview) { setShowProductPhotoPreview(false); return true; }
     if (showCameraCheckout) { setShowCameraCheckout(false); return true; }
-    if (showPaymentShortcut) { setShowPaymentShortcut(false); return true; }
+    if (showCheckoutModal) { setShowCheckoutModal(false); return true; }
     if (showAccountingExport) { setShowAccountingExport(false); return true; }
     if (showShopSwitcher) { setShowShopSwitcher(false); return true; }
     if (qrEmployee || qrInvite) { setQrEmployee(null); setQrInvite(null); return true; }
@@ -11103,7 +11109,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     (confirmDeleteExpense ? 1 : 0) + (confirmDeleteCart ? 1 : 0) + (showLockPinModal ? 1 : 0) +
     (showForgotPin ? 1 : 0) + (partialPayDebt ? 1 : 0) + (showAddDebtModal ? 1 : 0) +
     (shareDialogProduct ? 1 : 0) + (cropModalFile ? 1 : 0) + (showProductPhotoPreview ? 1 : 0) +
-    (showCameraCheckout ? 1 : 0) + (showPaymentShortcut ? 1 : 0) + (showAccountingExport ? 1 : 0) +
+    (showCameraCheckout ? 1 : 0) + (showCheckoutModal ? 1 : 0) + (showAccountingExport ? 1 : 0) +
     (showShopSwitcher ? 1 : 0) + ((qrEmployee || qrInvite) ? 1 : 0) + (showAddEmployee ? 1 : 0) +
     (showAiHistory ? 1 : 0) + (showMoreMenu ? 1 : 0) + (showSortMenu ? 1 : 0) +
     (showAddExpense ? 1 : 0) + (showEditFund ? 1 : 0) + (showAddProduct ? 1 : 0) +
@@ -11855,7 +11861,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           messages IA) sont maintenant affichées directement dans les onglets Vente et
           Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
           uniquement quand la limite est réellement atteinte. */}
-      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1 }}>
+      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined }}>
       {/* pb-56 (au lieu de pb-40) : laisse assez d'espace en bas pour que le dernier élément
           d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
           "Démasquer les données" quand on scrolle tout en bas. */}
@@ -12696,8 +12702,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   })}
                 </div>
                 )}
-                {activeCart.items.length > 0 && (
-                <div ref={paymentZoneRef} className="space-y-2">
+                {activeCart.items.length > 0 && showCheckoutModal && typeof document !== "undefined" && createPortal(
+                <div
+                  onClick={() => setShowCheckoutModal(false)}
+                  className="fixed inset-0 flex items-end justify-center"
+                  style={{ background: "rgba(0,0,0,0.5)", zIndex: 9999 }}
+                >
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full flex flex-col"
+                  style={{
+                    background: darkMode ? T.bg : "#f8fafc",
+                    maxHeight: "88vh",
+                    borderTopLeftRadius: 24,
+                    borderTopRightRadius: 24,
+                    boxShadow: "0 -8px 30px rgba(0,0,0,0.3)",
+                    paddingBottom: "env(safe-area-inset-bottom, 0px)",
+                  }}
+                >
+                  <div className="flex items-center justify-between px-4 py-3 shrink-0" style={{ borderBottom: `1px solid ${T.border}` }}>
+                    <p className="text-base font-bold" style={{ color: T.text }}>{t(lang, "paymentShortcut")}</p>
+                    <button onClick={() => setShowCheckoutModal(false)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}>
+                      <X size={18} />
+                    </button>
+                  </div>
+                  <div className="space-y-2 overflow-y-auto p-3">
                   <div className="rounded-2xl overflow-hidden" style={{ background: darkMode ? T.card : "linear-gradient(135deg, #eff6ff, #dbeafe)", boxShadow: darkMode ? "none" : "0 8px 18px rgba(37,99,235,0.15)" }}>
                     <div className="p-4">
                       <div className="flex items-center gap-1.5 mb-2">
@@ -12774,7 +12803,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       ✅ {t(lang, "finalizeSale")} — {fcfa(cartTotal)}
                     </button>
                   </div>
+                  </div>
                 </div>
+                </div>,
+                document.body
                 )}
               </>
             )}
@@ -15386,9 +15418,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         </div>
       )}
-      {showPaymentShortcut && activeCart && typeof document !== "undefined" && createPortal(
+      {showPaymentShortcut && !showCheckoutModal && activeCart && typeof document !== "undefined" && createPortal(
         <button
-          onClick={() => paymentZoneRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}
+          onClick={() => setShowCheckoutModal(true)}
           className="fixed left-1/2 flex items-center gap-2 px-5 py-3 rounded-full text-white font-extrabold text-sm active:scale-95"
           style={{
             // Même correction que le bouton "Démasquer les données" : en position fixe
@@ -15699,6 +15731,31 @@ function BoutiqueAppInner() {
       body.style.width = prev.bodyWidth;
       body.style.height = prev.bodyHeight;
     };
+  }, []);
+  // ---- Empêche le WebView natif de redimensionner/défiler lui-même au clavier (iOS) ----
+  // Par défaut, le WKWebView d'iOS fait remonter tout seul le contenu pour garder le champ
+  // actif visible au-dessus du clavier — un comportement natif indépendant de notre JS, qui
+  // entre en conflit avec le verrouillage ci-dessus (body en position:fixed) et avec notre
+  // propre repositionnement basé sur visualViewport (useKeyboardOpen/useVisibleHeight) :
+  // les deux mécanismes "tirent" chacun de leur côté, ce qui peut laisser un champ ou une
+  // barre ancrée en absolute se retrouver affichée au mauvais endroit (ex. tout en haut,
+  // avec un grand vide en dessous) — constaté sur iPhone. "none" dit au WebView natif de ne
+  // rien faire lui-même et de laisser le clavier simplement se superposer par-dessus ; c'est
+  // alors uniquement notre JS (déjà en place, déjà correct sur Android) qui gère le décalage.
+  // Sans effet sur Android (déjà correct), donc sans risque de régression de ce côté.
+  useEffect(() => {
+    if (!isNativePlatformNow()) return;
+    (async () => {
+      try {
+        await Keyboard.setResizeMode({ mode: "none" });
+        await Keyboard.setScroll({ isDisabled: true });
+      } catch (err) {
+        // Le plugin @capacitor/keyboard doit être installé et synchronisé côté natif
+        // (npm install @capacitor/keyboard puis npx cap sync) pour que ces appels
+        // fassent quelque chose ; sans ça, ils échouent silencieusement ici et le
+        // comportement natif par défaut reste inchangé.
+      }
+    })();
   }, []);
   // ---- Défilement au clavier (flèches) sur ordinateur, valable pour tout l'écran ----
   // (connexion, app, admin, calculatrice, modales...) : plusieurs écrans mettent leur zone
@@ -16202,6 +16259,19 @@ export function BoutiqueAppSafe() {
   }
   return (
     <ErrorBoundary>
+      {/* Sur iOS Safari (onglet normal OU app ajoutée à l'écran d'accueil), un champ de
+          saisie dont la taille de police est inférieure à 16px déclenche un ZOOM AUTOMATIQUE
+          de toute la page au moment où il reçoit le focus (fonctionnalité d'accessibilité native
+          de Safari, pas un bug de l'app) — et, le clavier s'affichant en même temps, le rendu
+          pendant/juste après ce zoom peut donner exactement ce qui a été observé : un champ qui
+          semble "sauter" tout en haut de l'écran avec un grand espace vide en dessous, ou une
+          barre ancrée en bas qui apparaît ailleurs le temps que la page se stabilise. Beaucoup
+          de champs de l'app utilisent une police à 14px (classe Tailwind text-sm), en dessous
+          du seuil de 16px qui déclenche ce zoom. Cette règle globale relève la taille de police
+          de TOUS les champs à 16px sur mobile pour désactiver ce zoom à la source — seule une
+          taille de police réelle (pas un transform CSS) empêche Safari de zoomer.
+          Voir : https://web.dev/articles/iphone-gotchas */}
+      <style>{"@media (max-width: 767px) { input, textarea, select { font-size: 16px !important; } }"}</style>
       <BoutiqueAppInner />
     </ErrorBoundary>
   );
