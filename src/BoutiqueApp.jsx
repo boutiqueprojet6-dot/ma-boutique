@@ -3615,6 +3615,44 @@ const TRANSLATIONS = {
 function t(lang, key) {
   return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.fr[key] || key;
 }
+// Découpe la phrase "legalConsentText" (ex. "En continuant, vous acceptez nos Conditions
+// d'utilisation et notre Politique de confidentialité.") pour transformer les deux segments
+// termsLabel/privacyLabel qu'elle contient déjà en vrais liens soulignés vers /terms et
+// /privacy — la phrase reste d'un seul tenant (comme sur l'écran de connexion de Claude),
+// quelle que soit la langue, sans avoir à ré-écrire chaque traduction avec des balises.
+function renderLegalConsentText(sentence, termsLabel, privacyLabel, darkMode) {
+  const linkStyle = { color: darkMode ? "#8B85F2" : INDIGO, textDecoration: "underline", fontWeight: 600 };
+  const iTerms = sentence.indexOf(termsLabel);
+  const iPrivacy = sentence.indexOf(privacyLabel);
+  if (iTerms === -1 || iPrivacy === -1) {
+    // Filet de sécurité si une traduction ne contient pas exactement ces libellés.
+    return (
+      <>
+        {sentence}{" "}
+        <a href="/terms" target="_blank" rel="noopener noreferrer" style={linkStyle}>{termsLabel}</a>
+        {" · "}
+        <a href="/privacy" target="_blank" rel="noopener noreferrer" style={linkStyle}>{privacyLabel}</a>
+      </>
+    );
+  }
+  const firstLabel = iTerms < iPrivacy ? termsLabel : privacyLabel;
+  const firstHref = iTerms < iPrivacy ? "/terms" : "/privacy";
+  const secondLabel = iTerms < iPrivacy ? privacyLabel : termsLabel;
+  const secondHref = iTerms < iPrivacy ? "/privacy" : "/terms";
+  const firstStart = Math.min(iTerms, iPrivacy);
+  const firstEnd = firstStart + firstLabel.length;
+  const secondStart = sentence.indexOf(secondLabel, firstEnd);
+  const secondEnd = secondStart + secondLabel.length;
+  return (
+    <>
+      {sentence.slice(0, firstStart)}
+      <a href={firstHref} target="_blank" rel="noopener noreferrer" style={linkStyle}>{firstLabel}</a>
+      {sentence.slice(firstEnd, secondStart)}
+      <a href={secondHref} target="_blank" rel="noopener noreferrer" style={linkStyle}>{secondLabel}</a>
+      {sentence.slice(secondEnd)}
+    </>
+  );
+}
 const LANGUAGES = [
   { id: "am", label: "አማርኛ", name: { ar: "الأمهرية", bm: "amarikikan", bn: "আমহারিক", de: "Amharisch", en: "Amharic", es: "amárico", fr: "amharique", ha: "Amharic", hi: "अम्हारी", id: "Amhara", it: "amarico", nl: "Amhaars", ja: "アムハラ語", ko: "암하라어", pl: "amharski", pt: "amárico", ru: "амхарский", sw: "Kiamhari", ta: "அம்ஹாரிக்", te: "అమ్హారిక్", th: "อัมฮาริก", tl: "Amharic", tr: "Amharca", ur: "امہری", vi: "Tiếng Amharic", wo: "Amariñ", yo: "Amharic", zh: "阿姆哈拉语", zu: "isi-Amharic" } },  // Amharique
   { id: "ar", label: "العربية", name: { am: "አረብኛ", ar: "العربية", bm: "larabukan", bn: "আরবি", de: "Arabisch", en: "Arabic", yo: "Arabic", es: "árabe", fr: "arabe", ha: "Larabci", hi: "अरबी", id: "Arab", it: "arabo", nl: "الهولندية", ja: "アラビア語", ko: "아랍어", pl: "arabski", pt: "árabe", ru: "арабский", sw: "Kiarabu", ta: "அரபிக்", te: "అరబిక్", th: "อาหรับ", tl: "Arabic", tr: "Arapça", ur: "عربی", vi: "Tiếng Ả Rập", wo: "Arabic", zh: "阿拉伯语", zu: "الزولو" } },  // Arabe
@@ -5733,12 +5771,8 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 </button>
               </>
             )}
-            <p className="text-center mt-4" style={{ fontSize: 10, color: AT.muted, lineHeight: 1.5 }}>
-              {t(lang, "legalConsentText")}
-              {" "}
-              <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: darkMode ? "#8B85F2" : INDIGO, textDecoration: "underline" }}>{t(lang, "termsLinkLabel")}</a>
-              {" · "}
-              <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: darkMode ? "#8B85F2" : INDIGO, textDecoration: "underline" }}>{t(lang, "privacyLinkLabel")}</a>
+            <p className="text-center mt-4" style={{ fontSize: 11, color: AT.muted, lineHeight: 1.6 }}>
+              {renderLegalConsentText(t(lang, "legalConsentText"), t(lang, "termsLinkLabel"), t(lang, "privacyLinkLabel"), darkMode)}
             </p>
             <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
               <QrCode size={13} /> {t(lang, "loginAsEmployee")}
@@ -10543,7 +10577,9 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Connexion Google NATIVE (Credential Manager, écran épuré type Claude avec juste nom + logo de l'app) : réactivée. Le code utilise @capgo/capacitor-social-login (déjà dans package.json) sur plateforme native Android ; la version web (navigateur + lien profond) reste utilisée sur iPhone (toujours sans app native) et sur PC/web. Cette connexion native était désactivée par une session précédente par crainte de la limite de 100 testeurs manuels propre au statut "Test" de l'app OAuth — cette limite ne s'applique plus car l'app est passée en statut "En production" dans Google Cloud Console. Pour que ça marche réellement sur un appareil Android, il faut en plus, côté projet natif (hors de ce fichier JS) : que le dossier android/ (Capacitor) existe et soit à jour (npx cap sync android), et qu'un Client ID OAuth de type "Android" soit enregistré dans Google Cloud Console avec le nom de package de l'app + l'empreinte SHA-1 du certificat de signature utilisé pour la build (keystore) — sans ce Client ID Android, la connexion native échouera même si le code JS est correct. Objectif de l'utilisateur : obtenir cet écran natif sans nécessairement publier sur le Play Store (simple APK signé, installé directement/sideload — possible, le compte développeur Play à 25$ n'est utile que pour publier sur le Store, pas pour que la connexion native fonctionne).
 - Google Sign-In ne faisait rien au tap sur iPhone (corrigé) : la fonction de connexion Google utilisait le test !!window.Capacitor pour décider si elle tournait dans une app native — or cet objet existe AUSSI en plein navigateur web (shim auto-injecté par @capacitor/core), donc ce test valait toujours vrai à tort sur iPhone (web pur, sans app native), envoyant la connexion dans la branche "app native" (Browser.open, qui ouvre une popup que Safari bloque silencieusement) au lieu de la redirection web normale. Remplacé par isNativePlatformNow(), le seul test fiable (déjà utilisé ailleurs dans le fichier, voir son commentaire explicatif) — tout code futur qui doit distinguer "vraie app native" de "web" doit utiliser isNativePlatformNow(), jamais window.Capacitor seul.
 - Zoom automatique de Safari sur champ de saisie (iPhone) : un champ dont la taille de police est inférieure à 16px déclenche un zoom automatique de toute la page quand il reçoit le focus (comportement natif de Safari, pas un bug de l'app) — observé comme un champ qui "saute" tout en haut de l'écran avec un grand vide en dessous, ou une barre ancrée en bas (ex. saisie de l'Assistant IA) qui apparaît ailleurs le temps que la page se stabilise. Beaucoup de champs utilisaient du texte à 14px (classe Tailwind text-sm), sous le seuil de 16px. Corrigé par une règle CSS globale (mobile uniquement) qui force tous les input/textarea/select à 16px, ce qui désactive ce zoom à la source.
-- Écran de connexion, bas de page ("En continuant, vous acceptez...") : "Conditions d'utilisation" et "Politique de confidentialité" sont maintenant de vrais liens cliquables (ouvrent /terms et /privacy dans un nouvel onglet), traduits dans les 30 langues. La page /terms (Conditions d'utilisation) est nouvelle, écrite sur le même modèle que /privacy (déjà existante) — toutes deux définies tout en bas du fichier (TermsOfServiceScreen et PrivacyPolicyScreen), en dehors du système de traduction normal (texte en dur, en français uniquement, comme c'était déjà le cas pour /privacy). PRIVACY_APP_NAME (utilisé dans ces deux pages) a été mis à jour de "Ma Boutique" à "Boutipro" pour rester cohérent avec le reste de l'app.
+- Écran de connexion, bas de page ("En continuant, vous acceptez...") : "Conditions d'utilisation" et "Politique de confidentialité" sont de vrais liens soulignés, insérés directement À L'INTÉRIEUR de la phrase existante (comme sur l'écran de connexion de Claude, pris comme modèle) via renderLegalConsentText() (juste après la fonction t(), repère la position des deux libellés traduits dans la phrase et les remplace par des <a> vers /terms et /privacy, ouverts dans un nouvel onglet) — traduit et fonctionnel dans les 30 langues, avec un filet de sécurité si une traduction ne contenait pas exactement ces libellés.
+- Pages /privacy et /terms, ajouts suite à une référence visuelle (page légale d'Anthropic) : (1) "boutipro.com" affiché sous le nom de l'app dans l'en-tête ; (2) bouton "Télécharger la version PDF" (sous le titre, à côté de la pastille de date) qui génère un vrai PDF téléchargeable côté client via jsPDF (déjà une dépendance du projet, même bibliothèque que les rapports de caisse) — voir downloadLegalPdf() juste avant LegalPageLayout, alimentée par PRIVACY_PDF_SECTIONS / TERMS_PDF_SECTIONS (contenu texte brut dupliqué à partir du JSX affiché à l'écran, puisque jsPDF ne peut pas lire du JSX directement — toute future modif du texte légal doit être répercutée aux deux endroits).
+- Pages /privacy et /terms (Confidentialité et Conditions d'utilisation) : design commun modernisé via LegalPageLayout + LegalSection (juste avant PrivacyPolicyScreen) — logo de l'app + nom en haut, bouton "← Retour" vers /, gros titre avec pastille dégradée + emoji, pastille "Dernière mise à jour" colorée, carte blanche arrondie avec ombre contenant le texte, sections à puce colorée + titre en gras souligné, petites animations d'apparition (fondu + léger glissement vers le haut, en cascade section par section) via les keyframes legalFadeUp/legalPop. Contenu juridique inchangé (toujours en dur, en français uniquement, hors système de traduction normal). PRIVACY_APP_NAME = "Boutipro" (mis à jour depuis "Ma Boutique").
 - L'app s'appelait "Shopnify", renommée "Boutipro" (nouveau domaine : boutipro.com) — tout le texte visible (appName, à propos, bannière d'installation, filigrane sur les images de partage, etc.) a été renommé partout dans ce fichier. EXCEPTION VOLONTAIRE, à ne jamais renommer ici sans un vrai projet à part : le schéma d'URL technique com.shopnify.app (lien profond utilisé pour le retour de connexion Google, voir juste en dessous) — c'est très probablement aussi le nom de package de l'app Android native (applicationId), déclaré dans un projet natif hors de ce fichier .jsx, et potentiellement référencé dans Google Cloud Console/Supabase. Le changer demande de coordonner plusieurs projets à la fois (package Android, Google Cloud Console, Supabase, page de callback hébergée séparément) ; le faire uniquement ici casserait la connexion sans rien réparer ailleurs. Les clés de cache interne (ex. boutipro_last_shop_cache) ont, elles, été renommées sans risque (juste un cache local vidé une fois).
 - Connexion "Continuer avec Google" ne fonctionnant pas sur iPhone (signalé, pas encore résolu) : le flux actuel (fonction de connexion Google, autour de signInWithOAuth/Browser.open/appUrlOpen) passe par le navigateur système + une page de callback HTTPS intermédiaire (ma-boutique-tawny.vercel.app/auth-callback.html) qui rouvre l'app via un lien profond (schéma com.shopnify.app) — ce choix est explicitement documenté dans le code comme ayant été fait pour contourner un comportement d'Android (refus d'ouvrir un schéma personnalisé après redirection OAuth), et ne semble jamais avoir été vérifié spécifiquement sur iOS. Pistes à vérifier côté natif (hors de ce fichier JS, donc non vérifiables ni corrigeables d'ici) : le schéma d'URL personnalisé est-il bien déclaré dans l'Info.plist du projet iOS (CFBundleURLTypes) ? Le comportement observé est-il "rien ne se passe au tap", "Safari s'ouvre puis reste bloqué dessus sans revenir à l'app", ou "une erreur s'affiche" ?
 - Écran d'inscription (étape 1/2, "infos boutique" : prénom, nom, nom de la boutique, secteur, pays, téléphone, langue, devise) : corrigé un bug où, sur certains téléphones (constaté sur iPhone) avec un formulaire long et/ou le clavier ouvert, le bouton « Suivant » devenait inatteignable car l'écran ne défilait pas (la carte était verticalement centrée sans défilement propre). La carte d'inscription défile maintenant correctement en interne si son contenu dépasse la hauteur de l'écran.
@@ -16146,159 +16182,336 @@ function BoutiqueAppInner() {
 }
 
 // ---------------------------------------------------------------------------
-// Page "Politique de confidentialité" — nécessaire pour Google OAuth et,
-// plus tard, pour la fiche Play Store. Accessible à l'URL /privacy.
+// Pages légales ("Politique de confidentialité" /privacy et "Conditions
+// d'utilisation" /terms) — nécessaires pour Google OAuth et, plus tard, pour
+// la fiche Play Store. Design partagé (LegalPageLayout + LegalSection) pensé
+// pour rappeler l'écran de connexion de Claude qui a servi de modèle : logo
+// de l'app en haut, grand titre, carte blanche animée à l'entrée, sections
+// avec un repère de couleur + titre en gras, plutôt qu'un mur de texte brut.
 // ---------------------------------------------------------------------------
 const PRIVACY_CONTACT_EMAIL = "boutiqueprojet6@gmail.com";
 const PRIVACY_APP_NAME = "Boutipro";
+const LEGAL_ACCENT = "#4F46E5";
 
-function PrivacyPolicyScreen() {
-  const section = { fontSize: 18, marginTop: 28, marginBottom: 8 };
+function LegalAppLogo({ size = 30 }) {
   return (
-    <div
-      style={{
-        maxWidth: 720,
-        margin: "0 auto",
-        padding: "32px 20px 64px",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-        color: "#1a1a1a",
-        lineHeight: 1.6,
-        background: "#fff",
-        minHeight: "100vh",
-      }}
-    >
-      <h1 style={{ fontSize: 28, marginBottom: 4 }}>Politique de confidentialité</h1>
-      <p style={{ color: "#666", marginBottom: 32 }}>
-        Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
-      </p>
-      <p>
-        La présente politique de confidentialité décrit comment{" "}
-        <strong>{PRIVACY_APP_NAME}</strong> ("l'application", "nous") collecte,
-        utilise et protège les informations des utilisateurs.
-      </p>
-      <h2 style={section}>1. Informations que nous collectons</h2>
-      <p>Lorsque vous utilisez {PRIVACY_APP_NAME}, nous pouvons collecter :</p>
-      <ul>
-        <li>Votre nom et adresse e-mail (via la connexion Google ou la création de compte)</li>
-        <li>Le nom de votre boutique</li>
-        <li>Les données que vous saisissez dans l'application (produits, ventes, dettes, dépenses)</li>
-      </ul>
-      <p>Nous ne collectons pas d'informations de paiement, de localisation précise, ni de données biométriques.</p>
-      <h2 style={section}>2. Utilisation des informations</h2>
-      <p>Les informations collectées servent uniquement à :</p>
-      <ul>
-        <li>Créer et sécuriser votre compte</li>
-        <li>Faire fonctionner les fonctionnalités de gestion de boutique (stock, ventes, dettes)</li>
-        <li>Synchroniser vos données entre vos appareils</li>
-        <li>Vous contacter en cas de besoin lié à votre compte</li>
-      </ul>
-      <p>Nous ne vendons ni ne partageons vos données avec des tiers à des fins publicitaires.</p>
-      <h2 style={section}>3. Stockage et sécurité</h2>
-      <p>
-        Vos données sont stockées de façon sécurisée via notre prestataire d'hébergement (Supabase).
-        Des mesures raisonnables sont prises pour protéger vos informations contre tout accès non autorisé.
-      </p>
-      <h2 style={section}>4. Connexion avec Google</h2>
-      <p>
-        Si vous choisissez de vous connecter avec votre compte Google, nous recevons uniquement votre nom
-        et votre adresse e-mail associés à ce compte, dans le seul but de créer et sécuriser votre profil
-        dans l'application.
-      </p>
-      <h2 style={section}>5. Conservation des données</h2>
-      <p>
-        Vos données sont conservées tant que votre compte est actif. Vous pouvez demander la suppression
-        de votre compte et de vos données à tout moment en nous contactant.
-      </p>
-      <h2 style={section}>6. Vos droits</h2>
-      <p>
-        Vous pouvez à tout moment demander l'accès, la correction ou la suppression de vos données
-        personnelles en nous contactant à l'adresse ci-dessous.
-      </p>
-      <h2 style={section}>7. Contact</h2>
-      <p>
-        Pour toute question concernant cette politique de confidentialité, contactez-nous à :{" "}
-        <a href={`mailto:${PRIVACY_CONTACT_EMAIL}`}>{PRIVACY_CONTACT_EMAIL}</a>
-      </p>
-      <h2 style={section}>8. Modifications</h2>
-      <p>Cette politique de confidentialité peut être mise à jour occasionnellement. Toute modification sera publiée sur cette page.</p>
+    <svg width={size} height={size} viewBox="0 0 26 26">
+      <rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2" />
+      <rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2" />
+      <rect x="19" y="1" width="4" height="21" rx="2" fill={LEGAL_ACCENT} />
+    </svg>
+  );
+}
+
+function LegalSection({ n, title, children }) {
+  return (
+    <section style={{ marginTop: 32, animation: `legalFadeUp 0.5s ease-out ${0.05 * n}s both` }}>
+      <h2 style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 17, fontWeight: 800, margin: "0 0 10px", color: "#161a2b" }}>
+        <span style={{ width: 8, height: 8, borderRadius: 999, background: LEGAL_ACCENT, flexShrink: 0 }} />
+        <span style={{ textDecoration: "underline", textDecorationColor: `${LEGAL_ACCENT}55`, textDecorationThickness: 3, textUnderlineOffset: 4 }}>
+          {title}
+        </span>
+      </h2>
+      <div style={{ color: "#44485a", fontSize: 15 }}>{children}</div>
+    </section>
+  );
+}
+
+// Génère et télécharge un PDF simple (titre + sections numérotées, texte replié
+// automatiquement, pagination automatique) à partir d'un contenu texte brut —
+// utilisé par les pages /privacy et /terms pour leur bouton "Télécharger en PDF".
+// Même bibliothèque (jsPDF) et même façon de l'appeler que pour les rapports de
+// caisse ailleurs dans l'app (import à la demande, doc.text/splitTextToSize).
+async function downloadLegalPdf(title, sections, fileName) {
+  const { default: jsPDF } = await import("jspdf");
+  const doc = new jsPDF();
+  const marginX = 14;
+  const pageWidth = 182; // largeur utile (A4 210mm - 2*14)
+  const pageBottom = 280;
+  let y = 20;
+  const ensureSpace = (needed) => {
+    if (y + needed > pageBottom) { doc.addPage(); y = 20; }
+  };
+  doc.setFontSize(18);
+  doc.setFont(undefined, "bold");
+  doc.text(title, marginX, y);
+  y += 7;
+  doc.setFont(undefined, "normal");
+  doc.setFontSize(10);
+  doc.setTextColor(130);
+  doc.text(`${PRIVACY_APP_NAME} · boutipro.com · Dernière mise à jour : ${new Date().toLocaleDateString("fr-FR")}`, marginX, y);
+  doc.setTextColor(0);
+  y += 12;
+  sections.forEach((sec) => {
+    ensureSpace(14);
+    doc.setFontSize(13);
+    doc.setFont(undefined, "bold");
+    const headingLines = doc.splitTextToSize(sec.heading, pageWidth);
+    doc.text(headingLines, marginX, y);
+    y += headingLines.length * 6 + 2;
+    doc.setFont(undefined, "normal");
+    doc.setFontSize(10.5);
+    sec.paragraphs.forEach((para) => {
+      const lines = doc.splitTextToSize(para, pageWidth);
+      ensureSpace(lines.length * 5.2 + 4);
+      doc.text(lines, marginX, y);
+      y += lines.length * 5.2 + 4;
+    });
+    y += 4;
+  });
+  doc.save(fileName);
+}
+
+function LegalPageLayout({ title, emoji, pdfSections, pdfFileName, children }) {
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const handleDownloadPdf = async () => {
+    setPdfBusy(true);
+    try {
+      await downloadLegalPdf(title, pdfSections, pdfFileName);
+    } catch (err) {
+      // Le téléchargement du PDF est une commodité ; en cas d'échec (ex. jsPDF non
+      // chargé), on laisse simplement l'utilisateur lire la page web elle-même.
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+  return (
+    <div style={{ minHeight: "100vh", background: "linear-gradient(180deg, #f3f1ff 0%, #f7f7fb 320px, #f7f7fb 100%)", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+      <style>{"@keyframes legalFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } } @keyframes legalPop { 0% { transform: scale(0.6); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }"}</style>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "28px 20px 72px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28, animation: "legalFadeUp 0.4s ease-out both" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <LegalAppLogo />
+            <div style={{ lineHeight: 1.2 }}>
+              <div style={{ fontSize: 19, fontWeight: 800, color: "#161a2b" }}>{PRIVACY_APP_NAME}</div>
+              <div style={{ fontSize: 12, color: "#9a9db0" }}>boutipro.com</div>
+            </div>
+          </div>
+          <a href="/" style={{ fontSize: 13, fontWeight: 700, color: LEGAL_ACCENT, textDecoration: "none", padding: "8px 14px", borderRadius: 999, background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
+            ← Retour
+          </a>
+        </div>
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
+          <div style={{ width: 64, height: 64, margin: "0 auto 16px", borderRadius: 20, background: `linear-gradient(135deg, ${LEGAL_ACCENT}, #8B85F2)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 30, boxShadow: `0 10px 24px ${LEGAL_ACCENT}33`, animation: "legalPop 0.5s ease-out both" }}>
+            {emoji}
+          </div>
+          <h1 style={{ fontSize: 30, fontWeight: 800, margin: "0 0 10px", color: "#161a2b", animation: "legalFadeUp 0.45s ease-out 0.05s both" }}>{title}</h1>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, flexWrap: "wrap", animation: "legalFadeUp 0.45s ease-out 0.1s both" }}>
+            <span style={{ display: "inline-block", fontSize: 12, fontWeight: 700, color: LEGAL_ACCENT, background: `${LEGAL_ACCENT}14`, padding: "6px 14px", borderRadius: 999 }}>
+              Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
+            </span>
+            <button onClick={handleDownloadPdf} disabled={pdfBusy} style={{ fontSize: 12, fontWeight: 700, color: LEGAL_ACCENT, background: "none", border: "none", textDecoration: "underline", cursor: pdfBusy ? "default" : "pointer", opacity: pdfBusy ? 0.6 : 1, padding: 0 }}>
+              {pdfBusy ? "Génération..." : "⬇ Télécharger la version PDF"}
+            </button>
+          </div>
+        </div>
+        <div style={{ background: "#fff", borderRadius: 24, padding: "32px 24px", boxShadow: "0 20px 50px -24px rgba(22,26,43,0.25)", lineHeight: 1.7, animation: "legalFadeUp 0.5s ease-out 0.12s both" }}>
+          {children}
+        </div>
+        <p style={{ textAlign: "center", fontSize: 12, color: "#9a9db0", marginTop: 24 }}>
+          {PRIVACY_APP_NAME} · <a href="/privacy" style={{ color: "#9a9db0" }}>Confidentialité</a> · <a href="/terms" style={{ color: "#9a9db0" }}>Conditions</a>
+        </p>
+      </div>
     </div>
   );
 }
 
-function TermsOfServiceScreen() {
-  const section = { fontSize: 18, marginTop: 28, marginBottom: 8 };
+const PRIVACY_PDF_SECTIONS = [
+  { heading: "Introduction", paragraphs: [
+    `La présente politique de confidentialité décrit comment ${PRIVACY_APP_NAME} ("l'application", "nous") collecte, utilise et protège les informations des utilisateurs.`,
+  ] },
+  { heading: "1. Informations que nous collectons", paragraphs: [
+    `Lorsque vous utilisez ${PRIVACY_APP_NAME}, nous pouvons collecter : votre nom et adresse e-mail (via la connexion Google ou la création de compte), le nom de votre boutique, et les données que vous saisissez dans l'application (produits, ventes, dettes, dépenses).`,
+    "Nous ne collectons pas d'informations de paiement, de localisation précise, ni de données biométriques.",
+  ] },
+  { heading: "2. Utilisation des informations", paragraphs: [
+    "Les informations collectées servent uniquement à : créer et sécuriser votre compte, faire fonctionner les fonctionnalités de gestion de boutique (stock, ventes, dettes), synchroniser vos données entre vos appareils, et vous contacter en cas de besoin lié à votre compte.",
+    "Nous ne vendons ni ne partageons vos données avec des tiers à des fins publicitaires.",
+  ] },
+  { heading: "3. Stockage et sécurité", paragraphs: [
+    "Vos données sont stockées de façon sécurisée via notre prestataire d'hébergement (Supabase). Des mesures raisonnables sont prises pour protéger vos informations contre tout accès non autorisé.",
+  ] },
+  { heading: "4. Connexion avec Google", paragraphs: [
+    "Si vous choisissez de vous connecter avec votre compte Google, nous recevons uniquement votre nom et votre adresse e-mail associés à ce compte, dans le seul but de créer et sécuriser votre profil dans l'application.",
+  ] },
+  { heading: "5. Conservation des données", paragraphs: [
+    "Vos données sont conservées tant que votre compte est actif. Vous pouvez demander la suppression de votre compte et de vos données à tout moment en nous contactant.",
+  ] },
+  { heading: "6. Vos droits", paragraphs: [
+    "Vous pouvez à tout moment demander l'accès, la correction ou la suppression de vos données personnelles en nous contactant à l'adresse ci-dessous.",
+  ] },
+  { heading: "7. Contact", paragraphs: [
+    `Pour toute question concernant cette politique de confidentialité, contactez-nous à : ${PRIVACY_CONTACT_EMAIL}`,
+  ] },
+  { heading: "8. Modifications", paragraphs: [
+    "Cette politique de confidentialité peut être mise à jour occasionnellement. Toute modification sera publiée sur cette page.",
+  ] },
+];
+
+function PrivacyPolicyScreen() {
   return (
-    <div
-      style={{
-        maxWidth: 720,
-        margin: "0 auto",
-        padding: "32px 20px 64px",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-        color: "#1a1a1a",
-        lineHeight: 1.6,
-        background: "#fff",
-        minHeight: "100vh",
-      }}
-    >
-      <h1 style={{ fontSize: 28, marginBottom: 4 }}>Conditions d'utilisation</h1>
-      <p style={{ color: "#666", marginBottom: 32 }}>
-        Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
+    <LegalPageLayout title="Politique de confidentialité" emoji="🔒" pdfSections={PRIVACY_PDF_SECTIONS} pdfFileName="boutipro-politique-confidentialite.pdf">
+      <p style={{ color: "#44485a" }}>
+        La présente politique de confidentialité décrit comment <strong>{PRIVACY_APP_NAME}</strong>{" "}
+        ("l'application", "nous") collecte, utilise et protège les informations des utilisateurs.
       </p>
-      <p>
+      <LegalSection n={1} title="Informations que nous collectons">
+        <p>Lorsque vous utilisez {PRIVACY_APP_NAME}, nous pouvons collecter :</p>
+        <ul style={{ paddingLeft: 20 }}>
+          <li>Votre nom et adresse e-mail (via la connexion Google ou la création de compte)</li>
+          <li>Le nom de votre boutique</li>
+          <li>Les données que vous saisissez dans l'application (produits, ventes, dettes, dépenses)</li>
+        </ul>
+        <p>Nous ne collectons pas d'informations de paiement, de localisation précise, ni de données biométriques.</p>
+      </LegalSection>
+      <LegalSection n={2} title="Utilisation des informations">
+        <p>Les informations collectées servent uniquement à :</p>
+        <ul style={{ paddingLeft: 20 }}>
+          <li>Créer et sécuriser votre compte</li>
+          <li>Faire fonctionner les fonctionnalités de gestion de boutique (stock, ventes, dettes)</li>
+          <li>Synchroniser vos données entre vos appareils</li>
+          <li>Vous contacter en cas de besoin lié à votre compte</li>
+        </ul>
+        <p>Nous ne vendons ni ne partageons vos données avec des tiers à des fins publicitaires.</p>
+      </LegalSection>
+      <LegalSection n={3} title="Stockage et sécurité">
+        <p>
+          Vos données sont stockées de façon sécurisée via notre prestataire d'hébergement (Supabase).
+          Des mesures raisonnables sont prises pour protéger vos informations contre tout accès non autorisé.
+        </p>
+      </LegalSection>
+      <LegalSection n={4} title="Connexion avec Google">
+        <p>
+          Si vous choisissez de vous connecter avec votre compte Google, nous recevons uniquement votre nom
+          et votre adresse e-mail associés à ce compte, dans le seul but de créer et sécuriser votre profil
+          dans l'application.
+        </p>
+      </LegalSection>
+      <LegalSection n={5} title="Conservation des données">
+        <p>
+          Vos données sont conservées tant que votre compte est actif. Vous pouvez demander la suppression
+          de votre compte et de vos données à tout moment en nous contactant.
+        </p>
+      </LegalSection>
+      <LegalSection n={6} title="Vos droits">
+        <p>
+          Vous pouvez à tout moment demander l'accès, la correction ou la suppression de vos données
+          personnelles en nous contactant à l'adresse ci-dessous.
+        </p>
+      </LegalSection>
+      <LegalSection n={7} title="Contact">
+        <p>
+          Pour toute question concernant cette politique de confidentialité, contactez-nous à :{" "}
+          <a href={`mailto:${PRIVACY_CONTACT_EMAIL}`} style={{ color: LEGAL_ACCENT, fontWeight: 700 }}>{PRIVACY_CONTACT_EMAIL}</a>
+        </p>
+      </LegalSection>
+      <LegalSection n={8} title="Modifications">
+        <p>Cette politique de confidentialité peut être mise à jour occasionnellement. Toute modification sera publiée sur cette page.</p>
+      </LegalSection>
+    </LegalPageLayout>
+  );
+}
+
+const TERMS_PDF_SECTIONS = [
+  { heading: "Introduction", paragraphs: [
+    `Les présentes conditions d'utilisation régissent l'usage de l'application ${PRIVACY_APP_NAME} ("l'application", "nous"). En créant un compte ou en utilisant l'application, vous acceptez ces conditions.`,
+  ] },
+  { heading: "1. Description du service", paragraphs: [
+    `${PRIVACY_APP_NAME} est un outil de gestion de boutique (stock, ventes, dettes, dépenses) destiné aux commerçants. L'application est fournie "en l'état", sans garantie de disponibilité continue ou d'absence d'erreurs.`,
+  ] },
+  { heading: "2. Compte utilisateur", paragraphs: [
+    "Vous êtes responsable de la confidentialité des identifiants de votre compte et de l'exactitude des informations que vous saisissez. Vous êtes seul responsable des données (produits, ventes, dettes) que vous enregistrez dans l'application.",
+  ] },
+  { heading: "3. Utilisation autorisée", paragraphs: [
+    "Vous vous engagez à ne pas utiliser l'application à des fins illégales, frauduleuses, ou pour porter atteinte à des tiers. Nous nous réservons le droit de suspendre tout compte utilisé de façon abusive.",
+  ] },
+  { heading: "4. Données et confidentialité", paragraphs: [
+    "Le traitement de vos données personnelles est décrit dans notre Politique de confidentialité (boutipro.com/privacy), qui fait partie intégrante des présentes conditions.",
+  ] },
+  { heading: "5. Limitation de responsabilité", paragraphs: [
+    `Dans la limite permise par la loi, ${PRIVACY_APP_NAME} ne pourra être tenue responsable des pertes de données, pertes financières ou interruptions de service, y compris celles liées à une panne du prestataire d'hébergement ou à une erreur de saisie de l'utilisateur. Nous recommandons de conserver vos propres sauvegardes pour les données critiques.`,
+  ] },
+  { heading: "6. Modification ou interruption du service", paragraphs: [
+    "Nous pouvons modifier, suspendre ou interrompre tout ou partie de l'application à tout moment, avec ou sans préavis, notamment pour des raisons de maintenance ou d'évolution du service.",
+  ] },
+  { heading: "7. Résiliation", paragraphs: [
+    "Vous pouvez cesser d'utiliser l'application à tout moment. Nous pouvons suspendre ou supprimer un compte en cas de non-respect de ces conditions.",
+  ] },
+  { heading: "8. Modifications des présentes conditions", paragraphs: [
+    "Ces conditions d'utilisation peuvent être mises à jour occasionnellement. Toute modification sera publiée sur cette page.",
+  ] },
+  { heading: "9. Contact", paragraphs: [
+    `Pour toute question concernant ces conditions d'utilisation, contactez-nous à : ${PRIVACY_CONTACT_EMAIL}`,
+  ] },
+];
+
+function TermsOfServiceScreen() {
+  return (
+    <LegalPageLayout title="Conditions d'utilisation" emoji="📄" pdfSections={TERMS_PDF_SECTIONS} pdfFileName="boutipro-conditions-utilisation.pdf">
+      <p style={{ color: "#44485a" }}>
         Les présentes conditions d'utilisation régissent l'usage de l'application{" "}
         <strong>{PRIVACY_APP_NAME}</strong> ("l'application", "nous"). En créant un compte
         ou en utilisant l'application, vous acceptez ces conditions.
       </p>
-      <h2 style={section}>1. Description du service</h2>
-      <p>
-        {PRIVACY_APP_NAME} est un outil de gestion de boutique (stock, ventes, dettes, dépenses)
-        destiné aux commerçants. L'application est fournie "en l'état", sans garantie de
-        disponibilité continue ou d'absence d'erreurs.
-      </p>
-      <h2 style={section}>2. Compte utilisateur</h2>
-      <p>
-        Vous êtes responsable de la confidentialité des identifiants de votre compte et de
-        l'exactitude des informations que vous saisissez. Vous êtes seul responsable des données
-        (produits, ventes, dettes) que vous enregistrez dans l'application.
-      </p>
-      <h2 style={section}>3. Utilisation autorisée</h2>
-      <p>
-        Vous vous engagez à ne pas utiliser l'application à des fins illégales, frauduleuses, ou
-        pour porter atteinte à des tiers. Nous nous réservons le droit de suspendre tout compte
-        utilisé de façon abusive.
-      </p>
-      <h2 style={section}>4. Données et confidentialité</h2>
-      <p>
-        Le traitement de vos données personnelles est décrit dans notre{" "}
-        <a href="/privacy">Politique de confidentialité</a>, qui fait partie intégrante des
-        présentes conditions.
-      </p>
-      <h2 style={section}>5. Limitation de responsabilité</h2>
-      <p>
-        Dans la limite permise par la loi, {PRIVACY_APP_NAME} ne pourra être tenue responsable des
-        pertes de données, pertes financières ou interruptions de service, y compris celles liées
-        à une panne du prestataire d'hébergement ou à une erreur de saisie de l'utilisateur. Nous
-        recommandons de conserver vos propres sauvegardes pour les données critiques.
-      </p>
-      <h2 style={section}>6. Modification ou interruption du service</h2>
-      <p>
-        Nous pouvons modifier, suspendre ou interrompre tout ou partie de l'application à tout
-        moment, avec ou sans préavis, notamment pour des raisons de maintenance ou d'évolution du
-        service.
-      </p>
-      <h2 style={section}>7. Résiliation</h2>
-      <p>
-        Vous pouvez cesser d'utiliser l'application à tout moment. Nous pouvons suspendre ou
-        supprimer un compte en cas de non-respect de ces conditions.
-      </p>
-      <h2 style={section}>8. Modifications des présentes conditions</h2>
-      <p>Ces conditions d'utilisation peuvent être mises à jour occasionnellement. Toute modification sera publiée sur cette page.</p>
-      <h2 style={section}>9. Contact</h2>
-      <p>
-        Pour toute question concernant ces conditions d'utilisation, contactez-nous à :{" "}
-        <a href={`mailto:${PRIVACY_CONTACT_EMAIL}`}>{PRIVACY_CONTACT_EMAIL}</a>
-      </p>
-    </div>
+      <LegalSection n={1} title="Description du service">
+        <p>
+          {PRIVACY_APP_NAME} est un outil de gestion de boutique (stock, ventes, dettes, dépenses)
+          destiné aux commerçants. L'application est fournie "en l'état", sans garantie de
+          disponibilité continue ou d'absence d'erreurs.
+        </p>
+      </LegalSection>
+      <LegalSection n={2} title="Compte utilisateur">
+        <p>
+          Vous êtes responsable de la confidentialité des identifiants de votre compte et de
+          l'exactitude des informations que vous saisissez. Vous êtes seul responsable des données
+          (produits, ventes, dettes) que vous enregistrez dans l'application.
+        </p>
+      </LegalSection>
+      <LegalSection n={3} title="Utilisation autorisée">
+        <p>
+          Vous vous engagez à ne pas utiliser l'application à des fins illégales, frauduleuses, ou
+          pour porter atteinte à des tiers. Nous nous réservons le droit de suspendre tout compte
+          utilisé de façon abusive.
+        </p>
+      </LegalSection>
+      <LegalSection n={4} title="Données et confidentialité">
+        <p>
+          Le traitement de vos données personnelles est décrit dans notre{" "}
+          <a href="/privacy" style={{ color: LEGAL_ACCENT, fontWeight: 700 }}>Politique de confidentialité</a>, qui fait partie
+          intégrante des présentes conditions.
+        </p>
+      </LegalSection>
+      <LegalSection n={5} title="Limitation de responsabilité">
+        <p>
+          Dans la limite permise par la loi, {PRIVACY_APP_NAME} ne pourra être tenue responsable des
+          pertes de données, pertes financières ou interruptions de service, y compris celles liées
+          à une panne du prestataire d'hébergement ou à une erreur de saisie de l'utilisateur. Nous
+          recommandons de conserver vos propres sauvegardes pour les données critiques.
+        </p>
+      </LegalSection>
+      <LegalSection n={6} title="Modification ou interruption du service">
+        <p>
+          Nous pouvons modifier, suspendre ou interrompre tout ou partie de l'application à tout
+          moment, avec ou sans préavis, notamment pour des raisons de maintenance ou d'évolution du
+          service.
+        </p>
+      </LegalSection>
+      <LegalSection n={7} title="Résiliation">
+        <p>
+          Vous pouvez cesser d'utiliser l'application à tout moment. Nous pouvons suspendre ou
+          supprimer un compte en cas de non-respect de ces conditions.
+        </p>
+      </LegalSection>
+      <LegalSection n={8} title="Modifications des présentes conditions">
+        <p>Ces conditions d'utilisation peuvent être mises à jour occasionnellement. Toute modification sera publiée sur cette page.</p>
+      </LegalSection>
+      <LegalSection n={9} title="Contact">
+        <p>
+          Pour toute question concernant ces conditions d'utilisation, contactez-nous à :{" "}
+          <a href={`mailto:${PRIVACY_CONTACT_EMAIL}`} style={{ color: LEGAL_ACCENT, fontWeight: 700 }}>{PRIVACY_CONTACT_EMAIL}</a>
+        </p>
+      </LegalSection>
+    </LegalPageLayout>
   );
 }
 
