@@ -5430,7 +5430,10 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       } else {
         const { error: oauthError } = await supabase.auth.signInWithOAuth({
           provider: "google",
-          options: { redirectTo: window.location.origin },
+          // "/" est désormais la page d'accueil PUBLIQUE (exigée par Google OAuth,
+          // voir LandingScreen juste avant BoutiqueAppSafe) : après connexion, on
+          // doit revenir sur "/app" (l'app elle-même), pas sur cette vitrine.
+          options: { redirectTo: window.location.origin + "/app" },
         });
         if (oauthError) throw oauthError;
         // La redirection vers Google se déclenche automatiquement ; l'utilisateur
@@ -10582,6 +10585,7 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Pages /privacy et /terms (Confidentialité et Conditions d'utilisation) : design commun modernisé via LegalPageLayout + LegalSection (juste avant PrivacyPolicyScreen) — logo de l'app + nom en haut, bouton "← Retour" vers /, gros titre avec pastille dégradée + emoji, pastille "Dernière mise à jour" colorée, carte blanche arrondie avec ombre contenant le texte, sections à puce colorée + titre en gras souligné, petites animations d'apparition (fondu + léger glissement vers le haut, en cascade section par section) via les keyframes legalFadeUp/legalPop. Contenu juridique inchangé (toujours en dur, en français uniquement, hors système de traduction normal). PRIVACY_APP_NAME = "Boutipro" (mis à jour depuis "Ma Boutique").
 - L'app s'appelait "Shopnify", renommée "Boutipro" (nouveau domaine : boutipro.com) — tout le texte visible (appName, à propos, bannière d'installation, filigrane sur les images de partage, etc.) a été renommé partout dans ce fichier. EXCEPTION VOLONTAIRE, à ne jamais renommer ici sans un vrai projet à part : le schéma d'URL technique com.shopnify.app (lien profond utilisé pour le retour de connexion Google, voir juste en dessous) — c'est très probablement aussi le nom de package de l'app Android native (applicationId), déclaré dans un projet natif hors de ce fichier .jsx, et potentiellement référencé dans Google Cloud Console/Supabase. Le changer demande de coordonner plusieurs projets à la fois (package Android, Google Cloud Console, Supabase, page de callback hébergée séparément) ; le faire uniquement ici casserait la connexion sans rien réparer ailleurs. Les clés de cache interne (ex. boutipro_last_shop_cache) ont, elles, été renommées sans risque (juste un cache local vidé une fois).
 - Connexion "Continuer avec Google" ne fonctionnant pas sur iPhone (signalé, pas encore résolu) : le flux actuel (fonction de connexion Google, autour de signInWithOAuth/Browser.open/appUrlOpen) passe par le navigateur système + une page de callback HTTPS intermédiaire (ma-boutique-tawny.vercel.app/auth-callback.html) qui rouvre l'app via un lien profond (schéma com.shopnify.app) — ce choix est explicitement documenté dans le code comme ayant été fait pour contourner un comportement d'Android (refus d'ouvrir un schéma personnalisé après redirection OAuth), et ne semble jamais avoir été vérifié spécifiquement sur iOS. Pistes à vérifier côté natif (hors de ce fichier JS, donc non vérifiables ni corrigeables d'ici) : le schéma d'URL personnalisé est-il bien déclaré dans l'Info.plist du projet iOS (CFBundleURLTypes) ? Le comportement observé est-il "rien ne se passe au tap", "Safari s'ouvre puis reste bloqué dessus sans revenir à l'app", ou "une erreur s'affiche" ?
+- Page d'accueil publique ajoutée à la racine "/" du site (LandingScreen, juste avant BoutiqueAppSafe), pour répondre aux exigences de validation du branding OAuth Google (page d'accueil accessible sans connexion + objectif de l'app clairement expliqué) : "/" affiche désormais cette vitrine publique au lieu de l'app, et c'est "/app" qui porte maintenant l'application + l'écran de connexion (bouton "Accéder à l'application" sur la vitrine, et redirectTo de la connexion Google web mis à jour vers "/app"). Le bouton "← Retour" des pages /privacy et /terms pointe lui aussi vers "/app" (et non plus "/"), puisque ces pages sont surtout consultées depuis l'écran de connexion de l'app.
 - Écran d'inscription (étape 1/2, "infos boutique" : prénom, nom, nom de la boutique, secteur, pays, téléphone, langue, devise) : corrigé un bug où, sur certains téléphones (constaté sur iPhone) avec un formulaire long et/ou le clavier ouvert, le bouton « Suivant » devenait inatteignable car l'écran ne défilait pas (la carte était verticalement centrée sans défilement propre). La carte d'inscription défile maintenant correctement en interne si son contenu dépasse la hauteur de l'écran.
 - Onglet Vente, bouton flottant « Voir la vente » : visible en permanence dès que le panier actif contient au moins un article (il ne se cache plus automatiquement en défilant). Au tap, il ouvre une fenêtre (bottom-sheet, avec en-tête et bouton de fermeture) contenant le résumé du panier et le paiement (mode de paiement, nom du client, montant donné, bouton « Finaliser la vente ») — ce n'est plus une section qu'on atteignait en faisant défiler la page jusqu'en bas. La liste de produits réserve un espace supplémentaire en bas lorsque ce bouton est affiché, pour que le dernier produit reste visible au-dessus de lui.
 - Compte : dans « Gérer le compte », on peut consulter et modifier ses informations, dont le numéro de mobile saisi à l'inscription.
@@ -16287,7 +16291,7 @@ function LegalPageLayout({ title, emoji, pdfSections, pdfFileName, children }) {
               <div style={{ fontSize: 12, color: "#9a9db0" }}>boutipro.com</div>
             </div>
           </div>
-          <a href="/" style={{ fontSize: 13, fontWeight: 700, color: LEGAL_ACCENT, textDecoration: "none", padding: "8px 14px", borderRadius: 999, background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
+          <a href="/app" style={{ fontSize: 13, fontWeight: 700, color: LEGAL_ACCENT, textDecoration: "none", padding: "8px 14px", borderRadius: 999, background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
             ← Retour
           </a>
         </div>
@@ -16515,6 +16519,75 @@ function TermsOfServiceScreen() {
   );
 }
 
+// Page d'accueil PUBLIQUE, à la racine "/" du site — ajoutée pour répondre aux
+// 3 problèmes relevés par la validation du branding OAuth Google (Centre de
+// validation > Branding) :
+//   1. « Votre page d'accueil n'est accessible que via une page de connexion » :
+//      avant cet ajout, "/" affichait directement BoutiqueAppInner (donc l'écran
+//      de connexion) ; "/" affiche maintenant cette vitrine publique, consultable
+//      sans compte, et c'est "/app" qui porte désormais l'application + connexion.
+//   2. « Votre page d'accueil n'explique pas l'objectif de votre application » :
+//      le texte ci-dessous décrit explicitement ce qu'est l'app.
+//   3. « Le site Web correspondant à l'URL de votre page d'accueil n'est pas
+//      enregistré à votre nom » : problème de PROPRIÉTÉ DE DOMAINE (Google
+//      Search Console), qui ne se règle pas dans ce fichier JS — voir la
+//      réponse donnée à l'utilisateur en dehors du code pour la marche à suivre.
+// Réutilise les constantes/style des pages légales (LEGAL_ACCENT, PRIVACY_APP_NAME,
+// LegalAppLogo) pour rester visuellement cohérent avec /privacy et /terms.
+function LandingScreen() {
+  return (
+    <div style={{ minHeight: "100vh", background: "linear-gradient(180deg, #f3f1ff 0%, #f7f7fb 320px, #f7f7fb 100%)", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+      <div style={{ maxWidth: 760, margin: "0 auto", padding: "28px 20px 72px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 48 }}>
+          <LegalAppLogo />
+          <div style={{ lineHeight: 1.2 }}>
+            <div style={{ fontSize: 19, fontWeight: 800, color: "#161a2b" }}>{PRIVACY_APP_NAME}</div>
+            <div style={{ fontSize: 12, color: "#9a9db0" }}>boutipro.com</div>
+          </div>
+        </div>
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
+          <div style={{ width: 72, height: 72, margin: "0 auto 20px", borderRadius: 22, background: `linear-gradient(135deg, ${LEGAL_ACCENT}, #8B85F2)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 34, boxShadow: `0 10px 24px ${LEGAL_ACCENT}33` }}>
+            🛍️
+          </div>
+          <h1 style={{ fontSize: 32, fontWeight: 800, margin: "0 0 14px", color: "#161a2b" }}>
+            {PRIVACY_APP_NAME} — la gestion de votre boutique, simplifiée
+          </h1>
+          <p style={{ fontSize: 16, color: "#55596e", lineHeight: 1.7, maxWidth: 560, margin: "0 auto" }}>
+            {PRIVACY_APP_NAME} est une application destinée aux commerçants pour gérer au quotidien
+            leur boutique depuis un téléphone ou un ordinateur : suivi du stock, enregistrement des
+            ventes, suivi des dettes clients, gestion de la caisse et des dépenses, et statistiques
+            de l'activité. Plusieurs employés peuvent y être rattachés avec des accès contrôlés, et
+            plusieurs boutiques peuvent être gérées depuis un même compte.
+          </p>
+          <a
+            href="/app"
+            style={{ display: "inline-block", marginTop: 28, fontSize: 15, fontWeight: 700, color: "#fff", background: LEGAL_ACCENT, textDecoration: "none", padding: "14px 32px", borderRadius: 999, boxShadow: `0 10px 24px ${LEGAL_ACCENT}44` }}
+          >
+            Accéder à l'application →
+          </a>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 12 }}>
+          {[
+            { emoji: "📦", title: "Stock", text: "Ajoutez vos produits, suivez les quantités et recevez une alerte en cas de stock faible." },
+            { emoji: "💳", title: "Ventes & caisse", text: "Encaissez en espèces, Mobile Money ou carte, et suivez le solde de caisse en temps réel." },
+            { emoji: "🧾", title: "Dettes clients", text: "Enregistrez les ventes à crédit et suivez les remboursements, même partiels." },
+            { emoji: "📊", title: "Statistiques", text: "Comparez vos boutiques et suivez votre activité dans le temps." },
+          ].map((f) => (
+            <div key={f.title} style={{ background: "#fff", borderRadius: 18, padding: "20px 18px", boxShadow: "0 12px 30px -18px rgba(22,26,43,0.25)" }}>
+              <div style={{ fontSize: 24, marginBottom: 8 }}>{f.emoji}</div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: "#161a2b", marginBottom: 4 }}>{f.title}</div>
+              <div style={{ fontSize: 13, color: "#777b90", lineHeight: 1.5 }}>{f.text}</div>
+            </div>
+          ))}
+        </div>
+        <p style={{ textAlign: "center", fontSize: 12, color: "#9a9db0", marginTop: 36 }}>
+          {PRIVACY_APP_NAME} · <a href="/privacy" style={{ color: "#9a9db0" }}>Confidentialité</a> · <a href="/terms" style={{ color: "#9a9db0" }}>Conditions</a> · <a href={`mailto:${PRIVACY_CONTACT_EMAIL}`} style={{ color: "#9a9db0" }}>{PRIVACY_CONTACT_EMAIL}</a>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // Point d'entrée réel du fichier : enveloppe l'app dans le filet anti-page-blanche
 // ci-dessus, et affiche aussi les erreurs qui surviennent hors du rendu React
 // (dans un clic, un useEffect asynchrone, etc.) sous forme d'alerte visible.
@@ -16536,6 +16609,14 @@ export function BoutiqueAppSafe() {
   }
   if (typeof window !== "undefined" && window.location.pathname === "/terms") {
     return <TermsOfServiceScreen />;
+  }
+  // Route "/" (racine exacte du domaine) : vitrine publique, sans connexion requise
+  // (voir LandingScreen juste au-dessus pour le détail des 3 problèmes Google OAuth
+  // que cette route règle). Toute AUTRE route non listée ci-dessus (dont "/app",
+  // utilisée par le bouton "Accéder à l'application" et par le retour du login
+  // Google — voir redirectTo dans loginWithGoogle) continue d'afficher l'app.
+  if (typeof window !== "undefined" && window.location.pathname === "/") {
+    return <LandingScreen />;
   }
   return (
     <ErrorBoundary>
