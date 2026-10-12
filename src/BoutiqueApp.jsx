@@ -359,6 +359,69 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     storage: capacitorPreferencesStorage,
   },
 });
+// ---- Connexion Google côté web/PWA avec le sélecteur de compte NATIF du navigateur ----
+// Client ID OAuth de type "Application Web" ("Ma Boutique Web" dans Google Cloud Console) —
+// PAS le Client ID "Android" utilisé par le plugin natif (SocialLogin.initialize plus bas) :
+// Google Identity Services sur le web exige obligatoirement un Client ID de type Web.
+const GOOGLE_WEB_CLIENT_ID = "431612912550-np9pvnq0faokbgle9dba608ab4no5g3j.apps.googleusercontent.com";
+// Charge la bibliothèque Google Identity Services (GIS) à la demande. Cette bibliothèque est
+// ce qui permet, sur le WEB (PWA incluse), d'afficher le même sélecteur de compte natif/épuré
+// ("Sélectionner un compte", sans barre d'adresse accounts.google.com) que celui de l'app
+// installée (APK) ou que celui utilisé par Claude lui-même — via FedCM (Federated Credential
+// Management), une fonctionnalité du navigateur. Sans cela, le web repart en redirection
+// classique vers la page d'autorisation complète de Google (ancien comportement).
+let _gisScriptPromise = null;
+function loadGoogleIdentityScript() {
+  if (typeof window === "undefined") return Promise.reject(new Error("GIS indisponible hors navigateur"));
+  if (window.google && window.google.accounts && window.google.accounts.id) return Promise.resolve();
+  if (_gisScriptPromise) return _gisScriptPromise;
+  _gisScriptPromise = new Promise((resolve, reject) => {
+    const existing = document.getElementById("google-identity-script");
+    if (existing) {
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", () => reject(new Error("Échec de chargement de Google Identity Services")));
+      return;
+    }
+    const script = document.createElement("script");
+    script.id = "google-identity-script";
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Échec de chargement de Google Identity Services"));
+    document.head.appendChild(script);
+  });
+  return _gisScriptPromise;
+}
+// Déclenche le sélecteur de compte natif (FedCM/One Tap) et résout avec le jeton d'ID Google
+// renvoyé, ou rejette si le navigateur ne le supporte pas / l'affiche pas (Safari, Firefox,
+// cookies tiers bloqués, etc.) — auquel cas loginWithGoogle retombe sur l'ancien flux par
+// redirection.
+function promptGoogleIdentitySignIn() {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    try {
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_WEB_CLIENT_ID,
+        callback: (response) => {
+          settled = true;
+          if (response && response.credential) resolve(response.credential);
+          else reject(new Error("Aucun jeton reçu de Google"));
+        },
+        use_fedcm_for_prompt: true,
+        auto_select: false,
+      });
+      window.google.accounts.id.prompt((notification) => {
+        if (settled) return;
+        const unavailable =
+          notification && ((notification.isNotDisplayed && notification.isNotDisplayed()) || (notification.isSkippedMoment && notification.isSkippedMoment()));
+        if (unavailable) reject(new Error("GIS_PROMPT_UNAVAILABLE"));
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
 // ---- Remplacement de window.storage (spécifique à l'environnement Claude Artifacts) ----
 // Lit l'utilisateur connecté depuis la session locale (aucun appel réseau, ~0 ms) au lieu de
 // getUserFast() qui fait un aller-retour serveur à chaque fois. Le jeton est
@@ -5428,16 +5491,31 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         if (oauthError) throw oauthError;
         setGoogleLoginBusy(false);
       } else {
-        const { error: oauthError } = await supabase.auth.signInWithOAuth({
-          provider: "google",
-          // "/" est désormais la page d'accueil PUBLIQUE (exigée par Google OAuth,
-          // voir LandingScreen juste avant BoutiqueAppSafe) : après connexion, on
-          // doit revenir sur "/app" (l'app elle-même), pas sur cette vitrine.
-          options: { redirectTo: window.location.origin + "/app" },
-        });
-        if (oauthError) throw oauthError;
-        // La redirection vers Google se déclenche automatiquement ; l'utilisateur
-        // revient ensuite sur l'app déjà connecté, sans autre action ici.
+        // Web / PWA : on tente d'abord le même sélecteur de compte NATIF que l'app installée
+        // (FedCM/One Tap, via Google Identity Services — voir promptGoogleIdentitySignIn plus
+        // haut dans ce fichier), pour avoir le même rendu épuré ("Sélectionner un compte", sans
+        // page accounts.google.com complète) que l'APK ou que Claude. Pris en charge par Chrome/
+        // Edge sur Android et desktop ; indisponible sur Safari et Firefox, ou si les cookies
+        // tiers sont bloqués — dans ce cas on retombe automatiquement sur l'ancienne redirection
+        // classique (signInWithOAuth), qui continue donc de fonctionner partout.
+        try {
+          await loadGoogleIdentityScript();
+          const idToken = await promptGoogleIdentitySignIn();
+          const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
+          if (oauthError) throw oauthError;
+          setGoogleLoginBusy(false);
+        } catch (gisErr) {
+          const { error: oauthError } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            // "/" est désormais la page d'accueil PUBLIQUE (exigée par Google OAuth,
+            // voir LandingScreen juste avant BoutiqueAppSafe) : après connexion, on
+            // doit revenir sur "/app" (l'app elle-même), pas sur cette vitrine.
+            options: { redirectTo: window.location.origin + "/app" },
+          });
+          if (oauthError) throw oauthError;
+          // La redirection vers Google se déclenche automatiquement ; l'utilisateur
+          // revient ensuite sur l'app déjà connecté, sans autre action ici.
+        }
       }
     } catch (err) {
       setError(t(lang, "googleLoginError"));
@@ -10585,6 +10663,7 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Pages /privacy et /terms (Confidentialité et Conditions d'utilisation) : design commun modernisé via LegalPageLayout + LegalSection (juste avant PrivacyPolicyScreen) — logo de l'app + nom en haut, bouton "← Retour" vers /, gros titre avec pastille dégradée + emoji, pastille "Dernière mise à jour" colorée, carte blanche arrondie avec ombre contenant le texte, sections à puce colorée + titre en gras souligné, petites animations d'apparition (fondu + léger glissement vers le haut, en cascade section par section) via les keyframes legalFadeUp/legalPop. Contenu juridique inchangé (toujours en dur, en français uniquement, hors système de traduction normal). PRIVACY_APP_NAME = "Boutipro" (mis à jour depuis "Ma Boutique").
 - L'app s'appelait "Shopnify", renommée "Boutipro" (nouveau domaine : boutipro.com) — tout le texte visible (appName, à propos, bannière d'installation, filigrane sur les images de partage, etc.) a été renommé partout dans ce fichier. EXCEPTION VOLONTAIRE, à ne jamais renommer ici sans un vrai projet à part : le schéma d'URL technique com.shopnify.app (lien profond utilisé pour le retour de connexion Google, voir juste en dessous) — c'est très probablement aussi le nom de package de l'app Android native (applicationId), déclaré dans un projet natif hors de ce fichier .jsx, et potentiellement référencé dans Google Cloud Console/Supabase. Le changer demande de coordonner plusieurs projets à la fois (package Android, Google Cloud Console, Supabase, page de callback hébergée séparément) ; le faire uniquement ici casserait la connexion sans rien réparer ailleurs. Les clés de cache interne (ex. boutipro_last_shop_cache) ont, elles, été renommées sans risque (juste un cache local vidé une fois).
 - Connexion "Continuer avec Google" ne fonctionnant pas sur iPhone (signalé, pas encore résolu) : le flux actuel (fonction de connexion Google, autour de signInWithOAuth/Browser.open/appUrlOpen) passe par le navigateur système + une page de callback HTTPS intermédiaire (ma-boutique-tawny.vercel.app/auth-callback.html) qui rouvre l'app via un lien profond (schéma com.shopnify.app) — ce choix est explicitement documenté dans le code comme ayant été fait pour contourner un comportement d'Android (refus d'ouvrir un schéma personnalisé après redirection OAuth), et ne semble jamais avoir été vérifié spécifiquement sur iOS. Pistes à vérifier côté natif (hors de ce fichier JS, donc non vérifiables ni corrigeables d'ici) : le schéma d'URL personnalisé est-il bien déclaré dans l'Info.plist du projet iOS (CFBundleURLTypes) ? Le comportement observé est-il "rien ne se passe au tap", "Safari s'ouvre puis reste bloqué dessus sans revenir à l'app", ou "une erreur s'affiche" ?
+- Connexion Google sur le web/PWA : elle utilise désormais, en priorité, le même sélecteur de compte natif/épuré que l'app installée et que Claude (FedCM/One Tap via Google Identity Services, promptGoogleIdentitySignIn + signInWithIdToken, même Client ID "Web" que le plugin natif), au lieu de rediriger vers la page complète accounts.google.com ; repli automatique et transparent sur l'ancienne redirection (signInWithOAuth) si le navigateur ne supporte pas FedCM (Safari, Firefox, cookies tiers bloqués).
 - Page d'accueil publique ajoutée à la racine "/" du site (LandingScreen, juste avant BoutiqueAppSafe), pour répondre aux exigences de validation du branding OAuth Google (page d'accueil accessible sans connexion + objectif de l'app clairement expliqué) : "/" affiche désormais cette vitrine publique au lieu de l'app, et c'est "/app" qui porte maintenant l'application + l'écran de connexion (bouton "Accéder à l'application" sur la vitrine, et redirectTo de la connexion Google web mis à jour vers "/app"). Le bouton "← Retour" des pages /privacy et /terms pointe lui aussi vers "/app" (et non plus "/"), puisque ces pages sont surtout consultées depuis l'écran de connexion de l'app.
 - Écran d'inscription (étape 1/2, "infos boutique" : prénom, nom, nom de la boutique, secteur, pays, téléphone, langue, devise) : corrigé un bug où, sur certains téléphones (constaté sur iPhone) avec un formulaire long et/ou le clavier ouvert, le bouton « Suivant » devenait inatteignable car l'écran ne défilait pas (la carte était verticalement centrée sans défilement propre). La carte d'inscription défile maintenant correctement en interne si son contenu dépasse la hauteur de l'écran.
 - Onglet Vente, bouton flottant « Voir la vente » : visible en permanence dès que le panier actif contient au moins un article (il ne se cache plus automatiquement en défilant). Au tap, il ouvre une fenêtre (bottom-sheet, avec en-tête et bouton de fermeture) contenant le résumé du panier et le paiement (mode de paiement, nom du client, montant donné, bouton « Finaliser la vente ») — ce n'est plus une section qu'on atteignait en faisant défiler la page jusqu'en bas. La liste de produits réserve un espace supplémentaire en bas lorsque ce bouton est affiché, pour que le dernier produit reste visible au-dessus de lui.
