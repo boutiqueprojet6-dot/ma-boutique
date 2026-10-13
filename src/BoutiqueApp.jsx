@@ -3692,16 +3692,16 @@ function renderLegalConsentText(sentence, termsLabel, privacyLabel, darkMode) {
     return (
       <>
         {sentence}{" "}
-        <a href="/terms" target="_blank" rel="noopener noreferrer" style={linkStyle}>{termsLabel}</a>
+        <a href="https://www.boutipro.com/terms" target="_blank" rel="noopener noreferrer" style={linkStyle}>{termsLabel}</a>
         {" · "}
-        <a href="/privacy" target="_blank" rel="noopener noreferrer" style={linkStyle}>{privacyLabel}</a>
+        <a href="https://www.boutipro.com/privacy" target="_blank" rel="noopener noreferrer" style={linkStyle}>{privacyLabel}</a>
       </>
     );
   }
   const firstLabel = iTerms < iPrivacy ? termsLabel : privacyLabel;
-  const firstHref = iTerms < iPrivacy ? "/terms" : "/privacy";
+  const firstHref = iTerms < iPrivacy ? "https://www.boutipro.com/terms" : "https://www.boutipro.com/privacy";
   const secondLabel = iTerms < iPrivacy ? privacyLabel : termsLabel;
-  const secondHref = iTerms < iPrivacy ? "/privacy" : "/terms";
+  const secondHref = iTerms < iPrivacy ? "https://www.boutipro.com/privacy" : "https://www.boutipro.com/terms";
   const firstStart = Math.min(iTerms, iPrivacy);
   const firstEnd = firstStart + firstLabel.length;
   const secondStart = sentence.indexOf(secondLabel, firstEnd);
@@ -5726,6 +5726,36 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     if (isGoogleFlow && obStep === 4) { setObStep(1); return; }
     if (obStep > 1) setObStep(obStep - 1);
   };
+  // ---- Bouton retour du téléphone pendant l'inscription / la connexion ----
+  // Avant cet ajout, AuthScreen n'avait aucun écouteur "backButton" : le retour matériel
+  // fermait directement l'app pendant le remplissage des étapes d'inscription (au lieu de
+  // revenir à l'étape précédente), contrairement au reste de l'app une fois connecté (ex :
+  // Paramètres, où retour revient au menu puis à l'accueil). Même logique de priorité que
+  // backHandlerRef dans le composant principal : on gère du plus "profond" au plus "racine",
+  // et on renvoie true si on a géré l'appui (sinon l'écouteur global ferme l'application).
+  const authBackHandlerRef = useRef(null);
+  authBackHandlerRef.current = () => {
+    if (screen === "employee-scan") { setScreen("login"); return true; }
+    if (screen === "onboarding") {
+      if (isGoogleFlow && obStep === 4) { setObStep(1); return true; }
+      if (obStep > 1) { setObStep(obStep - 1); return true; }
+      // Étape 1 : il n'y a plus d'étape précédente dans le formulaire, donc on ferme
+      // l'inscription et on revient à l'écran de connexion (comme le bouton ✕ existant).
+      setScreen("login");
+      return true;
+    }
+    return false; // écran "login" ou "success" : comportement par défaut (ferme l'app)
+  };
+  useEffect(() => {
+    if (!isNativePlatformNow()) return;
+    let handle = null;
+    let cancelled = false;
+    CapacitorApp.addListener("backButton", () => {
+      const handled = authBackHandlerRef.current ? authBackHandlerRef.current() : false;
+      if (!handled) CapacitorApp.exitApp();
+    }).then((h) => { if (cancelled) h.remove(); else handle = h; });
+    return () => { cancelled = true; if (handle) handle.remove(); };
+  }, []);
   const fieldStyle = (hasError) => ({
     borderColor: hasError ? CLAY : "#E7E8F1",
   });
@@ -10663,6 +10693,8 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Pages /privacy et /terms (Confidentialité et Conditions d'utilisation) : design commun modernisé via LegalPageLayout + LegalSection (juste avant PrivacyPolicyScreen) — logo de l'app + nom en haut, bouton "← Retour" vers /, gros titre avec pastille dégradée + emoji, pastille "Dernière mise à jour" colorée, carte blanche arrondie avec ombre contenant le texte, sections à puce colorée + titre en gras souligné, petites animations d'apparition (fondu + léger glissement vers le haut, en cascade section par section) via les keyframes legalFadeUp/legalPop. Contenu juridique inchangé (toujours en dur, en français uniquement, hors système de traduction normal). PRIVACY_APP_NAME = "Boutipro" (mis à jour depuis "Ma Boutique").
 - L'app s'appelait "Shopnify", renommée "Boutipro" (nouveau domaine : boutipro.com) — tout le texte visible (appName, à propos, bannière d'installation, filigrane sur les images de partage, etc.) a été renommé partout dans ce fichier. EXCEPTION VOLONTAIRE, à ne jamais renommer ici sans un vrai projet à part : le schéma d'URL technique com.shopnify.app (lien profond utilisé pour le retour de connexion Google, voir juste en dessous) — c'est très probablement aussi le nom de package de l'app Android native (applicationId), déclaré dans un projet natif hors de ce fichier .jsx, et potentiellement référencé dans Google Cloud Console/Supabase. Le changer demande de coordonner plusieurs projets à la fois (package Android, Google Cloud Console, Supabase, page de callback hébergée séparément) ; le faire uniquement ici casserait la connexion sans rien réparer ailleurs. Les clés de cache interne (ex. boutipro_last_shop_cache) ont, elles, été renommées sans risque (juste un cache local vidé une fois).
 - Connexion "Continuer avec Google" ne fonctionnant pas sur iPhone (signalé, pas encore résolu) : le flux actuel (fonction de connexion Google, autour de signInWithOAuth/Browser.open/appUrlOpen) passe par le navigateur système + une page de callback HTTPS intermédiaire (ma-boutique-tawny.vercel.app/auth-callback.html) qui rouvre l'app via un lien profond (schéma com.shopnify.app) — ce choix est explicitement documenté dans le code comme ayant été fait pour contourner un comportement d'Android (refus d'ouvrir un schéma personnalisé après redirection OAuth), et ne semble jamais avoir été vérifié spécifiquement sur iOS. Pistes à vérifier côté natif (hors de ce fichier JS, donc non vérifiables ni corrigeables d'ici) : le schéma d'URL personnalisé est-il bien déclaré dans l'Info.plist du projet iOS (CFBundleURLTypes) ? Le comportement observé est-il "rien ne se passe au tap", "Safari s'ouvre puis reste bloqué dessus sans revenir à l'app", ou "une erreur s'affiche" ?
+- Bouton retour natif pendant l'inscription (AuthScreen, écran "onboarding") : géré désormais (authBackHandlerRef) pour revenir à l'étape précédente au lieu de fermer l'app ; à l'étape 1, revient à l'écran de connexion. Avant, seul le composant principal (après connexion) gérait le retour natif.
+- Liens "Conditions d'utilisation" / "Politique de confidentialité" de l'écran de connexion (renderLegalConsentText) : rendus absolus vers https://www.boutipro.com/terms et https://www.boutipro.com/privacy (au lieu de /terms et /privacy relatifs) — dans l'app native (APK), ces liens s'ouvrent dans un onglet in-app dont la barre affiche l'URL ouverte ; en relatif, elle affichait "ma-boutique-tawny.vercel.app" (origine du WebView, définie côté config native hors de ce fichier) au lieu du vrai domaine de l'app.
 - Connexion Google sur le web/PWA : elle utilise désormais, en priorité, le même sélecteur de compte natif/épuré que l'app installée et que Claude (FedCM/One Tap via Google Identity Services, promptGoogleIdentitySignIn + signInWithIdToken, même Client ID "Web" que le plugin natif), au lieu de rediriger vers la page complète accounts.google.com ; repli automatique et transparent sur l'ancienne redirection (signInWithOAuth) si le navigateur ne supporte pas FedCM (Safari, Firefox, cookies tiers bloqués).
 - Page d'accueil publique ajoutée à la racine "/" du site (LandingScreen, juste avant BoutiqueAppSafe), pour répondre aux exigences de validation du branding OAuth Google (page d'accueil accessible sans connexion + objectif de l'app clairement expliqué) : "/" affiche désormais cette vitrine publique au lieu de l'app, et c'est "/app" qui porte maintenant l'application + l'écran de connexion (bouton "Accéder à l'application" sur la vitrine, et redirectTo de la connexion Google web mis à jour vers "/app"). Le bouton "← Retour" des pages /privacy et /terms pointe lui aussi vers "/app" (et non plus "/"), puisque ces pages sont surtout consultées depuis l'écran de connexion de l'app.
 - Écran d'inscription (étape 1/2, "infos boutique" : prénom, nom, nom de la boutique, secteur, pays, téléphone, langue, devise) : corrigé un bug où, sur certains téléphones (constaté sur iPhone) avec un formulaire long et/ou le clavier ouvert, le bouton « Suivant » devenait inatteignable car l'écran ne défilait pas (la carte était verticalement centrée sans défilement propre). La carte d'inscription défile maintenant correctement en interne si son contenu dépasse la hauteur de l'écran.
