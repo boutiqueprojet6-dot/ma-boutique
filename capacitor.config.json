@@ -1,6 +1,6 @@
 {
   "appId": "com.shopnify.app",
-  "appName": "Shopnify",
+  "appName": "Boutipro",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"
