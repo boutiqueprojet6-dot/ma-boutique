@@ -10995,6 +10995,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const [accountingFrom, setAccountingFrom] = useState("");
   const [accountingTo, setAccountingTo] = useState("");
   const [accountingGenerating, setAccountingGenerating] = useState(false);
+  // Déplacé ici (même raison que ci-dessus) : ce hook était resté après le
+  // "if (loading) return" plus bas, ce qui faisait planter React (erreur #310)
+  // dès que "loading" passait à false — notamment juste après le clic sur
+  // "Mode démo", où ce passage se fait immédiatement.
+  const [pdfExportGenerating, setPdfExportGenerating] = useState(false);
   // ============================================================
   // PERSISTANCE CRITIQUE CONTRE LE KILL ANDROID EN ARRIÈRE-PLAN
   // ============================================================
@@ -11637,7 +11642,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // expose une API toDataURL() qui génère directement une image PNG, utilisable
   // telle quelle avec doc.addImage(), sans passer par un rendu React/SVG.
   // Chargé à la demande comme jsPDF, pour ne pas alourdir le démarrage de l'app.
-  const [pdfExportGenerating, setPdfExportGenerating] = useState(false);
   const generateShopExportPdf = async () => {
     setPdfExportGenerating(true);
     try {
