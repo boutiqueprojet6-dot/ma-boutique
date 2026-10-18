@@ -11463,6 +11463,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       }).catch(() => {});
     }
   }, [todayTotalForWidget, todaySalesForWidget.length]);
+  // Même raison que le commentaire ci-dessus : ce hook doit être appelé à CHAQUE rendu,
+  // donc avant le "if (loading) return" qui suit. Il était auparavant déclaré plus bas
+  // (juste avant generateShopExportPdf), ce qui provoquait la même erreur React #310
+  // une fois le chargement terminé.
+  const [pdfExportGenerating, setPdfExportGenerating] = useState(false);
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen" style={{ background: darkMode ? "#0a0a14" : SAND, color: darkMode ? "#eceef5" : CHARCOAL }}>
@@ -11703,7 +11708,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // expose une API toDataURL() qui génère directement une image PNG, utilisable
   // telle quelle avec doc.addImage(), sans passer par un rendu React/SVG.
   // Chargé à la demande comme jsPDF, pour ne pas alourdir le démarrage de l'app.
-  const [pdfExportGenerating, setPdfExportGenerating] = useState(false);
+  // (pdfExportGenerating est maintenant déclaré plus haut, avant le "if (loading) return" — voir commentaire là-bas.)
   const generateShopExportPdf = async () => {
     setPdfExportGenerating(true);
     try {
