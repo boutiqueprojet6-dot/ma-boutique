@@ -4328,6 +4328,13 @@ EXTRA_UI.tabHelpCashreportTitle = { fr: "L'onglet Rapport de caisse, en détail"
 EXTRA_UI.tabHelpCashreport1 = { fr: "👤 Par personne — Chaque carte montre les ventes, dépenses et remboursements de dette réalisés par vous-même ou un employé.", am: "👤 በግለሰብ — እያንዳንዱ ካርድ በእርስዎ ወይም በሰራተኛ የተከናወኑ ሽያጮችን፣ ወጪዎችን እና የእዳ ክፍያዎችን ያሳያል።", en: "👤 By person — Each card shows the sales, expenses and debt repayments made by you or an employee.", tl: "👤 Bawat tao — Ipinapakita ng bawat card ang benta, gastos at pagbabayad ng utang na ginawa mo o ng isang empleyado.", te: "👤 వ్యక్తి వారీగా — ప్రతి కార్డు మీరు లేదా ఉద్యోగి చేసిన అమ్మకాలు, ఖర్చులు మరియు అప్పు తిరిగి చెల్లింపులను చూపిస్తుంది.", th: "👤 แยกตามบุคคล — การ์ดแต่ละใบแสดงยอดขาย รายจ่าย และการชำระหนี้ที่ทำโดยคุณเองหรือพนักงาน", wo: "👤 Ci nit ku nekk — Karte bu nekk day won jaay, bakkan ak fey bor yi yaw walla liggéeykat def.", pl: "👤 Według osoby — Każda karta pokazuje sprzedaż, wydatki i spłaty długów dokonane przez Ciebie lub pracownika.", ar: "👤 حسب الشخص — تُظهر كل بطاقة المبيعات والمصاريف وسدادات الديون التي قمت بها أنت أو أحد الموظفين.", es: "👤 Por persona — Cada tarjeta muestra las ventas, gastos y pagos de deuda realizados por usted o un empleado.", pt: "👤 Por pessoa — Cada cartão mostra as vendas, despesas e pagamentos de dívida feitos por você ou um funcionário.", zh: "👤 按人员 — 每张卡片显示您本人或某位员工所完成的销售额、支出和欠款还款。", vi: "👤 Theo từng người — Mỗi thẻ hiển thị doanh số, chi phí và khoản trả nợ do bạn hoặc một nhân viên thực hiện.", de: "👤 Nach Person — Jede Karte zeigt die Verkäufe, Ausgaben und Schuldrückzahlungen, die Sie oder ein Mitarbeiter getätigt haben.", ru: "👤 По сотруднику — Каждая карточка показывает продажи, расходы и погашения долгов, сделанные вами или сотрудником.", hi: "👤 व्यक्ति अनुसार — हर कार्ड आपके या किसी कर्मचारी द्वारा की गई बिक्री, खर्च और उधार भुगतान दिखाता है।", ta: "👤 நபர் வாரியாக — ஒவ்வொரு அட்டையும் நீங்கள் அல்லது ஒரு ஊழியர் செய்த விற்பனை, செலவுகள் மற்றும் கடன் திருப்பிச் செலுத்துதலைக் காட்டுகிறது.", bn: "👤 ব্যক্তি অনুযায়ী — প্রতিটি কার্ড আপনার বা কোনো কর্মচারীর করা বিক্রয়, খরচ এবং বাকি পরিশোধ দেখায়।", ur: "👤 فرد کے مطابق — ہر کارڈ آپ یا کسی ملازم کی کی گئی فروخت، اخراجات اور ادھار کی ادائیگی دکھاتا ہے۔", id: "👤 Per orang — Setiap kartu menampilkan penjualan, pengeluaran, dan pelunasan utang yang dilakukan oleh Anda atau karyawan.", tr: "👤 Kişi bazında — Her kart, senin veya bir çalışanın yaptığı satışları, giderleri ve borç ödemelerini gösterir.", ko: "👤 담당자별 — 각 카드에는 본인 또는 직원이 수행한 판매, 지출, 채무 상환 내역이 표시됩니다.", ja: "👤 担当者ごと — 各カードには、あなたまたは従業員が行った売上・支出・未収金の返済が表示されます。", it: "👤 Per persona — Ogni scheda mostra le vendite, le spese e i rimborsi dei debiti effettuati da lei o da un dipendente.", nl: "👤 Per persoon — Elke kaart toont de verkopen, uitgaven en schuldaflossingen die u of een medewerker hebben gedaan.", sw: "👤 Kwa kila mtu — Kila kadi inaonyesha mauzo, gharama na marejesho ya deni yaliyofanywa na wewe au mfanyakazi.", ha: "👤 Ga kowane mutum — Kowace katin tana nuna sayarwa, kashe kuɗi da biyan bashi da kai ko ma'aikaci suka yi.", bm: "👤 Mɔgɔ kelen-kelen fɛ — Karti kelen-kelen bɛɛ bɛ feereli, musaka ani juru sariyɔrɔ min kɛra i yɛrɛ walima baarakɛla fɛ, jira.", zu: "👤 Ngomuntu — Ikhadi ngalinye libonisa ukuthengisa, izindleko nokukhokhwa kwezikweletu okwenziwe nguwe noma isisebenzi.", yo: "👤 Nípasẹ̀ ènìyàn — Káàdì kọ̀ọ̀kan máa ń fi títà, inawo àti ìsanwó gbèsè tí ìwọ fúnra rẹ tàbí òṣìṣẹ́ kan ṣe hàn." };
 EXTRA_UI.tabHelpCashreport2 = { fr: "💳 Détail des paiements — Le total est réparti par mode de paiement (espèces, mobile money, carte) pour chaque personne.", am: "💳 የክፍያ ዝርዝር — ጠቅላላው መጠን ለእያንዳንዱ ግለሰብ በክፍያ መንገድ (ጥሬ ገንዘብ፣ ሞባይል ገንዘብ፣ ካርድ) ይከፋፈላል።", en: "💳 Payment breakdown — The total is split by payment method (cash, mobile money, card) for each person.", tl: "💳 Detalye ng bayad — Hinahati ang kabuuan ayon sa paraan ng pagbabayad (cash, mobile money, card) para sa bawat tao.", te: "💳 చెల్లింపు వివరాలు — ప్రతి వ్యక్తికి మొత్తం చెల్లింపు పద్ధతి (నగదు, మొబైల్ మనీ, కార్డు) ద్వారా విభజించబడుతుంది.", th: "💳 รายละเอียดการชำระเงิน — ยอดรวมแบ่งตามวิธีชำระเงิน (เงินสด โมบายมันนี่ บัตร) สำหรับแต่ละคน", wo: "💳 Fan-fan fey — Limu bi dañu ko séddoo ci yoonu fey (xaalis, mobile money, kart) ngir nit ku nekk.", pl: "💳 Podział płatności — Suma jest podzielona według metody płatności (gotówka, mobile money, karta) dla każdej osoby.", ar: "💳 تفصيل المدفوعات — يُقسَّم الإجمالي حسب طريقة الدفع (نقدًا، محفظة إلكترونية، بطاقة) لكل شخص.", es: "💳 Desglose de pagos — El total se reparte por método de pago (efectivo, dinero móvil, tarjeta) para cada persona.", pt: "💳 Detalhamento dos pagamentos — O total é dividido por forma de pagamento (dinheiro, mobile money, cartão) para cada pessoa.", zh: "💳 支付明细 — 每个人的总额会按支付方式（现金、移动支付、银行卡）进行拆分。", vi: "💳 Chi tiết thanh toán — Tổng số được chia theo phương thức thanh toán (tiền mặt, ví điện tử, thẻ) cho từng người.", de: "💳 Zahlungsaufschlüsselung — Die Gesamtsumme wird für jede Person nach Zahlungsmethode (Bargeld, Mobile Money, Karte) aufgeteilt.", ru: "💳 Разбивка платежей — Итоговая сумма делится по способу оплаты (наличные, мобильные деньги, карта) для каждого человека.", hi: "💳 भुगतान विवरण — कुल राशि हर व्यक्ति के लिए भुगतान के तरीके (नकद, मोबाइल मनी, कार्ड) के अनुसार विभाजित है।", ta: "💳 பணம் செலுத்தும் விவரம் — ஒவ்வொரு நபருக்கும் மொத்தத் தொகை பணம் செலுத்தும் முறை (பணம், மொபைல் மணி, கார்டு) படி பிரிக்கப்படுகிறது.", bn: "💳 পেমেন্টের বিস্তারিত — মোট পরিমাণ প্রতিটি ব্যক্তির জন্য পেমেন্ট পদ্ধতি (নগদ, মোবাইল মানি, কার্ড) অনুযায়ী ভাগ করা হয়।", ur: "💳 ادائیگی کی تفصیل — کل رقم ہر فرد کے لیے ادائیگی کے طریقے (نقد، موبائل منی، کارڈ) کے مطابق تقسیم کی جاتی ہے۔", id: "💳 Rincian pembayaran — Totalnya dipecah berdasarkan metode pembayaran (tunai, mobile money, kartu) untuk setiap orang.", tr: "💳 Ödeme dağılımı — Toplam, her kişi için ödeme yöntemine (nakit, mobil para, kart) göre ayrılır.", ko: "💳 결제 내역 — 총액은 각 담당자별로 결제 수단(현금, 모바일 머니, 카드)에 따라 나뉘어 표시됩니다.", ja: "💳 支払い内訳 — 合計金額は、各担当者ごとに支払い方法（現金・モバイルマネー・カード）別に分けられます。", it: "💳 Dettaglio dei pagamenti — Il totale è suddiviso per metodo di pagamento (contanti, mobile money, carta) per ciascuna persona.", nl: "💳 Betalingsoverzicht — Het totaal wordt per persoon opgesplitst naar betaalmethode (contant, mobile money, kaart).", sw: "💳 Mchanganuo wa malipo — Jumla hugawanywa kwa njia ya malipo (fedha taslimu, pesa za simu, kadi) kwa kila mtu.", ha: "💳 Rarraba biyan kuɗi — Ana raba jimillar ta hanyar biyan kuɗi (kuɗi a hannu, mobile money, katin) ga kowane mutum.", bm: "💳 Sarali fan-fan — Jate bɛɛ bɛ tila sarali siraw fɛ (wari lonfilenw, mobile money, kart) mɔgɔ kelen-kelen bɛɛ la.", zu: "💳 Ukuhlukaniswa kwezinkokhelo — Inani eliphelele lihlukaniswa ngendlela yokukhokha (imali eqinisekile, imali yeselula, ikhadi) ngomuntu ngamunye.", yo: "💳 Àkójọpọ̀ ìsanwó — A óò pín àpapọ̀ náà gẹ́gẹ́ bí ọ̀nà ìsanwó (owó lọ́wọ́, mobile money, káàdì) fún ènìyàn kọ̀ọ̀kan." };
 EXTRA_UI.tabHelpCashreport3 = { fr: "🔒 Fonction payante — Cet onglet n'est visible que si votre palier d'abonnement inclut le rapport de caisse par employé.", am: "🔒 የሚከፈልበት ባህሪ — ይህ ትር የሚታየው የደንበኝነት ደረጃዎ በሰራተኛ የካሽ ሪፖርትን ካካተተ ብቻ ነው።", en: "🔒 Paid feature — This tab is only visible if your subscription tier includes the per-employee cash report.", tl: "🔒 Bayad na tampok — Makikita lang ang tab na ito kung kasama sa iyong subscription ang cash report bawat empleyado.", te: "🔒 చెల్లింపు ఫీచర్ — మీ సభ్యత్వ స్థాయిలో ఉద్యోగి వారీగా నగదు నివేదిక ఉంటేనే ఈ ట్యాబ్ కనిపిస్తుంది.", th: "🔒 ฟีเจอร์แบบชำระเงิน — แท็บนี้จะแสดงก็ต่อเมื่อแพ็กเกจของคุณมีรายงานเงินสดแยกตามพนักงานเท่านั้น", wo: "🔒 Jumtukaay bu fey — Onglet bii du feeñ lu dul ci sa abonnement am rapport kaas ngir liggéeykat kiliyaan.", pl: "🔒 Funkcja płatna — Ta zakładka jest widoczna tylko wtedy, gdy Twój plan obejmuje raport kasowy dla poszczególnych pracowników.", ar: "🔒 ميزة مدفوعة — لا يظهر هذا التبويب إلا إذا كانت باقتك تشمل تقرير الصندوق لكل موظف.", es: "🔒 Función de pago — Esta pestaña solo es visible si su plan incluye el informe de caja por empleado.", pt: "🔒 Recurso pago — Esta aba só fica visível se o seu plano incluir o relatório de caixa por funcionário.", zh: "🔒 付费功能 — 只有当您的订阅套餐包含按员工区分的现金报告时，此标签页才会显示。", vi: "🔒 Tính năng trả phí — Tab này chỉ hiển thị nếu gói đăng ký của bạn bao gồm báo cáo quỹ theo từng nhân viên.", de: "🔒 Kostenpflichtige Funktion — Dieser Tab ist nur sichtbar, wenn Ihr Tarif den Kassenbericht pro Mitarbeiter enthält.", ru: "🔒 Платная функция — Эта вкладка видна, только если ваш тариф включает кассовый отчёт по каждому сотруднику.", hi: "🔒 सशुल्क सुविधा — यह टैब केवल तभी दिखाई देता है जब आपकी सदस्यता योजना में प्रति-कर्मचारी कैश रिपोर्ट शामिल हो।", ta: "🔒 கட்டண அம்சம் — உங்கள் சந்தா தரத்தில் ஊழியர்வாரியான பணப்பெட்டி அறிக்கை இருந்தால் மட்டுமே இந்தத் தாவல் காணப்படும்.", bn: "🔒 পেইড ফিচার — আপনার সাবস্ক্রিপশনে কর্মচারী-ভিত্তিক ক্যাশ রিপোর্ট থাকলেই এই ট্যাবটি দেখা যায়।", ur: "🔒 ادا شدہ خصوصیت — یہ ٹیب صرف اس وقت نظر آتا ہے جب آپ کی رکنیت میں فی ملازم کیش رپورٹ شامل ہو۔", id: "🔒 Fitur berbayar — Tab ini hanya terlihat jika paket langgananmu mencakup laporan kas per karyawan.", tr: "🔒 Ücretli özellik — Bu sekme yalnızca abonelik paketin çalışan bazlı kasa raporunu içeriyorsa görünür.", ko: "🔒 유료 기능 — 이 탭은 구독 등급에 직원별 현금 보고서가 포함된 경우에만 표시됩니다.", ja: "🔒 有料機能 — このタブは、プランに従業員ごとのレジ報告が含まれている場合にのみ表示されます。", it: "🔒 Funzione a pagamento — Questa scheda è visibile solo se il suo piano include il rapporto di cassa per dipendente.", nl: "🔒 Betaalde functie — Dit tabblad is alleen zichtbaar als uw abonnement het kasrapport per medewerker bevat.", sw: "🔒 Kipengele cha malipo — Kichupo hiki kinaonekana tu ikiwa mpango wako unajumuisha ripoti ya fedha kwa kila mfanyakazi.", ha: "🔒 Fasalin biya — Wannan shafi yana bayyana ne kawai idan shirin biyanka ya haɗa da rahoton kuɗi na kowane ma'aikaci.", bm: "🔒 Sarali fɛn — Onglet in bɛ jira dɔrɔn ni i ka sabɔnyali ye baarakɛla kelen-kelen ka wari jatebɔ don a la.", zu: "🔒 Isici esikhokhelwayo — Leli thebu libonakala kuphela uma izinga lakho lokubhalisela lihlanganisa umbiko wemali ngasinye wesisebenzi.", yo: "🔒 Ẹ̀yà tí a san owó fún — Abala yìí yóò hàn nìkan tí ìforúkọsílẹ̀ rẹ bá ní ìròyìn owó fún òṣìṣẹ́ kọ̀ọ̀kan." };
+// --- Mode "Quantité du jour" (boulangerie/pâtisserie) : toggle produit, badge, bouton "Nouvelle journée", libellés de journal d'activité ---
+EXTRA_UI.dailyModeToggle = { fr: "Quantité du jour (boulangerie, pâtisserie...)", am: "የቀኑ መጠን (ዳቦ ቤት፣ ኬክ ቤት...)", en: "Daily quantity (bakery, pastry shop...)", tl: "Dami ngayong araw (panaderya, pastry shop...)", te: "రోజు పరిమాణం (బేకరీ, పేస్ట్రీ షాప్...)", th: "จำนวนในแต่ละวัน (ร้านเบเกอรี่ ร้านขนมหวาน...)", wo: "Limu bés bi (mbuur, gato...)", pl: "Ilość dzienna (piekarnia, cukiernia...)", ar: "كمية اليوم (مخبزة، حلويات...)", es: "Cantidad del día (panadería, pastelería...)", pt: "Quantidade do dia (padaria, confeitaria...)", zh: "当日数量（面包店、糕点店等）", vi: "Số lượng trong ngày (tiệm bánh, tiệm bánh ngọt...)", de: "Tagesmenge (Bäckerei, Konditorei...)", ru: "Дневное количество (пекарня, кондитерская...)", hi: "दिन की मात्रा (बेकरी, पेस्ट्री शॉप...)", ta: "நாளின் அளவு (பேக்கரி, பேஸ்ட்ரி கடை...)", bn: "দিনের পরিমাণ (বেকারি, পেস্ট্রি শপ...)", ur: "دن کی مقدار (بیکری، پیسٹری شاپ...)", id: "Kuantitas harian (toko roti, kue...)", tr: "Günlük miktar (fırın, pastane...)", ko: "일일 수량 (베이커리, 제과점...)", ja: "その日の数量（ベーカリー、パティスリーなど）", it: "Quantità del giorno (panetteria, pasticceria...)", nl: "Dagelijkse hoeveelheid (bakkerij, banketbakkerij...)", sw: "Kiasi cha siku (mkate, keki...)", ha: "Adadin yau (gurasa, kek...)", bm: "Don hakɛ (burukutu so, gato so...)", zu: "Inani losuku (ibhakhali, izinkantolo zamakhekhe...)", yo: "Iye ọjọ́ (ilé búrẹ́dì, àwọn kéèkì...)" };
+EXTRA_UI.dailyModeHint = { fr: "Pour une production fraîche, non stockable : le bouton « Nouvelle journée » enregistre ce qu'il reste comme invendu, puis remet la quantité à 0.", am: "ለአዲስ፣ ማከማቸት ለማይቻል ምርት፦ «አዲስ ቀን» ቁልፍ የቀረውን እንደ ያልተሸጠ ይመዘግባል፣ ከዚያ መጠኑን ወደ 0 ይመልሳል።", en: "For fresh, non-storable production: the \"New day\" button logs what's left as unsold, then resets the quantity to 0.", tl: "Para sa sariwang produkto na hindi maiimbak: ang button na \"Bagong araw\" ay nagtatala ng natitira bilang hindi nabenta, pagkatapos ay binabalik ang dami sa 0.", te: "తాజా, నిల్వ చేయలేని ఉత్పత్తి కోసం: \"కొత్త రోజు\" బటన్ మిగిలినదాన్ని అమ్ముడుపోనిదిగా నమోదు చేసి, తర్వాత పరిమాణాన్ని 0కి తిరిగి సెట్ చేస్తుంది.", th: "สำหรับสินค้าสดใหม่ที่เก็บไว้ไม่ได้ ปุ่ม \"วันใหม่\" จะบันทึกจำนวนที่เหลือเป็นสินค้าขายไม่หมด แล้วรีเซ็ตจำนวนกลับเป็น 0", wo: "Ngir liggéey bu bees, bu mënul a denc: bouton \"Bés bu bees\" dafay bind limu bu des ni amul jaay, ba noppi limu bi delloo 0.", pl: "Dla świeżej, nieprzechowywalnej produkcji: przycisk „Nowy dzień” zapisuje pozostałą ilość jako niesprzedaną, a następnie resetuje ilość do 0.", ar: "للإنتاج الطازج غير القابل للتخزين: يسجل زر «يوم جديد» الكمية المتبقية كغير مباعة، ثم يعيد الكمية إلى 0.", es: "Para producción fresca, no almacenable: el botón «Nueva jornada» registra lo que queda como invendido y repone la cantidad a 0.", pt: "Para produção fresca, não armazenável: o botão «Novo dia» registra o que sobrou como não vendido e zera a quantidade.", zh: "适用于无法长期保存的新鲜现制商品：点击「开始新的一天」会把剩余数量记为未售出，然后将数量清零。", vi: "Dành cho sản phẩm tươi, không thể lưu kho: nút \"Ngày mới\" ghi lại số còn lại là hàng tồn chưa bán, sau đó đặt lại số lượng về 0.", de: "Für frische, nicht lagerfähige Produktion: Die Schaltfläche „Neuer Tag“ erfasst den Restbestand als unverkauft und setzt die Menge auf 0 zurück.", ru: "Для свежей, не подлежащей хранению продукции: кнопка «Новый день» фиксирует остаток как непроданный и обнуляет количество.", hi: "ताज़ा, जिसे स्टोर नहीं किया जा सकता उस उत्पादन के लिए: «नया दिन» बटन बचे हुए को बिना बिका हुआ दर्ज करता है, फिर मात्रा 0 कर देता है।", ta: "பதிவு செய்ய முடியாத புதிய உற்பத்திக்கு: «புதிய நாள்» பொத்தான் மீதமுள்ளதை விற்காதது என பதிவு செய்து, பின் அளவை 0 ஆக மாற்றும்.", bn: "তাজা, সংরক্ষণ করা যায় না এমন উৎপাদনের জন্য: «নতুন দিন» বোতাম বাকিটাকে অবিক্রীত হিসেবে নথিভুক্ত করে, তারপর পরিমাণ ০ করে দেয়।", ur: "تازہ، غیر ذخیرہ شدہ پیداوار کے لیے: «نیا دن» بٹن باقی ماندہ کو غیر فروخت شدہ کے طور پر درج کرتا ہے، پھر مقدار 0 کر دیتا ہے۔", id: "Untuk produksi segar, tidak dapat disimpan: tombol \"Hari baru\" mencatat sisa sebagai tidak terjual, lalu mengatur ulang jumlah ke 0.", tr: "Taze, depolanamayan üretim için: \"Yeni gün\" düğmesi kalanı satılmamış olarak kaydeder, ardından miktarı sıfırlar.", ko: "신선하고 보관이 어려운 생산물용: \"새로운 하루\" 버튼이 남은 수량을 미판매로 기록한 후 수량을 0으로 초기화합니다.", ja: "保存がきかない当日製造品向け：「新しい一日」ボタンは残数を売れ残りとして記録し、数量を0にリセットします。", it: "Per produzione fresca, non stoccabile: il pulsante «Nuova giornata» registra ciò che resta come invenduto, poi azzera la quantità.", nl: "Voor verse, niet-opslagbare productie: de knop 'Nieuwe dag' registreert wat overblijft als onverkocht en zet de hoeveelheid terug op 0.", sw: "Kwa uzalishaji mpya, usiohifadhika: kitufe \"Siku mpya\" husajili kilichobaki kama kisichouzwa, kisha hurudisha kiasi hadi 0.", ha: "Don samar da sabo, wanda ba za a iya adanawa ba: maɓallin \"Sabuwar rana\" yana rikodin saura a matsayin wanda ba a sayar ba, sannan ya mayar da adadin zuwa 0.", bm: "Fɛn kura, min tɛ se ka mara: bolonda \"Don kura\" bɛ tɔ sɛbɛn i n'a fɔ a man feere, o kɔfɛ a bɛ hakɛ segin 0 ma.", zu: "Okomkhiqizo omusha, ongalondolozeki: inkinobho \"Usuku olusha\" ibhala okusele njengokungathengisiwe, bese ibuyisela inani ku-0.", yo: "Fún ọjà tuntun tí a kò lè kó pamọ́: bọ́tìnnì \"Ọjọ́ tuntun\" máa ń kọ ohun tí ó ṣẹ́kù sílẹ̀ gẹ́gẹ́ bí èyí tí kò tà, lẹ́yìn náà a óò mú iye padà sí 0." };
+EXTRA_UI.dailyBadge = { fr: "Quotidien", am: "ዕለታዊ", en: "Daily", tl: "Araw-araw", te: "రోజువారీ", th: "รายวัน", wo: "Bés bu nekk", pl: "Codziennie", ar: "يومي", es: "Diario", pt: "Diário", zh: "每日", vi: "Hằng ngày", de: "Täglich", ru: "Ежедневно", hi: "दैनिक", ta: "தினசரி", bn: "প্রতিদিন", ur: "روزانہ", id: "Harian", tr: "Günlük", ko: "일일", ja: "毎日", it: "Giornaliero", nl: "Dagelijks", sw: "Kila siku", ha: "Kullum", bm: "Don o don", zu: "Nsuku zonke", yo: "Lójoojúmọ́" };
+EXTRA_UI.startNewDayBtn = { fr: "Nouvelle journée", am: "አዲስ ቀን", en: "New day", tl: "Bagong araw", te: "కొత్త రోజు", th: "วันใหม่", wo: "Bés bu bees", pl: "Nowy dzień", ar: "يوم جديد", es: "Nueva jornada", pt: "Novo dia", zh: "开始新的一天", vi: "Ngày mới", de: "Neuer Tag", ru: "Новый день", hi: "नया दिन", ta: "புதிய நாள்", bn: "নতুন দিন", ur: "نیا دن", id: "Hari baru", tr: "Yeni gün", ko: "새로운 하루", ja: "新しい一日", it: "Nuova giornata", nl: "Nieuwe dag", sw: "Siku mpya", ha: "Sabuwar rana", bm: "Don kura", zu: "Usuku olusha", yo: "Ọjọ́ tuntun" };
+EXTRA_UI.logNewDayStarted = { fr: "Nouvelle journée démarrée", am: "አዲስ ቀን ጀምሯል", en: "New day started", tl: "Nagsimula ang bagong araw", te: "కొత్త రోజు ప్రారంభమైంది", th: "เริ่มวันใหม่แล้ว", wo: "Bés bu bees tambali na", pl: "Rozpoczęto nowy dzień", ar: "بدأ يوم جديد", es: "Nueva jornada iniciada", pt: "Novo dia iniciado", zh: "已开始新的一天", vi: "Đã bắt đầu ngày mới", de: "Neuer Tag gestartet", ru: "Начат новый день", hi: "नया दिन शुरू हुआ", ta: "புதிய நாள் தொடங்கப்பட்டது", bn: "নতুন দিন শুরু হয়েছে", ur: "نیا دن شروع ہوا", id: "Hari baru dimulai", tr: "Yeni gün başlatıldı", ko: "새로운 하루 시작됨", ja: "新しい一日を開始しました", it: "Nuova giornata avviata", nl: "Nieuwe dag gestart", sw: "Siku mpya imeanza", ha: "An fara sabuwar rana", bm: "Don kura daminɛna", zu: "Kuqalwe usuku olusha", yo: "Ọjọ́ tuntun ti bẹ̀rẹ̀" };
+EXTRA_UI.logUnsoldQty = { fr: "invendus :", am: "ያልተሸጠ፦", en: "unsold:", tl: "hindi nabenta:", te: "అమ్ముడుపోనిది:", th: "ขายไม่หมด:", wo: "amul jaay:", pl: "niesprzedane:", ar: "غير مباع:", es: "invendidos:", pt: "não vendidos:", zh: "未售出：", vi: "tồn chưa bán:", de: "unverkauft:", ru: "непроданные:", hi: "बिना बिका:", ta: "விற்காதவை:", bn: "অবিক্রীত:", ur: "غیر فروخت شدہ:", id: "tidak terjual:", tr: "satılmayan:", ko: "미판매:", ja: "売れ残り：", it: "invenduti:", nl: "onverkocht:", sw: "haikuuzwa:", ha: "ba a sayar ba:", bm: "feerelen tɛ:", zu: "okungathengisiwe:", yo: "tí kò tà:" };
 const TAB_HELP_CONTENT = {
   stock: { titleKey: "tabHelpStockTitle", itemKeys: ["tabHelpStock1", "tabHelpStock2", "tabHelpStock3", "tabHelpStock4", "tabHelpStock5", "tabHelpStock6", "tabHelpStock7"] },
   dashboard: { titleKey: "tabHelpDashboardTitle", itemKeys: ["tabHelpDashboard1", "tabHelpDashboard2", "tabHelpDashboard3"] },
@@ -5114,6 +5121,9 @@ function mergeShop(baseShop, localShop, remoteShop) {
     cashCounts: sortByDate(mergeById(base.cashCounts, local.cashCounts, remote.cashCounts)),
     debts: mergeDebts(base.debts, local.debts, remote.debts),
     debtEvents: sortByDate(mergeById(base.debtEvents, local.debtEvents, remote.debtEvents)),
+    // Invendus "Quantité du jour" (boulangerie/pâtisserie) : chaque "Nouvelle journée"
+    // déclenchée sur un produit ajoute une entrée ici avant de remettre son stock à 0.
+    unsoldLog: sortByDate(mergeById(base.unsoldLog, local.unsoldLog, remote.unsoldLog)),
     historyLog: sortByDate(mergeById(base.historyLog, local.historyLog, remote.historyLog)),
     draftCarts: mergeById(base.draftCarts, local.draftCarts, remote.draftCarts),
     aiConversations: mergeById(base.aiConversations, local.aiConversations, remote.aiConversations),
@@ -7404,7 +7414,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     onLogout();
   }, [onLogout]);
   const isDesktop = useIsDesktop();
-  const { open: keyboardOpen } = useKeyboardOpen();
+  const { open: keyboardOpen, height: keyboardHeightPx } = useKeyboardOpen();
   const visibleHeight = useVisibleHeight();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -7424,6 +7434,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Historique des comptages de caisse (fiabilité) : chaque comptage garde le solde attendu,
   // le montant compté et l'écart, même quand aucun ajustement n'est fait.
   const [cashCounts, setCashCounts] = useState([]);
+  // Historique des invendus (produits en mode "Quantité du jour") : une entrée par
+  // "Nouvelle journée" déclenchée sur un produit qui avait encore du stock restant.
+  const [unsoldLog, setUnsoldLog] = useState([]);
   const [cashFund, setCashFund] = useState(0);
   const [lowStockThreshold, setLowStockThreshold] = useState(5);
   const [darkMode, setDarkMode] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
@@ -8437,6 +8450,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [newCategoryName, setNewCategoryName] = useState("");
   const [pPhoto, setPPhoto] = useState(null);
   const [pSellByUnit, setPSellByUnit] = useState(false);
+  // Produit en "Quantité du jour" (boulangerie/pâtisserie, production non stockable) :
+  // la quantité se gère comme un stock classique au jour le jour (le "+" existant sert
+  // de réapprovisionnement, qu'il s'agisse d'une nouvelle fournée ou d'une livraison),
+  // mais un bouton dédié "Nouvelle journée" permet de clôturer manuellement une journée
+  // de vente : ce qu'il reste est journalisé comme invendu puis remis à 0. Rien
+  // d'automatique (pas d'heure fixe) : voir startNewDay.
+  const [pDailyMode, setPDailyMode] = useState(false);
   const [pUnitsPerPack, setPUnitsPerPack] = useState("");
   const [pUnitPrice, setPUnitPrice] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
@@ -8471,6 +8491,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setPSellByUnit(!!draft.pSellByUnit);
       setPUnitsPerPack(draft.pUnitsPerPack || "");
       setPUnitPrice(draft.pUnitPrice || "");
+      setPDailyMode(!!draft.pDailyMode);
       setTab("stock");
       setShowAddProduct(true);
     } catch (err) {}
@@ -8480,13 +8501,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     try {
       if (showAddProduct) {
         window.sessionStorage.setItem("mb_product_draft_v1", JSON.stringify({
-          pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, savedAt: Date.now(),
+          pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, pDailyMode, savedAt: Date.now(),
         }));
       } else {
         window.sessionStorage.removeItem("mb_product_draft_v1");
       }
     } catch (err) {}
-  }, [showAddProduct, pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice]);
+  }, [showAddProduct, pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, pDailyMode]);
   // Anti-clic-fantôme : sur Android Chrome, revenir de l'appareil photo natif (input file
   // capture="environment") peut déclencher un clic fantôme sur l'élément situé à l'endroit
   // où était le bouton "OK" natif — ici, ça tombait sur le bouton "fermer" du formulaire,
@@ -8693,6 +8714,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setDebts(shop.debts || []);
     setExpenses(shop.expenses || []);
     setCashCounts(shop.cashCounts || []);
+    setUnsoldLog(shop.unsoldLog || []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
     setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
@@ -9042,6 +9064,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       debts: overrides.debts ?? debts,
       expenses: overrides.expenses ?? expenses,
       cashCounts: overrides.cashCounts ?? cashCounts,
+      unsoldLog: overrides.unsoldLog ?? unsoldLog,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
       darkMode: overrides.darkMode ?? darkMode,
@@ -9073,6 +9096,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setDebts(next.debts);
     setExpenses(next.expenses);
     setCashCounts(next.cashCounts || []);
+    setUnsoldLog(next.unsoldLog || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
     setDarkMode(next.darkMode);
@@ -9437,12 +9461,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           sellByUnit: pSellByUnit,
           unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
           unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
+          dailyMode: pDailyMode,
           updatedAt: Date.now(),
         } : p),
       });
       logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}`);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setShowAddProduct(false);
+      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -9465,12 +9490,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       sellByUnit: pSellByUnit,
       unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
       unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
+      dailyMode: pDailyMode,
       looseUnits: 0,
       updatedAt: Date.now(),
     };
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setShowAddProduct(false);
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setShowAddProduct(false);
   };
   // Ouvre le formulaire déjà rempli avec les valeurs du produit, pour corriger
   // une erreur de saisie (nom, quantité, prix, photo...) sans le recréer.
@@ -9486,6 +9512,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPSellByUnit(!!p.sellByUnit);
     setPUnitsPerPack(p.unitsPerPack != null ? String(p.unitsPerPack) : "");
     setPUnitPrice(p.unitPrice != null ? String(p.unitPrice) : "");
+    setPDailyMode(!!p.dailyMode);
     setError("");
     setShowAddProduct(true);
   };
@@ -9498,6 +9525,38 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const targetProduct = products.find((pr) => pr.id === id);
     saveAll({ products: products.map((p) => (p.id === id ? { ...p, quantity: Math.max(0, p.quantity + delta), updatedAt: Date.now() } : p)) });
     if (targetProduct) logAction(`${t(lang, "logStockAdjusted")} : ${targetProduct.name} (${delta > 0 ? "+" : ""}${delta})`);
+  };
+  // "Nouvelle journée" (produits en mode "Quantité du jour", boulangerie/pâtisserie) :
+  // déclenché manuellement par la boutique, jamais automatiquement (pas d'heure fixe,
+  // certaines pâtisseries ouvrent tard le soir) — voir le fil de discussion qui a mené
+  // à cette fonctionnalité. Ce qu'il reste en stock est journalisé comme invendu (sauf
+  // s'il ne reste rien, auquel cas aucune entrée inutile n'est créée), puis le stock de
+  // ce produit repart à 0, prêt pour la prochaine fournée/livraison du jour suivant. Tant
+  // que ce bouton n'est pas pressé, le stock restant continue normalement à se vendre
+  // (ex. invendus du midi revendus l'après-midi ou le lendemain) : rien ne change pour lui.
+  const startNewDay = (id) => {
+    if (isProductFrozen(id)) {
+      setError(t(lang, "productFrozenMsg"));
+      return;
+    }
+    const p = products.find((pr) => pr.id === id);
+    if (!p) return;
+    const remaining = (p.quantity || 0) * (p.sellByUnit ? (p.unitsPerPack || 1) : 1) + (p.sellByUnit ? (p.looseUnits || 0) : 0);
+    const nextProducts = products.map((pr) => (pr.id === id ? { ...pr, quantity: 0, looseUnits: pr.sellByUnit ? 0 : pr.looseUnits, updatedAt: Date.now() } : pr));
+    if (remaining > 0) {
+      const entry = {
+        id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
+        productId: p.id,
+        productName: p.name,
+        qty: remaining,
+        date: new Date().toISOString(),
+      };
+      saveAll({ products: nextProducts, unsoldLog: [...unsoldLog, entry] });
+      logAction(`${tx(lang, "logNewDayStarted")} : ${p.name} (${tx(lang, "logUnsoldQty")} ${localizedNumber(remaining)})`);
+    } else {
+      saveAll({ products: nextProducts });
+      logAction(`${tx(lang, "logNewDayStarted")} : ${p.name}`);
+    }
   };
   // Déduit "unitsToRemove" unités individuelles d'un produit vendu à l'unité,
   // en ouvrant des paquets automatiquement si le stock d'unités détachées ne suffit pas.
@@ -12488,6 +12547,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
+            {/* Mode "Quantité du jour" : pour une production fraîche et non stockable
+                (boulangerie, pâtisserie...). La quantité se gère ensuite exactement comme
+                un stock classique (même "+"/"−") ; ce toggle n'ajoute qu'un comportement en
+                plus, le bouton "Nouvelle journée" (voir startNewDay), visible uniquement
+                sur les produits ainsi marqués. */}
+            <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+              <label className="flex items-center justify-between cursor-pointer gap-3">
+                <span className="text-xs font-semibold" style={{ color: T.text }}>{tx(lang, "dailyModeToggle")}</span>
+                <button type="button" onClick={() => setPDailyMode(!pDailyMode)} style={{ width: 40, height: 22, borderRadius: 12, background: pDailyMode ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pDailyMode ? "flex-end" : "flex-start", border: "none", cursor: "pointer", flexShrink: 0 }}>
+                  <span style={{ width: 16, height: 16, borderRadius: "50%", background: "white", display: "block" }} />
+                </button>
+              </label>
+              {pDailyMode && (
+                <p className="text-[11px] mt-2" style={{ color: T.muted }}>{tx(lang, "dailyModeHint")}</p>
+              )}
+            </div>
             <div className="mb-3">
               <label className="text-xs block mb-1" style={{ color: T.muted }}>{t(lang, "productPhoto")}</label>
               <button
@@ -12588,6 +12663,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             <Lock size={9} /> {t(lang, "productFrozenBadge")}
                           </span>
                         )}
+                        {p.dailyMode && (
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 flex-shrink-0" style={{ background: darkMode ? "rgba(217,119,6,0.15)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#b45309" }}>
+                            🌅 {tx(lang, "dailyBadge")}
+                          </span>
+                        )}
                       </div>
                       <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {t(lang, "othUnite")}</p>
                       {p.sellByUnit && (
@@ -12641,6 +12721,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       aria-label={tx(lang, "editProductTitle")}
                     >
                       <Edit3 size={13} color={darkMode ? "#34d399" : "#059669"} />
+                    </button>
+                  )}
+                  {p.dailyMode && hasPermission("editStock") && !frozen && (
+                    <button
+                      onClick={() => {
+                        const remaining = (p.quantity || 0) * (p.sellByUnit ? (p.unitsPerPack || 1) : 1) + (p.sellByUnit ? (p.looseUnits || 0) : 0);
+                        setConfirmModal({
+                          message: remaining > 0
+                            ? `Démarrer une nouvelle journée pour "${p.name}" ? Les ${localizedNumber(remaining)} restant(e)s seront enregistré(e)s comme invendus, puis la quantité repartira à 0.`
+                            : `Démarrer une nouvelle journée pour "${p.name}" ? La quantité repartira à 0.`,
+                          onConfirm: () => startNewDay(p.id),
+                        });
+                      }}
+                      className="w-8 h-8 rounded-full flex items-center justify-center"
+                      style={{ background: darkMode ? "rgba(217,119,6,0.12)" : "#fef3c7" }}
+                      aria-label={tx(lang, "startNewDayBtn")}
+                    >
+                      <RotateCcw size={13} color={darkMode ? "#fbbf24" : "#b45309"} />
                     </button>
                   )}
                   {hasPermission("editStock") && (
@@ -14120,12 +14218,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             <div className="flex gap-2 pt-2" style={{
               background: T.bg,
-              // "absolute" (plutôt que "fixed") + le conteneur app-root dont la hauteur
-              // suit désormais la hauteur réellement visible (useVisibleHeight) : la barre
-              // reste ainsi ancrée au vrai bas de l'écran visible, juste au-dessus du
-              // clavier, même sur les WebView où "fixed; bottom: 0" ne suit pas le clavier.
-              position: isDesktop ? "sticky" : "absolute",
-              bottom: isDesktop ? 0 : (keyboardOpen ? "8px" : "calc(112px + env(safe-area-inset-bottom, 0px))"),
+              // "fixed" (ancré directement à l'écran), avec un décalage qu'on calcule
+              // nous-mêmes à partir de la hauteur réelle du clavier (keyboardHeightPx,
+              // mesurée via visualViewport dans useKeyboardOpen). On utilisait "absolute"
+              // + un conteneur ancêtre redimensionné (useVisibleHeight) pour obtenir le
+              // même résultat sans dépendre du comportement "fixed" face au clavier sur
+              // certains WebView Android — mais cette barre héritait alors de la hauteur
+              // réellement rendue de son ancêtre scrollable au moment précis de l'affichage
+              // de l'onglet, hauteur pas toujours stabilisée en arrivant sur l'onglet
+              // Assistant : la barre apparaissait alors au milieu de l'écran (juste après
+              // les suggestions) au lieu d'être ancrée en bas. "fixed" + décalage calculé
+              // par nous-mêmes ne dépend plus de la taille d'aucun ancêtre, seulement de la
+              // mesure du clavier — donc plus de dépendance de taille d'ancêtre incorrecte,
+              // dans ce cas précis.
+              position: isDesktop ? "sticky" : "fixed",
+              bottom: isDesktop ? 0 : (keyboardOpen ? `${keyboardHeightPx + 8}px` : "calc(112px + env(safe-area-inset-bottom, 0px))"),
               left: isDesktop ? "auto" : 16,
               right: isDesktop ? "auto" : 16,
               zIndex: isDesktop ? "auto" : 5,
