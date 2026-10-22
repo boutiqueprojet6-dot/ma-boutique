@@ -12341,7 +12341,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           messages IA) sont maintenant affichées directement dans les onglets Vente et
           Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
           uniquement quand la limite est réellement atteinte. */}
-      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined }}>
+      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, minHeight: 0, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined }}>
       {/* pb-56 (au lieu de pb-40) : laisse assez d'espace en bas pour que le dernier élément
           d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
           "Démasquer les données" quand on scrolle tout en bas. */}
