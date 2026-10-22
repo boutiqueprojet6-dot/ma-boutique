@@ -4270,6 +4270,11 @@ EXTRA_UI.feat_shopComparison = { fr: "Comparaison des boutiques", en: "Shop comp
 EXTRA_UI.feat_supervisorRole = { fr: "Rôle de superviseur", en: "Supervisor role" };
 EXTRA_UI.feat_salesGoals = { fr: "Objectifs de vente mensuels", en: "Monthly sales goals" };
 EXTRA_UI.feat_shopProfitabilityReport = { fr: "Rapport de rentabilité : prix d'achat, marge et bénéfice", en: "Profitability report: cost price, margin and profit" };
+// ---- Réapprovisionnement (bouton "+" du Stock → demande quantité + nouveau prix d'achat optionnel) ----
+EXTRA_UI.restockModalTitle = { fr: "Réapprovisionnement", en: "Restock", es: "Reabastecimiento", pt: "Reabastecimento", de: "Nachbestellung", it: "Rifornimento", nl: "Bevoorrading", pl: "Uzupełnienie zapasów", ru: "Пополнение запаса", tr: "Stok yenileme", ar: "إعادة تخزين", hi: "स्टॉक की पुनःपूर्ति", bn: "স্টক পুনঃপূরণ", ur: "اسٹاک کی دوبارہ بھرائی", ta: "பங்கு நிரப்புதல்", te: "స్టాక్ రీఫిల్", th: "เติมสต็อก", zh: "补货", ja: "再入荷", ko: "재입고", id: "Pengisian stok ulang", vi: "Nhập thêm hàng", tl: "Muling pagdadagdag ng stock", sw: "Kuongeza bidhaa stoo", ha: "Sake cika kaya", yo: "Fífi ọjà kún", zu: "Ukugcwalisa isitoko", am: "ዕቃ መሙላት", bm: "Fɛn kura dilan", wo: "Yokkute marsandiz" };
+EXTRA_UI.restockPriceLabel = { fr: "Nouveau prix d'achat (optionnel)", en: "New purchase price (optional)", es: "Nuevo precio de compra (opcional)", pt: "Novo preço de compra (opcional)", de: "Neuer Einkaufspreis (optional)", it: "Nuovo prezzo d'acquisto (facoltativo)", nl: "Nieuwe inkoopprijs (optioneel)", pl: "Nowa cena zakupu (opcjonalnie)", ru: "Новая закупочная цена (необязательно)", tr: "Yeni alış fiyatı (isteğe bağlı)", ar: "سعر شراء جديد (اختياري)", hi: "नया खरीद मूल्य (वैकल्पिक)", bn: "নতুন ক্রয়মূল্য (ঐচ্ছিক)", ur: "نئی خریداری قیمت (اختیاری)", ta: "புதிய கொள்முதல் விலை (விருப்பத்தேர்வு)", te: "కొత్త కొనుగోలు ధర (ఐచ్ఛికం)", th: "ราคาซื้อใหม่ (ไม่บังคับ)", zh: "新进价（可选）", ja: "新しい仕入れ価格（任意）", ko: "새 매입가 (선택 사항)", id: "Harga beli baru (opsional)", vi: "Giá nhập mới (không bắt buộc)", tl: "Bagong presyong bili (opsyonal)", sw: "Bei mpya ya kununulia (si lazima)", ha: "Sabon farashin siye (ba dole ba)", yo: "Owó rírà tuntun (kìí ṣe dandan)", zu: "Intengo entsha yokuthenga (akuphoqelekile)", am: "አዲስ የመግዣ ዋጋ (አማራጭ)", bm: "Sara sɔrɔ kura (fɛɛrɛ)", wo: "Njëgu jënd bu bees (du obligatoire)" };
+EXTRA_UI.restockPriceHint = { fr: "Si vous laissez vide, l'ancien prix est conservé. Sinon, la moyenne pondérée avec le stock existant est calculée automatiquement.", en: "Leave blank to keep the current price. Otherwise, a weighted average with the existing stock is calculated automatically.", es: "Déjelo en blanco para conservar el precio actual. Si no, se calculará automáticamente un promedio ponderado con el stock existente.", pt: "Deixe em branco para manter o preço atual. Caso contrário, será calculada automaticamente uma média ponderada com o estoque existente.", de: "Leer lassen, um den aktuellen Preis beizubehalten. Andernfalls wird automatisch ein gewichteter Durchschnitt mit dem vorhandenen Bestand berechnet.", it: "Lasci vuoto per mantenere il prezzo attuale. Altrimenti verrà calcolata automaticamente una media ponderata con lo stock esistente.", nl: "Laat leeg om de huidige prijs te behouden. Anders wordt automatisch een gewogen gemiddelde met de bestaande voorraad berekend.", pl: "Pozostaw puste, aby zachować obecną cenę. W przeciwnym razie zostanie automatycznie obliczona średnia ważona z istniejącym zapasem.", ru: "Оставьте пустым, чтобы сохранить текущую цену. Иначе будет автоматически рассчитана средневзвешенная цена с учётом имеющегося запаса.", tr: "Mevcut fiyatı korumak için boş bırakın. Aksi halde mevcut stokla ağırlıklı ortalama otomatik hesaplanır.", ar: "اتركه فارغاً للحفاظ على السعر الحالي. وإلا، سيُحسب متوسط مرجّح مع المخزون الحالي تلقائياً.", hi: "मौजूदा कीमत बनाए रखने के लिए खाली छोड़ें। अन्यथा, मौजूदा स्टॉक के साथ भारित औसत स्वतः गणना होगी।", bn: "বর্তমান দাম রাখতে খালি রাখুন। নাহলে, বিদ্যমান স্টকের সাথে ওজনযুক্ত গড় স্বয়ংক্রিয়ভাবে গণনা হবে।", ur: "موجودہ قیمت برقرار رکھنے کے لیے خالی چھوڑیں۔ ورنہ، موجودہ اسٹاک کے ساتھ وزنی اوسط خود بخود شمار ہو جائے گی۔", ta: "தற்போதைய விலையை வைத்திருக்க காலியாக விடவும். இல்லையெனில், இருக்கும் கையிருப்புடன் சராசரி தானாக கணக்கிடப்படும்.", te: "ప్రస్తుత ధరను ఉంచడానికి ఖాళీగా ఉంచండి. లేకపోతే, ఉన్న నిల్వతో సగటు ధర స్వయంచాలకంగా లెక్కించబడుతుంది.", th: "เว้นว่างไว้เพื่อคงราคาเดิม มิฉะนั้นระบบจะคำนวณราคาเฉลี่ยถ่วงน้ำหนักกับสต็อกที่มีอยู่โดยอัตโนมัติ", zh: "留空则保留原价；否则系统会自动按现有库存计算加权平均进价。", ja: "空欄のままにすると現在の価格が維持されます。入力すると、既存の在庫との加重平均が自動計算されます。", ko: "비워두면 현재 가격이 유지됩니다. 입력하면 기존 재고와의 가중 평균이 자동으로 계산됩니다。", id: "Biarkan kosong untuk mempertahankan harga saat ini. Jika diisi, rata-rata tertimbang dengan stok yang ada akan dihitung otomatis.", vi: "Để trống để giữ giá hiện tại. Nếu không, hệ thống sẽ tự động tính giá trung bình theo trọng số với tồn kho hiện có.", tl: "Iwanang blangko para panatilihin ang kasalukuyang presyo. Kung hindi, awtomatikong kakalkulahin ang weighted average kasama ang kasalukuyang stock.", sw: "Acha wazi ili kuendelea na bei ya sasa. Vinginevyo, wastani wenye uzito utahesabiwa kiotomatiki na bidhaa zilizopo.", ha: "Ka bari fanko don ci gaba da farashin yanzu. In ba haka ba, za a lissafta matsakaicin nauyi tare da kayan da ke akwai ta atomatik.", yo: "Fi sílẹ̀ láìsí nǹkan kí owó tí ó wà báyìí máa wà. Bí kò bá rí bẹ́ẹ̀, a ó ṣírò ìwọ̀nwọ̀n pẹ̀lú ọjà tí ó ṣẹ́kù láìfọwọ́kàn.", zu: "Shiya kungenalutho ukuze intengo yamanje igcinwe. Uma kungenjalo, inani eliphakathi elinesisindo lizobalwa ngokuzenzakalela nesitoko esikhona.", am: "የአሁኑን ዋጋ ለማስቀጠል ባዶ ይተዉት። ካልሆነ፣ ካለው ክምችት ጋር ክብደት ያለው አማካይ በራስ-ሰር ይሰላል።", bm: "A to lankolon walasa sanni kɔrɔ be to. Ni o tɛ, hakɛ sara sɔrɔ kɔnɔ be jate yɛrɛ yɛrɛ ni fɛn tora ye.", wo: "Bàyyi mu amul dara ngir njëg bi mujjee. Lu ko moy, dinañu jàppale ko ak njëgu jumtukaay yi nekk." };
+EXTRA_UI.restockConfirmBtn = { fr: "Ajouter au stock", en: "Add to stock", es: "Añadir al stock", pt: "Adicionar ao estoque", de: "Zum Lager hinzufügen", it: "Aggiungi allo stock", nl: "Toevoegen aan voorraad", pl: "Dodaj do zapasu", ru: "Добавить на склад", tr: "Stoğa ekle", ar: "إضافة إلى المخزون", hi: "स्टॉक में जोड़ें", bn: "স্টকে যোগ করুন", ur: "اسٹاک میں شامل کریں", ta: "கையிருப்பில் சேர்", te: "స్టాక్‌కు జోడించండి", th: "เพิ่มเข้าสต็อก", zh: "加入库存", ja: "在庫に追加", ko: "재고에 추가", id: "Tambahkan ke stok", vi: "Thêm vào kho", tl: "Idagdag sa stock", sw: "Ongeza kwenye stoo", ha: "Ƙara wa kaya", yo: "Fi kún ọjà", zu: "Engeza esitokweni", am: "ወደ ክምችት ጨምር", bm: "A fara fɛn na", wo: "Yokk ci marsandiz yi" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
 EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseignez le prix d'achat de vos produits pour voir votre bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
 EXTRA_UI.cashMargin = { am: "በሽያጭ ላይ ያለ ህዳግ", ar: "هامش المبيعات", bm: "Tɔnɔ feerew kan", bn: "বিক্রয়ের মার্জিন", de: "Marge auf Verkäufe", en: "Margin on sales", es: "Margen sobre ventas", fr: "Marge sur les ventes", ha: "Ribar da ke kan tallace-tallace", hi: "बिक्री पर मार्जिन", id: "Margin penjualan", it: "Margine sulle vendite", ja: "売上の粗利", ko: "판매 마진", nl: "Marge op verkopen", pl: "Marża na sprzedaży", pt: "Margem sobre vendas", ru: "Маржа с продаж", sw: "Kiwango cha faida kwenye mauzo", ta: "விற்பனை மீதான வரம்பு", te: "అమ్మకాలపై మార్జిన్", th: "กำไรขั้นต้นจากการขาย", tl: "Margin sa benta", tr: "Satış marjı", ur: "فروخت پر مارجن", vi: "Biên lợi nhuận bán hàng", wo: "Tabax ci jaay yi", yo: "Èrè lórí títà", zh: "销售毛利", zu: "Inzuzo ekuthengisweni" };
@@ -8517,6 +8522,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [eLabel, setELabel] = useState("");
   const [eAmount, setEAmount] = useState("");
   const [fundInput, setFundInput] = useState("");
+  // ---- Réapprovisionnement (bouton "+" dans l'onglet Stock) ----
+  // restockTarget = id du produit en cours de réapprovisionnement (null = modal fermée).
+  // Demande une quantité ET, optionnellement, un nouveau prix d'achat : si un nouveau
+  // prix est donné, le prix d'achat du produit devient une MOYENNE PONDÉRÉE entre
+  // l'ancien stock (à l'ancien prix) et le nouveau lot (au nouveau prix) — voir
+  // confirmRestock(). Si le champ prix est laissé vide, l'ancien prix est conservé tel quel.
+  const [restockTarget, setRestockTarget] = useState(null);
+  const [restockQty, setRestockQty] = useState("");
+  const [restockPrice, setRestockPrice] = useState("");
   const [stockSearch, setStockSearch] = useState("");
   const [historySearch, setHistorySearch] = useState("");
   // ---- Filtres avancés de l'Historique (période, produit, client, montant) ----
@@ -9525,6 +9539,55 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const targetProduct = products.find((pr) => pr.id === id);
     saveAll({ products: products.map((p) => (p.id === id ? { ...p, quantity: Math.max(0, p.quantity + delta), updatedAt: Date.now() } : p)) });
     if (targetProduct) logAction(`${t(lang, "logStockAdjusted")} : ${targetProduct.name} (${delta > 0 ? "+" : ""}${delta})`);
+  };
+  // Ouvre le modal de réapprovisionnement pour le produit "id" (bouton "+" du Stock).
+  const openRestock = (id) => {
+    if (isProductFrozen(id)) {
+      setError(t(lang, "productFrozenMsg"));
+      return;
+    }
+    setRestockTarget(id);
+    setRestockQty("");
+    setRestockPrice("");
+  };
+  // Valide le réapprovisionnement : ajoute la quantité saisie, et si un nouveau prix
+  // d'achat est fourni, recalcule le prix d'achat du produit en moyenne pondérée entre
+  // l'ancien stock (ancien prix) et le nouveau lot (nouveau prix). Si le champ prix est
+  // laissé vide, l'ancien prix d'achat est simplement conservé sans recalcul.
+  const confirmRestock = () => {
+    const addQty = parseInt(restockQty, 10);
+    if (!addQty || addQty <= 0) {
+      setError(t(lang, "invalidAmount"));
+      return;
+    }
+    const target = products.find((p) => p.id === restockTarget);
+    if (!target) { setRestockTarget(null); return; }
+    if (isProductFrozen(target.id)) {
+      setError(t(lang, "productFrozenMsg"));
+      setRestockTarget(null);
+      return;
+    }
+    const oldQty = target.quantity || 0;
+    const oldCost = target.costPrice != null ? target.costPrice : null;
+    const priceInputTrimmed = restockPrice.trim();
+    const newLotCostRaw = priceInputTrimmed === "" ? null : parseFloat(priceInputTrimmed);
+    const newLotCost = newLotCostRaw != null && !isNaN(newLotCostRaw) ? newLotCostRaw : null;
+    let nextCost;
+    if (newLotCost == null) {
+      // Aucun nouveau prix saisi : on garde l'ancien prix d'achat tel quel.
+      nextCost = oldCost;
+    } else if (oldCost == null) {
+      // Le produit n'avait pas encore de prix d'achat : le nouveau devient la référence.
+      nextCost = newLotCost;
+    } else {
+      // Moyenne pondérée par les quantités : (ancien stock × ancien prix + nouveau lot × nouveau prix) / stock total.
+      nextCost = (oldQty * oldCost + addQty * newLotCost) / (oldQty + addQty);
+    }
+    saveAll({ products: products.map((p) => (p.id === target.id ? { ...p, quantity: oldQty + addQty, costPrice: nextCost, updatedAt: Date.now() } : p)) });
+    logAction(`${t(lang, "logStockAdjusted")} : ${target.name} (+${addQty})`);
+    setRestockTarget(null);
+    setRestockQty("");
+    setRestockPrice("");
   };
   // "Nouvelle journée" (produits en mode "Quantité du jour", boulangerie/pâtisserie) :
   // déclenché manuellement par la boutique, jamais automatiquement (pas d'heure fixe,
@@ -12482,6 +12545,25 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           </div>
         )}
+        {restockTarget && (() => {
+          const restockProduct = products.find((p) => p.id === restockTarget);
+          if (!restockProduct) return null;
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+              <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-bold text-sm">{tx(lang, "restockModalTitle")}</h3>
+                  <button onClick={() => setRestockTarget(null)}><X size={18} /></button>
+                </div>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{restockProduct.name}</p>
+                <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={restockQty} onChange={(e) => setRestockQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <input autoComplete="off" placeholder={tx(lang, "restockPriceLabel")} type="number" value={restockPrice} onChange={(e) => setRestockPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "restockPriceHint")}</p>
+                <button onClick={confirmRestock} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "restockConfirmBtn")}</button>
+              </div>
+            </div>
+          );
+        })()}
         {tab === "stock" && showAddProduct && (
           <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
             <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
@@ -12690,7 +12772,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <div className="flex items-center gap-2">
                         <button onClick={() => adjustStock(p.id, -1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
                         <span className="text-sm font-extrabold w-6 text-center" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
-                        <button onClick={() => adjustStock(p.id, 1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Plus size={14} /></button>
+                        <button onClick={() => openRestock(p.id)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Plus size={14} /></button>
                       </div>
                     ) : (
                       // Lecture seule (permission "editStock" absente) : la quantité reste visible,
@@ -14221,71 +14303,63 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
-            <div className="flex gap-2 pt-2" style={{
-              background: T.bg,
-              // "fixed" (ancré directement à l'écran), avec un décalage qu'on calcule
-              // nous-mêmes à partir de la hauteur réelle du clavier (keyboardHeightPx,
-              // mesurée via visualViewport dans useKeyboardOpen). On utilisait "absolute"
-              // + un conteneur ancêtre redimensionné (useVisibleHeight) pour obtenir le
-              // même résultat sans dépendre du comportement "fixed" face au clavier sur
-              // certains WebView Android — mais cette barre héritait alors de la hauteur
-              // réellement rendue de son ancêtre scrollable au moment précis de l'affichage
-              // de l'onglet, hauteur pas toujours stabilisée en arrivant sur l'onglet
-              // Assistant : la barre apparaissait alors au milieu de l'écran (juste après
-              // les suggestions) au lieu d'être ancrée en bas. "fixed" + décalage calculé
-              // par nous-mêmes ne dépend plus de la taille d'aucun ancêtre, seulement de la
-              // mesure du clavier — donc plus de dépendance de taille d'ancêtre incorrecte,
-              // dans ce cas précis.
-              position: isDesktop ? "sticky" : "fixed",
-              bottom: isDesktop ? 0 : (keyboardOpen ? `${keyboardHeightPx + 8}px` : "calc(112px + env(safe-area-inset-bottom, 0px))"),
-              left: isDesktop ? "auto" : 16,
-              right: isDesktop ? "auto" : 16,
-              zIndex: isDesktop ? "auto" : 5,
-            }}>
-              <button
-                onClick={startVoiceInput}
-                disabled={aiLoading}
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 disabled:opacity-40"
-                style={{ background: isListening ? CLAY : (darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)") }}
-              >
-                <Mic size={16} color={isListening ? "white" : T.text} style={isListening ? { animation: "aiSpin 1s ease-in-out infinite alternate" } : undefined} />
-              </button>
-              <textarea
-                rows={1}
-                value={aiInput}
-                onChange={(e) => setAiInput(e.target.value.replace(/\n/g, ""))}
-                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); sendAiMessage(); } }}
-                placeholder={isListening ? t(lang, "voiceListening") : t(lang, "aiPlaceholder")}
-                className="flex-1 border rounded-xl px-3 py-2 text-sm"
-                style={{ background: T.card, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }}
-                // Les champs <input> classiques se faisaient signaler par le clavier Android
-                // (Gboard) comme s'ils pouvaient contenir un mot de passe/une carte/une adresse,
-                // avec les raccourcis correspondants affichés au-dessus du clavier. Contrairement
-                // à <input>, un <textarea> n'est pas candidat à ces heuristiques de remplissage
-                // automatique : on l'utilise ici en une seule ligne (rows=1, pas de retour à la
-                // ligne, resize désactivé) pour se comporter exactement comme un champ de texte
-                // normal, sans déclencher cette bande de suggestions.
-                type="text"
-                autoComplete="off"
-                autoCorrect="on"
-                autoCapitalize="sentences"
-                name="ai_question"
-              />
-              <button
-                onClick={() => sendAiMessage()}
-                disabled={!aiInput.trim() || aiLoading}
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 disabled:opacity-40"
-                style={{ background: INDIGO }}
-              >
-                <Send size={16} color="white" />
-              </button>
-            </div>
           </div>
         )}
         {tab === "calculator" && (
           <CalculatorTab T={T} darkMode={darkMode} lang={lang} products={products} />
         )}
       </div>
+      {/* Barre de saisie de l'Assistant IA : rendue ICI, en dehors du conteneur
+          défilant contentScrollRef (qui vient de se fermer juste au-dessus), et non
+          plus à l'intérieur de celui-ci. Un élément "position: fixed" rendu comme
+          DESCENDANT d'un conteneur "overflow-y: auto" (+ -webkit-overflow-scrolling:
+          touch, utilisé par contentScrollRef) casse le défilement tactile de TOUT ce
+          conteneur sur de nombreux WebView Android/iOS — c'est ce qui empêchait de
+          scroller dans l'onglet Assistant IA depuis qu'on avait mis cette barre en
+          "fixed" pour la garder ancrée en bas. En la sortant du conteneur défilant,
+          elle reste ancrée en bas exactement comme avant (même position/style), mais
+          le défilement des messages au-dessus redevient possible. */}
+      {tab === "ai" && (
+        <div className="flex gap-2 pt-2 px-4" style={{
+          background: T.bg,
+          position: isDesktop ? "sticky" : "fixed",
+          bottom: isDesktop ? 0 : (keyboardOpen ? `${keyboardHeightPx + 8}px` : "calc(112px + env(safe-area-inset-bottom, 0px))"),
+          left: isDesktop ? "auto" : 0,
+          right: isDesktop ? "auto" : 0,
+          zIndex: isDesktop ? "auto" : 5,
+        }}>
+          <button
+            onClick={startVoiceInput}
+            disabled={aiLoading}
+            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 disabled:opacity-40"
+            style={{ background: isListening ? CLAY : (darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)") }}
+          >
+            <Mic size={16} color={isListening ? "white" : T.text} style={isListening ? { animation: "aiSpin 1s ease-in-out infinite alternate" } : undefined} />
+          </button>
+          <textarea
+            rows={1}
+            value={aiInput}
+            onChange={(e) => setAiInput(e.target.value.replace(/\n/g, ""))}
+            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); sendAiMessage(); } }}
+            placeholder={isListening ? t(lang, "voiceListening") : t(lang, "aiPlaceholder")}
+            className="flex-1 border rounded-xl px-3 py-2 text-sm"
+            style={{ background: T.card, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }}
+            type="text"
+            autoComplete="off"
+            autoCorrect="on"
+            autoCapitalize="sentences"
+            name="ai_question"
+          />
+          <button
+            onClick={() => sendAiMessage()}
+            disabled={!aiInput.trim() || aiLoading}
+            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 disabled:opacity-40"
+            style={{ background: INDIGO }}
+          >
+            <Send size={16} color="white" />
+          </button>
+        </div>
+      )}
       {showAiHistory && (
         <div dir="ltr" className="absolute inset-0 z-40 flex flex-col" style={{ background: T.bg }}>
           <div dir="ltr" className="flex items-center gap-3 px-4 py-4 shrink-0" style={{ borderBottom: `1px solid ${T.border}` }}>
