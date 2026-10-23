@@ -14159,7 +14159,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         )}
         {tab === "ai" && (
-          <div className="flex flex-col h-full" style={{ minHeight: "calc(100vh - 160px)" }}>
+          <div style={{ paddingBottom: isDesktop ? 12 : "calc(160px + env(safe-area-inset-bottom, 0px))" }}>
             <div dir="ltr" className="flex items-center gap-2 mb-3">
               <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(95,178,255,0.2)" : "rgba(27,58,92,0.1)" }}>
                 <Sparkles size={16} color={darkMode ? "#7fb2ff" : INDIGO} />
@@ -14196,7 +14196,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })()}
-            <div data-kbscroll="true" className="flex-1 overflow-y-auto space-y-3 pb-3" style={{ minHeight: 200, paddingBottom: isDesktop ? 12 : "calc(160px + env(safe-area-inset-bottom, 0px))", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+            <div className="space-y-3">
+              {/* Plus de data-kbscroll ni d'overflow-y:auto ici : cette liste fait
+                  maintenant partie du flux normal de la page, et c'est le conteneur
+                  défilant principal (contentScrollRef, juste au-dessus dans l'arbre)
+                  qui gère tout le scroll de cet onglet — exactement comme pour
+                  Tableau de bord, Stock, Ventes, etc. Avoir DEUX conteneurs
+                  "overflow-y: auto" imbriqués (celui-ci + contentScrollRef) est ce
+                  qui bloquait complètement le scroll tactile sur mobile : le geste
+                  était capté par ce conteneur interne, qui ne parvenait pourtant pas
+                  à défiler lui-même faute d'une hauteur parente bien définie. */}
               {aiMessages.length === 0 && (
                 <div className="rounded-2xl p-4" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   <div className="flex items-start gap-2">
