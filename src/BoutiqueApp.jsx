@@ -10941,22 +10941,18 @@ RÈGLE IMPORTANTE SUR LA DISPONIBILITÉ DES FONCTIONNALITÉS :
 - Tu connais précisément tout ce que l'application propose (voir le guide ci-dessus). Si le boutiquier demande comment faire quelque chose qui EXISTE dans l'application, explique-lui les étapes exactes (onglet, bouton, écran concerné) pour le faire.
 - Si le boutiquier demande une fonctionnalité qui n'existe PAS dans l'application (rien dans le guide ci-dessus n'y correspond, même de loin), dis-le-lui clairement et simplement, sans inventer de fonctionnalité, de bouton ou d'écran qui n'existe pas.
 - Ne dis JAMAIS qu'une fonctionnalité n'est pas disponible si elle figure dans le guide ci-dessus, et n'invente JAMAIS qu'une fonctionnalité existe si elle n'y figure pas. Sois précis : mieux vaut dire honnêtement que tu n'es pas sûr d'un détail que d'affirmer quelque chose de faux sur ce que l'application peut ou ne peut pas faire.
-RÈGLES DE FORMATAGE IMPORTANTES:
-- N'utilise JAMAIS les étoiles (*mot* ou **mot**) pour mettre en valeur des mots
-- Pour mettre en gras, utilise les balises HTML: <b>mot</b>
-- Pour souligner, utilise: <u>mot</u>
-- Pour mettre en couleur importante, utilise: <span style="color:#00CCCC">mot</span>
-- Pas de markdown, uniquement du HTML simple pour le formatage
-- Dès que tu dois présenter un bilan de caisse, un inventaire, ou comparer plus de deux articles, génère IMMÉDIATEMENT un tableau HTML (balises <table>, <tr>, <td>, avec un léger style inline du type style="border-collapse:collapse" sur la table et style="border:1px solid #ccc;padding:4px 8px" sur chaque cellule pour qu'il reste lisible). Utilise toujours les colonnes, dans cet ordre : Article | Quantité | Prix Unitaire | Total (adapte les en-têtes à la langue de la réponse)
-- Lorsqu'on te demande de vérifier une rentabilité, d'appliquer une remise complexe ou de calculer un bilan, décompose ton calcul étape par étape de manière verticale (une opération par ligne, avec <br> entre chaque), en utilisant des symboles arithmétiques clairs (×, ÷, %, ±) plutôt que des mots ("x" ou "divisé par")
-- Pour toute formule, calcul de marge ou de TVA, utilise toujours un rendu avec de vrais caractères (ex: 15%, a/b, x², ±) et non du code de formatage brut : tout doit être immédiatement lisible tel quel dans le message
-- INTERDICTION ABSOLUE DE LaTeX : n'utilise JAMAIS de syntaxe LaTeX, sous aucune forme, nulle part dans tes réponses — ni délimiteurs ($, $$, \\(, \\[), ni commandes (\\frac, \\times, \\sqrt, \\cdot, etc.), ni aucun autre balisage mathématique non interprété. Même pour des formules complexes, écris toujours directement en texte normal avec de vrais caractères (ex: "a/b" au lieu de "\\frac{a}{b}", "×" au lieu de "\\times", "√x" au lieu de "\\sqrt{x}")
-- Structure tes réponses pour qu'elles soient agréables à lire, comme un vrai message bien écrit, pas un bloc compact :
-  • Pour un saut de ligne simple, utilise <br>
-  • Pour séparer deux paragraphes ou deux idées, utilise <br><br>
-  • Pour une liste de plusieurs éléments (produits, conseils, étapes...), mets chaque élément sur sa propre ligne précédée d'un tiret "- " ou d'un point "•", séparés par <br>
-  • Pour une réponse en plusieurs étapes numérotées, utilise "1. ", "2. " etc. en début de ligne avec <br> entre chaque
-- N'ajoute cette structure que quand ça aide vraiment la lecture : une réponse courte en une phrase n'a pas besoin d'être découpée artificiellement
+RÈGLES DE FORMATAGE IMPORTANTES (Markdown simple — jamais de HTML, jamais de LaTeX) :
+- Écris en Markdown simple et STRUCTURÉ, jamais en un seul bloc de texte compact. Chaque règle ci-dessous utilise un VRAI retour à la ligne (une vraie nouvelle ligne dans ta réponse, pas un tiret au milieu d'une phrase) :
+  • Pour le gras (chiffres clés, titres de section, mots importants), entoure le mot de deux étoiles : **mot**. N'utilise JAMAIS de balise HTML (pas de <b>, <br>, <span>, <table>...), le Markdown seul suffit.
+  • Pour un titre de section (ex: Ventes hebdomadaires, Stock critique, Caisse, Dettes, Actions recommandées), mets-le SEUL sur sa propre ligne, en gras, suivi d'une ligne vide avant son contenu — jamais enchaîné avec le texte qui suit sur la même ligne.
+  • Pour une liste de plusieurs éléments (produits, dettes, conseils...), mets CHAQUE élément sur sa PROPRE ligne, précédée de "- " en tout début de ligne. N'enchaîne JAMAIS plusieurs éléments à la suite séparés par des tirets au milieu d'une phrase (jamais "- Total : X - Meilleur produit : Y" sur une seule ligne : chacun sur sa ligne à lui).
+  • Pour une réponse en plusieurs étapes, utilise "1. ", "2. " etc. en tout début de ligne, chaque étape sur sa propre ligne.
+  • Sépare toujours deux sections ou deux idées différentes par une ligne complètement vide (un vrai saut de paragraphe).
+  • Pour comparer plusieurs articles ou présenter un inventaire/bilan, utilise un tableau Markdown simple (lignes avec des | entre les colonnes, ex: | Article | Quantité | Total |), jamais de tableau HTML.
+- Utilise un emoji sobre en début de ligne pour signaler une urgence ou un point clé quand c'est pertinent (⚠️ pour une alerte stock/dette, 💰 pour la caisse, 📈 pour une tendance positive) — avec modération, jamais plus d'un par ligne, jamais pour décorer sans raison.
+- Quand ta réponse contient une ou plusieurs recommandations concrètes, regroupe-les à la toute fin sous un titre en gras dédié, par exemple **Actions recommandées**, plutôt que de les disperser dans le texte.
+- Pour toute formule ou calcul (marge, TVA, remise), écris-le en texte normal avec de vrais caractères (ex: "1 500 × 2 = 3 000", "25 %", "a/b", "√x") — jamais de syntaxe LaTeX ($, \\frac, \\times...) ni de code de formatage brut : tout doit être immédiatement lisible tel quel.
+- N'ajoute cette structure que quand ça aide vraiment la lecture : une réponse courte en une phrase n'a pas besoin d'être découpée artificiellement.
 - Reste concis et pratique, chaleureux et naturel, comme si tu parlais à un commerçant que tu connais bien
 - À la toute fin de CHAQUE réponse, sur une nouvelle ligne, ajoute exactement ce format (rien d'autre après) : <!--FOLLOWUPS: Question courte 1 ||| Question courte 2--> avec 1 ou 2 questions de suivi courtes et pertinentes que le boutiquier pourrait vouloir poser ensuite, dans la langue de la réponse. IMPORTANT : ces questions sont envoyées telles quelles, au nom du boutiquier, dès qu'il appuie dessus — formule-les donc comme si c'était LUI qui te les posait (à la première personne : "Quels sont mes produits les plus vendus cette semaine ?", "Dois-je vérifier mon stock faible ?"), JAMAIS comme si tu t'adressais à lui ("Voulez-vous connaître...", "Souhaitez-vous vérifier..."). Si aucune question de suivi naturelle n'existe, mets <!--FOLLOWUPS:--> vide
 - MÉMOIRE : si le boutiquier exprime une préférence durable sur ta façon de répondre — il n'aime pas quelque chose que tu as fait, te demande de ne plus répéter telle chose, préfère un style, un format, une habitude particulière, etc. — retiens-le pour toutes les prochaines réponses (y compris dans une future conversation). Pour cela, ajoute juste avant le <!--FOLLOWUPS:--> une ligne au format exact <!--MEMORY: la consigne reformulée simplement--> (une seule par réponse, à la 3e personne et dans la langue de la réponse, ex: <!--MEMORY: Ne plus utiliser d'emoji dans les réponses-->). N'ajoute cette ligne QUE quand le boutiquier vient d'exprimer une vraie préférence durable à ce moment précis de la conversation — jamais pour une remarque ponctuelle, une simple question, ou une préférence déjà présente dans "CE QUE LE BOUTIQUIER T'A DÉJÀ DEMANDÉ DE RETENIR" ci-dessus. Sinon, ne mets pas cette ligne du tout
@@ -11042,8 +11038,54 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     setRenamingConvId(null);
     setRenameInput("");
   };
+  // Convertit le Markdown simple que l'IA renvoie (gras **mot**, listes "- item",
+  // paragraphes séparés par une ligne vide, tableaux "| a | b |") en HTML sûr pour
+  // l'affichage dans la bulle de chat. On demande au modèle d'écrire du Markdown
+  // plutôt que du HTML directement : même les petits modèles gratuits utilisés en
+  // secours (Mistral, Cerebras, Cohere) suivent très fidèlement cette syntaxe simple,
+  // alors qu'ils ratent souvent une syntaxe HTML précise avec balises et styles — la
+  // conversion en HTML se fait ici, de façon fiable, plutôt que d'en dépendre.
+  const aiMarkdownToHtml = (raw) => {
+    if (!raw) return "";
+    const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    let text = esc(String(raw).trim());
+    // Filet de sécurité : si un modèle a quand même écrit sa liste sur une seule ligne
+    // ("**Titre** - a - b"), on force un retour à la ligne avant chaque tiret qui suit
+    // un gras fermant, signature typique de ce cas précis — sans toucher aux tirets
+    // normaux à l'intérieur d'une phrase (ex: "23-10-2026").
+    text = text.replace(/\*\*([^*]+)\*\*\s+-\s+/g, "**$1**\n- ");
+    text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    const blocks = text.split(/\n{2,}/);
+    const htmlBlocks = blocks.map((block) => {
+      const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+      if (!lines.length) return "";
+      // Tableau Markdown ("| a | b |", avec éventuelle ligne de séparation "|---|---|")
+      if (lines.length >= 2 && lines.every((l) => l.startsWith("|") && l.endsWith("|"))) {
+        const rows = lines.filter((l) => !/^\|[\s:|-]+\|$/.test(l)).map((l) => l.slice(1, -1).split("|").map((c) => c.trim()));
+        if (rows.length) {
+          const [head, ...body] = rows;
+          const th = head.map((c) => `<th style="border:1px solid #ccc;padding:4px 8px;text-align:left;">${c}</th>`).join("");
+          const tr = body.map((r) => `<tr>${r.map((c) => `<td style="border:1px solid #ccc;padding:4px 8px;">${c}</td>`).join("")}</tr>`).join("");
+          return `<table style="border-collapse:collapse;width:100%;margin:4px 0 10px;font-size:0.95em;"><tr>${th}</tr>${tr}</table>`;
+        }
+      }
+      if (lines.every((l) => /^[-•]\s+/.test(l))) {
+        return `<ul style="margin:4px 0 10px 18px;padding:0;">${lines.map((l) => `<li style="margin-bottom:3px;">${l.replace(/^[-•]\s+/, "")}</li>`).join("")}</ul>`;
+      }
+      if (lines.every((l) => /^\d+[.)]\s+/.test(l))) {
+        return `<ol style="margin:4px 0 10px 18px;padding:0;">${lines.map((l) => `<li style="margin-bottom:3px;">${l.replace(/^\d+[.)]\s+/, "")}</li>`).join("")}</ol>`;
+      }
+      if (lines.length === 1 && /^<strong>.*<\/strong>:?$/.test(lines[0])) {
+        return `<div style="font-weight:700;margin:10px 0 4px;">${lines[0]}</div>`;
+      }
+      return `<p style="margin:0 0 8px;">${lines.join("<br>")}</p>`;
+    });
+    return htmlBlocks.join("") || `<p style="margin:0;">${text.replace(/\n/g, "<br>")}</p>`;
+  };
   const copyAiMessage = (text, idx) => {
-    const plain = text.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "");
+    // "text" est le Markdown brut stocké (msg.content, pas le HTML affiché) : on
+    // retire juste les ** de mise en gras pour une copie propre et lisible ailleurs.
+    const plain = text.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "").replace(/\*\*(.+?)\*\*/g, "$1");
     navigator.clipboard?.writeText(plain).then(() => {
       setCopiedMsgIdx(idx);
       setTimeout(() => setCopiedMsgIdx(null), 1500);
@@ -14251,7 +14293,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         borderBottomLeftRadius: msg.role === "assistant" ? 4 : 16,
                         lineHeight: 1.55,
                       }}
-                      dangerouslySetInnerHTML={msg.role === "assistant" ? { __html: msg.content } : undefined}
+                      dangerouslySetInnerHTML={msg.role === "assistant" ? { __html: aiMarkdownToHtml(msg.content) } : undefined}
                     >
                       {msg.role === "user" ? msg.content : null}
                     </div>
