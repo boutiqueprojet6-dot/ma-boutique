@@ -10973,9 +10973,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       const reply = await callClaudeApi(newMessages, systemPrompt);
       if (reply) {
         incrementAiUsage(); // comptabilise ce message dans le quota mensuel du palier
-        const followMatch = reply.match(/<!--FOLLOWUPS:(.*?)-->/s);
-        const memoryMatch = reply.match(/<!--MEMORY:\s*(.*?)-->/s);
-        const cleanReply = reply.replace(/<!--MEMORY:.*?-->/s, "").replace(/<!--FOLLOWUPS:.*?-->/s, "").trim();
+        // Extraction tolérante : un modèle de secours plus faible ne reproduit pas
+        // toujours exactement la syntaxe "<!--...-->" demandée (espace en trop,
+        // balise mal refermée ou oubliée). On reste souple pour EXTRAIRE ces infos
+        // quand c'est repérable, mais surtout on garantit que ce marqueur ne
+        // s'affiche JAMAIS dans le message visible, même mal formé : on coupe le
+        // texte au premier endroit où l'un de ces marqueurs commence, qu'il soit
+        // bien refermé ou non (plutôt que de ne retirer que la partie bien fermée).
+        const followMatch = reply.match(/<!--\s*FOLLOWUPS\s*:(.*?)-->/is);
+        const memoryMatch = reply.match(/<!--\s*MEMORY\s*:\s*(.*?)-->/is);
+        const markerStart = reply.search(/<!--\s*(FOLLOWUPS|MEMORY)\s*:/i);
+        const cleanReply = (markerStart !== -1 ? reply.slice(0, markerStart) : reply).trim();
         const follows = followMatch ? followMatch[1].split("|||").map((q) => q.trim()).filter(Boolean) : [];
         setAiFollowUps(follows);
         const newMemoryText = memoryMatch ? memoryMatch[1].trim() : "";
