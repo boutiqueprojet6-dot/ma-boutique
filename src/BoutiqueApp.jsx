@@ -4275,6 +4275,18 @@ EXTRA_UI.restockModalTitle = { fr: "Réapprovisionnement", en: "Restock", es: "R
 EXTRA_UI.restockPriceLabel = { fr: "Nouveau prix d'achat (optionnel)", en: "New purchase price (optional)", es: "Nuevo precio de compra (opcional)", pt: "Novo preço de compra (opcional)", de: "Neuer Einkaufspreis (optional)", it: "Nuovo prezzo d'acquisto (facoltativo)", nl: "Nieuwe inkoopprijs (optioneel)", pl: "Nowa cena zakupu (opcjonalnie)", ru: "Новая закупочная цена (необязательно)", tr: "Yeni alış fiyatı (isteğe bağlı)", ar: "سعر شراء جديد (اختياري)", hi: "नया खरीद मूल्य (वैकल्पिक)", bn: "নতুন ক্রয়মূল্য (ঐচ্ছিক)", ur: "نئی خریداری قیمت (اختیاری)", ta: "புதிய கொள்முதல் விலை (விருப்பத்தேர்வு)", te: "కొత్త కొనుగోలు ధర (ఐచ్ఛికం)", th: "ราคาซื้อใหม่ (ไม่บังคับ)", zh: "新进价（可选）", ja: "新しい仕入れ価格（任意）", ko: "새 매입가 (선택 사항)", id: "Harga beli baru (opsional)", vi: "Giá nhập mới (không bắt buộc)", tl: "Bagong presyong bili (opsyonal)", sw: "Bei mpya ya kununulia (si lazima)", ha: "Sabon farashin siye (ba dole ba)", yo: "Owó rírà tuntun (kìí ṣe dandan)", zu: "Intengo entsha yokuthenga (akuphoqelekile)", am: "አዲስ የመግዣ ዋጋ (አማራጭ)", bm: "Sara sɔrɔ kura (fɛɛrɛ)", wo: "Njëgu jënd bu bees (du obligatoire)" };
 EXTRA_UI.restockPriceHint = { fr: "Si vous laissez vide, l'ancien prix est conservé. Sinon, la moyenne pondérée avec le stock existant est calculée automatiquement.", en: "Leave blank to keep the current price. Otherwise, a weighted average with the existing stock is calculated automatically.", es: "Déjelo en blanco para conservar el precio actual. Si no, se calculará automáticamente un promedio ponderado con el stock existente.", pt: "Deixe em branco para manter o preço atual. Caso contrário, será calculada automaticamente uma média ponderada com o estoque existente.", de: "Leer lassen, um den aktuellen Preis beizubehalten. Andernfalls wird automatisch ein gewichteter Durchschnitt mit dem vorhandenen Bestand berechnet.", it: "Lasci vuoto per mantenere il prezzo attuale. Altrimenti verrà calcolata automaticamente una media ponderata con lo stock esistente.", nl: "Laat leeg om de huidige prijs te behouden. Anders wordt automatisch een gewogen gemiddelde met de bestaande voorraad berekend.", pl: "Pozostaw puste, aby zachować obecną cenę. W przeciwnym razie zostanie automatycznie obliczona średnia ważona z istniejącym zapasem.", ru: "Оставьте пустым, чтобы сохранить текущую цену. Иначе будет автоматически рассчитана средневзвешенная цена с учётом имеющегося запаса.", tr: "Mevcut fiyatı korumak için boş bırakın. Aksi halde mevcut stokla ağırlıklı ortalama otomatik hesaplanır.", ar: "اتركه فارغاً للحفاظ على السعر الحالي. وإلا، سيُحسب متوسط مرجّح مع المخزون الحالي تلقائياً.", hi: "मौजूदा कीमत बनाए रखने के लिए खाली छोड़ें। अन्यथा, मौजूदा स्टॉक के साथ भारित औसत स्वतः गणना होगी।", bn: "বর্তমান দাম রাখতে খালি রাখুন। নাহলে, বিদ্যমান স্টকের সাথে ওজনযুক্ত গড় স্বয়ংক্রিয়ভাবে গণনা হবে।", ur: "موجودہ قیمت برقرار رکھنے کے لیے خالی چھوڑیں۔ ورنہ، موجودہ اسٹاک کے ساتھ وزنی اوسط خود بخود شمار ہو جائے گی۔", ta: "தற்போதைய விலையை வைத்திருக்க காலியாக விடவும். இல்லையெனில், இருக்கும் கையிருப்புடன் சராசரி தானாக கணக்கிடப்படும்.", te: "ప్రస్తుత ధరను ఉంచడానికి ఖాళీగా ఉంచండి. లేకపోతే, ఉన్న నిల్వతో సగటు ధర స్వయంచాలకంగా లెక్కించబడుతుంది.", th: "เว้นว่างไว้เพื่อคงราคาเดิม มิฉะนั้นระบบจะคำนวณราคาเฉลี่ยถ่วงน้ำหนักกับสต็อกที่มีอยู่โดยอัตโนมัติ", zh: "留空则保留原价；否则系统会自动按现有库存计算加权平均进价。", ja: "空欄のままにすると現在の価格が維持されます。入力すると、既存の在庫との加重平均が自動計算されます。", ko: "비워두면 현재 가격이 유지됩니다. 입력하면 기존 재고와의 가중 평균이 자동으로 계산됩니다。", id: "Biarkan kosong untuk mempertahankan harga saat ini. Jika diisi, rata-rata tertimbang dengan stok yang ada akan dihitung otomatis.", vi: "Để trống để giữ giá hiện tại. Nếu không, hệ thống sẽ tự động tính giá trung bình theo trọng số với tồn kho hiện có.", tl: "Iwanang blangko para panatilihin ang kasalukuyang presyo. Kung hindi, awtomatikong kakalkulahin ang weighted average kasama ang kasalukuyang stock.", sw: "Acha wazi ili kuendelea na bei ya sasa. Vinginevyo, wastani wenye uzito utahesabiwa kiotomatiki na bidhaa zilizopo.", ha: "Ka bari fanko don ci gaba da farashin yanzu. In ba haka ba, za a lissafta matsakaicin nauyi tare da kayan da ke akwai ta atomatik.", yo: "Fi sílẹ̀ láìsí nǹkan kí owó tí ó wà báyìí máa wà. Bí kò bá rí bẹ́ẹ̀, a ó ṣírò ìwọ̀nwọ̀n pẹ̀lú ọjà tí ó ṣẹ́kù láìfọwọ́kàn.", zu: "Shiya kungenalutho ukuze intengo yamanje igcinwe. Uma kungenjalo, inani eliphakathi elinesisindo lizobalwa ngokuzenzakalela nesitoko esikhona.", am: "የአሁኑን ዋጋ ለማስቀጠል ባዶ ይተዉት። ካልሆነ፣ ካለው ክምችት ጋር ክብደት ያለው አማካይ በራስ-ሰር ይሰላል።", bm: "A to lankolon walasa sanni kɔrɔ be to. Ni o tɛ, hakɛ sara sɔrɔ kɔnɔ be jate yɛrɛ yɛrɛ ni fɛn tora ye.", wo: "Bàyyi mu amul dara ngir njëg bi mujjee. Lu ko moy, dinañu jàppale ko ak njëgu jumtukaay yi nekk." };
 EXTRA_UI.restockConfirmBtn = { fr: "Ajouter au stock", en: "Add to stock", es: "Añadir al stock", pt: "Adicionar ao estoque", de: "Zum Lager hinzufügen", it: "Aggiungi allo stock", nl: "Toevoegen aan voorraad", pl: "Dodaj do zapasu", ru: "Добавить на склад", tr: "Stoğa ekle", ar: "إضافة إلى المخزون", hi: "स्टॉक में जोड़ें", bn: "স্টকে যোগ করুন", ur: "اسٹاک میں شامل کریں", ta: "கையிருப்பில் சேர்", te: "స్టాక్‌కు జోడించండి", th: "เพิ่มเข้าสต็อก", zh: "加入库存", ja: "在庫に追加", ko: "재고에 추가", id: "Tambahkan ke stok", vi: "Thêm vào kho", tl: "Idagdag sa stock", sw: "Ongeza kwenye stoo", ha: "Ƙara wa kaya", yo: "Fi kún ọjà", zu: "Engeza esitokweni", am: "ወደ ክምችት ጨምር", bm: "A fara fɛn na", wo: "Yokk ci marsandiz yi" };
+// ---- Actions que l'Assistant IA peut proposer (toujours avec confirmation) ----
+EXTRA_UI.aiActionUpdatePrice = { fr: "Modifier le prix", en: "Update price", es: "Actualizar el precio", pt: "Atualizar o preço", de: "Preis ändern", it: "Modificare il prezzo", nl: "Prijs wijzigen", pl: "Zmienić cenę", ru: "Изменить цену", tr: "Fiyatı değiştir", ar: "تغيير السعر", hi: "कीमत बदलें", bn: "দাম পরিবর্তন করুন", ur: "قیمت تبدیل کریں", ta: "விலையை மாற்று", te: "ధరను మార్చండి", th: "เปลี่ยนราคา", zh: "修改价格", ja: "価格を変更", ko: "가격 변경", id: "Ubah harga", vi: "Thay đổi giá", tl: "Baguhin ang presyo", sw: "Badilisha bei", ha: "Canza farashin", yo: "Yí owó padà", zu: "Shintsha intengo", am: "ዋጋ ይቀይሩ", bm: "Sɔngɔ caman", wo: "Soppi njëg" };
+EXTRA_UI.aiActionAdjustStock = { fr: "Ajuster le stock", en: "Adjust stock", es: "Ajustar el stock", pt: "Ajustar o estoque", de: "Lagerbestand anpassen", it: "Modificare lo stock", nl: "Voorraad aanpassen", pl: "Dostosować zapas", ru: "Изменить запас", tr: "Stoğu ayarla", ar: "تعديل المخزون", hi: "स्टॉक समायोजित करें", bn: "স্টক সামঞ্জস্য করুন", ur: "اسٹاک ایڈجسٹ کریں", ta: "கையிருப்பை சரிசெய்", te: "స్టాక్‌ను సర్దుబాటు చేయండి", th: "ปรับสต็อก", zh: "调整库存", ja: "在庫を調整", ko: "재고 조정", id: "Sesuaikan stok", vi: "Điều chỉnh tồn kho", tl: "Ayusin ang stock", sw: "Rekebisha stoo", ha: "Daidaita kaya", yo: "Ṣàtúnṣe ọjà", zu: "Lungisa isitoko", am: "ክምችት ያስተካክሉ", bm: "Fɛn latigɛ", wo: "Jubbanti marsandiz" };
+EXTRA_UI.aiActionMarkDebtPaid = { fr: "Marquer la dette payée", en: "Mark debt as paid", es: "Marcar deuda como pagada", pt: "Marcar dívida como paga", de: "Schuld als bezahlt markieren", it: "Segnare il debito come pagato", nl: "Schuld als betaald markeren", pl: "Oznaczyć dług jako spłacony", ru: "Отметить долг как оплаченный", tr: "Borcu ödendi olarak işaretle", ar: "تحديد الدين كمدفوع", hi: "कर्ज को चुकता के रूप में चिह्नित करें", bn: "ঋণ পরিশোধিত চিহ্নিত করুন", ur: "قرض کو ادا شدہ نشان زد کریں", ta: "கடனை செலுத்தியதாக குறி", te: "అప్పును చెల్లించినట్లు గుర్తించండి", th: "ทำเครื่องหมายหนี้ว่าชำระแล้ว", zh: "标记债务为已还清", ja: "借金を支払済みにする", ko: "빚을 상환 완료로 표시", id: "Tandai utang sebagai lunas", vi: "Đánh dấu nợ đã trả", tl: "Markahan ang utang bilang bayad", sw: "Weka alama deni limelipwa", ha: "Yi wa bashi alama an biya", yo: "Sàmì sí gbèsè náà pé a san án", zu: "Maka isikweletu njengesikhokhiwe", am: "ዕዳውን እንደተከፈለ ምልክት ያድርጉ", bm: "Juru ta bɔ a sara kɔ", wo: "Firndeel bor bi defar fay" };
+EXTRA_UI.aiActionRecordSale = { fr: "Enregistrer une vente", en: "Record a sale", es: "Registrar una venta", pt: "Registrar uma venda", de: "Verkauf erfassen", it: "Registrare una vendita", nl: "Verkoop registreren", pl: "Zarejestrować sprzedaż", ru: "Записать продажу", tr: "Satışı kaydet", ar: "تسجيل عملية بيع", hi: "बिक्री दर्ज करें", bn: "বিক্রয় নথিভুক্ত করুন", ur: "فروخت درج کریں", ta: "விற்பனையை பதிவு செய்", te: "అమ్మకాన్ని నమోదు చేయండి", th: "บันทึกการขาย", zh: "记录一笔销售", ja: "販売を記録", ko: "판매 기록", id: "Catat penjualan", vi: "Ghi nhận một giao dịch bán", tl: "Itala ang isang benta", sw: "Rekodi mauzo", ha: "Yi rikodin siyarwa", yo: "Ṣàkọsílẹ̀ títà kan", zu: "Bhala ukuthengisa", am: "ሽያጭ ይመዝግቡ", bm: "Sɔngɔ kɛ sɛbɛn", wo: "Bind benn jaay" };
+EXTRA_UI.aiActionConfirmBtn = { fr: "Confirmer", en: "Confirm", es: "Confirmar", pt: "Confirmar", de: "Bestätigen", it: "Conferma", nl: "Bevestigen", pl: "Potwierdź", ru: "Подтвердить", tr: "Onayla", ar: "تأكيد", hi: "पुष्टि करें", bn: "নিশ্চিত করুন", ur: "تصدیق کریں", ta: "உறுதிசெய்", te: "నిర్ధారించండి", th: "ยืนยัน", zh: "确认", ja: "確認", ko: "확인", id: "Konfirmasi", vi: "Xác nhận", tl: "Kumpirmahin", sw: "Thibitisha", ha: "Tabbatar", yo: "Jẹ́rìí sí", zu: "Qinisekisa", am: "ያረጋግጡ", bm: "Dafɔ", wo: "Wòor" };
+EXTRA_UI.aiActionCancelBtn = { fr: "Annuler", en: "Cancel", es: "Cancelar", pt: "Cancelar", de: "Abbrechen", it: "Annulla", nl: "Annuleren", pl: "Anuluj", ru: "Отменить", tr: "İptal", ar: "إلغاء", hi: "रद्द करें", bn: "বাতিল করুন", ur: "منسوخ کریں", ta: "ரத்துசெய்", te: "రద్దు చేయండి", th: "ยกเลิก", zh: "取消", ja: "キャンセル", ko: "취소", id: "Batal", vi: "Hủy", tl: "Kanselahin", sw: "Ghairi", ha: "Soke", yo: "Fagilé", zu: "Khansela", am: "ይቅር", bm: "Bla", wo: "Bàyyi" };
+EXTRA_UI.aiActionAppliedMsg = { fr: "Fait ✅", en: "Done ✅", es: "Hecho ✅", pt: "Feito ✅", de: "Erledigt ✅", it: "Fatto ✅", nl: "Gedaan ✅", pl: "Gotowe ✅", ru: "Готово ✅", tr: "Tamamlandı ✅", ar: "تم ✅", hi: "हो गया ✅", bn: "সম্পন্ন ✅", ur: "ہو گیا ✅", ta: "முடிந்தது ✅", te: "పూర్తయింది ✅", th: "เสร็จแล้ว ✅", zh: "已完成 ✅", ja: "完了 ✅", ko: "완료 ✅", id: "Selesai ✅", vi: "Xong ✅", tl: "Tapos na ✅", sw: "Imefanyika ✅", ha: "An gama ✅", yo: "Ṣíṣe ✅", zu: "Kwenziwe ✅", am: "ተከናውኗል ✅", bm: "A ban ✅", wo: "Wax jeexna ✅" };
+EXTRA_UI.aiActionDismissedMsg = { fr: "Annulé", en: "Cancelled", es: "Cancelado", pt: "Cancelado", de: "Abgebrochen", it: "Annullato", nl: "Geannuleerd", pl: "Anulowano", ru: "Отменено", tr: "İptal edildi", ar: "تم الإلغاء", hi: "रद्द किया गया", bn: "বাতিল করা হয়েছে", ur: "منسوخ ہو گیا", ta: "ரத்துசெய்யப்பட்டது", te: "రద్దు చేయబడింది", th: "ยกเลิกแล้ว", zh: "已取消", ja: "キャンセル済み", ko: "취소됨", id: "Dibatalkan", vi: "Đã hủy", tl: "Nakansela", sw: "Imeghairiwa", ha: "An soke", yo: "A ti fagilé", zu: "Kukhanseliwe", am: "ተሰርዟል", bm: "A bla", wo: "Bàyyi na" };
+EXTRA_UI.aiActionErrorNotFound = { fr: "Introuvable, l'action n'a pas pu être appliquée.", en: "Not found, the action could not be applied.", es: "No encontrado, no se pudo aplicar la acción.", pt: "Não encontrado, não foi possível aplicar a ação.", de: "Nicht gefunden, die Aktion konnte nicht ausgeführt werden.", it: "Non trovato, impossibile applicare l'azione.", nl: "Niet gevonden, de actie kon niet worden uitgevoerd.", pl: "Nie znaleziono, nie udało się wykonać akcji.", ru: "Не найдено, действие не удалось выполнить.", tr: "Bulunamadı, işlem uygulanamadı.", ar: "لم يتم العثور عليه، تعذر تنفيذ الإجراء.", hi: "नहीं मिला, कार्रवाई लागू नहीं हो सकी।", bn: "পাওয়া যায়নি, পদক্ষেপটি প্রয়োগ করা যায়নি।", ur: "نہیں ملا، کارروائی نافذ نہیں ہو سکی۔", ta: "கிடைக்கவில்லை, செயல் செய்ய முடியவில்லை.", te: "కనుగొనబడలేదు, చర్య వర్తింపజేయబడలేదు.", th: "ไม่พบ การดำเนินการไม่สำเร็จ", zh: "未找到，操作无法执行。", ja: "見つかりません。操作を実行できませんでした。", ko: "찾을 수 없어 작업을 적용하지 못했습니다.", id: "Tidak ditemukan, tindakan tidak dapat diterapkan.", vi: "Không tìm thấy, không thể thực hiện hành động.", tl: "Hindi natagpuan, hindi naisagawa ang aksyon.", sw: "Haikupatikana, hatua haikuweza kutekelezwa.", ha: "Ba a samu ba, ba a iya aiwatar da aikin ba.", yo: "A kò rí i, a kò lè ṣe iṣe náà.", zu: "Akutholakalanga, isenzo asikwazanga ukusetshenziswa.", am: "አልተገኘም፣ እርምጃው ሊፈጸም አልቻለም።", bm: "Ma sɔrɔla, baara tɛ se ka kɛ.", wo: "Gisul, warugar wi mënula def." };
+EXTRA_UI.aiActionErrorStock = { fr: "Stock insuffisant pour cette vente.", en: "Not enough stock for this sale.", es: "Stock insuficiente para esta venta.", pt: "Estoque insuficiente para esta venda.", de: "Nicht genug Lagerbestand für diesen Verkauf.", it: "Stock insufficiente per questa vendita.", nl: "Onvoldoende voorraad voor deze verkoop.", pl: "Za mało towaru na tę sprzedaż.", ru: "Недостаточно товара для этой продажи.", tr: "Bu satış için yeterli stok yok.", ar: "المخزون غير كافٍ لهذا البيع.", hi: "इस बिक्री के लिए पर्याप्त स्टॉक नहीं है।", bn: "এই বিক্রয়ের জন্য পর্যাপ্ত স্টক নেই।", ur: "اس فروخت کے لیے کافی اسٹاک نہیں ہے۔", ta: "இந்த விற்பனைக்கு போதிய கையிருப்பு இல்லை.", te: "ఈ అమ్మకానికి తగినంత స్టాక్ లేదు.", th: "สต็อกไม่พอสำหรับการขายนี้", zh: "库存不足，无法完成此次销售。", ja: "この販売には在庫が足りません。", ko: "이 판매를 위한 재고가 부족합니다.", id: "Stok tidak cukup untuk penjualan ini.", vi: "Không đủ tồn kho cho giao dịch bán này.", tl: "Hindi sapat ang stock para sa bentang ito.", sw: "Stoo haitoshi kwa mauzo haya.", ha: "Kayan ba su isa ba don wannan siyarwar.", yo: "Ọjà kò tó fún títà yìí.", zu: "Isitoko asanele kulokhu kuthengiswa.", am: "ለዚህ ሽያጭ በቂ ክምችት የለም።", bm: "Fɛn tɛ ɲɛ dɔɔnin nin feere ninnu na.", wo: "Marsandiz baaxul ngir jaay bii." };
+EXTRA_UI.aiActionErrorSalesLimit = { fr: "Limite de ventes quotidienne atteinte.", en: "Daily sales limit reached.", es: "Límite diario de ventas alcanzado.", pt: "Limite diário de vendas atingido.", de: "Tägliches Verkaufslimit erreicht.", it: "Limite giornaliero di vendite raggiunto.", nl: "Dagelijkse verkooplimiet bereikt.", pl: "Osiągnięto dzienny limit sprzedaży.", ru: "Достигнут дневной лимит продаж.", tr: "Günlük satış limitine ulaşıldı.", ar: "تم بلوغ الحد اليومي للمبيعات.", hi: "दैनिक बिक्री सीमा पूरी हो गई।", bn: "দৈনিক বিক্রয় সীমা পৌঁছেছে।", ur: "روزانہ فروخت کی حد مکمل ہو گئی۔", ta: "தினசரி விற்பனை வரம்பு எட்டப்பட்டது.", te: "రోజువారీ అమ్మకాల పరిమితి చేరుకుంది.", th: "ถึงขีดจำกัดการขายรายวันแล้ว", zh: "已达到每日销售上限。", ja: "1日の販売上限に達しました。", ko: "일일 판매 한도에 도달했습니다.", id: "Batas penjualan harian tercapai.", vi: "Đã đạt giới hạn bán hàng trong ngày.", tl: "Naabot na ang araw-araw na limitasyon sa benta.", sw: "Kikomo cha mauzo cha kila siku kimefikiwa.", ha: "An kai iyakar sayarwa ta yau da kullun.", yo: "Ààlà títà ojoojúmọ́ ti dé.", zu: "Kufinyelelwe emkhawulweni wokuthengisa wansuku zonke.", am: "ዕለታዊ የሽያጭ ገደብ ላይ ደርሷል።", bm: "Don-don feere dan sera.", wo: "Dayo jaaytu bis bu nekk jotna." };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
 EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseignez le prix d'achat de vos produits pour voir votre bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
 EXTRA_UI.cashMargin = { am: "በሽያጭ ላይ ያለ ህዳግ", ar: "هامش المبيعات", bm: "Tɔnɔ feerew kan", bn: "বিক্রয়ের মার্জিন", de: "Marge auf Verkäufe", en: "Margin on sales", es: "Margen sobre ventas", fr: "Marge sur les ventes", ha: "Ribar da ke kan tallace-tallace", hi: "बिक्री पर मार्जिन", id: "Margin penjualan", it: "Margine sulle vendite", ja: "売上の粗利", ko: "판매 마진", nl: "Marge op verkopen", pl: "Marża na sprzedaży", pt: "Margem sobre vendas", ru: "Маржа с продаж", sw: "Kiwango cha faida kwenye mauzo", ta: "விற்பனை மீதான வரம்பு", te: "అమ్మకాలపై మార్జిన్", th: "กำไรขั้นต้นจากการขาย", tl: "Margin sa benta", tr: "Satış marjı", ur: "فروخت پر مارجن", vi: "Biên lợi nhuận bán hàng", wo: "Tabax ci jaay yi", yo: "Èrè lórí títà", zh: "销售毛利", zu: "Inzuzo ekuthengisweni" };
@@ -10828,6 +10840,284 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     throw lastErr || new Error("failed");
   };
+  // Valide le bloc ACTIONS proposé par l'IA (texte brut entre les balises, avant
+  // parsing JSON). Ne fait confiance à RIEN de ce que l'IA a écrit : vérifie que
+  // chaque action est d'un type connu, que les ids référencés existent vraiment
+  // dans les données actuelles (jamais un id halluciné), et que le boutiquier a
+  // bien la permission correspondante. Toute action invalide est silencieusement
+  // écartée (jamais affichée à moitié formée) plutôt que de planter l'affichage.
+  // Retourne un tableau de { raw, label } prêtes à être montrées pour confirmation —
+  // "raw" est l'action normalisée que executeAiAction consommera telle quelle.
+  const validateAiActions = (rawText) => {
+    if (!rawText || !rawText.trim()) return [];
+    let parsed;
+    try {
+      parsed = JSON.parse(rawText.trim());
+    } catch (e) {
+      return [];
+    }
+    if (!Array.isArray(parsed)) parsed = [parsed];
+    const out = [];
+    for (const a of parsed) {
+      if (!a || typeof a !== "object" || !a.type) continue;
+      if (a.type === "update_price") {
+        if (!hasPermission("editStock")) continue;
+        const product = products.find((p) => p.id === a.productId);
+        const newPrice = Number(a.newPrice);
+        if (!product || !newPrice || isNaN(newPrice) || newPrice <= 0) continue;
+        out.push({
+          raw: { type: "update_price", productId: product.id, newPrice },
+          label: `${tx(lang, "aiActionUpdatePrice")} : ${product.name} — ${localizedNumber(product.price)} → ${localizedNumber(newPrice)} ${CURRENT_CURRENCY.symbol}`,
+        });
+      } else if (a.type === "adjust_stock") {
+        if (!hasPermission("editStock")) continue;
+        const product = products.find((p) => p.id === a.productId);
+        const delta = Number(a.delta);
+        if (!product || !delta || isNaN(delta)) continue;
+        out.push({
+          raw: { type: "adjust_stock", productId: product.id, delta },
+          label: `${tx(lang, "aiActionAdjustStock")} : ${product.name} (${product.quantity} → ${Math.max(0, product.quantity + delta)})`,
+        });
+      } else if (a.type === "mark_debt_paid") {
+        if (!hasPermission("editDebts")) continue;
+        const debt = debts.find((d) => d.id === a.debtId && !d.paid);
+        if (!debt) continue;
+        out.push({
+          raw: { type: "mark_debt_paid", debtId: debt.id },
+          label: `${tx(lang, "aiActionMarkDebtPaid")} : ${debt.customer} — ${localizedNumber(remainingDebt(debt))} ${CURRENT_CURRENCY.symbol}`,
+        });
+      } else if (a.type === "record_sale") {
+        // La carte de cette action est un vrai petit formulaire modifiable (produit +
+        // quantité + paquet/unité par ligne), pas juste un texte à valider tel quel —
+        // voir le rendu plus bas et updateSaleDraftItem/addSaleDraftItem. "draft" est
+        // l'état actuel du formulaire ; il part de ce que l'IA a compris (ou vide si
+        // le boutiquier a juste exprimé l'intention de vendre sans préciser quoi), et
+        // le boutiquier peut tout corriger avant de confirmer — c'est alors "draft",
+        // reconstruit en action exécutable au moment du clic, qui est utilisé, jamais
+        // "raw" tel quel.
+        if (!hasPermission("sell")) continue;
+        const items = Array.isArray(a.items) ? a.items : [];
+        const draftItems = [];
+        for (const it of items) {
+          const product = products.find((p) => p.id === it.productId);
+          if (!product) continue; // on ignore juste cette ligne plutôt que rejeter toute la proposition
+          const mode = it.mode === "unit" && product.sellByUnit ? "unit" : "pack";
+          const maxQty = mode === "unit" ? ((product.quantity || 0) * (product.unitsPerPack || 1) + (product.looseUnits || 0)) : (product.quantity || 0);
+          const qty = Math.max(1, Math.min(Number(it.qty) || 1, Math.max(1, maxQty)));
+          draftItems.push({ productId: product.id, qty, mode });
+        }
+        const payment = ["cash", "mobile", "card", "credit"].includes(a.payment) ? a.payment : "cash";
+        const customer = (a.customer || "").trim();
+        out.push({
+          raw: { type: "record_sale" },
+          label: "",
+          isSaleForm: true,
+          draft: { items: draftItems, payment, customer },
+        });
+      }
+      // Une seule proposition prise en compte : si l'IA a quand même mis plusieurs
+      // actions de types différents dans le même bloc (contrairement à la consigne),
+      // on s'arrête à la première valide plutôt que d'en appliquer plusieurs d'un coup.
+      if (out.length >= 1 && a.type !== "record_sale") break;
+    }
+    return out;
+  };
+
+  // Applique réellement UNE action déjà validée (voir validateAiActions) après que
+  // le boutiquier a appuyé sur "Confirmer". Revalide une dernière fois l'existence
+  // des données au moment de l'exécution (le produit/la dette a pu changer depuis
+  // la proposition de l'IA) plutôt que de faire confiance à l'état figé au moment
+  // de la réponse. Retourne { ok, error? }.
+  const executeAiAction = (action) => {
+    try {
+      if (action.type === "update_price") {
+        const product = products.find((p) => p.id === action.productId);
+        if (!product) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+        saveAll({ products: products.map((p) => (p.id === product.id ? { ...p, price: action.newPrice, updatedAt: Date.now() } : p)) });
+        logAction(`${t(lang, "logProductAdded")} : ${product.name} — ${localizedNumber(product.price)} → ${localizedNumber(action.newPrice)} ${CURRENT_CURRENCY.symbol}`);
+        return { ok: true };
+      }
+      if (action.type === "adjust_stock") {
+        const product = products.find((p) => p.id === action.productId);
+        if (!product) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+        adjustStock(product.id, action.delta);
+        return { ok: true };
+      }
+      if (action.type === "mark_debt_paid") {
+        const debt = debts.find((d) => d.id === action.debtId && !d.paid);
+        if (!debt) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+        saveAll({
+          debts: debts.map((x) => (x.id === debt.id ? { ...x, paid: true } : x)),
+          debtEvents: [...allDebtEvents, { id: debt.id + "-paidev", debtId: debt.id, type: "paid", customer: debt.customer, amount: remainingDebt(debt), product: debt.product, date: new Date().toISOString(), actorId: activeEmployee ? activeEmployee.id : null, actorName: activeEmployee ? activeEmployee.name : null }],
+          historyLog: [...historyLog, makeHistoryEntry("debtPaid", { refId: debt.id + "-paidev", amount: remainingDebt(debt), customer: debt.customer, product: debt.product || "" })],
+        });
+        logAction(`${t(lang, "logDebtSettled")} : ${debt.customer} — ${localizedNumber(remainingDebt(debt))}`);
+        return { ok: true };
+      }
+      if (action.type === "record_sale") {
+        const resolved = [];
+        for (const it of action.items) {
+          const product = products.find((p) => p.id === it.productId);
+          if (!product) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+          const mode = it.mode === "unit" && product.sellByUnit ? "unit" : "pack";
+          const unitPrice = mode === "unit" ? (product.unitPrice || 0) : product.price;
+          const available = mode === "unit" ? ((product.quantity || 0) * (product.unitsPerPack || 1) + (product.looseUnits || 0)) : (product.quantity || 0);
+          if (it.qty > available) return { ok: false, error: tx(lang, "aiActionErrorStock") };
+          resolved.push({ product, qty: it.qty, mode, unitPrice });
+        }
+        if (resolved.length === 0) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+        const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
+        const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
+        if (salesLimit !== null && salesTodayCount() >= salesLimit) {
+          setShowSettings(true);
+          setSettingsView("subscription");
+          return { ok: false, error: tx(lang, "aiActionErrorSalesLimit") };
+        }
+        const total = resolved.reduce((sum, r) => sum + r.qty * r.unitPrice, 0);
+        const transactionId = `t${Date.now()}${Math.random().toString(36).slice(2, 7)}`;
+        const dateNow = new Date().toISOString();
+        const receivedNum = action.payment === "cash" ? (action.received != null ? action.received : total) : null;
+        const customer = (action.customer || "").trim();
+        const newSales = resolved.map(({ product, qty, mode, unitPrice }) => ({
+          id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
+          transactionId,
+          productId: product.id,
+          productName: product.name,
+          qty,
+          unitPrice,
+          total: qty * unitPrice,
+          mode,
+          costPrice: product.costPrice != null ? product.costPrice : null,
+          payment: action.payment,
+          customer: customer || null,
+          date: dateNow,
+          received: receivedNum,
+          change: receivedNum !== null ? receivedNum - total : null,
+          actorId: activeEmployee ? activeEmployee.id : null,
+          actorName: activeEmployee ? activeEmployee.name : null,
+        }));
+        const nextProducts = products.map((p) => {
+          const packMatch = resolved.find((r) => r.product.id === p.id && r.mode === "pack");
+          const unitMatch = resolved.find((r) => r.product.id === p.id && r.mode === "unit");
+          if (!packMatch && !unitMatch) return p;
+          let updated = { ...p };
+          if (packMatch) updated.quantity = Math.max(0, updated.quantity - packMatch.qty);
+          if (unitMatch) {
+            const deducted = deductUnitStock(updated, unitMatch.qty);
+            updated.quantity = deducted.quantity;
+            updated.looseUnits = deducted.looseUnits;
+          }
+          updated.updatedAt = Date.now();
+          return updated;
+        });
+        let nextDebts = debts;
+        let nextDebtEvents = allDebtEvents;
+        const newHistory = [makeHistoryEntry("sale", {
+          refId: transactionId, date: dateNow, amount: total, customer, payment: action.payment,
+          change: receivedNum !== null ? receivedNum - total : null,
+          items: resolved.map((r) => ({ productName: r.product.name, qty: r.qty, unitPrice: r.unitPrice })),
+        })];
+        if (action.payment === "credit") {
+          const newDebtId = Date.now().toString() + Math.random().toString(36).slice(2, 7) + "-debt";
+          nextDebts = [...debts, { id: newDebtId, customer, amount: total, product: resolved.map((r) => `${r.product.name} x${r.qty}`).join(", "), date: dateNow, paid: false, paidAmount: 0, updatedAt: Date.now(), source: "sale", transactionId }];
+          nextDebtEvents = [...allDebtEvents, { id: newDebtId + "-ev", debtId: newDebtId, type: "created", customer, amount: total, product: resolved.map((r) => `${r.product.name} x${r.qty}`).join(", "), date: dateNow, source: "sale" }];
+          newHistory.push(makeHistoryEntry("debtCreated", { refId: newDebtId + "-ev", date: dateNow, amount: total, customer, product: resolved.map((r) => `${r.product.name} x${r.qty}`).join(", "), source: "sale" }));
+        }
+        saveAll({ products: nextProducts, sales: [...allSales, ...newSales], debts: nextDebts, debtEvents: nextDebtEvents, historyLog: [...historyLog, ...newHistory] });
+        logAction(`${t(lang, "logSaleRecorded")} : ${resolved.map((r) => `${r.product.name} x${r.qty}`).join(", ")} — ${localizedNumber(total)}`);
+        playSound("success");
+        triggerHaptic("success");
+        setSaleSuccessOverlay({ amount: total, id: transactionId });
+        return { ok: true };
+      }
+      return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+    } catch (e) {
+      return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+    }
+  };
+
+  // Appelé quand le boutiquier appuie sur "Confirmer" / "Annuler" sous une proposition
+  // d'action de l'assistant. Pour "mark_debt_paid", on repasse par le même verrou PIN
+  // que le bouton natif "Payé" de l'onglet Dettes (voir setShowLockPinModal plus bas) —
+  // l'assistant ne doit pas offrir un raccourci qui contourne cette protection.
+  const respondToAiAction = (msgIndex, actionIdx, confirmed) => {
+    const msg = aiMessages[msgIndex];
+    if (!msg || !msg.actions || !msg.actions[actionIdx]) return;
+    const actionEntry = msg.actions[actionIdx];
+    // Pour "record_sale", l'action réellement exécutée vient du formulaire modifiable
+    // (draft) tel qu'il est AU MOMENT du clic, pas de la proposition d'origine de l'IA
+    // (raw) : le boutiquier a pu tout changer (produit, quantité, paquet/unité...).
+    const action = actionEntry.isSaleForm
+      ? { type: "record_sale", items: actionEntry.draft.items.map((it) => ({ productId: it.productId, qty: it.qty, mode: it.mode })), payment: actionEntry.draft.payment, customer: actionEntry.draft.payment === "credit" ? actionEntry.draft.customer.trim() : undefined }
+      : actionEntry.raw;
+    const applyAndUpdateMsg = () => {
+      const result = executeAiAction(action);
+      setAiMessages((prevMsgs) => prevMsgs.map((m, i) => (i === msgIndex ? { ...m, actionStatus: result.ok ? "applied" : "error", actionError: result.ok ? undefined : result.error } : m)));
+    };
+    if (!confirmed) {
+      setAiMessages((prevMsgs) => prevMsgs.map((m, i) => (i === msgIndex ? { ...m, actionStatus: "dismissed" } : m)));
+      return;
+    }
+    if (actionEntry.isSaleForm) {
+      if (!action.items.length) return; // rien à vendre, le bouton Confirmer est de toute façon désactivé dans ce cas
+      if (action.payment === "credit" && !action.customer) return; // nom du client requis, bouton désactivé aussi dans ce cas
+    }
+    if (action.type === "mark_debt_paid") {
+      setPendingLockAction(() => applyAndUpdateMsg);
+      setShowLockPinModal(true);
+      return;
+    }
+    applyAndUpdateMsg();
+  };
+
+  // ---- Formulaire modifiable de la carte "Enregistrer une vente" proposée par l'IA ----
+  // Toutes ces fonctions modifient uniquement msg.actions[actionIdx].draft (jamais
+  // "raw", qui reste la proposition d'origine de l'IA pour mémoire) ; le formulaire
+  // est reconstruit en action exécutable seulement au moment du clic sur "Confirmer"
+  // (voir respondToAiAction plus bas).
+  const updateSaleDraft = (msgIndex, actionIdx, patch) => {
+    setAiMessages((prev) => prev.map((m, i) => {
+      if (i !== msgIndex) return m;
+      const actions = m.actions.map((act, ai) => (ai === actionIdx ? { ...act, draft: { ...act.draft, ...patch } } : act));
+      return { ...m, actions };
+    }));
+  };
+  const updateSaleDraftItem = (msgIndex, actionIdx, itemIdx, patch) => {
+    setAiMessages((prev) => prev.map((m, i) => {
+      if (i !== msgIndex) return m;
+      const actions = m.actions.map((act, ai) => {
+        if (ai !== actionIdx) return act;
+        const items = act.draft.items.map((it, ii) => (ii === itemIdx ? { ...it, ...patch } : it));
+        return { ...act, draft: { ...act.draft, items } };
+      });
+      return { ...m, actions };
+    }));
+  };
+  const addSaleDraftItem = (msgIndex, actionIdx) => {
+    const firstProduct = products[0];
+    if (!firstProduct) return;
+    setAiMessages((prev) => prev.map((m, i) => {
+      if (i !== msgIndex) return m;
+      const actions = m.actions.map((act, ai) => (ai === actionIdx ? { ...act, draft: { ...act.draft, items: [...act.draft.items, { productId: firstProduct.id, qty: 1, mode: "pack" }] } } : act));
+      return { ...m, actions };
+    }));
+  };
+  const removeSaleDraftItem = (msgIndex, actionIdx, itemIdx) => {
+    setAiMessages((prev) => prev.map((m, i) => {
+      if (i !== msgIndex) return m;
+      const actions = m.actions.map((act, ai) => (ai === actionIdx ? { ...act, draft: { ...act.draft, items: act.draft.items.filter((_, ii) => ii !== itemIdx) } } : act));
+      return { ...m, actions };
+    }));
+  };
+  // Prix unitaire affiché/utilisé pour une ligne du formulaire (prix du paquet, ou
+  // prix de l'unité détail si mode "unit").
+  const saleDraftItemUnitPrice = (item) => {
+    const product = products.find((p) => p.id === item.productId);
+    if (!product) return 0;
+    return item.mode === "unit" ? (product.unitPrice || 0) : (product.price || 0);
+  };
+  const saleDraftTotal = (draft) => draft.items.reduce((sum, it) => sum + it.qty * saleDraftItemUnitPrice(it), 0);
+
   const sendAiMessage = async (overrideText, isRetry) => {
     const textToSend = (overrideText ?? aiInput).trim();
     if (!textToSend || aiLoading) return;
@@ -10876,9 +11166,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const topProd = Object.entries(
       sales.reduce((acc, s) => { acc[s.productName] = (acc[s.productName] || 0) + s.qty; return acc; }, {})
     ).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([n, q]) => `${n}: ${q} vendus`).join(", ");
-    const stockSummary = products.map((p) => `${p.name}: ${p.quantity} en stock (seuil alerte: ${lowStockThreshold}), prix ${p.price} ${CURRENT_CURRENCY.symbol}`).join("\n");
+    // Les identifiants (id: ...) sont inclus pour chaque produit/dette : c'est ce que
+    // l'IA doit utiliser dans un bloc ACTIONS (voir plus bas), jamais le nom en texte
+    // libre, pour cibler sans ambiguïté la bonne ligne même si deux produits ont un nom
+    // proche. L'id n'est pas destiné à être affiché au boutiquier dans la réponse.
+    const stockSummary = products.map((p) => `${p.name} (id: ${p.id}): ${p.quantity} en stock (seuil alerte: ${lowStockThreshold}), prix ${p.price} ${CURRENT_CURRENCY.symbol}`).join("\n");
     const lowStockList = products.filter((p) => p.quantity <= lowStockThreshold).map((p) => p.name).join(", ") || "Aucun";
-    const debtSummary = debts.filter((d) => !d.paid).map((d) => `${d.customer}: ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n") || "Aucune";
+    const debtSummary = debts.filter((d) => !d.paid).map((d) => `${d.customer} (id: ${d.id}): ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n") || "Aucune";
     const cashSummary = `Fond de caisse: ${cashFund} ${CURRENT_CURRENCY.symbol}, Ventes espèces totales: ${sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}, Dépenses: ${expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}, Solde estimé: ${cashFund + sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0) - expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}`;
     const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => s.date.slice(0, 10) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
     const memoryNotesText = aiMemoryNotes.length > 0
@@ -10906,6 +11200,27 @@ CE QUE TU PEUX FAIRE:
 - Chercher sur internet des informations utiles et actuelles (prix de référence, tendances, actualités économiques locales) si la question le demande. Dans ce cas, base-toi sur la date du jour ci-dessus et privilégie toujours les résultats les plus récents : ignore ou écarte une information ancienne (par exemple datée d'une année passée) si une version plus récente existe, et ne présente jamais une info périmée comme si elle était d'actualité. Si tu n'es pas sûr qu'un résultat trouvé soit encore à jour, dis-le clairement au boutiquier plutôt que de l'affirmer comme un fait actuel
 - Faire des simulations "Et si...?" (ex: et si j'augmente un prix, et si j'achète plus de stock, et si je réduis mes dépenses) en te basant sur les vraies données ci-dessous pour donner une estimation chiffrée concrète, pas juste une réponse vague
 - Guider le boutiquier pas à pas pour utiliser n'importe quelle fonctionnalité de l'application (voir la liste complète ci-dessous)
+AGIR DIRECTEMENT SUR LA BOUTIQUE (actions) :
+Pour ces 4 demandes précises seulement, tu peux proposer une action concrète que le boutiquier confirmera d'un tap (jamais appliquée automatiquement) :
+  1. Changer le prix d'un produit
+  2. Ajuster une quantité en stock (réapprovisionnement ou correction)
+  3. Marquer une dette comme payée
+  4. Enregistrer une vente
+Quand le boutiquier te demande clairement l'une de ces 4 choses ET que tu identifies sans ambiguïté le produit/la dette concerné(e) dans les données ci-dessous (par son id, jamais en inventant un id) :
+- Réponds d'abord par une phrase courte et naturelle qui résume ce que tu vas faire et demande la confirmation (ex: "Je vais passer le prix du Savon à 600 FCFA, vous confirmez ci-dessous ?").
+- Termine ta réponse par un bloc cachée au format EXACT suivant (rien d'autre après) :
+<!--ACTIONS:[{"type":"update_price","productId":"ID_EXACT","newPrice":600}]-->
+  Les 4 formats possibles (un seul objet dans le tableau, sauf pour une vente à plusieurs articles) :
+  - {"type":"update_price","productId":"...","newPrice":NOMBRE}
+  - {"type":"adjust_stock","productId":"...","delta":NOMBRE}  (positif pour ajouter, négatif pour retirer)
+  - {"type":"mark_debt_paid","debtId":"..."}
+  - {"type":"record_sale","items":[{"productId":"...","qty":NOMBRE,"mode":"pack"|"unit"}, ...],"payment":"cash"|"mobile"|"card"|"credit","customer":"nom (obligatoire seulement si payment=credit)"}
+    "mode" n'a de sens que si le produit permet la vente à l'unité (sellByUnit) ; sinon utilise toujours "pack". Si le boutiquier demande à faire une vente SANS préciser quel produit ("je veux faire une vente", "j'ai vendu quelque chose tout à l'heure"), c'est le SEUL cas où tu peux proposer "record_sale" avec "items":[] (liste vide) : ça ouvre un petit formulaire où il remplit lui-même le produit, la quantité et paquet/unité — ta phrase avant le bloc doit alors juste dire que tu ouvres le formulaire de vente, sans inventer de produit.
+Règles strictes :
+- N'utilise JAMAIS un id que tu as inventé : copie-le exactement depuis la liste de produits/dettes fournie plus haut. Si tu ne trouves pas le produit/la dette avec certitude (nom ambigu, plusieurs correspondances, rien ne correspond) pour update_price / adjust_stock / mark_debt_paid, ne propose AUCUNE action : explique le problème et demande une précision, en texte normal. (Pour record_sale uniquement, l'exception "items":[] ci-dessus s'applique.)
+- Une seule proposition d'action par réponse. Si le boutiquier demande plusieurs choses différentes à la fois, occupe-toi seulement de la première et propose-lui de faire le reste ensuite.
+- N'ajoute JAMAIS ce bloc pour une simple question ou une demande d'analyse — uniquement quand le boutiquier demande explicitement de changer quelque chose.
+- Le bloc ACTIONS ne doit contenir AUCUN texte visible pour le boutiquier : il est retiré avant affichage, donc ta phrase de confirmation juste avant doit déjà tout expliquer clairement par elle-même.
 GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand il demande comment faire quelque chose) :
 - Onglets principaux : Accueil (tableau de bord), Stock, Vente, Historique, Dettes, Stats, Assistant (toi). Le menu « Plus » donne accès aux autres écrans, dont l'onglet Caisse.
 - Tableau de bord (Accueil) : voir les ventes du jour, fixer un objectif de ventes du mois, carte « Stock faible » (regroupe les produits dont la quantité est sous le seuil d'alerte défini dans Paramètres > Boutique, ce seuil est modifiable et n'est pas figé à 5 ; par défaut l'affichage se limite aux 5 produits les plus faibles, le bouton « Voir tout » / « Voir moins » affiche ou réduit la liste, et le bouton de tri permet de la trier), rapport de caisse (pour les comptes multi-boutiques : ventes par propriétaire, espèces, Mobile Money, carte, dépenses, paiements de dettes), alertes d'activité inhabituelle (annulations en série, caisse vidée, etc.). Le fond de caisse et les dépenses ne se gèrent plus sur l'Accueil : tout se fait dans l'onglet Caisse.
@@ -11000,8 +11315,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         // bien refermé ou non (plutôt que de ne retirer que la partie bien fermée).
         const followMatch = reply.match(/<!--\s*FOLLOWUPS\s*:(.*?)-->/is);
         const memoryMatch = reply.match(/<!--\s*MEMORY\s*:\s*(.*?)-->/is);
-        const markerStart = reply.search(/<!--\s*(FOLLOWUPS|MEMORY)\s*:/i);
+        const actionsMatch = reply.match(/<!--\s*ACTIONS\s*:(.*?)-->/is);
+        const markerStart = reply.search(/<!--\s*(FOLLOWUPS|MEMORY|ACTIONS)\s*:/i);
         const cleanReply = (markerStart !== -1 ? reply.slice(0, markerStart) : reply).trim();
+        // Validation stricte des actions proposées par l'IA : jamais appliquées
+        // automatiquement (c'est validateAiActions qui prépare leur résumé lisible
+        // et refuse tout id inexistant ou action mal formée — voir cette fonction).
+        // Un seul objet action est accepté par réponse pour update_price/adjust_stock/
+        // mark_debt_paid (un tableau avec plusieurs items n'a de sens que pour
+        // record_sale), et toute action invalide est simplement ignorée plutôt que
+        // de planter l'affichage de la réponse.
+        const proposedActions = validateAiActions(actionsMatch ? actionsMatch[1] : "");
         const follows = followMatch ? followMatch[1].split("|||").map((q) => q.trim()).filter(Boolean) : [];
         setAiFollowUps(follows);
         const newMemoryText = memoryMatch ? memoryMatch[1].trim() : "";
@@ -11014,7 +11338,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             nextMemory = [...aiMemoryNotes, { id: `mem_${Date.now()}${Math.random().toString(36).slice(2, 7)}`, text: newMemoryText, createdAt: new Date().toISOString() }];
           }
         }
-        const finalMessages = [...newMessages, { role: "assistant", content: cleanReply }];
+        const finalMessages = [...newMessages, { role: "assistant", content: cleanReply, actions: proposedActions.length ? proposedActions : undefined, actionStatus: proposedActions.length ? "pending" : undefined }];
         setAiMessages(finalMessages);
         const title = (currentConvId
           ? aiConversations.find((c) => c.id === currentConvId)?.title
@@ -14336,6 +14660,102 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       {copiedMsgIdx === i ? <><Check size={11} color="#4C7A5A" /> {t(lang, "copied")}</> : <><Copy size={11} /> {t(lang, "copyMsg")}</>}
                     </button>
                   )}
+                  {/* Carte de confirmation d'action proposée par l'IA (voir validateAiActions/
+                      executeAiAction/respondToAiAction). Jamais appliquée automatiquement :
+                      affiche un résumé en clair de ce qui va changer et attend un tap. */}
+                  {msg.role === "assistant" && msg.actions && msg.actions.length > 0 && (() => {
+                    const act = msg.actions[0];
+                    const pending = !msg.actionStatus || msg.actionStatus === "pending";
+                    return (
+                      <div className="ml-8 mt-1.5 max-w-[88%] rounded-xl px-3 py-2.5" style={{ background: darkMode ? "rgba(95,178,255,0.1)" : "rgba(27,58,92,0.06)", border: `1px solid ${darkMode ? "rgba(95,178,255,0.25)" : "rgba(27,58,92,0.15)"}` }}>
+                        {!act.isSaleForm && (
+                          <p className="text-xs font-semibold mb-1.5" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{act.label}</p>
+                        )}
+                        {act.isSaleForm && pending && (
+                          <div className="flex flex-col gap-2 mb-2">
+                            <p className="text-xs font-bold" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{tx(lang, "aiActionRecordSale")}</p>
+                            {act.draft.items.map((item, itIdx) => {
+                              const product = products.find((p) => p.id === item.productId);
+                              return (
+                                <div key={itIdx} className="flex items-center gap-1.5">
+                                  <select
+                                    value={item.productId || ""}
+                                    onChange={(e) => updateSaleDraftItem(i, 0, itIdx, { productId: e.target.value, mode: "pack" })}
+                                    className="flex-1 min-w-0 border rounded-lg px-2 py-1.5 text-xs"
+                                    style={{ background: T.card, color: T.text, borderColor: T.border }}
+                                  >
+                                    {products.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+                                  </select>
+                                  <input
+                                    type="number"
+                                    min="1"
+                                    value={item.qty}
+                                    onChange={(e) => updateSaleDraftItem(i, 0, itIdx, { qty: Math.max(1, parseInt(e.target.value, 10) || 1) })}
+                                    className="w-14 border rounded-lg px-1.5 py-1.5 text-xs text-center"
+                                    style={{ background: T.card, color: T.text, borderColor: T.border }}
+                                  />
+                                  {product && product.sellByUnit && (
+                                    <div className="flex rounded-lg overflow-hidden shrink-0" style={{ border: `1px solid ${T.border}` }}>
+                                      <button onClick={() => updateSaleDraftItem(i, 0, itIdx, { mode: "pack" })} className="px-2 py-1.5 text-[10px] font-semibold" style={{ background: item.mode !== "unit" ? INDIGO : "transparent", color: item.mode !== "unit" ? "white" : T.text }}>{t(lang, "sellPack")}</button>
+                                      <button onClick={() => updateSaleDraftItem(i, 0, itIdx, { mode: "unit" })} className="px-2 py-1.5 text-[10px] font-semibold" style={{ background: item.mode === "unit" ? INDIGO : "transparent", color: item.mode === "unit" ? "white" : T.text }}>{t(lang, "sellUnit")}</button>
+                                    </div>
+                                  )}
+                                  <button onClick={() => removeSaleDraftItem(i, 0, itIdx)} className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: T.input }}>
+                                    <X size={13} color={T.muted} />
+                                  </button>
+                                </div>
+                              );
+                            })}
+                            <button onClick={() => addSaleDraftItem(i, 0)} className="self-start flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded-lg" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>
+                              <Plus size={12} /> {t(lang, "addProduct")}
+                            </button>
+                            <div className="flex gap-1.5 flex-wrap mt-0.5">
+                              {["cash", "mobile", "card", "credit"].map((pm) => (
+                                <button key={pm} onClick={() => updateSaleDraft(i, 0, { payment: pm })} className="px-2.5 py-1.5 rounded-lg text-[11px] font-semibold" style={{ background: act.draft.payment === pm ? INDIGO : T.input, color: act.draft.payment === pm ? "white" : T.text }}>
+                                  {pm === "cash" ? t(lang, "cash") : pm === "mobile" ? t(lang, "mobilePayment") : pm === "card" ? t(lang, "card") : t(lang, "credit")}
+                                </button>
+                              ))}
+                            </div>
+                            {act.draft.payment === "credit" && (
+                              <input
+                                type="text"
+                                value={act.draft.customer}
+                                onChange={(e) => updateSaleDraft(i, 0, { customer: e.target.value })}
+                                placeholder={t(lang, "clientName")}
+                                className="border rounded-lg px-2.5 py-1.5 text-xs"
+                                style={{ background: T.card, color: T.text, borderColor: T.border }}
+                              />
+                            )}
+                            {act.draft.items.length > 0 && (
+                              <p className="text-xs font-bold text-right" style={{ color: T.text }}>{localizedNumber(saleDraftTotal(act.draft))} {CURRENT_CURRENCY.symbol}</p>
+                            )}
+                          </div>
+                        )}
+                        {pending && (
+                          <div className="flex gap-2 mt-1">
+                            <button
+                              onClick={() => respondToAiAction(i, 0, true)}
+                              disabled={act.isSaleForm && (act.draft.items.length === 0 || (act.draft.payment === "credit" && !act.draft.customer.trim()))}
+                              className="flex-1 py-2 rounded-lg text-xs font-bold text-white disabled:opacity-40"
+                              style={{ background: INDIGO }}
+                            >
+                              {tx(lang, "aiActionConfirmBtn")}
+                            </button>
+                            <button onClick={() => respondToAiAction(i, 0, false)} className="flex-1 py-2 rounded-lg text-xs font-bold" style={{ background: T.input, color: T.text }}>{tx(lang, "aiActionCancelBtn")}</button>
+                          </div>
+                        )}
+                        {msg.actionStatus === "applied" && (
+                          <p className="text-xs font-bold" style={{ color: "#16a34a" }}>{tx(lang, "aiActionAppliedMsg")}</p>
+                        )}
+                        {msg.actionStatus === "dismissed" && (
+                          <p className="text-xs font-semibold" style={{ color: T.muted }}>{tx(lang, "aiActionDismissedMsg")}</p>
+                        )}
+                        {msg.actionStatus === "error" && (
+                          <p className="text-xs font-semibold" style={{ color: "#dc2626" }}>{msg.actionError || tx(lang, "aiActionErrorNotFound")}</p>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
               ))}
               {aiFollowUps.length > 0 && !aiLoading && (
