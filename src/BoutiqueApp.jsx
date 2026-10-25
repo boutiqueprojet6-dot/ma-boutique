@@ -8329,6 +8329,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [arabicDigits, setArabicDigits] = useState(false);
   const [showArabicDigitsPrompt, setShowArabicDigitsPrompt] = useState(false);
   const [aiInput, setAiInput] = useState("");
+  // Champ de saisie de l'Assistant IA : grandit automatiquement avec le texte tapé
+  // (comme la zone de saisie de Gemini), au lieu de rester bloqué sur une seule ligne
+  // où le texte défile hors champ. Pas de limite de caractères côté app : le texte
+  // peut être aussi long que nécessaire, ce champ s'agrandit jusqu'à une hauteur
+  // maximale (~6 lignes) puis défile normalement à l'intérieur au-delà.
+  const aiTextareaRef = useRef(null);
+  useEffect(() => {
+    const el = aiTextareaRef.current;
+    if (!el) return;
+    const MAX_HEIGHT_PX = 140;
+    el.style.height = "auto";
+    const next = Math.min(el.scrollHeight, MAX_HEIGHT_PX);
+    el.style.height = `${next}px`;
+    el.style.overflowY = el.scrollHeight > MAX_HEIGHT_PX ? "auto" : "hidden";
+  }, [aiInput]);
   const [aiLoading, setAiLoading] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
   // null = mode ajout ; sinon l'id du produit en cours de modification.
@@ -10944,13 +10959,16 @@ RÈGLE IMPORTANTE SUR LA DISPONIBILITÉ DES FONCTIONNALITÉS :
 RÈGLES DE FORMATAGE IMPORTANTES (Markdown simple — jamais de HTML, jamais de LaTeX) :
 - Écris en Markdown simple et STRUCTURÉ, jamais en un seul bloc de texte compact. Chaque règle ci-dessous utilise un VRAI retour à la ligne (une vraie nouvelle ligne dans ta réponse, pas un tiret au milieu d'une phrase) :
   • Pour le gras (chiffres clés, titres de section, mots importants), entoure le mot de deux étoiles : **mot**. N'utilise JAMAIS de balise HTML (pas de <b>, <br>, <span>, <table>...), le Markdown seul suffit.
-  • Pour un titre de section (ex: Ventes hebdomadaires, Stock critique, Caisse, Dettes, Actions recommandées), mets-le SEUL sur sa propre ligne, en gras, suivi d'une ligne vide avant son contenu — jamais enchaîné avec le texte qui suit sur la même ligne.
+  • Pour un titre de section (ex: Ventes hebdomadaires, Stock critique, Caisse, Dettes, Actions recommandées), mets-le SEUL sur sa propre ligne, en gras, suivi d'une ligne vide avant son contenu — jamais enchaîné avec le texte qui suit sur la même ligne. N'utilise QUE cette ligne vide pour séparer les sections : jamais de ligne de tirets "---" ou "___" entre elles, ce n'est pas nécessaire et alourdit la lecture.
   • Pour une liste de plusieurs éléments (produits, dettes, conseils...), mets CHAQUE élément sur sa PROPRE ligne, précédée de "- " en tout début de ligne. N'enchaîne JAMAIS plusieurs éléments à la suite séparés par des tirets au milieu d'une phrase (jamais "- Total : X - Meilleur produit : Y" sur une seule ligne : chacun sur sa ligne à lui).
   • Pour une réponse en plusieurs étapes, utilise "1. ", "2. " etc. en tout début de ligne, chaque étape sur sa propre ligne.
-  • Sépare toujours deux sections ou deux idées différentes par une ligne complètement vide (un vrai saut de paragraphe).
+  • Sépare toujours deux sections ou deux idées différentes par une ligne complètement vide (un vrai saut de paragraphe) — jamais par une ligne de tirets.
   • Pour comparer plusieurs articles ou présenter un inventaire/bilan, utilise un tableau Markdown simple (lignes avec des | entre les colonnes, ex: | Article | Quantité | Total |), jamais de tableau HTML.
-- Utilise un emoji sobre en début de ligne pour signaler une urgence ou un point clé quand c'est pertinent (⚠️ pour une alerte stock/dette, 💰 pour la caisse, 📈 pour une tendance positive) — avec modération, jamais plus d'un par ligne, jamais pour décorer sans raison.
-- Quand ta réponse contient une ou plusieurs recommandations concrètes, regroupe-les à la toute fin sous un titre en gras dédié, par exemple **Actions recommandées**, plutôt que de les disperser dans le texte.
+- N'ouvre JAMAIS ta réponse par une phrase d'introduction creuse du type "Voici le résumé de..." ou "basé sur les données disponibles" : entre directement dans le vif du sujet avec le chiffre ou le fait le plus important, de façon naturelle (ex: "Cette semaine, vos ventes s'élèvent à 23 500 FCFA, portées par les excellents résultats d'aujourd'hui.").
+- Pour un point d'alerte (stock bas, dette, baisse de ventes...), ne te contente pas de constater passivement avec la logique entre parenthèses : formule une recommandation directe et actionnable. Commence la ligne par ⚠️, ex: "⚠️ Pensez à réapprovisionner le Sucre : il n'en reste que 4, sous le seuil d'alerte de 5." plutôt que "Sucre : 4 en stock (seuil à 5)."
+- Utilise un emoji sobre en début de ligne pour signaler un point clé quand c'est pertinent (⚠️ alerte stock/dette, 💰 caisse, 📈 tendance positive, 📦 stock) — avec modération, jamais plus d'un par ligne, jamais pour décorer sans raison.
+- Évite de répéter la même information dans deux sections différentes : si un fait concerne plusieurs catégories à la fois (ex: une vente à crédit qui crée aussi une dette), regroupe-le en une seule phrase plutôt que de le mentionner séparément dans "Top produits" et dans "Dettes".
+- Quand ta réponse contient une ou plusieurs recommandations concrètes au-delà des alertes ⚠️ déjà formulées en ligne, regroupe les recommandations restantes à la toute fin sous un titre en gras dédié, par exemple **Actions recommandées**, plutôt que de les disperser dans le texte.
 - Pour toute formule ou calcul (marge, TVA, remise), écris-le en texte normal avec de vrais caractères (ex: "1 500 × 2 = 3 000", "25 %", "a/b", "√x") — jamais de syntaxe LaTeX ($, \\frac, \\times...) ni de code de formatage brut : tout doit être immédiatement lisible tel quel.
 - N'ajoute cette structure que quand ça aide vraiment la lecture : une réponse courte en une phrase n'a pas besoin d'être découpée artificiellement.
 - Reste concis et pratique, chaleureux et naturel, comme si tu parlais à un commerçant que tu connais bien
@@ -11067,6 +11085,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const htmlBlocks = blocks.map((block) => {
       const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
       if (!lines.length) return "";
+      // Ligne de séparation Markdown ("---", "___" ou "***" seule) : on ne l'affiche
+      // pas littéralement (ça alourdit la lecture), un simple espacement entre
+      // sections suffit — déjà assuré par la séparation en blocs ci-dessus.
+      if (lines.length === 1 && /^(-{3,}|_{3,}|\*{3,})$/.test(lines[0])) return "";
       // Tableau Markdown ("| a | b |", avec éventuelle ligne de séparation "|---|---|")
       if (lines.length >= 2 && lines.every((l) => l.startsWith("|") && l.endsWith("|"))) {
         const rows = lines.filter((l) => !/^\|[\s:|-]+\|$/.test(l)).map((l) => l.slice(1, -1).split("|").map((c) => c.trim()));
@@ -14379,7 +14401,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           elle reste ancrée en bas exactement comme avant (même position/style), mais
           le défilement des messages au-dessus redevient possible. */}
       {tab === "ai" && (
-        <div className="flex gap-2 pt-2 px-4" style={{
+        <div className="flex gap-2 pt-2 px-4 items-end" style={{
           background: T.bg,
           position: isDesktop ? "sticky" : "fixed",
           bottom: isDesktop ? 0 : (keyboardOpen ? `${keyboardHeightPx + 8}px` : "calc(112px + env(safe-area-inset-bottom, 0px))"),
@@ -14396,14 +14418,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <Mic size={16} color={isListening ? "white" : T.text} style={isListening ? { animation: "aiSpin 1s ease-in-out infinite alternate" } : undefined} />
           </button>
           <textarea
+            ref={aiTextareaRef}
             rows={1}
             value={aiInput}
-            onChange={(e) => setAiInput(e.target.value.replace(/\n/g, ""))}
-            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); sendAiMessage(); } }}
+            onChange={(e) => setAiInput(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendAiMessage(); } }}
             placeholder={isListening ? t(lang, "voiceListening") : t(lang, "aiPlaceholder")}
-            className="flex-1 border rounded-xl px-3 py-2 text-sm"
-            style={{ background: T.card, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }}
-            type="text"
+            className="flex-1 border rounded-xl px-3 py-2.5 text-sm"
+            style={{ background: T.card, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden", lineHeight: 1.4, minHeight: 42 }}
             autoComplete="off"
             autoCorrect="on"
             autoCapitalize="sentences"
