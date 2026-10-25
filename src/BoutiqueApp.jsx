@@ -14401,44 +14401,57 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           elle reste ancrée en bas exactement comme avant (même position/style), mais
           le défilement des messages au-dessus redevient possible. */}
       {tab === "ai" && (
-        <div className="flex gap-2 pt-2 px-4 items-end" style={{
+        <div className="px-4" style={{
           background: T.bg,
+          paddingTop: 8,
           position: isDesktop ? "sticky" : "fixed",
           bottom: isDesktop ? 0 : (keyboardOpen ? `${keyboardHeightPx + 8}px` : "calc(112px + env(safe-area-inset-bottom, 0px))"),
           left: isDesktop ? "auto" : 0,
           right: isDesktop ? "auto" : 0,
           zIndex: isDesktop ? "auto" : 5,
         }}>
-          <button
-            onClick={startVoiceInput}
-            disabled={aiLoading}
-            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 disabled:opacity-40"
-            style={{ background: isListening ? CLAY : (darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)") }}
-          >
-            <Mic size={16} color={isListening ? "white" : T.text} style={isListening ? { animation: "aiSpin 1s ease-in-out infinite alternate" } : undefined} />
-          </button>
-          <textarea
-            ref={aiTextareaRef}
-            rows={1}
-            value={aiInput}
-            onChange={(e) => setAiInput(e.target.value)}
-            onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendAiMessage(); } }}
-            placeholder={isListening ? t(lang, "voiceListening") : t(lang, "aiPlaceholder")}
-            className="flex-1 border rounded-xl px-3 py-2.5 text-sm"
-            style={{ background: T.card, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden", lineHeight: 1.4, minHeight: 42 }}
-            autoComplete="off"
-            autoCorrect="on"
-            autoCapitalize="sentences"
-            name="ai_question"
-          />
-          <button
-            onClick={() => sendAiMessage()}
-            disabled={!aiInput.trim() || aiLoading}
-            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 disabled:opacity-40"
-            style={{ background: INDIGO }}
-          >
-            <Send size={16} color="white" />
-          </button>
+          {/* Conteneur unique "pilule" (style Gemini) : champ de texte + boutons
+              micro/envoi regroupés dans le même fond arrondi, au lieu de trois
+              éléments séparés. Le padding-bottom s'ajuste avec la hauteur du
+              textarea pour garder les boutons collés en bas même quand il grandit. */}
+          <div className="flex items-end gap-1" style={{
+            background: darkMode ? "rgba(255,255,255,0.08)" : "#f0f4f9",
+            borderRadius: 28,
+            padding: "6px 6px 6px 18px",
+          }}>
+            <textarea
+              ref={aiTextareaRef}
+              rows={1}
+              value={aiInput}
+              onChange={(e) => setAiInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendAiMessage(); } }}
+              placeholder={isListening ? t(lang, "voiceListening") : t(lang, "aiPlaceholder")}
+              className="flex-1 text-sm"
+              style={{ background: "transparent", color: T.text, border: "none", outline: "none", resize: "none", overflow: "hidden", lineHeight: 1.4, minHeight: 40, padding: "8px 0" }}
+              autoComplete="off"
+              autoCorrect="on"
+              autoCapitalize="sentences"
+              name="ai_question"
+            />
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                onClick={startVoiceInput}
+                disabled={aiLoading}
+                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 disabled:opacity-40"
+                style={{ background: isListening ? CLAY : "transparent" }}
+              >
+                <Mic size={18} color={isListening ? "white" : T.text} style={isListening ? { animation: "aiSpin 1s ease-in-out infinite alternate" } : undefined} />
+              </button>
+              <button
+                onClick={() => sendAiMessage()}
+                disabled={!aiInput.trim() || aiLoading}
+                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 disabled:opacity-40"
+                style={{ background: aiInput.trim() ? INDIGO : (darkMode ? "rgba(255,255,255,0.12)" : "#e3e3e3") }}
+              >
+                <Send size={16} color={aiInput.trim() ? "white" : T.text} />
+              </button>
+            </div>
+          </div>
         </div>
       )}
       {showAiHistory && (
