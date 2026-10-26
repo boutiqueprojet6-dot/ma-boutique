@@ -10904,7 +10904,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           const mode = it.mode === "unit" && product.sellByUnit ? "unit" : "pack";
           const maxQty = mode === "unit" ? ((product.quantity || 0) * (product.unitsPerPack || 1) + (product.looseUnits || 0)) : (product.quantity || 0);
           const qty = Math.max(1, Math.min(Number(it.qty) || 1, Math.max(1, maxQty)));
-          draftItems.push({ productId: product.id, qty, mode });
+          draftItems.push({ productId: product.id, qty, mode, searchText: product.name });
         }
         const payment = ["cash", "mobile", "card", "credit"].includes(a.payment) ? a.payment : "cash";
         const customer = (a.customer || "").trim();
@@ -11070,6 +11070,33 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     applyAndUpdateMsg();
   };
 
+  // Trouve les meilleures correspondances de produit pour un texte tapé librement,
+  // en tolérant les fautes de frappe/orthographe (réutilise normalizeForMatch et
+  // wordSimilarity, déjà utilisés pour la saisie vocale du panier plus haut dans ce
+  // fichier) — pas besoin de connaître le nom exact du produit pour le retrouver.
+  const findBestProductMatches = (text, limit) => {
+    const restNorm = normalizeForMatch(text);
+    if (!restNorm) return [];
+    const restWords = restNorm.split(/\s+/).filter((w) => w.length > 1);
+    const scored = (products || []).map((p) => {
+      const nameNorm = normalizeForMatch(p.name);
+      let score = 0;
+      if (nameNorm === restNorm) score = 100;
+      else if (nameNorm.includes(restNorm) || restNorm.includes(nameNorm)) score = 70;
+      else {
+        const nameWords = nameNorm.split(/\s+/).filter((w) => w.length > 1);
+        let wordScore = 0;
+        restWords.forEach((rw) => {
+          const bestMatch = Math.max(0, ...nameWords.map((nw) => (nw.includes(rw) || rw.includes(nw) ? 0.9 : wordSimilarity(rw, nw))));
+          wordScore += bestMatch;
+        });
+        score = restWords.length ? (wordScore / restWords.length) * 65 : 0;
+      }
+      return { product: p, score };
+    }).filter((s) => s.score >= 20).sort((a, b) => b.score - a.score);
+    return scored.slice(0, limit).map((s) => s.product);
+  };
+
   // ---- Formulaire modifiable de la carte "Enregistrer une vente" proposée par l'IA ----
   // Toutes ces fonctions modifient uniquement msg.actions[actionIdx].draft (jamais
   // "raw", qui reste la proposition d'origine de l'IA pour mémoire) ; le formulaire
@@ -11094,11 +11121,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }));
   };
   const addSaleDraftItem = (msgIndex, actionIdx) => {
-    const firstProduct = products[0];
-    if (!firstProduct) return;
+    // Ligne vierge : productId null et searchText vide — le boutiquier tape le nom,
+    // il n'a pas besoin de connaître/choisir un produit "par défaut" au préalable.
     setAiMessages((prev) => prev.map((m, i) => {
       if (i !== msgIndex) return m;
-      const actions = m.actions.map((act, ai) => (ai === actionIdx ? { ...act, draft: { ...act.draft, items: [...act.draft.items, { productId: firstProduct.id, qty: 1, mode: "pack" }] } } : act));
+      const actions = m.actions.map((act, ai) => (ai === actionIdx ? { ...act, draft: { ...act.draft, items: [...act.draft.items, { productId: null, qty: 1, mode: "pack", searchText: "" }] } } : act));
       return { ...m, actions };
     }));
   };
@@ -14676,33 +14703,65 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             <p className="text-xs font-bold" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{tx(lang, "aiActionRecordSale")}</p>
                             {act.draft.items.map((item, itIdx) => {
                               const product = products.find((p) => p.id === item.productId);
+                              // On montre des suggestions tant que le texte tapé ne correspond pas
+                              // EXACTEMENT au produit déjà sélectionné : c'est le signal que le
+                              // boutiquier est encore en train de chercher (ou vient de corriger
+                              // une lettre), même si un produit était déjà choisi juste avant.
+                              const stillSearching = !product || normalizeForMatch(item.searchText) !== normalizeForMatch(product.name);
+                              const suggestions = stillSearching && item.searchText.trim() ? findBestProductMatches(item.searchText, 4) : [];
                               return (
-                                <div key={itIdx} className="flex items-center gap-1.5">
-                                  <select
-                                    value={item.productId || ""}
-                                    onChange={(e) => updateSaleDraftItem(i, 0, itIdx, { productId: e.target.value, mode: "pack" })}
-                                    className="flex-1 min-w-0 border rounded-lg px-2 py-1.5 text-xs"
-                                    style={{ background: T.card, color: T.text, borderColor: T.border }}
-                                  >
-                                    {products.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
-                                  </select>
-                                  <input
-                                    type="number"
-                                    min="1"
-                                    value={item.qty}
-                                    onChange={(e) => updateSaleDraftItem(i, 0, itIdx, { qty: Math.max(1, parseInt(e.target.value, 10) || 1) })}
-                                    className="w-14 border rounded-lg px-1.5 py-1.5 text-xs text-center"
-                                    style={{ background: T.card, color: T.text, borderColor: T.border }}
-                                  />
-                                  {product && product.sellByUnit && (
-                                    <div className="flex rounded-lg overflow-hidden shrink-0" style={{ border: `1px solid ${T.border}` }}>
-                                      <button onClick={() => updateSaleDraftItem(i, 0, itIdx, { mode: "pack" })} className="px-2 py-1.5 text-[10px] font-semibold" style={{ background: item.mode !== "unit" ? INDIGO : "transparent", color: item.mode !== "unit" ? "white" : T.text }}>{t(lang, "sellPack")}</button>
-                                      <button onClick={() => updateSaleDraftItem(i, 0, itIdx, { mode: "unit" })} className="px-2 py-1.5 text-[10px] font-semibold" style={{ background: item.mode === "unit" ? INDIGO : "transparent", color: item.mode === "unit" ? "white" : T.text }}>{t(lang, "sellUnit")}</button>
+                                <div key={itIdx} className="flex flex-col gap-1">
+                                  <div className="flex items-center gap-1.5">
+                                    <input
+                                      type="text"
+                                      value={item.searchText}
+                                      onChange={(e) => updateSaleDraftItem(i, 0, itIdx, { searchText: e.target.value, productId: null })}
+                                      onBlur={() => {
+                                        // Si on quitte le champ sans avoir tapé le nom exact ni choisi
+                                        // une suggestion, on retient automatiquement la meilleure
+                                        // correspondance (tolère une lettre près, faute de frappe...),
+                                        // plutôt que d'obliger à une sélection manuelle précise.
+                                        if (!item.searchText.trim()) return;
+                                        const best = findBestProductMatches(item.searchText, 1)[0];
+                                        if (best) updateSaleDraftItem(i, 0, itIdx, { productId: best.id, mode: "pack", searchText: best.name });
+                                      }}
+                                      placeholder={t(lang, "search")}
+                                      className="flex-1 min-w-0 border rounded-lg px-2 py-1.5 text-xs"
+                                      style={{ background: T.card, color: T.text, borderColor: product ? T.border : "#f87171" }}
+                                    />
+                                    <input
+                                      type="number"
+                                      min="1"
+                                      value={item.qty}
+                                      onChange={(e) => updateSaleDraftItem(i, 0, itIdx, { qty: Math.max(1, parseInt(e.target.value, 10) || 1) })}
+                                      className="w-14 border rounded-lg px-1.5 py-1.5 text-xs text-center"
+                                      style={{ background: T.card, color: T.text, borderColor: T.border }}
+                                    />
+                                    {product && product.sellByUnit && (
+                                      <div className="flex rounded-lg overflow-hidden shrink-0" style={{ border: `1px solid ${T.border}` }}>
+                                        <button onClick={() => updateSaleDraftItem(i, 0, itIdx, { mode: "pack" })} className="px-2 py-1.5 text-[10px] font-semibold" style={{ background: item.mode !== "unit" ? INDIGO : "transparent", color: item.mode !== "unit" ? "white" : T.text }}>{t(lang, "sellPack")}</button>
+                                        <button onClick={() => updateSaleDraftItem(i, 0, itIdx, { mode: "unit" })} className="px-2 py-1.5 text-[10px] font-semibold" style={{ background: item.mode === "unit" ? INDIGO : "transparent", color: item.mode === "unit" ? "white" : T.text }}>{t(lang, "sellUnit")}</button>
+                                      </div>
+                                    )}
+                                    <button onClick={() => removeSaleDraftItem(i, 0, itIdx)} className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: T.input }}>
+                                      <X size={13} color={T.muted} />
+                                    </button>
+                                  </div>
+                                  {suggestions.length > 0 && (
+                                    <div className="flex flex-wrap gap-1 pl-0.5">
+                                      {suggestions.map((sp) => (
+                                        <button
+                                          key={sp.id}
+                                          onMouseDown={(e) => e.preventDefault()}
+                                          onClick={() => updateSaleDraftItem(i, 0, itIdx, { productId: sp.id, mode: "pack", searchText: sp.name })}
+                                          className="text-[11px] px-2 py-1 rounded-full"
+                                          style={{ background: T.input, color: T.text }}
+                                        >
+                                          {sp.name}
+                                        </button>
+                                      ))}
                                     </div>
                                   )}
-                                  <button onClick={() => removeSaleDraftItem(i, 0, itIdx)} className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: T.input }}>
-                                    <X size={13} color={T.muted} />
-                                  </button>
                                 </div>
                               );
                             })}
@@ -14735,7 +14794,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <div className="flex gap-2 mt-1">
                             <button
                               onClick={() => respondToAiAction(i, 0, true)}
-                              disabled={act.isSaleForm && (act.draft.items.length === 0 || (act.draft.payment === "credit" && !act.draft.customer.trim()))}
+                              disabled={act.isSaleForm && (act.draft.items.length === 0 || act.draft.items.some((it) => !it.productId) || (act.draft.payment === "credit" && !act.draft.customer.trim()))}
                               className="flex-1 py-2 rounded-lg text-xs font-bold text-white disabled:opacity-40"
                               style={{ background: INDIGO }}
                             >
