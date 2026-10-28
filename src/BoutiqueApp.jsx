@@ -4287,6 +4287,13 @@ EXTRA_UI.aiActionDismissedMsg = { fr: "Annulé", en: "Cancelled", es: "Cancelado
 EXTRA_UI.aiActionErrorNotFound = { fr: "Introuvable, l'action n'a pas pu être appliquée.", en: "Not found, the action could not be applied.", es: "No encontrado, no se pudo aplicar la acción.", pt: "Não encontrado, não foi possível aplicar a ação.", de: "Nicht gefunden, die Aktion konnte nicht ausgeführt werden.", it: "Non trovato, impossibile applicare l'azione.", nl: "Niet gevonden, de actie kon niet worden uitgevoerd.", pl: "Nie znaleziono, nie udało się wykonać akcji.", ru: "Не найдено, действие не удалось выполнить.", tr: "Bulunamadı, işlem uygulanamadı.", ar: "لم يتم العثور عليه، تعذر تنفيذ الإجراء.", hi: "नहीं मिला, कार्रवाई लागू नहीं हो सकी।", bn: "পাওয়া যায়নি, পদক্ষেপটি প্রয়োগ করা যায়নি।", ur: "نہیں ملا، کارروائی نافذ نہیں ہو سکی۔", ta: "கிடைக்கவில்லை, செயல் செய்ய முடியவில்லை.", te: "కనుగొనబడలేదు, చర్య వర్తింపజేయబడలేదు.", th: "ไม่พบ การดำเนินการไม่สำเร็จ", zh: "未找到，操作无法执行。", ja: "見つかりません。操作を実行できませんでした。", ko: "찾을 수 없어 작업을 적용하지 못했습니다.", id: "Tidak ditemukan, tindakan tidak dapat diterapkan.", vi: "Không tìm thấy, không thể thực hiện hành động.", tl: "Hindi natagpuan, hindi naisagawa ang aksyon.", sw: "Haikupatikana, hatua haikuweza kutekelezwa.", ha: "Ba a samu ba, ba a iya aiwatar da aikin ba.", yo: "A kò rí i, a kò lè ṣe iṣe náà.", zu: "Akutholakalanga, isenzo asikwazanga ukusetshenziswa.", am: "አልተገኘም፣ እርምጃው ሊፈጸም አልቻለም።", bm: "Ma sɔrɔla, baara tɛ se ka kɛ.", wo: "Gisul, warugar wi mënula def." };
 EXTRA_UI.aiActionErrorStock = { fr: "Stock insuffisant pour cette vente.", en: "Not enough stock for this sale.", es: "Stock insuficiente para esta venta.", pt: "Estoque insuficiente para esta venda.", de: "Nicht genug Lagerbestand für diesen Verkauf.", it: "Stock insufficiente per questa vendita.", nl: "Onvoldoende voorraad voor deze verkoop.", pl: "Za mało towaru na tę sprzedaż.", ru: "Недостаточно товара для этой продажи.", tr: "Bu satış için yeterli stok yok.", ar: "المخزون غير كافٍ لهذا البيع.", hi: "इस बिक्री के लिए पर्याप्त स्टॉक नहीं है।", bn: "এই বিক্রয়ের জন্য পর্যাপ্ত স্টক নেই।", ur: "اس فروخت کے لیے کافی اسٹاک نہیں ہے۔", ta: "இந்த விற்பனைக்கு போதிய கையிருப்பு இல்லை.", te: "ఈ అమ్మకానికి తగినంత స్టాక్ లేదు.", th: "สต็อกไม่พอสำหรับการขายนี้", zh: "库存不足，无法完成此次销售。", ja: "この販売には在庫が足りません。", ko: "이 판매를 위한 재고가 부족합니다.", id: "Stok tidak cukup untuk penjualan ini.", vi: "Không đủ tồn kho cho giao dịch bán này.", tl: "Hindi sapat ang stock para sa bentang ito.", sw: "Stoo haitoshi kwa mauzo haya.", ha: "Kayan ba su isa ba don wannan siyarwar.", yo: "Ọjà kò tó fún títà yìí.", zu: "Isitoko asanele kulokhu kuthengiswa.", am: "ለዚህ ሽያጭ በቂ ክምችት የለም።", bm: "Fɛn tɛ ɲɛ dɔɔnin nin feere ninnu na.", wo: "Marsandiz baaxul ngir jaay bii." };
 EXTRA_UI.aiActionErrorSalesLimit = { fr: "Limite de ventes quotidienne atteinte.", en: "Daily sales limit reached.", es: "Límite diario de ventas alcanzado.", pt: "Limite diário de vendas atingido.", de: "Tägliches Verkaufslimit erreicht.", it: "Limite giornaliero di vendite raggiunto.", nl: "Dagelijkse verkooplimiet bereikt.", pl: "Osiągnięto dzienny limit sprzedaży.", ru: "Достигнут дневной лимит продаж.", tr: "Günlük satış limitine ulaşıldı.", ar: "تم بلوغ الحد اليومي للمبيعات.", hi: "दैनिक बिक्री सीमा पूरी हो गई।", bn: "দৈনিক বিক্রয় সীমা পৌঁছেছে।", ur: "روزانہ فروخت کی حد مکمل ہو گئی۔", ta: "தினசரி விற்பனை வரம்பு எட்டப்பட்டது.", te: "రోజువారీ అమ్మకాల పరిమితి చేరుకుంది.", th: "ถึงขีดจำกัดการขายรายวันแล้ว", zh: "已达到每日销售上限。", ja: "1日の販売上限に達しました。", ko: "일일 판매 한도에 도달했습니다.", id: "Batas penjualan harian tercapai.", vi: "Đã đạt giới hạn bán hàng trong ngày.", tl: "Naabot na ang araw-araw na limitasyon sa benta.", sw: "Kikomo cha mauzo cha kila siku kimefikiwa.", ha: "An kai iyakar sayarwa ta yau da kullun.", yo: "Ààlà títà ojoojúmọ́ ti dé.", zu: "Kufinyelelwe emkhawulweni wokuthengisa wansuku zonke.", am: "ዕለታዊ የሽያጭ ገደብ ላይ ደርሷል።", bm: "Don-don feere dan sera.", wo: "Dayo jaaytu bis bu nekk jotna." };
+// ---- Reçu de vente envoyable par WhatsApp ----
+EXTRA_UI.receiptHeading = { fr: "Reçu", en: "Receipt", es: "Recibo", pt: "Recibo", de: "Beleg", it: "Ricevuta", nl: "Bon", pl: "Paragon", ru: "Чек", tr: "Fiş", ar: "إيصال", hi: "रसीद", bn: "রসিদ", ur: "رسید", ta: "ரசீது", te: "రసీదు", th: "ใบเสร็จ", zh: "收据", ja: "レシート", ko: "영수증", id: "Struk", vi: "Hóa đơn", tl: "Resibo", sw: "Risiti", ha: "Rasit", yo: "Gbàrà", zu: "Irisidi", am: "ደረሰኝ", bm: "Sɛbɛn", wo: "Resi" };
+EXTRA_UI.receiptTotalLabel = { fr: "Total", en: "Total", es: "Total", pt: "Total", de: "Gesamt", it: "Totale", nl: "Totaal", pl: "Razem", ru: "Итого", tr: "Toplam", ar: "الإجمالي", hi: "कुल", bn: "মোট", ur: "کل", ta: "மொத்தம்", te: "మొత్తం", th: "รวม", zh: "总计", ja: "合計", ko: "합계", id: "Total", vi: "Tổng", tl: "Kabuuan", sw: "Jumla", ha: "Jimla", yo: "Lápapọ̀", zu: "Isamba", am: "ጠቅላላ", bm: "Bɛɛ lajɛlen", wo: "Limam" };
+EXTRA_UI.receiptPaymentLabel = { fr: "Paiement", en: "Payment", es: "Pago", pt: "Pagamento", de: "Zahlung", it: "Pagamento", nl: "Betaling", pl: "Płatność", ru: "Оплата", tr: "Ödeme", ar: "الدفع", hi: "भुगतान", bn: "পেমেন্ট", ur: "ادائیگی", ta: "கட்டணம்", te: "చెల్లింపు", th: "การชำระเงิน", zh: "付款方式", ja: "支払い", ko: "결제", id: "Pembayaran", vi: "Thanh toán", tl: "Bayad", sw: "Malipo", ha: "Biya", yo: "Sísan", zu: "Inkokhelo", am: "ክፍያ", bm: "Sara", wo: "Fey" };
+EXTRA_UI.receiptThanks = { fr: "Merci pour votre achat !", en: "Thank you for your purchase!", es: "¡Gracias por su compra!", pt: "Obrigado pela sua compra!", de: "Vielen Dank für Ihren Einkauf!", it: "Grazie per il tuo acquisto!", nl: "Bedankt voor uw aankoop!", pl: "Dziękujemy za zakupy!", ru: "Спасибо за покупку!", tr: "Alışverişiniz için teşekkürler!", ar: "شكراً لشرائكم!", hi: "आपकी खरीदारी के लिए धन्यवाद!", bn: "আপনার কেনাকাটার জন্য ধন্যবাদ!", ur: "آپ کی خریداری کا شکریہ!", ta: "உங்கள் கொள்முதலுக்கு நன்றி!", te: "మీ కొనుగోలుకు ధన్యవాదాలు!", th: "ขอบคุณสำหรับการซื้อ!", zh: "感谢您的惠顾！", ja: "ご購入ありがとうございます！", ko: "구매해 주셔서 감사합니다!", id: "Terima kasih atas pembelian Anda!", vi: "Cảm ơn bạn đã mua hàng!", tl: "Salamat sa inyong pagbili!", sw: "Asante kwa ununuzi wako!", ha: "Na gode da sayayyar ku!", yo: "Ẹ ṣeun fún rírà yín!", zu: "Siyabonga ngokuthenga kwakho!", am: "ስለ ግዢዎ እናመሰግናለን!", bm: "I ni ce i ka sanni na!", wo: "Jerejef ci jëndugaay bi!" };
+EXTRA_UI.receiptModalTitle = { fr: "Vente enregistrée", en: "Sale recorded", es: "Venta registrada", pt: "Venda registrada", de: "Verkauf erfasst", it: "Vendita registrata", nl: "Verkoop geregistreerd", pl: "Sprzedaż zarejestrowana", ru: "Продажа зарегистрирована", tr: "Satış kaydedildi", ar: "تم تسجيل البيع", hi: "बिक्री दर्ज हुई", bn: "বিক্রয় নথিভুক্ত হয়েছে", ur: "فروخت درج ہو گئی", ta: "விற்பனை பதிவு செய்யப்பட்டது", te: "అమ్మకం నమోదు చేయబడింది", th: "บันทึกการขายแล้ว", zh: "销售已记录", ja: "販売を記録しました", ko: "판매가 기록되었습니다", id: "Penjualan tercatat", vi: "Đã ghi nhận giao dịch bán", tl: "Naitala ang benta", sw: "Mauzo yamerekodiwa", ha: "An rubuta siyarwa", yo: "A ti ṣàkọsílẹ̀ títà", zu: "Ukuthengisa kurekhodiwe", am: "ሽያጭ ተመዝግቧል", bm: "Sɔngɔ sɛbɛnna", wo: "Jaay bi bindna" };
+EXTRA_UI.receiptSendWhatsApp = { fr: "Envoyer le reçu par WhatsApp", en: "Send receipt via WhatsApp", es: "Enviar el recibo por WhatsApp", pt: "Enviar o recibo pelo WhatsApp", de: "Beleg per WhatsApp senden", it: "Invia la ricevuta via WhatsApp", nl: "Bon versturen via WhatsApp", pl: "Wyślij paragon przez WhatsApp", ru: "Отправить чек через WhatsApp", tr: "Fişi WhatsApp ile gönder", ar: "إرسال الإيصال عبر واتساب", hi: "व्हाट्सएप से रसीद भेजें", bn: "হোয়াটসঅ্যাপে রসিদ পাঠান", ur: "واٹس ایپ سے رسید بھیجیں", ta: "வாட்ஸ்அப் வழியாக ரசீதை அனுப்பு", te: "వాట్సాప్ ద్వారా రసీదు పంపండి", th: "ส่งใบเสร็จทาง WhatsApp", zh: "通过WhatsApp发送收据", ja: "WhatsAppでレシートを送る", ko: "왓츠앱으로 영수증 보내기", id: "Kirim struk via WhatsApp", vi: "Gửi hóa đơn qua WhatsApp", tl: "Ipadala ang resibo sa WhatsApp", sw: "Tuma risiti kupitia WhatsApp", ha: "Aika rasit ta WhatsApp", yo: "Fi gbàrà ránṣẹ́ nípasẹ̀ WhatsApp", zu: "Thumela irisidi nge-WhatsApp", am: "ደረሰኙን በ WhatsApp ይላኩ", bm: "Ci sɛbɛn ci WhatsApp fɛ", wo: "Yónni resi bi ci WhatsApp" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
 EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseignez le prix d'achat de vos produits pour voir votre bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
 EXTRA_UI.cashMargin = { am: "በሽያጭ ላይ ያለ ህዳግ", ar: "هامش المبيعات", bm: "Tɔnɔ feerew kan", bn: "বিক্রয়ের মার্জিন", de: "Marge auf Verkäufe", en: "Margin on sales", es: "Margen sobre ventas", fr: "Marge sur les ventes", ha: "Ribar da ke kan tallace-tallace", hi: "बिक्री पर मार्जिन", id: "Margin penjualan", it: "Margine sulle vendite", ja: "売上の粗利", ko: "판매 마진", nl: "Marge op verkopen", pl: "Marża na sprzedaży", pt: "Margem sobre vendas", ru: "Маржа с продаж", sw: "Kiwango cha faida kwenye mauzo", ta: "விற்பனை மீதான வரம்பு", te: "అమ్మకాలపై మార్జిన్", th: "กำไรขั้นต้นจากการขาย", tl: "Margin sa benta", tr: "Satış marjı", ur: "فروخت پر مارجن", vi: "Biên lợi nhuận bán hàng", wo: "Tabax ci jaay yi", yo: "Èrè lórí títà", zh: "销售毛利", zu: "Inzuzo ekuthengisweni" };
@@ -7563,6 +7570,30 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // (confettis + coche animée + bannière avec le montant + pulsation de l'écran) — voir
   // finalizeCart plus bas et le composant SaleSuccessOverlay tout en bas du fichier.
   const [saleSuccessOverlay, setSaleSuccessOverlay] = useState(null);
+  // Reçu en attente d'envoi après une vente — contrairement à saleSuccessOverlay
+  // (toast qui se ferme tout seul après 2,2s, bien trop vite pour laisser le temps
+  // d'appuyer sur un bouton), ce modal reste affiché jusqu'à ce que le boutiquier le
+  // ferme lui-même ou envoie le reçu.
+  const [pendingReceipt, setPendingReceipt] = useState(null);
+  // Construit le texte du reçu et le lien WhatsApp correspondant. On ne connaît pas le
+  // numéro du client (l'app ne demande qu'un nom) : on ouvre WhatsApp sans destinataire
+  // pré-rempli (wa.me/?text=...), le boutiquier choisit lui-même le contact — pas besoin
+  // d'ajouter un champ téléphone pour que ça marche dès maintenant.
+  const buildReceiptWhatsAppUrl = (receipt) => {
+    const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
+    const lines = [
+      `🧾 ${tx(lang, "receiptHeading")} — ${shopName || "Boutique"}`,
+      new Date(receipt.date).toLocaleString(),
+      "",
+      ...receipt.items.map((it) => `${it.qty} × ${it.name} — ${localizedNumber(it.total)} ${CURRENT_CURRENCY.symbol}`),
+      "",
+      `${tx(lang, "receiptTotalLabel")} : ${localizedNumber(receipt.total)} ${CURRENT_CURRENCY.symbol}`,
+      `${tx(lang, "receiptPaymentLabel")} : ${paymentLabel}`,
+      "",
+      tx(lang, "receiptThanks"),
+    ];
+    return `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
+  };
   useEffect(() => {
     if (!saleSuccessOverlay) return;
     const timer = setTimeout(() => setSaleSuccessOverlay(null), 2200);
@@ -10728,6 +10759,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -11028,6 +11060,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         playSound("success");
         triggerHaptic("success");
         setSaleSuccessOverlay({ amount: total, id: transactionId });
+        setPendingReceipt({ items: resolved.map((r) => ({ name: r.product.name, qty: r.qty, total: r.qty * r.unitPrice })), total, payment: action.payment, date: dateNow });
         return { ok: true };
       }
       return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
@@ -16605,6 +16638,40 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           label={t(lang, "saleSuccessLabel")}
           darkMode={darkMode}
         />,
+        document.body
+      )}
+      {pendingReceipt && typeof document !== "undefined" && createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+          <div className="w-full max-w-xs rounded-2xl p-5" style={{ background: darkMode ? "#1a1a24" : "white", color: darkMode ? "#eceef5" : CHARCOAL }}>
+            <p className="text-center text-2xl mb-1">✅</p>
+            <p className="text-center font-bold text-sm mb-3">{tx(lang, "receiptModalTitle")}</p>
+            <div className="rounded-xl px-3 py-2.5 mb-4" style={{ background: darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }}>
+              {pendingReceipt.items.map((it, idx) => (
+                <div key={idx} className="flex justify-between text-xs mb-1">
+                  <span>{it.qty} × {it.name}</span>
+                  <span className="font-semibold">{localizedNumber(it.total)} {CURRENT_CURRENCY.symbol}</span>
+                </div>
+              ))}
+              <div className="flex justify-between text-sm font-bold mt-2 pt-2" style={{ borderTop: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}` }}>
+                <span>{tx(lang, "receiptTotalLabel")}</span>
+                <span>{localizedNumber(pendingReceipt.total)} {CURRENT_CURRENCY.symbol}</span>
+              </div>
+            </div>
+            <a
+              href={buildReceiptWhatsAppUrl(pendingReceipt)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setPendingReceipt(null)}
+              className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
+              style={{ background: "#25D366", textDecoration: "none" }}
+            >
+              💬 {tx(lang, "receiptSendWhatsApp")}
+            </a>
+            <button onClick={() => setPendingReceipt(null)} className="w-full py-2.5 rounded-lg text-sm font-semibold" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}>
+              {t(lang, "empQrClose")}
+            </button>
+          </div>
+        </div>,
         document.body
       )}
       <style>{"@keyframes shortcutIn { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }"}</style>
