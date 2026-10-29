@@ -4293,6 +4293,9 @@ EXTRA_UI.receiptTotalLabel = { fr: "Total", en: "Total", es: "Total", pt: "Total
 EXTRA_UI.receiptPaymentLabel = { fr: "Paiement", en: "Payment", es: "Pago", pt: "Pagamento", de: "Zahlung", it: "Pagamento", nl: "Betaling", pl: "Płatność", ru: "Оплата", tr: "Ödeme", ar: "الدفع", hi: "भुगतान", bn: "পেমেন্ট", ur: "ادائیگی", ta: "கட்டணம்", te: "చెల్లింపు", th: "การชำระเงิน", zh: "付款方式", ja: "支払い", ko: "결제", id: "Pembayaran", vi: "Thanh toán", tl: "Bayad", sw: "Malipo", ha: "Biya", yo: "Sísan", zu: "Inkokhelo", am: "ክፍያ", bm: "Sara", wo: "Fey" };
 EXTRA_UI.receiptThanks = { fr: "Merci pour votre achat !", en: "Thank you for your purchase!", es: "¡Gracias por su compra!", pt: "Obrigado pela sua compra!", de: "Vielen Dank für Ihren Einkauf!", it: "Grazie per il tuo acquisto!", nl: "Bedankt voor uw aankoop!", pl: "Dziękujemy za zakupy!", ru: "Спасибо за покупку!", tr: "Alışverişiniz için teşekkürler!", ar: "شكراً لشرائكم!", hi: "आपकी खरीदारी के लिए धन्यवाद!", bn: "আপনার কেনাকাটার জন্য ধন্যবাদ!", ur: "آپ کی خریداری کا شکریہ!", ta: "உங்கள் கொள்முதலுக்கு நன்றி!", te: "మీ కొనుగోలుకు ధన్యవాదాలు!", th: "ขอบคุณสำหรับการซื้อ!", zh: "感谢您的惠顾！", ja: "ご購入ありがとうございます！", ko: "구매해 주셔서 감사합니다!", id: "Terima kasih atas pembelian Anda!", vi: "Cảm ơn bạn đã mua hàng!", tl: "Salamat sa inyong pagbili!", sw: "Asante kwa ununuzi wako!", ha: "Na gode da sayayyar ku!", yo: "Ẹ ṣeun fún rírà yín!", zu: "Siyabonga ngokuthenga kwakho!", am: "ስለ ግዢዎ እናመሰግናለን!", bm: "I ni ce i ka sanni na!", wo: "Jerejef ci jëndugaay bi!" };
 EXTRA_UI.receiptModalTitle = { fr: "Vente enregistrée", en: "Sale recorded", es: "Venta registrada", pt: "Venda registrada", de: "Verkauf erfasst", it: "Vendita registrata", nl: "Verkoop geregistreerd", pl: "Sprzedaż zarejestrowana", ru: "Продажа зарегистрирована", tr: "Satış kaydedildi", ar: "تم تسجيل البيع", hi: "बिक्री दर्ज हुई", bn: "বিক্রয় নথিভুক্ত হয়েছে", ur: "فروخت درج ہو گئی", ta: "விற்பனை பதிவு செய்யப்பட்டது", te: "అమ్మకం నమోదు చేయబడింది", th: "บันทึกการขายแล้ว", zh: "销售已记录", ja: "販売を記録しました", ko: "판매가 기록되었습니다", id: "Penjualan tercatat", vi: "Đã ghi nhận giao dịch bán", tl: "Naitala ang benta", sw: "Mauzo yamerekodiwa", ha: "An rubuta siyarwa", yo: "A ti ṣàkọsílẹ̀ títà", zu: "Ukuthengisa kurekhodiwe", am: "ሽያጭ ተመዝግቧል", bm: "Sɔngɔ sɛbɛnna", wo: "Jaay bi bindna" };
+EXTRA_UI.receiptSendPdf = { fr: "Envoyer en PDF", en: "Send as PDF", es: "Enviar en PDF", pt: "Enviar em PDF", de: "Als PDF senden", it: "Invia in PDF", nl: "Verzenden als PDF", pl: "Wyślij jako PDF", ru: "Отправить как PDF", tr: "PDF olarak gönder", ar: "إرسال كملف PDF", hi: "पीडीएफ के रूप में भेजें", bn: "পিডিএফ হিসেবে পাঠান", ur: "پی ڈی ایف کے طور پر بھیجیں", ta: "PDF ஆக அனுப்பு", te: "PDFగా పంపండి", th: "ส่งเป็น PDF", zh: "以PDF发送", ja: "PDFで送信", ko: "PDF로 보내기", id: "Kirim sebagai PDF", vi: "Gửi dưới dạng PDF", tl: "Ipadala bilang PDF", sw: "Tuma kama PDF", ha: "Aika a matsayin PDF", yo: "Fi ránṣẹ́ gẹ́gẹ́ bí PDF", zu: "Thumela njenge-PDF", am: "እንደ PDF ይላኩ", bm: "Ci PDF kɔnɔ", wo: "Yónni ci anam PDF" };
+EXTRA_UI.receiptPdfFallback = { fr: "Le PDF a été téléchargé — ouvrez WhatsApp et joignez-le manuellement.", en: "The PDF was downloaded — open WhatsApp and attach it manually.", es: "El PDF se ha descargado — abra WhatsApp y adjúntelo manualmente.", pt: "O PDF foi baixado — abra o WhatsApp e anexe-o manualmente.", de: "Das PDF wurde heruntergeladen – öffnen Sie WhatsApp und hängen Sie es manuell an.", it: "Il PDF è stato scaricato: apri WhatsApp e allegalo manualmente.", nl: "De PDF is gedownload — open WhatsApp en voeg het handmatig toe.", pl: "PDF został pobrany — otwórz WhatsApp i dołącz go ręcznie.", ru: "PDF скачан — откройте WhatsApp и прикрепите его вручную.", tr: "PDF indirildi — WhatsApp'ı açın ve manuel olarak ekleyin.", ar: "تم تنزيل ملف PDF — افتح واتساب وأرفقه يدوياً.", hi: "पीडीएफ डाउनलोड हो गई — व्हाट्सएप खोलें और इसे मैन्युअल रूप से जोड़ें।", bn: "পিডিএফ ডাউনলোড হয়েছে — হোয়াটসঅ্যাপ খুলুন এবং নিজে সংযুক্ত করুন।", ur: "پی ڈی ایف ڈاؤن لوڈ ہو گئی — واٹس ایپ کھولیں اور اسے دستی طور پر منسلک کریں۔", ta: "PDF பதிவிறக்கம் செய்யப்பட்டது — வாட்ஸ்அப்பைத் திறந்து கைமுறையாக இணைக்கவும்.", te: "PDF డౌన్‌లోడ్ అయింది — వాట్సాప్ తెరిచి మాన్యువల్‌గా జోడించండి.", th: "ดาวน์โหลด PDF แล้ว — เปิด WhatsApp แล้วแนบไฟล์ด้วยตนเอง", zh: "PDF已下载——请打开WhatsApp并手动附加。", ja: "PDFをダウンロードしました。WhatsAppを開いて手動で添付してください。", ko: "PDF가 다운로드되었습니다 — 왓츠앱을 열어 직접 첨부해 주세요.", id: "PDF telah diunduh — buka WhatsApp dan lampirkan secara manual.", vi: "Đã tải xuống PDF — mở WhatsApp và đính kèm thủ công.", tl: "Na-download ang PDF — buksan ang WhatsApp at i-attach ito nang manu-mano.", sw: "PDF imepakuliwa — fungua WhatsApp na uiambatanishe mwenyewe.", ha: "An sauke PDF — bude WhatsApp sannan a liƙa shi da hannu.", yo: "A ti gba PDF náà sílẹ̀ — ṣí WhatsApp kí o sì fi kún-ún fúnra rẹ.", zu: "I-PDF ilandwe — vula i-WhatsApp bese uyinamathisela ngesandla.", am: "ፒዲኤፉ ወርዷል — ዋትስአፕን ይክፈቱ እና በእጅ ያያይዙት።", bm: "PDF jiginna — WhatsApp da yɛrɛ i bolo fɛ.", wo: "PDF bi wàññi na — ubbi WhatsApp te def ko ci sa loxo." };
+EXTRA_UI.receiptPhoneLabel = { fr: "Numéro WhatsApp du client (optionnel)", en: "Customer's WhatsApp number (optional)", es: "Número de WhatsApp del cliente (opcional)", pt: "Número de WhatsApp do cliente (opcional)", de: "WhatsApp-Nummer des Kunden (optional)", it: "Numero WhatsApp del cliente (facoltativo)", nl: "WhatsApp-nummer van de klant (optioneel)", pl: "Numer WhatsApp klienta (opcjonalnie)", ru: "Номер WhatsApp клиента (необязательно)", tr: "Müşterinin WhatsApp numarası (isteğe bağlı)", ar: "رقم واتساب العميل (اختياري)", hi: "ग्राहक का व्हाट्सएप नंबर (वैकल्पिक)", bn: "গ্রাহকের হোয়াটসঅ্যাপ নম্বর (ঐচ্ছিক)", ur: "گاہک کا واٹس ایپ نمبر (اختیاری)", ta: "வாடிக்கையாளரின் வாட்ஸ்அப் எண் (விருப்பத்தேர்வு)", te: "కస్టమర్ వాట్సాప్ నంబర్ (ఐచ్ఛికం)", th: "เบอร์ WhatsApp ของลูกค้า (ไม่บังคับ)", zh: "客户的WhatsApp号码（可选）", ja: "顧客のWhatsApp番号（任意）", ko: "고객의 왓츠앱 번호 (선택 사항)", id: "Nomor WhatsApp pelanggan (opsional)", vi: "Số WhatsApp của khách hàng (không bắt buộc)", tl: "Numero ng WhatsApp ng customer (opsyonal)", sw: "Nambari ya WhatsApp ya mteja (si lazima)", ha: "Lambar WhatsApp na abokin ciniki (ba dole ba)", yo: "Nọ́mbà WhatsApp oníbàárà (kìí ṣe dandan)", zu: "Inombolo ye-WhatsApp yekhasimende (akuphoqelekile)", am: "የደንበኛ የWhatsApp ቁጥር (አማራጭ)", bm: "Kiliyanso ka WhatsApp nimewo (fɛɛrɛ)", wo: "Limeer WhatsApp bu kiliyaan bi (du obligatoire)" };
 EXTRA_UI.receiptSendWhatsApp = { fr: "Envoyer le reçu par WhatsApp", en: "Send receipt via WhatsApp", es: "Enviar el recibo por WhatsApp", pt: "Enviar o recibo pelo WhatsApp", de: "Beleg per WhatsApp senden", it: "Invia la ricevuta via WhatsApp", nl: "Bon versturen via WhatsApp", pl: "Wyślij paragon przez WhatsApp", ru: "Отправить чек через WhatsApp", tr: "Fişi WhatsApp ile gönder", ar: "إرسال الإيصال عبر واتساب", hi: "व्हाट्सएप से रसीद भेजें", bn: "হোয়াটসঅ্যাপে রসিদ পাঠান", ur: "واٹس ایپ سے رسید بھیجیں", ta: "வாட்ஸ்அப் வழியாக ரசீதை அனுப்பு", te: "వాట్సాప్ ద్వారా రసీదు పంపండి", th: "ส่งใบเสร็จทาง WhatsApp", zh: "通过WhatsApp发送收据", ja: "WhatsAppでレシートを送る", ko: "왓츠앱으로 영수증 보내기", id: "Kirim struk via WhatsApp", vi: "Gửi hóa đơn qua WhatsApp", tl: "Ipadala ang resibo sa WhatsApp", sw: "Tuma risiti kupitia WhatsApp", ha: "Aika rasit ta WhatsApp", yo: "Fi gbàrà ránṣẹ́ nípasẹ̀ WhatsApp", zu: "Thumela irisidi nge-WhatsApp", am: "ደረሰኙን በ WhatsApp ይላኩ", bm: "Ci sɛbɛn ci WhatsApp fɛ", wo: "Yónni resi bi ci WhatsApp" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
 EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseignez le prix d'achat de vos produits pour voir votre bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
@@ -7575,10 +7578,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // d'appuyer sur un bouton), ce modal reste affiché jusqu'à ce que le boutiquier le
   // ferme lui-même ou envoie le reçu.
   const [pendingReceipt, setPendingReceipt] = useState(null);
+  const [pdfSharing, setPdfSharing] = useState(false);
   // Construit le texte du reçu et le lien WhatsApp correspondant. On ne connaît pas le
   // numéro du client (l'app ne demande qu'un nom) : on ouvre WhatsApp sans destinataire
   // pré-rempli (wa.me/?text=...), le boutiquier choisit lui-même le contact — pas besoin
   // d'ajouter un champ téléphone pour que ça marche dès maintenant.
+  // wa.me n'accepte que des chiffres (indicatif pays + numéro, sans "+" ni espaces/tirets) :
+  // on nettoie tout ce qui n'est pas un chiffre. Si rien n'est fourni, le lien reste
+  // utilisable quand même (wa.me/?text=... ouvre WhatsApp sans destinataire pré-rempli,
+  // le boutiquier choisit lui-même le contact).
+  const normalizePhoneForWhatsApp = (raw) => (raw || "").replace(/[^\d]/g, "");
   const buildReceiptWhatsAppUrl = (receipt) => {
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     const lines = [
@@ -7592,7 +7601,79 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       "",
       tx(lang, "receiptThanks"),
     ];
-    return `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
+    const phoneDigits = normalizePhoneForWhatsApp(receipt.phone);
+    return `https://wa.me/${phoneDigits}?text=${encodeURIComponent(lines.join("\n"))}`;
+  };
+  // Génère le même reçu, mais en PDF (format étroit façon ticket de caisse, 80mm) —
+  // même bibliothèque jsPDF que les autres exports PDF de l'app, chargée à la demande.
+  const generateReceiptPdfBlob = async (receipt) => {
+    const { default: jsPDF } = await import("jspdf");
+    const doc = new jsPDF({ unit: "mm", format: [80, 200] });
+    const pageWidth = 80;
+    let y = 10;
+    doc.setFontSize(12);
+    doc.text(shopName || t(lang, "appName"), pageWidth / 2, y, { align: "center" });
+    y += 6;
+    doc.setFontSize(8);
+    doc.setTextColor(120);
+    doc.text(new Date(receipt.date).toLocaleString(), pageWidth / 2, y, { align: "center" });
+    doc.setTextColor(0);
+    y += 6;
+    doc.setLineWidth(0.2);
+    doc.line(5, y, pageWidth - 5, y);
+    y += 6;
+    doc.setFontSize(9);
+    receipt.items.forEach((it) => {
+      doc.text(`${it.qty} × ${it.name}`, 5, y);
+      doc.text(`${localizedNumber(it.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - 5, y, { align: "right" });
+      y += 5;
+    });
+    y += 2;
+    doc.line(5, y, pageWidth - 5, y);
+    y += 6;
+    doc.setFontSize(10);
+    doc.text(tx(lang, "receiptTotalLabel"), 5, y);
+    doc.text(`${localizedNumber(receipt.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - 5, y, { align: "right" });
+    y += 6;
+    doc.setFontSize(8);
+    const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
+    doc.text(`${tx(lang, "receiptPaymentLabel")} : ${paymentLabel}`, 5, y);
+    y += 8;
+    doc.setFontSize(9);
+    doc.text(tx(lang, "receiptThanks"), pageWidth / 2, y, { align: "center" });
+    return doc.output("blob");
+  };
+  // Partage le PDF via le partage natif du téléphone (Web Share API avec fichier),
+  // ce qui permet de choisir WhatsApp dans la liste et d'y joindre directement le
+  // fichier — contrairement à un simple lien wa.me, qui ne peut transporter que du
+  // texte. Si le navigateur/la WebView ne prend pas en charge le partage de fichiers
+  // (cas plus rare), on télécharge le PDF à la place avec une explication claire :
+  // rien ne casse silencieusement, le boutiquier sait toujours quoi faire ensuite.
+  const shareReceiptAsPdf = async (receipt) => {
+    setPdfSharing(true);
+    try {
+      const blob = await generateReceiptPdfBlob(receipt);
+      const file = new File([blob], `${tx(lang, "receiptHeading")}.pdf`, { type: "application/pdf" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: tx(lang, "receiptHeading") });
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${tx(lang, "receiptHeading")}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        alert(tx(lang, "receiptPdfFallback"));
+      }
+    } catch (e) {
+      // Partage annulé par le boutiquier (AbortError) : rien à faire, ce n'est pas une erreur.
+      if (e && e.name !== "AbortError") alert(tx(lang, "receiptPdfFallback"));
+    } finally {
+      setPdfSharing(false);
+      setPendingReceipt(null);
+    }
   };
   useEffect(() => {
     if (!saleSuccessOverlay) return;
@@ -10545,7 +10626,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
 
   const createCart = () => {
-    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: "cash", customer: "", received: "" };
+    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: "cash", customer: "", phone: "", received: "" };
     const next = [...draftCarts, newCart];
     saveAll({ draftCarts: next, activeCartId: newCart.id });
   };
@@ -10759,7 +10840,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow, phone: cart.phone });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -10940,11 +11021,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         }
         const payment = ["cash", "mobile", "card", "credit"].includes(a.payment) ? a.payment : "cash";
         const customer = (a.customer || "").trim();
+        const phone = (a.phone || "").trim();
         out.push({
           raw: { type: "record_sale" },
           label: "",
           isSaleForm: true,
-          draft: { items: draftItems, payment, customer },
+          draft: { items: draftItems, payment, customer, phone },
         });
       }
       // Une seule proposition prise en compte : si l'IA a quand même mis plusieurs
@@ -11060,7 +11142,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         playSound("success");
         triggerHaptic("success");
         setSaleSuccessOverlay({ amount: total, id: transactionId });
-        setPendingReceipt({ items: resolved.map((r) => ({ name: r.product.name, qty: r.qty, total: r.qty * r.unitPrice })), total, payment: action.payment, date: dateNow });
+        setPendingReceipt({ items: resolved.map((r) => ({ name: r.product.name, qty: r.qty, total: r.qty * r.unitPrice })), total, payment: action.payment, date: dateNow, phone: action.phone });
         return { ok: true };
       }
       return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
@@ -11081,7 +11163,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // (draft) tel qu'il est AU MOMENT du clic, pas de la proposition d'origine de l'IA
     // (raw) : le boutiquier a pu tout changer (produit, quantité, paquet/unité...).
     const action = actionEntry.isSaleForm
-      ? { type: "record_sale", items: actionEntry.draft.items.map((it) => ({ productId: it.productId, qty: it.qty, mode: it.mode })), payment: actionEntry.draft.payment, customer: actionEntry.draft.payment === "credit" ? actionEntry.draft.customer.trim() : undefined }
+      ? { type: "record_sale", items: actionEntry.draft.items.map((it) => ({ productId: it.productId, qty: it.qty, mode: it.mode })), payment: actionEntry.draft.payment, customer: actionEntry.draft.payment === "credit" ? actionEntry.draft.customer.trim() : undefined, phone: actionEntry.draft.phone.trim() }
       : actionEntry.raw;
     const applyAndUpdateMsg = () => {
       const result = executeAiAction(action);
@@ -11274,7 +11356,7 @@ Quand le boutiquier te demande clairement l'une de ces 4 choses ET que tu identi
   - {"type":"update_price","productId":"...","newPrice":NOMBRE}
   - {"type":"adjust_stock","productId":"...","delta":NOMBRE}  (positif pour ajouter, négatif pour retirer)
   - {"type":"mark_debt_paid","debtId":"..."}
-  - {"type":"record_sale","items":[{"productId":"...","qty":NOMBRE,"mode":"pack"|"unit"}, ...],"payment":"cash"|"mobile"|"card"|"credit","customer":"nom (obligatoire seulement si payment=credit)"}
+  - {"type":"record_sale","items":[{"productId":"...","qty":NOMBRE,"mode":"pack"|"unit"}, ...],"payment":"cash"|"mobile"|"card"|"credit","customer":"nom (obligatoire seulement si payment=credit)","phone":"numéro WhatsApp du client (optionnel, seulement si le boutiquier le donne explicitement)"}
     "mode" n'a de sens que si le produit permet la vente à l'unité (sellByUnit) ; sinon utilise toujours "pack". Si le boutiquier demande à faire une vente SANS préciser quel produit ("je veux faire une vente", "j'ai vendu quelque chose tout à l'heure"), c'est le SEUL cas où tu peux proposer "record_sale" avec "items":[] (liste vide) : ça ouvre un petit formulaire où il remplit lui-même le produit, la quantité et paquet/unité — ta phrase avant le bloc doit alors juste dire que tu ouvres le formulaire de vente, sans inventer de produit.
 Règles strictes :
 - N'utilise JAMAIS un id que tu as inventé : copie-le exactement depuis la liste de produits/dettes fournie plus haut. Si tu ne trouves pas le produit/la dette avec certitude (nom ambigu, plusieurs correspondances, rien ne correspond) pour update_price / adjust_stock / mark_debt_paid, ne propose AUCUNE action : explique le problème et demande une précision, en texte normal. (Pour record_sale uniquement, l'exception "items":[] ci-dessus s'applique.)
@@ -13798,6 +13880,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <div>
                       <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "clientName")} {activeCart.payment !== "credit" ? `(${t(lang, "othFacultatif")})` : ""}</label>
                       <textarea autoComplete="off" rows={1} value={activeCart.customer} onChange={(e) => updateCartMeta(activeCart.id, "customer", e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5" style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }} />
+                      {/* Facultatif, quel que soit le mode de paiement : sert uniquement à envoyer
+                          le reçu par WhatsApp directement au bon contact après la vente (voir
+                          buildReceiptWhatsAppUrl). Sans ce numéro, le reçu s'envoie quand même,
+                          juste sans destinataire pré-rempli. */}
+                      <input
+                        type="tel"
+                        autoComplete="off"
+                        value={activeCart.phone || ""}
+                        onChange={(e) => updateCartMeta(activeCart.id, "phone", e.target.value)}
+                        placeholder={tx(lang, "receiptPhoneLabel")}
+                        className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5"
+                        style={{ background: T.input, color: T.text, borderColor: T.border }}
+                      />
                       {activeCart.payment === "credit" && activeCart.customer.trim() && (() => {
                         const trust = getCustomerTrust(activeCart.customer);
                         if (!trust) return null;
@@ -14818,6 +14913,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                                 style={{ background: T.card, color: T.text, borderColor: T.border }}
                               />
                             )}
+                            <input
+                              type="tel"
+                              value={act.draft.phone}
+                              onChange={(e) => updateSaleDraft(i, 0, { phone: e.target.value })}
+                              placeholder={tx(lang, "receiptPhoneLabel")}
+                              className="border rounded-lg px-2.5 py-1.5 text-xs"
+                              style={{ background: T.card, color: T.text, borderColor: T.border }}
+                            />
                             {act.draft.items.length > 0 && (
                               <p className="text-xs font-bold text-right" style={{ color: T.text }}>{localizedNumber(saleDraftTotal(act.draft))} {CURRENT_CURRENCY.symbol}</p>
                             )}
@@ -16667,6 +16770,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             >
               💬 {tx(lang, "receiptSendWhatsApp")}
             </a>
+            <button
+              onClick={() => shareReceiptAsPdf(pendingReceipt)}
+              disabled={pdfSharing}
+              className="w-full py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 mb-2 disabled:opacity-50"
+              style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}
+            >
+              📄 {pdfSharing ? "…" : tx(lang, "receiptSendPdf")}
+            </button>
             <button onClick={() => setPendingReceipt(null)} className="w-full py-2.5 rounded-lg text-sm font-semibold" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}>
               {t(lang, "empQrClose")}
             </button>
