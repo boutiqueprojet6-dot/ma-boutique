@@ -4295,6 +4295,8 @@ EXTRA_UI.receiptThanks = { fr: "Merci pour votre achat !", en: "Thank you for yo
 EXTRA_UI.receiptModalTitle = { fr: "Vente enregistrée", en: "Sale recorded", es: "Venta registrada", pt: "Venda registrada", de: "Verkauf erfasst", it: "Vendita registrata", nl: "Verkoop geregistreerd", pl: "Sprzedaż zarejestrowana", ru: "Продажа зарегистрирована", tr: "Satış kaydedildi", ar: "تم تسجيل البيع", hi: "बिक्री दर्ज हुई", bn: "বিক্রয় নথিভুক্ত হয়েছে", ur: "فروخت درج ہو گئی", ta: "விற்பனை பதிவு செய்யப்பட்டது", te: "అమ్మకం నమోదు చేయబడింది", th: "บันทึกการขายแล้ว", zh: "销售已记录", ja: "販売を記録しました", ko: "판매가 기록되었습니다", id: "Penjualan tercatat", vi: "Đã ghi nhận giao dịch bán", tl: "Naitala ang benta", sw: "Mauzo yamerekodiwa", ha: "An rubuta siyarwa", yo: "A ti ṣàkọsílẹ̀ títà", zu: "Ukuthengisa kurekhodiwe", am: "ሽያጭ ተመዝግቧል", bm: "Sɔngɔ sɛbɛnna", wo: "Jaay bi bindna" };
 EXTRA_UI.receiptSendPdf = { fr: "Envoyer en PDF", en: "Send as PDF", es: "Enviar en PDF", pt: "Enviar em PDF", de: "Als PDF senden", it: "Invia in PDF", nl: "Verzenden als PDF", pl: "Wyślij jako PDF", ru: "Отправить как PDF", tr: "PDF olarak gönder", ar: "إرسال كملف PDF", hi: "पीडीएफ के रूप में भेजें", bn: "পিডিএফ হিসেবে পাঠান", ur: "پی ڈی ایف کے طور پر بھیجیں", ta: "PDF ஆக அனுப்பு", te: "PDFగా పంపండి", th: "ส่งเป็น PDF", zh: "以PDF发送", ja: "PDFで送信", ko: "PDF로 보내기", id: "Kirim sebagai PDF", vi: "Gửi dưới dạng PDF", tl: "Ipadala bilang PDF", sw: "Tuma kama PDF", ha: "Aika a matsayin PDF", yo: "Fi ránṣẹ́ gẹ́gẹ́ bí PDF", zu: "Thumela njenge-PDF", am: "እንደ PDF ይላኩ", bm: "Ci PDF kɔnɔ", wo: "Yónni ci anam PDF" };
 EXTRA_UI.receiptPdfFallback = { fr: "Le PDF a été téléchargé — ouvrez WhatsApp et joignez-le manuellement.", en: "The PDF was downloaded — open WhatsApp and attach it manually.", es: "El PDF se ha descargado — abra WhatsApp y adjúntelo manualmente.", pt: "O PDF foi baixado — abra o WhatsApp e anexe-o manualmente.", de: "Das PDF wurde heruntergeladen – öffnen Sie WhatsApp und hängen Sie es manuell an.", it: "Il PDF è stato scaricato: apri WhatsApp e allegalo manualmente.", nl: "De PDF is gedownload — open WhatsApp en voeg het handmatig toe.", pl: "PDF został pobrany — otwórz WhatsApp i dołącz go ręcznie.", ru: "PDF скачан — откройте WhatsApp и прикрепите его вручную.", tr: "PDF indirildi — WhatsApp'ı açın ve manuel olarak ekleyin.", ar: "تم تنزيل ملف PDF — افتح واتساب وأرفقه يدوياً.", hi: "पीडीएफ डाउनलोड हो गई — व्हाट्सएप खोलें और इसे मैन्युअल रूप से जोड़ें।", bn: "পিডিএফ ডাউনলোড হয়েছে — হোয়াটসঅ্যাপ খুলুন এবং নিজে সংযুক্ত করুন।", ur: "پی ڈی ایف ڈاؤن لوڈ ہو گئی — واٹس ایپ کھولیں اور اسے دستی طور پر منسلک کریں۔", ta: "PDF பதிவிறக்கம் செய்யப்பட்டது — வாட்ஸ்அப்பைத் திறந்து கைமுறையாக இணைக்கவும்.", te: "PDF డౌన్‌లోడ్ అయింది — వాట్సాప్ తెరిచి మాన్యువల్‌గా జోడించండి.", th: "ดาวน์โหลด PDF แล้ว — เปิด WhatsApp แล้วแนบไฟล์ด้วยตนเอง", zh: "PDF已下载——请打开WhatsApp并手动附加。", ja: "PDFをダウンロードしました。WhatsAppを開いて手動で添付してください。", ko: "PDF가 다운로드되었습니다 — 왓츠앱을 열어 직접 첨부해 주세요.", id: "PDF telah diunduh — buka WhatsApp dan lampirkan secara manual.", vi: "Đã tải xuống PDF — mở WhatsApp và đính kèm thủ công.", tl: "Na-download ang PDF — buksan ang WhatsApp at i-attach ito nang manu-mano.", sw: "PDF imepakuliwa — fungua WhatsApp na uiambatanishe mwenyewe.", ha: "An sauke PDF — bude WhatsApp sannan a liƙa shi da hannu.", yo: "A ti gba PDF náà sílẹ̀ — ṣí WhatsApp kí o sì fi kún-ún fúnra rẹ.", zu: "I-PDF ilandwe — vula i-WhatsApp bese uyinamathisela ngesandla.", am: "ፒዲኤፉ ወርዷል — ዋትስአፕን ይክፈቱ እና በእጅ ያያይዙት።", bm: "PDF jiginna — WhatsApp da yɛrɛ i bolo fɛ.", wo: "PDF bi wàññi na — ubbi WhatsApp te def ko ci sa loxo." };
+EXTRA_UI.dailySummaryTimeLabel = { fr: "Heure du résumé quotidien", en: "Daily summary time", es: "Hora del resumen diario", pt: "Horário do resumo diário", de: "Uhrzeit der täglichen Zusammenfassung", it: "Orario del riepilogo giornaliero", nl: "Tijdstip van het dagelijkse overzicht", pl: "Godzina codziennego podsumowania", ru: "Время ежедневной сводки", tr: "Günlük özet saati", ar: "وقت الملخص اليومي", hi: "दैनिक सारांश का समय", bn: "দৈনিক সারাংশের সময়", ur: "روزانہ خلاصے کا وقت", ta: "தினசரி சுருக்கத்தின் நேரம்", te: "రోజువారీ సారాంశం సమయం", th: "เวลาสรุปประจำวัน", zh: "每日摘要时间", ja: "日次サマリーの時間", ko: "일일 요약 시간", id: "Waktu ringkasan harian", vi: "Giờ nhận tóm tắt hàng ngày", tl: "Oras ng pang-araw-araw na buod", sw: "Muda wa muhtasari wa kila siku", ha: "Lokacin takaitaccen bayani na yau da kullun", yo: "Àkókò àkótán ojoojúmọ́", zu: "Isikhathi sesifinyezo sansuku zonke", am: "የዕለታዊ ማጠቃለያ ሰዓት", bm: "Don-don kunnafoni waati", wo: "Waxtu bataaxal bis bu nekk" };
+EXTRA_UI.dailySummaryTimeDesc = { fr: "Vous recevrez une notification avec le résumé de la veille à cette heure chaque jour.", en: "You'll receive a notification with yesterday's summary at this time every day.", es: "Recibirá una notificación con el resumen del día anterior a esta hora cada día.", pt: "Você receberá uma notificação com o resumo do dia anterior neste horário todos os dias.", de: "Sie erhalten jeden Tag zu dieser Uhrzeit eine Benachrichtigung mit der Zusammenfassung des Vortages.", it: "Riceverai una notifica con il riepilogo del giorno precedente a questo orario ogni giorno.", nl: "U ontvangt elke dag op dit tijdstip een melding met de samenvatting van gisteren.", pl: "Każdego dnia o tej porze otrzymasz powiadomienie z podsumowaniem poprzedniego dnia.", ru: "Каждый день в это время вы будете получать уведомление со сводкой за предыдущий день.", tr: "Her gün bu saatte bir önceki günün özetiyle bildirim alacaksınız.", ar: "ستتلقى إشعاراً بملخص اليوم السابق في هذا الوقت كل يوم.", hi: "हर दिन इस समय पर आपको पिछले दिन के सारांश की सूचना मिलेगी।", bn: "প্রতিদিন এই সময়ে গতকালের সারাংশ সহ একটি নোটিফিকেশন পাবেন।", ur: "ہر روز اس وقت پچھلے دن کے خلاصے کے ساتھ اطلاع موصول ہوگی۔", ta: "ஒவ்வொரு நாளும் இந்த நேரத்தில் முந்தைய நாளின் சுருக்கத்துடன் அறிவிப்பு பெறுவீர்கள்.", te: "ప్రతిరోజూ ఈ సమయంలో మునుపటి రోజు సారాంశంతో నోటిఫికేషన్ అందుతుంది.", th: "คุณจะได้รับการแจ้งเตือนพร้อมสรุปของเมื่อวานในเวลานี้ทุกวัน", zh: "您每天都会在此时间收到前一天摘要的通知。", ja: "毎日この時間に前日の要約の通知が届きます。", ko: "매일 이 시간에 전날 요약 알림을 받게 됩니다.", id: "Anda akan menerima notifikasi berisi ringkasan kemarin pada waktu ini setiap hari.", vi: "Bạn sẽ nhận được thông báo tóm tắt của ngày hôm trước vào giờ này mỗi ngày.", tl: "Makakatanggap ka ng abiso na may buod ng kahapon sa oras na ito araw-araw.", sw: "Utapokea arifa yenye muhtasari wa jana kwa wakati huu kila siku.", ha: "Za ku karɓi sanarwa tare da taƙaitaccen bayanin jiya a wannan lokacin kowace rana.", yo: "Ìwọ yóò gba ìfitónilétí pẹ̀lú àkótán àná ní àkókò yìí lójoojúmọ́.", zu: "Uzothola isaziso esinesifinyezo sayizolo ngalesi sikhathi nsuku zonke.", am: "በየቀኑ በዚህ ሰዓት የትላንትናውን ማጠቃለያ የያዘ ማሳወቂያ ይደርስዎታል።", bm: "I bɛna kunnafoni sɔrɔ ni kunun kunnafoni ye waati in na don o don.", wo: "Dinga jot benn xibaar ak bataaxalu démb ci waxtu wii bis bu nekk." };
 EXTRA_UI.receiptPhoneLabel = { fr: "Numéro WhatsApp du client (optionnel)", en: "Customer's WhatsApp number (optional)", es: "Número de WhatsApp del cliente (opcional)", pt: "Número de WhatsApp do cliente (opcional)", de: "WhatsApp-Nummer des Kunden (optional)", it: "Numero WhatsApp del cliente (facoltativo)", nl: "WhatsApp-nummer van de klant (optioneel)", pl: "Numer WhatsApp klienta (opcjonalnie)", ru: "Номер WhatsApp клиента (необязательно)", tr: "Müşterinin WhatsApp numarası (isteğe bağlı)", ar: "رقم واتساب العميل (اختياري)", hi: "ग्राहक का व्हाट्सएप नंबर (वैकल्पिक)", bn: "গ্রাহকের হোয়াটসঅ্যাপ নম্বর (ঐচ্ছিক)", ur: "گاہک کا واٹس ایپ نمبر (اختیاری)", ta: "வாடிக்கையாளரின் வாட்ஸ்அப் எண் (விருப்பத்தேர்வு)", te: "కస్టమర్ వాట్సాప్ నంబర్ (ఐచ్ఛికం)", th: "เบอร์ WhatsApp ของลูกค้า (ไม่บังคับ)", zh: "客户的WhatsApp号码（可选）", ja: "顧客のWhatsApp番号（任意）", ko: "고객의 왓츠앱 번호 (선택 사항)", id: "Nomor WhatsApp pelanggan (opsional)", vi: "Số WhatsApp của khách hàng (không bắt buộc)", tl: "Numero ng WhatsApp ng customer (opsyonal)", sw: "Nambari ya WhatsApp ya mteja (si lazima)", ha: "Lambar WhatsApp na abokin ciniki (ba dole ba)", yo: "Nọ́mbà WhatsApp oníbàárà (kìí ṣe dandan)", zu: "Inombolo ye-WhatsApp yekhasimende (akuphoqelekile)", am: "የደንበኛ የWhatsApp ቁጥር (አማራጭ)", bm: "Kiliyanso ka WhatsApp nimewo (fɛɛrɛ)", wo: "Limeer WhatsApp bu kiliyaan bi (du obligatoire)" };
 EXTRA_UI.receiptSendWhatsApp = { fr: "Envoyer le reçu par WhatsApp", en: "Send receipt via WhatsApp", es: "Enviar el recibo por WhatsApp", pt: "Enviar o recibo pelo WhatsApp", de: "Beleg per WhatsApp senden", it: "Invia la ricevuta via WhatsApp", nl: "Bon versturen via WhatsApp", pl: "Wyślij paragon przez WhatsApp", ru: "Отправить чек через WhatsApp", tr: "Fişi WhatsApp ile gönder", ar: "إرسال الإيصال عبر واتساب", hi: "व्हाट्सएप से रसीद भेजें", bn: "হোয়াটসঅ্যাপে রসিদ পাঠান", ur: "واٹس ایپ سے رسید بھیجیں", ta: "வாட்ஸ்அப் வழியாக ரசீதை அனுப்பு", te: "వాట్సాప్ ద్వారా రసీదు పంపండి", th: "ส่งใบเสร็จทาง WhatsApp", zh: "通过WhatsApp发送收据", ja: "WhatsAppでレシートを送る", ko: "왓츠앱으로 영수증 보내기", id: "Kirim struk via WhatsApp", vi: "Gửi hóa đơn qua WhatsApp", tl: "Ipadala ang resibo sa WhatsApp", sw: "Tuma risiti kupitia WhatsApp", ha: "Aika rasit ta WhatsApp", yo: "Fi gbàrà ránṣẹ́ nípasẹ̀ WhatsApp", zu: "Thumela irisidi nge-WhatsApp", am: "ደረሰኙን በ WhatsApp ይላኩ", bm: "Ci sɛbɛn ci WhatsApp fɛ", wo: "Yónni resi bi ci WhatsApp" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
@@ -4974,7 +4976,7 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories"];
 // ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
 // On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
 // "light" / "dark" / "system"), pour que l'écran de connexion garde la même ambiance. Pour un
@@ -5116,6 +5118,8 @@ function mergeSettings(baseShop, localShop, remoteShop) {
   return {
     cashFund: winner.cashFund ?? 0,
     lowStockThreshold: winner.lowStockThreshold ?? 5,
+    dailySummaryHour: winner.dailySummaryHour ?? 7,
+    dailySummaryUtcOffsetMinutes: winner.dailySummaryUtcOffsetMinutes ?? 0,
     darkMode: !!winner.darkMode,
     themeMode: winner.themeMode || (winner.darkMode ? "dark" : "system"),
     showBalls: winner.showBalls !== false,
@@ -7466,6 +7470,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [unsoldLog, setUnsoldLog] = useState([]);
   const [cashFund, setCashFund] = useState(0);
   const [lowStockThreshold, setLowStockThreshold] = useState(5);
+  // Heure locale (0-23) à laquelle le propriétaire veut recevoir le résumé quotidien
+  // automatique (notification push, voir la fonction Supabase daily-summary). Le
+  // décalage par rapport à l'UTC est déduit automatiquement de l'appareil au moment
+  // où ce réglage est enregistré (voir saveAll plus bas) : pas besoin de demander le
+  // fuseau horaire séparément, et ça reste correct même pour un boutiquier qui change
+  // de pays, tant qu'il réenregistre l'heure voulue depuis son nouvel appareil/fuseau.
+  const [dailySummaryHour, setDailySummaryHour] = useState(7);
+  const [dailySummaryUtcOffsetMinutes, setDailySummaryUtcOffsetMinutes] = useState(() => -new Date().getTimezoneOffset());
   const [darkMode, setDarkMode] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
   // "system" (suit le téléphone), "light" ou "dark" (choix figé par l'utilisateur).
   const [themeMode, setThemeMode] = useState("system");
@@ -8870,6 +8882,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setUnsoldLog(shop.unsoldLog || []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
+    setDailySummaryHour(shop.dailySummaryHour ?? 7);
+    setDailySummaryUtcOffsetMinutes(shop.dailySummaryUtcOffsetMinutes ?? -new Date().getTimezoneOffset());
     setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
     setShowBalls(shop.showBalls !== false);
     setSoundsEnabled(shop.soundsEnabled !== false);
@@ -9220,6 +9234,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       unsoldLog: overrides.unsoldLog ?? unsoldLog,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
+      dailySummaryHour: overrides.dailySummaryHour ?? dailySummaryHour,
+      // Recalculé à chaque sauvegarde de ce réglage à partir du fuseau horaire ACTUEL
+      // de l'appareil (voir le commentaire sur le state dailySummaryHour) : c'est la
+      // fonction Supabase daily-summary qui en a besoin pour convertir l'heure locale
+      // voulue en heure UTC à comparer. "dailySummaryUtcOffsetMinutes" n'est volontairement
+      // recalculé QUE quand "dailySummaryHour" est explicitement fourni dans overrides
+      // (c'est-à-dire quand ce réglage précis vient d'être modifié), pour ne jamais
+      // l'écraser par erreur lors d'une sauvegarde qui ne concerne pas ce réglage.
+      dailySummaryUtcOffsetMinutes: overrides.dailySummaryHour !== undefined ? -new Date().getTimezoneOffset() : (overrides.dailySummaryUtcOffsetMinutes ?? dailySummaryUtcOffsetMinutes),
       darkMode: overrides.darkMode ?? darkMode,
       themeMode: overrides.themeMode ?? themeMode,
       showBalls: overrides.showBalls ?? showBalls,
@@ -9252,6 +9275,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setUnsoldLog(next.unsoldLog || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
+    setDailySummaryHour(next.dailySummaryHour);
+    setDailySummaryUtcOffsetMinutes(next.dailySummaryUtcOffsetMinutes);
     setDarkMode(next.darkMode);
     setThemeMode(next.themeMode);
     setShowBalls(next.showBalls);
@@ -15709,6 +15734,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "haptics", label: t(lang, "setVibrations"), right: hapticsEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "ballcolor", label: t(lang, "ballColor"), right: null },
                 { id: "threshold", label: t(lang, "stockAlert"), right: lowStockThreshold },
+                { id: "dailysummary", label: tx(lang, "dailySummaryTimeLabel"), right: `${String(dailySummaryHour).padStart(2, "0")}:00` },
                 { id: "currency", label: t(lang, "setDevise"), right: `${CURRENT_CURRENCY.symbol} ${currency}` },
                 ...(lang === "ar" ? [{ id: "digits", label: "الأرقام", right: arabicDigits ? "١٢٣" : "123" }] : []),
               ].map((item) => (
@@ -16022,6 +16048,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                   <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
+                </div>
+              )}
+              {/* Boutique — Heure du résumé quotidien automatique (notification push) */}
+              {settingsField === "dailysummary" && (
+                <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "dailySummaryTimeLabel")}</div>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                    <select
+                      value={dailySummaryHour}
+                      onChange={(e) => saveAll({ dailySummaryHour: parseInt(e.target.value, 10) })}
+                      style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }}
+                    >
+                      {Array.from({ length: 24 }, (_, h) => (
+                        <option key={h} value={h}>{String(h).padStart(2, "0")}:00</option>
+                      ))}
+                    </select>
+                  </div>
+                  <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{tx(lang, "dailySummaryTimeDesc")}</p>
                 </div>
               )}
               {settingsField === "sharecard" && (
