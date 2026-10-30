@@ -7591,6 +7591,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ferme lui-même ou envoie le reçu.
   const [pendingReceipt, setPendingReceipt] = useState(null);
   const [pdfSharing, setPdfSharing] = useState(false);
+  // Si aucun numéro n'était déjà renseigné pour la vente (champ optionnel du panier/
+  // formulaire IA), on le demande au moment même du tap sur "Envoyer par WhatsApp",
+  // plutôt que d'ouvrir WhatsApp sans destinataire précis.
+  const [receiptAskingPhone, setReceiptAskingPhone] = useState(false);
+  const [receiptPhoneDraft, setReceiptPhoneDraft] = useState("");
+  useEffect(() => {
+    if (pendingReceipt) { setReceiptAskingPhone(false); setReceiptPhoneDraft(""); }
+  }, [pendingReceipt]);
   // Construit le texte du reçu et le lien WhatsApp correspondant. On ne connaît pas le
   // numéro du client (l'app ne demande qu'un nom) : on ouvre WhatsApp sans destinataire
   // pré-rempli (wa.me/?text=...), le boutiquier choisit lui-même le contact — pas besoin
@@ -16804,16 +16812,53 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <span>{localizedNumber(pendingReceipt.total)} {CURRENT_CURRENCY.symbol}</span>
               </div>
             </div>
-            <a
-              href={buildReceiptWhatsAppUrl(pendingReceipt)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setPendingReceipt(null)}
-              className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
-              style={{ background: "#25D366", textDecoration: "none" }}
-            >
-              💬 {tx(lang, "receiptSendWhatsApp")}
-            </a>
+            {normalizePhoneForWhatsApp(pendingReceipt.phone) && !receiptAskingPhone && (
+              <a
+                href={buildReceiptWhatsAppUrl(pendingReceipt)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setPendingReceipt(null)}
+                className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
+                style={{ background: "#25D366", textDecoration: "none" }}
+              >
+                💬 {tx(lang, "receiptSendWhatsApp")}
+              </a>
+            )}
+            {!normalizePhoneForWhatsApp(pendingReceipt.phone) && !receiptAskingPhone && (
+              <button
+                onClick={() => setReceiptAskingPhone(true)}
+                className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
+                style={{ background: "#25D366" }}
+              >
+                💬 {tx(lang, "receiptSendWhatsApp")}
+              </button>
+            )}
+            {receiptAskingPhone && (
+              <div className="flex flex-col gap-2 mb-2">
+                <input
+                  type="tel"
+                  autoFocus
+                  value={receiptPhoneDraft}
+                  onChange={(e) => setReceiptPhoneDraft(e.target.value)}
+                  placeholder={tx(lang, "receiptPhoneLabel")}
+                  className="border rounded-lg px-3 py-2.5 text-sm"
+                  style={{ background: T.input, color: T.text, borderColor: T.border }}
+                />
+                {/* Vrai lien <a>, jamais window.open : un clic JS sur une popup est
+                    silencieusement bloqué par Safari (bug déjà rencontré ailleurs dans
+                    cette app), un clic sur un <a> ne l'est pas. */}
+                <a
+                  href={buildReceiptWhatsAppUrl({ ...pendingReceipt, phone: receiptPhoneDraft })}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setPendingReceipt(null)}
+                  className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2"
+                  style={{ background: "#25D366", textDecoration: "none" }}
+                >
+                  💬 {tx(lang, "receiptSendWhatsApp")}
+                </a>
+              </div>
+            )}
             <button
               onClick={() => shareReceiptAsPdf(pendingReceipt)}
               disabled={pdfSharing}
