@@ -7603,11 +7603,32 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // numéro du client (l'app ne demande qu'un nom) : on ouvre WhatsApp sans destinataire
   // pré-rempli (wa.me/?text=...), le boutiquier choisit lui-même le contact — pas besoin
   // d'ajouter un champ téléphone pour que ça marche dès maintenant.
-  // wa.me n'accepte que des chiffres (indicatif pays + numéro, sans "+" ni espaces/tirets) :
-  // on nettoie tout ce qui n'est pas un chiffre. Si rien n'est fourni, le lien reste
-  // utilisable quand même (wa.me/?text=... ouvre WhatsApp sans destinataire pré-rempli,
-  // le boutiquier choisit lui-même le contact).
-  const normalizePhoneForWhatsApp = (raw) => (raw || "").replace(/[^\d]/g, "");
+  // wa.me n'accepte que des chiffres (indicatif pays + numéro, SANS "+" ni espaces/
+  // tirets), et exige le numéro COMPLET avec indicatif — un numéro purement local
+  // (ex: juste "76 54 32 10" sans le "+223" du Mali) n'atterrit pas forcément sur le
+  // bon contact. Si le numéro tapé a exactement la longueur d'un numéro LOCAL du pays
+  // de la boutique (avec ou sans le "0" initial parfois utilisé localement), on ajoute
+  // automatiquement l'indicatif de ce pays — hypothèse raisonnable, l'immense majorité
+  // des clients d'une boutique sont dans le même pays qu'elle. Si le numéro ne
+  // correspond à aucun de ces formats (déjà complet, ou pays sans règle connue), on le
+  // laisse tel quel plutôt que de risquer de le déformer. Si rien n'est fourni, le lien
+  // reste utilisable quand même (wa.me/?text=... ouvre WhatsApp sans destinataire
+  // pré-rempli, le boutiquier choisit lui-même le contact).
+  const normalizePhoneForWhatsApp = (raw) => {
+    let digits = (raw || "").replace(/[^\d]/g, "");
+    if (!digits) return "";
+    const dial = COUNTRY_DIAL_CODE[shopCountry];
+    const nationalLen = COUNTRY_PHONE_DIGITS[shopCountry];
+    if (dial && nationalLen) {
+      const dialDigits = dial.replace(/\D/g, "");
+      if (digits.length === nationalLen) {
+        digits = dialDigits + digits;
+      } else if (digits.length === nationalLen + 1 && digits.startsWith("0")) {
+        digits = dialDigits + digits.slice(1);
+      }
+    }
+    return digits;
+  };
   const buildReceiptWhatsAppUrl = (receipt) => {
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     const lines = [
@@ -7628,39 +7649,88 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // même bibliothèque jsPDF que les autres exports PDF de l'app, chargée à la demande.
   const generateReceiptPdfBlob = async (receipt) => {
     const { default: jsPDF } = await import("jspdf");
-    const doc = new jsPDF({ unit: "mm", format: [80, 200] });
+    const doc = new jsPDF({ unit: "mm", format: [80, 190] });
     const pageWidth = 80;
-    let y = 10;
+    const marginX = 6;
+    // Couleurs de la marque Boutipro (identiques à l'app : INDIGO, CLAY, SAND,
+    // CHARCOAL) — pour que le reçu reste reconnaissable même imprimé/en PDF, pas
+    // seulement à l'écran.
+    const INDIGO_RGB = [27, 58, 92];
+    const CLAY_RGB = [184, 86, 47];
+    const SAND_RGB = [243, 234, 216];
+    const CHARCOAL_RGB = [43, 36, 32];
+
+    // ---- Bandeau d'en-tête avec badge/logo (pas d'image externe à charger : un
+    // badge vectoriel dessiné directement est plus fiable qu'un fichier image qui
+    // pourrait échouer à charger, et reste net à n'importe quelle taille d'impression).
+    doc.setFillColor(...INDIGO_RGB);
+    doc.rect(0, 0, pageWidth, 28, "F");
+    doc.setFillColor(255, 255, 255);
+    doc.roundedRect(pageWidth / 2 - 9, 5, 18, 18, 4, 4, "F");
+    doc.setTextColor(...INDIGO_RGB);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("B", pageWidth / 2, 16.3, { align: "center" });
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7);
+    doc.text(t(lang, "appName") || "Boutipro", pageWidth / 2, 25.5, { align: "center" });
+
+    let y = 36;
+    doc.setTextColor(...CHARCOAL_RGB);
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.text(shopName || t(lang, "appName"), pageWidth / 2, y, { align: "center" });
-    y += 6;
+    y += 5;
+    doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
-    doc.setTextColor(120);
+    doc.setTextColor(140, 140, 140);
     doc.text(new Date(receipt.date).toLocaleString(), pageWidth / 2, y, { align: "center" });
-    doc.setTextColor(0);
-    y += 6;
-    doc.setLineWidth(0.2);
-    doc.line(5, y, pageWidth - 5, y);
-    y += 6;
+    y += 5;
+
+    doc.setDrawColor(...CLAY_RGB);
+    doc.setLineWidth(0.6);
+    doc.line(marginX, y, pageWidth - marginX, y);
+    y += 7;
+
     doc.setFontSize(9);
     receipt.items.forEach((it) => {
-      doc.text(`${it.qty} × ${it.name}`, 5, y);
-      doc.text(`${localizedNumber(it.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - 5, y, { align: "right" });
-      y += 5;
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(...CHARCOAL_RGB);
+      doc.text(`${it.qty} × ${it.name}`, marginX, y);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${localizedNumber(it.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - marginX, y, { align: "right" });
+      y += 5.5;
     });
+
     y += 2;
-    doc.line(5, y, pageWidth - 5, y);
-    y += 6;
-    doc.setFontSize(10);
-    doc.text(tx(lang, "receiptTotalLabel"), 5, y);
-    doc.text(`${localizedNumber(receipt.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - 5, y, { align: "right" });
-    y += 6;
+    doc.setDrawColor(225, 225, 225);
+    doc.setLineWidth(0.2);
+    doc.line(marginX, y, pageWidth - marginX, y);
+    y += 4;
+
+    // Bloc total mis en évidence (fond SAND, texte INDIGO) plutôt qu'une simple ligne de texte.
+    doc.setFillColor(...SAND_RGB);
+    doc.roundedRect(marginX, y, pageWidth - marginX * 2, 12, 2, 2, "F");
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(...INDIGO_RGB);
+    doc.text(tx(lang, "receiptTotalLabel"), marginX + 3, y + 8);
+    doc.text(`${localizedNumber(receipt.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - marginX - 3, y + 8, { align: "right" });
+    y += 19;
+
+    doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
+    doc.setTextColor(140, 140, 140);
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
-    doc.text(`${tx(lang, "receiptPaymentLabel")} : ${paymentLabel}`, 5, y);
-    y += 8;
-    doc.setFontSize(9);
+    doc.text(`${tx(lang, "receiptPaymentLabel")} : ${paymentLabel}`, marginX, y);
+    y += 11;
+
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(9.5);
+    doc.setTextColor(...CLAY_RGB);
     doc.text(tx(lang, "receiptThanks"), pageWidth / 2, y, { align: "center" });
+
     return doc.output("blob");
   };
   // Partage le PDF via le partage natif du téléphone (Web Share API avec fichier),
