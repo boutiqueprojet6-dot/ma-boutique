@@ -4297,6 +4297,14 @@ EXTRA_UI.receiptSendPdf = { fr: "Envoyer en PDF", en: "Send as PDF", es: "Enviar
 EXTRA_UI.receiptPdfFallback = { fr: "Le PDF a été téléchargé — ouvrez WhatsApp et joignez-le manuellement.", en: "The PDF was downloaded — open WhatsApp and attach it manually.", es: "El PDF se ha descargado — abra WhatsApp y adjúntelo manualmente.", pt: "O PDF foi baixado — abra o WhatsApp e anexe-o manualmente.", de: "Das PDF wurde heruntergeladen – öffnen Sie WhatsApp und hängen Sie es manuell an.", it: "Il PDF è stato scaricato: apri WhatsApp e allegalo manualmente.", nl: "De PDF is gedownload — open WhatsApp en voeg het handmatig toe.", pl: "PDF został pobrany — otwórz WhatsApp i dołącz go ręcznie.", ru: "PDF скачан — откройте WhatsApp и прикрепите его вручную.", tr: "PDF indirildi — WhatsApp'ı açın ve manuel olarak ekleyin.", ar: "تم تنزيل ملف PDF — افتح واتساب وأرفقه يدوياً.", hi: "पीडीएफ डाउनलोड हो गई — व्हाट्सएप खोलें और इसे मैन्युअल रूप से जोड़ें।", bn: "পিডিএফ ডাউনলোড হয়েছে — হোয়াটসঅ্যাপ খুলুন এবং নিজে সংযুক্ত করুন।", ur: "پی ڈی ایف ڈاؤن لوڈ ہو گئی — واٹس ایپ کھولیں اور اسے دستی طور پر منسلک کریں۔", ta: "PDF பதிவிறக்கம் செய்யப்பட்டது — வாட்ஸ்அப்பைத் திறந்து கைமுறையாக இணைக்கவும்.", te: "PDF డౌన్‌లోడ్ అయింది — వాట్సాప్ తెరిచి మాన్యువల్‌గా జోడించండి.", th: "ดาวน์โหลด PDF แล้ว — เปิด WhatsApp แล้วแนบไฟล์ด้วยตนเอง", zh: "PDF已下载——请打开WhatsApp并手动附加。", ja: "PDFをダウンロードしました。WhatsAppを開いて手動で添付してください。", ko: "PDF가 다운로드되었습니다 — 왓츠앱을 열어 직접 첨부해 주세요.", id: "PDF telah diunduh — buka WhatsApp dan lampirkan secara manual.", vi: "Đã tải xuống PDF — mở WhatsApp và đính kèm thủ công.", tl: "Na-download ang PDF — buksan ang WhatsApp at i-attach ito nang manu-mano.", sw: "PDF imepakuliwa — fungua WhatsApp na uiambatanishe mwenyewe.", ha: "An sauke PDF — bude WhatsApp sannan a liƙa shi da hannu.", yo: "A ti gba PDF náà sílẹ̀ — ṣí WhatsApp kí o sì fi kún-ún fúnra rẹ.", zu: "I-PDF ilandwe — vula i-WhatsApp bese uyinamathisela ngesandla.", am: "ፒዲኤፉ ወርዷል — ዋትስአፕን ይክፈቱ እና በእጅ ያያይዙት።", bm: "PDF jiginna — WhatsApp da yɛrɛ i bolo fɛ.", wo: "PDF bi wàññi na — ubbi WhatsApp te def ko ci sa loxo." };
 EXTRA_UI.dailySummaryTimeLabel = { fr: "Heure du résumé quotidien", en: "Daily summary time", es: "Hora del resumen diario", pt: "Horário do resumo diário", de: "Uhrzeit der täglichen Zusammenfassung", it: "Orario del riepilogo giornaliero", nl: "Tijdstip van het dagelijkse overzicht", pl: "Godzina codziennego podsumowania", ru: "Время ежедневной сводки", tr: "Günlük özet saati", ar: "وقت الملخص اليومي", hi: "दैनिक सारांश का समय", bn: "দৈনিক সারাংশের সময়", ur: "روزانہ خلاصے کا وقت", ta: "தினசரி சுருக்கத்தின் நேரம்", te: "రోజువారీ సారాంశం సమయం", th: "เวลาสรุปประจำวัน", zh: "每日摘要时间", ja: "日次サマリーの時間", ko: "일일 요약 시간", id: "Waktu ringkasan harian", vi: "Giờ nhận tóm tắt hàng ngày", tl: "Oras ng pang-araw-araw na buod", sw: "Muda wa muhtasari wa kila siku", ha: "Lokacin takaitaccen bayani na yau da kullun", yo: "Àkókò àkótán ojoojúmọ́", zu: "Isikhathi sesifinyezo sansuku zonke", am: "የዕለታዊ ማጠቃለያ ሰዓት", bm: "Don-don kunnafoni waati", wo: "Waxtu bataaxal bis bu nekk" };
 EXTRA_UI.dailySummaryTimeDesc = { fr: "Vous recevrez une notification avec le résumé de la veille à cette heure chaque jour.", en: "You'll receive a notification with yesterday's summary at this time every day.", es: "Recibirá una notificación con el resumen del día anterior a esta hora cada día.", pt: "Você receberá uma notificação com o resumo do dia anterior neste horário todos os dias.", de: "Sie erhalten jeden Tag zu dieser Uhrzeit eine Benachrichtigung mit der Zusammenfassung des Vortages.", it: "Riceverai una notifica con il riepilogo del giorno precedente a questo orario ogni giorno.", nl: "U ontvangt elke dag op dit tijdstip een melding met de samenvatting van gisteren.", pl: "Każdego dnia o tej porze otrzymasz powiadomienie z podsumowaniem poprzedniego dnia.", ru: "Каждый день в это время вы будете получать уведомление со сводкой за предыдущий день.", tr: "Her gün bu saatte bir önceki günün özetiyle bildirim alacaksınız.", ar: "ستتلقى إشعاراً بملخص اليوم السابق في هذا الوقت كل يوم.", hi: "हर दिन इस समय पर आपको पिछले दिन के सारांश की सूचना मिलेगी।", bn: "প্রতিদিন এই সময়ে গতকালের সারাংশ সহ একটি নোটিফিকেশন পাবেন।", ur: "ہر روز اس وقت پچھلے دن کے خلاصے کے ساتھ اطلاع موصول ہوگی۔", ta: "ஒவ்வொரு நாளும் இந்த நேரத்தில் முந்தைய நாளின் சுருக்கத்துடன் அறிவிப்பு பெறுவீர்கள்.", te: "ప్రతిరోజూ ఈ సమయంలో మునుపటి రోజు సారాంశంతో నోటిఫికేషన్ అందుతుంది.", th: "คุณจะได้รับการแจ้งเตือนพร้อมสรุปของเมื่อวานในเวลานี้ทุกวัน", zh: "您每天都会在此时间收到前一天摘要的通知。", ja: "毎日この時間に前日の要約の通知が届きます。", ko: "매일 이 시간에 전날 요약 알림을 받게 됩니다.", id: "Anda akan menerima notifikasi berisi ringkasan kemarin pada waktu ini setiap hari.", vi: "Bạn sẽ nhận được thông báo tóm tắt của ngày hôm trước vào giờ này mỗi ngày.", tl: "Makakatanggap ka ng abiso na may buod ng kahapon sa oras na ito araw-araw.", sw: "Utapokea arifa yenye muhtasari wa jana kwa wakati huu kila siku.", ha: "Za ku karɓi sanarwa tare da taƙaitaccen bayanin jiya a wannan lokacin kowace rana.", yo: "Ìwọ yóò gba ìfitónilétí pẹ̀lú àkótán àná ní àkókò yìí lójoojúmọ́.", zu: "Uzothola isaziso esinesifinyezo sayizolo ngalesi sikhathi nsuku zonke.", am: "በየቀኑ በዚህ ሰዓት የትላንትናውን ማጠቃለያ የያዘ ማሳወቂያ ይደርስዎታል።", bm: "I bɛna kunnafoni sɔrɔ ni kunun kunnafoni ye waati in na don o don.", wo: "Dinga jot benn xibaar ak bataaxalu démb ci waxtu wii bis bu nekk." };
+EXTRA_UI.receiptItemsHeader = { fr: "QTÉ × ARTICLE", en: "QTY × ITEM", es: "CANT. × ARTÍCULO", pt: "QTD × ARTIGO", de: "ANZ. × ARTIKEL", it: "QTÀ × ARTICOLO", nl: "AANTAL × ARTIKEL", pl: "ILOŚĆ × PRODUKT", ru: "КОЛ-ВО × ТОВАР", tr: "ADET × ÜRÜN", ar: "الكمية × الصنف", hi: "मात्रा × वस्तु", bn: "পরিমাণ × পণ্য", ur: "مقدار × شے", ta: "அளவு × பொருள்", te: "పరిమాణం × వస్తువు", th: "จำนวน × สินค้า", zh: "数量 × 商品", ja: "数量 × 商品", ko: "수량 × 품목", id: "JML × BARANG", vi: "SL × MẶT HÀNG", tl: "DAMI × ITEM", sw: "IDADI × BIDHAA", ha: "ADADI × KAYA", yo: "IYE × OHUN", zu: "INANI × IMPAHLA", am: "ብዛት × ዕቃ", bm: "HAKƐ × FƐN", wo: "LIMAM × JUMTUKAAY" };
+EXTRA_UI.receiptPriceHeader = { fr: "PRIX", en: "PRICE", es: "PRECIO", pt: "PREÇO", de: "PREIS", it: "PREZZO", nl: "PRIJS", pl: "CENA", ru: "ЦЕНА", tr: "FİYAT", ar: "السعر", hi: "मूल्य", bn: "মূল্য", ur: "قیمت", ta: "விலை", te: "ధర", th: "ราคา", zh: "价格", ja: "価格", ko: "가격", id: "HARGA", vi: "GIÁ", tl: "PRESYO", sw: "BEI", ha: "FARASHI", yo: "OWÓ", zu: "INTENGO", am: "ዋጋ", bm: "SƆNGƆ", wo: "NJËG" };
+EXTRA_UI.receiptTicketLabel = { fr: "Ticket", en: "Ticket", es: "Ticket", pt: "Recibo nº", de: "Beleg-Nr.", it: "Scontrino", nl: "Bon", pl: "Paragon", ru: "Чек №", tr: "Fiş No", ar: "التذكرة", hi: "टिकट", bn: "টিকিট", ur: "ٹکٹ", ta: "டிக்கெட்", te: "టికెట్", th: "เลขที่ใบเสร็จ", zh: "单号", ja: "伝票番号", ko: "영수증 번호", id: "Nomor struk", vi: "Số hóa đơn", tl: "Resibo blg.", sw: "Risiti Na.", ha: "Lambar rasit", yo: "Nọ́mbà gbàrà", zu: "Inombolo yerisidi", am: "ቁጥር", bm: "Sɛbɛn nimɔrɔ", wo: "Nimero resi" };
+EXTRA_UI.receiptClientLabel = { fr: "Client", en: "Customer", es: "Cliente", pt: "Cliente", de: "Kunde", it: "Cliente", nl: "Klant", pl: "Klient", ru: "Клиент", tr: "Müşteri", ar: "العميل", hi: "ग्राहक", bn: "গ্রাহক", ur: "گاہک", ta: "வாடிக்கையாளர்", te: "కస్టమర్", th: "ลูกค้า", zh: "客户", ja: "お客様", ko: "고객", id: "Pelanggan", vi: "Khách hàng", tl: "Customer", sw: "Mteja", ha: "Abokin ciniki", yo: "Oníbàárà", zu: "Ikhasimende", am: "ደንበኛ", bm: "Kiliyanso", wo: "Kiliyaan" };
+EXTRA_UI.receiptAmountGivenLabel = { fr: "Montant remis", en: "Amount given", es: "Monto entregado", pt: "Valor entregue", de: "Gegebener Betrag", it: "Importo versato", nl: "Gegeven bedrag", pl: "Kwota wpłacona", ru: "Внесённая сумма", tr: "Verilen tutar", ar: "المبلغ المدفوع", hi: "दी गई राशि", bn: "প্রদত্ত পরিমাণ", ur: "دی گئی رقم", ta: "கொடுத்த தொகை", te: "ఇచ్చిన మొత్తం", th: "จำนวนเงินที่รับมา", zh: "实收金额", ja: "お預かり金額", ko: "받은 금액", id: "Jumlah diberikan", vi: "Số tiền đưa", tl: "Halagang ibinigay", sw: "Kiasi kilichotolewa", ha: "Adadin da aka bayar", yo: "Iye tí a fún", zu: "Inani elinikeziwe", am: "የተሰጠ መጠን", bm: "Wari dira", wo: "Limam bi joxe" };
+EXTRA_UI.receiptGeneratedBy = { fr: "Ce reçu a été généré par Boutipro, votre solution de gestion de point de vente.", en: "This receipt was generated by Boutipro, your point-of-sale management solution.", es: "Este recibo fue generado por Boutipro, su solución de gestión de punto de venta.", pt: "Este recibo foi gerado pelo Boutipro, a sua solução de gestão de ponto de venda.", de: "Dieser Beleg wurde von Boutipro erstellt, Ihrer Kassensystem-Lösung.", it: "Questa ricevuta è stata generata da Boutipro, la tua soluzione di gestione punto vendita.", nl: "Deze bon is gegenereerd door Boutipro, uw kassasysteem.", pl: "Ten paragon został wygenerowany przez Boutipro, Twoje rozwiązanie do zarządzania punktem sprzedaży.", ru: "Этот чек сформирован приложением Boutipro — вашим решением для управления точкой продаж.", tr: "Bu fiş, satış noktası yönetim çözümünüz Boutipro tarafından oluşturulmuştur.", ar: "تم إنشاء هذا الإيصال بواسطة Boutipro، حل إدارة نقطة البيع الخاص بك.", hi: "यह रसीद Boutipro द्वारा बनाई गई है, आपका पॉइंट-ऑफ-सेल प्रबंधन समाधान।", bn: "এই রসিদটি তৈরি করেছে Boutipro, আপনার পয়েন্ট-অফ-সেল ব্যবস্থাপনা সমাধান।", ur: "یہ رسید Boutipro نے بنائی ہے، آپ کا پوائنٹ آف سیل مینجمنٹ حل۔", ta: "இந்த ரசீது Boutipro ஆல் உருவாக்கப்பட்டது, உங்கள் விற்பனை மேலாண்மை தீர்வு.", te: "ఈ రసీదు Boutipro ద్వారా రూపొందించబడింది, మీ పాయింట్-ఆఫ్-సేల్ నిర్వహణ పరిష్కారం.", th: "ใบเสร็จนี้สร้างขึ้นโดย Boutipro โซลูชันจัดการระบบขายหน้าร้านของคุณ", zh: "本收据由Boutipro生成，您的收银管理解决方案。", ja: "このレシートはPOS管理ソリューションBoutiproによって発行されました。", ko: "이 영수증은 POS 관리 솔루션 Boutipro에서 생성되었습니다.", id: "Struk ini dibuat oleh Boutipro, solusi manajemen kasir Anda.", vi: "Hóa đơn này được tạo bởi Boutipro, giải pháp quản lý bán hàng của bạn.", tl: "Ang resibong ito ay nabuo ng Boutipro, ang inyong solusyon sa pamamahala ng point-of-sale.", sw: "Risiti hii imetengenezwa na Boutipro, suluhisho lako la usimamizi wa mauzo.", ha: "Wannan rasit an samar da ita ta Boutipro, maganin sarrafa tallace-tallace naka.", yo: "Boutipro ni ó ṣe gbàrà yìí, ojútùú ìṣàkóso ibi títà rẹ.", zu: "Le risidi yenziwe yi-Boutipro, isixazululo sakho sokuphatha indawo yokuthengisa.", am: "ይህ ደረሰኝ በBoutipro ተፈጥሯል፣ የሽያጭ ነጥብ አስተዳደር መፍትሔዎ።", bm: "Sɛbɛn nin dilannen Boutipro fɛ, i ka feereyɔrɔ kunnafoni ɲɛnabɔbaga.", wo: "Resi bii Boutipro moo ko sos, sa solisioŋ di sàmba sa jaaykat." };
+EXTRA_UI.receiptScanToVisit = { fr: "Scannez pour visiter", en: "Scan to visit", es: "Escanee para visitar", pt: "Digitalize para visitar", de: "Scannen zum Besuchen", it: "Scansiona per visitare", nl: "Scan om te bezoeken", pl: "Zeskanuj, aby odwiedzić", ru: "Отсканируйте, чтобы посетить", tr: "Ziyaret etmek için tarayın", ar: "امسح للزيارة", hi: "देखने के लिए स्कैन करें", bn: "দেখতে স্ক্যান করুন", ur: "دیکھنے کے لیے اسکین کریں", ta: "பார்வையிட ஸ்கேன் செய்யவும்", te: "సందర్శించడానికి స్కాన్ చేయండి", th: "สแกนเพื่อเยี่ยมชม", zh: "扫码访问", ja: "スキャンしてアクセス", ko: "스캔하여 방문", id: "Pindai untuk kunjungi", vi: "Quét để truy cập", tl: "I-scan para bisitahin", sw: "Changanua kutembelea", ha: "Duba don ziyarta", yo: "Ṣàyẹ̀wò láti ṣàbẹ̀wò", zu: "Skena ukuze uvakashele", am: "ለመጎብኘት ይቃኙ", bm: "Scan walasa taama", wo: "Scan ngir seetaan" };
+EXTRA_UI.receiptPageLabel = { fr: "Page", en: "Page", es: "Página", pt: "Página", de: "Seite", it: "Pagina", nl: "Pagina", pl: "Strona", ru: "Стр.", tr: "Sayfa", ar: "صفحة", hi: "पृष्ठ", bn: "পৃষ্ঠা", ur: "صفحہ", ta: "பக்கம்", te: "పేజీ", th: "หน้า", zh: "第", ja: "ページ", ko: "페이지", id: "Halaman", vi: "Trang", tl: "Pahina", sw: "Ukurasa", ha: "Shafi", yo: "Ojú ìwé", zu: "Ikhasi", am: "ገጽ", bm: "Ɲɛ", wo: "Xët" };
 EXTRA_UI.receiptPhoneLabel = { fr: "Numéro WhatsApp du client (optionnel)", en: "Customer's WhatsApp number (optional)", es: "Número de WhatsApp del cliente (opcional)", pt: "Número de WhatsApp do cliente (opcional)", de: "WhatsApp-Nummer des Kunden (optional)", it: "Numero WhatsApp del cliente (facoltativo)", nl: "WhatsApp-nummer van de klant (optioneel)", pl: "Numer WhatsApp klienta (opcjonalnie)", ru: "Номер WhatsApp клиента (необязательно)", tr: "Müşterinin WhatsApp numarası (isteğe bağlı)", ar: "رقم واتساب العميل (اختياري)", hi: "ग्राहक का व्हाट्सएप नंबर (वैकल्पिक)", bn: "গ্রাহকের হোয়াটসঅ্যাপ নম্বর (ঐচ্ছিক)", ur: "گاہک کا واٹس ایپ نمبر (اختیاری)", ta: "வாடிக்கையாளரின் வாட்ஸ்அப் எண் (விருப்பத்தேர்வு)", te: "కస్టమర్ వాట్సాప్ నంబర్ (ఐచ్ఛికం)", th: "เบอร์ WhatsApp ของลูกค้า (ไม่บังคับ)", zh: "客户的WhatsApp号码（可选）", ja: "顧客のWhatsApp番号（任意）", ko: "고객의 왓츠앱 번호 (선택 사항)", id: "Nomor WhatsApp pelanggan (opsional)", vi: "Số WhatsApp của khách hàng (không bắt buộc)", tl: "Numero ng WhatsApp ng customer (opsyonal)", sw: "Nambari ya WhatsApp ya mteja (si lazima)", ha: "Lambar WhatsApp na abokin ciniki (ba dole ba)", yo: "Nọ́mbà WhatsApp oníbàárà (kìí ṣe dandan)", zu: "Inombolo ye-WhatsApp yekhasimende (akuphoqelekile)", am: "የደንበኛ የWhatsApp ቁጥር (አማራጭ)", bm: "Kiliyanso ka WhatsApp nimewo (fɛɛrɛ)", wo: "Limeer WhatsApp bu kiliyaan bi (du obligatoire)" };
 EXTRA_UI.receiptSendWhatsApp = { fr: "Envoyer le reçu par WhatsApp", en: "Send receipt via WhatsApp", es: "Enviar el recibo por WhatsApp", pt: "Enviar o recibo pelo WhatsApp", de: "Beleg per WhatsApp senden", it: "Invia la ricevuta via WhatsApp", nl: "Bon versturen via WhatsApp", pl: "Wyślij paragon przez WhatsApp", ru: "Отправить чек через WhatsApp", tr: "Fişi WhatsApp ile gönder", ar: "إرسال الإيصال عبر واتساب", hi: "व्हाट्सएप से रसीद भेजें", bn: "হোয়াটসঅ্যাপে রসিদ পাঠান", ur: "واٹس ایپ سے رسید بھیجیں", ta: "வாட்ஸ்அப் வழியாக ரசீதை அனுப்பு", te: "వాట్సాప్ ద్వారా రసీదు పంపండి", th: "ส่งใบเสร็จทาง WhatsApp", zh: "通过WhatsApp发送收据", ja: "WhatsAppでレシートを送る", ko: "왓츠앱으로 영수증 보내기", id: "Kirim struk via WhatsApp", vi: "Gửi hóa đơn qua WhatsApp", tl: "Ipadala ang resibo sa WhatsApp", sw: "Tuma risiti kupitia WhatsApp", ha: "Aika rasit ta WhatsApp", yo: "Fi gbàrà ránṣẹ́ nípasẹ̀ WhatsApp", zu: "Thumela irisidi nge-WhatsApp", am: "ደረሰኙን በ WhatsApp ይላኩ", bm: "Ci sɛbɛn ci WhatsApp fɛ", wo: "Yónni resi bi ci WhatsApp" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
@@ -7647,89 +7655,231 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   // Génère le même reçu, mais en PDF (format étroit façon ticket de caisse, 80mm) —
   // même bibliothèque jsPDF que les autres exports PDF de l'app, chargée à la demande.
+  // Reçu pleine page (A4), inspiré du modèle fourni par le boutiquier : badge/logo
+  // rond, nom de boutique en majuscules, ligne Date/Ticket/Client, tableau des
+  // articles, total dans un pavé coloré, détail du paiement, bloc de marque Boutipro
+  // cliquable avec QR code, pied de page "Page X of Y".
   const generateReceiptPdfBlob = async (receipt) => {
     const { default: jsPDF } = await import("jspdf");
-    const doc = new jsPDF({ unit: "mm", format: [80, 190] });
-    const pageWidth = 80;
-    const marginX = 6;
-    // Couleurs de la marque Boutipro (identiques à l'app : INDIGO, CLAY, SAND,
-    // CHARCOAL) — pour que le reçu reste reconnaissable même imprimé/en PDF, pas
-    // seulement à l'écran.
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+    const pageW = 210, pageH = 297;
+    const marginX = 18;
+    const contentW = pageW - marginX * 2;
     const INDIGO_RGB = [27, 58, 92];
     const CLAY_RGB = [184, 86, 47];
-    const SAND_RGB = [243, 234, 216];
     const CHARCOAL_RGB = [43, 36, 32];
+    const GREEN_RGB = [22, 130, 70];
+    const MUTED_RGB = [130, 130, 130];
+    const cur = CURRENT_CURRENCY.symbol;
+    const fmt = (n) => `${localizedNumber(n)} ${cur}`;
+    const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
 
-    // ---- Bandeau d'en-tête avec badge/logo (pas d'image externe à charger : un
-    // badge vectoriel dessiné directement est plus fiable qu'un fichier image qui
-    // pourrait échouer à charger, et reste net à n'importe quelle taille d'impression).
-    doc.setFillColor(...INDIGO_RGB);
-    doc.rect(0, 0, pageWidth, 28, "F");
-    doc.setFillColor(255, 255, 255);
-    doc.roundedRect(pageWidth / 2 - 9, 5, 18, 18, 4, 4, "F");
-    doc.setTextColor(...INDIGO_RGB);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    doc.text("B", pageWidth / 2, 16.3, { align: "center" });
-    doc.setTextColor(255, 255, 255);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(7);
-    doc.text(t(lang, "appName") || "Boutipro", pageWidth / 2, 25.5, { align: "center" });
+    // QR code vers le site : généré via la bibliothèque "qrcode" (encodeur pur, sans
+    // DOM), chargée à la demande comme jsPDF. Si elle n'est pas installée dans ce
+    // projet, on continue sans QR plutôt que de faire échouer tout le reçu — le lien
+    // texte cliquable reste affiché dans tous les cas.
+    let qrDataUrl = null;
+    try {
+      const qrcodeModule = await import("qrcode");
+      const QRCode = qrcodeModule.default || qrcodeModule;
+      qrDataUrl = await QRCode.toDataURL("https://www.boutipro.com", { margin: 0, width: 240 });
+    } catch (e) {
+      qrDataUrl = null;
+    }
 
-    let y = 36;
-    doc.setTextColor(...CHARCOAL_RGB);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.text(shopName || t(lang, "appName"), pageWidth / 2, y, { align: "center" });
-    y += 5;
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8);
-    doc.setTextColor(140, 140, 140);
-    doc.text(new Date(receipt.date).toLocaleString(), pageWidth / 2, y, { align: "center" });
-    y += 5;
+    // ---- Hauteurs réservées pour tenter de tout faire tenir sur UNE page : on ne
+    // bascule en plusieurs pages QUE si même la taille de ligne minimale lisible ne
+    // suffit pas pour le nombre d'articles de cette vente.
+    const HEADER_H = 60;
+    const META_H = 16;
+    const TABLE_HEAD_H = 8;
+    const TOTAL_BLOCK_H = receipt.payment === "cash" && receipt.received != null ? 46 : 30;
+    const FOOTER_H = 30;
+    const BOTTOM_LINE_H = 10;
+    const availableForItems = pageH - HEADER_H - META_H - TABLE_HEAD_H - TOTAL_BLOCK_H - FOOTER_H - BOTTOM_LINE_H;
+    const DEFAULT_ROW_H = 8, MIN_ROW_H = 5;
+    const neededH = receipt.items.length * DEFAULT_ROW_H;
+    const rowH = neededH <= availableForItems ? DEFAULT_ROW_H : Math.max(MIN_ROW_H, availableForItems / receipt.items.length);
+    const itemFontSize = rowH >= 7 ? 10 : rowH >= 6 ? 9 : 8;
+    const itemsPerPage = Math.max(1, Math.floor(availableForItems / rowH));
+    const totalPages = Math.max(1, Math.ceil(receipt.items.length / itemsPerPage));
 
-    doc.setDrawColor(...CLAY_RGB);
-    doc.setLineWidth(0.6);
-    doc.line(marginX, y, pageWidth - marginX, y);
-    y += 7;
+    for (let page = 0; page < totalPages; page++) {
+      if (page > 0) doc.addPage();
+      let y = 20;
 
-    doc.setFontSize(9);
-    receipt.items.forEach((it) => {
+      // ---- En-tête : badge rond + nom boutique + téléphone ----
+      doc.setFillColor(...INDIGO_RGB);
+      doc.circle(pageW / 2, y + 7, 7, "F");
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.text("B", pageW / 2, y + 9.5, { align: "center" });
+      y += 20;
+      doc.setTextColor(...CHARCOAL_RGB);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(15);
+      doc.text((shopName || t(lang, "appName")).toUpperCase(), pageW / 2, y, { align: "center" });
+      y += 6;
+      if (shopPhone) {
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(...MUTED_RGB);
+        doc.text(shopPhone, pageW / 2, y, { align: "center" });
+        y += 6;
+      } else {
+        y += 2;
+      }
+
+      doc.setDrawColor(210, 210, 210);
+      doc.setLineWidth(0.3);
+      doc.setLineDashPattern([1.2, 1.2], 0);
+      doc.line(marginX, y, pageW - marginX, y);
+      doc.setLineDashPattern([], 0);
+      y += 10;
+
+      // ---- Ligne Date (gauche) / Ticket + Client (droite) ----
+      doc.setFontSize(9.5);
       doc.setFont("helvetica", "normal");
       doc.setTextColor(...CHARCOAL_RGB);
-      doc.text(`${it.qty} × ${it.name}`, marginX, y);
+      doc.text("Date :", marginX, y);
       doc.setFont("helvetica", "bold");
-      doc.text(`${localizedNumber(it.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - marginX, y, { align: "right" });
-      y += 5.5;
-    });
+      doc.text(new Date(receipt.date).toLocaleDateString(), marginX + doc.getTextWidth("Date : ") + 1, y);
+      if (receipt.ticketId) {
+        doc.setFont("helvetica", "normal");
+        const ticketLabel = `${tx(lang, "receiptTicketLabel")} : `;
+        const ticketValue = `#${receipt.ticketId.replace(/[^0-9a-zA-Z]/g, "").slice(-6)}`;
+        doc.text(ticketLabel, pageW - marginX - doc.getTextWidth(ticketValue), y, { align: "left" });
+        doc.setFont("helvetica", "bold");
+        doc.text(ticketValue, pageW - marginX, y, { align: "right" });
+      }
+      if (receipt.customer) {
+        y += 5.5;
+        doc.setFont("helvetica", "normal");
+        const clientLabel = `${tx(lang, "receiptClientLabel")} : `;
+        const clientValue = receipt.customer;
+        doc.text(clientLabel, pageW - marginX - doc.getTextWidth(clientValue), y, { align: "left" });
+        doc.setFont("helvetica", "bold");
+        doc.text(clientValue, pageW - marginX, y, { align: "right" });
+      }
+      y += 10;
 
-    y += 2;
-    doc.setDrawColor(225, 225, 225);
-    doc.setLineWidth(0.2);
-    doc.line(marginX, y, pageWidth - marginX, y);
-    y += 4;
+      // ---- Tableau des articles ----
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8);
+      doc.setTextColor(...MUTED_RGB);
+      doc.text(tx(lang, "receiptItemsHeader"), marginX, y);
+      doc.text(tx(lang, "receiptPriceHeader"), pageW - marginX, y, { align: "right" });
+      y += 3;
+      doc.setDrawColor(220, 220, 220);
+      doc.setLineWidth(0.2);
+      doc.line(marginX, y, pageW - marginX, y);
+      y += rowH - 2;
 
-    // Bloc total mis en évidence (fond SAND, texte INDIGO) plutôt qu'une simple ligne de texte.
-    doc.setFillColor(...SAND_RGB);
-    doc.roundedRect(marginX, y, pageWidth - marginX * 2, 12, 2, 2, "F");
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.setTextColor(...INDIGO_RGB);
-    doc.text(tx(lang, "receiptTotalLabel"), marginX + 3, y + 8);
-    doc.text(`${localizedNumber(receipt.total)} ${CURRENT_CURRENCY.symbol}`, pageWidth - marginX - 3, y + 8, { align: "right" });
-    y += 19;
+      const startIdx = page * itemsPerPage;
+      const endIdx = Math.min(receipt.items.length, startIdx + itemsPerPage);
+      doc.setFontSize(itemFontSize);
+      for (let idx = startIdx; idx < endIdx; idx++) {
+        const it = receipt.items[idx];
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(...CHARCOAL_RGB);
+        doc.text(`${it.qty}×  ${it.name}`, marginX, y);
+        doc.setFont("helvetica", "bold");
+        doc.text(fmt(it.total), pageW - marginX, y, { align: "right" });
+        y += rowH;
+      }
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8);
-    doc.setTextColor(140, 140, 140);
-    const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
-    doc.text(`${tx(lang, "receiptPaymentLabel")} : ${paymentLabel}`, marginX, y);
-    y += 11;
+      // ---- Total / paiement / remerciement : seulement sur la DERNIÈRE page ----
+      if (page === totalPages - 1) {
+        y += 3;
+        doc.setDrawColor(210, 210, 210);
+        doc.setLineWidth(0.3);
+        doc.setLineDashPattern([1.2, 1.2], 0);
+        doc.line(marginX, y, pageW - marginX, y);
+        doc.setLineDashPattern([], 0);
+        y += 11;
 
-    doc.setFont("helvetica", "italic");
-    doc.setFontSize(9.5);
-    doc.setTextColor(...CLAY_RGB);
-    doc.text(tx(lang, "receiptThanks"), pageWidth / 2, y, { align: "center" });
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12.5);
+        doc.setTextColor(...CHARCOAL_RGB);
+        doc.text(tx(lang, "receiptTotalLabel").toUpperCase(), marginX, y);
+        const totalText = fmt(receipt.total);
+        doc.setFontSize(11);
+        const totalW = doc.getTextWidth(totalText) + 10;
+        doc.setFillColor(...INDIGO_RGB);
+        doc.roundedRect(pageW - marginX - totalW, y - 6.5, totalW, 9.5, 2, 2, "F");
+        doc.setTextColor(255, 255, 255);
+        doc.text(totalText, pageW - marginX - totalW / 2, y, { align: "center" });
+        y += 11;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        doc.setTextColor(...CHARCOAL_RGB);
+        doc.text(tx(lang, "receiptPaymentLabel"), marginX, y);
+        doc.setFont("helvetica", "bold");
+        doc.text(paymentLabel, pageW - marginX, y, { align: "right" });
+        y += 7;
+
+        if (receipt.payment === "cash" && receipt.received != null) {
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(...CHARCOAL_RGB);
+          doc.text(tx(lang, "receiptAmountGivenLabel"), marginX, y);
+          doc.text(fmt(receipt.received), pageW - marginX, y, { align: "right" });
+          y += 7;
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(...GREEN_RGB);
+          doc.text(t(lang, "change"), marginX, y);
+          doc.text(fmt(Math.max(0, receipt.received - receipt.total)), pageW - marginX, y, { align: "right" });
+          y += 9;
+        } else {
+          y += 2;
+        }
+
+        doc.setFont("helvetica", "italic");
+        doc.setFontSize(10);
+        doc.setTextColor(...CLAY_RGB);
+        doc.text(tx(lang, "receiptThanks"), pageW / 2, y, { align: "center" });
+      }
+
+      // ---- Pied de page marque Boutipro (sur chaque page) ----
+      const footY = pageH - 34;
+      doc.setFillColor(243, 245, 248);
+      doc.rect(0, footY, pageW, 34, "F");
+      doc.setFillColor(...INDIGO_RGB);
+      doc.roundedRect(marginX, footY + 8, 9, 9, 2, 2, "F");
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(6.5);
+      doc.text("BP", marginX + 4.5, footY + 13.3, { align: "center" });
+      doc.setTextColor(...CHARCOAL_RGB);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(10);
+      doc.text(t(lang, "appName") || "Boutipro", marginX + 13, footY + 10.5);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.5);
+      doc.setTextColor(...MUTED_RGB);
+      const genByLines = doc.splitTextToSize(tx(lang, "receiptGeneratedBy"), contentW - 52);
+      doc.text(genByLines, marginX + 13, footY + 15.5);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.5);
+      doc.setTextColor(...MUTED_RGB);
+      doc.text(tx(lang, "receiptScanToVisit"), pageW - marginX - (qrDataUrl ? 24 : 0), footY + 8, { align: "right" });
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8.5);
+      doc.setTextColor(...INDIGO_RGB);
+      // Lien cliquable (pas juste du texte) vers le site, via textWithLink.
+      doc.textWithLink("www.boutipro.com", pageW - marginX - (qrDataUrl ? 24 : 0), footY + 13, { align: "right", url: "https://www.boutipro.com" });
+      if (qrDataUrl) {
+        doc.addImage(qrDataUrl, "PNG", pageW - marginX - 20, footY + 16, 20, 20);
+      }
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(...MUTED_RGB);
+      doc.text(`${shopName || t(lang, "appName")} — ${tx(lang, "receiptHeading")}`, marginX, pageH - 8);
+      doc.text(`${tx(lang, "receiptPageLabel")} ${page + 1} / ${totalPages}`, pageW - marginX, pageH - 8, { align: "right" });
+    }
 
     return doc.output("blob");
   };
@@ -10943,7 +11093,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow, phone: cart.phone });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim() });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -11245,7 +11395,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         playSound("success");
         triggerHaptic("success");
         setSaleSuccessOverlay({ amount: total, id: transactionId });
-        setPendingReceipt({ items: resolved.map((r) => ({ name: r.product.name, qty: r.qty, total: r.qty * r.unitPrice })), total, payment: action.payment, date: dateNow, phone: action.phone });
+        setPendingReceipt({ items: resolved.map((r) => ({ name: r.product.name, qty: r.qty, total: r.qty * r.unitPrice })), total, payment: action.payment, date: dateNow, phone: action.phone, received: receivedNum, ticketId: transactionId, customer: (action.customer || "").trim() });
         return { ok: true };
       }
       return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
