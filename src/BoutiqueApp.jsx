@@ -8614,6 +8614,61 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const [showAllTopProducts, setShowAllTopProducts] = useState(false);
   const contentScrollRef = useRef(null);
+  // ---- Navigation par glissement entre onglets (mobile uniquement) ----
+  // Glisser vers la gauche = onglet suivant dans cet ordre, vers la droite = onglet
+  // précédent — même ordre que la barre du bas (Accueil, Vente, Stock, Dettes) suivie
+  // des onglets du menu "Plus" (Historique, Stats, Assistant IA, Employés, Comparaison
+  // boutiques, Rapport caisse, Caisse, Calculatrice), dans le même ordre que ce menu.
+  // Recalculé à chaque rendu : les onglets masqués selon les permissions/le rôle de
+  // l'employé connecté le sont aussi pour le glissement, jamais de saut vers un
+  // onglet auquel l'utilisateur n'a pas accès.
+  const swipeTabOrder = [
+    { id: "dashboard", hidden: false },
+    { id: "sale", hidden: !hasBasePermission("sell") },
+    { id: "stock", hidden: !hasPermission("viewStock") },
+    { id: "debts", hidden: !hasPermission("viewDebts") },
+    { id: "history", hidden: false },
+    { id: "stats", hidden: !hasPermission("viewStats") },
+    { id: "ai", hidden: false },
+    { id: "employees", hidden: !!activeEmployee },
+    { id: "shopcompare", hidden: !hasFeatureAccess("shopComparison") || !!activeEmployee },
+    { id: "cashreport", hidden: !hasFeatureAccess("perEmployeeCashReport") || !!activeEmployee },
+    { id: "cash", hidden: !hasPermission("viewCash") },
+    { id: "calculator", hidden: false },
+  ].filter((it) => !it.hidden).map((it) => it.id);
+  const swipeStartRef = useRef(null);
+  const handleTabSwipeStart = (e) => {
+    if (isDesktop || e.touches.length !== 1) { swipeStartRef.current = null; return; }
+    // Ignore un geste commencé sur un champ de saisie ou un élément qui gère son propre
+    // glissement horizontal (marqué data-no-swipe), pour ne jamais interférer avec une
+    // interaction plus spécifique (curseur de texte, carrousel interne, etc.).
+    const target = e.target;
+    if (target && target.closest && target.closest("input, textarea, select, [data-no-swipe]")) {
+      swipeStartRef.current = null;
+      return;
+    }
+    const touch = e.touches[0];
+    swipeStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+  const handleTabSwipeEnd = (e) => {
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+    if (!start || isDesktop) return;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    const MIN_SWIPE_DIST = 70;
+    if (Math.abs(dx) < MIN_SWIPE_DIST) return;
+    // Doit être nettement plus horizontal que vertical, pour ne jamais se déclencher
+    // pendant un simple défilement vertical de la liste (même avec un peu de dérive).
+    if (Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (isPhotoReturnGuardActive()) return;
+    const idx = swipeTabOrder.indexOf(tab);
+    if (idx === -1) return;
+    const nextIdx = idx + (dx < 0 ? 1 : -1);
+    if (nextIdx < 0 || nextIdx >= swipeTabOrder.length) return; // aux extrémités, ne boucle pas
+    setTab(swipeTabOrder[nextIdx]);
+  };
   const [showPaymentShortcut, setShowPaymentShortcut] = useState(false);
   // Le résumé du panier + le paiement s'affichent désormais dans une fenêtre dédiée
   // (ouverte par le bouton flottant "Voir la vente"), plutôt qu'en faisant défiler la
@@ -13132,7 +13187,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           messages IA) sont maintenant affichées directement dans les onglets Vente et
           Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
           uniquement quand la limite est réellement atteinte. */}
-      <div data-kbscroll="true" ref={contentScrollRef} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, minHeight: 0, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined }}>
+      <div data-kbscroll="true" ref={contentScrollRef} onTouchStart={handleTabSwipeStart} onTouchEnd={handleTabSwipeEnd} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, minHeight: 0, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined }}>
       {/* pb-56 (au lieu de pb-40) : laisse assez d'espace en bas pour que le dernier élément
           d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
           "Démasquer les données" quand on scrolle tout en bas. */}
