@@ -8636,12 +8636,73 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     { id: "cash", hidden: !hasPermission("viewCash") },
     { id: "calculator", hidden: false },
   ].filter((it) => !it.hidden).map((it) => it.id);
+  // ---- Largeur du panneau latéral bleu, redimensionnable à la souris (desktop) ----
+  // Mémorisée dans localStorage pour rester d'une session à l'autre ; limites
+  // raisonnables (160 à 320px) pour ne jamais pouvoir le réduire à rien ni envahir
+  // tout l'écran.
+  const SIDEBAR_MIN_W = 160, SIDEBAR_MAX_W = 320;
+  const [sidebarWidth, setSidebarWidth] = useState(() => {
+    try {
+      if (typeof window === "undefined" || !window.localStorage) return 220;
+      const saved = parseInt(window.localStorage.getItem("boutipro_sidebar_width"), 10);
+      return !isNaN(saved) && saved >= SIDEBAR_MIN_W && saved <= SIDEBAR_MAX_W ? saved : 220;
+    } catch (e) {
+      return 220;
+    }
+  });
+  const sidebarWidthLiveRef = useRef(sidebarWidth);
+  useEffect(() => { sidebarWidthLiveRef.current = sidebarWidth; }, [sidebarWidth]);
+  const handleSidebarResizeStart = (e) => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const startWidth = sidebarWidth;
+    const onMove = (ev) => {
+      // Le panneau a "zoom: 1.35" appliqué (voir son style) : un pixel de souris
+      // déplacé à l'écran correspond donc à 1 / 1.35 pixel de largeur CSS réelle —
+      // sans ce correctif, le panneau grandirait/rétrécirait plus vite que la souris.
+      const delta = (ev.clientX - startX) / 1.35;
+      setSidebarWidth(Math.min(SIDEBAR_MAX_W, Math.max(SIDEBAR_MIN_W, startWidth + delta)));
+    };
+    const onUp = () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+      try {
+        if (typeof window !== "undefined" && window.localStorage) {
+          window.localStorage.setItem("boutipro_sidebar_width", String(Math.round(sidebarWidthLiveRef.current)));
+        }
+      } catch (err) {}
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  };
+  // Icône + libellé + couleurs utilisés pour l'aperçu qui apparaît progressivement
+  // pendant le glissement (voir plus bas) — mêmes couleurs que la nav existante.
+  const SWIPE_TAB_META = {
+    dashboard: { Icon: Store, label: t(lang, "navDashboard"), grad: ["#4f46e5", "#7c3aed"] },
+    sale: { Icon: ShoppingCart, label: t(lang, "navSale"), grad: ["#2563eb", "#1d4ed8"] },
+    stock: { Icon: Package, label: t(lang, "navStock"), grad: ["#0891b2", "#0e7490"] },
+    debts: { Icon: Users, label: t(lang, "navDebts"), grad: ["#dc2626", "#b91c1c"] },
+    history: { Icon: History, label: t(lang, "navHistory"), grad: ["#d97706", "#b45309"] },
+    stats: { Icon: BarChart3, label: t(lang, "navStats"), grad: ["#7c3aed", "#6d28d9"] },
+    ai: { Icon: Bot, label: tx(lang, "aiTitle") || t(lang, "navAI"), grad: ["#00bcd4", "#0097a7"] },
+    employees: { Icon: Users, label: t(lang, "empTabLabel"), grad: ["#0ea5e9", "#0369a1"] },
+    shopcompare: { Icon: BarChart3, label: t(lang, "shopCompareTabLabel"), grad: ["#c084fc", "#9333ea"] },
+    cashreport: { Icon: Wallet, label: t(lang, "cashReportTabLabel"), grad: ["#fbbf24", "#d97706"] },
+    cash: { Icon: Wallet, label: t(lang, "setCaisse"), grad: ["#059669", "#047857"] },
+    calculator: { Icon: Calculator, label: t(lang, "calcTabLabel"), grad: ["#10b981", "#059669"] },
+  };
+  // ---- État du glissement progressif (façon WhatsApp) ----
+  // swipeDragX : décalage en direct du contenu actuel pendant que le doigt bouge
+  // (0 = au repos). swipeTransitioning : true pendant l'animation de rattrapage
+  // (vers 0 si on annule, ou vers l'écran suivant si on valide) — active la
+  // transition CSS ; swipeDragX change sans transition pendant le geste lui-même,
+  // pour suivre le doigt sans latence.
+  const [swipeDragX, setSwipeDragX] = useState(0);
+  const [swipeTransitioning, setSwipeTransitioning] = useState(false);
   const swipeStartRef = useRef(null);
+  const swipeActiveRef = useRef(false); // true une fois le geste reconnu comme horizontal
   const handleTabSwipeStart = (e) => {
-    if (isDesktop || e.touches.length !== 1) { swipeStartRef.current = null; return; }
-    // Ignore un geste commencé sur un champ de saisie ou un élément qui gère son propre
-    // glissement horizontal (marqué data-no-swipe), pour ne jamais interférer avec une
-    // interaction plus spécifique (curseur de texte, carrousel interne, etc.).
+    if (isDesktop || e.touches.length !== 1 || swipeTransitioning) { swipeStartRef.current = null; return; }
     const target = e.target;
     if (target && target.closest && target.closest("input, textarea, select, [data-no-swipe]")) {
       swipeStartRef.current = null;
@@ -8649,25 +8710,58 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     const touch = e.touches[0];
     swipeStartRef.current = { x: touch.clientX, y: touch.clientY };
+    swipeActiveRef.current = false;
   };
-  const handleTabSwipeEnd = (e) => {
+  const handleTabSwipeMove = (e) => {
     const start = swipeStartRef.current;
-    swipeStartRef.current = null;
-    if (!start || isDesktop) return;
-    const touch = e.changedTouches[0];
+    if (!start || isDesktop || e.touches.length !== 1) return;
+    const touch = e.touches[0];
     const dx = touch.clientX - start.x;
     const dy = touch.clientY - start.y;
-    const MIN_SWIPE_DIST = 70;
-    if (Math.abs(dx) < MIN_SWIPE_DIST) return;
-    // Doit être nettement plus horizontal que vertical, pour ne jamais se déclencher
-    // pendant un simple défilement vertical de la liste (même avec un peu de dérive).
-    if (Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    if (isPhotoReturnGuardActive()) return;
+    if (!swipeActiveRef.current) {
+      // Pas encore décidé si c'est un glissement d'onglet ou un défilement vertical :
+      // on attend un mouvement net et clairement horizontal avant de s'engager, pour
+      // ne jamais voler un défilement vertical normal de liste.
+      if (Math.abs(dx) < 12 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
+      if (isPhotoReturnGuardActive()) return;
+      swipeActiveRef.current = true;
+    }
     const idx = swipeTabOrder.indexOf(tab);
-    if (idx === -1) return;
-    const nextIdx = idx + (dx < 0 ? 1 : -1);
-    if (nextIdx < 0 || nextIdx >= swipeTabOrder.length) return; // aux extrémités, ne boucle pas
-    setTab(swipeTabOrder[nextIdx]);
+    const hasNext = dx < 0 ? idx < swipeTabOrder.length - 1 : idx > 0;
+    // Résistance (effet élastique) en bout de liste : pas de voisin dans cette
+    // direction, le contenu bouge beaucoup moins que le doigt, dans une limite
+    // raisonnable, plutôt que de ne rien montrer du tout ou de glisser librement.
+    setSwipeDragX(hasNext ? dx : dx * 0.25);
+  };
+  const handleTabSwipeEnd = () => {
+    const wasActive = swipeActiveRef.current;
+    swipeStartRef.current = null;
+    swipeActiveRef.current = false;
+    if (!wasActive || isDesktop) { setSwipeDragX(0); return; }
+    const dx = swipeDragX;
+    const idx = swipeTabOrder.indexOf(tab);
+    const direction = dx < 0 ? 1 : -1;
+    const nextIdx = idx + direction;
+    const hasTarget = nextIdx >= 0 && nextIdx < swipeTabOrder.length;
+    const width = (typeof window !== "undefined" && window.innerWidth) || 375;
+    const threshold = width * 0.28;
+    if (hasTarget && Math.abs(dx) > threshold) {
+      // Validé : termine la course jusqu'à faire disparaître complètement l'onglet
+      // actuel, puis bascule sur le nouvel onglet exactement quand l'ancien est
+      // sorti de l'écran (aucun flash, l'aperçu couvrait déjà cette zone).
+      setSwipeTransitioning(true);
+      setSwipeDragX(direction * width);
+      setTimeout(() => {
+        setTab(swipeTabOrder[nextIdx]);
+        setSwipeDragX(0);
+        setSwipeTransitioning(false);
+      }, 240);
+    } else {
+      // Pas assez loin (ou bout de liste) : revient à sa position de départ.
+      setSwipeTransitioning(true);
+      setSwipeDragX(0);
+      setTimeout(() => setSwipeTransitioning(false), 240);
+    }
   };
   const [showPaymentShortcut, setShowPaymentShortcut] = useState(false);
   // Le résumé du panier + le paiement s'affichent désormais dans une fenêtre dédiée
@@ -13021,7 +13115,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
            rendu final (après zoom) occupe exactement 100vh, comme pour la zone de contenu
            principale à droite (où le zoom est lui appliqué à un conteneur interne défilant
            plutôt qu'au conteneur externe de hauteur fixe — la même règle s'applique ici). */
-        <div className="shrink-0" style={{ width: 220, background: darkMode ? "#0a0d14" : INDIGO, height: "calc(100vh / 1.35)", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35 }}>
+        <div className="shrink-0" style={{ width: sidebarWidth, position: "relative", background: darkMode ? "#0a0d14" : INDIGO, height: "calc(100vh / 1.35)", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35 }}>
+          {/* Poignée de redimensionnement : fine zone invisible sur le bord droit du
+              panneau, entre le bleu et le blanc — glisser latéralement change sa largeur
+              (160 à 320px), mémorisé pour les prochaines sessions. */}
+          <div
+            onMouseDown={handleSidebarResizeStart}
+            title=""
+            style={{ position: "absolute", top: 0, right: -4, width: 8, height: "100%", cursor: "col-resize", zIndex: 5 }}
+          />
           <div className="flex items-center gap-2 px-2 mb-8 shrink-0">
             {shopPhoto ? (
               <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/30" />
@@ -13187,7 +13289,43 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           messages IA) sont maintenant affichées directement dans les onglets Vente et
           Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
           uniquement quand la limite est réellement atteinte. */}
-      <div data-kbscroll="true" ref={contentScrollRef} onTouchStart={handleTabSwipeStart} onTouchEnd={handleTabSwipeEnd} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, minHeight: 0, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined }}>
+      {/* Enveloppe du glissement progressif entre onglets : position relative + overflow
+          hidden pour que l'aperçu de l'onglet voisin (ci-dessous) reste découpé dans
+          cette zone pendant le geste, sans déborder sur la nav ou le reste de l'écran. */}
+      <div style={{ position: "relative", overflow: "hidden", flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
+        {swipeDragX !== 0 && (() => {
+          const idx = swipeTabOrder.indexOf(tab);
+          const peekIdx = idx + (swipeDragX < 0 ? 1 : -1);
+          const peekTab = peekIdx >= 0 && peekIdx < swipeTabOrder.length ? swipeTabOrder[peekIdx] : null;
+          const meta = peekTab ? SWIPE_TAB_META[peekTab] : null;
+          if (!meta) return null;
+          const width = (typeof window !== "undefined" && window.innerWidth) || 375;
+          const progress = Math.min(1, Math.abs(swipeDragX) / width);
+          const PeekIcon = meta.Icon;
+          return (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                left: swipeDragX < 0 ? "auto" : 0,
+                right: swipeDragX < 0 ? 0 : "auto",
+                width: `${Math.abs(swipeDragX)}px`,
+                background: `linear-gradient(135deg, ${meta.grad[0]}, ${meta.grad[1]})`,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 10,
+                opacity: 0.35 + progress * 0.65,
+                zIndex: 0,
+              }}
+            >
+              <PeekIcon size={34} color="white" style={{ opacity: 0.9 }} />
+              <span style={{ color: "white", fontSize: 13, fontWeight: 700, opacity: 0.9, whiteSpace: "nowrap" }}>{meta.label}</span>
+            </div>
+          );
+        })()}
+      <div data-kbscroll="true" ref={contentScrollRef} onTouchStart={handleTabSwipeStart} onTouchMove={handleTabSwipeMove} onTouchEnd={handleTabSwipeEnd} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, minHeight: 0, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined, transform: swipeDragX !== 0 ? `translateX(${swipeDragX}px)` : undefined, transition: swipeTransitioning ? "transform 240ms cubic-bezier(0.22,1,0.36,1)" : "none", background: T.bg }}>
       {/* pb-56 (au lieu de pb-40) : laisse assez d'espace en bas pour que le dernier élément
           d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
           "Démasquer les données" quand on scrolle tout en bas. */}
@@ -15311,6 +15449,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         {tab === "calculator" && (
           <CalculatorTab T={T} darkMode={darkMode} lang={lang} products={products} />
         )}
+      </div>
       </div>
       {/* Barre de saisie de l'Assistant IA : rendue ICI, en dehors du conteneur
           défilant contentScrollRef (qui vient de se fermer juste au-dessus), et non
