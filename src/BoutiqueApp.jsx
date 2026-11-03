@@ -78,6 +78,7 @@ import {
   List,
   LayoutGrid,
   ArrowUpDown,
+  Gift,
 } from "lucide-react";
 // Génère le QR code de connexion employé. Nécessite le package "qrcode.react"
 // (npm install qrcode.react) — composant standard, largement utilisé, pas de logique QR maison.
@@ -615,6 +616,10 @@ const PLAN_FEATURE_DISPLAY = ["anomalyAlerts", "advancedHistory", "shiftPermissi
 const FREE_PRODUCT_LIMIT = 20;
 const PRO_PRODUCT_LIMIT = 100;
 const FREE_SALES_LIMIT_PER_DAY = 30;
+// Programme de fidélité : tous les combien d'achats (compté par numéro de téléphone
+// client) une récompense est suggérée au boutiquier. Valeur fixe pour l'instant (pas
+// encore un réglage modifiable) — simple à changer ici si besoin plus tard.
+const LOYALTY_REWARD_EVERY = 10;
 const BALL_COLORS = [
   { id: "blue", label: "Bleu", swatch: "#ADD8E6", light: "rgba(173,216,230,0.55)", dark: "rgba(173,216,230,0.9)" },
   { id: "teal", label: "Turquoise", swatch: "#14b8a6", light: "rgba(45,190,175,0.6)", dark: "rgba(120,235,220,1)" },
@@ -4307,6 +4312,31 @@ EXTRA_UI.receiptScanToVisit = { fr: "Scannez pour visiter", en: "Scan to visit",
 EXTRA_UI.receiptPageLabel = { fr: "Page", en: "Page", es: "Página", pt: "Página", de: "Seite", it: "Pagina", nl: "Pagina", pl: "Strona", ru: "Стр.", tr: "Sayfa", ar: "صفحة", hi: "पृष्ठ", bn: "পৃষ্ঠা", ur: "صفحہ", ta: "பக்கம்", te: "పేజీ", th: "หน้า", zh: "第", ja: "ページ", ko: "페이지", id: "Halaman", vi: "Trang", tl: "Pahina", sw: "Ukurasa", ha: "Shafi", yo: "Ojú ìwé", zu: "Ikhasi", am: "ገጽ", bm: "Ɲɛ", wo: "Xët" };
 EXTRA_UI.receiptPhoneLabel = { fr: "Numéro WhatsApp du client (optionnel)", en: "Customer's WhatsApp number (optional)", es: "Número de WhatsApp del cliente (opcional)", pt: "Número de WhatsApp do cliente (opcional)", de: "WhatsApp-Nummer des Kunden (optional)", it: "Numero WhatsApp del cliente (facoltativo)", nl: "WhatsApp-nummer van de klant (optioneel)", pl: "Numer WhatsApp klienta (opcjonalnie)", ru: "Номер WhatsApp клиента (необязательно)", tr: "Müşterinin WhatsApp numarası (isteğe bağlı)", ar: "رقم واتساب العميل (اختياري)", hi: "ग्राहक का व्हाट्सएप नंबर (वैकल्पिक)", bn: "গ্রাহকের হোয়াটসঅ্যাপ নম্বর (ঐচ্ছিক)", ur: "گاہک کا واٹس ایپ نمبر (اختیاری)", ta: "வாடிக்கையாளரின் வாட்ஸ்அப் எண் (விருப்பத்தேர்வு)", te: "కస్టమర్ వాట్సాప్ నంబర్ (ఐచ్ఛికం)", th: "เบอร์ WhatsApp ของลูกค้า (ไม่บังคับ)", zh: "客户的WhatsApp号码（可选）", ja: "顧客のWhatsApp番号（任意）", ko: "고객의 왓츠앱 번호 (선택 사항)", id: "Nomor WhatsApp pelanggan (opsional)", vi: "Số WhatsApp của khách hàng (không bắt buộc)", tl: "Numero ng WhatsApp ng customer (opsyonal)", sw: "Nambari ya WhatsApp ya mteja (si lazima)", ha: "Lambar WhatsApp na abokin ciniki (ba dole ba)", yo: "Nọ́mbà WhatsApp oníbàárà (kìí ṣe dandan)", zu: "Inombolo ye-WhatsApp yekhasimende (akuphoqelekile)", am: "የደንበኛ የWhatsApp ቁጥር (አማራጭ)", bm: "Kiliyanso ka WhatsApp nimewo (fɛɛrɛ)", wo: "Limeer WhatsApp bu kiliyaan bi (du obligatoire)" };
 EXTRA_UI.receiptSendWhatsApp = { fr: "Envoyer le reçu par WhatsApp", en: "Send receipt via WhatsApp", es: "Enviar el recibo por WhatsApp", pt: "Enviar o recibo pelo WhatsApp", de: "Beleg per WhatsApp senden", it: "Invia la ricevuta via WhatsApp", nl: "Bon versturen via WhatsApp", pl: "Wyślij paragon przez WhatsApp", ru: "Отправить чек через WhatsApp", tr: "Fişi WhatsApp ile gönder", ar: "إرسال الإيصال عبر واتساب", hi: "व्हाट्सएप से रसीद भेजें", bn: "হোয়াটসঅ্যাপে রসিদ পাঠান", ur: "واٹس ایپ سے رسید بھیجیں", ta: "வாட்ஸ்அப் வழியாக ரசீதை அனுப்பு", te: "వాట్సాప్ ద్వారా రసీదు పంపండి", th: "ส่งใบเสร็จทาง WhatsApp", zh: "通过WhatsApp发送收据", ja: "WhatsAppでレシートを送る", ko: "왓츠앱으로 영수증 보내기", id: "Kirim struk via WhatsApp", vi: "Gửi hóa đơn qua WhatsApp", tl: "Ipadala ang resibo sa WhatsApp", sw: "Tuma risiti kupitia WhatsApp", ha: "Aika rasit ta WhatsApp", yo: "Fi gbàrà ránṣẹ́ nípasẹ̀ WhatsApp", zu: "Thumela irisidi nge-WhatsApp", am: "ደረሰኙን በ WhatsApp ይላኩ", bm: "Ci sɛbɛn ci WhatsApp fɛ", wo: "Yónni resi bi ci WhatsApp" };
+// ---- Rappel de dette (échéance + rappel WhatsApp au client) ----
+EXTRA_UI.debtDueDateShort = { fr: "Échéance", en: "Due date", es: "Vencimiento", pt: "Vencimento", de: "Fälligkeit", it: "Scadenza", nl: "Vervaldatum", pl: "Termin", ru: "Срок оплаты", tr: "Vade", ar: "تاريخ الاستحقاق", hi: "नियत तारीख", bn: "নির্ধারিত তারিখ", ur: "مقررہ تاریخ", ta: "செலுத்த வேண்டிய தேதி", te: "గడువు తేదీ", th: "วันครบกำหนด", zh: "到期日", ja: "支払期限", ko: "만기일", id: "Jatuh tempo", vi: "Ngày đến hạn", tl: "Takdang petsa", sw: "Tarehe ya mwisho", ha: "Ranar ƙarshe", yo: "Ọjọ́ ìpẹ̀wọ̀n", zu: "Usuku lokugcina", am: "የመጨረሻ ቀን", bm: "Dan bannen don", wo: "Bisu wet" };
+EXTRA_UI.debtSetDueDate = { fr: "Définir une échéance", en: "Set a due date", es: "Fijar un vencimiento", pt: "Definir um vencimento", de: "Fälligkeitsdatum festlegen", it: "Imposta una scadenza", nl: "Vervaldatum instellen", pl: "Ustaw termin", ru: "Задать срок оплаты", tr: "Bir vade belirle", ar: "تحديد تاريخ الاستحقاق", hi: "नियत तारीख सेट करें", bn: "নির্ধারিত তারিখ সেট করুন", ur: "مقررہ تاریخ مقرر کریں", ta: "செலுத்த வேண்டிய தேதியை அமை", te: "గడువు తేదీని సెట్ చేయండి", th: "ตั้งวันครบกำหนด", zh: "设置到期日", ja: "支払期限を設定", ko: "만기일 설정", id: "Atur tanggal jatuh tempo", vi: "Đặt ngày đến hạn", tl: "Magtakda ng takdang petsa", sw: "Weka tarehe ya mwisho", ha: "Saita ranar ƙarshe", yo: "Ṣètò ọjọ́ ìpẹ̀wọ̀n", zu: "Setha usuku lokugcina", am: "የመጨረሻ ቀን ያዘጋጁ", bm: "Dan bannen don sigi", wo: "Defar bisu wet" };
+EXTRA_UI.debtOverdueBadge = { fr: "En retard", en: "Overdue", es: "Vencida", pt: "Em atraso", de: "Überfällig", it: "Scaduto", nl: "Achterstallig", pl: "Zaległe", ru: "Просрочено", tr: "Gecikmiş", ar: "متأخر", hi: "बकाया", bn: "বকেয়া", ur: "واجب الادا", ta: "தாமதம்", te: "ఆలస్యం", th: "เกินกำหนด", zh: "已逾期", ja: "延滞", ko: "연체됨", id: "Terlambat", vi: "Quá hạn", tl: "Lampas na sa takdang panahon", sw: "Imechelewa", ha: "Ya wuce lokaci", yo: "Ti pẹ́", zu: "Idlule isikhathi", am: "ጊዜው አልፏል", bm: "A tɛmɛna", wo: "Jotna" };
+EXTRA_UI.debtPhoneFieldLabel = { fr: "Téléphone du client (optionnel)", en: "Customer's phone (optional)", es: "Teléfono del cliente (opcional)", pt: "Telefone do cliente (opcional)", de: "Telefon des Kunden (optional)", it: "Telefono del cliente (facoltativo)", nl: "Telefoon van de klant (optioneel)", pl: "Telefon klienta (opcjonalnie)", ru: "Телефон клиента (необязательно)", tr: "Müşterinin telefonu (isteğe bağlı)", ar: "هاتف العميل (اختياري)", hi: "ग्राहक का फोन (वैकल्पिक)", bn: "গ্রাহকের ফোন (ঐচ্ছিক)", ur: "گاہک کا فون (اختیاری)", ta: "வாடிக்கையாளர் தொலைபேசி (விருப்பத்தேர்வு)", te: "కస్టమర్ ఫోన్ (ఐచ్ఛికం)", th: "โทรศัพท์ลูกค้า (ไม่บังคับ)", zh: "客户电话（可选）", ja: "お客様の電話番号（任意）", ko: "고객 전화번호 (선택 사항)", id: "Telepon pelanggan (opsional)", vi: "Số điện thoại khách hàng (không bắt buộc)", tl: "Telepono ng customer (opsyonal)", sw: "Simu ya mteja (si lazima)", ha: "Wayar abokin ciniki (ba dole ba)", yo: "Fóònù oníbàárà (kìí ṣe dandan)", zu: "Ucingo lwekhasimende (akuphoqelekile)", am: "የደንበኛ ስልክ (አማራጭ)", bm: "Kiliyanso ka telefɔni (fɛɛrɛ)", wo: "Tele kiliyaan bi (du obligatoire)" };
+EXTRA_UI.debtDueDateFieldLabel = { fr: "Échéance (optionnel)", en: "Due date (optional)", es: "Vencimiento (opcional)", pt: "Vencimento (opcional)", de: "Fälligkeit (optional)", it: "Scadenza (facoltativa)", nl: "Vervaldatum (optioneel)", pl: "Termin (opcjonalnie)", ru: "Срок оплаты (необязательно)", tr: "Vade (isteğe bağlı)", ar: "تاريخ الاستحقاق (اختياري)", hi: "नियत तारीख (वैकल्पिक)", bn: "নির্ধারিত তারিখ (ঐচ্ছিক)", ur: "مقررہ تاریخ (اختیاری)", ta: "செலுத்த வேண்டிய தேதி (விருப்பத்தேர்வு)", te: "గడువు తేదీ (ఐచ్ఛికం)", th: "วันครบกำหนด (ไม่บังคับ)", zh: "到期日（可选）", ja: "支払期限（任意）", ko: "만기일 (선택 사항)", id: "Jatuh tempo (opsional)", vi: "Ngày đến hạn (không bắt buộc)", tl: "Takdang petsa (opsyonal)", sw: "Tarehe ya mwisho (si lazima)", ha: "Ranar ƙarshe (ba dole ba)", yo: "Ọjọ́ ìpẹ̀wọ̀n (kìí ṣe dandan)", zu: "Usuku lokugcina (akuphoqelekile)", am: "የመጨረሻ ቀን (አማራጭ)", bm: "Dan bannen don (fɛɛrɛ)", wo: "Bisu wet (du obligatoire)" };
+EXTRA_UI.debtPhoneShort = { fr: "Téléphone", en: "Phone", es: "Teléfono", pt: "Telefone", de: "Telefon", it: "Telefono", nl: "Telefoon", pl: "Telefon", ru: "Телефон", tr: "Telefon", ar: "الهاتف", hi: "फोन", bn: "ফোন", ur: "فون", ta: "தொலைபேசி", te: "ఫోన్", th: "โทรศัพท์", zh: "电话", ja: "電話", ko: "전화", id: "Telepon", vi: "Điện thoại", tl: "Telepono", sw: "Simu", ha: "Waya", yo: "Fóònù", zu: "Ucingo", am: "ስልክ", bm: "Telefɔni", wo: "Tele" };
+EXTRA_UI.debtSetPhone = { fr: "Ajouter un numéro", en: "Add a number", es: "Añadir un número", pt: "Adicionar um número", de: "Nummer hinzufügen", it: "Aggiungi un numero", nl: "Nummer toevoegen", pl: "Dodaj numer", ru: "Добавить номер", tr: "Numara ekle", ar: "إضافة رقم", hi: "नंबर जोड़ें", bn: "নম্বর যোগ করুন", ur: "نمبر شامل کریں", ta: "எண்ணைச் சேர்", te: "నంబర్ జోడించండి", th: "เพิ่มเบอร์โทร", zh: "添加号码", ja: "番号を追加", ko: "번호 추가", id: "Tambahkan nomor", vi: "Thêm số điện thoại", tl: "Magdagdag ng numero", sw: "Ongeza nambari", ha: "Ƙara lamba", yo: "Fi nọ́mbà kún", zu: "Engeza inombolo", am: "ቁጥር ያክሉ", bm: "Nimewo fara", wo: "Yokk limeer" };
+EXTRA_UI.debtSendReminder = { fr: "Rappel WhatsApp", en: "WhatsApp reminder", es: "Recordatorio por WhatsApp", pt: "Lembrete por WhatsApp", de: "WhatsApp-Erinnerung", it: "Promemoria WhatsApp", nl: "WhatsApp-herinnering", pl: "Przypomnienie WhatsApp", ru: "Напоминание в WhatsApp", tr: "WhatsApp hatırlatması", ar: "تذكير واتساب", hi: "व्हाट्सएप रिमाइंडर", bn: "হোয়াটসঅ্যাপ রিমাইন্ডার", ur: "واٹس ایپ یاد دہانی", ta: "வாட்ஸ்அப் நினைவூட்டல்", te: "వాట్సాప్ రిమైండర్", th: "แจ้งเตือนทาง WhatsApp", zh: "WhatsApp提醒", ja: "WhatsAppリマインダー", ko: "왓츠앱 알림", id: "Pengingat WhatsApp", vi: "Nhắc nhở qua WhatsApp", tl: "Paalala sa WhatsApp", sw: "Kikumbusho cha WhatsApp", ha: "Tunatarwa ta WhatsApp", yo: "Ìránnilétí WhatsApp", zu: "Isikhumbuzo se-WhatsApp", am: "የWhatsApp አስታዋሽ", bm: "WhatsApp hakilimaga", wo: "Xalaat WhatsApp" };
+EXTRA_UI.debtReminderGreeting = { fr: "Bonjour", en: "Hello", es: "Hola", pt: "Olá", de: "Hallo", it: "Ciao", nl: "Hallo", pl: "Dzień dobry", ru: "Здравствуйте", tr: "Merhaba", ar: "مرحباً", hi: "नमस्ते", bn: "নমস্কার", ur: "السلام علیکم", ta: "வணக்கம்", te: "నమస్కారం", th: "สวัสดี", zh: "您好", ja: "こんにちは", ko: "안녕하세요", id: "Halo", vi: "Xin chào", tl: "Kamusta", sw: "Habari", ha: "Sannu", yo: "Ẹ nlẹ́", zu: "Sawubona", am: "ሰላም", bm: "I ni ce", wo: "Asalaa maalekum" };
+EXTRA_UI.debtReminderLine = { fr: "Petit rappel : vous avez un solde de", en: "Friendly reminder: your outstanding balance is", es: "Recordatorio: su saldo pendiente es de", pt: "Lembrete: o seu saldo em aberto é de", de: "Kleine Erinnerung: Ihr offener Betrag beträgt", it: "Promemoria: il tuo saldo in sospeso è di", nl: "Kleine herinnering: uw openstaande saldo is", pl: "Przypomnienie: Twoje saldo do zapłaty wynosi", ru: "Напоминание: ваш непогашенный остаток составляет", tr: "Hatırlatma: ödenmemiş bakiyeniz", ar: "تذكير: رصيدكم المستحق هو", hi: "याद दिलाना चाहेंगे: आपका बकाया शेष है", bn: "মনে করিয়ে দিচ্ছি: আপনার বকেয়া পরিমাণ", ur: "یاد دہانی: آپ کا باقی بقایا ہے", ta: "நினைவூட்டல்: உங்கள் நிலுவைத் தொகை", te: "రిమైండర్: మీ బకాయి మొత్తం", th: "ขอแจ้งเตือน: ยอดค้างชำระของคุณคือ", zh: "温馨提示：您的欠款余额为", ja: "ご確認のお願い：未払い残高は", ko: "안내드립니다: 미결제 잔액은", id: "Pengingat: saldo terutang Anda adalah", vi: "Nhắc nhở: số dư còn nợ của bạn là", tl: "Paalala: ang natitira ninyong balanse ay", sw: "Kikumbusho: deni lako lililobaki ni", ha: "Tunasarwa: bashin da ya rage a kanka shine", yo: "Ìránnilétí: gbèsè tó ṣẹ́kù lọ́wọ́ yín ni", zu: "Isikhumbuzo: isikweletu sakho esisele ngu", am: "ማስታወሻ: ያልተከፈለ ቀሪ ሂሳብዎ", bm: "Hakilimaga: i ka juru bɛ tɔ min na", wo: "Xalaat: sa bor bi des na" };
+// ---- Scan de code-barres à la caisse ----
+EXTRA_UI.scanBarcodeBtn = { fr: "Scanner", en: "Scan", es: "Escanear", pt: "Escanear", de: "Scannen", it: "Scansiona", nl: "Scannen", pl: "Skanuj", ru: "Сканировать", tr: "Tara", ar: "مسح ضوئي", hi: "स्कैन करें", bn: "স্ক্যান করুন", ur: "اسکین کریں", ta: "ஸ்கேன் செய்", te: "స్కాన్ చేయండి", th: "สแกน", zh: "扫描", ja: "スキャン", ko: "스캔", id: "Pindai", vi: "Quét", tl: "I-scan", sw: "Changanua", ha: "Duba", yo: "Ṣàyẹ̀wò", zu: "Skena", am: "ቃኝ", bm: "Scan", wo: "Scan" };
+EXTRA_UI.scanBarcodeTitle = { fr: "Scanner un code-barres", en: "Scan a barcode", es: "Escanear un código de barras", pt: "Escanear um código de barras", de: "Barcode scannen", it: "Scansiona un codice a barre", nl: "Een streepjescode scannen", pl: "Zeskanuj kod kreskowy", ru: "Сканировать штрихкод", tr: "Bir barkod tara", ar: "مسح رمز شريطي", hi: "बारकोड स्कैन करें", bn: "বারকোড স্ক্যান করুন", ur: "بار کوڈ اسکین کریں", ta: "பார்கோடை ஸ்கேன் செய்", te: "బార్‌కోడ్‌ను స్కాన్ చేయండి", th: "สแกนบาร์โค้ด", zh: "扫描条形码", ja: "バーコードをスキャン", ko: "바코드 스캔", id: "Pindai barcode", vi: "Quét mã vạch", tl: "I-scan ang barcode", sw: "Changanua bakodi", ha: "Duba lambar sanda", yo: "Ṣàyẹ̀wò bakódù", zu: "Skena ibhakhodi", am: "ባርኮድ ይቃኙ", bm: "Barcode scan", wo: "Scan code-barres" };
+EXTRA_UI.scanBarcodeNotFound = { fr: "Aucun produit ne correspond à ce code-barres.", en: "No product matches this barcode.", es: "Ningún producto coincide con este código de barras.", pt: "Nenhum produto corresponde a este código de barras.", de: "Kein Produkt passt zu diesem Barcode.", it: "Nessun prodotto corrisponde a questo codice a barre.", nl: "Geen product komt overeen met deze streepjescode.", pl: "Żaden produkt nie pasuje do tego kodu kreskowego.", ru: "Ни один товар не соответствует этому штрихкоду.", tr: "Bu barkodla eşleşen ürün yok.", ar: "لا يوجد منتج يطابق هذا الرمز الشريطي.", hi: "इस बारकोड से कोई उत्पाद मेल नहीं खाता।", bn: "এই বারকোডের সাথে কোনো পণ্য মেলে না।", ur: "اس بار کوڈ سے کوئی پروڈکٹ مماثل نہیں ہے۔", ta: "இந்த பார்கோடுக்கு பொருத்தமான பொருள் இல்லை.", te: "ఈ బార్‌కోడ్‌కు ఏ ఉత్పత్తి సరిపోలడం లేదు.", th: "ไม่มีสินค้าที่ตรงกับบาร์โค้ดนี้", zh: "没有商品与此条形码匹配。", ja: "このバーコードに一致する商品がありません。", ko: "이 바코드와 일치하는 상품이 없습니다.", id: "Tidak ada produk yang cocok dengan barcode ini.", vi: "Không có sản phẩm nào khớp với mã vạch này.", tl: "Walang produktong tumutugma sa barcode na ito.", sw: "Hakuna bidhaa inayolingana na bakodi hii.", ha: "Babu wani kaya da ya dace da wannan lambar sanda.", yo: "Kò sí ọjà tí ó bá bakódù yìí mu.", zu: "Akukho mkhiqizo ohambisana nale bhakhodi.", am: "ከዚህ ባርኮድ ጋር የሚዛመድ ምርት የለም።", bm: "Fɛn si tɛ barcode nin fan fɛ.", wo: "Amul jumtukaay bu mel ni code-barres bii" };
+EXTRA_UI.scanBarcodeCameraError = { fr: "Caméra indisponible. Fermez cette fenêtre et cherchez le produit dans la liste.", en: "Camera unavailable. Close this window and search for the product in the list.", es: "Cámara no disponible. Cierre esta ventana y busque el producto en la lista.", pt: "Câmera indisponível. Feche esta janela e procure o produto na lista.", de: "Kamera nicht verfügbar. Schließen Sie dieses Fenster und suchen Sie das Produkt in der Liste.", it: "Fotocamera non disponibile. Chiudi questa finestra e cerca il prodotto nell'elenco.", nl: "Camera niet beschikbaar. Sluit dit venster en zoek het product in de lijst.", pl: "Aparat niedostępny. Zamknij to okno i wyszukaj produkt na liście.", ru: "Камера недоступна. Закройте окно и найдите товар в списке.", tr: "Kamera kullanılamıyor. Bu pencereyi kapatın ve ürünü listede arayın.", ar: "الكاميرا غير متاحة. أغلق هذه النافذة وابحث عن المنتج في القائمة.", hi: "कैमरा उपलब्ध नहीं है। यह विंडो बंद करें और सूची में उत्पाद खोजें।", bn: "ক্যামেরা অনুপলব্ধ। এই উইন্ডোটি বন্ধ করুন এবং তালিকায় পণ্যটি খুঁজুন।", ur: "کیمرہ دستیاب نہیں ہے۔ یہ ونڈو بند کریں اور فہرست میں پروڈکٹ تلاش کریں۔", ta: "கேமரா கிடைக்கவில்லை. இந்த சாளரத்தை மூடி பட்டியலில் பொருளைத் தேடுங்கள்.", te: "కెమెరా అందుబాటులో లేదు. ఈ విండోను మూసివేసి జాబితాలో ఉత్పత్తిని వెతకండి.", th: "กล้องไม่พร้อมใช้งาน ปิดหน้าต่างนี้แล้วค้นหาสินค้าในรายการ", zh: "摄像头不可用。请关闭此窗口并在列表中搜索该商品。", ja: "カメラが使用できません。このウィンドウを閉じてリストから商品を検索してください。", ko: "카메라를 사용할 수 없습니다. 이 창을 닫고 목록에서 상품을 검색하세요.", id: "Kamera tidak tersedia. Tutup jendela ini dan cari produk di daftar.", vi: "Không có camera. Đóng cửa sổ này và tìm sản phẩm trong danh sách.", tl: "Hindi available ang camera. Isara ang window na ito at hanapin ang produkto sa listahan.", sw: "Kamera haipatikani. Funga dirisha hili kisha tafuta bidhaa kwenye orodha.", ha: "Kyamara ba ta samuwa ba. Rufe wannan taga sannan ka nemo kayan a jerin.", yo: "Kámẹ́rà kò sí. Ti fèrèsé yìí kí o sì wá ọjà náà nínú àtòjọ.", zu: "Ikhamera ayitholakali. Vala le windi bese usesha umkhiqizo ohlwini.", am: "ካሜራ አይገኝም። ይህን መስኮት ዝጉ እና ምርቱን ከዝርዝሩ ይፈልጉ።", bm: "Kamera tɛ sɔrɔ. Finɛtiri in datugu ka fɛn ɲini lisi kɔnɔ.", wo: "Kamera amul. Tëj palanteer bii te seet jumtukaay bi ci lis bi" };
+// ---- Programme de fidélité ----
+EXTRA_UI.loyaltyPurchaseCount = { fr: "Achat n°{n} chez vous", en: "Purchase #{n} with you", es: "Compra n.º{n} con usted", pt: "Compra n.º{n} com você", de: "Einkauf Nr. {n} bei Ihnen", it: "Acquisto n°{n} da te", nl: "Aankoop nr. {n} bij u", pl: "Zakup nr {n} u Ciebie", ru: "Покупка №{n} у вас", tr: "Sizdeki {n}. alışveriş", ar: "الشراء رقم {n} لديكم", hi: "आपके यहाँ खरीद #{n}", bn: "আপনার কাছে কেনা #{n}", ur: "آپ کے ہاں خریداری نمبر {n}", ta: "உங்களிடம் வாங்கியது #{n}", te: "మీ వద్ద కొనుగోలు #{n}", th: "การซื้อครั้งที่ {n} กับคุณ", zh: "在您这里的第{n}次购买", ja: "あなたのお店での{n}回目のご購入", ko: "고객님 매장에서 {n}번째 구매", id: "Pembelian ke-{n} di tempat Anda", vi: "Lần mua thứ {n} tại đây", tl: "Ika-{n} na bili sa inyo", sw: "Ununuzi wa {n} kwako", ha: "Sayayya ta {n} a wurinka", yo: "Rírà kejì {n} lọ́dọ̀ yín", zu: "Ukuthenga kuka-{n} kuwe", am: "{n}ኛ ግዢ እርስዎ ጋር", bm: "San {n}nan i yɛrɛ ka", wo: "Jaay {n}eel ci yow" };
+EXTRA_UI.loyaltyRewardBanner = { fr: "🎉 Client fidèle — pensez à une petite récompense !", en: "🎉 Loyal customer — consider a small reward!", es: "🎉 Cliente fiel — ¡piense en una pequeña recompensa!", pt: "🎉 Cliente fiel — pense numa pequena recompensa!", de: "🎉 Treuer Kunde — denken Sie an eine kleine Belohnung!", it: "🎉 Cliente fedele — pensa a un piccolo premio!", nl: "🎉 Trouwe klant — overweeg een kleine beloning!", pl: "🎉 Stały klient — rozważ drobną nagrodę!", ru: "🎉 Постоянный клиент — подумайте о небольшом подарке!", tr: "🎉 Sadık müşteri — küçük bir ödül düşünün!", ar: "🎉 عميل وفي — فكر في مكافأة صغيرة!", hi: "🎉 वफ़ादार ग्राहक — एक छोटा इनाम सोचें!", bn: "🎉 অনুগত গ্রাহক — একটি ছোট পুরস্কার ভাবুন!", ur: "🎉 وفادار گاہک — ایک چھوٹا انعام سوچیں!", ta: "🎉 விசுவாசமான வாடிக்கையாளர் — ஒரு சிறிய பரிசைக் கருதுங்கள்!", te: "🎉 నమ్మకమైన కస్టమర్ — చిన్న బహుమతి గురించి ఆలోచించండి!", th: "🎉 ลูกค้าประจำ — ลองมอบของรางวัลเล็กๆ น้อยๆ!", zh: "🎉 忠实客户——考虑给点小奖励吧！", ja: "🎉 常連のお客様です。ちょっとしたお礼を考えてみては？", ko: "🎉 단골 고객입니다 — 작은 보상을 고려해보세요!", id: "🎉 Pelanggan setia — pertimbangkan hadiah kecil!", vi: "🎉 Khách hàng thân thiết — hãy cân nhắc một phần thưởng nhỏ!", tl: "🎉 Tapat na customer — mag-isip ng maliit na regalo!", sw: "🎉 Mteja mwaminifu — fikiria zawadi ndogo!", ha: "🎉 Abokin ciniki na aminci — ka yi tunanin ƙaramin lada!", yo: "🎉 Oníbàárà olótítọ́ — ronú nípa ẹ̀bùn kékeré kan!", zu: "🎉 Ikhasimende elithembekile — cabanga ngomklomelo omncane!", am: "🎉 ታማኝ ደንበኛ — ስለ ትንሽ ሽልማት ያስቡ!", bm: "🎉 Kiliyan sabatira — hakili la nafolo fitinin kan!", wo: "🎉 Kiliyaan buy takku — xalaat ci benn ndimbal ndaw!" };
+EXTRA_UI.dailySummaryEnabledLabel = { fr: "Recevoir le résumé quotidien", en: "Receive the daily summary", es: "Recibir el resumen diario", pt: "Receber o resumo diário", de: "Tägliche Zusammenfassung erhalten", it: "Ricevere il riepilogo giornaliero", nl: "Dagelijkse samenvatting ontvangen", pl: "Otrzymuj codzienne podsumowanie", ru: "Получать ежедневную сводку", tr: "Günlük özeti al", ar: "استلام الملخص اليومي", hi: "दैनिक सारांश प्राप्त करें", bn: "দৈনিক সারাংশ পান", ur: "روزانہ خلاصہ وصول کریں", ta: "தினசரி சுருக்கத்தைப் பெறுங்கள்", te: "రోజువారీ సారాంశం అందుకోండి", th: "รับสรุปประจำวัน", zh: "接收每日摘要", ja: "日次サマリーを受け取る", ko: "일일 요약 받기", id: "Terima ringkasan harian", vi: "Nhận tóm tắt hàng ngày", tl: "Tumanggap ng pang-araw-araw na buod", sw: "Pokea muhtasari wa kila siku", ha: "Karɓi taƙaitaccen bayani na yau da kullun", yo: "Gba àkótán ojoojúmọ́", zu: "Thola isifinyezo sansuku zonke", am: "ዕለታዊ ማጠቃለያ ይቀበሉ", bm: "Don-don kunnafoni sɔrɔ", wo: "Jot bataaxal bis bu nekk" };
+EXTRA_UI.dailySummaryEnabledDesc = { fr: "Désactivez si vous ne voulez plus recevoir cette notification chaque jour. Vous pouvez la réactiver à tout moment.", en: "Turn off if you no longer want to receive this notification every day. You can turn it back on at any time.", es: "Desactive si ya no desea recibir esta notificación cada día. Puede volver a activarla en cualquier momento.", pt: "Desative se não quiser mais receber esta notificação todos os dias. Pode reativá-la a qualquer momento.", de: "Deaktivieren Sie dies, wenn Sie diese Benachrichtigung nicht mehr täglich erhalten möchten. Sie können sie jederzeit wieder aktivieren.", it: "Disattiva se non vuoi più ricevere questa notifica ogni giorno. Puoi riattivarla in qualsiasi momento.", nl: "Schakel uit als u deze melding niet meer elke dag wilt ontvangen. U kunt dit op elk moment weer inschakelen.", pl: "Wyłącz, jeśli nie chcesz już codziennie otrzymywać tego powiadomienia. Możesz je ponownie włączyć w każdej chwili.", ru: "Отключите, если больше не хотите получать это уведомление каждый день. Вы можете включить его снова в любое время.", tr: "Bu bildirimi her gün almak istemiyorsanız kapatın. İstediğiniz zaman tekrar açabilirsiniz.", ar: "عطّل هذا إذا كنت لا تريد تلقي هذا الإشعار كل يوم. يمكنك إعادة تفعيله في أي وقت.", hi: "यदि आप हर दिन यह सूचना नहीं पाना चाहते तो इसे बंद करें। आप इसे कभी भी फिर से चालू कर सकते हैं।", bn: "প্রতিদিন এই নোটিফিকেশন না চাইলে বন্ধ করুন। আপনি যেকোনো সময় এটি পুনরায় চালু করতে পারেন।", ur: "اگر آپ ہر روز یہ اطلاع نہیں چاہتے تو اسے بند کریں۔ آپ اسے کسی بھی وقت دوبارہ چالو کر سکتے ہیں۔", ta: "ஒவ்வொரு நாளும் இந்த அறிவிப்பைப் பெற விரும்பவில்லை என்றால் முடக்கவும். எப்போது வேண்டுமானாலும் மீண்டும் இயக்கலாம்.", te: "ప్రతిరోజూ ఈ నోటిఫికేషన్ పొందకూడదనుకుంటే నిలిపివేయండి. మీరు ఎప్పుడైనా దీన్ని తిరిగి ఆన్ చేయవచ్చు.", th: "ปิดหากคุณไม่ต้องการรับการแจ้งเตือนนี้ทุกวัน คุณสามารถเปิดใช้งานอีกครั้งได้ทุกเมื่อ", zh: "如果您不想每天收到此通知，请将其关闭。您可以随时重新开启。", ja: "この通知を毎日受け取りたくない場合はオフにしてください。いつでも再度オンにできます。", ko: "매일 이 알림을 받고 싶지 않으면 꺼 두세요. 언제든지 다시 켤 수 있습니다.", id: "Matikan jika Anda tidak lagi ingin menerima notifikasi ini setiap hari. Anda dapat mengaktifkannya kembali kapan saja.", vi: "Tắt nếu bạn không muốn nhận thông báo này mỗi ngày nữa. Bạn có thể bật lại bất cứ lúc nào.", tl: "I-off kung ayaw mo nang tumanggap ng abisong ito araw-araw. Maaari mong i-on muli anumang oras.", sw: "Zima ikiwa hutaki tena kupokea arifa hii kila siku. Unaweza kuiwasha tena wakati wowote.", ha: "Kashe idan ba kwa son karɓar wannan sanarwa kowace rana. Za ku iya kunna shi kowane lokaci.", yo: "Pa á ti o kò bá fẹ́ gba ìfitónilétí yìí lójoojúmọ́ mọ́. Ẹ lè tún ṣí i nígbàkigbà.", zu: "Vala uma ungasafuni ukuthola lesi saziso nsuku zonke. Ungakuvula futhi noma kunini.", am: "ይህን ማሳወቂያ በየቀኑ ማግኘት ካልፈለጉ ያጥፉት። በማንኛውም ጊዜ መልሰው ማብራት ይችላሉ።", bm: "A tigɛ ni i tɛ a fɛ ka kunnafoni in sɔrɔ don o don. I bɛ se k'a yɛlɛma tuma bɛɛ.", wo: "Dama ko ni bul koy jot bataaxal bii bis bu nekk. Mën nga ko defar bis bu ci la neex." };
+EXTRA_UI.loyaltyRewardSettingTitle ={ fr: "Récompense fidélité", en: "Loyalty reward", es: "Recompensa de fidelidad", pt: "Recompensa de fidelidade", de: "Treuebelohnung", it: "Premio fedeltà", nl: "Trouwbeloning", pl: "Nagroda za lojalność", ru: "Награда за лояльность", tr: "Sadakat ödülü", ar: "مكافأة الولاء", hi: "वफ़ादारी इनाम", bn: "অনুগত্য পুরস্কার", ur: "وفاداری انعام", ta: "விசுவாச பரிசு", te: "విధేయత బహుమతి", th: "รางวัลความภักดี", zh: "忠诚奖励", ja: "ロイヤルティ特典", ko: "단골 보상", id: "Hadiah loyalitas", vi: "Phần thưởng thân thiết", tl: "Gantimpala sa katapatan", sw: "Zawadi ya uaminifu", ha: "Lada aminci", yo: "Ẹ̀bùn olóòtítọ́", zu: "Umklomelo wokwethembeka", am: "የታማኝነት ሽልማት", bm: "Sabatira nafolo", wo: "Ndimbal takku" };
+EXTRA_UI.loyaltyRewardSettingDesc = { fr: "Affiche un message au bout de 10 achats du même client, pour vous rappeler de proposer une récompense si vous le souhaitez.", en: "Shows a message after 10 purchases from the same customer, to remind you to offer a reward if you wish.", es: "Muestra un mensaje tras 10 compras del mismo cliente, para recordarle ofrecer una recompensa si lo desea.", pt: "Mostra uma mensagem após 10 compras do mesmo cliente, para lembrá-lo de oferecer uma recompensa se desejar.", de: "Zeigt nach 10 Einkäufen desselben Kunden eine Nachricht an, die Sie daran erinnert, bei Bedarf eine Belohnung anzubieten.", it: "Mostra un messaggio dopo 10 acquisti dello stesso cliente, per ricordarti di offrire un premio se lo desideri.", nl: "Toont een bericht na 10 aankopen van dezelfde klant, om u te herinneren eventueel een beloning aan te bieden.", pl: "Wyświetla komunikat po 10 zakupach tego samego klienta, aby przypomnieć o ewentualnej nagrodzie.", ru: "Показывает сообщение после 10 покупок одного клиента, чтобы напомнить вам предложить награду, если хотите.", tr: "Aynı müşterinin 10. alışverişinden sonra, isterseniz bir ödül sunmanızı hatırlatan bir mesaj gösterir.", ar: "يعرض رسالة بعد 10 عمليات شراء من نفس العميل، لتذكيركم بتقديم مكافأة إذا رغبتم.", hi: "एक ही ग्राहक की 10 खरीद के बाद एक संदेश दिखाता है, ताकि आपको चाहने पर इनाम देने की याद आए।", bn: "একই গ্রাহকের ১০টি কেনাকাটার পর একটি বার্তা দেখায়, যাতে আপনি চাইলে পুরস্কার দেওয়ার কথা মনে রাখতে পারেন।", ur: "ایک ہی گاہک کی 10 خریداریوں کے بعد ایک پیغام دکھاتا ہے، تاکہ آپ چاہیں تو انعام دینے کی یاد آئے۔", ta: "ஒரே வாடிக்கையாளரின் 10 வது வாங்குதலுக்குப் பிறகு ஒரு செய்தியைக் காண்பிக்கிறது, நீங்கள் விரும்பினால் பரிசு வழங்க நினைவூட்டும்.", te: "ఒకే కస్టమర్ 10 కొనుగోళ్ల తర్వాత ఒక సందేశాన్ని చూపుతుంది, మీరు కోరుకుంటే బహుమతి ఇవ్వాలని గుర్తు చేస్తుంది.", th: "แสดงข้อความหลังจากลูกค้าคนเดียวกันซื้อครบ 10 ครั้ง เพื่อเตือนให้คุณมอบของรางวัลหากต้องการ", zh: "同一客户第10次购买后显示提示信息，提醒您可以考虑给予奖励。", ja: "同じお客様が10回購入すると通知が表示され、ご希望に応じて特典を検討するきっかけになります。", ko: "같은 고객이 10번째 구매를 하면 메시지가 표시되어, 원하시면 보상을 고려하도록 알려드립니다.", id: "Menampilkan pesan setelah 10 kali pembelian dari pelanggan yang sama, untuk mengingatkan Anda menawarkan hadiah jika berkenan.", vi: "Hiển thị thông báo sau 10 lần mua hàng của cùng một khách, để nhắc bạn tặng quà nếu muốn.", tl: "Nagpapakita ng mensahe pagkatapos ng 10 bili mula sa parehong customer, para paalalahanan kang mag-alok ng gantimpala kung nanaisin.", sw: "Huonyesha ujumbe baada ya manunuzi 10 ya mteja mmoja, kukukumbusha kutoa zawadi ukipenda.", ha: "Yana nuna sako bayan sayayya 10 na abokin ciniki daya, don tunatar da kai ka bayar da lada idan kana so.", yo: "Ó ń fi ìránnilétí hàn lẹ́yìn ìgbà mẹ́wàá tí oníbàárà kan náà ti rà, kí ó rán yín létí láti fúnni ní ẹ̀bùn bí ẹ bá fẹ́.", zu: "Ibonisa umlayezo ngemva kokuthenga okulishumi kwekhasimende elifanayo, ukukukhumbuza ukunikeza umklomelo uma uthanda.", am: "ለተመሳሳይ ደንበኛ 10 ግዢ በኋላ መልእክት ያሳያል፣ ይህም ከፈለጉ ሽልማት እንዲሰጡ ያስታውስዎታል።", bm: "A bɛ ciden kofɔ kiliyan kelen ye san 10nan kɔ, walisa ka i hakili jigin ka nafolo fɛn di ni i y'a fɛ.", wo: "Mel ci baat buy feeñ bu kiliyaan benn jëndee ñaari yoon fukk, ngir fàttaliku la ngir may ko benn ndimbal bu la neex." };
+EXTRA_UI.productBarcodeLabel ={ fr: "Code-barres (optionnel)", en: "Barcode (optional)", es: "Código de barras (opcional)", pt: "Código de barras (opcional)", de: "Barcode (optional)", it: "Codice a barre (facoltativo)", nl: "Streepjescode (optioneel)", pl: "Kod kreskowy (opcjonalnie)", ru: "Штрихкод (необязательно)", tr: "Barkod (isteğe bağlı)", ar: "الرمز الشريطي (اختياري)", hi: "बारकोड (वैकल्पिक)", bn: "বারকোড (ঐচ্ছিক)", ur: "بار کوڈ (اختیاری)", ta: "பார்கோடு (விருப்பத்தேர்வு)", te: "బార్‌కోడ్ (ఐచ్ఛికం)", th: "บาร์โค้ด (ไม่บังคับ)", zh: "条形码（可选）", ja: "バーコード（任意）", ko: "바코드 (선택 사항)", id: "Barcode (opsional)", vi: "Mã vạch (không bắt buộc)", tl: "Barcode (opsyonal)", sw: "Bakodi (si lazima)", ha: "Lambar sanda (ba dole ba)", yo: "Bakódù (kìí ṣe dandan)", zu: "Ibhakhodi (akuphoqelekile)", am: "ባርኮድ (አማራጭ)", bm: "Barcode (fɛɛrɛ)", wo: "Code-barres (du obligatoire)" };
+EXTRA_UI.debtReminderThanks = { fr: "Merci de régulariser dès que possible 🙏", en: "Thank you for settling it as soon as possible 🙏", es: "Gracias por regularizarlo lo antes posible 🙏", pt: "Obrigado por regularizar o quanto antes 🙏", de: "Vielen Dank, dass Sie dies so bald wie möglich begleichen 🙏", it: "Grazie per regolarizzare il prima possibile 🙏", nl: "Bedankt om dit zo snel mogelijk te vereffenen 🙏", pl: "Dziękujemy za uregulowanie tego jak najszybciej 🙏", ru: "Спасибо, что погасите задолженность как можно скорее 🙏", tr: "En kısa sürede ödediğiniz için teşekkür ederiz 🙏", ar: "شكراً لتسويته في أقرب وقت ممكن 🙏", hi: "कृपया जल्द से जल्द भुगतान करें, धन्यवाद 🙏", bn: "যত দ্রুত সম্ভব পরিশোধ করার জন্য ধন্যবাদ 🙏", ur: "جلد از جلد ادائیگی کرنے کا شکریہ 🙏", ta: "விரைவில் தீர்த்துவைத்ததற்கு நன்றி 🙏", te: "వీలైనంత త్వరగా చెల్లించినందుకు ధన్యవాదాలు 🙏", th: "ขอบคุณที่ชำระโดยเร็วที่สุด 🙏", zh: "感谢您尽快结清 🙏", ja: "早めのご精算、よろしくお願いいたします 🙏", ko: "가능한 한 빨리 정산해 주셔서 감사합니다 🙏", id: "Terima kasih sudah melunasi secepatnya 🙏", vi: "Cảm ơn bạn đã thanh toán sớm nhất có thể 🙏", tl: "Salamat sa pagbabayad sa lalong madaling panahon 🙏", sw: "Asante kwa kulipa haraka iwezekanavyo 🙏", ha: "Na gode da biya da wuri-wuri 🙏", yo: "Ẹ ṣeun fún sísan ní kíá tó bá ti ṣeé ṣe 🙏", zu: "Siyabonga ngokukhokha ngokushesha okukhulu 🙏", am: "በተቻለ ፍጥነት ስለከፈሉ እናመሰግናለን 🙏", bm: "I ni ce i ka joona a sara 🙏", wo: "Jerejef ci fey bi gaaw gaaw 🙏" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
 EXTRA_UI.cashProfitNoCost = { am: "ትርፍዎን ለማየት የምርቶችዎን የመግዣ ዋጋ ያስገቡ።", ar: "أدخل سعر شراء منتجاتك لترى أرباحك.", bm: "I ka fɛnw sara sɔrɔ da yɛlɛ ka i ka tɔnɔ ye.", bn: "লাভ দেখতে আপনার পণ্যের ক্রয়মূল্য দিন।", de: "Trage den Einkaufspreis deiner Produkte ein, um deinen Gewinn zu sehen.", en: "Set your products' purchase price to see your profit.", es: "Indica el precio de compra de tus productos para ver tu beneficio.", fr: "Renseignez le prix d'achat de vos produits pour voir votre bénéfice.", ha: "Saka farashin sayen kayanka don ganin ribarka.", hi: "लाभ देखने के लिए अपने उत्पादों का खरीद मूल्य भरें।", id: "Isi harga beli produkmu untuk melihat labamu.", it: "Inserisci il prezzo d'acquisto dei tuoi prodotti per vedere il guadagno.", ja: "利益を見るには商品の仕入れ価格を入力してください。", ko: "이익을 보려면 상품의 매입가를 입력하세요.", nl: "Vul de inkoopprijs van je producten in om je winst te zien.", pl: "Podaj cenę zakupu produktów, aby zobaczyć zysk.", pt: "Informe o preço de compra dos seus produtos para ver seu lucro.", ru: "Укажите закупочную цену товаров, чтобы увидеть прибыль.", sw: "Weka bei ya kununulia ya bidhaa zako uone faida yako.", ta: "லாபத்தைக் காண உங்கள் பொருட்களின் கொள்முதல் விலையை உள்ளிடுங்கள்.", te: "లాభం చూడటానికి మీ ఉత్పత్తుల కొనుగోలు ధర నమోదు చేయండి.", th: "ระบุราคาซื้อสินค้าเพื่อดูกำไร", tl: "Ilagay ang presyong bili ng mga produkto mo para makita ang tubo.", tr: "Kârını görmek için ürünlerinin alış fiyatını gir.", ur: "منافع دیکھنے کے لیے اپنی مصنوعات کی خریداری قیمت درج کریں۔", vi: "Nhập giá nhập của sản phẩm để xem lợi nhuận.", wo: "Duggal njëgu jënd bu sa jumtukaay yi ngir gis sa tabax.", yo: "Fi owó rírà àwọn ọjà rẹ sí kí o lè rí èrè rẹ.", zh: "填写商品进价即可查看利润。", zu: "Faka intengo yokuthenga yemikhiqizo yakho ukuze ubone inzuzo." };
 EXTRA_UI.cashMargin = { am: "በሽያጭ ላይ ያለ ህዳግ", ar: "هامش المبيعات", bm: "Tɔnɔ feerew kan", bn: "বিক্রয়ের মার্জিন", de: "Marge auf Verkäufe", en: "Margin on sales", es: "Margen sobre ventas", fr: "Marge sur les ventes", ha: "Ribar da ke kan tallace-tallace", hi: "बिक्री पर मार्जिन", id: "Margin penjualan", it: "Margine sulle vendite", ja: "売上の粗利", ko: "판매 마진", nl: "Marge op verkopen", pl: "Marża na sprzedaży", pt: "Margem sobre vendas", ru: "Маржа с продаж", sw: "Kiwango cha faida kwenye mauzo", ta: "விற்பனை மீதான வரம்பு", te: "అమ్మకాలపై మార్జిన్", th: "กำไรขั้นต้นจากการขาย", tl: "Margin sa benta", tr: "Satış marjı", ur: "فروخت پر مارجن", vi: "Biên lợi nhuận bán hàng", wo: "Tabax ci jaay yi", yo: "Èrè lórí títà", zh: "销售毛利", zu: "Inzuzo ekuthengisweni" };
@@ -4433,8 +4463,92 @@ const SHARE_CARD_STYLES = [
   { id: "obsidian3d", label: "Obsidienne 3D", colors: ["#64748b", "#020617"], glossy: true },
   { id: "neon3d", label: "Néon 3D", colors: ["#22d3ee", "#701a75"], glossy: true },
   { id: "ruby3d", label: "Rubis 3D", colors: ["#fb7185", "#4c0519"], glossy: true },
+  // Styles "décoratifs" : en plus du dégradé, de petits éléments (confettis,
+  // bulles, étincelles, vagues) sont dessinés en semi-transparence par
+  // drawCardDecor (voir plus bas) — rendu plus festif/attractif pour une
+  // image pensée pour être partagée comme publicité du produit. Restent
+  // visibles surtout dans les marges (au-dessus/en dessous de la photo), pour
+  // ne jamais gêner la lecture du nom ou du prix.
+  { id: "partyconfetti", label: "Confettis", colors: ["#ec4899", "#7c3aed"], decor: "confetti" },
+  { id: "goldsparkle", label: "Étincelles dorées", colors: ["#f59e0b", "#78350f"], decor: "sparkle", glossy: true },
+  { id: "bubblepop", label: "Bulles", colors: ["#06b6d4", "#1e3a8a"], decor: "bubbles" },
+  { id: "tropicalwave", label: "Vague tropicale", colors: ["#10b981", "#0c4a6e"], decor: "wave" },
+  { id: "festiveconfetti", label: "Fête", colors: ["#f43f5e", "#f59e0b"], decor: "confetti" },
 ];
 const shareCardStyleById = (id) => SHARE_CARD_STYLES.find((s) => s.id === id) || SHARE_CARD_STYLES[0];
+// Dessine de petits éléments décoratifs semi-transparents par-dessus le
+// dégradé de fond d'une fiche de partage produit (voir shareProduct plus
+// bas). Appelé AVANT la carte photo et le texte, donc ce qu'il dessine au
+// centre est de toute façon recouvert — seules les marges (haut/bas/côtés)
+// restent visibles, ce qui est voulu : décoratif sans jamais gêner la lecture.
+const drawCardDecor = (ctx, decor, W, H) => {
+  ctx.save();
+  if (decor === "confetti") {
+    const colors = ["#ffffff", "#fde68a", "#f472b6", "#38bdf8", "#4ade80"];
+    for (let i = 0; i < 46; i++) {
+      const x = Math.random() * W;
+      const y = Math.random() * H;
+      const size = 6 + Math.random() * 14;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(Math.random() * Math.PI * 2);
+      ctx.globalAlpha = 0.14 + Math.random() * 0.14;
+      ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+      if (i % 3 === 0) {
+        ctx.beginPath();
+        ctx.arc(0, 0, size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-size / 2, -size / 4, size, size / 2);
+      }
+      ctx.restore();
+    }
+  } else if (decor === "bubbles") {
+    for (let i = 0; i < 22; i++) {
+      const x = Math.random() * W;
+      const y = Math.random() * H;
+      const r = 20 + Math.random() * 70;
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+      grad.addColorStop(0, "rgba(255,255,255,0.16)");
+      grad.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  } else if (decor === "sparkle") {
+    const drawStar = (cx, cy, size, alpha) => {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - size);
+      ctx.bezierCurveTo(cx + size * 0.15, cy - size * 0.15, cx + size, cy, cx + size * 0.15, cy + size * 0.15);
+      ctx.bezierCurveTo(cx, cy + size, cx - size * 0.15, cy + size * 0.15, cx - size, cy);
+      ctx.bezierCurveTo(cx - size * 0.15, cy - size * 0.15, cx, cy - size, cx, cy - size);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    };
+    for (let i = 0; i < 26; i++) {
+      drawStar(Math.random() * W, Math.random() * H, 6 + Math.random() * 16, 0.12 + Math.random() * 0.18);
+    }
+  } else if (decor === "wave") {
+    for (let b = 0; b < 3; b++) {
+      ctx.globalAlpha = 0.08 + b * 0.04;
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      const baseY = H - 120 - b * 90;
+      ctx.moveTo(0, baseY + 40);
+      ctx.bezierCurveTo(W * 0.25, baseY - 40, W * 0.75, baseY + 60, W, baseY);
+      ctx.lineTo(W, H);
+      ctx.lineTo(0, H);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+};
 const SECTORS = [
   { fr: "Alimentation générale", en: "General food store", ar: "مواد غذائية عامة", vi: "Cửa hàng thực phẩm tổng hợp", bn: "সাধারণ খাদ্য দোকান", ha: "Kantin abinci na gaba ɗaya", bm: "Dumunikɛyɔrɔ (balo suguya bɛɛ)", ur: "عمومی خوراک کی دکان" },
   { fr: "Vêtements & mode", en: "Clothing & fashion", ar: "ملابس وموضة", vi: "Quần áo & thời trang", bn: "পোশাক ও ফ্যাশন", ha: "Tufafi da salo", bm: "Fani ni fasoya", ur: "لباس اور فیشن" },
@@ -4984,7 +5098,7 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled"];
 // ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
 // On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
 // "light" / "dark" / "system"), pour que l'écran de connexion garde la même ambiance. Pour un
@@ -5128,11 +5242,18 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     lowStockThreshold: winner.lowStockThreshold ?? 5,
     dailySummaryHour: winner.dailySummaryHour ?? 7,
     dailySummaryUtcOffsetMinutes: winner.dailySummaryUtcOffsetMinutes ?? 0,
+    // Activé par défaut (comportement historique conservé), mais désormais désactivable
+    // par le propriétaire depuis Paramètres > Interface > Heure du résumé quotidien.
+    dailySummaryEnabled: winner.dailySummaryEnabled !== false,
     darkMode: !!winner.darkMode,
     themeMode: winner.themeMode || (winner.darkMode ? "dark" : "system"),
     showBalls: winner.showBalls !== false,
     soundsEnabled: winner.soundsEnabled !== false,
     hapticsEnabled: winner.hapticsEnabled !== false,
+    // Désactivé par défaut : c'est au propriétaire de la boutique de décider s'il veut
+    // être averti, après 10 achats d'un même client, qu'une récompense pourrait être
+    // proposée. L'application ne l'active jamais elle-même.
+    loyaltyRewardEnabled: !!winner.loyaltyRewardEnabled,
     soundChoice: { ...DEFAULT_SOUND_CHOICE, ...(winner.soundChoice || {}) },
     ballColor: winner.ballColor || "blue",
     categories: Array.isArray(winner.categories) ? winner.categories : [],
@@ -7464,6 +7585,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const sales = useMemo(() => allSales.filter((x) => !x.cancelled), [allSales]);
   const setSales = setAllSales;
   const [debts, setDebts] = useState([]);
+  const [loyaltyCustomers, setLoyaltyCustomers] = useState({});
   // Même principe que pour les ventes : les événements d'une dette liée à une vente annulée
   // sont marqués `cancelled` (et non supprimés) ; `debtEvents` ne garde que les valides.
   const [allDebtEvents, setAllDebtEvents] = useState([]);
@@ -7486,6 +7608,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // de pays, tant qu'il réenregistre l'heure voulue depuis son nouvel appareil/fuseau.
   const [dailySummaryHour, setDailySummaryHour] = useState(7);
   const [dailySummaryUtcOffsetMinutes, setDailySummaryUtcOffsetMinutes] = useState(() => -new Date().getTimezoneOffset());
+  const [dailySummaryEnabled, setDailySummaryEnabled] = useState(true);
   const [darkMode, setDarkMode] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
   // "system" (suit le téléphone), "light" ou "dark" (choix figé par l'utilisateur).
   const [themeMode, setThemeMode] = useState("system");
@@ -7533,6 +7656,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // depuis ces states via de simples effets plutôt que de leur passer le state directement.
   const [soundsEnabled, setSoundsEnabled] = useState(true);
   const [hapticsEnabled, setHapticsEnabled] = useState(true);
+  // Désactivé par défaut : affiche (ou non) la bannière "récompense" dans le reçu au
+  // bout de LOYALTY_REWARD_EVERY achats d'un même client. Décision du propriétaire,
+  // réglable dans Paramètres > Ventes & finances.
+  const [loyaltyRewardEnabled, setLoyaltyRewardEnabled] = useState(false);
   // Son choisi pour chaque catégorie (clic / succès / erreur) — voir SOUND_VARIANTS tout
   // en haut du fichier pour la liste des choix possibles par catégorie.
   const [soundChoice, setSoundChoice] = useState(DEFAULT_SOUND_CHOICE);
@@ -7629,6 +7756,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const nationalLen = COUNTRY_PHONE_DIGITS[shopCountry];
     if (dial && nationalLen) {
       const dialDigits = dial.replace(/\D/g, "");
+      // Le champ est pré-rempli avec l'indicatif du pays (voir createCart) : si le
+      // boutiquier n'a rien tapé d'autre, "digits" ne contient que cet indicatif —
+      // ce n'est pas un numéro client, on le traite comme vide plutôt que d'envoyer
+      // un lien WhatsApp cassé (indicatif seul, sans numéro).
+      if (digits === dialDigits) return "";
       if (digits.length === nationalLen) {
         digits = dialDigits + digits;
       } else if (digits.length === nationalLen + 1 && digits.startsWith("0")) {
@@ -7652,6 +7784,39 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     ];
     const phoneDigits = normalizePhoneForWhatsApp(receipt.phone);
     return `https://wa.me/${phoneDigits}?text=${encodeURIComponent(lines.join("\n"))}`;
+  };
+  // Lien WhatsApp pré-rempli pour rappeler à un client qu'il a une dette en cours —
+  // même logique que buildReceiptWhatsAppUrl (wa.me + texte encodé), vers le numéro
+  // enregistré sur la dette (d.phone, ajouté automatiquement lors d'une vente à
+  // crédit depuis le champ téléphone du panier, ou renseigné manuellement).
+  const buildDebtReminderWhatsAppUrl = (d) => {
+    const lines = [
+      `👋 ${tx(lang, "debtReminderGreeting")} ${d.customer},`,
+      "",
+      `${tx(lang, "debtReminderLine")} ${fcfa(remainingDebt(d))}${d.product ? ` (${d.product})` : ""}.`,
+      "",
+      tx(lang, "debtReminderThanks"),
+    ];
+    const phoneDigits = normalizePhoneForWhatsApp(d.phone);
+    return `https://wa.me/${phoneDigits}?text=${encodeURIComponent(lines.join("\n"))}`;
+  };
+  // ---- Programme de fidélité ----
+  // Incrémente le compteur d'achats du client identifié par son numéro de téléphone
+  // (normalisé comme pour WhatsApp, donc insensible aux espaces/tirets tapés
+  // différemment d'une vente à l'autre) et retourne à la fois le nouvel objet
+  // loyaltyCustomers (à passer à saveAll) et un résumé { count, isReward } à afficher
+  // sur le reçu — ou null si le client n'a pas de numéro valide (pas de suivi possible
+  // sans identifiant stable : le nom seul seul n'est pas fiable, doublons/fautes de frappe).
+  const incrementLoyalty = (phoneRaw, customerName) => {
+    const key = normalizePhoneForWhatsApp(phoneRaw);
+    if (!key) return { nextLoyaltyCustomers: loyaltyCustomers, loyaltyInfo: null };
+    const prev = loyaltyCustomers[key];
+    const count = (prev && prev.count ? prev.count : 0) + 1;
+    const nextLoyaltyCustomers = {
+      ...loyaltyCustomers,
+      [key]: { name: (customerName || "").trim() || (prev && prev.name) || "", count, lastDate: new Date().toISOString() },
+    };
+    return { nextLoyaltyCustomers, loyaltyInfo: { count, isReward: count % LOYALTY_REWARD_EVERY === 0 } };
   };
   // Génère le même reçu, mais en PDF (format étroit façon ticket de caisse, 80mm) —
   // même bibliothèque jsPDF que les autres exports PDF de l'app, chargée à la demande.
@@ -7883,20 +8048,25 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
 
     return doc.output("blob");
   };
-  // Partage le PDF via le partage natif du téléphone (Web Share API avec fichier),
-  // ce qui permet de choisir WhatsApp dans la liste et d'y joindre directement le
-  // fichier — contrairement à un simple lien wa.me, qui ne peut transporter que du
-  // texte. Si le navigateur/la WebView ne prend pas en charge le partage de fichiers
-  // (cas plus rare), on télécharge le PDF à la place avec une explication claire :
-  // rien ne casse silencieusement, le boutiquier sait toujours quoi faire ensuite.
+  // Partage le PDF. Important : le partage natif du téléphone (Web Share API) ouvre
+  // une liste générale d'applications/contacts — il ne sait PAS viser un numéro
+  // WhatsApp précis, même quand on lui donne un fichier. Résultat avant ce correctif :
+  // le reçu partait vers n'importe quel contact (souvent soi-même), jamais celui du
+  // client tapé dans le champ téléphone. Aucune API web ne permet d'envoyer un
+  // fichier à un numéro WhatsApp précis sans action humaine (contrairement à un
+  // simple texte, via un lien wa.me). Le compromis fiable : si un numéro client
+  // valide est renseigné, on ouvre D'ABORD la conversation WhatsApp de CE numéro
+  // précis (comme pour le reçu texte), puis on télécharge le PDF et on explique au
+  // boutiquier de le joindre dans la conversation qui vient de s'ouvrir — au lieu de
+  // lancer le sélecteur général qui pourrait l'envoyer ailleurs. Sans numéro client,
+  // on garde l'ancien comportement (partage général, le boutiquier choisit lui-même).
   const shareReceiptAsPdf = async (receipt) => {
     setPdfSharing(true);
     try {
+      const phoneDigits = normalizePhoneForWhatsApp(receipt.phone);
       const blob = await generateReceiptPdfBlob(receipt);
-      const file = new File([blob], `${tx(lang, "receiptHeading")}.pdf`, { type: "application/pdf" });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: tx(lang, "receiptHeading") });
-      } else {
+      if (phoneDigits) {
+        window.open(`https://wa.me/${phoneDigits}`, "_blank");
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -7906,6 +8076,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         alert(tx(lang, "receiptPdfFallback"));
+      } else {
+        const file = new File([blob], `${tx(lang, "receiptHeading")}.pdf`, { type: "application/pdf" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: tx(lang, "receiptHeading") });
+        } else {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${tx(lang, "receiptHeading")}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          alert(tx(lang, "receiptPdfFallback"));
+        }
       }
     } catch (e) {
       // Partage annulé par le boutiquier (AbortError) : rien à faire, ce n'est pas une erreur.
@@ -8652,10 +8837,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   });
   const sidebarWidthLiveRef = useRef(sidebarWidth);
   useEffect(() => { sidebarWidthLiveRef.current = sidebarWidth; }, [sidebarWidth]);
+  // sidebarResizeHover : la souris survole la poignée (sans forcément glisser) ;
+  // sidebarResizing : le glissement est en cours. Les deux servent uniquement à
+  // afficher une fine ligne claire sur la poignée, invisible le reste du temps,
+  // pour que l'utilisateur comprenne qu'il peut redimensionner à cet endroit.
+  const [sidebarResizeHover, setSidebarResizeHover] = useState(false);
+  const [sidebarResizing, setSidebarResizing] = useState(false);
   const handleSidebarResizeStart = (e) => {
     e.preventDefault();
     const startX = e.clientX;
     const startWidth = sidebarWidth;
+    setSidebarResizing(true);
     const onMove = (ev) => {
       // Le panneau a "zoom: 1.35" appliqué (voir son style) : un pixel de souris
       // déplacé à l'écran correspond donc à 1 / 1.35 pixel de largeur CSS réelle —
@@ -8666,6 +8858,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const onUp = () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
+      setSidebarResizing(false);
       try {
         if (typeof window !== "undefined" && window.localStorage) {
           window.localStorage.setItem("boutipro_sidebar_width", String(Math.round(sidebarWidthLiveRef.current)));
@@ -8677,32 +8870,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   // Icône + libellé + couleurs utilisés pour l'aperçu qui apparaît progressivement
   // pendant le glissement (voir plus bas) — mêmes couleurs que la nav existante.
-  const SWIPE_TAB_META = {
-    dashboard: { Icon: Store, label: t(lang, "navDashboard"), grad: ["#4f46e5", "#7c3aed"] },
-    sale: { Icon: ShoppingCart, label: t(lang, "navSale"), grad: ["#2563eb", "#1d4ed8"] },
-    stock: { Icon: Package, label: t(lang, "navStock"), grad: ["#0891b2", "#0e7490"] },
-    debts: { Icon: Users, label: t(lang, "navDebts"), grad: ["#dc2626", "#b91c1c"] },
-    history: { Icon: History, label: t(lang, "navHistory"), grad: ["#d97706", "#b45309"] },
-    stats: { Icon: BarChart3, label: t(lang, "navStats"), grad: ["#7c3aed", "#6d28d9"] },
-    ai: { Icon: Bot, label: tx(lang, "aiTitle") || t(lang, "navAI"), grad: ["#00bcd4", "#0097a7"] },
-    employees: { Icon: Users, label: t(lang, "empTabLabel"), grad: ["#0ea5e9", "#0369a1"] },
-    shopcompare: { Icon: BarChart3, label: t(lang, "shopCompareTabLabel"), grad: ["#c084fc", "#9333ea"] },
-    cashreport: { Icon: Wallet, label: t(lang, "cashReportTabLabel"), grad: ["#fbbf24", "#d97706"] },
-    cash: { Icon: Wallet, label: t(lang, "setCaisse"), grad: ["#059669", "#047857"] },
-    calculator: { Icon: Calculator, label: t(lang, "calcTabLabel"), grad: ["#10b981", "#059669"] },
-  };
-  // ---- État du glissement progressif (façon WhatsApp) ----
-  // swipeDragX : décalage en direct du contenu actuel pendant que le doigt bouge
-  // (0 = au repos). swipeTransitioning : true pendant l'animation de rattrapage
-  // (vers 0 si on annule, ou vers l'écran suivant si on valide) — active la
-  // transition CSS ; swipeDragX change sans transition pendant le geste lui-même,
-  // pour suivre le doigt sans latence.
-  const [swipeDragX, setSwipeDragX] = useState(0);
-  const [swipeTransitioning, setSwipeTransitioning] = useState(false);
+  // ---- Glissement entre onglets (sur mobile) : changement direct, sans aperçu ni
+  // animation de transition — juste un geste horizontal net qui fait passer
+  // immédiatement à l'onglet voisin, comme un appui sur le bouton de nav. ----
   const swipeStartRef = useRef(null);
-  const swipeActiveRef = useRef(false); // true une fois le geste reconnu comme horizontal
   const handleTabSwipeStart = (e) => {
-    if (isDesktop || e.touches.length !== 1 || swipeTransitioning) { swipeStartRef.current = null; return; }
+    if (isDesktop || e.touches.length !== 1) { swipeStartRef.current = null; return; }
     const target = e.target;
     if (target && target.closest && target.closest("input, textarea, select, [data-no-swipe]")) {
       swipeStartRef.current = null;
@@ -8710,57 +8883,24 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     const touch = e.touches[0];
     swipeStartRef.current = { x: touch.clientX, y: touch.clientY };
-    swipeActiveRef.current = false;
   };
-  const handleTabSwipeMove = (e) => {
+  const handleTabSwipeEnd = (e) => {
     const start = swipeStartRef.current;
-    if (!start || isDesktop || e.touches.length !== 1) return;
-    const touch = e.touches[0];
+    swipeStartRef.current = null;
+    if (!start || isDesktop) return;
+    const touch = e.changedTouches && e.changedTouches[0];
+    if (!touch) return;
     const dx = touch.clientX - start.x;
     const dy = touch.clientY - start.y;
-    if (!swipeActiveRef.current) {
-      // Pas encore décidé si c'est un glissement d'onglet ou un défilement vertical :
-      // on attend un mouvement net et clairement horizontal avant de s'engager, pour
-      // ne jamais voler un défilement vertical normal de liste.
-      if (Math.abs(dx) < 12 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
-      if (isPhotoReturnGuardActive()) return;
-      swipeActiveRef.current = true;
-    }
-    const idx = swipeTabOrder.indexOf(tab);
-    const hasNext = dx < 0 ? idx < swipeTabOrder.length - 1 : idx > 0;
-    // Résistance (effet élastique) en bout de liste : pas de voisin dans cette
-    // direction, le contenu bouge beaucoup moins que le doigt, dans une limite
-    // raisonnable, plutôt que de ne rien montrer du tout ou de glisser librement.
-    setSwipeDragX(hasNext ? dx : dx * 0.25);
-  };
-  const handleTabSwipeEnd = () => {
-    const wasActive = swipeActiveRef.current;
-    swipeStartRef.current = null;
-    swipeActiveRef.current = false;
-    if (!wasActive || isDesktop) { setSwipeDragX(0); return; }
-    const dx = swipeDragX;
+    // Geste net et clairement horizontal (sinon c'est un défilement vertical normal
+    // de la liste, qu'on ne doit surtout pas intercepter).
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
+    if (isPhotoReturnGuardActive()) return;
     const idx = swipeTabOrder.indexOf(tab);
     const direction = dx < 0 ? 1 : -1;
     const nextIdx = idx + direction;
-    const hasTarget = nextIdx >= 0 && nextIdx < swipeTabOrder.length;
-    const width = (typeof window !== "undefined" && window.innerWidth) || 375;
-    const threshold = width * 0.28;
-    if (hasTarget && Math.abs(dx) > threshold) {
-      // Validé : termine la course jusqu'à faire disparaître complètement l'onglet
-      // actuel, puis bascule sur le nouvel onglet exactement quand l'ancien est
-      // sorti de l'écran (aucun flash, l'aperçu couvrait déjà cette zone).
-      setSwipeTransitioning(true);
-      setSwipeDragX(direction * width);
-      setTimeout(() => {
-        setTab(swipeTabOrder[nextIdx]);
-        setSwipeDragX(0);
-        setSwipeTransitioning(false);
-      }, 240);
-    } else {
-      // Pas assez loin (ou bout de liste) : revient à sa position de départ.
-      setSwipeTransitioning(true);
-      setSwipeDragX(0);
-      setTimeout(() => setSwipeTransitioning(false), 240);
+    if (nextIdx >= 0 && nextIdx < swipeTabOrder.length) {
+      setTab(swipeTabOrder[nextIdx]);
     }
   };
   const [showPaymentShortcut, setShowPaymentShortcut] = useState(false);
@@ -8992,6 +9132,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pDailyMode, setPDailyMode] = useState(false);
   const [pUnitsPerPack, setPUnitsPerPack] = useState("");
   const [pUnitPrice, setPUnitPrice] = useState("");
+  // Code-barres (EAN, optionnel) — permet de scanner le produit directement à la
+  // caisse (onglet Vente) au lieu de le chercher/cliquer dans la liste.
+  const [pBarcode, setPBarcode] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
   // Filet de secours "brouillon produit" : sur Android, ouvrir l'appareil photo natif
   // (input file capture="environment") peut amener le système à décharger complètement
@@ -9125,7 +9268,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [newDebtAmount, setNewDebtAmount] = useState("");
   const [newDebtProduct, setNewDebtProduct] = useState("");
   const [newDebtDate, setNewDebtDate] = useState("");
+  // Numéro de téléphone (pré-rempli avec l'indicatif du pays, comme pour le panier de
+  // vente) et échéance (date future, optionnelle) — permettent le rappel WhatsApp.
+  const [newDebtPhone, setNewDebtPhone] = useState("");
+  const [newDebtDueDate, setNewDebtDueDate] = useState("");
   const [newDebtError, setNewDebtError] = useState("");
+  // Édition rapide du téléphone/échéance d'une dette déjà créée (ex. vieille dette
+  // saisie avant l'ajout de cette fonctionnalité, ou dette venant d'une vente sans
+  // numéro renseigné) — un seul champ ouvert à la fois, identifié par son id de dette.
+  const [debtEditingId, setDebtEditingId] = useState(null);
+  const [debtEditPhone, setDebtEditPhone] = useState("");
+  const [debtEditDueDate, setDebtEditDueDate] = useState("");
   const [cartSearch, setCartSearch] = useState("");
   // Filtre par catégorie dans l'onglet Vente — complète la recherche par nom ; "" = toutes
   // les catégories. Volontairement non persisté entre sessions (comme la plupart des filtres
@@ -9254,6 +9407,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setProducts(restoredProducts);
     setSales(shop.sales || []);
     setDebts(shop.debts || []);
+    // Programme de fidélité : { "<téléphone normalisé>": { name, count, lastDate } } —
+    // un compteur d'achats par numéro de client, pour signaler automatiquement les
+    // clients réguliers (voir finalizeCart) sans dépendre d'une base séparée.
+    setLoyaltyCustomers(shop.loyaltyCustomers || {});
     setExpenses(shop.expenses || []);
     setCashCounts(shop.cashCounts || []);
     setUnsoldLog(shop.unsoldLog || []);
@@ -9261,10 +9418,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setLowStockThreshold(shop.lowStockThreshold || 5);
     setDailySummaryHour(shop.dailySummaryHour ?? 7);
     setDailySummaryUtcOffsetMinutes(shop.dailySummaryUtcOffsetMinutes ?? -new Date().getTimezoneOffset());
+    setDailySummaryEnabled(shop.dailySummaryEnabled !== false);
     setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
     setShowBalls(shop.showBalls !== false);
     setSoundsEnabled(shop.soundsEnabled !== false);
     setHapticsEnabled(shop.hapticsEnabled !== false);
+    setLoyaltyRewardEnabled(!!shop.loyaltyRewardEnabled);
     setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(shop.soundChoice || {}) });
     setBallColor(shop.ballColor || "blue");
     setCategories(Array.isArray(shop.categories) ? shop.categories : []);
@@ -9479,7 +9638,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     (async () => {
       __mark("ShopApp : début du chargement des données");
-      const emptyShop = { products: [], sales: [], debts: [], expenses: [], cashFund: 0, draftCarts: [] };
+      const emptyShop = { products: [], sales: [], debts: [], loyaltyCustomers: {}, expenses: [], cashFund: 0, draftCarts: [] };
       // 1) Démarrage instantané depuis le cache local, pour que l'app soit
       //    immédiatement utilisable même sans réseau (mode hors-ligne complet).
       const cachedShop = readLocalCache(shopKey);
@@ -9606,12 +9765,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       products: overrides.products ?? products,
       sales: overrides.sales ?? allSales,
       debts: overrides.debts ?? debts,
+      loyaltyCustomers: overrides.loyaltyCustomers ?? loyaltyCustomers,
       expenses: overrides.expenses ?? expenses,
       cashCounts: overrides.cashCounts ?? cashCounts,
       unsoldLog: overrides.unsoldLog ?? unsoldLog,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
       dailySummaryHour: overrides.dailySummaryHour ?? dailySummaryHour,
+      dailySummaryEnabled: overrides.dailySummaryEnabled ?? dailySummaryEnabled,
       // Recalculé à chaque sauvegarde de ce réglage à partir du fuseau horaire ACTUEL
       // de l'appareil (voir le commentaire sur le state dailySummaryHour) : c'est la
       // fonction Supabase daily-summary qui en a besoin pour convertir l'heure locale
@@ -9625,6 +9786,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       showBalls: overrides.showBalls ?? showBalls,
       soundsEnabled: overrides.soundsEnabled ?? soundsEnabled,
       hapticsEnabled: overrides.hapticsEnabled ?? hapticsEnabled,
+      loyaltyRewardEnabled: overrides.loyaltyRewardEnabled ?? loyaltyRewardEnabled,
       soundChoice: overrides.soundChoice ?? soundChoice,
       ballColor: overrides.ballColor ?? ballColor,
       categories: overrides.categories ?? categories,
@@ -9647,6 +9809,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setProducts(next.products);
     setSales(next.sales);
     setDebts(next.debts);
+    setLoyaltyCustomers(next.loyaltyCustomers);
     setExpenses(next.expenses);
     setCashCounts(next.cashCounts || []);
     setUnsoldLog(next.unsoldLog || []);
@@ -9654,11 +9817,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setLowStockThreshold(next.lowStockThreshold);
     setDailySummaryHour(next.dailySummaryHour);
     setDailySummaryUtcOffsetMinutes(next.dailySummaryUtcOffsetMinutes);
+    setDailySummaryEnabled(next.dailySummaryEnabled);
     setDarkMode(next.darkMode);
     setThemeMode(next.themeMode);
     setShowBalls(next.showBalls);
     setSoundsEnabled(next.soundsEnabled);
     setHapticsEnabled(next.hapticsEnabled);
+    setLoyaltyRewardEnabled(next.loyaltyRewardEnabled);
     setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(next.soundChoice || {}) });
     setBallColor(next.ballColor);
     setCategories(Array.isArray(next.categories) ? next.categories : []);
@@ -9951,9 +10116,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // et bien présent dans input.files (bug navigateur connu). On vérifie donc
   // manuellement le contenu de l'input dès que l'onglet retrouve le focus.
   const productPhotoInputRef = useRef(null);
+  // Second input, avec capture="environment" (ouvre directement l'appareil photo natif
+  // plutôt que la galerie) — voir le bouton "Prendre une photo" du formulaire produit.
+  // Partage le même filet de secours ci-dessous (checkPendingPhoto), puisque c'est
+  // justement pour ce cas — retour de l'appareil photo natif — qu'il a été prévu.
+  const productPhotoCameraInputRef = useRef(null);
   useEffect(() => {
     const checkPendingPhoto = () => {
-      const input = productPhotoInputRef.current;
+      const input = (productPhotoInputRef.current && productPhotoInputRef.current.files && productPhotoInputRef.current.files[0]) ? productPhotoInputRef.current : productPhotoCameraInputRef.current;
       if (!input || !input.files || !input.files[0]) return;
       const file = input.files[0];
       input.value = "";
@@ -10017,12 +10187,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
           unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
           dailyMode: pDailyMode,
+          barcode: pBarcode.trim() || null,
           updatedAt: Date.now(),
         } : p),
       });
       logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}`);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setShowAddProduct(false);
+      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPBarcode(""); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -10046,12 +10217,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
       unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
       dailyMode: pDailyMode,
+      barcode: pBarcode.trim() || null,
       looseUnits: 0,
       updatedAt: Date.now(),
     };
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setShowAddProduct(false);
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPBarcode(""); setShowAddProduct(false);
   };
   // Ouvre le formulaire déjà rempli avec les valeurs du produit, pour corriger
   // une erreur de saisie (nom, quantité, prix, photo...) sans le recréer.
@@ -10068,6 +10240,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPUnitsPerPack(p.unitsPerPack != null ? String(p.unitsPerPack) : "");
     setPUnitPrice(p.unitPrice != null ? String(p.unitPrice) : "");
     setPDailyMode(!!p.dailyMode);
+    setPBarcode(p.barcode || "");
     setError("");
     setShowAddProduct(true);
   };
@@ -10237,6 +10410,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ctx.fillStyle = spec;
         ctx.fillRect(0, 0, W, H * 0.35);
       }
+      if (cardStyle.decor) drawCardDecor(ctx, cardStyle.decor, W, H);
       // Halo doux derrière le logo, pour un rendu plus premium.
       const halo = ctx.createRadialGradient(70 + 38, 74 + 38, 4, 70 + 38, 74 + 38, 90);
       halo.addColorStop(0, "rgba(139,133,242,0.35)");
@@ -10628,6 +10802,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         paidAmount: 0,
         updatedAt: Date.now(),
         source: "manual",
+        phone: newDebtPhone.trim(),
+        dueDate: newDebtDueDate || null,
       }],
       debtEvents: [...allDebtEvents, {
         id: newDebtId + "-ev",
@@ -10651,6 +10827,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setNewDebtAmount("");
     setNewDebtProduct("");
     setNewDebtDate("");
+    setNewDebtPhone("");
+    setNewDebtDueDate("");
     setNewDebtError("");
   };
   const renameShop = async () => {
@@ -10771,7 +10949,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const resetShopData = () => {
     // L'historique est permanent : avant de vider les ventes/dépenses, on recopie dans le journal
     // ce qui n'y figurait pas encore, pour que rien ne disparaisse de l'onglet Historique.
-    saveAll({ products: [], sales: [], debts: [], expenses: [], cashFund: 0, draftCarts: [], activeCartId: null, historyLog: [...historyLog, ...deriveLegacyHistory()] });
+    saveAll({ products: [], sales: [], debts: [], loyaltyCustomers: {}, expenses: [], cashFund: 0, draftCarts: [], activeCartId: null, historyLog: [...historyLog, ...deriveLegacyHistory()] });
     setConfirmReset(false);
     setShowSettings(false);
   };
@@ -10989,6 +11167,43 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCameraCheckoutPhotos([]);
     setCheckedCameraProductIds([]);
   };
+  // ---- Scan de code-barres à la caisse (onglet Vente) ----
+  // Même composant Scanner (@yudiel/react-qr-scanner) déjà utilisé pour la connexion
+  // employé — il lit aussi bien les QR codes que les codes-barres standards (EAN-13,
+  // etc.) sans configuration supplémentaire. Chaque code scanné est comparé au champ
+  // "barcode" (optionnel) des produits ; en cas de correspondance, le produit est
+  // ajouté au panier directement, sans avoir à le chercher/cliquer dans la liste.
+  const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
+  const [barcodeScanCameraError, setBarcodeScanCameraError] = useState(false);
+  const [barcodeScanMsg, setBarcodeScanMsg] = useState(""); // dernier résultat (trouvé ou non), bref
+  const barcodeScanCooldownRef = useRef(0); // évite d'ajouter 10x le même produit pendant qu'il reste dans le cadre
+  const openBarcodeScanner = () => {
+    if (!activeCart) createCart();
+    setBarcodeScanCameraError(false);
+    setBarcodeScanMsg("");
+    setShowBarcodeScanner(true);
+  };
+  const handleBarcodeScan = (result) => {
+    if (Date.now() < barcodeScanCooldownRef.current) return;
+    const raw = Array.isArray(result) ? result[0]?.rawValue : result?.rawValue || result;
+    const code = String(raw || "").trim();
+    if (!code) return;
+    barcodeScanCooldownRef.current = Date.now() + 1200;
+    const product = products.find((p) => p.barcode && p.barcode === code);
+    if (!product) {
+      setBarcodeScanMsg(tx(lang, "scanBarcodeNotFound"));
+      playSound("error");
+      return;
+    }
+    if (isProductFrozen(product.id)) {
+      setBarcodeScanMsg(t(lang, "productFrozenMsg"));
+      return;
+    }
+    changeCartQty(activeCart.id, product, 1, "pack");
+    setBarcodeScanMsg(`✅ ${product.name}`);
+    playSound("success");
+    triggerHaptic("success");
+  };
 
   const addCameraCheckoutPhoto = async (e) => {
     const file = e.target.files && e.target.files[0];
@@ -11028,7 +11243,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
 
   const createCart = () => {
-    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: "cash", customer: "", phone: "", received: "" };
+    // Le champ téléphone du client est préempli avec l'indicatif du pays du boutiquier
+    // (boutiquier et client sont presque toujours dans le même pays) — ça évite de le
+    // retaper à chaque vente ; reste entièrement modifiable, y compris pour le supprimer.
+    const prefillDial = shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : "";
+    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: "cash", customer: "", phone: prefillDial, received: "" };
     const next = [...draftCarts, newCart];
     saveAll({ draftCarts: next, activeCartId: newCart.id });
   };
@@ -11214,6 +11433,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         updatedAt: Date.now(),
         source: "sale",
         transactionId,
+        // Le téléphone tapé dans le panier (pré-rempli avec l'indicatif du pays) est
+        // repris tel quel sur la dette, pour pouvoir envoyer un rappel WhatsApp plus
+        // tard sans le retaper. L'échéance, elle, n'est pas demandée à la vente —
+        // modifiable ensuite depuis l'onglet Dettes.
+        phone: cart.phone || "",
+        dueDate: null,
       }];
       nextDebtEvents = [...allDebtEvents, {
         id: newDebtId + "-ev",
@@ -11229,11 +11454,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       newHistory.push(makeHistoryEntry("debtCreated", { refId: newDebtId + "-ev", date: dateNow, amount: total, customer: cart.customer.trim(), product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", "), source: "sale" }));
     }
     const nextCarts = draftCarts.filter((c) => c.id !== cartId);
+    const { nextLoyaltyCustomers, loyaltyInfo } = incrementLoyalty(cart.phone, cart.customer);
     saveAll({
       products: nextProducts,
       sales: [...allSales, ...newSales],
       debts: nextDebts,
       debtEvents: nextDebtEvents,
+      loyaltyCustomers: nextLoyaltyCustomers,
       historyLog: [...historyLog, ...newHistory],
       draftCarts: nextCarts,
       activeCartId: activeCartId === cartId ? (nextCarts[0] ? nextCarts[0].id : null) : activeCartId,
@@ -11242,7 +11469,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim() });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim(), loyalty: loyaltyInfo });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -11535,11 +11762,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         })];
         if (action.payment === "credit") {
           const newDebtId = Date.now().toString() + Math.random().toString(36).slice(2, 7) + "-debt";
-          nextDebts = [...debts, { id: newDebtId, customer, amount: total, product: resolved.map((r) => `${r.product.name} x${r.qty}`).join(", "), date: dateNow, paid: false, paidAmount: 0, updatedAt: Date.now(), source: "sale", transactionId }];
+          // action.phone : numéro WhatsApp du client, seulement si le boutiquier l'a donné
+          // explicitement à l'assistant (voir le schéma "record_sale" plus bas) — optionnel.
+          nextDebts = [...debts, { id: newDebtId, customer, amount: total, product: resolved.map((r) => `${r.product.name} x${r.qty}`).join(", "), date: dateNow, paid: false, paidAmount: 0, updatedAt: Date.now(), source: "sale", transactionId, phone: action.phone ? action.phone.trim() : "", dueDate: null }];
           nextDebtEvents = [...allDebtEvents, { id: newDebtId + "-ev", debtId: newDebtId, type: "created", customer, amount: total, product: resolved.map((r) => `${r.product.name} x${r.qty}`).join(", "), date: dateNow, source: "sale" }];
           newHistory.push(makeHistoryEntry("debtCreated", { refId: newDebtId + "-ev", date: dateNow, amount: total, customer, product: resolved.map((r) => `${r.product.name} x${r.qty}`).join(", "), source: "sale" }));
         }
-        saveAll({ products: nextProducts, sales: [...allSales, ...newSales], debts: nextDebts, debtEvents: nextDebtEvents, historyLog: [...historyLog, ...newHistory] });
+        const { nextLoyaltyCustomers } = incrementLoyalty(action.phone, customer);
+        saveAll({ products: nextProducts, sales: [...allSales, ...newSales], debts: nextDebts, debtEvents: nextDebtEvents, loyaltyCustomers: nextLoyaltyCustomers, historyLog: [...historyLog, ...newHistory] });
         logAction(`${t(lang, "logSaleRecorded")} : ${resolved.map((r) => `${r.product.name} x${r.qty}`).join(", ")} — ${localizedNumber(total)}`);
         playSound("success");
         triggerHaptic("success");
@@ -13115,15 +13345,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
            rendu final (après zoom) occupe exactement 100vh, comme pour la zone de contenu
            principale à droite (où le zoom est lui appliqué à un conteneur interne défilant
            plutôt qu'au conteneur externe de hauteur fixe — la même règle s'applique ici). */
-        <div className="shrink-0" style={{ width: sidebarWidth, position: "relative", background: darkMode ? "#0a0d14" : INDIGO, height: "calc(100vh / 1.35)", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35 }}>
-          {/* Poignée de redimensionnement : fine zone invisible sur le bord droit du
-              panneau, entre le bleu et le blanc — glisser latéralement change sa largeur
-              (160 à 320px), mémorisé pour les prochaines sessions. */}
+        <div className="shrink-0" style={{ width: sidebarWidth, position: "relative", background: darkMode ? "#0a0d14" : INDIGO, height: "calc(100vh / 1.35)", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35, userSelect: "none", WebkitUserSelect: "none" }}>
+          {/* Poignée de redimensionnement : fine zone sur le bord droit du panneau, entre
+              le bleu et le blanc — glisser latéralement change sa largeur (160 à 320px),
+              mémorisé pour les prochaines sessions. La zone cliquable (8px) reste plus
+              large que le trait affiché, pour rester facile à attraper ; le trait lui-même
+              n'apparaît qu'au survol ou pendant le glissement, afin de ne rien afficher en
+              temps normal tout en restant découvrable. */}
           <div
             onMouseDown={handleSidebarResizeStart}
+            onMouseEnter={() => setSidebarResizeHover(true)}
+            onMouseLeave={() => setSidebarResizeHover(false)}
             title=""
-            style={{ position: "absolute", top: 0, right: -4, width: 8, height: "100%", cursor: "col-resize", zIndex: 5 }}
-          />
+            style={{ position: "absolute", top: 0, right: -4, width: 8, height: "100%", cursor: "col-resize", zIndex: 5, display: "flex", justifyContent: "center" }}
+          >
+            <div
+              style={{
+                width: 3,
+                height: "100%",
+                borderRadius: 2,
+                background: "rgba(255,255,255,0.55)",
+                opacity: sidebarResizeHover || sidebarResizing ? 1 : 0,
+                transition: sidebarResizing ? "none" : "opacity 0.15s ease",
+              }}
+            />
+          </div>
           <div className="flex items-center gap-2 px-2 mb-8 shrink-0">
             {shopPhoto ? (
               <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/30" />
@@ -13174,7 +13420,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               return (
                 <button
                   key={item.id}
-                  onClick={() => { setTab(item.id); setShowAddProduct(false); }}
+                  onClick={() => { setTab(item.id); setShowAddProduct(false); setShowSettings(false); }}
                   className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0"
                   style={{
                     background: active ? "rgba(255,255,255,0.15)" : "transparent",
@@ -13197,7 +13443,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             })}
           </div>
           <div className="shrink-0">
-            <button onClick={() => setShowSettings(true)} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold w-full" style={{ color: "rgba(255,255,255,0.65)" }}>
+            <button onClick={() => setShowSettings(true)} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold w-full transition-all" style={{ background: showSettings ? "rgba(255,255,255,0.15)" : "transparent", color: showSettings ? "white" : "rgba(255,255,255,0.65)" }}>
               <Settings size={17} strokeWidth={2.25} />
               {t(lang, "settingsTitle")}
             </button>
@@ -13289,43 +13535,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           messages IA) sont maintenant affichées directement dans les onglets Vente et
           Assistant IA, avec une barre de progression, et ouvrent les paliers de paiement
           uniquement quand la limite est réellement atteinte. */}
-      {/* Enveloppe du glissement progressif entre onglets : position relative + overflow
-          hidden pour que l'aperçu de l'onglet voisin (ci-dessous) reste découpé dans
-          cette zone pendant le geste, sans déborder sur la nav ou le reste de l'écran. */}
       <div style={{ position: "relative", overflow: "hidden", flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-        {swipeDragX !== 0 && (() => {
-          const idx = swipeTabOrder.indexOf(tab);
-          const peekIdx = idx + (swipeDragX < 0 ? 1 : -1);
-          const peekTab = peekIdx >= 0 && peekIdx < swipeTabOrder.length ? swipeTabOrder[peekIdx] : null;
-          const meta = peekTab ? SWIPE_TAB_META[peekTab] : null;
-          if (!meta) return null;
-          const width = (typeof window !== "undefined" && window.innerWidth) || 375;
-          const progress = Math.min(1, Math.abs(swipeDragX) / width);
-          const PeekIcon = meta.Icon;
-          return (
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                left: swipeDragX < 0 ? "auto" : 0,
-                right: swipeDragX < 0 ? 0 : "auto",
-                width: `${Math.abs(swipeDragX)}px`,
-                background: `linear-gradient(135deg, ${meta.grad[0]}, ${meta.grad[1]})`,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 10,
-                opacity: 0.35 + progress * 0.65,
-                zIndex: 0,
-              }}
-            >
-              <PeekIcon size={34} color="white" style={{ opacity: 0.9 }} />
-              <span style={{ color: "white", fontSize: 13, fontWeight: 700, opacity: 0.9, whiteSpace: "nowrap" }}>{meta.label}</span>
-            </div>
-          );
-        })()}
-      <div data-kbscroll="true" ref={contentScrollRef} onTouchStart={handleTabSwipeStart} onTouchMove={handleTabSwipeMove} onTouchEnd={handleTabSwipeEnd} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, minHeight: 0, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined, transform: swipeDragX !== 0 ? `translateX(${swipeDragX}px)` : undefined, transition: swipeTransitioning ? "transform 240ms cubic-bezier(0.22,1,0.36,1)" : "none", background: T.bg }}>
+      <div data-kbscroll="true" ref={contentScrollRef} onTouchStart={handleTabSwipeStart} onTouchEnd={handleTabSwipeEnd} className={isDesktop ? "flex-1 px-8 py-6" : "flex-1 px-4 py-4 pb-56"} style={{ position: "relative", zIndex: 1, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", maxWidth: isDesktop ? 900 : "none", width: "100%", margin: isDesktop ? "0 auto" : "0", zoom: isDesktop ? 1.35 : 1, minHeight: 0, paddingBottom: !isDesktop && tab === "sale" && showPaymentShortcut ? "calc(14rem + 72px + env(safe-area-inset-bottom, 0px))" : undefined, background: T.bg }}>
       {/* pb-56 (au lieu de pb-40) : laisse assez d'espace en bas pour que le dernier élément
           d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
           "Démasquer les données" quand on scrolle tout en bas. */}
@@ -13560,6 +13771,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <input autoComplete="off" placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <textarea placeholder={t(lang, "productDescription")} value={pDescription} onChange={(e) => setPDescription(e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2 text-sm mb-3 resize-none" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <input autoComplete="off" placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            <input autoComplete="off" placeholder={tx(lang, "productBarcodeLabel")} type="text" inputMode="numeric" value={pBarcode} onChange={(e) => setPBarcode(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <div className="mb-3">
               <select
                 value={pCategory}
@@ -13635,18 +13847,32 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             <div className="mb-3">
               <label className="text-xs block mb-1" style={{ color: T.muted }}>{t(lang, "productPhoto")}</label>
-              <button
-                type="button"
-                onClick={() => productPhotoInputRef.current && productPhotoInputRef.current.click()}
-                className="text-xs px-3 py-2 rounded-lg font-semibold"
-                style={{ background: T.accent || "#1B3A5C", color: "#fff" }}
-              >
-                🖼️ Choisir un fichier
-              </button>
+              <div className="flex gap-2 flex-wrap">
+                <button
+                  type="button"
+                  onClick={() => productPhotoCameraInputRef.current && productPhotoCameraInputRef.current.click()}
+                  className="text-xs px-3 py-2 rounded-lg font-semibold flex items-center gap-1.5"
+                  style={{ background: T.accent || "#1B3A5C", color: "#fff" }}
+                >
+                  <Camera size={13} /> {t(lang, "cameraCheckoutTakePhoto")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => productPhotoInputRef.current && productPhotoInputRef.current.click()}
+                  className="text-xs px-3 py-2 rounded-lg font-semibold"
+                  style={{ background: T.input, color: T.text, border: `1px solid ${T.border}` }}
+                >
+                  🖼️ Choisir un fichier
+                </button>
+              </div>
+              {/* capture="environment" : sur mobile, ouvre directement l'appareil photo natif
+                  du téléphone (caméra arrière) au lieu de passer par la galerie — l'image
+                  prise est ensuite traitée par le même handlePhotoChange que le choix de
+                  fichier classique. Sans effet sur desktop (où "capture" est ignoré), d'où
+                  le second bouton "Choisir un fichier" qui reste la seule option pertinente
+                  sur ordinateur. */}
+              <input ref={productPhotoCameraInputRef} type="file" accept="image/*" capture="environment" onChange={handlePhotoChange} className="hidden" />
               <input ref={productPhotoInputRef} type="file" accept="image/*" onChange={handlePhotoChange} className="hidden" />
-              <p className="text-[11px] mt-1" style={{ color: T.muted }}>
-                Prenez la photo avec l'appli Appareil photo de votre téléphone, puis revenez ici et choisissez-la depuis la galerie.
-              </p>
               {photoBusy && <p className="text-[11px] mt-1" style={{ color: T.muted }}>{t(lang, "processing")}</p>}
               {pPhoto && !photoBusy && (
                 <div style={{ position: "relative", display: "inline-block", marginTop: 8 }}>
@@ -14035,10 +14261,46 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                   </div>
                 )}
+                {showBarcodeScanner && (
+                  <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowBarcodeScanner(false)}>
+                    <div className="w-full max-w-md rounded-t-3xl p-4" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center justify-between mb-3">
+                        <p className="text-sm font-bold" style={{ color: T.text }}>{tx(lang, "scanBarcodeTitle")}</p>
+                        <button onClick={() => setShowBarcodeScanner(false)}><X size={18} color={T.muted} /></button>
+                      </div>
+                      {!barcodeScanCameraError ? (
+                        <div className="w-full aspect-square rounded-2xl overflow-hidden mb-3" style={{ background: "#0b0b12" }}>
+                          <React.Suspense fallback={null}>
+                            <Scanner
+                              onScan={handleBarcodeScan}
+                              onError={() => setBarcodeScanCameraError(true)}
+                              constraints={{ facingMode: "environment" }}
+                              styles={{ container: { width: "100%", height: "100%" } }}
+                            />
+                          </React.Suspense>
+                        </div>
+                      ) : (
+                        <div className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 mb-3" style={{ background: T.input, border: `2px dashed ${T.border}` }}>
+                          <ScanLine size={48} style={{ color: T.muted }} />
+                          <p className="text-xs text-center px-6" style={{ color: T.muted }}>{tx(lang, "scanBarcodeCameraError")}</p>
+                        </div>
+                      )}
+                      {barcodeScanMsg && <p className="text-sm text-center font-semibold" style={{ color: T.text }}>{barcodeScanMsg}</p>}
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-center gap-2 mb-3">
                   <div className="flex-1">
                     <SearchBox compact value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} />
                   </div>
+                  <button
+                    onClick={openBarcodeScanner}
+                    aria-label={tx(lang, "scanBarcodeBtn")}
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: darkMode ? "rgba(37,99,235,0.12)" : "#eff6ff", color: darkMode ? "#60a5fa" : "#2563eb", border: `1px solid ${darkMode ? "rgba(37,99,235,0.3)" : "#bfdbfe"}` }}
+                  >
+                    <ScanLine size={18} />
+                  </button>
                   {renderSortButton()}
                   <div className="flex items-center rounded-xl overflow-hidden shrink-0" style={{ border: `1px solid ${T.border}` }}>
                     <button
@@ -14356,6 +14618,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           </div>
                         );
                       })()}
+                      {(() => {
+                        // Aperçu fidélité : si ce numéro correspond à un client déjà connu,
+                        // montre son nombre d'achats avant même de valider la vente (le
+                        // compteur ne s'incrémente, lui, qu'à la finalisation — voir
+                        // incrementLoyalty dans finalizeCart).
+                        const key = normalizePhoneForWhatsApp(activeCart.phone);
+                        const known = key ? loyaltyCustomers[key] : null;
+                        if (!known || !known.count) return null;
+                        return (
+                          <p className="text-[11px] mt-1.5" style={{ color: T.muted }}>
+                            🎖️ {tx(lang, "loyaltyPurchaseCount").replace("{n}", known.count + 1)}
+                          </p>
+                        );
+                      })()}
                     </div>
                     {activeCart.payment === "cash" && (
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
@@ -14437,7 +14713,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
                 <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{t(lang, "noDebts")}</p>
                 <p className="text-xs mt-1" style={{ color: T.muted }}>{t(lang, "noDebtsEmptySubtitle")}</p>
-                <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full mt-5 flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
+                <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); setNewDebtPhone(shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : ""); }} className="w-full mt-5 flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
                   <Plus size={20} /> {t(lang, "debtAddBtn")}
                 </button>
               </div>
@@ -14448,18 +14724,26 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ fontSize: 40 }}>🧾</div>
                 </div>
                 <p className="text-sm font-bold mt-2 mb-4" style={{ color: T.text }}>{t(lang, "debtAddHeaderTitle")}</p>
-                <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); }} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
+                <button onClick={() => { setShowAddDebtModal(true); setNewDebtError(""); setNewDebtPhone(shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : ""); }} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
                   <Plus size={20} /> {t(lang, "debtAddBtn")}
                 </button>
               </div>
             )}
             {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} />}
             {unpaidDebts.length > 0 && filteredDebts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>Aucun résultat pour "{debtsSearch}".</p>}
-            {filteredDebts.map((d) => (
-              <div key={d.id} className="rounded-2xl p-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+            {filteredDebts.map((d) => {
+              // En retard : une échéance a été fixée et elle est passée (comparaison de
+              // simples chaînes "YYYY-MM-DD", comme todayKey() — pas de fuseau à gérer).
+              const overdue = !!d.dueDate && d.dueDate < todayKey();
+              const reminderPhone = normalizePhoneForWhatsApp(d.phone);
+              return (
+              <div key={d.id} className="rounded-2xl p-3" style={{ background: T.card, color: T.text, border: overdue ? `1px solid ${CLAY}` : darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-bold text-sm">{d.customer}</p>
+                    <p className="font-bold text-sm">
+                      {d.customer}
+                      {overdue && <span className="ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full" style={{ color: "#dc2626", background: "#fee2e2" }}>⏰ {tx(lang, "debtOverdueBadge")}</span>}
+                    </p>
                     <p className="text-xs" style={{ color: T.muted }}>{d.product} — {fcfa(d.amount)}</p>
                     <p className="text-[11px] mt-0.5" style={{ color: T.muted }}>
                       {t(lang, "debtSinceLabel")} {fullDate(d.date)} · {d.source === "manual" ? t(lang, "debtSourceManual") : t(lang, "debtSourceSale")}
@@ -14467,8 +14751,37 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {d.paidAmount > 0 && (
                       <p className="text-[11px] mt-0.5" style={{ color: GREEN }}>{t(lang, "alreadyPaid")}: {fcfa(d.paidAmount)} · {t(lang, "remainingToPay")}: {fcfa(remainingDebt(d))}</p>
                     )}
+                    {hasPermission("editDebts") && (
+                      debtEditingId === d.id ? (
+                        <div className="mt-2 flex flex-col gap-1.5" data-no-swipe>
+                          <input autoComplete="off" type="tel" inputMode="tel" value={debtEditPhone} onChange={(e) => setDebtEditPhone(e.target.value)}
+                            placeholder={shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? `${COUNTRY_DIAL_CODE[shopCountry]} ...` : tx(lang, "debtPhoneShort")}
+                            className="w-full border rounded-lg px-2.5 py-1.5 text-xs" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                          <input autoComplete="off" type="date" min={todayKey()} value={debtEditDueDate} onChange={(e) => setDebtEditDueDate(e.target.value)}
+                            className="w-full border rounded-lg px-2.5 py-1.5 text-xs" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                          <div className="flex gap-1.5">
+                            <button onClick={() => setDebtEditingId(null)} className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold" style={{ background: T.input, color: T.text }}>{t(lang, "cancel")}</button>
+                            <button onClick={() => {
+                              saveAll({ debts: debts.map((x) => (x.id === d.id ? { ...x, phone: debtEditPhone.trim(), dueDate: debtEditDueDate || null } : x)) });
+                              setDebtEditingId(null);
+                            }} className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold text-white" style={{ background: INDIGO }}>{t(lang, "confirmBtn")}</button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button onClick={() => { setDebtEditingId(d.id); setDebtEditPhone(d.phone || (shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : "")); setDebtEditDueDate(d.dueDate || ""); }}
+                          className="text-[11px] mt-1 underline" style={{ color: T.muted }}>
+                          {tx(lang, "debtDueDateShort")} : {d.dueDate ? fullDate(d.dueDate) : tx(lang, "debtSetDueDate")}
+                          {" · "}{tx(lang, "debtPhoneShort")} : {d.phone ? d.phone : tx(lang, "debtSetPhone")}
+                        </button>
+                      )
+                    )}
                   </div>
                   <div className="flex flex-col gap-1.5 shrink-0">
+                    {reminderPhone && (
+                      <a href={buildDebtReminderWhatsAppUrl(d)} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs font-bold px-3 py-2 rounded-xl text-white" style={{ background: "#25D366" }}>
+                        <MessageSquare size={14} /> {tx(lang, "debtSendReminder")}
+                      </a>
+                    )}
                     {hasPermission("editDebts") && (
                       <button onClick={() => {
                         const openConfirm = () => setConfirmModal({ message: t(lang, "confirmMarkPaid"), onConfirm: () => {
@@ -14497,7 +14810,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
         {false && tab === "stats" && !isActive && (
@@ -15920,9 +16234,28 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2"
               style={{ background: T.input, color: T.text, borderColor: T.border }}
             />
+            <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>{tx(lang, "debtPhoneFieldLabel")}</label>
+            <input autoComplete="off"
+              value={newDebtPhone}
+              onChange={(e) => setNewDebtPhone(e.target.value)}
+              type="tel"
+              inputMode="tel"
+              placeholder={shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? `${COUNTRY_DIAL_CODE[shopCountry]} ...` : ""}
+              className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2"
+              style={{ background: T.input, color: T.text, borderColor: T.border }}
+            />
+            <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>{tx(lang, "debtDueDateFieldLabel")}</label>
+            <input autoComplete="off"
+              value={newDebtDueDate}
+              onChange={(e) => setNewDebtDueDate(e.target.value)}
+              type="date"
+              min={todayKey()}
+              className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2"
+              style={{ background: T.input, color: T.text, borderColor: T.border }}
+            />
             {newDebtError && <p className="text-xs mb-2" style={{ color: CLAY }}>{newDebtError}</p>}
             <div className="flex gap-2 mt-3">
-              <button onClick={() => { setShowAddDebtModal(false); setNewDebtCustomer(""); setNewDebtAmount(""); setNewDebtProduct(""); setNewDebtDate(""); setNewDebtError(""); }} className="flex-1 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>
+              <button onClick={() => { setShowAddDebtModal(false); setNewDebtCustomer(""); setNewDebtAmount(""); setNewDebtProduct(""); setNewDebtDate(""); setNewDebtPhone(""); setNewDebtDueDate(""); setNewDebtError(""); }} className="flex-1 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>
                 {t(lang, "cancel")}
               </button>
               <button onClick={submitAddDebt} className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: INDIGO }}>
@@ -16045,6 +16378,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "defpayment" && (t(lang, "setPaiementParDefaut"))}
                   {settingsField === "debtdelay" && (t(lang, "setDettesClients"))}
                   {settingsField === "benchmark" && t(lang, "benchmarkTitle")}
+                  {settingsField === "loyalty" && tx(lang, "loyaltyRewardSettingTitle")}
                   {settingsField === "export" && (t(lang, "setExporterLesDonnees"))}
                   {settingsField === "resetdata" && (t(lang, "setReinitialiser"))}
                   {settingsField === "aiprefs" && (t(lang, "setPreferencesAssistant"))}
@@ -16156,7 +16490,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "haptics", label: t(lang, "setVibrations"), right: hapticsEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "ballcolor", label: t(lang, "ballColor"), right: null },
                 { id: "threshold", label: t(lang, "stockAlert"), right: lowStockThreshold },
-                { id: "dailysummary", label: tx(lang, "dailySummaryTimeLabel"), right: `${String(dailySummaryHour).padStart(2, "0")}:00` },
+                { id: "dailysummary", label: tx(lang, "dailySummaryTimeLabel"), right: dailySummaryEnabled ? `${String(dailySummaryHour).padStart(2, "0")}:00` : t(lang, "setDesactive") },
                 { id: "currency", label: t(lang, "setDevise"), right: `${CURRENT_CURRENCY.symbol} ${currency}` },
                 ...(lang === "ar" ? [{ id: "digits", label: "الأرقام", right: arabicDigits ? "١٢٣" : "123" }] : []),
               ].map((item) => (
@@ -16185,6 +16519,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "defpayment", icon: CreditCard, label: t(lang, "setPaiementParDefaut"), desc: "Espèces, Mobile Money" },
                 { id: "debtdelay", icon: Clock, label: t(lang, "setDettesClients"), desc: t(lang, "setDelaiDeRelance") },
                 { id: "benchmark", icon: BarChart3, label: t(lang, "benchmarkTitle"), desc: benchmarkOptIn ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
+                { id: "loyalty", icon: Gift, label: tx(lang, "loyaltyRewardSettingTitle"), desc: loyaltyRewardEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
               ].map((item) => { const Icon = item.icon; return (
                 <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
                   <div style={{ width: 38, height: 38, borderRadius: 11, flexShrink: 0, background: "#fbbf241a", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon size={17} color="#fbbf24" /></div>
@@ -16474,20 +16809,33 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
               {/* Boutique — Heure du résumé quotidien automatique (notification push) */}
               {settingsField === "dailysummary" && (
-                <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
-                  <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "dailySummaryTimeLabel")}</div>
-                  <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <select
-                      value={dailySummaryHour}
-                      onChange={(e) => saveAll({ dailySummaryHour: parseInt(e.target.value, 10) })}
-                      style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }}
-                    >
-                      {Array.from({ length: 24 }, (_, h) => (
-                        <option key={h} value={h}>{String(h).padStart(2, "0")}:00</option>
-                      ))}
-                    </select>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div style={{ flex: 1, paddingRight: 12 }}>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{tx(lang, "dailySummaryEnabledLabel")}</div>
+                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{tx(lang, "dailySummaryEnabledDesc")}</div>
+                    </div>
+                    <button onClick={() => saveAll({ dailySummaryEnabled: !dailySummaryEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: dailySummaryEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: dailySummaryEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                      <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                    </button>
                   </div>
-                  <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{tx(lang, "dailySummaryTimeDesc")}</p>
+                  {dailySummaryEnabled && (
+                    <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                      <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "dailySummaryTimeLabel")}</div>
+                      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                        <select
+                          value={dailySummaryHour}
+                          onChange={(e) => saveAll({ dailySummaryHour: parseInt(e.target.value, 10) })}
+                          style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }}
+                        >
+                          {Array.from({ length: 24 }, (_, h) => (
+                            <option key={h} value={h}>{String(h).padStart(2, "0")}:00</option>
+                          ))}
+                        </select>
+                      </div>
+                      <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{tx(lang, "dailySummaryTimeDesc")}</p>
+                    </div>
+                  )}
                 </div>
               )}
               {settingsField === "sharecard" && (
@@ -16599,6 +16947,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <div style={{ color: T.muted, fontSize: 11 }}>{t(lang, "setTuPeuxVoirLaComparaison")}</div>
                     </div>
                   )}
+                </div>
+              )}
+              {settingsField === "loyalty" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div style={{ flex: 1, paddingRight: 12 }}>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{tx(lang, "loyaltyRewardSettingTitle")}</div>
+                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{tx(lang, "loyaltyRewardSettingDesc")}</div>
+                    </div>
+                    <button onClick={() => saveAll({ loyaltyRewardEnabled: !loyaltyRewardEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: loyaltyRewardEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: loyaltyRewardEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                      <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                    </button>
+                  </div>
                 </div>
               )}
               {/* Données — Export CSV */}
@@ -17226,6 +17587,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <span>{localizedNumber(pendingReceipt.total)} {CURRENT_CURRENCY.symbol}</span>
               </div>
             </div>
+            {pendingReceipt.loyalty && (() => {
+              // La bannière "récompense" n'apparaît que si le propriétaire l'a explicitement
+              // activée dans Paramètres > Ventes & finances (loyaltyRewardEnabled) — l'appli ne
+              // doit jamais annoncer une récompense de sa propre initiative. Le compteur d'achats,
+              // lui, reste une simple information et s'affiche toujours.
+              const showReward = pendingReceipt.loyalty.isReward && loyaltyRewardEnabled;
+              return (
+                <div className="rounded-xl px-3 py-2 mb-3 text-center" style={{ background: showReward ? "#fef3c7" : darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }}>
+                  <p className="text-xs font-semibold" style={{ color: showReward ? "#92400e" : (darkMode ? "#eceef5" : CHARCOAL) }}>
+                    🎖️ {tx(lang, "loyaltyPurchaseCount").replace("{n}", pendingReceipt.loyalty.count)}
+                  </p>
+                  {showReward && (
+                    <p className="text-xs font-bold mt-1" style={{ color: "#92400e" }}>{tx(lang, "loyaltyRewardBanner")}</p>
+                  )}
+                </div>
+              );
+            })()}
+            )}
             {normalizePhoneForWhatsApp(pendingReceipt.phone) && !receiptAskingPhone && (
               <a
                 href={buildReceiptWhatsAppUrl(pendingReceipt)}
