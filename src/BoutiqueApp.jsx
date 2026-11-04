@@ -4264,6 +4264,8 @@ const EXTRA_UI = {
   shareCardPreview: { fr: "Aperçu", en: "Preview", ar: "معاينة", es: "Vista previa", pt: "Pré-visualização", zh: "预览", vi: "Xem trước", de: "Vorschau", ru: "Предпросмотр", hi: "पूर्वावलोकन", ta: "முன்னோட்டம்", bn: "প্রিভিউ", ur: "پیش منظر", id: "Pratinjau", tr: "Önizleme", ko: "미리보기", ja: "プレビュー", it: "Anteprima", nl: "Voorbeeld", sw: "Muhtasari", ha: "Duba kafin", bm: "Filɛli", tl: "Preview", te: "ప్రివ్యూ", th: "ตัวอย่าง", wo: "Xool bu jëkk", pl: "Podgląd", yo: "Àkíyèsí", am: "ቅድመ እይታ", zu: "Ukubuka kuqala" },
 };
 const tx = (lang, key) => (EXTRA_UI[key] && (EXTRA_UI[key][lang] || EXTRA_UI[key].en || EXTRA_UI[key].fr)) || "";
+EXTRA_UI.sidebarCollapse = { fr: "Réduire le menu", en: "Collapse menu", ar: "طي القائمة", es: "Contraer menú", pt: "Recolher menu", zh: "收起菜单", vi: "Thu gọn menu", de: "Menü einklappen", ru: "Свернуть меню", hi: "मेनू छोटा करें", ta: "மெனுவைச் சுருக்கு", bn: "মেনু সংকুচিত করুন", ur: "مینو سکیڑیں", id: "Ciutkan menu", tr: "Menüyü daralt", ko: "메뉴 축소", ja: "メニューを折りたたむ", it: "Comprimi menu", nl: "Menu inklappen", sw: "Punguza menyu", ha: "Rage menu", bm: "Ka menu dɔgɔya", tl: "I-collapse ang menu", te: "మెనూను కుదించండి", th: "ย่อเมนู", wo: "Wàññi menu", pl: "Zwiń menu", yo: "Dín àtòjọ kù", am: "ዝርዝሩን አጥብብ", zu: "Finyeza imenyu" };
+EXTRA_UI.sidebarExpand = { fr: "Déplier le menu", en: "Expand menu", ar: "توسيع القائمة", es: "Expandir menú", pt: "Expandir menu", zh: "展开菜单", vi: "Mở rộng menu", de: "Menü erweitern", ru: "Развернуть меню", hi: "मेनू विस्तृत करें", ta: "மெனுவை விரிவாக்கு", bn: "মেনু প্রসারিত করুন", ur: "مینو پھیلائیں", id: "Perluas menu", tr: "Menüyü genişlet", ko: "메뉴 펼치기", ja: "メニューを展開", it: "Espandi menu", nl: "Menu uitklappen", sw: "Panua menyu", ha: "Fadada menu", bm: "Ka menu fanga", tl: "I-expand ang menu", te: "మెనూను విస్తరించండి", th: "ขยายเมนู", wo: "Yiwi menu", pl: "Rozwiń menu", yo: "Fẹ àtòjọ sí i", am: "ዝርዝሩን ዘርጋ", zu: "Nweba imenyu" };
 EXTRA_UI.histSaleCancelled = { am: "ሽያጭ ተሰርዟል", ar: "بيع ملغى", bm: "Feereli dabilalen", bn: "বিক্রি বাতিল", de: "Verkauf storniert", en: "Sale cancelled", es: "Venta anulada", fr: "Vente annulée", ha: "An soke sayarwa", hi: "बिक्री रद्द", id: "Penjualan dibatalkan", it: "Vendita annullata", nl: "Verkoop geannuleerd", ja: "販売取り消し", ko: "판매 취소됨", pl: "Sprzedaż anulowana", pt: "Venda cancelada", ru: "Продажа отменена", sw: "Mauzo yameghairiwa", ta: "விற்பனை ரத்து", te: "అమ్మకం రద్దయింది", th: "ยกเลิกการขายแล้ว", tl: "Nakansela ang benta", tr: "Satış iptal edildi", ur: "فروخت منسوخ", vi: "Đơn bán đã hủy", wo: "Jaay bi neenu na", yo: "A ti fagilé títà", zh: "销售已取消", zu: "Ukuthengisa kukhanseliwe" };
 EXTRA_UI.histStockRestored = { am: "ክምችት ተመልሷል", ar: "أُعيد المخزون", bm: "Marifa segira a yɔrɔ", bn: "স্টক ফিরিয়ে আনা হয়েছে", de: "Bestand wiederhergestellt", en: "Stock restored", es: "Stock restablecido", fr: "Stock remis en place", ha: "An mayar da kaya", hi: "स्टॉक वापस जोड़ा गया", id: "Stok dikembalikan", it: "Scorte ripristinate", nl: "Voorraad hersteld", ja: "在庫を戻しました", ko: "재고 복원됨", pl: "Stan magazynowy przywrócony", pt: "Estoque restabelecido", ru: "Остатки восстановлены", sw: "Bidhaa zimerudishwa", ta: "இருப்பு மீட்கப்பட்டது", te: "స్టాక్ తిరిగి చేర్చబడింది", th: "คืนสต็อกแล้ว", tl: "Naibalik ang stock", tr: "Stok geri yüklendi", ur: "اسٹاک بحال کر دیا گیا", vi: "Đã hoàn lại tồn kho", wo: "Stock bi délsi na", yo: "A ti dá ọjà padà", zh: "库存已恢复", zu: "Isitoko sibuyisiwe" };
 EXTRA_UI.histDebtRemoved = { am: "ተያያዥ ዕዳ ተሰርዟል", ar: "أُلغي الدين المرتبط", bm: "Juru minɛn dabilalen", bn: "যুক্ত বাকি বাতিল", de: "Zugehörige Schuld storniert", en: "Linked debt cancelled", es: "Deuda vinculada anulada", fr: "Dette liée annulée", ha: "An soke bashin da ke da alaƙa", hi: "जुड़ा उधार रद्द", id: "Utang terkait dibatalkan", it: "Debito collegato annullato", nl: "Bijbehorende schuld geannuleerd", ja: "関連する未払いを取り消しました", ko: "연결된 외상 취소됨", pl: "Powiązany dług anulowany", pt: "Dívida associada cancelada", ru: "Связанный долг отменён", sw: "Deni husika limeghairiwa", ta: "தொடர்புடைய கடன் ரத்து", te: "సంబంధిత బాకీ రద్దయింది", th: "ยกเลิกหนี้ที่เกี่ยวข้องแล้ว", tl: "Nakansela ang kaugnay na utang", tr: "Bağlı borç iptal edildi", ur: "جڑا ہوا ادھار منسوخ", vi: "Đã hủy khoản nợ liên quan", wo: "Boor bi ci jaay bi neenu na", yo: "A ti fagilé gbèsè tó so mọ́ ọn", zh: "关联欠款已取消", zu: "Isikweletu esixhumene sikhanseliwe" };
@@ -9046,6 +9048,23 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   });
   const sidebarWidthLiveRef = useRef(sidebarWidth);
   useEffect(() => { sidebarWidthLiveRef.current = sidebarWidth; }, [sidebarWidth]);
+  // Réduction du panneau latéral à une fine colonne d'icônes (comme Gemini) : mémorisée
+  // elle aussi, indépendamment de la largeur choisie (qu'on retrouve telle quelle en
+  // dépliant). Largeur fixe (avant zoom) choisie pour que les icônes restent centrées
+  // et cliquables confortablement.
+  const SIDEBAR_COLLAPSED_W = 60;
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    try {
+      return typeof window !== "undefined" && window.localStorage && window.localStorage.getItem("boutipro_sidebar_collapsed") === "1";
+    } catch (e) { return false; }
+  });
+  const toggleSidebarCollapsed = () => {
+    setSidebarCollapsed((prev) => {
+      const next = !prev;
+      try { window.localStorage.setItem("boutipro_sidebar_collapsed", next ? "1" : "0"); } catch (e) {}
+      return next;
+    });
+  };
   // sidebarResizeHover : la souris survole la poignée (sans forcément glisser) ;
   // sidebarResizing : le glissement est en cours. Les deux servent uniquement à
   // afficher une fine ligne claire sur la poignée, invisible le reste du temps,
@@ -13715,13 +13734,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
            rendu final (après zoom) occupe exactement 100vh, comme pour la zone de contenu
            principale à droite (où le zoom est lui appliqué à un conteneur interne défilant
            plutôt qu'au conteneur externe de hauteur fixe — la même règle s'applique ici). */
-        <div className="shrink-0" style={{ width: sidebarWidth, position: "relative", background: darkMode ? "#0a0d14" : INDIGO, height: "calc(100vh / 1.35)", padding: "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35, userSelect: "none", WebkitUserSelect: "none" }}>
+        <div className="shrink-0" style={{ width: sidebarCollapsed ? SIDEBAR_COLLAPSED_W : sidebarWidth, position: "relative", background: darkMode ? "#0a0d14" : INDIGO, height: "calc(100vh / 1.35)", padding: sidebarCollapsed ? "24px 8px" : "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35, userSelect: "none", WebkitUserSelect: "none", transition: sidebarResizing ? "none" : "width 0.18s ease, padding 0.18s ease" }}>
           {/* Poignée de redimensionnement : fine zone sur le bord droit du panneau, entre
               le bleu et le blanc — glisser latéralement change sa largeur (160 à 320px),
               mémorisé pour les prochaines sessions. La zone cliquable (8px) reste plus
               large que le trait affiché, pour rester facile à attraper ; le trait lui-même
               n'apparaît qu'au survol ou pendant le glissement, afin de ne rien afficher en
               temps normal tout en restant découvrable. */}
+          {!sidebarCollapsed && (
           <div
             onMouseDown={handleSidebarResizeStart}
             onMouseEnter={() => setSidebarResizeHover(true)}
@@ -13740,16 +13760,33 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               }}
             />
           </div>
-          <div className="flex items-center gap-2 px-2 mb-8 shrink-0">
+          )}
+          {/* Bouton pour réduire/déplier le panneau en fine colonne d'icônes, comme
+              dans Gemini — placé en haut, toujours visible, avant le bloc boutique. */}
+          <button
+            onClick={toggleSidebarCollapsed}
+            title={sidebarCollapsed ? tx(lang, "sidebarExpand") : tx(lang, "sidebarCollapse")}
+            aria-label={sidebarCollapsed ? tx(lang, "sidebarExpand") : tx(lang, "sidebarCollapse")}
+            className="flex items-center justify-center shrink-0"
+            style={{
+              width: 26, height: 26, borderRadius: 8, marginBottom: 14,
+              background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.75)",
+              alignSelf: sidebarCollapsed ? "center" : "flex-end", marginRight: sidebarCollapsed ? 0 : 2,
+            }}
+          >
+            {sidebarCollapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+          </button>
+          <div className={"flex items-center gap-2 px-2 mb-8 shrink-0" + (sidebarCollapsed ? " justify-center" : "")}>
             {shopPhoto ? (
-              <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/30" />
+              <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/30 shrink-0" />
             ) : (
               <img
                 src={`data:image/jpeg;base64,${APP_LOGO_B64}`}
                 alt={shopName}
-                className="w-9 h-9 rounded-full object-cover border-2 border-white/30"
+                className="w-9 h-9 rounded-full object-cover border-2 border-white/30 shrink-0"
               />
             )}
+            {!sidebarCollapsed && (
             <div className="min-w-0">
               <p className="text-white font-bold text-sm truncate">{shops.find((s) => s.id === activeShopId)?.name || shopName}</p>
               <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.6)" }}>{t(lang, "appName")}</p>
@@ -13759,6 +13796,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </button>
               )}
             </div>
+            )}
           </div>
           {/* Liste complète des onglets (y compris ceux regroupés sous "Plus" sur mobile,
               où la place manque) : sur ordinateur, autant tout afficher directement.
@@ -13791,7 +13829,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <button
                   key={item.id}
                   onClick={() => { setTab(item.id); setShowAddProduct(false); setShowSettings(false); }}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0"
+                  title={sidebarCollapsed ? item.label : ""}
+                  className={"flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0" + (sidebarCollapsed ? " justify-center px-0" : " px-3")}
                   style={{
                     background: active ? "rgba(255,255,255,0.15)" : "transparent",
                     color: active ? "white" : "rgba(255,255,255,0.65)",
@@ -13807,19 +13846,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <Icon size={15} color="white" strokeWidth={2.25} />
                     )}
                   </div>
-                  {item.label}
+                  {!sidebarCollapsed && item.label}
                 </button>
               );
             })}
           </div>
           <div className="shrink-0">
-            <button onClick={() => setShowSettings(true)} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold w-full transition-all" style={{ background: showSettings ? "rgba(255,255,255,0.15)" : "transparent", color: showSettings ? "white" : "rgba(255,255,255,0.65)" }}>
+            <button onClick={() => setShowSettings(true)} title={sidebarCollapsed ? t(lang, "settingsTitle") : ""} className={"flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold w-full transition-all" + (sidebarCollapsed ? " justify-center px-0" : " px-3")} style={{ background: showSettings ? "rgba(255,255,255,0.15)" : "transparent", color: showSettings ? "white" : "rgba(255,255,255,0.65)" }}>
               <Settings size={17} strokeWidth={2.25} />
-              {t(lang, "settingsTitle")}
+              {!sidebarCollapsed && t(lang, "settingsTitle")}
             </button>
-            <button onClick={() => { if (window.confirm(t(lang, "logoutConfirm"))) handleLogoutClean(); }} className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold w-full" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <button onClick={() => { if (window.confirm(t(lang, "logoutConfirm"))) handleLogoutClean(); }} title={sidebarCollapsed ? t(lang, "othDeconnexion") : ""} className={"flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold w-full" + (sidebarCollapsed ? " justify-center px-0" : " px-3")} style={{ color: "rgba(255,255,255,0.5)" }}>
               <LogOut size={17} strokeWidth={2.25} />
-              {t(lang, "othDeconnexion")}
+              {!sidebarCollapsed && t(lang, "othDeconnexion")}
             </button>
           </div>
         </div>
@@ -14308,7 +14347,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   >×</button>
                 </div>
               )}
-              {!pPhoto && !photoBusy && <p className="text-[11px] mt-1" style={{ color: "#e11d48" }}>{t(lang, "productPhotoRequiredHint")}</p>}
             </div>
             <button
               onClick={addProduct}
