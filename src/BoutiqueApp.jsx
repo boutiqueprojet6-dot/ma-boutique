@@ -5854,6 +5854,23 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   // Connexion "Continuer avec Google" — utilise le fournisseur OAuth natif de
   // Supabase (configuré côté dashboard, aucune clé secrète exposée ici).
   const [googleLoginBusy, setGoogleLoginBusy] = useState(false);
+  // Web/PWA uniquement : si l'utilisateur quitte la page Google "Choisir un compte" sans
+  // choisir (bouton retour, fermeture), la page est restaurée telle quelle avec le bouton
+  // encore en chargement. On remet donc le bouton à l'état normal dès le retour sur la page.
+  useEffect(() => {
+    if (isNativePlatformNow()) return;
+    const resetBusy = () => setGoogleLoginBusy(false);
+    const onPageShow = (e) => { if (e.persisted) resetBusy(); };
+    const onVisible = () => { if (document.visibilityState === "visible") resetBusy(); };
+    window.addEventListener("pageshow", onPageShow);
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("focus", resetBusy);
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("focus", resetBusy);
+    };
+  }, []);
   const loginWithGoogle = async () => {
     setGoogleLoginBusy(true);
     setError("");
@@ -12980,8 +12997,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   }, [settingsField]);
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen" style={{ background: darkMode ? "#0a0a14" : SAND, color: darkMode ? "#eceef5" : CHARCOAL }}>
-        <p className="text-sm">Chargement de la boutique…</p>
+      <div style={{ minHeight: "100vh", background: "linear-gradient(160deg, #1e2a5e 0%, #16204a 50%, #101638 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <img
+          src={`data:image/jpeg;base64,${APP_LOGO_B64}`}
+          alt="Boutipro"
+          style={{ width: 180, height: 180, borderRadius: 40, boxShadow: "0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(79,110,247,0.3)" }}
+        />
       </div>
     );
   }
@@ -18819,6 +18840,15 @@ function BoutiqueAppInner() {
   // dans un compte s'il existe, sinon suit directement le thème du système dès le premier lancement.
   const [authDark] = useState(getInitialDarkPreference);
   const [showSplash, setShowSplash] = useState(true);
+  // Anti-clignotement au démarrage : si une session existe déjà sur cet appareil, on garde
+  // l'écran de démarrage affiché jusqu'à ce que Supabase ait répondu (bootResolved), au lieu
+  // de montrer une fraction de seconde l'écran de connexion puis un spinner puis l'accueil.
+  // Sans session connue, aucune attente. Un délai de sécurité évite tout blocage.
+  const [bootResolved, setBootResolved] = useState(() => !hasExistingWebSession());
+  useEffect(() => {
+    const timer = setTimeout(() => setBootResolved(true), 3500);
+    return () => clearTimeout(timer);
+  }, []);
   // Masque l'écran de démarrage natif Android (image fixe, configuré avec
   // launchAutoHide=false dans capacitor.config.json) dès qu'on sait quoi afficher —
   // que ce soit l'accueil ou l'écran de connexion. Tant qu'il reste affiché, l'utilisateur
@@ -18952,6 +18982,7 @@ function BoutiqueAppInner() {
   const [googleSessionUser, setGoogleSessionUser] = useState(null);
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange(async (event, sessionData) => {
+     try {
       // Dès qu'on a une première réponse de Supabase (peu importe le résultat : connecté
       // ou non), on sait quoi afficher — inutile de garder le splash natif plus longtemps.
       setAppReady(true);
@@ -19037,6 +19068,9 @@ function BoutiqueAppInner() {
       } finally {
         setCheckingGoogleOnboarding(false);
       }
+     } finally {
+      setBootResolved(true);
+     }
     });
     return () => listener.subscription.unsubscribe();
   }, []);
@@ -19065,7 +19099,7 @@ function BoutiqueAppInner() {
     changeLang(l);
     setLangChosen(true);
   };
-  if (showSplash) {
+  if (showSplash || (!bootResolved && !session)) {
     return (
       <div style={{ minHeight: "100vh", background: "linear-gradient(160deg, #1e2a5e 0%, #16204a 50%, #101638 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <style>{"@keyframes splashPop { 0% { opacity: 0; transform: scale(0.7); } 60% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } } @keyframes splashFade { from { opacity: 0; } to { opacity: 1; } }"}</style>
