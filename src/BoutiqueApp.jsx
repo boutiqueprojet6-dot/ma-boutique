@@ -8670,27 +8670,6 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const interval = setInterval(ping, 3 * 60 * 1000);
     return () => { cancelled = true; clearInterval(interval); };
   }, [isDemo, activeEmployee, activeShopId]);
-  // Présence du personnel (2/2) — côté propriétaire : rafraîchit la liste des employés
-  // (donc leur last_seen_at) toutes les 30 s tant que l'onglet Personnel est ouvert, pour
-  // que le statut "En ligne"/"Vu pour la dernière fois" reste à jour sans rouvrir l'écran.
-  useEffect(() => {
-    if (isDemo || !activeShopId || activeEmployee || tab !== "employees") return;
-    let cancelled = false;
-    const refresh = async () => {
-      try {
-        const { data: empRows } = await supabase.from("employees").select("*").eq("shop_id", activeShopId).order("created_at");
-        if (!cancelled && empRows) {
-          setEmployees(empRows.map((e) => ({
-            id: e.id, name: e.name, role: e.role, permissions: e.permissions || [],
-            pinHash: e.pin_hash, active: e.active, createdAt: e.created_at, qrToken: e.qr_token,
-            shiftSchedule: e.shift_schedule || null, lastSeenAt: e.last_seen_at || null,
-          })));
-        }
-      } catch (e) { /* best-effort */ }
-    };
-    const interval = setInterval(refresh, 30 * 1000);
-    return () => { cancelled = true; clearInterval(interval); };
-  }, [isDemo, activeShopId, activeEmployee, tab]);
   const [showAddEmployee, setShowAddEmployee] = useState(false);
   const [editingEmployeeId, setEditingEmployeeId] = useState(null);
   const [empName, setEmpName] = useState("");
@@ -8714,6 +8693,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return VALID_TABS.includes(saved) ? saved : "dashboard";
     } catch (e) { return "dashboard"; }
   });
+  // Présence du personnel (2/2) — côté propriétaire : rafraîchit la liste des employés
+  // (donc leur last_seen_at) toutes les 30 s tant que l'onglet Personnel est ouvert, pour
+  // que le statut "En ligne"/"Vu pour la dernière fois" reste à jour sans rouvrir l'écran.
+  useEffect(() => {
+    if (isDemo || !activeShopId || activeEmployee || tab !== "employees") return;
+    let cancelled = false;
+    const refresh = async () => {
+      try {
+        const { data: empRows } = await supabase.from("employees").select("*").eq("shop_id", activeShopId).order("created_at");
+        if (!cancelled && empRows) {
+          setEmployees(empRows.map((e) => ({
+            id: e.id, name: e.name, role: e.role, permissions: e.permissions || [],
+            pinHash: e.pin_hash, active: e.active, createdAt: e.created_at, qrToken: e.qr_token,
+            shiftSchedule: e.shift_schedule || null, lastSeenAt: e.last_seen_at || null,
+          })));
+        }
+      } catch (e) { /* best-effort */ }
+    };
+    const interval = setInterval(refresh, 30 * 1000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [isDemo, activeShopId, activeEmployee, tab]);
   // Sauvegarde l'onglet actif à chaque changement, en local et en miroir natif.
   useEffect(() => {
     try {
