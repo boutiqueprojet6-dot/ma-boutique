@@ -2,6 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import BoutiqueApp from "./BoutiqueApp.jsx";
 import "./index.css";
+// Import STATIQUE (et non plus dynamique via import()) : BoutiqueApp.jsx importe déjà
+// @capacitor/preferences de façon statique (voir son en-tête et backgroundPersistence.js),
+// donc l'import dynamique précédent ici n'apportait aucun gain réel (le module était de
+// toute façon déjà chargé en même temps que BoutiqueApp) — Vite/Rollup avertissait même
+// explicitement de ce mélange import statique + dynamique du même module ("dynamic import
+// will not move module into another chunk"), un cas limite qui peut perturber l'ordre
+// d'initialisation des chunks à la construction. Correctif suite à une erreur en
+// production ("Cannot access ... before initialization") qui n'apparaissait que sur le
+// bundle déployé (jamais reproduite en local), très probablement liée à ce mélange.
+import { Preferences } from "@capacitor/preferences";
 
 // IMPORTANT : window.Capacitor existe aussi en dehors de l'app native (PWA/site web),
 // car @capacitor/core l'injecte automatiquement dès qu'il est importé par un plugin
@@ -79,7 +89,7 @@ function renderApp() {
 }
 
 if (isCapacitorApp) {
-  import("@capacitor/preferences").then(async ({ Preferences }) => {
+  (async () => {
     try {
       const { keys } = await Preferences.keys();
       await Promise.all(
@@ -94,7 +104,7 @@ if (isCapacitorApp) {
       // Pas grave : l'app fonctionnera quand même, juste sans ce cache pour cette fois.
     }
     renderApp();
-  });
+  })();
 } else {
   renderApp();
 }
