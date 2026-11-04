@@ -5877,33 +5877,24 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // "Android" enregistré dans Google Cloud Console avec le nom de package de l'app et
         // l'empreinte SHA-1 du certificat de signature utilisé pour la build.)
         const { SocialLogin } = await import("@capgo/capacitor-social-login");
-        const res = await withLoginTimeout(SocialLogin.login({ provider: "google", options: {} }));
+        const res = await withLoginTimeout(SocialLogin.login({ provider: "google", options: { style: "standard" } }));
         const idToken = res && res.result && res.result.idToken;
         if (!idToken) throw new Error("Aucun jeton reçu de Google");
         const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
         if (oauthError) throw oauthError;
         setGoogleLoginBusy(false);
       } else {
-        // Web / PWA : on tente d'abord le même sélecteur de compte NATIF que l'app installée
-        // (FedCM/One Tap, via Google Identity Services — voir promptGoogleIdentitySignIn plus
-        // haut dans ce fichier), pour avoir le même rendu épuré ("Sélectionner un compte", sans
-        // page accounts.google.com complète) que l'APK ou que Claude. Pris en charge par Chrome/
-        // Edge sur Android et desktop ; indisponible sur Safari et Firefox, ou si les cookies
-        // tiers sont bloqués — dans ce cas on retombe automatiquement sur l'ancienne redirection
-        // classique (signInWithOAuth), qui continue donc de fonctionner partout.
-        try {
-          await withLoginTimeout(loadGoogleIdentityScript());
-          const idToken = await withLoginTimeout(promptGoogleIdentitySignIn());
-          const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
-          if (oauthError) throw oauthError;
-          setGoogleLoginBusy(false);
-        } catch (gisErr) {
+        // Web / PWA : redirection vers la page Google plein écran "Choisir un compte"
+        // (même rendu que l'écran de sélection de compte de Claude), au lieu de la petite
+        // fenêtre du navigateur (FedCM/One Tap). prompt=select_account force l'affichage
+        // de la liste des comptes même si un seul est connecté.
+        {
           const { error: oauthError } = await supabase.auth.signInWithOAuth({
             provider: "google",
             // "/" est désormais la page d'accueil PUBLIQUE (exigée par Google OAuth,
             // voir LandingScreen juste avant BoutiqueAppSafe) : après connexion, on
             // doit revenir sur "/app" (l'app elle-même), pas sur cette vitrine.
-            options: { redirectTo: window.location.origin + "/app" },
+            options: { redirectTo: window.location.origin + "/app", queryParams: { prompt: "select_account" } },
           });
           if (oauthError) throw oauthError;
           // La redirection vers Google se déclenche automatiquement ; l'utilisateur
