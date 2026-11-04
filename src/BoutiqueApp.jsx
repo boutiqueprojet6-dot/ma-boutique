@@ -48,6 +48,8 @@ import {
   Camera,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
+  ChevronDown,
   Volume2,
   Palette,
   HelpCircle,
@@ -152,6 +154,21 @@ import { createClient } from "@supabase/supabase-js";
 // stockage natif Preferences (où se trouve le vrai "code_verifier" PKCE), causant
 // l'erreur "invalid flow state, no valid flow state found" à l'échange du code.
 // On vérifie donc window.Capacitor À CHAQUE appel, pas une fois pour toutes.
+// Repère une session déjà ouverte (quelqu'un déjà connecté auparavant sur cet appareil/
+// navigateur) en cherchant la clé que Supabase utilise lui-même pour sauvegarder la session
+// dans localStorage ("sb-<réf-projet>-auth-token"). Sert à ne montrer la vitrine publique
+// (LandingScreen, route "/") qu'à un tout nouveau visiteur, jamais à quelqu'un qui revient
+// avec un compte déjà utilisé — voir BoutiqueAppSafe plus bas.
+function hasExistingWebSession() {
+  if (typeof window === "undefined") return false;
+  try {
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const k = window.localStorage.key(i);
+      if (k && k.indexOf("sb-") === 0 && k.indexOf("-auth-token") !== -1) return true;
+    }
+  } catch (e) { /* stockage indisponible : on considère qu'il n'y a pas de session connue */ }
+  return false;
+}
 function nativeBridgeReady() {
   return typeof window !== "undefined" && !!window.Capacitor;
 }
@@ -394,6 +411,20 @@ function loadGoogleIdentityScript() {
   });
   return _gisScriptPromise;
 }
+// Filet de sécurité pour la connexion Google : si la promesse donnée (plugin natif,
+// script Google, etc.) ne se résout ni ne rejette jamais — un cas réel observé (fenêtre
+// fermée sans que l'événement correspondant ne soit géré, plugin natif qui reste bloqué,
+// réseau qui ne répond pas...) — on force un rejet après le délai indiqué, plutôt que de
+// laisser le petit cercle de chargement tourner indéfiniment sans jamais rien signaler.
+function withLoginTimeout(promise, ms = 20000) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error("GOOGLE_LOGIN_TIMEOUT")), ms);
+    promise.then(
+      (value) => { clearTimeout(timer); resolve(value); },
+      (err) => { clearTimeout(timer); reject(err); }
+    );
+  });
+}
 // Déclenche le sélecteur de compte natif (FedCM/One Tap) et résout avec le jeton d'ID Google
 // renvoyé, ou rejette si le navigateur ne le supporte pas / l'affiche pas (Safari, Firefox,
 // cookies tiers bloqués, etc.) — auquel cas loginWithGoogle retombe sur l'ancien flux par
@@ -414,9 +445,18 @@ function promptGoogleIdentitySignIn() {
       });
       window.google.accounts.id.prompt((notification) => {
         if (settled) return;
+        // isDismissedMoment : l'utilisateur a fermé lui-même la fenêtre de sélection de
+        // compte (clic en dehors, touche Échap, croix...) sans en choisir un. Avant cet
+        // ajout, ce cas précis ne déclenchait ni resolve() ni reject() : la promesse restait
+        // en attente pour toujours, et le petit cercle de chargement tournait indéfiniment
+        // sans jamais afficher d'erreur ni redonner la main à l'utilisateur.
         const unavailable =
-          notification && ((notification.isNotDisplayed && notification.isNotDisplayed()) || (notification.isSkippedMoment && notification.isSkippedMoment()));
-        if (unavailable) reject(new Error("GIS_PROMPT_UNAVAILABLE"));
+          notification && (
+            (notification.isNotDisplayed && notification.isNotDisplayed()) ||
+            (notification.isSkippedMoment && notification.isSkippedMoment()) ||
+            (notification.isDismissedMoment && notification.isDismissedMoment())
+          );
+        if (unavailable) { settled = true; reject(new Error("GIS_PROMPT_UNAVAILABLE")); }
       });
     } catch (err) {
       reject(err);
@@ -540,6 +580,14 @@ const EMPLOYEE_ROLES = {
     descKey: "roleSupervisorDesc",
     permissions: ["viewStock", "viewDebts", "viewCash", "viewStats"],
   },
+};
+// Couleur d'accent par rôle, pour l'onglet Personnel (badge de rôle + avatar) — purement
+// visuel, aide à repérer un rôle d'un coup d'œil dans une liste un peu longue.
+const ROLE_COLOR = {
+  vendeur: "#2563eb",
+  gerant: "#7c3aed",
+  superviseur: "#d97706",
+  personnalise: "#0d9488",
 };
 // Ce qui reste TOUJOURS exclusif au propriétaire, quel que soit le rôle de l'employé :
 // gérer les employés, changer mot de passe/PIN du compte principal, abonnement, export/suppression de données,
@@ -742,8 +790,8 @@ const TRANSLATIONS = {
     restockForecast: "Prévision de réapprovisionnement", daysLeft: "jour(s) restant(s)", suggestedOrder: "Suggestion : commander environ", trustExcellent: "Excellent payeur", trustGood: "Bon payeur", trustOk: "Payeur correct", trustWatch: "À surveiller", trustHistory: "dette(s) réglée(s) sur", voiceListening: "Je vous écoute…", voiceNotSupported: "Dictée vocale non disponible sur cet appareil", benchmarkTitle: "Comparaison anonyme", benchmarkOptIn: "Comparer ma boutique anonymement", benchmarkOptInDesc: "Partagez vos moyennes de vente de façon anonyme pour voir comment vous vous situez par rapport à des boutiques similaires. Aucune donnée personnelle ou identifiable n'est partagée.", benchmarkYourShop: "Votre boutique", benchmarkAverage: "Moyenne des boutiques similaires", benchmarkNotEnough: "Pas encore assez de boutiques dans votre devise pour comparer.", avgDailySales: "Ventes moyennes/jour",
     arabicDigitsPromptTitle: "Chiffres arabes ou occidentaux ?", arabicDigitsPromptDesc: "Voulez-vous afficher les montants et dates avec les chiffres arabo-indiens (١٢٣) ou les chiffres occidentaux (123), les plus utilisés dans le commerce au quotidien ?", useArabicDigitsBtn: "Chiffres arabes (١٢٣)", useWesternDigitsBtn: "Chiffres occidentaux (123)",
     setBoutique: "Boutique", setVentesFinances: "Ventes & finances", setDonnees: "Données", setAssistantIa: "Assistant IA", setAPropos: "À propos", setCodePin: "Code PIN", setDevise: "Devise", setInfosBoutique: "Infos boutique", setCategories: "Catégories", setPaiementParDefaut: "Paiement par défaut", setDettesClients: "Dettes clients", setCaisse: "Caisse", setExporterLesDonnees: "Exporter les données", setReinitialiser: "Réinitialiser", setPreferencesAssistant: "Préférences assistant", setAlertes: "Alertes", setProfilPinPhoto: "Profil, PIN, photo", setNomCategoriesSeuils: "Nom, catégories, seuils", setModeSombreLangueBoules: "Mode sombre, langue, boules", setPaiementDettesCaisse: "Paiement, dettes, caisse", setSauvegardeExportReinitialisation: "Sauvegarde, export, réinitialisation", setRechercheWebHistorique: "Recherche web, historique", setNotifications: "Notifications", setStockDettesAbonnement: "Stock, dettes, abonnement", setVersionDeveloppeur: "Version, développeur", setReinitialiserLesDonnees: "Supprimer les données, déconnexion", setActive: "Activé", setDesactive: "Désactivé", setNomAdresseDevise: "Nom, adresse, devise", setProduitsRayons: "Produits & rayons", setSeuilsDeStock: "Seuils de stock", setAlerteStockBas: "Alerte stock bas", setDelaiDeRelance: "Délai de relance", setEffacerToutesLesDonnees: "Effacer toutes les données", setNomDeLaBoutique: "Nom de la boutique", setIdentifiantDeConnexion: "Identifiant de connexion", setCategoriesDeProduits: "Catégories de produits", setLesCategoriesSontDefiniesAutomatiquem: "Les catégories sont définies automatiquement d'après les noms de vos produits. Cette fonctionnalité sera enrichie dans une prochaine version.", setAucunProduitPourLinstant: "Aucun produit pour l'instant.", setActuellementLowstocklengthProduitsEnD: "Actuellement : {n} produit(s) en dessous du seuil.", setChoisisLeModeDePaiement: "Choisissez le mode de paiement par défaut lors d'une vente.", setResumeDesDettesImpayees: "Résumé des dettes impayées", setClientsAvecDettes: "Clients avec dettes", setTotalDu: "Total dû", setSoldeEstime: "Solde estimé", setTuPeuxVoirLaComparaison: "Vous pouvez voir la comparaison dans l'onglet Statistiques.", setExporteTesDonneesDeVentes: "Exportez vos données de ventes en fichier CSV.", setTelechargerLesVentesCsv: "Télécharger les ventes (CSV)", setTelechargerEnPdf: "Télécharger en PDF", setScannezPourInstaller: "Scannez pour installer l'application", saleCatFilterAll: "Toutes", setSaleslengthVentesProductslengthProdui: "{s} ventes · {p} produits", setRechercheWeb: "Recherche web", setPermettreALiaDeChercher: "Permettre à l'IA de chercher sur internet", setHistoriqueDeConversation: "Historique de conversation", setAimessageslengthMessagesDansLaSession: "{n} message(s) dans la session actuelle.", setEffacerLhistorique: "Effacer l'historique", setAlerteStockFaible: "Alerte stock faible", setSeDeclencheEnDessousDe: "Se déclenche en dessous de {n} unités", setDettesImpayees: "Dettes impayées", setUnpaiddebtslengthEnAttente: "{n} en attente", setExpirationAbonnement: "Expiration abonnement", setVersionGratuite: "Version gratuite", setCeCodeSertADemasquer: "Ce code sert à démasquer vos montants privés (solde de caisse, dépenses, confirmation de dettes).", setAncienCodePin: "Ancien code PIN", setNouveauCodePin: "Nouveau code PIN", setConfirmerLeCodePin: "Confirmer le code PIN", setChoisisLaDeviseDeTa: "Choisissez la devise de votre boutique. Entrez vos prix directement dans cette devise — aucune conversion automatique.", setPetitesBoulesQuiFlottentEn: "Petites boules qui flottent en arrière-plan", setSonsVibrations: "Sons", setSonsVibrationsDesc: "Clic léger et sons de succès/erreur dans l'application", setVibrations: "Vibrations", setVibrationsDesc: "Vibration sur les actions importantes (vente réussie, erreur, PIN)", setSonClic: "Son de clic", setSonVenteReussie: "Son de vente réussie", setSonErreur: "Son d'erreur", setChoisirUnSon: "Choisissez un son.", noProductsEmptySubtitle: "Appuyez ci-dessous pour ajouter votre premier produit.", noDebtsEmptySubtitle: "Appuyez ci-dessous pour ajouter une dette.", addProductHeaderTitle: "Un nouveau produit à ajouter ?", debtAddHeaderTitle: "Une nouvelle dette à ajouter ?", setChoisisLaCouleurDesBoules: "Choisissez la couleur des boules.", setUneQuestionEcrisnousDirectement: "Une question ? Écris-nous directement.", setPriseEnMain: "Prise en main", setCommentAjouterMonPremierProduit: "Comment ajouter mon premier produit ?", setVaDansLongletStockAppuie: "Allez dans l'onglet Stock, appuyez sur le bouton « + », remplissez le nom, la quantité et le prix. Vous pouvez aussi ajouter une photo.", setCommentEnregistrerUneVente: "Comment enregistrer une vente ?", setVaDansLongletVenteDemarre: "Allez dans l'onglet Vente, démarrez un nouveau panier, ajoutez les produits vendus avec leurs quantités, choisissez un mode de paiement, puis finalisez.", setPuisjeGererPlusieursClientsEn: "Puis-je gérer plusieurs clients en même temps ?", setOuiTuPeuxOuvrirPlusieurs: "Oui — vous pouvez ouvrir plusieurs paniers en même temps dans l'onglet Vente, un par client, et les finaliser l'un après l'autre.", setDettesVentesACredit: "Dettes & ventes à crédit", setCommentEnregistrerUneVenteA: "Comment enregistrer une vente à crédit ?", setLorsDeLaFinalisationDune: "Lors de la finalisation d'une vente, choisissez « Crédit » comme mode de paiement et indiquez le nom du client — elle s'ajoute automatiquement dans Dettes.", setCommentMarquerUneDetteComme: "Comment marquer une dette comme payée ?", setDansLongletDettesAppuieSur: "Dans l'onglet Dettes, appuyez sur « Payé » à côté du nom du client, puis confirmez. Ça reste visible pour toujours dans l'Historique.", setCestQuoiLeScoreDe: "C'est quoi le score de confiance client ?", setQuandTuTapesLeNom: "Quand vous tapez le nom d'un client pour une vente à crédit, l'appli affiche s'il rembourse fiablement ses dettes passées, basé sur votre propre historique.", setCaisseDepenses: "Caisse & dépenses", setCommentReglerMonFondDe: "Comment régler mon fond de caisse de départ ?", setSurLeTableauDeBord: "Sur le tableau de bord, appuyez sur « Régler le fond de caisse » et indiquez le montant que vous avez physiquement en caisse maintenant.", setCommentEnregistrerUneDepense: "Comment enregistrer une dépense ?", setAppuieSurAjouterUneDepense: "Appuyez sur « Ajouter une dépense » sur le tableau de bord, indiquez le montant sorti de la caisse et une raison facultative.", setLassistantPeutMaiderAvecQuoi: "L'assistant peut m'aider avec quoi ?", setDemandeluiTesVentesTonStock: "Demandez-lui vos ventes, votre stock, vos dettes, ou des conseils business — il connaît les vraies données de votre boutique. Vous pouvez aussi parler au lieu de taper avec le bouton micro.", setPuisjeGarderPlusieursDiscussions: "Puis-je garder plusieurs discussions ?", setOuiAppuieSurLiconeHistorique: "Oui — appuyez sur l'icône historique pour voir vos discussions passées, épinglez celles qui comptent, renommez-les ou supprimez-les.", setCompteAbonnement: "Compte & abonnement", setCommentDebloquerLesFonctionnalitesPay: "Comment débloquer les fonctionnalités payantes ?", setContacteLeSupportPourOrganiser: "Contactez le support pour organiser le paiement ; votre compte est activé manuellement ensuite.", setMesDonneesSontellesEnSecurite: "Mes données sont-elles en sécurité ?", setTonMotDePasseNest: "Votre mot de passe n'est jamais stocké en clair, et vos données de ventes/stock restent liées uniquement à votre compte.", setPuisjeChangerLaDeviseDe: "Puis-je changer la devise de ma boutique plus tard ?", setOuiAToutMomentDans: "Oui, à tout moment dans Paramètres > Interface > Devise. Les montants s'affichent simplement dans la nouvelle devise, sans conversion.", setVersion: "Version", setMaBoutiqueEstUneApplication: "Boutipro est une application simple de gestion de boutique, pensée pour les commerçants — suivez votre stock, vos ventes, vos dettes et votre caisse, dans votre langue et votre devise.", setDeveloppePour: "Développé pour", setBoutiquiersDuMondeEntier: "Boutiquiers du monde entier", setContact: "Contact", setContacterLeDeveloppeur: "Contacter le développeur",
-    othEtapeObstepSurTotalsteps: "Étape {obStep} sur {totalSteps}", othRemplisCorrectementTousLesChamps: "Remplissez correctement tous les champs (surlignés en rouge).", othTransportMarchandise: "Transport marchandise", tapEffectSettingLabel: "Son à l'achat", tapEffectSettingDesc: "Choisissez le son joué quand vous ajoutez un produit à une vente.", tapSoundPop: "Pop", tapSoundCash: "Caisse enregistreuse", tapSoundBell: "Clochette", tapEffectPreviewBtn: "Écouter", sortByCategory: "Par catégorie", noCategory: "Aucune catégorie", addCategoryOption: "+ Nouvelle catégorie", newCategoryPlaceholder: "Nom de la catégorie", addCategoryConfirm: "Ajouter", noCategoriesYet: "Aucune catégorie pour l'instant.", categoryDeleteConfirm: "Supprimer cette catégorie ? Les produits concernés n'auront plus de catégorie.", othJeNaiPasTrouveDe: "Je n'ai pas trouvé de réponse. Reformulez votre question, ou appuyez sur réessayer ci-dessous.", othSouciDeConnexionApresPlusieurs: "Souci de connexion après plusieurs tentatives. Appuyez sur réessayer ci-dessous.", othDeconnexion: "Déconnexion", othFondDeCaisseFcfacashfundVentes: "Fond de caisse {cashFund} + ventes espèces {totalCashSales} − dépenses {totalExpenses}", othUnite: "unité", othAppuieCidessousPourCommencerA: "Appuyez ci-dessous pour commencer à vendre", othLocalizednumbertodaysaleslengthVentes: "{n} vente(s) aujourd'hui", othPanierDe: "Panier de :", othFacultatif: "facultatif", othEncoreDus: "encore dû(s)", othIlManque: "Il manque", othQuestceQueJaiVenduAujourdhui: "Qu'est-ce que j'ai vendu aujourd'hui ?", othQuelProduitEstPresqueEpuise: "Quel produit est presque épuisé ?", othQuiMeDoitDeLargent: "Qui me doit de l'argent ?", othQuelEstMonMeilleurProduit: "Quel est mon meilleur produit ?", othDesConseilsPourAugmenterMes: "Des conseils pour augmenter mes ventes", othResumeDeMaSemaine: "Résumé de ma semaine", othEtSiJaugmentaisMesPrix: "Et si j'augmentais mes prix de 10% ?", othReessayer: "Réessayer", othEntreTonCodePin: "Entrez votre code PIN", othPourVoirLesMontantsPrives: "Pour voir les montants privés", unmaskCashFloatingBtn: "Démasquer les données", maskCashFloatingBtn: "Masquer les données", othRendu: "Rendu :", errCreditNeedsCustomer: "Indiquez le nom du client pour une vente à crédit.", histColDate: "Date", histColType: "Type", histColProduct: "Produit", histColCustomer: "Client", histColAmount: "Montant", histFiltersBtn: "Filtres", histFilterFromLabel: "Du", histFilterToLabel: "Au", histFilterProductLabel: "Produit", histFilterCustomerLabel: "Client", histFilterMinAmountLabel: "Montant min", histFilterMaxAmountLabel: "Montant max", histFilterReset: "Réinitialiser", histExportBtn: "Exporter (CSV)", histTypeSale: "Ventes", histTypeDebt: "Dettes", histTypeExpense: "Dépenses", noResultsFilters: "Aucun résultat pour ces filtres.", planFreeName: "Gratuit", planProName: "Pro", planBusiness2Name: "Business", planMenuLabel: "Abonnement", planCurrentLabel: "Votre palier actuel", planPerMonth: "mois", planNoEmployees: "Pas d'collaborateurs", planUnlimitedEmployees: "Collaborateurs illimités", planMaxEmployees: "{n} collaborateurs max", planNoAi: "Pas d'assistant IA", planUnlimitedAi: "Assistant IA illimité", planLimitedAi: "Assistant IA ({n} messages/mois)", planMultiShop: "Plusieurs boutiques", planCurrentBadge: "✓ Palier actuel", planChooseBtn: "Choisir ce palier", empLimitReached: "Votre palier {plan} permet {n} collaborateur(s) maximum. Passez à un palier supérieur pour en ajouter plus.", histFiltersProBadge: "Filtres avancés et export — passez à Pro pour débloquer", switchShopBtn: "Changer de boutique", switchShopTitle: "Vos boutiques", newShopNameLabel: "Nom de la nouvelle boutique", shopCompareTabLabel: "Comparaison", shopCompareRevenue: "CA", shopCompareStock: "Stock", shopCompareDebts: "Dettes", cashReportTabLabel: "Rapport de caisse", cashReportOwner: "Propriétaire", cashReportTotalSales: "Total ventes", cashReportCash: "Espèces", cashReportMobile: "Mobile Money", cashReportCard: "Carte", cashReportExpenses: "Dépenses", cashReportDebtPayments: "Paiements de dettes", empShiftLabel: "Plages horaires", empShiftEnable: "Activer", empShiftDisable: "Désactiver", empShiftAddSlot: "Ajouter un créneau", empDayMon: "Lundi", empDayTue: "Mardi", empDayWed: "Mercredi", empDayThu: "Jeudi", empDayFri: "Vendredi", empDaySat: "Samedi", empDaySun: "Dimanche", empOutsideShiftTitle: "Hors de vos heures de travail", empOutsideShiftDesc: "Vous ne pouvez pas encaisser de vente en dehors de vos heures déclarées. Contactez votre responsable si besoin.", accountingExportBtn: "Export comptable", accountingPeriodLabel: "Période", accountingGeneratedBy: "Généré par", accountingSummaryTitle: "Résumé", accountingNetProfit: "Bénéfice net", accountingRevenueChartTitle: "Évolution du chiffre d'affaires", accountingComparisonChartTitle: "Ventes vs Dépenses", accountingSalesTableTitle: "Détail des ventes", accountingExpensesTableTitle: "Détail des dépenses", accountingGenerateBtn: "Générer le PDF", logAccountingExport: "Export comptable généré", productCostPrice: "Prix d'achat (optionnel)", roleSupervisorLabel: "Superviseur", roleSupervisorDesc: "Voit toutes les boutiques, ne modifie rien.", salesGoalLabel: "Objectif du mois", salesGoalSetBtn: "Fixer un objectif", pushAnomalyTitle: "Alertes d'activité inhabituelle", pushAnomalyDesc: "Reçois une notification si une action inhabituelle est détectée (annulations en série, caisse vidée, etc.).", pushEnabledBadge: "✓ Activées", pushUnsupported: "Non disponible sur cet appareil/navigateur.", pushEnableBtn: "Activer les notifications", logProductAdded: "Produit ajouté", logStockAdjusted: "Stock ajusté", logProductDeleted: "Produit supprimé", logExpenseAdded: "Dépense enregistrée", logExpenseDeleted: "Dépense supprimée", logCashFundUpdated: "Fond de caisse modifié", logSaleRecorded: "Vente", logDebtSettled: "Dette soldée", logPartialPayment: "Paiement partiel", logPaymentCash: "espèces", logPaymentCredit: "à crédit", saleSuccessLabel: "Vente réussie !",
-    empTabLabel: "Collaborateurs", empIntro: "Créez un compte pour chaque collaborateur et choisissez ce qu'il peut faire. Vous seul(e) pouvez gérer les collaborateurs, l'abonnement et les données de la boutique.", empAddBtn: "Ajouter un collaborateur", empNoneYet: "Aucun collaborateur pour l'instant.", empActive: "Actif", empSuspended: "Suspendu", empEdit: "Modifier", empSuspend: "Suspendre", empReactivate: "Réactiver", empActionLogTitle: "Journal des actions récentes", empNoActionsYet: "Aucune action enregistrée pour l'instant.", empEditTitle: "Modifier le collaborateur", empAddTitle: "Ajouter un collaborateur", empNameLabel: "Nom du collaborateur", empPinLabel: "Code PIN du collaborateur (4 à 6 chiffres)", empRoleLabel: "Rôle", empPermissionsLabel: "Permissions", empSave: "Enregistrer", empAdd: "Ajouter", empErrName: "Entrez le nom du collaborateur.", empErrPin: "Le code PIN doit contenir entre 4 et 6 chiffres.", empErrPinUsed: "Ce code PIN est déjà utilisé par un autre collaborateur. Choisissez-en un autre.", roleVendeurLabel: "Vendeur", roleVendeurDesc: "Vend et consulte le stock/dettes, sans les modifier.", roleGerantLabel: "Gérant", roleGerantDesc: "Gère l'activité quotidienne au complet : ventes, stock, dettes, caisse, statistiques.", rolePersoLabel: "Personnalisé", rolePersoDesc: "Choisissez précisément ce que cet collaborateur peut faire.", permSell: "Enregistrer des ventes", permViewStock: "Consulter le stock", permEditStock: "Modifier le stock", permViewDebts: "Consulter les dettes clients", permEditDebts: "Gérer les dettes clients (marquer payé, etc.)", permViewCash: "Voir la caisse et le solde", permEditCash: "Modifier la caisse (dépenses, fond de caisse)", permViewStats: "Voir les statistiques", empShowQr: "Voir le QR de connexion", empQrModalTitle: "QR de connexion", empQrModalDesc: "Cet collaborateur scanne ce code depuis l'écran de connexion pour accéder à la boutique. La connexion par QR sera activée prochainement.", empQrClose: "Fermer", loginAsEmployee: "Se connecter en tant que collaborateur", empScanTitle: "Scanner votre QR", empManualCodeLabel: "Ou entrez ce code sur PC", empRetryInvite: "Réessayer", empScanInvalidCode: "Ce code est invalide, déjà utilisé, ou a expiré.",
+    othEtapeObstepSurTotalsteps: "Étape {obStep} sur {totalSteps}", othRemplisCorrectementTousLesChamps: "Remplissez correctement tous les champs (surlignés en rouge).", othTransportMarchandise: "Transport marchandise", tapEffectSettingLabel: "Son à l'achat", tapEffectSettingDesc: "Choisissez le son joué quand vous ajoutez un produit à une vente.", tapSoundPop: "Pop", tapSoundCash: "Caisse enregistreuse", tapSoundBell: "Clochette", tapEffectPreviewBtn: "Écouter", sortByCategory: "Par catégorie", noCategory: "Aucune catégorie", addCategoryOption: "+ Nouvelle catégorie", newCategoryPlaceholder: "Nom de la catégorie", addCategoryConfirm: "Ajouter", noCategoriesYet: "Aucune catégorie pour l'instant.", categoryDeleteConfirm: "Supprimer cette catégorie ? Les produits concernés n'auront plus de catégorie.", othJeNaiPasTrouveDe: "Je n'ai pas trouvé de réponse. Reformulez votre question, ou appuyez sur réessayer ci-dessous.", othSouciDeConnexionApresPlusieurs: "Souci de connexion après plusieurs tentatives. Appuyez sur réessayer ci-dessous.", othDeconnexion: "Déconnexion", othFondDeCaisseFcfacashfundVentes: "Fond de caisse {cashFund} + ventes espèces {totalCashSales} − dépenses {totalExpenses}", othUnite: "unité", othAppuieCidessousPourCommencerA: "Appuyez ci-dessous pour commencer à vendre", othLocalizednumbertodaysaleslengthVentes: "{n} vente(s) aujourd'hui", othPanierDe: "Panier de :", othFacultatif: "facultatif", othEncoreDus: "encore dû(s)", othIlManque: "Il manque", othQuestceQueJaiVenduAujourdhui: "Qu'est-ce que j'ai vendu aujourd'hui ?", othQuelProduitEstPresqueEpuise: "Quel produit est presque épuisé ?", othQuiMeDoitDeLargent: "Qui me doit de l'argent ?", othQuelEstMonMeilleurProduit: "Quel est mon meilleur produit ?", othDesConseilsPourAugmenterMes: "Des conseils pour augmenter mes ventes", othResumeDeMaSemaine: "Résumé de ma semaine", othEtSiJaugmentaisMesPrix: "Et si j'augmentais mes prix de 10% ?", othReessayer: "Réessayer", othEntreTonCodePin: "Entrez votre code PIN", othPourVoirLesMontantsPrives: "Pour voir les montants privés", unmaskCashFloatingBtn: "Démasquer les données", maskCashFloatingBtn: "Masquer les données", othRendu: "Rendu :", errCreditNeedsCustomer: "Indiquez le nom du client pour une vente à crédit.", histColDate: "Date", histColType: "Type", histColProduct: "Produit", histColCustomer: "Client", histColAmount: "Montant", histFiltersBtn: "Filtres", histFilterFromLabel: "Du", histFilterToLabel: "Au", histFilterProductLabel: "Produit", histFilterCustomerLabel: "Client", histFilterMinAmountLabel: "Montant min", histFilterMaxAmountLabel: "Montant max", histFilterReset: "Réinitialiser", histExportBtn: "Exporter (CSV)", histTypeSale: "Ventes", histTypeDebt: "Dettes", histTypeExpense: "Dépenses", noResultsFilters: "Aucun résultat pour ces filtres.", planFreeName: "Gratuit", planProName: "Pro", planBusiness2Name: "Business", planMenuLabel: "Abonnement", planCurrentLabel: "Votre palier actuel", planPerMonth: "mois", planNoEmployees: "Pas de personnel", planUnlimitedEmployees: "Personnel illimité", planMaxEmployees: "{n} membres du personnel max", planNoAi: "Pas d'assistant IA", planUnlimitedAi: "Assistant IA illimité", planLimitedAi: "Assistant IA ({n} messages/mois)", planMultiShop: "Plusieurs boutiques", planCurrentBadge: "✓ Palier actuel", planChooseBtn: "Choisir ce palier", empLimitReached: "Votre palier {plan} permet {n} membre(s) du personnel maximum. Passez à un palier supérieur pour en ajouter plus.", histFiltersProBadge: "Filtres avancés et export — passez à Pro pour débloquer", switchShopBtn: "Changer de boutique", switchShopTitle: "Vos boutiques", newShopNameLabel: "Nom de la nouvelle boutique", shopCompareTabLabel: "Comparaison", shopCompareRevenue: "CA", shopCompareStock: "Stock", shopCompareDebts: "Dettes", cashReportTabLabel: "Rapport de caisse", cashReportOwner: "Propriétaire", cashReportTotalSales: "Total ventes", cashReportCash: "Espèces", cashReportMobile: "Mobile Money", cashReportCard: "Carte", cashReportExpenses: "Dépenses", cashReportDebtPayments: "Paiements de dettes", empShiftLabel: "Plages horaires", empShiftEnable: "Activer", empShiftDisable: "Désactiver", empShiftAddSlot: "Ajouter un créneau", empDayMon: "Lundi", empDayTue: "Mardi", empDayWed: "Mercredi", empDayThu: "Jeudi", empDayFri: "Vendredi", empDaySat: "Samedi", empDaySun: "Dimanche", empOutsideShiftTitle: "Hors de vos heures de travail", empOutsideShiftDesc: "Vous ne pouvez pas encaisser de vente en dehors de vos heures déclarées. Contactez votre responsable si besoin.", accountingExportBtn: "Export comptable", accountingPeriodLabel: "Période", accountingGeneratedBy: "Généré par", accountingSummaryTitle: "Résumé", accountingNetProfit: "Bénéfice net", accountingRevenueChartTitle: "Évolution du chiffre d'affaires", accountingComparisonChartTitle: "Ventes vs Dépenses", accountingSalesTableTitle: "Détail des ventes", accountingExpensesTableTitle: "Détail des dépenses", accountingGenerateBtn: "Générer le PDF", logAccountingExport: "Export comptable généré", productCostPrice: "Prix d'achat (optionnel)", roleSupervisorLabel: "Superviseur", roleSupervisorDesc: "Voit toutes les boutiques, ne modifie rien.", salesGoalLabel: "Objectif du mois", salesGoalSetBtn: "Fixer un objectif", pushAnomalyTitle: "Alertes d'activité inhabituelle", pushAnomalyDesc: "Reçois une notification si une action inhabituelle est détectée (annulations en série, caisse vidée, etc.).", pushEnabledBadge: "✓ Activées", pushUnsupported: "Non disponible sur cet appareil/navigateur.", pushEnableBtn: "Activer les notifications", logProductAdded: "Produit ajouté", logStockAdjusted: "Stock ajusté", logProductDeleted: "Produit supprimé", logExpenseAdded: "Dépense enregistrée", logExpenseDeleted: "Dépense supprimée", logCashFundUpdated: "Fond de caisse modifié", logSaleRecorded: "Vente", logDebtSettled: "Dette soldée", logPartialPayment: "Paiement partiel", logPaymentCash: "espèces", logPaymentCredit: "à crédit", saleSuccessLabel: "Vente réussie !",
+    empTabLabel: "Personnel", empIntro: "Créez un compte pour chaque membre du personnel et choisissez ce qu'il peut faire. Vous seul(e) pouvez gérer le personnel, l'abonnement et les données de la boutique.", empAddBtn: "Ajouter un membre du personnel", empNoneYet: "Aucun membre du personnel pour l'instant.", empActive: "Actif", empSuspended: "Suspendu", empEdit: "Modifier", empSuspend: "Suspendre", empReactivate: "Réactiver", empActionLogTitle: "Journal des actions récentes", empNoActionsYet: "Aucune action enregistrée pour l'instant.", empEditTitle: "Modifier le membre du personnel", empAddTitle: "Ajouter un membre du personnel", empNameLabel: "Nom du membre du personnel", empPinLabel: "Code PIN du membre du personnel (4 à 6 chiffres)", empRoleLabel: "Rôle", empPermissionsLabel: "Permissions", empSave: "Enregistrer", empAdd: "Ajouter", empErrName: "Entrez le nom du membre du personnel.", empErrPin: "Le code PIN doit contenir entre 4 et 6 chiffres.", empErrPinUsed: "Ce code PIN est déjà utilisé par un autre membre du personnel. Choisissez-en un autre.", roleVendeurLabel: "Vendeur", roleVendeurDesc: "Vend et consulte le stock/dettes, sans les modifier.", roleGerantLabel: "Gérant", roleGerantDesc: "Gère l'activité quotidienne au complet : ventes, stock, dettes, caisse, statistiques.", rolePersoLabel: "Personnalisé", rolePersoDesc: "Choisissez précisément ce que ce membre du personnel peut faire.", permSell: "Enregistrer des ventes", permViewStock: "Consulter le stock", permEditStock: "Modifier le stock", permViewDebts: "Consulter les dettes clients", permEditDebts: "Gérer les dettes clients (marquer payé, etc.)", permViewCash: "Voir la caisse et le solde", permEditCash: "Modifier la caisse (dépenses, fond de caisse)", permViewStats: "Voir les statistiques", empShowQr: "Voir le QR de connexion", empQrModalTitle: "QR de connexion", empQrModalDesc: "Ce membre du personnel scanne ce code depuis l'écran de connexion pour accéder à la boutique. La connexion par QR sera activée prochainement.", empQrClose: "Fermer", loginAsEmployee: "Se connecter en tant que membre du personnel", empScanTitle: "Scanner votre QR", empManualCodeLabel: "Ou entrez ce code sur PC", empRetryInvite: "Réessayer", empScanInvalidCode: "Ce code est invalide, déjà utilisé, ou a expiré.",
   },
   am: {
     appName: "Boutipro", chooseLanguage: "ቋንቋህን ምረጥ",
@@ -4334,7 +4382,51 @@ EXTRA_UI.loyaltyRewardBanner = { fr: "🎉 Client fidèle — pensez à une peti
 EXTRA_UI.dailySummaryEnabledLabel = { fr: "Recevoir le résumé quotidien", en: "Receive the daily summary", es: "Recibir el resumen diario", pt: "Receber o resumo diário", de: "Tägliche Zusammenfassung erhalten", it: "Ricevere il riepilogo giornaliero", nl: "Dagelijkse samenvatting ontvangen", pl: "Otrzymuj codzienne podsumowanie", ru: "Получать ежедневную сводку", tr: "Günlük özeti al", ar: "استلام الملخص اليومي", hi: "दैनिक सारांश प्राप्त करें", bn: "দৈনিক সারাংশ পান", ur: "روزانہ خلاصہ وصول کریں", ta: "தினசரி சுருக்கத்தைப் பெறுங்கள்", te: "రోజువారీ సారాంశం అందుకోండి", th: "รับสรุปประจำวัน", zh: "接收每日摘要", ja: "日次サマリーを受け取る", ko: "일일 요약 받기", id: "Terima ringkasan harian", vi: "Nhận tóm tắt hàng ngày", tl: "Tumanggap ng pang-araw-araw na buod", sw: "Pokea muhtasari wa kila siku", ha: "Karɓi taƙaitaccen bayani na yau da kullun", yo: "Gba àkótán ojoojúmọ́", zu: "Thola isifinyezo sansuku zonke", am: "ዕለታዊ ማጠቃለያ ይቀበሉ", bm: "Don-don kunnafoni sɔrɔ", wo: "Jot bataaxal bis bu nekk" };
 EXTRA_UI.dailySummaryEnabledDesc = { fr: "Désactivez si vous ne voulez plus recevoir cette notification chaque jour. Vous pouvez la réactiver à tout moment.", en: "Turn off if you no longer want to receive this notification every day. You can turn it back on at any time.", es: "Desactive si ya no desea recibir esta notificación cada día. Puede volver a activarla en cualquier momento.", pt: "Desative se não quiser mais receber esta notificação todos os dias. Pode reativá-la a qualquer momento.", de: "Deaktivieren Sie dies, wenn Sie diese Benachrichtigung nicht mehr täglich erhalten möchten. Sie können sie jederzeit wieder aktivieren.", it: "Disattiva se non vuoi più ricevere questa notifica ogni giorno. Puoi riattivarla in qualsiasi momento.", nl: "Schakel uit als u deze melding niet meer elke dag wilt ontvangen. U kunt dit op elk moment weer inschakelen.", pl: "Wyłącz, jeśli nie chcesz już codziennie otrzymywać tego powiadomienia. Możesz je ponownie włączyć w każdej chwili.", ru: "Отключите, если больше не хотите получать это уведомление каждый день. Вы можете включить его снова в любое время.", tr: "Bu bildirimi her gün almak istemiyorsanız kapatın. İstediğiniz zaman tekrar açabilirsiniz.", ar: "عطّل هذا إذا كنت لا تريد تلقي هذا الإشعار كل يوم. يمكنك إعادة تفعيله في أي وقت.", hi: "यदि आप हर दिन यह सूचना नहीं पाना चाहते तो इसे बंद करें। आप इसे कभी भी फिर से चालू कर सकते हैं।", bn: "প্রতিদিন এই নোটিফিকেশন না চাইলে বন্ধ করুন। আপনি যেকোনো সময় এটি পুনরায় চালু করতে পারেন।", ur: "اگر آپ ہر روز یہ اطلاع نہیں چاہتے تو اسے بند کریں۔ آپ اسے کسی بھی وقت دوبارہ چالو کر سکتے ہیں۔", ta: "ஒவ்வொரு நாளும் இந்த அறிவிப்பைப் பெற விரும்பவில்லை என்றால் முடக்கவும். எப்போது வேண்டுமானாலும் மீண்டும் இயக்கலாம்.", te: "ప్రతిరోజూ ఈ నోటిఫికేషన్ పొందకూడదనుకుంటే నిలిపివేయండి. మీరు ఎప్పుడైనా దీన్ని తిరిగి ఆన్ చేయవచ్చు.", th: "ปิดหากคุณไม่ต้องการรับการแจ้งเตือนนี้ทุกวัน คุณสามารถเปิดใช้งานอีกครั้งได้ทุกเมื่อ", zh: "如果您不想每天收到此通知，请将其关闭。您可以随时重新开启。", ja: "この通知を毎日受け取りたくない場合はオフにしてください。いつでも再度オンにできます。", ko: "매일 이 알림을 받고 싶지 않으면 꺼 두세요. 언제든지 다시 켤 수 있습니다.", id: "Matikan jika Anda tidak lagi ingin menerima notifikasi ini setiap hari. Anda dapat mengaktifkannya kembali kapan saja.", vi: "Tắt nếu bạn không muốn nhận thông báo này mỗi ngày nữa. Bạn có thể bật lại bất cứ lúc nào.", tl: "I-off kung ayaw mo nang tumanggap ng abisong ito araw-araw. Maaari mong i-on muli anumang oras.", sw: "Zima ikiwa hutaki tena kupokea arifa hii kila siku. Unaweza kuiwasha tena wakati wowote.", ha: "Kashe idan ba kwa son karɓar wannan sanarwa kowace rana. Za ku iya kunna shi kowane lokaci.", yo: "Pa á ti o kò bá fẹ́ gba ìfitónilétí yìí lójoojúmọ́ mọ́. Ẹ lè tún ṣí i nígbàkigbà.", zu: "Vala uma ungasafuni ukuthola lesi saziso nsuku zonke. Ungakuvula futhi noma kunini.", am: "ይህን ማሳወቂያ በየቀኑ ማግኘት ካልፈለጉ ያጥፉት። በማንኛውም ጊዜ መልሰው ማብራት ይችላሉ።", bm: "A tigɛ ni i tɛ a fɛ ka kunnafoni in sɔrɔ don o don. I bɛ se k'a yɛlɛma tuma bɛɛ.", wo: "Dama ko ni bul koy jot bataaxal bii bis bu nekk. Mën nga ko defar bis bu ci la neex." };
 EXTRA_UI.loyaltyRewardSettingTitle ={ fr: "Récompense fidélité", en: "Loyalty reward", es: "Recompensa de fidelidad", pt: "Recompensa de fidelidade", de: "Treuebelohnung", it: "Premio fedeltà", nl: "Trouwbeloning", pl: "Nagroda za lojalność", ru: "Награда за лояльность", tr: "Sadakat ödülü", ar: "مكافأة الولاء", hi: "वफ़ादारी इनाम", bn: "অনুগত্য পুরস্কার", ur: "وفاداری انعام", ta: "விசுவாச பரிசு", te: "విధేయత బహుమతి", th: "รางวัลความภักดี", zh: "忠诚奖励", ja: "ロイヤルティ特典", ko: "단골 보상", id: "Hadiah loyalitas", vi: "Phần thưởng thân thiết", tl: "Gantimpala sa katapatan", sw: "Zawadi ya uaminifu", ha: "Lada aminci", yo: "Ẹ̀bùn olóòtítọ́", zu: "Umklomelo wokwethembeka", am: "የታማኝነት ሽልማት", bm: "Sabatira nafolo", wo: "Ndimbal takku" };
-EXTRA_UI.loyaltyRewardSettingDesc = { fr: "Affiche un message au bout de 10 achats du même client, pour vous rappeler de proposer une récompense si vous le souhaitez.", en: "Shows a message after 10 purchases from the same customer, to remind you to offer a reward if you wish.", es: "Muestra un mensaje tras 10 compras del mismo cliente, para recordarle ofrecer una recompensa si lo desea.", pt: "Mostra uma mensagem após 10 compras do mesmo cliente, para lembrá-lo de oferecer uma recompensa se desejar.", de: "Zeigt nach 10 Einkäufen desselben Kunden eine Nachricht an, die Sie daran erinnert, bei Bedarf eine Belohnung anzubieten.", it: "Mostra un messaggio dopo 10 acquisti dello stesso cliente, per ricordarti di offrire un premio se lo desideri.", nl: "Toont een bericht na 10 aankopen van dezelfde klant, om u te herinneren eventueel een beloning aan te bieden.", pl: "Wyświetla komunikat po 10 zakupach tego samego klienta, aby przypomnieć o ewentualnej nagrodzie.", ru: "Показывает сообщение после 10 покупок одного клиента, чтобы напомнить вам предложить награду, если хотите.", tr: "Aynı müşterinin 10. alışverişinden sonra, isterseniz bir ödül sunmanızı hatırlatan bir mesaj gösterir.", ar: "يعرض رسالة بعد 10 عمليات شراء من نفس العميل، لتذكيركم بتقديم مكافأة إذا رغبتم.", hi: "एक ही ग्राहक की 10 खरीद के बाद एक संदेश दिखाता है, ताकि आपको चाहने पर इनाम देने की याद आए।", bn: "একই গ্রাহকের ১০টি কেনাকাটার পর একটি বার্তা দেখায়, যাতে আপনি চাইলে পুরস্কার দেওয়ার কথা মনে রাখতে পারেন।", ur: "ایک ہی گاہک کی 10 خریداریوں کے بعد ایک پیغام دکھاتا ہے، تاکہ آپ چاہیں تو انعام دینے کی یاد آئے۔", ta: "ஒரே வாடிக்கையாளரின் 10 வது வாங்குதலுக்குப் பிறகு ஒரு செய்தியைக் காண்பிக்கிறது, நீங்கள் விரும்பினால் பரிசு வழங்க நினைவூட்டும்.", te: "ఒకే కస్టమర్ 10 కొనుగోళ్ల తర్వాత ఒక సందేశాన్ని చూపుతుంది, మీరు కోరుకుంటే బహుమతి ఇవ్వాలని గుర్తు చేస్తుంది.", th: "แสดงข้อความหลังจากลูกค้าคนเดียวกันซื้อครบ 10 ครั้ง เพื่อเตือนให้คุณมอบของรางวัลหากต้องการ", zh: "同一客户第10次购买后显示提示信息，提醒您可以考虑给予奖励。", ja: "同じお客様が10回購入すると通知が表示され、ご希望に応じて特典を検討するきっかけになります。", ko: "같은 고객이 10번째 구매를 하면 메시지가 표시되어, 원하시면 보상을 고려하도록 알려드립니다.", id: "Menampilkan pesan setelah 10 kali pembelian dari pelanggan yang sama, untuk mengingatkan Anda menawarkan hadiah jika berkenan.", vi: "Hiển thị thông báo sau 10 lần mua hàng của cùng một khách, để nhắc bạn tặng quà nếu muốn.", tl: "Nagpapakita ng mensahe pagkatapos ng 10 bili mula sa parehong customer, para paalalahanan kang mag-alok ng gantimpala kung nanaisin.", sw: "Huonyesha ujumbe baada ya manunuzi 10 ya mteja mmoja, kukukumbusha kutoa zawadi ukipenda.", ha: "Yana nuna sako bayan sayayya 10 na abokin ciniki daya, don tunatar da kai ka bayar da lada idan kana so.", yo: "Ó ń fi ìránnilétí hàn lẹ́yìn ìgbà mẹ́wàá tí oníbàárà kan náà ti rà, kí ó rán yín létí láti fúnni ní ẹ̀bùn bí ẹ bá fẹ́.", zu: "Ibonisa umlayezo ngemva kokuthenga okulishumi kwekhasimende elifanayo, ukukukhumbuza ukunikeza umklomelo uma uthanda.", am: "ለተመሳሳይ ደንበኛ 10 ግዢ በኋላ መልእክት ያሳያል፣ ይህም ከፈለጉ ሽልማት እንዲሰጡ ያስታውስዎታል።", bm: "A bɛ ciden kofɔ kiliyan kelen ye san 10nan kɔ, walisa ka i hakili jigin ka nafolo fɛn di ni i y'a fɛ.", wo: "Mel ci baat buy feeñ bu kiliyaan benn jëndee ñaari yoon fukk, ngir fàttaliku la ngir may ko benn ndimbal bu la neex." };
+EXTRA_UI.loyaltyRewardSettingDesc = { fr: "Affiche un message au bout de {n} achats du même client, pour vous rappeler de proposer une récompense si vous le souhaitez. Vous choisissez vous-même ce nombre ci-dessous.", en: "Shows a message after {n} purchases from the same customer, to remind you to offer a reward if you wish. You choose this number yourself below.", es: "Muestra un mensaje tras {n} compras del mismo cliente, para recordarle ofrecer una recompensa si lo desea. Usted elige este número más abajo.", pt: "Mostra uma mensagem após {n} compras do mesmo cliente, para lembrá-lo de oferecer uma recompensa se desejar. Você escolhe esse número abaixo.", de: "Zeigt nach {n} Einkäufen desselben Kunden eine Nachricht an, die Sie daran erinnert, bei Bedarf eine Belohnung anzubieten. Diese Zahl legen Sie unten selbst fest.", it: "Mostra un messaggio dopo {n} acquisti dello stesso cliente, per ricordarti di offrire un premio se lo desideri. Sei tu a scegliere questo numero qui sotto.", nl: "Toont een bericht na {n} aankopen van dezelfde klant, om u te herinneren eventueel een beloning aan te bieden. U kiest dit aantal zelf hieronder.", pl: "Wyświetla komunikat po {n} zakupach tego samego klienta, aby przypomnieć o ewentualnej nagrodzie. Tę liczbę ustalacie Państwo sami poniżej.", ru: "Показывает сообщение после {n} покупок одного клиента, чтобы напомнить вам предложить награду, если хотите. Это число вы задаёте сами ниже.", tr: "Aynı müşterinin {n}. alışverişinden sonra, isterseniz bir ödül sunmanızı hatırlatan bir mesaj gösterir. Bu sayıyı aşağıdan kendiniz belirlersiniz.", ar: "يعرض رسالة بعد {n} عمليات شراء من نفس العميل، لتذكيركم بتقديم مكافأة إذا رغبتم. تختارون هذا الرقم بأنفسكم أدناه.", hi: "एक ही ग्राहक की {n} खरीद के बाद एक संदेश दिखाता है, ताकि आपको चाहने पर इनाम देने की याद आए। यह संख्या आप स्वयं नीचे तय करते हैं।", bn: "একই গ্রাহকের {n}টি কেনাকাটার পর একটি বার্তা দেখায়, যাতে আপনি চাইলে পুরস্কার দেওয়ার কথা মনে রাখতে পারেন। এই সংখ্যাটি আপনি নিজে নিচে নির্ধারণ করেন।", ur: "ایک ہی گاہک کی {n} خریداریوں کے بعد ایک پیغام دکھاتا ہے، تاکہ آپ چاہیں تو انعام دینے کی یاد آئے۔ یہ تعداد آپ خود نیچے طے کرتے ہیں۔", ta: "ஒரே வாடிக்கையாளரின் {n} வது வாங்குதலுக்குப் பிறகு ஒரு செய்தியைக் காண்பிக்கிறது, நீங்கள் விரும்பினால் பரிசு வழங்க நினைவூட்டும். இந்த எண்ணை நீங்களே கீழே தேர்வு செய்கிறீர்கள்.", te: "ఒకే కస్టమర్ {n} కొనుగోళ్ల తర్వాత ఒక సందేశాన్ని చూపుతుంది, మీరు కోరుకుంటే బహుమతి ఇవ్వాలని గుర్తు చేస్తుంది. ఈ సంఖ్యను మీరే క్రింద ఎంచుకుంటారు.", th: "แสดงข้อความหลังจากลูกค้าคนเดียวกันซื้อครบ {n} ครั้ง เพื่อเตือนให้คุณมอบของรางวัลหากต้องการ คุณเลือกจำนวนนี้เองด้านล่าง", zh: "同一客户第{n}次购买后显示提示信息，提醒您可以考虑给予奖励。这个数字由您自己在下方设置。", ja: "同じお客様が{n}回購入すると通知が表示され、ご希望に応じて特典を検討するきっかけになります。この回数は下でご自身で設定できます。", ko: "같은 고객이 {n}번째 구매를 하면 메시지가 표시되어, 원하시면 보상을 고려하도록 알려드립니다. 이 횟수는 아래에서 직접 설정합니다.", id: "Menampilkan pesan setelah {n} kali pembelian dari pelanggan yang sama, untuk mengingatkan Anda menawarkan hadiah jika berkenan. Anda sendiri yang menentukan angka ini di bawah.", vi: "Hiển thị thông báo sau {n} lần mua hàng của cùng một khách, để nhắc bạn tặng quà nếu muốn. Bạn tự chọn con số này ở bên dưới.", tl: "Nagpapakita ng mensahe pagkatapos ng {n} bili mula sa parehong customer, para paalalahanan kang mag-alok ng gantimpala kung nanaisin. Ikaw mismo ang pumipili ng bilang na ito sa ibaba.", sw: "Huonyesha ujumbe baada ya manunuzi {n} ya mteja mmoja, kukukumbusha kutoa zawadi ukipenda. Wewe mwenyewe ndiye unayechagua idadi hii hapa chini.", ha: "Yana nuna sako bayan sayayya {n} na abokin ciniki daya, don tunatar da kai ka bayar da lada idan kana so. Kai da kanka ne za ka zaɓi wannan adadin a ƙasa.", yo: "Ó ń fi ìránnilétí hàn lẹ́yìn ìgbà {n} tí oníbàárà kan náà ti rà, kí ó rán yín létí láti fúnni ní ẹ̀bùn bí ẹ bá fẹ́. Ẹ̀yin fúnra yín ni ẹ máa yan nọ́mbà yìí nísàlẹ̀.", zu: "Ibonisa umlayezo ngemva kokuthenga okungu-{n} kwekhasimende elifanayo, ukukukhumbuza ukunikeza umklomelo uma uthanda. Uzikhethela wena lesi sibalo ngezansi.", am: "ለተመሳሳይ ደንበኛ {n} ግዢ በኋላ መልእክት ያሳያል፣ ይህም ከፈለጉ ሽልማት እንዲሰጡ ያስታውስዎታል። ይህን ቁጥር እርስዎ ራስዎ ከታች ይመርጣሉ።", bm: "A bɛ ciden kofɔ kiliyan kelen ye san {n}nan kɔ, walisa ka i hakili jigin ka nafolo fɛn di ni i y'a fɛ. I yɛrɛ bɛ nin jatebɔ in sugandi duguma.", wo: "Mel ci baat buy feeñ bu kiliyaan benn jëndee yoon {n}, ngir fàttaliku la ngir may ko benn ndimbal bu la neex. Yaw ci bopp nga fal lim bii ci suuf." };
+EXTRA_UI.loyaltyThresholdTitle = { fr: "Seuil de récompense", en: "Reward threshold", es: "Umbral de recompensa", pt: "Limite de recompensa", de: "Belohnungsschwelle", it: "Soglia del premio", nl: "Beloningsdrempel", pl: "Próg nagrody", ru: "Порог награды", tr: "Ödül eşiği", ar: "عتبة المكافأة", hi: "इनाम सीमा", bn: "পুরস্কার সীমা", ur: "انعام کی حد", ta: "பரிசு வரம்பு", te: "బహుమతి పరిమితి", th: "เกณฑ์รางวัล", zh: "奖励门槛", ja: "特典のしきい値", ko: "보상 기준 횟수", id: "Ambang hadiah", vi: "Ngưỡng phần thưởng", tl: "Threshold ng gantimpala", sw: "Kiwango cha zawadi", ha: "Matakin lada", yo: "Òsùwọ̀n ẹ̀bùn", zu: "Umkhawulo womklomelo", am: "የሽልማት መድረሻ", bm: "Nafolo dan", wo: "Daanu ndimbal" };
+EXTRA_UI.loyaltyThresholdDesc = { fr: "Nombre d'achats du même client avant de signaler un seuil de fidélité atteint.", en: "Number of purchases from the same customer before a loyalty milestone is flagged.", es: "Número de compras del mismo cliente antes de señalar un hito de fidelidad alcanzado.", pt: "Número de compras do mesmo cliente antes de sinalizar um marco de fidelidade atingido.", de: "Anzahl der Einkäufe desselben Kunden, bevor ein Treue-Meilenstein angezeigt wird.", it: "Numero di acquisti dello stesso cliente prima di segnalare il raggiungimento di una soglia fedeltà.", nl: "Aantal aankopen van dezelfde klant voordat een loyaliteitsmijlpaal wordt gesignaleerd.", pl: "Liczba zakupów tego samego klienta, zanim zostanie zasygnalizowany próg lojalności.", ru: "Количество покупок одного клиента, после которого отмечается достижение порога лояльности.", tr: "Sadakat eşiğine ulaşıldığının bildirilmesi için aynı müşterinin yapması gereken alışveriş sayısı.", ar: "عدد المشتريات من نفس العميل قبل الإشارة إلى بلوغ عتبة الولاء.", hi: "वफ़ादारी सीमा तक पहुँचने का संकेत देने से पहले उसी ग्राहक की खरीद की संख्या।", bn: "অনুগত্যের সীমা চিহ্নিত করার আগে একই গ্রাহকের কেনাকাটার সংখ্যা।", ur: "وفاداری کی حد تک پہنچنے کی نشاندہی سے پہلے اسی گاہک کی خریداریوں کی تعداد۔", ta: "விசுவாச வரம்பை அடைந்ததைக் குறிப்பதற்கு முன் அதே வாடிக்கையாளரின் வாங்குதல்களின் எண்ணிக்கை.", te: "విధేయత పరిమితిని చేరుకున్నట్లు సూచించే ముందు అదే కస్టమర్ చేసిన కొనుగోళ్ల సంఖ్య.", th: "จำนวนการซื้อของลูกค้าคนเดียวกันก่อนที่จะแจ้งว่าถึงเกณฑ์ความภักดี", zh: "同一客户在被标记为达到忠诚度门槛之前的购买次数。", ja: "ロイヤルティのしきい値に達したと表示されるまでの、同じ顧客の購入回数です。", ko: "단골 기준 도달을 표시하기 전까지 같은 고객의 구매 횟수입니다.", id: "Jumlah pembelian dari pelanggan yang sama sebelum ambang loyalitas ditandai.", vi: "Số lần mua hàng của cùng một khách trước khi đánh dấu đạt ngưỡng thân thiết.", tl: "Bilang ng bili mula sa parehong customer bago markahan na naabot ang threshold ng katapatan.", sw: "Idadi ya manunuzi ya mteja huyo huyo kabla ya kuashiria kiwango cha uaminifu kimefikiwa.", ha: "Yawan sayayya daga abokin ciniki daya kafin a nuna an kai matakin aminci.", yo: "Iye ìgbà tí oníbàárà kan náà ti rà kí a tó fi àmì hàn pé òsùwọ̀n olóòtítọ́ ti dé.", zu: "Inani lokuthenga kwekhasimende elifanayo ngaphambi kokuphawula umkhawulo wokwethembeka ofinyelelwe.", am: "የታማኝነት መድረሻ ላይ መድረሱ ከመገለጹ በፊት ከተመሳሳይ ደንበኛ የሚደረጉ ግዢዎች ብዛት።", bm: "San hakɛ min bɛ kiliyan kelen fɛ sani nafolo dan sira ka ye.", wo: "Yoon ñu jëndee kiliyaan bi la laata ñu won ne daanu ndimbal bi egg." };
+EXTRA_UI.loyaltyModeTitle = { fr: "Mode d'affichage", en: "Display mode", es: "Modo de visualización", pt: "Modo de exibição", de: "Anzeigemodus", it: "Modalità di visualizzazione", nl: "Weergavemodus", pl: "Tryb wyświetlania", ru: "Режим отображения", tr: "Görüntüleme modu", ar: "وضع العرض", hi: "प्रदर्शन मोड", bn: "প্রদর্শন মোড", ur: "ڈسپلے موڈ", ta: "காட்சி முறை", te: "ప్రదర్శన మోడ్", th: "โหมดการแสดงผล", zh: "显示模式", ja: "表示モード", ko: "표시 모드", id: "Mode tampilan", vi: "Chế độ hiển thị", tl: "Mode ng pagpapakita", sw: "Hali ya kuonyesha", ha: "Yanayin nuni", yo: "Ipò ìfihàn", zu: "Imodi yokubonisa", am: "የማሳያ ሁነታ", bm: "Yiracogo", wo: "Fiirin mode" };
+EXTRA_UI.loyaltyModeDesc = { fr: "Automatique : la bannière de récompense apparaît directement sur le reçu, potentiellement vu par le client. Manuel : vous voyez seulement un indicateur privé avant de valider la vente, et décidez vous-même.", en: "Automatic: the reward banner appears directly on the receipt, which the customer may see. Manual: you only see a private indicator before confirming the sale, and decide for yourself.", es: "Automático: el aviso de recompensa aparece directamente en el recibo, que el cliente podría ver. Manual: solo usted ve un indicador privado antes de confirmar la venta, y decide.", pt: "Automático: o aviso de recompensa aparece diretamente no recibo, que o cliente pode ver. Manual: só você vê um indicador privado antes de confirmar a venda, e decide.", de: "Automatisch: Der Belohnungshinweis erscheint direkt auf dem Beleg, den der Kunde sehen könnte. Manuell: Nur Sie sehen einen privaten Hinweis vor Bestätigung des Verkaufs und entscheiden selbst.", it: "Automatico: l'avviso del premio appare direttamente sulla ricevuta, che il cliente potrebbe vedere. Manuale: solo tu vedi un indicatore privato prima di confermare la vendita, e decidi.", nl: "Automatisch: de beloningsmelding verschijnt direct op de bon, die de klant mogelijk ziet. Handmatig: alleen u ziet een privé-indicator voordat u de verkoop bevestigt, en beslist zelf.", pl: "Automatyczny: baner nagrody pojawia się bezpośrednio na paragonie, który może zobaczyć klient. Ręczny: tylko Ty widzisz prywatny wskaźnik przed potwierdzeniem sprzedaży i decydujesz sam.", ru: "Автоматический: баннер с наградой появляется прямо на чеке, который может увидеть клиент. Ручной: только вы видите личный индикатор перед подтверждением продажи и решаете сами.", tr: "Otomatik: ödül afişi doğrudan, müşterinin görebileceği fişte görünür. Manuel: yalnızca siz, satışı onaylamadan önce özel bir gösterge görür ve kendiniz karar verirsiniz.", ar: "تلقائي: يظهر شريط المكافأة مباشرة على الإيصال، الذي قد يراه العميل. يدوي: ترون فقط مؤشراً خاصاً قبل تأكيد البيع، وتقررون بأنفسكم.", hi: "स्वचालित: इनाम बैनर सीधे रसीद पर दिखता है, जिसे ग्राहक देख सकता है। मैन्युअल: बिक्री की पुष्टि से पहले केवल आपको एक निजी संकेत दिखता है, और आप खुद निर्णय लेते हैं।", bn: "স্বয়ংক্রিয়: পুরস্কারের ব্যানার সরাসরি রসিদে দেখা যায়, যা গ্রাহক দেখতে পারে। ম্যানুয়াল: বিক্রয় নিশ্চিত করার আগে শুধু আপনি একটি ব্যক্তিগত ইঙ্গিত দেখতে পান, এবং নিজেই সিদ্ধান্ত নেন।", ur: "خودکار: انعام کا بینر براہ راست رسید پر ظاہر ہوتا ہے، جسے گاہک دیکھ سکتا ہے۔ دستی: فروخت کی تصدیق سے پہلے صرف آپ کو ایک نجی اشارہ نظر آتا ہے، اور آپ خود فیصلہ کرتے ہیں۔", ta: "தானியங்கி: பரிசு பேனர் நேரடியாக ரசீதில் தோன்றும், இது வாடிக்கையாளருக்குத் தெரியக்கூடும். கைமுறை: விற்பனையை உறுதிப்படுத்தும் முன் உங்களுக்கு மட்டும் ஒரு தனிப்பட்ட அறிகுறி தெரியும், நீங்களே முடிவு செய்யலாம்.", te: "స్వయంచాలక: బహుమతి బ్యానర్ నేరుగా రసీదుపై కనిపిస్తుంది, ఇది కస్టమర్‌కు కనిపించవచ్చు. మాన్యువల్: అమ్మకాన్ని నిర్ధారించే ముందు మీకు మాత్రమే ఒక ప్రైవేట్ సూచిక కనిపిస్తుంది, మీరే నిర్ణయించుకుంటారు.", th: "อัตโนมัติ: แบนเนอร์รางวัลจะปรากฏบนใบเสร็จโดยตรง ซึ่งลูกค้าอาจเห็นได้ ด้วยตนเอง: คุณจะเห็นเพียงตัวบ่งชี้ส่วนตัวก่อนยืนยันการขาย และตัดสินใจเอง", zh: "自动：奖励横幅会直接显示在收据上，客户可能会看到。手动：您在确认销售前只会看到一个私密提示，由您自行决定。", ja: "自動：特典バナーがレシートに直接表示され、お客様の目に触れる可能性があります。手動：販売確定前にあなただけに非公開の表示が出て、ご自身で判断できます。", ko: "자동: 보상 배너가 영수증에 직접 표시되어 고객이 볼 수 있습니다. 수동: 판매 확정 전 사장님에게만 비공개 표시가 보이며, 직접 결정합니다.", id: "Otomatis: spanduk hadiah muncul langsung di struk, yang mungkin dilihat pelanggan. Manual: Anda hanya melihat indikator pribadi sebelum mengonfirmasi penjualan, dan memutuskan sendiri.", vi: "Tự động: biểu ngữ phần thưởng hiện trực tiếp trên hóa đơn, khách hàng có thể thấy. Thủ công: bạn chỉ thấy một dấu hiệu riêng trước khi xác nhận bán hàng, và tự quyết định.", tl: "Awtomatiko: lalabas ang banner ng gantimpala nang direkta sa resibo, na maaaring makita ng customer. Manual: ikaw lang ang makakakita ng pribadong indikasyon bago kumpirmahin ang benta, at ikaw ang magpapasya.", sw: "Kiotomatiki: bango la zawadi linaonekana moja kwa moja kwenye risiti, ambalo mteja anaweza kuliona. Kwa mkono: unaona tu ishara ya faragha kabla ya kuthibitisha mauzo, na kuamua mwenyewe.", ha: "Atomatik: tutar lada tana bayyana kai tsaye akan rasit, wanda abokin ciniki zai iya gani. Da hannu: kai kadai kake ganin alamar sirri kafin tabbatar da sayarwa, kuma ka yanke shawara da kanka.", yo: "Àdáṣe: àmì ẹ̀bùn náà máa ń fara hàn tààrà lórí ìwé-ẹ̀rí náà, tí oníbàárà lè rí. Pẹ̀lú ọwọ́: ẹ nìkan ni ẹ máa rí àmì ìkọ̀kọ̀ kan kí a tó jẹ́rìí ìtajà náà, kí ẹ sì pinnu fúnra yín.", zu: "Ngokuzenzakalela: ibhena yomklomelo ibonakala ngqo kureceipt, engase ibonwe ikhasimende. Ngesandla: nje kuphela nizobona uphawu lomfihlo ngaphambi kokuqinisekisa ukuthengisa, futhi nizinqumele.", am: "ራስ-ሰር፡ የሽልማት ባነር በቀጥታ በደረሰኝ ላይ ይታያል፣ ይህም ደንበኛው ሊያየው ይችላል። በእጅ፡ ሽያጩን ከማረጋገጥ በፊት እርስዎ ብቻ የግል ምልክት ያያሉ፣ እና በራስዎ ይወስናሉ።", bm: "Yɛrɛmahan: nafolo bandɛri bɛ bɔ reçu kan yɛrɛ la, min bɛ se ka ye kiliyan fɛ. Bolo la: e kelen de bɛna taamasiyɛn gundo ye sani i ka feere sɛbɛn, i yɛrɛ bɛ latigɛ kɛ.", wo: "Automatik: baniɛr ndimbal bi feeñ ci kaw reçu bi, buy mel ne kiliyaan bi mën na ko gis. Ak loxo: yaw rekk ngay gis benn araame bu sutura laata nga dëggal jaay bi, te yaw rekk ngay dogu." };
+EXTRA_UI.loyaltyModeManual = { fr: "Manuel", en: "Manual", es: "Manual", pt: "Manual", de: "Manuell", it: "Manuale", nl: "Handmatig", pl: "Ręczny", ru: "Ручной", tr: "Manuel", ar: "يدوي", hi: "मैन्युअल", bn: "ম্যানুয়াল", ur: "دستی", ta: "கைமுறை", te: "మాన్యువల్", th: "ด้วยตนเอง", zh: "手动", ja: "手動", ko: "수동", id: "Manual", vi: "Thủ công", tl: "Manual", sw: "Kwa mkono", ha: "Da hannu", yo: "Pẹ̀lú ọwọ́", zu: "Ngesandla", am: "በእጅ", bm: "Bolo la", wo: "Ak loxo" };
+EXTRA_UI.loyaltyModeAuto = { fr: "Automatique", en: "Automatic", es: "Automático", pt: "Automático", de: "Automatisch", it: "Automatico", nl: "Automatisch", pl: "Automatyczny", ru: "Автоматический", tr: "Otomatik", ar: "تلقائي", hi: "स्वचालित", bn: "স্বয়ংক্রিয়", ur: "خودکار", ta: "தானியங்கி", te: "స్వయంచాలక", th: "อัตโนมัติ", zh: "自动", ja: "自動", ko: "자동", id: "Otomatis", vi: "Tự động", tl: "Awtomatiko", sw: "Kiotomatiki", ha: "Atomatik", yo: "Àdáṣe", zu: "Ngokuzenzakalela", am: "ራስ-ሰር", bm: "Yɛrɛmahan", wo: "Automatik" };
+EXTRA_UI.loyaltyRewardManualHint = { fr: "seuil atteint — à vous de décider", en: "threshold reached — your call", es: "umbral alcanzado — usted decide", pt: "limite atingido — a decisão é sua", de: "Schwelle erreicht — Sie entscheiden", it: "soglia raggiunta — decidi tu", nl: "drempel bereikt — u beslist", pl: "próg osiągnięty — Ty decydujesz", ru: "порог достигнут — решение за вами", tr: "eşiğe ulaşıldı — karar sizin", ar: "تم بلوغ العتبة — القرار لكم", hi: "सीमा पूरी हुई — निर्णय आपका", bn: "সীমা পূর্ণ হয়েছে — সিদ্ধান্ত আপনার", ur: "حد پوری ہوئی — فیصلہ آپ کا", ta: "வரம்பை அடைந்தது — முடிவு உங்களுடையது", te: "పరిమితి చేరుకుంది — నిర్ణయం మీదే", th: "ถึงเกณฑ์แล้ว — คุณตัดสินใจเอง", zh: "已达门槛——由您决定", ja: "しきい値到達 — あなたの判断で", ko: "기준 도달 — 사장님이 결정하세요", id: "ambang tercapai — keputusan Anda", vi: "đã đạt ngưỡng — bạn tự quyết định", tl: "naabot ang threshold — desisyon mo", sw: "kiwango kimefikiwa — uamuzi wako", ha: "an kai matakin — zaɓin naka ne", yo: "òsùwọ̀n ti dé — tiyín ni ìpinnu", zu: "umkhawulo ufikiwe — kuncike kuwe", am: "መድረሻ ላይ ደርሷል — ውሳኔው የእርስዎ ነው", bm: "dan sera — i ka latigɛ don", wo: "daanu egg na — yaw ngay dogu" };
+EXTRA_UI.debtReminderAutoTitle = { fr: "Rappels automatiques", en: "Automatic reminders", es: "Recordatorios automáticos", pt: "Lembretes automáticos", de: "Automatische Erinnerungen", it: "Promemoria automatici", nl: "Automatische herinneringen", pl: "Automatyczne przypomnienia", ru: "Автоматические напоминания", tr: "Otomatik hatırlatmalar", ar: "تذكيرات تلقائية", hi: "स्वचालित अनुस्मारक", bn: "স্বয়ংক্রিয় অনুস্মারক", ur: "خودکار یاد دہانیاں", ta: "தானியங்கி நினைவூட்டல்கள்", te: "స్వయంచాలక రిమైండర్‌లు", th: "การแจ้งเตือนอัตโนมัติ", zh: "自动提醒", ja: "自動リマインダー", ko: "자동 알림", id: "Pengingat otomatis", vi: "Nhắc nhở tự động", tl: "Awtomatikong paalala", sw: "Vikumbusho vya kiotomatiki", ha: "Tunatarwa ta atomatik", yo: "Ìránnilétí àdáṣe", zu: "Izikhumbuzo ezizenzakalelayo", am: "ራስ-ሰር ማስታወሻዎች", bm: "Hakili jigin yɛrɛma", wo: "Fàttaliku boobu automatik" };
+EXTRA_UI.debtReminderAutoDesc = { fr: "Signale automatiquement, dans l'onglet Dettes, les dettes en retard ou arrivant à échéance avec un numéro WhatsApp renseigné — vous n'avez plus à vérifier manuellement. L'envoi du message reste toujours un clic de votre part : WhatsApp ne permet pas d'envoi totalement silencieux sans un service tiers payant.", en: "Automatically flags, in the Debts tab, overdue debts or those due today with a WhatsApp number on file — you no longer need to check manually. Sending the message always stays a tap away: WhatsApp does not allow fully silent sending without a paid third-party service.", es: "Señala automáticamente, en la pestaña Deudas, las deudas vencidas o que vencen hoy con un número de WhatsApp registrado — ya no necesita revisar manualmente. El envío del mensaje sigue siendo un clic suyo: WhatsApp no permite el envío totalmente silencioso sin un servicio externo de pago.", pt: "Sinaliza automaticamente, na aba Dívidas, as dívidas atrasadas ou que vencem hoje com um número de WhatsApp registado — já não precisa de verificar manualmente. O envio da mensagem continua a ser um clique seu: o WhatsApp não permite envio totalmente silencioso sem um serviço externo pago.", de: "Markiert im Tab „Schulden“ automatisch überfällige oder heute fällige Schulden mit hinterlegter WhatsApp-Nummer — Sie müssen nicht mehr manuell prüfen. Das Senden bleibt immer ein Klick von Ihnen: WhatsApp erlaubt kein vollständig stilles Senden ohne einen kostenpflichtigen Drittanbieterdienst.", it: "Segnala automaticamente, nella scheda Debiti, i debiti scaduti o in scadenza oggi con un numero WhatsApp registrato — non devi più controllare manualmente. L'invio del messaggio resta comunque un clic da parte tua: WhatsApp non consente l'invio completamente automatico senza un servizio terzo a pagamento.", nl: "Signaleert automatisch, in het tabblad Schulden, achterstallige schulden of schulden die vandaag vervallen met een geregistreerd WhatsApp-nummer — u hoeft niet meer handmatig te controleren. Het verzenden blijft altijd een klik van u: WhatsApp staat geen volledig stil verzenden toe zonder een betaalde externe dienst.", pl: "Automatycznie oznacza w zakładce Długi zaległe długi lub te, których termin mija dziś, z podanym numerem WhatsApp — nie musisz już sprawdzać ręcznie. Wysłanie wiadomości nadal wymaga kliknięcia: WhatsApp nie pozwala na w pełni ciche wysyłanie bez płatnej usługi zewnętrznej.", ru: "Автоматически отмечает на вкладке «Долги» просроченные долги или долги со сроком сегодня, у которых указан номер WhatsApp — больше не нужно проверять вручную. Отправка сообщения всегда остаётся одним вашим нажатием: WhatsApp не позволяет полностью автоматическую отправку без платного стороннего сервиса.", tr: "Borçlar sekmesinde, WhatsApp numarası kayıtlı olan gecikmiş veya bugün vadesi gelen borçları otomatik olarak işaretler — artık manuel kontrol etmenize gerek yok. Mesajı göndermek yine de sizin bir dokunuşunuzu gerektirir: WhatsApp, ücretli bir üçüncü taraf hizmeti olmadan tamamen sessiz gönderime izin vermez.", ar: "يشير تلقائياً، في تبويب الديون، إلى الديون المتأخرة أو المستحقة اليوم والتي لديها رقم واتساب مسجل — لم تعد بحاجة للتحقق يدوياً. يبقى إرسال الرسالة دائماً نقرة منكم: واتساب لا يسمح بالإرسال الصامت الكامل دون خدمة خارجية مدفوعة.", hi: "ऋण टैब में, जिन बकाया या आज देय ऋणों का व्हाट्सऐप नंबर दर्ज है उन्हें स्वतः चिह्नित करता है — अब मैन्युअल जांच की ज़रूरत नहीं। संदेश भेजना फिर भी आपके एक टैप पर निर्भर रहता है: व्हाट्सऐप बिना किसी भुगतान वाली बाहरी सेवा के पूरी तरह स्वचालित भेजना संभव नहीं बनाता।", bn: "দেনা ট্যাবে, যেসব বকেয়া বা আজ পরিশোধযোগ্য দেনায় হোয়াটসঅ্যাপ নম্বর দেওয়া আছে তা স্বয়ংক্রিয়ভাবে চিহ্নিত করে — আর ম্যানুয়ালি পরীক্ষার দরকার নেই। বার্তা পাঠানো এখনও আপনার একটি ট্যাপের উপর নির্ভর করে: হোয়াটসঅ্যাপ কোনো পেইড তৃতীয় পক্ষের সেবা ছাড়া সম্পূর্ণ স্বয়ংক্রিয় পাঠানোর অনুমতি দেয় না।", ur: "واجب الادا ٹیب میں، ان بقایا یا آج واجب الادا قرضوں کی نشاندہی خودکار طور پر کرتا ہے جن کا واٹس ایپ نمبر درج ہے — اب دستی جانچ کی ضرورت نہیں۔ پیغام بھیجنا پھر بھی آپ کے ایک ٹیپ پر منحصر رہتا ہے: واٹس ایپ بغیر ادا شدہ تھرڈ پارٹی سروس کے مکمل خودکار بھیجنے کی اجازت نہیں دیتا۔", ta: "கடன்கள் தாவலில், வாட்ஸ்அப் எண் பதிவு செய்யப்பட்ட தாமதமான அல்லது இன்று முடிவடையும் கடன்களை தானாகக் குறிக்கிறது — இனி கைமுறையாக சரிபார்க்க வேண்டியதில்லை. செய்தி அனுப்புவது இன்னும் உங்கள் தட்டலைச் சார்ந்துள்ளது: கட்டணம் செலுத்தும் மூன்றாம் தரப்பு சேவை இல்லாமல் வாட்ஸ்அப் முழுமையாக தானியங்கி அனுப்புதலை அனுமதிக்காது.", te: "బకాయిల ట్యాబ్‌లో, వాట్సాప్ నంబర్ నమోదు చేసిన ఆలస్యమైన లేదా ఈరోజు గడువు ఉన్న బకాయిలను స్వయంచాలకంగా గుర్తిస్తుంది — ఇక మాన్యువల్‌గా తనిఖీ చేయాల్సిన అవసరం లేదు. సందేశం పంపడం ఇప్పటికీ మీ ఒక్క టాప్‌పై ఆధారపడి ఉంటుంది: చెల్లింపు థర్డ్-పార్టీ సేవ లేకుండా వాట్సాప్ పూర్తిగా స్వయంచాలక పంపడాన్ని అనుమతించదు.", th: "ทำเครื่องหมายอัตโนมัติในแท็บหนี้สิน สำหรับหนี้ที่เกินกำหนดหรือครบกำหนดวันนี้ที่มีเบอร์ WhatsApp ไว้ — ไม่ต้องตรวจสอบด้วยตนเองอีกต่อไป การส่งข้อความยังคงต้องแตะจากคุณเสมอ เนื่องจาก WhatsApp ไม่อนุญาตให้ส่งแบบอัตโนมัติทั้งหมดโดยไม่มีบริการภายนอกแบบเสียเงิน", zh: "在「欠款」标签中自动标记已登记WhatsApp号码的逾期或今日到期欠款——您无需再手动检查。发送消息仍需您点击一下：没有付费的第三方服务，WhatsApp无法实现完全自动静默发送。", ja: "債務タブで、WhatsApp番号が登録済みの延滞債務や本日期限の債務を自動的に表示します。手動で確認する必要がなくなります。メッセージの送信は引き続きあなたのタップが必要です。有料の外部サービスなしでは、WhatsAppは完全な自動送信を許可していません。", ko: "채무 탭에서 왓츠앱 번호가 등록된 연체 또는 오늘 만기인 채무를 자동으로 표시합니다 — 더 이상 수동으로 확인할 필요가 없습니다. 메시지 전송은 여전히 사장님의 탭이 필요합니다. 유료 외부 서비스 없이는 왓츠앱이 완전 자동 전송을 허용하지 않습니다.", id: "Secara otomatis menandai, di tab Utang, utang yang terlambat atau jatuh tempo hari ini dengan nomor WhatsApp terdaftar — Anda tidak perlu lagi memeriksa secara manual. Mengirim pesan tetap memerlukan satu ketukan dari Anda: WhatsApp tidak mengizinkan pengiriman sepenuhnya otomatis tanpa layanan pihak ketiga berbayar.", vi: "Tự động đánh dấu trong tab Nợ các khoản nợ quá hạn hoặc đến hạn hôm nay có số WhatsApp — bạn không cần kiểm tra thủ công nữa. Việc gửi tin nhắn vẫn cần một lần chạm từ bạn: WhatsApp không cho phép gửi hoàn toàn tự động nếu không có dịch vụ bên thứ ba trả phí.", tl: "Awtomatikong binabantayan, sa tab na Utang, ang mga overdue o dapat bayaran ngayon na may nakarehistrong numero ng WhatsApp — hindi mo na kailangang tingnan nang manu-mano. Ang pagpapadala ng mensahe ay laging mangangailangan pa rin ng isang tap mula sa inyo: hindi pinapayagan ng WhatsApp ang ganap na awtomatikong pagpapadala nang walang bayad na serbisyo ng ikatlong partido.", sw: "Huashiria kiotomatiki, katika kichupo cha Madeni, madeni yaliyochelewa au yanayostahili leo yenye nambari ya WhatsApp — hauhitaji tena kuangalia kwa mkono. Kutuma ujumbe bado kunahitaji mguso wako: WhatsApp haimruhusu kutuma kiotomatiki kabisa bila huduma ya tatu inayolipiwa.", ha: "Yana alamta ta atomatik, a shafin Bashi, basussukan da suka wuce lokaci ko kuma da suke cika a yau tare da lambar WhatsApp — ba kwa bukatar bincika da hannu kuma. Aika sakon har yanzu yana bukatar taɓawarku: WhatsApp ba ya ba da izinin aikawa ta atomatik gaba ɗaya ba tare da wata hidima ta biyan kuɗi ba.", yo: "Ó ń fi àmì sí àwọn gbèsè tí ó ti pẹ́ tàbí tí ó yẹ kí a san lónìí nínú tábù Gbèsè, tí ó ní nọ́mbà WhatsApp — o kò ní nílò láti ṣàyẹ̀wò pẹ̀lú ọwọ́ mọ́. Fífi ránṣẹ́ síbẹ̀ nílò pé kí ẹ fọwọ́ bá a: WhatsApp kò gba fífi ránṣẹ́ àdáṣe pátápátá láì sí iṣẹ́ ìta tí a ń san owó fún.", zu: "Iphawula ngokuzenzakalela, kuthebhu yezikweletu, izikweletu ezihlulekile noma ezifika namuhla ezinenombolo ye-WhatsApp efakiwe — awusenandaba yokuhlola ngesandla. Ukuthumela umlayezo kusadinga ukuthi uthinte: i-WhatsApp ayivumeli ukuthumela okuzenzakalelayo ngokuphelele ngaphandle kwesevisi yangaphandle ekhokhelwayo.", am: "በዕዳዎች ትር ውስጥ፣ ዋትስአፕ ቁጥር የተመዘገበላቸው ያለፈባቸው ወይም ዛሬ የሚደርሱ ዕዳዎችን ራስ-ሰር ያመለክታል — እንግዲህ በእጅ መፈተሽ አያስፈልግዎትም። መልእክት መላክ አሁንም የእርስዎ ንክኪ ይፈልጋል፡ ዋትስአፕ ያለ ተጨማሪ ክፍያ አገልግሎት ሙሉ በሙሉ ራስ-ሰር መላክን አይፈቅድም።", bm: "A bɛ juru minnu kɔrɔtalen don walima min bɛ dan bi, ni WhatsApp nimɔrɔ sɛbɛnnen b'u fɛ, olu tagamasiyɛn yɛrɛmahan cogo la, Juruw ɲɛda la — i tɛ mago ka i yɛrɛ sɛgɛsɛgɛ tugun. Cikan ci bɛ to i bolo digi la: WhatsApp tɛ se ka cikan ci yɛrɛmahan cogo la ni jɛɲɔgɔn sariyali tɛ.", wo: "Dafay won ci automatik ci onglet Juroom-i, juroom-i yi mujjee walla yi war a fey tey yi am limero WhatsApp — doo ko seetaat ak loxo. Yónnee bataaxal bi dafay sopp ne nga laal ko: WhatsApp mënul fey yónnee ci automatik bu mat te amul servis ci biti bu fey." };
+EXTRA_UI.debtReminderBannerText = { fr: "⏰ {n} rappel(s) de dette à envoyer", en: "⏰ {n} debt reminder(s) to send", es: "⏰ {n} recordatorio(s) de deuda por enviar", pt: "⏰ {n} lembrete(s) de dívida para enviar", de: "⏰ {n} Schuldenerinnerung(en) zu versenden", it: "⏰ {n} promemoria di debito da inviare", nl: "⏰ {n} schuldherinnering(en) te versturen", pl: "⏰ {n} przypomnienie(a) o długu do wysłania", ru: "⏰ {n} напоминание(я) о долге для отправки", tr: "⏰ Gönderilecek {n} borç hatırlatması", ar: "⏰ {n} تذكير(ات) دين للإرسال", hi: "⏰ भेजने के लिए {n} ऋण अनुस्मारक", bn: "⏰ পাঠানোর জন্য {n}টি দেনার অনুস্মারক", ur: "⏰ بھیجنے کے لیے {n} قرض یاد دہانی", ta: "⏰ அனுப்ப வேண்டிய {n} கடன் நினைவூட்டல்(கள்)", te: "⏰ పంపవలసిన {n} బకాయి రిమైండర్(లు)", th: "⏰ มีการแจ้งเตือนหนี้ {n} รายการที่ต้องส่ง", zh: "⏰ 有{n}条欠款提醒待发送", ja: "⏰ 送信が必要な債務リマインダーが{n}件あります", ko: "⏰ 보낼 채무 알림 {n}건", id: "⏰ {n} pengingat utang untuk dikirim", vi: "⏰ {n} lời nhắc nợ cần gửi", tl: "⏰ {n} paalala ng utang na ipapadala", sw: "⏰ Vikumbusho {n} vya deni vya kutuma", ha: "⏰ Tunatarwar bashi {n} da za a aika", yo: "⏰ Ìránnilétí gbèsè {n} tí ó yẹ kí a fi ránṣẹ́", zu: "⏰ Izikhumbuzo zesikweletu ezingu-{n} okufanele zithunyelwe", am: "⏰ መላክ ያለበት {n} የዕዳ ማስታወሻ(ዎች)", bm: "⏰ Juru hakili jigin {n} ci cili", wo: "⏰ {n} fàttaliku juroom-i ñu war a yónnee" };
+EXTRA_UI.aiWebSearchAlwaysOnDesc = { fr: "Activée automatiquement lorsque votre question semble avoir besoin d'une information à jour (prix, actualité, taux de change…). Aucun réglage manuel nécessaire.", en: "Automatically turned on when your question seems to need up-to-date information (prices, news, exchange rates…). No manual setting needed.", es: "Se activa automáticamente cuando su pregunta parece necesitar información actualizada (precios, noticias, tipos de cambio…). No requiere ningún ajuste manual.", pt: "Ativada automaticamente quando a sua pergunta parece precisar de informação atualizada (preços, notícias, taxas de câmbio…). Não é necessário nenhum ajuste manual.", de: "Wird automatisch aktiviert, wenn Ihre Frage aktuelle Informationen zu benötigen scheint (Preise, Nachrichten, Wechselkurse …). Keine manuelle Einstellung nötig.", it: "Si attiva automaticamente quando la tua domanda sembra richiedere informazioni aggiornate (prezzi, notizie, tassi di cambio…). Nessuna impostazione manuale necessaria.", nl: "Wordt automatisch ingeschakeld wanneer uw vraag actuele informatie lijkt te vereisen (prijzen, nieuws, wisselkoersen…). Geen handmatige instelling nodig.", pl: "Włącza się automatycznie, gdy Twoje pytanie wydaje się wymagać aktualnych informacji (ceny, wiadomości, kursy walut…). Nie wymaga ustawień ręcznych.", ru: "Включается автоматически, если ваш вопрос требует актуальной информации (цены, новости, курсы валют…). Ручная настройка не нужна.", tr: "Sorunuz güncel bir bilgi gerektiriyor gibi göründüğünde (fiyatlar, haberler, döviz kurları…) otomatik olarak etkinleşir. Manuel ayara gerek yoktur.", ar: "تُفعَّل تلقائياً عندما يبدو أن سؤالكم يحتاج إلى معلومة محدّثة (أسعار، أخبار، أسعار صرف...). لا حاجة لأي إعداد يدوي.", hi: "यह तब स्वतः सक्रिय हो जाता है जब आपके प्रश्न को ताज़ा जानकारी (कीमतें, समाचार, विनिमय दर...) की आवश्यकता प्रतीत होती है। किसी मैन्युअल सेटिंग की आवश्यकता नहीं।", bn: "আপনার প্রশ্নে হালনাগাদ তথ্যের প্রয়োজন মনে হলে (দাম, খবর, বিনিময় হার...) এটি স্বয়ংক্রিয়ভাবে চালু হয়ে যায়। কোনো ম্যানুয়াল সেটিংয়ের দরকার নেই।", ur: "جب آپ کے سوال کو تازہ معلومات (قیمتیں، خبریں، زرِمبادلہ کی شرح...) کی ضرورت محسوس ہو تو یہ خودکار طور پر فعال ہو جاتا ہے۔ کسی دستی سیٹنگ کی ضرورت نہیں۔", ta: "உங்கள் கேள்விக்கு புதுப்பித்த தகவல் (விலைகள், செய்திகள், நாணய மாற்று விகிதங்கள்...) தேவைப்படுவதாகத் தோன்றும்போது இது தானாக இயங்கும். கைமுறை அமைப்பு தேவையில்லை.", te: "మీ ప్రశ్నకు తాజా సమాచారం (ధరలు, వార్తలు, మారకపు రేట్లు...) అవసరమని అనిపించినప్పుడు ఇది స్వయంచాలకంగా ఆన్ అవుతుంది. మాన్యువల్ సెట్టింగ్ అవసరం లేదు.", th: "เปิดใช้งานอัตโนมัติเมื่อคำถามของคุณดูเหมือนต้องการข้อมูลล่าสุด (ราคา ข่าวสาร อัตราแลกเปลี่ยน...) ไม่ต้องตั้งค่าด้วยตนเอง", zh: "当您的问题似乎需要最新信息（价格、新闻、汇率等）时会自动开启，无需手动设置。", ja: "価格、ニュース、為替レートなど、最新情報が必要そうな質問の場合に自動的に有効になります。手動設定は不要です。", ko: "질문에 최신 정보(가격, 뉴스, 환율 등)가 필요해 보일 때 자동으로 켜집니다. 수동 설정은 필요 없습니다.", id: "Diaktifkan secara otomatis saat pertanyaan Anda tampak memerlukan informasi terkini (harga, berita, kurs...). Tidak perlu pengaturan manual.", vi: "Tự động bật khi câu hỏi của bạn có vẻ cần thông tin cập nhật (giá cả, tin tức, tỷ giá...). Không cần cài đặt thủ công.", tl: "Awtomatikong nagsisimula kapag parang kailangan ng iyong tanong ng napapanahong impormasyon (presyo, balita, palitan ng pera...). Walang kailangang manual na setting.", sw: "Huwashwa kiotomatiki wakati swali lako linapoonekana kuhitaji taarifa mpya (bei, habari, viwango vya ubadilishaji...). Hakuna mpangilio wa mkono unaohitajika.", ha: "Yana kunna kai tsaye idan tambayarku ta bayyana tana bukatar sabon bayani (farashi, labarai, farashin musaya...). Babu bukatar daidaita da hannu.", yo: "Ó ń ṣiṣẹ́ fúnra rẹ̀ nígbà tí ìbéèrè yín bá dà bí ẹni pé ó nílò àlàyé tuntun (owó, ìròyìn, iye paṣípààrọ̀...). Kò sí ètò pẹ̀lú ọwọ́ tí a nílò.", zu: "Kuyavuleka ngokuzenzakalela lapho umbuzo wakho ubonakala udinga ulwazi olusha (amanani, izindaba, amazinga okushintshaniswa...). Akukho sethingi ngesandla edingekayo.", am: "ጥያቄዎ የዘመነ መረጃ (ዋጋዎች፣ ዜና፣ የምንዛሬ ተመኖች...) የሚያስፈልገው መስሎ ሲታይ በራስ-ሰር ይነቃል። ምንም በእጅ ማስተካከያ አያስፈልግም።", bm: "A bɛ yɛlɛ yɛrɛmahan n'i ka ɲininkali ye kunnafoni kura fɛ (sɔngɔw, kibaruyaw, warijɛla hakɛw...). Bolo la labɛncogo si mago tɛ.", wo: "Dafay dal ci automatik bu sa laaj di soxla xibaar bu bees (njëg, xibaar, taux échange...). Amul soxla ci defar ko ak loxo." };
+EXTRA_UI.empSearchPlaceholder = { fr: "Rechercher un membre du personnel…", en: "Search for a staff member…", es: "Buscar un miembro del personal…", pt: "Pesquisar um membro da equipa…", de: "Mitarbeiter suchen…", it: "Cerca un membro del personale…", nl: "Een personeelslid zoeken…", pl: "Szukaj członka personelu…", ru: "Поиск сотрудника…", tr: "Personel üyesi ara…", ar: "البحث عن أحد أفراد الطاقم…", hi: "स्टाफ़ सदस्य खोजें…", bn: "একজন কর্মী খুঁজুন…", ur: "عملے کے رکن کو تلاش کریں…", ta: "பணியாளரைத் தேடுங்கள்…", te: "సిబ్బంది సభ్యుని వెతకండి…", th: "ค้นหาพนักงาน…", zh: "搜索工作人员…", ja: "スタッフを検索…", ko: "직원 검색…", id: "Cari anggota staf…", vi: "Tìm nhân viên…", tl: "Maghanap ng kawani…", sw: "Tafuta mfanyakazi…", ha: "Nemo ma'aikaci…", yo: "Wá ọmọ ẹgbẹ́ òṣìṣẹ́…", zu: "Sesha isisebenzi…", am: "ሰራተኛ ይፈልጉ…", bm: "I ka baarakɛla ɲini…", wo: "Seet baykat…" };
+EXTRA_UI.empSortLabel = { fr: "Trier par", en: "Sort by", es: "Ordenar por", pt: "Ordenar por", de: "Sortieren nach", it: "Ordina per", nl: "Sorteren op", pl: "Sortuj według", ru: "Сортировать по", tr: "Sırala", ar: "ترتيب حسب", hi: "इसके अनुसार क्रमबद्ध करें", bn: "সাজান", ur: "ترتیب دیں", ta: "வரிசைப்படுத்து", te: "క్రమం ద్వారా", th: "เรียงตาม", zh: "排序方式", ja: "並び替え", ko: "정렬 기준", id: "Urutkan berdasarkan", vi: "Sắp xếp theo", tl: "Ayusin ayon sa", sw: "Panga kwa", ha: "Tsara ta", yo: "To lẹsẹsẹ nípasẹ̀", zu: "Hlunga nge", am: "በ ደርድር", bm: "A dilan ka bɔ", wo: "Aar ci" };
+EXTRA_UI.empSortName = { fr: "Nom", en: "Name", es: "Nombre", pt: "Nome", de: "Name", it: "Nome", nl: "Naam", pl: "Imię", ru: "Имя", tr: "Ad", ar: "الاسم", hi: "नाम", bn: "নাম", ur: "نام", ta: "பெயர்", te: "పేరు", th: "ชื่อ", zh: "姓名", ja: "名前", ko: "이름", id: "Nama", vi: "Tên", tl: "Pangalan", sw: "Jina", ha: "Suna", yo: "Orúkọ", zu: "Igama", am: "ስም", bm: "Tɔgɔ", wo: "Tur" };
+EXTRA_UI.empSortRole = { fr: "Rôle", en: "Role", es: "Rol", pt: "Função", de: "Rolle", it: "Ruolo", nl: "Rol", pl: "Rola", ru: "Роль", tr: "Rol", ar: "الدور", hi: "भूमिका", bn: "ভূমিকা", ur: "کردار", ta: "பங்கு", te: "పాత్ర", th: "บทบาท", zh: "角色", ja: "役割", ko: "역할", id: "Peran", vi: "Vai trò", tl: "Tungkulin", sw: "Jukumu", ha: "Matsayi", yo: "Ipò", zu: "Indima", am: "ሚና", bm: "Jɔyɔrɔ", wo: "Wareef" };
+EXTRA_UI.empSortSales = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
+EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
+EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
+EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
+EXTRA_UI.empActionLogFilterAll = { fr: "Tout le monde", en: "Everyone", es: "Todos", pt: "Todos", de: "Alle", it: "Tutti", nl: "Iedereen", pl: "Wszyscy", ru: "Все", tr: "Herkes", ar: "الجميع", hi: "सभी", bn: "সবাই", ur: "سب", ta: "அனைவரும்", te: "అందరూ", th: "ทุกคน", zh: "所有人", ja: "全員", ko: "전체", id: "Semua orang", vi: "Tất cả mọi người", tl: "Lahat", sw: "Kila mtu", ha: "Kowa", yo: "Gbogbo èèyàn", zu: "Wonke umuntu", am: "ሁሉም", bm: "Bɛɛ", wo: "Ñépp" };
+EXTRA_UI.empNoSearchResults = { fr: "Aucun résultat pour cette recherche.", en: "No results for this search.", es: "No hay resultados para esta búsqueda.", pt: "Nenhum resultado para esta pesquisa.", de: "Keine Ergebnisse für diese Suche.", it: "Nessun risultato per questa ricerca.", nl: "Geen resultaten voor deze zoekopdracht.", pl: "Brak wyników dla tego wyszukiwania.", ru: "Нет результатов по этому запросу.", tr: "Bu arama için sonuç yok.", ar: "لا توجد نتائج لهذا البحث.", hi: "इस खोज के लिए कोई परिणाम नहीं।", bn: "এই অনুসন্ধানের জন্য কোনো ফলাফল নেই।", ur: "اس تلاش کے لیے کوئی نتیجہ نہیں۔", ta: "இந்தத் தேடலுக்கு முடிவுகள் இல்லை.", te: "ఈ శోధనకు ఫలితాలు లేవు.", th: "ไม่พบผลลัพธ์สำหรับการค้นหานี้", zh: "未找到相关结果。", ja: "この検索結果はありません。", ko: "검색 결과가 없습니다.", id: "Tidak ada hasil untuk pencarian ini.", vi: "Không có kết quả cho tìm kiếm này.", tl: "Walang resulta para sa paghahanap na ito.", sw: "Hakuna matokeo kwa utafutaji huu.", ha: "Babu sakamako ga wannan bincike.", yo: "Kò sí àbájáde fún ìwádìí yìí.", zu: "Awekho imiphumela yalolu suku.", am: "ለዚህ ፍለጋ ምንም ውጤት የለም።", bm: "Jaabi si ɲinini in na", wo: "Amul résultat ci ci seet bii." };
+EXTRA_UI.weeklySummaryLabel = { fr: "Rapport hebdomadaire", en: "Weekly report", es: "Informe semanal", pt: "Relatório semanal", de: "Wöchentlicher Bericht", it: "Rapporto settimanale", nl: "Wekelijks rapport", pl: "Raport tygodniowy", ru: "Еженедельный отчёт", tr: "Haftalık rapor", ar: "التقرير الأسبوعي", hi: "साप्ताहिक रिपोर्ट", bn: "সাপ্তাহিক প্রতিবেদন", ur: "ہفتہ وار رپورٹ", ta: "வாராந்திர அறிக்கை", te: "వారాంతపు నివేదిక", th: "รายงานประจำสัปดาห์", zh: "每周报告", ja: "週次レポート", ko: "주간 보고서", id: "Laporan mingguan", vi: "Báo cáo hàng tuần", tl: "Ulat lingguhan", sw: "Ripoti ya kila wiki", ha: "Rahoto na mako-mako", yo: "Ìjábọ̀ ọ̀sọ̀ọ̀sẹ̀", zu: "Umbiko wamasonto", am: "ሳምንታዊ ሪፖርት", bm: "Dɔgɔkun kunnafoni", wo: "Rapport bu bis bu nekk" };
+EXTRA_UI.weeklySummaryDesc = { fr: "Recevez chaque semaine, par notification, un récapitulatif de votre boutique : ventes, meilleur produit, meilleur membre du personnel, dettes impayées et stock bas. Vous pouvez désactiver cette notification à tout moment.", en: "Receive a weekly notification summarizing your shop: sales, best-selling product, top staff member, unpaid debts and low stock. You can turn off this notification at any time.", es: "Reciba cada semana una notificación con el resumen de su tienda: ventas, producto más vendido, mejor miembro del personal, deudas impagadas y stock bajo. Puede desactivar esta notificación en cualquier momento.", pt: "Receba semanalmente uma notificação com o resumo da sua loja: vendas, produto mais vendido, melhor membro da equipa, dívidas não pagas e stock baixo. Pode desativar esta notificação em qualquer momento.", de: "Erhalten Sie jede Woche eine Benachrichtigung mit der Zusammenfassung Ihres Geschäfts: Verkäufe, meistverkauftes Produkt, bestes Teammitglied, offene Schulden und niedriger Lagerbestand. Sie können diese Benachrichtigung jederzeit deaktivieren.", it: "Ricevi ogni settimana una notifica con il riepilogo del tuo negozio: vendite, prodotto più venduto, miglior membro del personale, debiti non pagati e scorte basse. Puoi disattivare questa notifica in qualsiasi momento.", nl: "Ontvang elke week een melding met het overzicht van uw winkel: verkopen, bestverkochte product, beste personeelslid, onbetaalde schulden en lage voorraad. U kunt deze melding op elk moment uitschakelen.", pl: "Otrzymuj co tydzień powiadomienie z podsumowaniem Twojego sklepu: sprzedaż, najlepiej sprzedający się produkt, najlepszy pracownik, niezapłacone długi i niski stan zapasów. Możesz wyłączyć to powiadomienie w każdej chwili.", ru: "Получайте каждую неделю уведомление с итогами вашего магазина: продажи, самый продаваемый товар, лучший сотрудник, непогашенные долги и низкий остаток товара. Вы можете отключить это уведомление в любое время.", tr: "Her hafta mağazanızın özetini bildirim olarak alın: satışlar, en çok satan ürün, en iyi personel üyesi, ödenmemiş borçlar ve düşük stok. Bu bildirimi istediğiniz zaman kapatabilirsiniz.", ar: "استلم كل أسبوع إشعارًا بملخص متجرك: المبيعات، المنتج الأكثر مبيعًا، أفضل عضو من الطاقم، الديون غير المدفوعة والمخزون المنخفض. يمكنك إيقاف هذا الإشعار في أي وقت.", hi: "हर सप्ताह अपनी दुकान का सारांश सूचना के रूप में प्राप्त करें: बिक्री, सबसे अधिक बिकने वाला उत्पाद, सर्वश्रेष्ठ स्टाफ़ सदस्य, बकाया उधारी और कम स्टॉक। आप इस सूचना को कभी भी बंद कर सकते हैं।", bn: "প্রতি সপ্তাহে একটি নোটিফিকেশনে আপনার দোকানের সারাংশ পান: বিক্রয়, সর্বাধিক বিক্রিত পণ্য, সেরা কর্মী, বকেয়া ঋণ এবং কম স্টক। আপনি এই নোটিফিকেশন যেকোনো সময় বন্ধ করতে পারেন।", ur: "ہر ہفتے اپنی دکان کا خلاصہ اطلاع کے ذریعے وصول کریں: فروخت، سب سے زیادہ فروخت ہونے والی پروڈکٹ، بہترین عملے کا رکن، ادھار اور کم اسٹاک۔ آپ اس اطلاع کو کسی بھی وقت بند کر سکتے ہیں۔", ta: "ஒவ்வொரு வாரமும் உங்கள் கடையின் சுருக்கத்தை அறிவிப்பாகப் பெறுங்கள்: விற்பனை, அதிகம் விற்பனையான பொருள், சிறந்த பணியாளர், நிலுவையில் உள்ள கடன்கள் மற்றும் குறைந்த இருப்பு. இந்த அறிவிப்பை எப்போது வேண்டுமானாலும் முடக்கலாம்.", te: "ప్రతి వారం మీ దుకాణం యొక్క సారాంశాన్ని నోటిఫికేషన్‌గా అందుకోండి: అమ్మకాలు, ఎక్కువగా అమ్ముడైన ఉత్పత్తి, అత్యుత్తమ సిబ్బంది సభ్యుడు, చెల్లించని అప్పులు మరియు తక్కువ స్టాక్. మీరు ఎప్పుడైనా ఈ నోటిఫికేషన్‌ను ఆపవచ్చు.", th: "รับการแจ้งเตือนสรุปร้านค้าของคุณทุกสัปดาห์: ยอดขาย สินค้าขายดีที่สุด พนักงานยอดเยี่ยม หนี้ที่ยังไม่ชำระ และสต็อกต่ำ คุณสามารถปิดการแจ้งเตือนนี้ได้ทุกเมื่อ", zh: "每周通过通知接收您店铺的摘要：销售情况、最畑销产品、最佳员工、未付欠款及库存不足情况。您可以随时关闭此通知。", ja: "毎週、売上、売れ筋商品、最優秀スタッフ、未払いの借金、在庫不足についての通知を受け取れます。この通知はいつでもオフにできます。", ko: "매주 매출, 베스트 상품, 최고 직원, 미수금, 재고 부족 등 매장 요약을 알림으로 받아보세요. 이 알림은 언제든지 끌 수 있습니다.", id: "Terima notifikasi mingguan berisi ringkasan toko Anda: penjualan, produk terlaris, staf terbaik, utang yang belum dibayar, dan stok rendah. Anda dapat menonaktifkan notifikasi ini kapan saja.", vi: "Nhận thông báo hàng tuần tóm tắt cửa hàng của bạn: doanh số, sản phẩm bán chạy nhất, nhân viên xuất sắc nhất, công nợ chưa thanh toán và hàng sắp hết. Bạn có thể tắt thông báo này bất cứ lúc nào.", tl: "Tumanggap ng lingguhang abiso na nagbubuod ng iyong tindahan: benta, pinakamabentang produkto, pinakamahusay na kawani, hindi pa bayad na utang, at mababang stock. Maaari mong i-off ang abisong ito anumang oras.", sw: "Pokea arifa ya kila wiki inayofupisha duka lako: mauzo, bidhaa inayouzwa zaidi, mfanyakazi bora, madeni ambayo hayajalipwa, na bidhaa chache. Unaweza kuzima arifa hii wakati wowote.", ha: "Karɓi sanarwa ta mako-mako da ke taƙaita shagon ku: siyar da kaya, kayan da aka fi sayarwa, ma'aikaci mafi kyau, basussukan da ba a biya ba, da ƴan kaya. Kuna iya kashe wannan sanarwa a kowane lokaci.", yo: "Gba ìfitónilétí ọ̀sọ̀ọ̀sẹ̀ tí ó ṣàkótán ilé ìtajà rẹ: títà, ọjà tí ó ta jùlọ, òṣìṣẹ́ tí ó dára jùlọ, gbèsè tí a kò tí ì sanwó àti ọjà tí ó dín kù. O lè pa ìfitónilétí yìí ní ìgbàkigbà.", zu: "Thola isaziso sansuku zonke esifingqa isitolo sakho: ukuthengisa, umkhiqizo othengiswa kakhulu, isisebenzi esihle kakhulu, izikweletu ezingakhokhiwe, nesitoko esiphansi. Ungavala lesi saziso noma kunini.", am: "ሱቅዎን የሚያጠቃልል ሳምንታዊ ማሳወቂያ ይቀበሉ፦ ሽያጭ፣ በጣም የተሸጠ ምርት፣ ምርጥ ሰራተኛ፣ ያልተከፈሉ ዕዳዎች እና ዝቅተኛ ክምችት። ይህን ማሳወቂያ በማንኛውም ጊዜ ማጥፋት ይችላሉ።", bm: "Dɔgɔkun o dɔgɔkun, i bɛna kunnafoni sɔrɔ min bɛ i ka magasa ɲɛsin: feerew, fɛn min feerew ka ca, baarakɛla min ka ɲi kosɛbɛ, juru minnu ma sara, ani minnu dɔgɔyara. I bɛ se ka nin kunnafoni in tigɛ tuma bɛɛ.", wo: "Jot bataaxal bu dëgër bu bis bu nekk bu wone jukki bu sa boutique: jaay, jumtukaay bu gëna jaay, baykat bu gëna baax, bor yu ñu waxul, ak marchandiz bu néew. Mën nga bul koy wax ci jamono bu nekk." };
+EXTRA_UI.weeklySummaryDayLabel = { fr: "Jour d'envoi", en: "Delivery day", es: "Día de envío", pt: "Dia de envio", de: "Versandtag", it: "Giorno di invio", nl: "Verzenddag", pl: "Dzień wysyłki", ru: "День отправки", tr: "Gönderim günü", ar: "يوم الإرسال", hi: "भेजने का दिन", bn: "পাঠানোর দিন", ur: "بھیجنے کا دن", ta: "அனுப்பும் நாள்", te: "పంపే రోజు", th: "วันที่ส่ง", zh: "发送日", ja: "送信日", ko: "전송 요일", id: "Hari pengiriman", vi: "Ngày gửi", tl: "Araw ng pagpapadala", sw: "Siku ya kutuma", ha: "Ranar aikewa", yo: "Ọjọ́ fífiránṣẹ́", zu: "Usuku lokuthumela", am: "የመላኪያ ቀን", bm: "Cibon don", wo: "Bis bu yónnee" };
+EXTRA_UI.weeklySummaryTimeNote = { fr: "Envoyé à la même heure que votre résumé quotidien ({time}).", en: "Sent at the same time as your daily summary ({time}).", es: "Se envía a la misma hora que su resumen diario ({time}).", pt: "Enviado à mesma hora do seu resumo diário ({time}).", de: "Wird zur gleichen Zeit wie Ihre tägliche Zusammenfassung gesendet ({time}).", it: "Inviato alla stessa ora del tuo riepilogo giornaliero ({time}).", nl: "Wordt verzonden op hetzelfde tijdstip als uw dagelijkse samenvatting ({time}).", pl: "Wysyłane w tym samym czasie co codzienne podsumowanie ({time}).", ru: "Отправляется в то же время, что и ваша ежедневная сводка ({time}).", tr: "Günlük özetinizle aynı saatte gönderilir ({time}).", ar: "يُرسل في نفس وقت ملخصك اليومي ({time}).", hi: "आपके दैनिक सारांश के समय ही भेजा जाता है ({time})।", bn: "আপনার দৈনিক সারাংশের মতো একই সময়ে পাঠানো হয় ({time})।", ur: "آپ کے روزانہ خلاصے کی طرح اسی وقت بھیجا جاتا ہے ({time})۔", ta: "உங்கள் தினசரி சுருக்கத்தின் அதே நேரத்தில் அனுப்பப்படும் ({time}).", te: "మీ రోజువారీ సారాంశం అదే సమయంలో పంపబడుతుంది ({time}).", th: "ส่งในเวลาเดียวกับสรุปประจำวันของคุณ ({time})", zh: "与您的每日摘要同一时间发送（{time}）。", ja: "日次サマリーと同じ時刻に送信されます（{time}）。", ko: "일일 요약과 같은 시간에 전송됩니다 ({time}).", id: "Dikirim pada waktu yang sama dengan ringkasan harian Anda ({time}).", vi: "Được gửi vào cùng thời điểm với tóm tắt hàng ngày của bạn ({time}).", tl: "Ipinapadala sa parehong oras ng iyong pang-araw-araw na buod ({time}).", sw: "Hutumwa saa sawa na muhtasari wako wa kila siku ({time}).", ha: "Ana aika shi a lokaci guda da taƙaitaccen bayaninku na yau da kullun ({time}).", yo: "A máa fi ránṣẹ́ ní àkókò kan náà pẹ̀lú àkótán ojoojúmọ́ rẹ ({time}).", zu: "Ithunyelwa ngesikhathi esifanayo nesifinyezo sakho sansuku zonke ({time}).", am: "ከዕለታዊ ማጠቃለያዎ ጋር በተመሳሳይ ጊዜ ይላካል ({time})።", bm: "A bɛ ci ci waati kelen min bɛ i ka don o don kunnafoni la ({time}).", wo: "Dañu koy yonnee ci waxtu bu bokk ak rapport bu bis bu nekk ({time})." };
+EXTRA_UI.backupTitle = { fr: "Sauvegardes", en: "Backups", es: "Copias de seguridad", pt: "Cópias de segurança", de: "Sicherungen", it: "Backup", nl: "Backups", pl: "Kopie zapasowe", ru: "Резервные копии", tr: "Yedeklemeler", ar: "النسخ الاحتياطية", hi: "बैकअप", bn: "ব্যাকআপ", ur: "بیک اپ", ta: "காப்புப்பிரதிகள்", te: "బ్యాకప్‌లు", th: "การสำรองข้อมูล", zh: "备份", ja: "バックアップ", ko: "백업", id: "Cadangan", vi: "Sao lưu", tl: "Mga backup", sw: "Nakala za akiba", ha: "Ajiyoyi", yo: "Àwọn ẹ̀dà ìpamọ́", zu: "Amakhophi asekelayo", am: "ምትክ ቅጂዎች", bm: "Ntalenko", wo: "Woññat" };
+EXTRA_UI.backupDesc = { fr: "Export JSON & historique", en: "JSON export & history", es: "Exportación JSON e historial", pt: "Exportação JSON e histórico", de: "JSON-Export & Verlauf", it: "Esportazione JSON e cronologia", nl: "JSON-export & geschiedenis", pl: "Eksport JSON i historia", ru: "Экспорт JSON и история", tr: "JSON dışa aktarma ve geçmiş", ar: "تصدير JSON والسجل", hi: "JSON निर्यात और इतिहास", bn: "JSON এক্সপোর্ট ও ইতিহাস", ur: "JSON ایکسپورٹ اور تاریخ", ta: "JSON ஏற்றுமதி & வரலாறு", te: "JSON ఎగుమతి & చరిత్ర", th: "ส่งออก JSON และประวัติ", zh: "JSON 导出与历史记录", ja: "JSON書き出しと履歴", ko: "JSON 내보내기 및 기록", id: "Ekspor JSON & riwayat", vi: "Xuất JSON & lịch sử", tl: "Pag-export ng JSON at kasaysayan", sw: "Hamisha JSON na historia", ha: "Fitar da JSON da tarihi", yo: "Yíyọ JSON àti ìtàn", zu: "Ukukhipha JSON nomlando", am: "የJSON ወጪ እና ታሪክ", bm: "JSON bɔli ni tariku", wo: "Woññat JSON ak taariix" };
+EXTRA_UI.backupSummaryLine = { fr: "{p} produit(s) · {s} vente(s) · {d} dette(s) · {e} dépense(s)", en: "{p} product(s) · {s} sale(s) · {d} debt(s) · {e} expense(s)", es: "{p} producto(s) · {s} venta(s) · {d} deuda(s) · {e} gasto(s)", pt: "{p} produto(s) · {s} venda(s) · {d} dívida(s) · {e} despesa(s)", de: "{p} Produkt(e) · {s} Verkauf/Verkäufe · {d} Schuld(en) · {e} Ausgabe(n)", it: "{p} prodotto/i · {s} vendita/e · {d} debito/i · {e} spesa/e", nl: "{p} product(en) · {s} verkoop/verkopen · {d} schuld(en) · {e} uitgave(n)", pl: "{p} produkt(y) · {s} sprzedaż(e) · {d} dług(i) · {e} wydatek/wydatki", ru: "{p} товар(ов) · {s} продаж(и) · {d} долг(ов) · {e} расход(ов)", tr: "{p} ürün · {s} satış · {d} borç · {e} gider", ar: "{p} منتج(ات) · {s} عملية بيع · {d} دين(ديون) · {e} مصروف(ات)", hi: "{p} उत्पाद · {s} बिक्री · {d} उधारी · {e} खर्च", bn: "{p} পণ্য · {s} বিক্রয় · {d} ঋণ · {e} খরচ", ur: "{p} پروڈکٹ · {s} فروخت · {d} ادھار · {e} اخراجات", ta: "{p} பொருள்(கள்) · {s} விற்பனை(கள்) · {d} கடன்(கள்) · {e} செலவு(கள்)", te: "{p} ఉత్పత్తులు · {s} అమ్మకాలు · {d} అప్పులు · {e} ఖర్చులు", th: "{p} สินค้า · {s} การขาย · {d} หนี้ · {e} ค่าใช้จ่าย", zh: "{p} 件产品 · {s} 笔销售 · {d} 笔欠款 · {e} 笔支出", ja: "商品{p}件 · 売上{s}件 · 借金{d}件 · 支出{e}件", ko: "상품 {p}개 · 판매 {s}건 · 외상 {d}건 · 지출 {e}건", id: "{p} produk · {s} penjualan · {d} utang · {e} pengeluaran", vi: "{p} sản phẩm · {s} lượt bán · {d} công nợ · {e} chi phí", tl: "{p} produkto · {s} benta · {d} utang · {e} gastos", sw: "Bidhaa {p} · Mauzo {s} · Madeni {d} · Matumizi {e}", ha: "Kaya {p} · Siyarwa {s} · Bashi {d} · Kashewa {e}", yo: "Ọjà {p} · Títà {s} · Gbèsè {d} · Ìnáwó {e}", zu: "Imikhiqizo {p} · Ukuthengisa {s} · Izikweletu {d} · Izindleko {e}", am: "{p} ምርቶች · {s} ሽያጮች · {d} ዕዳዎች · {e} ወጪዎች", bm: "Fɛn {p} · Feerew {s} · Juru {d} · Wari bɔra {e}", wo: "Jumtukaay {p} · Jaay {s} · Bor {d} · Depans {e}" };
+EXTRA_UI.backupExportJsonBtn = { fr: "Télécharger une sauvegarde complète (JSON)", en: "Download a complete backup (JSON)", es: "Descargar una copia de seguridad completa (JSON)", pt: "Descarregar uma cópia de segurança completa (JSON)", de: "Vollständige Sicherung herunterladen (JSON)", it: "Scarica un backup completo (JSON)", nl: "Volledige backup downloaden (JSON)", pl: "Pobierz pełną kopię zapasową (JSON)", ru: "Скачать полную резервную копию (JSON)", tr: "Tam yedeklemeyi indir (JSON)", ar: "تنزيل نسخة احتياطية كاملة (JSON)", hi: "पूर्ण बैकअप डाउनलोड करें (JSON)", bn: "সম্পূর্ণ ব্যাকআপ ডাউনলোড করুন (JSON)", ur: "مکمل بیک اپ ڈاؤن لوڈ کریں (JSON)", ta: "முழுமையான காப்புப்பிரதியைப் பதிவிறக்கவும் (JSON)", te: "పూర్తి బ్యాకప్‌ను డౌన్‌లోడ్ చేయండి (JSON)", th: "ดาวน์โหลดข้อมูลสำรองฉบับสมบูรณ์ (JSON)", zh: "下载完整备份（JSON）", ja: "完全バックアップをダウンロード（JSON）", ko: "전체 백업 다운로드 (JSON)", id: "Unduh cadangan lengkap (JSON)", vi: "Tải xuống bản sao lưu đầy đủ (JSON)", tl: "I-download ang kumpletong backup (JSON)", sw: "Pakua nakala kamili ya akiba (JSON)", ha: "Sauke cikakken ajiyar bayanai (JSON)", yo: "Gba ẹ̀dà ìpamọ́ pípé (JSON)", zu: "Landa ikhophi esekelayo ephelele (JSON)", am: "ሙሉ ምትክ ቅጂ ያውርዱ (JSON)", bm: "Ntalenko dafalen bɔn (JSON)", wo: "Yàggal woññat bu mat sëkk (JSON)" };
+EXTRA_UI.backupCreateNowBtn = { fr: "Créer une sauvegarde maintenant", en: "Create a backup now", es: "Crear una copia de seguridad ahora", pt: "Criar uma cópia de segurança agora", de: "Jetzt eine Sicherung erstellen", it: "Crea un backup ora", nl: "Nu een backup maken", pl: "Utwórz kopię zapasową teraz", ru: "Создать резервную копию сейчас", tr: "Şimdi yedekleme oluştur", ar: "إنشاء نسخة احتياطية الآن", hi: "अभी बैकअप बनाएं", bn: "এখনই ব্যাকআপ তৈরি করুন", ur: "ابھی بیک اپ بنائیں", ta: "இப்போது காப்புப்பிரதி உருவாக்கவும்", te: "ఇప్పుడు బ్యాకప్‌ను సృష్టించండి", th: "สร้างข้อมูลสำรองตอนนี้", zh: "立即创建备份", ja: "今すぐバックアップを作成", ko: "지금 백업 만들기", id: "Buat cadangan sekarang", vi: "Tạo bản sao lưu ngay", tl: "Gumawa ng backup ngayon", sw: "Unda nakala ya akiba sasa", ha: "Ƙirƙiri ajiya yanzu", yo: "Dá ẹ̀dà ìpamọ́ sílẹ̀ nísinsìnyí", zu: "Dala ikhophi esekelayo manje", am: "አሁን ምትክ ቅጂ ይፍጠሩ", bm: "Ntalenko dafalen kura sisan", wo: "Sos woññat léegi" };
+EXTRA_UI.backupCreateDone = { fr: "Sauvegarde créée avec succès.", en: "Backup created successfully.", es: "Copia de seguridad creada correctamente.", pt: "Cópia de segurança criada com sucesso.", de: "Sicherung erfolgreich erstellt.", it: "Backup creato con successo.", nl: "Backup succesvol aangemaakt.", pl: "Kopia zapasowa utworzona pomyślnie.", ru: "Резервная копия успешно создана.", tr: "Yedekleme başarıyla oluşturuldu.", ar: "تم إنشاء النسخة الاحتياطية بنجاح.", hi: "बैकअप सफलतापूर्वक बनाया गया।", bn: "ব্যাকআপ সফলভাবে তৈরি হয়েছে।", ur: "بیک اپ کامیابی سے بن گیا۔", ta: "காப்புப்பிரதி வெற்றிகரமாக உருவாக்கப்பட்டது.", te: "బ్యాకప్ విజయవంతంగా సృష్టించబడింది.", th: "สร้างข้อมูลสำรองสำเร็จแล้ว", zh: "备份已成功创建。", ja: "バックアップが正常に作成されました。", ko: "백업이 성공적으로 생성되었습니다.", id: "Cadangan berhasil dibuat.", vi: "Đã tạo bản sao lưu thành công.", tl: "Matagumpay na nagawa ang backup.", sw: "Nakala ya akiba imeundwa kwa mafanikio.", ha: "An ƙirƙiri ajiya cikin nasara.", yo: "Ẹ̀dà ìpamọ́ ti di dídá sílẹ̀ ní àṣeyọrí.", zu: "Ikhophi esekelayo idalwe ngempumelelo.", am: "ምትክ ቅጂው በተሳካ ሁኔታ ተፈጥሯል።", bm: "Ntalenko dafalen kura ɲɛnabɔra ka ɲɛ.", wo: "Woññat sosu ci jamm." };
+EXTRA_UI.backupHistoryTitle = { fr: "Historique des sauvegardes", en: "Backup history", es: "Historial de copias de seguridad", pt: "Histórico de cópias de segurança", de: "Sicherungsverlauf", it: "Cronologia dei backup", nl: "Backupgeschiedenis", pl: "Historia kopii zapasowych", ru: "История резервных копий", tr: "Yedekleme geçmişi", ar: "سجل النسخ الاحتياطية", hi: "बैकअप इतिहास", bn: "ব্যাকআপ ইতিহাস", ur: "بیک اپ کی تاریخ", ta: "காப்புப்பிரதி வரலாறு", te: "బ్యాకప్ చరిత్ర", th: "ประวัติการสำรองข้อมูล", zh: "备份历史记录", ja: "バックアップ履歴", ko: "백업 기록", id: "Riwayat cadangan", vi: "Lịch sử sao lưu", tl: "Kasaysayan ng backup", sw: "Historia ya nakala za akiba", ha: "Tarihin ajiya", yo: "Ìtàn àwọn ẹ̀dà ìpamọ́", zu: "Umlando wamakhophi asekelayo", am: "የምትክ ቅጂዎች ታሪክ", bm: "Ntalenko tariku", wo: "Jaar-jaari woññat yi" };
+EXTRA_UI.backupNoneYet = { fr: "Aucune sauvegarde pour l'instant.", en: "No backups yet.", es: "Aún no hay copias de seguridad.", pt: "Ainda não há cópias de segurança.", de: "Noch keine Sicherungen.", it: "Nessun backup per ora.", nl: "Nog geen backups.", pl: "Brak kopii zapasowych na razie.", ru: "Резервных копий пока нет.", tr: "Henüz yedekleme yok.", ar: "لا توجد نسخ احتياطية حتى الآن.", hi: "अभी तक कोई बैकअप नहीं।", bn: "এখনো কোনো ব্যাকআপ নেই।", ur: "ابھی تک کوئی بیک اپ نہیں۔", ta: "இன்னும் காப்புப்பிரதிகள் இல்லை.", te: "ఇంకా బ్యాకప్‌లు లేవు.", th: "ยังไม่มีข้อมูลสำรอง", zh: "暂无备份。", ja: "バックアップはまだありません。", ko: "아직 백업이 없습니다.", id: "Belum ada cadangan.", vi: "Chưa có bản sao lưu nào.", tl: "Walang backup pa.", sw: "Hakuna nakala za akiba bado.", ha: "Babu ajiya tukuna.", yo: "Kò sí ẹ̀dà ìpamọ́ kankan síbẹ̀.", zu: "Awekho amakhophi asekelayo okwamanje.", am: "እስካሁን ምትክ ቅጂ የለም።", bm: "Ntalenko si foyi ma kɛ fɔlɔ.", wo: "Amul woññat ba léegi." };
+EXTRA_UI.backupKindManual = { fr: "Manuelle", en: "Manual", es: "Manual", pt: "Manual", de: "Manuell", it: "Manuale", nl: "Handmatig", pl: "Ręczna", ru: "Вручную", tr: "Manuel", ar: "يدوية", hi: "मैन्युअल", bn: "ম্যানুয়াল", ur: "دستی", ta: "கையேடு", te: "మాన్యువల్", th: "ด้วยตนเอง", zh: "手动", ja: "手動", ko: "수동", id: "Manual", vi: "Thủ công", tl: "Manu-mano", sw: "Mwenyewe", ha: "Da hannu", yo: "Pẹ̀lú ọwọ́", zu: "Ngesandla", am: "በእጅ", bm: "Bolo la", wo: "Ak loxo" };
+EXTRA_UI.backupKindAuto = { fr: "Automatique", en: "Automatic", es: "Automática", pt: "Automática", de: "Automatisch", it: "Automatico", nl: "Automatisch", pl: "Automatyczna", ru: "Автоматически", tr: "Otomatik", ar: "تلقائية", hi: "स्वचालित", bn: "স্বয়ংক্রিয়", ur: "خودکار", ta: "தானியங்கி", te: "ఆటోమేటిక్", th: "อัตโนมัติ", zh: "自动", ja: "自動", ko: "자동", id: "Otomatis", vi: "Tự động", tl: "Awtomatiko", sw: "Kiotomatiki", ha: "Atomatik", yo: "Láìfọwọ́kàn", zu: "Ngokuzenzekelayo", am: "ራስ-ሰር", bm: "Dankari", wo: "Automatik" };
+EXTRA_UI.backupRestoreBtn = { fr: "Restaurer", en: "Restore", es: "Restaurar", pt: "Restaurar", de: "Wiederherstellen", it: "Ripristina", nl: "Herstellen", pl: "Przywróć", ru: "Восстановить", tr: "Geri yükle", ar: "استعادة", hi: "पुनर्स्थापित करें", bn: "পুনরুদ্ধার করুন", ur: "بحال کریں", ta: "மீட்டமை", te: "పునరుద్ధరించు", th: "กู้คืน", zh: "恢复", ja: "復元", ko: "복원", id: "Pulihkan", vi: "Khôi phục", tl: "Ibalik", sw: "Rejesha", ha: "Dawo da", yo: "Dá padà", zu: "Buyisela", am: "መልስ", bm: "Lasegin", wo: "Yeesal" };
+EXTRA_UI.backupRestoreConfirm = { fr: "Remplacer toutes les données actuelles par cette sauvegarde du {date} ? Cette action est irréversible. Confirmez-vous ?", en: "Replace all current data with this backup from {date}? This action cannot be undone. Do you confirm?", es: "¿Reemplazar todos los datos actuales con esta copia de seguridad del {date}? Esta acción no se puede deshacer. ¿Confirma?", pt: "Substituir todos os dados atuais por esta cópia de segurança de {date}? Esta ação é irreversível. Confirma?", de: "Alle aktuellen Daten durch diese Sicherung vom {date} ersetzen? Diese Aktion kann nicht widerrufen werden. Bestätigen Sie?", it: "Sostituire tutti i dati attuali con questo backup del {date}? Questa azione è irreversibile. Confermi?", nl: "Alle huidige gegevens vervangen door deze backup van {date}? Deze actie kan niet ongedaan worden gemaakt. Bevestigt u dit?", pl: "Zastąpić wszystkie obecne dane tą kopią zapasową z {date}? Tej czynności nie można odwrócić. Potwierdzasz?", ru: "Заменить все текущие данные этой резервной копией от {date}? Это действие необратимо. Подтверждаете?", tr: "Tüm mevcut veriler {date} tarihli bu yedeklemeyle değiştirilsin mi? Bu işlem geri alınamaz. Onaylıyor musunuz?", ar: "هل تريد استبدال جميع البيانات الحالية بهذه النسخة الاحتياطية من {date}؟ هذا الإجراء لا يمكن التراجع عنه. هل تؤكد؟", hi: "क्या सभी मौजूदा डेटा को {date} की इस बैकअप से बदलना है? यह कार्रवाई अपरिवर्तनीय है। क्या आप पुष्टि करते हैं?", bn: "{date} তারিখের এই ব্যাকআপ দিয়ে সমস্ত বর্তমান ডেটা প্রতিস্থাপন করবেন? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না। আপনি কি নিশ্চিত করছেন?", ur: "کیا تمام موجودہ ڈیٹا کو {date} کے اس بیک اپ سے بدل دیا جائے؟ یہ عمل واپس نہیں ہو سکتا۔ کیا آپ تصدیق کرتے ہیں؟", ta: "{date} தேதியிட்ட இந்தக் காப்புப்பிரதியுடன் தற்போதைய அனைத்து தரவையும் மாற்றவா? இச்செயலை மீட்க முடியாது. உறுதிப்படுத்துகிறீர்களா?", te: "{date} నాటి ఈ బ్యాకప్‌తో ప్రస్తుత డేటా అంతటినీ మార్చాలా? ఈ చర్యను తిప్పికొట్టలేము. నిర్ధారిస్తున్నారా?", th: "แทนที่ข้อมูลปัจจุบันทั้งหมดด้วยข้อมูลสำรองจากวันที่ {date} หรือไม่? การดำเนินการนี้ไม่สามารถย้อนกลับได้ คุณยืนยันหรือไม่?", zh: "要用 {date} 的这个备份替换所有当前数据吗？此操作无法撤销。您确认吗？", ja: "{date} のこのバックアップで現在のすべてのデータを置き換えますか？この操作は取り消せません。よろしいですか？", ko: "{date}의 이 백업으로 현재 모든 데이터를 바꾸시겠습니까? 이 작업은 되돌릴 수 없습니다. 확인하시겠습니까?", id: "Ganti semua data saat ini dengan cadangan dari {date} ini? Tindakan ini tidak dapat dibatalkan. Konfirmasi?", vi: "Thay thế toàn bộ dữ liệu hiện tại bằng bản sao lưu ngày {date} này? Hành động này không thể hoàn tác. Bạn xác nhận chứ?", tl: "Palitan ang lahat ng kasalukuyang data ng backup na ito mula {date}? Hindi na maibabalik ang aksyong ito. Kumpirmahin mo?", sw: "Badilisha data yote ya sasa na nakala hii ya akiba ya {date}? Hatua hii haiwezi kutenduliwa. Unathibitisha?", ha: "Maye duk bayanan yanzu da wannan ajiyar ta {date}? Ba za a iya mayar da wannan mataki ba. Kana tabbata?", yo: "Ṣe pàrọ̀ gbogbo dátà tó wà lọ́wọ́lọ́wọ́ pẹ̀lú ẹ̀dà ìpamọ́ yìí láti ọjọ́ {date}? Ìgbésẹ̀ yìí kò ṣe é dá padà. Ṣe o jẹ́rìí?", zu: "Shintsha yonke idatha yamanje ngale khophi esekelayo yasuka {date}? Lesi senzo asibuyiseleki. Uqinisekisa?", am: "ሁሉንም የአሁኑን ውሂብ በ{date} በተደረገው በዚህ ምትክ ቅጂ መተካት ይፈልጋሉ? ይህ ተግባር የማይቀለበስ ነው። ያረጋግጣሉ?", bm: "I b'a fɛ ka dátà bɛɛ min bɛ sisan yɛlɛma ni ntalenko in ye min dafalen {date}? Nin ko in tɛ se ka lasegin. I sɔnna wa?", wo: "Wax nga wax ni bëgg nga weesaarul toll-toll la data yëpp ak woññat bii bu demoon {date}? Jëf jii mënul am wecc. Dëggal nga ko?" };
+EXTRA_UI.backupRestoreDone = { fr: "Sauvegarde restaurée avec succès.", en: "Backup restored successfully.", es: "Copia de seguridad restaurada correctamente.", pt: "Cópia de segurança restaurada com sucesso.", de: "Sicherung erfolgreich wiederhergestellt.", it: "Backup ripristinato con successo.", nl: "Backup succesvol herstelt.", pl: "Kopia zapasowa przywrócona pomyślnie.", ru: "Резервная копия успешно восстановлена.", tr: "Yedekleme başarıyla geri yüklendi.", ar: "تمت استعادة النسخة الاحتياطية بنجاح.", hi: "बैकअप सफलतापूर्वक पुनर्स्थापित किया गया।", bn: "ব্যাকআপ সফলভাবে পুনরুদ্ধার হয়েছে।", ur: "بیک اپ کامیابی سے بحال ہو گیا۔", ta: "காப்புப்பிரதி வெற்றிகரமாக மீட்டமைக்கப்பட்டது.", te: "బ్యాకప్ విజయవంతంగా పునరుద్ధరించబడింది.", th: "กู้คืนข้อมูลสำรองสำเร็จแล้ว", zh: "备份已成功恢复。", ja: "バックアップが正常に復元されました。", ko: "백업이 성공적으로 복원되었습니다.", id: "Cadangan berhasil dipulihkan.", vi: "Đã khôi phục bản sao lưu thành công.", tl: "Matagumpay na naibalik ang backup.", sw: "Nakala ya akiba imerejeshwa kwa mafanikio.", ha: "An dawo da ajiya cikin nasara.", yo: "Ẹ̀dà ìpamọ́ ti di dídápadà ní àṣeyọrí.", zu: "Ikhophi esekelayo ibuyiselwe ngempumelelo.", am: "ምትክ ቅጂው በተሳካ ሁኔታ ተመልሷል።", bm: "Ntalenko laseginna ka ɲɛ.", wo: "Woññat yeesalu ci jamm." };
+EXTRA_UI.logBackupExported = { fr: "Sauvegarde JSON téléchargée", en: "JSON backup downloaded", es: "Copia de seguridad JSON descargada", pt: "Cópia de segurança JSON descarregada", de: "JSON-Sicherung heruntergeladen", it: "Backup JSON scaricato", nl: "JSON-backup gedownload", pl: "Kopia zapasowa JSON pobrana", ru: "Резервная копия JSON скачана", tr: "JSON yedeklemesi indirildi", ar: "تم تنزيل نسخة احتياطية JSON", hi: "JSON बैकअप डाउनलोड किया गया", bn: "JSON ব্যাকআপ ডাউনলোড হয়েছে", ur: "JSON بیک اپ ڈاؤن لوڈ ہو گیا", ta: "JSON காப்புப்பிரதி பதிவிறக்கப்பட்டது", te: "JSON బ్యాకప్ డౌన్‌లోడ్ అయింది", th: "ดาวน์โหลดข้อมูลสำรอง JSON แล้ว", zh: "JSON 备份已下载", ja: "JSONバックアップをダウンロードしました", ko: "JSON 백업 다운로드됨", id: "Cadangan JSON diunduh", vi: "Đã tải xuống bản sao lưu JSON", tl: "Na-download ang JSON backup", sw: "Nakala ya akiba ya JSON imepakuliwa", ha: "An sauke ajiyar JSON", yo: "Ẹ̀dà ìpamọ́ JSON ti di gbígbà", zu: "Ikhophi esekelayo ye-JSON ilandwe", am: "የJSON ምትክ ቅጂ ወርዷል", bm: "JSON ntalenko dafalennen", wo: "Woññat JSON yàggalu" };
+EXTRA_UI.logBackupCreated = { fr: "Sauvegarde manuelle créée", en: "Manual backup created", es: "Copia de seguridad manual creada", pt: "Cópia de segurança manual criada", de: "Manuelle Sicherung erstellt", it: "Backup manuale creato", nl: "Handmatige backup aangemaakt", pl: "Utworzono ręczną kopię zapasową", ru: "Создана резервная копия вручную", tr: "Manuel yedekleme oluşturuldu", ar: "تم إنشاء نسخة احتياطية يدوية", hi: "मैन्युअल बैकअप बनाया गया", bn: "ম্যানুয়াল ব্যাকআপ তৈরি হয়েছে", ur: "دستی بیک اپ بن گیا", ta: "கையேடு காப்புப்பிரதி உருவாக்கப்பட்டது", te: "మాన్యువల్ బ్యాకప్ సృష్టించబడింది", th: "สร้างข้อมูลสำรองด้วยตนเองแล้ว", zh: "已创建手动备份", ja: "手動バックアップを作成しました", ko: "수동 백업 생성됨", id: "Cadangan manual dibuat", vi: "Đã tạo bản sao lưu thủ công", tl: "Nagawa ang manu-manong backup", sw: "Nakala ya akiba ya mwenyewe imeundwa", ha: "An ƙirƙiri ajiya ta hannu", yo: "Ẹ̀dà ìpamọ́ pẹ̀lú ọwọ́ ti di dídá sílẹ̀", zu: "Ikhophi esekelayo ngesandla idaliwe", am: "በእጅ የተፈጠረ ምትክ ቅጂ", bm: "Bolo la ntalenko dafalen kurana", wo: "Woññat ak loxo sosu" };
+EXTRA_UI.logBackupRestored = { fr: "Sauvegarde du {date} restaurée", en: "Backup from {date} restored", es: "Copia de seguridad del {date} restaurada", pt: "Cópia de segurança de {date} restaurada", de: "Sicherung vom {date} wiederhergestellt", it: "Backup del {date} ripristinato", nl: "Backup van {date} herstelt", pl: "Przywrócono kopię zapasową z {date}", ru: "Восстановлена резервная копия от {date}", tr: "{date} tarihli yedekleme geri yüklendi", ar: "تمت استعادة النسخة الاحتياطية من {date}", hi: "{date} का बैकअप पुनर्स्थापित किया गया", bn: "{date} তারিখের ব্যাকআপ পুনরুদ্ধার হয়েছে", ur: "{date} کا بیک اپ بحال ہو گیا", ta: "{date} தேதியிட்ட காப்புப்பிரதி மீட்டமைக்கப்பட்டது", te: "{date} నాటి బ్యాకప్ పునరుద్ధరించబడింది", th: "กู้คืนข้อมูลสำรองจากวันที่ {date} แล้ว", zh: "已恢复 {date} 的备份", ja: "{date} のバックアップを復元しました", ko: "{date} 백업이 복원됨", id: "Cadangan dari {date} dipulihkan", vi: "Đã khôi phục bản sao lưu ngày {date}", tl: "Naibalik ang backup mula {date}", sw: "Nakala ya akiba ya {date} imerejeshwa", ha: "An dawo da ajiyar {date}", yo: "Ẹ̀dà ìpamọ́ láti {date} ti di dídápadà", zu: "Ikhophi esekelayo yasuka {date} ibuyiselwe", am: "ከ{date} የተገኘ ምትክ ቅጂ ተመልሷል", bm: "{date} ntalenko laseginna", wo: "Woññat {date} yeesalu" };
+EXTRA_UI.empOnlineNow = { fr: "En ligne", en: "Online", es: "En línea", pt: "Online", de: "Online", it: "Online", nl: "Online", pl: "Online", ru: "В сети", tr: "Çevrimiçi", ar: "متصل الآن", hi: "ऑनलाइन", bn: "অনলাইন", ur: "آن لائن", ta: "ஆன்லைனில்", te: "ఆన్‌లైన్", th: "ออนไลน์", zh: "在线", ja: "オンライン", ko: "온라인", id: "Online", vi: "Trực tuyến", tl: "Online", sw: "Mtandaoni", ha: "A kan layi", yo: "Lórí ayélujára", zu: "Ku-inthanethi", am: "መስመር ላይ", bm: "Ka ɲɛsin", wo: "Ci lignu" };
+EXTRA_UI.empLastSeenPrefix = { fr: "Vu pour la dernière fois : {time}", en: "Last seen: {time}", es: "Visto por última vez: {time}", pt: "Visto por última vez: {time}", de: "Zuletzt gesehen: {time}", it: "Ultimo accesso: {time}", nl: "Laatst gezien: {time}", pl: "Ostatnio widziano: {time}", ru: "Последний раз был на связи: {time}", tr: "Son görülme: {time}", ar: "شوهد آخر مرة: {time}", hi: "अंतिम बार देखा गया: {time}", bn: "সর্বশেষ দেখা: {time}", ur: "آخری بار دیکھا گیا: {time}", ta: "கடைசியாகப் பார்க்கப்பட்டது: {time}", te: "చివరిగా చూసింది: {time}", th: "พบล่าสุด: {time}", zh: "最后上线：{time}", ja: "最終確認：{time}", ko: "마지막 접속: {time}", id: "Terakhir dilihat: {time}", vi: "Lần cuối hoạt động: {time}", tl: "Huling nakita: {time}", sw: "Alionekana mara ya mwisho: {time}", ha: "Ganuwa na ƙarshe: {time}", yo: "Ìgbà tí a kẹ́yìn rí i: {time}", zu: "Ubonwe okugcina: {time}", am: "መጨረሻ የታየበት: {time}", bm: "A jiralen laban: {time}", wo: "Mujj gis ko: {time}" };
+EXTRA_UI.empNeverSeen = { fr: "Jamais connecté(e)", en: "Never logged in", es: "Nunca ha iniciado sesión", pt: "Nunca entrou", de: "Noch nie angemeldet", it: "Mai connesso/a", nl: "Nooit ingelogd", pl: "Nigdy się nie zalogował(a)", ru: "Ещё не заходил(а)", tr: "Hiç giriş yapmadı", ar: "لم يسجّل الدخول من قبل", hi: "कभी लॉगिन नहीं किया", bn: "কখনো লগইন করেনি", ur: "کبھی لاگ ان نہیں ہوا", ta: "ஒருபோதும் உள்நுழையவில்லை", te: "ఎప్పుడూ లాగిన్ అవ్వలేదు", th: "ไม่เคยเข้าสู่ระบบ", zh: "从未登录", ja: "ログイン履歴なし", ko: "로그인 기록 없음", id: "Belum pernah masuk", vi: "Chưa từng đăng nhập", tl: "Hindi pa kailanman nag-login", sw: "Hajawahi kuingia", ha: "Bai taɓa shiga ba", yo: "Kò tí ì wọlé rí", zu: "Akakaze angene", am: "እስካሁን ገብተው አያውቁም", bm: "A ma deli don abada", wo: "Dugalu mukk" };
 EXTRA_UI.productBarcodeLabel ={ fr: "Code-barres (optionnel)", en: "Barcode (optional)", es: "Código de barras (opcional)", pt: "Código de barras (opcional)", de: "Barcode (optional)", it: "Codice a barre (facoltativo)", nl: "Streepjescode (optioneel)", pl: "Kod kreskowy (opcjonalnie)", ru: "Штрихкод (необязательно)", tr: "Barkod (isteğe bağlı)", ar: "الرمز الشريطي (اختياري)", hi: "बारकोड (वैकल्पिक)", bn: "বারকোড (ঐচ্ছিক)", ur: "بار کوڈ (اختیاری)", ta: "பார்கோடு (விருப்பத்தேர்வு)", te: "బార్‌కోడ్ (ఐచ్ఛికం)", th: "บาร์โค้ด (ไม่บังคับ)", zh: "条形码（可选）", ja: "バーコード（任意）", ko: "바코드 (선택 사항)", id: "Barcode (opsional)", vi: "Mã vạch (không bắt buộc)", tl: "Barcode (opsyonal)", sw: "Bakodi (si lazima)", ha: "Lambar sanda (ba dole ba)", yo: "Bakódù (kìí ṣe dandan)", zu: "Ibhakhodi (akuphoqelekile)", am: "ባርኮድ (አማራጭ)", bm: "Barcode (fɛɛrɛ)", wo: "Code-barres (du obligatoire)" };
 EXTRA_UI.debtReminderThanks = { fr: "Merci de régulariser dès que possible 🙏", en: "Thank you for settling it as soon as possible 🙏", es: "Gracias por regularizarlo lo antes posible 🙏", pt: "Obrigado por regularizar o quanto antes 🙏", de: "Vielen Dank, dass Sie dies so bald wie möglich begleichen 🙏", it: "Grazie per regolarizzare il prima possibile 🙏", nl: "Bedankt om dit zo snel mogelijk te vereffenen 🙏", pl: "Dziękujemy za uregulowanie tego jak najszybciej 🙏", ru: "Спасибо, что погасите задолженность как можно скорее 🙏", tr: "En kısa sürede ödediğiniz için teşekkür ederiz 🙏", ar: "شكراً لتسويته في أقرب وقت ممكن 🙏", hi: "कृपया जल्द से जल्द भुगतान करें, धन्यवाद 🙏", bn: "যত দ্রুত সম্ভব পরিশোধ করার জন্য ধন্যবাদ 🙏", ur: "جلد از جلد ادائیگی کرنے کا شکریہ 🙏", ta: "விரைவில் தீர்த்துவைத்ததற்கு நன்றி 🙏", te: "వీలైనంత త్వరగా చెల్లించినందుకు ధన్యవాదాలు 🙏", th: "ขอบคุณที่ชำระโดยเร็วที่สุด 🙏", zh: "感谢您尽快结清 🙏", ja: "早めのご精算、よろしくお願いいたします 🙏", ko: "가능한 한 빨리 정산해 주셔서 감사합니다 🙏", id: "Terima kasih sudah melunasi secepatnya 🙏", vi: "Cảm ơn bạn đã thanh toán sớm nhất có thể 🙏", tl: "Salamat sa pagbabayad sa lalong madaling panahon 🙏", sw: "Asante kwa kulipa haraka iwezekanavyo 🙏", ha: "Na gode da biya da wuri-wuri 🙏", yo: "Ẹ ṣeun fún sísan ní kíá tó bá ti ṣeé ṣe 🙏", zu: "Siyabonga ngokukhokha ngokushesha okukhulu 🙏", am: "በተቻለ ፍጥነት ስለከፈሉ እናመሰግናለን 🙏", bm: "I ni ce i ka joona a sara 🙏", wo: "Jerejef ci fey bi gaaw gaaw 🙏" };
 EXTRA_UI.cashProfitNote = { am: "የመግዣ ዋጋ በተሞላላቸው ምርቶች የተሰላ።", ar: "يُحسب بالمنتجات التي حُدّد سعر شرائها.", bm: "A jatera ni fɛnw ye u sara sɔrɔ bɛ min na.", bn: "ক্রয়মূল্য দেওয়া পণ্য দিয়ে হিসাব করা।", de: "Berechnet mit Produkten, deren Einkaufspreis erfasst ist.", en: "Calculated using products with a purchase price set.", es: "Calculado con los productos que tienen precio de compra.", fr: "Calculé avec les produits dont le prix d'achat est renseigné.", ha: "An lissafa da kayayyakin da aka saka farashin sayensu.", hi: "उन उत्पादों से गणना जिनका खरीद मूल्य दर्ज है।", id: "Dihitung dari produk yang harga belinya sudah diisi.", it: "Calcolato con i prodotti che hanno un prezzo d'acquisto.", ja: "仕入れ価格を入力した商品で計算しています。", ko: "매입가가 입력된 상품 기준으로 계산됩니다.", nl: "Berekend met producten waarvan de inkoopprijs is ingevuld.", pl: "Obliczone dla produktów z podaną ceną zakupu.", pt: "Calculado com os produtos que têm preço de compra.", ru: "Рассчитано по товарам с указанной закупочной ценой.", sw: "Imehesabiwa kwa bidhaa zilizo na bei ya kununulia.", ta: "கொள்முதல் விலை உள்ள பொருட்களைக் கொண்டு கணக்கிடப்பட்டது.", te: "కొనుగోలు ధర ఉన్న ఉత్పత్తులతో లెక్కించబడింది.", th: "คำนวณจากสินค้าที่ระบุราคาซื้อไว้", tl: "Kinalkula gamit ang mga produktong may nakalagay na presyong bili.", tr: "Alış fiyatı girilmiş ürünlerle hesaplanır.", ur: "ان مصنوعات سے حساب جن کی خریداری قیمت درج ہے۔", vi: "Tính theo các sản phẩm đã nhập giá nhập.", wo: "Ñu jàppe ko ak jumtukaay yi am njëg bu ñu jënd.", yo: "A ṣírò rẹ̀ pẹ̀lú àwọn ọjà tí a ti fi owó rírà sí.", zh: "仅按已填写进价的商品计算。", zu: "Kubalwe ngemikhiqizo enentengo yokuthenga efakiwe." };
@@ -4363,7 +4455,8 @@ EXTRA_UI.tabHelpSaleTitle = { fr: "L'onglet Vente, en détail", am: "የ«ሽያ
 EXTRA_UI.tabHelpSale1 = { fr: "🛒 Paniers multiples — Préparez plusieurs paniers en parallèle et basculez entre eux avant de finaliser une vente.", am: "🛒 በርካታ ቅርጫቶች — ብዙ ቅርጫቶችን በአንድ ጊዜ ያዘጋጁ፣ ሽያጩን ከማጠናቀቅዎ በፊት በመካከላቸው ይቀያይሩ።", en: "🛒 Multiple carts — Prepare several carts at once and switch between them before completing a sale.", tl: "🛒 Maraming cart — Maghanda ng ilang cart nang sabay-sabay at lumipat sa pagitan ng mga ito bago tapusin ang benta.", te: "🛒 బహుళ కార్ట్‌లు — ఒకేసారి అనేక కార్ట్‌లను సిద్ధం చేసి, అమ్మకం పూర్తి చేయడానికి ముందు వాటి మధ్య మారండి.", th: "🛒 ตะกร้าหลายใบ — เตรียมตะกร้าหลายใบพร้อมกันและสลับไปมาก่อนทำการขายให้เสร็จสิ้น", wo: "🛒 Paner yu bari — Waajal paner yu bari ci benn waxtu, soppi ci diggante yi balaa nga jeexal jaay bi.", pl: "🛒 Wiele koszyków — Przygotuj kilka koszyków jednocześnie i przełączaj się między nimi przed sfinalizowaniem sprzedaży.", ar: "🛒 سلال متعددة — جهّز عدة سلال في آن واحد وتنقّل بينها قبل إتمام عملية البيع.", es: "🛒 Varios carritos — Prepare varios carritos a la vez y cambie entre ellos antes de finalizar una venta.", pt: "🛒 Vários carrinhos — Prepare vários carrinhos ao mesmo tempo e alterne entre eles antes de finalizar uma venda.", zh: "🛒 多个购物车 — 可以同时准备多个购物车，并在完成销售前切换使用。", vi: "🛒 Nhiều giỏ hàng — Chuẩn bị nhiều giỏ hàng cùng lúc và chuyển đổi giữa chúng trước khi hoàn tất bán hàng.", de: "🛒 Mehrere Warenkörbe — Bereiten Sie mehrere Warenkörbe gleichzeitig vor und wechseln Sie zwischen ihnen vor Abschluss eines Verkaufs.", ru: "🛒 Несколько корзин — Готовьте сразу несколько корзин и переключайтесь между ними перед завершением продажи.", hi: "🛒 कई टोकरियां — एक साथ कई कार्ट तैयार करें और बिक्री पूरी करने से पहले उनके बीच स्विच करें।", ta: "🛒 பல கூடைகள் — ஒரே நேரத்தில் பல கார்ட்டுகளை தயார் செய்து, விற்பனையை முடிக்கும் முன் அவற்றுக்கு இடையே மாறவும்.", bn: "🛒 একাধিক কার্ট — একসাথে একাধিক কার্ট তৈরি করুন এবং বিক্রি সম্পন্ন করার আগে তাদের মধ্যে পরিবর্তন করুন।", ur: "🛒 متعدد کارٹس — ایک ساتھ کئی کارٹ تیار کریں اور فروخت مکمل کرنے سے پہلے ان کے درمیان سوئچ کریں۔", id: "🛒 Beberapa keranjang — Siapkan beberapa keranjang sekaligus dan beralih di antaranya sebelum menyelesaikan penjualan.", tr: "🛒 Birden fazla sepet — Birkaç sepeti aynı anda hazırlayıp satışı tamamlamadan önce aralarında geçiş yap.", ko: "🛒 여러 장바구니 — 여러 장바구니를 동시에 준비하고 판매를 완료하기 전에 전환할 수 있습니다.", ja: "🛒 複数のカート — 複数のカートを同時に用意し、販売を確定する前に切り替えられます。", it: "🛒 Carrelli multipli — Prepari più carrelli contemporaneamente e passi dall'uno all'altro prima di concludere una vendita.", nl: "🛒 Meerdere winkelwagens — Bereid meerdere winkelwagens tegelijk voor en wissel ertussen vóór u een verkoop afrondt.", sw: "🛒 Vikapu vingi — Andaa vikapu kadhaa kwa wakati mmoja na ubadilishe kati yao kabla ya kukamilisha mauzo.", ha: "🛒 Kwanduna da yawa — Shirya kwanduna da yawa lokaci guda ka canza tsakaninsu kafin kammala sayarwa.", bm: "🛒 Seni caman — Seni caman labɛn waati kelen na, ka yɛlɛma u ni ɲɔgɔn cɛ sanni feereli ka ban.", zu: "🛒 Amabhasikidi amaningi — Lungiselela amabhasikidi amaningana ngesikhathi esisodwa bese ushintsha phakathi kwawo ngaphambi kokuqeda ukuthengisa.", yo: "🛒 Ọ̀pọ̀lọpọ̀ agbọ̀ — Múra ọ̀pọ̀lọpọ̀ agbọ̀ sílẹ̀ ní àkókò kan náà, kí o sì yí padà láàrin wọn kí o tó parí títà." };
 EXTRA_UI.tabHelpSale2 = { fr: "💳 Moyens de paiement — Espèces, mobile money, carte ou crédit : choisissez le mode à la finalisation, avec suivi de fiabilité pour le crédit.", am: "💳 የክፍያ መንገዶች — ጥሬ ገንዘብ፣ ሞባይል ገንዘብ፣ ካርድ ወይም ብድር፦ ሽያጩን ሲያጠናቅቁ መንገዱን ይምረጡ፣ ለብድር የታማኝነት ክትትል ጋር።", en: "💳 Payment methods — Cash, mobile money, card or credit: choose the method when finalizing, with reliability tracking for credit.", tl: "💳 Mga paraan ng bayad — Cash, mobile money, card o utang: piliin ang paraan kapag tinapos, may pagsubaybay sa pagiging maaasahan para sa utang.", te: "💳 చెల్లింపు పద్ధతులు — నగదు, మొబైల్ మనీ, కార్డు లేదా అరువు: పూర్తి చేసేటప్పుడు పద్ధతిని ఎంచుకోండి, అరువుకు విశ్వసనీయత ట్రాకింగ్‌తో.", th: "💳 วิธีชำระเงิน — เงินสด โมบายมันนี่ บัตร หรือเงินเชื่อ: เลือกวิธีตอนทำรายการเสร็จ พร้อมติดตามความน่าเชื่อถือสำหรับเงินเชื่อ", wo: "💳 Yoonu fey — Xaalis, mobile money, kart walla bor: tann ni ngay fey bu nga jeexal, ak topp ngëm bor.", pl: "💳 Metody płatności — Gotówka, mobile money, karta lub kredyt: wybierz metodę przy finalizacji, z monitorowaniem wiarygodności przy kredycie.", ar: "💳 طرق الدفع — نقدًا أو محفظة إلكترونية أو بطاقة أو دين: اختر الطريقة عند الإتمام، مع تتبع موثوقية العميل للدين.", es: "💳 Métodos de pago — Efectivo, dinero móvil, tarjeta o crédito: elija el método al finalizar, con seguimiento de fiabilidad para el crédito.", pt: "💳 Formas de pagamento — Dinheiro, mobile money, cartão ou crédito: escolha o método ao finalizar, com acompanhamento de confiabilidade para o crédito.", zh: "💳 支付方式 — 现金、移动支付、银行卡或赊账：结账时选择方式，赊账会跟踪客户信用。", vi: "💳 Phương thức thanh toán — Tiền mặt, ví điện tử, thẻ hoặc ghi nợ: chọn phương thức khi hoàn tất, có theo dõi độ tin cậy cho khoản ghi nợ.", de: "💳 Zahlungsmethoden — Bargeld, Mobile Money, Karte oder Kredit: Wählen Sie die Methode beim Abschluss, mit Bonitätsverfolgung für Kredite.", ru: "💳 Способы оплаты — Наличные, мобильные деньги, карта или кредит: выбирайте способ при завершении, с отслеживанием надёжности для кредита.", hi: "💳 भुगतान के तरीके — नकद, मोबाइल मनी, कार्ड या उधार: समाप्त करते समय तरीका चुनें, उधार के लिए विश्वसनीयता ट्रैकिंग के साथ।", ta: "💳 பணம் செலுத்தும் முறைகள் — பணம், மொபைல் மணி, கார்டு அல்லது கடன்: முடிக்கும்போது முறையைத் தேர்வு செய்யவும், கடனுக்கு நம்பகத்தன்மை கண்காணிப்புடன்.", bn: "💳 পেমেন্ট পদ্ধতি — নগদ, মোবাইল মানি, কার্ড বা বাকি: সম্পন্ন করার সময় পদ্ধতি বেছে নিন, বাকির জন্য নির্ভরযোগ্যতা ট্র্যাকিং সহ।", ur: "💳 ادائیگی کے طریقے — نقد، موبائل منی، کارڈ یا ادھار: مکمل کرتے وقت طریقہ منتخب کریں، ادھار کے لیے اعتماد کی ٹریکنگ کے ساتھ۔", id: "💳 Metode pembayaran — Tunai, mobile money, kartu, atau kredit: pilih metode saat menyelesaikan, dengan pelacakan keandalan untuk kredit.", tr: "💳 Ödeme yöntemleri — Nakit, mobil para, kart veya veresiye: tamamlarken yöntemi seç, veresiyede güvenilirlik takibiyle.", ko: "💳 결제 수단 — 현금, 모바일 머니, 카드 또는 외상: 결제 완료 시 수단을 선택하며, 외상에는 신뢰도 추적이 적용됩니다.", ja: "💳 支払い方法 — 現金・モバイルマネー・カード・ツケ払いから、確定時に選択します。ツケ払いには信頼度トラッキングがあります。", it: "💳 Metodi di pagamento — Contanti, mobile money, carta o credito: scelga il metodo al momento della conclusione, con monitoraggio dell'affidabilità per il credito.", nl: "💳 Betaalmethoden — Contant, mobile money, kaart of krediet: kies de methode bij het afronden, met betrouwbaarheidscontrole voor krediet.", sw: "💳 Njia za malipo — Fedha taslimu, pesa za simu, kadi au mkopo: chagua njia unapokamilisha, na ufuatiliaji wa uaminifu kwa mkopo.", ha: "💳 Hanyoyin biyan kuɗi — Kuɗi a hannu, mobile money, katin ko bashi: zaɓi hanyar yayin kammalawa, tare da bin diddigin amintuwa don bashi.", bm: "💳 Sarali siraw — Wari lonfilenw, mobile money, kart walima juru: sarali siraw sugandi ni i bɛ ban, juru fɛ, dannaya kɔlɔsi bɛ kɛ.", zu: "💳 Izindlela zokukhokha — Imali eqinisekile, imali yeselula, ikhadi noma isikweletu: khetha indlela ngesikhathi uqeda, nokulandelela ukwethembeka kwesikweletu.", yo: "💳 Ọ̀nà ìsanwó — Owó lọ́wọ́, mobile money, káàdì tàbí gbèsè: yan ọ̀nà náà nígbà ìparí, pẹ̀lú àmójútó ìgbẹ́kẹ̀lé fún gbèsè." };
 EXTRA_UI.tabHelpSale3 = { fr: "📦 Vente au paquet ou à l'unité — Les produits configurés pour les deux peuvent être vendus au détail directement depuis le panier.", am: "📦 በጥቅል ወይም በነጠላ መሸጥ — ለሁለቱም የተዘጋጁ ምርቶች ከቅርጫቱ በቀጥታ በነጠላ ሊሸጡ ይችላሉ።", en: "📦 Sell by pack or by unit — Products set up for both can be sold individually right from the cart.", tl: "📦 Pagbenta bawat pakete o piraso — Ang mga produktong naka-set up para sa pareho ay maaaring ibenta nang paisa-isa mula sa cart.", te: "📦 ప్యాకెట్‌గా లేదా యూనిట్‌గా అమ్మకం — రెండింటికీ సెట్ చేసిన ఉత్పత్తులను కార్ట్ నుండి నేరుగా విడిగా అమ్మవచ్చు.", th: "📦 ขายแบบแพ็กหรือแบบแยกชิ้น — สินค้าที่ตั้งค่าไว้ทั้งสองแบบสามารถขายแยกชิ้นได้โดยตรงจากตะกร้า", wo: "📦 Jaay ci paket walla kelen kelen — Marsandiis yu defar ñaar yépp mën nañu jaay kelen kelen jóge ci paner bi.", pl: "📦 Sprzedaż w paczkach lub sztukach — Produkty skonfigurowane do obu opcji można sprzedawać pojedynczo bezpośrednio z koszyka.", ar: "📦 البيع بالعبوة أو بالوحدة — المنتجات المُعدّة للاثنين يمكن بيعها بالتجزئة مباشرة من السلة.", es: "📦 Venta por paquete o por unidad — Los productos configurados para ambos pueden venderse al detalle desde el carrito.", pt: "📦 Venda por pacote ou unidade — Produtos configurados para ambos podem ser vendidos individualmente direto do carrinho.", zh: "📦 整包或散装销售 — 同时设置了两种方式的商品，可直接在购物车中按件单独出售。", vi: "📦 Bán theo gói hoặc theo đơn vị — Sản phẩm được cài đặt cho cả hai có thể bán lẻ ngay từ giỏ hàng.", de: "📦 Verkauf nach Packung oder Stück — Produkte, die für beides eingerichtet sind, können direkt im Warenkorb einzeln verkauft werden.", ru: "📦 Продажа упаковкой или поштучно — Товары, настроенные для обоих вариантов, можно продавать поштучно прямо из корзины.", hi: "📦 पैकेट या इकाई में बिक्री — दोनों के लिए सेट किए गए उत्पाद कार्ट से सीधे अलग-अलग बेचे जा सकते हैं।", ta: "📦 பேக்கெட் அல்லது அலகு வாரியாக விற்பனை — இரண்டிற்கும் அமைக்கப்பட்ட பொருட்களை கார்ட்டிலிருந்தே தனித்தனியாக விற்கலாம்.", bn: "📦 প্যাকেট বা ইউনিট হিসেবে বিক্রি — উভয়ের জন্য সেট করা পণ্য কার্ট থেকে সরাসরি আলাদাভাবে বিক্রি করা যায়।", ur: "📦 پیکٹ یا یونٹ میں فروخت — دونوں کے لیے ترتیب دی گئی مصنوعات کارٹ سے براہ راست الگ الگ فروخت کی جا سکتی ہیں۔", id: "📦 Jual per paket atau satuan — Produk yang diatur untuk keduanya bisa dijual eceran langsung dari keranjang.", tr: "📦 Paket veya birim satışı — Her ikisi için ayarlanmış ürünler sepetten doğrudan tek tek satılabilir.", ko: "📦 묶음 또는 낱개 판매 — 둘 다 설정된 상품은 장바구니에서 바로 낱개로 판매할 수 있습니다.", ja: "📦 パックまたは個別販売 — 両方に対応した商品はカートから直接バラ売りできます。", it: "📦 Vendita a pacco o a unità — I prodotti configurati per entrambi possono essere venduti al dettaglio direttamente dal carrello.", nl: "📦 Verkoop per pak of per stuk — Producten die voor beide zijn ingesteld, kunnen rechtstreeks vanuit de winkelwagen per stuk worden verkocht.", sw: "📦 Uuzaji wa paketi au kipande — Bidhaa zilizowekwa kwa njia zote mbili zinaweza kuuzwa kipande kimoja kimoja moja kwa moja kutoka kikapuni.", ha: "📦 Sayarwa a fakiti ko guda — Kayayyakin da aka tsara don duka biyun ana iya sayar da su guda-guda kai tsaye daga kwando.", bm: "📦 Feereli pake walima kelen na — Fɛn minnu labɛnna fila bɛɛ la, u bɛ se ka feere kelen kelen seni kɔnɔ yen.", zu: "📦 Ukuthengisa ngephakheji noma ngayunithi — Imikhiqizo esethwe kokubili ingathengiswa ngayunithi ngqo kusuka ebhasikidini.", yo: "📦 Títà ní páálí tàbí ẹyọ — Àwọn ọjà tí a ṣètò fún méjèèjì ni a lè tà ní ẹyọ tààrà láti inú agbọ̀." };
-EXTRA_UI.tabHelpDebtsTitle = { fr: "L'onglet Dettes, en détail", am: "የ«እዳ» ትር፣ በዝርዝር", en: "The Debts tab, in detail", tl: "Ang tab na Utang, nang detalyado", te: "అప్పు ట్యాబ్, వివరంగా", th: "แท็บหนี้สิน อย่างละเอียด", wo: "Onglet Bor bi, ci anam bu wér", pl: "Zakładka Długi, szczegółowo", ar: "تبويب الديون بالتفصيل", es: "La pestaña Deudas, en detalle", pt: "A aba Dívidas, em detalhe", zh: "欠款标签页详解", vi: "Tab Nợ, chi tiết", de: "Der Tab „Schulden“ im Detail", ru: "Вкладка «Долги» подробно", hi: "उधार टैब, विस्तार से", ta: "கடன் தாவல், விரிவாக", bn: "বাকি ট্যাব, বিস্তারিত", ur: "ادھار ٹیب، تفصیل سے", id: "Tab Utang, secara detail", tr: "Borçlar sekmesi, ayrıntılı", ko: "채무 탭 자세히 보기", ja: "未収金タブの詳細", it: "La scheda Debiti, nel dettaglio", nl: "Het tabblad Schulden, in detail", sw: "Kichupo cha Madeni, kwa kina", ha: "Shafin Bashi, dalla-dalla", bm: "Juru ɲɛfɔyɔrɔ, ka ɲɛfɔ kɔsɛbɛ", zu: "Ithebu lezikweletu, ngokuningiliziwe", yo: "Abala Gbèsè, ní kíkún" };
+EXTRA_UI.tabHelpSale4 = { fr: "📷 Scan de code-barres — Appuyez sur l'icône de scan à côté de la recherche pour ouvrir la caméra : visez le code-barres d'un produit déjà enregistré, il est ajouté automatiquement au panier, sans avoir à prendre de photo.", en: "📷 Barcode scan — Tap the scan icon next to the search bar to open the camera: aim at a registered product's barcode and it's added to the cart automatically, no need to take a photo.", es: "📷 Escaneo de código de barras — Toque el icono de escaneo junto a la búsqueda para abrir la cámara: apunte al código de barras de un producto ya registrado y se añadirá automáticamente al carrito, sin necesidad de tomar una foto.", pt: "📷 Leitura de código de barras — Toque no ícone de leitura ao lado da busca para abrir a câmera: aponte para o código de barras de um produto já cadastrado e ele é adicionado automaticamente ao carrinho, sem precisar tirar foto.", de: "📷 Barcode scannen — Tippen Sie auf das Scan-Symbol neben der Suche, um die Kamera zu öffnen: Richten Sie sie auf den Barcode eines bereits erfassten Produkts, und es wird automatisch zum Warenkorb hinzugefügt, ganz ohne ein Foto aufzunehmen.", it: "📷 Scansione codice a barre — Tocca l'icona di scansione accanto alla ricerca per aprire la fotocamera: inquadra il codice a barre di un prodotto già registrato e viene aggiunto automaticamente al carrello, senza dover scattare una foto.", nl: "📷 Streepjescode scannen — Tik op het scanicoon naast de zoekbalk om de camera te openen: richt op de streepjescode van een geregistreerd product en het wordt automatisch aan de winkelwagen toegevoegd, zonder foto te hoeven maken.", pl: "📷 Skanowanie kodu kreskowego — Dotknij ikony skanowania obok wyszukiwarki, aby otworzyć aparat: wyceluj w kod kreskowy zarejestrowanego produktu, a zostanie on automatycznie dodany do koszyka, bez robienia zdjęcia.", ru: "📷 Сканирование штрихкода — Нажмите значок сканирования рядом с поиском, чтобы открыть камеру: наведите на штрихкод уже зарегистрированного товара, и он автоматически добавится в корзину, без необходимости делать фото.", tr: "📷 Barkod tarama — Kamerayı açmak için aramanın yanındaki tarama simgesine dokunun: kayıtlı bir ürünün barkodunu hedefleyin, fotoğraf çekmenize gerek kalmadan otomatik olarak sepete eklenir.", ar: "📷 مسح الرمز الشريطي — اضغط على أيقونة المسح بجانب البحث لفتح الكاميرا: وجّهها نحو الرمز الشريطي لمنتج مسجّل مسبقاً، فيُضاف تلقائياً إلى السلة دون الحاجة لالتقاط صورة.", hi: "📷 बारकोड स्कैन — कैमरा खोलने के लिए खोज के बगल में स्कैन आइकन पर टैप करें: पहले से दर्ज किए गए उत्पाद के बारकोड पर निशाना लगाएं, यह बिना फोटो लिए अपने आप कार्ट में जुड़ जाएगा।", bn: "📷 বারকোড স্ক্যান — ক্যামেরা খুলতে সার্চের পাশে স্ক্যান আইকনে ট্যাপ করুন: আগে থেকে নিবন্ধিত পণ্যের বারকোডে তাক করুন, ছবি তোলার প্রয়োজন ছাড়াই এটি স্বয়ংক্রিয়ভাবে কার্টে যোগ হয়ে যাবে।", ur: "📷 بار کوڈ اسکین — کیمرہ کھولنے کے لیے تلاش کے ساتھ موجود اسکین آئیکن پر ٹیپ کریں: پہلے سے درج شدہ پروڈکٹ کے بار کوڈ کا نشانہ لیں، یہ بغیر تصویر لیے خودکار طور پر ٹوکری میں شامل ہو جائے گا۔", ta: "📷 பார்கோடு ஸ்கேன் — கேமராவைத் திறக்க தேடலுக்கு அருகில் உள்ள ஸ்கேன் ஐகானைத் தட்டவும்: ஏற்கனவே பதிவு செய்யப்பட்ட பொருளின் பார்கோடை நோக்கவும், புகைப்படம் எடுக்காமலேயே அது தானாகவே கூடைக்குச் சேர்க்கப்படும்.", te: "📷 బార్‌కోడ్ స్కాన్ — కెమెరాను తెరవడానికి శోధన పక్కన ఉన్న స్కాన్ చిహ్నాన్ని నొక్కండి: ఇప్పటికే నమోదు చేసిన ఉత్పత్తి బార్‌కోడ్‌ను గురిపెట్టండి, ఫోటో తీయాల్సిన అవసరం లేకుండా అది స్వయంచాలకంగా కార్ట్‌కు జోడించబడుతుంది.", th: "📷 สแกนบาร์โค้ด — แตะไอคอนสแกนข้างช่องค้นหาเพื่อเปิดกล้อง: เล็งไปที่บาร์โค้ดของสินค้าที่บันทึกไว้แล้ว สินค้าจะถูกเพิ่มลงตะกร้าโดยอัตโนมัติ โดยไม่ต้องถ่ายรูป", zh: "📷 扫描条形码 — 点击搜索旁边的扫描图标打开摄像头：对准已登记商品的条形码，无需拍照即可自动加入购物车。", ja: "📷 バーコードスキャン — 検索欄の横にあるスキャンアイコンをタップしてカメラを開き、登録済み商品のバーコードに向けるだけで、写真を撮らなくても自動的にカートに追加されます。", ko: "📷 바코드 스캔 — 검색창 옆의 스캔 아이콘을 눌러 카메라를 열고, 이미 등록된 상품의 바코드를 비추면 사진을 찍지 않아도 자동으로 장바구니에 담깁니다.", id: "📷 Pindai barcode — Ketuk ikon pindai di sebelah kolom pencarian untuk membuka kamera: arahkan ke barcode produk yang sudah terdaftar, produk otomatis masuk ke keranjang tanpa perlu mengambil foto.", vi: "📷 Quét mã vạch — Nhấn vào biểu tượng quét bên cạnh ô tìm kiếm để mở camera: hướng vào mã vạch của sản phẩm đã đăng ký, sản phẩm sẽ tự động được thêm vào giỏ hàng mà không cần chụp ảnh.", tl: "📷 Pag-scan ng barcode — Tapikin ang icon ng pag-scan sa tabi ng paghahanap para buksan ang camera: itutok sa barcode ng isang nakarehistrong produkto, awtomatiko itong maidaragdag sa cart, hindi na kailangang kumuha ng litrato.", sw: "📷 Kuchanganua bakodi — Gusa aikoni ya kuchanganua kando ya utafutaji ili kufungua kamera: lenga bakodi ya bidhaa iliyosajiliwa tayari, itaongezwa kwenye kikapu moja kwa moja, bila kuhitaji kupiga picha.", ha: "📷 Bincike lambar sanda — Danna alamar bincike kusa da nema don buɗe kyamara: ka nufa lambar sandar wani kaya da aka riga aka yi rajista, za a ƙara shi cikin kwando kai tsaye, ba tare da ɗaukar hoto ba.", yo: "📷 Ṣíṣàyẹ̀wò bakódù — Tẹ àmì ìṣàyẹ̀wò lẹ́gbẹ̀ẹ́ àwárí láti ṣí kámẹ́rà: dojú kọ bakódù ọjà tí a ti forúkọsílẹ̀ tẹ́lẹ̀, a óò fi kún kẹ́tẹ́kẹ́tẹ́ láìfọ̀rọ̀wérọ̀.", zu: "📷 Ukuskena ibhakhodi — Thepha uphawu lokuskena eceleni kosesho ukuze uvule ikhamera: qondisa ebhakhodini yomkhiqizo osuvele ubhalisiwe, uzongezwa ngokuzenzakalela ekalishini, ngaphandle kokuthwebula isithombe.", am: "📷 ባርኮድ መቃኘት — ካሜራውን ለመክፈት ከፍለጋው አጠገብ ያለውን የመቃኛ አዶ ይንኩ፦ አስቀድሞ የተመዘገበ ምርት ባርኮድ ላይ ያነጣጥሩ፣ ፎቶ ሳያነሱ ወደ ጋሪው በራስ-ሰር ይጨመራል።", bm: "📷 Barcode scan — I bɛ se ka digi scan ja la i ka ɲinini kɛrɛfɛ walisa ka kamera dayɛlɛ: i y'i ɲɛ don fɛn min barcode kan min sɛbɛnnen kɔ, a bɛna don panye kɔnɔ otomatiki, foto ta mago tɛ.", wo: "📷 Scan code-barres — Bàyyi ci woyoofu scan bi ci wetu seet bi ngir ubbi kamera bi: jubal ci code-barres jumtukaay bu nekk ci lëkkalekaay, dinga dugg ci paanier bi boppam, amul mago foto." };
+EXTRA_UI.tabHelpDebtsTitle ={ fr: "L'onglet Dettes, en détail", am: "የ«እዳ» ትር፣ በዝርዝር", en: "The Debts tab, in detail", tl: "Ang tab na Utang, nang detalyado", te: "అప్పు ట్యాబ్, వివరంగా", th: "แท็บหนี้สิน อย่างละเอียด", wo: "Onglet Bor bi, ci anam bu wér", pl: "Zakładka Długi, szczegółowo", ar: "تبويب الديون بالتفصيل", es: "La pestaña Deudas, en detalle", pt: "A aba Dívidas, em detalhe", zh: "欠款标签页详解", vi: "Tab Nợ, chi tiết", de: "Der Tab „Schulden“ im Detail", ru: "Вкладка «Долги» подробно", hi: "उधार टैब, विस्तार से", ta: "கடன் தாவல், விரிவாக", bn: "বাকি ট্যাব, বিস্তারিত", ur: "ادھار ٹیب، تفصیل سے", id: "Tab Utang, secara detail", tr: "Borçlar sekmesi, ayrıntılı", ko: "채무 탭 자세히 보기", ja: "未収金タブの詳細", it: "La scheda Debiti, nel dettaglio", nl: "Het tabblad Schulden, in detail", sw: "Kichupo cha Madeni, kwa kina", ha: "Shafin Bashi, dalla-dalla", bm: "Juru ɲɛfɔyɔrɔ, ka ɲɛfɔ kɔsɛbɛ", zu: "Ithebu lezikweletu, ngokuningiliziwe", yo: "Abala Gbèsè, ní kíkún" };
 EXTRA_UI.tabHelpDebts1 = { fr: "👥 Suivi par client — Chaque dette est liée à un client, avec le montant dû et l'historique des paiements.", am: "👥 በደንበኛ መከታተል — እያንዳንዱ እዳ ከአንድ ደንበኛ ጋር የተገናኘ ነው፣ ከሚከፈል መጠን እና የክፍያ ታሪክ ጋር።", en: "👥 Tracking by customer — Every debt is linked to a customer, with the amount owed and payment history.", tl: "👥 Pagsubaybay bawat kustomer — Bawat utang ay naka-link sa isang kustomer, kasama ang halagang utang at history ng bayad.", te: "👥 కస్టమర్ వారీగా ట్రాకింగ్ — ప్రతి అప్పు ఒక కస్టమర్‌తో ముడిపడి ఉంటుంది, బాకీ మొత్తం మరియు చెల్లింపు చరిత్రతో.", th: "👥 ติดตามรายลูกค้า — หนี้แต่ละรายการเชื่อมโยงกับลูกค้า พร้อมยอดค้างชำระและประวัติการชำระเงิน", wo: "👥 Topp ci kiliyaan — Bor bu nekk dafa jóge ci kiliyaan, ak limu bu des ak jaar-jaar yi fey ko.", pl: "👥 Śledzenie wg klienta — Każdy dług jest powiązany z klientem, z kwotą zaległości i historią płatności.", ar: "👥 التتبع حسب العميل — كل دين مرتبط بعميل، مع المبلغ المستحق وسجل المدفوعات.", es: "👥 Seguimiento por cliente — Cada deuda está vinculada a un cliente, con el monto adeudado y el historial de pagos.", pt: "👥 Acompanhamento por cliente — Cada dívida está ligada a um cliente, com o valor devido e o histórico de pagamentos.", zh: "👥 按客户追踪 — 每笔欠款都关联一个客户，显示欠款金额和还款记录。", vi: "👥 Theo dõi theo khách hàng — Mỗi khoản nợ gắn với một khách hàng, kèm số tiền còn nợ và lịch sử thanh toán.", de: "👥 Verfolgung pro Kunde — Jede Schuld ist einem Kunden zugeordnet, mit geschuldetem Betrag und Zahlungsverlauf.", ru: "👥 Учёт по клиенту — Каждый долг привязан к клиенту, с суммой задолженности и историей платежей.", hi: "👥 ग्राहक अनुसार ट्रैकिंग — हर उधार एक ग्राहक से जुड़ा होता है, बकाया राशि और भुगतान इतिहास के साथ।", ta: "👥 வாடிக்கையாளர் வாரியான கண்காணிப்பு — ஒவ்வொரு கடனும் ஒரு வாடிக்கையாளருடன் இணைக்கப்பட்டுள்ளது, நிலுவைத் தொகை மற்றும் கட்டண வரலாற்றுடன்.", bn: "👥 গ্রাহক অনুযায়ী ট্র্যাকিং — প্রতিটি বাকি একজন গ্রাহকের সাথে যুক্ত, পাওনা পরিমাণ ও পেমেন্ট ইতিহাস সহ।", ur: "👥 گاہک کے مطابق ٹریکنگ — ہر ادھار ایک گاہک سے جڑا ہوتا ہے، واجب الادا رقم اور ادائیگی کی تاریخ کے ساتھ۔", id: "👥 Pelacakan per pelanggan — Setiap utang terkait dengan pelanggan, lengkap dengan jumlah terutang dan riwayat pembayaran.", tr: "👥 Müşteri bazında takip — Her borç bir müşteriye bağlıdır, borç tutarı ve ödeme geçmişiyle birlikte.", ko: "👥 고객별 관리 — 모든 채무는 고객과 연결되어 있으며, 남은 금액과 결제 내역이 함께 표시됩니다.", ja: "👥 顧客ごとの管理 — 各未収金は顧客に紐づけられ、未払い額と支払い履歴が表示されます。", it: "👥 Monitoraggio per cliente — Ogni debito è collegato a un cliente, con l'importo dovuto e lo storico dei pagamenti.", nl: "👥 Opvolging per klant — Elke schuld is gekoppeld aan een klant, met het verschuldigde bedrag en de betalingsgeschiedenis.", sw: "👥 Ufuatiliaji kwa mteja — Kila deni limeunganishwa na mteja, pamoja na kiasi kinachodaiwa na historia ya malipo.", ha: "👥 Bin diddigi ta kowane abokin ciniki — Kowane bashi yana da alaƙa da abokin ciniki, tare da adadin da ake bi da tarihin biya.", bm: "👥 Juru kɔlɔsi kiliyan fɛ — Juru kelen-kelen bɛɛ sitigi kiliyan kelen kan, ni wari dɔ tɔw ani sarali tariku.", zu: "👥 Ukulandelela ngekhasimende — Isikweletu ngasinye sixhunywe kukhasimende, kanye nenani elisasele nomlando wezinkokhelo.", yo: "👥 Àmójútó nípasẹ̀ oníbàárà — Gbèsè kọ̀ọ̀kan ni a so mọ́ oníbàárà kan, pẹ̀lú iye tí ó kù àti ìtàn ìsanwó." };
 EXTRA_UI.tabHelpDebts2 = { fr: "✅ Enregistrer un remboursement — Appuyez sur une dette pour ajouter un paiement partiel ou total.", am: "✅ ክፍያ መዝግብ — ከፊል ወይም ሙሉ ክፍያ ለማከል በእዳው ላይ ይንኩ።", en: "✅ Record a repayment — Tap a debt to add a partial or full payment.", tl: "✅ Itala ang bayad — Pindutin ang isang utang para magdagdag ng bahagyang o buong bayad.", te: "✅ తిరిగి చెల్లింపును నమోదు చేయండి — పాక్షిక లేదా పూర్తి చెల్లింపును జోడించడానికి అప్పును నొక్కండి.", th: "✅ บันทึกการชำระคืน — แตะที่หนี้เพื่อเพิ่มการชำระบางส่วนหรือเต็มจำนวน", wo: "✅ Bind fey — Daal ci bor ngir yokk fey bu dul mat walla bu mat.", pl: "✅ Zarejestruj spłatę — Dotknij długu, aby dodać płatność częściową lub całkowitą.", ar: "✅ تسجيل سداد — اضغط على دين لإضافة دفعة جزئية أو كاملة.", es: "✅ Registrar un pago — Toque una deuda para agregar un pago parcial o total.", pt: "✅ Registrar um pagamento — Toque em uma dívida para adicionar um pagamento parcial ou total.", zh: "✅ 记录还款 — 点击一笔欠款，添加部分或全部还款。", vi: "✅ Ghi nhận khoản trả — Nhấn vào một khoản nợ để thêm thanh toán một phần hoặc toàn bộ.", de: "✅ Rückzahlung erfassen — Tippen Sie auf eine Schuld, um eine Teil- oder Komplettzahlung hinzuzufügen.", ru: "✅ Зафиксировать платёж — Нажмите на долг, чтобы добавить частичный или полный платёж.", hi: "✅ भुगतान दर्ज करें — आंशिक या पूरा भुगतान जोड़ने के लिए किसी उधार पर टैप करें।", ta: "✅ திருப்பிச் செலுத்துதலைப் பதிவு செய் — பகுதி அல்லது முழு பணம் சேர்க்க ஒரு கடனைத் தட்டவும்.", bn: "✅ পরিশোধ রেকর্ড করুন — আংশিক বা সম্পূর্ণ পেমেন্ট যোগ করতে কোনো বাকিতে ট্যাপ করুন।", ur: "✅ ادائیگی درج کریں — جزوی یا مکمل ادائیگی شامل کرنے کے لیے کسی ادھار پر ٹیپ کریں۔", id: "✅ Catat pelunasan — Ketuk sebuah utang untuk menambahkan pembayaran sebagian atau penuh.", tr: "✅ Ödeme kaydet — Kısmi veya tam ödeme eklemek için bir borca dokun.", ko: "✅ 상환 기록 — 채무를 눌러 부분 또는 전체 결제를 추가하세요.", ja: "✅ 返済を記録 — 未収金をタップして、一部または全額の支払いを追加します。", it: "✅ Registrare un rimborso — Tocchi un debito per aggiungere un pagamento parziale o totale.", nl: "✅ Terugbetaling registreren — Tik op een schuld om een gedeeltelijke of volledige betaling toe te voegen.", sw: "✅ Sajili malipo — Gusa deni ili kuongeza malipo ya sehemu au yote.", ha: "✅ Yi rikodin biya — Danna bashi don ƙara biya na wani ɓangare ko cikakke.", bm: "✅ Sariyɔrɔ sɛbɛn — Digi juru kan ka sariyɔrɔ dɔɔnin walima dafalen fara a kan.", zu: "✅ Bhala ukukhokha — Thepha isikweletu ukuze wengeze inkokhelo eyingxenye noma egcwele.", yo: "✅ Kọ ìsanwó padà — Tẹ gbèsè kan láti fi ìsanwó apá kan tàbí kíkún kún un." };
 EXTRA_UI.tabHelpDebts3 = { fr: "🔔 Fiabilité du client — Le système évalue la fiabilité selon l'historique de remboursement, visible au moment d'une vente à crédit.", am: "🔔 የደንበኛ ታማኝነት — ስርዓቱ በክፍያ ታሪክ ላይ ተመስርቶ ታማኝነትን ይገመግማል፣ ይህም በብድር ሽያጭ ወቅት ይታያል።", en: "🔔 Customer reliability — The system scores reliability based on repayment history, visible when making a credit sale.", tl: "🔔 Pagiging maaasahan ng kustomer — Tinataya ng sistema ang pagiging maaasahan base sa history ng pagbabayad, makikita sa oras ng pagbenta sa utang.", te: "🔔 కస్టమర్ విశ్వసనీయత — తిరిగి చెల్లింపు చరిత్ర ఆధారంగా వ్యవస్థ విశ్వసనీయతను అంచనా వేస్తుంది, ఇది అరువు అమ్మకం చేసేటప్పుడు కనిపిస్తుంది.", th: "🔔 ความน่าเชื่อถือของลูกค้า — ระบบจะประเมินความน่าเชื่อถือจากประวัติการชำระคืน ซึ่งจะแสดงเมื่อทำการขายแบบเงินเชื่อ", wo: "🔔 Ngëmum kiliyaan — Sistem bi dafay xool ngëm ci jaar-jaar fey yi, di feeñ bu ñu jaay ci bor.", pl: "🔔 Wiarygodność klienta — System ocenia wiarygodność na podstawie historii spłat, widoczną podczas sprzedaży na kredyt.", ar: "🔔 موثوقية العميل — يقيّم النظام الموثوقية بناءً على سجل السداد، وتظهر عند إجراء بيع بالدين.", es: "🔔 Fiabilidad del cliente — El sistema evalúa la fiabilidad según el historial de pagos, visible al hacer una venta a crédito.", pt: "🔔 Confiabilidade do cliente — O sistema avalia a confiabilidade com base no histórico de pagamentos, visível ao fazer uma venda a crédito.", zh: "🔔 客户信用 — 系统根据还款记录评估客户信用，在赊账销售时可见。", vi: "🔔 Độ tin cậy của khách hàng — Hệ thống chấm điểm độ tin cậy dựa trên lịch sử trả nợ, hiển thị khi thực hiện bán hàng ghi nợ.", de: "🔔 Bonität des Kunden — Das System bewertet die Bonität anhand der Rückzahlungshistorie, sichtbar bei einem Kreditverkauf.", ru: "🔔 Надёжность клиента — Система оценивает надёжность по истории погашений, видно при продаже в кредит.", hi: "🔔 ग्राहक की विश्वसनीयता — सिस्टम भुगतान इतिहास के आधार पर विश्वसनीयता आंकता है, जो उधार बिक्री के समय दिखती है।", ta: "🔔 வாடிக்கையாளர் நம்பகத்தன்மை — திருப்பிச் செலுத்தும் வரலாற்றின் அடிப்படையில் கணினி நம்பகத்தன்மையை மதிப்பிடும், கடன் விற்பனையின்போது காணலாம்.", bn: "🔔 গ্রাহকের নির্ভরযোগ্যতা — সিস্টেম পরিশোধের ইতিহাসের ভিত্তিতে নির্ভরযোগ্যতা মূল্যায়ন করে, যা বাকিতে বিক্রির সময় দেখা যায়।", ur: "🔔 گاہک کی اعتماد پذیری — نظام ادائیگی کی تاریخ کی بنیاد پر اعتماد پذیری کا اندازہ لگاتا ہے، جو ادھار فروخت کے وقت نظر آتا ہے۔", id: "🔔 Keandalan pelanggan — Sistem menilai keandalan berdasarkan riwayat pembayaran, terlihat saat melakukan penjualan kredit.", tr: "🔔 Müşteri güvenilirliği — Sistem, geri ödeme geçmişine göre güvenilirliği puanlar; bu, veresiye satışta görünür.", ko: "🔔 고객 신뢰도 — 시스템은 상환 이력을 기반으로 신뢰도를 평가하며, 외상 판매 시 확인할 수 있습니다.", ja: "🔔 顧客の信頼度 — システムは返済履歴に基づいて信頼度を評価し、ツケ払い販売時に表示されます。", it: "🔔 Affidabilità del cliente — Il sistema valuta l'affidabilità in base allo storico dei rimborsi, visibile durante una vendita a credito.", nl: "🔔 Betrouwbaarheid van de klant — Het systeem beoordeelt de betrouwbaarheid op basis van de terugbetalingsgeschiedenis, zichtbaar bij een verkoop op krediet.", sw: "🔔 Uaminifu wa mteja — Mfumo hupima uaminifu kulingana na historia ya marejesho, unaonekana wakati wa mauzo ya mkopo.", ha: "🔔 Amincin abokin ciniki — Tsarin yana auna amincin bisa tarihin biyan bashi, wanda ake gani lokacin sayar da bashi.", bm: "🔔 Kiliyan dannaya — Sisɛmu bɛ dannaya suma sariyɔrɔ tariku kan, min bɛ ye juru feereli waati la.", zu: "🔔 Ukwethembeka kwekhasimende — Uhlelo luhlola ukwethembeka ngokusekelwe emlandweni wokukhokha, okubonakala uma kwenziwa ukuthengisa ngesikweletu.", yo: "🔔 Ìgbẹ́kẹ̀lé oníbàárà — Ètò náà máa ń díwọ̀n ìgbẹ́kẹ̀lé gẹ́gẹ́ bí ìtàn ìsanwó padà, tí a óò rí nígbà títà gbèsè." };
@@ -4405,7 +4498,7 @@ EXTRA_UI.logUnsoldQty = { fr: "invendus :", am: "ያልተሸጠ፦", en: "unsol
 const TAB_HELP_CONTENT = {
   stock: { titleKey: "tabHelpStockTitle", itemKeys: ["tabHelpStock1", "tabHelpStock2", "tabHelpStock3", "tabHelpStock4", "tabHelpStock5", "tabHelpStock6", "tabHelpStock7"] },
   dashboard: { titleKey: "tabHelpDashboardTitle", itemKeys: ["tabHelpDashboard1", "tabHelpDashboard2", "tabHelpDashboard3"] },
-  sale: { titleKey: "tabHelpSaleTitle", itemKeys: ["tabHelpSale1", "tabHelpSale2", "tabHelpSale3"] },
+  sale: { titleKey: "tabHelpSaleTitle", itemKeys: ["tabHelpSale1", "tabHelpSale2", "tabHelpSale3", "tabHelpSale4"] },
   debts: { titleKey: "tabHelpDebtsTitle", itemKeys: ["tabHelpDebts1", "tabHelpDebts2", "tabHelpDebts3"] },
   cash: { titleKey: "tabHelpCashTitle", itemKeys: ["tabHelpCash1", "tabHelpCash2", "tabHelpCash3"] },
   history: { titleKey: "tabHelpHistoryTitle", itemKeys: ["tabHelpHistory1", "tabHelpHistory2", "tabHelpHistory3"] },
@@ -4615,6 +4708,13 @@ function fcfa(n) {
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
 }
+// Nom du jour de la semaine traduit, à partir de l'index JS (0=dimanche..6=samedi) —
+// réutilise les traductions déjà existantes des jours pour les plages horaires du
+// personnel (empDaySun..empDaySat), pour ne pas dupliquer 30 langues de plus.
+function weekdayLabel(lang, dayIdx) {
+  const keys = ["empDaySun", "empDayMon", "empDayTue", "empDayWed", "empDayThu", "empDayFri", "empDaySat"];
+  return t(lang, keys[((dayIdx % 7) + 7) % 7]);
+}
 // ---- Format de date ET de nombre selon la LANGUE de l'app et le PAYS du compte ----
 // Chaque langue/pays a sa façon d'écrire la date (ex. 20/09/2026 en France ou au Mali,
 // 09/20/2026 aux États-Unis, 2026-09-20 au Canada français, 2026/9/20 au Japon...).
@@ -4669,9 +4769,19 @@ function fullDate(iso) {
   const d = new Date(iso);
   return d.toLocaleDateString(getAppLocale());
 }
+// Le navigateur renvoie les dates "longues" (jour de semaine + mois en toutes lettres)
+// entièrement en minuscules dans la plupart des langues (ex. français : "lundi 3 novembre"),
+// ce qui est correct au milieu d'une phrase mais pas pour un texte affiché seul comme titre
+// à l'écran d'accueil — là, la première lettre doit être en majuscule, comme on l'écrirait à
+// la main. On met donc en majuscule uniquement la toute première lettre du texte obtenu (la
+// seule chose à corriger), quelle que soit la langue ; les langues sans majuscules/minuscules
+// (chinois, arabe, etc.) ne sont pas affectées puisqu'il n'y a simplement rien à changer.
+function capitalizeFirstLetter(str) {
+  return str.replace(/^(\s*[‎‏؜]*)(\p{L})/u, (_, prefix, letter) => prefix + letter.toUpperCase());
+}
 function fullDateLong(iso) {
   const d = iso ? new Date(iso) : new Date();
-  return d.toLocaleDateString(getAppLocale(), { weekday: "long", day: "numeric", month: "long" });
+  return capitalizeFirstLetter(d.toLocaleDateString(getAppLocale(), { weekday: "long", day: "numeric", month: "long" }));
 }
 function fullTime(iso) {
   const d = new Date(iso);
@@ -5098,7 +5208,7 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "weeklySummaryEnabled", "weeklySummaryDay", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled", "loyaltyRewardThreshold", "loyaltyRewardMode", "debtReminderAutoMode", "defaultPaymentMethod"];
 // ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
 // On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
 // "light" / "dark" / "system"), pour que l'écran de connexion garde la même ambiance. Pour un
@@ -5245,6 +5355,10 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     // Activé par défaut (comportement historique conservé), mais désormais désactivable
     // par le propriétaire depuis Paramètres > Interface > Heure du résumé quotidien.
     dailySummaryEnabled: winner.dailySummaryEnabled !== false,
+    // Rapport hebdomadaire : même logique (activé par défaut, désactivable), jour de la
+    // semaine réglable séparément (0=dimanche..6=samedi, lundi par défaut).
+    weeklySummaryEnabled: winner.weeklySummaryEnabled !== false,
+    weeklySummaryDay: winner.weeklySummaryDay ?? 1,
     darkMode: !!winner.darkMode,
     themeMode: winner.themeMode || (winner.darkMode ? "dark" : "system"),
     showBalls: winner.showBalls !== false,
@@ -5254,6 +5368,11 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     // être averti, après 10 achats d'un même client, qu'une récompense pourrait être
     // proposée. L'application ne l'active jamais elle-même.
     loyaltyRewardEnabled: !!winner.loyaltyRewardEnabled,
+    loyaltyRewardThreshold: winner.loyaltyRewardThreshold > 0 ? winner.loyaltyRewardThreshold : 10,
+    loyaltyRewardMode: winner.loyaltyRewardMode === "auto" ? "auto" : "manual",
+    // Désactivé par défaut, comme loyaltyRewardEnabled : c'est au propriétaire de décider
+    // s'il veut un signalement automatique des dettes à relancer.
+    debtReminderAutoMode: !!winner.debtReminderAutoMode,
     soundChoice: { ...DEFAULT_SOUND_CHOICE, ...(winner.soundChoice || {}) },
     ballColor: winner.ballColor || "blue",
     categories: Array.isArray(winner.categories) ? winner.categories : [],
@@ -5698,6 +5817,20 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       if (data && data.user && data.user.email) setObUsername(data.user.email);
     });
   }, [startInGoogleOnboarding]);
+  // Précharge le script Google Identity Services dès l'affichage de l'écran de connexion
+  // (en arrière-plan, sans bloquer l'affichage), plutôt que d'attendre le clic sur
+  // "Continuer avec Google" pour commencer à le télécharger. Avant ce changement, tout le
+  // temps de téléchargement + d'analyse de ce script (réseau variable, surtout sur une
+  // connexion mobile lente) s'ajoutait, au moment du clic, à l'attente avant que la fenêtre
+  // de sélection de compte apparaisse — c'est très probablement la cause de la lenteur
+  // ressentie par rapport à d'autres apps, qui préchargent ce même script en arrière-plan.
+  // Sans effet sur l'app native (Android), qui n'utilise pas ce script. Erreur ignorée ici
+  // volontairement : si le préchargement échoue (pas de réseau, etc.), loginWithGoogle
+  // retentera lui-même au moment du clic, puis retombera sur le flux de secours habituel.
+  useEffect(() => {
+    if (isNativePlatformNow()) return;
+    loadGoogleIdentityScript().catch(() => {});
+  }, []);
   const [obLockPin, setObLockPin] = useState("");
   const [obConfirmLockPin, setObConfirmLockPin] = useState("");
   const [obErrors, setObErrors] = useState({});
@@ -5744,7 +5877,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // "Android" enregistré dans Google Cloud Console avec le nom de package de l'app et
         // l'empreinte SHA-1 du certificat de signature utilisé pour la build.)
         const { SocialLogin } = await import("@capgo/capacitor-social-login");
-        const res = await SocialLogin.login({ provider: "google", options: {} });
+        const res = await withLoginTimeout(SocialLogin.login({ provider: "google", options: {} }));
         const idToken = res && res.result && res.result.idToken;
         if (!idToken) throw new Error("Aucun jeton reçu de Google");
         const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
@@ -5759,8 +5892,8 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // tiers sont bloqués — dans ce cas on retombe automatiquement sur l'ancienne redirection
         // classique (signInWithOAuth), qui continue donc de fonctionner partout.
         try {
-          await loadGoogleIdentityScript();
-          const idToken = await promptGoogleIdentitySignIn();
+          await withLoginTimeout(loadGoogleIdentityScript());
+          const idToken = await withLoginTimeout(promptGoogleIdentitySignIn());
           const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
           if (oauthError) throw oauthError;
           setGoogleLoginBusy(false);
@@ -7609,6 +7742,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [dailySummaryHour, setDailySummaryHour] = useState(7);
   const [dailySummaryUtcOffsetMinutes, setDailySummaryUtcOffsetMinutes] = useState(() => -new Date().getTimezoneOffset());
   const [dailySummaryEnabled, setDailySummaryEnabled] = useState(true);
+  // Rapport hebdomadaire automatique (notification push, une fois par semaine) : réutilise
+  // la même heure locale que le résumé quotidien (dailySummaryHour/UtcOffsetMinutes), on ne
+  // demande que le jour de la semaine en plus. 0 = dimanche … 6 = samedi (lundi par défaut).
+  const [weeklySummaryEnabled, setWeeklySummaryEnabled] = useState(true);
+  const [weeklySummaryDay, setWeeklySummaryDay] = useState(1);
   const [darkMode, setDarkMode] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
   // "system" (suit le téléphone), "light" ou "dark" (choix figé par l'utilisateur).
   const [themeMode, setThemeMode] = useState("system");
@@ -7660,6 +7798,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // bout de LOYALTY_REWARD_EVERY achats d'un même client. Décision du propriétaire,
   // réglable dans Paramètres > Ventes & finances.
   const [loyaltyRewardEnabled, setLoyaltyRewardEnabled] = useState(false);
+  // Seuil d'achats avant récompense fidélité (remplace la constante fixe LOYALTY_REWARD_EVERY).
+  const [loyaltyRewardThreshold, setLoyaltyRewardThreshold] = useState(10);
+  // "auto" : la bannière de récompense s'affiche automatiquement dans le reçu partagé
+  // (donc potentiellement vue par le client) dès que le seuil est atteint. "manual" :
+  // aucune bannière automatique sur le reçu — seul le propriétaire voit un indicateur
+  // discret (dans l'écran de vente, avant finalisation) et décide lui-même quoi faire.
+  const [loyaltyRewardMode, setLoyaltyRewardMode] = useState("manual");
+  // "auto" : un bandeau en haut de l'onglet Dettes signale automatiquement les dettes
+  // à relancer (en retard ou échéance du jour, avec un numéro renseigné) — l'envoi
+  // WhatsApp lui-même reste un clic manuel (WhatsApp ne permet pas d'envoi 100% silencieux
+  // sans passer par son API Business payante). "manual" : comportement historique, aucun
+  // signalement automatique.
+  const [debtReminderAutoMode, setDebtReminderAutoMode] = useState(false);
   // Son choisi pour chaque catégorie (clic / succès / erreur) — voir SOUND_VARIANTS tout
   // en haut du fichier pour la liste des choix possibles par catégorie.
   const [soundChoice, setSoundChoice] = useState(DEFAULT_SOUND_CHOICE);
@@ -7683,6 +7834,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // doit re-proposer le choix avant chaque envoi ou garder ce style partout.
   const [shareCardStyleId, setShareCardStyleId] = useState("midnight");
   const [shareCardAskEachTime, setShareCardAskEachTime] = useState(false);
+  // Mode de paiement présélectionné à l'ouverture d'un nouveau panier (Paramètres > Ventes &
+  // finances > Paiement par défaut). "cash" par défaut, comme le comportement historique.
+  const [defaultPaymentMethod, setDefaultPaymentMethod] = useState("cash");
   const [settingsUpdatedAt, setSettingsUpdatedAt] = useState(0);
   const [draftCarts, setDraftCarts] = useState([]);
   const [activeCartId, setActiveCartId] = useState(null);
@@ -7816,7 +7970,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ...loyaltyCustomers,
       [key]: { name: (customerName || "").trim() || (prev && prev.name) || "", count, lastDate: new Date().toISOString() },
     };
-    return { nextLoyaltyCustomers, loyaltyInfo: { count, isReward: count % LOYALTY_REWARD_EVERY === 0 } };
+    const threshold = loyaltyRewardThreshold > 0 ? loyaltyRewardThreshold : LOYALTY_REWARD_EVERY;
+    return { nextLoyaltyCustomers, loyaltyInfo: { count, isReward: count % threshold === 0 } };
   };
   // Génère le même reçu, mais en PDF (format étroit façon ticket de caisse, 80mm) —
   // même bibliothèque jsPDF que les autres exports PDF de l'app, chargée à la demande.
@@ -8108,6 +8263,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [expiresAt, setExpiresAt] = useState(null);
   const [employees, setEmployees] = useState([]);
   const [actionLog, setActionLog] = useState([]);
+  // Onglet Personnel (restylage demandé) : recherche/tri de la liste, et repli du journal
+  // d'actions (plus affiché en entier par défaut) avec un filtre par personne. États
+  // purement locaux à l'écran, pas besoin de les sauvegarder (saveAll/SETTINGS_KEYS).
+  const [empSearch, setEmpSearch] = useState("");
+  const [empSortBy, setEmpSortBy] = useState("name"); // "name" | "role" | "sales"
+  const [showActionLog, setShowActionLog] = useState(false);
+  const [actionLogFilterId, setActionLogFilterId] = useState("__all__");
   // Journal d'historique PERMANENT (ajout seulement) : chaque vente, annulation de vente, dette,
   // paiement de dette et dépense y est copié au moment où il a lieu. Aucune action de l'app ne
   // supprime ni ne modifie ces lignes — l'onglet Historique lit ce journal.
@@ -8477,7 +8639,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           setEmployees(empRows.map((e) => ({
             id: e.id, name: e.name, role: e.role, permissions: e.permissions || [],
             pinHash: e.pin_hash, active: e.active, createdAt: e.created_at, qrToken: e.qr_token,
-            shiftSchedule: e.shift_schedule || null,
+            shiftSchedule: e.shift_schedule || null, lastSeenAt: e.last_seen_at || null,
           })));
         }
         const { data: logRows } = await supabase.from("action_log").select("*").eq("shop_id", activeShopId).order("created_at", { ascending: false }).limit(500);
@@ -8490,6 +8652,45 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     })();
     return () => { cancelled = true; };
   }, [isDemo, activeShopId]);
+  // Présence du personnel (1/2) — "battement de cœur" : tant qu'un employé est connecté
+  // sur CET appareil, on marque régulièrement sa dernière activité (last_seen_at) côté
+  // Supabase, pour que le propriétaire voie qui est "en ligne" dans l'onglet Personnel.
+  // Écrit avec la session Supabase du PROPRIÉTAIRE (les employés n'ont pas leur propre
+  // compte Supabase Auth — voir le commentaire sur activeEmployee) : la policy RLS
+  // "auth.uid() = owner_id" laisse donc toujours passer cette mise à jour.
+  useEffect(() => {
+    if (isDemo || !activeEmployee || !activeShopId) return;
+    let cancelled = false;
+    const ping = async () => {
+      try {
+        if (!cancelled) await supabase.from("employees").update({ last_seen_at: new Date().toISOString() }).eq("id", activeEmployee.id);
+      } catch (e) { /* best-effort */ }
+    };
+    ping();
+    const interval = setInterval(ping, 3 * 60 * 1000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [isDemo, activeEmployee, activeShopId]);
+  // Présence du personnel (2/2) — côté propriétaire : rafraîchit la liste des employés
+  // (donc leur last_seen_at) toutes les 30 s tant que l'onglet Personnel est ouvert, pour
+  // que le statut "En ligne"/"Vu pour la dernière fois" reste à jour sans rouvrir l'écran.
+  useEffect(() => {
+    if (isDemo || !activeShopId || activeEmployee || tab !== "employees") return;
+    let cancelled = false;
+    const refresh = async () => {
+      try {
+        const { data: empRows } = await supabase.from("employees").select("*").eq("shop_id", activeShopId).order("created_at");
+        if (!cancelled && empRows) {
+          setEmployees(empRows.map((e) => ({
+            id: e.id, name: e.name, role: e.role, permissions: e.permissions || [],
+            pinHash: e.pin_hash, active: e.active, createdAt: e.created_at, qrToken: e.qr_token,
+            shiftSchedule: e.shift_schedule || null, lastSeenAt: e.last_seen_at || null,
+          })));
+        }
+      } catch (e) { /* best-effort */ }
+    };
+    const interval = setInterval(refresh, 30 * 1000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [isDemo, activeShopId, activeEmployee, tab]);
   const [showAddEmployee, setShowAddEmployee] = useState(false);
   const [editingEmployeeId, setEditingEmployeeId] = useState(null);
   const [empName, setEmpName] = useState("");
@@ -9419,11 +9620,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setDailySummaryHour(shop.dailySummaryHour ?? 7);
     setDailySummaryUtcOffsetMinutes(shop.dailySummaryUtcOffsetMinutes ?? -new Date().getTimezoneOffset());
     setDailySummaryEnabled(shop.dailySummaryEnabled !== false);
+    setWeeklySummaryEnabled(shop.weeklySummaryEnabled !== false);
+    setWeeklySummaryDay(shop.weeklySummaryDay ?? 1);
     setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
     setShowBalls(shop.showBalls !== false);
     setSoundsEnabled(shop.soundsEnabled !== false);
     setHapticsEnabled(shop.hapticsEnabled !== false);
     setLoyaltyRewardEnabled(!!shop.loyaltyRewardEnabled);
+    setLoyaltyRewardThreshold(shop.loyaltyRewardThreshold > 0 ? shop.loyaltyRewardThreshold : 10);
+    setLoyaltyRewardMode(shop.loyaltyRewardMode === "auto" ? "auto" : "manual");
+    setDebtReminderAutoMode(!!shop.debtReminderAutoMode);
     setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(shop.soundChoice || {}) });
     setBallColor(shop.ballColor || "blue");
     setCategories(Array.isArray(shop.categories) ? shop.categories : []);
@@ -9464,6 +9670,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     setShareCardStyleId(shop.shareCardStyleId || "midnight");
     setShareCardAskEachTime(!!shop.shareCardAskEachTime);
+    setDefaultPaymentMethod(shop.defaultPaymentMethod || "cash");
     setSettingsUpdatedAt(shop.settingsUpdatedAt || 0);
     setAiConversations(shop.aiConversations || []);
     setAiMemoryNotes(shop.aiMemoryNotes || []);
@@ -9773,6 +9980,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
       dailySummaryHour: overrides.dailySummaryHour ?? dailySummaryHour,
       dailySummaryEnabled: overrides.dailySummaryEnabled ?? dailySummaryEnabled,
+      weeklySummaryEnabled: overrides.weeklySummaryEnabled ?? weeklySummaryEnabled,
+      weeklySummaryDay: overrides.weeklySummaryDay ?? weeklySummaryDay,
       // Recalculé à chaque sauvegarde de ce réglage à partir du fuseau horaire ACTUEL
       // de l'appareil (voir le commentaire sur le state dailySummaryHour) : c'est la
       // fonction Supabase daily-summary qui en a besoin pour convertir l'heure locale
@@ -9787,6 +9996,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       soundsEnabled: overrides.soundsEnabled ?? soundsEnabled,
       hapticsEnabled: overrides.hapticsEnabled ?? hapticsEnabled,
       loyaltyRewardEnabled: overrides.loyaltyRewardEnabled ?? loyaltyRewardEnabled,
+      loyaltyRewardThreshold: overrides.loyaltyRewardThreshold ?? loyaltyRewardThreshold,
+      loyaltyRewardMode: overrides.loyaltyRewardMode ?? loyaltyRewardMode,
+      debtReminderAutoMode: overrides.debtReminderAutoMode ?? debtReminderAutoMode,
       soundChoice: overrides.soundChoice ?? soundChoice,
       ballColor: overrides.ballColor ?? ballColor,
       categories: overrides.categories ?? categories,
@@ -9800,6 +10012,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       arabicDigits: overrides.arabicDigits ?? arabicDigits,
       shareCardStyleId: overrides.shareCardStyleId ?? shareCardStyleId,
       shareCardAskEachTime: overrides.shareCardAskEachTime ?? shareCardAskEachTime,
+      defaultPaymentMethod: overrides.defaultPaymentMethod ?? defaultPaymentMethod,
       phone: overrides.phone ?? shopPhone,
       activeCartId: overrides.activeCartId ?? activeCartId,
       employees: overrides.employees ?? employees,
@@ -9818,12 +10031,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setDailySummaryHour(next.dailySummaryHour);
     setDailySummaryUtcOffsetMinutes(next.dailySummaryUtcOffsetMinutes);
     setDailySummaryEnabled(next.dailySummaryEnabled);
+    setWeeklySummaryEnabled(next.weeklySummaryEnabled);
+    setWeeklySummaryDay(next.weeklySummaryDay);
     setDarkMode(next.darkMode);
     setThemeMode(next.themeMode);
     setShowBalls(next.showBalls);
     setSoundsEnabled(next.soundsEnabled);
     setHapticsEnabled(next.hapticsEnabled);
     setLoyaltyRewardEnabled(next.loyaltyRewardEnabled);
+    setLoyaltyRewardThreshold(next.loyaltyRewardThreshold);
+    setLoyaltyRewardMode(next.loyaltyRewardMode);
+    setDebtReminderAutoMode(next.debtReminderAutoMode);
     setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(next.soundChoice || {}) });
     setBallColor(next.ballColor);
     setCategories(Array.isArray(next.categories) ? next.categories : []);
@@ -9838,6 +10056,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setArabicDigits(next.arabicDigits);
     setShareCardStyleId(next.shareCardStyleId);
     setShareCardAskEachTime(next.shareCardAskEachTime);
+    setDefaultPaymentMethod(next.defaultPaymentMethod || "cash");
     setShopPhone(next.phone);
     setEmployees(next.employees);
     setActionLog(next.actionLog);
@@ -11176,12 +11395,25 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const [barcodeScanCameraError, setBarcodeScanCameraError] = useState(false);
   const [barcodeScanMsg, setBarcodeScanMsg] = useState(""); // dernier résultat (trouvé ou non), bref
+  // Couleur du cadre de la caméra : null (gris, neutre) tant qu'aucun scan n'a eu lieu,
+  // "success" (vert) ou "error" (rouge) brièvement après chaque scan, pour confirmer d'un
+  // coup d'œil que ça a bien été pris en compte — sans avoir à lire le petit texte en
+  // dessous. Revient automatiquement au gris après un court instant, prêt pour le scan
+  // suivant (la caméra, elle, reste allumée en continu pendant tout ce temps).
+  const [barcodeScanFlash, setBarcodeScanFlash] = useState(null);
+  const barcodeScanFlashTimerRef = useRef(null);
   const barcodeScanCooldownRef = useRef(0); // évite d'ajouter 10x le même produit pendant qu'il reste dans le cadre
   const openBarcodeScanner = () => {
     if (!activeCart) createCart();
     setBarcodeScanCameraError(false);
     setBarcodeScanMsg("");
+    setBarcodeScanFlash(null);
     setShowBarcodeScanner(true);
+  };
+  const triggerBarcodeScanFlash = (kind) => {
+    setBarcodeScanFlash(kind);
+    if (barcodeScanFlashTimerRef.current) clearTimeout(barcodeScanFlashTimerRef.current);
+    barcodeScanFlashTimerRef.current = setTimeout(() => setBarcodeScanFlash(null), 700);
   };
   const handleBarcodeScan = (result) => {
     if (Date.now() < barcodeScanCooldownRef.current) return;
@@ -11192,15 +11424,38 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const product = products.find((p) => p.barcode && p.barcode === code);
     if (!product) {
       setBarcodeScanMsg(tx(lang, "scanBarcodeNotFound"));
+      triggerBarcodeScanFlash("error");
       playSound("error");
       return;
     }
     if (isProductFrozen(product.id)) {
       setBarcodeScanMsg(t(lang, "productFrozenMsg"));
+      triggerBarcodeScanFlash("error");
       return;
     }
     changeCartQty(activeCart.id, product, 1, "pack");
     setBarcodeScanMsg(`✅ ${product.name}`);
+    triggerBarcodeScanFlash("success");
+    playSound("success");
+    triggerHaptic("success");
+  };
+  // ---- Scan de code-barres à l'AJOUT d'un produit (formulaire Stock) ----
+  // Même composant Scanner que ci-dessus, mais usage différent : un seul scan suffit,
+  // il remplit directement le champ pBarcode puis referme la caméra (pas de boucle
+  // continue comme à la vente). Résout le problème de devoir connaître/taper à la main
+  // les chiffres d'un code-barres physique.
+  const [showProductBarcodeScanner, setShowProductBarcodeScanner] = useState(false);
+  const [productBarcodeScanCameraError, setProductBarcodeScanCameraError] = useState(false);
+  const openProductBarcodeScanner = () => {
+    setProductBarcodeScanCameraError(false);
+    setShowProductBarcodeScanner(true);
+  };
+  const handleProductBarcodeScan = (result) => {
+    const raw = Array.isArray(result) ? result[0]?.rawValue : result?.rawValue || result;
+    const code = String(raw || "").trim();
+    if (!code) return;
+    setPBarcode(code);
+    setShowProductBarcodeScanner(false);
     playSound("success");
     triggerHaptic("success");
   };
@@ -11247,7 +11502,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // (boutiquier et client sont presque toujours dans le même pays) — ça évite de le
     // retaper à chaque vente ; reste entièrement modifiable, y compris pour le supprimer.
     const prefillDial = shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : "";
-    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: "cash", customer: "", phone: prefillDial, received: "" };
+    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: defaultPaymentMethod || "cash", customer: "", phone: prefillDial, received: "" };
     const next = [...draftCarts, newCart];
     saveAll({ draftCarts: next, activeCartId: newCart.id });
   };
@@ -11998,7 +12253,7 @@ Règles strictes :
 GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand il demande comment faire quelque chose) :
 - Onglets principaux : Accueil (tableau de bord), Stock, Vente, Historique, Dettes, Stats, Assistant (toi). Le menu « Plus » donne accès aux autres écrans, dont l'onglet Caisse.
 - Tableau de bord (Accueil) : voir les ventes du jour, fixer un objectif de ventes du mois, carte « Stock faible » (regroupe les produits dont la quantité est sous le seuil d'alerte défini dans Paramètres > Boutique, ce seuil est modifiable et n'est pas figé à 5 ; par défaut l'affichage se limite aux 5 produits les plus faibles, le bouton « Voir tout » / « Voir moins » affiche ou réduit la liste, et le bouton de tri permet de la trier), rapport de caisse (pour les comptes multi-boutiques : ventes par propriétaire, espèces, Mobile Money, carte, dépenses, paiements de dettes), alertes d'activité inhabituelle (annulations en série, caisse vidée, etc.). Le fond de caisse et les dépenses ne se gèrent plus sur l'Accueil : tout se fait dans l'onglet Caisse.
-- Onglet Caisse (menu « Plus ») : tableau de bord complet de la caisse. En haut : le solde de caisse estimé et trois actions rapides : « Régler le fond de caisse » (indiquer le montant réellement en caisse), « Ajouter une dépense » (montant + raison facultative) et « Compter la caisse » (saisir le montant compté ; l'application indique l'écart, ou « La caisse est juste » s'il n'y en a pas). Plus bas : mini-graphique de tendance sur 7 jours, sélecteur de période (Aujourd'hui / 7 jours / 30 jours / Tout), entrées espèces, dépenses et net, bénéfice estimé et marge sur les ventes (calculés uniquement avec les produits dont le prix d'achat est renseigné), fiabilité de la caisse (historique des comptages et dernier écart), répartition par mode de paiement, principales dépenses et journal des mouvements (ventes, dépenses, comptages) avec « Voir plus ». Les collaborateurs ont besoin de la permission « Voir la caisse » ou « Modifier la caisse » pour l'utiliser.
+- Onglet Caisse (menu « Plus ») : tableau de bord complet de la caisse. En haut : le solde de caisse estimé et trois actions rapides : « Régler le fond de caisse » (indiquer le montant réellement en caisse), « Ajouter une dépense » (montant + raison facultative) et « Compter la caisse » (saisir le montant compté ; l'application indique l'écart, ou « La caisse est juste » s'il n'y en a pas). Plus bas : mini-graphique de tendance sur 7 jours, sélecteur de période (Aujourd'hui / 7 jours / 30 jours / Tout), entrées espèces, dépenses et net, bénéfice estimé et marge sur les ventes (calculés uniquement avec les produits dont le prix d'achat est renseigné), fiabilité de la caisse (historique des comptages et dernier écart), répartition par mode de paiement, principales dépenses et journal des mouvements (ventes, dépenses, comptages) avec « Voir plus ». Le personnel a besoin de la permission « Voir la caisse » ou « Modifier la caisse » pour l'utiliser.
 - Stock : ajouter/modifier/supprimer un produit (bouton « + », nom, quantité, prix, prix d'achat optionnel, photo) ; les catégories sont définies automatiquement d'après les noms de produits ; seuil d'alerte de stock bas configurable dans les paramètres. Un bouton « Trier par » permet d'ordonner la liste : ordre alphabétique, plus vendus, moins vendus, plus disponible, moins disponible, ou ordre par défaut (les mêmes options existent dans l'onglet Vente et sur la carte « Stock faible » de l'Accueil ; « plus/moins vendus » se base sur les quantités totales vendues).
 - Vente : démarrer un panier, plusieurs paniers simultanés possibles (un par client) ; modes de paiement espèces / Mobile Money / carte / crédit ; une vente à crédit demande le nom du client et s'ajoute automatiquement dans Dettes ; un score de confiance client s'affiche à la saisie du nom pour une vente à crédit, basé sur l'historique de remboursement ; calcul automatique du rendu. Le bouton « Trier par » y trie aussi la liste des produits. Annuler une vente récente (vente de test ou client qui se rétracte) : dans l'onglet Vente, ouvrir la vente concernée dans les ventes récentes et appuyer sur « Annuler la vente », puis confirmer ; les quantités sont remises en stock et l'annulation est notée dans l'Historique (« Vente annulée »). L'annulation est impossible si la dette liée à cette vente a déjà été payée, même en partie. Une vente annulée compte quand même dans la limite de ventes par jour du palier Gratuit.
 - Historique : filtres (dates, produit, client, montant min/max), export CSV (les filtres avancés et l'export sont réservés au palier Pro et au-dessus).
@@ -12037,8 +12292,8 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Compte : dans « Gérer le compte », on peut consulter et modifier ses informations, dont le numéro de mobile saisi à l'inscription.
 - Aide et assistance : l'écran Aide contient les questions-réponses, et tout en bas un formulaire d'assistance par e-mail : écrire son problème ou sa question, joindre une photo ou une vidéo (facultatif, 3 fichiers maximum, 20 Mo par fichier), puis « Envoyer ». La réponse arrive par e-mail à l'adresse du compte. Limite de 3 messages par jour. L'adresse du support n'est pas affichée à l'utilisateur.
 - Installation : l'application peut s'installer sur l'écran d'accueil (bannière « Installer l'application » proposée à l'ouverture quand c'est possible ; sur iPhone : bouton Partager puis « Sur l'écran d'accueil » depuis Safari) et fonctionne hors connexion : les ventes faites hors ligne sont synchronisées à la reconnexion.
-- Compte & abonnement : paliers Gratuit / Pro / Business. Le palier Gratuit a une limite de produits en stock, une limite de ventes par jour, aucun collaborateur, un accès Assistant IA limité (quelques messages par mois) et pas de multi-boutique. Les paliers supérieurs débloquent davantage de produits, des collaborateurs, un Assistant IA illimité, les filtres avancés et l'export dans l'Historique, l'export comptable en PDF (résumé, bénéfice net, graphique d'évolution du chiffre d'affaires, ventes vs dépenses, détail des ventes et des dépenses) et la gestion de plusieurs boutiques. Le déblocage d'un palier payant se fait en contactant le support ; l'activation est ensuite faite manuellement.
-- Collaborateurs (comptes employés, selon le palier) : chaque collaborateur a son propre code PIN de connexion (4 à 6 chiffres). Rôles disponibles : Vendeur (vend et consulte le stock/les dettes sans les modifier), Gérant (gère toute l'activité quotidienne : ventes, stock, dettes, caisse, statistiques), Superviseur (voit toutes les boutiques, ne modifie rien), Personnalisé (permissions choisies une à une : enregistrer des ventes, consulter/modifier le stock, consulter/gérer les dettes clients, voir/modifier la caisse, voir les statistiques). On peut définir des plages horaires de travail par collaborateur (il ne peut alors pas encaisser de vente en dehors de ses heures déclarées) et consulter un journal des actions récentes des collaborateurs.
+- Compte & abonnement : paliers Gratuit / Pro / Business. Le palier Gratuit a une limite de produits en stock, une limite de ventes par jour, aucun membre du personnel, un accès Assistant IA limité (quelques messages par mois) et pas de multi-boutique. Les paliers supérieurs débloquent davantage de produits, du personnel, un Assistant IA illimité, les filtres avancés et l'export dans l'Historique, l'export comptable en PDF (résumé, bénéfice net, graphique d'évolution du chiffre d'affaires, ventes vs dépenses, détail des ventes et des dépenses) et la gestion de plusieurs boutiques. Le déblocage d'un palier payant se fait en contactant le support ; l'activation est ensuite faite manuellement.
+- Personnel (comptes employés, selon le palier) : chaque membre du personnel a son propre code PIN de connexion (4 à 6 chiffres). Rôles disponibles : Vendeur (vend et consulte le stock/les dettes sans les modifier), Gérant (gère toute l'activité quotidienne : ventes, stock, dettes, caisse, statistiques), Superviseur (voit toutes les boutiques, ne modifie rien), Personnalisé (permissions choisies une à une : enregistrer des ventes, consulter/modifier le stock, consulter/gérer les dettes clients, voir/modifier la caisse, voir les statistiques). On peut définir des plages horaires de travail par membre du personnel (il ne peut alors pas encaisser de vente en dehors de ses heures déclarées) et consulter un journal des actions récentes du personnel.
 - Onglet Calculatrice (menu « Plus ») : calculatrice avec mémoire (touches GT, MRC, M+, M-), un calcul de marge en 3 touches (COÛT, VENTE, MARGE), une racine carrée (√) et des touches de taxe (TAX, TAX+, TAX-) pour ajouter/retirer une taxe préréglée. Un bouton « ? » en haut de l'écran ouvre un petit guide qui explique à quoi sert chaque touche spéciale. La touche « Produits » permet d'insérer directement le prix d'un article du Stock, et « Historique » garde les derniers calculs.
 - Multi-boutiques (selon le palier) : changer de boutique, comparer les boutiques (chiffre d'affaires, stock, dettes), rapport de caisse consolidé entre boutiques/propriétaires.
 RÈGLE IMPORTANTE SUR LA DISPONIBILITÉ DES FONCTIONNALITÉS :
@@ -12674,6 +12929,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     () => debts.filter((d) => !d.paid).filter((d) => d.customer.toLowerCase().includes(deferredDebtsSearch.toLowerCase())),
     [debts, deferredDebtsSearch]
   );
+  // Dettes à relancer "maintenant" (en retard, ou échéance du jour même) et pour
+  // lesquelles un numéro WhatsApp valide est renseigné — n'a d'effet que visuel
+  // (bandeau + mise en avant du bouton), WhatsApp ne permettant pas d'envoi silencieux
+  // sans passer par son API Business payante (non configurée ici).
+  const debtsNeedingReminder = useMemo(
+    () => debts.filter((d) => !d.paid && !!d.dueDate && d.dueDate <= todayKey() && !!normalizePhoneForWhatsApp(d.phone)),
+    [debts]
+  );
   const cartProducts = useMemo(
     () => sortProductList(products.filter((p) =>
       p.name.toLowerCase().includes(deferredCartSearch.toLowerCase()) &&
@@ -12701,6 +12964,29 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // (juste avant generateShopExportPdf), ce qui provoquait la même erreur React #310
   // une fois le chargement terminé.
   const [pdfExportGenerating, setPdfExportGenerating] = useState(false);
+  // ---- Sauvegardes (export JSON + historique de sauvegardes automatiques/manuelles) ----
+  const [shopBackups, setShopBackups] = useState([]);
+  const [backupBusy, setBackupBusy] = useState(null); // null | "export" | "create" | "restore-<id>"
+  const [confirmRestoreId, setConfirmRestoreId] = useState(null);
+  const [backupActionMsg, setBackupActionMsg] = useState("");
+  // Toujours relue directement depuis Supabase (jamais reconstruite à partir de l'état
+  // local) pour être certain d'exporter/sauvegarder exactement ce qui est persisté.
+  const loadShopBackups = async () => {
+    try {
+      const { data: userData } = await getUserFast();
+      if (!userData || !userData.user) return;
+      const { data: rows } = await supabase
+        .from("shop_backups")
+        .select("id, created_at, kind")
+        .eq("owner_id", userData.user.id)
+        .order("created_at", { ascending: false })
+        .limit(20);
+      setShopBackups(rows || []);
+    } catch (e) { /* best-effort */ }
+  };
+  useEffect(() => {
+    if (settingsField === "backup") loadShopBackups();
+  }, [settingsField]);
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen" style={{ background: darkMode ? "#0a0a14" : SAND, color: darkMode ? "#eceef5" : CHARCOAL }}>
@@ -12885,6 +13171,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     transactionsMap[key].total += s.total;
   });
   const transactions = Object.values(transactionsMap).sort((a, b) => new Date(b.date) - new Date(a.date));
+  // Onglet Vente > "Ventes récentes" : volontairement limité aux 2 dernières heures, pour ne
+  // pas surcharger cet écran — l'historique complet (avec annulation toujours possible) reste
+  // disponible dans l'onglet Historique.
+  const RECENT_SALES_WINDOW_MS = 2 * 60 * 60 * 1000;
+  const recentTransactions = transactions.filter((txn) => Date.now() - new Date(txn.date).getTime() <= RECENT_SALES_WINDOW_MS);
   const filteredTransactions = transactions.filter((t) => {
     if (!deferredHistorySearch.trim()) return true;
     const q = deferredHistorySearch.toLowerCase();
@@ -12942,6 +13233,73 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // telle quelle avec doc.addImage(), sans passer par un rendu React/SVG.
   // Chargé à la demande comme jsPDF, pour ne pas alourdir le démarrage de l'app.
   // (pdfExportGenerating est maintenant déclaré plus haut, avant le "if (loading) return" — voir commentaire là-bas.)
+  // ---- Sauvegardes : export JSON téléchargeable + historique (auto quotidien côté
+  // serveur via la fonction Supabase "auto-backup", ou manuel depuis cet écran) ----
+  // (loadShopBackups et son useEffect déclencheur sont déclarés plus haut, avant le
+  // "if (loading) return", pour la même raison que pdfExportGenerating — voir ce commentaire.)
+  const exportShopDataJson = async () => {
+    setBackupBusy("export");
+    setBackupActionMsg("");
+    try {
+      const { data: userData } = await getUserFast();
+      if (!userData || !userData.user) throw new Error("no_user");
+      const { data: row } = await supabase.from("shop_data").select("data, shop_name").eq("owner_id", userData.user.id).single();
+      const payload = {
+        app: "Boutipro",
+        exportType: "full_backup",
+        exportedAt: new Date().toISOString(),
+        shopName: (row && row.shop_name) || shopName || "",
+        data: (row && row.data) || {},
+      };
+      const safeName = (shopName || "boutipro").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "boutipro";
+      await saveTextFile(JSON.stringify(payload, null, 2), `${safeName}-sauvegarde-${todayKey()}.json`, "application/json");
+      logAction(tx(lang, "logBackupExported"));
+    } catch (e) {
+      setBackupActionMsg(t(lang, "genericError"));
+    }
+    setBackupBusy(null);
+  };
+  const createManualBackup = async () => {
+    setBackupBusy("create");
+    setBackupActionMsg("");
+    try {
+      const { data: userData } = await getUserFast();
+      if (!userData || !userData.user) throw new Error("no_user");
+      const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
+      await supabase.from("shop_backups").insert({ owner_id: userData.user.id, kind: "manual", data: (row && row.data) || {} });
+      logAction(tx(lang, "logBackupCreated"));
+      await loadShopBackups();
+      setBackupActionMsg(tx(lang, "backupCreateDone"));
+    } catch (e) {
+      setBackupActionMsg(t(lang, "genericError"));
+    }
+    setBackupBusy(null);
+  };
+  // Restauration : remplace ENTIÈREMENT les données actuelles par celles de la sauvegarde
+  // choisie (pas une fusion) — c'est le sens même de "restaurer" un instantané passé.
+  // Protégé par le code PIN du compte (comme la réinitialisation), car irréversible.
+  const restoreShopBackup = async (backupId) => {
+    setBackupBusy("restore-" + backupId);
+    setBackupActionMsg("");
+    try {
+      const { data: userData } = await getUserFast();
+      if (!userData || !userData.user) throw new Error("no_user");
+      const { data: backupRow, error: readError } = await supabase
+        .from("shop_backups").select("data, created_at").eq("id", backupId).eq("owner_id", userData.user.id).single();
+      if (readError || !backupRow) throw readError || new Error("not_found");
+      const restoredData = backupRow.data || {};
+      const { error: writeError } = await supabase
+        .from("shop_data").update({ data: restoredData, updated_at: new Date().toISOString() }).eq("owner_id", userData.user.id);
+      if (writeError) throw writeError;
+      applyShop(restoredData);
+      logAction(tx(lang, "logBackupRestored").replace("{date}", `${fullDate(backupRow.created_at)} ${fullTime(backupRow.created_at)}`));
+      setConfirmRestoreId(null);
+      setBackupActionMsg(tx(lang, "backupRestoreDone"));
+    } catch (e) {
+      setBackupActionMsg(t(lang, "genericError"));
+    }
+    setBackupBusy(null);
+  };
   const generateShopExportPdf = async () => {
     setPdfExportGenerating(true);
     try {
@@ -13771,7 +14129,50 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <input autoComplete="off" placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <textarea placeholder={t(lang, "productDescription")} value={pDescription} onChange={(e) => setPDescription(e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2 text-sm mb-3 resize-none" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <input autoComplete="off" placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-            <input autoComplete="off" placeholder={tx(lang, "productBarcodeLabel")} type="text" inputMode="numeric" value={pBarcode} onChange={(e) => setPBarcode(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            {/* Scanner plutôt que taper : personne ne connaît par cœur les 13 chiffres
+                d'un code-barres. Le bouton ouvre la même caméra que le scan à la vente
+                (handleProductBarcodeScan), remplit le champ automatiquement ; il reste
+                aussi modifiable/saisissable à la main pour qui préfère. */}
+            <div className="flex gap-2 mb-3">
+              <input autoComplete="off" placeholder={tx(lang, "productBarcodeLabel")} type="text" inputMode="numeric" value={pBarcode} onChange={(e) => setPBarcode(e.target.value)} className="flex-1 min-w-0 border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <button
+                type="button"
+                onClick={openProductBarcodeScanner}
+                aria-label={tx(lang, "scanBarcodeBtn")}
+                className="px-3 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: darkMode ? "rgba(37,99,235,0.12)" : "#eff6ff", color: darkMode ? "#60a5fa" : "#2563eb", border: `1px solid ${darkMode ? "rgba(37,99,235,0.3)" : "#bfdbfe"}` }}
+              >
+                <ScanLine size={16} />
+              </button>
+            </div>
+            {showProductBarcodeScanner && (
+              <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowProductBarcodeScanner(false)}>
+                <div className="w-full max-w-md rounded-t-3xl p-4" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-sm font-bold" style={{ color: T.text }}>{tx(lang, "scanBarcodeTitle")}</p>
+                    <button onClick={() => setShowProductBarcodeScanner(false)}><X size={18} color={T.muted} /></button>
+                  </div>
+                  {!productBarcodeScanCameraError ? (
+                    <div className="w-full aspect-square rounded-2xl overflow-hidden mb-3" style={{ background: "#0b0b12" }}>
+                      <React.Suspense fallback={null}>
+                        <Scanner
+                          onScan={handleProductBarcodeScan}
+                          onError={() => setProductBarcodeScanCameraError(true)}
+                          constraints={{ facingMode: "environment" }}
+                          styles={{ container: { width: "100%", height: "100%" } }}
+                          components={{ finder: false }}
+                        />
+                      </React.Suspense>
+                    </div>
+                  ) : (
+                    <div className="w-full aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 mb-3" style={{ background: T.input, border: `2px dashed ${T.border}` }}>
+                      <ScanLine size={48} style={{ color: T.muted }} />
+                      <p className="text-xs text-center px-6" style={{ color: T.muted }}>{tx(lang, "scanBarcodeCameraError")}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
             <div className="mb-3">
               <select
                 value={pCategory}
@@ -14269,13 +14670,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <button onClick={() => setShowBarcodeScanner(false)}><X size={18} color={T.muted} /></button>
                       </div>
                       {!barcodeScanCameraError ? (
-                        <div className="w-full aspect-square rounded-2xl overflow-hidden mb-3" style={{ background: "#0b0b12" }}>
+                        <div
+                          className="w-full aspect-square rounded-2xl overflow-hidden mb-3"
+                          style={{
+                            background: "#0b0b12",
+                            border: "3px solid",
+                            borderColor: barcodeScanFlash === "success" ? "#22c55e" : barcodeScanFlash === "error" ? "#ef4444" : "#6b7280",
+                            boxShadow: barcodeScanFlash === "success" ? "0 0 16px rgba(34,197,94,0.6)" : barcodeScanFlash === "error" ? "0 0 16px rgba(239,68,68,0.6)" : "none",
+                            transition: "border-color 0.15s ease, box-shadow 0.15s ease",
+                          }}
+                        >
                           <React.Suspense fallback={null}>
                             <Scanner
                               onScan={handleBarcodeScan}
                               onError={() => setBarcodeScanCameraError(true)}
                               constraints={{ facingMode: "environment" }}
                               styles={{ container: { width: "100%", height: "100%" } }}
+                              components={{ finder: false }}
                             />
                           </React.Suspense>
                         </div>
@@ -14592,15 +15003,46 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           le reçu par WhatsApp directement au bon contact après la vente (voir
                           buildReceiptWhatsAppUrl). Sans ce numéro, le reçu s'envoie quand même,
                           juste sans destinataire pré-rempli. */}
-                      <input
-                        type="tel"
-                        autoComplete="off"
-                        value={activeCart.phone || ""}
-                        onChange={(e) => updateCartMeta(activeCart.id, "phone", e.target.value)}
-                        placeholder={tx(lang, "receiptPhoneLabel")}
-                        className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5"
-                        style={{ background: T.input, color: T.text, borderColor: T.border }}
-                      />
+                      {(() => {
+                        // Indicatif affiché comme un bloc séparé et fixe devant le champ (à la
+                        // manière du numéro de téléphone lors d'une inscription Google), plutôt
+                        // que comme un simple texte pré-tapé dans le champ qu'on pouvait effacer
+                        // par erreur. On continue de stocker le numéro COMPLET (indicatif inclus)
+                        // dans activeCart.phone, pour ne rien changer au reste (reçus, dettes,
+                        // normalizePhoneForWhatsApp) qui attendent déjà ce format.
+                        const dialCode = shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] : "";
+                        const phoneRaw = activeCart.phone || "";
+                        const localPart = dialCode && phoneRaw.startsWith(dialCode) ? phoneRaw.slice(dialCode.length).replace(/^\s+/, "") : phoneRaw;
+                        if (!dialCode) {
+                          return (
+                            <input
+                              type="tel"
+                              autoComplete="off"
+                              value={phoneRaw}
+                              onChange={(e) => updateCartMeta(activeCart.id, "phone", e.target.value)}
+                              placeholder={tx(lang, "receiptPhoneLabel")}
+                              className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5"
+                              style={{ background: T.input, color: T.text, borderColor: T.border }}
+                            />
+                          );
+                        }
+                        return (
+                          <div className="flex items-stretch mt-1.5 border rounded-xl overflow-hidden" style={{ borderColor: T.border }}>
+                            <span className="flex items-center px-3 text-sm font-bold shrink-0" style={{ background: darkMode ? "rgba(255,255,255,0.06)" : "#eef0f6", color: T.text, borderRight: `1px solid ${T.border}` }}>
+                              {dialCode}
+                            </span>
+                            <input
+                              type="tel"
+                              autoComplete="off"
+                              value={localPart}
+                              onChange={(e) => updateCartMeta(activeCart.id, "phone", `${dialCode} ${e.target.value}`.replace(/\s+$/, ""))}
+                              placeholder={tx(lang, "receiptPhoneLabel")}
+                              className="flex-1 min-w-0 px-3 py-2.5 text-sm"
+                              style={{ background: T.input, color: T.text, border: "none" }}
+                            />
+                          </div>
+                        );
+                      })()}
                       {activeCart.payment === "credit" && activeCart.customer.trim() && (() => {
                         const trust = getCustomerTrust(activeCart.customer);
                         if (!trust) return null;
@@ -14626,9 +15068,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         const key = normalizePhoneForWhatsApp(activeCart.phone);
                         const known = key ? loyaltyCustomers[key] : null;
                         if (!known || !known.count) return null;
+                        const nextCount = known.count + 1;
+                        const threshold = loyaltyRewardThreshold > 0 ? loyaltyRewardThreshold : 10;
+                        // En mode "manuel", cet indicateur privé (visible seulement du côté
+                        // propriétaire, jamais sur le reçu partagé) signale que ce prochain
+                        // achat atteint le seuil, pour que le propriétaire décide lui-même.
+                        const manualRewardHint = loyaltyRewardEnabled && loyaltyRewardMode === "manual" && nextCount % threshold === 0;
                         return (
-                          <p className="text-[11px] mt-1.5" style={{ color: T.muted }}>
-                            🎖️ {tx(lang, "loyaltyPurchaseCount").replace("{n}", known.count + 1)}
+                          <p className="text-[11px] mt-1.5" style={{ color: manualRewardHint ? "#92400e" : T.muted, fontWeight: manualRewardHint ? 700 : 400 }}>
+                            🎖️ {tx(lang, "loyaltyPurchaseCount").replace("{n}", nextCount)}
+                            {manualRewardHint && ` · ${tx(lang, "loyaltyRewardManualHint")}`}
                           </p>
                         );
                       })()}
@@ -14659,37 +15108,42 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
               </>
             )}
-            {transactions.length > 0 && !activeCart && (
+            {!activeCart && (
               <div>
                 <p className="text-xs font-bold mb-2 mt-4" style={{ color: T.text }}>{t(lang, "recentSales")}</p>
-                {transactions.slice(0, 5).map((txn) => {
-                  // Un employé ne voit le bouton d'annulation que sur ses propres ventes.
-                  const canCancel = !activeEmployee || txn.actorId === activeEmployee.id;
-                  const confirming = cancelSaleConfirmId === txn.id;
-                  return (
-                    <div key={txn.id} className="rounded-2xl p-3 mb-2" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                      <div className="flex justify-between text-sm">
-                        <span style={{ color: T.text }}>{txn.items.map((i) => i.productName).join(", ")}</span>
-                        <span className="font-bold" style={{ color: T.text }}>{fcfa(txn.total)}</span>
-                      </div>
-                      {canCancel && !confirming && (
-                        <button onClick={() => { setCancelSaleConfirmId(txn.id); setCancelSaleError(""); }} className="mt-2 text-[11px] font-semibold flex items-center gap-1" style={{ color: darkMode ? CLAY : "#e11d48" }}>
-                          <X size={12} /> {tx(lang, "cancelSaleBtn")}
-                        </button>
-                      )}
-                      {confirming && (
-                        <div className="mt-2 rounded-xl p-2.5" style={{ background: T.input }}>
-                          <p className="text-[11px] mb-2" style={{ color: T.text }}>{tx(lang, "cancelSaleConfirmMsg")}</p>
-                          {cancelSaleError && <p className="text-[11px] mb-2" style={{ color: CLAY }}>{cancelSaleError}</p>}
-                          <div className="flex gap-2">
-                            <button onClick={() => { setCancelSaleConfirmId(null); setCancelSaleError(""); }} className="flex-1 py-2 rounded-lg text-[11px] font-semibold border" style={{ borderColor: T.border, color: T.text }}>{tx(lang, "cancelSaleKeep")}</button>
-                            <button onClick={() => cancelSale(txn.id)} className="flex-1 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#e11d48" }}>{tx(lang, "cancelSaleConfirmYes")}</button>
-                          </div>
+                {recentTransactions.length === 0 ? (
+                  <p className="text-xs text-center py-4" style={{ color: T.muted }}>0</p>
+                ) : (
+                  recentTransactions.slice(0, 5).map((txn) => {
+                    // Un employé peut annuler sa propre vente (erreur de caisse) mais pas celle d'un autre.
+                    const canCancel = !activeEmployee || txn.actorId === activeEmployee.id;
+                    const confirming = cancelSaleConfirmId === txn.id;
+                    const cancelColor = darkMode ? CLAY : "#e11d48";
+                    return (
+                      <div key={txn.id} className="rounded-2xl p-3 mb-2" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                        <div className="flex justify-between text-sm">
+                          <span style={{ color: T.text }}>{txn.items.map((i) => i.productName).join(", ")}</span>
+                          <span className="font-bold" style={{ color: T.text }}>{fcfa(txn.total)}</span>
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
+                        {canCancel && !confirming && (
+                          <button onClick={() => { setCancelSaleConfirmId(txn.id); setCancelSaleError(""); }} className="mt-2 text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: cancelColor, borderColor: cancelColor }}>
+                            <X size={12} /> {tx(lang, "cancelSaleBtn")}
+                          </button>
+                        )}
+                        {confirming && (
+                          <div className="mt-2 rounded-xl p-2.5" style={{ background: T.input }}>
+                            <p className="text-[11px] mb-2" style={{ color: T.text }}>{tx(lang, "cancelSaleConfirmMsg")}</p>
+                            {cancelSaleError && <p className="text-[11px] mb-2" style={{ color: CLAY }}>{cancelSaleError}</p>}
+                            <div className="flex gap-2">
+                              <button onClick={() => { setCancelSaleConfirmId(null); setCancelSaleError(""); }} className="flex-1 py-2 rounded-lg text-[11px] font-semibold border" style={{ borderColor: T.border, color: T.text }}>{tx(lang, "cancelSaleKeep")}</button>
+                              <button onClick={() => cancelSale(txn.id)} className="flex-1 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#e11d48" }}>{tx(lang, "cancelSaleConfirmYes")}</button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+                )}
               </div>
             )}
           </div>
@@ -14706,6 +15160,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "debts" && (
           <div className="space-y-2">
+            {debtReminderAutoMode && debtsNeedingReminder.length > 0 && (
+              <div className="rounded-2xl px-4 py-3 flex items-center gap-2.5" style={{ background: "#fef3c7", border: "1px solid #fde68a" }}>
+                <BellRing size={18} color="#92400e" />
+                <p className="text-xs font-bold" style={{ color: "#92400e" }}>
+                  {tx(lang, "debtReminderBannerText").replace("{n}", localizedNumber(debtsNeedingReminder.length))}
+                </p>
+              </div>
+            )}
             {hasPermission("editDebts") && unpaidDebts.length === 0 && (
               <div className="rounded-3xl p-6 text-center" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div style={{ animation: "floatSlow 2.3s ease-in-out infinite alternate" }}>
@@ -14736,6 +15198,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               // simples chaînes "YYYY-MM-DD", comme todayKey() — pas de fuseau à gérer).
               const overdue = !!d.dueDate && d.dueDate < todayKey();
               const reminderPhone = normalizePhoneForWhatsApp(d.phone);
+              const reminderNeeded = debtReminderAutoMode && !!d.dueDate && d.dueDate <= todayKey() && !!reminderPhone;
               return (
               <div key={d.id} className="rounded-2xl p-3" style={{ background: T.card, color: T.text, border: overdue ? `1px solid ${CLAY}` : darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center justify-between">
@@ -14778,7 +15241,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                   <div className="flex flex-col gap-1.5 shrink-0">
                     {reminderPhone && (
-                      <a href={buildDebtReminderWhatsAppUrl(d)} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs font-bold px-3 py-2 rounded-xl text-white" style={{ background: "#25D366" }}>
+                      <a href={buildDebtReminderWhatsAppUrl(d)} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs font-bold px-3 py-2 rounded-xl text-white" style={{ background: "#25D366", boxShadow: reminderNeeded ? "0 0 0 3px #fbbf2466" : "none" }}>
                         <MessageSquare size={14} /> {tx(lang, "debtSendReminder")}
                       </a>
                     )}
@@ -14923,55 +15386,168 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <Plus size={16} /> {t(lang, "empAddBtn")}
               </button>
             )}
-            {employees.length === 0 && (
+            {employees.length === 0 ? (
               <p className="text-sm text-center py-6" style={{ color: T.muted }}>{t(lang, "empNoneYet")}</p>
-            )}
-            <div className="space-y-2">
-              {employees.map((emp) => (
-                <div key={emp.id} className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-bold text-sm">{emp.name}</p>
-                      <p className="text-xs" style={{ color: T.muted }}>{EMPLOYEE_ROLES[emp.role] ? t(lang, EMPLOYEE_ROLES[emp.role].labelKey) : emp.role}</p>
-                    </div>
-                    <span
-                      className="text-[10px] font-bold px-2 py-1 rounded-full"
-                      style={{ background: emp.active ? "#e5f0e8" : "#fbe9e2", color: emp.active ? GREEN : CLAY }}
-                    >
-                      {emp.active ? t(lang, "empActive") : t(lang, "empSuspended")}
-                    </span>
-                  </div>
-                  <div className="flex gap-2 mt-3">
-                    <button onClick={() => generateEmployeeInvite(emp)} className="px-3 py-2 rounded-lg" style={{ background: T.input, color: T.text }} title={t(lang, "empShowQr")}>
-                      <QrCode size={14} />
-                    </button>
-                    <button onClick={() => openEditEmployee(emp)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: T.input, color: T.text }}>
-                      {t(lang, "empEdit")}
-                    </button>
-                    <button onClick={() => toggleEmployeeActive(emp.id)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: T.input, color: emp.active ? CLAY : GREEN }}>
-                      {emp.active ? t(lang, "empSuspend") : t(lang, "empReactivate")}
-                    </button>
-                    <button onClick={() => removeEmployee(emp.id)} className="px-3 py-2 rounded-lg" style={{ background: T.input, color: CLAY }}>
-                      <Trash2 size={14} />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-xs font-bold mt-6 mb-2" style={{ color: T.text }}>{t(lang, "empActionLogTitle")}</p>
-            {actionLog.length === 0 ? (
-              <p className="text-sm text-center py-4" style={{ color: T.muted }}>{t(lang, "empNoActionsYet")}</p>
             ) : (
-              <div className="space-y-1.5">
-                {actionLog.slice(0, 30).map((entry) => (
-                  <div key={entry.id} className="rounded-xl px-3 py-2" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}` }}>
-                    <p className="text-xs" style={{ color: T.text }}>
-                      <span className="font-semibold">{entry.actorName}</span> · {entry.action}
-                    </p>
-                    <p className="text-[10.5px]" style={{ color: T.muted }}>{fullDate(entry.date)}</p>
+              <>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex-1">
+                    <SearchBox value={empSearch} onChange={setEmpSearch} placeholder={tx(lang, "empSearchPlaceholder")} compact />
                   </div>
-                ))}
-              </div>
+                  <select
+                    value={empSortBy}
+                    onChange={(e) => setEmpSortBy(e.target.value)}
+                    className="text-xs font-semibold rounded-lg px-2 py-2"
+                    style={{ background: T.input, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}` }}
+                    title={tx(lang, "empSortLabel")}
+                  >
+                    <option value="name">{tx(lang, "empSortName")}</option>
+                    <option value="role">{tx(lang, "empSortRole")}</option>
+                    <option value="sales">{tx(lang, "empSortSales")}</option>
+                  </select>
+                </div>
+                {(() => {
+                  const todayStr = todayKey();
+                  const statsByEmp = {};
+                  employees.forEach((emp) => {
+                    const todaySales = sales.filter((s) => !s.cancelled && s.actorId === emp.id && (s.date || "").slice(0, 10) === todayStr);
+                    statsByEmp[emp.id] = {
+                      count: todaySales.length,
+                      total: todaySales.reduce((sum, s) => sum + (s.total || 0), 0),
+                    };
+                  });
+                  const q = empSearch.trim().toLowerCase();
+                  let list = employees.filter((emp) => !q || (emp.name || "").toLowerCase().includes(q));
+                  if (empSortBy === "name") {
+                    list = [...list].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+                  } else if (empSortBy === "role") {
+                    list = [...list].sort((a, b) => {
+                      const ra = EMPLOYEE_ROLES[a.role] ? t(lang, EMPLOYEE_ROLES[a.role].labelKey) : a.role || "";
+                      const rb = EMPLOYEE_ROLES[b.role] ? t(lang, EMPLOYEE_ROLES[b.role].labelKey) : b.role || "";
+                      return ra.localeCompare(rb);
+                    });
+                  } else if (empSortBy === "sales") {
+                    list = [...list].sort((a, b) => (statsByEmp[b.id]?.total || 0) - (statsByEmp[a.id]?.total || 0));
+                  }
+                  if (list.length === 0) {
+                    return <p className="text-sm text-center py-6" style={{ color: T.muted }}>{tx(lang, "empNoSearchResults")}</p>;
+                  }
+                  return (
+                    <div className="space-y-2">
+                      {list.map((emp) => {
+                        const roleColor = ROLE_COLOR[emp.role] || INDIGO;
+                        const initial = (emp.name || "?").trim().charAt(0).toUpperCase();
+                        const stat = statsByEmp[emp.id] || { count: 0, total: 0 };
+                        return (
+                          <div key={emp.id} className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2.5">
+                                <div
+                                  className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
+                                  style={{ background: `${roleColor}22`, color: roleColor }}
+                                >
+                                  {initial}
+                                </div>
+                                <div>
+                                  <p className="font-bold text-sm">{emp.name}</p>
+                                  <span
+                                    className="text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mt-0.5"
+                                    style={{ background: `${roleColor}1a`, color: roleColor }}
+                                  >
+                                    {EMPLOYEE_ROLES[emp.role] ? t(lang, EMPLOYEE_ROLES[emp.role].labelKey) : emp.role}
+                                  </span>
+                                  {(() => {
+                                    const isOnline = emp.lastSeenAt && (Date.now() - new Date(emp.lastSeenAt).getTime() < 6 * 60 * 1000);
+                                    return (
+                                      <div className="flex items-center gap-1.5 mt-1">
+                                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: isOnline ? GREEN : T.muted }} />
+                                        <span className="text-[10.5px]" style={{ color: isOnline ? GREEN : T.muted }}>
+                                          {isOnline ? tx(lang, "empOnlineNow") : emp.lastSeenAt ? tx(lang, "empLastSeenPrefix").replace("{time}", `${fullDate(emp.lastSeenAt)} ${fullTime(emp.lastSeenAt)}`) : tx(lang, "empNeverSeen")}
+                                        </span>
+                                      </div>
+                                    );
+                                  })()}
+                                </div>
+                              </div>
+                              <span
+                                className="text-[10px] font-bold px-2 py-1 rounded-full"
+                                style={{ background: emp.active ? "#e5f0e8" : "#fbe9e2", color: emp.active ? GREEN : CLAY }}
+                              >
+                                {emp.active ? t(lang, "empActive") : t(lang, "empSuspended")}
+                              </span>
+                            </div>
+                            <div className="flex items-center justify-between mt-3 px-3 py-2 rounded-xl" style={{ background: T.input }}>
+                              <span className="text-[11px] font-semibold" style={{ color: T.muted }}>{tx(lang, "empTodaySalesLabel")}</span>
+                              <span className="text-xs font-bold" style={{ color: T.text }}>
+                                {stat.count} · {fcfa(stat.total)}
+                              </span>
+                            </div>
+                            <div className="flex gap-2 mt-3">
+                              <button onClick={() => generateEmployeeInvite(emp)} className="px-3 py-2 rounded-lg" style={{ background: T.input, color: T.text }} title={t(lang, "empShowQr")}>
+                                <QrCode size={14} />
+                              </button>
+                              <button onClick={() => openEditEmployee(emp)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: T.input, color: T.text }}>
+                                {t(lang, "empEdit")}
+                              </button>
+                              <button onClick={() => toggleEmployeeActive(emp.id)} className="flex-1 py-2 rounded-lg text-xs font-semibold" style={{ background: T.input, color: emp.active ? CLAY : GREEN }}>
+                                {emp.active ? t(lang, "empSuspend") : t(lang, "empReactivate")}
+                              </button>
+                              <button onClick={() => removeEmployee(emp.id)} className="px-3 py-2 rounded-lg" style={{ background: T.input, color: CLAY }}>
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+              </>
+            )}
+            <button
+              onClick={() => setShowActionLog((v) => !v)}
+              className="w-full flex items-center justify-between mt-6 mb-2"
+            >
+              <span className="text-xs font-bold" style={{ color: T.text }}>{t(lang, "empActionLogTitle")}</span>
+              <span className="text-[11px] font-semibold flex items-center gap-1" style={{ color: INDIGO }}>
+                {showActionLog ? tx(lang, "empActionLogHide") : tx(lang, "empActionLogShow")}
+                {showActionLog ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+              </span>
+            </button>
+            {showActionLog && (
+              <>
+                {employees.length > 0 && (
+                  <select
+                    value={actionLogFilterId}
+                    onChange={(e) => setActionLogFilterId(e.target.value)}
+                    className="text-xs font-semibold rounded-lg px-2 py-2 mb-2 w-full"
+                    style={{ background: T.input, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}` }}
+                  >
+                    <option value="__all__">{tx(lang, "empActionLogFilterAll")}</option>
+                    {employees.map((emp) => (
+                      <option key={emp.id} value={emp.id}>{emp.name}</option>
+                    ))}
+                  </select>
+                )}
+                {(() => {
+                  const filtered = actionLog.filter((entry) => actionLogFilterId === "__all__" || entry.actorId === actionLogFilterId);
+                  if (filtered.length === 0) {
+                    return <p className="text-sm text-center py-4" style={{ color: T.muted }}>{t(lang, "empNoActionsYet")}</p>;
+                  }
+                  return (
+                    <div className="space-y-1.5">
+                      {filtered.slice(0, 30).map((entry) => (
+                        <div key={entry.id} className="rounded-xl px-3 py-2" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}` }}>
+                          <p className="text-xs" style={{ color: T.text }}>
+                            <span className="font-semibold">{entry.actorName}</span> · {entry.action}
+                          </p>
+                          <p className="text-[10.5px]" style={{ color: T.muted }}>{fullDate(entry.date)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </>
             )}
           </div>
         )}
@@ -15463,6 +16039,32 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {isCancelledEntry && h.debtCancelled && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5", color: darkMode ? "#f0c869" : "#ea580c" }}>{tx(lang, "histDebtRemoved")}</span>}
                     {!isCancelled && h.change != null && h.change >= 0 && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(212,160,23,0.2)" : "#ffedd5", color: darkMode ? "#f0c869" : "#ea580c" }}>{t(lang, "othRendu")} {fcfa(h.change)}</span>}
                   </div>
+                  {/* Annulation toujours possible depuis l'Historique, même au-delà de la fenêtre de
+                      2h affichée dans l'onglet Vente > Ventes récentes (qui ne montre que le plus
+                      court terme pour ne pas surcharger cet écran). */}
+                  {!isCancelled && entry.kind === "sale" && (() => {
+                    const canCancel = !activeEmployee || (h.actorId || null) === activeEmployee.id;
+                    if (!canCancel) return null;
+                    const confirming = cancelSaleConfirmId === h.refId;
+                    return (
+                      <div className="mt-2">
+                        {!confirming ? (
+                          <button onClick={() => { setCancelSaleConfirmId(h.refId); setCancelSaleError(""); }} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: cancelColor, borderColor: cancelColor }}>
+                            <X size={12} /> {tx(lang, "cancelSaleBtn")}
+                          </button>
+                        ) : (
+                          <div className="rounded-xl p-2.5" style={{ background: T.input }}>
+                            <p className="text-[11px] mb-2" style={{ color: T.text }}>{tx(lang, "cancelSaleConfirmMsg")}</p>
+                            {cancelSaleError && <p className="text-[11px] mb-2" style={{ color: CLAY }}>{cancelSaleError}</p>}
+                            <div className="flex gap-2">
+                              <button onClick={() => { setCancelSaleConfirmId(null); setCancelSaleError(""); }} className="flex-1 py-2 rounded-lg text-[11px] font-semibold border" style={{ borderColor: T.border, color: T.text }}>{tx(lang, "cancelSaleKeep")}</button>
+                              <button onClick={() => cancelSale(h.refId)} className="flex-1 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#e11d48" }}>{tx(lang, "cancelSaleConfirmYes")}</button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
               );
             })}
@@ -16380,6 +16982,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "benchmark" && t(lang, "benchmarkTitle")}
                   {settingsField === "loyalty" && tx(lang, "loyaltyRewardSettingTitle")}
                   {settingsField === "export" && (t(lang, "setExporterLesDonnees"))}
+                  {settingsField === "backup" && tx(lang, "backupTitle")}
+                  {settingsField === "weeklysummary" && tx(lang, "weeklySummaryLabel")}
                   {settingsField === "resetdata" && (t(lang, "setReinitialiser"))}
                   {settingsField === "aiprefs" && (t(lang, "setPreferencesAssistant"))}
                   {settingsField === "alerts" && (t(lang, "setAlertes"))}
@@ -16491,6 +17095,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "ballcolor", label: t(lang, "ballColor"), right: null },
                 { id: "threshold", label: t(lang, "stockAlert"), right: lowStockThreshold },
                 { id: "dailysummary", label: tx(lang, "dailySummaryTimeLabel"), right: dailySummaryEnabled ? `${String(dailySummaryHour).padStart(2, "0")}:00` : t(lang, "setDesactive") },
+                { id: "weeklysummary", label: tx(lang, "weeklySummaryLabel"), right: weeklySummaryEnabled ? weekdayLabel(lang, weeklySummaryDay) : t(lang, "setDesactive") },
                 { id: "currency", label: t(lang, "setDevise"), right: `${CURRENT_CURRENCY.symbol} ${currency}` },
                 ...(lang === "ar" ? [{ id: "digits", label: "الأرقام", right: arabicDigits ? "١٢٣" : "123" }] : []),
               ].map((item) => (
@@ -16516,8 +17121,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </button>
               );})}
               {settingsView === "finances" && !settingsField && [
-                { id: "defpayment", icon: CreditCard, label: t(lang, "setPaiementParDefaut"), desc: "Espèces, Mobile Money" },
-                { id: "debtdelay", icon: Clock, label: t(lang, "setDettesClients"), desc: t(lang, "setDelaiDeRelance") },
+                { id: "defpayment", icon: CreditCard, label: t(lang, "setPaiementParDefaut"), desc: (getPaymentMethods(lang).find((m) => m.id === (defaultPaymentMethod || "cash")) || {}).label || "" },
+                { id: "debtdelay", icon: Clock, label: t(lang, "setDettesClients"), desc: debtReminderAutoMode ? tx(lang, "loyaltyModeAuto") : tx(lang, "loyaltyModeManual") },
                 { id: "benchmark", icon: BarChart3, label: t(lang, "benchmarkTitle"), desc: benchmarkOptIn ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "loyalty", icon: Gift, label: tx(lang, "loyaltyRewardSettingTitle"), desc: loyaltyRewardEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
               ].map((item) => { const Icon = item.icon; return (
@@ -16672,6 +17277,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
               {settingsView === "donnees" && !settingsField && [
                 { id: "export", icon: FileDown, label: t(lang, "setExporterLesDonnees"), desc: "CSV" },
+                { id: "backup", icon: Database, label: tx(lang, "backupTitle"), desc: tx(lang, "backupDesc") },
                 { id: "resetdata", icon: RotateCcw, label: t(lang, "setReinitialiser"), desc: t(lang, "setEffacerToutesLesDonnees") },
               ].map((item) => { const Icon = item.icon; return (
                 <button key={item.id} onClick={() => setSettingsField(item.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer", width: "100%" }}>
@@ -16838,6 +17444,35 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   )}
                 </div>
               )}
+              {/* Boutique — Rapport hebdomadaire automatique (notification push, 1x/semaine) */}
+              {settingsField === "weeklysummary" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div style={{ flex: 1, paddingRight: 12 }}>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{tx(lang, "weeklySummaryLabel")}</div>
+                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{tx(lang, "weeklySummaryDesc")}</div>
+                    </div>
+                    <button onClick={() => saveAll({ weeklySummaryEnabled: !weeklySummaryEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: weeklySummaryEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: weeklySummaryEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                      <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                    </button>
+                  </div>
+                  {weeklySummaryEnabled && (
+                    <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                      <div style={{ color: T.muted, fontSize: 12, marginBottom: 8 }}>{tx(lang, "weeklySummaryDayLabel")}</div>
+                      <select
+                        value={weeklySummaryDay}
+                        onChange={(e) => saveAll({ weeklySummaryDay: parseInt(e.target.value, 10) })}
+                        style={{ background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }}
+                      >
+                        {[1, 2, 3, 4, 5, 6, 0].map((d) => (
+                          <option key={d} value={d}>{weekdayLabel(lang, d)}</option>
+                        ))}
+                      </select>
+                      <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{tx(lang, "weeklySummaryTimeNote").replace("{time}", `${String(dailySummaryHour).padStart(2, "0")}:00`)}</p>
+                    </div>
+                  )}
+                </div>
+              )}
               {settingsField === "sharecard" && (
                 <div>
                   <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "shareCardPreview")}</p>
@@ -16908,24 +17543,52 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {settingsField === "defpayment" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <p style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setChoisisLeModeDePaiement")}</p>
-                  {getPaymentMethods(lang).map((m) => (
-                    <button key={m.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, cursor: "pointer" }}>
-                      <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{m.label}</span>
-                    </button>
-                  ))}
+                  {getPaymentMethods(lang).map((m) => {
+                    const selected = (defaultPaymentMethod || "cash") === m.id;
+                    return (
+                      <button
+                        key={m.id}
+                        onClick={() => saveAll({ defaultPaymentMethod: m.id })}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          padding: "14px 16px",
+                          borderRadius: 14,
+                          background: selected ? "#22d3ee22" : T.input,
+                          border: selected ? "2px solid #22d3ee" : `1px solid ${T.border}`,
+                          cursor: "pointer",
+                        }}
+                      >
+                        <span style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{m.label}</span>
+                        {selected && <Check size={16} color="#22d3ee" />}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
               {/* Finances — Dettes */}
               {settingsField === "debtdelay" && (
-                <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
-                  <p style={{ color: T.muted, fontSize: 12, marginBottom: 10 }}>{t(lang, "setResumeDesDettesImpayees")}</p>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ color: T.text, fontSize: 13 }}>{t(lang, "setClientsAvecDettes")}</span>
-                    <span style={{ color: "#fbbf24", fontSize: 13, fontWeight: 700 }}>{localizedNumber(unpaidDebts.length)}</span>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <p style={{ color: T.muted, fontSize: 12, marginBottom: 10 }}>{t(lang, "setResumeDesDettesImpayees")}</p>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                      <span style={{ color: T.text, fontSize: 13 }}>{t(lang, "setClientsAvecDettes")}</span>
+                      <span style={{ color: "#fbbf24", fontSize: 13, fontWeight: 700 }}>{localizedNumber(unpaidDebts.length)}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: T.text, fontSize: 13 }}>{t(lang, "setTotalDu")}</span>
+                      <span style={{ color: "#f87171", fontSize: 13, fontWeight: 700 }}>{fcfa(totalOwed)}</span>
+                    </div>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ color: T.text, fontSize: 13 }}>{t(lang, "setTotalDu")}</span>
-                    <span style={{ color: "#f87171", fontSize: 13, fontWeight: 700 }}>{fcfa(totalOwed)}</span>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div style={{ flex: 1, paddingRight: 12 }}>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{tx(lang, "debtReminderAutoTitle")}</div>
+                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{tx(lang, "debtReminderAutoDesc")}</div>
+                    </div>
+                    <button onClick={() => saveAll({ debtReminderAutoMode: !debtReminderAutoMode })} style={{ width: 48, height: 28, borderRadius: 14, background: debtReminderAutoMode ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: debtReminderAutoMode ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
+                      <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                    </button>
                   </div>
                 </div>
               )}
@@ -16954,12 +17617,43 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <div style={{ flex: 1, paddingRight: 12 }}>
                       <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{tx(lang, "loyaltyRewardSettingTitle")}</div>
-                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{tx(lang, "loyaltyRewardSettingDesc")}</div>
+                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{tx(lang, "loyaltyRewardSettingDesc").replace("{n}", localizedNumber(loyaltyRewardThreshold > 0 ? loyaltyRewardThreshold : 10))}</div>
                     </div>
                     <button onClick={() => saveAll({ loyaltyRewardEnabled: !loyaltyRewardEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: loyaltyRewardEnabled ? "#22d3ee" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: loyaltyRewardEnabled ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: "pointer" }}>
                       <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
                     </button>
                   </div>
+                  {loyaltyRewardEnabled && (
+                    <>
+                      <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                        <div style={{ color: T.text, fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{tx(lang, "loyaltyThresholdTitle")}</div>
+                        <div style={{ color: T.muted, fontSize: 11.5, marginBottom: 10, lineHeight: 1.5 }}>{tx(lang, "loyaltyThresholdDesc")}</div>
+                        <input
+                          type="number"
+                          min={1}
+                          value={loyaltyRewardThreshold}
+                          onChange={(e) => {
+                            const v = parseInt(e.target.value, 10);
+                            saveAll({ loyaltyRewardThreshold: v > 0 ? v : 1 });
+                          }}
+                          className="w-full border rounded-lg px-3 py-2 text-sm"
+                          style={{ background: T.card, color: T.text, borderColor: T.border }}
+                        />
+                      </div>
+                      <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                        <div style={{ color: T.text, fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{tx(lang, "loyaltyModeTitle")}</div>
+                        <div style={{ color: T.muted, fontSize: 11.5, marginBottom: 10, lineHeight: 1.5 }}>{tx(lang, "loyaltyModeDesc")}</div>
+                        <div style={{ display: "flex", gap: 8 }}>
+                          <button onClick={() => saveAll({ loyaltyRewardMode: "manual" })} style={{ flex: 1, padding: "10px 8px", borderRadius: 12, fontSize: 12.5, fontWeight: 700, cursor: "pointer", border: loyaltyRewardMode === "manual" ? "2px solid #22d3ee" : `1px solid ${T.border}`, background: loyaltyRewardMode === "manual" ? "#22d3ee22" : T.card, color: T.text }}>
+                            {tx(lang, "loyaltyModeManual")}
+                          </button>
+                          <button onClick={() => saveAll({ loyaltyRewardMode: "auto" })} style={{ flex: 1, padding: "10px 8px", borderRadius: 12, fontSize: 12.5, fontWeight: 700, cursor: "pointer", border: loyaltyRewardMode === "auto" ? "2px solid #22d3ee" : `1px solid ${T.border}`, background: loyaltyRewardMode === "auto" ? "#22d3ee22" : T.card, color: T.text }}>
+                            {tx(lang, "loyaltyModeAuto")}
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
               {/* Données — Export CSV */}
@@ -16980,6 +17674,75 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ padding: 12, borderRadius: 12, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setSaleslengthVentesProductslengthProdui").replace("{s}", localizedNumber(sales.length)).replace("{p}", localizedNumber(products.length))}</div>
                   </div>
+                </div>
+              )}
+              {/* Données — Sauvegardes (export JSON complet + historique auto/manuel) */}
+              {settingsField === "backup" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ padding: 12, borderRadius: 12, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.muted, fontSize: 12 }}>
+                      {tx(lang, "backupSummaryLine")
+                        .replace("{p}", localizedNumber(products.length))
+                        .replace("{s}", localizedNumber(sales.length))
+                        .replace("{d}", localizedNumber(debts.length))
+                        .replace("{e}", localizedNumber(expenses.length))}
+                    </div>
+                  </div>
+                  <button onClick={exportShopDataJson} disabled={!!backupBusy} style={{ padding: "14px 16px", borderRadius: 14, background: "#60a5fa1a", border: "1px solid #60a5fa33", color: "#60a5fa", fontSize: 14, fontWeight: 600, cursor: backupBusy ? "default" : "pointer", display: "flex", alignItems: "center", gap: 10, opacity: backupBusy && backupBusy !== "export" ? 0.6 : 1 }}>
+                    <FileDown size={18} /> {backupBusy === "export" ? "…" : tx(lang, "backupExportJsonBtn")}
+                  </button>
+                  <button onClick={createManualBackup} disabled={!!backupBusy} style={{ padding: "14px 16px", borderRadius: 14, background: "#34d3991a", border: "1px solid #34d39933", color: "#34d399", fontSize: 14, fontWeight: 600, cursor: backupBusy ? "default" : "pointer", display: "flex", alignItems: "center", gap: 10, opacity: backupBusy && backupBusy !== "create" ? 0.6 : 1 }}>
+                    <Database size={18} /> {backupBusy === "create" ? "…" : tx(lang, "backupCreateNowBtn")}
+                  </button>
+                  {backupActionMsg && (
+                    <p style={{ color: T.muted, fontSize: 11.5, textAlign: "center" }}>{backupActionMsg}</p>
+                  )}
+                  <p style={{ color: T.text, fontSize: 13, fontWeight: 700, marginTop: 10 }}>{tx(lang, "backupHistoryTitle")}</p>
+                  {shopBackups.length === 0 ? (
+                    <p style={{ color: T.muted, fontSize: 12.5, textAlign: "center", padding: "10px 0" }}>{tx(lang, "backupNoneYet")}</p>
+                  ) : (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      {shopBackups.map((b) => (
+                        <div key={b.id} style={{ padding: 12, borderRadius: 12, background: T.input, border: `1px solid ${T.border}` }}>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                            <div>
+                              <div style={{ color: T.text, fontSize: 13, fontWeight: 600 }}>{fullDate(b.created_at)} {fullTime(b.created_at)}</div>
+                              <span
+                                className="text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mt-1"
+                                style={{ background: b.kind === "manual" ? "#60a5fa1a" : "#a78bfa1a", color: b.kind === "manual" ? "#60a5fa" : "#a78bfa" }}
+                              >
+                                {b.kind === "manual" ? tx(lang, "backupKindManual") : tx(lang, "backupKindAuto")}
+                              </span>
+                            </div>
+                            {confirmRestoreId !== b.id && (
+                              <button onClick={() => setConfirmRestoreId(b.id)} disabled={!!backupBusy} style={{ padding: "8px 12px", borderRadius: 10, background: "transparent", border: `1px solid ${CLAY}`, color: CLAY, fontSize: 12, fontWeight: 700, cursor: backupBusy ? "default" : "pointer", opacity: backupBusy ? 0.6 : 1 }}>
+                                {tx(lang, "backupRestoreBtn")}
+                              </button>
+                            )}
+                          </div>
+                          {confirmRestoreId === b.id && (
+                            <div style={{ marginTop: 10, padding: 10, borderRadius: 10, background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.25)" }}>
+                              <p style={{ color: "#fca5a5", fontSize: 12, marginBottom: 10 }}>
+                                {tx(lang, "backupRestoreConfirm").replace("{date}", `${fullDate(b.created_at)} ${fullTime(b.created_at)}`)}
+                              </p>
+                              <div style={{ display: "flex", gap: 8 }}>
+                                <button
+                                  onClick={() => { setLockPinReason("delete"); setPendingLockAction(() => () => restoreShopBackup(b.id)); setShowLockPinModal(true); }}
+                                  disabled={!!backupBusy}
+                                  style={{ flex: 1, padding: 10, borderRadius: 10, background: "linear-gradient(135deg,#f87171,#ef4444)", color: "white", fontSize: 12.5, fontWeight: 700, cursor: backupBusy ? "default" : "pointer", border: "none" }}
+                                >
+                                  {backupBusy === "restore-" + b.id ? "…" : tx(lang, "backupRestoreBtn")}
+                                </button>
+                                <button onClick={() => setConfirmRestoreId(null)} disabled={!!backupBusy} style={{ flex: 1, padding: 10, borderRadius: 10, background: T.card, border: `1px solid ${T.border}`, color: T.muted, fontSize: 12.5, cursor: "pointer" }}>
+                                  {t(lang, "cancel")}
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
               {/* Données — Réinitialiser */}
@@ -17003,14 +17766,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {/* IA — Préférences */}
               {settingsField === "aiprefs" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <div>
-                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{t(lang, "setRechercheWeb")}</div>
-                      <div style={{ color: T.muted, fontSize: 12, marginTop: 2 }}>{t(lang, "setPermettreALiaDeChercher")}</div>
-                    </div>
-                    <div style={{ width: 48, height: 28, borderRadius: 14, background: "#22d3ee", display: "flex", alignItems: "center", padding: "0 4px", justifyContent: "flex-end" }}>
-                      <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
-                    </div>
+                  <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                    <div style={{ color: T.text, fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{t(lang, "setRechercheWeb")}</div>
+                    <div style={{ color: T.muted, fontSize: 12 }}>{tx(lang, "aiWebSearchAlwaysOnDesc")}</div>
                   </div>
                   <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.text, fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{t(lang, "setHistoriqueDeConversation")}</div>
@@ -17537,7 +18295,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         </div>
       )}
-      {showPaymentShortcut && !showCheckoutModal && activeCart && typeof document !== "undefined" && createPortal(
+      {showPaymentShortcut && !showCheckoutModal && !showTabHelp && activeCart && typeof document !== "undefined" && createPortal(
         <button
           onClick={() => setShowCheckoutModal(true)}
           className="fixed left-1/2 flex items-center gap-2 px-5 py-3 rounded-full text-white font-extrabold text-sm active:scale-95"
@@ -17588,11 +18346,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             </div>
             {pendingReceipt.loyalty && (() => {
-              // La bannière "récompense" n'apparaît que si le propriétaire l'a explicitement
-              // activée dans Paramètres > Ventes & finances (loyaltyRewardEnabled) — l'appli ne
-              // doit jamais annoncer une récompense de sa propre initiative. Le compteur d'achats,
+              // La bannière "récompense" n'apparaît sur le reçu (potentiellement partagé avec le
+              // client) que si le propriétaire a explicitement activé la fonction ET choisi le
+              // mode "automatique" dans Paramètres > Ventes & finances. En mode "manuel", le
+              // propriétaire voit déjà un indicateur privé avant de finaliser la vente (écran
+              // Vente) et décide lui-même, sans que ça n'apparaisse ici. Le compteur d'achats,
               // lui, reste une simple information et s'affiche toujours.
-              const showReward = pendingReceipt.loyalty.isReward && loyaltyRewardEnabled;
+              const showReward = pendingReceipt.loyalty.isReward && loyaltyRewardEnabled && loyaltyRewardMode === "auto";
               return (
                 <div className="rounded-xl px-3 py-2 mb-3 text-center" style={{ background: showReward ? "#fef3c7" : darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }}>
                   <p className="text-xs font-semibold" style={{ color: showReward ? "#92400e" : (darkMode ? "#eceef5" : CHARCOAL) }}>
@@ -17604,7 +18364,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })()}
-            )}
             {normalizePhoneForWhatsApp(pendingReceipt.phone) && !receiptAskingPhone && (
               <a
                 href={buildReceiptWhatsAppUrl(pendingReceipt)}
@@ -18767,6 +19526,7 @@ function LandingScreen() {
             { emoji: "💳", title: "Ventes & caisse", text: "Encaissez en espèces, Mobile Money ou carte, et suivez le solde de caisse en temps réel." },
             { emoji: "🧾", title: "Dettes clients", text: "Enregistrez les ventes à crédit et suivez les remboursements, même partiels." },
             { emoji: "📊", title: "Statistiques", text: "Comparez vos boutiques et suivez votre activité dans le temps." },
+            { emoji: "🤖", title: "Assistant IA", text: "Posez vos questions sur votre boutique en langage naturel et obtenez des réponses, analyses et conseils instantanés." },
           ].map((f) => (
             <div key={f.title} style={{ background: "#fff", borderRadius: 18, padding: "20px 18px", boxShadow: "0 12px 30px -18px rgba(22,26,43,0.25)" }}>
               <div style={{ fontSize: 24, marginBottom: 8 }}>{f.emoji}</div>
@@ -18810,7 +19570,18 @@ export function BoutiqueAppSafe() {
   // que cette route règle). Toute AUTRE route non listée ci-dessus (dont "/app",
   // utilisée par le bouton "Accéder à l'application" et par le retour du login
   // Google — voir redirectTo dans loginWithGoogle) continue d'afficher l'app.
-  if (typeof window !== "undefined" && window.location.pathname === "/") {
+  // Ne s'affiche que pour un tout premier visiteur du site web : jamais dans l'app
+  // native Android/iOS (qui charge elle aussi ses fichiers depuis "/" en interne, mais
+  // n'a rien à voir avec un visiteur web — isNativePlatformNow() l'exclut), et jamais
+  // pour quelqu'un qui revient avec un compte déjà utilisé sur ce navigateur
+  // (hasExistingWebSession()) — sinon la vitrine réapparaîtrait à chaque réouverture
+  // au lieu de n'être vue qu'une seule fois, avant la toute première connexion.
+  if (
+    typeof window !== "undefined" &&
+    window.location.pathname === "/" &&
+    !isNativePlatformNow() &&
+    !hasExistingWebSession()
+  ) {
     return <LandingScreen />;
   }
   return (
