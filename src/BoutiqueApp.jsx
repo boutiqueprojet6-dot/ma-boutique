@@ -159,31 +159,19 @@ import { createClient } from "@supabase/supabase-js";
 // dans localStorage ("sb-<réf-projet>-auth-token"). Sert à ne montrer la vitrine publique
 // (LandingScreen, route "/") qu'à un tout nouveau visiteur, jamais à quelqu'un qui revient
 // avec un compte déjà utilisé — voir BoutiqueAppSafe plus bas.
+// ATTENTION : sur le web, comme window.Capacitor existe aussi (voir nativeBridgeReady), la session
+// est écrite via Capacitor Preferences, dont l'implémentation web préfixe la clé
+// ("CapacitorStorage.sb-<réf>-auth-token") : la clé ne COMMENCE donc pas par "sb-". On teste
+// pour cette raison que "sb-" et "-auth-token" apparaissent n'importe où dans la clé.
 function hasExistingWebSession() {
   if (typeof window === "undefined") return false;
   try {
     for (let i = 0; i < window.localStorage.length; i++) {
       const k = window.localStorage.key(i);
-      if (k && k.indexOf("sb-") === 0 && k.indexOf("-auth-token") !== -1) return true;
+      if (k && k.indexOf("sb-") !== -1 && k.indexOf("-auth-token") !== -1) return true;
     }
   } catch (e) { /* stockage indisponible : on considère qu'il n'y a pas de session connue */ }
   return false;
-}
-// Marque dédiée, indépendante du jeton de session Supabase : posée dès la toute
-// première fois où la vitrine (LandingScreen) s'affiche, pour ne plus jamais la
-// réafficher ensuite sur cet appareil/navigateur — même si, pour une raison ou une
-// autre (rotation du jeton Supabase, nettoyage partiel du stockage par le système,
-// etc.), hasExistingWebSession() ne retrouvait plus le jeton exact à un instant donné.
-// Les deux vérifications se complètent : hasExistingWebSession() couvre un compte
-// déjà connecté AVANT que ce correctif existe, LANDING_SEEN_KEY couvre tout le reste.
-const LANDING_SEEN_KEY = "mb_seen_landing_v1";
-function hasSeenLandingBefore() {
-  if (typeof window === "undefined") return false;
-  try { return window.localStorage.getItem(LANDING_SEEN_KEY) === "1"; } catch (e) { return false; }
-}
-function markLandingSeen() {
-  if (typeof window === "undefined") return;
-  try { window.localStorage.setItem(LANDING_SEEN_KEY, "1"); } catch (e) {}
 }
 function nativeBridgeReady() {
   return typeof window !== "undefined" && !!window.Capacitor;
@@ -19638,10 +19626,6 @@ function TermsOfServiceScreen() {
 // Réutilise les constantes/style des pages légales (LEGAL_ACCENT, PRIVACY_APP_NAME,
 // LegalAppLogo) pour rester visuellement cohérent avec /privacy et /terms.
 function LandingScreen() {
-  // Dès que cette page s'affiche effectivement (une seule fois dans la vie de cet
-  // appareil/navigateur), on pose la marque — qu'il clique sur « Accéder à
-  // l'application » ou non : la vitrine ne doit plus jamais réapparaître après.
-  useEffect(() => { markLandingSeen(); }, []);
   return (
     <div style={{ minHeight: "100vh", background: "linear-gradient(180deg, #f3f1ff 0%, #f7f7fb 320px, #f7f7fb 100%)", fontFamily: "system-ui, -apple-system, sans-serif" }}>
       <div style={{ maxWidth: 760, margin: "0 auto", padding: "28px 20px 72px" }}>
@@ -19733,8 +19717,7 @@ export function BoutiqueAppSafe() {
     typeof window !== "undefined" &&
     window.location.pathname === "/" &&
     !isNativePlatformNow() &&
-    !hasExistingWebSession() &&
-    !hasSeenLandingBefore()
+    !hasExistingWebSession()
   ) {
     return <LandingScreen />;
   }
