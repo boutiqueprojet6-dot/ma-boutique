@@ -674,6 +674,18 @@ const SUBSCRIPTION_PLANS = {
 };
 // Ordre croissant, utile pour comparer deux paliers ("est-ce que ce plan est au moins Pro ?").
 const SUBSCRIPTION_PLAN_ORDER = ["free", "pro", "business"];
+// Convertit un palier lu dans la base (table subscriptions) en identifiant connu de l'app.
+// La base et le tableau de bord admin utilisent encore les identifiants historiques
+// "business1" / "business2" (la contrainte subscriptions_plan_check refuse d'ailleurs
+// "business"), alors que l'app ne connaît plus qu'un seul palier Business, "business",
+// qui réunit les deux. Sans cette conversion, SUBSCRIPTION_PLANS["business2"] n'existait
+// pas et l'app retombait silencieusement sur le palier Gratuit : un client Business
+// n'avait accès à aucune fonction payante. Tout identifiant inconnu donne "free", jamais
+// un palier payant par défaut.
+function normalizePlanId(plan) {
+  if (plan === "business1" || plan === "business2") return "business";
+  return SUBSCRIPTION_PLANS[plan] ? plan : "free";
+}
 // Fonctionnalités réellement verrouillées par palier et affichées dans l'écran Abonnement
 // (clé de traduction : EXTRA_UI["feat_" + id]). "stockAlerts" et "consolidatedView" sont
 // volontairement absentes : déclarées dans les paliers mais ne verrouillent rien pour l'instant.
@@ -4518,6 +4530,10 @@ EXTRA_UI.dailyBadge = { fr: "Quotidien", am: "ዕለታዊ", en: "Daily", tl: "A
 EXTRA_UI.startNewDayBtn = { fr: "Nouvelle journée", am: "አዲስ ቀን", en: "New day", tl: "Bagong araw", te: "కొత్త రోజు", th: "วันใหม่", wo: "Bés bu bees", pl: "Nowy dzień", ar: "يوم جديد", es: "Nueva jornada", pt: "Novo dia", zh: "开始新的一天", vi: "Ngày mới", de: "Neuer Tag", ru: "Новый день", hi: "नया दिन", ta: "புதிய நாள்", bn: "নতুন দিন", ur: "نیا دن", id: "Hari baru", tr: "Yeni gün", ko: "새로운 하루", ja: "新しい一日", it: "Nuova giornata", nl: "Nieuwe dag", sw: "Siku mpya", ha: "Sabuwar rana", bm: "Don kura", zu: "Usuku olusha", yo: "Ọjọ́ tuntun" };
 EXTRA_UI.logNewDayStarted = { fr: "Nouvelle journée démarrée", am: "አዲስ ቀን ጀምሯል", en: "New day started", tl: "Nagsimula ang bagong araw", te: "కొత్త రోజు ప్రారంభమైంది", th: "เริ่มวันใหม่แล้ว", wo: "Bés bu bees tambali na", pl: "Rozpoczęto nowy dzień", ar: "بدأ يوم جديد", es: "Nueva jornada iniciada", pt: "Novo dia iniciado", zh: "已开始新的一天", vi: "Đã bắt đầu ngày mới", de: "Neuer Tag gestartet", ru: "Начат новый день", hi: "नया दिन शुरू हुआ", ta: "புதிய நாள் தொடங்கப்பட்டது", bn: "নতুন দিন শুরু হয়েছে", ur: "نیا دن شروع ہوا", id: "Hari baru dimulai", tr: "Yeni gün başlatıldı", ko: "새로운 하루 시작됨", ja: "新しい一日を開始しました", it: "Nuova giornata avviata", nl: "Nieuwe dag gestart", sw: "Siku mpya imeanza", ha: "An fara sabuwar rana", bm: "Don kura daminɛna", zu: "Kuqalwe usuku olusha", yo: "Ọjọ́ tuntun ti bẹ̀rẹ̀" };
 EXTRA_UI.logUnsoldQty = { fr: "invendus :", am: "ያልተሸጠ፦", en: "unsold:", tl: "hindi nabenta:", te: "అమ్ముడుపోనిది:", th: "ขายไม่หมด:", wo: "amul jaay:", pl: "niesprzedane:", ar: "غير مباع:", es: "invendidos:", pt: "não vendidos:", zh: "未售出：", vi: "tồn chưa bán:", de: "unverkauft:", ru: "непроданные:", hi: "बिना बिका:", ta: "விற்காதவை:", bn: "অবিক্রীত:", ur: "غیر فروخت شدہ:", id: "tidak terjual:", tr: "satılmayan:", ko: "미판매:", ja: "売れ残り：", it: "invenduti:", nl: "onverkocht:", sw: "haikuuzwa:", ha: "ba a sayar ba:", bm: "feerelen tɛ:", zu: "okungathengisiwe:", yo: "tí kò tà:" };
+// Multi-boutique : refus de création (limite du palier / nom déjà pris), affichés
+// sous le champ "nouvelle boutique" du sélecteur.
+EXTRA_UI.shopLimitReached = { fr: "Votre palier ne permet qu'une seule boutique. Passez au palier Business pour en gérer plusieurs.", am: "የእርስዎ ዕቅድ አንድ ሱቅ ብቻ ይፈቅዳል። ብዙ ሱቆችን ለማስተዳደር ወደ Business ዕቅድ ይቀይሩ።", en: "Your plan allows only one shop. Upgrade to Business to manage several.", tl: "Isang tindahan lang ang pinapayagan ng inyong plano. Lumipat sa Business para makapamahala ng ilan.", te: "మీ ప్లాన్‌లో ఒక్క దుకాణం మాత్రమే అనుమతించబడుతుంది. అనేక దుకాణాలను నిర్వహించడానికి Business ప్లాన్‌కు మారండి.", th: "แพ็กเกจของคุณใช้ได้เพียงร้านเดียว อัปเกรดเป็น Business เพื่อจัดการหลายร้าน", wo: "Sa pàkk dafa may benn bitig rekk. Dem ci pàkk Business ngir saytu ay bitig yu bari.", pl: "Państwa plan pozwala tylko na jeden sklep. Aby zarządzać kilkoma, proszę przejść na plan Business.", ar: "باقتكم تسمح بمتجر واحد فقط. انتقلوا إلى باقة Business لإدارة عدة متاجر.", es: "Su plan solo permite una tienda. Pase al plan Business para gestionar varias.", pt: "O seu plano permite apenas uma loja. Mude para o plano Business para gerir várias.", zh: "您的套餐仅允许一家店铺。升级到 Business 套餐即可管理多家店铺。", vi: "Gói của bạn chỉ cho phép một cửa hàng. Hãy nâng cấp lên gói Business để quản lý nhiều cửa hàng.", de: "Ihr Tarif erlaubt nur einen Laden. Wechseln Sie zu Business, um mehrere zu verwalten.", ru: "Ваш тариф позволяет только один магазин. Перейдите на тариф Business, чтобы управлять несколькими.", hi: "आपकी योजना में केवल एक दुकान की अनुमति है। कई दुकानें चलाने के लिए Business योजना लें।", ta: "உங்கள் திட்டத்தில் ஒரு கடை மட்டுமே அனுமதிக்கப்படும். பல கடைகளை நிர்வகிக்க Business திட்டத்திற்கு மாறுங்கள்.", bn: "আপনার প্ল্যানে কেবল একটি দোকান রাখা যায়। একাধিক দোকান চালাতে Business প্ল্যানে যান।", ur: "آپ کے پلان میں صرف ایک دکان کی اجازت ہے۔ کئی دکانیں چلانے کے لیے Business پلان پر جائیں۔", id: "Paket Anda hanya mengizinkan satu toko. Beralihlah ke paket Business untuk mengelola beberapa toko.", tr: "Planınız yalnızca bir mağazaya izin veriyor. Birden fazla mağaza yönetmek için Business planına geçin.", ko: "현재 요금제는 매장 1개만 허용됩니다. 여러 매장을 관리하려면 Business 요금제로 변경하세요.", ja: "ご利用のプランでは店舗は1つまでです。複数の店舗を管理するには Business プランへ変更してください。", it: "Il suo piano consente un solo negozio. Passi al piano Business per gestirne diversi.", nl: "Uw abonnement staat maar één winkel toe. Stap over op Business om er meerdere te beheren.", sw: "Mpango wako unaruhusu duka moja tu. Hamia mpango wa Business ili kusimamia maduka kadhaa.", ha: "Tsarinku yana ba da damar shago ɗaya kawai. Ku koma tsarin Business don gudanar da shaguna da yawa.", bm: "Aw ka sugandili bɛ butiki kelen dɔrɔn de sira di. Aw ye Business ta walasa ka butiki caman ɲɛnabɔ.", zu: "Uhlelo lwenu luvumela isitolo esisodwa kuphela. Shintshelani ku-Business ukuze niphathe eziningana.", yo: "Ètò yín gba ṣọ́ọ̀bù kan ṣoṣo láàyè. Ẹ lọ sí ètò Business láti ṣàkóso ọ̀pọ̀ ṣọ́ọ̀bù." };
+EXTRA_UI.shopNameTaken = { fr: "Vous avez déjà une boutique portant ce nom. Choisissez un autre nom.", am: "በዚህ ስም የሚጠራ ሱቅ አስቀድሞ አለዎት። እባክዎ ሌላ ስም ይምረጡ።", en: "You already have a shop with this name. Please choose another name.", tl: "Mayroon na kayong tindahan na may ganitong pangalan. Pumili ng ibang pangalan.", te: "ఈ పేరుతో మీకు ఇప్పటికే ఒక దుకాణం ఉంది. దయచేసి వేరే పేరు ఎంచుకోండి.", th: "คุณมีร้านที่ใช้ชื่อนี้อยู่แล้ว โปรดเลือกชื่ออื่น", wo: "Am ngeen ba noppi benn bitig bu am tur boobu. Tànnleen beneen tur.", pl: "Mają Państwo już sklep o tej nazwie. Proszę wybrać inną nazwę.", ar: "لديكم بالفعل متجر بهذا الاسم. اختاروا اسمًا آخر.", es: "Ya tiene una tienda con este nombre. Elija otro nombre.", pt: "Já tem uma loja com este nome. Escolha outro nome.", zh: "您已有一家同名店铺。请换一个名称。", vi: "Bạn đã có một cửa hàng với tên này. Vui lòng chọn tên khác.", de: "Sie haben bereits einen Laden mit diesem Namen. Bitte wählen Sie einen anderen Namen.", ru: "У вас уже есть магазин с таким названием. Выберите другое название.", hi: "इस नाम की दुकान आपके पास पहले से है। कृपया कोई दूसरा नाम चुनें।", ta: "இந்தப் பெயரில் உங்களிடம் ஏற்கனவே ஒரு கடை உள்ளது. வேறு பெயரைத் தேர்ந்தெடுக்கவும்.", bn: "এই নামে আপনার একটি দোকান আগে থেকেই আছে। অন্য একটি নাম বেছে নিন।", ur: "اس نام کی دکان آپ کے پاس پہلے سے موجود ہے۔ براہ کرم کوئی اور نام منتخب کریں۔", id: "Anda sudah memiliki toko dengan nama ini. Silakan pilih nama lain.", tr: "Bu ada sahip bir mağazanız zaten var. Lütfen başka bir ad seçin.", ko: "이미 같은 이름의 매장이 있습니다. 다른 이름을 선택하세요.", ja: "同じ名前の店舗がすでにあります。別の名前を選んでください。", it: "Ha già un negozio con questo nome. Scelga un altro nome.", nl: "U hebt al een winkel met deze naam. Kies een andere naam.", sw: "Tayari una duka lenye jina hili. Tafadhali chagua jina jingine.", ha: "Kuna da shago mai wannan suna tuni. Da fatan za ku zaɓi wani suna.", bm: "Butiki dɔ bɛ aw bolo ka kɔn tɔgɔ in na. Aw ye tɔgɔ wɛrɛ sugandi.", zu: "Senivele ninesitolo esinaleli gama. Sicela nikhethe elinye igama.", yo: "Ẹ ti ní ṣọ́ọ̀bù kan tó ní orúkọ yìí. Ẹ jọ̀wọ́ yan orúkọ mìíràn." };
 const TAB_HELP_CONTENT = {
   stock: { titleKey: "tabHelpStockTitle", itemKeys: ["tabHelpStock1", "tabHelpStock2", "tabHelpStock3", "tabHelpStock4", "tabHelpStock5", "tabHelpStock6", "tabHelpStock7"] },
   dashboard: { titleKey: "tabHelpDashboardTitle", itemKeys: ["tabHelpDashboard1", "tabHelpDashboard2", "tabHelpDashboard3"] },
@@ -5281,6 +5297,10 @@ const SHOP_LEVEL_KEYS = [
   "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
   "historyLog", "categories", "employees", "actionLog",
 ];
+// Dernière boutique affichée sur CET appareil, pour y revenir au prochain démarrage
+// au lieu de retomber systématiquement sur la boutique principale (suffixée par le
+// nom d'utilisateur, pour que deux comptes sur un même téléphone ne se mélangent pas).
+const ACTIVE_SHOP_KEY_PREFIX = "mb_active_shop:";
 // Sépare un blob complet en sa part "compte" et sa part "boutique".
 function splitShopBlob(blob) {
   const account = {};
@@ -8573,10 +8593,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         if (userData.user.created_at) setAccountCreatedAt(userData.user.created_at);
         const { data: subRow } = await supabase
           .from("subscriptions")
-          .select("plan, suspended")
+          .select("plan, suspended, expires_at")
           .eq("owner_id", userData.user.id)
           .single();
-        if (!cancelled && subRow && subRow.plan) setCurrentPlan(subRow.plan);
+        if (!cancelled && subRow && subRow.plan) {
+          // Un palier payant n'est valable que jusqu'à sa date d'expiration (le tableau de
+          // bord admin l'accorde "pour N jours"). Avant, la date n'était jamais lue : un
+          // palier payant restait actif pour toujours. Sans date (accord manuel), il reste
+          // actif — même règle que le déclencheur enforce_shop_rules côté base.
+          const expired = subRow.expires_at && new Date(subRow.expires_at).getTime() <= Date.now();
+          setCurrentPlan(expired ? "free" : normalizePlanId(subRow.plan));
+        }
         if (!cancelled && subRow && subRow.suspended) setAccountSuspended(true);
       } catch (e) {
         // en cas d'échec (hors ligne, etc.), on reste sur "free" par sécurité — jamais
@@ -8753,7 +8780,23 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const { data: rows } = await supabase.from("shops").select("id, name, created_at").eq("owner_id", userData.user.id).order("created_at");
       if (rows) {
         setShops(rows);
-        if (!activeShopId && rows.length > 0) setActiveShopId(rows[0].id);
+        if (rows.length > 0) {
+          // Choix de la boutique à afficher, dans cet ordre :
+          //   1) celle déjà active, si elle existe toujours ;
+          //   2) la dernière utilisée sur cet appareil (mémorisée ci-dessous), si elle
+          //      existe toujours — avant, on revenait TOUJOURS sur la principale au
+          //      redémarrage, au risque d'enregistrer une vente dans la mauvaise boutique ;
+          //   3) sinon la boutique principale.
+          // Une boutique supprimée entre-temps (depuis un autre appareil par exemple) n'est
+          // donc jamais réactivée : on retombe proprement sur une boutique qui existe.
+          setActiveShopId((current) => {
+            if (current && rows.some((r) => r.id === current)) return current;
+            let saved = null;
+            try { saved = window.localStorage.getItem(ACTIVE_SHOP_KEY_PREFIX + username); } catch (e) {}
+            if (saved && rows.some((r) => r.id === saved)) return saved;
+            return rows[0].id;
+          });
+        }
       }
     } catch (e) {
       // best-effort : en cas d'échec, l'app reste utilisable sur la boutique déjà active.
@@ -8761,19 +8804,55 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDemo]);
   useEffect(() => { loadShops(); }, [loadShops]);
+  // Mémorise la boutique active sur cet appareil (relue par loadShops au démarrage).
+  // Doublée dans le stockage natif, pour survivre à l'arrêt de l'app Android.
+  useEffect(() => {
+    if (isDemo || !activeShopId) return;
+    try {
+      window.localStorage.setItem(ACTIVE_SHOP_KEY_PREFIX + username, activeShopId);
+      mirrorToNativeStorage(ACTIVE_SHOP_KEY_PREFIX + username, activeShopId);
+    } catch (e) { /* best-effort */ }
+  }, [isDemo, activeShopId, username]);
+  // Message d'erreur du formulaire "nouvelle boutique" (limite du palier, nom en double...).
+  const [shopFormError, setShopFormError] = useState("");
+  // Renvoie true si la boutique a bien été créée (le champ de saisie n'est vidé que dans ce cas).
   const addShop = async (name) => {
-    if (!name.trim()) return;
+    const cleanName = name.trim();
+    if (!cleanName) return false;
+    setShopFormError("");
+    // Limite du palier (maxShops : null = illimité). Le même contrôle existe côté base
+    // (déclencheur enforce_shop_rules) : celui-ci sert à donner un message clair tout de
+    // suite, celui de la base à empêcher tout contournement.
+    const maxShops = planInfo.maxShops;
+    if (maxShops != null && shops.length >= maxShops) {
+      setShopFormError(tx(lang, "shopLimitReached"));
+      return false;
+    }
+    if (shops.some((s) => (s.name || "").trim().toLowerCase() === cleanName.toLowerCase())) {
+      setShopFormError(tx(lang, "shopNameTaken"));
+      return false;
+    }
     try {
       const { data: userData } = await getUserFast();
-      if (!userData || !userData.user) return;
-      const { data: newShop, error } = await supabase.from("shops").insert({ owner_id: userData.user.id, name: name.trim() }).select("id, name, created_at").single();
-      if (!error && newShop) {
+      if (!userData || !userData.user) { setShopFormError(t(lang, "genericError")); return false; }
+      const { data: newShop, error } = await supabase.from("shops").insert({ owner_id: userData.user.id, name: cleanName }).select("id, name, created_at").single();
+      if (error) {
+        // Refus de la base : on traduit ses deux motifs connus en message lisible.
+        const msg = `${error.message || ""} ${error.code || ""}`;
+        if (msg.includes("shop_limit_reached")) setShopFormError(tx(lang, "shopLimitReached"));
+        else if (msg.includes("shop_name_taken") || msg.includes("23505")) setShopFormError(tx(lang, "shopNameTaken"));
+        else setShopFormError(t(lang, "genericError"));
+        return false;
+      }
+      if (newShop) {
         setShops([...shops, newShop]);
         setActiveShopId(newShop.id);
+        return true;
       }
     } catch (e) {
-      // best-effort
+      setShopFormError(t(lang, "genericError"));
     }
+    return false;
   };
   // Charge employés et journal d'actions depuis Supabase, filtrés par la boutique active.
   // Se redéclenche automatiquement à chaque changement de boutique (activeShopId en dépendance).
@@ -9759,6 +9838,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ne peuvent donc jamais désigner deux boutiques différentes. Vaut null tant que la
   // liste des boutiques n'est pas chargée — dans ce cas on retombe sur le comportement
   // historique (tout dans shop_data), pour ne jamais risquer de perdre une écriture.
+  // Sert aussi au NOM affiché dans l'en-tête : on y montre la boutique réellement
+  // chargée, et non activeShopId. Sinon, un compte redescendu sous Business avec une
+  // boutique secondaire mémorisée afficherait son nom au-dessus du stock de la principale.
   const primaryShopId = shops.length > 0 ? shops[0].id : null;
   const blobShopId = isSecondaryShop ? activeShopId : primaryShopId;
   // Applique un objet "shop" (fusionné ou non) à tous les états React.
@@ -13991,7 +14073,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {!sidebarCollapsed && (
             <div className="min-w-0">
-              <p className="text-white font-bold text-sm truncate">{shops.find((s) => s.id === activeShopId)?.name || shopName}</p>
+              <p className="text-white font-bold text-sm truncate">{shops.find((s) => s.id === (blobShopId || activeShopId))?.name || shopName}</p>
               <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.6)" }}>{t(lang, "appName")}</p>
               {hasFeatureAccess("multiShop") && !activeEmployee && (
                 <button onClick={() => setShowShopSwitcher(true)} className="text-[10px] underline mt-0.5" style={{ color: "rgba(255,255,255,0.75)" }}>
@@ -14100,7 +14182,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               />
             )}
             <div>
-              <h1 className="text-lg font-bold tracking-tight">{shops.find((s) => s.id === activeShopId)?.name || shopName}</h1>
+              <h1 className="text-lg font-bold tracking-tight">{shops.find((s) => s.id === (blobShopId || activeShopId))?.name || shopName}</h1>
               {expiresAt && <span className="text-xs opacity-80">{t(lang, "subscriptionUntil")} {fullDate(expiresAt)}</span>}
               {hasFeatureAccess("multiShop") && !activeEmployee && (
                 <button onClick={() => setShowShopSwitcher(true)} className="block text-[11px] underline mt-0.5 opacity-90">
@@ -16954,7 +17036,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showShopSwitcher && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowShopSwitcher(false)}>
+        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => { setShowShopSwitcher(false); setShopFormError(""); }}>
           <div className="w-full max-w-sm rounded-2xl p-6" style={{ background: T.card }} onClick={(e) => e.stopPropagation()}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{t(lang, "switchShopTitle")}</p>
             <div className="space-y-2 mb-4">
@@ -16973,13 +17055,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="flex gap-2">
               <textarea autoComplete="off" rows={1}
                 value={newShopNameInput}
-                onChange={(e) => setNewShopNameInput(e.target.value.replace(/\n/g, ""))}
+                onChange={(e) => { setNewShopNameInput(e.target.value.replace(/\n/g, "")); if (shopFormError) setShopFormError(""); }}
                 onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }}
                 className="flex-1 border rounded-xl px-3 py-2.5 text-sm"
                 style={{ background: T.input, borderColor: T.border, color: T.text, resize: "none", overflow: "hidden" }}
               />
               <button
-                onClick={async () => { await addShop(newShopNameInput); setNewShopNameInput(""); }}
+                onClick={async () => { if (await addShop(newShopNameInput)) setNewShopNameInput(""); }}
                 disabled={!newShopNameInput.trim()}
                 className="px-4 py-2.5 rounded-xl text-white font-semibold text-sm"
                 style={{ background: INDIGO, opacity: newShopNameInput.trim() ? 1 : 0.5 }}
@@ -16987,7 +17069,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <Plus size={16} />
               </button>
             </div>
-            <button onClick={() => setShowShopSwitcher(false)} className="w-full mt-4 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>
+            {shopFormError && (
+              <p className="text-xs mt-2" style={{ color: CLAY }}>{shopFormError}</p>
+            )}
+            <button onClick={() => { setShowShopSwitcher(false); setShopFormError(""); }} className="w-full mt-4 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>
               {t(lang, "empQrClose")}
             </button>
           </div>
