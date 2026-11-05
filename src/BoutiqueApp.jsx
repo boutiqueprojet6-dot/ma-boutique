@@ -8743,15 +8743,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     for (const s of shops) {
       try {
         const data = byShop[s.id] || null;
-        const revenue = data && Array.isArray(data.sales) ? data.sales.reduce((sum, sale) => sum + (sale.total || 0), 0) : 0;
+        // Les ventes annulées restent stockées (marquées `cancelled`, pour l'historique) :
+        // il faut les exclure ici comme partout ailleurs dans l'app (voir `sales`, filtré
+        // de la même façon). Avant, elles gonflaient le chiffre d'affaires et la marge de
+        // cet écran. Les dettes, elles, n'ont pas besoin de ce filtre : annuler une vente
+        // à crédit retire purement la dette liée.
+        const validSales = data && Array.isArray(data.sales) ? data.sales.filter((sale) => !sale.cancelled) : [];
+        const revenue = validSales.reduce((sum, sale) => sum + (sale.total || 0), 0);
         const stockCount = data && Array.isArray(data.products) ? data.products.reduce((sum, p) => sum + (p.quantity || 0), 0) : 0;
         const unpaidDebts = data && Array.isArray(data.debts) ? data.debts.filter((d) => !d.paid).reduce((sum, d) => sum + (d.amount || 0) - (d.paidAmount || 0), 0) : 0;
         // Marge nette (Business 2) : uniquement calculée sur les ventes dont le coût d'achat
         // est connu (costPrice renseigné) — les autres sont ignorées plutôt que faussées.
         let netMargin = 0;
         let marginableRevenue = 0;
-        if (data && Array.isArray(data.sales)) {
-          data.sales.forEach((sale) => {
+        {
+          validSales.forEach((sale) => {
             if (sale.costPrice != null) {
               netMargin += sale.total - sale.costPrice * sale.qty;
               marginableRevenue += sale.total;
@@ -8777,7 +8783,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     try {
       const { data: userData } = await getUserFast();
       if (!userData || !userData.user) return;
-      const { data: rows } = await supabase.from("shops").select("id, name, created_at").eq("owner_id", userData.user.id).order("created_at");
+      // La boutique principale vient TOUJOURS en premier (tout le code suppose
+      // shops[0] = principale) : marquée explicitement par is_primary en base, au lieu
+      // d'être déduite de la date de création. Puis date et id pour un ordre stable.
+      const { data: rows } = await supabase.from("shops").select("id, name, created_at, is_primary").eq("owner_id", userData.user.id)
+        .order("is_primary", { ascending: false }).order("created_at").order("id");
       if (rows) {
         setShops(rows);
         if (rows.length > 0) {
@@ -8835,7 +8845,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     try {
       const { data: userData } = await getUserFast();
       if (!userData || !userData.user) { setShopFormError(t(lang, "genericError")); return false; }
-      const { data: newShop, error } = await supabase.from("shops").insert({ owner_id: userData.user.id, name: cleanName }).select("id, name, created_at").single();
+      const { data: newShop, error } = await supabase.from("shops").insert({ owner_id: userData.user.id, name: cleanName }).select("id, name, created_at, is_primary").single();
       if (error) {
         // Refus de la base : on traduit ses deux motifs connus en message lisible.
         const msg = `${error.message || ""} ${error.code || ""}`;
