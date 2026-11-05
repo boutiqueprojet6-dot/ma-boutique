@@ -8528,6 +8528,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   }, []);
   const effectivePlan = (DEV_TEST_MODE_ENABLED && !isDemo && testPlanOverride) || currentPlan;
   const planInfo = SUBSCRIPTION_PLANS[effectivePlan] || SUBSCRIPTION_PLANS.free;
+  // Plafond quotidien de ventes : uniquement pour le palier Gratuit (Pro et Business sont
+  // illimités). Basé sur le palier EFFECTIF, qui tient déjà compte de l'expiration de
+  // l'abonnement et du mode test développeur. Avant, ce plafond lisait `expiresAt`, une
+  // valeur alimentée seulement par l'ancien canal window.storage (table kv_store, absente
+  // de la base) : elle restait toujours vide, donc TOUS les comptes, Pro et Business
+  // compris, étaient bloqués à la 31e vente de la journée et renvoyés vers la page
+  // d'abonnement alors qu'ils payaient déjà.
+  const dailySalesLimit = effectivePlan === "free" ? FREE_SALES_LIMIT_PER_DAY : null;
   // Date de création du compte (auth.users.created_at), utilisée pour le quota IA en deux
   // phases du palier Gratuit (10 messages/mois pendant les 30 premiers jours glissants, puis 5).
   const [accountCreatedAt, setAccountCreatedAt] = useState(null);
@@ -8603,6 +8611,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           // actif — même règle que le déclencheur enforce_shop_rules côté base.
           const expired = subRow.expires_at && new Date(subRow.expires_at).getTime() <= Date.now();
           setCurrentPlan(expired ? "free" : normalizePlanId(subRow.plan));
+          // Alimente l'affichage "Abonnement jusqu'au..." (en-tête et Réglages), qui
+          // restait toujours vide faute de source.
+          setExpiresAt(subRow.expires_at || null);
         }
         if (!cancelled && subRow && subRow.suspended) setAccountSuspended(true);
       } catch (e) {
@@ -9947,7 +9958,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // employees et actionLog ne viennent plus de window.storage : ils sont chargés séparément
     // depuis Supabase (tables employees/action_log), filtrés par la boutique active — voir le
     // useEffect dédié plus bas, qui se redéclenche automatiquement à chaque changement de boutique.
-    if (sub) setExpiresAt(sub.expiresAt);
+    // La date d'expiration de l'abonnement ne vient plus d'ici : `sub` provenait de
+    // l'ancien canal window.storage (table kv_store, absente de la base), donc valait
+    // toujours null, et écrasait la vraie date lue dans la table subscriptions (voir
+    // le chargement du palier, qui fait désormais setExpiresAt).
     if (account) setShopPhoto(account.shopPhoto || null);
   }, [shopKey]);
   // Résolveur appelé juste avant l'envoi d'une écriture mise en file d'attente
@@ -11925,11 +11939,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return;
     }
     setReceivedFieldError(false);
-    // Plafond de ventes : 10/jour pour le palier Gratuit (et tout palier payant expiré),
+    // Plafond de ventes : 30/jour pour le palier Gratuit (et tout palier payant expiré),
     // remis à zéro chaque jour sans jamais se cumuler. Pro et Business sont illimités en
     // ventes tant que l'abonnement est actif.
-    const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
-    const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
+    const salesLimit = dailySalesLimit;
     if (salesLimit !== null && salesTodayCount() >= salesLimit) {
       // Au lieu d'un simple message d'erreur, on ouvre directement les paliers de
       // paiement : le commerçant voit immédiatement comment débloquer plus de ventes.
@@ -12282,8 +12295,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           resolved.push({ product, qty: it.qty, mode, unitPrice });
         }
         if (resolved.length === 0) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
-        const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
-        const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
+        const salesLimit = dailySalesLimit;
         if (salesLimit !== null && salesTodayCount() >= salesLimit) {
           setShowSettings(true);
           setSettingsView("subscription");
@@ -14816,8 +14828,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               // Barre de progression des ventes du jour, visible en permanence en haut de
               // l'onglet Vente (pas seulement quand un panier est ouvert) pour que le
               // commerçant voie toujours où il en est par rapport à sa limite gratuite.
-              const activeForSalesLimit = expiresAt && new Date(expiresAt) > new Date();
-              const salesLimit = !activeForSalesLimit ? FREE_SALES_LIMIT_PER_DAY : null;
+              const salesLimit = dailySalesLimit;
               if (salesLimit === null) return null;
               const used = salesTodayCount();
               const ratio = Math.min(1, used / salesLimit);
