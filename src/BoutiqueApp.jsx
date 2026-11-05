@@ -660,16 +660,23 @@ const SUBSCRIPTION_PLANS = {
     maxEmployees: 3,
     aiMonthlyQuota: 500,
     maxShops: 1,
-    features: ["advancedHistory", "stockAlerts", "anomalyAlerts"],
+    // Les plages horaires et le rapport de caisse par employé sont en Pro (et plus
+    // seulement en Business) : Pro permet déjà d'avoir des employés, et pouvoir les
+    // encadrer est justement l'une des premières raisons de payer.
+    features: ["advancedHistory", "stockAlerts", "anomalyAlerts", "shiftPermissions", "perEmployeeCashReport"],
   },
   business: {
     id: "business",
     nameKey: "planBusiness2Name",
     price: 50,
     maxEmployees: null,
-    aiMonthlyQuota: null,
+    // 2 000 messages/mois et non "illimité" : l'assistant IA ne passe que par des offres
+    // gratuites (Gemini, Groq, Cerebras, Mistral, Cohere), dont les quotas sont partagés
+    // entre tous les utilisateurs — un seul compte sans limite pourrait les épuiser pour tous.
+    aiMonthlyQuota: 2000,
     maxShops: null,
-    features: ["advancedHistory", "stockAlerts", "anomalyAlerts", "shiftPermissions", "perEmployeeCashReport", "accountingExport", "multiShop", "consolidatedView", "shopComparison", "supervisorRole", "salesGoals", "shopProfitabilityReport"],
+    // "consolidatedView" retirée : annoncée mais jamais construite (aucun écran ne la fournit).
+    features: ["advancedHistory", "stockAlerts", "anomalyAlerts", "shiftPermissions", "perEmployeeCashReport", "accountingExport", "multiShop", "shopComparison", "supervisorRole", "salesGoals", "shopProfitabilityReport"],
   },
 };
 // Ordre croissant, utile pour comparer deux paliers ("est-ce que ce plan est au moins Pro ?").
@@ -686,8 +693,8 @@ function normalizePlanId(plan) {
   return SUBSCRIPTION_PLANS[plan] ? plan : "free";
 }
 // Fonctionnalités réellement verrouillées par palier et affichées dans l'écran Abonnement
-// (clé de traduction : EXTRA_UI["feat_" + id]). "stockAlerts" et "consolidatedView" sont
-// volontairement absentes : déclarées dans les paliers mais ne verrouillent rien pour l'instant.
+// (clé de traduction : EXTRA_UI["feat_" + id]). "stockAlerts" est volontairement absente :
+// déclarée dans les paliers mais ne verrouille rien pour l'instant.
 // "multiShop" est affichée à part (ligne "Plusieurs boutiques").
 const PLAN_FEATURE_DISPLAY = ["anomalyAlerts", "advancedHistory", "shiftPermissions", "perEmployeeCashReport", "accountingExport", "shopComparison", "supervisorRole", "salesGoals", "shopProfitabilityReport"];
 // Anciennes limites de stock, plus utilisées nulle part (le nombre de produits est
@@ -696,6 +703,9 @@ const PLAN_FEATURE_DISPLAY = ["anomalyAlerts", "advancedHistory", "shiftPermissi
 const FREE_PRODUCT_LIMIT = 20;
 const PRO_PRODUCT_LIMIT = 100;
 const FREE_SALES_LIMIT_PER_DAY = 30;
+// Jours pendant lesquels un palier payant expiré reste pleinement actif (avec un rappel)
+// avant de repasser en Gratuit. Doit rester aligné sur le déclencheur enforce_shop_rules.
+const SUBSCRIPTION_GRACE_DAYS = 7;
 // Programme de fidélité : tous les combien d'achats (compté par numéro de téléphone
 // client) une récompense est suggérée au boutiquier. Valeur fixe pour l'instant (pas
 // encore un réglage modifiable) — simple à changer ici si besoin plus tard.
@@ -4533,6 +4543,12 @@ EXTRA_UI.logUnsoldQty = { fr: "invendus :", am: "ያልተሸጠ፦", en: "unsol
 // sous le champ "nouvelle boutique" du sélecteur.
 EXTRA_UI.shopLimitReached = { fr: "Votre palier ne permet qu'une seule boutique. Passez au palier Business pour en gérer plusieurs.", am: "የእርስዎ ዕቅድ አንድ ሱቅ ብቻ ይፈቅዳል። ብዙ ሱቆችን ለማስተዳደር ወደ Business ዕቅድ ይቀይሩ።", en: "Your plan allows only one shop. Upgrade to Business to manage several.", tl: "Isang tindahan lang ang pinapayagan ng inyong plano. Lumipat sa Business para makapamahala ng ilan.", te: "మీ ప్లాన్‌లో ఒక్క దుకాణం మాత్రమే అనుమతించబడుతుంది. అనేక దుకాణాలను నిర్వహించడానికి Business ప్లాన్‌కు మారండి.", th: "แพ็กเกจของคุณใช้ได้เพียงร้านเดียว อัปเกรดเป็น Business เพื่อจัดการหลายร้าน", wo: "Sa pàkk dafa may benn bitig rekk. Dem ci pàkk Business ngir saytu ay bitig yu bari.", pl: "Państwa plan pozwala tylko na jeden sklep. Aby zarządzać kilkoma, proszę przejść na plan Business.", ar: "باقتكم تسمح بمتجر واحد فقط. انتقلوا إلى باقة Business لإدارة عدة متاجر.", es: "Su plan solo permite una tienda. Pase al plan Business para gestionar varias.", pt: "O seu plano permite apenas uma loja. Mude para o plano Business para gerir várias.", zh: "您的套餐仅允许一家店铺。升级到 Business 套餐即可管理多家店铺。", vi: "Gói của bạn chỉ cho phép một cửa hàng. Hãy nâng cấp lên gói Business để quản lý nhiều cửa hàng.", de: "Ihr Tarif erlaubt nur einen Laden. Wechseln Sie zu Business, um mehrere zu verwalten.", ru: "Ваш тариф позволяет только один магазин. Перейдите на тариф Business, чтобы управлять несколькими.", hi: "आपकी योजना में केवल एक दुकान की अनुमति है। कई दुकानें चलाने के लिए Business योजना लें।", ta: "உங்கள் திட்டத்தில் ஒரு கடை மட்டுமே அனுமதிக்கப்படும். பல கடைகளை நிர்வகிக்க Business திட்டத்திற்கு மாறுங்கள்.", bn: "আপনার প্ল্যানে কেবল একটি দোকান রাখা যায়। একাধিক দোকান চালাতে Business প্ল্যানে যান।", ur: "آپ کے پلان میں صرف ایک دکان کی اجازت ہے۔ کئی دکانیں چلانے کے لیے Business پلان پر جائیں۔", id: "Paket Anda hanya mengizinkan satu toko. Beralihlah ke paket Business untuk mengelola beberapa toko.", tr: "Planınız yalnızca bir mağazaya izin veriyor. Birden fazla mağaza yönetmek için Business planına geçin.", ko: "현재 요금제는 매장 1개만 허용됩니다. 여러 매장을 관리하려면 Business 요금제로 변경하세요.", ja: "ご利用のプランでは店舗は1つまでです。複数の店舗を管理するには Business プランへ変更してください。", it: "Il suo piano consente un solo negozio. Passi al piano Business per gestirne diversi.", nl: "Uw abonnement staat maar één winkel toe. Stap over op Business om er meerdere te beheren.", sw: "Mpango wako unaruhusu duka moja tu. Hamia mpango wa Business ili kusimamia maduka kadhaa.", ha: "Tsarinku yana ba da damar shago ɗaya kawai. Ku koma tsarin Business don gudanar da shaguna da yawa.", bm: "Aw ka sugandili bɛ butiki kelen dɔrɔn de sira di. Aw ye Business ta walasa ka butiki caman ɲɛnabɔ.", zu: "Uhlelo lwenu luvumela isitolo esisodwa kuphela. Shintshelani ku-Business ukuze niphathe eziningana.", yo: "Ètò yín gba ṣọ́ọ̀bù kan ṣoṣo láàyè. Ẹ lọ sí ètò Business láti ṣàkóso ọ̀pọ̀ ṣọ́ọ̀bù." };
 EXTRA_UI.shopNameTaken = { fr: "Vous avez déjà une boutique portant ce nom. Choisissez un autre nom.", am: "በዚህ ስም የሚጠራ ሱቅ አስቀድሞ አለዎት። እባክዎ ሌላ ስም ይምረጡ።", en: "You already have a shop with this name. Please choose another name.", tl: "Mayroon na kayong tindahan na may ganitong pangalan. Pumili ng ibang pangalan.", te: "ఈ పేరుతో మీకు ఇప్పటికే ఒక దుకాణం ఉంది. దయచేసి వేరే పేరు ఎంచుకోండి.", th: "คุณมีร้านที่ใช้ชื่อนี้อยู่แล้ว โปรดเลือกชื่ออื่น", wo: "Am ngeen ba noppi benn bitig bu am tur boobu. Tànnleen beneen tur.", pl: "Mają Państwo już sklep o tej nazwie. Proszę wybrać inną nazwę.", ar: "لديكم بالفعل متجر بهذا الاسم. اختاروا اسمًا آخر.", es: "Ya tiene una tienda con este nombre. Elija otro nombre.", pt: "Já tem uma loja com este nome. Escolha outro nome.", zh: "您已有一家同名店铺。请换一个名称。", vi: "Bạn đã có một cửa hàng với tên này. Vui lòng chọn tên khác.", de: "Sie haben bereits einen Laden mit diesem Namen. Bitte wählen Sie einen anderen Namen.", ru: "У вас уже есть магазин с таким названием. Выберите другое название.", hi: "इस नाम की दुकान आपके पास पहले से है। कृपया कोई दूसरा नाम चुनें।", ta: "இந்தப் பெயரில் உங்களிடம் ஏற்கனவே ஒரு கடை உள்ளது. வேறு பெயரைத் தேர்ந்தெடுக்கவும்.", bn: "এই নামে আপনার একটি দোকান আগে থেকেই আছে। অন্য একটি নাম বেছে নিন।", ur: "اس نام کی دکان آپ کے پاس پہلے سے موجود ہے۔ براہ کرم کوئی اور نام منتخب کریں۔", id: "Anda sudah memiliki toko dengan nama ini. Silakan pilih nama lain.", tr: "Bu ada sahip bir mağazanız zaten var. Lütfen başka bir ad seçin.", ko: "이미 같은 이름의 매장이 있습니다. 다른 이름을 선택하세요.", ja: "同じ名前の店舗がすでにあります。別の名前を選んでください。", it: "Ha già un negozio con questo nome. Scelga un altro nome.", nl: "U hebt al een winkel met deze naam. Kies een andere naam.", sw: "Tayari una duka lenye jina hili. Tafadhali chagua jina jingine.", ha: "Kuna da shago mai wannan suna tuni. Da fatan za ku zaɓi wani suna.", bm: "Butiki dɔ bɛ aw bolo ka kɔn tɔgɔ in na. Aw ye tɔgɔ wɛrɛ sugandi.", zu: "Senivele ninesitolo esinaleli gama. Sicela nikhethe elinye igama.", yo: "Ẹ ti ní ṣọ́ọ̀bù kan tó ní orúkọ yìí. Ẹ jọ̀wọ́ yan orúkọ mìíràn." };
+// Fin d'abonnement payant : période de grâce et boutiques secondaires en consultation seule.
+EXTRA_UI.subscriptionGraceBanner = { fr: "Votre abonnement a expiré le {date}. Il reste actif encore {n} jour(s) : renouvelez-le pour conserver ses fonctions.", am: "የደንበኝነት ምዝገባዎ በ{date} አልቋል። ለ{n} ተጨማሪ ቀን(ናት) ንቁ ሆኖ ይቆያል፦ ባህሪያቱን ለማቆየት ያድሱት።", en: "Your subscription expired on {date}. It stays active for {n} more day(s): renew it to keep its features.", tl: "Nag-expire ang inyong subscription noong {date}. Mananatili itong aktibo nang {n} araw pa: i-renew ito para mapanatili ang mga feature.", te: "మీ సబ్‌స్క్రిప్షన్ {date}న ముగిసింది. ఇది ఇంకా {n} రోజులు సక్రియంగా ఉంటుంది: దాని సౌకర్యాలను కొనసాగించడానికి పునరుద్ధరించండి.", th: "การสมัครสมาชิกของคุณหมดอายุเมื่อ {date} ยังคงใช้งานได้อีก {n} วัน: ต่ออายุเพื่อใช้ฟีเจอร์ต่อไป", wo: "Sa abonmaa jeex na ci {date}. Dina dox ba {n} fan: yeesal ko ngir denc ay jumtukaayam.", pl: "Subskrypcja Państwa wygasła {date}. Pozostanie aktywna jeszcze przez {n} dz.: proszę ją odnowić, aby zachować jej funkcje.", ar: "انتهى اشتراككم في {date}. سيبقى فعّالًا لمدة {n} يوم إضافي: جدّدوه للاحتفاظ بميزاته.", es: "Su suscripción venció el {date}. Seguirá activa {n} día(s) más: renuévela para conservar sus funciones.", pt: "A sua assinatura expirou em {date}. Continua ativa por mais {n} dia(s): renove-a para manter as suas funcionalidades.", zh: "您的订阅已于 {date} 到期。它还将保持有效 {n} 天：请续订以保留其功能。", vi: "Gói đăng ký của bạn đã hết hạn vào {date}. Gói vẫn hoạt động thêm {n} ngày: hãy gia hạn để giữ các tính năng.", de: "Ihr Abonnement ist am {date} abgelaufen. Es bleibt noch {n} Tag(e) aktiv: Verlängern Sie es, um seine Funktionen zu behalten.", ru: "Срок вашей подписки истёк {date}. Она останется активной ещё {n} дн.: продлите её, чтобы сохранить функции.", hi: "आपकी सदस्यता {date} को समाप्त हो गई। यह {n} दिन और सक्रिय रहेगी: इसकी सुविधाएँ बनाए रखने के लिए इसे नवीनीकृत करें।", ta: "உங்கள் சந்தா {date} அன்று காலாவதியானது. இன்னும் {n} நாள் செயலில் இருக்கும்: அதன் வசதிகளைத் தக்கவைக்க புதுப்பிக்கவும்.", bn: "আপনার সাবস্ক্রিপশনের মেয়াদ {date} তারিখে শেষ হয়েছে। এটি আরও {n} দিন সক্রিয় থাকবে: এর সুবিধাগুলো ধরে রাখতে নবায়ন করুন।", ur: "آپ کی سبسکرپشن {date} کو ختم ہو گئی۔ یہ مزید {n} دن فعال رہے گی: اس کی سہولیات برقرار رکھنے کے لیے اس کی تجدید کریں۔", id: "Langganan Anda berakhir pada {date}. Langganan masih aktif {n} hari lagi: perpanjang untuk mempertahankan fiturnya.", tr: "Aboneliğinizin süresi {date} tarihinde doldu. {n} gün daha etkin kalacak: özelliklerini korumak için yenileyin.", ko: "구독이 {date}에 만료되었습니다. {n}일 동안 계속 사용할 수 있습니다. 기능을 유지하려면 갱신하세요.", ja: "ご契約は {date} に期限切れとなりました。あと {n} 日間は有効です。機能を引き続きご利用いただくには更新してください。", it: "Il suo abbonamento è scaduto il {date}. Resta attivo ancora {n} giorno/i: lo rinnovi per mantenerne le funzioni.", nl: "Uw abonnement is verlopen op {date}. Het blijft nog {n} dag(en) actief: verleng het om de functies te behouden.", sw: "Usajili wako uliisha tarehe {date}. Utaendelea kufanya kazi kwa siku {n} zaidi: uhuishe ili kuendelea kutumia vipengele vyake.", ha: "Biyan kuɗinku ya ƙare a ranar {date}. Zai ci gaba da aiki har tsawon kwana {n}: ku sabunta shi don ci gaba da amfani da fasalolinsa.", bm: "Aw ka abonɛman banna {date}. A bɛna to ka baara kɛ tile {n} wɛrɛ: aw ye a kura kɛ walasa a nafaw ka to aw bolo.", zu: "Ukubhalisa kwenu kuphelelwe yisikhathi ngo-{date}. Kusazosebenza izinsuku ezingu-{n}: kuvuseleleni ukuze nigcine izici zakho.", yo: "Ìforúkọsílẹ̀ yín parí ní {date}. Yóò ṣì máa ṣiṣẹ́ fún ọjọ́ {n} sí i: ẹ tún un ṣe láti máa lo àwọn ẹ̀yà rẹ̀." };
+EXTRA_UI.subscriptionRenewBtn = { fr: "Renouveler", am: "አድስ", en: "Renew", tl: "I-renew", te: "పునరుద్ధరించండి", th: "ต่ออายุ", wo: "Yeesal", pl: "Odnów", ar: "تجديد", es: "Renovar", pt: "Renovar", zh: "续订", vi: "Gia hạn", de: "Verlängern", ru: "Продлить", hi: "नवीनीकृत करें", ta: "புதுப்பிக்கவும்", bn: "নবায়ন করুন", ur: "تجدید کریں", id: "Perpanjang", tr: "Yenile", ko: "갱신", ja: "更新する", it: "Rinnova", nl: "Verlengen", sw: "Uhuishe", ha: "Sabunta", bm: "Ka kura kɛ", zu: "Vuselela", yo: "Tún un ṣe" };
+EXTRA_UI.shopReadOnlyBanner = { fr: "Boutique en consultation seule : votre abonnement Business a expiré. Vous pouvez consulter ses données et enregistrer les remboursements de dettes. Renouvelez pour y vendre à nouveau — rien n'a été perdu.", am: "ለማየት ብቻ የሆነ ሱቅ፦ የBusiness ምዝገባዎ አልቋል። መረጃውን ማየትና የዕዳ ክፍያዎችን መመዝገብ ይችላሉ። እዚህ እንደገና ለመሸጥ ያድሱት — ምንም አልጠፋም።", en: "View-only shop: your Business subscription has expired. You can view its data and record debt repayments. Renew to sell here again — nothing has been lost.", tl: "Tindahang pang-view lang: nag-expire na ang inyong Business subscription. Maaari ninyong tingnan ang data nito at itala ang mga bayad sa utang. I-renew para makapagbenta ulit dito — walang nawala.", te: "చూడటానికి మాత్రమే దుకాణం: మీ Business సబ్‌స్క్రిప్షన్ ముగిసింది. మీరు దాని డేటాను చూడవచ్చు, బాకీ చెల్లింపులను నమోదు చేయవచ్చు. ఇక్కడ మళ్లీ అమ్మడానికి పునరుద్ధరించండి — ఏదీ కోల్పోలేదు.", th: "ร้านค้าแบบดูอย่างเดียว: การสมัคร Business ของคุณหมดอายุแล้ว คุณยังดูข้อมูลและบันทึกการชำระหนี้ได้ ต่ออายุเพื่อกลับมาขายที่นี่อีกครั้ง — ไม่มีข้อมูลใดสูญหาย", wo: "Bitig bu ñuy xool rekk: sa abonmaa Business jeex na. Mënngeen xool ay donneeam te bind fey yi ñuy fey boor. Yeesalleen ngir jaay fi ci kanam — dara réerul.", pl: "Sklep tylko do wglądu: subskrypcja Business wygasła. Mogą Państwo przeglądać jego dane i rejestrować spłaty długów. Proszę ją odnowić, aby znów tu sprzedawać — nic nie zostało utracone.", ar: "متجر للعرض فقط: انتهى اشتراك Business الخاص بكم. يمكنكم الاطلاع على بياناته وتسجيل سداد الديون. جدّدوا الاشتراك للبيع فيه مجددًا — لم يُفقد أي شيء.", es: "Tienda en modo solo lectura: su suscripción Business ha vencido. Puede consultar sus datos y registrar pagos de deudas. Renueve para volver a vender aquí; no se ha perdido nada.", pt: "Loja só para consulta: a sua assinatura Business expirou. Pode consultar os dados e registar pagamentos de dívidas. Renove para voltar a vender aqui — nada foi perdido.", zh: "店铺仅供查看：您的 Business 订阅已到期。您仍可查看其数据并记录欠款还款。续订后即可在此恢复销售——没有任何数据丢失。", vi: "Cửa hàng chỉ để xem: gói Business của bạn đã hết hạn. Bạn vẫn có thể xem dữ liệu và ghi nhận khoản trả nợ. Hãy gia hạn để bán hàng ở đây trở lại — không có gì bị mất.", de: "Laden nur zur Ansicht: Ihr Business-Abonnement ist abgelaufen. Sie können seine Daten einsehen und Schuldenrückzahlungen erfassen. Verlängern Sie es, um hier wieder zu verkaufen – es ist nichts verloren gegangen.", ru: "Магазин только для просмотра: срок вашей подписки Business истёк. Вы можете просматривать его данные и записывать погашение долгов. Продлите подписку, чтобы снова продавать здесь, — ничего не потеряно.", hi: "दुकान केवल देखने के लिए: आपकी Business सदस्यता समाप्त हो गई है। आप इसका डेटा देख सकते हैं और उधार की वापसी दर्ज कर सकते हैं। यहाँ फिर से बिक्री करने के लिए नवीनीकृत करें — कुछ भी नहीं खोया है।", ta: "பார்வைக்கு மட்டும் கடை: உங்கள் Business சந்தா காலாவதியாகிவிட்டது. அதன் தரவைப் பார்க்கலாம், கடன் திருப்பிச் செலுத்துதல்களைப் பதிவு செய்யலாம். இங்கே மீண்டும் விற்க புதுப்பிக்கவும் — எதுவும் இழக்கப்படவில்லை.", bn: "শুধু দেখার জন্য দোকান: আপনার Business সাবস্ক্রিপশনের মেয়াদ শেষ হয়েছে। আপনি এর তথ্য দেখতে এবং বাকি পরিশোধ নথিভুক্ত করতে পারবেন। এখানে আবার বিক্রি করতে নবায়ন করুন — কিছুই হারায়নি।", ur: "صرف دیکھنے کے لیے دکان: آپ کی Business سبسکرپشن ختم ہو گئی ہے۔ آپ اس کا ڈیٹا دیکھ سکتے ہیں اور ادھار کی واپسی درج کر سکتے ہیں۔ یہاں دوبارہ فروخت کرنے کے لیے تجدید کریں — کچھ بھی ضائع نہیں ہوا۔", id: "Toko hanya untuk dilihat: langganan Business Anda telah berakhir. Anda dapat melihat datanya dan mencatat pembayaran utang. Perpanjang untuk berjualan di sini lagi — tidak ada yang hilang.", tr: "Yalnızca görüntülenebilir mağaza: Business aboneliğinizin süresi doldu. Verilerini görüntüleyebilir ve borç ödemelerini kaydedebilirsiniz. Burada yeniden satış yapmak için yenileyin; hiçbir şey kaybolmadı.", ko: "보기 전용 매장: Business 구독이 만료되었습니다. 데이터를 확인하고 외상 상환을 기록할 수 있습니다. 이 매장에서 다시 판매하려면 갱신하세요. 잃어버린 데이터는 없습니다.", ja: "閲覧専用の店舗：Business プランの期限が切れました。データの閲覧と、掛け売りの返済の記録はできます。ここで再び販売するには更新してください。データは何も失われていません。", it: "Negozio in sola consultazione: il suo abbonamento Business è scaduto. Può consultarne i dati e registrare i rimborsi dei debiti. Rinnovi per tornare a vendere qui: non è andato perso nulla.", nl: "Winkel alleen ter inzage: uw Business-abonnement is verlopen. U kunt de gegevens bekijken en terugbetalingen van schulden registreren. Verleng om hier weer te verkopen — er is niets verloren gegaan.", sw: "Duka la kutazama tu: usajili wako wa Business umeisha. Unaweza kuona data yake na kurekodi malipo ya madeni. Uhuishe ili kuuza hapa tena — hakuna kilichopotea.", ha: "Shago na dubawa kawai: biyan kuɗin Business ɗinku ya ƙare. Kuna iya duba bayanansa da yin rijistar biyan bashi. Ku sabunta don sake sayarwa a nan — ba abin da ya ɓace.", bm: "Butiki min bɛ lajɛ dɔrɔn: aw ka Business abonɛman banna. Aw bɛ se k'a kunnafoniw lajɛ ani ka juru saraw sɛbɛn. Aw ye a kura kɛ walasa ka feereli kɛ yan tugun — foyi ma tunun.", zu: "Isitolo sokubuka kuphela: ukubhalisa kwenu kwe-Business kuphelelwe yisikhathi. Ningabuka idatha yaso futhi nirekhode ukukhokhwa kwezikweletu. Vuselelani ukuze nidayise lapha futhi — akukho okulahlekile.", yo: "Ṣọ́ọ̀bù fún wíwò nìkan: ìforúkọsílẹ̀ Business yín ti parí. Ẹ lè wo àwọn dátà rẹ̀ kí ẹ sì kọ ìsanpadà gbèsè sílẹ̀. Ẹ tún un ṣe láti tún máa tà níbí — kò sí ohun tó sọnù." };
+EXTRA_UI.shopReadOnlyBlocked = { fr: "Cette boutique est en consultation seule. Renouvelez votre abonnement Business pour la modifier.", am: "ይህ ሱቅ ለማየት ብቻ ነው። ለውጦችን ለማድረግ የBusiness ምዝገባዎን ያድሱ።", en: "This shop is view-only. Renew your Business subscription to make changes.", tl: "Pang-view lang ang tindahang ito. I-renew ang inyong Business subscription para baguhin ito.", te: "ఈ దుకాణం చూడటానికి మాత్రమే. మార్పులు చేయడానికి మీ Business సబ్‌స్క్రిప్షన్‌ను పునరుద్ధరించండి.", th: "ร้านนี้ดูได้อย่างเดียว ต่ออายุการสมัคร Business เพื่อแก้ไข", wo: "Bitig bii, xool rekk lañu ko. Yeesalleen sa abonmaa Business ngir soppi ko.", pl: "Ten sklep jest tylko do wglądu. Proszę odnowić subskrypcję Business, aby go modyfikować.", ar: "هذا المتجر للعرض فقط. جدّدوا اشتراك Business لتعديله.", es: "Esta tienda está en modo solo lectura. Renueve su suscripción Business para modificarla.", pt: "Esta loja está apenas para consulta. Renove a sua assinatura Business para a modificar.", zh: "此店铺仅供查看。请续订 Business 订阅以进行修改。", vi: "Cửa hàng này chỉ để xem. Hãy gia hạn gói Business để chỉnh sửa.", de: "Dieser Laden ist nur zur Ansicht. Verlängern Sie Ihr Business-Abonnement, um ihn zu ändern.", ru: "Этот магазин доступен только для просмотра. Продлите подписку Business, чтобы вносить изменения.", hi: "यह दुकान केवल देखने के लिए है। इसमें बदलाव करने के लिए अपनी Business सदस्यता नवीनीकृत करें।", ta: "இந்தக் கடை பார்வைக்கு மட்டுமே. மாற்றங்கள் செய்ய உங்கள் Business சந்தாவைப் புதுப்பிக்கவும்.", bn: "এই দোকানটি শুধু দেখার জন্য। পরিবর্তন করতে আপনার Business সাবস্ক্রিপশন নবায়ন করুন।", ur: "یہ دکان صرف دیکھنے کے لیے ہے۔ اس میں تبدیلی کے لیے اپنی Business سبسکرپشن کی تجدید کریں۔", id: "Toko ini hanya untuk dilihat. Perpanjang langganan Business Anda untuk mengubahnya.", tr: "Bu mağaza yalnızca görüntülenebilir. Değişiklik yapmak için Business aboneliğinizi yenileyin.", ko: "이 매장은 보기 전용입니다. 변경하려면 Business 구독을 갱신하세요.", ja: "この店舗は閲覧専用です。変更するには Business プランを更新してください。", it: "Questo negozio è in sola consultazione. Rinnovi l'abbonamento Business per modificarlo.", nl: "Deze winkel is alleen ter inzage. Verleng uw Business-abonnement om hem te wijzigen.", sw: "Duka hili ni la kutazama tu. Uhuishe usajili wako wa Business ili kulibadilisha.", ha: "Wannan shagon na dubawa ne kawai. Ku sabunta biyan kuɗin Business don yin canje-canje.", bm: "Nin butiki in bɛ lajɛ dɔrɔn. Aw ye aw ka Business abonɛman kura kɛ walasa k'a yɛlɛma.", zu: "Lesi sitolo esokubuka kuphela. Vuselelani ukubhalisa kwenu kwe-Business ukuze nenze izinguquko.", yo: "Ṣọ́ọ̀bù yìí jẹ́ fún wíwò nìkan. Ẹ tún ìforúkọsílẹ̀ Business yín ṣe láti ṣe àyípadà." };
+EXTRA_UI.shopReadOnlyGoPrimary = { fr: "Ouvrir la boutique principale", am: "ዋናውን ሱቅ ክፈት", en: "Open main shop", tl: "Buksan ang pangunahing tindahan", te: "ప్రధాన దుకాణాన్ని తెరవండి", th: "เปิดร้านหลัก", wo: "Ubbi bitig bu mag bi", pl: "Otwórz sklep główny", ar: "فتح المتجر الرئيسي", es: "Abrir la tienda principal", pt: "Abrir a loja principal", zh: "打开主店铺", vi: "Mở cửa hàng chính", de: "Hauptladen öffnen", ru: "Открыть основной магазин", hi: "मुख्य दुकान खोलें", ta: "முதன்மைக் கடையைத் திறக்கவும்", bn: "প্রধান দোকান খুলুন", ur: "مرکزی دکان کھولیں", id: "Buka toko utama", tr: "Ana mağazayı aç", ko: "기본 매장 열기", ja: "メイン店舗を開く", it: "Apri il negozio principale", nl: "Hoofdwinkel openen", sw: "Fungua duka kuu", ha: "Buɗe babban shago", bm: "Butiki fɔlɔ da wuli", zu: "Vula isitolo esiyinhloko", yo: "Ṣí ṣọ́ọ̀bù àkọ́kọ́" };
 const TAB_HELP_CONTENT = {
   stock: { titleKey: "tabHelpStockTitle", itemKeys: ["tabHelpStock1", "tabHelpStock2", "tabHelpStock3", "tabHelpStock4", "tabHelpStock5", "tabHelpStock6", "tabHelpStock7"] },
   dashboard: { titleKey: "tabHelpDashboardTitle", itemKeys: ["tabHelpDashboard1", "tabHelpDashboard2", "tabHelpDashboard3"] },
@@ -8477,6 +8493,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // tant que le chargement n'est pas terminé, pour ne jamais débloquer une fonctionnalité payante
   // par erreur avant confirmation du vrai palier.
   const [currentPlan, setCurrentPlan] = useState("free");
+  // ---- Fin d'abonnement payant ----
+  // Après la date d'expiration, le palier payant reste actif pendant SUBSCRIPTION_GRACE_DAYS
+  // (rappel affiché), pour laisser le temps de renouveler — utile notamment quand un
+  // paiement arrive en retard. Ensuite le compte repasse en Gratuit : les boutiques
+  // secondaires restent visibles mais passent en consultation seule (voir shopReadOnly).
+  // subscriptionGraceUntil = fin de la période de grâce (ms) tant qu'on est dedans, sinon null.
+  // planLoaded = le palier réel a été lu depuis la base (évite d'agir sur la valeur
+  // provisoire "free" du tout premier rendu).
+  const [subscriptionGraceUntil, setSubscriptionGraceUntil] = useState(null);
+  const [planLoaded, setPlanLoaded] = useState(false);
   const [accountSuspended, setAccountSuspended] = useState(false);
   // ---- Mode test développeur ----
   // Simule un palier localement (Gratuit / Pro / Business) pour tester les fonctionnalités
@@ -8608,11 +8634,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           // bord admin l'accorde "pour N jours"). Avant, la date n'était jamais lue : un
           // palier payant restait actif pour toujours. Sans date (accord manuel), il reste
           // actif — même règle que le déclencheur enforce_shop_rules côté base.
-          const expired = subRow.expires_at && new Date(subRow.expires_at).getTime() <= Date.now();
-          setCurrentPlan(expired ? "free" : normalizePlanId(subRow.plan));
+          // Palier payant : actif jusqu'à expires_at, puis encore SUBSCRIPTION_GRACE_DAYS de
+          // grâce (même règle que le déclencheur enforce_shop_rules côté base), puis Gratuit.
+          const expiresMs = subRow.expires_at ? new Date(subRow.expires_at).getTime() : null;
+          const graceEndMs = expiresMs !== null ? expiresMs + SUBSCRIPTION_GRACE_DAYS * 86400000 : null;
+          const now = Date.now();
+          const lapsed = graceEndMs !== null && now >= graceEndMs;
+          const inGrace = expiresMs !== null && now >= expiresMs && !lapsed && normalizePlanId(subRow.plan) !== "free";
+          setCurrentPlan(lapsed ? "free" : normalizePlanId(subRow.plan));
+          setSubscriptionGraceUntil(inGrace ? graceEndMs : null);
           // Alimente l'affichage "Abonnement jusqu'au..." (en-tête et Réglages), qui
           // restait toujours vide faute de source.
           setExpiresAt(subRow.expires_at || null);
+          setPlanLoaded(true);
         }
         if (!cancelled && subRow && subRow.suspended) setAccountSuspended(true);
       } catch (e) {
@@ -9847,9 +9881,28 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   );
   // Clé de stockage de la boutique actuellement affichée. Pour la boutique "principale"
   // (comportement historique, mono-boutique), la clé reste inchangée : shop:${username}.
-  // Pour toute AUTRE boutique (multi-boutique, Business 2), la clé inclut son id, pour que
+  // Pour toute AUTRE boutique (multi-boutique, Business), la clé inclut son id, pour que
   // chaque boutique ait ses propres produits/ventes/dettes/etc., séparément stockés.
-  const isSecondaryShop = hasFeatureAccess("multiShop") && activeShopId && shops.length > 0 && shops[0].id !== activeShopId;
+  // Ne dépend PAS du palier : un compte dont l'abonnement Business a expiré garde accès à
+  // ses boutiques secondaires (en consultation seule, voir shopReadOnly) — ses données ne
+  // sont jamais cachées. Seule la boutique réellement choisie compte.
+  const isSecondaryShop = !!activeShopId && shops.length > 0 && shops[0].id !== activeShopId;
+  // Boutique secondaire d'un compte sans accès multi-boutique (Business expiré, période de
+  // grâce terminée) : on peut tout consulter et encaisser des remboursements de dettes,
+  // mais plus vendre ni modifier le stock, les dépenses, etc. Tout se débloque dès que
+  // l'abonnement est renouvelé, rien n'est perdu.
+  const shopReadOnly = isSecondaryShop && !hasFeatureAccess("multiShop");
+  // Au démarrage seulement : si la boutique mémorisée est en consultation seule, on ouvre
+  // plutôt la boutique principale, où l'on peut vendre — un commerçant pressé ne doit pas
+  // tomber sur une boutique où la vente est bloquée. Il peut toujours y revenir par le
+  // sélecteur pour consulter ses données. Attend le vrai palier (planLoaded), sinon la
+  // valeur provisoire "free" du premier rendu ferait quitter à tort une boutique Business.
+  const startupShopCheckedRef = useRef(false);
+  useEffect(() => {
+    if (startupShopCheckedRef.current || !planLoaded || shops.length === 0 || !activeShopId) return;
+    startupShopCheckedRef.current = true;
+    if (shopReadOnly) setActiveShopId(shops[0].id);
+  }, [planLoaded, shops, activeShopId, shopReadOnly]);
   const shopKey = isSecondaryShop ? `shop:${username}:${activeShopId}` : `shop:${username}`;
   const subKey = `subscription:${username}`;
   const shopSyncBaseKey = shopKey + SHOP_SYNC_BASE_SUFFIX;
@@ -9858,9 +9911,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ne peuvent donc jamais désigner deux boutiques différentes. Vaut null tant que la
   // liste des boutiques n'est pas chargée — dans ce cas on retombe sur le comportement
   // historique (tout dans shop_data), pour ne jamais risquer de perdre une écriture.
-  // Sert aussi au NOM affiché dans l'en-tête : on y montre la boutique réellement
-  // chargée, et non activeShopId. Sinon, un compte redescendu sous Business avec une
-  // boutique secondaire mémorisée afficherait son nom au-dessus du stock de la principale.
+  // Sert aussi au NOM affiché dans l'en-tête : on y montre toujours la boutique dont les
+  // données sont réellement chargées.
   const primaryShopId = shops.length > 0 ? shops[0].id : null;
   const blobShopId = isSecondaryShop ? activeShopId : primaryShopId;
   // Applique un objet "shop" (fusionné ou non) à tous les états React.
@@ -10284,7 +10336,29 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
     })();
   }, [shopKey, subKey, shopSyncBaseKey, username, isDemo, applyShop, isSecondaryShop, blobShopId]);
+  // Ce qui reste autorisé dans une boutique en consultation seule (voir shopReadOnly) :
+  // les modifications de COMPTE (réglages, langue, thème... qui ne touchent aucune clé de
+  // SHOP_LEVEL_KEYS) et les remboursements de dettes — on ne bloque jamais l'argent qui
+  // rentre. Un remboursement ne fait que changer paid/paidAmount de dettes EXISTANTES :
+  // aucune dette ajoutée ni supprimée, montants et clients inchangés.
+  const isReadOnlyAllowedChange = (overrides) => {
+    const touched = Object.keys(overrides).filter((k) => SHOP_LEVEL_KEYS.indexOf(k) !== -1);
+    if (touched.some((k) => ["debts", "debtEvents", "historyLog"].indexOf(k) === -1)) return false;
+    if (!overrides.debts) return true;
+    if (overrides.debts.length !== debts.length) return false;
+    return overrides.debts.every((d) => {
+      const prev = debts.find((x) => x.id === d.id);
+      return !!prev && prev.amount === d.amount && prev.customer === d.customer;
+    });
+  };
   const saveAll = (overrides) => {
+    // Boutique en consultation seule : tout changement non autorisé est refusé AVANT de
+    // toucher à l'état, pour que l'écran reste fidèle à ce qui est réellement enregistré.
+    if (shopReadOnly && !isReadOnlyAllowedChange(overrides)) {
+      playSound("error"); triggerHaptic("error");
+      setError(tx(lang, "shopReadOnlyBlocked"));
+      return;
+    }
     // Sauvegarde de secours dédiée au stock : écrite en tout premier, avant la
     // mise à jour de l'état et avant tout le pipeline de fusion/réseau plus bas,
     // pour capturer la nouvelle liste de produits même si la suite est interrompue.
@@ -11920,6 +11994,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const finalizeCart = (cartId) => {
     const cart = draftCarts.find((c) => c.id === cartId);
     if (!cart || cart.items.length === 0) return;
+    // Vérifié dès le début (et pas seulement dans saveAll) pour qu'aucun effet de la vente
+    // (reçu, son de succès...) ne se produise dans une boutique en consultation seule.
+    if (shopReadOnly) {
+      playSound("error"); triggerHaptic("error");
+      setError(tx(lang, "shopReadOnlyBlocked"));
+      return;
+    }
     if (cart.payment === "credit" && !cart.customer.trim()) {
       playSound("error"); triggerHaptic("error");
       setError(t(lang, "errCreditNeedsCustomer"));
@@ -12258,6 +12339,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // de la réponse. Retourne { ok, error? }.
   const executeAiAction = (action) => {
     try {
+      // Boutique en consultation seule : seul le remboursement de dette reste possible.
+      // Vérifié ici, avant l'action, pour que l'assistant n'annonce jamais un succès qui
+      // aurait en réalité été refusé par saveAll.
+      if (shopReadOnly && action.type !== "mark_debt_paid") return { ok: false, error: tx(lang, "shopReadOnlyBlocked") };
       if (action.type === "update_price") {
         const product = products.find((p) => p.id === action.productId);
         if (!product) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
@@ -12294,6 +12379,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           resolved.push({ product, qty: it.qty, mode, unitPrice });
         }
         if (resolved.length === 0) return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
+        if (shopReadOnly) return { ok: false, error: tx(lang, "shopReadOnlyBlocked") };
         const salesLimit = dailySalesLimit;
         if (salesLimit !== null && salesTodayCount() >= salesLimit) {
           setShowSettings(true);
@@ -12624,7 +12710,8 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Compte & abonnement : paliers Gratuit / Pro / Business. Le palier Gratuit a une limite de produits en stock, une limite de ventes par jour, aucun membre du personnel, un accès Assistant IA limité (quelques messages par mois) et pas de multi-boutique. Les paliers supérieurs débloquent davantage de produits, du personnel, un Assistant IA illimité, les filtres avancés et l'export dans l'Historique, l'export comptable en PDF (résumé, bénéfice net, graphique d'évolution du chiffre d'affaires, ventes vs dépenses, détail des ventes et des dépenses) et la gestion de plusieurs boutiques. Le déblocage d'un palier payant se fait en contactant le support ; l'activation est ensuite faite manuellement.
 - Personnel (comptes employés, selon le palier) : chaque membre du personnel a son propre code PIN de connexion (4 à 6 chiffres). Rôles disponibles : Vendeur (vend et consulte le stock/les dettes sans les modifier), Gérant (gère toute l'activité quotidienne : ventes, stock, dettes, caisse, statistiques), Superviseur (voit toutes les boutiques, ne modifie rien), Personnalisé (permissions choisies une à une : enregistrer des ventes, consulter/modifier le stock, consulter/gérer les dettes clients, voir/modifier la caisse, voir les statistiques). On peut définir des plages horaires de travail par membre du personnel (il ne peut alors pas encaisser de vente en dehors de ses heures déclarées) et consulter un journal des actions récentes du personnel.
 - Onglet Calculatrice (menu « Plus ») : calculatrice avec mémoire (touches GT, MRC, M+, M-), un calcul de marge en 3 touches (COÛT, VENTE, MARGE), une racine carrée (√) et des touches de taxe (TAX, TAX+, TAX-) pour ajouter/retirer une taxe préréglée. Un bouton « ? » en haut de l'écran ouvre un petit guide qui explique à quoi sert chaque touche spéciale. La touche « Produits » permet d'insérer directement le prix d'un article du Stock, et « Historique » garde les derniers calculs.
-- Multi-boutiques (selon le palier) : changer de boutique, comparer les boutiques (chiffre d'affaires, stock, dettes), rapport de caisse consolidé entre boutiques/propriétaires.
+- Multi-boutiques (palier Business) : changer de boutique, comparer les boutiques (chiffre d'affaires, stock, dettes, bénéfice), objectifs de vente par boutique. Si l'abonnement Business expire : 7 jours de grâce, puis les boutiques secondaires passent en consultation seule (on peut les consulter et y enregistrer des remboursements de dettes, mais plus y vendre) ; tout se débloque au réabonnement, rien n'est perdu.
+- Rapport de caisse par employé (palier Pro ou Business) : ventes, dépenses et remboursements encaissés par chaque membre du personnel, dans la boutique affichée.
 RÈGLE IMPORTANTE SUR LA DISPONIBILITÉ DES FONCTIONNALITÉS :
 - Tu connais précisément tout ce que l'application propose (voir le guide ci-dessus). Si le boutiquier demande comment faire quelque chose qui EXISTE dans l'application, explique-lui les étapes exactes (onglet, bouton, écran concerné) pour le faire.
 - Si le boutiquier demande une fonctionnalité qui n'existe PAS dans l'application (rien dans le guide ci-dessus n'y correspond, même de loin), dis-le-lui clairement et simplement, sans inventer de fonctionnalité, de bouton ou d'écran qui n'existe pas.
@@ -14096,7 +14183,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="min-w-0">
               <p className="text-white font-bold text-sm truncate">{shops.find((s) => s.id === (blobShopId || activeShopId))?.name || shopName}</p>
               <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.6)" }}>{t(lang, "appName")}</p>
-              {hasFeatureAccess("multiShop") && !activeEmployee && (
+              {(hasFeatureAccess("multiShop") || shops.length > 1) && !activeEmployee && (
                 <button onClick={() => setShowShopSwitcher(true)} className="text-[10px] underline mt-0.5" style={{ color: "rgba(255,255,255,0.75)" }}>
                   {t(lang, "switchShopBtn")}
                 </button>
@@ -14205,7 +14292,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div>
               <h1 className="text-lg font-bold tracking-tight">{shops.find((s) => s.id === (blobShopId || activeShopId))?.name || shopName}</h1>
               {expiresAt && <span className="text-xs opacity-80">{t(lang, "subscriptionUntil")} {fullDate(expiresAt)}</span>}
-              {hasFeatureAccess("multiShop") && !activeEmployee && (
+              {(hasFeatureAccess("multiShop") || shops.length > 1) && !activeEmployee && (
                 <button onClick={() => setShowShopSwitcher(true)} className="block text-[11px] underline mt-0.5 opacity-90">
                   {t(lang, "switchShopBtn")}
                 </button>
@@ -14249,6 +14336,41 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         <div className="mx-4 mt-3 rounded-xl p-3" style={{ background: "#e5f0e8" }}>
           <p className="text-xs font-semibold" style={{ color: GREEN }}>👀 {t(lang, "demoMode")}</p>
           <p className="text-[11px] text-gray-600 mt-0.5">Vous pouvez tout explorer librement, mais rien n'est réellement sauvegardé. Créez un vrai compte quand le souci de stockage sera résolu.</p>
+        </div>
+      )}
+      {/* Période de grâce : l'abonnement payant a expiré mais reste actif quelques jours
+          (SUBSCRIPTION_GRACE_DAYS). Rappel visible sur tous les onglets, réservé au
+          propriétaire (un employé ne peut rien y faire). */}
+      {subscriptionGraceUntil && !activeEmployee && (
+        <div className="mx-4 mt-3 rounded-xl px-3 py-2.5 flex items-center gap-2" style={{ background: "#fff4e0", border: "1px solid #f5c26b" }}>
+          <Clock size={16} style={{ color: "#b45309", flexShrink: 0 }} />
+          <p className="text-xs flex-1" style={{ color: "#92400e" }}>
+            {tx(lang, "subscriptionGraceBanner")
+              .replace("{date}", expiresAt ? fullDate(expiresAt) : "")
+              .replace("{n}", String(Math.max(1, Math.ceil((subscriptionGraceUntil - Date.now()) / 86400000))))}
+          </p>
+          <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="text-xs font-bold px-2.5 py-1.5 rounded-lg" style={{ background: "#b45309", color: "white", flexShrink: 0 }}>
+            {tx(lang, "subscriptionRenewBtn")}
+          </button>
+        </div>
+      )}
+      {/* Boutique secondaire en consultation seule (voir shopReadOnly). */}
+      {shopReadOnly && (
+        <div className="mx-4 mt-3 rounded-xl px-3 py-2.5" style={{ background: "#eef2ff", border: "1px solid #c7d2fe" }}>
+          <p className="text-xs flex items-start gap-2" style={{ color: "#3730a3" }}>
+            <Lock size={14} style={{ flexShrink: 0, marginTop: 1 }} />
+            <span>{tx(lang, "shopReadOnlyBanner")}</span>
+          </p>
+          {!activeEmployee && (
+            <div className="flex flex-wrap gap-2 mt-2">
+              <button onClick={() => setActiveShopId(shops[0].id)} className="text-xs font-semibold px-2.5 py-1.5 rounded-lg" style={{ background: "white", color: "#3730a3", border: "1px solid #c7d2fe" }}>
+                {tx(lang, "shopReadOnlyGoPrimary")}
+              </button>
+              <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="text-xs font-bold px-2.5 py-1.5 rounded-lg" style={{ background: "#4338ca", color: "white" }}>
+                {tx(lang, "subscriptionRenewBtn")}
+              </button>
+            </div>
+          )}
         </div>
       )}
       {/* Le bandeau "Version gratuite" a été retiré d'ici : les limites (ventes/jour,
@@ -17067,10 +17189,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   className="w-full text-left rounded-xl px-3 py-2.5"
                   style={{ background: s.id === activeShopId ? INDIGO : T.input, border: `1px solid ${s.id === activeShopId ? INDIGO : T.border}` }}
                 >
-                  <p className="text-sm font-semibold" style={{ color: s.id === activeShopId ? "white" : T.text }}>{s.name}</p>
+                  <p className="text-sm font-semibold flex items-center gap-1.5" style={{ color: s.id === activeShopId ? "white" : T.text }}>
+                    {s.name}
+                    {/* Cadenas : boutique secondaire en consultation seule (Business expiré). */}
+                    {!hasFeatureAccess("multiShop") && shops.length > 0 && s.id !== shops[0].id && <Lock size={12} />}
+                  </p>
                 </button>
               ))}
             </div>
+            {/* Le compte peut toujours naviguer entre ses boutiques existantes, mais n'en crée de
+                nouvelles qu'avec un accès multi-boutique (règle aussi imposée par la base). */}
+            {hasFeatureAccess("multiShop") && (<>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "newShopNameLabel")}</label>
             <div className="flex gap-2">
               <textarea autoComplete="off" rows={1}
@@ -17092,6 +17221,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {shopFormError && (
               <p className="text-xs mt-2" style={{ color: CLAY }}>{shopFormError}</p>
             )}
+            </>)}
             <button onClick={() => { setShowShopSwitcher(false); setShopFormError(""); }} className="w-full mt-4 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>
               {t(lang, "empQrClose")}
             </button>
