@@ -643,6 +643,9 @@ const LEMONSQUEEZY_WEBHOOK_ENDPOINT = "https://TON-BACKEND.example.com/lemonsque
 // Le nombre de ventes/jour est plafonné séparément (voir FREE_SALES_LIMIT_PER_DAY) : Gratuit
 // et tout palier payant expiré sont limités à 30 ventes/jour (remis à zéro chaque jour, sans
 // cumul), Pro et Business sont illimités en ventes tant que l'abonnement est actif.
+// ⚠️ Le champ "price" ci-dessous n'est plus affiché nulle part : depuis le passage à la
+// tarification par zone, le prix vient de PRICING_ZONES / planPricingFor() (plus bas).
+// Il est conservé comme simple repère historique de l'ancien tarif unique en euros.
 const SUBSCRIPTION_PLANS = {
   free: {
     id: "free",
@@ -692,6 +695,131 @@ function normalizePlanId(plan) {
   if (plan === "business1" || plan === "business2") return "business";
   return SUBSCRIPTION_PLANS[plan] ? plan : "free";
 }
+
+// ============================================================================
+// TARIFICATION INTERNATIONALE — 3 zones de pouvoir d'achat
+// ============================================================================
+// L'app vise le monde entier (Play Store / App Store / PC), pas seulement l'Afrique :
+// un prix unique en euros serait à la fois trop cher pour Bamako et trop bon marché pour
+// Paris. Le prix affiché dépend donc du PAYS DE LA BOUTIQUE (shopCountry, déjà renseigné
+// par le boutiquier et déjà utilisé pour la devise, l'indicatif téléphonique et le format
+// de date).
+//
+// ⚠️ Le pays renseigné dans l'app est DÉCLARATIF : il sert à AFFICHER le bon prix, jamais
+// à décider du prix réellement facturé. L'anti-fraude se joue au moment du paiement :
+//   - Sur Android/iOS : les "pricing templates" natifs du store. Le pays vient du compte
+//     Google/Apple et du moyen de paiement réel, pas d'un formulaire — rien à coder ici.
+//   - Sur le web : le prix dépend du MOYEN DE PAIEMENT choisi. Carte bancaire
+//     (Lemon Squeezy) = tarif international ; Mobile Money (Moneroo) = tarif Zone 3, car
+//     ouvrir un compte Orange Money/Wave/MTN exige une puce et une identité locales.
+//     (Vérifié : Lemon Squeezy ne fournit aucun champ pays exploitable dans ses webhooks.)
+const PRICING_ZONES = {
+  // Zone 1 — pouvoir d'achat élevé (Amérique du Nord, Europe, Asie développée, Golfe).
+  1: { currency: "USD", prices: { free: 0, pro: 12, business: 39 } },
+  // Zone 2 — zone intermédiaire. C'est aussi le repli par défaut pour tout pays non listé :
+  // mieux vaut un tarif médian qu'un tarif haut appliqué par erreur à un pays modeste.
+  2: { currency: "USD", prices: { free: 0, pro: 7, business: 24 } },
+  // Zone 3 — zone franc CFA (UEMOA + CEMAC). XOF et XAF ont la même valeur (parité fixe
+  // avec l'euro), donc un seul tarif en FCFA couvre les deux unions monétaires.
+  3: { currency: "XOF", prices: { free: 0, pro: 5000, business: 15000 } },
+};
+const DEFAULT_PRICING_ZONE = 2;
+// Pays de Zone 1 (tarif international plein).
+const PRICING_ZONE_1_COUNTRIES = [
+  "Allemagne", "Andorre", "Arabie saoudite", "Australie", "Autriche", "Bahreïn", "Belgique",
+  "Brunei", "Bulgarie", "Canada", "Chypre", "Corée du Sud", "Croatie", "Danemark",
+  "Émirats arabes unis", "Espagne", "Estonie", "États-Unis", "Finlande", "France", "Grèce",
+  "Hongrie", "Irlande", "Islande", "Israël", "Italie", "Japon", "Koweït", "Lettonie",
+  "Liechtenstein", "Lituanie", "Luxembourg", "Malte", "Monaco", "Norvège",
+  "Nouvelle-Zélande", "Oman", "Pays-Bas", "Pologne", "Portugal", "Qatar",
+  "République tchèque", "Roumanie", "Royaume-Uni", "Saint-Marin", "Singapour", "Slovaquie",
+  "Slovénie", "Suède", "Suisse", "Taïwan", "Vatican",
+];
+// Pays de Zone 3 (tarif FCFA). Toute la zone franc est traitée ensemble par simplicité :
+// Gabon et Guinée équatoriale ont un revenu plus élevé que leurs voisins, mais les séparer
+// de leur propre union monétaire créerait plus de confusion que de gain.
+const PRICING_ZONE_3_COUNTRIES = [
+  "Bénin", "Burkina Faso", "Cameroun", "Congo-Brazzaville", "Côte d'Ivoire", "Gabon",
+  "Guinée équatoriale", "Guinée-Bissau", "Mali", "Niger", "République centrafricaine",
+  "Sénégal", "Tchad", "Togo",
+];
+// Construit une fois la table pays → zone, pour une lecture directe à l'affichage.
+const PRICING_ZONE_BY_COUNTRY = (() => {
+  const map = {};
+  PRICING_ZONE_1_COUNTRIES.forEach((c) => { map[c] = 1; });
+  PRICING_ZONE_3_COUNTRIES.forEach((c) => { map[c] = 3; });
+  return map;
+})();
+// Zone tarifaire d'un pays (identifiant tel qu'il est stocké dans shopCountry).
+function pricingZoneOf(country) {
+  return PRICING_ZONE_BY_COUNTRY[country] || DEFAULT_PRICING_ZONE;
+}
+// Prix d'un palier dans la zone du pays, avec sa devise. Renvoie toujours un objet
+// exploitable, même pour un pays inconnu (repli sur la zone par défaut).
+function planPricingFor(planId, country) {
+  const zone = pricingZoneOf(country);
+  const zoneConf = PRICING_ZONES[zone] || PRICING_ZONES[DEFAULT_PRICING_ZONE];
+  const amount = zoneConf.prices[planId];
+  return { zone, currency: zoneConf.currency, amount: typeof amount === "number" ? amount : 0 };
+}
+// Met en forme un prix d'abonnement dans la devise de la zone, en respectant les
+// conventions du pays et de la langue du boutiquier (même logique que les dates, via
+// getAppLocale()). Le FCFA n'a pas de décimales, l'USD en a deux.
+function formatPlanPrice(amount, currency) {
+  const noDecimals = currency === "XOF" || currency === "XAF" || currency === "JPY";
+  try {
+    return new Intl.NumberFormat(getAppLocale(), {
+      style: "currency",
+      currency,
+      minimumFractionDigits: noDecimals ? 0 : 0,
+      maximumFractionDigits: noDecimals ? 0 : 2,
+    }).format(amount);
+  } catch {
+    // Devise ou locale non reconnue par l'appareil : repli lisible plutôt qu'un plantage.
+    return `${amount} ${currency}`;
+  }
+}
+
+// ---- Fournisseurs de paiement (fondations) ----
+// Chaque plateforme a ses propres contraintes, et elles ne sont PAS interchangeables :
+//   - Android : Google Play Billing est imposé pour tout abonnement acheté DEPUIS l'app.
+//     Les règles "anti-steering" interdisent aussi d'indiquer dans l'app qu'un autre moyen
+//     de paiement existe ailleurs — même un simple texte sans lien. Rien ne doit donc
+//     mentionner le site, Moneroo ou le Mobile Money dans l'écran Abonnement de l'APK.
+//   - iOS : Apple In-App Purchase, mêmes contraintes.
+//   - Web : libre. Carte bancaire via Lemon Squeezy (Merchant of Record : il gère la TVA
+//     de chaque pays à notre place), Mobile Money via Moneroo pour la Zone 3.
+const PAYMENT_PROVIDER = {
+  PLAY: "play",
+  APPSTORE: "appstore",
+  LEMONSQUEEZY: "lemonsqueezy",
+  MONEROO: "moneroo",
+};
+// Nom de la plateforme native ("android", "ios") ou null en web/PWA.
+function nativePlatformName() {
+  if (!isNativePlatformNow()) return null;
+  try {
+    const p = window.Capacitor.getPlatform && window.Capacitor.getPlatform();
+    return p === "ios" || p === "android" ? p : null;
+  } catch {
+    return null;
+  }
+}
+// Choisit le fournisseur à utiliser pour un achat, selon la plateforme et la zone.
+// Ne déclenche rien : sert à la fois au routage du paiement et à l'affichage.
+function resolvePaymentProvider(zone) {
+  const platform = nativePlatformName();
+  if (platform === "android") return PAYMENT_PROVIDER.PLAY;
+  if (platform === "ios") return PAYMENT_PROVIDER.APPSTORE;
+  return zone === 3 ? PAYMENT_PROVIDER.MONEROO : PAYMENT_PROVIDER.LEMONSQUEEZY;
+}
+// ---- Moneroo (Mobile Money Afrique de l'Ouest) — pas encore branché ----
+// Contrairement à Lemon Squeezy, Moneroo exige un appel serveur pour créer le paiement
+// (l'Edge Function "payment-webhook" côté Supabase sert déjà de réceptacle aux
+// confirmations). Tant que MONEROO_CHECKOUT_ENDPOINT reste le gabarit ci-dessous, le
+// parcours retombe proprement sur le message de simulation existant.
+const MONEROO_CHECKOUT_ENDPOINT = "https://TON-BACKEND.example.com/moneroo-checkout";
+
 // Fonctionnalités réellement verrouillées par palier et affichées dans l'écran Abonnement
 // (clé de traduction : EXTRA_UI["feat_" + id]). "stockAlerts" est volontairement absente :
 // déclarée dans les paliers mais ne verrouille rien pour l'instant.
@@ -8579,20 +8707,72 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // formulaire de paiement, et un "custom data" avec le username pour retrouver le compte
   // une fois le webhook branché (voir LEMONSQUEEZY_WEBHOOK_ENDPOINT).
   const [checkoutBusyPlanId, setCheckoutBusyPlanId] = useState(null);
-  const startLemonSqueezyCheckout = (planId) => {
-    const variantId = LEMONSQUEEZY_VARIANT_IDS[planId];
-    const isPlaceholder = LEMONSQUEEZY_STORE_SUBDOMAIN === "TON-STORE" || !variantId || variantId === "000000";
-    if (isPlaceholder) {
-      // Mode simulation : Lemon Squeezy n'est pas encore configuré (voir les constantes
-      // en haut du fichier). Affiche un message clair au lieu d'ouvrir un lien cassé.
-      setError(t(lang, "stripeSimulationMsg").replace("{plan}", t(lang, SUBSCRIPTION_PLANS[planId].nameKey)));
+  // Zone tarifaire et prix affichés, dérivés du pays de la boutique.
+  const pricingZone = pricingZoneOf(shopCountry);
+  // Point d'entrée UNIQUE du paiement. L'écran Abonnement n'appelle que cette fonction :
+  // le jour où un fournisseur est réellement branché (clés renseignées, compte bancaire
+  // ouvert), il n'y a qu'à compléter la branche correspondante ci-dessous, sans toucher
+  // à l'interface. Tant qu'aucun fournisseur n'est configuré, tout retombe sur le message
+  // de simulation existant — exactement le comportement actuel.
+  const startCheckout = async (planId) => {
+    const provider = resolvePaymentProvider(pricingZone);
+    const planName = t(lang, SUBSCRIPTION_PLANS[planId].nameKey);
+    const notConfigured = () => {
+      setError(t(lang, "stripeSimulationMsg").replace("{plan}", planName));
+    };
+    if (provider === PAYMENT_PROVIDER.PLAY || provider === PAYMENT_PROVIDER.APPSTORE) {
+      // Achat depuis l'app native : doit passer par Google Play Billing / Apple IAP.
+      // Pas encore implémenté (nécessite un compte développeur et les produits créés
+      // côté console). ⚠️ Ne JAMAIS rediriger ni même mentionner le site ici : les règles
+      // anti-steering des stores l'interdisent et peuvent faire retirer l'app.
+      notConfigured();
       return;
     }
+    if (provider === PAYMENT_PROVIDER.MONEROO) {
+      // Mobile Money (Orange Money, Wave, MTN) pour la zone franc CFA.
+      if (MONEROO_CHECKOUT_ENDPOINT.includes("TON-BACKEND")) { notConfigured(); return; }
+      setCheckoutBusyPlanId(planId);
+      setError("");
+      const { amount, currency } = planPricingFor(planId, shopCountry);
+      // Le serveur crée le paiement et renvoie l'URL hébergée vers laquelle rediriger.
+      fetch(MONEROO_CHECKOUT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: planId, amount, currency, username, zone: pricingZone }),
+      })
+        .then((r) => r.json())
+        .then((d) => {
+          if (d && d.checkout_url) window.location.href = d.checkout_url;
+          else { setCheckoutBusyPlanId(null); notConfigured(); }
+        })
+        .catch(() => { setCheckoutBusyPlanId(null); notConfigured(); });
+      return;
+    }
+    // Carte bancaire via Lemon Squeezy (Merchant of Record) : lien hébergé, aucun appel
+    // serveur nécessaire pour l'ouvrir.
+    const variantId = LEMONSQUEEZY_VARIANT_IDS[planId];
+    const isPlaceholder = LEMONSQUEEZY_STORE_SUBDOMAIN === "TON-STORE" || !variantId || variantId === "000000";
+    if (isPlaceholder) { notConfigured(); return; }
     setCheckoutBusyPlanId(planId);
     setError("");
-    const checkoutUrl = `https://${LEMONSQUEEZY_STORE_SUBDOMAIN}.lemonsqueezy.com/checkout/buy/${variantId}?checkout[email]=${encodeURIComponent(username)}&checkout[custom][username]=${encodeURIComponent(username)}`;
+    // On joint le palier, la zone et l'identifiant du compte en "custom data" : c'est ce
+    // que l'Edge Function "payment-webhook" relit pour activer le bon abonnement sur le
+    // bon compte, sans avoir à retrouver l'utilisateur par son email.
+    let ownerId = "";
+    try {
+      const { data: userData } = await getUserFast();
+      if (userData && userData.user) ownerId = userData.user.id;
+    } catch { /* non bloquant : le webhook retombera sur l'email */ }
+    const custom =
+      `&checkout[custom][username]=${encodeURIComponent(username)}` +
+      `&checkout[custom][plan]=${encodeURIComponent(planId)}` +
+      `&checkout[custom][zone]=${encodeURIComponent(String(pricingZone))}` +
+      (ownerId ? `&checkout[custom][owner_id]=${encodeURIComponent(ownerId)}` : "");
+    const checkoutUrl = `https://${LEMONSQUEEZY_STORE_SUBDOMAIN}.lemonsqueezy.com/checkout/buy/${variantId}?checkout[email]=${encodeURIComponent(username)}${custom}`;
     window.location.href = checkoutUrl;
   };
+  // Ancien nom conservé : plusieurs écrans l'appellent encore (bannières de limite atteinte).
+  const startLemonSqueezyCheckout = startCheckout;
 
   // Limite de stock : plus aucune limite sur le nombre de produits, à aucun palier — seules
   // les ventes/jour et les messages IA sont plafonnés désormais pour le palier Gratuit.
@@ -17714,7 +17894,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
                           <p style={{ color: T.text, fontSize: 15, fontWeight: 700 }}>{t(lang, plan.nameKey)}</p>
                           <p style={{ color: "#c084fc", fontSize: 15, fontWeight: 800 }}>
-                            {plan.price === 0 ? t(lang, "planFreeName") : `${plan.price}€/${t(lang, "planPerMonth")}`}
+                            {(() => {
+                              // Prix adapté à la zone du pays de la boutique, dans sa
+                              // devise (voir PRICING_ZONES en haut du fichier).
+                              const pricing = planPricingFor(planId, shopCountry);
+                              if (pricing.amount === 0) return t(lang, "planFreeName");
+                              return `${formatPlanPrice(pricing.amount, pricing.currency)}/${t(lang, "planPerMonth")}`;
+                            })()}
                           </p>
                         </div>
                         <p style={{ color: T.muted, fontSize: 12, marginBottom: 4 }}>
@@ -17756,7 +17942,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <div style={{ marginTop: 10, textAlign: "center", color: "#c084fc", fontSize: 12, fontWeight: 700 }}>{t(lang, "planCurrentBadge")}</div>
                         ) : (
                           <button
-                            onClick={() => startLemonSqueezyCheckout(planId)}
+                            onClick={() => startCheckout(planId)}
                             disabled={checkoutBusyPlanId !== null}
                             style={{ marginTop: 10, width: "100%", background: "#c084fc1a", color: "#c084fc", border: "1px solid #c084fc33", borderRadius: 10, padding: "10px 14px", fontSize: 13, fontWeight: 700, cursor: "pointer", opacity: checkoutBusyPlanId !== null ? 0.6 : 1 }}
                           >
