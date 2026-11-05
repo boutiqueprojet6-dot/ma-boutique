@@ -19632,24 +19632,55 @@ function TermsOfServiceScreen() {
 // Réutilise les constantes/style des pages légales (LEGAL_ACCENT, PRIVACY_APP_NAME,
 // LegalAppLogo) pour rester visuellement cohérent avec /privacy et /terms.
 function LandingScreen() {
+  // 6 cartes — 3 en haut / 3 en bas sur un écran large (voir .lp-grid ci-dessous),
+  // qui repassent à 2 puis 1 par ligne quand l'écran rétrécit. La 6e carte
+  // (Équipe & boutiques) reprend une idée déjà citée dans le paragraphe
+  // d'introduction mais qui n'avait pas sa propre carte.
+  const FEATURES = [
+    { emoji: "📦", title: "Stock", text: "Ajoutez vos produits, suivez les quantités et recevez une alerte en cas de stock faible." },
+    { emoji: "💳", title: "Ventes & caisse", text: "Encaissez en espèces, Mobile Money ou carte, et suivez le solde de caisse en temps réel." },
+    { emoji: "🧾", title: "Dettes clients", text: "Enregistrez les ventes à crédit et suivez les remboursements, même partiels." },
+    { emoji: "📊", title: "Statistiques", text: "Comparez vos boutiques et suivez votre activité dans le temps." },
+    { emoji: "🤖", title: "Assistant IA", text: "Posez vos questions sur votre boutique en langage naturel et obtenez des réponses, analyses et conseils instantanés." },
+    { emoji: "👥", title: "Équipe & boutiques", text: "Ajoutez des employés avec des accès contrôlés, et gérez plusieurs boutiques depuis un même compte." },
+  ];
   return (
-    <div style={{ minHeight: "100vh", background: "linear-gradient(180deg, #f3f1ff 0%, #f7f7fb 320px, #f7f7fb 100%)", fontFamily: "system-ui, -apple-system, sans-serif" }}>
-      <div style={{ maxWidth: 760, margin: "0 auto", padding: "28px 20px 72px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 48 }}>
+    <div
+      style={{
+        minHeight: "100dvh",
+        display: "flex",
+        flexDirection: "column",
+        background: "radial-gradient(1100px 560px at 50% -8%, #ece9ff 0%, rgba(236,233,255,0) 60%), linear-gradient(180deg, #f3f1ff 0%, #f7f7fb 420px, #f7f7fb 100%)",
+        fontFamily: "system-ui, -apple-system, sans-serif",
+      }}
+    >
+      {/* Grille des fonctionnalités : 3 colonnes sur grand écran, 2 puis 1 en dessous —
+          c'est elle qui donne à la page son aspect "pleine largeur", pas une largeur figée. */}
+      <style>{`
+        .lp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        @media (max-width: 980px) { .lp-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 620px) { .lp-grid { grid-template-columns: 1fr; } }
+      `}</style>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%", maxWidth: 1080, margin: "0 auto", padding: "28px 24px clamp(40px, 6vh, 72px)", boxSizing: "border-box" }}>
+        {/* Emplacement du logo : en haut à gauche, comme une barre de navigation — c'est la
+            place la plus reconnaissable (c'est là que les visiteurs cherchent le nom/la marque
+            d'un site en premier), et elle n'entre pas en concurrence avec l'icône décorative du
+            bloc d'accroche juste en dessous, qui elle attire l'œil sur le message principal. */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "clamp(36px, 6vh, 64px)" }}>
           <LegalAppLogo />
           <div style={{ lineHeight: 1.2 }}>
             <div style={{ fontSize: 19, fontWeight: 800, color: "#161a2b" }}>{PRIVACY_APP_NAME}</div>
             <div style={{ fontSize: 12, color: "#9a9db0" }}>boutipro.com</div>
           </div>
         </div>
-        <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <div style={{ textAlign: "center", marginBottom: "clamp(44px, 7vh, 76px)" }}>
           <div style={{ width: 72, height: 72, margin: "0 auto 20px", borderRadius: 22, background: `linear-gradient(135deg, ${LEGAL_ACCENT}, #8B85F2)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 34, boxShadow: `0 10px 24px ${LEGAL_ACCENT}33` }}>
             🛍️
           </div>
-          <h1 style={{ fontSize: 32, fontWeight: 800, margin: "0 0 14px", color: "#161a2b" }}>
+          <h1 style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 800, margin: "0 0 14px", color: "#161a2b", lineHeight: 1.18 }}>
             {PRIVACY_APP_NAME} — la gestion de votre boutique, simplifiée
           </h1>
-          <p style={{ fontSize: 16, color: "#55596e", lineHeight: 1.7, maxWidth: 560, margin: "0 auto" }}>
+          <p style={{ fontSize: 16, color: "#55596e", lineHeight: 1.7, maxWidth: 580, margin: "0 auto" }}>
             {PRIVACY_APP_NAME} est une application destinée aux commerçants pour gérer au quotidien
             leur boutique depuis un téléphone ou un ordinateur : suivi du stock, enregistrement des
             ventes, suivi des dettes clients, gestion de la caisse et des dépenses, et statistiques
@@ -19663,15 +19694,9 @@ function LandingScreen() {
             Accéder à l'application →
           </a>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 12 }}>
-          {[
-            { emoji: "📦", title: "Stock", text: "Ajoutez vos produits, suivez les quantités et recevez une alerte en cas de stock faible." },
-            { emoji: "💳", title: "Ventes & caisse", text: "Encaissez en espèces, Mobile Money ou carte, et suivez le solde de caisse en temps réel." },
-            { emoji: "🧾", title: "Dettes clients", text: "Enregistrez les ventes à crédit et suivez les remboursements, même partiels." },
-            { emoji: "📊", title: "Statistiques", text: "Comparez vos boutiques et suivez votre activité dans le temps." },
-            { emoji: "🤖", title: "Assistant IA", text: "Posez vos questions sur votre boutique en langage naturel et obtenez des réponses, analyses et conseils instantanés." },
-          ].map((f) => (
-            <div key={f.title} style={{ background: "#fff", borderRadius: 18, padding: "20px 18px", boxShadow: "0 12px 30px -18px rgba(22,26,43,0.25)" }}>
+        <div className="lp-grid" style={{ flex: "1 1 auto", alignContent: "center", marginBottom: 12 }}>
+          {FEATURES.map((f) => (
+            <div key={f.title} style={{ background: "#fff", borderRadius: 18, padding: "22px 20px", boxShadow: "0 12px 30px -18px rgba(22,26,43,0.25)" }}>
               <div style={{ fontSize: 24, marginBottom: 8 }}>{f.emoji}</div>
               <div style={{ fontSize: 15, fontWeight: 700, color: "#161a2b", marginBottom: 4 }}>{f.title}</div>
               <div style={{ fontSize: 13, color: "#777b90", lineHeight: 1.5 }}>{f.text}</div>
