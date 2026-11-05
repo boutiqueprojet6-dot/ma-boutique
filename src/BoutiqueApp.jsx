@@ -190,6 +190,23 @@ function isNativePlatformNow() {
   );
 }
 const isCapacitorApp = nativeBridgeReady();
+// Détecte une PWA installée (icône ajoutée à l'écran d'accueil depuis Chrome/Safari, hors
+// coquille Capacitor) — utilisé pour donner un sens au bouton retour du téléphone dans ce
+// mode-là aussi, pas seulement dans l'app Android installée via l'APK. Fonction indépendante
+// (plutôt que de réutiliser celle, identique, déclarée dans ShopApp) pour pouvoir aussi
+// l'utiliser dans AuthScreen, qui est un composant distinct monté avant la connexion.
+function isPwaStandaloneNow() {
+  return (
+    (window.matchMedia && (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.matchMedia("(display-mode: minimal-ui)").matches ||
+      window.matchMedia("(display-mode: fullscreen)").matches ||
+      window.matchMedia("(display-mode: window-controls-overlay)").matches
+    )) ||
+    window.navigator.standalone === true ||
+    (typeof document !== "undefined" && document.referrer.startsWith("android-app://"))
+  );
+}
 // ---- Effets sonores (clic, vente réussie, erreur) — plusieurs variantes au choix ----
 // Générés directement via l'API Web Audio (oscillateurs), sans aucun fichier audio à
 // héberger ni à télécharger — ça marche à l'identique sur le web et dans l'app Capacitor.
@@ -5801,6 +5818,22 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   const [showObConfirmLockPin, setShowObConfirmLockPin] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  // ---- accès caché au mode démo : 7 appuis sur le logo (comme les "options développeur"
+  // d'Android), pour que ce ne soit plus un bouton visible qui pousse les visiteurs à éviter
+  // de créer un compte. Le compteur se réinitialise si plus de 1,5 s passe entre deux appuis.
+  const [logoTapCount, setLogoTapCount] = useState(0);
+  const logoTapTimerRef = useRef(null);
+  const handleLogoTap = () => {
+    if (logoTapTimerRef.current) clearTimeout(logoTapTimerRef.current);
+    const next = logoTapCount + 1;
+    if (next >= 7) {
+      setLogoTapCount(0);
+      onDemo();
+      return;
+    }
+    setLogoTapCount(next);
+    logoTapTimerRef.current = setTimeout(() => setLogoTapCount(0), 1500);
+  };
   // ---- onboarding state ----
   const [obPrenom, setObPrenom] = useState("");
   const [obNom, setObNom] = useState("");
@@ -6159,6 +6192,33 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     }).then((h) => { if (cancelled) h.remove(); else handle = h; });
     return () => { cancelled = true; if (handle) handle.remove(); };
   }, []);
+  // ---- Bouton retour du téléphone, écran "Scanner QR employé" (PWA installée hors Capacitor) ----
+  // L'écouteur "backButton" ci-dessus ne fait rien hors de l'app Capacitor native. Sur une PWA
+  // installée depuis Chrome (icône ajoutée à l'écran d'accueil), l'app ne change jamais d'URL,
+  // donc Chrome n'a aucune entrée d'historique à "défaire" et le retour matériel ferme l'app au
+  // lieu de revenir à l'écran de connexion. On pousse une entrée d'historique UNIQUEMENT au
+  // moment où l'écran de scan s'ouvre (jamais en réaction à un popstate — Chromium ignore sinon
+  // ce "rebond" par protection anti-piégeage du bouton retour, même si le pushState réussit en
+  // apparence), et popstate se contente de consommer cette entrée en revenant à l'écran de
+  // connexion (authBackHandlerRef connaît déjà cette règle, on la réutilise telle quelle).
+  const empScanPwaDepthRef = useRef(0);
+  useEffect(() => {
+    if (isNativePlatformNow() || !isPwaStandaloneNow()) return;
+    const wantDepth = screen === "employee-scan" ? 1 : 0;
+    if (wantDepth > empScanPwaDepthRef.current) {
+      window.history.pushState({ pwaGuard: true }, "", "#pwa-authscan-" + Date.now());
+    }
+    empScanPwaDepthRef.current = wantDepth;
+  }, [screen]);
+  useEffect(() => {
+    if (isNativePlatformNow() || !isPwaStandaloneNow()) return;
+    const onPopState = () => {
+      if (authBackHandlerRef.current) authBackHandlerRef.current();
+      empScanPwaDepthRef.current = Math.max(0, empScanPwaDepthRef.current - 1);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
   const fieldStyle = (hasError) => ({
     borderColor: hasError ? CLAY : "#E7E8F1",
   });
@@ -6183,7 +6243,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             className={isDesktop ? "px-16 text-white w-2/5 flex flex-col justify-center" : "px-7 py-8 text-white md:w-2/5 md:flex md:flex-col md:justify-center"}
             style={{ background: "radial-gradient(120% 100% at 0% 0%, #272A56 0%, #12132A 60%)" }}
           >
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-4" onClick={handleLogoTap} style={{ cursor: "pointer", width: "fit-content" }}>
               <svg width="24" height="24" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
               <span className="font-bold text-sm tracking-wide">{t(lang, "appName")}</span>
             </div>
@@ -6290,9 +6350,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </p>
             <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
               <QrCode size={13} /> {t(lang, "loginAsEmployee")}
-            </button>
-            <button onClick={onDemo} className="w-full text-center text-[11px] mt-3 font-semibold underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
-              👀 {t(lang, "seeDemoBtn")}
             </button>
             </div>
           </div>
@@ -6583,9 +6640,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             )}
             <div className="flex gap-3 mt-6">
               <button onClick={obNext} className="flex-1 py-3 rounded-xl text-white font-semibold text-sm" style={{ background: "#4F46E5" }}>{t(lang, "continueBtn")}</button>
-            </div>
-            <div className="flex flex-col items-center gap-2 mt-5 pt-4" style={{ borderTop: `1px solid ${AT.border}` }}>
-              <button onClick={onDemo} className="text-[11px] font-semibold underline" style={{ color: INDIGO }}>👀 {t(lang, "seeDemoBtn")}</button>
             </div>
           </div>
         )}
@@ -13269,6 +13323,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // (loadShopBackups et son useEffect déclencheur sont déclarés plus haut, avant le
   // "if (loading) return", pour la même raison que pdfExportGenerating — voir ce commentaire.)
   const exportShopDataJson = async () => {
+    if (isDemo) { setBackupActionMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
     setBackupBusy("export");
     setBackupActionMsg("");
     try {
@@ -13291,6 +13346,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     setBackupBusy(null);
   };
   const createManualBackup = async () => {
+    if (isDemo) { setBackupActionMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
     setBackupBusy("create");
     setBackupActionMsg("");
     try {
@@ -13310,6 +13366,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // choisie (pas une fusion) — c'est le sens même de "restaurer" un instantané passé.
   // Protégé par le code PIN du compte (comme la réinitialisation), car irréversible.
   const restoreShopBackup = async (backupId) => {
+    if (isDemo) { setBackupActionMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
     setBackupBusy("restore-" + backupId);
     setBackupActionMsg("");
     try {
@@ -13734,7 +13791,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
            rendu final (après zoom) occupe exactement 100vh, comme pour la zone de contenu
            principale à droite (où le zoom est lui appliqué à un conteneur interne défilant
            plutôt qu'au conteneur externe de hauteur fixe — la même règle s'applique ici). */
-        <div className="shrink-0" style={{ width: sidebarCollapsed ? SIDEBAR_COLLAPSED_W : sidebarWidth, position: "relative", background: darkMode ? "#0a0d14" : INDIGO, height: "calc(100vh / 1.35)", padding: sidebarCollapsed ? "24px 8px" : "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35, userSelect: "none", WebkitUserSelect: "none", transition: sidebarResizing ? "none" : "width 0.18s ease, padding 0.18s ease" }}>
+        <div className="shrink-0" style={{ width: sidebarCollapsed ? SIDEBAR_COLLAPSED_W : sidebarWidth, position: "relative", background: darkMode ? "linear-gradient(165deg, #10131f 0%, #0a0d14 55%, #060810 100%)" : "linear-gradient(165deg, #22466d 0%, #1B3A5C 55%, #122a44 100%)", boxShadow: "4px 0 24px rgba(0,0,0,0.25)", height: "calc(100vh / 1.35)", padding: sidebarCollapsed ? "24px 8px" : "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35, userSelect: "none", WebkitUserSelect: "none", transition: sidebarResizing ? "none" : "width 0.18s ease, padding 0.18s ease" }}>
           {/* Poignée de redimensionnement : fine zone sur le bord droit du panneau, entre
               le bleu et le blanc — glisser latéralement change sa largeur (160 à 320px),
               mémorisé pour les prochaines sessions. La zone cliquable (8px) reste plus
@@ -13778,12 +13835,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </button>
           <div className={"flex items-center gap-2 px-2 mb-8 shrink-0" + (sidebarCollapsed ? " justify-center" : "")}>
             {shopPhoto ? (
-              <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/30 shrink-0" />
+              <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover shrink-0" style={{ border: "2px solid rgba(255,255,255,0.35)", boxShadow: "0 2px 10px rgba(0,0,0,0.3)" }} />
             ) : (
               <img
                 src={`data:image/jpeg;base64,${APP_LOGO_B64}`}
                 alt={shopName}
-                className="w-9 h-9 rounded-full object-cover border-2 border-white/30 shrink-0"
+                className="w-9 h-9 rounded-full object-cover shrink-0"
+                style={{ border: "2px solid rgba(255,255,255,0.35)", boxShadow: "0 2px 10px rgba(0,0,0,0.3)" }}
               />
             )}
             {!sidebarCollapsed && (
@@ -13830,15 +13888,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   key={item.id}
                   onClick={() => { setTab(item.id); setShowAddProduct(false); setShowSettings(false); }}
                   title={sidebarCollapsed ? item.label : ""}
-                  className={"flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0" + (sidebarCollapsed ? " justify-center px-0" : " px-3")}
+                  className={"relative flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0" + (sidebarCollapsed ? " justify-center px-0" : " px-3")}
                   style={{
-                    background: active ? "rgba(255,255,255,0.15)" : "transparent",
-                    color: active ? "white" : "rgba(255,255,255,0.65)",
+                    background: active ? "rgba(255,255,255,0.12)" : "transparent",
+                    boxShadow: active ? "inset 0 0 0 1px rgba(255,255,255,0.08)" : "none",
+                    color: active ? "white" : "rgba(255,255,255,0.6)",
                   }}
                 >
+                  {active && (
+                    <span style={{ position: "absolute", left: sidebarCollapsed ? -8 : -14, top: "50%", transform: "translateY(-50%)", width: 3, height: 18, borderRadius: 3, background: `linear-gradient(180deg, ${item.grad[0]}, ${item.grad[1]})`, boxShadow: `0 0 8px ${item.grad[0]}99` }} />
+                  )}
                   <div
                     className="flex items-center justify-center rounded-lg shrink-0"
-                    style={{ width: 28, height: 28, background: `linear-gradient(145deg, ${item.grad[0]}, ${item.grad[1]})`, boxShadow: `0 2px 6px ${item.grad[0]}55` }}
+                    style={{ width: 28, height: 28, background: `linear-gradient(145deg, ${item.grad[0]}, ${item.grad[1]})`, boxShadow: active ? `0 2px 10px ${item.grad[0]}88` : `0 2px 6px ${item.grad[0]}55`, transition: "box-shadow 0.2s ease" }}
                   >
                     {item.emoji ? (
                       <span style={{ fontSize: 15 }}>{item.emoji}</span>
@@ -13852,6 +13914,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             })}
           </div>
           <div className="shrink-0">
+            <div style={{ height: 1, background: "rgba(255,255,255,0.1)", margin: sidebarCollapsed ? "4px 2px 10px" : "4px 10px 10px" }} />
             <button onClick={() => setShowSettings(true)} title={sidebarCollapsed ? t(lang, "settingsTitle") : ""} className={"flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold w-full transition-all" + (sidebarCollapsed ? " justify-center px-0" : " px-3")} style={{ background: showSettings ? "rgba(255,255,255,0.15)" : "transparent", color: showSettings ? "white" : "rgba(255,255,255,0.65)" }}>
               <Settings size={17} strokeWidth={2.25} />
               {!sidebarCollapsed && t(lang, "settingsTitle")}
@@ -14588,7 +14651,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <>
                 <div className="flex items-center justify-between rounded-2xl px-4 py-2.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}` }}>
                   <p className="text-xs" style={{ color: T.muted }}>{t(lang, "othPanierDe")} <span className="font-bold" style={{ color: T.text }}>{activeCart.label}</span></p>
-                  <button onClick={() => setConfirmModal({ message: t(lang, "abandonCartMsg"), onConfirm: () => deleteCart(activeCart.id) })} className="text-[11px] font-semibold flex items-center gap-1" style={{ color: "#e11d48" }}>
+                  <button onClick={() => setConfirmModal({ message: t(lang, "abandonCartMsg"), onConfirm: () => deleteCart(activeCart.id) })} className="text-[11px] font-semibold flex items-center gap-1 px-2.5 py-1.5 rounded-lg" style={{ color: "#e11d48", border: "1px solid #e11d48", background: "transparent" }}>
                     <Trash2 size={12} /> {t(lang, "abandonCart")}
                   </button>
                 </div>
@@ -18345,7 +18408,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         </div>
       )}
-      {showPaymentShortcut && !showCheckoutModal && !showTabHelp && activeCart && typeof document !== "undefined" && createPortal(
+      {showPaymentShortcut && !showCheckoutModal && !showTabHelp && !showSettings && activeCart && typeof document !== "undefined" && createPortal(
         <button
           onClick={() => setShowCheckoutModal(true)}
           className="fixed left-1/2 flex items-center gap-2 px-5 py-3 rounded-full text-white font-extrabold text-sm active:scale-95"
@@ -18860,15 +18923,22 @@ function BoutiqueAppInner() {
   // centaines de boutons de l'app : on écoute la phase de capture (avant que le bouton
   // ne déclenche son propre onClick), et on remonte jusqu'au <button> le plus proche du
   // point cliqué. Les boutons désactivés ne jouent rien (ce n'est pas une vraie action).
+  // IMPORTANT : écoute "click" et non "pointerdown". "pointerdown" se déclenche dès que
+  // le doigt touche l'écran, y compris au tout début d'un geste de défilement démarré
+  // par-dessus un bouton (ex. poser le doigt sur un produit puis faire glisser la liste)
+  // — ça jouait donc le son/la vibration à chaque défilement, pas seulement à l'appui.
+  // "click" ne se déclenche, lui, que si le doigt n'a quasiment pas bougé entre l'appui
+  // et le relâchement (comportement natif du navigateur) : un vrai tap le déclenche,
+  // un glissement/défilement ne le déclenche jamais, même s'il commence sur un bouton.
   useEffect(() => {
-    const onPointerDown = (e) => {
+    const onClickCapture = (e) => {
       const btn = e.target.closest && e.target.closest("button");
       if (!btn || btn.disabled) return;
       playSound("click");
       triggerHaptic("light");
     };
-    document.addEventListener("pointerdown", onPointerDown, { capture: true, passive: true });
-    return () => document.removeEventListener("pointerdown", onPointerDown, { capture: true });
+    document.addEventListener("click", onClickCapture, { capture: true });
+    return () => document.removeEventListener("click", onClickCapture, { capture: true });
   }, []);
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
