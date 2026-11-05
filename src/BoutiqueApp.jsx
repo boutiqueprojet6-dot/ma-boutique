@@ -5231,6 +5231,41 @@ function useOfflineSync(resolveBeforeFlush) {
 //    version la plus récente, comparée par horodatage.
 // Tout ça se fait silencieusement, sans aucune action de l'utilisateur.
 const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
+// ---- Répartition compte / boutique des données ----
+// Côté Supabase, les données d'un compte vivent dans DEUX tables complémentaires :
+//   - shop_data  : UNE ligne par compte (code PIN, quota IA, langue, devise, profil,
+//                  réglages...) — inchangée, c'est elle que lisent les Edge Functions ;
+//   - shop_blobs : UNE ligne par boutique, avec uniquement les données ci-dessous.
+// C'est ce qui permet au multi-boutique (Business 2) d'être réellement sauvegardé côté
+// serveur : avant, une boutique secondaire n'était jamais envoyée à Supabase et ses
+// données ne vivaient que dans le cache local du téléphone. On ne duplique surtout pas
+// la ligne de compte par boutique, sinon le quota IA repartirait à zéro à chaque
+// changement de boutique et le code PIN pourrait diverger d'une boutique à l'autre.
+const SHOP_LEVEL_KEYS = [
+  "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts",
+  "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
+  "historyLog", "categories", "employees", "actionLog",
+];
+// Sépare un blob complet en sa part "compte" et sa part "boutique".
+function splitShopBlob(blob) {
+  const account = {};
+  const shop = {};
+  Object.keys(blob || {}).forEach((k) => {
+    if (SHOP_LEVEL_KEYS.indexOf(k) !== -1) shop[k] = blob[k];
+    else account[k] = blob[k];
+  });
+  return { account, shop };
+}
+// Retire les clés de boutique d'une ligne de compte. Nécessaire pour les boutiques
+// SECONDAIRES : shop_data contient encore, par héritage, les données de la boutique
+// principale, qu'une boutique secondaire ne doit jamais afficher comme étant les siennes.
+function stripShopLevelKeys(blob) {
+  const out = {};
+  Object.keys(blob || {}).forEach((k) => {
+    if (SHOP_LEVEL_KEYS.indexOf(k) === -1) out[k] = blob[k];
+  });
+  return out;
+}
 const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "weeklySummaryEnabled", "weeklySummaryDay", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled", "loyaltyRewardThreshold", "loyaltyRewardMode", "debtReminderAutoMode", "defaultPaymentMethod"];
 // ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
 // On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
@@ -8631,11 +8666,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (!hasFeatureAccess("shopComparison") || shops.length === 0) return;
     setShopComparisonLoading(true);
     const results = {};
+    // Une seule requête pour toutes les boutiques du compte. Avant, cet écran faisait
+    // une lecture window.storage par boutique, vers une table kv_store qui n'existait
+    // pas dans la base : toutes les lectures échouaient et l'écran affichait 0 partout,
+    // y compris pour la boutique principale.
+    let byShop = {};
+    try {
+      const { data: userData } = await getUserFast();
+      if (userData && userData.user) {
+        const { data: rows } = await supabase.from("shop_blobs").select("shop_id, data").eq("owner_id", userData.user.id);
+        (rows || []).forEach((r) => { byShop[r.shop_id] = r.data || {}; });
+      }
+    } catch (e) { /* hors ligne : chaque boutique retombera sur 0 ci-dessous */ }
     for (const s of shops) {
-      const key = s.id === shops[0].id ? `shop:${username}` : `shop:${username}:${s.id}`;
       try {
-        const r = await window.storage.get(key, true);
-        const data = r ? JSON.parse(r.value) : null;
+        const data = byShop[s.id] || null;
         const revenue = data && Array.isArray(data.sales) ? data.sales.reduce((sum, sale) => sum + (sale.total || 0), 0) : 0;
         const stockCount = data && Array.isArray(data.products) ? data.products.reduce((sum, p) => sum + (p.quantity || 0), 0) : 0;
         const unpaidDebts = data && Array.isArray(data.debts) ? data.debts.filter((d) => !d.paid).reduce((sum, d) => sum + (d.amount || 0) - (d.paidAmount || 0), 0) : 0;
@@ -9674,6 +9719,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const shopKey = isSecondaryShop ? `shop:${username}:${activeShopId}` : `shop:${username}`;
   const subKey = `subscription:${username}`;
   const shopSyncBaseKey = shopKey + SHOP_SYNC_BASE_SUFFIX;
+  // Boutique dont on lit/écrit les données dans shop_blobs. Volontairement alignée sur
+  // shopKey ci-dessus (même condition isSecondaryShop) : cache local et données serveur
+  // ne peuvent donc jamais désigner deux boutiques différentes. Vaut null tant que la
+  // liste des boutiques n'est pas chargée — dans ce cas on retombe sur le comportement
+  // historique (tout dans shop_data), pour ne jamais risquer de perdre une écriture.
+  const primaryShopId = shops.length > 0 ? shops[0].id : null;
+  const blobShopId = isSecondaryShop ? activeShopId : primaryShopId;
   // Applique un objet "shop" (fusionné ou non) à tous les états React.
   // Réutilisé au chargement initial ET après chaque fusion automatique.
   const applyShop = useCallback((shop, sub, account) => {
@@ -9804,24 +9856,43 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // On préserve les autres champs du compte (ownerName, sector, lockPin, aiUsage...)
   // en les relisant d'abord, plutôt que d'écraser toute la colonne "data".
   const persistShopToSupabase = useCallback(async (merged) => {
-    if (isSecondaryShop) return { ok: false }; // pas encore supporté pour les boutiques secondaires
-    try {
+    // Écriture de la ligne de COMPTE (shop_data) : réglages, profil, quota IA, code PIN.
+    const writeAccountRow = async (payload) => {
+      if (Object.keys(payload).length === 0) return true;
       // 1 seul aller-retour réseau : la fusion se fait côté Postgres (fonction save_shop_data)
-      const { data: updated, error: rpcError } = await supabase.rpc("save_shop_data", { p_data: merged });
-      if (!rpcError && updated === true) return { ok: true };
+      const { data: updated, error: rpcError } = await supabase.rpc("save_shop_data", { p_data: payload });
+      if (!rpcError && updated === true) return true;
       // Filet de sécurité : ancienne méthode si la fonction échoue ou ne trouve pas la ligne
       const { data: userData } = await supabase.auth.getUser();
-      if (!userData || !userData.user) return { ok: false };
+      if (!userData || !userData.user) return false;
       const ownerId = userData.user.id;
       const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", ownerId).single();
       const currentData = (row && row.data) || {};
-      const nextData = { ...currentData, ...merged };
+      const nextData = { ...currentData, ...payload };
       const { error } = await supabase.from("shop_data").update({ data: nextData, updated_at: new Date().toISOString() }).eq("owner_id", ownerId);
-      return { ok: !error };
+      return !error;
+    };
+    try {
+      // Liste des boutiques pas encore chargée : on ne sait pas à quelle boutique
+      // rattacher les données, donc on écrit tout dans shop_data comme avant. Rien
+      // n'est perdu : dès que la boutique est connue, la sauvegarde suivante range la
+      // part "boutique" au bon endroit.
+      if (!blobShopId) return { ok: await writeAccountRow(merged || {}) };
+      const { account, shop } = splitShopBlob(merged);
+      const accountOk = await writeAccountRow(account);
+      let shopOk = true;
+      if (Object.keys(shop).length > 0) {
+        // Même principe que save_shop_data : fusion côté Postgres, donc les clés non
+        // envoyées cette fois-ci sont préservées, et la boutique visée est vérifiée
+        // comme appartenant bien au compte connecté.
+        const { data: blobOk, error: blobError } = await supabase.rpc("save_shop_blob", { p_shop_id: blobShopId, p_data: shop });
+        shopOk = !blobError && blobOk === true;
+      }
+      return { ok: accountOk && shopOk };
     } catch (e) {
       return { ok: false };
     }
-  }, [isSecondaryShop]);
+  }, [blobShopId]);
   const persist = useCallback(
     async (next) => {
       if (isDemo) { setSaving(true); setTimeout(() => setSaving(false), 300); return; }
@@ -9962,36 +10033,71 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // qui fonctionne sur un vrai déploiement (contrairement à window.storage,
         // qui peut ne pas exister selon l'environnement d'hébergement — voir
         // persistShopToSupabase ci-dessous pour la même logique côté écriture).
-        // On ne le fait pas encore pour les boutiques secondaires (multi-boutique),
-        // qui restent pour l'instant sur window.storage uniquement.
-        if (!isSecondaryShop) {
+        // Vaut maintenant pour TOUTES les boutiques, principale comme secondaires :
+        // la part "compte" vient de shop_data, la part "boutique" de shop_blobs
+        // (voir SHOP_LEVEL_KEYS), et les deux sont recombinées en un seul objet pour
+        // que tout le reste du pipeline (fusion, cache, applyShop) reste inchangé.
+        {
           try {
             __mark("ShopApp : avant getUserFast()");
             const { data: userData } = await getUserFast();
             __mark("ShopApp : après getUserFast()");
             if (userData && userData.user) {
               __mark("ShopApp : avant requête shop_data réseau");
-              const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
+              // Les deux lectures partent en parallèle : pas de latence supplémentaire.
+              const [accountRes, blobRes] = await Promise.all([
+                supabase.from("shop_data").select("data, updated_at").eq("owner_id", userData.user.id).single(),
+                blobShopId
+                  ? supabase.from("shop_blobs").select("data, updated_at").eq("owner_id", userData.user.id).eq("shop_id", blobShopId).maybeSingle()
+                  : Promise.resolve({ data: null }),
+              ]);
               __mark("ShopApp : après requête shop_data réseau");
-              if (row && row.data && Array.isArray(row.data.products)) {
-                const remoteShop = row.data;
-                const hasPending = readQueue().some((item) => item.key === shopKey);
-                if (hasPending) {
-                  const baseShop = readLocalCache(shopSyncBaseKey) || cachedShop || remoteShop;
-                  shop = mergeShop(baseShop, cachedShop || remoteShop, remoteShop);
-                  writeLocalCache(shopKey, shop);
+              const accountData = (accountRes && accountRes.data && accountRes.data.data) || null;
+              const blobData = (blobRes && blobRes.data && blobRes.data.data) || null;
+              const accountAt = accountRes && accountRes.data && accountRes.data.updated_at ? new Date(accountRes.data.updated_at).getTime() : 0;
+              const blobAt = blobRes && blobRes.data && blobRes.data.updated_at ? new Date(blobRes.data.updated_at).getTime() : 0;
+              if (accountData || blobData) {
+                let remoteShop;
+                if (isSecondaryShop) {
+                  // shop_data ne contient JAMAIS les données d'une boutique secondaire :
+                  // ses clés de boutique appartiennent à la boutique principale, donc on
+                  // les retire pour qu'une boutique secondaire ne les affiche pas comme
+                  // étant les siennes.
+                  remoteShop = { ...stripShopLevelKeys(accountData || {}), ...(blobData || {}) };
+                } else if (accountData && accountAt > blobAt) {
+                  // Un appareil encore sur l'ANCIENNE version de l'app n'écrit que
+                  // shop_data, jamais shop_blobs. Si la ligne de compte est plus récente
+                  // que le blob, ce sont ses données de boutique qui font référence :
+                  // sinon un blob figé masquerait ses dernières ventes pendant toute la
+                  // durée du déploiement. La sauvegarde suivante (nouvelle version)
+                  // réalignera les deux.
+                  remoteShop = { ...(blobData || {}), ...accountData };
                 } else {
-                  shop = remoteShop;
-                  writeLocalCache(shopKey, shop);
-                  shopConfirmed = true;
+                  remoteShop = { ...(accountData || {}), ...(blobData || {}) };
+                }
+                // Une ligne shop_blobs existante fait référence pour cette boutique, même
+                // vide (boutique tout juste créée) : on normalise alors products en [] pour
+                // que ce cas soit traité comme une vraie version serveur confirmée.
+                if (blobData && !Array.isArray(remoteShop.products)) remoteShop.products = [];
+                if (Array.isArray(remoteShop.products)) {
+                  const hasPending = readQueue().some((item) => item.key === shopKey);
+                  if (hasPending) {
+                    const baseShop = readLocalCache(shopSyncBaseKey) || cachedShop || remoteShop;
+                    shop = mergeShop(baseShop, cachedShop || remoteShop, remoteShop);
+                    writeLocalCache(shopKey, shop);
+                  } else {
+                    shop = remoteShop;
+                    writeLocalCache(shopKey, shop);
+                    shopConfirmed = true;
+                  }
                 }
               }
             }
           } catch (e) { /* Supabase indisponible : on retente via window.storage ci-dessous */ }
         }
-        // Filet de sécurité historique (autre canal de synchro, notamment utilisé
-        // pour les boutiques secondaires) : on ne l'utilise que si Supabase n'a
-        // rien confirmé au-dessus, pour ne jamais écraser une version déjà fiable.
+        // Filet de sécurité historique (autre canal de synchro) : on ne l'utilise que
+        // si Supabase n'a rien confirmé au-dessus, pour ne jamais écraser une version
+        // déjà fiable.
         if (!shopConfirmed && window.storage) {
         try {
           const r = await window.storage.get(shopKey, true);
@@ -10037,7 +10143,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         __mark("ShopApp : setLoading(false) final (après vérification réseau)");
       }
     })();
-  }, [shopKey, subKey, shopSyncBaseKey, username, isDemo, applyShop, isSecondaryShop]);
+  }, [shopKey, subKey, shopSyncBaseKey, username, isDemo, applyShop, isSecondaryShop, blobShopId]);
   const saveAll = (overrides) => {
     // Sauvegarde de secours dédiée au stock : écrite en tout premier, avant la
     // mise à jour de l'état et avant tout le pipeline de fusion/réseau plus bas,
