@@ -5085,7 +5085,28 @@ async function saveTextFile(content, filename, mime = "text/csv") {
 function readLocalCache(key) {
   try {
     const raw = window.localStorage.getItem(OFFLINE_CACHE_PREFIX + key);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    let parsed = JSON.parse(raw);
+    // ---- Réparation des caches déjà abîmés sur les appareils existants ----
+    // Un défaut corrigé dans persistOffline (voir son commentaire) a pu enregistrer
+    // ce cache sous deux formes invalides. On les rattrape ici plutôt que de rendre
+    // une valeur inutilisable, sinon les appareils concernés resteraient dégradés
+    // tant qu'ils n'ont pas réécrit leur cache.
+    // 1) la valeur a été enregistrée en CHAÎNE JSON au lieu d'un objet
+    if (typeof parsed === "string") {
+      try { parsed = JSON.parse(parsed); } catch (e) { return null; }
+    }
+    // 2) cette chaîne a ensuite été étalée par un { ...cache }, donnant un objet dont
+    //    les caractères sont indexés ("0", "1", "2"...). On recompose la chaîne
+    //    d'origine à partir de ces index, dans l'ordre, puis on la relit.
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed) && typeof parsed["0"] === "string" && typeof parsed["1"] === "string") {
+      const indexes = Object.keys(parsed).filter((k) => /^\d+$/.test(k)).sort((a, b) => a - b);
+      try {
+        const recompose = JSON.parse(indexes.map((k) => parsed[k]).join(""));
+        if (recompose && typeof recompose === "object") parsed = recompose;
+      } catch (e) { /* irrécupérable : on garde ce qu'on a plutôt que de tout perdre */ }
+    }
+    return parsed;
   } catch (e) { return null; }
 }
 // Renvoie true/false selon que l'écriture a réussi, pour que l'appelant
@@ -5193,7 +5214,21 @@ function useOfflineSync(resolveBeforeFlush) {
   // Écriture "offline-first" : cache local instantané + tentative réseau immédiate,
   // avec repli automatique sur la file d'attente en cas d'échec.
   const persistOffline = useCallback(async (key, value, shared) => {
-    const cacheOk = writeLocalCache(key, value);
+    // `value` arrive SÉRIALISÉ, parce que c'est cette forme qu'attendent la file
+    // d'attente et window.storage. Le cache local, lui, doit contenir l'OBJET :
+    // readLocalCache fait un JSON.parse, donc enregistrer la chaîne telle quelle
+    // redonnait une CHAÎNE à la relecture. Cette écriture écrasait en plus celle,
+    // correcte, que persist() venait de faire sur la même clé — le cache d'une
+    // boutique finissait donc systématiquement en chaîne. Ensuite, tout code qui
+    // faisait { ...cache } étalait cette chaîne en un objet de caractères
+    // ("0", "1", "2"...), ce qui gonflait le stockage et surtout faisait repartir
+    // ventes, dettes, dépenses et solde de caisse à zéro au démarrage hors ligne
+    // (seuls les produits étaient rattrapés par leur copie de secours dédiée).
+    let cacheValue = value;
+    if (typeof value === "string") {
+      try { cacheValue = JSON.parse(value); } catch (e) { /* pas du JSON : on garde tel quel */ }
+    }
+    const cacheOk = writeLocalCache(key, cacheValue);
     if (!navigator.onLine || !window.storage) {
       const count = enqueueWrite(key, value, shared);
       setPendingCount(count);
