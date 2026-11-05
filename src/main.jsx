@@ -25,6 +25,29 @@ const isCapacitorApp =
   typeof window.Capacitor.isNativePlatform === "function" &&
   window.Capacitor.isNativePlatform();
 
+// Un déploiement remplace les fichiers JS/CSS par de nouveaux fichiers au nom différent
+// (hash de contenu) et supprime les anciens. Si quelqu'un a déjà cette page ouverte (ou
+// une copie mise en cache par le navigateur/service worker) au moment d'un déploiement,
+// elle continue de pointer vers les anciens noms de fichiers — qui n'existent plus — et
+// le navigateur affiche alors une boîte de dialogue brute "Failed to fetch dynamically
+// imported module" au lieu de l'app. La solution : recharger la page UNE FOIS pour
+// récupérer la version à jour (garde-fou via sessionStorage pour ne jamais boucler si le
+// problème persistait pour une autre raison).
+function reloadOnceForStaleAssets() {
+  try {
+    if (window.sessionStorage.getItem("mb_stale_reload_done") === "1") return false;
+    window.sessionStorage.setItem("mb_stale_reload_done", "1");
+  } catch (e) { /* tant pis, on tente quand même le rechargement */ }
+  window.location.reload();
+  return true;
+}
+// Couvre tout import dynamique qui échouerait plus tard pendant l'utilisation de l'app
+// (chargement différé d'un morceau de code), pas seulement celui de main.jsx ci-dessous.
+window.addEventListener("vite:preloadError", (event) => {
+  event.preventDefault();
+  reloadOnceForStaleAssets();
+});
+
 // Bandeau "Mise à jour disponible" affiché par-dessus l'app, injecté directement
 // dans le DOM (pas de composant React ici : main.jsx tourne avant le montage,
 // et on veut que ça marche même si BoutiqueApp plante).
@@ -77,6 +100,14 @@ if (!isCapacitorApp && "serviceWorker" in navigator) {
         });
       },
     });
+  }).catch(() => {
+    // Cet import lui-même peut échouer si la page vient d'un vieux cache pointant vers
+    // un fichier "virtual_pwa-register-*.js" qui n'existe plus après un déploiement —
+    // voir reloadOnceForStaleAssets ci-dessus. Sans ce filet, l'erreur restait silencieuse
+    // dans la console et l'app démarrait quand même (renderApp() plus bas n'en dépend pas),
+    // mais autant récupérer tout de suite la version à jour plutôt que de laisser
+    // l'enregistrement du service worker (et donc les mises à jour futures) cassé.
+    reloadOnceForStaleAssets();
   });
 }
 
@@ -86,6 +117,10 @@ function renderApp() {
       <BoutiqueApp />
     </React.StrictMode>
   );
+  // L'app a fini par se charger correctement : on lève le garde-fou anti-boucle, pour
+  // qu'un VRAI nouveau problème de cache plus tard dans cette même page (après un futur
+  // déploiement) puisse de nouveau déclencher un rechargement automatique.
+  try { window.sessionStorage.removeItem("mb_stale_reload_done"); } catch (e) {}
 }
 
 if (isCapacitorApp) {
