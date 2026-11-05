@@ -48,34 +48,25 @@ window.addEventListener("vite:preloadError", (event) => {
   reloadOnceForStaleAssets();
 });
 
-// Bandeau "Mise à jour disponible" affiché par-dessus l'app, injecté directement
-// dans le DOM (pas de composant React ici : main.jsx tourne avant le montage,
-// et on veut que ça marche même si BoutiqueApp plante).
-function showUpdateBanner(onReload) {
-  if (document.getElementById("sw-update-banner")) return; // déjà affiché
-  const banner = document.createElement("div");
-  banner.id = "sw-update-banner";
-  banner.style.cssText = `
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999999;
-    background: #1a1a1a; color: #fff; padding: 12px 16px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; font-family: system-ui, -apple-system, sans-serif; font-size: 14px;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
-  `;
-  banner.innerHTML = `
-    <span>Une nouvelle version de l'app est disponible.</span>
-    <button id="sw-update-btn" style="
-      background: #fff; color: #1a1a1a; border: none; border-radius: 6px;
-      padding: 8px 14px; font-weight: 600; font-size: 14px; cursor: pointer;
-      white-space: nowrap;
-    ">Mettre à jour</button>
-  `;
-  document.body.appendChild(banner);
-  document.getElementById("sw-update-btn").onclick = () => {
-    banner.remove();
-    onReload();
-  };
+// Mise à jour SILENCIEUSE, sans bandeau ni bouton : l'ancien bandeau "Mettre à jour"
+// collé en bas de l'écran pouvait recouvrir un bouton que le boutiquier devait
+// atteindre (ex. finaliser une vente en cours), et laissait la mise à jour entre les
+// mains de chacun. Ici, dès qu'une nouvelle version est détectée, on la garde en
+// attente et on l'applique (rechargement de la page) UNIQUEMENT pendant que l'app
+// est en arrière-plan (onglet caché / app mise en veille sur le téléphone) — jamais
+// pendant que l'écran est affiché, donc jamais au milieu d'une vente. La prochaine
+// fois que le boutiquier revient sur l'app, elle est déjà à jour, sans rien à faire.
+// Pour vérifier qu'une mise à jour est bien arrivée sur un appareil donné, voir
+// Réglages > À propos > "Dernière mise à jour" dans BoutiqueApp.jsx (__BUILD_TIME__).
+let pendingUpdateApply = null;
+function applyPendingUpdateIfHidden() {
+  if (pendingUpdateApply && document.visibilityState === "hidden") {
+    const apply = pendingUpdateApply;
+    pendingUpdateApply = null;
+    apply(true); // true = recharge la page après activation du nouveau service worker
+  }
 }
+document.addEventListener("visibilitychange", applyPendingUpdateIfHidden);
 
 if (!isCapacitorApp && "serviceWorker" in navigator) {
   import("virtual:pwa-register").then(({ registerSW }) => {
@@ -85,7 +76,8 @@ if (!isCapacitorApp && "serviceWorker" in navigator) {
         console.log("App prête pour le mode hors-ligne");
       },
       onNeedRefresh() {
-        showUpdateBanner(() => updateSW(true)); // true = recharge la page après activation
+        pendingUpdateApply = updateSW;
+        applyPendingUpdateIfHidden(); // couvre le cas où l'app est déjà en arrière-plan à cet instant
       },
       onRegisteredSW(swUrl, registration) {
         // Une PWA peut rester ouverte des heures/jours sans jamais revérifier s'il existe

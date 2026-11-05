@@ -3,6 +3,14 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  // Horodatage figé à la construction (pas à l'exécution) : sert à afficher "Dernière
+  // mise à jour" dans Réglages > À propos. Comme la valeur est gravée dans le fichier
+  // JS lui-même, elle change automatiquement de date dès qu'un appareil charge un
+  // nouveau build — exactement ce qu'il faut pour vérifier qu'une modification
+  // demandée est bien arrivée jusqu'à un appareil donné (voir aussi main.jsx).
+  define: {
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+  },
   plugins: [
     react(),
     VitePWA({

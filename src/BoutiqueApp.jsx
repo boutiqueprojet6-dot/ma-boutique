@@ -18324,6 +18324,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     >
                       {t(lang, "setVersion")} 1.0
                     </p>
+                    {/* Horodatage figé à la construction (__BUILD_TIME__, voir vite.config.js) : permet
+                        de vérifier qu'une mise à jour demandée est bien arrivée sur CET appareil — la
+                        date affichée change automatiquement dès que l'appareil charge un nouveau build. */}
+                    <p style={{ color: T.muted, fontSize: 11, marginTop: 4 }}>
+                      Dernière mise à jour : {new Date(__BUILD_TIME__).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })} à {new Date(__BUILD_TIME__).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
+                    </p>
                   </div>
                   {DEV_TEST_MODE_ENABLED && devModeUnlocked && (
                     <div style={{ padding: 14, borderRadius: 14, background: T.input, border: "1px dashed #c084fc", display: "flex", flexDirection: "column", gap: 8 }}>
