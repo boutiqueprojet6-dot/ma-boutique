@@ -675,13 +675,12 @@ const SUBSCRIPTION_PLANS = {
 // Ordre croissant, utile pour comparer deux paliers ("est-ce que ce plan est au moins Pro ?").
 const SUBSCRIPTION_PLAN_ORDER = ["free", "pro", "business"];
 // Convertit un palier lu dans la base (table subscriptions) en identifiant connu de l'app.
-// La base et le tableau de bord admin utilisent encore les identifiants historiques
-// "business1" / "business2" (la contrainte subscriptions_plan_check refuse d'ailleurs
-// "business"), alors que l'app ne connaît plus qu'un seul palier Business, "business",
-// qui réunit les deux. Sans cette conversion, SUBSCRIPTION_PLANS["business2"] n'existait
-// pas et l'app retombait silencieusement sur le palier Gratuit : un client Business
-// n'avait accès à aucune fonction payante. Tout identifiant inconnu donne "free", jamais
-// un palier payant par défaut.
+// Il n'existe plus qu'un seul palier Business, "business" : la base, l'admin-api et le
+// tableau de bord admin n'enregistrent plus que free / pro / business. Les anciens
+// identifiants "business1" / "business2" (qui faisaient retomber silencieusement un client
+// Business sur le palier Gratuit, faute d'entrée dans SUBSCRIPTION_PLANS) restent convertis
+// ici par sécurité, pour un éventuel cache ancien. Tout identifiant inconnu donne "free",
+// jamais un palier payant par défaut.
 function normalizePlanId(plan) {
   if (plan === "business1" || plan === "business2") return "business";
   return SUBSCRIPTION_PLANS[plan] ? plan : "free";
