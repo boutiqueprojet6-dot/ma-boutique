@@ -4564,6 +4564,8 @@ EXTRA_UI.cashJournal = { am: "የገንዘብ ማስቀመጫ እንቅስቃሴ
 EXTRA_UI.cashEmpty = { am: "በዚህ ጊዜ ምንም እንቅስቃሴ የለም።", ar: "لا توجد حركات في هذه الفترة.", bm: "Foyi ma kɛ nin waati in na.", bn: "এই সময়ে কোনো লেনদেন নেই।", de: "Keine Bewegungen in diesem Zeitraum.", en: "No movements in this period.", es: "Sin movimientos en este período.", fr: "Aucun mouvement sur cette période.", ha: "Babu wani motsi a wannan lokacin.", hi: "इस अवधि में कोई लेन-देन नहीं।", id: "Tidak ada transaksi pada periode ini.", it: "Nessun movimento in questo periodo.", ja: "この期間の取引はありません。", ko: "이 기간에 내역이 없습니다.", nl: "Geen bewegingen in deze periode.", pl: "Brak ruchów w tym okresie.", pt: "Nenhum movimento neste período.", ru: "Нет операций за этот период.", sw: "Hakuna miamala katika kipindi hiki.", ta: "இந்தக் காலத்தில் எந்தப் பரிவர்த்தனையும் இல்லை.", te: "ఈ కాలంలో లావాదేవీలు లేవు.", th: "ไม่มีรายการในช่วงนี้", tl: "Walang galaw sa panahong ito.", tr: "Bu dönemde hareket yok.", ur: "اس مدت میں کوئی لین دین نہیں۔", vi: "Không có giao dịch trong kỳ này.", wo: "Amul dara ci diir bii.", yo: "Kò sí ìrìn owó ní àkókò yìí.", zh: "此期间没有记录。", zu: "Azikho izinguquko kule nkathi." };
 EXTRA_UI.cashSeeMore = { am: "ተጨማሪ ይመልከቱ", ar: "عرض المزيد", bm: "A caman jira", bn: "আরও দেখুন", de: "Mehr anzeigen", en: "See more", es: "Ver más", fr: "Voir plus", ha: "Duba ƙari", hi: "और देखें", id: "Lihat lainnya", it: "Mostra altro", ja: "もっと見る", ko: "더 보기", nl: "Meer tonen", pl: "Pokaż więcej", pt: "Ver mais", ru: "Показать ещё", sw: "Ona zaidi", ta: "மேலும் காட்டு", te: "మరిన్ని చూడండి", th: "ดูเพิ่มเติม", tl: "Tingnan pa", tr: "Daha fazla göster", ur: "مزید دیکھیں", vi: "Xem thêm", wo: "Gën a ci gis", yo: "Wo síi", zh: "查看更多", zu: "Bona okuningi" };
 EXTRA_UI.cashCountBtn = { am: "ገንዘብ ቁጠር", ar: "عدّ الصندوق", bm: "Kɛsi jate", bn: "ক্যাশ গুনুন", de: "Kasse zählen", en: "Count the cash", es: "Contar la caja", fr: "Compter la caisse", ha: "Ƙirga kuɗin da ke hannu", hi: "गल्ला गिनें", id: "Hitung kas", it: "Conta la cassa", ja: "レジを数える", ko: "금고 세기", nl: "Kas tellen", pl: "Przelicz kasę", pt: "Contar o caixa", ru: "Пересчитать кассу", sw: "Hesabu fedha za kasha", ta: "கல்லாவை எண்ணு", te: "గల్లా లెక్కించండి", th: "นับเงินในลิ้นชัก", tl: "Bilangin ang kaha", tr: "Kasayı say", ur: "گلا گنیں", vi: "Kiểm quỹ", wo: "Waññ kes bi", yo: "Ka owó ẹrọ", zh: "清点现金", zu: "Bala ikheshi" };
+EXTRA_UI.cashReportIntro = { am: "በተመረጠው ጊዜ እያንዳንዱ ሰው የተቀበለውና ያወጣው።", ar: "ما حصّله كل شخص وأنفقه خلال الفترة المختارة.", bm: "Mɔgɔ kelen-kelen bɛɛ ye wari min sɔrɔ ani a ye min musaka waati sugandilen na.", bn: "নির্বাচিত সময়ে প্রত্যেকে কত আদায় করেছেন ও খরচ করেছেন।", de: "Was jede Person im gewählten Zeitraum eingenommen und ausgegeben hat.", en: "What each person took in and spent over the chosen period.", es: "Lo que cada persona cobró y gastó en el período elegido.", fr: "Ce que chaque personne a encaissé et dépensé sur la période choisie.", ha: "Abin da kowane mutum ya karɓa ya kuma kashe a lokacin da aka zaɓa.", hi: "चुनी गई अवधि में हर व्यक्ति ने कितना लिया और खर्च किया।", id: "Jumlah yang diterima dan dibelanjakan tiap orang pada periode terpilih.", it: "Quanto ogni persona ha incassato e speso nel periodo scelto.", ja: "選んだ期間に各自が受け取った金額と使った金額。", ko: "선택한 기간에 각자가 받은 금액과 쓴 금액.", nl: "Wat elke persoon in de gekozen periode heeft ontvangen en uitgegeven.", pl: "Ile każda osoba przyjęła i wydała w wybranym okresie.", pt: "O que cada pessoa recebeu e gastou no período escolhido.", ru: "Сколько каждый человек получил и потратил за выбранный период.", sw: "Kiasi kila mtu alichopokea na kutumia katika kipindi kilichochaguliwa.", ta: "தேர்ந்தெடுத்த காலத்தில் ஒவ்வொருவரும் வசூலித்தது மற்றும் செலவழித்தது.", te: "ఎంచుకున్న కాలంలో ప్రతి ఒక్కరు వసూలు చేసినది, ఖర్చు చేసినది.", th: "แต่ละคนรับเงินและใช้จ่ายเท่าไรในช่วงที่เลือก", tl: "Kung magkano ang nakolekta at nagastos ng bawat tao sa napiling panahon.", tr: "Seçilen dönemde her kişinin tahsil ettiği ve harcadığı tutar.", ur: "منتخب مدت میں ہر شخص نے کتنا وصول کیا اور خرچ کیا۔", vi: "Mỗi người đã thu và chi bao nhiêu trong kỳ đã chọn.", wo: "Lu ku nekk jot te jëfandikoo ci jamono ji ñu tànn.", yo: "Ohun tí ẹnìkọ̀ọ̀kan gbà tí ó sì ná ní àkókò tí a yàn.", zh: "所选时段内每个人的收款与支出。", zu: "Lokho umuntu ngamunye akutholile nakusebenzisile esikhathini esikhethiwe." };
+EXTRA_UI.cashReportEmpty = { am: "በዚህ ጊዜ ምንም እንቅስቃሴ የለም። ረዘም ያለ ጊዜ ይምረጡ።", ar: "لا يوجد نشاط في هذه الفترة. اختر فترة أطول.", bm: "Foyi ma kɛ nin waati in na. Waati jan dɔ sugandi.", bn: "এই সময়ে কোনো কার্যকলাপ নেই। দীর্ঘ সময় বেছে নিন।", de: "Keine Aktivität in diesem Zeitraum. Wählen Sie einen längeren Zeitraum.", en: "No activity in this period. Choose a longer period.", es: "Sin actividad en este período. Elija un período más largo.", fr: "Aucune activité sur cette période. Choisissez une période plus longue.", ha: "Babu wani aiki a wannan lokacin. Zaɓi lokaci mai tsawo.", hi: "इस अवधि में कोई गतिविधि नहीं। लंबी अवधि चुनें।", id: "Tidak ada aktivitas pada periode ini. Pilih periode yang lebih panjang.", it: "Nessuna attività in questo periodo. Scegliete un periodo più lungo.", ja: "この期間の記録はありません。もっと長い期間を選んでください。", ko: "이 기간에는 기록이 없습니다. 더 긴 기간을 선택하세요.", nl: "Geen activiteit in deze periode. Kies een langere periode.", pl: "Brak aktywności w tym okresie. Wybierz dłuższy okres.", pt: "Sem atividade neste período. Escolha um período mais longo.", ru: "За этот период нет операций. Выберите более длинный период.", sw: "Hakuna shughuli katika kipindi hiki. Chagua kipindi kirefu zaidi.", ta: "இந்தக் காலத்தில் செயல்பாடு இல்லை. நீண்ட காலத்தைத் தேர்ந்தெடுக்கவும்.", te: "ఈ కాలంలో కార్యకలాపం లేదు. ఎక్కువ కాలాన్ని ఎంచుకోండి.", th: "ไม่มีความเคลื่อนไหวในช่วงนี้ เลือกช่วงที่ยาวขึ้น", tl: "Walang aktibidad sa panahong ito. Pumili ng mas mahabang panahon.", tr: "Bu dönemde hareket yok. Daha uzun bir dönem seçin.", ur: "اس مدت میں کوئی سرگرمی نہیں۔ لمبی مدت منتخب کریں۔", vi: "Không có hoạt động trong kỳ này. Hãy chọn kỳ dài hơn.", wo: "Amul dara ci jamono jii. Tànnal jamono ju gëna gudd.", yo: "Kò sí ìgbòkègbodò ní àkókò yìí. Yan àkókò gígùn jù.", zh: "此时段没有记录。请选择更长的时段。", zu: "Awukho umsebenzi kulesi sikhathi. Khetha isikhathi eside." };
 EXTRA_UI.cashCountedLabel = { am: "በትክክል የተቆጠረ መጠን", ar: "المبلغ المعدود فعليًا", bm: "Wari min jatera tiɲɛ na", bn: "প্রকৃতপক্ষে গোনা পরিমাণ", de: "Tatsächlich gezählter Betrag", en: "Amount actually counted", es: "Importe realmente contado", fr: "Montant réellement compté", ha: "Adadin da aka ƙirga da gaske", hi: "वास्तव में गिनी गई राशि", id: "Jumlah yang benar-benar dihitung", it: "Importo effettivamente contato", ja: "実際に数えた金額", ko: "실제로 센 금액", nl: "Werkelijk geteld bedrag", pl: "Rzeczywiście przeliczona kwota", pt: "Valor realmente contado", ru: "Фактически пересчитанная сумма", sw: "Kiasi kilichohesabiwa kweli", ta: "உண்மையில் எண்ணிய தொகை", te: "వాస్తవంగా లెక్కించిన మొత్తం", th: "จำนวนเงินที่นับได้จริง", tl: "Halagang aktwal na nabilang", tr: "Gerçekte sayılan tutar", ur: "اصل میں گنی گئی رقم", vi: "Số tiền đếm được thực tế", wo: "Xaalis bi ñu waññ dëgg-dëgg", yo: "Iye tí a kà gidi", zh: "实际清点金额", zu: "Inani elibalwe ngempela" };
 EXTRA_UI.cashGapLabel = { am: "ልዩነት", ar: "الفرق", bm: "Danfara", bn: "পার্থক্য", de: "Differenz", en: "Difference", es: "Diferencia", fr: "Écart", ha: "Bambanci", hi: "अंतर", id: "Selisih", it: "Differenza", ja: "差額", ko: "차액", nl: "Verschil", pl: "Różnica", pt: "Diferença", ru: "Расхождение", sw: "Tofauti", ta: "வித்தியாசம்", te: "తేడా", th: "ส่วนต่าง", tl: "Pagkakaiba", tr: "Fark", ur: "فرق", vi: "Chênh lệch", wo: "Wuute", yo: "Ìyàtọ̀", zh: "差额", zu: "Umehluko" };
 EXTRA_UI.cashCountAdjust = { am: "ቀሪ ሂሳቡን ከተቆጠረው መጠን ጋር አስተካክል", ar: "تصحيح الرصيد ليطابق المبلغ المعدود", bm: "Solde latilen walasa a ka kɛ i n'a fɔ wari jatelen", bn: "ব্যালেন্স গোনা পরিমাণের সঙ্গে মিলিয়ে ঠিক করুন", de: "Kassenstand an den gezählten Betrag angleichen", en: "Correct the balance to match the counted amount", es: "Corregir el saldo para que coincida con el importe contado", fr: "Corriger le solde pour qu'il corresponde au montant compté", ha: "Gyara ma'auni ya yi daidai da adadin da aka ƙirga", hi: "शेष राशि को गिनी गई राशि के बराबर करें", id: "Sesuaikan saldo agar cocok dengan jumlah yang dihitung", it: "Correggere il saldo per farlo corrispondere all'importo contato", ja: "残高を実際に数えた金額に合わせる", ko: "잔액을 실제로 센 금액에 맞추기", nl: "Saldo corrigeren zodat het overeenkomt met het getelde bedrag", pl: "Skoryguj saldo, aby odpowiadało przeliczonej kwocie", pt: "Corrigir o saldo para corresponder ao valor contado", ru: "Исправить остаток, чтобы он совпал с пересчитанной суммой", sw: "Rekebisha salio lilingane na kiasi kilichohesabiwa", ta: "எண்ணிய தொகைக்கு ஏற்ப இருப்பைத் திருத்து", te: "లెక్కించిన మొత్తానికి సరిపోయేలా నిల్వను సరిచేయండి", th: "ปรับยอดคงเหลือให้ตรงกับจำนวนที่นับได้", tl: "Itama ang balanse para tumugma sa nabilang na halaga", tr: "Bakiyeyi sayılan tutara eşitle", ur: "بیلنس کو گنی گئی رقم کے برابر کریں", vi: "Chỉnh số dư cho khớp với số tiền đã đếm", wo: "Defaraat solde bi ngir mu tollu ak xaalis bi ñu waññ", yo: "Ṣàtúnṣe owó tó kù kí ó bá iye tí a kà mu", zh: "将余额调整为实际清点金额", zu: "Lungisa ibhalansi ihambisane nenani elibaliwe" };
@@ -9779,6 +9781,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [countAdjust, setCountAdjust] = useState(false);
   // Onglet Caisse : période affichée, longueur du journal, fenêtre de comptage.
   const [cashPeriod, setCashPeriod] = useState("today");
+  // Période du Rapport de caisse par employé (même logique que cashPeriod ci-dessus).
+  const [cashReportPeriod, setCashReportPeriod] = useState("today");
   const [cashJournalLimit, setCashJournalLimit] = useState(20);
   const [showSettings, setShowSettings] = useState(false);
   // Guide contextuel par onglet (icône d'aide en haut à droite) : affiche le détail de ce
@@ -16773,15 +16777,25 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </button>,
           document.body
         )}
-        {tab === "cashreport" && (
-          <div>
-            {[{ id: null, name: t(lang, "cashReportOwner") }, ...employees].map((person) => {
-              const personSales = sales.filter((s) => (s.actorId || null) === person.id);
+        {tab === "cashreport" && (() => {
+          // Cet écran ne rendait qu'une liste de cartes, et chaque carte disparaissait quand la
+          // personne n'avait rien fait. Résultat : une page entièrement blanche, sans titre ni
+          // explication, dès qu'il n'y avait aucune activité. Il portait en plus sur TOUT
+          // l'historique, alors qu'un rapport de caisse se lit par journée : on ajoute le même
+          // sélecteur de période que l'onglet Caisse, réglé sur « Aujourd'hui » par défaut.
+          const startDay = cashReportPeriod === "today" ? todayKey()
+            : cashReportPeriod === "7" ? new Date(Date.now() - 6 * 86400000).toISOString().slice(0, 10)
+            : cashReportPeriod === "30" ? new Date(Date.now() - 29 * 86400000).toISOString().slice(0, 10)
+            : null;
+          const inReportPeriod = (d) => !startDay || String(d || "").slice(0, 10) >= startDay;
+          const people = [{ id: null, name: t(lang, "cashReportOwner") }, ...employees];
+          const cards = people.map((person) => {
+              const personSales = sales.filter((s) => (s.actorId || null) === person.id && inReportPeriod(s.date));
               const revenueByMethod = { cash: 0, mobile: 0, card: 0, credit: 0 };
               personSales.forEach((s) => { revenueByMethod[s.payment] = (revenueByMethod[s.payment] || 0) + s.total; });
               const totalRevenue = personSales.reduce((sum, s) => sum + s.total, 0);
-              const personExpenses = expenses.filter((e) => (e.actorId || null) === person.id).reduce((sum, e) => sum + e.amount, 0);
-              const personDebtPayments = debtEvents.filter((ev) => (ev.actorId || null) === person.id && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + ev.amount, 0);
+              const personExpenses = expenses.filter((e) => (e.actorId || null) === person.id && inReportPeriod(e.date)).reduce((sum, e) => sum + e.amount, 0);
+              const personDebtPayments = debtEvents.filter((ev) => (ev.actorId || null) === person.id && inReportPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + ev.amount, 0);
               if (personSales.length === 0 && personExpenses === 0 && personDebtPayments === 0) return null;
               return (
                 <div key={person.id || "owner"} className="rounded-2xl p-4 mb-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
@@ -16814,9 +16828,29 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 </div>
               );
-            })}
-          </div>
-        )}
+            }).filter(Boolean);
+          return (
+            <div>
+              <div className="rounded-2xl p-4 mb-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}` }}>
+                <p className="text-sm font-bold mb-1">{t(lang, "cashReportTabLabel")}</p>
+                <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "cashReportIntro")}</p>
+                <div className="flex gap-1.5">
+                  {[["today", "cashPeriodToday"], ["7", "cashPeriod7"], ["30", "cashPeriod30"], ["all", "cashPeriodAll"]].map(([id, key]) => (
+                    <button key={id} onClick={() => setCashReportPeriod(id)} className="flex-1 text-[10.5px] font-semibold py-1.5 rounded-lg" style={{ background: cashReportPeriod === id ? INDIGO : T.input, color: cashReportPeriod === id ? "white" : T.text }}>
+                      {tx(lang, key)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {cards.length > 0 ? cards : (
+                <div className="rounded-2xl p-6 text-center" style={{ background: T.card, color: T.muted, border: darkMode ? "none" : `1px solid ${T.border}` }}>
+                  <Wallet size={26} style={{ color: OCHRE }} className="mx-auto mb-2" />
+                  <p className="text-xs">{tx(lang, "cashReportEmpty")}</p>
+                </div>
+              )}
+            </div>
+          );
+        })()}
         {false && tab === "history" && !isActive && (
           <div className="rounded-xl p-6 text-center mt-4" style={{ background: T.card, color: T.text }}>
             <Lock size={28} style={{ color: OCHRE }} className="mx-auto mb-2" />
