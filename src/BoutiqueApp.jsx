@@ -381,6 +381,12 @@ const capacitorPreferencesStorage = {
     await Preferences.remove({ key });
   },
 };
+let employeeSessionToken = null;
+let employeeSessionOwnerId = null;
+function setEmployeeSession(token, ownerId) {
+  employeeSessionToken = token || null;
+  employeeSessionOwnerId = ownerId || null;
+}
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     persistSession: true,
@@ -396,6 +402,17 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     // le stockage natif Preferences dans l'app — sans dépendre d'une détection figée
     // au chargement du script.
     storage: capacitorPreferencesStorage,
+  },
+  // Appareil d'un employé : pas de compte Supabase Auth, mais un jeton secret émis à la connexion
+  // par code (RPC redeem_employee_invite). Il est joint à chaque requête ; les policies RLS et les
+  // RPC de la base en déduisent l'employé et sa boutique (fonctions employee_session_*).
+  global: {
+    fetch: (input, init) => {
+      if (!employeeSessionToken) return fetch(input, init);
+      const headers = new Headers((init && init.headers) || (input && input.headers) || undefined);
+      headers.set("x-employee-token", employeeSessionToken);
+      return fetch(input, { ...(init || {}), headers });
+    },
   },
 });
 // ---- Connexion Google côté web/PWA avec le sélecteur de compte NATIF du navigateur ----
@@ -495,6 +512,11 @@ async function getUserFast() {
       return { data: { user: data.session.user }, error: null };
     }
   } catch (e) { /* on retombe sur la méthode réseau */ }
+  // Appareil d'employé (connecté par code) : l'« utilisateur » est le propriétaire de la boutique ;
+  // les droits réels sont appliqués côté base grâce au jeton d'employé.
+  if (employeeSessionToken && employeeSessionOwnerId) {
+    return { data: { user: { id: employeeSessionOwnerId } }, error: null };
+  }
   return supabase.auth.getUser();
 }
 // Sur un vrai site déployé (Vercel), window.storage n'existe pas. Cet objet reproduit
@@ -6644,47 +6666,22 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       }
       setEmpScanBusy(true);
       try {
-        // 1. Vérifie que le code correspond à une invitation valide (non utilisée, non expirée).
-        const { data: invite, error: inviteError } = await supabase
-          .from("employee_invites")
-          .select("id, owner_id, employee_id, expires_at, used_at")
-          .eq("token", codeToCheck)
-          .is("used_at", null)
-          .gt("expires_at", new Date().toISOString())
-          .single();
-        if (inviteError || !invite) {
-          setEmpScanError(t(lang, "empScanInvalidCode"));
-          setEmpScanBusy(false);
-          return;
-        }
-        // 2. Marque l'invitation comme utilisée (empêche la réutilisation du même code).
-        const { error: markError } = await supabase
-          .from("employee_invites")
-          .update({ used_at: new Date().toISOString() })
-          .eq("id", invite.id);
-        if (markError) {
+        // Une seule RPC côté base : vérifie le code (non utilisé, non expiré), le consomme, contrôle que
+        // l'employé est actif et émet un jeton de session propre à cet employé.
+        const { data: res, error: rpcErr } = await supabase.rpc("redeem_employee_invite", { p_code: codeToCheck });
+        if (rpcErr) {
           setEmpScanError(t(lang, "genericError"));
           setEmpScanBusy(false);
           return;
         }
-        // 3. Récupère la fiche employé (autorisé grâce à la policy "employees_public_read_after_invite").
-        const { data: emp, error: empError } = await supabase
-          .from("employees")
-          .select("id, name, role, permissions, active, shift_schedule")
-          .eq("id", invite.employee_id)
-          .single();
-        if (empError || !emp || !emp.active) {
+        if (!res || res.error || !res.token || !res.employee) {
           setEmpScanError(t(lang, "empScanInvalidCode"));
           setEmpScanBusy(false);
           return;
         }
-        // 4. Récupère le nom de la boutique pour l'affichage (owner_id de l'invitation).
-        const { data: shopRow } = await supabase
-          .from("shop_data")
-          .select("shop_name")
-          .eq("owner_id", invite.owner_id)
-          .single();
-        onLogin(invite.owner_id, shopRow ? shopRow.shop_name : "", {
+        setEmployeeSession(res.token, res.owner_id);
+        const emp = res.employee;
+        onLogin(res.owner_id, res.shop_name || "", {
           id: emp.id,
           name: emp.name,
           role: emp.role,
@@ -8037,6 +8034,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // et rouvrir l'appli reconnectait automatiquement sur l'ancien compte.
   const handleLogoutClean = useCallback(async () => {
     clearCriticalState();
+    setEmployeeSession(null, null);
     try { await supabase.auth.signOut(); } catch (e) { /* déconnexion locale quand même */ }
     try {
       const isCapacitorApp = typeof window !== "undefined" && !!window.Capacitor;
@@ -9176,7 +9174,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     let cancelled = false;
     const ping = async () => {
       try {
-        if (!cancelled) await supabase.from("employees").update({ last_seen_at: new Date().toISOString() }).eq("id", activeEmployee.id);
+        if (!cancelled) await supabase.rpc("employee_ping");
       } catch (e) { /* best-effort */ }
     };
     ping();
