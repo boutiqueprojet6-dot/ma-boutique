@@ -16253,11 +16253,26 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         {tab === "shopcompare" && (
           <div>
             {shopComparisonLoading && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "wait")}</p>}
-            {!shopComparisonLoading && shops.map((s) => {
+            {/* Classement par rentabilité (Business, voir shopProfitabilityReport) : du plus
+                au moins rentable, seulement affiché s'il y a plus d'une boutique à comparer —
+                sinon un classement d'un seul élément n'a pas de sens. */}
+            {(() => {
+              const showRanking = hasFeatureAccess("shopProfitabilityReport") && shops.length > 1;
+              const orderedShops = showRanking
+                ? [...shops].sort((a, b) => ((shopComparisonData[b.id] || {}).netProfit || 0) - ((shopComparisonData[a.id] || {}).netProfit || 0))
+                : shops;
+              return !shopComparisonLoading && orderedShops.map((s, idx) => {
               const stats = shopComparisonData[s.id] || { revenue: 0, stockCount: 0, unpaidDebts: 0, netProfit: 0, marginableRevenue: 0 };
               return (
                 <div key={s.id} className="rounded-2xl p-4 mb-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                  <p className="text-sm font-bold mb-3">{s.name}</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    {showRanking && (
+                      <span className="text-[10px] font-extrabold rounded-full flex items-center justify-center" style={{ width: 20, height: 20, background: idx === 0 ? "#16a34a" : T.input, color: idx === 0 ? "white" : T.muted }}>
+                        {idx + 1}
+                      </span>
+                    )}
+                    <p className="text-sm font-bold">{s.name}</p>
+                  </div>
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div>
                       <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "shopCompareRevenue")}</p>
@@ -16303,7 +16318,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   )}
                 </div>
               );
-            })}
+              });
+            })()}
           </div>
         )}
         {tab === "cash" && hasPermission("viewCash") && cashView && (
