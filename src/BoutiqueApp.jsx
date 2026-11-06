@@ -14547,7 +14547,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           doc.text(shopName || "", M + 14, 26);
           doc.setFontSize(9);
           doc.setTextColor(200, 210, 225);
-          doc.text(`${t(lang, "accountingPeriodLabel")} : ${fromDate} → ${toDate}`, PAGE_W - M, 19, { align: "right" });
+          doc.text(`${t(lang, "accountingPeriodLabel")} : ${fromDate} - ${toDate}`, PAGE_W - M, 19, { align: "right" });
           doc.text(new Date().toISOString().slice(0, 10), PAGE_W - M, 26, { align: "right" });
         } else {
           doc.setFontSize(9);
@@ -14594,18 +14594,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         doc.setTextColor(GREY[0], GREY[1], GREY[2]);
         doc.text(`${tx(lang, "cashWithdrawalsLine")} : ${money(totalWithdrawals)}`, M, y);
         doc.setTextColor(0, 0, 0);
-        y += 8;
+        y += 10;
       }
 
       // ---- Graphiques ----
+      // Hauteur calée pour que les DEUX graphiques tiennent sur la première page sous la
+      // synthèse : quelques millimètres de plus et le second basculait sur une page à lui
+      // seul, laissant un grand vide en bas de la première.
       const chartBlock = (title, img) => {
-        room(78);
+        room(70);
         doc.setFont("helvetica", "bold"); doc.setFontSize(11);
         doc.text(title, M, y); y += 4;
         doc.setDrawColor(226, 232, 240);
-        doc.roundedRect(M, y, PAGE_W - M * 2, 62, 2, 2, "S");
-        doc.addImage(img, "PNG", M + 2, y + 2, PAGE_W - M * 2 - 4, 58);
-        y += 70;
+        doc.roundedRect(M, y, PAGE_W - M * 2, 55, 2, 2, "S");
+        doc.addImage(img, "PNG", M + 2, y + 2, PAGE_W - M * 2 - 4, 51);
+        y += 62;
       };
       chartBlock(t(lang, "accountingRevenueChartTitle"), revenueChartImg);
       chartBlock(t(lang, "accountingComparisonChartTitle"), barChartImg);
@@ -14660,8 +14663,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
 
       const colsSales = [
         { label: t(lang, "histColDate"), w: 26 },
-        { label: t(lang, "histColProduct"), w: 92 },
-        { label: t(lang, "othUnite"), w: 20, align: "right" },
+        { label: t(lang, "histColProduct"), w: 84 },
+        { label: t(lang, "qtySold"), w: 28, align: "right" },
         { label: t(lang, "histColAmount"), w: 44, align: "right" },
       ];
       drawTable(
