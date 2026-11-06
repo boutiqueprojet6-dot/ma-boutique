@@ -4564,6 +4564,9 @@ EXTRA_UI.cashJournal = { am: "የገንዘብ ማስቀመጫ እንቅስቃሴ
 EXTRA_UI.cashEmpty = { am: "በዚህ ጊዜ ምንም እንቅስቃሴ የለም።", ar: "لا توجد حركات في هذه الفترة.", bm: "Foyi ma kɛ nin waati in na.", bn: "এই সময়ে কোনো লেনদেন নেই।", de: "Keine Bewegungen in diesem Zeitraum.", en: "No movements in this period.", es: "Sin movimientos en este período.", fr: "Aucun mouvement sur cette période.", ha: "Babu wani motsi a wannan lokacin.", hi: "इस अवधि में कोई लेन-देन नहीं।", id: "Tidak ada transaksi pada periode ini.", it: "Nessun movimento in questo periodo.", ja: "この期間の取引はありません。", ko: "이 기간에 내역이 없습니다.", nl: "Geen bewegingen in deze periode.", pl: "Brak ruchów w tym okresie.", pt: "Nenhum movimento neste período.", ru: "Нет операций за этот период.", sw: "Hakuna miamala katika kipindi hiki.", ta: "இந்தக் காலத்தில் எந்தப் பரிவர்த்தனையும் இல்லை.", te: "ఈ కాలంలో లావాదేవీలు లేవు.", th: "ไม่มีรายการในช่วงนี้", tl: "Walang galaw sa panahong ito.", tr: "Bu dönemde hareket yok.", ur: "اس مدت میں کوئی لین دین نہیں۔", vi: "Không có giao dịch trong kỳ này.", wo: "Amul dara ci diir bii.", yo: "Kò sí ìrìn owó ní àkókò yìí.", zh: "此期间没有记录。", zu: "Azikho izinguquko kule nkathi." };
 EXTRA_UI.cashSeeMore = { am: "ተጨማሪ ይመልከቱ", ar: "عرض المزيد", bm: "A caman jira", bn: "আরও দেখুন", de: "Mehr anzeigen", en: "See more", es: "Ver más", fr: "Voir plus", ha: "Duba ƙari", hi: "और देखें", id: "Lihat lainnya", it: "Mostra altro", ja: "もっと見る", ko: "더 보기", nl: "Meer tonen", pl: "Pokaż więcej", pt: "Ver mais", ru: "Показать ещё", sw: "Ona zaidi", ta: "மேலும் காட்டு", te: "మరిన్ని చూడండి", th: "ดูเพิ่มเติม", tl: "Tingnan pa", tr: "Daha fazla göster", ur: "مزید دیکھیں", vi: "Xem thêm", wo: "Gën a ci gis", yo: "Wo síi", zh: "查看更多", zu: "Bona okuningi" };
 EXTRA_UI.cashCountBtn = { am: "ገንዘብ ቁጠር", ar: "عدّ الصندوق", bm: "Kɛsi jate", bn: "ক্যাশ গুনুন", de: "Kasse zählen", en: "Count the cash", es: "Contar la caja", fr: "Compter la caisse", ha: "Ƙirga kuɗin da ke hannu", hi: "गल्ला गिनें", id: "Hitung kas", it: "Conta la cassa", ja: "レジを数える", ko: "금고 세기", nl: "Kas tellen", pl: "Przelicz kasę", pt: "Contar o caixa", ru: "Пересчитать кассу", sw: "Hesabu fedha za kasha", ta: "கல்லாவை எண்ணு", te: "గల్లా లెక్కించండి", th: "นับเงินในลิ้นชัก", tl: "Bilangin ang kaha", tr: "Kasayı say", ur: "گلا گنیں", vi: "Kiểm quỹ", wo: "Waññ kes bi", yo: "Ka owó ẹrọ", zh: "清点现金", zu: "Bala ikheshi" };
+EXTRA_UI.cashCountedLabel = { am: "በትክክል የተቆጠረ መጠን", ar: "المبلغ المعدود فعليًا", bm: "Wari min jatera tiɲɛ na", bn: "প্রকৃতপক্ষে গোনা পরিমাণ", de: "Tatsächlich gezählter Betrag", en: "Amount actually counted", es: "Importe realmente contado", fr: "Montant réellement compté", ha: "Adadin da aka ƙirga da gaske", hi: "वास्तव में गिनी गई राशि", id: "Jumlah yang benar-benar dihitung", it: "Importo effettivamente contato", ja: "実際に数えた金額", ko: "실제로 센 금액", nl: "Werkelijk geteld bedrag", pl: "Rzeczywiście przeliczona kwota", pt: "Valor realmente contado", ru: "Фактически пересчитанная сумма", sw: "Kiasi kilichohesabiwa kweli", ta: "உண்மையில் எண்ணிய தொகை", te: "వాస్తవంగా లెక్కించిన మొత్తం", th: "จำนวนเงินที่นับได้จริง", tl: "Halagang aktwal na nabilang", tr: "Gerçekte sayılan tutar", ur: "اصل میں گنی گئی رقم", vi: "Số tiền đếm được thực tế", wo: "Xaalis bi ñu waññ dëgg-dëgg", yo: "Iye tí a kà gidi", zh: "实际清点金额", zu: "Inani elibalwe ngempela" };
+EXTRA_UI.cashGapLabel = { am: "ልዩነት", ar: "الفرق", bm: "Danfara", bn: "পার্থক্য", de: "Differenz", en: "Difference", es: "Diferencia", fr: "Écart", ha: "Bambanci", hi: "अंतर", id: "Selisih", it: "Differenza", ja: "差額", ko: "차액", nl: "Verschil", pl: "Różnica", pt: "Diferença", ru: "Расхождение", sw: "Tofauti", ta: "வித்தியாசம்", te: "తేడా", th: "ส่วนต่าง", tl: "Pagkakaiba", tr: "Fark", ur: "فرق", vi: "Chênh lệch", wo: "Wuute", yo: "Ìyàtọ̀", zh: "差额", zu: "Umehluko" };
+EXTRA_UI.cashCountAdjust = { am: "ቀሪ ሂሳቡን ከተቆጠረው መጠን ጋር አስተካክል", ar: "تصحيح الرصيد ليطابق المبلغ المعدود", bm: "Solde latilen walasa a ka kɛ i n'a fɔ wari jatelen", bn: "ব্যালেন্স গোনা পরিমাণের সঙ্গে মিলিয়ে ঠিক করুন", de: "Kassenstand an den gezählten Betrag angleichen", en: "Correct the balance to match the counted amount", es: "Corregir el saldo para que coincida con el importe contado", fr: "Corriger le solde pour qu'il corresponde au montant compté", ha: "Gyara ma'auni ya yi daidai da adadin da aka ƙirga", hi: "शेष राशि को गिनी गई राशि के बराबर करें", id: "Sesuaikan saldo agar cocok dengan jumlah yang dihitung", it: "Correggere il saldo per farlo corrispondere all'importo contato", ja: "残高を実際に数えた金額に合わせる", ko: "잔액을 실제로 센 금액에 맞추기", nl: "Saldo corrigeren zodat het overeenkomt met het getelde bedrag", pl: "Skoryguj saldo, aby odpowiadało przeliczonej kwocie", pt: "Corrigir o saldo para corresponder ao valor contado", ru: "Исправить остаток, чтобы он совпал с пересчитанной суммой", sw: "Rekebisha salio lilingane na kiasi kilichohesabiwa", ta: "எண்ணிய தொகைக்கு ஏற்ப இருப்பைத் திருத்து", te: "లెక్కించిన మొత్తానికి సరిపోయేలా నిల్వను సరిచేయండి", th: "ปรับยอดคงเหลือให้ตรงกับจำนวนที่นับได้", tl: "Itama ang balanse para tumugma sa nabilang na halaga", tr: "Bakiyeyi sayılan tutara eşitle", ur: "بیلنس کو گنی گئی رقم کے برابر کریں", vi: "Chỉnh số dư cho khớp với số tiền đã đếm", wo: "Defaraat solde bi ngir mu tollu ak xaalis bi ñu waññ", yo: "Ṣàtúnṣe owó tó kù kí ó bá iye tí a kà mu", zh: "将余额调整为实际清点金额", zu: "Lungisa ibhalansi ihambisane nenani elibaliwe" };
 EXTRA_UI.cashGapOk = { am: "ገንዘቡ ትክክል ነው ✓", ar: "الصندوق مضبوط ✓", bm: "Kɛsi ka ɲi ✓", bn: "ক্যাশ ঠিক আছে ✓", de: "Die Kasse stimmt ✓", en: "The till is balanced ✓", es: "La caja cuadra ✓", fr: "La caisse est juste ✓", ha: "Kuɗin sun daidaita ✓", hi: "गल्ला सही है ✓", id: "Kas sudah pas ✓", it: "La cassa torna ✓", ja: "レジは合っています ✓", ko: "금고가 맞습니다 ✓", nl: "De kas klopt ✓", pl: "Kasa się zgadza ✓", pt: "O caixa está certo ✓", ru: "Касса сходится ✓", sw: "Fedha zinalingana ✓", ta: "கல்லா சரியாக உள்ளது ✓", te: "గల్లా సరిగ్గా ఉంది ✓", th: "ยอดตรงกัน ✓", tl: "Tugma ang kaha ✓", tr: "Kasa tutuyor ✓", ur: "گلا درست ہے ✓", vi: "Quỹ khớp ✓", wo: "Kes bi baax na ✓", yo: "Owó náà péye ✓", zh: "现金无误 ✓", zu: "Ikheshi lilungile ✓" };
 EXTRA_UI.cashProfitTitle = { am: "የዛሬ የተገመተ ትርፍ", ar: "الربح التقديري لليوم", bm: "Bi tɔnɔ jatelen dabɔlen", bn: "আজকের আনুমানিক লাভ", de: "Geschätzter Gewinn heute", en: "Estimated profit today", es: "Beneficio estimado de hoy", fr: "Bénéfice estimé du jour", ha: "Ƙiyasin ribar yau", hi: "आज का अनुमानित लाभ", id: "Perkiraan laba hari ini", it: "Guadagno stimato di oggi", ja: "今日の推定利益", ko: "오늘의 예상 이익", nl: "Geschatte winst vandaag", pl: "Szacowany zysk dzisiaj", pt: "Lucro estimado de hoje", ru: "Ожидаемая прибыль за сегодня", sw: "Faida inayokadiriwa ya leo", ta: "இன்றைய மதிப்பிட்ட லாபம்", te: "ఈ రోజు అంచనా లాభం", th: "กำไรโดยประมาณวันนี้", tl: "Tantiyang tubo ngayon", tr: "Bugünün tahmini kârı", ur: "آج کا تخمینی منافع", vi: "Lợi nhuận ước tính hôm nay", wo: "Tabax bu ñu waxtaan tey", yo: "Èrè tí a fojú díwọ̀n lónìí", zh: "今日预计利润", zu: "Inzuzo elinganiselwe yanamuhla" };
 EXTRA_UI.planFeatIncludesPrev = { fr: "Tout le palier {plan}, plus :", en: "Everything in {plan}, plus:" };
@@ -9770,6 +9773,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [editingProductId, setEditingProductId] = useState(null);
   const [showAddExpense, setShowAddExpense] = useState(false);
   const [showEditFund, setShowEditFund] = useState(false);
+  // Comptage de caisse (voir saveCashCount) : montant saisi, et case "corriger le solde".
+  const [showCashCount, setShowCashCount] = useState(false);
+  const [countInput, setCountInput] = useState("");
+  const [countAdjust, setCountAdjust] = useState(false);
   // Onglet Caisse : période affichée, longueur du journal, fenêtre de comptage.
   const [cashPeriod, setCashPeriod] = useState("today");
   const [cashJournalLimit, setCashJournalLimit] = useState(20);
@@ -11593,6 +11600,35 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     logAction(`${t(lang, "logCashFundUpdated")} : ${localizedNumber(parseFloat(fundInput))}`);
     setFundInput(""); setShowEditFund(false);
     setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
+  };
+  // Comptage de caisse : le boutiquier compte l'argent réellement présent dans le tiroir et
+  // l'app enregistre l'écart avec le solde estimé. Les écarts répétés sont le principal signal
+  // de vol interne ou d'erreur de saisie — c'est la raison d'être de ce bouton.
+  // Les comptages étaient déjà stockés, synchronisés et affichés dans le journal, mais aucun
+  // écran ne permettait d'en créer un : la fonctionnalité était inachevée.
+  const saveCashCount = () => {
+    const counted = parseFloat((countInput || "").replace(",", "."));
+    if (countInput === "" || isNaN(counted)) return;
+    const gap = counted - cashBalance;
+    const entry = {
+      id: "count-" + Date.now(),
+      date: new Date().toISOString(),
+      counted,
+      expected: cashBalance,
+      gap,
+      adjusted: !!countAdjust && gap !== 0,
+      actorId: activeEmployee ? activeEmployee.id : null,
+      actorName: activeEmployee ? activeEmployee.name : null,
+    };
+    // "Corriger le solde" : on déplace le fond de caisse de l'écart, pour que le solde estimé
+    // reparte du montant réellement compté. L'écart reste inscrit dans le journal : la
+    // correction ne l'efface jamais.
+    const overrides = { cashCounts: [...cashCounts, entry] };
+    if (entry.adjusted) overrides.cashFund = cashFund + gap;
+    saveAll(overrides);
+    logAction(`${tx(lang, "cashCountBtn")} : ${localizedNumber(counted)} — ${tx(lang, "cashGapLabel")} ${gap >= 0 ? "+" : "-"}${localizedNumber(Math.abs(gap))}`);
+    setCountInput(""); setCountAdjust(false); setShowCashCount(false);
+    setAmountsHidden(true); // même re-verrouillage que le réglage du fond de caisse
   };
   // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
   const changeLockPin = async () => {
@@ -13818,7 +13854,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const totalOwed = unpaidDebts.reduce((sum, d) => sum + remainingDebt(d), 0);
   const totalCashSales = sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0);
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const cashBalance = cashFund + totalCashSales - totalExpenses;
+  // Les remboursements de dettes entrent physiquement dans la caisse. Ils étaient comptés
+  // nulle part dans le solde : un client qui remboursait 10 000 laissait l'argent dans le
+  // tiroir sans que le solde estimé bouge, donc un écart permanent au moment de compter.
+  const totalDebtCollected = debtEvents
+    .filter((ev) => ev.type === "paid" || ev.type === "partialPayment")
+    .reduce((sum, ev) => sum + (ev.amount || 0), 0);
+  const cashBalance = cashFund + totalCashSales + totalDebtCollected - totalExpenses;
   const todayExpenses = expenses.filter((e) => e.date.slice(0, 10) === todayKey());
 
   const cashCardStyle = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
@@ -13857,9 +13899,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       txn[k].amount += s.total;
       if (s.productName && txn[k].names.indexOf(s.productName) === -1) txn[k].names.push(s.productName);
     });
+    // Les remboursements de dettes manquaient au journal : de l'argent entrait dans la
+    // caisse sans aucune ligne pour l'expliquer.
+    const pDebtPayments = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
     const journal = [
       ...Object.values(txn),
       ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", date: e.date, amount: e.amount, label: e.label, expenseId: e.id, actorName: e.actorName || null })),
+      ...pDebtPayments.map((ev) => ({ id: "d-" + ev.id, kind: "debt", date: ev.date, amount: ev.amount, label: ev.customer || "", actorName: ev.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // Bénéfice de la période : marge des ventes dont le prix d'achat est connu, moins les dépenses.
     let margin = 0, costed = 0;
@@ -13870,13 +13916,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const trend7 = last30Days().slice(-7).map((day) => {
       const dSales = sales.filter((sl) => sl.date.slice(0, 10) === day && sl.payment === "cash").reduce((sum, sl) => sum + sl.total, 0);
       const dExp = expenses.filter((e) => e.date.slice(0, 10) === day).reduce((sum, e) => sum + e.amount, 0);
-      return { day, net: dSales - dExp };
+      const dDebt = debtEvents.filter((ev) => String(ev.date).slice(0, 10) === day && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + (ev.amount || 0), 0);
+      return { day, net: dSales + dDebt - dExp };
     });
     const journalWithCounts = [
       ...journal,
       ...pCounts.map((c) => ({ id: "c-" + c.id, kind: "count", date: c.date, gap: c.gap, counted: c.counted, adjusted: c.adjusted, actorName: c.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
-    return { cashIn: cashInTotal, out: outTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, trend7 };
+    // "Entrées" = tout ce qui rentre réellement dans le tiroir : ventes en espèces ET
+    // remboursements de dettes (le détail des deux reste visible plus bas dans l'écran).
+    return { cashIn: cashInTotal + debtIn, out: outTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, trend7 };
   })() : null;
   const days = last30Days();
   const firstSaleDate = sales.length > 0
@@ -14918,6 +14967,46 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           </div>
         )}
+        {showCashCount && (() => {
+          // Écart calculé en direct pendant la saisie, pour que le boutiquier voie tout de
+          // suite s'il manque de l'argent, sans avoir à valider d'abord.
+          const countedNum = parseFloat((countInput || "").replace(",", "."));
+          const hasCount = countInput !== "" && !isNaN(countedNum);
+          const gap = hasCount ? countedNum - cashBalance : 0;
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+              <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-bold text-sm">{tx(lang, "cashCountBtn")}</h3>
+                  <button onClick={() => { setShowCashCount(false); setCountInput(""); setCountAdjust(false); }}><X size={18} /></button>
+                </div>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "fundExplain")}</p>
+                <div className="flex items-center justify-between text-xs rounded-lg p-2 mb-3" style={{ background: T.input }}>
+                  <span style={{ color: T.muted }}>{t(lang, "cashBalance")}</span>
+                  <span className="font-bold">{fcfa(cashBalance)}</span>
+                </div>
+                <input autoComplete="off" placeholder={tx(lang, "cashCountedLabel")} type="number" inputMode="decimal" value={countInput} onChange={(e) => setCountInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                {hasCount && (
+                  <div className="flex items-center justify-between text-xs rounded-lg p-2 mb-3" style={{ background: gap === 0 ? (darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5") : (darkMode ? "rgba(184,86,47,0.15)" : "#fef2f2") }}>
+                    <span style={{ color: T.muted }}>{tx(lang, "cashGapLabel")}</span>
+                    <span className="font-extrabold" style={{ color: gap === 0 ? (darkMode ? "#6ee7b7" : "#065f46") : CLAY }}>
+                      {gap === 0 ? tx(lang, "cashGapOk") : `${gap > 0 ? "+" : "-"}${fcfa(Math.abs(gap))}`}
+                    </span>
+                  </div>
+                )}
+                {hasCount && gap !== 0 && (
+                  <button onClick={() => setCountAdjust((v) => !v)} className="w-full flex items-start gap-2 text-left mb-3">
+                    <div className="rounded flex items-center justify-center flex-shrink-0" style={{ width: 18, height: 18, marginTop: 1, border: `1.5px solid ${countAdjust ? INDIGO : T.border}`, background: countAdjust ? INDIGO : "transparent" }}>
+                      {countAdjust && <Check size={12} color="white" />}
+                    </div>
+                    <span className="text-[11px] leading-snug" style={{ color: T.muted }}>{tx(lang, "cashCountAdjust")}</span>
+                  </button>
+                )}
+                <button onClick={saveCashCount} disabled={!hasCount} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: hasCount ? INDIGO : T.border, opacity: hasCount ? 1 : 0.7 }}>{t(lang, "save")}</button>
+              </div>
+            </div>
+          );
+        })()}
         {restockTarget && (() => {
           const restockProduct = products.find((p) => p.id === restockTarget);
           if (!restockProduct) return null;
@@ -16479,9 +16568,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <span style={{ fontSize: 26 }}>🪙</span>
                   </div>
                 </div>
-                <p onClick={() => { if (amountsHidden) setShowLockPinModal(true); }} className="text-[10px] mt-2" style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.4, cursor: amountsHidden ? "pointer" : "default" }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}</p>
+                <p onClick={() => { if (amountsHidden) setShowLockPinModal(true); }} className="text-[10px] mt-2" style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.4, cursor: amountsHidden ? "pointer" : "default" }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}{totalDebtCollected > 0 ? ` · ${t(lang, "cashReportDebtPayments")} +${maskAmount(fcfa(totalDebtCollected))}` : ""}</p>
                 {hasPermission("editCash") && (
-                  <div className="grid grid-cols-2 gap-2 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
+                  <div className="grid grid-cols-3 gap-2 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
                     <button onClick={() => requireUnlock(openEditFund, "editFund")} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.12)" }}>
                       <Wallet size={16} color="white" />
                       <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{t(lang, "setCashFund")}</span>
@@ -16489,6 +16578,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <button onClick={() => requireUnlock(() => setShowAddExpense(true), "addExpense")} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.12)" }}>
                       <Plus size={16} color="white" />
                       <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{t(lang, "addExpense")}</span>
+                    </button>
+                    <button onClick={() => requireUnlock(() => { setCountInput(""); setCountAdjust(false); setShowCashCount(true); })} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.12)" }}>
+                      <Search size={16} color="white" />
+                      <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{tx(lang, "cashCountBtn")}</span>
                     </button>
                   </div>
                 )}
@@ -16604,6 +16697,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     const showDay = idx === 0 || String(arr[idx - 1].date).slice(0, 10) !== dayKey;
                     const isSale = m.kind === "sale";
                     const isCount = m.kind === "count";
+                    const isDebt = m.kind === "debt";
+                    // Entrée d'argent dans le tiroir : vente en espèces OU remboursement de dette.
+                    const isIn = isSale || isDebt;
                     return (
                       <React.Fragment key={m.id}>
                         {showDay && (
@@ -16611,11 +16707,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         )}
                         <div className="flex items-center justify-between rounded-xl p-2 gap-2" style={{ background: T.input }}>
                           <div className="flex items-center gap-2 min-w-0">
-                            <div className="rounded-lg flex items-center justify-center flex-shrink-0" style={{ width: 28, height: 28, background: isCount ? (darkMode ? "rgba(59,91,138,0.25)" : "#e0e7ff") : isSale ? (darkMode ? "rgba(52,211,153,0.15)" : "#dcfce7") : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
-                              <span style={{ fontSize: 13 }}>{isCount ? "🔎" : isSale ? "💵" : "🧾"}</span>
+                            <div className="rounded-lg flex items-center justify-center flex-shrink-0" style={{ width: 28, height: 28, background: isCount ? (darkMode ? "rgba(59,91,138,0.25)" : "#e0e7ff") : isIn ? (darkMode ? "rgba(52,211,153,0.15)" : "#dcfce7") : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
+                              <span style={{ fontSize: 13 }}>{isCount ? "🔎" : isDebt ? "🤝" : isSale ? "💵" : "🧾"}</span>
                             </div>
                             <div className="min-w-0">
-                              <p className="text-[11px] font-semibold truncate">{isCount ? tx(lang, "cashCountBtn") : isSale ? (m.names.length ? m.names.join(", ") : t(lang, "navSale")) : m.label}</p>
+                              <p className="text-[11px] font-semibold truncate">{isCount ? tx(lang, "cashCountBtn") : isDebt ? `${t(lang, "cashReportDebtPayments")}${m.label ? ` · ${m.label}` : ""}` : isSale ? (m.names.length ? m.names.join(", ") : t(lang, "navSale")) : m.label}</p>
                               <p className="text-[10px]" style={{ color: T.muted }}>{fullTime(m.date)}{m.actorName ? ` · ${m.actorName}` : ""}</p>
                             </div>
                           </div>
@@ -16625,9 +16721,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                                 {amountsHidden ? "•••••" : (m.gap === 0 ? tx(lang, "cashGapOk") : `${m.gap > 0 ? "+" : "-"}${fcfa(Math.abs(m.gap))}`)}
                               </span>
                             ) : (
-                              <span onClick={() => { if (amountsHidden) setShowLockPinModal(true); }} className="text-[11px] font-extrabold" style={{ color: amountsHidden ? T.muted : (isSale ? (darkMode ? "#8fd6a3" : "#16a34a") : CLAY), cursor: amountsHidden ? "pointer" : "default" }}>{amountsHidden ? "•••••" : `${isSale ? "+" : "-"}${fcfa(m.amount)}`}</span>
+                              <span onClick={() => { if (amountsHidden) setShowLockPinModal(true); }} className="text-[11px] font-extrabold" style={{ color: amountsHidden ? T.muted : (isIn ? (darkMode ? "#8fd6a3" : "#16a34a") : CLAY), cursor: amountsHidden ? "pointer" : "default" }}>{amountsHidden ? "•••••" : `${isIn ? "+" : "-"}${fcfa(m.amount)}`}</span>
                             )}
-                            {!isSale && !isCount && hasPermission("editCash") && (
+                            {!isIn && !isCount && hasPermission("editCash") && (
                               <button onClick={() => requireUnlock(() => setConfirmModal({ message: `Supprimer cette dépense de ${fcfa(m.amount)} ?`, onConfirm: () => deleteExpense(m.expenseId) }))}><Trash2 size={13} color={T.muted} /></button>
                             )}
                           </div>
