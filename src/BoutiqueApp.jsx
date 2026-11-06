@@ -14400,7 +14400,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="min-w-0">
               <p className="text-white font-bold text-sm truncate">{shops.find((s) => s.id === (blobShopId || activeShopId))?.name || shopName}</p>
               <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.6)" }}>{t(lang, "appName")}</p>
-              {(hasFeatureAccess("multiShop") || shops.length > 1) && !activeEmployee && (
+              {(hasFeatureAccess("multiShop") || shops.length > 1) && (!activeEmployee || (hasFeatureAccess("supervisorRole") && activeEmployee.role === "superviseur")) && (
                 <button onClick={() => setShowShopSwitcher(true)} className="text-[10px] underline mt-0.5" style={{ color: "rgba(255,255,255,0.75)" }}>
                   {t(lang, "switchShopBtn")}
                 </button>
@@ -14509,7 +14509,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div>
               <h1 className="text-lg font-bold tracking-tight">{shops.find((s) => s.id === (blobShopId || activeShopId))?.name || shopName}</h1>
               {expiresAt && <span className="text-xs opacity-80">{t(lang, "subscriptionUntil")} {fullDate(expiresAt)}</span>}
-              {(hasFeatureAccess("multiShop") || shops.length > 1) && !activeEmployee && (
+              {(hasFeatureAccess("multiShop") || shops.length > 1) && (!activeEmployee || (hasFeatureAccess("supervisorRole") && activeEmployee.role === "superviseur")) && (
                 <button onClick={() => setShowShopSwitcher(true)} className="block text-[11px] underline mt-0.5 opacity-90">
                   {t(lang, "switchShopBtn")}
                 </button>
@@ -17431,8 +17431,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               ))}
             </div>
             {/* Le compte peut toujours naviguer entre ses boutiques existantes, mais n'en crée de
-                nouvelles qu'avec un accès multi-boutique (règle aussi imposée par la base). */}
-            {hasFeatureAccess("multiShop") && (<>
+                nouvelles qu'avec un accès multi-boutique (règle aussi imposée par la base) —
+                et jamais depuis une session Superviseur (lecture seule, voir EMPLOYEE_ROLES). */}
+            {hasFeatureAccess("multiShop") && !activeEmployee && (<>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "newShopNameLabel")}</label>
             <div className="flex gap-2">
               <textarea autoComplete="off" rows={1}
