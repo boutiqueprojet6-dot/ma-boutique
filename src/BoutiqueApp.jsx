@@ -878,7 +878,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Votre code PIN et vos données de boutique (stock, ventes, caisse) restent privés. Vous seul(e) pouvez les voir — même l'administrateur n'y a pas accès.",
     backToShop: "Retour compte boutique",
     navDashboard: "Accueil", navStock: "Stock", navSale: "Vente", navHistory: "Historique", navDebts: "Dettes", navStats: "Stats", navAI: "Assistant",
-    aiTitle: "Assistant IA", aiPlaceholder: "", aiThinking: "Réflexion…",
+    aiTitle: "Assistant IA", aiPlaceholder: "Posez votre question…", aiThinking: "Réflexion…",
     aiWelcome: "Bonjour ! Je connais votre boutique. Posez-moi une question sur votre stock, vos ventes, vos dettes ou votre caisse.",
     settingsTitle: "Paramètres", manageAccount: "Gérer le compte", interfaceTitle: "Interface", assistance: "Assistance",
     dangerZone: "Sécurité", language: "Langue",
@@ -997,7 +997,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 የፒን ኮድህ እና የሱቅ መረጃህ (ክምችት፣ ሽያጭ፣ ካዝና) የግል ሆነው ይቆያሉ። አንተ ብቻ ልታያቸው ትችላለህ — አስተዳዳሪውም እንኳ ማየት አይችልም።",
     backToShop: "ወደ ሱቅ መለያ ተመለስ",
     navDashboard: "መነሻ", navStock: "ክምችት", navSale: "ሽያጭ", navHistory: "ታሪክ", navDebts: "ዕዳዎች", navStats: "ስታቲስቲክስ", navAI: "ረዳት",
-    aiTitle: "የ AI ረዳት", aiPlaceholder: "", aiThinking: "እያሰበ ነው…",
+    aiTitle: "የ AI ረዳት", aiPlaceholder: "ጥያቄዎን ይጠይቁ…", aiThinking: "እያሰበ ነው…",
     aiWelcome: "ሰላም! ስለ ሱቅህ አውቃለሁ። ስለ ክምችትህ፣ ሽያጭህ፣ ዕዳዎችህ ወይም ካዝናህ ጠይቀኝ።",
     settingsTitle: "ቅንብሮች", manageAccount: "መለያ አስተዳድር", interfaceTitle: "ገፅታ", assistance: "እገዛ",
     dangerZone: "ደህንነት", language: "ቋንቋ",
@@ -1104,7 +1104,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Your PIN and shop data (stock, sales, cash) stay private. Only you can see them — not even the admin has access.",
     backToShop: "Back to shop account",
     navDashboard: "Home", navStock: "Stock", navSale: "Sale", navHistory: "History", navDebts: "Debts", navStats: "Stats", navAI: "Assistant",
-    aiTitle: "AI Assistant", aiPlaceholder: "", aiThinking: "Thinking…",
+    aiTitle: "AI Assistant", aiPlaceholder: "Ask your question…", aiThinking: "Thinking…",
     aiWelcome: "Hello! I know your shop. Ask me anything about your stock, sales, debts or cash.",
     settingsTitle: "Settings", manageAccount: "Manage account", interfaceTitle: "Interface", assistance: "Support",
     dangerZone: "Security", language: "Language",
@@ -1213,7 +1213,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Ang iyong PIN at datos ng tindahan (stock, benta, cash) ay pribado. Ikaw lang ang makakakita nito — kahit ang admin ay walang access.",
     backToShop: "Bumalik sa account ng tindahan",
     navDashboard: "Home", navStock: "Stock", navSale: "Benta", navHistory: "Kasaysayan", navDebts: "Utang", navStats: "Stats", navAI: "Katulong",
-    aiTitle: "AI Assistant", aiPlaceholder: "", aiThinking: "Nag-iisip…",
+    aiTitle: "AI Assistant", aiPlaceholder: "Itanong ang tanong mo…", aiThinking: "Nag-iisip…",
     aiWelcome: "Kumusta! Kilala ko ang iyong tindahan. Magtanong ka tungkol sa iyong stock, benta, utang o cash.",
     settingsTitle: "Mga Setting", manageAccount: "Pamahalaan ang account", interfaceTitle: "Interface", assistance: "Suporta",
     dangerZone: "Seguridad", language: "Wika",
@@ -1320,7 +1320,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 మీ PIN మరియు దుకాణ డేటా (స్టాక్, అమ్మకాలు, నగదు) ప్రైవేట్‌గా ఉంటాయి. మీరు మాత్రమే వాటిని చూడగలరు — అడ్మిన్‌కు కూడా యాక్సెస్ ఉండదు.",
     backToShop: "దుకాణ ఖాతాకు తిరిగి వెళ్లండి",
     navDashboard: "హోమ్", navStock: "స్టాక్", navSale: "అమ్మకం", navHistory: "చరిత్ర", navDebts: "అప్పులు", navStats: "గణాంకాలు", navAI: "సహాయకుడు",
-    aiTitle: "AI సహాయకుడు", aiPlaceholder: "", aiThinking: "ఆలోచిస్తోంది…",
+    aiTitle: "AI సహాయకుడు", aiPlaceholder: "మీ ప్రశ్న అడగండి…", aiThinking: "ఆలోచిస్తోంది…",
     aiWelcome: "నమస్కారం! నాకు మీ దుకాణం తెలుసు. మీ స్టాక్, అమ్మకాలు, అప్పులు లేదా నగదు గురించి నన్ను అడగండి.",
     settingsTitle: "సెట్టింగ్‌లు", manageAccount: "ఖాతాను నిర్వహించండి", interfaceTitle: "ఇంటర్‌ఫేస్", assistance: "సహాయం",
     dangerZone: "భద్రత", language: "భాష",
@@ -1427,7 +1427,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 รหัส PIN และข้อมูลร้านของคุณ (สต็อก การขาย เงินสด) เป็นความลับ มีเพียงคุณเท่านั้นที่เห็นได้ — แม้แต่ผู้ดูแลระบบก็ไม่มีสิทธิ์เข้าถึง",
     backToShop: "กลับไปยังบัญชีร้านค้า",
     navDashboard: "หน้าแรก", navStock: "สต็อก", navSale: "ขาย", navHistory: "ประวัติ", navDebts: "หนี้สิน", navStats: "สถิติ", navAI: "ผู้ช่วย",
-    aiTitle: "ผู้ช่วย AI", aiPlaceholder: "", aiThinking: "กำลังคิด…",
+    aiTitle: "ผู้ช่วย AI", aiPlaceholder: "ถามคำถามของคุณ…", aiThinking: "กำลังคิด…",
     aiWelcome: "สวัสดี! ฉันรู้จักร้านของคุณ ถามฉันเกี่ยวกับสต็อก การขาย หนี้สิน หรือเงินสดของคุณได้เลย",
     settingsTitle: "การตั้งค่า", manageAccount: "จัดการบัญชี", interfaceTitle: "อินเทอร์เฟซ", assistance: "ความช่วยเหลือ",
     dangerZone: "ความปลอดภัย", language: "ภาษา",
@@ -1534,7 +1534,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Sa PIN ak xibaar bu bitik bi (stock, jaay, xaalis) dañu ne sekare. Yow rekk moo ko man a gis — admin bi itam amul ci sañ-sañ.",
     backToShop: "Delluwaat ci compte bitik bi",
     navDashboard: "Kër", navStock: "Stock", navSale: "Jaay", navHistory: "Jaar-jaar", navDebts: "Boor", navStats: "Statistik", navAI: "Ndimbal",
-    aiTitle: "Ndimbal AI", aiPlaceholder: "", aiThinking: "Dama xalaat…",
+    aiTitle: "Ndimbal AI", aiPlaceholder: "Laajal sa laaj…", aiThinking: "Dama xalaat…",
     aiWelcome: "Salaam! Xam naa sa bitik. Laaj ma dara ci sa stock, sa jaay, sa boor walla sa xaalis.",
     settingsTitle: "Paramaetar yi", manageAccount: "Yëngal compte bi", interfaceTitle: "Interface", assistance: "Ndimbal",
     dangerZone: "Kaaraange", language: "Làkk",
@@ -1641,7 +1641,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Państwa PIN i dane sklepu (zapasy, sprzedaż, gotówka) pozostają prywatne. Tylko Państwo mogą je zobaczyć — nawet administrator nie ma dostępu.",
     backToShop: "Powrót do konta sklepu",
     navDashboard: "Start", navStock: "Zapasy", navSale: "Sprzedaż", navHistory: "Historia", navDebts: "Długi", navStats: "Statystyki", navAI: "Asystent",
-    aiTitle: "Asystent AI", aiPlaceholder: "", aiThinking: "Myślę…",
+    aiTitle: "Asystent AI", aiPlaceholder: "Zadaj pytanie…", aiThinking: "Myślę…",
     aiWelcome: "Witam! Znam Państwa sklep. Proszę zapytać mnie o zapasy, sprzedaż, długi lub gotówkę.",
     settingsTitle: "Ustawienia", manageAccount: "Zarządzaj kontem", interfaceTitle: "Interfejs", assistance: "Pomoc",
     dangerZone: "Bezpieczeństwo", language: "Język",
@@ -1748,7 +1748,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 رمزك السري وبيانات متجرك (المخزون، المبيعات، الصندوق) تبقى خاصة. أنت فقط من يمكنه رؤيتها — حتى المدير لا يمكنه الوصول إليها.",
     backToShop: "الرجوع إلى حساب المتجر",
     navDashboard: "الرئيسية", navStock: "المخزون", navSale: "بيع", navHistory: "السجل", navDebts: "الديون", navStats: "إحصائيات", navAI: "مساعد",
-    aiTitle: "المساعد الذكي", aiPlaceholder: "", aiThinking: "جارٍ التفكير…",
+    aiTitle: "المساعد الذكي", aiPlaceholder: "اطرح سؤالك…", aiThinking: "جارٍ التفكير…",
     aiWelcome: "أهلاً! أعرف كل شيء عن متجرك. اسألني أي سؤال عن البضاعة، البيع، الديون أو الفلوس في الصندوق.",
     settingsTitle: "الإعدادات", manageAccount: "إدارة الحساب", interfaceTitle: "الواجهة", assistance: "المساعدة",
     dangerZone: "الأمان", language: "اللغة",
@@ -1855,7 +1855,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Su PIN y los datos de su tienda (stock, ventas, caja) son privados. Solo usted puede verlos — ni siquiera el administrador tiene acceso.",
     backToShop: "Volver a la cuenta de tienda",
     navDashboard: "Inicio", navStock: "Stock", navSale: "Venta", navHistory: "Historial", navDebts: "Deudas", navStats: "Estadísticas", navAI: "Asistente",
-    aiTitle: "Asistente IA", aiPlaceholder: "", aiThinking: "Pensando…",
+    aiTitle: "Asistente IA", aiPlaceholder: "Haga su pregunta…", aiThinking: "Pensando…",
     aiWelcome: "¡Hola! Conozco su tienda. Pregúnteme sobre su stock, ventas, deudas o caja.",
     settingsTitle: "Ajustes", manageAccount: "Gestionar cuenta", interfaceTitle: "Interfaz", assistance: "Soporte",
     dangerZone: "Seguridad", language: "Idioma",
@@ -1962,7 +1962,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Seu PIN e os dados da sua loja (estoque, vendas, caixa) permanecem privados. Só você pode vê-los — nem mesmo o administrador tem acesso.",
     backToShop: "Voltar à conta da loja",
     navDashboard: "Início", navStock: "Estoque", navSale: "Venda", navHistory: "Histórico", navDebts: "Dívidas", navStats: "Estatísticas", navAI: "Assistente",
-    aiTitle: "Assistente de IA", aiPlaceholder: "", aiThinking: "Pensando…",
+    aiTitle: "Assistente de IA", aiPlaceholder: "Faça a sua pergunta…", aiThinking: "Pensando…",
     aiWelcome: "Olá! Eu conheço sua loja. Me faça uma pergunta sobre seu estoque, vendas, dívidas ou caixa.",
     settingsTitle: "Configurações", manageAccount: "Gerenciar conta", interfaceTitle: "Interface", assistance: "Suporte",
     dangerZone: "Segurança", language: "Idioma",
@@ -2069,7 +2069,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 你的密码和店铺数据（库存、销售、账户余额）完全保密。只有你自己能看到——管理员也无权查看。",
     backToShop: "返回店铺账号",
     navDashboard: "首页", navStock: "库存", navSale: "收银", navHistory: "记录", navDebts: "赊账", navStats: "统计", navAI: "助手",
-    aiTitle: "智能助手", aiPlaceholder: "", aiThinking: "思考中…",
+    aiTitle: "智能助手", aiPlaceholder: "请输入您的问题…", aiThinking: "思考中…",
     aiWelcome: "你好！我了解你的店铺情况。有关于库存、销售、赊账或账户余额的问题，尽管问我。",
     settingsTitle: "设置", manageAccount: "账号管理", interfaceTitle: "界面", assistance: "帮助与客服",
     dangerZone: "安全", language: "语言",
@@ -2176,7 +2176,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Mã PIN và dữ liệu cửa hàng của bạn (kho, doanh thu, tiền mặt) được giữ riêng tư. Chỉ bạn mới có thể xem — kể cả quản trị viên cũng không có quyền truy cập.",
     backToShop: "Quay lại tài khoản cửa hàng",
     navDashboard: "Trang chủ", navStock: "Kho hàng", navSale: "Bán hàng", navHistory: "Lịch sử", navDebts: "Công nợ", navStats: "Thống kê", navAI: "Trợ lý",
-    aiTitle: "Trợ lý AI", aiPlaceholder: "", aiThinking: "Đang suy nghĩ…",
+    aiTitle: "Trợ lý AI", aiPlaceholder: "Đặt câu hỏi của bạn…", aiThinking: "Đang suy nghĩ…",
     aiWelcome: "Xin chào! Tôi biết thông tin về cửa hàng của bạn. Hãy hỏi tôi về kho hàng, doanh thu, công nợ hoặc tiền mặt của bạn.",
     settingsTitle: "Cài đặt", manageAccount: "Quản lý tài khoản", interfaceTitle: "Giao diện", assistance: "Hỗ trợ",
     dangerZone: "Bảo mật", language: "Ngôn ngữ",
@@ -2283,7 +2283,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Ihr PIN und Ihre Ladendaten (Bestand, Verkäufe, Kasse) bleiben privat. Nur Sie können sie sehen — auch der Administrator nicht.",
     backToShop: "Zurück zum Ladenkonto",
     navDashboard: "Start", navStock: "Bestand", navSale: "Verkauf", navHistory: "Verlauf", navDebts: "Schulden", navStats: "Statistik", navAI: "Assistent",
-    aiTitle: "KI-Assistent", aiPlaceholder: "", aiThinking: "Denke nach…",
+    aiTitle: "KI-Assistent", aiPlaceholder: "Stellen Sie Ihre Frage…", aiThinking: "Denke nach…",
     aiWelcome: "Hallo! Ich kenne Ihren Laden. Fragen Sie mich etwas über Bestand, Verkäufe, Schulden oder Kasse.",
     settingsTitle: "Einstellungen", manageAccount: "Konto verwalten", interfaceTitle: "Oberfläche", assistance: "Hilfe",
     dangerZone: "Sicherheit", language: "Sprache",
@@ -2390,7 +2390,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Ваш PIN-код и данные магазина (склад, продажи, касса) остаются конфиденциальными. Только вы можете их видеть — даже администратор не имеет доступа.",
     backToShop: "Вернуться к аккаунту магазина",
     navDashboard: "Главная", navStock: "Склад", navSale: "Продажа", navHistory: "История", navDebts: "Долги", navStats: "Статистика", navAI: "Помощник",
-    aiTitle: "ИИ-помощник", aiPlaceholder: "", aiThinking: "Думаю…",
+    aiTitle: "ИИ-помощник", aiPlaceholder: "Задайте ваш вопрос…", aiThinking: "Думаю…",
     aiWelcome: "Привет! Я знаю ваш магазин. Спросите меня о складе, продажах, долгах или кассе.",
     settingsTitle: "Настройки", manageAccount: "Управление аккаунтом", interfaceTitle: "Интерфейс", assistance: "Поддержка",
     dangerZone: "Безопасность", language: "Язык",
@@ -2497,7 +2497,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 आपका पिन कोड और दुकान का डेटा (स्टॉक, बिक्री, नकदी) निजी रहते हैं। केवल आप ही इन्हें देख सकते हैं — एडमिन को भी इनकी पहुंच नहीं है।",
     backToShop: "दुकान खाते पर वापस जाएं",
     navDashboard: "होम", navStock: "स्टॉक", navSale: "बिक्री", navHistory: "इतिहास", navDebts: "उधारी", navStats: "आंकड़े", navAI: "सहायक",
-    aiTitle: "एआई सहायक", aiPlaceholder: "", aiThinking: "सोच रहा हूँ…",
+    aiTitle: "एआई सहायक", aiPlaceholder: "अपना सवाल पूछें…", aiThinking: "सोच रहा हूँ…",
     aiWelcome: "नमस्ते! मुझे आपकी दुकान की जानकारी है। मुझसे अपने स्टॉक, बिक्री, उधारी या नकदी के बारे में पूछें।",
     settingsTitle: "सेटिंग्स", manageAccount: "खाता प्रबंधित करें", interfaceTitle: "इंटरफ़ेस", assistance: "सहायता",
     dangerZone: "सुरक्षा", language: "भाषा",
@@ -2604,7 +2604,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 உங்கள் பின் குறியீடு மற்றும் கடை தரவு (இருப்பு, விற்பனை, பணம்) தனிப்பட்டதாக இருக்கும். நீங்கள் மட்டுமே அவற்றைப் பார்க்க முடியும் — நிர்வாகிக்கும் அணுகல் இல்லை.",
     backToShop: "கடை கணக்குக்குத் திரும்பு",
     navDashboard: "முகப்பு", navStock: "இருப்பு", navSale: "விற்பனை", navHistory: "வரலாறு", navDebts: "கடன்கள்", navStats: "புள்ளிவிவரங்கள்", navAI: "உதவியாளர்",
-    aiTitle: "AI உதவியாளர்", aiPlaceholder: "", aiThinking: "யோசிக்கிறேன்…",
+    aiTitle: "AI உதவியாளர்", aiPlaceholder: "உங்கள் கேள்வியைக் கேளுங்கள்…", aiThinking: "யோசிக்கிறேன்…",
     aiWelcome: "வணக்கம்! உங்கள் கடை பற்றி எனக்குத் தெரியும். உங்கள் இருப்பு, விற்பனை, கடன் அல்லது பணம் பற்றி என்னிடம் கேளுங்கள்.",
     settingsTitle: "அமைப்புகள்", manageAccount: "கணக்கை நிர்வகிக்கவும்", interfaceTitle: "இடைமுகம்", assistance: "உதவி",
     dangerZone: "பாதுகாப்பு", language: "மொழி",
@@ -2711,7 +2711,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 আপনার পিন কোড এবং দোকানের ডেটা (স্টক, বিক্রয়, নগদ) ব্যক্তিগত থাকে। শুধুমাত্র আপনিই এগুলো দেখতে পারেন — অ্যাডমিনেরও এতে প্রবেশাধিকার নেই।",
     backToShop: "দোকানের অ্যাকাউন্টে ফিরে যান",
     navDashboard: "হোম", navStock: "স্টক", navSale: "বিক্রয়", navHistory: "ইতিহাস", navDebts: "বাকি", navStats: "পরিসংখ্যান", navAI: "সহায়ক",
-    aiTitle: "এআই সহায়ক", aiPlaceholder: "", aiThinking: "ভাবছি…",
+    aiTitle: "এআই সহায়ক", aiPlaceholder: "আপনার প্রশ্ন করুন…", aiThinking: "ভাবছি…",
     aiWelcome: "নমস্কার! আমি আপনার দোকান সম্পর্কে জানি। আমাকে আপনার স্টক, বিক্রয়, বাকি বা নগদ সম্পর্কে জিজ্ঞাসা করুন।",
     settingsTitle: "সেটিংস", manageAccount: "অ্যাকাউন্ট পরিচালনা করুন", interfaceTitle: "ইন্টারফেস", assistance: "সহায়তা",
     dangerZone: "নিরাপত্তা", language: "ভাষা",
@@ -2818,7 +2818,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 آپ کا پن کوڈ اور دکان کا ڈیٹا (اسٹاک، فروخت، نقد) نجی رہتا ہے۔ صرف آپ ہی اسے دیکھ سکتے ہیں — ایڈمن کو بھی اس تک رسائی نہیں۔",
     backToShop: "دکان اکاؤنٹ پر واپس جائیں",
     navDashboard: "ہوم", navStock: "اسٹاک", navSale: "فروخت", navHistory: "تاریخ", navDebts: "ادھار", navStats: "اعداد و شمار", navAI: "معاون",
-    aiTitle: "اے آئی معاون", aiPlaceholder: "", aiThinking: "سوچ رہا ہوں…",
+    aiTitle: "اے آئی معاون", aiPlaceholder: "اپنا سوال پوچھیں…", aiThinking: "سوچ رہا ہوں…",
     aiWelcome: "السلام علیکم! مجھے آپ کی دکان کے بارے میں علم ہے۔ مجھ سے اپنے اسٹاک، فروخت، ادھار یا نقدی کے بارے میں پوچھیں۔",
     settingsTitle: "ترتیبات", manageAccount: "اکاؤنٹ کا انتظام کریں", interfaceTitle: "انٹرفیس", assistance: "معاونت",
     dangerZone: "سیکیورٹی", language: "زبان",
@@ -2925,7 +2925,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Kode PIN dan data tokomu (stok, penjualan, kas) tetap privat. Hanya kamu yang bisa melihatnya — bahkan admin tidak punya akses.",
     backToShop: "Kembali ke akun toko",
     navDashboard: "Beranda", navStock: "Stok", navSale: "Jual", navHistory: "Riwayat", navDebts: "Utang", navStats: "Statistik", navAI: "Asisten",
-    aiTitle: "Asisten AI", aiPlaceholder: "", aiThinking: "Sedang berpikir…",
+    aiTitle: "Asisten AI", aiPlaceholder: "Ajukan pertanyaan Anda…", aiThinking: "Sedang berpikir…",
     aiWelcome: "Halo! Saya tahu tentang tokomu. Tanyakan tentang stok, penjualan, utang, atau kasmu.",
     settingsTitle: "Pengaturan", manageAccount: "Kelola akun", interfaceTitle: "Tampilan", assistance: "Bantuan",
     dangerZone: "Keamanan", language: "Bahasa",
@@ -3032,7 +3032,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 PIN kodun ve dükkan verilerin (stok, satış, kasa) gizli kalır. Sadece sen görebilirsin — yönetici bile erişemez.",
     backToShop: "Dükkan hesabına dön",
     navDashboard: "Ana sayfa", navStock: "Stok", navSale: "Satış", navHistory: "Geçmiş", navDebts: "Borçlar", navStats: "İstatistik", navAI: "Asistan",
-    aiTitle: "Yapay Zeka Asistanı", aiPlaceholder: "", aiThinking: "Düşünüyor…",
+    aiTitle: "Yapay Zeka Asistanı", aiPlaceholder: "Sorunuzu yazın…", aiThinking: "Düşünüyor…",
     aiWelcome: "Merhaba! Dükkanını tanıyorum. Stok, satış, borç veya kasan hakkında bana soru sorabilirsin.",
     settingsTitle: "Ayarlar", manageAccount: "Hesabı yönet", interfaceTitle: "Arayüz", assistance: "Destek",
     dangerZone: "Güvenlik", language: "Dil",
@@ -3139,7 +3139,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 PIN 코드와 가게 데이터(재고, 판매, 시재)는 비공개로 유지됩니다. 오직 본인만 볼 수 있으며, 관리자도 접근할 수 없습니다.",
     backToShop: "가게 계정으로 돌아가기",
     navDashboard: "홈", navStock: "재고", navSale: "판매", navHistory: "기록", navDebts: "외상", navStats: "통계", navAI: "어시스턴트",
-    aiTitle: "AI 어시스턴트", aiPlaceholder: "", aiThinking: "생각 중…",
+    aiTitle: "AI 어시스턴트", aiPlaceholder: "질문을 입력하세요…", aiThinking: "생각 중…",
     aiWelcome: "안녕하세요! 저는 당신의 가게를 알고 있어요. 재고, 판매, 외상, 시재에 대해 물어보세요.",
     settingsTitle: "설정", manageAccount: "계정 관리", interfaceTitle: "화면", assistance: "고객 지원",
     dangerZone: "보안", language: "언어",
@@ -3246,7 +3246,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 あなたのPINコードと店舗データ（在庫、売上、レジ）は非公開です。あなただけが見ることができ、管理者もアクセスできません。",
     backToShop: "店舗アカウントに戻る",
     navDashboard: "ホーム", navStock: "在庫", navSale: "販売", navHistory: "履歴", navDebts: "掛け売り", navStats: "統計", navAI: "アシスタント",
-    aiTitle: "AIアシスタント", aiPlaceholder: "", aiThinking: "考え中…",
+    aiTitle: "AIアシスタント", aiPlaceholder: "質問を入力してください…", aiThinking: "考え中…",
     aiWelcome: "こんにちは！あなたのお店について把握しています。在庫、売上、掛け売り、レジについて質問してください。",
     settingsTitle: "設定", manageAccount: "アカウント管理", interfaceTitle: "インターフェース", assistance: "サポート",
     dangerZone: "セキュリティ", language: "言語",
@@ -3353,7 +3353,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Il suo codice PIN e i dati del negozio (magazzino, vendite, cassa) restano privati. Solo lei può vederli — nemmeno l'amministratore vi ha accesso.",
     backToShop: "Torna all'account negozio",
     navDashboard: "Home", navStock: "Magazzino", navSale: "Vendita", navHistory: "Cronologia", navDebts: "Debiti", navStats: "Statistiche", navAI: "Assistente",
-    aiTitle: "Assistente IA", aiPlaceholder: "", aiThinking: "Sto pensando…",
+    aiTitle: "Assistente IA", aiPlaceholder: "Fate la vostra domanda…", aiThinking: "Sto pensando…",
     aiWelcome: "Ciao! Conosco il suo negozio. Mi chieda qualsiasi cosa sul suo magazzino, le vendite, i debiti o la cassa.",
     settingsTitle: "Impostazioni", manageAccount: "Gestisci account", interfaceTitle: "Interfaccia", assistance: "Assistenza",
     dangerZone: "Sicurezza", language: "Lingua",
@@ -3456,7 +3456,7 @@ const TRANSLATIONS = {
     periodThisMonth: "Deze maand", periodAllTime: "Volledige geschiedenis", setPinFirstBtn: "PIN-code instellen",
     appName: "Boutipro", chooseLanguage: "Kies uw taal", shopNamePlaceholder: "Naam van de winkel", identifierPlaceholder: "uw@email.com", createAccountBtn: "Mijn account aanmaken", loginBtn: "Inloggen", wait: "Even geduld…",
     privacyNote: "🔒 Uw PIN-code en uw winkelgegevens (voorraad, verkoop, kassa) blijven privé. Alleen u kunt ze zien — zelfs de beheerder heeft er geen toegang toe.", backToShop: "Terug naar winkelaccount", navDashboard: "Start", navStock: "Voorraad", navSale: "Verkoop", navHistory: "Geschiedenis", navDebts: "Schulden", navStats: "Statistieken", navAI: "Assistent",
-    aiTitle: "AI-assistent", aiPlaceholder: "", aiThinking: "Aan het nadenken…", aiWelcome: "Hallo! Ik ken uw winkel. Stel me een vraag over uw voorraad, uw verkopen, uw schulden of uw kassa.", settingsTitle: "Instellingen", manageAccount: "Account beheren", interfaceTitle: "Interface", assistance: "Ondersteuning", dangerZone: "Beveiliging", language: "Taal", addProduct: "Een product toevoegen", save: "Opslaan",
+    aiTitle: "AI-assistent", aiPlaceholder: "Stel uw vraag…", aiThinking: "Aan het nadenken…", aiWelcome: "Hallo! Ik ken uw winkel. Stel me een vraag over uw voorraad, uw verkopen, uw schulden of uw kassa.", settingsTitle: "Instellingen", manageAccount: "Account beheren", interfaceTitle: "Interface", assistance: "Ondersteuning", dangerZone: "Beveiliging", language: "Taal", addProduct: "Een product toevoegen", save: "Opslaan",
     cancel: "Annuleren", search: "Zoeken…", todaySales: "Verkopen vandaag", articlesSold: "artikel(en) verkocht", paymentBreakdown: "Verdeling per betaalmethode", cash: "Contant", credit: "Krediet", mobilePayment: "Mobiel betalen", card: "Bankkaart", lowStock: "Lage voorraad", clientDebts: "Klantschulden", seeAllLowStock: "Alles bekijken ({n})", seeLessLowStock: "Minder bekijken", sortMenuTitle: "Sorteren op", sortAlpha: "Alfabetische volgorde", sortMostSold: "Meest verkocht", sortLeastSold: "Minst verkocht", sortMostAvailable: "Meest beschikbaar", sortLeastAvailable: "Minst beschikbaar", sortDefault: "Standaardvolgorde", cashBalance: "Geschat kassaldo", setCashFund: "Kassafonds instellen", addExpense: "Een uitgave toevoegen", noProduct: "Geen product. Voeg uw eerste artikel toe.", newProduct: "Nieuw product", productName: "Naam van het product", quantity: "Hoeveelheid in voorraad", unitPrice: "Eenheidsprijs (FCFA)", productPhoto: "Foto van het product (optioneel)", processing: "Afbeelding verwerken…", noCartYet: "Geen lopend winkelmandje. Komt er een klant aan? Start een nieuw winkelmandje.", newCart: "Nieuw winkelmandje",
     abandonCart: "Dit winkelmandje verlaten", cartContent: "Inhoud van het winkelmandje", paymentMethod: "Betaalmethode", clientName: "Naam van de klant", amountGiven: "Bedrag gegeven door de klant (FCFA)", change: "Terug te geven wisselgeld", finalizeSale: "Verkoop afronden", recentSales: "Recente verkopen", noDebts: "Geen lopende schulden.", noHistory: "Geen verkoop geregistreerd.", noResults: "Geen resultaat voor",
     paidBtn: "Betaald", confirmDelete: "Verwijdering bevestigen", noCancel: "Nee, annuleren", yesDelete: "Ja, verwijderen", abandonCartMsg: "Dit winkelmandje verlaten? Niet-afgeronde artikelen gaan verloren.", demoMode: "Demomodus — voorbeeldgegevens", upgradeCta: "Overstappen naar betaald", identifier: "E-mail", shopPhoto: "Foto van de winkel", shopName: "Naam van de winkel", updatePin: "PIN-code bijwerken",
@@ -3510,7 +3510,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Nambari yako ya siri na taarifa za duka lako (bidhaa, mauzo, fedha) ni siri. Wewe tu ndiye unaweza kuziona — hata msimamizi hana ruhusa.",
     backToShop: "Rudi kwenye akaunti ya duka",
     navDashboard: "Nyumbani", navStock: "Bidhaa", navSale: "Uuzaji", navHistory: "Historia", navDebts: "Madeni", navStats: "Takwimu", navAI: "Msaidizi",
-    aiTitle: "Msaidizi wa AI", aiPlaceholder: "", aiThinking: "Anafikiri…",
+    aiTitle: "Msaidizi wa AI", aiPlaceholder: "Uliza swali lako…", aiThinking: "Anafikiri…",
     aiWelcome: "Habari! Ninajua duka lako. Niulize chochote kuhusu bidhaa, mauzo, madeni au fedha zako.",
     settingsTitle: "Mipangilio", manageAccount: "Simamia akaunti", interfaceTitle: "Muonekano", assistance: "Msaada",
     dangerZone: "Usalama", language: "Lugha",
@@ -3617,7 +3617,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Lambar PIN ɗinka da bayanan shago (kaya, tallace-tallace, kuɗi) suna zaman sirri. Kai kaɗai zaka iya ganin su — ko admin ma ba shi da damar shiga.",
     backToShop: "Koma zuwa asusun shago",
     navDashboard: "Gida", navStock: "Kaya", navSale: "Tallace-tallace", navHistory: "Tarihi", navDebts: "Bashi", navStats: "Kididdiga", navAI: "Mataimaki",
-    aiTitle: "Mataimakin AI", aiPlaceholder: "", aiThinking: "Ina tunani…",
+    aiTitle: "Mataimakin AI", aiPlaceholder: "Yi tambayarka…", aiThinking: "Ina tunani…",
     aiWelcome: "Sannu! Na san bayanan shagonka. Tambaye ni game da kayanka, tallace-tallace, bashi ko kuɗi.",
     settingsTitle: "Saituna", manageAccount: "Sarrafa asusu", interfaceTitle: "Fuskar aiki", assistance: "Taimako",
     dangerZone: "Tsaro", language: "Harshe",
@@ -3724,7 +3724,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 I ka PIN nimɔrɔ ni butiki kunnafoniw (marifa, feerew, wari) bɛ to gundo la. I kelen bɛ se ka olu ye — hali admin tɛ se ka don o la.",
     backToShop: "Segin butiki jatebɔlan na",
     navDashboard: "So", navStock: "Marifa", navSale: "Feerew", navHistory: "Tariku", navDebts: "Juru", navStats: "Jateminɛw", navAI: "Dɛmɛbaga",
-    aiTitle: "AI Dɛmɛbaga", aiPlaceholder: "", aiThinking: "N bɛ miiri la…",
+    aiTitle: "AI Dɛmɛbaga", aiPlaceholder: "I ka ɲininkali kɛ…", aiThinking: "N bɛ miiri la…",
     aiWelcome: "I ni ce! N bɛ i ka butiki kunnafoniw dɔn. I ka ɲininkali kɛ n na i ka marifa, feerew, juru wala wari kan.",
     settingsTitle: "Labɛnw", manageAccount: "Jatebɔlan ɲɛnabɔ", interfaceTitle: "Kɛnɛyɔrɔ", assistance: "Dɛmɛni",
     dangerZone: "Kisi", language: "Kan",
@@ -3825,7 +3825,7 @@ const TRANSLATIONS = {
   zu: {
     empRevokeDevice: "Khipha idivayisi yalo msebenzi",
     periodThisMonth: "Le nyanga", periodAllTime: "Umlando wonke", setPinFirstBtn: "Setha ikhodi ye-PIN",
-    appName: "Boutipro", chooseLanguage: "Khetha ulimi lwakho", shopNamePlaceholder: "Igama lesitolo", identifierPlaceholder: "wakho@email.com", createAccountBtn: "Dala i-akhawunti yami", loginBtn: "Ngena", wait: "Linda…", privacyNote: "🔒 Ikhodi yakho ye-PIN nedatha yesitolo sakho (isitoko, ukuthengisa, ikheshi) kuhlala kuyimfihlo. Nguwe kuphela ongakubona — ngisho nomphathi akakwazi ukufinyelela kukho.", backToShop: "Buyela ku-akhawunti yesitolo", navDashboard: "Ekhaya", navStock: "Isitoko", navSale: "Ukuthengisa", navHistory: "Umlando", navDebts: "Izikweletu", navStats: "Izibalo", navAI: "Umsizi", aiTitle: "Umsizi we-AI", aiPlaceholder: "", aiThinking: "Iyacabanga…", aiWelcome: "Sawubona! Ngiyasazi isitolo sakho. Ngibuze umbuzo ngesitoko sakho, ukuthengisa kwakho, izikweletu zakho noma ikheshi lakho.",
+    appName: "Boutipro", chooseLanguage: "Khetha ulimi lwakho", shopNamePlaceholder: "Igama lesitolo", identifierPlaceholder: "wakho@email.com", createAccountBtn: "Dala i-akhawunti yami", loginBtn: "Ngena", wait: "Linda…", privacyNote: "🔒 Ikhodi yakho ye-PIN nedatha yesitolo sakho (isitoko, ukuthengisa, ikheshi) kuhlala kuyimfihlo. Nguwe kuphela ongakubona — ngisho nomphathi akakwazi ukufinyelela kukho.", backToShop: "Buyela ku-akhawunti yesitolo", navDashboard: "Ekhaya", navStock: "Isitoko", navSale: "Ukuthengisa", navHistory: "Umlando", navDebts: "Izikweletu", navStats: "Izibalo", navAI: "Umsizi", aiTitle: "Umsizi we-AI", aiPlaceholder: "Buza umbuzo wakho…", aiThinking: "Iyacabanga…", aiWelcome: "Sawubona! Ngiyasazi isitolo sakho. Ngibuze umbuzo ngesitoko sakho, ukuthengisa kwakho, izikweletu zakho noma ikheshi lakho.",
     settingsTitle: "Izilungiselelo", manageAccount: "Phatha i-akhawunti", interfaceTitle: "Isixhumanisi", assistance: "Usizo", dangerZone: "Ukuphepha", language: "Ulimi", addProduct: "Engeza umkhiqizo", save: "Londoloza", cancel: "Khansela", search: "Sesha…",
     todaySales: "Ukuthengisa kwanamuhla", articlesSold: "impahla ethengisiwe", paymentBreakdown: "Ukwahlukaniswa ngendlela yokukhokha", cash: "Ukheshi", credit: "Isikweletu", mobilePayment: "Ukukhokha ngeselula", card: "Ikhadi lasebhange", lowStock: "Isitoko esiphansi", clientDebts: "Izikweletu zamakhasimende", seeAllLowStock: "Bona konke ({n})", seeLessLowStock: "Bona kancane", sortMenuTitle: "Hlunga nge", sortAlpha: "Uhlelo lwezinhlamvu", sortMostSold: "Ezithengiswa kakhulu", sortLeastSold: "Ezithengiswa kancane", sortMostAvailable: "Ezitholakala kakhulu", sortLeastAvailable: "Ezitholakala kancane", sortDefault: "Uhlelo oluvamile", cashBalance: "Ibhalansi yekheshi elilinganiselwe", setCashFund: "Setha isisekelo sekheshi", addExpense: "Engeza isindleko", noProduct: "Ayikho impahla. Engeza impahla yakho yokuqala.", newProduct: "Umkhiqizo omusha", productName: "Igama lomkhiqizo", quantity: "Inani elikhona esitokweni", unitPrice: "Intengo yeyunithi (FCFA)", productPhoto: "Isithombe somkhiqizo (akuphoqelekile)", processing: "Kucutshungulwa isithombe…", noCartYet: "Alikho ibhasikidi eliqhubekayo. Kufika ikhasimende? Qala ibhasikidi elisha.", newCart: "Ibhasikidi elisha", abandonCart: "Yeka lelibhasikidi", cartContent: "Okuqukethwe ebhasikidini", paymentMethod: "Indlela yokukhokha", clientName: "Igama lekhasimende", amountGiven: "Imali enikezwe yikhasimende (FCFA)", change: "Ushintshi okumele ubuyiselwe", finalizeSale: "Qedela ukuthengisa", recentSales: "Ukuthengisa kwakamuva",
     noDebts: "Azikho izikweletu eziqhubekayo.", noHistory: "Akukho kuthengisa okuqoshiwe.", noResults: "Ayikho imiphumela ye", paidBtn: "Kukhokhiwe", confirmDelete: "Qinisekisa ukususa", noCancel: "Cha, khansela", yesDelete: "Yebo, susa", abandonCartMsg: "Yeka lelibhasikidi? Izimpahla ezingaqedelwanga zizolahleka.",
@@ -3882,7 +3882,7 @@ const TRANSLATIONS = {
     privacyNote: "🔒 Kóòdù PIN rẹ àti data ilé ìtajà rẹ (ọjà, títà, owó) wà ní ìkọ̀kọ̀. Ìwọ nìkan ni ó lè rí wọn — kódà alábojútó kò ní àǹfààní sí wọn.",
     backToShop: "Padà sí àkọọ́lẹ̀ ilé ìtajà",
     navDashboard: "Ilé", navStock: "Ọjà", navSale: "Títà", navHistory: "Ìtàn", navDebts: "Gbèsè", navStats: "Ìṣirò", navAI: "Olùrànlọ́wọ́",
-    aiTitle: "Olùrànlọ́wọ́ AI", aiPlaceholder: "", aiThinking: "Ń ronú…",
+    aiTitle: "Olùrànlọ́wọ́ AI", aiPlaceholder: "Béèrè ìbéèrè rẹ…", aiThinking: "Ń ronú…",
     aiWelcome: "Ẹ nlẹ́! Mo mọ ilé ìtajà rẹ. Bèèrè lọ́wọ́ mi ohunkóhun nípa ọjà, títà, gbèsè tàbí owó rẹ.",
     settingsTitle: "Ètò", manageAccount: "Ṣàkóso àkọọ́lẹ̀", interfaceTitle: "Ojú-ìwé", assistance: "Ìrànlọ́wọ́",
     dangerZone: "Aabo", language: "Èdè",
@@ -14416,134 +14416,286 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         const d = dateStr.slice(0, 10);
         return d >= fromDate && d <= toDate;
       };
-      const periodSales = sales.filter((s) => inRange(s.date));
-      const periodExpenses = expenses.filter((e) => inRange(e.date));
+      // Les ventes ANNULÉES étaient comptées dans le chiffre d'affaires de l'export
+      // comptable : un document destiné à un comptable ne peut pas inclure des ventes
+      // qui n'ont jamais eu lieu. Elles sont désormais exclues partout dans ce rapport.
+      const periodSales = sales.filter((s) => inRange(s.date) && !s.cancelled);
+      const periodCashOut = expenses.filter((e) => inRange(e.date));
+      // Un retrait de caisse (versement en banque, prélèvement du patron) sort de l'argent
+      // mais n'est pas une charge : il ne doit pas réduire le bénéfice. Il est présenté à part.
+      const periodExpenses = periodCashOut.filter((e) => e.kind !== "withdrawal");
+      const periodWithdrawals = periodCashOut.filter((e) => e.kind === "withdrawal");
       const periodDebtPayments = debtEvents.filter((ev) => inRange(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
 
       const totalRevenue = periodSales.reduce((sum, s) => sum + s.total, 0);
       const totalExpenses = periodExpenses.reduce((sum, e) => sum + e.amount, 0);
+      const totalWithdrawals = periodWithdrawals.reduce((sum, e) => sum + e.amount, 0);
       const totalDebtCollected = periodDebtPayments.reduce((sum, ev) => sum + ev.amount, 0);
       const netProfit = totalRevenue - totalExpenses;
 
-      // ---- Graphique 1 : CA par jour (courbe), dessiné sur un <canvas> hors écran puis converti en image ----
+      // ================= Mise en page du PDF =================
+      // Le rapport était jusqu'ici une suite de lignes de texte noir sur fond blanc, sans
+      // en-tête, sans logo, sans tableau : lisible, mais impossible à présenter à un
+      // comptable ou à une banque. Refait avec l'identité de l'application : bandeau de
+      // marque, cartes de synthèse colorées, vrais tableaux et pied de page numéroté.
+      const BRAND = [27, 58, 92];       // bleu nuit de l'application
+      const ACCENT = [139, 133, 242];   // violet du logo
+      const OK = [22, 163, 74];
+      const KO = [225, 29, 72];
+      const GREY = [110, 116, 134];
+      const LIGHT = [243, 245, 249];
+      const PAGE_W = 210, PAGE_H = 297, M = 14;
+      const money = (n) => `${localizedNumber(n)} ${CURRENT_CURRENCY.symbol}`;
+
+      // ---- Graphique 1 : chiffre d'affaires par jour ----
       const dayTotals = {};
       periodSales.forEach((s) => {
         const day = s.date.slice(0, 10);
         dayTotals[day] = (dayTotals[day] || 0) + s.total;
       });
       const sortedDays = Object.keys(dayTotals).sort();
+      const W = 1100, H = 380, PAD = 60;
       const chartCanvas = document.createElement("canvas");
-      chartCanvas.width = 900;
-      chartCanvas.height = 300;
+      chartCanvas.width = W; chartCanvas.height = H;
       const ctx = chartCanvas.getContext("2d");
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, 900, 300);
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
       if (sortedDays.length > 0) {
         const maxVal = Math.max(...sortedDays.map((d) => dayTotals[d]), 1);
-        const stepX = 860 / Math.max(sortedDays.length - 1, 1);
-        ctx.strokeStyle = "#1B3A5C";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        sortedDays.forEach((day, i) => {
-          const x = 20 + i * stepX;
-          const y = 270 - (dayTotals[day] / maxVal) * 230;
-          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        });
+        const x0 = PAD, x1 = W - 20, y0 = 30, y1 = H - 45;
+        // Grille horizontale + échelle : sans repère, une courbe ne veut rien dire.
+        ctx.strokeStyle = "#e5e7eb"; ctx.lineWidth = 1;
+        ctx.fillStyle = "#9ca3af"; ctx.font = "15px sans-serif"; ctx.textAlign = "right";
+        for (let k = 0; k <= 4; k++) {
+          const yy = y1 - ((y1 - y0) * k) / 4;
+          ctx.beginPath(); ctx.moveTo(x0, yy); ctx.lineTo(x1, yy); ctx.stroke();
+          ctx.fillText(localizedNumber(Math.round((maxVal * k) / 4)), x0 - 8, yy + 5);
+        }
+        const stepX = (x1 - x0) / Math.max(sortedDays.length - 1, 1);
+        const pt = (i) => [x0 + i * stepX, y1 - (dayTotals[sortedDays[i]] / maxVal) * (y1 - y0)];
+        // Aplat sous la courbe, pour que le volume se lise d'un coup d'œil.
+        ctx.beginPath(); ctx.moveTo(x0, y1);
+        sortedDays.forEach((d, i) => { const [x, y] = pt(i); ctx.lineTo(x, y); });
+        ctx.lineTo(x0 + (sortedDays.length - 1) * stepX, y1); ctx.closePath();
+        ctx.fillStyle = "rgba(27,58,92,0.10)"; ctx.fill();
+        ctx.strokeStyle = "#1B3A5C"; ctx.lineWidth = 3; ctx.beginPath();
+        sortedDays.forEach((d, i) => { const [x, y] = pt(i); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
         ctx.stroke();
         ctx.fillStyle = "#1B3A5C";
-        sortedDays.forEach((day, i) => {
-          const x = 20 + i * stepX;
-          const y = 270 - (dayTotals[day] / maxVal) * 230;
-          ctx.beginPath();
-          ctx.arc(x, y, 3, 0, Math.PI * 2);
-          ctx.fill();
-        });
+        sortedDays.forEach((d, i) => { const [x, y] = pt(i); ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill(); });
+        // Dates : seulement la première et la dernière, sinon elles se chevauchent.
+        ctx.fillStyle = "#6b7280"; ctx.font = "15px sans-serif";
+        ctx.textAlign = "left"; ctx.fillText(sortedDays[0], x0, H - 15);
+        if (sortedDays.length > 1) { ctx.textAlign = "right"; ctx.fillText(sortedDays[sortedDays.length - 1], x1, H - 15); }
+      } else {
+        ctx.fillStyle = "#9ca3af"; ctx.font = "18px sans-serif"; ctx.textAlign = "center";
+        ctx.fillText(t(lang, "noSalesShort"), W / 2, H / 2);
       }
       const revenueChartImg = chartCanvas.toDataURL("image/png");
 
-      // ---- Graphique 2 : Ventes vs Dépenses (barres) ----
+      // ---- Graphique 2 : ventes contre dépenses ----
       const barCanvas = document.createElement("canvas");
-      barCanvas.width = 900;
-      barCanvas.height = 300;
+      barCanvas.width = W; barCanvas.height = H;
       const bctx = barCanvas.getContext("2d");
-      bctx.fillStyle = "#ffffff";
-      bctx.fillRect(0, 0, 900, 300);
+      bctx.fillStyle = "#ffffff"; bctx.fillRect(0, 0, W, H);
       const barMax = Math.max(totalRevenue, totalExpenses, 1);
-      const barW = 200;
-      const revenueH = (totalRevenue / barMax) * 220;
-      const expenseH = (totalExpenses / barMax) * 220;
-      bctx.fillStyle = "#16a34a";
-      bctx.fillRect(200, 260 - revenueH, barW, revenueH);
-      bctx.fillStyle = "#e11d48";
-      bctx.fillRect(500, 260 - expenseH, barW, expenseH);
-      bctx.fillStyle = "#111827";
-      bctx.font = "16px sans-serif";
-      bctx.fillText(t(lang, "cashReportTotalSales"), 220, 280);
-      bctx.fillText(t(lang, "cashReportExpenses"), 520, 280);
+      const bY1 = H - 60, bY0 = 50;
+      bctx.strokeStyle = "#e5e7eb"; bctx.lineWidth = 1;
+      for (let k = 0; k <= 4; k++) {
+        const yy = bY1 - ((bY1 - bY0) * k) / 4;
+        bctx.beginPath(); bctx.moveTo(60, yy); bctx.lineTo(W - 40, yy); bctx.stroke();
+      }
+      const bars = [
+        { label: t(lang, "cashReportTotalSales"), value: totalRevenue, color: "#16a34a", x: 220 },
+        { label: t(lang, "cashReportExpenses"), value: totalExpenses, color: "#e11d48", x: 620 },
+      ];
+      bars.forEach((b) => {
+        const h = (b.value / barMax) * (bY1 - bY0);
+        bctx.fillStyle = b.color; bctx.fillRect(b.x, bY1 - h, 260, h);
+        bctx.fillStyle = "#111827"; bctx.font = "bold 20px sans-serif"; bctx.textAlign = "center";
+        bctx.fillText(localizedNumber(b.value), b.x + 130, bY1 - h - 12);
+        bctx.fillStyle = "#4b5563"; bctx.font = "18px sans-serif";
+        bctx.fillText(b.label, b.x + 130, bY1 + 28);
+      });
       const barChartImg = barCanvas.toDataURL("image/png");
 
       // ---- Construction du PDF ----
       const { default: jsPDF } = await import("jspdf");
       const doc = new jsPDF();
-      let y = 20;
-      doc.setFontSize(18);
-      doc.text(shopName || "", 14, y);
-      y += 8;
-      doc.setFontSize(10);
-      doc.setTextColor(120);
-      doc.text(`${t(lang, "accountingPeriodLabel")} : ${fromDate} - ${toDate}`, 14, y);
-      y += 5;
-      doc.text(`${t(lang, "accountingGeneratedBy")} ${t(lang, "appName")}`, 14, y);
-      doc.setTextColor(0);
-      y += 12;
 
-      doc.setFontSize(13);
-      doc.text(t(lang, "accountingSummaryTitle"), 14, y);
-      y += 8;
-      doc.setFontSize(10);
-      doc.text(`${t(lang, "cashReportTotalSales")}: ${localizedNumber(totalRevenue)}`, 14, y); y += 6;
-      doc.text(`${t(lang, "cashReportExpenses")}: ${localizedNumber(totalExpenses)}`, 14, y); y += 6;
-      doc.text(`${t(lang, "cashReportDebtPayments")}: ${localizedNumber(totalDebtCollected)}`, 14, y); y += 6;
-      doc.setFontSize(12);
-      doc.text(`${t(lang, "accountingNetProfit")}: ${localizedNumber(netProfit)}`, 14, y);
-      y += 12;
+      // Logo de l'application, dessiné en vectoriel (3 barres montantes, comme dans l'app).
+      const drawLogo = (x, y, s) => {
+        doc.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+        doc.roundedRect(x, y + s * 0.14, s * 0.17, s * 0.70, s * 0.08, s * 0.08, "F");
+        doc.roundedRect(x + s * 0.32, y + s * 0.33, s * 0.17, s * 0.51, s * 0.08, s * 0.08, "F");
+        doc.setFillColor(255, 255, 255);
+        doc.roundedRect(x + s * 0.64, y, s * 0.17, s * 0.84, s * 0.08, s * 0.08, "F");
+      };
 
-      doc.setFontSize(12);
-      doc.text(t(lang, "accountingRevenueChartTitle"), 14, y);
-      y += 4;
-      doc.addImage(revenueChartImg, "PNG", 14, y, 180, 60);
-      y += 68;
-      if (y > 240) { doc.addPage(); y = 20; }
-      doc.text(t(lang, "accountingComparisonChartTitle"), 14, y);
-      y += 4;
-      doc.addImage(barChartImg, "PNG", 14, y, 180, 60);
-      y += 68;
+      // Bandeau de marque en haut de chaque page.
+      const drawHeader = (isFirst) => {
+        const h = isFirst ? 38 : 18;
+        doc.setFillColor(BRAND[0], BRAND[1], BRAND[2]);
+        doc.rect(0, 0, PAGE_W, h, "F");
+        drawLogo(M, isFirst ? 11 : 5.5, isFirst ? 11 : 7);
+        doc.setTextColor(255, 255, 255);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(isFirst ? 16 : 10);
+        doc.text(t(lang, "appName"), M + (isFirst ? 14 : 9), isFirst ? 19 : 11.5);
+        doc.setFont("helvetica", "normal");
+        if (isFirst) {
+          doc.setFontSize(10);
+          doc.text(shopName || "", M + 14, 26);
+          doc.setFontSize(9);
+          doc.setTextColor(200, 210, 225);
+          doc.text(`${t(lang, "accountingPeriodLabel")} : ${fromDate} → ${toDate}`, PAGE_W - M, 19, { align: "right" });
+          doc.text(new Date().toISOString().slice(0, 10), PAGE_W - M, 26, { align: "right" });
+        } else {
+          doc.setFontSize(9);
+          doc.setTextColor(200, 210, 225);
+          doc.text(shopName || "", PAGE_W - M, 11.5, { align: "right" });
+        }
+        doc.setTextColor(0, 0, 0);
+        return h + 12;
+      };
 
-      // ---- Tableau détaillé des ventes ----
-      doc.addPage();
-      y = 20;
-      doc.setFontSize(13);
-      doc.text(t(lang, "accountingSalesTableTitle"), 14, y);
-      y += 8;
-      doc.setFontSize(9);
-      periodSales.slice(0, 200).forEach((s) => {
-        if (y > 280) { doc.addPage(); y = 20; }
-        doc.text(`${s.date.slice(0, 10)}  ${s.productName} x${s.qty}  -  ${localizedNumber(s.total)}`, 14, y);
-        y += 5;
+      let y = drawHeader(true);
+      const newPage = () => { doc.addPage(); y = drawHeader(false); };
+      const room = (needed) => { if (y + needed > PAGE_H - 20) newPage(); };
+
+      // ---- Synthèse : quatre cartes plutôt qu'une liste de lignes ----
+      doc.setFont("helvetica", "bold"); doc.setFontSize(13);
+      doc.text(t(lang, "accountingSummaryTitle"), M, y);
+      y += 6;
+      const cards = [
+        { label: t(lang, "cashReportTotalSales"), value: totalRevenue, color: OK },
+        { label: t(lang, "cashReportExpenses"), value: totalExpenses, color: KO },
+        { label: t(lang, "cashReportDebtPayments"), value: totalDebtCollected, color: BRAND },
+        { label: t(lang, "accountingNetProfit"), value: netProfit, color: netProfit >= 0 ? OK : KO },
+      ];
+      const cw = (PAGE_W - M * 2 - 6) / 2, ch = 22;
+      cards.forEach((c, i) => {
+        const cx = M + (i % 2) * (cw + 6);
+        const cy = y + Math.floor(i / 2) * (ch + 6);
+        doc.setFillColor(LIGHT[0], LIGHT[1], LIGHT[2]);
+        doc.roundedRect(cx, cy, cw, ch, 2.5, 2.5, "F");
+        doc.setFillColor(c.color[0], c.color[1], c.color[2]);
+        doc.roundedRect(cx, cy, 1.6, ch, 0.8, 0.8, "F");
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8.5);
+        doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+        doc.text(c.label, cx + 6, cy + 8);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(13);
+        doc.setTextColor(c.color[0], c.color[1], c.color[2]);
+        doc.text(money(c.value), cx + 6, cy + 17);
       });
+      y += 2 * (ch + 6) + 4;
+      doc.setTextColor(0, 0, 0);
+      if (totalWithdrawals > 0) {
+        doc.setFont("helvetica", "normal"); doc.setFontSize(9);
+        doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+        doc.text(`${tx(lang, "cashWithdrawalsLine")} : ${money(totalWithdrawals)}`, M, y);
+        doc.setTextColor(0, 0, 0);
+        y += 8;
+      }
 
-      // ---- Tableau détaillé des dépenses ----
-      doc.addPage();
-      y = 20;
-      doc.setFontSize(13);
-      doc.text(t(lang, "accountingExpensesTableTitle"), 14, y);
-      y += 8;
-      doc.setFontSize(9);
-      periodExpenses.slice(0, 200).forEach((e) => {
-        if (y > 280) { doc.addPage(); y = 20; }
-        doc.text(`${e.date.slice(0, 10)}  ${e.label}  -  ${localizedNumber(e.amount)}`, 14, y);
-        y += 5;
-      });
+      // ---- Graphiques ----
+      const chartBlock = (title, img) => {
+        room(78);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(11);
+        doc.text(title, M, y); y += 4;
+        doc.setDrawColor(226, 232, 240);
+        doc.roundedRect(M, y, PAGE_W - M * 2, 62, 2, 2, "S");
+        doc.addImage(img, "PNG", M + 2, y + 2, PAGE_W - M * 2 - 4, 58);
+        y += 70;
+      };
+      chartBlock(t(lang, "accountingRevenueChartTitle"), revenueChartImg);
+      chartBlock(t(lang, "accountingComparisonChartTitle"), barChartImg);
+
+      // ---- Tableaux : en-tête coloré, lignes alternées, montants alignés à droite ----
+      const drawTable = (title, cols, rows, totalLabel, totalValue) => {
+        newPage();
+        doc.setFont("helvetica", "bold"); doc.setFontSize(13);
+        doc.text(title, M, y); y += 7;
+        const tw = PAGE_W - M * 2;
+        const drawHeadRow = () => {
+          doc.setFillColor(BRAND[0], BRAND[1], BRAND[2]);
+          doc.rect(M, y, tw, 8, "F");
+          doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(8.5);
+          let cx = M + 3;
+          cols.forEach((c) => {
+            doc.text(c.label, c.align === "right" ? cx + c.w - 6 : cx, y + 5.5, { align: c.align === "right" ? "right" : "left" });
+            cx += c.w;
+          });
+          doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "normal");
+          y += 8;
+        };
+        drawHeadRow();
+        doc.setFontSize(8.5);
+        rows.forEach((r, i) => {
+          if (y > PAGE_H - 24) { newPage(); drawHeadRow(); doc.setFontSize(8.5); }
+          if (i % 2 === 1) { doc.setFillColor(248, 249, 252); doc.rect(M, y, tw, 6.5, "F"); }
+          let cx = M + 3;
+          cols.forEach((c, ci) => {
+            const val = String(r[ci] ?? "");
+            doc.text(val, c.align === "right" ? cx + c.w - 6 : cx, y + 4.6, {
+              align: c.align === "right" ? "right" : "left",
+              maxWidth: c.w - 6,
+            });
+            cx += c.w;
+          });
+          y += 6.5;
+        });
+        if (rows.length === 0) {
+          doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+          doc.text("—", M + 3, y + 4.6); doc.setTextColor(0, 0, 0); y += 6.5;
+        }
+        // Ligne de total : c'est le chiffre que le comptable cherche en premier.
+        doc.setDrawColor(BRAND[0], BRAND[1], BRAND[2]); doc.setLineWidth(0.4);
+        doc.line(M, y + 1, M + tw, y + 1);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(9.5);
+        doc.text(totalLabel, M + 3, y + 7);
+        doc.text(money(totalValue), M + tw - 6, y + 7, { align: "right" });
+        doc.setFont("helvetica", "normal");
+        y += 12;
+      };
+
+      const colsSales = [
+        { label: t(lang, "histColDate"), w: 26 },
+        { label: t(lang, "histColProduct"), w: 92 },
+        { label: t(lang, "othUnite"), w: 20, align: "right" },
+        { label: t(lang, "histColAmount"), w: 44, align: "right" },
+      ];
+      drawTable(
+        t(lang, "accountingSalesTableTitle"), colsSales,
+        periodSales.slice(0, 400).map((s) => [s.date.slice(0, 10), s.productName || "", localizedNumber(s.qty || 0), money(s.total)]),
+        t(lang, "cashReportTotalSales"), totalRevenue,
+      );
+
+      const colsExp = [
+        { label: t(lang, "histColDate"), w: 26 },
+        { label: t(lang, "histColType"), w: 112 },
+        { label: t(lang, "histColAmount"), w: 44, align: "right" },
+      ];
+      drawTable(
+        t(lang, "accountingExpensesTableTitle"), colsExp,
+        periodCashOut.slice(0, 400).map((e) => [
+          e.date.slice(0, 10),
+          `${e.label || ""}${e.kind === "withdrawal" ? ` (${tx(lang, "cashOutKindWithdrawal")})` : ""}`,
+          money(e.amount),
+        ]),
+        t(lang, "cashReportExpenses"), totalExpenses,
+      );
+
+      // ---- Pied de page numéroté, ajouté une fois toutes les pages créées ----
+      const pages = doc.internal.getNumberOfPages();
+      for (let p = 1; p <= pages; p++) {
+        doc.setPage(p);
+        doc.setDrawColor(226, 232, 240); doc.setLineWidth(0.3);
+        doc.line(M, PAGE_H - 14, PAGE_W - M, PAGE_H - 14);
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8);
+        doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+        doc.text(`${t(lang, "accountingGeneratedBy")} ${t(lang, "appName")} — boutipro.com`, M, PAGE_H - 9);
+        doc.text(`${p} / ${pages}`, PAGE_W - M, PAGE_H - 9, { align: "right" });
+      }
 
       doc.save(`${shopName}-comptable-${fromDate}-${toDate}.pdf`);
       logAction(`${t(lang, "logAccountingExport")} : ${fromDate} - ${toDate}`);
