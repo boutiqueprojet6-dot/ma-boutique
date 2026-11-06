@@ -4564,6 +4564,13 @@ EXTRA_UI.cashJournal = { am: "የገንዘብ ማስቀመጫ እንቅስቃሴ
 EXTRA_UI.cashEmpty = { am: "በዚህ ጊዜ ምንም እንቅስቃሴ የለም።", ar: "لا توجد حركات في هذه الفترة.", bm: "Foyi ma kɛ nin waati in na.", bn: "এই সময়ে কোনো লেনদেন নেই।", de: "Keine Bewegungen in diesem Zeitraum.", en: "No movements in this period.", es: "Sin movimientos en este período.", fr: "Aucun mouvement sur cette période.", ha: "Babu wani motsi a wannan lokacin.", hi: "इस अवधि में कोई लेन-देन नहीं।", id: "Tidak ada transaksi pada periode ini.", it: "Nessun movimento in questo periodo.", ja: "この期間の取引はありません。", ko: "이 기간에 내역이 없습니다.", nl: "Geen bewegingen in deze periode.", pl: "Brak ruchów w tym okresie.", pt: "Nenhum movimento neste período.", ru: "Нет операций за этот период.", sw: "Hakuna miamala katika kipindi hiki.", ta: "இந்தக் காலத்தில் எந்தப் பரிவர்த்தனையும் இல்லை.", te: "ఈ కాలంలో లావాదేవీలు లేవు.", th: "ไม่มีรายการในช่วงนี้", tl: "Walang galaw sa panahong ito.", tr: "Bu dönemde hareket yok.", ur: "اس مدت میں کوئی لین دین نہیں۔", vi: "Không có giao dịch trong kỳ này.", wo: "Amul dara ci diir bii.", yo: "Kò sí ìrìn owó ní àkókò yìí.", zh: "此期间没有记录。", zu: "Azikho izinguquko kule nkathi." };
 EXTRA_UI.cashSeeMore = { am: "ተጨማሪ ይመልከቱ", ar: "عرض المزيد", bm: "A caman jira", bn: "আরও দেখুন", de: "Mehr anzeigen", en: "See more", es: "Ver más", fr: "Voir plus", ha: "Duba ƙari", hi: "और देखें", id: "Lihat lainnya", it: "Mostra altro", ja: "もっと見る", ko: "더 보기", nl: "Meer tonen", pl: "Pokaż więcej", pt: "Ver mais", ru: "Показать ещё", sw: "Ona zaidi", ta: "மேலும் காட்டு", te: "మరిన్ని చూడండి", th: "ดูเพิ่มเติม", tl: "Tingnan pa", tr: "Daha fazla göster", ur: "مزید دیکھیں", vi: "Xem thêm", wo: "Gën a ci gis", yo: "Wo síi", zh: "查看更多", zu: "Bona okuningi" };
 EXTRA_UI.cashCountBtn = { am: "ገንዘብ ቁጠር", ar: "عدّ الصندوق", bm: "Kɛsi jate", bn: "ক্যাশ গুনুন", de: "Kasse zählen", en: "Count the cash", es: "Contar la caja", fr: "Compter la caisse", ha: "Ƙirga kuɗin da ke hannu", hi: "गल्ला गिनें", id: "Hitung kas", it: "Conta la cassa", ja: "レジを数える", ko: "금고 세기", nl: "Kas tellen", pl: "Przelicz kasę", pt: "Contar o caixa", ru: "Пересчитать кассу", sw: "Hesabu fedha za kasha", ta: "கல்லாவை எண்ணு", te: "గల్లా లెక్కించండి", th: "นับเงินในลิ้นชัก", tl: "Bilangin ang kaha", tr: "Kasayı say", ur: "گلا گنیں", vi: "Kiểm quỹ", wo: "Waññ kes bi", yo: "Ka owó ẹrọ", zh: "清点现金", zu: "Bala ikheshi" };
+EXTRA_UI.aiLocalBestProduct = { am: "በጣም የተሸጠ ምርት (ያለፉት 30 ቀናት)", ar: "أفضل منتج (آخر 30 يومًا)", bm: "Fɛn min feereli ka ca (tile 30 tɛmɛnen)", bn: "সেরা পণ্য (গত ৩০ দিন)", de: "Bestes Produkt (letzte 30 Tage)", en: "Best product (last 30 days)", es: "Mejor producto (últimos 30 días)", fr: "Meilleur produit (30 derniers jours)", ha: "Kayan da ya fi saida (kwanaki 30 da suka wuce)", hi: "सर्वश्रेष्ठ उत्पाद (पिछले 30 दिन)", id: "Produk terlaris (30 hari terakhir)", it: "Miglior prodotto (ultimi 30 giorni)", ja: "売れ筋商品（直近30日）", ko: "베스트 상품 (최근 30일)", nl: "Beste product (laatste 30 dagen)", pl: "Najlepszy produkt (ostatnie 30 dni)", pt: "Melhor produto (últimos 30 dias)", ru: "Лучший товар (последние 30 дней)", sw: "Bidhaa inayouzwa zaidi (siku 30 zilizopita)", ta: "சிறந்த பொருள் (கடந்த 30 நாட்கள்)", te: "ఉత్తమ ఉత్పత్తి (గత 30 రోజులు)", th: "สินค้าขายดี (30 วันล่าสุด)", tl: "Pinakamabentang produkto (huling 30 araw)", tr: "En çok satan ürün (son 30 gün)", ur: "بہترین پروڈکٹ (پچھلے 30 دن)", vi: "Sản phẩm bán chạy nhất (30 ngày qua)", wo: "Marchandise bi gëna jaay (fan 30 yi weesu)", yo: "Ọjà tó ta jù (ọjọ́ 30 sẹ́yìn)", zh: "最畅销商品（近30天）", zu: "Umkhiqizo othengiswa kakhulu (izinsuku ezingu-30 ezedlule)" };
+EXTRA_UI.aiLocalSoldUnits = { am: "{n} ተሸጠ", ar: "{n} مباع", bm: "{n} feerela", bn: "{n} বিক্রি", de: "{n} verkauft", en: "{n} sold", es: "{n} vendidos", fr: "{n} vendus", ha: "an sayar da {n}", hi: "{n} बिके", id: "{n} terjual", it: "{n} venduti", ja: "{n} 個販売", ko: "{n}개 판매", nl: "{n} verkocht", pl: "sprzedano {n}", pt: "{n} vendidos", ru: "продано {n}", sw: "{n} zimeuzwa", ta: "{n} விற்பனை", te: "{n} అమ్ముడయ్యాయి", th: "ขายได้ {n}", tl: "{n} naibenta", tr: "{n} satıldı", ur: "{n} فروخت", vi: "đã bán {n}", wo: "{n} ñu jaay", yo: "{n} tí a tà", zh: "售出 {n}", zu: "{n} kuthengisiwe" };
+EXTRA_UI.aiLocalNoLowStock = { am: "ከማስጠንቀቂያ ገደብ በታች ምንም ምርት የለም።", ar: "لا يوجد منتج تحت حد التنبيه.", bm: "Fɛn si tɛ kɔrɔ la ka tɛmɛ lasɔmini hakɛ kan.", bn: "সতর্কতার সীমার নিচে কোনো পণ্য নেই।", de: "Kein Produkt unter der Warnschwelle.", en: "No product below the alert threshold.", es: "Ningún producto por debajo del umbral de alerta.", fr: "Aucun produit sous le seuil d'alerte.", ha: "Babu kayan da ke ƙasa da iyakar gargaɗi.", hi: "कोई भी उत्पाद अलर्ट सीमा से नीचे नहीं है।", id: "Tidak ada produk di bawah ambang peringatan.", it: "Nessun prodotto sotto la soglia di allerta.", ja: "警告しきい値を下回る商品はありません。", ko: "경고 기준 아래인 상품이 없습니다.", nl: "Geen product onder de waarschuwingsdrempel.", pl: "Żaden produkt nie jest poniżej progu alertu.", pt: "Nenhum produto abaixo do limite de alerta.", ru: "Нет товаров ниже порога оповещения.", sw: "Hakuna bidhaa chini ya kiwango cha tahadhari.", ta: "எச்சரிக்கை அளவுக்குக் கீழே எந்தப் பொருளும் இல்லை.", te: "హెచ్చరిక పరిమితి కంటే తక్కువ ఉత్పత్తి లేదు.", th: "ไม่มีสินค้าต่ำกว่าเกณฑ์แจ้งเตือน", tl: "Walang produktong mas mababa sa alert threshold.", tr: "Uyarı eşiğinin altında ürün yok.", ur: "کوئی پروڈکٹ الرٹ کی حد سے نیچے نہیں۔", vi: "Không có sản phẩm nào dưới ngưỡng cảnh báo.", wo: "Amul marchandise bu wàcc ci limu artu bi.", yo: "Kò sí ọjà tí ó wà ní ìsàlẹ̀ ààlà ìkìlọ̀.", zh: "没有低于预警线的商品。", zu: "Awukho umkhiqizo ongaphansi komkhawulo wesexwayiso." };
+EXTRA_UI.aiLocalNoDebts = { am: "ማንም ገንዘብ አይበደርዎትም።", ar: "لا أحد مدين لك بالمال.", bm: "Mɔgɔ si ka juru tɛ i la.", bn: "কেউ আপনার কাছে টাকা পাওনা নেই।", de: "Niemand schuldet Ihnen Geld.", en: "Nobody owes you money.", es: "Nadie le debe dinero.", fr: "Personne ne vous doit d'argent.", ha: "Babu wanda ke bin ka bashi.", hi: "किसी पर आपका पैसा बाकी नहीं है।", id: "Tidak ada yang berutang kepada Anda.", it: "Nessuno vi deve denaro.", ja: "あなたに借りのある人はいません。", ko: "당신에게 빚진 사람이 없습니다.", nl: "Niemand is u geld schuldig.", pl: "Nikt nie jest Ci winien pieniędzy.", pt: "Ninguém lhe deve dinheiro.", ru: "Вам никто не должен денег.", sw: "Hakuna mtu anayekudai.", ta: "யாரும் உங்களுக்குப் பணம் தர வேண்டியதில்லை.", te: "ఎవరూ మీకు డబ్బు బాకీ లేరు.", th: "ไม่มีใครค้างเงินคุณ", tl: "Walang may utang sa iyo.", tr: "Kimsenin size borcu yok.", ur: "کسی پر آپ کا پیسہ باقی نہیں۔", vi: "Không ai nợ bạn tiền.", wo: "Kenn boru la.", yo: "Kò sí ẹni tó jẹ ọ́ lówó.", zh: "没有人欠您钱。", zu: "Akekho okukweletayo." };
+EXTRA_UI.aiLocalWeekTitle = { am: "የእርስዎ ሳምንት (ያለፉት 7 ቀናት)", ar: "أسبوعك (آخر 7 أيام)", bm: "I ka dɔgɔkun (tile 7 tɛmɛnen)", bn: "আপনার সপ্তাহ (গত ৭ দিন)", de: "Ihre Woche (letzte 7 Tage)", en: "Your week (last 7 days)", es: "Su semana (últimos 7 días)", fr: "Votre semaine (7 derniers jours)", ha: "Satinka (kwanaki 7 da suka wuce)", hi: "आपका सप्ताह (पिछले 7 दिन)", id: "Pekan Anda (7 hari terakhir)", it: "La vostra settimana (ultimi 7 giorni)", ja: "今週（直近7日）", ko: "이번 주 (최근 7일)", nl: "Uw week (laatste 7 dagen)", pl: "Twój tydzień (ostatnie 7 dni)", pt: "A sua semana (últimos 7 dias)", ru: "Ваша неделя (последние 7 дней)", sw: "Wiki yako (siku 7 zilizopita)", ta: "உங்கள் வாரம் (கடந்த 7 நாட்கள்)", te: "మీ వారం (గత 7 రోజులు)", th: "สัปดาห์ของคุณ (7 วันล่าสุด)", tl: "Ang linggo mo (huling 7 araw)", tr: "Haftanız (son 7 gün)", ur: "آپ کا ہفتہ (پچھلے 7 دن)", vi: "Tuần của bạn (7 ngày qua)", wo: "Sa ayubés (fan 7 yi weesu)", yo: "Ọ̀sẹ̀ rẹ (ọjọ́ 7 sẹ́yìn)", zh: "您的一周（近7天）", zu: "Isonto lakho (izinsuku ezingu-7 ezedlule)" };
+EXTRA_UI.aiLocalMore = { am: "+ ሌሎች {n}", ar: "+ {n} أخرى", bm: "+ {n} wɛrɛ", bn: "+ আরও {n}", de: "+ {n} weitere", en: "+ {n} more", es: "+ {n} más", fr: "+ {n} autres", ha: "+ wasu {n}", hi: "+ {n} और", id: "+ {n} lagi", it: "+ altri {n}", ja: "+ 他 {n} 件", ko: "+ 외 {n}건", nl: "+ {n} meer", pl: "+ {n} więcej", pt: "+ {n} mais", ru: "+ ещё {n}", sw: "+ nyingine {n}", ta: "+ மேலும் {n}", te: "+ మరో {n}", th: "+ อีก {n}", tl: "+ {n} pa", tr: "+ {n} tane daha", ur: "+ {n} مزید", vi: "+ {n} nữa", wo: "+ {n} yeneen", yo: "+ {n} mìíràn", zh: "+ 其他 {n} 项", zu: "+ okunye okungu-{n}" };
+EXTRA_UI.aiLocalNoData = { am: "ይህን ጥያቄ ለመመለስ በቂ ሽያጭ የለም።", ar: "لا توجد مبيعات كافية بعد للإجابة على هذا السؤال.", bm: "Feereli ma caya fɔlɔ walasa ka nin ɲininkali jaabi.", bn: "এই প্রশ্নের উত্তর দিতে এখনও যথেষ্ট বিক্রি হয়নি।", de: "Noch nicht genug Verkäufe, um diese Frage zu beantworten.", en: "Not enough sales yet to answer this question.", es: "Aún no hay suficientes ventas para responder a esta pregunta.", fr: "Pas encore assez de ventes pour répondre à cette question.", ha: "Har yanzu babu isassun sayarwa don amsa wannan tambayar.", hi: "इस सवाल का जवाब देने के लिए अभी पर्याप्त बिक्री नहीं है।", id: "Penjualan belum cukup untuk menjawab pertanyaan ini.", it: "Non ci sono ancora abbastanza vendite per rispondere.", ja: "この質問に答えるには販売データがまだ足りません。", ko: "이 질문에 답하기에는 판매 데이터가 아직 부족합니다.", nl: "Nog niet genoeg verkopen om deze vraag te beantwoorden.", pl: "Za mało sprzedaży, aby odpowiedzieć na to pytanie.", pt: "Ainda não há vendas suficientes para responder a esta pergunta.", ru: "Пока недостаточно продаж, чтобы ответить на этот вопрос.", sw: "Bado hakuna mauzo ya kutosha kujibu swali hili.", ta: "இந்தக் கேள்விக்கு பதிலளிக்க போதுமான விற்பனை இன்னும் இல்லை.", te: "ఈ ప్రశ్నకు సమాధానం ఇవ్వడానికి ఇంకా తగినన్ని అమ్మకాలు లేవు.", th: "ยังมียอดขายไม่พอที่จะตอบคำถามนี้", tl: "Kulang pa ang benta para masagot ang tanong na ito.", tr: "Bu soruyu yanıtlamak için henüz yeterli satış yok.", ur: "اس سوال کا جواب دینے کے لیے ابھی کافی فروخت نہیں ہوئی۔", vi: "Chưa đủ doanh số để trả lời câu hỏi này.", wo: "Amul jaay bu doy ba tontu laaj bii.", yo: "Kò tíì sí títà tó pọ̀ tó láti dáhùn ìbéèrè yìí.", zh: "销售数据还不足以回答这个问题。", zu: "Awukabi khona umthengiso owanele ukuphendula lo mbuzo." };
 EXTRA_UI.cashOutKindExpense = { am: "ወጪ", ar: "مصروف", bm: "Musaka", bn: "খরচ", de: "Ausgabe", en: "Expense", es: "Gasto", fr: "Dépense", ha: "Kashewa", hi: "खर्च", id: "Pengeluaran", it: "Spesa", ja: "経費", ko: "지출", nl: "Uitgave", pl: "Wydatek", pt: "Despesa", ru: "Расход", sw: "Matumizi", ta: "செலவு", te: "ఖర్చు", th: "ค่าใช้จ่าย", tl: "Gastos", tr: "Gider", ur: "خرچ", vi: "Chi phí", wo: "Depãs", yo: "Ìnáwó", zh: "支出", zu: "Izindleko" };
 EXTRA_UI.cashOutKindWithdrawal = { am: "ማውጣት", ar: "سحب", bm: "Wari bɔli", bn: "উত্তোলন", de: "Entnahme", en: "Withdrawal", es: "Retiro", fr: "Retrait", ha: "Fitar da kuɗi", hi: "निकासी", id: "Penarikan", it: "Prelievo", ja: "引き出し", ko: "인출", nl: "Opname", pl: "Wypłata", pt: "Levantamento", ru: "Изъятие", sw: "Kutoa fedha", ta: "எடுப்பு", te: "ఉపసంహరణ", th: "การถอนเงิน", tl: "Paglabas ng pera", tr: "Çekim", ur: "رقم نکالنا", vi: "Rút tiền", wo: "Génne xaalis", yo: "Yíyọ owó", zh: "取出", zu: "Ukukhipha imali" };
 EXTRA_UI.cashOutKindHint = { am: "ማውጣት (በባንክ ማስቀመጥ፣ እርስዎ የሚወስዱት ገንዘብ) ከሳጥኑ ይወጣል ግን ወጪ አይደለም፤ ትርፍዎን አይቀንስም።", ar: "السحب (إيداع بنكي، مال تأخذه) يخرج من الصندوق لكنه ليس مصروفًا: لا يقلل من ربحك.", bm: "Wari bɔli (a bila banki la, wari i b'a ta) bɛ bɔ kɛsu kɔnɔ nka musaka tɛ : a tɛ i ka tɔnɔ dɔgɔya.", bn: "উত্তোলন (ব্যাংকে জমা, আপনি যে টাকা নেন) ক্যাশ থেকে বেরোয় কিন্তু খরচ নয়: এটি আপনার লাভ কমায় না।", de: "Eine Entnahme (Bankeinzahlung, Geld, das Sie entnehmen) verlässt die Kasse, ist aber kein Aufwand: Sie mindert Ihren Gewinn nicht.", en: "A withdrawal (bank deposit, money you take out) leaves the till but is not a cost: it does not reduce your profit.", es: "Un retiro (ingreso en el banco, dinero que usted saca) sale de la caja pero no es un gasto: no reduce su beneficio.", fr: "Un retrait (versement en banque, argent que vous prenez) sort de la caisse mais n'est pas une charge : il ne réduit pas votre bénéfice.", ha: "Fitar da kuɗi (ajiya a banki, kuɗin da ka ɗauka) yana fita daga akwatin kuɗi amma ba kashewa ba ne: ba ya rage ribarka.", hi: "निकासी (बैंक जमा, आपके द्वारा लिया गया पैसा) गल्ले से निकलती है पर खर्च नहीं है: इससे आपका लाभ कम नहीं होता।", id: "Penarikan (setoran bank, uang yang Anda ambil) keluar dari laci tetapi bukan biaya: tidak mengurangi laba Anda.", it: "Un prelievo (versamento in banca, denaro che prendete) esce dalla cassa ma non è un costo: non riduce il vostro utile.", ja: "引き出し（銀行への入金、ご自身が持ち出すお金）はレジから出ますが経費ではありません。利益は減りません。", ko: "인출(은행 입금, 직접 가져가는 돈)은 금고에서 나가지만 비용이 아니므로 이익을 줄이지 않습니다.", nl: "Een opname (bankstorting, geld dat u meeneemt) verlaat de kassa maar is geen kost: het vermindert uw winst niet.", pl: "Wypłata (wpłata do banku, pieniądze, które zabierasz) opuszcza kasę, ale nie jest kosztem: nie zmniejsza zysku.", pt: "Um levantamento (depósito no banco, dinheiro que retira) sai da caixa mas não é um custo: não reduz o seu lucro.", ru: "Изъятие (внесение в банк, деньги, которые вы забираете) уходит из кассы, но не является расходом: оно не уменьшает прибыль.", sw: "Kutoa fedha (kuweka benki, pesa unazochukua) kunatoka kwenye kasha lakini si gharama: hakupunguzi faida yako.", ta: "எடுப்பு (வங்கியில் செலுத்துதல், நீங்கள் எடுக்கும் பணம்) பணப்பெட்டியிலிருந்து வெளியேறும், ஆனால் செலவு அல்ல: உங்கள் லாபத்தைக் குறைக்காது.", te: "ఉపసంహరణ (బ్యాంకులో జమ, మీరు తీసుకునే డబ్బు) నగదు పెట్టె నుండి వెళ్తుంది కానీ ఖర్చు కాదు: ఇది మీ లాభాన్ని తగ్గించదు.", th: "การถอนเงิน (ฝากธนาคาร เงินที่คุณนำออก) ออกจากลิ้นชักแต่ไม่ใช่ค่าใช้จ่าย จึงไม่ลดกำไรของคุณ", tl: "Ang paglabas ng pera (deposito sa bangko, perang kinuha mo) ay lumalabas sa kahera pero hindi ito gastos: hindi nito binabawasan ang kita mo.", tr: "Çekim (bankaya yatırma, aldığınız para) kasadan çıkar ama bir gider değildir: kârınızı azaltmaz.", ur: "رقم نکالنا (بینک میں جمع، جو پیسہ آپ لیتے ہیں) گلے سے نکلتا ہے مگر خرچ نہیں: اس سے آپ کا منافع کم نہیں ہوتا۔", vi: "Rút tiền (nộp ngân hàng, tiền bạn lấy ra) rời két nhưng không phải chi phí: nó không làm giảm lợi nhuận của bạn.", wo: "Génne xaalis (def ko ci bank, xaalis bi ngay jël) dafay génn ci kees bi waaye depãs la woon: du wàññi sa tudd.", yo: "Yíyọ owó (fífi sí báńkì, owó tí o mú) ń jáde nínú àpótí owó ṣùgbọ́n kì í ṣe ìnáwó: kò dín èrè rẹ kù.", zh: "取出（存入银行、您拿走的钱）会离开钱箱，但不是开支，不会减少您的利润。", zu: "Ukukhipha imali (ukufaka ebhange, imali oyithathayo) kuphuma ebhokisini kodwa akuzona izindleko: akunciphisi inzuzo yakho." };
@@ -12950,9 +12957,134 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const saleDraftTotal = (draft) => draft.items.reduce((sum, it) => sum + it.qty * saleDraftItemUnitPrice(it), 0);
 
+  // ---- Réponses calculées sans IA ----
+  // Les questions les plus fréquentes d'un boutiquier ("combien j'ai vendu aujourd'hui",
+  // "qui me doit de l'argent", "quel produit est presque épuisé") ont une réponse EXACTE
+  // dans ses propres données. Les envoyer à un modèle de langage, c'est payer et attendre
+  // pour un résultat moins fiable : un modèle peut se tromper en additionnant, l'application
+  // non. Ces questions sont donc traitées ici, instantanément, gratuitement, et sans
+  // consommer le quota mensuel — y compris pour les comptes qui n'ont pas accès à l'IA.
+  // La reconnaissance est VOLONTAIREMENT STRICTE : on ne répond en local que si la question
+  // correspond à l'une des suggestions proposées dans l'écran (quelle que soit la langue,
+  // puisqu'on compare au libellé traduit), ou à une formulation très proche en français ou
+  // en anglais. Au moindre doute, on laisse passer la question vers l'IA : mieux vaut une
+  // réponse d'IA à une question simple qu'une réponse toute faite à côté du sujet.
+  const tryLocalAnswer = (question) => {
+    const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\p{L}\p{N} ]/gu, " ").replace(/\s+/g, " ").trim();
+    const q = norm(question);
+    if (!q) return null;
+    const matches = (suggestionKey, patterns) => {
+      const suggestion = norm(t(lang, suggestionKey));
+      if (suggestion && (q === suggestion || q.includes(suggestion))) return true;
+      return patterns.some((re) => re.test(q));
+    };
+    // Mêmes droits que pour l'IA : un vendeur qui n'a pas accès à la caisse ou aux dettes
+    // ne doit pas les obtenir ici non plus (sinon on rouvre la porte qu'on vient de fermer).
+    const can = (perm) => !activeEmployee || hasPermission(perm);
+    const money = (n) => fcfa(n);
+    const today = todayKey();
+    const validSales = sales.filter((s) => !s.cancelled);
+
+    // 1. Ce que j'ai vendu aujourd'hui
+    if (matches("othQuestceQueJaiVenduAujourdhui", [/vendu.*(aujourd hui|ce jour)/, /(ventes?|chiffre).*(aujourd hui|du jour)/, /(sold|sales|revenue).*(today)/])) {
+      if (!can("viewStats")) return null;
+      const todaySales = validSales.filter((s) => String(s.date).slice(0, 10) === today);
+      if (todaySales.length === 0) return `${t(lang, "todaySales")} : 0`;
+      const total = todaySales.reduce((sum, s) => sum + s.total, 0);
+      const tickets = new Set(todaySales.map((s) => s.transactionId || s.id)).size;
+      const byProd = {};
+      todaySales.forEach((s) => { const k = s.productName || "?"; byProd[k] = (byProd[k] || 0) + (s.qty || 0); });
+      const top = Object.entries(byProd).sort((a, b) => b[1] - a[1]).slice(0, 5);
+      return `${t(lang, "todaySales")} : ${money(total)}\n`
+        + `${t(lang, "othLocalizednumbertodaysaleslengthVentes").replace("{n}", localizedNumber(tickets))}\n\n`
+        + top.map(([name, qty]) => `• ${name} — ${tx(lang, "aiLocalSoldUnits").replace("{n}", localizedNumber(qty))}`).join("\n")
+        + (Object.keys(byProd).length > top.length ? `\n${tx(lang, "aiLocalMore").replace("{n}", Object.keys(byProd).length - top.length)}` : "");
+    }
+
+    // 2. Quel produit est presque épuisé
+    if (matches("othQuelProduitEstPresqueEpuise", [/(produit|article|stock).*(epuise|fini|bas|faible|manque|rupture)/, /(low|out of) stock/, /(what|which).*(running low)/])) {
+      if (!can("viewStock")) return null;
+      const low = products.filter((p) => p.quantity <= lowStockThreshold).sort((a, b) => a.quantity - b.quantity);
+      if (low.length === 0) return tx(lang, "aiLocalNoLowStock");
+      const shown = low.slice(0, 15);
+      return `${t(lang, "lowStock")} (${localizedNumber(low.length)})\n\n`
+        + shown.map((p) => `• ${p.name} — ${localizedNumber(p.quantity)}${p.quantity <= 0 ? ` (${t(lang, "outOfStock")})` : ""}`).join("\n")
+        + (low.length > shown.length ? `\n${tx(lang, "aiLocalMore").replace("{n}", low.length - shown.length)}` : "");
+    }
+
+    // 3. Qui me doit de l'argent
+    if (matches("othQuiMeDoitDeLargent", [/qui.*(doit|dette)/, /(combien|total).*(dette|impaye)/, /who.*owe/, /(unpaid|outstanding).*(debt|credit)/])) {
+      if (!can("viewDebts")) return null;
+      const unpaid = debts.filter((d) => !d.paid).map((d) => ({ d, left: remainingDebt(d) }))
+        .filter((x) => x.left > 0).sort((a, b) => b.left - a.left);
+      if (unpaid.length === 0) return tx(lang, "aiLocalNoDebts");
+      const total = unpaid.reduce((sum, x) => sum + x.left, 0);
+      const shown = unpaid.slice(0, 15);
+      return `${t(lang, "setDettesImpayees")} : ${money(total)} (${localizedNumber(unpaid.length)})\n\n`
+        + shown.map(({ d, left }) => `• ${d.customer} — ${money(left)}`).join("\n")
+        + (unpaid.length > shown.length ? `\n${tx(lang, "aiLocalMore").replace("{n}", unpaid.length - shown.length)}` : "");
+    }
+
+    // 4. Mon meilleur produit
+    if (matches("othQuelEstMonMeilleurProduit", [/(meilleur|plus vendu|top).*(produit|article|vente)/, /best.*(product|seller|selling)/])) {
+      if (!can("viewStats")) return null;
+      const since = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
+      const recent = validSales.filter((s) => String(s.date).slice(0, 10) >= since);
+      if (recent.length === 0) return tx(lang, "aiLocalNoData");
+      const byProd = {};
+      recent.forEach((s) => {
+        const k = s.productName || "?";
+        if (!byProd[k]) byProd[k] = { qty: 0, total: 0 };
+        byProd[k].qty += s.qty || 0; byProd[k].total += s.total;
+      });
+      const top = Object.entries(byProd).sort((a, b) => b[1].total - a[1].total).slice(0, 5);
+      return `${tx(lang, "aiLocalBestProduct")}\n\n`
+        + top.map(([name, v], i) => `${i + 1}. ${name} — ${money(v.total)} (${tx(lang, "aiLocalSoldUnits").replace("{n}", localizedNumber(v.qty))})`).join("\n");
+    }
+
+    // 5. Résumé de ma semaine
+    if (matches("othResumeDeMaSemaine", [/(resume|bilan|recap).*(semaine)/, /(summary|recap).*week/])) {
+      if (!can("viewStats")) return null;
+      const since = new Date(Date.now() - 6 * 86400000).toISOString().slice(0, 10);
+      const week = validSales.filter((s) => String(s.date).slice(0, 10) >= since);
+      const total = week.reduce((sum, s) => sum + s.total, 0);
+      const tickets = new Set(week.map((s) => s.transactionId || s.id)).size;
+      const byProd = {};
+      week.forEach((s) => { const k = s.productName || "?"; byProd[k] = (byProd[k] || 0) + s.total; });
+      const best = Object.entries(byProd).sort((a, b) => b[1] - a[1])[0];
+      const lines = [`${tx(lang, "aiLocalWeekTitle")}\n`];
+      lines.push(`• ${t(lang, "cashReportTotalSales")} : ${money(total)} (${localizedNumber(tickets)})`);
+      if (best) lines.push(`• ${tx(lang, "aiLocalBestProduct").split("(")[0].trim()} : ${best[0]} — ${money(best[1])}`);
+      if (can("viewCash")) {
+        const exp = expenses.filter((e) => String(e.date).slice(0, 10) >= since && e.kind !== "withdrawal")
+          .reduce((sum, e) => sum + e.amount, 0);
+        lines.push(`• ${t(lang, "cashReportExpenses")} : ${money(exp)}`);
+      }
+      if (can("viewDebts")) {
+        const owed = debts.filter((d) => !d.paid).reduce((sum, d) => sum + remainingDebt(d), 0);
+        lines.push(`• ${t(lang, "setDettesImpayees")} : ${money(owed)}`);
+      }
+      return lines.join("\n");
+    }
+    return null;
+  };
+
   const sendAiMessage = async (overrideText, isRetry) => {
     const textToSend = (overrideText ?? aiInput).trim();
     if (!textToSend || aiLoading) return;
+    // Réponse calculable sans IA : instantanée, gratuite, et exacte (voir tryLocalAnswer).
+    // Placé AVANT le contrôle de quota, donc disponible même sans accès à l'IA.
+    if (!isRetry) {
+      const localAnswer = tryLocalAnswer(textToSend);
+      if (localAnswer) {
+        setAiMessages([...aiMessages, { role: "user", content: textToSend }, { role: "assistant", content: localAnswer }]);
+        setAiInput("");
+        setAiFollowUps([]);
+        setAiLastFailed(null);
+        return;
+      }
+    }
     // Quota mensuel IA selon le palier. aiMonthlyQuota === 0 : pas d'accès du tout (palier Gratuit).
     // aiMonthlyQuota === null : illimité. effectiveAiQuota résout aussi le cas du palier
     // Gratuit (10 messages/mois pendant les 30 premiers jours, puis 5 ensuite).
