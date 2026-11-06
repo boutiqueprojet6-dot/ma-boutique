@@ -12981,9 +12981,22 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const debtSummary = debts.filter((d) => !d.paid).map((d) => `${d.customer} (id: ${d.id}): ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n") || "Aucune";
     const cashSummary = `Fond de caisse: ${cashFund} ${CURRENT_CURRENCY.symbol}, Ventes espèces totales: ${sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}, Dépenses: ${expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}, Solde estimé: ${cashFund + sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0) - expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}`;
     const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => s.date.slice(0, 10) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
-    const memoryNotesText = aiMemoryNotes.length > 0
+    const memoryNotesText = activeEmployee ? "Aucune pour l'instant." : (aiMemoryNotes.length > 0
       ? aiMemoryNotes.map((n) => `- ${n.text}`).join("\n")
-      : "Aucune pour l'instant.";
+      : "Aucune pour l'instant.");
+    // ---- Cloisonnement des données vues par l'assistant ----
+    // L'onglet Assistant est ouvert à TOUT le personnel, et le contexte envoyé au modèle
+    // contenait jusqu'ici la boutique entière : solde de caisse, chiffre d'affaires total,
+    // toutes les dettes, tous les prix. Un vendeur dont l'écran Caisse est masqué n'avait
+    // donc qu'à demander « combien il y a dans la caisse ? » pour l'obtenir : l'assistant
+    // contournait les permissions sans rien casser. Le contexte est maintenant découpé
+    // selon les droits réels de la personne connectée — ce qu'elle n'a pas le droit de voir
+    // n'est pas masqué dans la réponse, il n'est tout simplement jamais envoyé au modèle,
+    // seule façon fiable de faire (une consigne de discrétion dans le prompt se contourne).
+    const aiSee = (perm) => !activeEmployee || hasPermission(perm);
+    const aiRestrictionNotice = activeEmployee
+      ? `IMPORTANT : tu parles à ${activeEmployee.name}, un membre du personnel, pas au propriétaire. Tu ne reçois volontairement qu'une partie des données de la boutique. Si on te demande un chiffre que tu n'as pas reçu ci-dessous (solde de caisse, chiffre d'affaires, dettes, prix...), réponds simplement que tu n'y as pas accès et qu'il faut voir avec le propriétaire. N'invente jamais un chiffre, et n'essaie pas de le reconstituer par calcul.\n\n`
+      : "";
     const systemPrompt = `Tu es l'assistant de la boutique "${shopName}". Tu es comme un ami de confiance qui s'y connaît en commerce et qui suit de près les affaires du boutiquier — pas un logiciel qui récite des chiffres. Réponds par défaut en ${langLabel} (la langue choisie dans l'app), SAUF si le message de l'utilisateur est clairement écrit dans une autre langue — dans ce cas, réponds dans la langue utilisée par l'utilisateur plutôt qu'en ${langLabel}.
 DATE D'AUJOURD'HUI : ${todayForAi}. C'est la vraie date actuelle (information fournie par le système, fiable à 100%) — base-toi dessus pour toute notion de "récent", "actuel", "cette année", etc.
 CE QUE LE BOUTIQUIER T'A DÉJÀ DEMANDÉ DE RETENIR (respecte ces consignes dans TOUTES tes réponses, même dans une toute nouvelle conversation) :
@@ -13096,18 +13109,18 @@ RÈGLES DE FORMATAGE IMPORTANTES (Markdown simple — jamais de HTML, jamais de 
 - Reste concis et pratique, chaleureux et naturel, comme si tu parlais à un commerçant que tu connais bien
 - À la toute fin de CHAQUE réponse, sur une nouvelle ligne, ajoute exactement ce format (rien d'autre après) : <!--FOLLOWUPS: Question courte 1 ||| Question courte 2--> avec 1 ou 2 questions de suivi courtes et pertinentes que le boutiquier pourrait vouloir poser ensuite, dans la langue de la réponse. IMPORTANT : ces questions sont envoyées telles quelles, au nom du boutiquier, dès qu'il appuie dessus — formule-les donc comme si c'était LUI qui te les posait (à la première personne : "Quels sont mes produits les plus vendus cette semaine ?", "Dois-je vérifier mon stock faible ?"), JAMAIS comme si tu t'adressais à lui ("Voulez-vous connaître...", "Souhaitez-vous vérifier..."). Si aucune question de suivi naturelle n'existe, mets <!--FOLLOWUPS:--> vide
 - MÉMOIRE : si le boutiquier exprime une préférence durable sur ta façon de répondre — il n'aime pas quelque chose que tu as fait, te demande de ne plus répéter telle chose, préfère un style, un format, une habitude particulière, etc. — retiens-le pour toutes les prochaines réponses (y compris dans une future conversation). Pour cela, ajoute juste avant le <!--FOLLOWUPS:--> une ligne au format exact <!--MEMORY: la consigne reformulée simplement--> (une seule par réponse, à la 3e personne et dans la langue de la réponse, ex: <!--MEMORY: Ne plus utiliser d'emoji dans les réponses-->). N'ajoute cette ligne QUE quand le boutiquier vient d'exprimer une vraie préférence durable à ce moment précis de la conversation — jamais pour une remarque ponctuelle, une simple question, ou une préférence déjà présente dans "CE QUE LE BOUTIQUIER T'A DÉJÀ DEMANDÉ DE RETENIR" ci-dessus. Sinon, ne mets pas cette ligne du tout
-Voici les données actuelles de la boutique:
-STOCK:
+${aiRestrictionNotice}Voici les données actuelles de la boutique:
+${aiSee("viewStock") ? `STOCK:
 ${stockSummary || "Aucun produit"}
-PRODUITS EN STOCK FAIBLE: ${lowStockList}
-VENTES AUJOURD'HUI: ${todaySalesSum} ${CURRENT_CURRENCY.symbol}
+PRODUITS EN STOCK FAIBLE: ${lowStockList}` : ""}
+${aiSee("viewStats") ? `VENTES AUJOURD'HUI: ${todaySalesSum} ${CURRENT_CURRENCY.symbol}
 TOP PRODUITS: ${topProd || "Pas encore de ventes"}
 TOTAL VENTES: ${sales.reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol} sur ${sales.length} transactions
-TENDANCE 7 DERNIERS JOURS: ${last7}
-DETTES CLIENTS:
-${debtSummary}
-CAISSE:
-${cashSummary}
+TENDANCE 7 DERNIERS JOURS: ${last7}` : ""}
+${aiSee("viewDebts") ? `DETTES CLIENTS:
+${debtSummary}` : ""}
+${aiSee("viewCash") ? `CAISSE:
+${cashSummary}` : ""}
 Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question dans une autre langue — dans ce cas, réponds dans cette langue-là.`;
     try {
       const reply = await callClaudeApi(newMessages, systemPrompt);
