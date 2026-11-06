@@ -666,7 +666,7 @@ const SUBSCRIPTION_PLANS = {
     // Les plages horaires et le rapport de caisse par employé sont en Pro (et plus
     // seulement en Business) : Pro permet déjà d'avoir des employés, et pouvoir les
     // encadrer est justement l'une des premières raisons de payer.
-    features: ["advancedHistory", "stockAlerts", "anomalyAlerts", "shiftPermissions", "perEmployeeCashReport"],
+    features: ["advancedHistory", "stockAlerts", "anomalyAlerts", "shiftPermissions", "perEmployeeCashReport", "accountingExport"],
   },
   business: {
     id: "business",
@@ -4495,6 +4495,13 @@ EXTRA_UI.feat_shopComparison = { fr: "Comparaison des boutiques", en: "Shop comp
 EXTRA_UI.feat_supervisorRole = { fr: "Rôle de superviseur", en: "Supervisor role" };
 EXTRA_UI.feat_salesGoals = { fr: "Objectifs de vente mensuels", en: "Monthly sales goals" };
 EXTRA_UI.feat_shopProfitabilityReport = { fr: "Rapport de rentabilité : prix d'achat, marge et bénéfice", en: "Profitability report: cost price, margin and profit" };
+// ---- Export comptable CSV (Paramètres > Données, voir exportAccountingCsv) ----
+EXTRA_UI.accountingCsvTitle = { fr: "Export comptable (CSV)", en: "Accounting export (CSV)", es: "Exportación contable (CSV)", de: "Buchhaltungsexport (CSV)", it: "Esportazione contabile (CSV)", nl: "Boekhoudkundige export (CSV)", pt: "Exportação contábil (CSV)", id: "Ekspor akuntansi (CSV)", tr: "Muhasebe dışa aktarımı (CSV)", pl: "Eksport księgowy (CSV)", ru: "Бухгалтерский экспорт (CSV)", ja: "会計エクスポート（CSV）", ko: "회계 내보내기 (CSV)", zh: "会计导出（CSV）", vi: "Xuất dữ liệu kế toán (CSV)", th: "ส่งออกข้อมูลบัญชี (CSV)", ar: "تصدير محاسبي (CSV)", hi: "लेखा निर्यात (CSV)", bn: "হিসাব এক্সপোর্ট (CSV)", ur: "اکاؤنٹنگ ایکسپورٹ (CSV)", ta: "கணக்கியல் ஏற்றுமதி (CSV)", te: "అకౌంటింగ్ ఎక్స్‌పోర్ట్ (CSV)", sw: "Hamisho la uhasibu (CSV)", ha: "Fitar da bayanan asusu (CSV)", wo: "Yóbbu koontu yi (CSV)", yo: "Fífi àkọọ́lẹ̀ owó síta (CSV)", zu: "Ukukhiphela amarekhodi ezezimali (CSV)", am: "የሂሳብ ወጪ ፋይል (CSV)", bm: "Wari sɛbɛnni bɔli (CSV)", tl: "Pag-export ng accounting (CSV)" };
+EXTRA_UI.accountingCsvDesc = { fr: "Vos ventes et dépenses de la période choisie, au format CSV (s'ouvre dans n'importe quel tableur).", en: "Your sales and expenses for the chosen period, as a CSV file (opens in any spreadsheet).", es: "Sus ventas y gastos del período elegido, en formato CSV (se abre en cualquier hoja de cálculo).", de: "Ihre Verkäufe und Ausgaben des gewählten Zeitraums als CSV-Datei (öffnet sich in jeder Tabellenkalkulation).", it: "Le sue vendite e spese del periodo scelto, in formato CSV (si apre in qualsiasi foglio di calcolo).", nl: "Uw verkopen en uitgaven van de gekozen periode, als CSV-bestand (opent in elk spreadsheetprogramma).", pt: "Suas vendas e despesas do período escolhido, em formato CSV (abre em qualquer planilha).", id: "Penjualan dan pengeluaran Anda untuk periode yang dipilih, dalam format CSV (dapat dibuka di spreadsheet apa pun).", tr: "Seçilen dönemdeki satışlarınız ve giderleriniz, CSV biçiminde (herhangi bir hesap tablosunda açılır).", pl: "Pana/Pani sprzedaż i wydatki z wybranego okresu, w formacie CSV (otwiera się w każdym arkuszu kalkulacyjnym).", ru: "Ваши продажи и расходы за выбранный период в формате CSV (открывается в любой табличной программе).", ja: "選択した期間の売上と支出を、どの表計算ソフトでも開けるCSV形式で出力します。", ko: "선택한 기간의 매출과 지출을 어떤 스프레드시트에서도 열 수 있는 CSV 형식으로 제공합니다.", zh: "将您所选期间的销售和支出导出为 CSV 格式（可在任意表格软件中打开）。", vi: "Doanh số và chi phí của bạn trong kỳ đã chọn, dưới dạng tệp CSV (mở được trong mọi phần mềm bảng tính).", th: "ยอดขายและค่าใช้จ่ายของท่านในช่วงที่เลือก ในรูปแบบ CSV (เปิดได้ในโปรแกรมสเปรดชีตทุกชนิด)", ar: "مبيعاتك ومصروفاتك للفترة المختارة، بصيغة CSV (تُفتح في أي برنامج جدول بيانات).", hi: "आपकी चुनी हुई अवधि की बिक्री और खर्च, CSV फ़ाइल के रूप में (किसी भी स्प्रेडशीट में खुलती है)।", bn: "আপনার নির্বাচিত সময়কালের বিক্রি ও খরচ, CSV ফাইল হিসেবে (যেকোনো স্প্রেডশিটে খোলা যায়)।", ur: "آپ کی منتخب مدت کی فروخت اور اخراجات، CSV فائل کی صورت میں (کسی بھی اسپریڈشیٹ میں کھلتی ہے)۔", ta: "நீங்கள் தேர்ந்த காலத்தின் விற்பனை மற்றும் செலவுகள், CSV கோப்பாக (எந்த விரிதாளிலும் திறக்கும்).", te: "మీరు ఎంచుకున్న కాలానికి చెందిన అమ్మకాలు మరియు ఖర్చులు, CSV ఫైల్‌గా (ఏ స్ప్రెడ్‌షీట్‌లోనూ తెరుచుకుంటుంది).", sw: "Mauzo na matumizi yako ya kipindi ulichochagua, kama faili ya CSV (hufunguka katika programu yoyote ya lahajedwali).", ha: "Tallace-tallace da kashe kuɗin ku na lokacin da aka zaɓa, a matsayin fayil na CSV (yana buɗewa a kowane shirin maƙunsar bayanai).", wo: "Say ak wàllu ci diir bi nga tannee, ci CSV (dafay ubbiku ci tablo bu mu man).", yo: "Títà àti ìnáwó yín fún àkókò tí a yàn, gẹ́gẹ́ bí fáìlì CSV (ó máa ṣí nínú ẹ̀rọ spreadsheet èyíkéyìí).", zu: "Ukuthengisa nezindleko zakho zesikhathi osikhethile, njengefayela le-CSV (livuleka kunoma iluphi uhlelo lwamaspredishithi).", am: "የመረጡት ጊዜ የሽያጭ እና ወጪ ዝርዝር በ CSV ፋይል (በማንኛውም የሰንጠረዥ ፕሮግራም ይከፈታል)።", bm: "I ka feere ni musaka minnu kɛra waati min na, CSV fayil cogo la (a be dayɛlɛ tableur bɛɛ la).", tl: "Ang mga benta at gastos mo sa napiling panahon, bilang CSV file (nabubuksan sa kahit anong spreadsheet)." };
+EXTRA_UI.accountingCsvColDesc = { fr: "Description", en: "Description", es: "Descripción", de: "Beschreibung", it: "Descrizione", nl: "Beschrijving", pt: "Descrição", id: "Deskripsi", tr: "Açıklama", pl: "Opis", ru: "Описание", ja: "詳細", ko: "설명", zh: "描述", vi: "Mô tả", th: "คำอธิบาย", ar: "الوصف", hi: "विवरण", bn: "বিবরণ", ur: "تفصیل", ta: "விளக்கம்", te: "వివరణ", sw: "Maelezo", ha: "Bayani", wo: "Leeral", yo: "Àpèjúwe", zu: "Incazelo", am: "መግለጫ", bm: "Ɲɛfɔli", tl: "Paglalarawan" };
+EXTRA_UI.accountingCsvColEmployee = { fr: "Employé", en: "Employee", es: "Empleado", de: "Mitarbeiter", it: "Dipendente", nl: "Medewerker", pt: "Funcionário", id: "Karyawan", tr: "Çalışan", pl: "Pracownik", ru: "Сотрудник", ja: "従業員", ko: "직원", zh: "员工", vi: "Nhân viên", th: "พนักงาน", ar: "الموظف", hi: "कर्मचारी", bn: "কর্মচারী", ur: "ملازم", ta: "பணியாளர்", te: "ఉద్యోగి", sw: "Mfanyakazi", ha: "Ma'aikaci", wo: "Liggéeykat", yo: "Òṣìṣẹ́", zu: "Isisebenzi", am: "ሰራተኛ", bm: "Baarakɛla", tl: "Empleyado" };
+EXTRA_UI.accountingCsvBtn = { fr: "Télécharger le CSV comptable", en: "Download accounting CSV", es: "Descargar el CSV contable", de: "Buchhaltungs-CSV herunterladen", it: "Scarica il CSV contabile", nl: "Boekhoudkundige CSV downloaden", pt: "Baixar o CSV contábil", id: "Unduh CSV akuntansi", tr: "Muhasebe CSV'sini indir", pl: "Pobierz plik CSV księgowy", ru: "Скачать бухгалтерский CSV", ja: "会計CSVをダウンロード", ko: "회계 CSV 다운로드", zh: "下载会计 CSV", vi: "Tải tệp CSV kế toán", th: "ดาวน์โหลดไฟล์ CSV บัญชี", ar: "تنزيل ملف CSV المحاسبي", hi: "लेखा CSV डाउनलोड करें", bn: "হিসাব CSV ডাউনলোড করুন", ur: "اکاؤنٹنگ CSV ڈاؤن لوڈ کریں", ta: "கணக்கியல் CSV பதிவிறக்கவும்", te: "అకౌంటింగ్ CSV డౌన్‌లోడ్ చేయండి", sw: "Pakua CSV ya uhasibu", ha: "Sauke CSV na asusu", wo: "Télécharger CSV koontu", yo: "Gba CSV owó sílẹ̀", zu: "Dawulodha i-CSV yezezimali", am: "የሂሳብ CSV ያውርዱ", bm: "CSV wari sɛbɛnni jigin", tl: "I-download ang accounting CSV" };
+EXTRA_UI.accountingCsvProBadge = { fr: "Fonctionnalité Pro — Export comptable", en: "Pro feature — Accounting export", es: "Función Pro — Exportación contable", de: "Pro-Funktion — Buchhaltungsexport", it: "Funzione Pro — Esportazione contabile", nl: "Pro-functie — Boekhoudkundige export", pt: "Recurso Pro — Exportação contábil", id: "Fitur Pro — Ekspor akuntansi", tr: "Pro özellik — Muhasebe dışa aktarımı", pl: "Funkcja Pro — Eksport księgowy", ru: "Функция Pro — Бухгалтерский экспорт", ja: "Pro機能 — 会計エクスポート", ko: "Pro 기능 — 회계 내보내기", zh: "Pro 功能 — 会计导出", vi: "Tính năng Pro — Xuất kế toán", th: "ฟีเจอร์ Pro — ส่งออกข้อมูลบัญชี", ar: "ميزة برو — تصدير محاسبي", hi: "प्रो सुविधा — लेखा निर्यात", bn: "প্রো ফিচার — হিসাব এক্সপোর্ট", ur: "پرو خصوصیت — اکاؤنٹنگ ایکسپورٹ", ta: "புரோ அம்சம் — கணக்கியல் ஏற்றுமதி", te: "ప్రో ఫీచర్ — అకౌంటింగ్ ఎక్స్‌పోర్ట్", sw: "Kipengele cha Pro — Hamisho la uhasibu", ha: "Fasalin Pro — Fitar da bayanan asusu", wo: "Fonksiyon Pro — Yóbbu koontu", yo: "Ẹ̀yà Pro — Fífi àkọọ́lẹ̀ owó síta", zu: "Isici se-Pro — Ukukhiphela amarekhodi ezezimali", am: "የPro ባህሪ — የሂሳብ ወጪ ፋይል", bm: "Pro fɛɛrɛ — Wari sɛbɛnni bɔli", tl: "Pro feature — Pag-export ng accounting" };
 // ---- Réapprovisionnement (bouton "+" du Stock → demande quantité + nouveau prix d'achat optionnel) ----
 EXTRA_UI.restockModalTitle = { fr: "Réapprovisionnement", en: "Restock", es: "Reabastecimiento", pt: "Reabastecimento", de: "Nachbestellung", it: "Rifornimento", nl: "Bevoorrading", pl: "Uzupełnienie zapasów", ru: "Пополнение запаса", tr: "Stok yenileme", ar: "إعادة تخزين", hi: "स्टॉक की पुनःपूर्ति", bn: "স্টক পুনঃপূরণ", ur: "اسٹاک کی دوبارہ بھرائی", ta: "பங்கு நிரப்புதல்", te: "స్టాక్ రీఫిల్", th: "เติมสต็อก", zh: "补货", ja: "再入荷", ko: "재입고", id: "Pengisian stok ulang", vi: "Nhập thêm hàng", tl: "Muling pagdadagdag ng stock", sw: "Kuongeza bidhaa stoo", ha: "Sake cika kaya", yo: "Fífi ọjà kún", zu: "Ukugcwalisa isitoko", am: "ዕቃ መሙላት", bm: "Fɛn kura dilan", wo: "Yokkute marsandiz" };
 EXTRA_UI.restockPriceLabel = { fr: "Nouveau prix d'achat (optionnel)", en: "New purchase price (optional)", es: "Nuevo precio de compra (opcional)", pt: "Novo preço de compra (opcional)", de: "Neuer Einkaufspreis (optional)", it: "Nuovo prezzo d'acquisto (facoltativo)", nl: "Nieuwe inkoopprijs (optioneel)", pl: "Nowa cena zakupu (opcjonalnie)", ru: "Новая закупочная цена (необязательно)", tr: "Yeni alış fiyatı (isteğe bağlı)", ar: "سعر شراء جديد (اختياري)", hi: "नया खरीद मूल्य (वैकल्पिक)", bn: "নতুন ক্রয়মূল্য (ঐচ্ছিক)", ur: "نئی خریداری قیمت (اختیاری)", ta: "புதிய கொள்முதல் விலை (விருப்பத்தேர்வு)", te: "కొత్త కొనుగోలు ధర (ఐచ్ఛికం)", th: "ราคาซื้อใหม่ (ไม่บังคับ)", zh: "新进价（可选）", ja: "新しい仕入れ価格（任意）", ko: "새 매입가 (선택 사항)", id: "Harga beli baru (opsional)", vi: "Giá nhập mới (không bắt buộc)", tl: "Bagong presyong bili (opsyonal)", sw: "Bei mpya ya kununulia (si lazima)", ha: "Sabon farashin siye (ba dole ba)", yo: "Owó rírà tuntun (kìí ṣe dandan)", zu: "Intengo entsha yokuthenga (akuphoqelekile)", am: "አዲስ የመግዣ ዋጋ (አማራጭ)", bm: "Sara sɔrɔ kura (fɛɛrɛ)", wo: "Njëgu jënd bu bees (du obligatoire)" };
@@ -13560,6 +13567,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // (juste avant generateShopExportPdf), ce qui provoquait la même erreur React #310
   // une fois le chargement terminé.
   const [pdfExportGenerating, setPdfExportGenerating] = useState(false);
+  // ---- Export comptable CSV (Paramètres > Données, Pro et Business — voir accountingExport
+  // dans SUBSCRIPTION_PLANS) : ventes + dépenses sur une période choisie (mois en cours par
+  // défaut), une ligne par mouvement avec date/type/description/montant/mode de
+  // paiement/employé. Différent de l'export PDF existant (showAccountingExport, avec
+  // graphiques) : ce format CSV s'ouvre dans n'importe quel tableur pour la comptabilité.
+  const [acctCsvFrom, setAcctCsvFrom] = useState(() => todayKey().slice(0, 7) + "-01");
+  const [acctCsvTo, setAcctCsvTo] = useState(() => todayKey());
   // ---- Sauvegardes (export JSON + historique de sauvegardes automatiques/manuelles) ----
   const [shopBackups, setShopBackups] = useState([]);
   const [backupBusy, setBackupBusy] = useState(null); // null | "export" | "create" | "restore-<id>"
@@ -13821,6 +13835,29 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     });
     const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
     saveTextFile(csv, `${shopName}-historique.csv`);
+  };
+  // ---- Export comptable CSV (Paramètres > Données) ----
+  // Une ligne par vente et par dépense sur la période choisie (mois en cours par défaut) :
+  // date, type, description, montant, mode de paiement, employé — un format simple ouvrable
+  // dans n'importe quel tableur, pensé pour la comptabilité plutôt que pour l'audit détaillé
+  // (voir exportHistoryCsv ci-dessus) ou le PDF illustré (voir generateAccountingReport).
+  const exportAccountingCsv = () => {
+    if (!acctCsvFrom || !acctCsvTo) return;
+    const inRange = (dateStr) => { const d = (dateStr || "").slice(0, 10); return d >= acctCsvFrom && d <= acctCsvTo; };
+    const paymentLabel = (pm) => (pm === "cash" ? t(lang, "cash") : pm === "mobile" ? t(lang, "mobilePayment") : pm === "card" ? t(lang, "card") : pm === "credit" ? t(lang, "credit") : (pm || ""));
+    const header = [t(lang, "histColDate"), t(lang, "histColType"), t(lang, "accountingCsvColDesc"), t(lang, "histColAmount"), t(lang, "paymentMethod"), t(lang, "accountingCsvColEmployee")];
+    const dataRows = [];
+    sales.filter((s) => !s.cancelled && inRange(s.date)).forEach((s) => {
+      dataRows.push([s.date.slice(0, 10), t(lang, "histTypeSale"), `${s.productName} x${s.qty}`, s.total, paymentLabel(s.payment), s.actorName || shopName || ""]);
+    });
+    expenses.filter((e) => inRange(e.date)).forEach((e) => {
+      dataRows.push([e.date.slice(0, 10), t(lang, "histTypeExpense"), e.label, -Math.abs(e.amount), "", e.actorName || shopName || ""]);
+    });
+    dataRows.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
+    const rows = [header, ...dataRows];
+    const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
+    saveTextFile(csv, `${shopName}-comptable-${acctCsvFrom}-${acctCsvTo}.csv`);
+    logAction(`${t(lang, "logAccountingExport")} : ${acctCsvFrom} - ${acctCsvTo}`);
   };
   // ---- Export des ventes en PDF (onglet Données > Exporter les données) ----
   // Vient compléter l'export CSV déjà existant : un PDF "présentable" avec un
@@ -18353,6 +18390,29 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ padding: 12, borderRadius: 12, background: T.input, border: `1px solid ${T.border}` }}>
                     <div style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setSaleslengthVentesProductslengthProdui").replace("{s}", localizedNumber(sales.length)).replace("{p}", localizedNumber(products.length))}</div>
                   </div>
+                  <p style={{ color: T.text, fontSize: 13, fontWeight: 700, marginTop: 10 }}>{t(lang, "accountingCsvTitle")}</p>
+                  {hasFeatureAccess("accountingExport") ? (
+                    <>
+                      <p style={{ color: T.muted, fontSize: 12 }}>{t(lang, "accountingCsvDesc")}</p>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                        <div>
+                          <label style={{ fontSize: 10, fontWeight: 600, color: T.muted, display: "block", marginBottom: 4 }}>{t(lang, "histFilterFromLabel")}</label>
+                          <input autoComplete="off" type="date" value={acctCsvFrom} onChange={(e) => setAcctCsvFrom(e.target.value)} style={{ width: "100%", background: T.input, border: `1px solid ${T.border}`, color: T.text, borderRadius: 10, padding: "8px 10px", fontSize: 13 }} />
+                        </div>
+                        <div>
+                          <label style={{ fontSize: 10, fontWeight: 600, color: T.muted, display: "block", marginBottom: 4 }}>{t(lang, "histFilterToLabel")}</label>
+                          <input autoComplete="off" type="date" value={acctCsvTo} onChange={(e) => setAcctCsvTo(e.target.value)} style={{ width: "100%", background: T.input, border: `1px solid ${T.border}`, color: T.text, borderRadius: 10, padding: "8px 10px", fontSize: 13 }} />
+                        </div>
+                      </div>
+                      <button onClick={exportAccountingCsv} disabled={!acctCsvFrom || !acctCsvTo} style={{ padding: "14px 16px", borderRadius: 14, background: "#34d3991a", border: "1px solid #34d39933", color: "#34d399", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, opacity: (!acctCsvFrom || !acctCsvTo) ? 0.5 : 1 }}>
+                        <FileDown size={18} /> {t(lang, "accountingCsvBtn")}
+                      </button>
+                    </>
+                  ) : !activeEmployee ? (
+                    <button onClick={() => setSettingsView("subscription")} style={{ padding: "14px 16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, color: T.muted, fontSize: 13, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
+                      <Lock size={16} /> {t(lang, "accountingCsvProBadge")}
+                    </button>
+                  ) : null}
                 </div>
               )}
               {/* Données — Sauvegardes (export JSON complet + historique auto/manuel) */}
