@@ -13002,9 +13002,32 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // l'IA doit utiliser dans un bloc ACTIONS (voir plus bas), jamais le nom en texte
     // libre, pour cibler sans ambiguïté la bonne ligne même si deux produits ont un nom
     // proche. L'id n'est pas destiné à être affiché au boutiquier dans la réponse.
-    const stockSummary = products.map((p) => `${p.name} (id: ${p.id}): ${p.quantity} en stock (seuil alerte: ${lowStockThreshold}), prix ${p.price} ${CURRENT_CURRENCY.symbol}`).join("\n");
+    // ---- Contexte envoyé au modèle : volontairement borné ----
+    // Avant, TOUT le stock et TOUTES les dettes partaient dans chaque question, même pour
+    // "comment j'ajoute un produit". Une boutique de 300 références envoyait donc 300 lignes
+    // à chaque message : plus lent, plus cher, et les petits modèles se perdent dans un
+    // contexte aussi long. On garde les lignes qui servent vraiment à répondre (stock bas
+    // d'abord, puis meilleures ventes, puis le reste) et on DIT au modèle que la liste est
+    // tronquée, pour qu'il n'affirme jamais que la boutique ne compte que ces produits-là.
+    const AI_MAX_PRODUCTS = 60;
+    const AI_MAX_DEBTS = 40;
+    const soldQty = {};
+    sales.forEach((s) => { if (s.productId) soldQty[s.productId] = (soldQty[s.productId] || 0) + (s.qty || 0); });
+    const productsForAi = [...products].sort((a, b) => {
+      const aLow = a.quantity <= lowStockThreshold ? 0 : 1;
+      const bLow = b.quantity <= lowStockThreshold ? 0 : 1;
+      if (aLow !== bLow) return aLow - bLow;
+      return (soldQty[b.id] || 0) - (soldQty[a.id] || 0);
+    });
+    const stockShown = productsForAi.slice(0, AI_MAX_PRODUCTS);
+    const stockSummary = stockShown.map((p) => `${p.name} (id: ${p.id}): ${p.quantity} en stock (seuil alerte: ${lowStockThreshold}), prix ${p.price} ${CURRENT_CURRENCY.symbol}`).join("\n")
+      + (products.length > stockShown.length ? `\n(+ ${products.length - stockShown.length} autres produits non listés ici — la boutique en compte ${products.length} au total. Si la question porte sur un produit absent de cette liste, demande au boutiquier de préciser son nom plutôt que de conclure qu'il n'existe pas.)` : "");
     const lowStockList = products.filter((p) => p.quantity <= lowStockThreshold).map((p) => p.name).join(", ") || "Aucun";
-    const debtSummary = debts.filter((d) => !d.paid).map((d) => `${d.customer} (id: ${d.id}): ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n") || "Aucune";
+    const unpaidDebts = debts.filter((d) => !d.paid);
+    const debtsShown = [...unpaidDebts].sort((a, b) => remainingDebt(b) - remainingDebt(a)).slice(0, AI_MAX_DEBTS);
+    const debtsHiddenTotal = unpaidDebts.slice(AI_MAX_DEBTS).reduce((sum, d) => sum + remainingDebt(d), 0);
+    const debtSummary = (debtsShown.map((d) => `${d.customer} (id: ${d.id}): ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n")
+      + (unpaidDebts.length > debtsShown.length ? `\n(+ ${unpaidDebts.length - debtsShown.length} autres dettes plus petites, ${debtsHiddenTotal} ${CURRENT_CURRENCY.symbol} au total — ${unpaidDebts.length} dettes impayées en tout.)` : "")) || "Aucune";
     const cashSummary = `Fond de caisse: ${cashFund} ${CURRENT_CURRENCY.symbol}, Ventes espèces totales: ${sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}, Dépenses: ${expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}, Solde estimé: ${cashFund + sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0) - expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}`;
     const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => s.date.slice(0, 10) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
     const memoryNotesText = activeEmployee ? "Aucune pour l'instant." : (aiMemoryNotes.length > 0
