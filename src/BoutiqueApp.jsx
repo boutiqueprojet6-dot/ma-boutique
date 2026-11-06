@@ -4564,6 +4564,10 @@ EXTRA_UI.cashJournal = { am: "የገንዘብ ማስቀመጫ እንቅስቃሴ
 EXTRA_UI.cashEmpty = { am: "በዚህ ጊዜ ምንም እንቅስቃሴ የለም።", ar: "لا توجد حركات في هذه الفترة.", bm: "Foyi ma kɛ nin waati in na.", bn: "এই সময়ে কোনো লেনদেন নেই।", de: "Keine Bewegungen in diesem Zeitraum.", en: "No movements in this period.", es: "Sin movimientos en este período.", fr: "Aucun mouvement sur cette période.", ha: "Babu wani motsi a wannan lokacin.", hi: "इस अवधि में कोई लेन-देन नहीं।", id: "Tidak ada transaksi pada periode ini.", it: "Nessun movimento in questo periodo.", ja: "この期間の取引はありません。", ko: "이 기간에 내역이 없습니다.", nl: "Geen bewegingen in deze periode.", pl: "Brak ruchów w tym okresie.", pt: "Nenhum movimento neste período.", ru: "Нет операций за этот период.", sw: "Hakuna miamala katika kipindi hiki.", ta: "இந்தக் காலத்தில் எந்தப் பரிவர்த்தனையும் இல்லை.", te: "ఈ కాలంలో లావాదేవీలు లేవు.", th: "ไม่มีรายการในช่วงนี้", tl: "Walang galaw sa panahong ito.", tr: "Bu dönemde hareket yok.", ur: "اس مدت میں کوئی لین دین نہیں۔", vi: "Không có giao dịch trong kỳ này.", wo: "Amul dara ci diir bii.", yo: "Kò sí ìrìn owó ní àkókò yìí.", zh: "此期间没有记录。", zu: "Azikho izinguquko kule nkathi." };
 EXTRA_UI.cashSeeMore = { am: "ተጨማሪ ይመልከቱ", ar: "عرض المزيد", bm: "A caman jira", bn: "আরও দেখুন", de: "Mehr anzeigen", en: "See more", es: "Ver más", fr: "Voir plus", ha: "Duba ƙari", hi: "और देखें", id: "Lihat lainnya", it: "Mostra altro", ja: "もっと見る", ko: "더 보기", nl: "Meer tonen", pl: "Pokaż więcej", pt: "Ver mais", ru: "Показать ещё", sw: "Ona zaidi", ta: "மேலும் காட்டு", te: "మరిన్ని చూడండి", th: "ดูเพิ่มเติม", tl: "Tingnan pa", tr: "Daha fazla göster", ur: "مزید دیکھیں", vi: "Xem thêm", wo: "Gën a ci gis", yo: "Wo síi", zh: "查看更多", zu: "Bona okuningi" };
 EXTRA_UI.cashCountBtn = { am: "ገንዘብ ቁጠር", ar: "عدّ الصندوق", bm: "Kɛsi jate", bn: "ক্যাশ গুনুন", de: "Kasse zählen", en: "Count the cash", es: "Contar la caja", fr: "Compter la caisse", ha: "Ƙirga kuɗin da ke hannu", hi: "गल्ला गिनें", id: "Hitung kas", it: "Conta la cassa", ja: "レジを数える", ko: "금고 세기", nl: "Kas tellen", pl: "Przelicz kasę", pt: "Contar o caixa", ru: "Пересчитать кассу", sw: "Hesabu fedha za kasha", ta: "கல்லாவை எண்ணு", te: "గల్లా లెక్కించండి", th: "นับเงินในลิ้นชัก", tl: "Bilangin ang kaha", tr: "Kasayı say", ur: "گلا گنیں", vi: "Kiểm quỹ", wo: "Waññ kes bi", yo: "Ka owó ẹrọ", zh: "清点现金", zu: "Bala ikheshi" };
+EXTRA_UI.cashOutKindExpense = { am: "ወጪ", ar: "مصروف", bm: "Musaka", bn: "খরচ", de: "Ausgabe", en: "Expense", es: "Gasto", fr: "Dépense", ha: "Kashewa", hi: "खर्च", id: "Pengeluaran", it: "Spesa", ja: "経費", ko: "지출", nl: "Uitgave", pl: "Wydatek", pt: "Despesa", ru: "Расход", sw: "Matumizi", ta: "செலவு", te: "ఖర్చు", th: "ค่าใช้จ่าย", tl: "Gastos", tr: "Gider", ur: "خرچ", vi: "Chi phí", wo: "Depãs", yo: "Ìnáwó", zh: "支出", zu: "Izindleko" };
+EXTRA_UI.cashOutKindWithdrawal = { am: "ማውጣት", ar: "سحب", bm: "Wari bɔli", bn: "উত্তোলন", de: "Entnahme", en: "Withdrawal", es: "Retiro", fr: "Retrait", ha: "Fitar da kuɗi", hi: "निकासी", id: "Penarikan", it: "Prelievo", ja: "引き出し", ko: "인출", nl: "Opname", pl: "Wypłata", pt: "Levantamento", ru: "Изъятие", sw: "Kutoa fedha", ta: "எடுப்பு", te: "ఉపసంహరణ", th: "การถอนเงิน", tl: "Paglabas ng pera", tr: "Çekim", ur: "رقم نکالنا", vi: "Rút tiền", wo: "Génne xaalis", yo: "Yíyọ owó", zh: "取出", zu: "Ukukhipha imali" };
+EXTRA_UI.cashOutKindHint = { am: "ማውጣት (በባንክ ማስቀመጥ፣ እርስዎ የሚወስዱት ገንዘብ) ከሳጥኑ ይወጣል ግን ወጪ አይደለም፤ ትርፍዎን አይቀንስም።", ar: "السحب (إيداع بنكي، مال تأخذه) يخرج من الصندوق لكنه ليس مصروفًا: لا يقلل من ربحك.", bm: "Wari bɔli (a bila banki la, wari i b'a ta) bɛ bɔ kɛsu kɔnɔ nka musaka tɛ : a tɛ i ka tɔnɔ dɔgɔya.", bn: "উত্তোলন (ব্যাংকে জমা, আপনি যে টাকা নেন) ক্যাশ থেকে বেরোয় কিন্তু খরচ নয়: এটি আপনার লাভ কমায় না।", de: "Eine Entnahme (Bankeinzahlung, Geld, das Sie entnehmen) verlässt die Kasse, ist aber kein Aufwand: Sie mindert Ihren Gewinn nicht.", en: "A withdrawal (bank deposit, money you take out) leaves the till but is not a cost: it does not reduce your profit.", es: "Un retiro (ingreso en el banco, dinero que usted saca) sale de la caja pero no es un gasto: no reduce su beneficio.", fr: "Un retrait (versement en banque, argent que vous prenez) sort de la caisse mais n'est pas une charge : il ne réduit pas votre bénéfice.", ha: "Fitar da kuɗi (ajiya a banki, kuɗin da ka ɗauka) yana fita daga akwatin kuɗi amma ba kashewa ba ne: ba ya rage ribarka.", hi: "निकासी (बैंक जमा, आपके द्वारा लिया गया पैसा) गल्ले से निकलती है पर खर्च नहीं है: इससे आपका लाभ कम नहीं होता।", id: "Penarikan (setoran bank, uang yang Anda ambil) keluar dari laci tetapi bukan biaya: tidak mengurangi laba Anda.", it: "Un prelievo (versamento in banca, denaro che prendete) esce dalla cassa ma non è un costo: non riduce il vostro utile.", ja: "引き出し（銀行への入金、ご自身が持ち出すお金）はレジから出ますが経費ではありません。利益は減りません。", ko: "인출(은행 입금, 직접 가져가는 돈)은 금고에서 나가지만 비용이 아니므로 이익을 줄이지 않습니다.", nl: "Een opname (bankstorting, geld dat u meeneemt) verlaat de kassa maar is geen kost: het vermindert uw winst niet.", pl: "Wypłata (wpłata do banku, pieniądze, które zabierasz) opuszcza kasę, ale nie jest kosztem: nie zmniejsza zysku.", pt: "Um levantamento (depósito no banco, dinheiro que retira) sai da caixa mas não é um custo: não reduz o seu lucro.", ru: "Изъятие (внесение в банк, деньги, которые вы забираете) уходит из кассы, но не является расходом: оно не уменьшает прибыль.", sw: "Kutoa fedha (kuweka benki, pesa unazochukua) kunatoka kwenye kasha lakini si gharama: hakupunguzi faida yako.", ta: "எடுப்பு (வங்கியில் செலுத்துதல், நீங்கள் எடுக்கும் பணம்) பணப்பெட்டியிலிருந்து வெளியேறும், ஆனால் செலவு அல்ல: உங்கள் லாபத்தைக் குறைக்காது.", te: "ఉపసంహరణ (బ్యాంకులో జమ, మీరు తీసుకునే డబ్బు) నగదు పెట్టె నుండి వెళ్తుంది కానీ ఖర్చు కాదు: ఇది మీ లాభాన్ని తగ్గించదు.", th: "การถอนเงิน (ฝากธนาคาร เงินที่คุณนำออก) ออกจากลิ้นชักแต่ไม่ใช่ค่าใช้จ่าย จึงไม่ลดกำไรของคุณ", tl: "Ang paglabas ng pera (deposito sa bangko, perang kinuha mo) ay lumalabas sa kahera pero hindi ito gastos: hindi nito binabawasan ang kita mo.", tr: "Çekim (bankaya yatırma, aldığınız para) kasadan çıkar ama bir gider değildir: kârınızı azaltmaz.", ur: "رقم نکالنا (بینک میں جمع، جو پیسہ آپ لیتے ہیں) گلے سے نکلتا ہے مگر خرچ نہیں: اس سے آپ کا منافع کم نہیں ہوتا۔", vi: "Rút tiền (nộp ngân hàng, tiền bạn lấy ra) rời két nhưng không phải chi phí: nó không làm giảm lợi nhuận của bạn.", wo: "Génne xaalis (def ko ci bank, xaalis bi ngay jël) dafay génn ci kees bi waaye depãs la woon: du wàññi sa tudd.", yo: "Yíyọ owó (fífi sí báńkì, owó tí o mú) ń jáde nínú àpótí owó ṣùgbọ́n kì í ṣe ìnáwó: kò dín èrè rẹ kù.", zh: "取出（存入银行、您拿走的钱）会离开钱箱，但不是开支，不会减少您的利润。", zu: "Ukukhipha imali (ukufaka ebhange, imali oyithathayo) kuphuma ebhokisini kodwa akuzona izindleko: akunciphisi inzuzo yakho." };
+EXTRA_UI.cashWithdrawalsLine = { am: "የወጡ ገንዘቦች", ar: "عمليات السحب", bm: "Wari bɔlenw", bn: "উত্তোলন", de: "Entnahmen", en: "Withdrawals", es: "Retiros", fr: "Retraits", ha: "Kuɗin da aka fitar", hi: "निकासियाँ", id: "Penarikan", it: "Prelievi", ja: "引き出し", ko: "인출", nl: "Opnames", pl: "Wypłaty", pt: "Levantamentos", ru: "Изъятия", sw: "Fedha zilizotolewa", ta: "எடுப்புகள்", te: "ఉపసంహరణలు", th: "การถอนเงิน", tl: "Mga paglabas ng pera", tr: "Çekimler", ur: "رقم نکالنا", vi: "Các khoản rút", wo: "Xaalis bu ñu génne", yo: "Owó tí a yọ", zh: "取出", zu: "Imali ekhishiwe" };
 EXTRA_UI.syncSaved = { am: "ተቀምጧል", ar: "تم الحفظ", bm: "A marala", bn: "সংরক্ষিত", de: "Gespeichert", en: "Saved", es: "Guardado", fr: "Enregistré", ha: "An ajiye", hi: "सहेजा गया", id: "Tersimpan", it: "Salvato", ja: "保存済み", ko: "저장됨", nl: "Opgeslagen", pl: "Zapisano", pt: "Guardado", ru: "Сохранено", sw: "Imehifadhiwa", ta: "சேமிக்கப்பட்டது", te: "సేవ్ అయింది", th: "บันทึกแล้ว", tl: "Nai-save", tr: "Kaydedildi", ur: "محفوظ", vi: "Đã lưu", wo: "Denc na", yo: "Tí a tọ́jú", zh: "已保存", zu: "Kulondoloziwe" };
 EXTRA_UI.syncSaving = { am: "በማስቀመጥ ላይ…", ar: "جارٍ الحفظ…", bm: "A bɛ mara la…", bn: "সংরক্ষণ হচ্ছে…", de: "Wird gespeichert…", en: "Saving…", es: "Guardando…", fr: "Enregistrement…", ha: "Ana ajiyewa…", hi: "सहेजा जा रहा है…", id: "Menyimpan…", it: "Salvataggio…", ja: "保存中…", ko: "저장 중…", nl: "Opslaan…", pl: "Zapisywanie…", pt: "A guardar…", ru: "Сохранение…", sw: "Inahifadhi…", ta: "சேமிக்கிறது…", te: "సేవ్ చేస్తోంది…", th: "กำลังบันทึก…", tl: "Sine-save…", tr: "Kaydediliyor…", ur: "محفوظ ہو رہا ہے…", vi: "Đang lưu…", wo: "Mungi denc…", yo: "Ń tọ́jú…", zh: "保存中…", zu: "Iyalondoloza…" };
 EXTRA_UI.syncOffline = { am: "ከመስመር ውጭ", ar: "غير متصل", bm: "Rezo tɛ yen", bn: "অফলাইন", de: "Offline", en: "Offline", es: "Sin conexión", fr: "Hors ligne", ha: "Babu haɗi", hi: "ऑफ़लाइन", id: "Luring", it: "Offline", ja: "オフライン", ko: "오프라인", nl: "Offline", pl: "Offline", pt: "Sem ligação", ru: "Нет сети", sw: "Nje ya mtandao", ta: "ஆஃப்லைன்", te: "ఆఫ్‌లైన్", th: "ออฟไลน์", tl: "Offline", tr: "Çevrimdışı", ur: "آف لائن", vi: "Ngoại tuyến", wo: "Amul reseau", yo: "Kò sí lórí ayélujára", zh: "离线", zu: "Awuxhunyiwe" };
@@ -9793,6 +9797,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showEditFund, setShowEditFund] = useState(false);
   // Comptage de caisse (voir saveCashCount) : montant saisi, et case "corriger le solde".
   const [showCashCount, setShowCashCount] = useState(false);
+  // Type de sortie de caisse : "expense" (vraie charge) ou "withdrawal" (retrait).
+  // Les deux sortent l'argent du tiroir, mais seule une dépense réduit le bénéfice :
+  // prendre 50 000 dans la caisse ou les porter à la banque n'appauvrit pas la boutique,
+  // alors que jusqu'ici c'était enregistré comme une charge et faussait le bénéfice.
+  const [eKind, setEKind] = useState("expense");
   const [countInput, setCountInput] = useState("");
   const [countAdjust, setCountAdjust] = useState(false);
   // Onglet Caisse : période affichée, longueur du journal, fenêtre de comptage.
@@ -11586,8 +11595,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (!eAmount || parseFloat(eAmount) <= 0) return;
     const expense = {
       id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
-      label: eLabel.trim() || "Dépense",
+      label: eLabel.trim() || (eKind === "withdrawal" ? tx(lang, "cashOutKindWithdrawal") : tx(lang, "cashOutKindExpense")),
       amount: parseFloat(eAmount),
+      kind: eKind,
       date: new Date().toISOString(),
       actorId: activeEmployee ? activeEmployee.id : null,
       actorName: activeEmployee ? activeEmployee.name : null,
@@ -11597,7 +11607,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       historyLog: [...historyLog, makeHistoryEntry("expense", { refId: expense.id, date: expense.date, amount: expense.amount, label: expense.label })],
     });
     logAction(`${t(lang, "logExpenseAdded")} : ${expense.label} — ${localizedNumber(expense.amount)}`);
-    setELabel(""); setEAmount(""); setShowAddExpense(false);
+    setELabel(""); setEAmount(""); setEKind("expense"); setShowAddExpense(false);
     setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
   };
   const deleteExpense = (id) => {
@@ -13931,11 +13941,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pExpenses = expenses.filter((e) => inPeriod(e.date));
     const cashInTotal = pSales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0);
     const outTotal = pExpenses.reduce((sum, e) => sum + e.amount, 0);
+    // Un retrait sort de la caisse mais n'est pas une charge : il ne doit pas entrer dans
+    // le calcul du bénéfice, sinon porter sa recette à la banque ferait "perdre" de l'argent.
+    const pRealExpenses = pExpenses.filter((e) => e.kind !== "withdrawal");
+    const outExpensesOnly = pRealExpenses.reduce((sum, e) => sum + e.amount, 0);
+    const withdrawalsTotal = outTotal - outExpensesOnly;
     const salesTotal = pSales.reduce((sum, s) => sum + s.total, 0);
     const byMethodP = getPaymentMethods(lang).map((m) => ({ ...m, total: pSales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
     const debtIn = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + (ev.amount || 0), 0);
     const groups = {};
-    pExpenses.forEach((e) => {
+    pRealExpenses.forEach((e) => {
       const k = String(e.label || "").trim().toLowerCase();
       if (!groups[k]) groups[k] = { label: e.label, total: 0, count: 0 };
       groups[k].total += e.amount; groups[k].count += 1;
@@ -13953,13 +13968,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pDebtPayments = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
     const journal = [
       ...Object.values(txn),
-      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", date: e.date, amount: e.amount, label: e.label, expenseId: e.id, actorName: e.actorName || null })),
+      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", isWithdrawal: e.kind === "withdrawal", date: e.date, amount: e.amount, label: e.label, expenseId: e.id, actorName: e.actorName || null })),
       ...pDebtPayments.map((ev) => ({ id: "d-" + ev.id, kind: "debt", date: ev.date, amount: ev.amount, label: ev.customer || "", actorName: ev.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // Bénéfice de la période : marge des ventes dont le prix d'achat est connu, moins les dépenses.
     let margin = 0, costed = 0;
     pSales.forEach((sl) => { if (sl.costPrice != null) { margin += sl.total - sl.costPrice * sl.qty; costed++; } });
-    const profit = { margin, costed, net: margin - outTotal };
+    const profit = { margin, costed, net: margin - outExpensesOnly };
     const pCounts = cashCounts.filter((c) => inPeriod(c.date));
     // Tendance : flux net (espèces − dépenses) des 7 derniers jours, pour un coup d'œil visuel.
     const trend7 = last30Days().slice(-7).map((day) => {
@@ -13974,7 +13989,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // "Entrées" = tout ce qui rentre réellement dans le tiroir : ventes en espèces ET
     // remboursements de dettes (le détail des deux reste visible plus bas dans l'écran).
-    return { cashIn: cashInTotal + debtIn, out: outTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, trend7 };
+    return { cashIn: cashInTotal + debtIn, out: outTotal, withdrawals: withdrawalsTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, trend7 };
   })() : null;
   const days = last30Days();
   const firstSaleDate = sales.length > 0
@@ -14994,8 +15009,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div data-kbscroll="true" className="rounded-2xl p-5 w-full overflow-y-auto" style={{ background: T.card, color: T.text, maxWidth: 400, maxHeight: "85vh", overscrollBehavior: "contain" }}>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-bold text-sm">{t(lang, "newExpense")}</h3>
-                <button onClick={() => setShowAddExpense(false)}><X size={18} /></button>
+                <button onClick={() => { setShowAddExpense(false); setEKind("expense"); }}><X size={18} /></button>
               </div>
+              <div className="flex gap-1.5 mb-2">
+                {[["expense", "cashOutKindExpense"], ["withdrawal", "cashOutKindWithdrawal"]].map(([id, key]) => (
+                  <button key={id} onClick={() => setEKind(id)} className="flex-1 text-xs font-semibold py-2 rounded-lg" style={{ background: eKind === id ? INDIGO : T.input, color: eKind === id ? "white" : T.text }}>
+                    {tx(lang, key)}
+                  </button>
+                ))}
+              </div>
+              {eKind === "withdrawal" && (
+                <p className="text-[11px] mb-2 rounded-lg p-2" style={{ background: T.input, color: T.muted }}>{tx(lang, "cashOutKindHint")}</p>
+              )}
               <input autoComplete="off" placeholder={t(lang, "amountOut")} type="number" value={eAmount} onChange={(e) => setEAmount(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
               <textarea autoComplete="off" rows={1} placeholder={t(lang, "reasonOpt")} value={eLabel} onChange={(e) => setELabel(e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }} />
               <button onClick={addExpense} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: CLAY }}>{t(lang, "saveExpense")}</button>
@@ -15030,12 +15055,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <button onClick={() => { setShowCashCount(false); setCountInput(""); setCountAdjust(false); }}><X size={18} /></button>
                 </div>
                 <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "fundExplain")}</p>
-                <div className="flex items-center justify-between text-xs rounded-lg p-2 mb-3" style={{ background: T.input }}>
-                  <span style={{ color: T.muted }}>{t(lang, "cashBalance")}</span>
-                  <span className="font-bold">{fcfa(cashBalance)}</span>
-                </div>
+                {!activeEmployee && (
+                  <div className="flex items-center justify-between text-xs rounded-lg p-2 mb-3" style={{ background: T.input }}>
+                    <span style={{ color: T.muted }}>{t(lang, "cashBalance")}</span>
+                    <span className="font-bold">{fcfa(cashBalance)}</span>
+                  </div>
+                )}
                 <input autoComplete="off" placeholder={tx(lang, "cashCountedLabel")} type="number" inputMode="decimal" value={countInput} onChange={(e) => setCountInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-                {hasCount && (
+                {hasCount && !activeEmployee && (
                   <div className="flex items-center justify-between text-xs rounded-lg p-2 mb-3" style={{ background: gap === 0 ? (darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5") : (darkMode ? "rgba(184,86,47,0.15)" : "#fef2f2") }}>
                     <span style={{ color: T.muted }}>{tx(lang, "cashGapLabel")}</span>
                     <span className="font-extrabold" style={{ color: gap === 0 ? (darkMode ? "#6ee7b7" : "#065f46") : CLAY }}>
@@ -15043,7 +15070,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </span>
                   </div>
                 )}
-                {hasCount && gap !== 0 && (
+                {hasCount && gap !== 0 && !activeEmployee && (
                   <button onClick={() => setCountAdjust((v) => !v)} className="w-full flex items-start gap-2 text-left mb-3">
                     <div className="rounded flex items-center justify-center flex-shrink-0" style={{ width: 18, height: 18, marginTop: 1, border: `1.5px solid ${countAdjust ? INDIGO : T.border}`, background: countAdjust ? INDIGO : "transparent" }}>
                       {countAdjust && <Check size={12} color="white" />}
@@ -16709,6 +16736,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     );
                   })}
                 </div>
+                {cashView.withdrawals > 0 && (
+                  <div className="flex items-center justify-between text-[11px] mt-1.5">
+                    <span style={{ color: T.muted }}>🏦 {tx(lang, "cashWithdrawalsLine")}</span>
+                    <span className="font-bold" style={{ color: T.muted }}>-{maskAmount(fcfa(cashView.withdrawals))}</span>
+                  </div>
+                )}
                 {cashView.debtIn > 0 && (
                   <div className="flex items-center justify-between text-xs pt-2 mt-2.5" style={{ borderTop: `1px solid ${T.border}` }}>
                     <span style={{ color: T.muted }}>{t(lang, "cashReportDebtPayments")}</span>
@@ -16757,7 +16790,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div className="flex items-center justify-between rounded-xl p-2 gap-2" style={{ background: T.input }}>
                           <div className="flex items-center gap-2 min-w-0">
                             <div className="rounded-lg flex items-center justify-center flex-shrink-0" style={{ width: 28, height: 28, background: isCount ? (darkMode ? "rgba(59,91,138,0.25)" : "#e0e7ff") : isIn ? (darkMode ? "rgba(52,211,153,0.15)" : "#dcfce7") : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
-                              <span style={{ fontSize: 13 }}>{isCount ? "🔎" : isDebt ? "🤝" : isSale ? "💵" : "🧾"}</span>
+                              <span style={{ fontSize: 13 }}>{isCount ? "🔎" : isDebt ? "🤝" : isSale ? "💵" : m.isWithdrawal ? "🏦" : "🧾"}</span>
                             </div>
                             <div className="min-w-0">
                               <p className="text-[11px] font-semibold truncate">{isCount ? tx(lang, "cashCountBtn") : isDebt ? `${t(lang, "cashReportDebtPayments")}${m.label ? ` · ${m.label}` : ""}` : isSale ? (m.names.length ? m.names.join(", ") : t(lang, "navSale")) : m.label}</p>
