@@ -12579,7 +12579,23 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // On sépare le dernier message (celui de l'utilisateur) du reste de l'historique,
     // car l'Edge Function attend { prompt } plutôt qu'un tableau de messages.
     const lastUserMessage = msgHistory[msgHistory.length - 1]?.content ?? "";
-    const history = msgHistory.slice(0, -1);
+    // On n'envoie que les derniers échanges, pas toute la conversation. Avant, l'intégralité
+    // de l'historique était recollée dans le prompt à CHAQUE message, en plus du contexte
+    // complet de la boutique : une longue conversation devenait de plus en plus lente et de
+    // plus en plus chère à chaque question, et finissait par dépasser la taille maximale
+    // acceptée par le serveur — l'assistant se bloquait alors complètement sur un
+    // "Demande trop volumineuse" tant que le boutiquier n'effaçait pas la conversation.
+    // Les messages plus anciens restent affichés à l'écran, ils ne sont simplement plus
+    // renvoyés au modèle. Chaque message gardé est aussi tronqué : une réponse très longue
+    // dans l'historique n'apporte presque rien au contexte mais coûte beaucoup.
+    const AI_HISTORY_MAX_MESSAGES = 8; // 4 allers-retours, assez pour suivre le fil
+    const AI_HISTORY_MAX_CHARS = 1200;
+    const history = msgHistory.slice(0, -1).slice(-AI_HISTORY_MAX_MESSAGES).map((h) => ({
+      ...h,
+      content: typeof h.content === "string" && h.content.length > AI_HISTORY_MAX_CHARS
+        ? h.content.slice(0, AI_HISTORY_MAX_CHARS) + " […]"
+        : h.content,
+    }));
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
       try {
         const { data, error } = await supabase.functions.invoke("ai-assistant", {
