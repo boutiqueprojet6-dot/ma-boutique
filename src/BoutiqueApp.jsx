@@ -5833,6 +5833,19 @@ EXTRA_UI.cashJournal = { am: "የገንዘብ ማስቀመጫ እንቅስቃሴ
 EXTRA_UI.cashEmpty = { am: "በዚህ ጊዜ ምንም እንቅስቃሴ የለም።", ar: "لا توجد حركات في هذه الفترة.", bm: "Foyi ma kɛ nin waati in na.", bn: "এই সময়ে কোনো লেনদেন নেই।", de: "Keine Bewegungen in diesem Zeitraum.", en: "No movements in this period.", es: "Sin movimientos en este período.", fr: "Aucun mouvement sur cette période.", ha: "Babu wani motsi a wannan lokacin.", hi: "इस अवधि में कोई लेन-देन नहीं।", id: "Tidak ada transaksi pada periode ini.", it: "Nessun movimento in questo periodo.", ja: "この期間の取引はありません。", ko: "이 기간에 내역이 없습니다.", nl: "Geen bewegingen in deze periode.", pl: "Brak ruchów w tym okresie.", pt: "Nenhum movimento neste período.", ru: "Нет операций за этот период.", sw: "Hakuna miamala katika kipindi hiki.", ta: "இந்தக் காலத்தில் எந்தப் பரிவர்த்தனையும் இல்லை.", te: "ఈ కాలంలో లావాదేవీలు లేవు.", th: "ไม่มีรายการในช่วงนี้", tl: "Walang galaw sa panahong ito.", tr: "Bu dönemde hareket yok.", ur: "اس مدت میں کوئی لین دین نہیں۔", vi: "Không có giao dịch trong kỳ này.", wo: "Amul dara ci diir bii.", yo: "Kò sí ìrìn owó ní àkókò yìí.", zh: "此期间没有记录。", zu: "Azikho izinguquko kule nkathi." };
 EXTRA_UI.cashSeeMore = { am: "ተጨማሪ ይመልከቱ", ar: "عرض المزيد", bm: "A caman jira", bn: "আরও দেখুন", de: "Mehr anzeigen", en: "See more", es: "Ver más", fr: "Voir plus", ha: "Duba ƙari", hi: "और देखें", id: "Lihat lainnya", it: "Mostra altro", ja: "もっと見る", ko: "더 보기", nl: "Meer tonen", pl: "Pokaż więcej", pt: "Ver mais", ru: "Показать ещё", sw: "Ona zaidi", ta: "மேலும் காட்டு", te: "మరిన్ని చూడండి", th: "ดูเพิ่มเติม", tl: "Tingnan pa", tr: "Daha fazla göster", ur: "مزید دیکھیں", vi: "Xem thêm", wo: "Gën a ci gis", yo: "Wo síi", zh: "查看更多", zu: "Bona okuningi" };
 EXTRA_UI.cashCountBtn = { am: "ገንዘብ ቁጠር", ar: "عدّ الصندوق", bm: "Kɛsi jate", bn: "ক্যাশ গুনুন", de: "Kasse zählen", en: "Count the cash", es: "Contar la caja", fr: "Compter la caisse", ha: "Ƙirga kuɗin da ke hannu", hi: "गल्ला गिनें", id: "Hitung kas", it: "Conta la cassa", ja: "レジを数える", ko: "금고 세기", nl: "Kas tellen", pl: "Przelicz kasę", pt: "Contar o caixa", ru: "Пересчитать кассу", sw: "Hesabu fedha za kasha", ta: "கல்லாவை எண்ணு", te: "గల్లా లెక్కించండి", th: "นับเงินในลิ้นชัก", tl: "Bilangin ang kaha", tr: "Kasayı say", ur: "گلا گنیں", vi: "Kiểm quỹ", wo: "Waññ kes bi", yo: "Ka owó ẹrọ", zh: "清点现金", zu: "Bala ikheshi" };
+// ---- Clôture de journée (rapport Z) ----
+EXTRA_UI.zCloseBtn = { am: "ቀኑን ዝጋ", ar: "إقفال اليوم", bm: "Tile datugu", bn: "দিন বন্ধ করুন", de: "Tag abschließen", en: "Close the day", es: "Cerrar el día", fr: "Clôturer la journée", ha: "Rufe ranar", hi: "दिन बंद करें", id: "Tutup hari", it: "Chiudi la giornata", ja: "日次締め", ko: "일일 마감", nl: "Dag afsluiten", pl: "Zamknij dzień", pt: "Fechar o dia", ru: "Закрыть день", sw: "Funga siku", ta: "நாளை முடி", te: "రోజును ముగించు", th: "ปิดยอดวัน", tl: "Isara ang araw", tr: "Günü kapat", ur: "دن بند کریں", vi: "Chốt ngày", wo: "Tëj bés bi", yo: "Pa ọjọ́ náà", zh: "日结", zu: "Vala usuku" };
+EXTRA_UI.zModalTitle = { am: "የቀን መዝጊያ", ar: "إقفال اليوم", bm: "Tile datuguli", bn: "দিনের সমাপ্তি", de: "Tagesabschluss", en: "Day closing", es: "Cierre del día", fr: "Clôture de journée", ha: "Rufewar rana", hi: "दिन की समाप्ति", id: "Penutupan hari", it: "Chiusura di giornata", ja: "日次締め", ko: "일일 마감", nl: "Dagafsluiting", pl: "Zamknięcie dnia", pt: "Fecho do dia", ru: "Закрытие дня", sw: "Kufunga siku", ta: "நாள் முடிவு", te: "రోజు ముగింపు", th: "การปิดยอดประจำวัน", tl: "Pagsasara ng araw", tr: "Gün kapanışı", ur: "دن کی بندش", vi: "Chốt sổ cuối ngày", wo: "Tëjug bés bi", yo: "Ìparí ọjọ́", zh: "日结报表", zu: "Ukuvala usuku" };
+EXTRA_UI.zModalIntro = { am: "ቀኑን ይዘጋል እና የነገውን መነሻ ያስቀምጣል። አንዴ ከተዘጋ አይስተካከልም።", ar: "يثبّت اليوم ويحدّد نقطة البداية للغد. لا يمكن تعديل الإقفال بعد ذلك.", bm: "A bɛ tile datugu ani ka sini daminɛyɔrɔ sigi. Datuguli tɛ se ka yɛlɛma tugun.", bn: "দিনটি চূড়ান্ত করে এবং আগামীকালের শুরুর অঙ্ক নির্ধারণ করে। সমাপ্তির পর আর পরিবর্তন করা যায় না।", de: "Friert den Tag ein und legt den Startpunkt für morgen fest. Ein Abschluss lässt sich nicht mehr ändern.", en: "Freezes the day and sets tomorrow's starting point. A closing can no longer be changed.", es: "Congela el día y fija el punto de partida de mañana. Un cierre ya no se puede modificar.", fr: "Fige la journée et fixe le point de départ de demain. Une clôture ne se modifie plus.", ha: "Yana rufe ranar kuma ya tsayar da adadin fara gobe. Bayan rufewa ba a sake canzawa.", hi: "दिन को स्थिर करता है और कल का शुरुआती बिंदु तय करता है। समाप्ति के बाद बदलाव संभव नहीं।", id: "Mengunci hari ini dan menetapkan titik awal untuk besok. Penutupan tidak bisa diubah lagi.", it: "Blocca la giornata e fissa il punto di partenza di domani. Una chiusura non è più modificabile.", ja: "その日を確定し、翌日の開始額を決めます。締めたあとは変更できません。", ko: "하루를 마감하고 내일의 시작 금액을 정합니다. 마감 후에는 수정할 수 없습니다.", nl: "Bevriest de dag en legt het startpunt van morgen vast. Een afsluiting kan niet meer worden gewijzigd.", pl: "Zamyka dzień i ustala punkt wyjścia na jutro. Zamknięcia nie można już zmienić.", pt: "Fixa o dia e define o ponto de partida de amanhã. Um fecho já não pode ser alterado.", ru: "Фиксирует день и задаёт точку отсчёта на завтра. Закрытие изменить нельзя.", sw: "Hufunga siku na kuweka kiasi cha kuanzia kesho. Baada ya kufunga haibadiliki tena.", ta: "நாளை இறுதி செய்து, நாளைய தொடக்கப் புள்ளியை நிர்ணயிக்கிறது. முடித்த பிறகு மாற்ற முடியாது.", te: "రోజును స్థిరం చేసి, రేపటి ప్రారంభ స్థాయిని నిర్ణయిస్తుంది. ముగించాక మార్చలేరు.", th: "ปิดยอดของวันและกำหนดยอดตั้งต้นของพรุ่งนี้ เมื่อปิดแล้วแก้ไขไม่ได้", tl: "Pinipirmi ang araw at itinatakda ang panimulang halaga bukas. Hindi na mababago ang isang pagsasara.", tr: "Günü dondurur ve yarının başlangıç noktasını belirler. Bir kapanış artık değiştirilemez.", ur: "دن کو محفوظ کر کے کل کا نقطۂ آغاز طے کرتا ہے۔ بندش کے بعد تبدیلی ممکن نہیں۔", vi: "Chốt lại ngày và đặt điểm khởi đầu cho ngày mai. Đã chốt thì không sửa được nữa.", wo: "Day tëj bés bi te wax lu nu tàmbalee ëllëg. Bu nu ko tëjee, du soppiku ak.", yo: "Ó ń ti ọjọ́ náà pa, ó sì ń fi ìbẹ̀rẹ̀ ọ̀la lélẹ̀. A kò lè yí ìparí padà mọ́.", zh: "结算当天并确定明天的起始金额。日结之后不可更改。", zu: "Ivala usuku futhi ibeke isiqalo sakusasa. Uma selivaliwe alisashintshwa." };
+EXTRA_UI.zOpeningBalance = { am: "የመነሻ ገንዘብ", ar: "رصيد البداية", bm: "Daminɛ wari", bn: "শুরুর টাকা", de: "Anfangsbestand", en: "Opening float", es: "Fondo inicial", fr: "Fond de départ", ha: "Kuɗin farawa", hi: "शुरुआती रकम", id: "Kas awal", it: "Fondo iniziale", ja: "開始時現金", ko: "시작 금액", nl: "Beginsaldo", pl: "Stan początkowy", pt: "Fundo inicial", ru: "Начальная сумма", sw: "Fedha ya kuanzia", ta: "தொடக்கத் தொகை", te: "ప్రారంభ నగదు", th: "เงินตั้งต้น", tl: "Panimulang pondo", tr: "Açılış kasası", ur: "ابتدائی رقم", vi: "Tiền đầu ngày", wo: "Xaalis bu njëkk", yo: "Owó ìbẹ̀rẹ̀", zh: "期初现金", zu: "Imali yokuqala" };
+EXTRA_UI.zCarried = { am: "ለነገ በካዝና የተተወ", ar: "المتروك في الصندوق للغد", bm: "Min tora kɛsu kɔnɔ sini kama", bn: "আগামীকালের জন্য ক্যাশে রাখা", de: "Für morgen in der Kasse gelassen", en: "Left in the drawer for tomorrow", es: "Dejado en caja para mañana", fr: "Laissé en caisse pour demain", ha: "Abin da aka bar a akwatin kuɗi don gobe", hi: "कल के लिए गल्ले में छोड़ा गया", id: "Ditinggal di laci untuk besok", it: "Lasciato in cassa per domani", ja: "翌日のためレジに残す額", ko: "내일을 위해 금고에 남긴 금액", nl: "In de kassa gelaten voor morgen", pl: "Zostawione w kasie na jutro", pt: "Deixado na caixa para amanhã", ru: "Оставлено в кассе на завтра", sw: "Zilizoachwa kwenye kasha kwa kesho", ta: "நாளைக்காக கல்லாவில் விட்டது", te: "రేపటి కోసం గల్లాలో ఉంచినది", th: "เหลือไว้ในลิ้นชักสำหรับพรุ่งนี้", tl: "Iniwan sa kaha para bukas", tr: "Yarın için kasada bırakılan", ur: "کل کے لیے گلے میں چھوڑی گئی رقم", vi: "Để lại trong quỹ cho ngày mai", wo: "Li ñu bàyyi ci kes bi ngir ëllëg", yo: "Owó tí a fi sílẹ̀ fún ọ̀la", zh: "留在钱箱里备明天用", zu: "Okushiywe ebhokisini lakusasa" };
+EXTRA_UI.zCarriedHint = { am: "ባዶ ከሆነ ሁሉም በካዝና ይቀራል። ቀሪው እንደወጣ ይቆጠራል።", ar: "اتركه فارغًا ليبقى كل شيء في الصندوق. الباقي يُعتبر مسحوبًا.", bm: "Ni dalen tɛ, bɛɛ bɛ to kɛsu kɔnɔ. Tɔw bɛ jate i n'a fɔ u bɔra.", bn: "ফাঁকা = সবই ক্যাশে থাকবে। বাকিটা তুলে নেওয়া ধরা হবে।", de: "Leer = alles bleibt in der Kasse. Der Rest gilt als entnommen.", en: "Empty = everything stays in the drawer. The rest is counted as taken out.", es: "Vacío = todo se queda en caja. El resto se considera retirado.", fr: "Vide = tout reste en caisse. Le reste est considéré comme sorti.", ha: "Idan ka bar shi babu komai = duka ya rage a akwatin. Sauran za a ƙidaya a matsayin fitarwa.", hi: "खाली = सब कुछ गल्ले में रहेगा। बाकी निकाला गया माना जाएगा।", id: "Kosong = semua tetap di laci. Sisanya dihitung sebagai diambil.", it: "Vuoto = resta tutto in cassa. Il resto è considerato prelevato.", ja: "空欄なら全額をレジに残します。差額は持ち出し扱いです。", ko: "비워두면 전액을 금고에 남깁니다. 나머지는 반출로 처리됩니다.", nl: "Leeg = alles blijft in de kassa. De rest geldt als opgenomen.", pl: "Puste = wszystko zostaje w kasie. Reszta liczy się jako wypłacone.", pt: "Vazio = fica tudo na caixa. O resto é considerado retirado.", ru: "Пусто — всё остаётся в кассе. Остальное считается изъятым.", sw: "Ukiacha wazi = zote zinabaki kwenye kasha. Zilizobaki zinahesabiwa kuwa zimetolewa.", ta: "காலியாக விட்டால் அனைத்தும் கல்லாவில் இருக்கும். மீதி எடுக்கப்பட்டதாகக் கணக்கிடப்படும்.", te: "ఖాళీగా ఉంచితే అంతా గల్లాలోనే ఉంటుంది. మిగిలినది తీసినట్టు లెక్క.", th: "เว้นว่าง = เก็บไว้ทั้งหมดในลิ้นชัก ส่วนที่เหลือถือว่านำออกไป", tl: "Walang laman = lahat ay nananatili sa kaha. Ang natira ay ituturing na kinuha.", tr: "Boş = her şey kasada kalır. Kalanı çekilmiş sayılır.", ur: "خالی = سب کچھ گلے میں رہے گا۔ باقی نکالی گئی رقم شمار ہوگی۔", vi: "Để trống = giữ hết trong quỹ. Phần còn lại tính là đã rút ra.", wo: "Bu fi amul dara, lépp dina des ci kes bi. Li des, génn lañu ko jàppe.", yo: "Tí o bá fi sílẹ̀ ní òfo, gbogbo rẹ̀ yóò wà nínú ẹrọ owó. Àṣẹ́kù ni a kà sí èyí tí a mú jáde.", zh: "留空＝全部留在钱箱。其余视为已取出。", zu: "Uma kungenalutho = konke kuhlala ebhokisini. Okusele kubalwa njengokukhishiwe." };
+EXTRA_UI.zDeposited = { am: "ከካዝና የወጣ", ar: "المسحوب من الصندوق", bm: "Min bɔra kɛsu la", bn: "ক্যাশ থেকে তোলা", de: "Aus der Kasse entnommen", en: "Taken out of the drawer", es: "Retirado de la caja", fr: "Sorti de la caisse", ha: "An fitar daga akwatin kuɗi", hi: "गल्ले से निकाला गया", id: "Diambil dari laci", it: "Prelevato dalla cassa", ja: "レジから持ち出し", ko: "금고에서 반출", nl: "Uit de kassa gehaald", pl: "Wyjęte z kasy", pt: "Retirado da caixa", ru: "Изъято из кассы", sw: "Zilizotolewa kwenye kasha", ta: "கல்லாவிலிருந்து எடுத்தது", te: "గల్లా నుంచి తీసినది", th: "นำออกจากลิ้นชัก", tl: "Kinuha sa kaha", tr: "Kasadan çıkarılan", ur: "گلے سے نکالی گئی رقم", vi: "Rút khỏi quỹ", wo: "Li génn ci kes bi", yo: "Owó tí a mú jáde", zh: "从钱箱取出", zu: "Okukhishwe ebhokisini" };
+EXTRA_UI.zHistoryTitle = { am: "ቀደምት መዝጊያዎች", ar: "الإقفالات السابقة", bm: "Datuguli tɛmɛnenw", bn: "আগের সমাপ্তিগুলো", de: "Frühere Abschlüsse", en: "Previous closings", es: "Cierres anteriores", fr: "Clôtures précédentes", ha: "Rufewar da ta gabata", hi: "पिछली समाप्तियाँ", id: "Penutupan sebelumnya", it: "Chiusure precedenti", ja: "過去の日次締め", ko: "이전 마감", nl: "Eerdere afsluitingen", pl: "Poprzednie zamknięcia", pt: "Fechos anteriores", ru: "Предыдущие закрытия", sw: "Kufunga kwa awali", ta: "முந்தைய முடிவுகள்", te: "గత ముగింపులు", th: "การปิดยอดก่อนหน้า", tl: "Mga nakaraang pagsasara", tr: "Önceki kapanışlar", ur: "پچھلی بندشیں", vi: "Các lần chốt trước", wo: "Tëj yu jiitu", yo: "Àwọn ìparí tẹ́lẹ̀", zh: "历史日结", zu: "Ukuvala kwangaphambilini" };
+EXTRA_UI.zNumber = { am: "መዝጊያ ቁ. ", ar: "إقفال رقم ", bm: "Datuguli nim. ", bn: "সমাপ্তি নং ", de: "Abschluss Nr. ", en: "Closing no. ", es: "Cierre n.º ", fr: "Clôture n°", ha: "Rufewa lamba ", hi: "समाप्ति सं. ", id: "Penutupan no. ", it: "Chiusura n. ", ja: "締め No.", ko: "마감 제", nl: "Afsluiting nr. ", pl: "Zamknięcie nr ", pt: "Fecho n.º ", ru: "Закрытие № ", sw: "Kufunga na. ", ta: "முடிவு எண் ", te: "ముగింపు నం. ", th: "ปิดยอดครั้งที่ ", tl: "Pagsasara blg. ", tr: "Kapanış no ", ur: "بندش نمبر ", vi: "Lần chốt số ", wo: "Tëj nu. ", yo: "Ìparí nọ́ńbà ", zh: "日结 第", zu: "Ukuvala no. " };
+EXTRA_UI.zReportBtn = { am: "Z ሪፖርት", ar: "تقرير Z", bm: "Z rapɔr", bn: "Z রিপোর্ট", de: "Z-Bericht", en: "Z report", es: "Informe Z", fr: "Rapport Z", ha: "Rahoton Z", hi: "Z रिपोर्ट", id: "Laporan Z", it: "Rapporto Z", ja: "Zレポート", ko: "Z 보고서", nl: "Z-rapport", pl: "Raport Z", pt: "Relatório Z", ru: "Z-отчёт", sw: "Ripoti Z", ta: "Z அறிக்கை", te: "Z నివేదిక", th: "รายงาน Z", tl: "Z report", tr: "Z raporu", ur: "Z رپورٹ", vi: "Báo cáo Z", wo: "Rapoor Z", yo: "Ìròyìn Z", zh: "Z 报表", zu: "Umbiko we-Z" };
+EXTRA_UI.zSalesUnit = { am: "ሽያጮች", ar: "عملية بيع", bm: "feereli", bn: "বিক্রি", de: "Verkäufe", en: "sales", es: "ventas", fr: "ventes", ha: "sayarwa", hi: "बिक्री", id: "penjualan", it: "vendite", ja: "件の販売", ko: "건 판매", nl: "verkopen", pl: "sprzedaży", pt: "vendas", ru: "продаж", sw: "mauzo", ta: "விற்பனைகள்", te: "అమ్మకాలు", th: "รายการขาย", tl: "benta", tr: "satış", ur: "فروخت", vi: "lượt bán", wo: "njaay", yo: "títà", zh: "笔销售", zu: "ukuthengisa" };
+EXTRA_UI.zSinceOpening = { am: "ከተከፈተ ጀምሮ", ar: "منذ الافتتاح", bm: "Kabini a dayɛlɛla", bn: "খোলার পর থেকে", de: "Seit Eröffnung", en: "Since opening", es: "Desde la apertura", fr: "Depuis l'ouverture", ha: "Tun buɗewa", hi: "शुरुआत से", id: "Sejak dibuka", it: "Dall'apertura", ja: "開店以来", ko: "개점 이후", nl: "Sinds de opening", pl: "Od otwarcia", pt: "Desde a abertura", ru: "С начала работы", sw: "Tangu kufunguliwa", ta: "திறந்தது முதல்", te: "ప్రారంభం నుంచి", th: "ตั้งแต่เปิดร้าน", tl: "Mula nang magbukas", tr: "Açılıştan beri", ur: "کھلنے کے بعد سے", vi: "Từ khi mở cửa", wo: "Dale ci ubbite bi", yo: "Láti ìgbà tí a ti ṣí", zh: "自开店以来", zu: "Kusukela ekuvulweni" };
 EXTRA_UI.aiLocalBestProduct = { am: "በጣም የተሸጠ ምርት (ያለፉት 30 ቀናት)", ar: "أفضل منتج (آخر 30 يومًا)", bm: "Fɛn min feereli ka ca (tile 30 tɛmɛnen)", bn: "সেরা পণ্য (গত ৩০ দিন)", de: "Bestes Produkt (letzte 30 Tage)", en: "Best product (last 30 days)", es: "Mejor producto (últimos 30 días)", fr: "Meilleur produit (30 derniers jours)", ha: "Kayan da ya fi saida (kwanaki 30 da suka wuce)", hi: "सर्वश्रेष्ठ उत्पाद (पिछले 30 दिन)", id: "Produk terlaris (30 hari terakhir)", it: "Miglior prodotto (ultimi 30 giorni)", ja: "売れ筋商品（直近30日）", ko: "베스트 상품 (최근 30일)", nl: "Beste product (laatste 30 dagen)", pl: "Najlepszy produkt (ostatnie 30 dni)", pt: "Melhor produto (últimos 30 dias)", ru: "Лучший товар (последние 30 дней)", sw: "Bidhaa inayouzwa zaidi (siku 30 zilizopita)", ta: "சிறந்த பொருள் (கடந்த 30 நாட்கள்)", te: "ఉత్తమ ఉత్పత్తి (గత 30 రోజులు)", th: "สินค้าขายดี (30 วันล่าสุด)", tl: "Pinakamabentang produkto (huling 30 araw)", tr: "En çok satan ürün (son 30 gün)", ur: "بہترین پروڈکٹ (پچھلے 30 دن)", vi: "Sản phẩm bán chạy nhất (30 ngày qua)", wo: "Marchandise bi gëna jaay (fan 30 yi weesu)", yo: "Ọjà tó ta jù (ọjọ́ 30 sẹ́yìn)", zh: "最畅销商品（近30天）", zu: "Umkhiqizo othengiswa kakhulu (izinsuku ezingu-30 ezedlule)" };
 EXTRA_UI.aiLocalSoldUnits = { am: "{n} ተሸጠ", ar: "{n} مباع", bm: "{n} feerela", bn: "{n} বিক্রি", de: "{n} verkauft", en: "{n} sold", es: "{n} vendido(s)", fr: "{n} vendu(s)", ha: "an sayar da {n}", hi: "{n} बिके", id: "{n} terjual", it: "{n} venduto/i", ja: "{n} 個販売", ko: "{n}개 판매", nl: "{n} verkocht", pl: "sprzedano {n}", pt: "{n} vendido(s)", ru: "продано {n}", sw: "{n} zimeuzwa", ta: "{n} விற்பனை", te: "{n} అమ్ముడయ్యాయి", th: "ขายได้ {n}", tl: "{n} naibenta", tr: "{n} satıldı", ur: "{n} فروخت", vi: "đã bán {n}", wo: "{n} ñu jaay", yo: "{n} tí a tà", zh: "售出 {n}", zu: "{n} kuthengisiwe" };
 EXTRA_UI.aiLocalNoLowStock = { am: "ከማስጠንቀቂያ ገደብ በታች ምንም ምርት የለም።", ar: "لا يوجد منتج تحت حد التنبيه.", bm: "Fɛn si tɛ kɔrɔ la ka tɛmɛ lasɔmini hakɛ kan.", bn: "সতর্কতার সীমার নিচে কোনো পণ্য নেই।", de: "Kein Produkt unter der Warnschwelle.", en: "No product below the alert threshold.", es: "Ningún producto por debajo del umbral de alerta.", fr: "Aucun produit sous le seuil d'alerte.", ha: "Babu kayan da ke ƙasa da iyakar gargaɗi.", hi: "कोई भी उत्पाद अलर्ट सीमा से नीचे नहीं है।", id: "Tidak ada produk di bawah ambang peringatan.", it: "Nessun prodotto sotto la soglia di allerta.", ja: "警告しきい値を下回る商品はありません。", ko: "경고 기준 아래인 상품이 없습니다.", nl: "Geen product onder de waarschuwingsdrempel.", pl: "Żaden produkt nie jest poniżej progu alertu.", pt: "Nenhum produto abaixo do limite de alerta.", ru: "Нет товаров ниже порога оповещения.", sw: "Hakuna bidhaa chini ya kiwango cha tahadhari.", ta: "எச்சரிக்கை அளவுக்குக் கீழே எந்தப் பொருளும் இல்லை.", te: "హెచ్చరిక పరిమితి కంటే తక్కువ ఉత్పత్తి లేదు.", th: "ไม่มีสินค้าต่ำกว่าเกณฑ์แจ้งเตือน", tl: "Walang produktong mas mababa sa alert threshold.", tr: "Uyarı eşiğinin altında ürün yok.", ur: "کوئی پروڈکٹ الرٹ کی حد سے نیچے نہیں۔", vi: "Không có sản phẩm nào dưới ngưỡng cảnh báo.", wo: "Amul marchandise bu wàcc ci limu artu bi.", yo: "Kò sí ọjà tí ó wà ní ìsàlẹ̀ ààlà ìkìlọ̀.", zh: "没有低于预警线的商品。", zu: "Awukho umkhiqizo ongaphansi komkhawulo wesexwayiso." };
@@ -6392,6 +6405,12 @@ function applyPdfCanvasText(doc, langCode) {
   // a gauche que les chaines qui contiennent vraiment des lettres arabes,
   // hebraiques ou thaana.
   const RTL_CHARS = /[\u0590-\u05ff\u0600-\u06ff\u0700-\u074f\u0780-\u07bf\ufb1d-\ufdff\ufe70-\ufeff]/;
+  // toLocaleDateString("ar-MA") glisse des marques de direction invisibles dans ses
+  // resultats. Elles ne se voient pas mais elles comptent comme des caracteres arabes :
+  // une date "06/11/2026 20:05", qui ne contient pourtant aucune lettre, basculait en
+  // droite a gauche et ressortait melangee. On les retire avant toute mesure et tout
+  // dessin, pour que le test de direction ne porte que sur de vraies lettres.
+  const clean = (v) => String(v == null ? "" : v).replace(/[\u200e\u200f\u061c\u202a-\u202e\u2066-\u2069]/g, "");
   // On nomme large : le telephone choisira la police qu'il a. Tous les Android et
   // iOS recents embarquent les Noto correspondant a leur langue systeme.
   const FAMILY = '"Noto Sans", "Noto Naskh Arabic", "Noto Sans Arabic", "Noto Sans Hebrew", '
@@ -6414,10 +6433,11 @@ function applyPdfCanvasText(doc, langCode) {
   const useFont = (sizePt, bold) => {
     ctx.font = `${bold ? "700 " : "400 "}${Math.max(1, Math.round(sizePt * SCALE))}px ${FAMILY}`;
   };
-  const widthMm = (text, sizePt, bold) => {
+  const widthMm = (raw, sizePt, bold) => {
+    const text = clean(raw);
     useFont(sizePt, bold);
-    ctx.direction = rtl && RTL_CHARS.test(String(text)) ? "rtl" : "ltr";
-    return (ctx.measureText(String(text)).width / SCALE) * PT_TO_MM;
+    ctx.direction = rtl && RTL_CHARS.test(text) ? "rtl" : "ltr";
+    return (ctx.measureText(text).width / SCALE) * PT_TO_MM;
   };
 
   // Un meme libelle revient des dizaines de fois dans un tableau : on garde
@@ -6465,7 +6485,7 @@ function applyPdfCanvasText(doc, langCode) {
     try { lineGap = sizePt * PT_TO_MM * (doc.getLineHeightFactor() || 1.15); }
     catch (e) { lineGap = sizePt * PT_TO_MM * 1.15; }
     lines.forEach((raw, idx) => {
-      const t = String(raw == null ? "" : raw);
+      const t = clean(raw);
       if (!t) return;
       const img = render(t, sizePt, bold, color);
       let drawX = x;
@@ -6479,7 +6499,7 @@ function applyPdfCanvasText(doc, langCode) {
   };
 
   doc.getTextWidth = function (text) {
-    const t = String(text == null ? "" : text);
+    const t = clean(text);
     return t ? widthMm(t, doc.getFontSize(), isBold()) : 0;
   };
 
@@ -6487,7 +6507,7 @@ function applyPdfCanvasText(doc, langCode) {
   // connait pas ces caracteres. Le chinois et le japonais s'ecrivant sans
   // espaces, on coupe caractere par caractere quand il n'y a pas de mots.
   doc.splitTextToSize = function (text, maxWidth) {
-    const t = String(text == null ? "" : text);
+    const t = clean(text);
     if (!t) return [""];
     const sizePt = doc.getFontSize();
     const bold = isBold();
@@ -7036,7 +7056,7 @@ const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
 // la ligne de compte par boutique, sinon le quota IA repartirait à zéro à chaque
 // changement de boutique et le code PIN pourrait diverger d'une boutique à l'autre.
 const SHOP_LEVEL_KEYS = [
-  "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts",
+  "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts", "cashClosures",
   "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
   "historyLog", "categories", "employees", "actionLog",
 ];
@@ -7254,6 +7274,9 @@ function mergeShop(baseShop, localShop, remoteShop) {
     sales: sortByDate(mergeById(base.sales, local.sales, remote.sales)),
     expenses: sortByDate(mergeById(base.expenses, local.expenses, remote.expenses)),
     cashCounts: sortByDate(mergeById(base.cashCounts, local.cashCounts, remote.cashCounts)),
+    // Les clôtures se fusionnent par id comme les comptages : deux téléphones qui
+    // clôturent le même jour hors ligne gardent leurs deux clôtures, aucune n'écrase l'autre.
+    cashClosures: sortByDate(mergeById(base.cashClosures, local.cashClosures, remote.cashClosures)),
     debts: mergeDebts(base.debts, local.debts, remote.debts),
     debtEvents: sortByDate(mergeById(base.debtEvents, local.debtEvents, remote.debtEvents)),
     // Invendus "Quantité du jour" (boulangerie/pâtisserie) : chaque "Nouvelle journée"
@@ -9619,6 +9642,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Historique des comptages de caisse (fiabilité) : chaque comptage garde le solde attendu,
   // le montant compté et l'écart, même quand aucun ajustement n'est fait.
   const [cashCounts, setCashCounts] = useState([]);
+  // Clôtures de journée (rapports Z). Chaque clôture fige la journée écoulée et fixe le
+  // montant laissé en caisse, qui devient le point de départ du lendemain. Sans elles, le
+  // solde de caisse était cumulé depuis la création de la boutique : impossible de dire
+  // « voilà ce que la journée a fait » ni de repartir propre le matin.
+  const [cashClosures, setCashClosures] = useState([]);
   // Historique des invendus (produits en mode "Quantité du jour") : une entrée par
   // "Nouvelle journée" déclenchée sur un produit qui avait encore du stock restant.
   const [unsoldLog, setUnsoldLog] = useState([]);
@@ -10174,6 +10202,158 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     } finally {
       setPdfSharing(false);
       setPendingReceipt(null);
+    }
+  };
+
+  // ---- Rapport Z : le PDF d'une clôture de journée ----
+  // Même langage visuel que le reçu (badge, nom de boutique en capitales, séparateurs
+  // pointillés, bloc de total encadré) pour que les documents de la boutique se
+  // ressemblent. Un rapport Z se garde : c'est la pièce qu'on montre à un comptable, à un
+  // associé ou à un employé dont la caisse ne tombe pas juste.
+  const generateZReportPdf = async (z) => {
+    const { default: jsPDF } = await import("jspdf");
+    const doc = new jsPDF();
+    await applyPdfTextRendering(doc, lang, [shopName, z.actorName || ""].join(" "));
+
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const marginX = 18;
+    const contentW = pageW - marginX * 2;
+    const INDIGO_RGB = [27, 58, 92];
+    const CHARCOAL_RGB = [43, 36, 32];
+    const MUTED_RGB = [130, 124, 118];
+    const GREEN_RGB = [5, 122, 85];
+    const CLAY_RGB = [184, 86, 47];
+    const money = (v) => `${localizedNumber(Math.round(v))} ${CURRENT_CURRENCY.symbol}`;
+    const fullDateTime = (iso) => {
+      const d = new Date(iso);
+      return `${d.toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit", year: "numeric" })} ${d.toLocaleTimeString(getAppLocale(), { hour: "2-digit", minute: "2-digit" })}`;
+    };
+
+    let y = 20;
+    // En-tête
+    doc.setFillColor(...INDIGO_RGB);
+    doc.circle(pageW / 2, y, 7, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.text("B", pageW / 2, y + 2.4, { align: "center" });
+    y += 16;
+    doc.setTextColor(...CHARCOAL_RGB);
+    doc.setFontSize(15);
+    doc.text(String(shopName || t(lang, "appName")).toUpperCase(), pageW / 2, y, { align: "center" });
+    y += 7;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    doc.setTextColor(...MUTED_RGB);
+    // Sous-titre : le numéro suffit, le titre complet est déjà porté par le pied de page.
+    doc.text(`${tx(lang, "zNumber")}${z.number}`, pageW / 2, y, { align: "center" });
+    y += 9;
+    doc.setDrawColor(205, 200, 194);
+    doc.setLineDashPattern([1.2, 1.2], 0);
+    doc.line(marginX, y, pageW - marginX, y);
+    doc.setLineDashPattern([], 0);
+    y += 9;
+
+    // Période couverte et qui a clôturé
+    doc.setFontSize(9.5);
+    doc.setTextColor(...CHARCOAL_RGB);
+    const periodText = z.fromDate
+      ? `${fullDateTime(z.fromDate)}  →  ${fullDateTime(z.date)}`.replace("→", "-")
+      : `${tx(lang, "zSinceOpening")}  -  ${fullDateTime(z.date)}`;
+    doc.text(periodText, marginX, y);
+    if (z.actorName) doc.text(z.actorName, pageW - marginX, y, { align: "right" });
+    y += 11;
+
+    // Tableau des mouvements : chaque ligne est un montant qui entre ou sort du tiroir.
+    const row = (label, value, opts = {}) => {
+      doc.setFont("helvetica", opts.strong ? "bold" : "normal");
+      doc.setFontSize(opts.strong ? 10.5 : 10);
+      doc.setTextColor(...(opts.color || CHARCOAL_RGB));
+      doc.text(label, marginX + (opts.indent ? 5 : 0), y);
+      doc.setFont("helvetica", "bold");
+      doc.text(opts.sign && value > 0 ? `${opts.sign}${money(value)}` : money(value), pageW - marginX, y, { align: "right" });
+      y += opts.gapAfter || 7;
+    };
+    const rule = (gap = 4) => {
+      y += 1;
+      doc.setDrawColor(228, 224, 219);
+      doc.setLineDashPattern([1.2, 1.2], 0);
+      doc.line(marginX, y, pageW - marginX, y);
+      doc.setLineDashPattern([], 0);
+      y += gap;
+    };
+
+    row(tx(lang, "zOpeningBalance"), z.openingBalance, { strong: true });
+    rule();
+    row(`${t(lang, "cash")} (${localizedNumber(z.salesCount)} ${tx(lang, "zSalesUnit")})`, z.cashSales, { sign: "+" });
+    if (z.debtCollected > 0) row(t(lang, "cashReportDebtPayments"), z.debtCollected, { sign: "+" });
+    row(tx(lang, "cashOutKindExpense"), -z.expenses, { color: CLAY_RGB });
+    row(tx(lang, "cashOutKindWithdrawal"), -z.withdrawals, { color: CLAY_RGB });
+    rule();
+    row(t(lang, "cashBalance"), z.expected, { strong: true });
+    row(tx(lang, "cashCountedLabel"), z.counted, { strong: true });
+    const gapColor = z.gap === 0 ? GREEN_RGB : CLAY_RGB;
+    row(tx(lang, "cashGapLabel"), z.gap, { strong: true, color: gapColor, sign: "+", gapAfter: 10 });
+
+    // Ce qui reste dans le tiroir demain, et ce qui en est sorti : c'est la partie que le
+    // boutiquier relit le lendemain matin.
+    doc.setFillColor(243, 241, 238);
+    doc.roundedRect(marginX, y - 5, contentW, 20, 2.5, 2.5, "F");
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(...CHARCOAL_RGB);
+    doc.text(tx(lang, "zCarried"), marginX + 4, y + 1);
+    doc.setFont("helvetica", "bold");
+    doc.text(money(z.carried), pageW - marginX - 4, y + 1, { align: "right" });
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(...MUTED_RGB);
+    doc.text(tx(lang, "zDeposited"), marginX + 4, y + 8);
+    doc.setFont("helvetica", "bold");
+    doc.text(money(z.deposited), pageW - marginX - 4, y + 8, { align: "right" });
+    y += 24;
+
+    // Ventes encaissées autrement que par le tiroir : elles ne touchent pas la caisse mais
+    // font partie de la journée, donc elles figurent sur le rapport, à part.
+    if (z.mobileSales || z.cardSales || z.creditSales) {
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9.5);
+      doc.setTextColor(...MUTED_RGB);
+      doc.text(String(t(lang, "paymentBreakdown")).toUpperCase(), marginX, y);
+      y += 6;
+      if (z.mobileSales) row(t(lang, "mobilePayment"), z.mobileSales);
+      if (z.cardSales) row(t(lang, "card"), z.cardSales);
+      if (z.creditSales) row(t(lang, "credit"), z.creditSales);
+    }
+
+    // Pied de page
+    const footY = pageH - 26;
+    doc.setFillColor(243, 241, 238);
+    doc.rect(0, footY, pageW, pageH - footY, "F");
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.setTextColor(...MUTED_RGB);
+    doc.text(`${shopName || ""} - ${tx(lang, "zModalTitle")}`, marginX, pageH - 10);
+    doc.text(`${t(lang, "accountingGeneratedBy")} ${t(lang, "appName")}`, pageW - marginX, pageH - 10, { align: "right" });
+    return doc.output("blob");
+  };
+  // Télécharge (ou partage) le rapport Z d'une clôture donnée.
+  const shareZReport = async (z) => {
+    try {
+      const blob = await generateZReportPdf(z);
+      const name = `${tx(lang, "zModalTitle")} ${z.number} - ${String(z.date).slice(0, 10)}.pdf`;
+      const file = new File([blob], name, { type: "application/pdf" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: name });
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      if (e && e.name !== "AbortError") alert(tx(lang, "receiptPdfFallback"));
     }
   };
   useEffect(() => {
@@ -11322,6 +11502,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showEditFund, setShowEditFund] = useState(false);
   // Comptage de caisse (voir saveCashCount) : montant saisi, et case "corriger le solde".
   const [showCashCount, setShowCashCount] = useState(false);
+  const [showCloseDay, setShowCloseDay] = useState(false);
+  const [closeCountInput, setCloseCountInput] = useState("");   // argent réellement compté
+  const [closeCarryInput, setCloseCarryInput] = useState("");   // montant laissé pour demain
+  const [closeBusy, setCloseBusy] = useState(false);
   // Type de sortie de caisse : "expense" (vraie charge) ou "withdrawal" (retrait).
   // Les deux sortent l'argent du tiroir, mais seule une dépense réduit le bénéfice :
   // prendre 50 000 dans la caisse ou les porter à la banque n'appauvrit pas la boutique,
@@ -11785,6 +11969,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setLoyaltyCustomers(shop.loyaltyCustomers || {});
     setExpenses(shop.expenses || []);
     setCashCounts(shop.cashCounts || []);
+    setCashClosures(shop.cashClosures || []);
     setUnsoldLog(shop.unsoldLog || []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
@@ -12015,6 +12200,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setDebts([{ id: "debt1", customer: "Client B", amount: 1500, product: "Savon x3", date: new Date(now - 90000000).toISOString(), paid: false }]);
       setExpenses([{ id: "e1", label: t(lang, "othTransportMarchandise"), amount: 2000, date: new Date(now - 3600000).toISOString() }]);
       setCashCounts([]);
+      setCashClosures([]);
       setCashFund(10000);
       setLowStockThreshold(5);
       setDarkMode(false);
@@ -12225,6 +12411,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       loyaltyCustomers: overrides.loyaltyCustomers ?? loyaltyCustomers,
       expenses: overrides.expenses ?? expenses,
       cashCounts: overrides.cashCounts ?? cashCounts,
+      cashClosures: overrides.cashClosures ?? cashClosures,
       unsoldLog: overrides.unsoldLog ?? unsoldLog,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
@@ -12275,6 +12462,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setLoyaltyCustomers(next.loyaltyCustomers);
     setExpenses(next.expenses);
     setCashCounts(next.cashCounts || []);
+    setCashClosures(next.cashClosures || []);
     setUnsoldLog(next.unsoldLog || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
@@ -13184,6 +13372,40 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     logAction(`${tx(lang, "cashCountBtn")} : ${localizedNumber(counted)} — ${tx(lang, "cashGapLabel")} ${gap >= 0 ? "+" : "-"}${localizedNumber(Math.abs(gap))}`);
     setCountInput(""); setCountAdjust(false); setShowCashCount(false);
     setAmountsHidden(true); // même re-verrouillage que le réglage du fond de caisse
+  };
+  // ---- Clôture de journée (rapport Z) ----
+  // Fige la journée écoulée : ventes par mode de paiement, dettes encaissées, dépenses,
+  // retraits, caisse attendue, caisse comptée et écart. Le montant laissé dans le tiroir
+  // devient le point de départ du lendemain ; la différence est considérée comme sortie
+  // (versée en banque, remise au propriétaire...).
+  // Une clôture ne se modifie pas et ne se supprime pas : c'est ce qui en fait une preuve
+  // utilisable face à un employé ou un comptable.
+  const closeDay = () => {
+    const counted = parseFloat((closeCountInput || "").replace(",", "."));
+    if (closeCountInput === "" || isNaN(counted)) return;
+    // Par défaut on laisse tout en caisse : c'est le cas le plus courant chez un boutiquier
+    // qui garde son fonds de roulement dans le tiroir.
+    const carriedRaw = parseFloat((closeCarryInput || "").replace(",", "."));
+    const carried = closeCarryInput === "" || isNaN(carriedRaw) ? counted : Math.max(0, Math.min(counted, carriedRaw));
+    const now = new Date().toISOString();
+    const entry = {
+      id: "z-" + Date.now(),
+      number: cashClosures.length + 1,
+      date: now,
+      ...sessionSummary,
+      counted,
+      gap: counted - sessionSummary.expected,
+      carried,
+      deposited: counted - carried,
+      actorId: activeEmployee ? activeEmployee.id : null,
+      actorName: activeEmployee ? activeEmployee.name : null,
+    };
+    setCloseBusy(true);
+    saveAll({ cashClosures: [...cashClosures, entry] });
+    logAction(`${tx(lang, "zCloseBtn")} ${tx(lang, "zNumber")}${entry.number} — ${tx(lang, "cashCountedLabel")} ${localizedNumber(counted)}, ${tx(lang, "cashGapLabel")} ${entry.gap >= 0 ? "+" : "-"}${localizedNumber(Math.abs(entry.gap))}`);
+    playSound("success"); triggerHaptic("success");
+    setCloseCountInput(""); setCloseCarryInput(""); setShowCloseDay(false); setCloseBusy(false);
+    setAmountsHidden(true); // la caisse se re-verrouille, comme après tout geste sensible
   };
   // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
   const changeLockPin = async () => {
@@ -15584,15 +15806,47 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const remainingDebt = (d) => Math.max(0, d.amount - (d.paidAmount || 0));
   const unpaidDebts = debts.filter((d) => !d.paid);
   const totalOwed = unpaidDebts.reduce((sum, d) => sum + remainingDebt(d), 0);
-  const totalCashSales = sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0);
-  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+  // ---- Journée de caisse en cours ----
+  // Le solde de caisse ne part plus de la création de la boutique mais de la DERNIÈRE
+  // CLÔTURE. Sans ça, le « solde estimé » additionnait toutes les ventes en espèces
+  // depuis toujours : un chiffre qui ne correspondait à rien de ce qu'il y a dans le
+  // tiroir, et un comptage de caisse impossible à faire tomber juste.
+  // Tant qu'aucune clôture n'a été faite, le comportement est exactement l'ancien
+  // (point de départ = fond de caisse, période = tout l'historique).
+  const lastClosure = cashClosures.length ? cashClosures[cashClosures.length - 1] : null;
+  const sessionStartMs = lastClosure ? new Date(lastClosure.date).getTime() : null;
+  const afterLastClosure = (d) => sessionStartMs == null || new Date(d).getTime() > sessionStartMs;
+  // Point de départ : ce que le boutiquier a déclaré laisser en caisse à la clôture
+  // précédente, sinon son fond de caisse.
+  const openingBalance = lastClosure ? Number(lastClosure.carried) || 0 : cashFund;
+  const totalCashSales = sales.filter((s) => s.payment === "cash" && afterLastClosure(s.date)).reduce((sum, s) => sum + s.total, 0);
+  const totalExpenses = expenses.filter((e) => afterLastClosure(e.date)).reduce((sum, e) => sum + e.amount, 0);
   // Les remboursements de dettes entrent physiquement dans la caisse. Ils étaient comptés
   // nulle part dans le solde : un client qui remboursait 10 000 laissait l'argent dans le
   // tiroir sans que le solde estimé bouge, donc un écart permanent au moment de compter.
   const totalDebtCollected = debtEvents
-    .filter((ev) => ev.type === "paid" || ev.type === "partialPayment")
+    .filter((ev) => (ev.type === "paid" || ev.type === "partialPayment") && afterLastClosure(ev.date))
     .reduce((sum, ev) => sum + (ev.amount || 0), 0);
-  const cashBalance = cashFund + totalCashSales + totalDebtCollected - totalExpenses;
+  const cashBalance = openingBalance + totalCashSales + totalDebtCollected - totalExpenses;
+  // Détail de la journée en cours, affiché dans la fenêtre de clôture et repris tel quel
+  // dans le rapport Z.
+  const sessionSales = sales.filter((s) => afterLastClosure(s.date));
+  const sessionExpenseRows = expenses.filter((e) => afterLastClosure(e.date));
+  const sessionSummary = {
+    fromDate: lastClosure ? lastClosure.date : null,
+    openingBalance,
+    salesCount: sessionSales.length,
+    cashSales: totalCashSales,
+    mobileSales: sessionSales.filter((x) => x.payment === "mobile").reduce((sum, x) => sum + x.total, 0),
+    cardSales: sessionSales.filter((x) => x.payment === "card").reduce((sum, x) => sum + x.total, 0),
+    creditSales: sessionSales.filter((x) => x.payment === "credit").reduce((sum, x) => sum + x.total, 0),
+    debtCollected: totalDebtCollected,
+    // Une sortie de caisse est soit une dépense (elle ampute le bénéfice), soit un retrait
+    // (l'argent change seulement de place) : la clôture les sépare, comme le reste de l'app.
+    expenses: sessionExpenseRows.filter((e) => e.kind !== "withdrawal").reduce((sum, e) => sum + e.amount, 0),
+    withdrawals: sessionExpenseRows.filter((e) => e.kind === "withdrawal").reduce((sum, e) => sum + e.amount, 0),
+    expected: cashBalance,
+  };
   const todayExpenses = expenses.filter((e) => e.date.slice(0, 10) === todayKey());
 
   const cashCardStyle = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
@@ -16913,6 +17167,68 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </button>
                 )}
                 <button onClick={saveCashCount} disabled={!hasCount} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: hasCount ? INDIGO : T.border, opacity: hasCount ? 1 : 0.7 }}>{t(lang, "save")}</button>
+              </div>
+            </div>
+          );
+        })()}
+        {showCloseDay && (() => {
+          // Récapitulatif calculé en direct : le boutiquier voit la journée se solder
+          // pendant qu'il tape, sans avoir à valider pour découvrir l'écart.
+          const countedNum = parseFloat((closeCountInput || "").replace(",", "."));
+          const hasCount = closeCountInput !== "" && !isNaN(countedNum);
+          const gap = hasCount ? countedNum - sessionSummary.expected : 0;
+          const carriedRaw = parseFloat((closeCarryInput || "").replace(",", "."));
+          const carried = !hasCount ? 0 : (closeCarryInput === "" || isNaN(carriedRaw) ? countedNum : Math.max(0, Math.min(countedNum, carriedRaw)));
+          const deposited = hasCount ? countedNum - carried : 0;
+          // Clôture à l'aveugle pour un employé : il compte et déclare, sans jamais voir le
+          // montant attendu ni l'écart. C'est la seule façon qu'un comptage veuille dire
+          // quelque chose — sinon il suffit de recopier le chiffre affiché.
+          const blind = !!activeEmployee;
+          const line = (label, value, opts = {}) => (
+            <div className="flex items-center justify-between text-[11px] py-0.5">
+              <span style={{ color: T.muted }}>{label}</span>
+              <span className="font-bold" style={{ color: opts.color || T.text }}>{opts.sign && value > 0 ? "+" : ""}{fcfa(value)}</span>
+            </div>
+          );
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+              <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "88vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-bold text-sm">{tx(lang, "zModalTitle")}</h3>
+                  <button onClick={() => { setShowCloseDay(false); setCloseCountInput(""); setCloseCarryInput(""); }}><X size={18} /></button>
+                </div>
+                <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "zModalIntro")}</p>
+                {!blind && (
+                  <div className="rounded-xl p-2.5 mb-3" style={{ background: T.input }}>
+                    {line(tx(lang, "zOpeningBalance"), sessionSummary.openingBalance)}
+                    {line(`${t(lang, "cash")} (${localizedNumber(sessionSummary.salesCount)} ${tx(lang, "zSalesUnit")})`, sessionSummary.cashSales, { sign: true })}
+                    {sessionSummary.debtCollected > 0 && line(t(lang, "cashReportDebtPayments"), sessionSummary.debtCollected, { sign: true })}
+                    {sessionSummary.expenses > 0 && line(tx(lang, "cashOutKindExpense"), -sessionSummary.expenses, { color: CLAY })}
+                    {sessionSummary.withdrawals > 0 && line(tx(lang, "cashOutKindWithdrawal"), -sessionSummary.withdrawals, { color: CLAY })}
+                    <div className="mt-1.5 pt-1.5 flex items-center justify-between text-xs" style={{ borderTop: `1px solid ${T.border}` }}>
+                      <span className="font-semibold" style={{ color: T.muted }}>{t(lang, "cashBalance")}</span>
+                      <span className="font-extrabold">{fcfa(sessionSummary.expected)}</span>
+                    </div>
+                  </div>
+                )}
+                <input autoComplete="off" placeholder={tx(lang, "cashCountedLabel")} type="number" inputMode="decimal" value={closeCountInput} onChange={(e) => setCloseCountInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                {hasCount && !blind && (
+                  <div className="flex items-center justify-between text-xs rounded-lg p-2 mb-2" style={{ background: gap === 0 ? (darkMode ? "rgba(52,211,153,0.15)" : "#ecfdf5") : (darkMode ? "rgba(184,86,47,0.15)" : "#fef2f2") }}>
+                    <span style={{ color: T.muted }}>{tx(lang, "cashGapLabel")}</span>
+                    <span className="font-extrabold" style={{ color: gap === 0 ? (darkMode ? "#6ee7b7" : "#065f46") : CLAY }}>
+                      {gap === 0 ? tx(lang, "cashGapOk") : `${gap > 0 ? "+" : "-"}${fcfa(Math.abs(gap))}`}
+                    </span>
+                  </div>
+                )}
+                <input autoComplete="off" placeholder={tx(lang, "zCarried")} type="number" inputMode="decimal" value={closeCarryInput} onChange={(e) => setCloseCarryInput(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-1" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <p className="text-[10px] mb-2" style={{ color: T.muted }}>{tx(lang, "zCarriedHint")}</p>
+                {hasCount && deposited > 0 && (
+                  <div className="flex items-center justify-between text-[11px] rounded-lg p-2 mb-3" style={{ background: T.input }}>
+                    <span style={{ color: T.muted }}>{tx(lang, "zDeposited")}</span>
+                    <span className="font-bold">{fcfa(deposited)}</span>
+                  </div>
+                )}
+                <button onClick={closeDay} disabled={!hasCount || closeBusy} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: hasCount && !closeBusy ? INDIGO : T.border, opacity: hasCount && !closeBusy ? 1 : 0.7 }}>{tx(lang, "zCloseBtn")}</button>
               </div>
             </div>
           );
@@ -18480,7 +18796,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
                 <p onClick={() => { if (amountsHidden) setShowLockPinModal(true); }} className="text-[10px] mt-2" style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.4, cursor: amountsHidden ? "pointer" : "default" }}>{t(lang, "othFondDeCaisseFcfacashfundVentes").replace("{cashFund}", maskAmount(fcfa(cashFund))).replace("{totalCashSales}", maskAmount(fcfa(totalCashSales))).replace("{totalExpenses}", maskAmount(fcfa(totalExpenses)))}{totalDebtCollected > 0 ? ` · ${t(lang, "cashReportDebtPayments")} +${maskAmount(fcfa(totalDebtCollected))}` : ""}</p>
                 {hasPermission("editCash") && (
-                  <div className="grid grid-cols-3 gap-2 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
+                  <div className="grid grid-cols-2 gap-2 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
                     <button onClick={() => requireUnlock(openEditFund, "editFund")} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.12)" }}>
                       <Wallet size={16} color="white" />
                       <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{t(lang, "setCashFund")}</span>
@@ -18493,8 +18809,41 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <Search size={16} color="white" />
                       <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{tx(lang, "cashCountBtn")}</span>
                     </button>
+                    {/* Clôture de journée : le geste du soir. Il fige la journée et fixe le
+                        point de départ du lendemain, d'où le fond plus marqué — ce n'est pas
+                        un bouton qu'on appuie par curiosité. */}
+                    <button onClick={() => requireUnlock(() => { setCloseCountInput(""); setCloseCarryInput(""); setShowCloseDay(true); })} className="flex flex-col items-center justify-center gap-1 py-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.22)" }}>
+                      <Lock size={16} color="white" />
+                      <span className="text-[9.5px] font-bold text-center leading-tight" style={{ color: "white" }}>{tx(lang, "zCloseBtn")}</span>
+                    </button>
                   </div>
                 )}
+              </div>
+            )}
+            {/* Clôtures précédentes : un rapport Z se relit et se montre, donc chaque ligne
+                reste téléchargeable en PDF. On n'affiche la carte qu'une fois la première
+                clôture faite, pour ne pas encombrer l'écran des boutiques qui ne s'en
+                servent pas. */}
+            {cashClosures.length > 0 && (
+              <div className="rounded-2xl p-3.5" style={cashCardStyle}>
+                <p className="text-[11px] font-bold mb-2" style={{ color: T.muted }}>{tx(lang, "zHistoryTitle")}</p>
+                <div className="flex flex-col gap-1.5">
+                  {[...cashClosures].slice(-6).reverse().map((z) => (
+                    <button key={z.id} onClick={() => shareZReport(z)} className="flex items-center justify-between gap-2 rounded-xl px-2.5 py-2 text-left" style={{ background: T.input }}>
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-bold truncate" style={{ color: T.text }}>
+                          {tx(lang, "zNumber")}{z.number} · {new Date(z.date).toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit", year: "numeric" })}
+                        </p>
+                        <p className="text-[10px]" style={{ color: z.gap === 0 ? T.muted : CLAY }}>
+                          {tx(lang, "cashCountedLabel")} {maskAmount(fcfa(z.counted))}
+                          {z.gap !== 0 ? ` · ${tx(lang, "cashGapLabel")} ${z.gap > 0 ? "+" : "-"}${maskAmount(fcfa(Math.abs(z.gap)))}` : ""}
+                          {z.actorName ? ` · ${z.actorName}` : ""}
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-bold flex-shrink-0" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{tx(lang, "zReportBtn")}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
             <div className="rounded-2xl p-3.5" style={cashCardStyle}>
