@@ -6350,6 +6350,175 @@ async function applyPdfUnicodeFont(doc, langCode, sample) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Repli pour les ecritures qu'AUCUNE police embarquable ne rend correctement :
+// arabe, ourdou, hebreu, hindi, bengali, tamoul, telougou, thai, chinois,
+// japonais, coreen, amharique.
+//
+// Deux raisons pour lesquelles embarquer une police ne marche pas ici :
+//   - l'arabe et les ecritures indiennes demandent un moteur de "shaping" (les
+//     lettres changent de forme et se lient selon leurs voisines) ; jsPDF ecrit
+//     les caracteres les uns apres les autres, sans liaison ni reordonnancement ;
+//   - le chinois, le japonais et le coreen demandent des milliers de glyphes :
+//     une police complete pese plus de 10 Mo, impossible dans une app qui doit
+//     s'installer sur un telephone a petite connexion.
+//
+// Le navigateur, lui, sait deja faire les deux : c'est ce qu'il fait pour
+// afficher l'ecran. On lui fait donc dessiner chaque texte sur un <canvas>,
+// puis on colle le resultat comme image dans le PDF. Le texte n'est plus
+// selectionnable dans le PDF, mais il est LISIBLE et correctement forme, ce qui
+// vaut infiniment mieux que du charabia.
+//
+// On remplace trois methodes de jsPDF pour que tout le code de mise en page
+// existant (largeurs de colonnes, alignements, retours a la ligne) continue de
+// fonctionner sans etre reecrit : text, getTextWidth et splitTextToSize.
+const PDF_CANVAS_LANGS = new Set(["ar", "ur", "hi", "bn", "ta", "te", "th", "zh", "ja", "ko", "am"]);
+const PDF_RTL_LANGS = new Set(["ar", "ur"]);
+function applyPdfCanvasText(doc, langCode) {
+  if (typeof document === "undefined") return false;
+  const canvas = document.createElement("canvas");
+  const ctx = canvas && canvas.getContext ? canvas.getContext("2d") : null;
+  if (!ctx) return false;
+
+  const SCALE = 4;              // on dessine 4x trop grand puis on reduit : net a l'impression
+  const PT_TO_MM = 25.4 / 72;   // jsPDF raisonne en points, le document en millimetres
+  const PAD = 3 * SCALE;        // petite marge, sinon les jambages sont rognes
+  const rtl = PDF_RTL_LANGS.has(langCode);
+  // Le sens d'ecriture se decide CHAINE PAR CHAINE, pas une fois pour toute la
+  // langue. En arabe, "16 500 FCFA" ne contient aucune lettre arabe : place dans
+  // un paragraphe de droite a gauche, l'algorithme bidirectionnel le retourne et
+  // affiche "FCFA 500 16" — un montant faux, et dangereux sur un recu. Une date
+  // "07/11/2026 17:42" subissait la meme inversion. On ne met donc en mode droite
+  // a gauche que les chaines qui contiennent vraiment des lettres arabes,
+  // hebraiques ou thaana.
+  const RTL_CHARS = /[\u0590-\u05ff\u0600-\u06ff\u0700-\u074f\u0780-\u07bf\ufb1d-\ufdff\ufe70-\ufeff]/;
+  // On nomme large : le telephone choisira la police qu'il a. Tous les Android et
+  // iOS recents embarquent les Noto correspondant a leur langue systeme.
+  const FAMILY = '"Noto Sans", "Noto Naskh Arabic", "Noto Sans Arabic", "Noto Sans Hebrew", '
+    + '"Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Tamil", "Noto Sans Telugu", '
+    + '"Noto Sans Thai", "Noto Sans Ethiopic", "Noto Sans CJK SC", "Noto Sans CJK JP", '
+    + '"Noto Sans CJK KR", system-ui, -apple-system, "Segoe UI", sans-serif';
+
+  const isBold = () => {
+    try { return /bold/i.test(String(doc.getFont().fontStyle || "")); } catch (e) { return false; }
+  };
+  const colorOf = () => {
+    try {
+      const c = doc.getTextColor();
+      if (typeof c === "string" && /^#|^rgb/i.test(c)) return c;
+    } catch (e) { /* version de jsPDF sans getTextColor */ }
+    return "#111111";
+  };
+  // Le contexte perd sa configuration a chaque redimensionnement du canvas :
+  // on repose donc la police avant CHAQUE mesure et chaque dessin.
+  const useFont = (sizePt, bold) => {
+    ctx.font = `${bold ? "700 " : "400 "}${Math.max(1, Math.round(sizePt * SCALE))}px ${FAMILY}`;
+  };
+  const widthMm = (text, sizePt, bold) => {
+    useFont(sizePt, bold);
+    ctx.direction = rtl && RTL_CHARS.test(String(text)) ? "rtl" : "ltr";
+    return (ctx.measureText(String(text)).width / SCALE) * PT_TO_MM;
+  };
+
+  // Un meme libelle revient des dizaines de fois dans un tableau : on garde
+  // l'image produite et on la repasse a jsPDF sous le meme alias, ce qui lui
+  // fait ecrire les pixels une seule fois dans le fichier.
+  const cache = new Map();
+  const render = (text, sizePt, bold, color) => {
+    const key = `${text}|${sizePt}|${bold ? 1 : 0}|${color}`; // le sens decoule du texte
+    const hit = cache.get(key);
+    if (hit) return hit;
+    useFont(sizePt, bold);
+    const m = ctx.measureText(text);
+    const ascent = Math.ceil(m.actualBoundingBoxAscent || sizePt * SCALE * 0.8);
+    const descent = Math.ceil(m.actualBoundingBoxDescent || sizePt * SCALE * 0.25);
+    canvas.width = Math.max(1, Math.ceil(m.width) + PAD * 2);
+    canvas.height = Math.max(1, ascent + descent + PAD * 2);
+    useFont(sizePt, bold);               // le redimensionnement a remis le contexte a zero
+    ctx.direction = rtl && RTL_CHARS.test(text) ? "rtl" : "ltr";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = color;
+    ctx.fillText(text, PAD, PAD + ascent);
+    const out = {
+      url: canvas.toDataURL("image/png"),
+      alias: `t${cache.size}`,
+      wMm: (canvas.width / SCALE) * PT_TO_MM,
+      hMm: (canvas.height / SCALE) * PT_TO_MM,
+      textWmm: (m.width / SCALE) * PT_TO_MM,
+      padMm: (PAD / SCALE) * PT_TO_MM,
+      ascentMm: (ascent / SCALE) * PT_TO_MM,
+    };
+    cache.set(key, out);
+    return out;
+  };
+
+  const nativeText = doc.text.bind(doc);
+  doc.text = function (text, x, y, options) {
+    const sizePt = doc.getFontSize();
+    const bold = isBold();
+    const color = colorOf();
+    const lines = Array.isArray(text) ? text : [text];
+    // Meme interligne que jsPDF, pour que les textes deja decoupes en plusieurs
+    // lignes gardent exactement la hauteur prevue par le code de mise en page.
+    let lineGap;
+    try { lineGap = sizePt * PT_TO_MM * (doc.getLineHeightFactor() || 1.15); }
+    catch (e) { lineGap = sizePt * PT_TO_MM * 1.15; }
+    lines.forEach((raw, idx) => {
+      const t = String(raw == null ? "" : raw);
+      if (!t) return;
+      const img = render(t, sizePt, bold, color);
+      let drawX = x;
+      const align = options && options.align;
+      if (align === "right") drawX = x - img.textWmm;
+      else if (align === "center") drawX = x - img.textWmm / 2;
+      doc.addImage(img.url, "PNG", drawX - img.padMm, (y + idx * lineGap) - img.padMm - img.ascentMm,
+                   img.wMm, img.hMm, img.alias, "FAST");
+    });
+    return doc;
+  };
+
+  doc.getTextWidth = function (text) {
+    const t = String(text == null ? "" : text);
+    return t ? widthMm(t, doc.getFontSize(), isBold()) : 0;
+  };
+
+  // Retour a la ligne maison : jsPDF mesurerait avec la police PDF, qui ne
+  // connait pas ces caracteres. Le chinois et le japonais s'ecrivant sans
+  // espaces, on coupe caractere par caractere quand il n'y a pas de mots.
+  doc.splitTextToSize = function (text, maxWidth) {
+    const t = String(text == null ? "" : text);
+    if (!t) return [""];
+    const sizePt = doc.getFontSize();
+    const bold = isBold();
+    const out = [];
+    for (const paragraph of t.split("\n")) {
+      const pieces = paragraph.indexOf(" ") >= 0 ? paragraph.split(" ") : Array.from(paragraph);
+      const joiner = paragraph.indexOf(" ") >= 0 ? " " : "";
+      let line = "";
+      for (const piece of pieces) {
+        const candidate = line ? line + joiner + piece : piece;
+        if (line && widthMm(candidate, sizePt, bold) > maxWidth) { out.push(line); line = piece; }
+        else line = candidate;
+      }
+      out.push(line);
+    }
+    return out;
+  };
+
+  doc.setFont("helvetica", "normal"); // sans effet sur le rendu, garde jsPDF coherent
+  return true;
+}
+
+// Point d'entree unique : choisit la bonne strategie de rendu du texte selon la
+// langue et selon ce que le boutiquier a reellement saisi.
+async function applyPdfTextRendering(doc, langCode, sample) {
+  if (PDF_CANVAS_LANGS.has(langCode) || PDF_UNSUPPORTED_SCRIPTS.test(String(sample || ""))) {
+    if (applyPdfCanvasText(doc, langCode)) return "canvas";
+  }
+  return (await applyPdfUnicodeFont(doc, langCode, sample)) ? "unicode" : "standard";
+}
+
 const __dateLocaleCache = {};
 function getAppLocale() {
   const key = CURRENT_LANG + "|" + CURRENT_COUNTRY + "|" + (USE_ARABIC_DIGITS ? "a" : "l");
@@ -9716,7 +9885,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const fmt = (n) => `${localizedNumber(n)} ${cur}`;
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     // Charge la police Unicode si la langue ou les donnees saisies en ont besoin.
-    await applyPdfUnicodeFont(doc, lang, [shopName, shopPhone, receipt.customer, paymentLabel, ...receipt.items.map((it) => it.name)].join(" "));
+    await applyPdfTextRendering(doc, lang, [shopName, shopPhone, receipt.customer, paymentLabel, ...receipt.items.map((it) => it.name)].join(" "));
 
     // QR code vers le site : généré via la bibliothèque "qrcode" (encodeur pur, sans
     // DOM), chargée à la demande comme jsPDF. Si elle n'est pas installée dans ce
@@ -15682,7 +15851,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       const { default: jsPDF } = await import("jspdf");
       const { default: QRCode } = await import("qrcode");
       const doc = new jsPDF();
-      await applyPdfUnicodeFont(doc, lang, [shopName, ownerFirstName, ownerLastName, shopPhoneInput].join(" "));
+      await applyPdfTextRendering(doc, lang, [shopName, ownerFirstName, ownerLastName, shopPhoneInput].join(" "));
       const pageWidth = doc.internal.pageSize.getWidth();
       let y = 22;
 
@@ -15875,7 +16044,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       // ---- Construction du PDF ----
       const { default: jsPDF } = await import("jspdf");
       const doc = new jsPDF();
-      await applyPdfUnicodeFont(doc, lang, [shopName, ...periodSales.map((v) => v.productName || ""), ...periodCashOut.map((e) => e.label || "")].join(" "));
+      await applyPdfTextRendering(doc, lang, [shopName, ...periodSales.map((v) => v.productName || ""), ...periodCashOut.map((e) => e.label || "")].join(" "));
 
       // Logo de l'application, dessiné en vectoriel (3 barres montantes, comme dans l'app).
       const drawLogo = (x, y, s) => {
