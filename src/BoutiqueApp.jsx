@@ -6060,6 +6060,23 @@ EXTRA_UI.dailyModeToggle = { fr: "Quantité du jour (boulangerie, pâtisserie...
 EXTRA_UI.dailyModeHint = { fr: "Pour une production fraîche, non stockable : le bouton « Nouvelle journée » enregistre ce qu'il reste comme invendu, puis remet la quantité à 0.", am: "ለአዲስ፣ ማከማቸት ለማይቻል ምርት፦ «አዲስ ቀን» ቁልፍ የቀረውን እንደ ያልተሸጠ ይመዘግባል፣ ከዚያ መጠኑን ወደ 0 ይመልሳል።", en: "For fresh, non-storable production: the \"New day\" button logs what's left as unsold, then resets the quantity to 0.", tl: "Para sa sariwang produkto na hindi maiimbak: ang button na \"Bagong araw\" ay nagtatala ng natitira bilang hindi nabenta, pagkatapos ay binabalik ang dami sa 0.", te: "తాజా, నిల్వ చేయలేని ఉత్పత్తి కోసం: \"కొత్త రోజు\" బటన్ మిగిలినదాన్ని అమ్ముడుపోనిదిగా నమోదు చేసి, తర్వాత పరిమాణాన్ని 0కి తిరిగి సెట్ చేస్తుంది.", th: "สำหรับสินค้าสดใหม่ที่เก็บไว้ไม่ได้ ปุ่ม \"วันใหม่\" จะบันทึกจำนวนที่เหลือเป็นสินค้าขายไม่หมด แล้วรีเซ็ตจำนวนกลับเป็น 0", wo: "Ngir liggéey bu bees, bu mënul a denc: bouton \"Bés bu bees\" dafay bind limu bu des ni amul jaay, ba noppi limu bi delloo 0.", pl: "Dla świeżej, nieprzechowywalnej produkcji: przycisk „Nowy dzień” zapisuje pozostałą ilość jako niesprzedaną, a następnie resetuje ilość do 0.", ar: "للإنتاج الطازج غير القابل للتخزين: يسجل زر «يوم جديد» الكمية المتبقية كغير مباعة، ثم يعيد الكمية إلى 0.", es: "Para producción fresca, no almacenable: el botón «Nueva jornada» registra lo que queda como invendido y repone la cantidad a 0.", pt: "Para produção fresca, não armazenável: o botão «Novo dia» registra o que sobrou como não vendido e zera a quantidade.", zh: "适用于无法长期保存的新鲜现制商品：点击「开始新的一天」会把剩余数量记为未售出，然后将数量清零。", vi: "Dành cho sản phẩm tươi, không thể lưu kho: nút \"Ngày mới\" ghi lại số còn lại là hàng tồn chưa bán, sau đó đặt lại số lượng về 0.", de: "Für frische, nicht lagerfähige Produktion: Die Schaltfläche „Neuer Tag“ erfasst den Restbestand als unverkauft und setzt die Menge auf 0 zurück.", ru: "Для свежей, не подлежащей хранению продукции: кнопка «Новый день» фиксирует остаток как непроданный и обнуляет количество.", hi: "ताज़ा, जिसे स्टोर नहीं किया जा सकता उस उत्पादन के लिए: «नया दिन» बटन बचे हुए को बिना बिका हुआ दर्ज करता है, फिर मात्रा 0 कर देता है।", ta: "பதிவு செய்ய முடியாத புதிய உற்பத்திக்கு: «புதிய நாள்» பொத்தான் மீதமுள்ளதை விற்காதது என பதிவு செய்து, பின் அளவை 0 ஆக மாற்றும்.", bn: "তাজা, সংরক্ষণ করা যায় না এমন উৎপাদনের জন্য: «নতুন দিন» বোতাম বাকিটাকে অবিক্রীত হিসেবে নথিভুক্ত করে, তারপর পরিমাণ ০ করে দেয়।", ur: "تازہ، غیر ذخیرہ شدہ پیداوار کے لیے: «نیا دن» بٹن باقی ماندہ کو غیر فروخت شدہ کے طور پر درج کرتا ہے، پھر مقدار 0 کر دیتا ہے۔", id: "Untuk produksi segar, tidak dapat disimpan: tombol \"Hari baru\" mencatat sisa sebagai tidak terjual, lalu mengatur ulang jumlah ke 0.", tr: "Taze, depolanamayan üretim için: \"Yeni gün\" düğmesi kalanı satılmamış olarak kaydeder, ardından miktarı sıfırlar.", ko: "신선하고 보관이 어려운 생산물용: \"새로운 하루\" 버튼이 남은 수량을 미판매로 기록한 후 수량을 0으로 초기화합니다.", ja: "保存がきかない当日製造品向け：「新しい一日」ボタンは残数を売れ残りとして記録し、数量を0にリセットします。", it: "Per produzione fresca, non stoccabile: il pulsante «Nuova giornata» registra ciò che resta come invenduto, poi azzera la quantità.", nl: "Voor verse, niet-opslagbare productie: de knop 'Nieuwe dag' registreert wat overblijft als onverkocht en zet de hoeveelheid terug op 0.", sw: "Kwa uzalishaji mpya, usiohifadhika: kitufe \"Siku mpya\" husajili kilichobaki kama kisichouzwa, kisha hurudisha kiasi hadi 0.", ha: "Don samar da sabo, wanda ba za a iya adanawa ba: maɓallin \"Sabuwar rana\" yana rikodin saura a matsayin wanda ba a sayar ba, sannan ya mayar da adadin zuwa 0.", bm: "Fɛn kura, min tɛ se ka mara: bolonda \"Don kura\" bɛ tɔ sɛbɛn i n'a fɔ a man feere, o kɔfɛ a bɛ hakɛ segin 0 ma.", zu: "Okomkhiqizo omusha, ongalondolozeki: inkinobho \"Usuku olusha\" ibhala okusele njengokungathengisiwe, bese ibuyisela inani ku-0.", yo: "Fún ọjà tuntun tí a kò lè kó pamọ́: bọ́tìnnì \"Ọjọ́ tuntun\" máa ń kọ ohun tí ó ṣẹ́kù sílẹ̀ gẹ́gẹ́ bí èyí tí kò tà, lẹ́yìn náà a óò mú iye padà sí 0." };
 EXTRA_UI.dailyBadge = { fr: "Quotidien", am: "ዕለታዊ", en: "Daily", tl: "Araw-araw", te: "రోజువారీ", th: "รายวัน", wo: "Bés bu nekk", pl: "Codziennie", ar: "يومي", es: "Diario", pt: "Diário", zh: "每日", vi: "Hằng ngày", de: "Täglich", ru: "Ежедневно", hi: "दैनिक", ta: "தினசரி", bn: "প্রতিদিন", ur: "روزانہ", id: "Harian", tr: "Günlük", ko: "일일", ja: "毎日", it: "Giornaliero", nl: "Dagelijks", sw: "Kila siku", ha: "Kullum", bm: "Don o don", zu: "Nsuku zonke", yo: "Lójoojúmọ́" };
 EXTRA_UI.startNewDayBtn = { fr: "Nouvelle journée", am: "አዲስ ቀን", en: "New day", tl: "Bagong araw", te: "కొత్త రోజు", th: "วันใหม่", wo: "Bés bu bees", pl: "Nowy dzień", ar: "يوم جديد", es: "Nueva jornada", pt: "Novo dia", zh: "开始新的一天", vi: "Ngày mới", de: "Neuer Tag", ru: "Новый день", hi: "नया दिन", ta: "புதிய நாள்", bn: "নতুন দিন", ur: "نیا دن", id: "Hari baru", tr: "Yeni gün", ko: "새로운 하루", ja: "新しい一日", it: "Nuova giornata", nl: "Nieuwe dag", sw: "Siku mpya", ha: "Sabuwar rana", bm: "Don kura", zu: "Usuku olusha", yo: "Ọjọ́ tuntun" };
+// ---- Boulangerie / pâtisserie : production du matin et suivi des invendus ----
+EXTRA_UI.bakeProducedLabel = { am: "የተሠራ፦", ar: "المُنتَج:", bm: "min dilanna:", bn: "তৈরি:", de: "hergestellt:", en: "made:", es: "producido:", fr: "produit :", ha: "an yi:", hi: "बनाया:", id: "dibuat:", it: "prodotto:", ja: "製造：", ko: "제조:", nl: "gemaakt:", pl: "wyprodukowano:", pt: "produzido:", ru: "изготовлено:", sw: "zilizotengenezwa:", ta: "தயாரித்தது:", te: "తయారు చేసినది:", th: "ผลิต:", tl: "ginawa:", tr: "üretilen:", ur: "تیار کیا:", vi: "đã làm:", wo: "li ñu defar:", yo: "tí a ṣe:", zh: "制作：", zu: "okwenziwe:" };
+EXTRA_UI.bakeUnsoldToLog = { am: "የሚመዘገብ ያልተሸጠ", ar: "غير المباع المراد تسجيله", bm: "Feerebaliw minnu bɛna sɛbɛn", bn: "নথিভুক্ত করার অবিক্রীত", de: "Zu erfassende Reste", en: "Unsold to be logged", es: "Invendidos a registrar", fr: "Invendus à enregistrer", ha: "Rashin sayarwa da za a rubuta", hi: "दर्ज करने हेतु बिना बिका", id: "Sisa yang akan dicatat", it: "Invenduti da registrare", ja: "記録する売れ残り", ko: "기록할 미판매", nl: "Te registreren onverkocht", pl: "Niesprzedane do zapisania", pt: "Não vendidos a registar", ru: "Непроданное к записи", sw: "Zisizouzwa za kusajiliwa", ta: "பதிவு செய்ய வேண்டிய விற்காதவை", te: "నమోదు చేయాల్సిన అమ్ముడుపోనివి", th: "ของเหลือที่จะบันทึก", tl: "Hindi nabentang itatala", tr: "Kaydedilecek satılmayan", ur: "درج کرنے کے لیے غیر فروخت شدہ", vi: "Hàng tồn sẽ ghi nhận", wo: "Li jaaxul, bu nu war a bind", yo: "Èyí tí kò tà, tí a óò kọ sílẹ̀", zh: "将记录的未售出", zu: "Okungathengisiwe okuzobhalwa" };
+EXTRA_UI.bakeLossValue = { am: "የጠፋ ዋጋ", ar: "القيمة الضائعة", bm: "Bɔnɛ hakɛ", bn: "ক্ষতির পরিমাণ", de: "Verlorener Wert", en: "Value lost", es: "Valor perdido", fr: "Valeur perdue", ha: "Darajar da aka rasa", hi: "हुआ नुकसान", id: "Nilai yang hilang", it: "Valore perso", ja: "損失額", ko: "손실 금액", nl: "Verloren waarde", pl: "Stracona wartość", pt: "Valor perdido", ru: "Потерянная стоимость", sw: "Thamani iliyopotea", ta: "இழந்த மதிப்பு", te: "నష్టపోయిన విలువ", th: "มูลค่าที่สูญเสีย", tl: "Halagang nawala", tr: "Kaybedilen değer", ur: "ضائع ہونے والی قیمت", vi: "Giá trị mất đi", wo: "Njëg mu ñàkk", yo: "Iye tí ó sọnù", zh: "损失金额", zu: "Inani elilahlekile" };
+EXTRA_UI.bakeProductionPlaceholder = { am: "የጠዋት ምርት", ar: "إنتاج الصباح", bm: "Sɔgɔmada dilanniw", bn: "সকালের উৎপাদন", de: "Produktion am Morgen", en: "Morning production", es: "Producción de la mañana", fr: "Production du matin", ha: "Abin da aka yi da safe", hi: "सुबह का उत्पादन", id: "Produksi pagi", it: "Produzione del mattino", ja: "朝の製造数", ko: "아침 생산량", nl: "Productie van vanochtend", pl: "Poranna produkcja", pt: "Produção da manhã", ru: "Утренняя выпечка", sw: "Uzalishaji wa asubuhi", ta: "காலை உற்பத்தி", te: "ఉదయపు ఉత్పత్తి", th: "ยอดผลิตตอนเช้า", tl: "Produksyon sa umaga", tr: "Sabah üretimi", ur: "صبح کی پیداوار", vi: "Sản lượng buổi sáng", wo: "Liggéey bu suba", yo: "Ìṣelọ́pọ̀ àárọ̀", zh: "早上的产量", zu: "Umkhiqizo wasekuseni" };
+EXTRA_UI.bakeProductionHint = { am: "እስካሁን ምንም ካልሠሩ ባዶ ይተዉት፦ መጠኑን በኋላ ማስተካከል ይችላሉ።", ar: "اتركه فارغًا إن لم تُنتج شيئًا بعد: يمكنك ضبط الكمية لاحقًا.", bm: "N'i ma foyi dilan fɔlɔ, a to lakolon : i bɛ se ka hakɛ labɛn kɔfɛ.", bn: "এখনো কিছু না বানালে ফাঁকা রাখুন: পরিমাণ পরে ঠিক করতে পারবেন।", de: "Leer lassen, wenn Sie noch nichts hergestellt haben – die Menge lässt sich später anpassen.", en: "Leave empty if you haven't made anything yet: you can adjust the quantity later.", es: "Déjelo vacío si aún no ha producido nada: podrá ajustar la cantidad más tarde.", fr: "Laissez vide si vous n'avez encore rien produit : vous ajusterez la quantité plus tard.", ha: "Bar shi babu komai idan ba ka yi kome ba tukuna: za ka iya gyara adadin daga baya.", hi: "अगर अभी कुछ नहीं बनाया है तो खाली छोड़ें: मात्रा बाद में बदल सकते हैं।", id: "Kosongkan jika belum membuat apa pun: jumlahnya bisa diatur nanti.", it: "Lascia vuoto se non hai ancora prodotto nulla: potrai correggere la quantità più tardi.", ja: "まだ作っていなければ空欄のままで。数量はあとから調整できます。", ko: "아직 만들지 않았다면 비워두세요. 수량은 나중에 조정할 수 있습니다.", nl: "Laat leeg als u nog niets hebt gemaakt: u kunt de hoeveelheid later aanpassen.", pl: "Zostaw puste, jeśli nic jeszcze nie wyprodukowano — ilość można poprawić później.", pt: "Deixe vazio se ainda não produziu nada: poderá ajustar a quantidade mais tarde.", ru: "Оставьте пустым, если ещё ничего не испекли: количество можно задать позже.", sw: "Acha wazi kama hujatengeneza chochote bado: utarekebisha kiasi baadaye.", ta: "இன்னும் எதுவும் தயாரிக்கவில்லை என்றால் காலியாக விடுங்கள்: அளவை பின்னர் மாற்றலாம்.", te: "ఇంకా ఏమీ తయారు చేయకపోతే ఖాళీగా ఉంచండి: పరిమాణాన్ని తర్వాత సరిచేయవచ్చు.", th: "เว้นว่างไว้หากยังไม่ได้ผลิตอะไร คุณปรับจำนวนทีหลังได้", tl: "Iwanang blangko kung wala ka pang ginagawa: maaari mong baguhin ang dami mamaya.", tr: "Henüz bir şey üretmediyseniz boş bırakın: miktarı sonra düzeltebilirsiniz.", ur: "اگر ابھی کچھ نہیں بنایا تو خالی چھوڑ دیں: مقدار بعد میں درست کر سکتے ہیں۔", vi: "Để trống nếu chưa làm gì: bạn có thể chỉnh số lượng sau.", wo: "Bu fi amul dara su fekkee defuloo dara ba léegi: dinga mën a soppi limu bi ëllëg.", yo: "Fi sílẹ̀ ní òfo bí o kò bá tíì ṣe nǹkan kan: o lè ṣàtúnṣe iye náà lẹ́yìn.", zh: "还没做的话就留空，数量可以稍后再调整。", zu: "Shiya kungenalutho uma ungakenzi lutho: ungalungisa inani kamuva." };
+EXTRA_UI.bakeUnsoldTitle = { am: "ያልተሸጠ (ያለፉት 30 ቀናት)", ar: "غير المباع (آخر 30 يومًا)", bm: "Feerebaliw (tile 30 tɛmɛnenw)", bn: "অবিক্রীত (গত ৩০ দিন)", de: "Unverkauft (letzte 30 Tage)", en: "Unsold (last 30 days)", es: "Invendidos (últimos 30 días)", fr: "Invendus (30 derniers jours)", ha: "Rashin sayarwa (kwanaki 30 da suka wuce)", hi: "बिना बिका (पिछले 30 दिन)", id: "Tidak terjual (30 hari terakhir)", it: "Invenduti (ultimi 30 giorni)", ja: "売れ残り（直近30日）", ko: "미판매 (최근 30일)", nl: "Onverkocht (laatste 30 dagen)", pl: "Niesprzedane (ostatnie 30 dni)", pt: "Não vendidos (últimos 30 dias)", ru: "Непроданное (за 30 дней)", sw: "Zisizouzwa (siku 30 zilizopita)", ta: "விற்காதவை (கடந்த 30 நாட்கள்)", te: "అమ్ముడుపోనివి (గత 30 రోజులు)", th: "ขายไม่หมด (30 วันล่าสุด)", tl: "Hindi nabenta (huling 30 araw)", tr: "Satılmayan (son 30 gün)", ur: "غیر فروخت شدہ (پچھلے 30 دن)", vi: "Hàng tồn (30 ngày qua)", wo: "Li jaaxul (30 fan yu wees)", yo: "Èyí tí kò tà (ọjọ́ 30 sẹ́yìn)", zh: "未售出（最近 30 天）", zu: "Okungathengisiwe (izinsuku ezingu-30)" };
+EXTRA_UI.bakeUnsoldHint = { am: "የግዢ ዋጋ ሲታወቅ በእሱ፣ አለበለዚያ በመሸጫ ዋጋ ይሰላል።", ar: "يُحتسب بسعر الشراء إن كان معروفًا، وإلا بسعر البيع.", bm: "A bɛ jate sanni sɔngɔ la ni a dɔnna, n'o tɛ feereli sɔngɔ la.", bn: "ক্রয়মূল্য জানা থাকলে সেটিতে, নইলে বিক্রয়মূল্যে হিসাব করা।", de: "Bewertet zum Einkaufspreis, sofern bekannt, sonst zum Verkaufspreis.", en: "Valued at cost price when known, at selling price otherwise.", es: "Valorado al precio de compra cuando se conoce, al precio de venta si no.", fr: "Chiffré au prix d'achat quand il est connu, au prix de vente sinon.", ha: "Ana ƙididdigewa da farashin saye idan an sani, in ba haka ba da farashin sayarwa.", hi: "खरीद मूल्य ज्ञात हो तो उसी पर, अन्यथा बिक्री मूल्य पर गणना।", id: "Dihitung dengan harga beli bila diketahui, jika tidak dengan harga jual.", it: "Valorizzato al prezzo d'acquisto quando noto, altrimenti al prezzo di vendita.", ja: "仕入価格が分かる場合はそれで、分からない場合は売価で計算します。", ko: "매입가를 알면 매입가로, 모르면 판매가로 계산합니다.", nl: "Gewaardeerd tegen inkoopprijs indien bekend, anders tegen verkoopprijs.", pl: "Wyceniane po cenie zakupu, gdy jest znana, w przeciwnym razie po cenie sprzedaży.", pt: "Valorizado ao preço de compra quando conhecido, ao preço de venda caso contrário.", ru: "Оценено по закупочной цене, если она известна, иначе по цене продажи.", sw: "Hupigwa hesabu kwa bei ya ununuzi ikijulikana, vinginevyo kwa bei ya kuuza.", ta: "கொள்முதல் விலை தெரிந்தால் அதில், இல்லையெனில் விற்பனை விலையில் கணக்கிடப்படுகிறது.", te: "కొనుగోలు ధర తెలిస్తే దానిపై, లేకపోతే అమ్మకపు ధరపై లెక్కిస్తారు.", th: "คิดตามราคาซื้อหากทราบ ถ้าไม่ทราบใช้ราคาขาย", tl: "Tinatasa sa presyo ng bili kung alam, kung hindi ay sa presyo ng benta.", tr: "Biliniyorsa alış fiyatından, aksi halde satış fiyatından hesaplanır.", ur: "معلوم ہو تو خرید قیمت پر، ورنہ فروخت قیمت پر شمار کیا جاتا ہے۔", vi: "Tính theo giá mua khi biết, nếu không thì theo giá bán.", wo: "Ñu koy waññ ci njëgu njënd bu nu ko xam, su ko defulee ci njëgu njaay.", yo: "A ń ṣírò rẹ̀ ní owó ìrà bí a bá mọ̀ ọ́n, bí bẹ́ẹ̀ kọ́ ní owó títà.", zh: "已知进货价时按进货价计，否则按售价计。", zu: "Kubalwa ngentengo yokuthenga uma yaziwa, uma kungenjalo ngentengo yokuthengisa." };
+EXTRA_UI.bakeUnsoldDays = { am: "ቀናት", ar: "أيام", bm: "tile", bn: "দিন", de: "Tage", en: "days", es: "días", fr: "jours", ha: "kwanaki", hi: "दिन", id: "hari", it: "giorni", ja: "日", ko: "일", nl: "dagen", pl: "dni", pt: "dias", ru: "дн.", sw: "siku", ta: "நாட்கள்", te: "రోజులు", th: "วัน", tl: "araw", tr: "gün", ur: "دن", vi: "ngày", wo: "fan", yo: "ọjọ́", zh: "天", zu: "izinsuku" };
+// ---- Vente au poids / à la mesure ----
+EXTRA_UI.measureToggle = { am: "በክብደት ወይም በመለኪያ ይሸጣል", ar: "يُباع بالوزن أو بالقياس", bm: "A bɛ feere girinya walima sumanikɛlan na", bn: "ওজন বা মাপে বিক্রি", de: "Nach Gewicht oder Maß verkauft", en: "Sold by weight or measure", es: "Se vende por peso o medida", fr: "Vendu au poids ou à la mesure", ha: "Ana sayarwa da nauyi ko ma'auni", hi: "वज़न या माप से बिकता है", id: "Dijual per berat atau takaran", it: "Venduto a peso o a misura", ja: "量り売り", ko: "무게 또는 계량 판매", nl: "Verkocht per gewicht of maat", pl: "Sprzedawane na wagę lub miarę", pt: "Vendido a peso ou à medida", ru: "Продаётся на вес или по мере", sw: "Huuzwa kwa uzito au kipimo", ta: "எடை அல்லது அளவில் விற்பனை", te: "బరువు లేదా కొలత ప్రకారం అమ్మకం", th: "ขายตามน้ำหนักหรือปริมาณ", tl: "Ibinebenta ayon sa timbang o sukat", tr: "Kiloyla veya ölçüyle satılır", ur: "وزن یا پیمائش سے فروخت", vi: "Bán theo cân hoặc theo đơn vị đo", wo: "Ñu koy jaay ci diis walla natt", yo: "A ń tà á ní ìwọ̀n", zh: "按重量或计量销售", zu: "Kuthengiswa ngesisindo noma ngesilinganiso" };
+EXTRA_UI.measureUnitPlaceholder = { am: "መለኪያ (ኪግ፣ ሊ፣ ሜትር፣ ክምር...)", ar: "الوحدة (كغ، لتر، متر، كومة...)", bm: "Sumanikɛlan (kg, L, mɛtɛrɛ, kulu...)", bn: "একক (কেজি, লিটার, মিটার, স্তূপ...)", de: "Einheit (kg, L, Meter, Haufen...)", en: "Unit (kg, L, metre, pile...)", es: "Unidad (kg, L, metro, montón...)", fr: "Unité (kg, L, mètre, tas...)", ha: "Ma'auni (kg, L, mita, tari...)", hi: "इकाई (किग्रा, लीटर, मीटर, ढेर...)", id: "Satuan (kg, L, meter, tumpuk...)", it: "Unità (kg, L, metro, mucchio...)", ja: "単位（kg、L、メートル、山…）", ko: "단위 (kg, L, 미터, 무더기...)", nl: "Eenheid (kg, L, meter, hoop...)", pl: "Jednostka (kg, l, metr, kupka...)", pt: "Unidade (kg, L, metro, monte...)", ru: "Единица (кг, л, метр, куча...)", sw: "Kipimo (kg, L, mita, rundo...)", ta: "அலகு (கிகி, லி, மீட்டர், குவியல்...)", te: "యూనిట్ (కేజీ, లీ, మీటర్, కుప్ప...)", th: "หน่วย (กก., ลิตร, เมตร, กอง...)", tl: "Yunit (kg, L, metro, bunton...)", tr: "Birim (kg, L, metre, yığın...)", ur: "اکائی (کلو، لیٹر، میٹر، ڈھیر...)", vi: "Đơn vị (kg, L, mét, đống...)", wo: "Natt (kg, L, meetar, tas...)", yo: "Ìwọ̀n (kg, L, mítà, òkìtì...)", zh: "单位（公斤、升、米、堆……）", zu: "Iyunithi (kg, L, imitha, inqwaba...)" };
+EXTRA_UI.measureHint = { am: "ከላይ የገባው ዋጋ የዚህ መለኪያ ዋጋ ነው። በሽያጭ ጊዜ የተመዘነውን መጠን፣ ነጥብ ጨምሮ ይተይባሉ።", ar: "السعر أعلاه هو سعر هذه الوحدة. عند البيع تكتب الكمية الموزونة، بما في ذلك الكسور.", bm: "Sɔngɔ min sɛbɛnna sanfɛ, o ye nin sumanikɛlan sɔngɔ ye. Feereli waati, i bɛ girinya hakɛ sɛbɛn, ni tilan ye.", bn: "উপরের দামটি এই এককের দাম। বিক্রির সময় মাপা পরিমাণ লিখবেন, দশমিকসহ।", de: "Der Preis oben gilt für eine solche Einheit. Beim Verkauf geben Sie die gewogene Menge ein, auch mit Komma.", en: "The price above is the price of one such unit. At checkout you type the weighed quantity, decimals included.", es: "El precio indicado arriba es el de esa unidad. Al vender, escribe la cantidad pesada, con decimales.", fr: "Le prix saisi plus haut est le prix de cette unité. À la vente, vous tapez la quantité pesée, virgule comprise.", ha: "Farashin da ke sama shi ne na wannan ma'aunin. Lokacin sayarwa, kana rubuta adadin da aka auna, har da ɓangarori.", hi: "ऊपर दर्ज कीमत इसी इकाई की है। बिक्री के समय आप तौली गई मात्रा लिखते हैं, दशमलव सहित।", id: "Harga di atas adalah harga satu satuan tersebut. Saat menjual, Anda mengetik jumlah hasil timbangan, termasuk koma.", it: "Il prezzo indicato sopra è quello di questa unità. Alla vendita digiti la quantità pesata, virgola compresa.", ja: "上で入力した価格はこの単位あたりの価格です。販売時に量った数量を、小数も含めて入力します。", ko: "위에 입력한 가격은 이 단위당 가격입니다. 판매할 때 잰 수량을 소수점까지 입력합니다.", nl: "De prijs hierboven geldt per die eenheid. Bij verkoop typt u de gewogen hoeveelheid, met komma.", pl: "Cena powyżej dotyczy tej jednostki. Przy sprzedaży wpisujesz zważoną ilość, także z przecinkiem.", pt: "O preço acima é o preço dessa unidade. Na venda, escreve a quantidade pesada, com vírgula.", ru: "Цена выше — за одну такую единицу. При продаже вы вводите взвешенное количество, в том числе дробное.", sw: "Bei iliyo hapo juu ni ya kipimo hicho. Wakati wa kuuza, unaandika kiasi kilichopimwa, pamoja na desimali.", ta: "மேலே உள்ள விலை இந்த அலகின் விலை. விற்பனையின்போது எடை அளவை, தசமத்துடன் தட்டச்சு செய்வீர்கள்.", te: "పైన ఇచ్చిన ధర ఈ యూనిట్‌కి. అమ్మేటప్పుడు తూచిన పరిమాణాన్ని, దశాంశంతో సహా టైప్ చేస్తారు.", th: "ราคาด้านบนคือราคาต่อหน่วยนี้ ตอนขายคุณพิมพ์น้ำหนักที่ชั่งได้ รวมทศนิยม", tl: "Ang presyo sa itaas ay para sa isang yunit na iyon. Sa pagbebenta, ita-type mo ang natimbang na dami, kasama ang desimal.", tr: "Yukarıdaki fiyat bu birimin fiyatıdır. Satışta tartılan miktarı, virgüllü olarak yazarsınız.", ur: "اوپر درج قیمت اسی اکائی کی ہے۔ فروخت کے وقت آپ تولی گئی مقدار لکھتے ہیں، اعشاریہ سمیت۔", vi: "Giá ở trên là giá của một đơn vị đó. Khi bán, bạn nhập số cân, có cả phần lẻ.", wo: "Njëg gi ci kaw mooy njëgu natt boobu. Bu ngay jaay, dinga bind limu bi nga natt, ak lu ëpp.", yo: "Owó tí o kọ sókè ni owó ìwọ̀n yìí. Nígbà títà, o óò tẹ iye tí o wọ̀n, pẹ̀lú ààmì ìdá.", zh: "上面填的价格是该单位的价格。销售时输入称得的数量，可以带小数。", zu: "Intengo engenhla ingeyale yunithi. Lapho uthengisa, uthayipha inani olikalile, kanye namaphuzu." };
+EXTRA_UI.measureEnterBtn = { am: "መዝን", ar: "وزن", bm: "A sumani", bn: "ওজন করুন", de: "Wiegen", en: "Weigh", es: "Pesar", fr: "Peser", ha: "Auna", hi: "तौलें", id: "Timbang", it: "Pesare", ja: "量る", ko: "계량", nl: "Wegen", pl: "Zważ", pt: "Pesar", ru: "Взвесить", sw: "Pima", ta: "எடை", te: "తూకం", th: "ชั่ง", tl: "Timbangin", tr: "Tart", ur: "تولیں", vi: "Cân", wo: "Natt", yo: "Wọ̀n", zh: "称量", zu: "Kala" };
+EXTRA_UI.measureQtyPlaceholder = { am: "መጠን", ar: "الكمية", bm: "Hakɛ", bn: "পরিমাণ", de: "Menge", en: "Quantity", es: "Cantidad", fr: "Quantité", ha: "Adadi", hi: "मात्रा", id: "Jumlah", it: "Quantità", ja: "数量", ko: "수량", nl: "Hoeveelheid", pl: "Ilość", pt: "Quantidade", ru: "Количество", sw: "Kiasi", ta: "அளவு", te: "పరిమాణం", th: "จำนวน", tl: "Dami", tr: "Miktar", ur: "مقدار", vi: "Số lượng", wo: "Limu", yo: "Iye", zh: "数量", zu: "Inani" };
+EXTRA_UI.measureAvailable = { am: "ያለ፦", ar: "المتوفر:", bm: "min bɛ yen:", bn: "মজুদ:", de: "verfügbar:", en: "available:", es: "disponible:", fr: "dispo :", ha: "akwai:", hi: "उपलब्ध:", id: "tersedia:", it: "disponibile:", ja: "在庫：", ko: "재고:", nl: "beschikbaar:", pl: "dostępne:", pt: "disponível:", ru: "в наличии:", sw: "zilizopo:", ta: "கிடைப்பது:", te: "అందుబాటు:", th: "คงเหลือ:", tl: "available:", tr: "mevcut:", ur: "دستیاب:", vi: "còn:", wo: "am na:", yo: "tó wà:", zh: "可售：", zu: "okutholakalayo:" };
+EXTRA_UI.measureNotEnough = { am: "በክምችት የቀረው {n} ብቻ ነው።", ar: "لم يتبقَّ سوى {n} في المخزون.", bm: "{n} dɔrɔn de tora stɔki la.", bn: "স্টকে কেবল {n} আছে।", de: "Es sind nur noch {n} auf Lager.", en: "Only {n} left in stock.", es: "Solo quedan {n} en stock.", fr: "Il ne reste que {n} en stock.", ha: "Sauran {n} kaɗai a ajiya.", hi: "स्टॉक में केवल {n} बचा है।", id: "Hanya tersisa {n} di stok.", it: "Restano solo {n} in magazzino.", ja: "在庫は {n} しかありません。", ko: "재고가 {n}밖에 없습니다.", nl: "Er is nog maar {n} op voorraad.", pl: "W magazynie zostało tylko {n}.", pt: "Só restam {n} em stock.", ru: "В наличии осталось только {n}.", sw: "Zimebaki {n} tu kwenye stoo.", ta: "இருப்பில் {n} மட்டுமே உள்ளது.", te: "నిల్వలో {n} మాత్రమే ఉంది.", th: "เหลือในสต็อกเพียง {n}", tl: "{n} na lang ang natitira sa stock.", tr: "Stokta yalnızca {n} kaldı.", ur: "اسٹاک میں صرف {n} باقی ہے۔", vi: "Chỉ còn {n} trong kho.", wo: "{n} rekk a des ci stock bi.", yo: "{n} péré ló kù nínú ọjà.", zh: "库存只剩 {n}。", zu: "Kusele u-{n} kuphela esitokweni." };
 EXTRA_UI.logNewDayStarted = { fr: "Nouvelle journée démarrée", am: "አዲስ ቀን ጀምሯል", en: "New day started", tl: "Nagsimula ang bagong araw", te: "కొత్త రోజు ప్రారంభమైంది", th: "เริ่มวันใหม่แล้ว", wo: "Bés bu bees tambali na", pl: "Rozpoczęto nowy dzień", ar: "بدأ يوم جديد", es: "Nueva jornada iniciada", pt: "Novo dia iniciado", zh: "已开始新的一天", vi: "Đã bắt đầu ngày mới", de: "Neuer Tag gestartet", ru: "Начат новый день", hi: "नया दिन शुरू हुआ", ta: "புதிய நாள் தொடங்கப்பட்டது", bn: "নতুন দিন শুরু হয়েছে", ur: "نیا دن شروع ہوا", id: "Hari baru dimulai", tr: "Yeni gün başlatıldı", ko: "새로운 하루 시작됨", ja: "新しい一日を開始しました", it: "Nuova giornata avviata", nl: "Nieuwe dag gestart", sw: "Siku mpya imeanza", ha: "An fara sabuwar rana", bm: "Don kura daminɛna", zu: "Kuqalwe usuku olusha", yo: "Ọjọ́ tuntun ti bẹ̀rẹ̀" };
 EXTRA_UI.logUnsoldQty = { fr: "invendus :", am: "ያልተሸጠ፦", en: "unsold:", tl: "hindi nabenta:", te: "అమ్ముడుపోనిది:", th: "ขายไม่หมด:", wo: "amul jaay:", pl: "niesprzedane:", ar: "غير مباع:", es: "invendidos:", pt: "não vendidos:", zh: "未售出：", vi: "tồn chưa bán:", de: "unverkauft:", ru: "непроданные:", hi: "बिना बिका:", ta: "விற்காதவை:", bn: "অবিক্রীত:", ur: "غیر فروخت شدہ:", id: "tidak terjual:", tr: "satılmayan:", ko: "미판매:", ja: "売れ残り：", it: "invenduti:", nl: "onverkocht:", sw: "haikuuzwa:", ha: "ba a sayar ba:", bm: "feerelen tɛ:", zu: "okungathengisiwe:", yo: "tí kò tà:" };
 // Multi-boutique : refus de création (limite du palier / nom déjà pris), affichés
@@ -6251,6 +6268,18 @@ function localizedNumber(n) {
   let f = __numberFormatCache[loc];
   if (!f) f = __numberFormatCache[loc] = new Intl.NumberFormat(loc, { maximumFractionDigits: 0 });
   return f.format(Math.round(n));
+}
+// Quantité, et non montant. localizedNumber arrondit à l'entier : juste pour un montant
+// en FCFA (il n'y a pas de centime), faux pour un poids. Une vente de 1,5 kg s'affichait
+// "2 kg" sur le reçu remis au client — un chiffre faux sur une pièce qu'il emporte.
+function localizedQty(n) {
+  const loc = CURRENT_LANG === "bm" || CURRENT_LANG === "wo"
+    ? "fr-FR-u-nu-" + (USE_ARABIC_DIGITS ? "arab" : "latn")
+    : getAppLocale();
+  const key = "qty:" + loc;
+  let f = __numberFormatCache[key];
+  if (!f) f = __numberFormatCache[key] = new Intl.NumberFormat(loc, { maximumFractionDigits: 3 });
+  return f.format(Number(n) || 0);
 }
 // Version compacte (12 k, 3,4 M, 1,2 Md…) utilisée sur l'axe des graphiques : sans elle,
 // dès que les ventes atteignent les millions/milliards, les nombres complets ("1 200 000")
@@ -10049,7 +10078,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         doc.setFont("helvetica", "normal");
         doc.setTextColor(...CHARCOAL_RGB);
         // Un nom de produit long passait par-dessus le prix : on le tronque.
-        doc.text(clipTo(`${it.qty}×  ${it.name}`, contentW - priceW - 6), marginX, y);
+        // Une ligne vendue au poids porte son unité : "1,5 kg × Riz" et pas "1,5× Riz".
+        const qtyLabel = it.measureUnit ? `${localizedQty(it.qty)} ${it.measureUnit}` : localizedQty(it.qty);
+        doc.text(clipTo(`${qtyLabel}×  ${it.name}`, contentW - priceW - 6), marginX, y);
         doc.setFont("helvetica", "bold");
         doc.text(priceText, pageW - marginX, y, { align: "right" });
         y += rowH;
@@ -11503,6 +11534,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Comptage de caisse (voir saveCashCount) : montant saisi, et case "corriger le solde".
   const [showCashCount, setShowCashCount] = useState(false);
   const [showCloseDay, setShowCloseDay] = useState(false);
+  const [newDayTarget, setNewDayTarget] = useState(null);  // produit dont on ouvre la journée
+  const [measureTarget, setMeasureTarget] = useState(null); // produit vendu au poids en cours de saisie
+  const [measureQty, setMeasureQty] = useState("");
+  const [newDayQty, setNewDayQty] = useState("");          // production du matin saisie
   const [closeCountInput, setCloseCountInput] = useState("");   // argent réellement compté
   const [closeCarryInput, setCloseCarryInput] = useState("");   // montant laissé pour demain
   const [closeBusy, setCloseBusy] = useState(false);
@@ -11651,6 +11686,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [newCategoryName, setNewCategoryName] = useState("");
   const [pPhoto, setPPhoto] = useState(null);
   const [pSellByUnit, setPSellByUnit] = useState(false);
+  // Vente au poids / à la mesure : riz, sucre, huile, tissu... se vendent par quantité
+  // fractionnaire (1,5 kg), pas par unités entières. On ne rend pas TOUS les stocks
+  // décimaux — ce serait toucher à tout l'app pour rien : seuls les produits ainsi
+  // marqués acceptent une virgule, les autres restent entiers comme avant.
+  const [pSellByMeasure, setPSellByMeasure] = useState(false);
+  const [pMeasureUnit, setPMeasureUnit] = useState("");
   // Produit en "Quantité du jour" (boulangerie/pâtisserie, production non stockable) :
   // la quantité se gère comme un stock classique au jour le jour (le "+" existant sert
   // de réapprovisionnement, qu'il s'agisse d'une nouvelle fournée ou d'une livraison),
@@ -11693,6 +11734,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setPCategory(draft.pCategory || "");
       setPPhoto(draft.pPhoto || null);
       setPSellByUnit(!!draft.pSellByUnit);
+      setPSellByMeasure(!!draft.pSellByMeasure);
+      setPMeasureUnit(draft.pMeasureUnit || "");
       setPUnitsPerPack(draft.pUnitsPerPack || "");
       setPUnitPrice(draft.pUnitPrice || "");
       setPDailyMode(!!draft.pDailyMode);
@@ -11705,13 +11748,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     try {
       if (showAddProduct) {
         window.sessionStorage.setItem("mb_product_draft_v1", JSON.stringify({
-          pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, pDailyMode, savedAt: Date.now(),
+          pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, pDailyMode, pSellByMeasure, pMeasureUnit, savedAt: Date.now(),
         }));
       } else {
         window.sessionStorage.removeItem("mb_product_draft_v1");
       }
     } catch (err) {}
-  }, [showAddProduct, pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, pDailyMode]);
+  }, [showAddProduct, pName, pQty, pPrice, pDescription, pCostPrice, pCategory, pPhoto, pSellByUnit, pUnitsPerPack, pUnitPrice, pDailyMode, pSellByMeasure, pMeasureUnit]);
   // Anti-clic-fantôme : sur Android Chrome, revenir de l'appareil photo natif (input file
   // capture="environment") peut déclencher un clic fantôme sur l'élément situé à l'endroit
   // où était le bouton "OK" natif — ici, ça tombait sur le bouton "fermer" du formulaire,
@@ -12843,7 +12886,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         products: products.map((p) => p.id === editingProductId ? {
           ...p,
           name: pName.trim(),
-          quantity: parseInt(pQty, 10),
+          quantity: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10),
           price: parseFloat(pPrice),
           description: pDescription.trim() || null,
           costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
@@ -12853,13 +12896,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
           unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
           dailyMode: pDailyMode,
+          sellByMeasure: pSellByMeasure,
+          measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
           barcode: pBarcode.trim() || null,
           updatedAt: Date.now(),
         } : p),
       });
       logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}`);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPBarcode(""); setShowAddProduct(false);
+      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -12871,7 +12916,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const newProduct = {
       id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
       name: pName.trim(),
-      quantity: parseInt(pQty, 10),
+      quantity: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10),
       price: parseFloat(pPrice),
       description: pDescription.trim() || null,
       costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
@@ -12883,13 +12928,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
       unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
       dailyMode: pDailyMode,
+      sellByMeasure: pSellByMeasure,
+      measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
       barcode: pBarcode.trim() || null,
       looseUnits: 0,
       updatedAt: Date.now(),
     };
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPBarcode(""); setShowAddProduct(false);
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setShowAddProduct(false);
   };
   // Ouvre le formulaire déjà rempli avec les valeurs du produit, pour corriger
   // une erreur de saisie (nom, quantité, prix, photo...) sans le recréer.
@@ -12906,6 +12953,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPUnitsPerPack(p.unitsPerPack != null ? String(p.unitsPerPack) : "");
     setPUnitPrice(p.unitPrice != null ? String(p.unitPrice) : "");
     setPDailyMode(!!p.dailyMode);
+    setPSellByMeasure(!!p.sellByMeasure);
+    setPMeasureUnit(p.measureUnit || "");
     setPBarcode(p.barcode || "");
     setError("");
     setShowAddProduct(true);
@@ -12977,7 +13026,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ce produit repart à 0, prêt pour la prochaine fournée/livraison du jour suivant. Tant
   // que ce bouton n'est pas pressé, le stock restant continue normalement à se vendre
   // (ex. invendus du midi revendus l'après-midi ou le lendemain) : rien ne change pour lui.
-  const startNewDay = (id) => {
+  const startNewDay = (id, production) => {
     if (isProductFrozen(id)) {
       setError(t(lang, "productFrozenMsg"));
       return;
@@ -12985,7 +13034,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const p = products.find((pr) => pr.id === id);
     if (!p) return;
     const remaining = (p.quantity || 0) * (p.sellByUnit ? (p.unitsPerPack || 1) : 1) + (p.sellByUnit ? (p.looseUnits || 0) : 0);
-    const nextProducts = products.map((pr) => (pr.id === id ? { ...pr, quantity: 0, looseUnits: pr.sellByUnit ? 0 : pr.looseUnits, updatedAt: Date.now() } : pr));
+    // Production du matin saisie dans la même fenêtre : le boulanger clôt la veille et
+    // enregistre la fournée du jour d'un seul geste, au lieu de remettre à zéro puis de
+    // rouvrir la fiche produit pour ressaisir la quantité.
+    const made = Math.max(0, Math.floor(Number(production) || 0));
+    const nextProducts = products.map((pr) => (pr.id === id ? { ...pr, quantity: made, looseUnits: pr.sellByUnit ? 0 : pr.looseUnits, updatedAt: Date.now() } : pr));
     if (remaining > 0) {
       const entry = {
         id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
@@ -12993,13 +13046,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         productName: p.name,
         qty: remaining,
         date: new Date().toISOString(),
+        // Valeur de ce qui part à la poubelle : au prix d'achat quand il est connu
+        // (c'est la vraie perte), au prix de vente sinon (le manque à gagner).
+        unitCost: p.costPrice != null && p.costPrice !== "" ? Number(p.costPrice) : Number(p.price) || 0,
+        costKnown: p.costPrice != null && p.costPrice !== "",
+        actorId: activeEmployee ? activeEmployee.id : null,
+        actorName: activeEmployee ? activeEmployee.name : null,
       };
       saveAll({ products: nextProducts, unsoldLog: [...unsoldLog, entry] });
-      logAction(`${tx(lang, "logNewDayStarted")} : ${p.name} (${tx(lang, "logUnsoldQty")} ${localizedNumber(remaining)})`);
+      logAction(`${tx(lang, "logNewDayStarted")} : ${p.name} (${tx(lang, "logUnsoldQty")} ${localizedNumber(remaining)}${made > 0 ? `, ${tx(lang, "bakeProducedLabel")} ${localizedNumber(made)}` : ""})`);
     } else {
       saveAll({ products: nextProducts });
-      logAction(`${tx(lang, "logNewDayStarted")} : ${p.name}`);
+      logAction(`${tx(lang, "logNewDayStarted")} : ${p.name}${made > 0 ? ` (${tx(lang, "bakeProducedLabel")} ${localizedNumber(made)})` : ""}`);
     }
+    setNewDayTarget(null);
+    setNewDayQty("");
   };
   // Déduit "unitsToRemove" unités individuelles d'un produit vendu à l'unité,
   // en ouvrant des paquets automatiquement si le stock d'unités détachées ne suffit pas.
@@ -14092,6 +14153,36 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // l'icône Vente) est géré séparément par spawnFlyingToken, appelé depuis les boutons "+".
     if (delta > 0) playSound("addToCart");
   };
+  // Pose une quantité précise au lieu de l'incrémenter : c'est ce qu'il faut pour un
+  // produit vendu au poids, où l'on pèse puis on saisit 1,5 — on ne clique pas 15 fois.
+  // On réutilise le mode "pack" : pour tout le reste de l'app (réservation de stock,
+  // déduction à la vente, reçu, statistiques) une ligne au poids est une ligne normale
+  // dont la quantité porte une virgule. Rien d'autre n'a besoin de changer.
+  const setCartMeasureQty = (cartId, product, rawQty) => {
+    const cart = draftCarts.find((c) => c.id === cartId);
+    if (!cart) return;
+    const qty = Math.max(0, parseFloat(String(rawQty).replace(",", ".")) || 0);
+    if (qty > 0 && isProductFrozen(product.id)) { setError(t(lang, "productFrozenMsg")); return; }
+    const others = draftCarts.reduce((sum, c) => sum + (c.id === cartId ? 0 : c.items.filter((i) => i.productId === product.id && (i.mode || "pack") === "pack").reduce((x, i) => x + i.qty, 0)), 0);
+    if (others + qty > (product.quantity || 0)) {
+      setError(tx(lang, "measureNotEnough").replace("{n}", `${localizedQty(Math.max(0, (product.quantity || 0) - others))} ${product.measureUnit || ""}`.trim()));
+      return;
+    }
+    setError("");
+    const next = draftCarts.map((c) => {
+      if (c.id !== cartId) return c;
+      const exists = c.items.find((i) => i.productId === product.id && (i.mode || "pack") === "pack");
+      let items;
+      if (qty <= 0) items = c.items.filter((i) => !(i.productId === product.id && (i.mode || "pack") === "pack"));
+      else if (exists) items = c.items.map((i) => (i.productId === product.id && (i.mode || "pack") === "pack" ? { ...i, qty, measureUnit: product.measureUnit || null } : i));
+      else items = [...c.items, { id: Date.now().toString() + Math.random().toString(36).slice(2, 6), productId: product.id, productName: product.name, unitPrice: product.price, qty, mode: "pack", measureUnit: product.measureUnit || null }];
+      return { ...c, items };
+    });
+    saveAll({ draftCarts: next });
+    if (qty > 0) playSound("addToCart");
+    setMeasureTarget(null);
+    setMeasureQty("");
+  };
   const updateCartMeta = (cartId, field, value) => {
     saveAll({ draftCarts: draftCarts.map((c) => (c.id === cartId ? { ...c, [field]: value } : c)) });
   };
@@ -14254,7 +14345,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim(), loyalty: loyaltyInfo });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim(), loyalty: loyaltyInfo });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -17233,6 +17324,72 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {measureTarget && (() => {
+          // Saisie d'une quantité pesée. Le clavier décimal est demandé explicitement :
+          // sur un téléphone, sans ça, impossible de taper une virgule.
+          const p = products.find((pr) => pr.id === measureTarget);
+          if (!p) return null;
+          const others = draftCarts.reduce((sum, c) => sum + (activeCart && c.id === activeCart.id ? 0 : c.items.filter((i) => i.productId === p.id && (i.mode || "pack") === "pack").reduce((x, i) => x + i.qty, 0)), 0);
+          const dispo = Math.max(0, (p.quantity || 0) - others);
+          const qtyNum = parseFloat(String(measureQty).replace(",", ".")) || 0;
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+              <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-bold text-sm">{p.name}</h3>
+                  <button onClick={() => { setMeasureTarget(null); setMeasureQty(""); }}><X size={18} /></button>
+                </div>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>
+                  {fcfa(p.price)} / {p.measureUnit || ""} · {tx(lang, "measureAvailable")} {localizedQty(dispo)} {p.measureUnit || ""}
+                </p>
+                <input autoComplete="off" autoFocus placeholder={`${tx(lang, "measureQtyPlaceholder")} (${p.measureUnit || ""})`} type="number" inputMode="decimal" step="any" value={measureQty} onChange={(e) => setMeasureQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-base mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                {qtyNum > 0 && (
+                  <div className="flex items-center justify-between text-xs rounded-lg p-2 mb-3" style={{ background: T.input }}>
+                    <span style={{ color: T.muted }}>{t(lang, "cartTotal")}</span>
+                    <span className="font-extrabold">{fcfa(qtyNum * p.price)}</span>
+                  </div>
+                )}
+                <button onClick={() => setCartMeasureQty(activeCart.id, p, measureQty)} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "confirmBtn")}</button>
+              </div>
+            </div>
+          );
+        })()}
+        {newDayTarget && (() => {
+          // Ouverture de journée d'un produit frais (boulangerie, pâtisserie) : on clôt la
+          // veille et on enregistre la fournée du matin d'un seul geste. Avant, il fallait
+          // remettre à zéro puis rouvrir la fiche produit pour ressaisir la quantité, et le
+          // message de confirmation était en français en dur dans une app en 30 langues.
+          const p = products.find((pr) => pr.id === newDayTarget);
+          if (!p) return null;
+          const remaining = (p.quantity || 0) * (p.sellByUnit ? (p.unitsPerPack || 1) : 1) + (p.sellByUnit ? (p.looseUnits || 0) : 0);
+          const unitCost = p.costPrice != null && p.costPrice !== "" ? Number(p.costPrice) : Number(p.price) || 0;
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+              <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-bold text-sm">{tx(lang, "startNewDayBtn")}</h3>
+                  <button onClick={() => { setNewDayTarget(null); setNewDayQty(""); }}><X size={18} /></button>
+                </div>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{p.name}</p>
+                {remaining > 0 && (
+                  <div className="rounded-xl p-2.5 mb-3" style={{ background: darkMode ? "rgba(184,86,47,0.15)" : "#fef2f2" }}>
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span style={{ color: T.muted }}>{tx(lang, "bakeUnsoldToLog")}</span>
+                      <span className="font-extrabold" style={{ color: CLAY }}>{localizedNumber(remaining)}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px] mt-1">
+                      <span style={{ color: T.muted }}>{tx(lang, "bakeLossValue")}</span>
+                      <span className="font-bold" style={{ color: CLAY }}>{maskAmount(fcfa(remaining * unitCost))}</span>
+                    </div>
+                  </div>
+                )}
+                <input autoComplete="off" placeholder={tx(lang, "bakeProductionPlaceholder")} type="number" inputMode="numeric" value={newDayQty} onChange={(e) => setNewDayQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-1" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <p className="text-[10px] mb-3" style={{ color: T.muted }}>{tx(lang, "bakeProductionHint")}</p>
+                <button onClick={() => startNewDay(newDayTarget, newDayQty)} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "startNewDayBtn")}</button>
+              </div>
+            </div>
+          );
+        })()}
         {restockTarget && (() => {
           const restockProduct = products.find((p) => p.id === restockTarget);
           if (!restockProduct) return null;
@@ -17354,7 +17511,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
               <label className="flex items-center justify-between cursor-pointer">
                 <span className="text-xs font-semibold" style={{ color: T.text }}>{t(lang, "sellByUnitToggle")}</span>
-                <button type="button" onClick={() => setPSellByUnit(!pSellByUnit)} style={{ width: 40, height: 22, borderRadius: 12, background: pSellByUnit ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pSellByUnit ? "flex-end" : "flex-start", border: "none", cursor: "pointer" }}>
+                <button type="button" onClick={() => { const v = !pSellByUnit; setPSellByUnit(v); if (v) setPSellByMeasure(false); }} style={{ width: 40, height: 22, borderRadius: 12, background: pSellByUnit ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pSellByUnit ? "flex-end" : "flex-start", border: "none", cursor: "pointer" }}>
                   <span style={{ width: 16, height: 16, borderRadius: "50%", background: "white", display: "block" }} />
                 </button>
               </label>
@@ -17362,6 +17519,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div className="mt-3 flex flex-col gap-2">
                   <input autoComplete="off" placeholder={t(lang, "unitsPerPack")} type="number" value={pUnitsPerPack} onChange={(e) => setPUnitsPerPack(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                   <input autoComplete="off" placeholder={t(lang, "unitSalePrice")} type="number" value={pUnitPrice} onChange={(e) => setPUnitPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                </div>
+              )}
+            </div>
+            {/* Vente au poids / à la mesure : la quantité se saisit au lieu de se cliquer,
+                et elle accepte une virgule. Incompatible avec la vente à l'unité, qui
+                découpe des paquets entiers : les deux ne peuvent pas être actifs ensemble. */}
+            <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+              <label className="flex items-center justify-between cursor-pointer gap-3">
+                <span className="text-xs font-semibold" style={{ color: T.text }}>{tx(lang, "measureToggle")}</span>
+                <button type="button" onClick={() => { const v = !pSellByMeasure; setPSellByMeasure(v); if (v) setPSellByUnit(false); }} style={{ width: 40, height: 22, borderRadius: 12, background: pSellByMeasure ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pSellByMeasure ? "flex-end" : "flex-start", border: "none", cursor: "pointer", flexShrink: 0 }}>
+                  <span style={{ width: 16, height: 16, borderRadius: "50%", background: "white", display: "block" }} />
+                </button>
+              </label>
+              {pSellByMeasure && (
+                <div className="mt-3">
+                  <input autoComplete="off" placeholder={tx(lang, "measureUnitPlaceholder")} type="text" value={pMeasureUnit} onChange={(e) => setPMeasureUnit(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                  <p className="text-[11px] mt-2" style={{ color: T.muted }}>{tx(lang, "measureHint")}</p>
                 </div>
               )}
             </div>
@@ -17500,7 +17674,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           </span>
                         )}
                       </div>
-                      <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {t(lang, "othUnite")}</p>
+                      <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {p.sellByMeasure ? (p.measureUnit || t(lang, "othUnite")) : t(lang, "othUnite")}</p>
                       {p.sellByUnit && (
                         <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>
                           {fcfa(p.unitPrice)} / {t(lang, "sellUnit")} · {localizedNumber((p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0))} {t(lang, "unitsAvailable")}
@@ -17511,7 +17685,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                   <div className="flex-shrink-0 text-center">
                     {frozen ? (
-                      <span className="text-sm font-extrabold w-10 text-center block" style={{ color: T.muted }}>{localizedNumber(p.quantity)}</span>
+                      <span className="text-sm font-extrabold w-10 text-center block" style={{ color: T.muted }}>{localizedQty(p.quantity)}</span>
                     ) : hasPermission("editStock") ? (
                       <div className="flex items-center gap-2">
                         <button onClick={() => adjustStock(p.id, -1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
@@ -17556,15 +17730,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   )}
                   {p.dailyMode && hasPermission("editStock") && !frozen && (
                     <button
-                      onClick={() => {
-                        const remaining = (p.quantity || 0) * (p.sellByUnit ? (p.unitsPerPack || 1) : 1) + (p.sellByUnit ? (p.looseUnits || 0) : 0);
-                        setConfirmModal({
-                          message: remaining > 0
-                            ? `Démarrer une nouvelle journée pour "${p.name}" ? Les ${localizedNumber(remaining)} restant(e)s seront enregistré(e)s comme invendus, puis la quantité repartira à 0.`
-                            : `Démarrer une nouvelle journée pour "${p.name}" ? La quantité repartira à 0.`,
-                          onConfirm: () => startNewDay(p.id),
-                        });
-                      }}
+                      onClick={() => { setNewDayTarget(p.id); setNewDayQty(""); }}
                       className="w-8 h-8 rounded-full flex items-center justify-center"
                       style={{ background: darkMode ? "rgba(217,119,6,0.12)" : "#fef3c7" }}
                       aria-label={tx(lang, "startNewDayBtn")}
@@ -17938,24 +18104,39 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             </div>
                             <div>
                               <p className="text-base font-bold">{p.name}</p>
-                              <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · dispo : {localizedNumber(dispo)}</p>
+                              <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)}{p.sellByMeasure ? ` / ${p.measureUnit || ""}` : ""} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · {tx(lang, "measureAvailable")} {localizedQty(dispo)} {p.sellByMeasure ? (p.measureUnit || "") : ""}</p>
                             </div>
                           </div>
                           <div className="flex items-center gap-2.5">
-                            {inCartPack && (
+                            {p.sellByMeasure ? (
+                              // Vendu au poids : on pèse puis on saisit. Cliquer 15 fois sur
+                              // "+" pour 1,5 kg n'a aucun sens, et ne permettrait pas la virgule.
+                              <button
+                                onClick={() => { setMeasureTarget(p.id); setMeasureQty(inCartPack ? String(inCartPack.qty) : ""); }}
+                                disabled={dispo <= 0 && !inCartPack}
+                                className="px-3 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold disabled:opacity-30 active:scale-95 transition-transform"
+                                style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)", boxShadow: "0 3px 8px rgba(37,99,235,0.4)" }}
+                              >
+                                {inCartPack ? `${localizedQty(inCartPack.qty)} ${p.measureUnit || ""}`.trim() : tx(lang, "measureEnterBtn")}
+                              </button>
+                            ) : (
                               <>
-                                <button onClick={() => changeCartQty(activeCart.id, p, -1, "pack")} className="w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={18} /></button>
-                                <span className="text-base font-extrabold w-6 text-center">{inCartPack.qty}</span>
+                                {inCartPack && (
+                                  <>
+                                    <button onClick={() => changeCartQty(activeCart.id, p, -1, "pack")} className="w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={18} /></button>
+                                    <span className="text-base font-extrabold w-6 text-center">{inCartPack.qty}</span>
+                                  </>
+                                )}
+                                <button
+                                  onClick={(e) => { changeCartQty(activeCart.id, p, 1, "pack"); if (dispo > 0) spawnFlyingToken(p, e.currentTarget); }}
+                                  disabled={dispo <= 0}
+                                  className="w-10 h-10 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
+                                  style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)", boxShadow: "0 3px 8px rgba(37,99,235,0.4)" }}
+                                >
+                                  <Plus size={18} />
+                                </button>
                               </>
                             )}
-                            <button
-                              onClick={(e) => { changeCartQty(activeCart.id, p, 1, "pack"); if (dispo > 0) spawnFlyingToken(p, e.currentTarget); }}
-                              disabled={dispo <= 0}
-                              className="w-10 h-10 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
-                              style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)", boxShadow: "0 3px 8px rgba(37,99,235,0.4)" }}
-                            >
-                              <Plus size={18} />
-                            </button>
                           </div>
                         </div>
                         {p.sellByUnit && (
@@ -18033,19 +18214,32 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         </div>
                         <div className="p-2 flex-1 flex flex-col">
                           <p className="text-xs font-bold truncate" style={{ color: T.text }}>{p.name}</p>
-                          <p className="text-[10px] mb-1.5" style={{ color: T.muted }}>{fcfa(p.price)}</p>
+                          <p className="text-[10px] mb-1.5" style={{ color: T.muted }}>{fcfa(p.price)}{p.sellByMeasure ? ` / ${p.measureUnit || ""}` : ""}</p>
                           <div className="mt-auto flex items-center gap-1.5">
-                            {inCartPack && (
-                              <button onClick={() => changeCartQty(activeCart.id, p, -1, "pack")} className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={12} /></button>
+                            {p.sellByMeasure ? (
+                              <button
+                                onClick={() => { setMeasureTarget(p.id); setMeasureQty(inCartPack ? String(inCartPack.qty) : ""); }}
+                                disabled={dispo <= 0 && !inCartPack}
+                                className="flex-1 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-bold disabled:opacity-30 active:scale-90 transition-transform"
+                                style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)" }}
+                              >
+                                {inCartPack ? `${localizedQty(inCartPack.qty)} ${p.measureUnit || ""}`.trim() : tx(lang, "measureEnterBtn")}
+                              </button>
+                            ) : (
+                              <>
+                                {inCartPack && (
+                                  <button onClick={() => changeCartQty(activeCart.id, p, -1, "pack")} className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 active:scale-90 transition-transform" style={{ background: T.input, color: T.text }}><Minus size={12} /></button>
+                                )}
+                                <button
+                                  onClick={(e) => { changeCartQty(activeCart.id, p, 1, "pack"); if (dispo > 0) spawnFlyingToken(p, e.currentTarget); }}
+                                  disabled={dispo <= 0}
+                                  className="flex-1 h-7 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
+                                  style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)" }}
+                                >
+                                  <Plus size={13} />
+                                </button>
+                              </>
                             )}
-                            <button
-                              onClick={(e) => { changeCartQty(activeCart.id, p, 1, "pack"); if (dispo > 0) spawnFlyingToken(p, e.currentTarget); }}
-                              disabled={dispo <= 0}
-                              className="flex-1 h-7 rounded-full flex items-center justify-center text-white disabled:opacity-30 active:scale-90 transition-transform"
-                              style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)" }}
-                            >
-                              <Plus size={13} />
-                            </button>
                           </div>
                           {p.sellByUnit && (
                             <div className="mt-1.5 flex items-center gap-1.5">
@@ -18102,7 +18296,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <div className="space-y-1.5 mb-3">
                         {activeCart.items.map((it) => (
                           <div key={it.id} className="flex items-center justify-between text-xs">
-                            <span style={{ color: T.text }}>{it.productName} x{it.qty} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}</span>
+                            <span style={{ color: T.text }}>{it.productName} x{localizedQty(it.qty)}{it.measureUnit ? ` ${it.measureUnit}` : ""} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}</span>
                             <span className="font-bold" style={{ color: T.text }}>{fcfa(it.qty * it.unitPrice)}</span>
                           </div>
                         ))}
@@ -18467,6 +18661,48 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
+            {/* Invendus : l'app enregistrait ces lignes depuis le début (bouton « Nouvelle
+                journée ») mais ne les montrait nulle part — un boulanger ne pouvait donc
+                pas savoir combien il jette, ni ajuster sa production. C'est la seule
+                donnée qui lui dit s'il produit trop. */}
+            {(() => {
+              const since = Date.now() - 30 * 24 * 60 * 60 * 1000;
+              const rows = unsoldLog.filter((u) => u && u.date && new Date(u.date).getTime() >= since);
+              if (rows.length === 0) return null;
+              const byProduct = {};
+              rows.forEach((u) => {
+                const k = u.productId || u.productName;
+                if (!byProduct[k]) byProduct[k] = { name: u.productName, qty: 0, value: 0, days: 0 };
+                byProduct[k].qty += Number(u.qty) || 0;
+                // Les anciennes lignes n'ont pas de unitCost : on retombe sur le prix actuel
+                // du produit, sinon elles compteraient pour zéro et minimiseraient la perte.
+                const fallback = (products.find((pr) => pr.id === u.productId) || {}).price || 0;
+                byProduct[k].value += (Number(u.qty) || 0) * (Number(u.unitCost) || fallback);
+                byProduct[k].days += 1;
+              });
+              const list = Object.values(byProduct).sort((a, b) => b.value - a.value);
+              const totalValue = list.reduce((sum, r) => sum + r.value, 0);
+              return (
+                <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs font-bold" style={{ color: T.text }}>{tx(lang, "bakeUnsoldTitle")}</p>
+                    <span className="text-xs font-extrabold" style={{ color: CLAY }}>{maskAmount(fcfa(totalValue))}</span>
+                  </div>
+                  <p className="text-[10px] mb-2.5" style={{ color: T.muted }}>{tx(lang, "bakeUnsoldHint")}</p>
+                  <div className="flex flex-col gap-1.5">
+                    {list.slice(0, 8).map((r, i) => (
+                      <div key={i} className="flex items-center justify-between gap-2 rounded-lg px-2.5 py-1.5" style={{ background: T.input }}>
+                        <div className="min-w-0">
+                          <p className="text-[11px] font-semibold truncate" style={{ color: T.text }}>{r.name}</p>
+                          <p className="text-[10px]" style={{ color: T.muted }}>{localizedNumber(r.qty)} · {localizedNumber(r.days)} {tx(lang, "bakeUnsoldDays")}</p>
+                        </div>
+                        <span className="text-[11px] font-bold flex-shrink-0" style={{ color: CLAY }}>{maskAmount(fcfa(r.value))}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
             <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
               <p className="text-xs font-bold mb-2" style={{ color: T.text }}>{t(lang, "topProducts")}</p>
               {topProducts.length === 0 && <p className="text-xs" style={{ color: T.muted }}>{t(lang, "noSalesShort")}</p>}
