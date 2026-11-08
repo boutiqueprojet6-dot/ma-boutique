@@ -17462,14 +17462,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </button>
             </div>
             {showProductBarcodeScanner && (
-              <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowProductBarcodeScanner(false)}>
-                <div className="w-full max-w-md rounded-t-3xl p-4" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
+              <div
+                className="fixed inset-0 z-50 flex items-start justify-center px-2"
+                // La barre de navigation du bas reste au-dessus de cet écran : on lui réserve sa place
+                // pour que la caméra soit entièrement visible (même correctif que le scanner de vente).
+                style={{ background: "rgba(0,0,0,0.5)", paddingTop: "calc(8px + env(safe-area-inset-top, 0px))", paddingBottom: isDesktop ? 24 : "calc(112px + env(safe-area-inset-bottom, 0px))" }}
+                onClick={() => setShowProductBarcodeScanner(false)}
+              >
+                <div className="w-full max-w-md rounded-3xl p-4 max-h-full overflow-y-auto" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
                   <div className="flex items-center justify-between mb-3">
                     <p className="text-sm font-bold" style={{ color: T.text }}>{tx(lang, "scanBarcodeTitle")}</p>
                     <button onClick={() => setShowProductBarcodeScanner(false)}><X size={18} color={T.muted} /></button>
                   </div>
                   {!productBarcodeScanCameraError ? (
-                    <div className="w-full aspect-square rounded-2xl overflow-hidden mb-3" style={{ background: "#0b0b12" }}>
+                    <div className="w-full aspect-square rounded-2xl overflow-hidden mb-3" style={{ background: "#0b0b12", maxHeight: "min(100vw, 52vh)" }}>
                       <React.Suspense fallback={null}>
                         <Scanner
                           onScan={handleProductBarcodeScan}
