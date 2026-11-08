@@ -18013,16 +18013,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     style={{ background: "rgba(0,0,0,0.5)", paddingTop: "calc(8px + env(safe-area-inset-top, 0px))", paddingBottom: isDesktop ? 80 : "calc(176px + env(safe-area-inset-bottom, 0px))" }}
                     onClick={() => setShowBarcodeScanner(false)}
                   >
-                    <div className="w-full max-w-md rounded-3xl p-4 max-h-full overflow-y-auto" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
-                      <div className="flex items-center justify-between mb-3">
+                    <div className="w-full max-w-md rounded-3xl p-4 max-h-full flex flex-col" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center justify-between mb-3 shrink-0">
                         <p className="text-sm font-bold" style={{ color: T.text }}>{tx(lang, "scanBarcodeTitle")}</p>
                         <button onClick={() => setShowBarcodeScanner(false)}><X size={18} color={T.muted} /></button>
                       </div>
                       {!barcodeScanCameraError ? (
                         <div
-                          className="w-full aspect-square rounded-2xl overflow-hidden mb-3"
+                          className="w-full aspect-square rounded-2xl overflow-hidden mb-3 shrink-0"
                           style={{
-                            maxHeight: "min(100vw, 38vh)",
+                            maxHeight: "min(100vw, 48vh)",
                             background: "#0b0b12",
                             border: "3px solid",
                             borderColor: barcodeScanFlash === "success" ? "#22c55e" : barcodeScanFlash === "error" ? "#ef4444" : "#6b7280",
@@ -18051,16 +18051,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <p className="text-xs text-center px-6" style={{ color: T.muted }}>{tx(lang, "scanBarcodeCameraError")}</p>
                         </div>
                       )}
-                      {barcodeScanMsg && <p className="text-sm text-center font-semibold mb-2" style={{ color: T.text }}>{barcodeScanMsg}</p>}
+                      {barcodeScanMsg && <p className="text-sm text-center font-semibold mb-2 shrink-0" style={{ color: T.text }}>{barcodeScanMsg}</p>}
                       {/* Articles déjà pris pendant cette séance de scan : photo, nom, quantité, et
                           − / + pour corriger sans quitter la caméra. Le dernier scanné est en haut. */}
                       {activeCart && activeCart.items.length > 0 && (
-                        <div>
-                          <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex flex-col min-h-0 flex-1">
+                          <div className="flex items-center justify-between mb-1.5 shrink-0">
                             <p className="text-xs font-bold" style={{ color: T.muted }}>🛒 {activeCart.items.reduce((s, i) => s + (i.qty || 0), 0)}</p>
                             <p className="text-xs font-bold" style={{ color: T.text }}>{fcfa(activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0))}</p>
                           </div>
-                          <div className="rounded-2xl overflow-y-auto divide-y" style={{ maxHeight: "22vh", background: T.card, border: `1px solid ${T.border}` }}>
+                          {/* La liste prend tout l'espace restant sous la caméra et défile au doigt dès
+                              qu'elle déborde ; overscroll "contain" : arriver en bout de liste ne fait
+                              pas défiler la page de vente derrière. */}
+                          <div className="rounded-2xl overflow-y-auto divide-y flex-1 min-h-0" style={{ minHeight: 112, background: T.card, border: `1px solid ${T.border}`, overscrollBehaviorY: "contain", WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}>
                             {[...activeCart.items].reverse().map((it) => {
                               const prod = products.find((p) => p.id === it.productId);
                               const mode = it.mode || "pack";
