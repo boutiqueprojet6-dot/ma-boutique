@@ -14041,8 +14041,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       triggerBarcodeScanFlash("error");
       return;
     }
+    const qtyBefore = (activeCart.items.find((i) => i.productId === product.id && (i.mode || "pack") === "pack") || { qty: 0 }).qty;
+    if ((product.quantity || 0) - reservedQty(product.id) <= 0) {
+      setBarcodeScanMsg(`⚠️ ${product.name} — ${tx(lang, "measureAvailable")} 0`);
+      triggerBarcodeScanFlash("error");
+      playSound("error");
+      return;
+    }
     changeCartQty(activeCart.id, product, 1, "pack");
-    setBarcodeScanMsg(`✅ ${product.name}`);
+    setBarcodeScanMsg(`✅ ${product.name} × ${qtyBefore + 1}`);
     triggerBarcodeScanFlash("success");
     playSound("success");
     triggerHaptic("success");
@@ -16601,6 +16608,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     setAccountingGenerating(false);
   };
   const activeCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
+  // Produits déjà dans le panier : remontés en tête de la liste de vente et mis en couleur,
+  // pour qu'on voie d'un coup d'œil ce qui est sélectionné (surtout pendant un scan en rafale).
+  const selectedProductIds = new Set(activeCart ? activeCart.items.map((i) => i.productId) : []);
+  const cartProductsOrdered = selectedProductIds.size === 0
+    ? cartProducts
+    : [...cartProducts.filter((p) => selectedProductIds.has(p.id)), ...cartProducts.filter((p) => !selectedProductIds.has(p.id))];
   const cartTotal = activeCart ? activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0) : 0;
   // Compte suspendu par un administrateur : bloque tout accès à l'app, avant
   // même le rendu normal, quel que soit l'onglet ou l'état en cours.
@@ -18009,7 +18022,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div
                           className="w-full aspect-square rounded-2xl overflow-hidden mb-3"
                           style={{
-                            maxHeight: "min(100vw, 48vh)",
+                            maxHeight: "min(100vw, 38vh)",
                             background: "#0b0b12",
                             border: "3px solid",
                             borderColor: barcodeScanFlash === "success" ? "#22c55e" : barcodeScanFlash === "error" ? "#ef4444" : "#6b7280",
@@ -18038,7 +18051,43 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <p className="text-xs text-center px-6" style={{ color: T.muted }}>{tx(lang, "scanBarcodeCameraError")}</p>
                         </div>
                       )}
-                      {barcodeScanMsg && <p className="text-sm text-center font-semibold" style={{ color: T.text }}>{barcodeScanMsg}</p>}
+                      {barcodeScanMsg && <p className="text-sm text-center font-semibold mb-2" style={{ color: T.text }}>{barcodeScanMsg}</p>}
+                      {/* Articles déjà pris pendant cette séance de scan : photo, nom, quantité, et
+                          − / + pour corriger sans quitter la caméra. Le dernier scanné est en haut. */}
+                      {activeCart && activeCart.items.length > 0 && (
+                        <div>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <p className="text-xs font-bold" style={{ color: T.muted }}>🛒 {activeCart.items.reduce((s, i) => s + (i.qty || 0), 0)}</p>
+                            <p className="text-xs font-bold" style={{ color: T.text }}>{fcfa(activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0))}</p>
+                          </div>
+                          <div className="rounded-2xl overflow-y-auto divide-y" style={{ maxHeight: "22vh", background: T.card, border: `1px solid ${T.border}` }}>
+                            {[...activeCart.items].reverse().map((it) => {
+                              const prod = products.find((p) => p.id === it.productId);
+                              const mode = it.mode || "pack";
+                              const justAdded = barcodeScanFlash === "success" && barcodeScanMsg.includes(it.productName);
+                              return (
+                                <div key={it.id || `${it.productId}-${mode}`} className="flex items-center gap-2.5 px-2.5 py-2" style={{ background: justAdded ? (darkMode ? "rgba(34,197,94,0.18)" : "#dcfce7") : "transparent", transition: "background 0.2s ease" }}>
+                                  {prod && prod.photo ? (
+                                    <img src={prod.photo} alt="" className="w-9 h-9 rounded-lg object-cover shrink-0" />
+                                  ) : (
+                                    <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style={{ background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}><span style={{ fontSize: 16 }}>📦</span></div>
+                                  )}
+                                  <p className="flex-1 min-w-0 text-sm font-bold truncate" style={{ color: T.text }}>{it.productName}</p>
+                                  {prod && !prod.sellByMeasure ? (
+                                    <div className="flex items-center gap-1.5 shrink-0">
+                                      <button onClick={() => changeCartQty(activeCart.id, prod, -1, mode)} className="w-8 h-8 rounded-full flex items-center justify-center active:scale-90" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
+                                      <span className="text-sm font-extrabold w-6 text-center" style={{ color: T.text }}>{it.qty}</span>
+                                      <button onClick={() => changeCartQty(activeCart.id, prod, 1, mode)} className="w-8 h-8 rounded-full flex items-center justify-center text-white active:scale-90" style={{ background: "linear-gradient(145deg, #2563eb, #1d4ed8)" }}><Plus size={14} /></button>
+                                    </div>
+                                  ) : (
+                                    <span className="text-sm font-extrabold shrink-0" style={{ color: T.text }}>{localizedQty(it.qty)} {it.measureUnit || ""}</span>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
@@ -18109,7 +18158,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 {saleViewMode === "list" ? (
                 <div className="rounded-2xl divide-y overflow-hidden" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   {cartProducts.length === 0 && <p className="text-xs text-center p-4" style={{ color: T.muted }}>{t(lang, "noProductFound")}</p>}
-                  {cartProducts.map((p) => {
+                  {cartProductsOrdered.map((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
                     const dispo = p.quantity - reservedQty(p.id);
@@ -18126,13 +18175,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         onPointerLeave={() => setPressedProductId(null)}
                         onPointerCancel={() => setPressedProductId(null)}
                         onAnimationEnd={() => setReleasedProductId((cur) => (cur && cur.id === p.id ? null : cur))}
-                        style={
-                          pressed
+                        style={{
+                          // Produit sélectionné : fond teinté + liseré bleu à gauche
+                          ...(selectedProductIds.has(p.id)
+                            ? { background: darkMode ? "rgba(37,99,235,0.16)" : "#eff6ff", boxShadow: "inset 4px 0 0 #2563eb" }
+                            : {}),
+                          ...(pressed
                             ? { transform: "scale(0.96)", transition: "transform 0.08s ease-out" }
                             : justReleased
                             ? { animation: "tapRelease 0.22s ease-out" }
-                            : { transform: "scale(1)", transition: "transform 0.08s ease-out" }
-                        }
+                            : { transform: "scale(1)", transition: "transform 0.08s ease-out" }),
+                        }}
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
@@ -18210,7 +18263,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 ) : (
                 <div className="grid grid-cols-2 gap-2.5">
                   {cartProducts.length === 0 && <p className="text-xs text-center p-4 col-span-2" style={{ color: T.muted }}>{t(lang, "noProductFound")}</p>}
-                  {cartProducts.map((p) => {
+                  {cartProductsOrdered.map((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
                     const dispo = p.quantity - reservedQty(p.id);
@@ -18228,8 +18281,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         onPointerCancel={() => setPressedProductId(null)}
                         onAnimationEnd={() => setReleasedProductId((cur) => (cur && cur.id === p.id ? null : cur))}
                         style={{
-                          background: T.card,
-                          border: darkMode ? "none" : `1px solid ${T.border}`,
+                          background: selectedProductIds.has(p.id) ? (darkMode ? "rgba(37,99,235,0.16)" : "#eff6ff") : T.card,
+                          border: selectedProductIds.has(p.id) ? "2px solid #2563eb" : (darkMode ? "none" : `1px solid ${T.border}`),
                           boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)",
                           ...(pressed
                             ? { transform: "scale(0.95)", transition: "transform 0.08s ease-out" }
