@@ -7181,6 +7181,22 @@ function mergeById(baseList, localList, remoteList) {
   });
   return Array.from(map.values());
 }
+// Fusion des paniers en cours. mergeById fait l'UNION des deux listes : un panier supprimé
+// ici (abandonné ou encaissé) mais encore présent sur le serveur revenait donc à la vie à la
+// synchronisation suivante — le bouton « Abandonner ce panier » semblait ne rien faire.
+// On s'appuie sur la base commune (dernier état confirmé par le serveur) pour distinguer :
+//   - absent en local mais présent dans la base  => supprimé sur cet appareil  => on le retire ;
+//   - absent du serveur mais présent dans la base => supprimé ailleurs         => on le retire ;
+//   - absent de la base                          => créé depuis => on le garde.
+function mergeCarts(baseList, localList, remoteList) {
+  const inBase = new Set((baseList || []).filter((c) => c && c.id != null).map((c) => c.id));
+  const localIds = new Set((localList || []).filter((c) => c && c.id != null).map((c) => c.id));
+  const remoteIds = new Set((remoteList || []).filter((c) => c && c.id != null).map((c) => c.id));
+  return mergeById(baseList, localList, remoteList).filter((c) => {
+    if (!inBase.has(c.id)) return true;
+    return localIds.has(c.id) && remoteIds.has(c.id);
+  });
+}
 // Fusion du stock : quantité et unités détachées fusionnées de façon additive
 // par rapport à la base commune, pour que deux ventes simultanées sur deux
 // appareils se cumulent au lieu de s'écraser l'une l'autre.
@@ -7312,7 +7328,7 @@ function mergeShop(baseShop, localShop, remoteShop) {
     // déclenchée sur un produit ajoute une entrée ici avant de remettre son stock à 0.
     unsoldLog: sortByDate(mergeById(base.unsoldLog, local.unsoldLog, remote.unsoldLog)),
     historyLog: sortByDate(mergeById(base.historyLog, local.historyLog, remote.historyLog)),
-    draftCarts: mergeById(base.draftCarts, local.draftCarts, remote.draftCarts),
+    draftCarts: mergeCarts(base.draftCarts, local.draftCarts, remote.draftCarts),
     aiConversations: mergeById(base.aiConversations, local.aiConversations, remote.aiConversations),
     aiMemoryNotes: mergeById(base.aiMemoryNotes, local.aiMemoryNotes, remote.aiMemoryNotes),
     employees: mergeById(base.employees, local.employees, remote.employees),
@@ -13987,12 +14003,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // suivant (la caméra, elle, reste allumée en continu pendant tout ce temps).
   const [barcodeScanFlash, setBarcodeScanFlash] = useState(null);
   const barcodeScanFlashTimerRef = useRef(null);
-  const barcodeScanCooldownRef = useRef(0); // évite d'ajouter 10x le même produit pendant qu'il reste dans le cadre
+  const barcodeLastScanRef = useRef({ code: "", at: 0 }); // évite d'ajouter 10x le même produit pendant qu'il reste dans le cadre
+  const handleBarcodeScanRef = useRef(null); // toujours la dernière version du gestionnaire (panier, stock à jour)
   const openBarcodeScanner = () => {
     if (!activeCart) createCart();
     setBarcodeScanCameraError(false);
     setBarcodeScanMsg("");
     setBarcodeScanFlash(null);
+    barcodeLastScanRef.current = { code: "", at: 0 };
     setShowBarcodeScanner(true);
   };
   const triggerBarcodeScanFlash = (kind) => {
@@ -14001,11 +14019,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     barcodeScanFlashTimerRef.current = setTimeout(() => setBarcodeScanFlash(null), 700);
   };
   const handleBarcodeScan = (result) => {
-    if (Date.now() < barcodeScanCooldownRef.current) return;
     const raw = Array.isArray(result) ? result[0]?.rawValue : result?.rawValue || result;
     const code = String(raw || "").trim();
-    if (!code) return;
-    barcodeScanCooldownRef.current = Date.now() + 1200;
+    if (!code || !activeCart) return;
+    // Même code encore dans le cadre : on attend 1,5 s avant de le recompter (sinon il serait
+    // ajouté en boucle). Un AUTRE produit est accepté presque tout de suite, et le même produit
+    // peut être re-scanné dans la même session après ce court délai.
+    const nowMs = Date.now();
+    const last = barcodeLastScanRef.current;
+    if (nowMs - last.at < (code === last.code ? 1500 : 500)) return;
+    barcodeLastScanRef.current = { code, at: nowMs };
     const product = products.find((p) => p.barcode && p.barcode === code);
     if (!product) {
       setBarcodeScanMsg(tx(lang, "scanBarcodeNotFound"));
@@ -14024,6 +14047,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
   };
+  handleBarcodeScanRef.current = handleBarcodeScan;
   // ---- Scan de code-barres à l'AJOUT d'un produit (formulaire Stock) ----
   // Même composant Scanner que ci-dessus, mais usage différent : un seul scan suffit,
   // il remplit directement le champ pBarcode puis referme la caméra (pas de boucle
@@ -17962,8 +17986,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                 )}
                 {showBarcodeScanner && (
-                  <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowBarcodeScanner(false)}>
-                    <div className="w-full max-w-md rounded-t-3xl p-4" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
+                  <div
+                    className="fixed inset-0 z-50 flex items-start justify-center px-2"
+                    // Sur mobile, la barre du bas et le bouton vert « Voir la vente » restent au-dessus
+                    // de cet écran : on réserve leur place pour que la caméra soit entièrement visible
+                    // et que le bouton vert se trouve juste EN DESSOUS, comme demandé.
+                    style={{ background: "rgba(0,0,0,0.5)", paddingTop: "calc(8px + env(safe-area-inset-top, 0px))", paddingBottom: isDesktop ? 80 : "calc(176px + env(safe-area-inset-bottom, 0px))" }}
+                    onClick={() => setShowBarcodeScanner(false)}
+                  >
+                    <div className="w-full max-w-md rounded-3xl p-4 max-h-full overflow-y-auto" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center justify-between mb-3">
                         <p className="text-sm font-bold" style={{ color: T.text }}>{tx(lang, "scanBarcodeTitle")}</p>
                         <button onClick={() => setShowBarcodeScanner(false)}><X size={18} color={T.muted} /></button>
@@ -17972,6 +18003,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div
                           className="w-full aspect-square rounded-2xl overflow-hidden mb-3"
                           style={{
+                            maxHeight: "min(100vw, 48vh)",
                             background: "#0b0b12",
                             border: "3px solid",
                             borderColor: barcodeScanFlash === "success" ? "#22c55e" : barcodeScanFlash === "error" ? "#ef4444" : "#6b7280",
@@ -17981,7 +18013,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         >
                           <React.Suspense fallback={null}>
                             <Scanner
-                              onScan={handleBarcodeScan}
+                              onScan={(r) => handleBarcodeScanRef.current && handleBarcodeScanRef.current(r)}
+                              // Sans allowMultiple, la bibliothèque ignore un code identique tant qu'il
+                              // n'a pas quitté l'image : impossible de re-scanner le même produit sans
+                              // fermer puis rouvrir le scanner. Le délai anti-doublon est géré plus haut.
+                              allowMultiple
+                              scanDelay={250}
                               onError={() => setBarcodeScanCameraError(true)}
                               constraints={{ facingMode: "environment" }}
                               styles={{ container: { width: "100%", height: "100%" } }}
