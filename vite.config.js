@@ -31,8 +31,8 @@ export default defineConfig({
         navigateFallbackDenylist: [/^\/auth-callback\.html$/, /^\/\.well-known\//],
       },
       manifest: {
-        name: "Shopnify",
-        short_name: "Shopnify",
+        name: "Boutipro",
+        short_name: "Boutipro",
         description: "Application de gestion de boutique",
         theme_color: "#1e3a8a",
         background_color: "#ffffff",
