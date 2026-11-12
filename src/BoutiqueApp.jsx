@@ -5254,8 +5254,15 @@ function t(lang, key) {
   // Dernier recours avant d'afficher le nom brut de la clé : le second dictionnaire
   // (EXTRA_UI). Six libellés de l'export comptable CSV y vivent mais étaient appelés avec
   // t() : l'écran affichait littéralement « accountingCsvTitle », « accountingCsvBtn »…
-  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.fr[key] || tx(lang, key) || key;
+  const v = (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.fr[key] || tx(lang, key) || key;
+  // Cinq libellés de saisie de montant portent « (FCFA) » en dur dans leur traduction : une
+  // boutique réglée en dirhams, en euros ou en nairas lisait donc « Prix unitaire (FCFA) »
+  // juste au-dessus d'un prix affiché dans sa propre monnaie. On remplace la parenthèse
+  // finale par le symbole de la monnaie réellement choisie.
+  if (CURRENCY_SUFFIX_KEYS.has(key)) return `${stripTrailingCurrencyParen(v)} (${CURRENT_CURRENCY.symbol})`;
+  return v;
 }
+const CURRENCY_SUFFIX_KEYS = new Set(["unitPrice", "amountGiven", "amountOut", "amountInCash", "unitSalePrice"]);
 // Découpe la phrase "legalConsentText" (ex. "En continuant, vous acceptez nos Conditions
 // d'utilisation et notre Politique de confidentialité.") pour transformer les deux segments
 // termsLabel/privacyLabel qu'elle contient déjà en vrais liens soulignés vers /terms et
@@ -5789,6 +5796,48 @@ const EXTRA_UI = {
   shareCardPreview: { fr: "Aperçu", en: "Preview", ar: "معاينة", es: "Vista previa", pt: "Pré-visualização", zh: "预览", vi: "Xem trước", de: "Vorschau", ru: "Предпросмотр", hi: "पूर्वावलोकन", ta: "முன்னோட்டம்", bn: "প্রিভিউ", ur: "پیش منظر", id: "Pratinjau", tr: "Önizleme", ko: "미리보기", ja: "プレビュー", it: "Anteprima", nl: "Voorbeeld", sw: "Muhtasari", ha: "Duba kafin", bm: "Filɛli", tl: "Preview", te: "ప్రివ్యూ", th: "ตัวอย่าง", wo: "Xool bu jëkk", pl: "Podgląd", yo: "Àkíyèsí", am: "ቅድመ እይታ", zu: "Ukubuka kuqala" },
 };
 const tx = (lang, key) => (EXTRA_UI[key] && (EXTRA_UI[key][lang] || EXTRA_UI[key].en || EXTRA_UI[key].fr)) || "";
+// ---- Langues chargées à la demande ----
+// Les 30 langues pèsent ~1,9 Mo de texte, soit plus de la moitié du code de l'app : chaque
+// visiteur téléchargeait et analysait les 30 pour n'en lire qu'une. À la construction, le
+// plugin « boutipro-lang-split » (vite.config.js) laisse ici le français et l'anglais (les
+// deux langues de repli de t() et tx()) et range chacune des 28 autres dans son propre
+// fichier, chargé seulement quand on en a besoin puis gardé hors ligne par le service worker.
+// RIEN NE CHANGE DANS CE FICHIER SOURCE : on continue d'écrire toutes les traductions ici,
+// dans TRANSLATIONS et EXTRA_UI, comme avant. Sans le plugin (LANG_PACK_LOADERS vide), tout
+// reste en ligne et ces fonctions ne font rien.
+const LANG_PACK_LOADERS = {};
+const __langPackPromises = {};
+const __langPackListeners = new Set();
+function isLangPackReady(l) {
+  return !LANG_PACK_LOADERS[l] || !!TRANSLATIONS[l];
+}
+function loadLangPack(l) {
+  if (isLangPackReady(l)) return Promise.resolve();
+  if (!__langPackPromises[l]) {
+    __langPackPromises[l] = LANG_PACK_LOADERS[l]().then((m) => {
+      const pack = m.default || m;
+      TRANSLATIONS[l] = pack.T || {};
+      const extra = pack.X || {};
+      for (const k in extra) { (EXTRA_UI[k] || (EXTRA_UI[k] = {}))[l] = extra[k]; }
+      __langPackListeners.forEach((fn) => { try { fn(l); } catch (e) { /* ignoré */ } });
+    }).catch((e) => { delete __langPackPromises[l]; throw e; });
+  }
+  return __langPackPromises[l];
+}
+// Attend la langue au plus `ms` millisecondes : réseau lent ou coupé, on continue quand même
+// (textes de repli en attendant ; l'écran se met à jour tout seul quand la langue arrive).
+function waitLangPack(l, ms = 4000) {
+  if (isLangPackReady(l)) return Promise.resolve(true);
+  return Promise.race([
+    loadLangPack(l).then(() => true, () => false),
+    new Promise((resolve) => setTimeout(() => resolve(false), ms)),
+  ]);
+}
+function detectSystemLang() {
+  const raw = (typeof navigator !== "undefined" && (navigator.language || (navigator.languages && navigator.languages[0]))) || "en";
+  const code = String(raw).slice(0, 2).toLowerCase();
+  return LANGUAGES.some((l) => l.id === code) ? code : "en";
+}
 EXTRA_UI.sidebarCollapse = { fr: "Réduire le menu", en: "Collapse menu", ar: "طي القائمة", es: "Contraer menú", pt: "Recolher menu", zh: "收起菜单", vi: "Thu gọn menu", de: "Menü einklappen", ru: "Свернуть меню", hi: "मेनू छोटा करें", ta: "மெனுவைச் சுருக்கு", bn: "মেনু সংকুচিত করুন", ur: "مینو سکیڑیں", id: "Ciutkan menu", tr: "Menüyü daralt", ko: "메뉴 축소", ja: "メニューを折りたたむ", it: "Comprimi menu", nl: "Menu inklappen", sw: "Punguza menyu", ha: "Rage menu", bm: "Ka menu dɔgɔya", tl: "I-collapse ang menu", te: "మెనూను కుదించండి", th: "ย่อเมนู", wo: "Wàññi menu", pl: "Zwiń menu", yo: "Dín àtòjọ kù", am: "ዝርዝሩን አጥብብ", zu: "Finyeza imenyu" };
 EXTRA_UI.sidebarExpand = { fr: "Déplier le menu", en: "Expand menu", ar: "توسيع القائمة", es: "Expandir menú", pt: "Expandir menu", zh: "展开菜单", vi: "Mở rộng menu", de: "Menü erweitern", ru: "Развернуть меню", hi: "मेनू विस्तृत करें", ta: "மெனுவை விரிவாக்கு", bn: "মেনু প্রসারিত করুন", ur: "مینو پھیلائیں", id: "Perluas menu", tr: "Menüyü genişlet", ko: "메뉴 펼치기", ja: "メニューを展開", it: "Espandi menu", nl: "Menu uitklappen", sw: "Panua menyu", ha: "Fadada menu", bm: "Ka menu fanga", tl: "I-expand ang menu", te: "మెనూను విస్తరించండి", th: "ขยายเมนู", wo: "Yiwi menu", pl: "Rozwiń menu", yo: "Fẹ àtòjọ sí i", am: "ዝርዝሩን ዘርጋ", zu: "Nweba imenyu" };
 EXTRA_UI.histSaleCancelled = { am: "ሽያጭ ተሰርዟል", ar: "بيع ملغى", bm: "Feereli dabilalen", bn: "বিক্রি বাতিল", de: "Verkauf storniert", en: "Sale cancelled", es: "Venta anulada", fr: "Vente annulée", ha: "An soke sayarwa", hi: "बिक्री रद्द", id: "Penjualan dibatalkan", it: "Vendita annullata", nl: "Verkoop geannuleerd", ja: "販売取り消し", ko: "판매 취소됨", pl: "Sprzedaż anulowana", pt: "Venda cancelada", ru: "Продажа отменена", sw: "Mauzo yameghairiwa", ta: "விற்பனை ரத்து", te: "అమ్మకం రద్దయింది", th: "ยกเลิกการขายแล้ว", tl: "Nakansela ang benta", tr: "Satış iptal edildi", ur: "فروخت منسوخ", vi: "Đơn bán đã hủy", wo: "Jaay bi neenu na", yo: "A ti fagilé títà", zh: "销售已取消", zu: "Ukuthengisa kukhanseliwe" };
@@ -6119,6 +6168,13 @@ EXTRA_UI.errPhotoSave = { fr: "La photo n'a pas pu être enregistrée (problème
 EXTRA_UI.shareGetApp = { fr: "Téléchargez", en: "Download", am: "ያውርዱ", ar: "حمِّلوا", bm: "Aw ye a jiginni", bn: "ডাউনলোড করুন", de: "Jetzt laden:", es: "Descargue", ha: "Ku sauke", hi: "डाउनलोड करें", id: "Unduh", it: "Scarichi", nl: "Download", ja: "ダウンロード：", ko: "다운로드:", pl: "Pobierz", pt: "Descarregue", ru: "Скачайте", sw: "Pakua", ta: "பதிவிறக்குங்கள்", te: "డౌన్‌లోడ్ చేయండి", th: "ดาวน์โหลด", tl: "I-download ang", tr: "İndirin:", ur: "ڈاؤن لوڈ کریں", vi: "Tải", wo: "Yebleen", yo: "Ẹ gba", zh: "下载", zu: "Landa" };
 EXTRA_UI.shareScanQr = { fr: "Scannez le code", en: "Scan the code", am: "ኮዱን ይቃኙ", ar: "امسحوا الرمز", bm: "Aw ye kode sɛgɛsɛgɛ", bn: "কোডটি স্ক্যান করুন", de: "Code scannen", es: "Escanee el código", ha: "Ku duba lambar", hi: "कोड स्कैन करें", id: "Pindai kodenya", it: "Scansioni il codice", nl: "Scan de code", ja: "コードをスキャン", ko: "코드를 스캔하세요", pl: "Zeskanuj kod", pt: "Leia o código", ru: "Отсканируйте код", sw: "Changanua msimbo", ta: "குறியீட்டை ஸ்கேன் செய்யுங்கள்", te: "కోడ్‌ను స్కాన్ చేయండి", th: "สแกนโค้ด", tl: "I-scan ang code", tr: "Kodu tarayın", ur: "کوڈ اسکین کریں", vi: "Quét mã", wo: "Skaneleen kod bi", yo: "Ẹ ṣàyẹ̀wò kóòdù", zh: "扫描二维码", zu: "Skena ikhodi" };
 EXTRA_UI.cropPhotoTitle = { fr: "Cadrez votre photo", en: "Frame your photo", am: "ፎቶዎን ያስተካክሉ", ar: "اضبطوا إطار صورتكم", bm: "Aw ye aw ka ja labɛn", bn: "আপনার ছবি ফ্রেম করুন", de: "Foto zuschneiden", es: "Encuadre su foto", ha: "Ku daidaita hotonku", hi: "अपनी फ़ोटो फ़्रेम करें", id: "Atur bingkai foto Anda", it: "Inquadri la sua foto", nl: "Kader uw foto", ja: "写真の位置を調整", ko: "사진 구도를 맞추세요", pl: "Wykadruj zdjęcie", pt: "Enquadre a sua foto", ru: "Обрежьте фото", sw: "Panga picha yako", ta: "உங்கள் புகைப்படத்தை சரிசெய்யுங்கள்", te: "మీ ఫోటోను ఫ్రేమ్ చేయండి", th: "จัดกรอบรูปภาพของคุณ", tl: "Ayusin ang inyong larawan", tr: "Fotoğrafınızı kırpın", ur: "اپنی تصویر کو فریم کریں", vi: "Căn chỉnh ảnh của bạn", wo: "Defarleen seen nataal", yo: "Ẹ ṣètò fọ́tò yín", zh: "调整照片取景", zu: "Hlela isithombe sakho" };
+
+// ---- Marge en direct, journée habituelle, liste de commande, dettes par client ----
+EXTRA_UI.marginNegativeWarn = { fr: "Prix de vente inférieur au prix d'achat", en: "Selling price is below the purchase price", am: "የመሸጫ ዋጋ ከመግዣ ዋጋ ያነሰ ነው", ar: "سعر البيع أقل من سعر الشراء", bm: "Feere sɔngɔ ka dɔgɔ ni san sɔngɔ ye", bn: "বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে কম", de: "Der Verkaufspreis liegt unter dem Einkaufspreis", es: "El precio de venta es inferior al precio de compra", ha: "Farashin sayarwa ya gaza farashin saye", hi: "बिक्री मूल्य खरीद मूल्य से कम है", id: "Harga jual lebih rendah dari harga beli", it: "Il prezzo di vendita è inferiore al prezzo d'acquisto", nl: "De verkoopprijs is lager dan de inkoopprijs", ja: "販売価格が仕入れ価格を下回っています", ko: "판매가가 매입가보다 낮습니다", pl: "Cena sprzedaży jest niższa od ceny zakupu", pt: "O preço de venda é inferior ao preço de compra", ru: "Цена продажи ниже закупочной цены", sw: "Bei ya kuuza iko chini ya bei ya kununua", ta: "விற்பனை விலை வாங்கிய விலையை விடக் குறைவு", te: "అమ్మకపు ధర కొనుగోలు ధర కంటే తక్కువగా ఉంది", th: "ราคาขายต่ำกว่าราคาทุน", tl: "Mas mababa ang presyo ng benta kaysa presyo ng bili", tr: "Satış fiyatı alış fiyatının altında", ur: "فروخت کی قیمت خرید کی قیمت سے کم ہے", vi: "Giá bán thấp hơn giá nhập", wo: "Njëgu jaay bi moo gëna tuuti njëgu jënd bi", yo: "Owó títà kéré ju owó ríra lọ", zh: "售价低于进价", zu: "Intengo yokuthengisa ingaphansi kwentengo yokuthenga" };
+EXTRA_UI.homeUsualDay = { fr: "{pct} d'une journée habituelle", en: "{pct} of a usual day", am: "ከተለመደ ቀን {pct}", ar: "{pct} من يوم اعتيادي", bm: "Don kɔrɔ dɔ {pct}", bn: "একটি সাধারণ দিনের {pct}", de: "{pct} eines üblichen Tages", es: "{pct} de un día habitual", ha: "{pct} na rana ta yau da kullum", hi: "एक सामान्य दिन का {pct}", id: "{pct} dari hari biasa", it: "{pct} di una giornata abituale", nl: "{pct} van een gewone dag", ja: "いつもの1日の {pct}", ko: "평소 하루의 {pct}", pl: "{pct} zwykłego dnia", pt: "{pct} de um dia habitual", ru: "{pct} от обычного дня", sw: "{pct} ya siku ya kawaida", ta: "வழக்கமான நாளின் {pct}", te: "సాధారణ రోజులో {pct}", th: "{pct} ของวันปกติ", tl: "{pct} ng karaniwang araw", tr: "Olağan bir günün {pct}", ur: "ایک عام دن کا {pct}", vi: "{pct} của một ngày bình thường", wo: "{pct} ci bés bu yemamaay", yo: "{pct} ti ọjọ́ àṣà", zh: "相当于平常一天的 {pct}", zu: "{pct} wosuku olujwayelekile" };
+EXTRA_UI.reorderListTitle = { fr: "Liste de commande", en: "Order list", am: "የትዕዛዝ ዝርዝር", ar: "قائمة الطلب", bm: "Komandi lisi", bn: "অর্ডারের তালিকা", de: "Bestellliste", es: "Lista de pedido", ha: "Jerin oda", hi: "ऑर्डर सूची", id: "Daftar pesanan", it: "Lista d'ordine", nl: "Bestellijst", ja: "発注リスト", ko: "주문 목록", pl: "Lista zamówienia", pt: "Lista de encomenda", ru: "Список заказа", sw: "Orodha ya oda", ta: "ஆர்டர் பட்டியல்", te: "ఆర్డర్ జాబితా", th: "รายการสั่งซื้อ", tl: "Listahan ng order", tr: "Sipariş listesi", ur: "آرڈر کی فہرست", vi: "Danh sách đặt hàng", wo: "Limu komand", yo: "Àtòjọ ìbéèrè ọjà", zh: "订货清单", zu: "Uhlu lwe-oda" };
+EXTRA_UI.reorderShareBtn = { fr: "Commander", en: "Order", am: "አዝዝ", ar: "اطلب", bm: "Komandi kɛ", bn: "অর্ডার করুন", de: "Bestellen", es: "Pedir", ha: "Yi oda", hi: "ऑर्डर करें", id: "Pesan", it: "Ordinare", nl: "Bestellen", ja: "発注する", ko: "주문하기", pl: "Zamów", pt: "Encomendar", ru: "Заказать", sw: "Agiza", ta: "ஆர்டர் செய்", te: "ఆర్డర్ చేయండి", th: "สั่งซื้อ", tl: "Umorder", tr: "Sipariş ver", ur: "آرڈر کریں", vi: "Đặt hàng", wo: "Komande", yo: "Béèrè ọjà", zh: "订货", zu: "Oda" };
+EXTRA_UI.debtsByCustomer = { fr: "Total par client", en: "Total per customer", am: "ጠቅላላ በደንበኛ", ar: "الإجمالي لكل زبون", bm: "Sannikɛla kelen-kelen bɛɛ ka juru", bn: "প্রতি গ্রাহকের মোট", de: "Summe pro Kunde", es: "Total por cliente", ha: "Jimilla ga kowane abokin ciniki", hi: "प्रति ग्राहक कुल", id: "Total per pelanggan", it: "Totale per cliente", nl: "Totaal per klant", ja: "お客様ごとの合計", ko: "고객별 합계", pl: "Suma na klienta", pt: "Total por cliente", ru: "Итого по клиентам", sw: "Jumla kwa kila mteja", ta: "வாடிக்கையாளர் வாரியாக மொத்தம்", te: "ఒక్కో కస్టమర్ మొత్తం", th: "ยอดรวมต่อลูกค้า", tl: "Kabuuan bawat customer", tr: "Müşteri başına toplam", ur: "ہر گاہک کا کل", vi: "Tổng theo khách hàng", wo: "Lépp ci kiliyaan bu nekk", yo: "Àpapọ̀ fún oníbàárà kọ̀ọ̀kan", zh: "每位顾客合计", zu: "Isamba ngekhasimende ngalinye" };
 
 const TAB_HELP_CONTENT = {
   stock: { titleKey: "tabHelpStockTitle", itemKeys: ["tabHelpStock1", "tabHelpStock2", "tabHelpStock3", "tabHelpStock4", "tabHelpStock5", "tabHelpStock6", "tabHelpStock7"] },
@@ -7684,11 +7740,7 @@ function LanguagePickerScreen({ onChoose, darkMode }) {
   const [searchQuery, setSearchQuery] = useState("");
   // Détecte la langue du téléphone (ex: "fr-FR" -> "fr") et la fait
   // correspondre à une langue supportée par l'app ; "en" par défaut sinon.
-  const systemLang = useMemo(() => {
-    const raw = (typeof navigator !== "undefined" && (navigator.language || (navigator.languages && navigator.languages[0]))) || "en";
-    const code = raw.slice(0, 2).toLowerCase();
-    return LANGUAGES.some((l) => l.id === code) ? code : "en";
-  }, []);
+  const systemLang = useMemo(() => detectSystemLang(), []);
   // Préchoisit la langue du système : mise en avant visuellement dès l'arrivée,
   // même si l'utilisateur doit toujours taper dessus (ou une autre) pour continuer.
   const [selected, setSelected] = useState(systemLang);
@@ -16215,6 +16267,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const firstSaleDate = sales.length > 0
     ? sales.map((s) => dayKeyOf(s.date)).sort()[0]
     : null;
+  // Journée habituelle : moyenne du MÊME jour de semaine sur les 4 dernières semaines (un
+  // samedi se compare aux samedis). Sert d'objectif naturel, sans rien avoir à régler. Il
+  // faut au moins deux semaines d'historique, sinon la moyenne ne veut rien dire.
+  const usualDay = tab === "dashboard" && firstSaleDate != null ? (() => {
+    const wanted = [7, 14, 21, 28].map((n) => { const d = new Date(); d.setDate(d.getDate() - n); return dayKeyOf(d); }).filter((k) => k >= firstSaleDate);
+    if (wanted.length < 2) return null;
+    const set = new Set(wanted);
+    let sum = 0;
+    sales.forEach((s) => { if (set.has(dayKeyOf(s.date))) sum += s.total; });
+    const avg = sum / wanted.length;
+    return avg > 0 ? { avg, pct: Math.round((todayTotal / avg) * 100) } : null;
+  })() : null;
   const trendDays = firstSaleDate
     ? days.filter((d) => d >= firstSaleDate)
     : [];
@@ -17342,10 +17406,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                   <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>{localizedNumber(todaySales.length)} {t(lang, "articlesSold")}</p>
                 </div>
+                {usualDay ? (() => {
+                  // Anneau de progression vers une journée habituelle (plein et vert à 100 %).
+                  const R = 24, C = 2 * Math.PI * R;
+                  const done = usualDay.pct >= 100;
+                  const ringColor = done ? "#16a34a" : (darkMode ? "#7fb2ff" : "#2563eb");
+                  return (
+                    <div className="flex-shrink-0" style={{ position: "relative", width: 60, height: 60 }}>
+                      <svg width="60" height="60" viewBox="0 0 60 60" style={{ transform: "rotate(-90deg)" }}>
+                        <circle cx="30" cy="30" r={R} fill="none" stroke={darkMode ? "rgba(255,255,255,0.1)" : "#e2e8f0"} strokeWidth="6" />
+                        <circle cx="30" cy="30" r={R} fill="none" stroke={ringColor} strokeWidth="6" strokeLinecap="round" strokeDasharray={C} strokeDashoffset={C * (1 - Math.min(1, usualDay.pct / 100))} style={{ transition: "stroke-dashoffset 0.6s ease" }} />
+                      </svg>
+                      <span dir="ltr" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: usualDay.pct >= 1000 ? 10 : 12, fontWeight: 900, color: done ? "#16a34a" : T.text }}>{localizedNumber(Math.min(usualDay.pct, 999))}%</span>
+                    </div>
+                  );
+                })() : (
                 <div style={{ animation: "floatSlow 2.4s ease-in-out infinite alternate" }}>
                   <div style={{ fontSize: 26 }}>🛍️</div>
                 </div>
+                )}
               </div>
+              {usualDay && (
+                <p className="text-[10px] px-4 -mt-1.5 pb-2.5" style={{ color: T.muted }}>
+                  <span className="font-bold" style={{ color: usualDay.pct >= 100 ? "#16a34a" : T.text }}>{tx(lang, "homeUsualDay").replace("{pct}", localizedNumber(usualDay.pct) + " %")}</span> · ≈ {fcfa(Math.round(usualDay.avg))}
+                </p>
+              )}
               {/* 7 derniers jours : aujourd'hui en couleur pleine. Toucher une barre affiche
                   le jour et son montant. Masqué tant qu'il n'y a qu'aujourd'hui à montrer. */}
               {week7.some((d, i) => i < 6 && d.total > 0) && (
@@ -17482,7 +17567,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div className="rounded-2xl p-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <Sparkles size={13} style={{ color: darkMode ? "#7fb2ff" : INDIGO }} />
-                  <p className="text-xs font-extrabold" style={{ color: T.text }}>{t(lang, "restockForecast")}</p>
+                  <p className="text-xs font-extrabold flex-1" style={{ color: T.text }}>{t(lang, "restockForecast")}</p>
+                  {/* La liste de commande part toute faite vers WhatsApp : on choisit le
+                      fournisseur (ou soi-même, comme pense-bête) dans WhatsApp. */}
+                  <button
+                    onClick={() => {
+                      const lines = ["🧾 " + tx(lang, "reorderListTitle") + (shopName ? " — " + shopName : ""), ""];
+                      restockForecast.forEach((p) => lines.push("• " + p.name + " × " + localizedNumber(p.suggestedReorder) + (p.sellByMeasure && p.measureUnit ? " " + p.measureUnit : "")));
+                      window.open("https://wa.me/?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+                    }}
+                    className="flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0 active:scale-95 transition-transform"
+                    style={{ background: "#16a34a", color: "white", border: "none" }}
+                  >
+                    <MessageSquare size={11} /> {tx(lang, "reorderShareBtn")}
+                  </button>
                 </div>
                 {restockForecast.map((p, idx) => {
                   const days = Math.max(0, Math.round(p.daysLeft));
@@ -17754,6 +17852,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <input autoComplete="off" placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <textarea placeholder={t(lang, "productDescription")} value={pDescription} onChange={(e) => setPDescription(e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2 text-sm mb-3 resize-none" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <input autoComplete="off" placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            {/* Marge en direct : on voit ce que rapporte chaque vente avant d'enregistrer, et on
+                est prévenu tout de suite si le prix de vente est sous le prix d'achat. */}
+            {(() => {
+              const price = parseFloat(pPrice), cost = parseFloat(pCostPrice);
+              if (!(price > 0) || !(cost > 0)) return null;
+              const margin = price - cost;
+              const loss = margin < 0;
+              return (
+                <div className="flex items-center justify-between rounded-lg px-3 py-2 mb-3 -mt-1" style={{ background: loss ? (darkMode ? "rgba(225,29,72,0.18)" : "#ffe4e6") : (darkMode ? "rgba(22,163,74,0.16)" : "#dcfce7") }}>
+                  <span className="text-xs font-bold" style={{ color: loss ? (darkMode ? "#fda4af" : "#be123c") : (darkMode ? "#8fd6a3" : "#15803d") }}>{loss ? "⚠️ " + tx(lang, "marginNegativeWarn") : tx(lang, "cashMargin")}</span>
+                  <span dir="ltr" className="text-xs font-extrabold flex-shrink-0" style={{ color: loss ? (darkMode ? "#fda4af" : "#be123c") : (darkMode ? "#8fd6a3" : "#15803d") }}>{loss ? "−" : "+"}{fcfa(Math.abs(margin))} · {localizedNumber(Math.round((Math.abs(margin) / price) * 100))}%</span>
+                </div>
+              );
+            })()}
             {/* Scanner plutôt que taper : personne ne connaît par cœur les 13 chiffres
                 d'un code-barres. Le bouton ouvre la même caméra que le scan à la vente
                 (handleProductBarcodeScan), remplit le champ automatiquement ; il reste
@@ -18727,6 +18839,36 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <div>
                       <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "clientName")} {activeCart.payment !== "credit" ? `(${t(lang, "othFacultatif")})` : ""}</label>
                       <textarea autoComplete="off" rows={1} value={activeCart.customer} onChange={(e) => updateCartMeta(activeCart.id, "customer", e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5" style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }} />
+                      {/* Clients déjà connus (ventes et dettes) proposés pendant la saisie. Évite que
+                          la même personne existe sous trois orthographes (« Awa », « awa traore »,
+                          « Awa Traoré ») : ses dettes, sa fiabilité et son rang dans « Meilleurs
+                          clients » se retrouvaient alors éparpillés. Reprend aussi son numéro. */}
+                      {(() => {
+                        const typed = (activeCart.customer || "").trim().toLowerCase();
+                        if (typed.length < 1) return null;
+                        const known = {};
+                        const add = (name, phone, weight) => {
+                          const n = (name || "").trim();
+                          if (!n) return;
+                          const k = n.toLowerCase();
+                          if (!known[k]) known[k] = { name: n, phone: "", score: 0 };
+                          known[k].score += weight;
+                          if (phone && !known[k].phone) known[k].phone = phone;
+                        };
+                        debts.forEach((d) => add(d.customer, d.phone, 2));
+                        for (let i = sales.length - 1; i >= 0 && i >= sales.length - 3000; i--) add(sales[i].customer, "", 1);
+                        const matches = Object.values(known).filter((c) => c.name.toLowerCase().includes(typed) && c.name.toLowerCase() !== typed).sort((a, b) => b.score - a.score).slice(0, 4);
+                        if (matches.length === 0) return null;
+                        return (
+                          <div className="flex flex-wrap gap-1.5 mt-1.5">
+                            {matches.map((c) => (
+                              <button key={c.name} type="button" onClick={() => { updateCartMeta(activeCart.id, "customer", c.name); if (c.phone && !normalizePhoneForWhatsApp(activeCart.phone)) updateCartMeta(activeCart.id, "phone", c.phone); }} className="px-2.5 py-1 rounded-full text-[11px] font-semibold active:scale-95 transition-transform" style={{ background: darkMode ? "rgba(95,178,255,0.14)" : "#eff6ff", color: darkMode ? "#7fb2ff" : "#1d4ed8", border: "none" }}>
+                                👤 {c.name}
+                              </button>
+                            ))}
+                          </div>
+                        );
+                      })()}
                       {/* Facultatif, quel que soit le mode de paiement : sert uniquement à envoyer
                           le reçu par WhatsApp directement au bon contact après la vente (voir
                           buildReceiptWhatsAppUrl). Sans ce numéro, le reçu s'envoie quand même,
@@ -18814,6 +18956,26 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
                         <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
                         <input autoComplete="off" ref={receivedInputRef} required type="number" value={activeCart.received} onChange={(e) => { updateCartMeta(activeCart.id, "received", e.target.value); if (error) setError(""); if (receivedFieldError) setReceivedFieldError(false); }} className="w-full border-2 rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a", borderColor: receivedFieldError ? "#e11d48" : "transparent" }} />
+                        {/* Montants rapides : le compte juste, puis les billets ronds au-dessus.
+                            Un appui remplit le champ — plus besoin de taper le montant à chaque
+                            vente en espèces. */}
+                        {cartTotal > 0 && (() => {
+                          const base = Math.pow(10, Math.max(1, String(Math.round(cartTotal)).length - 1));
+                          const ups = [base / 2, base, base * 5, base * 10].map((step) => Math.ceil(cartTotal / step) * step);
+                          const amounts = [cartTotal, ...ups].filter((v, i, arr) => v >= cartTotal && arr.indexOf(v) === i).slice(0, 4);
+                          return (
+                            <div className="flex flex-wrap gap-1.5 mt-2" dir="ltr">
+                              {amounts.map((v, i) => {
+                                const active = parseFloat(activeCart.received) === v;
+                                return (
+                                  <button key={v} type="button" onClick={() => { updateCartMeta(activeCart.id, "received", String(v)); if (error) setError(""); if (receivedFieldError) setReceivedFieldError(false); }} className="px-3 py-1.5 rounded-full text-xs font-bold active:scale-95 transition-transform" style={{ background: active ? "#16a34a" : (darkMode ? "rgba(255,255,255,0.08)" : "white"), color: active ? "white" : (i === 0 ? "#16a34a" : T.text), border: active ? "1px solid #16a34a" : `1px solid ${i === 0 ? "#16a34a" : T.border}` }}>
+                                    {i === 0 ? "= " : ""}{localizedNumber(v)}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          );
+                        })()}
                         {activeCart.received !== "" && (() => {
                           const change = parseFloat(activeCart.received) - cartTotal;
                           if (isNaN(change)) return null;
@@ -18920,7 +19082,39 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} />}
-            {unpaidDebts.length > 0 && filteredDebts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>Aucun résultat pour "{debtsSearch}".</p>}
+            {/* Qui doit combien, tous crédits confondus : la liste ci-dessous montre une carte
+                par dette, donc un client avec quatre crédits n'avait son total nulle part.
+                Toucher un nom filtre la liste sur ce client ; retoucher l'enlève. */}
+            {unpaidDebts.length > 1 && (() => {
+              const by = {};
+              unpaidDebts.forEach((d) => {
+                const name = (d.customer || "").trim();
+                if (!name) return;
+                const k = name.toLowerCase();
+                if (!by[k]) by[k] = { name, total: 0, count: 0 };
+                by[k].total += (d.amount || 0) - (d.paidAmount || 0); by[k].count++;
+              });
+              const list = Object.values(by).sort((a, b) => b.total - a.total);
+              if (list.length < 2) return null;
+              return (
+                <div>
+                  <p className="text-[11px] font-bold mb-1.5" style={{ color: T.muted }}>{tx(lang, "debtsByCustomer")}</p>
+                  <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}>
+                    {list.slice(0, 12).map((c) => {
+                      const active = debtsSearch.trim().toLowerCase() === c.name.toLowerCase();
+                      return (
+                        <button key={c.name} onClick={() => setDebtsSearch(active ? "" : c.name)} className="flex-shrink-0 rounded-2xl px-3 py-2 text-start active:scale-95 transition-transform" style={{ background: active ? (darkMode ? "#3b5b8a" : INDIGO) : T.card, border: active || darkMode ? "none" : `1px solid ${T.border}`, minWidth: 104 }}>
+                          <p className="text-[11px] font-bold truncate" style={{ color: active ? "white" : T.text, maxWidth: 130 }}>{c.name}</p>
+                          <p className="text-xs font-extrabold" style={{ color: active ? "white" : "#e11d48" }}>{fcfa(c.total)}</p>
+                          {c.count > 1 && <p className="text-[9px]" style={{ color: active ? "rgba(255,255,255,0.75)" : T.muted }}>× {localizedNumber(c.count)}</p>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
+            {unpaidDebts.length > 0 && filteredDebts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResultsFilters")}</p>}
             {filteredDebts.map((d) => {
               // En retard : une échéance a été fixée et elle est passée (comparaison de
               // simples chaînes "YYYY-MM-DD", comme todayKey() — pas de fuseau à gérer).
@@ -22978,6 +23172,7 @@ function BoutiqueAppInner() {
   }, []);
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
+  const [, setLangPackTick] = useState(0); // incrémenté quand une langue finit de se charger
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
   // Thème (clair/sombre) pour tout ce qui est affiché avant qu'un compte soit chargé
   // (écran de connexion, onboarding, écrans de chargement) : reprend le dernier choix fait
@@ -23259,21 +23454,33 @@ function BoutiqueAppInner() {
   useEffect(() => {
     // Persistance de la langue choisie via localStorage (fonctionne sur un vrai site déployé,
     // contrairement à window.storage qui n'existe que dans l'environnement Claude Artifacts).
-    try {
-      const saved = window.localStorage.getItem("app-language");
-      if (saved) { setLang(saved); setLangChosen(true); }
-      else setLangChosen(false);
-    } catch (e) { setLangChosen(false); }
+    let saved = null;
+    try { saved = window.localStorage.getItem("app-language"); } catch (e) { /* stockage indisponible */ }
+    let cancelled = false;
+    // On attend que la langue soit chargée avant d'afficher le premier écran (l'écran de
+    // démarrage reste en place pendant ce temps) : jamais d'écran à moitié traduit.
+    if (saved) {
+      waitLangPack(saved).then(() => { if (!cancelled) { setLang(saved); setLangChosen(true); } });
+    } else {
+      // Premier lancement : le sélecteur de langue affiche son titre dans la langue du téléphone.
+      waitLangPack(detectSystemLang(), 2500).then(() => { if (!cancelled) setLangChosen(false); });
+    }
+    // Langue arrivée après coup (réseau lent) : on redessine pour remplacer les textes de repli.
+    const onPack = () => setLangPackTick((n) => n + 1);
+    __langPackListeners.add(onPack);
+    return () => { cancelled = true; __langPackListeners.delete(onPack); };
   }, []);
   const changeLang = (l) => {
-    setLang(l);
     try { window.localStorage.setItem("app-language", l); } catch (e) {}
+    if (isLangPackReady(l)) { setLang(l); return; }
+    waitLangPack(l).then(() => setLang(l));
   };
   const chooseInitialLang = (l) => {
     changeLang(l);
     setLangChosen(true);
   };
-  if (showSplash || (!bootResolved && !session)) {
+  // langChosen === null : la langue enregistrée est encore en cours de chargement.
+  if (showSplash || langChosen === null || (!bootResolved && !session)) {
     return (
       <div style={{ minHeight: "100vh", background: "linear-gradient(160deg, #1e2a5e 0%, #16204a 50%, #101638 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <style>{"@keyframes splashPop { 0% { opacity: 0; transform: scale(0.7); } 60% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } } @keyframes splashFade { from { opacity: 0; } to { opacity: 1; } }"}</style>
@@ -23287,9 +23494,6 @@ function BoutiqueAppInner() {
         <p style={{ position: "absolute", bottom: 60, color: "rgba(255,255,255,0.55)", fontSize: 13, fontWeight: 600, letterSpacing: 1, animation: "splashFade 1s ease 0.5s both" }}>{t(lang, "appName")}</p>
       </div>
     );
-  }
-  if (langChosen === null) {
-    return <div style={{ minHeight: "100vh", background: themePalette(authDark).bg }} />;
   }
   if (!langChosen) {
     return <LanguagePickerScreen onChoose={chooseInitialLang} darkMode={authDark} />;
