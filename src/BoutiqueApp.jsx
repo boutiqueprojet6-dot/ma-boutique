@@ -5251,7 +5251,10 @@ const TRANSLATIONS = {
   },
 };
 function t(lang, key) {
-  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.fr[key] || key;
+  // Dernier recours avant d'afficher le nom brut de la clé : le second dictionnaire
+  // (EXTRA_UI). Six libellés de l'export comptable CSV y vivent mais étaient appelés avec
+  // t() : l'écran affichait littéralement « accountingCsvTitle », « accountingCsvBtn »…
+  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.fr[key] || tx(lang, key) || key;
 }
 // Découpe la phrase "legalConsentText" (ex. "En continuant, vous acceptez nos Conditions
 // d'utilisation et notre Politique de confidentialité.") pour transformer les deux segments
@@ -6089,6 +6092,34 @@ EXTRA_UI.subscriptionRenewBtn = { fr: "Renouveler", am: "አድስ", en: "Renew"
 EXTRA_UI.shopReadOnlyBanner = { fr: "Boutique en consultation seule : votre abonnement Business a expiré. Vous pouvez consulter ses données et enregistrer les remboursements de dettes. Renouvelez pour y vendre à nouveau — rien n'a été perdu.", am: "ለማየት ብቻ የሆነ ሱቅ፦ የBusiness ምዝገባዎ አልቋል። መረጃውን ማየትና የዕዳ ክፍያዎችን መመዝገብ ይችላሉ። እዚህ እንደገና ለመሸጥ ያድሱት — ምንም አልጠፋም።", en: "View-only shop: your Business subscription has expired. You can view its data and record debt repayments. Renew to sell here again — nothing has been lost.", tl: "Tindahang pang-view lang: nag-expire na ang inyong Business subscription. Maaari ninyong tingnan ang data nito at itala ang mga bayad sa utang. I-renew para makapagbenta ulit dito — walang nawala.", te: "చూడటానికి మాత్రమే దుకాణం: మీ Business సబ్‌స్క్రిప్షన్ ముగిసింది. మీరు దాని డేటాను చూడవచ్చు, బాకీ చెల్లింపులను నమోదు చేయవచ్చు. ఇక్కడ మళ్లీ అమ్మడానికి పునరుద్ధరించండి — ఏదీ కోల్పోలేదు.", th: "ร้านค้าแบบดูอย่างเดียว: การสมัคร Business ของคุณหมดอายุแล้ว คุณยังดูข้อมูลและบันทึกการชำระหนี้ได้ ต่ออายุเพื่อกลับมาขายที่นี่อีกครั้ง — ไม่มีข้อมูลใดสูญหาย", wo: "Bitig bu ñuy xool rekk: sa abonmaa Business jeex na. Mënngeen xool ay donneeam te bind fey yi ñuy fey boor. Yeesalleen ngir jaay fi ci kanam — dara réerul.", pl: "Sklep tylko do wglądu: subskrypcja Business wygasła. Mogą Państwo przeglądać jego dane i rejestrować spłaty długów. Proszę ją odnowić, aby znów tu sprzedawać — nic nie zostało utracone.", ar: "متجر للعرض فقط: انتهى اشتراك Business الخاص بكم. يمكنكم الاطلاع على بياناته وتسجيل سداد الديون. جدّدوا الاشتراك للبيع فيه مجددًا — لم يُفقد أي شيء.", es: "Tienda en modo solo lectura: su suscripción Business ha vencido. Puede consultar sus datos y registrar pagos de deudas. Renueve para volver a vender aquí; no se ha perdido nada.", pt: "Loja só para consulta: a sua assinatura Business expirou. Pode consultar os dados e registar pagamentos de dívidas. Renove para voltar a vender aqui — nada foi perdido.", zh: "店铺仅供查看：您的 Business 订阅已到期。您仍可查看其数据并记录欠款还款。续订后即可在此恢复销售——没有任何数据丢失。", vi: "Cửa hàng chỉ để xem: gói Business của bạn đã hết hạn. Bạn vẫn có thể xem dữ liệu và ghi nhận khoản trả nợ. Hãy gia hạn để bán hàng ở đây trở lại — không có gì bị mất.", de: "Laden nur zur Ansicht: Ihr Business-Abonnement ist abgelaufen. Sie können seine Daten einsehen und Schuldenrückzahlungen erfassen. Verlängern Sie es, um hier wieder zu verkaufen – es ist nichts verloren gegangen.", ru: "Магазин только для просмотра: срок вашей подписки Business истёк. Вы можете просматривать его данные и записывать погашение долгов. Продлите подписку, чтобы снова продавать здесь, — ничего не потеряно.", hi: "दुकान केवल देखने के लिए: आपकी Business सदस्यता समाप्त हो गई है। आप इसका डेटा देख सकते हैं और उधार की वापसी दर्ज कर सकते हैं। यहाँ फिर से बिक्री करने के लिए नवीनीकृत करें — कुछ भी नहीं खोया है।", ta: "பார்வைக்கு மட்டும் கடை: உங்கள் Business சந்தா காலாவதியாகிவிட்டது. அதன் தரவைப் பார்க்கலாம், கடன் திருப்பிச் செலுத்துதல்களைப் பதிவு செய்யலாம். இங்கே மீண்டும் விற்க புதுப்பிக்கவும் — எதுவும் இழக்கப்படவில்லை.", bn: "শুধু দেখার জন্য দোকান: আপনার Business সাবস্ক্রিপশনের মেয়াদ শেষ হয়েছে। আপনি এর তথ্য দেখতে এবং বাকি পরিশোধ নথিভুক্ত করতে পারবেন। এখানে আবার বিক্রি করতে নবায়ন করুন — কিছুই হারায়নি।", ur: "صرف دیکھنے کے لیے دکان: آپ کی Business سبسکرپشن ختم ہو گئی ہے۔ آپ اس کا ڈیٹا دیکھ سکتے ہیں اور ادھار کی واپسی درج کر سکتے ہیں۔ یہاں دوبارہ فروخت کرنے کے لیے تجدید کریں — کچھ بھی ضائع نہیں ہوا۔", id: "Toko hanya untuk dilihat: langganan Business Anda telah berakhir. Anda dapat melihat datanya dan mencatat pembayaran utang. Perpanjang untuk berjualan di sini lagi — tidak ada yang hilang.", tr: "Yalnızca görüntülenebilir mağaza: Business aboneliğinizin süresi doldu. Verilerini görüntüleyebilir ve borç ödemelerini kaydedebilirsiniz. Burada yeniden satış yapmak için yenileyin; hiçbir şey kaybolmadı.", ko: "보기 전용 매장: Business 구독이 만료되었습니다. 데이터를 확인하고 외상 상환을 기록할 수 있습니다. 이 매장에서 다시 판매하려면 갱신하세요. 잃어버린 데이터는 없습니다.", ja: "閲覧専用の店舗：Business プランの期限が切れました。データの閲覧と、掛け売りの返済の記録はできます。ここで再び販売するには更新してください。データは何も失われていません。", it: "Negozio in sola consultazione: il suo abbonamento Business è scaduto. Può consultarne i dati e registrare i rimborsi dei debiti. Rinnovi per tornare a vendere qui: non è andato perso nulla.", nl: "Winkel alleen ter inzage: uw Business-abonnement is verlopen. U kunt de gegevens bekijken en terugbetalingen van schulden registreren. Verleng om hier weer te verkopen — er is niets verloren gegaan.", sw: "Duka la kutazama tu: usajili wako wa Business umeisha. Unaweza kuona data yake na kurekodi malipo ya madeni. Uhuishe ili kuuza hapa tena — hakuna kilichopotea.", ha: "Shago na dubawa kawai: biyan kuɗin Business ɗinku ya ƙare. Kuna iya duba bayanansa da yin rijistar biyan bashi. Ku sabunta don sake sayarwa a nan — ba abin da ya ɓace.", bm: "Butiki min bɛ lajɛ dɔrɔn: aw ka Business abonɛman banna. Aw bɛ se k'a kunnafoniw lajɛ ani ka juru saraw sɛbɛn. Aw ye a kura kɛ walasa ka feereli kɛ yan tugun — foyi ma tunun.", zu: "Isitolo sokubuka kuphela: ukubhalisa kwenu kwe-Business kuphelelwe yisikhathi. Ningabuka idatha yaso futhi nirekhode ukukhokhwa kwezikweletu. Vuselelani ukuze nidayise lapha futhi — akukho okulahlekile.", yo: "Ṣọ́ọ̀bù fún wíwò nìkan: ìforúkọsílẹ̀ Business yín ti parí. Ẹ lè wo àwọn dátà rẹ̀ kí ẹ sì kọ ìsanpadà gbèsè sílẹ̀. Ẹ tún un ṣe láti tún máa tà níbí — kò sí ohun tó sọnù." };
 EXTRA_UI.shopReadOnlyBlocked = { fr: "Cette boutique est en consultation seule. Renouvelez votre abonnement Business pour la modifier.", am: "ይህ ሱቅ ለማየት ብቻ ነው። ለውጦችን ለማድረግ የBusiness ምዝገባዎን ያድሱ።", en: "This shop is view-only. Renew your Business subscription to make changes.", tl: "Pang-view lang ang tindahang ito. I-renew ang inyong Business subscription para baguhin ito.", te: "ఈ దుకాణం చూడటానికి మాత్రమే. మార్పులు చేయడానికి మీ Business సబ్‌స్క్రిప్షన్‌ను పునరుద్ధరించండి.", th: "ร้านนี้ดูได้อย่างเดียว ต่ออายุการสมัคร Business เพื่อแก้ไข", wo: "Bitig bii, xool rekk lañu ko. Yeesalleen sa abonmaa Business ngir soppi ko.", pl: "Ten sklep jest tylko do wglądu. Proszę odnowić subskrypcję Business, aby go modyfikować.", ar: "هذا المتجر للعرض فقط. جدّدوا اشتراك Business لتعديله.", es: "Esta tienda está en modo solo lectura. Renueve su suscripción Business para modificarla.", pt: "Esta loja está apenas para consulta. Renove a sua assinatura Business para a modificar.", zh: "此店铺仅供查看。请续订 Business 订阅以进行修改。", vi: "Cửa hàng này chỉ để xem. Hãy gia hạn gói Business để chỉnh sửa.", de: "Dieser Laden ist nur zur Ansicht. Verlängern Sie Ihr Business-Abonnement, um ihn zu ändern.", ru: "Этот магазин доступен только для просмотра. Продлите подписку Business, чтобы вносить изменения.", hi: "यह दुकान केवल देखने के लिए है। इसमें बदलाव करने के लिए अपनी Business सदस्यता नवीनीकृत करें।", ta: "இந்தக் கடை பார்வைக்கு மட்டுமே. மாற்றங்கள் செய்ய உங்கள் Business சந்தாவைப் புதுப்பிக்கவும்.", bn: "এই দোকানটি শুধু দেখার জন্য। পরিবর্তন করতে আপনার Business সাবস্ক্রিপশন নবায়ন করুন।", ur: "یہ دکان صرف دیکھنے کے لیے ہے۔ اس میں تبدیلی کے لیے اپنی Business سبسکرپشن کی تجدید کریں۔", id: "Toko ini hanya untuk dilihat. Perpanjang langganan Business Anda untuk mengubahnya.", tr: "Bu mağaza yalnızca görüntülenebilir. Değişiklik yapmak için Business aboneliğinizi yenileyin.", ko: "이 매장은 보기 전용입니다. 변경하려면 Business 구독을 갱신하세요.", ja: "この店舗は閲覧専用です。変更するには Business プランを更新してください。", it: "Questo negozio è in sola consultazione. Rinnovi l'abbonamento Business per modificarlo.", nl: "Deze winkel is alleen ter inzage. Verleng uw Business-abonnement om hem te wijzigen.", sw: "Duka hili ni la kutazama tu. Uhuishe usajili wako wa Business ili kulibadilisha.", ha: "Wannan shagon na dubawa ne kawai. Ku sabunta biyan kuɗin Business don yin canje-canje.", bm: "Nin butiki in bɛ lajɛ dɔrɔn. Aw ye aw ka Business abonɛman kura kɛ walasa k'a yɛlɛma.", zu: "Lesi sitolo esokubuka kuphela. Vuselelani ukubhalisa kwenu kwe-Business ukuze nenze izinguquko.", yo: "Ṣọ́ọ̀bù yìí jẹ́ fún wíwò nìkan. Ẹ tún ìforúkọsílẹ̀ Business yín ṣe láti ṣe àyípadà." };
 EXTRA_UI.shopReadOnlyGoPrimary = { fr: "Ouvrir la boutique principale", am: "ዋናውን ሱቅ ክፈት", en: "Open main shop", tl: "Buksan ang pangunahing tindahan", te: "ప్రధాన దుకాణాన్ని తెరవండి", th: "เปิดร้านหลัก", wo: "Ubbi bitig bu mag bi", pl: "Otwórz sklep główny", ar: "فتح المتجر الرئيسي", es: "Abrir la tienda principal", pt: "Abrir a loja principal", zh: "打开主店铺", vi: "Mở cửa hàng chính", de: "Hauptladen öffnen", ru: "Открыть основной магазин", hi: "मुख्य दुकान खोलें", ta: "முதன்மைக் கடையைத் திறக்கவும்", bn: "প্রধান দোকান খুলুন", ur: "مرکزی دکان کھولیں", id: "Buka toko utama", tr: "Ana mağazayı aç", ko: "기본 매장 열기", ja: "メイン店舗を開く", it: "Apri il negozio principale", nl: "Hoofdwinkel openen", sw: "Fungua duka kuu", ha: "Buɗe babban shago", bm: "Butiki fɔlɔ da wuli", zu: "Vula isitolo esiyinhloko", yo: "Ṣí ṣọ́ọ̀bù àkọ́kọ́" };
+// ---- Statistiques (analyse de période), accueil (7 jours) et messages qui étaient restés en français ----
+EXTRA_UI.statsPeriod90 = { fr: "90 jours", en: "90 days", am: "90 ቀናት", ar: "90 يومًا", bm: "Tile 90", bn: "৯০ দিন", de: "90 Tage", es: "90 días", ha: "Kwanaki 90", hi: "90 दिन", id: "90 hari", it: "90 giorni", nl: "90 dagen", ja: "90日間", ko: "90일", pl: "90 dni", pt: "90 dias", ru: "90 дней", sw: "Siku 90", ta: "90 நாட்கள்", te: "90 రోజులు", th: "90 วัน", tl: "90 araw", tr: "90 gün", ur: "90 دن", vi: "90 ngày", wo: "90 fan", yo: "Ọjọ́ 90", zh: "90 天", zu: "Izinsuku ezingu-90" };
+EXTRA_UI.statsKpiRevenue = { fr: "Chiffre d'affaires", en: "Revenue", am: "ጠቅላላ ሽያጭ ገቢ", ar: "رقم المبيعات", bm: "Feereli wari bɛɛ", bn: "মোট বিক্রির অঙ্ক", de: "Umsatz", es: "Ingresos", ha: "Jimillar kuɗin ciniki", hi: "कुल बिक्री राशि", id: "Omzet", it: "Fatturato", nl: "Omzet", ja: "売上高", ko: "매출액", pl: "Obrót", pt: "Faturação", ru: "Выручка", sw: "Mauzo jumla", ta: "மொத்த விற்பனைத் தொகை", te: "మొత్తం అమ్మకాల విలువ", th: "ยอดขาย", tl: "Kabuuang benta", tr: "Ciro", ur: "کل فروخت", vi: "Doanh thu", wo: "Njëg li dugg", yo: "Àpapọ̀ owó ọjà", zh: "营业额", zu: "Imali yokuthengisa" };
+EXTRA_UI.statsKpiSales = { fr: "Nombre de ventes", en: "Number of sales", am: "የሽያጭ ብዛት", ar: "عدد المبيعات", bm: "Feereli hakɛ", bn: "বিক্রির সংখ্যা", de: "Anzahl der Verkäufe", es: "Número de ventas", ha: "Yawan tallace-tallace", hi: "बिक्री की संख्या", id: "Jumlah penjualan", it: "Numero di vendite", nl: "Aantal verkopen", ja: "販売件数", ko: "판매 건수", pl: "Liczba sprzedaży", pt: "Número de vendas", ru: "Количество продаж", sw: "Idadi ya mauzo", ta: "விற்பனைகளின் எண்ணிக்கை", te: "అమ్మకాల సంఖ్య", th: "จำนวนการขาย", tl: "Bilang ng benta", tr: "Satış sayısı", ur: "فروخت کی تعداد", vi: "Số lượt bán", wo: "Limu jaay yi", yo: "Iye ìtajà", zh: "销售笔数", zu: "Inani lokuthengisa" };
+EXTRA_UI.statsKpiBasket = { fr: "Panier moyen", en: "Average basket", am: "አማካይ ግዢ", ar: "متوسط السلة", bm: "Sanni cɛmancɛ", bn: "গড় কেনাকাটা", de: "Durchschnittlicher Einkauf", es: "Ticket medio", ha: "Matsakaicin sayayya", hi: "औसत खरीद", id: "Rata-rata belanja", it: "Scontrino medio", nl: "Gemiddelde bon", ja: "平均客単価", ko: "평균 구매액", pl: "Średni koszyk", pt: "Cesta média", ru: "Средний чек", sw: "Wastani wa manunuzi", ta: "சராசரி வாங்குதல்", te: "సగటు కొనుగోలు", th: "ยอดซื้อเฉลี่ย", tl: "Karaniwang halaga ng bili", tr: "Ortalama sepet", ur: "اوسط خریداری", vi: "Giá trị đơn trung bình", wo: "Njëgu jënd bu yemamaay", yo: "Àròpín ìrajà", zh: "平均客单价", zu: "Isilinganiso sokuthenga" };
+EXTRA_UI.statsVsPrev = { fr: "par rapport à la période précédente", en: "compared with the previous period", am: "ካለፈው ጊዜ ጋር ሲነጻጸር", ar: "مقارنةً بالفترة السابقة", bm: "ka sanga waati tɛmɛnen ma", bn: "আগের সময়ের তুলনায়", de: "im Vergleich zum vorherigen Zeitraum", es: "respecto al período anterior", ha: "idan aka kwatanta da lokacin da ya gabata", hi: "पिछली अवधि की तुलना में", id: "dibandingkan periode sebelumnya", it: "rispetto al periodo precedente", nl: "vergeleken met de vorige periode", ja: "前の期間との比較", ko: "이전 기간 대비", pl: "w porównaniu z poprzednim okresem", pt: "em relação ao período anterior", ru: "по сравнению с предыдущим периодом", sw: "ikilinganishwa na kipindi kilichopita", ta: "முந்தைய காலத்துடன் ஒப்பிடும்போது", te: "గత కాలంతో పోలిస్తే", th: "เทียบกับช่วงก่อนหน้า", tl: "kumpara sa nakaraang panahon", tr: "önceki döneme göre", ur: "پچھلے عرصے کے مقابلے میں", vi: "so với kỳ trước", wo: "bu ñu ko méngalee ak jamono ji weesu", yo: "ní ìfiwéra pẹ̀lú àkókò tó kọjá", zh: "与上一时期相比", zu: "uma kuqhathaniswa nesikhathi esedlule" };
+EXTRA_UI.statsBestMomentsTitle = { fr: "Vos meilleurs moments", en: "Your best moments", am: "ምርጥ ጊዜዎችዎ", ar: "أفضل أوقاتكم", bm: "Aw ka waati ɲumanw", bn: "আপনার সেরা সময়গুলো", de: "Ihre besten Zeiten", es: "Sus mejores momentos", ha: "Mafi kyawun lokutanku", hi: "आपके सबसे अच्छे समय", id: "Waktu terbaik Anda", it: "I suoi momenti migliori", nl: "Uw beste momenten", ja: "よく売れる時間帯", ko: "가장 잘 팔리는 시간", pl: "Państwa najlepsze pory", pt: "Os seus melhores momentos", ru: "Ваше лучшее время", sw: "Nyakati zako bora", ta: "உங்கள் சிறந்த நேரங்கள்", te: "మీ ఉత్తమ సమయాలు", th: "ช่วงเวลาขายดีของคุณ", tl: "Ang inyong pinakamagandang oras", tr: "En iyi zamanlarınız", ur: "آپ کے بہترین اوقات", vi: "Thời điểm bán tốt nhất của bạn", wo: "Seen waxtu yi gën", yo: "Àwọn àkókò yín tó dára jù", zh: "您的最佳时段", zu: "Izikhathi zakho ezinhle kakhulu" };
+EXTRA_UI.statsBestMomentsHint = { fr: "Plus la case est foncée, plus vous vendez à ce moment-là. Touchez une case pour voir le montant.", en: "The darker the square, the more you sell at that time. Tap a square to see the amount.", am: "ሳጥኑ በጨለመ ቁጥር በዚያ ሰዓት ብዙ ይሸጣሉ። መጠኑን ለማየት ሳጥኑን ይንኩ።", ar: "كلما كان المربع أغمق، زادت مبيعاتكم في ذلك الوقت. اضغطوا على مربع لرؤية المبلغ.", bm: "Kɛsu bɛ finya cogo min na, aw bɛ feereli caman kɛ o waati la. Aw ye kɛsu dɔ maga walasa ka wari hakɛ ye.", bn: "ঘর যত গাঢ়, সেই সময়ে আপনার বিক্রি তত বেশি। পরিমাণ দেখতে একটি ঘরে স্পর্শ করুন।", de: "Je dunkler das Feld, desto mehr verkaufen Sie zu dieser Zeit. Tippen Sie auf ein Feld, um den Betrag zu sehen.", es: "Cuanto más oscura la casilla, más vende en ese momento. Toque una casilla para ver el importe.", ha: "Yadda akwatin ya fi duhu, haka kuke sayarwa da yawa a wannan lokacin. Taɓa akwati don ganin adadin.", hi: "खाना जितना गहरा होगा, उस समय आपकी बिक्री उतनी ज़्यादा है। राशि देखने के लिए किसी खाने को छुएँ।", id: "Semakin gelap kotaknya, semakin banyak Anda menjual pada waktu itu. Ketuk kotak untuk melihat jumlahnya.", it: "Più la casella è scura, più vende in quel momento. Tocchi una casella per vedere l'importo.", nl: "Hoe donkerder het vakje, hoe meer u op dat moment verkoopt. Tik op een vakje om het bedrag te zien.", ja: "マスの色が濃いほど、その時間によく売れています。マスをタップすると金額が表示されます。", ko: "칸이 진할수록 그 시간에 더 많이 판매됩니다. 칸을 누르면 금액을 볼 수 있습니다.", pl: "Im ciemniejsze pole, tym więcej Państwo sprzedają o tej porze. Proszę dotknąć pola, aby zobaczyć kwotę.", pt: "Quanto mais escuro o quadrado, mais vende nesse momento. Toque num quadrado para ver o valor.", ru: "Чем темнее клетка, тем больше вы продаёте в это время. Нажмите на клетку, чтобы увидеть сумму.", sw: "Kadiri kisanduku kinavyokuwa cheusi, ndivyo unavyouza zaidi wakati huo. Gusa kisanduku kuona kiasi.", ta: "கட்டம் எவ்வளவு அடர்த்தியாக உள்ளதோ, அந்த நேரத்தில் நீங்கள் அவ்வளவு அதிகம் விற்கிறீர்கள். தொகையைக் காண ஒரு கட்டத்தைத் தொடுங்கள்.", te: "గడి ఎంత ముదురుగా ఉంటే, ఆ సమయంలో మీరు అంత ఎక్కువ అమ్ముతున్నారు. మొత్తాన్ని చూడటానికి ఒక గడిని తాకండి.", th: "ช่องยิ่งเข้ม แสดงว่าคุณขายได้มากในเวลานั้น แตะที่ช่องเพื่อดูยอดเงิน", tl: "Kapag mas madilim ang kahon, mas marami kayong nabebenta sa oras na iyon. Pindutin ang kahon para makita ang halaga.", tr: "Kare ne kadar koyuysa o saatte o kadar çok satıyorsunuz. Tutarı görmek için bir kareye dokunun.", ur: "خانہ جتنا گہرا ہوگا، اس وقت آپ کی فروخت اتنی زیادہ ہے۔ رقم دیکھنے کے لیے کسی خانے کو چھوئیں۔", vi: "Ô càng đậm thì bạn bán càng nhiều vào lúc đó. Chạm vào một ô để xem số tiền.", wo: "Lu kees bi gëna lëndëm, ngeen di gëna jaay ci waxtu woowu. Bësal benn kees ngir gis njëg li.", yo: "Bí àpótí bá ṣe dúdú tó, bẹ́ẹ̀ ni ẹ ṣe ń tà púpọ̀ ní àkókò yẹn. Ẹ tẹ àpótí kan láti rí iye owó.", zh: "格子颜色越深，表示该时段卖得越多。点击格子可查看金额。", zu: "Uma ibhokisi limnyama kakhulu, uthengisa kakhulu ngaleso sikhathi. Thinta ibhokisi ukuze ubone inani." };
+EXTRA_UI.statsBestDay = { fr: "Meilleur jour", en: "Best day", am: "ምርጥ ቀን", ar: "أفضل يوم", bm: "Don ɲuman", bn: "সেরা দিন", de: "Bester Tag", es: "Mejor día", ha: "Mafi kyawun rana", hi: "सबसे अच्छा दिन", id: "Hari terbaik", it: "Giorno migliore", nl: "Beste dag", ja: "最も売れる曜日", ko: "최고의 요일", pl: "Najlepszy dzień", pt: "Melhor dia", ru: "Лучший день", sw: "Siku bora", ta: "சிறந்த நாள்", te: "ఉత్తమ రోజు", th: "วันที่ดีที่สุด", tl: "Pinakamagandang araw", tr: "En iyi gün", ur: "بہترین دن", vi: "Ngày tốt nhất", wo: "Bés bi gën", yo: "Ọjọ́ tó dára jù", zh: "最佳日", zu: "Usuku oluhle kakhulu" };
+EXTRA_UI.statsBestHour = { fr: "Meilleure heure", en: "Best hour", am: "ምርጥ ሰዓት", ar: "أفضل ساعة", bm: "Lɛrɛ ɲuman", bn: "সেরা ঘণ্টা", de: "Beste Stunde", es: "Mejor hora", ha: "Mafi kyawun awa", hi: "सबसे अच्छा घंटा", id: "Jam terbaik", it: "Ora migliore", nl: "Beste uur", ja: "最も売れる時間", ko: "최고의 시간", pl: "Najlepsza godzina", pt: "Melhor hora", ru: "Лучший час", sw: "Saa bora", ta: "சிறந்த மணி நேரம்", te: "ఉత్తమ గంట", th: "ชั่วโมงที่ดีที่สุด", tl: "Pinakamagandang oras", tr: "En iyi saat", ur: "بہترین گھنٹہ", vi: "Giờ tốt nhất", wo: "Waxtu wi gën", yo: "Wákàtí tó dára jù", zh: "最佳时段", zu: "Ihora elihle kakhulu" };
+EXTRA_UI.statsTopProfitTitle = { fr: "Produits les plus rentables", en: "Most profitable products", am: "በጣም ትርፋማ ምርቶች", ar: "المنتجات الأكثر ربحًا", bm: "Fɛn minnu tɔnɔ ka bon", bn: "সবচেয়ে লাভজনক পণ্য", de: "Rentabelste Produkte", es: "Productos más rentables", ha: "Kayayyakin da suka fi riba", hi: "सबसे ज़्यादा मुनाफ़े वाले उत्पाद", id: "Produk paling menguntungkan", it: "Prodotti più redditizi", nl: "Meest winstgevende producten", ja: "利益の大きい商品", ko: "수익이 가장 높은 상품", pl: "Najbardziej dochodowe produkty", pt: "Produtos mais rentáveis", ru: "Самые прибыльные товары", sw: "Bidhaa zenye faida zaidi", ta: "அதிக லாபம் தரும் பொருட்கள்", te: "అత్యధిక లాభం ఇచ్చే ఉత్పత్తులు", th: "สินค้าที่ทำกำไรมากที่สุด", tl: "Mga produktong pinakamalaki ang tubo", tr: "En kârlı ürünler", ur: "سب سے زیادہ منافع بخش مصنوعات", vi: "Sản phẩm sinh lời nhất", wo: "Marsandiis yi gëna am ngañaay", yo: "Àwọn ọjà tó ní èrè jù", zh: "最赚钱的商品", zu: "Imikhiqizo enenzuzo enkulu" };
+EXTRA_UI.statsDeadStockTitle = { fr: "Argent qui dort", en: "Sleeping money", am: "የተኛ ገንዘብ", ar: "أموال نائمة", bm: "Wari min bɛ sunɔgɔ la", bn: "ঘুমিয়ে থাকা টাকা", de: "Schlafendes Geld", es: "Dinero dormido", ha: "Kuɗin da ke barci", hi: "सोया हुआ पैसा", id: "Uang yang tidur", it: "Soldi fermi", nl: "Slapend geld", ja: "眠っているお金", ko: "잠자는 돈", pl: "Uśpione pieniądze", pt: "Dinheiro parado", ru: "Спящие деньги", sw: "Pesa iliyolala", ta: "தூங்கும் பணம்", te: "నిద్రపోతున్న డబ్బు", th: "เงินที่จมอยู่", tl: "Natutulog na pera", tr: "Uyuyan para", ur: "سویا ہوا پیسہ", vi: "Tiền nằm im", wo: "Xaalis biy nelaw", yo: "Owó tó ń sùn", zh: "沉睡的资金", zu: "Imali elele" };
+EXTRA_UI.statsDeadStockHint = { fr: "Produits en stock sans aucune vente depuis 30 jours.", en: "Products in stock with no sale in the last 30 days.", am: "ባለፉት 30 ቀናት ምንም ያልተሸጡ በክምችት ያሉ ምርቶች።", ar: "منتجات في المخزون لم تُبَع إطلاقًا خلال آخر 30 يومًا.", bm: "Fɛn minnu bɛ mara la, u ma feere tile 30 kɔnɔ.", bn: "স্টকে থাকা পণ্য যেগুলো গত ৩০ দিনে একবারও বিক্রি হয়নি।", de: "Produkte auf Lager ohne Verkauf in den letzten 30 Tagen.", es: "Productos en stock sin ninguna venta en los últimos 30 días.", ha: "Kayayyakin da ke cikin ajiya ba tare da an sayar da su ba cikin kwanaki 30 da suka wuce.", hi: "स्टॉक में मौजूद उत्पाद जो पिछले 30 दिनों में बिल्कुल नहीं बिके।", id: "Produk di stok tanpa penjualan selama 30 hari terakhir.", it: "Prodotti in magazzino senza alcuna vendita negli ultimi 30 giorni.", nl: "Producten op voorraad zonder verkoop in de laatste 30 dagen.", ja: "過去30日間に一度も売れていない在庫商品です。", ko: "최근 30일 동안 한 번도 팔리지 않은 재고 상품입니다.", pl: "Produkty w magazynie bez żadnej sprzedaży w ciągu ostatnich 30 dni.", pt: "Produtos em stock sem nenhuma venda nos últimos 30 dias.", ru: "Товары на складе без единой продажи за последние 30 дней.", sw: "Bidhaa zilizopo stoo bila mauzo yoyote kwa siku 30 zilizopita.", ta: "கடந்த 30 நாட்களில் ஒருமுறை கூட விற்காத இருப்பிலுள்ள பொருட்கள்.", te: "గత 30 రోజుల్లో ఒక్కసారి కూడా అమ్ముడుపోని స్టాక్‌లోని ఉత్పత్తులు.", th: "สินค้าในสต็อกที่ไม่มีการขายเลยในช่วง 30 วันที่ผ่านมา", tl: "Mga produktong nasa stock na walang benta sa nakaraang 30 araw.", tr: "Son 30 günde hiç satılmayan stoktaki ürünler.", ur: "اسٹاک میں موجود مصنوعات جو پچھلے 30 دنوں میں بالکل نہیں بکیں۔", vi: "Sản phẩm còn trong kho không bán được lần nào trong 30 ngày qua.", wo: "Marsandiis yi nekk ci dencukaay te jaayuñu leen ci 30 fan yi weesu.", yo: "Àwọn ọjà tó wà nílẹ̀ tí a kò tà rárá láàárín ọjọ́ 30 sẹ́yìn.", zh: "库存中最近 30 天没有任何销售的商品。", zu: "Imikhiqizo esesitokweni engathengiswanga ezinsukwini ezingu-30 ezedlule." };
+EXTRA_UI.statsTopCustomersTitle = { fr: "Meilleurs clients", en: "Best customers", am: "ምርጥ ደንበኞች", ar: "أفضل الزبائن", bm: "Sannikɛla ɲumanw", bn: "সেরা গ্রাহক", de: "Beste Kunden", es: "Mejores clientes", ha: "Mafi kyawun abokan ciniki", hi: "सबसे अच्छे ग्राहक", id: "Pelanggan terbaik", it: "Clienti migliori", nl: "Beste klanten", ja: "上位のお客様", ko: "우수 고객", pl: "Najlepsi klienci", pt: "Melhores clientes", ru: "Лучшие клиенты", sw: "Wateja bora", ta: "சிறந்த வாடிக்கையாளர்கள்", te: "ఉత్తమ కస్టమర్లు", th: "ลูกค้าที่ดีที่สุด", tl: "Pinakamahusay na mga customer", tr: "En iyi müşteriler", ur: "بہترین گاہک", vi: "Khách hàng tốt nhất", wo: "Kiliyaan yi gën", yo: "Àwọn oníbàárà tó dára jù", zh: "最佳顾客", zu: "Amakhasimende ahamba phambili" };
+EXTRA_UI.statsPurchases = { fr: "{n} achat(s)", en: "{n} purchase(s)", am: "{n} ግዢ", ar: "{n} عملية شراء", bm: "Sanni {n}", bn: "{n} বার কেনা", de: "{n} Einkauf/Einkäufe", es: "{n} compra(s)", ha: "Sayayya {n}", hi: "{n} खरीद", id: "{n} pembelian", it: "{n} acquisto/i", nl: "{n} aankoop/aankopen", ja: "購入 {n} 回", ko: "구매 {n}회", pl: "Zakupy: {n}", pt: "{n} compra(s)", ru: "Покупок: {n}", sw: "Manunuzi {n}", ta: "{n} வாங்குதல்", te: "{n} కొనుగోళ్లు", th: "ซื้อ {n} ครั้ง", tl: "{n} pagbili", tr: "{n} alışveriş", ur: "{n} خریداری", vi: "{n} lần mua", wo: "{n} jënd", yo: "Ìrajà {n}", zh: "购买 {n} 次", zu: "Ukuthenga okungu-{n}" };
+EXTRA_UI.homeVsYesterday = { fr: "vs hier", en: "vs yesterday", am: "ከትናንት ጋር", ar: "مقارنةً بالأمس", bm: "ka sanga kunu ma", bn: "গতকালের তুলনায়", de: "ggü. gestern", es: "vs ayer", ha: "da jiya", hi: "कल की तुलना में", id: "vs kemarin", it: "vs ieri", nl: "t.o.v. gisteren", ja: "前日比", ko: "어제 대비", pl: "wzgl. wczoraj", pt: "vs ontem", ru: "ко вчера", sw: "dhidi ya jana", ta: "நேற்றுடன் ஒப்பிட", te: "నిన్నటితో పోలిస్తే", th: "เทียบกับเมื่อวาน", tl: "vs kahapon", tr: "düne göre", ur: "کل کے مقابلے میں", vi: "so với hôm qua", wo: "ak démb", yo: "sí àná", zh: "较昨日", zu: "uma kuqhathaniswa nayizolo" };
+EXTRA_UI.homeTopToday = { fr: "Top produits du jour", en: "Top products today", am: "የዛሬ ምርጥ ምርቶች", ar: "أفضل منتجات اليوم", bm: "Bi fɛn feerelenw ɲɛmɔgɔw", bn: "আজকের সেরা পণ্য", de: "Top-Produkte des Tages", es: "Top productos del día", ha: "Manyan kayayyakin yau", hi: "आज के शीर्ष उत्पाद", id: "Produk teratas hari ini", it: "Top prodotti del giorno", nl: "Topproducten van vandaag", ja: "本日の人気商品", ko: "오늘의 인기 상품", pl: "Najlepsze produkty dnia", pt: "Top produtos do dia", ru: "Топ товаров за день", sw: "Bidhaa bora za leo", ta: "இன்றைய முன்னணி பொருட்கள்", te: "ఈ రోజు అగ్ర ఉత్పత్తులు", th: "สินค้าขายดีวันนี้", tl: "Top na produkto ngayong araw", tr: "Günün en çok satanları", ur: "آج کی سرفہرست مصنوعات", vi: "Sản phẩm bán chạy hôm nay", wo: "Marsandiis yi gëna jar tey", yo: "Àwọn ọjà tó ga jù lónìí", zh: "今日热销商品", zu: "Imikhiqizo ehamba phambili namuhla" };
+EXTRA_UI.homeLast7 = { fr: "7 derniers jours", en: "Last 7 days", am: "ያለፉት 7 ቀናት", ar: "آخر 7 أيام", bm: "Tile 7 tɛmɛnenw", bn: "গত ৭ দিন", de: "Letzte 7 Tage", es: "Últimos 7 días", ha: "Kwanaki 7 da suka wuce", hi: "पिछले 7 दिन", id: "7 hari terakhir", it: "Ultimi 7 giorni", nl: "Laatste 7 dagen", ja: "過去7日間", ko: "최근 7일", pl: "Ostatnie 7 dni", pt: "Últimos 7 dias", ru: "Последние 7 дней", sw: "Siku 7 zilizopita", ta: "கடந்த 7 நாட்கள்", te: "గత 7 రోజులు", th: "7 วันที่ผ่านมา", tl: "Nakaraang 7 araw", tr: "Son 7 gün", ur: "پچھلے 7 دن", vi: "7 ngày qua", wo: "7 fan yi weesu", yo: "Ọjọ́ 7 sẹ́yìn", zh: "最近 7 天", zu: "Izinsuku ezingu-7 ezedlule" };
+EXTRA_UI.demoBannerDesc = { fr: "Explorez librement : rien n'est réellement enregistré.", en: "Explore freely: nothing is actually saved.", am: "በነጻነት ያስሱ፦ ምንም ነገር በእውነት አይቀመጥም።", ar: "استكشفوا بحرية: لا شيء يُحفظ فعليًا.", bm: "Aw ye a lajɛ hɔrɔnya la: foyi tɛ mara tiɲɛ na.", bn: "নির্দ্বিধায় ঘুরে দেখুন: আসলে কিছুই সংরক্ষিত হয় না।", de: "Erkunden Sie frei: Es wird nichts wirklich gespeichert.", es: "Explore libremente: nada se guarda realmente.", ha: "Ku bincika cikin 'yanci: babu abin da ake adanawa da gaske.", hi: "खुलकर देखें: असल में कुछ भी सहेजा नहीं जाता।", id: "Jelajahi dengan bebas: tidak ada yang benar-benar disimpan.", it: "Esplori liberamente: nulla viene realmente salvato.", nl: "Verken vrij: er wordt niets echt opgeslagen.", ja: "ご自由にお試しください。実際には何も保存されません。", ko: "자유롭게 둘러보세요. 실제로는 아무것도 저장되지 않습니다.", pl: "Proszę swobodnie zwiedzać: nic nie jest naprawdę zapisywane.", pt: "Explore livremente: nada é realmente guardado.", ru: "Изучайте свободно: на самом деле ничего не сохраняется.", sw: "Chunguza kwa uhuru: hakuna kinachohifadhiwa kihalisi.", ta: "தாராளமாகப் பாருங்கள்: உண்மையில் எதுவும் சேமிக்கப்படாது.", te: "స్వేచ్ఛగా పరిశీలించండి: నిజానికి ఏదీ సేవ్ కాదు.", th: "สำรวจได้อย่างอิสระ: ไม่มีการบันทึกข้อมูลจริง", tl: "Malayang mag-explore: walang talagang nase-save.", tr: "Serbestçe keşfedin: hiçbir şey gerçekten kaydedilmez.", ur: "آزادی سے دیکھیں: کچھ بھی حقیقت میں محفوظ نہیں ہوتا۔", vi: "Hãy khám phá thoải mái: không có gì thực sự được lưu.", wo: "Seetleen ci ndimbal: dara duñu ko denc dëgg.", yo: "Ẹ ṣàwárí láìsí ìdíwọ́: kò sí ohun tí a ń fipamọ́ ní tòótọ́.", zh: "请随意体验：不会真正保存任何内容。", zu: "Hlola ngokukhululeka: akukho okulondolozwa ngempela." };
+EXTRA_UI.demoDisabledMsg = { fr: "Désactivé en mode démo. Créez un vrai compte pour utiliser cette fonction.", en: "Disabled in demo mode. Create a real account to use this feature.", am: "በማሳያ ሁነታ ተሰናክሏል። ይህን አገልግሎት ለመጠቀም እውነተኛ መለያ ይፍጠሩ።", ar: "معطَّل في الوضع التجريبي. أنشئوا حسابًا حقيقيًا لاستخدام هذه الميزة.", bm: "A faralen don demo cogo la. Aw ye jate lakika dɔ dayɛlɛ walasa ka nin baara kɛ.", bn: "ডেমো মোডে বন্ধ আছে। এই সুবিধা ব্যবহার করতে আসল অ্যাকাউন্ট তৈরি করুন।", de: "Im Demo-Modus deaktiviert. Erstellen Sie ein echtes Konto, um diese Funktion zu nutzen.", es: "Desactivado en modo demo. Cree una cuenta real para usar esta función.", ha: "An kashe a yanayin gwaji. Ku buɗe asusu na gaske don amfani da wannan fasalin.", hi: "डेमो मोड में बंद है। इस सुविधा के लिए असली खाता बनाएँ।", id: "Dinonaktifkan dalam mode demo. Buat akun sungguhan untuk memakai fitur ini.", it: "Disattivato in modalità demo. Crei un vero account per usare questa funzione.", nl: "Uitgeschakeld in demomodus. Maak een echt account aan om deze functie te gebruiken.", ja: "デモモードでは無効です。この機能を使うには本物のアカウントを作成してください。", ko: "데모 모드에서는 사용할 수 없습니다. 이 기능을 사용하려면 실제 계정을 만드세요.", pl: "Wyłączone w trybie demo. Proszę utworzyć prawdziwe konto, aby korzystać z tej funkcji.", pt: "Desativado no modo demonstração. Crie uma conta real para usar esta função.", ru: "Отключено в демо-режиме. Создайте настоящий аккаунт, чтобы пользоваться этой функцией.", sw: "Imezimwa katika hali ya onyesho. Fungua akaunti halisi ili kutumia huduma hii.", ta: "டெமோ முறையில் முடக்கப்பட்டுள்ளது. இந்த வசதியைப் பயன்படுத்த உண்மையான கணக்கை உருவாக்குங்கள்.", te: "డెమో మోడ్‌లో నిలిపివేయబడింది. ఈ సదుపాయాన్ని వాడటానికి నిజమైన ఖాతాను సృష్టించండి.", th: "ปิดใช้งานในโหมดสาธิต กรุณาสร้างบัญชีจริงเพื่อใช้ฟีเจอร์นี้", tl: "Naka-disable sa demo mode. Gumawa ng totoong account para magamit ang feature na ito.", tr: "Demo modunda devre dışı. Bu özelliği kullanmak için gerçek bir hesap oluşturun.", ur: "ڈیمو موڈ میں غیر فعال ہے۔ یہ سہولت استعمال کرنے کے لیے اصل اکاؤنٹ بنائیں۔", vi: "Đã tắt trong chế độ demo. Hãy tạo tài khoản thật để dùng tính năng này.", wo: "Fey nañu ko ci démo bi. Sosleen kont bu dëgg ngir jëfandikoo lii.", yo: "A ti pa á ní ipò àfihàn. Ẹ ṣẹ̀dá àkáǹtì gidi láti lo ẹ̀yà yìí.", zh: "演示模式下已停用。请创建真实账户以使用此功能。", zu: "Kukhutshaziwe kumodi yedemo. Dala i-akhawunti yangempela ukuze usebenzise lesi sici." };
+EXTRA_UI.pinFieldsHint = { fr: "Remplissez les trois champs (4 chiffres chacun).", en: "Fill in all three fields (4 digits each).", am: "ሶስቱንም መስኮች ይሙሉ (እያንዳንዱ 4 አሃዝ)።", ar: "املؤوا الحقول الثلاثة (4 أرقام لكل حقل).", bm: "Aw ye yɔrɔ saba bɛɛ fa (jateden 4 kelen-kelen bɛɛ).", bn: "তিনটি ঘরই পূরণ করুন (প্রতিটিতে ৪টি অঙ্ক)।", de: "Füllen Sie alle drei Felder aus (je 4 Ziffern).", es: "Rellene los tres campos (4 dígitos cada uno).", ha: "Ku cike filayen uku (lambobi 4 kowanne).", hi: "तीनों खाने भरें (हर एक में 4 अंक)।", id: "Isi ketiga kolom (masing-masing 4 angka).", it: "Compili i tre campi (4 cifre ciascuno).", nl: "Vul de drie velden in (elk 4 cijfers).", ja: "3つの欄すべてに入力してください（各4桁）。", ko: "세 칸을 모두 입력하세요(각 4자리).", pl: "Proszę wypełnić trzy pola (po 4 cyfry).", pt: "Preencha os três campos (4 dígitos cada).", ru: "Заполните все три поля (по 4 цифры).", sw: "Jaza sehemu zote tatu (tarakimu 4 kila moja).", ta: "மூன்று புலங்களையும் நிரப்புங்கள் (ஒவ்வொன்றிலும் 4 இலக்கங்கள்).", te: "మూడు ఫీల్డ్‌లనూ నింపండి (ఒక్కొక్కటి 4 అంకెలు).", th: "กรุณากรอกทั้งสามช่อง (ช่องละ 4 หลัก)", tl: "Punan ang tatlong field (tig-4 na numero).", tr: "Üç alanı da doldurun (her biri 4 rakam).", ur: "تینوں خانے پُر کریں (ہر ایک میں 4 ہندسے)۔", vi: "Hãy điền cả ba ô (mỗi ô 4 chữ số).", wo: "Feesalleen ñetti barab yi (4 siifar bu nekk).", yo: "Ẹ kún gbogbo ààyè mẹ́ta (nọ́ńbà 4 ọ̀kọ̀ọ̀kan).", zh: "请填写全部三个栏位（每栏 4 位数字）。", zu: "Gcwalisa zonke izinkambu ezintathu (izinombolo ezingu-4 ngayinye)." };
+EXTRA_UI.errStorageFull = { fr: "Stockage plein sur ce téléphone : ce changement hors ligne risque de ne pas être conservé. Libérez de l'espace ou reconnectez-vous à Internet.", en: "Storage is full on this phone: this offline change may not be kept. Free up space or reconnect to the Internet.", am: "የዚህ ስልክ ማከማቻ ሞልቷል፦ ይህ ከመስመር ውጭ የተደረገ ለውጥ ላይቀመጥ ይችላል። ቦታ ያስለቅቁ ወይም ከኢንተርኔት ጋር እንደገና ይገናኙ።", ar: "مساحة التخزين ممتلئة على هذا الهاتف: قد لا يُحفظ هذا التغيير الذي تم دون اتصال. أفرغوا بعض المساحة أو أعيدوا الاتصال بالإنترنت.", bm: "Telefɔni in mara yɔrɔ falen don: nin yɛlɛma min kɛra ɛntɛrinɛti kɔ, a bɛ se ka tunun. Aw ye yɔrɔ bɔ walima ka segin ɛntɛrinɛti kan.", bn: "এই ফোনের স্টোরেজ ভরে গেছে: এই অফলাইন পরিবর্তনটি হয়তো সংরক্ষিত থাকবে না। জায়গা খালি করুন বা আবার ইন্টারনেটে সংযুক্ত হোন।", de: "Der Speicher dieses Telefons ist voll: Diese Offline-Änderung wird möglicherweise nicht behalten. Geben Sie Speicherplatz frei oder verbinden Sie sich wieder mit dem Internet.", es: "Almacenamiento lleno en este teléfono: este cambio sin conexión podría no conservarse. Libere espacio o vuelva a conectarse a Internet.", ha: "Ma'ajiyar wannan waya ta cika: wannan canjin da aka yi ba tare da intanet ba mai yiwuwa ba za a adana shi ba. Ku 'yantar da wuri ko ku sake haɗawa da Intanet.", hi: "इस फ़ोन का स्टोरेज भर गया है: यह ऑफ़लाइन बदलाव शायद सुरक्षित न रहे। जगह खाली करें या फिर से इंटरनेट से जुड़ें।", id: "Penyimpanan ponsel ini penuh: perubahan offline ini mungkin tidak tersimpan. Kosongkan ruang atau sambungkan kembali ke Internet.", it: "Memoria piena su questo telefono: questa modifica offline potrebbe non essere conservata. Liberi spazio o si riconnetta a Internet.", nl: "De opslag van deze telefoon is vol: deze offline wijziging wordt mogelijk niet bewaard. Maak ruimte vrij of maak opnieuw verbinding met internet.", ja: "この端末のストレージがいっぱいです。オフラインでのこの変更は保存されない可能性があります。空き容量を増やすか、インターネットに再接続してください。", ko: "이 휴대폰의 저장 공간이 가득 찼습니다. 오프라인에서 변경한 내용이 보관되지 않을 수 있습니다. 공간을 확보하거나 인터넷에 다시 연결하세요.", pl: "Pamięć tego telefonu jest pełna: ta zmiana offline może nie zostać zachowana. Proszę zwolnić miejsce lub połączyć się ponownie z Internetem.", pt: "Armazenamento cheio neste telemóvel: esta alteração offline pode não ser conservada. Liberte espaço ou volte a ligar-se à Internet.", ru: "Память телефона заполнена: это изменение, сделанное без сети, может не сохраниться. Освободите место или подключитесь к Интернету.", sw: "Hifadhi ya simu hii imejaa: badiliko hili la nje ya mtandao huenda lisihifadhiwe. Futa nafasi au unganisha tena Intaneti.", ta: "இந்த தொலைபேசியின் சேமிப்பிடம் நிரம்பிவிட்டது: இந்த ஆஃப்லைன் மாற்றம் சேமிக்கப்படாமல் போகலாம். இடத்தைக் காலி செய்யுங்கள் அல்லது மீண்டும் இணையத்துடன் இணையுங்கள்.", te: "ఈ ఫోన్ స్టోరేజ్ నిండిపోయింది: ఈ ఆఫ్‌లైన్ మార్పు నిలవకపోవచ్చు. స్థలాన్ని ఖాళీ చేయండి లేదా మళ్లీ ఇంటర్నెట్‌కు కనెక్ట్ అవ్వండి.", th: "พื้นที่จัดเก็บของโทรศัพท์เครื่องนี้เต็ม: การเปลี่ยนแปลงแบบออฟไลน์นี้อาจไม่ถูกเก็บไว้ กรุณาเพิ่มพื้นที่ว่างหรือเชื่อมต่ออินเทอร์เน็ตอีกครั้ง", tl: "Puno na ang storage ng teleponong ito: maaaring hindi ma-save ang offline na pagbabagong ito. Magbakante ng espasyo o kumonekta muli sa Internet.", tr: "Bu telefonun depolama alanı dolu: bu çevrimdışı değişiklik saklanmayabilir. Yer açın veya İnternet'e yeniden bağlanın.", ur: "اس فون کی اسٹوریج بھر گئی ہے: یہ آف لائن تبدیلی شاید محفوظ نہ رہے۔ جگہ خالی کریں یا دوبارہ انٹرنیٹ سے جڑیں۔", vi: "Bộ nhớ điện thoại này đã đầy: thay đổi ngoại tuyến này có thể không được giữ lại. Hãy giải phóng dung lượng hoặc kết nối lại Internet.", wo: "Dencukaayu telefon bii fees na: coppite gii amul ci internet man na réer. Yeesalleen barab walla ngeen dellu ci Internet.", yo: "Ibi ìpamọ́ fóònù yìí ti kún: àyípadà àìsí-ìkànnì yìí lè má wà nípamọ́. Ẹ tú ààyè sílẹ̀ tàbí kí ẹ tún sopọ̀ mọ́ Íńtánẹ́ẹ̀tì.", zh: "此手机存储空间已满：这次离线修改可能无法保留。请释放空间或重新连接网络。", zu: "Isitoreji sale foni sigcwele: lolu shintsho olwenziwe ungaxhunyiwe lungase lungagcinwa. Khulula isikhala noma uxhume futhi ku-inthanethi." };
+EXTRA_UI.errLoadFailed = { fr: "Chargement impossible. Vérifiez votre connexion.", en: "Unable to load. Check your connection.", am: "መጫን አልተቻለም። ግንኙነትዎን ያረጋግጡ።", ar: "تعذّر التحميل. تحققوا من اتصالكم.", bm: "A ma se ka dayɛlɛ. Aw ye aw ka ɛntɛrinɛti lajɛ.", bn: "লোড করা যায়নি। আপনার সংযোগ পরীক্ষা করুন।", de: "Laden nicht möglich. Prüfen Sie Ihre Verbindung.", es: "No se pudo cargar. Compruebe su conexión.", ha: "An kasa lodawa. Ku duba haɗin ku.", hi: "लोड नहीं हो सका। अपना कनेक्शन जाँचें।", id: "Gagal memuat. Periksa koneksi Anda.", it: "Caricamento impossibile. Controlli la connessione.", nl: "Laden mislukt. Controleer uw verbinding.", ja: "読み込めませんでした。接続をご確認ください。", ko: "불러올 수 없습니다. 연결 상태를 확인하세요.", pl: "Nie można wczytać. Proszę sprawdzić połączenie.", pt: "Não foi possível carregar. Verifique a sua ligação.", ru: "Не удалось загрузить. Проверьте подключение.", sw: "Imeshindwa kupakia. Angalia muunganisho wako.", ta: "ஏற்ற முடியவில்லை. உங்கள் இணைப்பைச் சரிபார்க்கவும்.", te: "లోడ్ చేయడం సాధ్యం కాలేదు. మీ కనెక్షన్‌ను తనిఖీ చేయండి.", th: "โหลดไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อ", tl: "Hindi ma-load. Suriin ang inyong koneksyon.", tr: "Yüklenemedi. Bağlantınızı kontrol edin.", ur: "لوڈ نہیں ہو سکا۔ اپنا کنکشن چیک کریں۔", vi: "Không tải được. Hãy kiểm tra kết nối.", wo: "Mënul yeb. Seetleen seen koneksioŋ.", yo: "Kò lè ṣí. Ẹ ṣàyẹ̀wò ìsopọ̀ yín.", zh: "无法加载。请检查您的网络连接。", zu: "Ayikwazi ukulayisha. Hlola uxhumano lwakho." };
+EXTRA_UI.errPhotoSave = { fr: "La photo n'a pas pu être enregistrée (problème de connexion). Réessayez.", en: "The photo could not be saved (connection problem). Please try again.", am: "ፎቶው ሊቀመጥ አልቻለም (የግንኙነት ችግር)። እባክዎ እንደገና ይሞክሩ።", ar: "تعذّر حفظ الصورة (مشكلة في الاتصال). حاولوا مجددًا.", bm: "Ja ma se ka mara (ɛntɛrinɛti gɛlɛya). Aw ye a lasegin.", bn: "ছবিটি সংরক্ষণ করা যায়নি (সংযোগের সমস্যা)। অনুগ্রহ করে আবার চেষ্টা করুন।", de: "Das Foto konnte nicht gespeichert werden (Verbindungsproblem). Bitte versuchen Sie es erneut.", es: "No se pudo guardar la foto (problema de conexión). Inténtelo de nuevo.", ha: "An kasa adana hoton (matsalar haɗi). Ku sake gwadawa.", hi: "फ़ोटो सहेजी नहीं जा सकी (कनेक्शन की समस्या)। कृपया फिर से कोशिश करें।", id: "Foto tidak dapat disimpan (masalah koneksi). Silakan coba lagi.", it: "Impossibile salvare la foto (problema di connessione). Riprovi.", nl: "De foto kon niet worden opgeslagen (verbindingsprobleem). Probeer het opnieuw.", ja: "写真を保存できませんでした（接続の問題）。もう一度お試しください。", ko: "사진을 저장하지 못했습니다(연결 문제). 다시 시도해 주세요.", pl: "Nie udało się zapisać zdjęcia (problem z połączeniem). Proszę spróbować ponownie.", pt: "Não foi possível guardar a foto (problema de ligação). Tente novamente.", ru: "Не удалось сохранить фото (проблема с подключением). Попробуйте ещё раз.", sw: "Picha haikuweza kuhifadhiwa (tatizo la muunganisho). Tafadhali jaribu tena.", ta: "புகைப்படத்தைச் சேமிக்க முடியவில்லை (இணைப்புச் சிக்கல்). மீண்டும் முயற்சிக்கவும்.", te: "ఫోటోను సేవ్ చేయడం సాధ్యం కాలేదు (కనెక్షన్ సమస్య). దయచేసి మళ్లీ ప్రయత్నించండి.", th: "ไม่สามารถบันทึกรูปภาพได้ (ปัญหาการเชื่อมต่อ) กรุณาลองอีกครั้ง", tl: "Hindi na-save ang larawan (problema sa koneksyon). Pakisubukang muli.", tr: "Fotoğraf kaydedilemedi (bağlantı sorunu). Lütfen tekrar deneyin.", ur: "تصویر محفوظ نہیں ہو سکی (کنکشن کا مسئلہ)۔ براہ کرم دوبارہ کوشش کریں۔", vi: "Không lưu được ảnh (lỗi kết nối). Vui lòng thử lại.", wo: "Nataal bi mënul denc (jafe-jafe koneksioŋ). Jéemaatleen.", yo: "A kò lè fi fọ́tò pamọ́ (ìṣòro ìsopọ̀). Ẹ jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.", zh: "照片未能保存（网络问题）。请重试。", zu: "Isithombe asikwazanga ukulondolozwa (inkinga yoxhumano). Sicela uzame futhi." };
+EXTRA_UI.shareGetApp = { fr: "Téléchargez", en: "Download", am: "ያውርዱ", ar: "حمِّلوا", bm: "Aw ye a jiginni", bn: "ডাউনলোড করুন", de: "Jetzt laden:", es: "Descargue", ha: "Ku sauke", hi: "डाउनलोड करें", id: "Unduh", it: "Scarichi", nl: "Download", ja: "ダウンロード：", ko: "다운로드:", pl: "Pobierz", pt: "Descarregue", ru: "Скачайте", sw: "Pakua", ta: "பதிவிறக்குங்கள்", te: "డౌన్‌లోడ్ చేయండి", th: "ดาวน์โหลด", tl: "I-download ang", tr: "İndirin:", ur: "ڈاؤن لوڈ کریں", vi: "Tải", wo: "Yebleen", yo: "Ẹ gba", zh: "下载", zu: "Landa" };
+EXTRA_UI.shareScanQr = { fr: "Scannez le code", en: "Scan the code", am: "ኮዱን ይቃኙ", ar: "امسحوا الرمز", bm: "Aw ye kode sɛgɛsɛgɛ", bn: "কোডটি স্ক্যান করুন", de: "Code scannen", es: "Escanee el código", ha: "Ku duba lambar", hi: "कोड स्कैन करें", id: "Pindai kodenya", it: "Scansioni il codice", nl: "Scan de code", ja: "コードをスキャン", ko: "코드를 스캔하세요", pl: "Zeskanuj kod", pt: "Leia o código", ru: "Отсканируйте код", sw: "Changanua msimbo", ta: "குறியீட்டை ஸ்கேன் செய்யுங்கள்", te: "కోడ్‌ను స్కాన్ చేయండి", th: "สแกนโค้ด", tl: "I-scan ang code", tr: "Kodu tarayın", ur: "کوڈ اسکین کریں", vi: "Quét mã", wo: "Skaneleen kod bi", yo: "Ẹ ṣàyẹ̀wò kóòdù", zh: "扫描二维码", zu: "Skena ikhodi" };
+EXTRA_UI.cropPhotoTitle = { fr: "Cadrez votre photo", en: "Frame your photo", am: "ፎቶዎን ያስተካክሉ", ar: "اضبطوا إطار صورتكم", bm: "Aw ye aw ka ja labɛn", bn: "আপনার ছবি ফ্রেম করুন", de: "Foto zuschneiden", es: "Encuadre su foto", ha: "Ku daidaita hotonku", hi: "अपनी फ़ोटो फ़्रेम करें", id: "Atur bingkai foto Anda", it: "Inquadri la sua foto", nl: "Kader uw foto", ja: "写真の位置を調整", ko: "사진 구도를 맞추세요", pl: "Wykadruj zdjęcie", pt: "Enquadre a sua foto", ru: "Обрежьте фото", sw: "Panga picha yako", ta: "உங்கள் புகைப்படத்தை சரிசெய்யுங்கள்", te: "మీ ఫోటోను ఫ్రేమ్ చేయండి", th: "จัดกรอบรูปภาพของคุณ", tl: "Ayusin ang inyong larawan", tr: "Fotoğrafınızı kırpın", ur: "اپنی تصویر کو فریم کریں", vi: "Căn chỉnh ảnh của bạn", wo: "Defarleen seen nataal", yo: "Ẹ ṣètò fọ́tò yín", zh: "调整照片取景", zu: "Hlela isithombe sakho" };
+
 const TAB_HELP_CONTENT = {
   stock: { titleKey: "tabHelpStockTitle", itemKeys: ["tabHelpStock1", "tabHelpStock2", "tabHelpStock3", "tabHelpStock4", "tabHelpStock5", "tabHelpStock6", "tabHelpStock7"] },
   dashboard: { titleKey: "tabHelpDashboardTitle", itemKeys: ["tabHelpDashboard1", "tabHelpDashboard2", "tabHelpDashboard3"] },
@@ -6311,8 +6342,39 @@ function fcfa(n) {
   const amount = localizedNumber(n);
   return CURRENT_CURRENCY.after ? `${amount} ${CURRENT_CURRENCY.symbol}` : `${CURRENT_CURRENCY.symbol}${amount}`;
 }
+// ---- Clé de jour LOCALE (AAAA-MM-JJ) ----
+// Toute l'app découpait les journées avec toISOString().slice(0, 10), c'est-à-dire en heure
+// UTC. Au Mali (UTC+0) ça tombe juste, mais partout ailleurs la « journée » ne commençait pas
+// à minuit : au Vietnam (UTC+7) les ventes faites avant 7 h du matin étaient comptées la
+// veille ; à New York (UTC-5) celles d'après 19 h passaient au lendemain. Ventes du jour,
+// quota quotidien, bénéfice, graphiques, filtres d'historique et exports étaient tous décalés.
+// dayKeyOf() donne le jour tel que l'horloge du téléphone le voit. Une chaîne déjà au format
+// AAAA-MM-JJ (échéance de dette, filtre de date) est rendue telle quelle.
+const __dayKeyCache = new Map();
+function dayKeyOf(v) {
+  if (v == null || v === "") return "";
+  if (typeof v === "string") {
+    if (v.length === 10 && v[4] === "-" && v[7] === "-") return v;
+    const hit = __dayKeyCache.get(v);
+    if (hit) return hit;
+  }
+  const d = v instanceof Date ? v : new Date(v);
+  if (isNaN(d.getTime())) return String(v).slice(0, 10);
+  const key = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  // Cache : les graphiques appellent cette fonction (ventes × jours) fois par affichage.
+  if (typeof v === "string") { if (__dayKeyCache.size > 60000) __dayKeyCache.clear(); __dayKeyCache.set(v, key); }
+  return key;
+}
+// Une clé de jour seule ("2026-11-12") passée à new Date() est lue comme minuit UTC : à
+// l'ouest de Greenwich elle s'afficherait la veille. On la lit donc comme une date locale.
+function parseDayOrIso(v) {
+  if (typeof v === "string" && v.length === 10 && v[4] === "-" && v[7] === "-") {
+    return new Date(Number(v.slice(0, 4)), Number(v.slice(5, 7)) - 1, Number(v.slice(8, 10)));
+  }
+  return new Date(v);
+}
 function todayKey() {
-  return new Date().toISOString().slice(0, 10);
+  return dayKeyOf(new Date());
 }
 // Nom du jour de la semaine traduit, à partir de l'index JS (0=dimanche..6=samedi) —
 // réutilise les traductions déjà existantes des jours pour les plages horaires du
@@ -6591,13 +6653,13 @@ function getAppLocale() {
   return (__dateLocaleCache[key] = base + ext);
 }
 function dayLabel(iso) {
-  const d = new Date(iso);
+  const d = parseDayOrIso(iso);
   // Étiquette courte des graphiques : on retire les marques de direction (arabe/hébreu) qui
   // décaleraient l'affichage dans un conteneur gauche→droite.
   return d.toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit" }).replace(/[\u200e\u200f\u061c]/g, "");
 }
 function fullDate(iso) {
-  const d = new Date(iso);
+  const d = parseDayOrIso(iso);
   return d.toLocaleDateString(getAppLocale());
 }
 // Le navigateur renvoie les dates "longues" (jour de semaine + mois en toutes lettres)
@@ -6618,11 +6680,100 @@ function fullTime(iso) {
   const d = new Date(iso);
   return d.toLocaleTimeString(getAppLocale(), { hour: "2-digit", minute: "2-digit" });
 }
+// ---- Jeu de données du mode démo ----
+// L'ancienne démo tenait en 4 produits et 4 ventes : presque tous les écrans (statistiques,
+// prévisions de rupture, bénéfice, fiabilité des clients, tendance de caisse) restaient vides,
+// alors que la démo sert justement à montrer l'app. Celle-ci fabrique 75 jours d'activité
+// vraisemblable d'une petite alimentation : samedis plus forts, pointes du matin et de la fin
+// d'après-midi, clients réguliers, crédits remboursés ou non, un produit qui va manquer et
+// deux qui ne se vendent plus. Générateur pseudo-aléatoire à graine fixe : la démo est la
+// même à chaque ouverture, seules les dates suivent le jour courant.
+function buildDemoData(transportLabel) {
+  let seed = 20261112;
+  const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  const pick = (weighted) => { const sum = weighted.reduce((a, w) => a + w[1], 0); let r = rnd() * sum; for (const w of weighted) { r -= w[1]; if (r <= 0) return w[0]; } return weighted[weighted.length - 1][0]; };
+  // [id, nom, prix de vente, prix d'achat, stock actuel, popularité, quantité max par ticket]
+  const catalog = [
+    ["d1", "Riz (sac 25kg)", 15000, 13200, 12, 3, 1],
+    ["d2", "Sucre (kg)", 750, 600, 6, 9, 3],
+    ["d3", "Huile (bidon 5L)", 6500, 5600, 8, 3, 1],
+    ["d4", "Savon", 500, 350, 40, 7, 3],
+    ["d5", "Lait en poudre", 2500, 2000, 15, 4, 2],
+    ["d6", "Thé (paquet)", 1000, 700, 22, 5, 2],
+    ["d7", "Pâtes (500g)", 600, 450, 30, 6, 3],
+    ["d8", "Eau minérale (1,5L)", 500, 350, 9, 9, 4],
+    ["d9", "Biscuits", 300, 200, 60, 7, 4],
+    ["d10", "Café soluble", 1500, 1150, 10, 3, 1],
+    ["d11", "Tomate concentrée", 400, 300, 35, 5, 3],
+    ["d12", "Piles (paquet)", 1000, 650, 14, 1, 1],
+    ["d13", "Parapluie", 3500, 2500, 6, 0, 1],
+    ["d14", "Cahier 200 pages", 500, 350, 25, 0, 2],
+  ];
+  const products = catalog.map(([id, name, price, costPrice, quantity]) => ({ id, name, quantity, price, costPrice, photo: null }));
+  const customers = [["Awa Traoré", 9], ["Moussa Diallo", 7], ["Fatoumata Koné", 5], ["Ibrahim Coulibaly", 4], ["Mariam Sidibé", 3], ["Oumar Keita", 2], ["Aminata Touré", 2], ["Seydou Cissé", 1]];
+  const hours = [[8, 1], [9, 2], [10, 3], [11, 3], [12, 2], [13, 1], [14, 1], [15, 1.5], [16, 2], [17, 3.5], [18, 3.5], [19, 2], [20, 1]];
+  const weekdayFactor = [0.5, 0.95, 0.9, 1, 1.05, 1.25, 1.6]; // dimanche … samedi
+  const sales = [], debts = [], debtEvents = [], expenses = [];
+  const nowDate = new Date();
+  const DAYS = 75;
+  let n = 0;
+  for (let off = DAYS - 1; off >= 0; off--) {
+    const day = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate() - off);
+    const growth = 1 + ((DAYS - 1 - off) / (DAYS - 1)) * 0.3;
+    const tickets = Math.max(2, Math.round(6 * weekdayFactor[day.getDay()] * growth * (0.8 + rnd() * 0.45)));
+    for (let k = 0; k < tickets; k++) {
+      const when = new Date(day.getFullYear(), day.getMonth(), day.getDate(), pick(hours), Math.floor(rnd() * 60));
+      if (when.getTime() > nowDate.getTime() - 5 * 60000) continue; // rien dans le futur
+      const date = when.toISOString();
+      const transactionId = "tdemo" + (++n);
+      const payment = pick([["cash", 62], ["mobile", 25], ["card", 3], ["credit", 10]]);
+      const customer = payment === "credit" || rnd() < 0.35 ? pick(customers) : null;
+      const lines = 1 + (rnd() < 0.45 ? 1 : 0) + (rnd() < 0.15 ? 1 : 0);
+      const taken = new Set();
+      let total = 0;
+      const rows = [];
+      for (let l = 0; l < lines; l++) {
+        // Le cahier ne s'est vendu qu'à la rentrée (il y a plus de 35 jours) : c'est lui qui
+        // alimente la carte « Argent qui dort ». Le parapluie, lui, ne s'est jamais vendu.
+        const pool = catalog.filter((c) => !taken.has(c[0]) && (c[5] > 0 || (c[0] === "d14" && off >= 36))).map((c) => [c, c[0] === "d14" ? 4 : c[5]]);
+        const c = pick(pool);
+        taken.add(c[0]);
+        const qty = 1 + Math.floor(rnd() * c[6]);
+        rows.push({ id: "sdemo" + n + "-" + l, transactionId, productId: c[0], productName: c[1], qty, unitPrice: c[2], total: qty * c[2], mode: "pack", costPrice: c[3], payment, customer, date, received: null, change: null, actorId: null, actorName: null });
+        total += qty * c[2];
+      }
+      if (payment === "cash") {
+        const received = Math.ceil(total / 5000) * 5000;
+        rows.forEach((r) => { r.received = received; r.change = received - total; });
+      }
+      sales.push(...rows);
+      if (payment === "credit") {
+        const debtId = "debtdemo" + n;
+        const product = rows.map((r) => `${r.productName} x${r.qty}`).join(", ");
+        // Les crédits de plus de 10 jours sont presque tous remboursés ; un client traîne.
+        const paid = off > 10 ? customer !== "Oumar Keita" : rnd() < 0.2;
+        debts.push({ id: debtId, customer, amount: total, product, date, paid, paidAmount: paid ? total : 0, source: "sale" });
+        debtEvents.push({ id: debtId + "-ev", debtId, type: "created", customer, amount: total, product, date, source: "sale" });
+        if (paid) {
+          const paidAt = new Date(Math.min(nowDate.getTime() - 3600000, when.getTime() + (2 + Math.floor(rnd() * 6)) * 86400000)).toISOString();
+          debtEvents.push({ id: debtId + "-paidev", debtId, type: "paid", customer, amount: total, product, date: paidAt });
+        }
+      }
+    }
+    if (off % 4 === 2) {
+      expenses.push({ id: "edemo" + off, label: transportLabel, amount: 2000 + Math.floor(rnd() * 4) * 1000, kind: "expense", date: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 7, 30).toISOString() });
+    }
+  }
+  return { products, sales, debts, debtEvents, expenses };
+}
 function last30Days() {
   const arr = [];
   for (let i = 29; i >= 0; i--) {
-    const d = new Date(Date.now() - i * 86400000);
-    arr.push(d.toISOString().slice(0, 10));
+    // setDate plutôt que « - i × 24 h » : un jour de changement d'heure dure 23 h ou 25 h,
+    // et l'ancien calcul pouvait alors sauter un jour ou en répéter un.
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    arr.push(dayKeyOf(d));
   }
   return arr;
 }
@@ -10388,7 +10539,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const shareZReport = async (z) => {
     try {
       const blob = await generateZReportPdf(z);
-      const name = `${tx(lang, "zModalTitle")} ${z.number} - ${String(z.date).slice(0, 10)}.pdf`;
+      const name = `${tx(lang, "zModalTitle")} ${z.number} - ${dayKeyOf(z.date)}.pdf`;
       const file = new File([blob], name, { type: "application/pdf" });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({ files: [file], title: name });
@@ -11566,6 +11717,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [countAdjust, setCountAdjust] = useState(false);
   // Onglet Caisse : période affichée, longueur du journal, fenêtre de comptage.
   const [cashPeriod, setCashPeriod] = useState("today");
+  const [statsPeriod, setStatsPeriod] = useState("30"); // onglet Stats : "7" | "30" | "90" jours
+  const [homeBarSel, setHomeBarSel] = useState(null); // barre touchée dans le mini-graphique 7 jours de l'accueil
+  const [heatSel, setHeatSel] = useState(null); // case touchée dans « Vos meilleurs moments » : { day, hour }
   // Période du Rapport de caisse par employé (même logique que cashPeriod ci-dessus).
   const [cashReportPeriod, setCashReportPeriod] = useState("today");
   const [cashJournalLimit, setCashJournalLimit] = useState(20);
@@ -11791,6 +11945,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [restockPrice, setRestockPrice] = useState("");
   const [stockSearch, setStockSearch] = useState("");
   const [historySearch, setHistorySearch] = useState("");
+  const [historyLimit, setHistoryLimit] = useState(40); // nombre de lignes d'historique affichées
   // ---- Filtres avancés de l'Historique (période, produit, client, montant) ----
   const [showHistoryFilters, setShowHistoryFilters] = useState(false);
   const [histFilterKinds, setHistFilterKinds] = useState({ sale: true, debt: true, expense: true });
@@ -12232,7 +12387,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // façon fiable en attente localement. On le signale clairement plutôt
         // que de laisser l'échec passer inaperçu (ex : trop de photos produits).
         if (cacheFailed && !supabaseOk && result && result.queued) {
-          setError("Stockage plein sur ce téléphone : ce changement hors ligne risque de ne pas être conservé. Libérez de l'espace (ex. supprimez des photos produits) ou reconnectez-vous au réseau.");
+          setError(tx(lang, "errStorageFull"));
         }
       } catch (e) { /* persistOffline gère déjà ses propres erreurs en interne */ }
       setSaving(false);
@@ -12242,22 +12397,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   useEffect(() => {
     if (isDemo) {
       const now = Date.now();
-      const demoProducts = [
-        { id: "d1", name: "Riz (sac 25kg)", quantity: 12, price: 15000, photo: null },
-        { id: "d2", name: "Sucre (kg)", quantity: 4, price: 750, photo: null },
-        { id: "d3", name: "Huile (bidon 5L)", quantity: 8, price: 6500, photo: null },
-        { id: "d4", name: "Savon", quantity: 20, price: 500, photo: null },
-      ];
-      const demoSales = [
-        { id: "s1", transactionId: "tdemo1", productId: "d1", productName: "Riz (sac 25kg)", qty: 1, unitPrice: 15000, total: 15000, payment: "cash", customer: null, date: new Date(now - 3600000).toISOString(), received: 20000, change: 5000 },
-        { id: "s2", transactionId: "tdemo1", productId: "d2", productName: "Sucre (kg)", qty: 2, unitPrice: 750, total: 1500, payment: "cash", customer: null, date: new Date(now - 3600000).toISOString(), received: 20000, change: 5000 },
-        { id: "s3", transactionId: "tdemo2", productId: "d3", productName: "Huile (bidon 5L)", qty: 1, unitPrice: 6500, total: 6500, payment: "mobile", customer: "Client A", date: new Date(now - 7200000).toISOString(), received: null, change: null },
-        { id: "s4", transactionId: "tdemo3", productId: "d4", productName: "Savon", qty: 3, unitPrice: 500, total: 1500, payment: "credit", customer: "Client B", date: new Date(now - 90000000).toISOString(), received: null, change: null },
-      ];
-      setProducts(demoProducts);
-      setSales(demoSales);
-      setDebts([{ id: "debt1", customer: "Client B", amount: 1500, product: "Savon x3", date: new Date(now - 90000000).toISOString(), paid: false }]);
-      setExpenses([{ id: "e1", label: t(lang, "othTransportMarchandise"), amount: 2000, date: new Date(now - 3600000).toISOString() }]);
+      const demo = buildDemoData(t(lang, "othTransportMarchandise"));
+      setProducts(demo.products);
+      setSales(demo.sales);
+      setDebts(demo.debts);
+      setExpenses(demo.expenses);
       setCashCounts([]);
       setCashClosures([]);
       setCashFund(10000);
@@ -12270,7 +12414,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setBallColor("blue");
       setCurrency("XOF");
       setAiConversations([]);
-      setDebtEvents([]);
+      setDebtEvents(demo.debtEvents);
       setHistoryLog([]);
       setBenchmarkOptIn(false);
       setArabicDigits(false);
@@ -12419,7 +12563,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // hors-ligne) : c'est la nouvelle base de référence pour les prochaines fusions.
         if (shopConfirmed) writeLocalCache(shopSyncBaseKey, shop);
       } catch (e) {
-        if (!cachedShop) setError("Chargement impossible. Vérifiez votre connexion.");
+        if (!cachedShop) setError(tx(lang, "errLoadFailed"));
       } finally {
         setLoading(false);
         __mark("ShopApp : setLoading(false) final (après vérification réseau)");
@@ -12883,7 +13027,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // à l'écran (changement local déjà appliqué) sans jamais être vraiment
       // enregistrée côté serveur si le réseau avait un souci à cet instant précis.
       // L'utilisateur croyait avoir sauvegardé alors que rien n'était confirmé.
-      setError("La photo n'a pas pu être enregistrée (problème de connexion). Réessaie.");
+      setError(tx(lang, "errPhotoSave"));
     }
     setShopPhotoBusy(false);
   };
@@ -13311,11 +13455,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ctx.textAlign = "left";
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 38px system-ui, -apple-system, sans-serif";
-      ctx.fillText("📲 Télécharge", textX, bandY + bandH / 2 - 30);
+      ctx.fillText("📲 " + tx(lang, "shareGetApp"), textX, bandY + bandH / 2 - 30);
       ctx.fillText("Boutipro", textX, bandY + bandH / 2 + 20);
       ctx.fillStyle = "rgba(255,255,255,0.65)";
       ctx.font = "28px system-ui, -apple-system, sans-serif";
-      ctx.fillText("Scanne le code ci-contre", textX, bandY + bandH / 2 + 65);
+      ctx.fillText(tx(lang, "shareScanQr"), textX, bandY + bandH / 2 + 65);
       if (includePhone || includeQty) {
         // Numéro et/ou quantité, à droite du bandeau (à droite de l'image QR
         // + accroche), alignés à droite du cadre.
@@ -13487,12 +13631,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ---- WebAuthn : enregistrer cet appareil pour la connexion par empreinte/visage ----
   const changeLockPin = async () => {
     setLockPinMsg("");
-    if (isDemo) { setLockPinMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
+    if (isDemo) { setLockPinMsg(tx(lang, "demoDisabledMsg")); return; }
     // Premier réglage (aucun code PIN existant) : pas de champ "ancien code" à remplir.
     const needsOldPin = hasLockPin !== false;
-    if (needsOldPin && !/^\d{4}$/.test(oldLockPin.trim())) { setLockPinMsg("Remplis les trois champs (4 chiffres chacun)."); return; }
-    if (!/^\d{4}$/.test(newLockPin.trim()) || !/^\d{4}$/.test(confirmNewLockPin.trim())) { setLockPinMsg("Remplis les trois champs (4 chiffres chacun)."); return; }
-    if (newLockPin.trim() !== confirmNewLockPin.trim()) { setLockPinMsg("Le nouveau code et sa confirmation ne correspondent pas."); return; }
+    if (needsOldPin && !/^\d{4}$/.test(oldLockPin.trim())) { setLockPinMsg(tx(lang, "pinFieldsHint")); return; }
+    if (!/^\d{4}$/.test(newLockPin.trim()) || !/^\d{4}$/.test(confirmNewLockPin.trim())) { setLockPinMsg(tx(lang, "pinFieldsHint")); return; }
+    if (newLockPin.trim() !== confirmNewLockPin.trim()) { setLockPinMsg(t(lang, "pinMismatch")); return; }
     try {
       // window.storage.get rejette avec une erreur "not_found" (pas une valeur vide) quand la
       // clé n'existe pas encore — c'est le cas normal pour un compte qui n'a jamais eu de code
@@ -13503,17 +13647,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         account = raw ? JSON.parse(raw.value) : null;
       } catch (e) { account = null; }
       if (needsOldPin) {
-        if (!account || !account.lockPin) { setLockPinMsg("Ancien code PIN incorrect."); return; }
+        if (!account || !account.lockPin) { setLockPinMsg(t(lang, "wrongPin")); return; }
         const oldHash = await hashPin(oldLockPin.trim());
-        if (account.lockPin !== oldHash) { setLockPinMsg("Ancien code PIN incorrect."); return; }
+        if (account.lockPin !== oldHash) { setLockPinMsg(t(lang, "wrongPin")); return; }
       }
       if (!account) account = {};
       account.lockPin = await hashPin(newLockPin.trim());
       await window.storage.set(`accounts:${username}`, JSON.stringify(account), true);
       setHasLockPin(true);
-      setLockPinMsg("Code PIN mis à jour ✓");
+      setLockPinMsg(tx(lang, "syncSaved") + " ✓");
       setOldLockPin(""); setNewLockPin(""); setConfirmNewLockPin("");
-    } catch (e) { setLockPinMsg("Erreur, réessaie."); }
+    } catch (e) { setLockPinMsg(t(lang, "genericError")); }
   };
   const verifyLockPin = async () => {
     setLockPinError("");
@@ -13653,7 +13797,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const renameShop = async () => {
     setShopNameMsg("");
-    if (isDemo) { onRenameShop && onRenameShop(shopNameInput.trim() || shopName); setShopNameMsg("Nom mis à jour ✓ (mode démo, non sauvegardé)"); return; }
+    if (isDemo) { onRenameShop && onRenameShop(shopNameInput.trim() || shopName); setShopNameMsg(tx(lang, "syncSaved") + " ✓"); return; }
     if (!shopNameInput.trim()) return;
     try {
       const newName = shopNameInput.trim();
@@ -13665,7 +13809,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // revenait à la reconnexion. (Boutiques secondaires : leur nom vit ailleurs, on n'y touche pas.)
       if (!isSecondaryShop) {
         const saved = await saveProfileFields({}, newName);
-        if (!saved.ok) { setShopNameMsg("Erreur, réessaie."); return; }
+        if (!saved.ok) { setShopNameMsg(t(lang, "genericError")); return; }
         if (isCapacitorApp) {
           // Cache du démarrage rapide de l'app native : évite de réafficher l'ancien nom au prochain lancement.
           try {
@@ -13679,8 +13823,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         }
       }
       onRenameShop && onRenameShop(newName);
-      setShopNameMsg("Nom mis à jour ✓");
-    } catch (e) { setShopNameMsg("Erreur, réessaie."); }
+      setShopNameMsg(tx(lang, "syncSaved") + " ✓");
+    } catch (e) { setShopNameMsg(t(lang, "genericError")); }
   };
   // Enregistre les infos de profil saisies à l'inscription (prénom, nom, secteur, pays) dans
   // shop_data : relit la ligne, fusionne, réécrit — sans toucher aux produits, ventes, PIN, etc.
@@ -13725,7 +13869,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const first = ownerFirstInput.trim();
     const last = ownerLastInput.trim();
     const saved = await saveProfileFields({ ownerName: `${first} ${last}`.trim(), ownerFirstName: first, ownerLastName: last });
-    if (!saved.ok) { setOwnerNameMsg("Erreur, réessaie."); return; }
+    if (!saved.ok) { setOwnerNameMsg(t(lang, "genericError")); return; }
     setOwnerFirstName(first);
     setOwnerLastName(last);
     cacheProfileLocally(first, last, shopSector);
@@ -13735,7 +13879,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const saveSector = async (sectorValue) => {
     setSectorMsg("");
     const saved = await saveProfileFields({ sector: sectorValue });
-    if (!saved.ok) { setSectorMsg("Erreur, réessaie."); return; }
+    if (!saved.ok) { setSectorMsg(t(lang, "genericError")); return; }
     setShopSector(sectorValue);
     cacheProfileLocally(ownerFirstName, ownerLastName, sectorValue);
     patchShopCache({ sector: sectorValue });
@@ -13745,7 +13889,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const saveCountry = async (countryId) => {
     setCountryMsg("");
     const saved = await saveProfileFields({ country: countryId });
-    if (!saved.ok) { setCountryMsg("Erreur, réessaie."); return; }
+    if (!saved.ok) { setCountryMsg(t(lang, "genericError")); return; }
     setShopCountry(countryId);
     try { window.localStorage.setItem("mb_shop_country:" + shopKey, countryId); } catch (e) { /* pas grave */ }
     patchShopCache({ country: countryId });
@@ -13757,14 +13901,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const saveEmail = async () => {
     setEmailMsg("");
-    if (isDemo) { setEmailMsg("Désactivé en mode démo."); return; }
+    if (isDemo) { setEmailMsg(tx(lang, "demoDisabledMsg")); return; }
     try {
       const raw = await window.storage.get(`accounts:${username}`, true);
       const account = raw ? JSON.parse(raw.value) : { shopName: username };
       account.email = emailInput.trim();
       await window.storage.set(`accounts:${username}`, JSON.stringify(account), true);
-      setEmailMsg("E-mail enregistré ✓");
-    } catch (e) { setEmailMsg("Erreur, réessaie."); }
+      setEmailMsg(tx(lang, "syncSaved") + " ✓");
+    } catch (e) { setEmailMsg(t(lang, "genericError")); }
   };
   const resetShopData = () => {
     // L'historique est permanent : avant de vider les ventes/dépenses, on recopie dans le journal
@@ -14227,7 +14371,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const seen = new Set();
     // allSales (et non sales) : une vente annulée compte quand même dans la limite du jour.
     allSales.forEach((s) => {
-      if (s.date.slice(0, 10) === key) seen.add(s.transactionId || s.id);
+      if (dayKeyOf(s.date) === key) seen.add(s.transactionId || s.id);
     });
     return seen.size;
   };
@@ -14851,7 +14995,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // 1. Ce que j'ai vendu aujourd'hui
     if (matches("othQuestceQueJaiVenduAujourdhui", [/vendu.*(aujourd hui|ce jour)/, /(ventes?|chiffre).*(aujourd hui|du jour)/, /(sold|sales|revenue).*(today)/])) {
       if (!can("viewStats")) return null;
-      const todaySales = validSales.filter((s) => String(s.date).slice(0, 10) === today);
+      const todaySales = validSales.filter((s) => dayKeyOf(s.date) === today);
       if (todaySales.length === 0) return `${t(lang, "todaySales")} : 0`;
       const total = todaySales.reduce((sum, s) => sum + s.total, 0);
       const tickets = new Set(todaySales.map((s) => s.transactionId || s.id)).size;
@@ -14891,8 +15035,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // 4. Mon meilleur produit
     if (matches("othQuelEstMonMeilleurProduit", [/(meilleur|plus vendu|top).*(produit|article|vente)/, /best.*(product|seller|selling)/])) {
       if (!can("viewStats")) return null;
-      const since = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
-      const recent = validSales.filter((s) => String(s.date).slice(0, 10) >= since);
+      const since = dayKeyOf(new Date(Date.now() - 30 * 86400000));
+      const recent = validSales.filter((s) => dayKeyOf(s.date) >= since);
       if (recent.length === 0) return tx(lang, "aiLocalNoData");
       const byProd = {};
       recent.forEach((s) => {
@@ -14908,8 +15052,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // 5. Résumé de ma semaine
     if (matches("othResumeDeMaSemaine", [/(resume|bilan|recap).*(semaine)/, /(summary|recap).*week/])) {
       if (!can("viewStats")) return null;
-      const since = new Date(Date.now() - 6 * 86400000).toISOString().slice(0, 10);
-      const week = validSales.filter((s) => String(s.date).slice(0, 10) >= since);
+      const since = dayKeyOf(new Date(Date.now() - 6 * 86400000));
+      const week = validSales.filter((s) => dayKeyOf(s.date) >= since);
       const total = week.reduce((sum, s) => sum + s.total, 0);
       const tickets = new Set(week.map((s) => s.transactionId || s.id)).size;
       const byProd = {};
@@ -14919,7 +15063,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       lines.push(`• ${t(lang, "cashReportTotalSales")} : ${money(total)} (${localizedNumber(tickets)})`);
       if (best) lines.push(`• ${tx(lang, "aiLocalBestProduct").split("(")[0].trim()} : ${best[0]} — ${money(best[1])}`);
       if (can("viewCash")) {
-        const exp = expenses.filter((e) => String(e.date).slice(0, 10) >= since && e.kind !== "withdrawal")
+        const exp = expenses.filter((e) => dayKeyOf(e.date) >= since && e.kind !== "withdrawal")
           .reduce((sum, e) => sum + e.amount, 0);
         lines.push(`• ${t(lang, "cashReportExpenses")} : ${money(exp)}`);
       }
@@ -14988,7 +15132,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // de savoir "aujourd'hui" lors d'une recherche internet, et pouvait resservir des
     // résultats anciens (ex: des infos d'il y a plusieurs années) comme s'ils étaient actuels.
     const todayForAi = new Date().toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
-    const todaySalesSum = sales.filter((s) => s.date.slice(0, 10) === todayKey()).reduce((sum, s) => sum + s.total, 0);
+    const todaySalesSum = sales.filter((s) => dayKeyOf(s.date) === todayKey()).reduce((sum, s) => sum + s.total, 0);
     const topProd = Object.entries(
       sales.reduce((acc, s) => { acc[s.productName] = (acc[s.productName] || 0) + s.qty; return acc; }, {})
     ).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([n, q]) => `${n}: ${q} vendus`).join(", ");
@@ -15023,7 +15167,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const debtSummary = (debtsShown.map((d) => `${d.customer} (id: ${d.id}): ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n")
       + (unpaidDebts.length > debtsShown.length ? `\n(+ ${unpaidDebts.length - debtsShown.length} autres dettes plus petites, ${debtsHiddenTotal} ${CURRENT_CURRENCY.symbol} au total — ${unpaidDebts.length} dettes impayées en tout.)` : "")) || "Aucune";
     const cashSummary = `Fond de caisse: ${cashFund} ${CURRENT_CURRENCY.symbol}, Ventes espèces totales: ${sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}, Dépenses: ${expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}, Solde estimé: ${cashFund + sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0) - expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}`;
-    const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => s.date.slice(0, 10) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
+    const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => dayKeyOf(s.date) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
     const memoryNotesText = activeEmployee ? "Aucune pour l'instant." : (aiMemoryNotes.length > 0
       ? aiMemoryNotes.map((n) => `- ${n.text}`).join("\n")
       : "Aucune pour l'instant.");
@@ -15335,7 +15479,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     setBenchmarkLoading(true);
     try {
       const last7 = last30Days().slice(-7);
-      const revenue7d = sales.filter((s) => last7.includes(s.date.slice(0, 10))).reduce((sum, s) => sum + s.total, 0);
+      const revenue7d = sales.filter((s) => last7.includes(dayKeyOf(s.date))).reduce((sum, s) => sum + s.total, 0);
       const myAvgDaily = revenue7d / 7;
       const myKey = `benchmark:${currency}:${shopKey}`;
       await window.storage.set(myKey, JSON.stringify({ avgDaily: myAvgDaily, updatedAt: new Date().toISOString() }), true);
@@ -15778,7 +15922,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     )),
     [products, deferredCartSearch, cartCategoryFilter, sortProductList]
   );
-  const todaySalesForWidget = sales.filter((s) => s.date.slice(0, 10) === todayKey());
+  const todaySalesForWidget = sales.filter((s) => dayKeyOf(s.date) === todayKey());
   const todayTotalForWidget = todaySalesForWidget.reduce((sum, s) => sum + s.total, 0);
   // Correction : ce useEffect était auparavant placé APRÈS le "if (loading) return"
   // ci-dessous, ce qui faisait que React l'appelait un rendu sur deux (pas lors du
@@ -15869,13 +16013,27 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const T = darkMode
     ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
     : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb" };
-  const todaySales = sales.filter((s) => s.date.slice(0, 10) === todayKey());
+  const todaySales = sales.filter((s) => dayKeyOf(s.date) === todayKey());
   const todayTotal = todaySales.reduce((sum, s) => sum + s.total, 0);
-  const yesterdayKeyStr = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-  const yesterdayTotal = sales.filter((s) => s.date.slice(0, 10) === yesterdayKeyStr).reduce((sum, s) => sum + s.total, 0);
+  const yesterdayKeyStr = dayKeyOf(new Date(Date.now() - 86400000));
+  const yesterdayTotal = sales.filter((s) => dayKeyOf(s.date) === yesterdayKeyStr).reduce((sum, s) => sum + s.total, 0);
+  // Sans vente hier il n'y a rien à comparer : l'ancien code affichait alors « ▲ 100 % »,
+  // un chiffre inventé. Et au-delà de +300 % un pourcentage ne se lit plus (« ▲ 1433 % ») :
+  // on affiche un multiplicateur (« ×15 »).
   const salesVsYesterdayPct = yesterdayTotal > 0
     ? Math.round(((todayTotal - yesterdayTotal) / yesterdayTotal) * 100)
-    : (todayTotal > 0 ? 100 : null);
+    : null;
+  const salesVsYesterdayText = salesVsYesterdayPct === null ? ""
+    : salesVsYesterdayPct >= 300 ? "×" + localizedNumber(Math.round(todayTotal / yesterdayTotal))
+    : localizedNumber(Math.abs(salesVsYesterdayPct)) + "%";
+  // Les 7 derniers jours, pour situer aujourd'hui d'un coup d'œil sur l'accueil.
+  const week7 = last30Days().slice(-7).map((day) => ({ day, total: 0 }));
+  if (tab === "dashboard") {
+    const week7Index = {};
+    week7.forEach((d, i) => { week7Index[d.day] = i; });
+    sales.forEach((s) => { const i = week7Index[dayKeyOf(s.date)]; if (i != null) week7[i].total += s.total; });
+  }
+  const week7Max = Math.max(1, ...week7.map((d) => d.total));
   const topProductsToday = (() => {
     const byProduct = {};
     todaySales.forEach((s) => { byProduct[s.productName] = (byProduct[s.productName] || 0) + (s.qty || 0); });
@@ -15886,24 +16044,37 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     ? products.filter((p) => p.quantity <= lowStockThreshold).sort((a, b) => a.quantity - b.quantity)
     : sortProductList(products.filter((p) => p.quantity <= lowStockThreshold));
   const lowStockDisplayed = showAllLowStock ? lowStock : lowStock.slice(0, 5);
-  const restockForecast = (() => {
+  // Prévision de rupture : rythme de vente des 14 derniers jours → jours de stock restants.
+  // Calculée pour tous les produits (accueil : les 5 plus urgents ; onglet Stock : une
+  // pastille sur chaque produit qui sera épuisé dans la semaine). Les ventes sont rattachées
+  // au produit par son identifiant : l'ancien calcul passait par le NOM, donc un produit
+  // renommé perdait tout son historique et deux produits homonymes s'additionnaient.
+  const forecastById = (() => {
     const cutoff = Date.now() - 14 * 86400000;
-    const soldByProduct = {};
-    sales.filter((s) => new Date(s.date).getTime() >= cutoff).forEach((s) => {
-      soldByProduct[s.productName] = (soldByProduct[s.productName] || 0) + s.qty;
+    const soldById = {}, soldByName = {};
+    sales.forEach((s) => {
+      if (new Date(s.date).getTime() < cutoff) return;
+      // Une vente à l'unité ne retire qu'une fraction de colis du stock.
+      const product = s.mode === "unit" ? products.find((p) => p.id === s.productId) : null;
+      const packs = product && product.unitsPerPack > 0 ? s.qty / product.unitsPerPack : s.qty;
+      if (s.productId != null) soldById[s.productId] = (soldById[s.productId] || 0) + packs;
+      else soldByName[s.productName] = (soldByName[s.productName] || 0) + packs;
     });
-    return products
-      .map((p) => {
-        const sold14d = soldByProduct[p.name] || 0;
-        const dailyRate = sold14d / 14;
-        if (dailyRate <= 0) return null;
-        const daysLeft = p.quantity / dailyRate;
-        return { ...p, dailyRate, daysLeft, suggestedReorder: Math.max(1, Math.ceil(dailyRate * 14)) };
-      })
-      .filter((p) => p && p.daysLeft <= 10)
-      .sort((a, b) => a.daysLeft - b.daysLeft)
-      .slice(0, 5);
+    const map = {};
+    products.forEach((p) => {
+      if (p.dailyMode) return; // production du jour : le stock repart de zéro chaque matin
+      const sold14d = (soldById[p.id] || 0) + (soldByName[p.name] || 0);
+      const dailyRate = sold14d / 14;
+      if (dailyRate <= 0) return;
+      map[p.id] = { dailyRate, daysLeft: (p.quantity || 0) / dailyRate, suggestedReorder: Math.max(1, Math.ceil(dailyRate * 14)) };
+    });
+    return map;
   })();
+  const restockForecast = products
+    .filter((p) => forecastById[p.id] && forecastById[p.id].daysLeft <= 10)
+    .map((p) => ({ ...p, ...forecastById[p.id] }))
+    .sort((x, y) => x.daysLeft - y.daysLeft)
+    .slice(0, 5);
   const getCustomerTrust = (name) => {
     const n = (name || "").trim().toLowerCase();
     if (!n) return null;
@@ -15969,7 +16140,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     withdrawals: sessionExpenseRows.filter((e) => e.kind === "withdrawal").reduce((sum, e) => sum + e.amount, 0),
     expected: cashBalance,
   };
-  const todayExpenses = expenses.filter((e) => e.date.slice(0, 10) === todayKey());
+  const todayExpenses = expenses.filter((e) => dayKeyOf(e.date) === todayKey());
 
   const cashCardStyle = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
   // Bénéfice estimé du jour (accueil) : marge des ventes dont le prix d'achat est connu, moins les dépenses du jour.
@@ -15982,10 +16153,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // Onglet Caisse : tout est calculé uniquement quand l'onglet est ouvert.
   const cashView = tab === "cash" ? (() => {
     const start = cashPeriod === "today" ? todayKey()
-      : cashPeriod === "7" ? new Date(Date.now() - 6 * 86400000).toISOString().slice(0, 10)
-      : cashPeriod === "30" ? new Date(Date.now() - 29 * 86400000).toISOString().slice(0, 10)
+      : cashPeriod === "7" ? dayKeyOf(new Date(Date.now() - 6 * 86400000))
+      : cashPeriod === "30" ? dayKeyOf(new Date(Date.now() - 29 * 86400000))
       : "0000-00-00";
-    const inPeriod = (iso) => String(iso).slice(0, 10) >= start;
+    const inPeriod = (iso) => dayKeyOf(iso) >= start;
     const pSales = sales.filter((s) => inPeriod(s.date));
     const pExpenses = expenses.filter((e) => inPeriod(e.date));
     const cashInTotal = pSales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0);
@@ -16027,9 +16198,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pCounts = cashCounts.filter((c) => inPeriod(c.date));
     // Tendance : flux net (espèces − dépenses) des 7 derniers jours, pour un coup d'œil visuel.
     const trend7 = last30Days().slice(-7).map((day) => {
-      const dSales = sales.filter((sl) => sl.date.slice(0, 10) === day && sl.payment === "cash").reduce((sum, sl) => sum + sl.total, 0);
-      const dExp = expenses.filter((e) => e.date.slice(0, 10) === day).reduce((sum, e) => sum + e.amount, 0);
-      const dDebt = debtEvents.filter((ev) => String(ev.date).slice(0, 10) === day && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + (ev.amount || 0), 0);
+      const dSales = sales.filter((sl) => dayKeyOf(sl.date) === day && sl.payment === "cash").reduce((sum, sl) => sum + sl.total, 0);
+      const dExp = expenses.filter((e) => dayKeyOf(e.date) === day).reduce((sum, e) => sum + e.amount, 0);
+      const dDebt = debtEvents.filter((ev) => dayKeyOf(ev.date) === day && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + (ev.amount || 0), 0);
       return { day, net: dSales + dDebt - dExp };
     });
     const journalWithCounts = [
@@ -16042,14 +16213,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   })() : null;
   const days = last30Days();
   const firstSaleDate = sales.length > 0
-    ? sales.map((s) => s.date.slice(0, 10)).sort()[0]
+    ? sales.map((s) => dayKeyOf(s.date)).sort()[0]
     : null;
   const trendDays = firstSaleDate
     ? days.filter((d) => d >= firstSaleDate)
     : [];
   const trendData = trendDays.map((d) => ({
     date: dayLabel(d),
-    total: sales.filter((s) => s.date.slice(0, 10) === d).reduce((sum, s) => sum + s.total, 0),
+    total: sales.filter((s) => dayKeyOf(s.date) === d).reduce((sum, s) => sum + s.total, 0),
   }));
   const productTotals = {};
   sales.forEach((s) => { productTotals[s.productName] = (productTotals[s.productName] || 0) + s.qty; });
@@ -16057,6 +16228,95 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const TOP_PRODUCTS_LIMIT = 7;
   const topProducts = showAllTopProducts ? allTopProducts : allTopProducts.slice(0, TOP_PRODUCTS_LIMIT);
   const yAxisWidth = topProducts.length === 0 ? 60 : Math.min(160, Math.max(55, Math.max(...topProducts.map((p) => p.name.length)) * 7 + 12));
+  // ---- Onglet Stats : analyse de la période choisie ----
+  // L'onglet se résumait à une courbe sur 30 jours et un classement par quantité : il
+  // montrait ce qui s'était passé, jamais ce qu'il fallait en conclure. Tout ce qui suit
+  // est calculé sur l'appareil à partir des ventes déjà enregistrées (aucun appel réseau,
+  // aucune IA), et uniquement quand l'onglet est ouvert.
+  const statsView = tab === "stats" ? (() => {
+    const N = Number(statsPeriod) || 30;
+    const keys = [];
+    for (let i = N * 2 - 1; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); keys.push(dayKeyOf(d)); }
+    const curStart = keys[N], prevStart = keys[0];
+    const cur = [], prev = [];
+    sales.forEach((s) => { const k = dayKeyOf(s.date); if (k >= curStart) cur.push(s); else if (k >= prevStart) prev.push(s); });
+    const revenueOf = (rows) => rows.reduce((sum, s) => sum + s.total, 0);
+    const ticketsOf = (rows) => new Set(rows.map((s) => s.transactionId || s.id)).size;
+    const profitOf = (rows, from, to) => {
+      let margin = 0, costed = 0;
+      rows.forEach((s) => { if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; } });
+      // Même règle que la Caisse : un retrait n'est pas une charge, seule une dépense l'est.
+      const exp = expenses.filter((e) => e.kind !== "withdrawal").reduce((sum, e) => { const k = dayKeyOf(e.date); return k >= from && (to == null || k < to) ? sum + e.amount : sum; }, 0);
+      return { net: margin - exp, costed };
+    };
+    const revenue = revenueOf(cur), tickets = ticketsOf(cur);
+    const prevRevenue = revenueOf(prev), prevTickets = ticketsOf(prev);
+    const profit = profitOf(cur, curStart, null), prevProfit = profitOf(prev, prevStart, curStart);
+    // On ne compare à la période précédente que si la boutique existait déjà pendant toute
+    // cette période : sinon un compte ouvert il y a 10 jours afficherait « +900 % ».
+    const hasFullPrev = firstSaleDate != null && firstSaleDate <= prevStart;
+    const delta = (a, b) => (hasFullPrev && b > 0 ? Math.round(((a - b) / b) * 100) : null);
+    const kpis = [
+      { id: "revenue", label: tx(lang, "statsKpiRevenue"), value: fcfa(revenue), delta: delta(revenue, prevRevenue), money: false },
+      { id: "tickets", label: tx(lang, "statsKpiSales"), value: localizedNumber(tickets), delta: delta(tickets, prevTickets), money: false },
+      { id: "basket", label: tx(lang, "statsKpiBasket"), value: fcfa(tickets > 0 ? revenue / tickets : 0), delta: delta(tickets > 0 ? revenue / tickets : 0, prevTickets > 0 ? prevRevenue / prevTickets : 0), money: false },
+      { id: "profit", label: tx(lang, "cashProfitPeriod"), value: profit.costed > 0 ? fcfa(profit.net) : "—", delta: profit.costed > 0 && prevProfit.costed > 0 && prevProfit.net > 0 ? delta(profit.net, prevProfit.net) : null, money: true, negative: profit.costed > 0 && profit.net < 0, missing: profit.costed === 0 },
+    ];
+    const curKeys = keys.slice(N);
+    const byDay = {};
+    cur.forEach((s) => { const k = dayKeyOf(s.date); byDay[k] = (byDay[k] || 0) + s.total; });
+    const series = curKeys.filter((k) => firstSaleDate != null && k >= firstSaleDate).map((k) => ({ date: dayLabel(k), total: byDay[k] || 0 }));
+    // Meilleurs moments : chiffre d'affaires par jour de semaine × heure (heure locale).
+    const grid = Array.from({ length: 7 }, () => Array(24).fill(0));
+    const dayTotals = Array(7).fill(0), hourTotals = Array(24).fill(0);
+    cur.forEach((s) => { const d = new Date(s.date); if (isNaN(d.getTime())) return; grid[d.getDay()][d.getHours()] += s.total; dayTotals[d.getDay()] += s.total; hourTotals[d.getHours()] += s.total; });
+    // Un jour de semaine se juge à sa moyenne : sur 30 jours il y a 5 lundis mais 4 samedis.
+    const dayCounts = Array(7).fill(0);
+    curKeys.forEach((k) => { if (firstSaleDate != null && k >= firstSaleDate) dayCounts[parseDayOrIso(k).getDay()]++; });
+    const dayAvg = dayTotals.map((v, i) => (dayCounts[i] > 0 ? v / dayCounts[i] : 0));
+    const activeHours = hourTotals.map((v, h) => (v > 0 ? h : -1)).filter((h) => h >= 0);
+    const hourFrom = activeHours.length ? Math.min(...activeHours) : 8;
+    const hourTo = activeHours.length ? Math.max(...activeHours) : 20;
+    const bestDay = dayAvg.indexOf(Math.max(...dayAvg));
+    const bestHour = hourTotals.indexOf(Math.max(...hourTotals));
+    const heat = { grid, max: Math.max(1, ...grid.map((row) => Math.max(...row))), hourFrom, hourTo, bestDay, bestHour, enough: tickets >= 8 };
+    // Produits les plus rentables : bénéfice réellement dégagé, pas quantité vendue.
+    const byProfit = {};
+    cur.forEach((s) => {
+      if (s.costPrice == null) return;
+      const k = s.productId || s.productName;
+      if (!byProfit[k]) byProfit[k] = { name: s.productName, margin: 0, revenue: 0 };
+      byProfit[k].margin += s.total - s.costPrice * s.qty; byProfit[k].revenue += s.total;
+    });
+    const topProfit = Object.values(byProfit).filter((r) => r.margin > 0).sort((a, b) => b.margin - a.margin).slice(0, 5);
+    // Argent qui dort : du stock payé qui ne tourne plus depuis 30 jours.
+    const d30 = new Date(); d30.setDate(d30.getDate() - 29);
+    const since30 = dayKeyOf(d30);
+    const soldRecently = new Set();
+    sales.forEach((s) => { if (dayKeyOf(s.date) >= since30) { soldRecently.add(s.productId); soldRecently.add(s.productName); } });
+    const shopIsOldEnough = firstSaleDate != null && firstSaleDate < since30;
+    const since30Ms = parseDayOrIso(since30).getTime();
+    const dead = products.filter((p) => {
+      if (!(p.quantity > 0) || p.dailyMode || soldRecently.has(p.id) || soldRecently.has(p.name)) return false;
+      // Un produit ajouté la semaine dernière n'est pas « dormant » : son identifiant commence
+      // par l'heure de création. À défaut, on se fie à l'ancienneté de la boutique.
+      const createdMs = /^\d{13}/.test(String(p.id)) ? Number(String(p.id).slice(0, 13)) : null;
+      return createdMs != null ? createdMs < since30Ms : shopIsOldEnough;
+    }).map((p) => ({ id: p.id, name: p.name, quantity: p.quantity, unit: p.sellByMeasure ? (p.measureUnit || "") : "", value: p.quantity * (p.costPrice != null && p.costPrice !== "" ? Number(p.costPrice) : Number(p.price) || 0) }))
+      .sort((a, b) => b.value - a.value);
+    const deadValue = dead.reduce((sum, p) => sum + p.value, 0);
+    // Meilleurs clients de la période (ventes où un nom de client a été saisi).
+    const byCustomer = {};
+    cur.forEach((s) => {
+      const name = (s.customer || "").trim();
+      if (!name) return;
+      const k = name.toLowerCase();
+      if (!byCustomer[k]) byCustomer[k] = { name, total: 0, txns: new Set() };
+      byCustomer[k].total += s.total; byCustomer[k].txns.add(s.transactionId || s.id);
+    });
+    const topCustomers = Object.values(byCustomer).map((c) => ({ name: c.name, total: c.total, count: c.txns.size })).sort((a, b) => b.total - a.total).slice(0, 5);
+    return { N, kpis, hasFullPrev, series, heat, topProfit, dead, deadValue, topCustomers };
+  })() : null;
   // Transactions groupées pour l'historique
   const transactionsMap = {};
   sales.forEach((s) => {
@@ -16099,8 +16359,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     }));
   const historyEntries = historyRaw.filter((entry) => {
     if (!histFilterKinds[entry.kind]) return false;
-    if (histFilterFrom && entry.date.slice(0, 10) < histFilterFrom) return false;
-    if (histFilterTo && entry.date.slice(0, 10) > histFilterTo) return false;
+    if (histFilterFrom && dayKeyOf(entry.date) < histFilterFrom) return false;
+    if (histFilterTo && dayKeyOf(entry.date) > histFilterTo) return false;
     if (histFilterProduct.trim() && !entry.product.toLowerCase().includes(histFilterProduct.trim().toLowerCase())) return false;
     if (histFilterCustomer.trim() && !entry.customer.toLowerCase().includes(histFilterCustomer.trim().toLowerCase())) return false;
     if (histFilterMinAmount !== "" && entry.amount < parseFloat(histFilterMinAmount)) return false;
@@ -16124,15 +16384,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // (voir exportHistoryCsv ci-dessus) ou le PDF illustré (voir generateAccountingReport).
   const exportAccountingCsv = () => {
     if (!acctCsvFrom || !acctCsvTo) return;
-    const inRange = (dateStr) => { const d = (dateStr || "").slice(0, 10); return d >= acctCsvFrom && d <= acctCsvTo; };
+    const inRange = (dateStr) => { const d = dayKeyOf(dateStr || ""); return d >= acctCsvFrom && d <= acctCsvTo; };
     const paymentLabel = (pm) => (pm === "cash" ? t(lang, "cash") : pm === "mobile" ? t(lang, "mobilePayment") : pm === "card" ? t(lang, "card") : pm === "credit" ? t(lang, "credit") : (pm || ""));
     const header = [t(lang, "histColDate"), t(lang, "histColType"), t(lang, "accountingCsvColDesc"), t(lang, "histColAmount"), t(lang, "paymentMethod"), t(lang, "accountingCsvColEmployee")];
     const dataRows = [];
     sales.filter((s) => !s.cancelled && inRange(s.date)).forEach((s) => {
-      dataRows.push([s.date.slice(0, 10), t(lang, "histTypeSale"), `${s.productName} x${s.qty}`, s.total, paymentLabel(s.payment), s.actorName || shopName || ""]);
+      dataRows.push([dayKeyOf(s.date), t(lang, "histTypeSale"), `${s.productName} x${s.qty}`, s.total, paymentLabel(s.payment), s.actorName || shopName || ""]);
     });
     expenses.filter((e) => inRange(e.date)).forEach((e) => {
-      dataRows.push([e.date.slice(0, 10), t(lang, "histTypeExpense"), e.label, -Math.abs(e.amount), "", e.actorName || shopName || ""]);
+      dataRows.push([dayKeyOf(e.date), t(lang, "histTypeExpense"), e.label, -Math.abs(e.amount), "", e.actorName || shopName || ""]);
     });
     dataRows.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
     const rows = [header, ...dataRows];
@@ -16156,7 +16416,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // (loadShopBackups et son useEffect déclencheur sont déclarés plus haut, avant le
   // "if (loading) return", pour la même raison que pdfExportGenerating — voir ce commentaire.)
   const exportShopDataJson = async () => {
-    if (isDemo) { setBackupActionMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
+    if (isDemo) { setBackupActionMsg(tx(lang, "demoDisabledMsg")); return; }
     setBackupBusy("export");
     setBackupActionMsg("");
     try {
@@ -16179,7 +16439,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     setBackupBusy(null);
   };
   const createManualBackup = async () => {
-    if (isDemo) { setBackupActionMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
+    if (isDemo) { setBackupActionMsg(tx(lang, "demoDisabledMsg")); return; }
     setBackupBusy("create");
     setBackupActionMsg("");
     try {
@@ -16199,7 +16459,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // choisie (pas une fusion) — c'est le sens même de "restaurer" un instantané passé.
   // Protégé par le code PIN du compte (comme la réinitialisation), car irréversible.
   const restoreShopBackup = async (backupId) => {
-    if (isDemo) { setBackupActionMsg("Désactivé en mode démo — crée un vrai compte pour utiliser cette fonction."); return; }
+    if (isDemo) { setBackupActionMsg(tx(lang, "demoDisabledMsg")); return; }
     setBackupBusy("restore-" + backupId);
     setBackupActionMsg("");
     try {
@@ -16286,7 +16546,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           doc.addPage();
           y = 20;
         }
-        doc.text(String(s.date || "").slice(0, 10), 14, y);
+        doc.text(dayKeyOf(s.date || ""), 14, y);
         doc.text(`${s.productName} x${s.qty}`, 46, y, { maxWidth: 98 });
         doc.text(String(localizedNumber(s.total)), 150, y);
         doc.text(s.customer || "—", 175, y, { maxWidth: 24 });
@@ -16308,7 +16568,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       const fromDate = accountingFrom;
       const toDate = accountingTo;
       const inRange = (dateStr) => {
-        const d = dateStr.slice(0, 10);
+        const d = dayKeyOf(dateStr);
         return d >= fromDate && d <= toDate;
       };
       // Les ventes ANNULÉES étaient comptées dans le chiffre d'affaires de l'export
@@ -16345,7 +16605,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       // ---- Graphique 1 : chiffre d'affaires par jour ----
       const dayTotals = {};
       periodSales.forEach((s) => {
-        const day = s.date.slice(0, 10);
+        const day = dayKeyOf(s.date);
         dayTotals[day] = (dayTotals[day] || 0) + s.total;
       });
       const sortedDays = Object.keys(dayTotals).sort();
@@ -16448,7 +16708,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           doc.setFontSize(9);
           doc.setTextColor(200, 210, 225);
           doc.text(`${t(lang, "accountingPeriodLabel")} : ${fromDate} - ${toDate}`, PAGE_W - M, 19, { align: "right" });
-          doc.text(new Date().toISOString().slice(0, 10), PAGE_W - M, 26, { align: "right" });
+          doc.text(dayKeyOf(new Date()), PAGE_W - M, 26, { align: "right" });
         } else {
           doc.setFontSize(9);
           doc.setTextColor(200, 210, 225);
@@ -16569,7 +16829,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       ];
       drawTable(
         t(lang, "accountingSalesTableTitle"), colsSales,
-        periodSales.slice(0, 400).map((s) => [s.date.slice(0, 10), s.productName || "", localizedNumber(s.qty || 0), money(s.total)]),
+        periodSales.slice(0, 400).map((s) => [dayKeyOf(s.date), s.productName || "", localizedNumber(s.qty || 0), money(s.total)]),
         t(lang, "cashReportTotalSales"), totalRevenue,
       );
 
@@ -16581,7 +16841,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       drawTable(
         t(lang, "accountingExpensesTableTitle"), colsExp,
         periodCashOut.slice(0, 400).map((e) => [
-          e.date.slice(0, 10),
+          dayKeyOf(e.date),
           `${e.label || ""}${e.kind === "withdrawal" ? ` (${tx(lang, "cashOutKindWithdrawal")})` : ""}`,
           money(e.amount),
         ]),
@@ -17000,7 +17260,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       {isDemo && (
         <div className="mx-4 mt-3 rounded-xl p-3" style={{ background: "#e5f0e8" }}>
           <p className="text-xs font-semibold" style={{ color: GREEN }}>👀 {t(lang, "demoMode")}</p>
-          <p className="text-[11px] text-gray-600 mt-0.5">Vous pouvez tout explorer librement, mais rien n'est réellement sauvegardé. Créez un vrai compte quand le souci de stockage sera résolu.</p>
+          <p className="text-[11px] text-gray-600 mt-0.5">{tx(lang, "demoBannerDesc")}</p>
         </div>
       )}
       {/* Période de grâce : l'abonnement payant a expiré mais reste actif quelques jours
@@ -17057,7 +17317,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             <div className="px-1 mb-1">
-              <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 Bonjour, {shopName || "Boutique"}</p>
+              <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 {tx(lang, "debtReminderGreeting")}, {shopName || PRIVACY_APP_NAME}</p>
               <p className="text-[11px]" style={{ color: T.text }}>
                 {fullDateLong()}
               </p>
@@ -17076,7 +17336,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           background: salesVsYesterdayPct >= 0 ? "#dcfce7" : "#fee2e2",
                         }}
                       >
-                        {salesVsYesterdayPct >= 0 ? "▲" : "▼"} {Math.abs(salesVsYesterdayPct)}% vs hier
+                        {salesVsYesterdayPct >= 0 ? "▲" : "▼"} <span dir="ltr">{salesVsYesterdayText}</span> {tx(lang, "homeVsYesterday")}
                       </span>
                     )}
                   </div>
@@ -17086,6 +17346,33 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ fontSize: 26 }}>🛍️</div>
                 </div>
               </div>
+              {/* 7 derniers jours : aujourd'hui en couleur pleine. Toucher une barre affiche
+                  le jour et son montant. Masqué tant qu'il n'y a qu'aujourd'hui à montrer. */}
+              {week7.some((d, i) => i < 6 && d.total > 0) && (
+                <div className="px-4 pb-3" dir="ltr">
+                  <div className="flex items-end" style={{ gap: 6, height: 46 }}>
+                    {week7.map((d, i) => {
+                      const isToday = i === 6;
+                      const selected = homeBarSel === d.day;
+                      return (
+                        <button key={d.day} onClick={() => setHomeBarSel(selected ? null : d.day)} className="flex-1 flex items-end" style={{ height: "100%", padding: 0, border: "none", background: "transparent" }} aria-label={fullDate(d.day)}>
+                          <div style={{ width: "100%", height: `${Math.max(6, Math.round((d.total / week7Max) * 100))}%`, borderRadius: 6, background: isToday || selected ? (darkMode ? "#7fb2ff" : "#2563eb") : (darkMode ? "rgba(127,178,255,0.28)" : "#bfdbfe"), opacity: d.total > 0 ? 1 : 0.45, transition: "height 0.3s ease, background 0.15s ease" }} />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="flex" style={{ gap: 6, marginTop: 3 }}>
+                    {week7.map((d, i) => (
+                      <span key={d.day} className="flex-1 text-center text-[9px]" style={{ color: i === 6 ? T.text : T.muted, fontWeight: i === 6 ? 800 : 500 }}>{parseDayOrIso(d.day).toLocaleDateString(getAppLocale(), { weekday: "narrow" })}</span>
+                    ))}
+                  </div>
+                  <p className="text-[10px] mt-1.5" dir="auto" style={{ color: T.muted }}>
+                    {homeBarSel && week7.find((d) => d.day === homeBarSel)
+                      ? <><span className="font-bold" style={{ color: T.text }}>{fullDate(homeBarSel)}</span> · {fcfa(week7.find((d) => d.day === homeBarSel).total)}</>
+                      : tx(lang, "homeLast7")}
+                  </p>
+                </div>
+              )}
             </div>
             {hasFeatureAccess("shopProfitabilityReport") && (
               <div className="rounded-2xl p-3.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
@@ -17137,7 +17424,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             {topProductsToday.length > 0 && (
               <div className="rounded-2xl p-3.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                <p className="text-sm font-extrabold mb-2.5" style={{ color: T.text }}>🏆 Top produits du jour</p>
+                <p className="text-sm font-extrabold mb-2.5" style={{ color: T.text }}>🏆 {tx(lang, "homeTopToday")}</p>
                 <div className="space-y-2">
                   {topProductsToday.map(([name, qty], i) => (
                     <div key={name} className="flex items-center justify-between">
@@ -17145,7 +17432,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <span className="text-xs font-black" style={{ color: T.muted, width: 14 }}>{i + 1}</span>
                         <span className="text-xs font-semibold" style={{ color: T.text }}>{name}</span>
                       </div>
-                      <span className="text-[11px] font-bold" style={{ color: T.muted }}>{localizedNumber(qty)} vendu(s)</span>
+                      <span className="text-[11px] font-bold" style={{ color: T.muted }}>{tx(lang, "aiLocalSoldUnits").replace("{n}", localizedQty(qty))}</span>
                     </div>
                   ))}
                 </div>
@@ -17174,7 +17461,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div key={p.id} className="flex items-center gap-2.5 py-1.5" style={{ borderTop: idx === 0 ? "none" : `1px solid ${T.border}` }}>
                           <span className="flex items-center justify-center text-[10px] font-extrabold flex-shrink-0" style={{ width: 20, height: 20, borderRadius: 10, background: darkMode ? "rgba(255,255,255,0.08)" : "#f3f4f6", color: T.muted }}>{localizedNumber(idx + 1)}</span>
                           <span className="text-xs font-semibold min-w-0 flex-1 truncate" style={{ color: T.text }}>{p.name}</span>
-                          <span title={`${p.quantity} restant(s)`} className="text-xs font-extrabold flex-shrink-0 px-2 py-0.5 rounded-full" style={{ background: badgeBg, color: badgeColor, minWidth: 30, textAlign: "center" }}>{localizedNumber(p.quantity)}</span>
+                          <span className="text-xs font-extrabold flex-shrink-0 px-2 py-0.5 rounded-full" style={{ background: badgeBg, color: badgeColor, minWidth: 30, textAlign: "center" }}>{localizedNumber(p.quantity)}</span>
                         </div>
                       );
                     })}
@@ -17197,12 +17484,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <Sparkles size={13} style={{ color: darkMode ? "#7fb2ff" : INDIGO }} />
                   <p className="text-xs font-extrabold" style={{ color: T.text }}>{t(lang, "restockForecast")}</p>
                 </div>
-                {restockForecast.map((p) => (
-                  <div key={p.id} className="flex items-center justify-between text-[10px] mb-1" style={{ color: T.muted }}>
-                    <span>{p.name} — {localizedNumber(Math.max(0, Math.round(p.daysLeft)))} {t(lang, "daysLeft")}</span>
-                    <span className="font-bold" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{t(lang, "suggestedOrder")} {localizedNumber(p.suggestedReorder)}</span>
-                  </div>
-                ))}
+                {restockForecast.map((p, idx) => {
+                  const days = Math.max(0, Math.round(p.daysLeft));
+                  const urgent = days <= 3;
+                  return (
+                    <div key={p.id} className="flex items-center justify-between gap-2 py-1.5" style={{ borderTop: idx === 0 ? "none" : `1px solid ${T.border}` }}>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold truncate" style={{ color: T.text }}>{p.name}</p>
+                        <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "suggestedOrder")} <span className="font-bold" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{localizedNumber(p.suggestedReorder)}</span></p>
+                      </div>
+                      <span className="text-[10px] font-extrabold flex-shrink-0 px-2 py-0.5 rounded-full" style={{ background: urgent ? (darkMode ? "rgba(225,29,72,0.25)" : "#ffe4e6") : (darkMode ? "rgba(212,160,23,0.25)" : "#ffedd5"), color: urgent ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#f0c869" : "#c2410c") }}>
+                        {localizedNumber(days)} {t(lang, "daysLeft")}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             )}
             {totalOwed > 0 && (
@@ -17718,6 +18014,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         )}
                       </div>
                       <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {p.sellByMeasure ? (p.measureUnit || t(lang, "othUnite")) : t(lang, "othUnite")}</p>
+                      {/* Rupture prévue dans la semaine, au rythme de vente des 14 derniers jours */}
+                      {forecastById[p.id] && p.quantity > 0 && forecastById[p.id].daysLeft <= 7 && (
+                        <p className="text-[10px] font-bold mt-0.5" style={{ color: forecastById[p.id].daysLeft <= 3 ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#f0c869" : "#c2410c") }}>
+                          ⏳ ≈ {localizedNumber(Math.max(1, Math.round(forecastById[p.id].daysLeft)))} {t(lang, "daysLeft")}
+                        </p>
+                      )}
                       {p.sellByUnit && (
                         <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>
                           {fcfa(p.unitPrice)} / {t(lang, "sellUnit")} · {localizedNumber((p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0))} {t(lang, "unitsAvailable")}
@@ -18727,7 +19029,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div className="flex gap-2.5">
                     <div className="flex-1 rounded-xl p-2.5" style={{ background: darkMode ? "rgba(95,178,255,0.1)" : "#dbeafe" }}>
                       <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "benchmarkYourShop")}</p>
-                      <p className="text-sm font-bold mt-0.5" style={{ color: darkMode ? "#7fb2ff" : "#2563eb" }}>{fcfa(sales.filter((s) => last30Days().slice(-7).includes(s.date.slice(0, 10))).reduce((sum, s) => sum + s.total, 0) / 7)}</p>
+                      <p className="text-sm font-bold mt-0.5" style={{ color: darkMode ? "#7fb2ff" : "#2563eb" }}>{fcfa(sales.filter((s) => last30Days().slice(-7).includes(dayKeyOf(s.date))).reduce((sum, s) => sum + s.total, 0) / 7)}</p>
                       <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "avgDailySales")}</p>
                     </div>
                     <div className="flex-1 rounded-xl p-2.5" style={{ background: T.input }}>
@@ -18739,27 +19041,216 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
               </div>
             )}
+            {/* Période d'analyse : tout l'écran (indicateurs, courbe, meilleurs moments,
+                rentabilité, clients) suit ce choix. */}
+            <div className="flex gap-1.5">
+              {[["7", tx(lang, "cashPeriod7")], ["30", tx(lang, "cashPeriod30")], ["90", tx(lang, "statsPeriod90")]].map(([pid, label]) => (
+                <button key={pid} onClick={() => { setStatsPeriod(pid); setHeatSel(null); }} className="flex-1 py-2 rounded-xl text-[11px] font-bold" style={{ background: statsPeriod === pid ? (darkMode ? "#3b5b8a" : INDIGO) : T.card, color: statsPeriod === pid ? "white" : T.text, border: statsPeriod === pid || darkMode ? "none" : `1px solid ${T.border}` }}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div>
+              <div className="grid grid-cols-2 gap-2">
+                {statsView.kpis.map((k) => (
+                  <div key={k.id} className="rounded-2xl p-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                    <p className="text-[10px] font-semibold" style={{ color: T.muted, lineHeight: 1.25 }}>{k.label}</p>
+                    <p
+                      onClick={() => { if (k.money && amountsHidden) setShowLockPinModal(true); }}
+                      className="font-black tracking-tight mt-1"
+                      style={{ fontSize: 17, letterSpacing: -0.4, wordBreak: "break-word", color: k.money && amountsHidden ? T.muted : k.negative ? CLAY : k.id === "profit" && !k.missing ? (darkMode ? "#8fd6a3" : "#16a34a") : T.text, cursor: k.money && amountsHidden ? "pointer" : "default" }}
+                    >
+                      {k.money ? maskAmount(k.value) : k.value}
+                    </p>
+                    {k.missing ? (
+                      <p className="text-[9px] mt-1" style={{ color: T.muted, lineHeight: 1.3 }}>{tx(lang, "cashProfitNoCostPeriod")}</p>
+                    ) : k.delta !== null && !(k.money && amountsHidden) ? (
+                      <span dir="ltr" className="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded-full mt-1.5" style={{ color: k.delta >= 0 ? "#16a34a" : "#dc2626", background: k.delta >= 0 ? (darkMode ? "rgba(22,163,74,0.18)" : "#dcfce7") : (darkMode ? "rgba(220,38,38,0.18)" : "#fee2e2") }}>
+                        {k.delta >= 0 ? "▲" : "▼"} {localizedNumber(Math.abs(k.delta))}%
+                      </span>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+              {statsView.hasFullPrev && <p className="text-[10px] mt-1.5 px-0.5" style={{ color: T.muted }}>▲▼ {tx(lang, "statsVsPrev")}</p>}
+            </div>
             <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-              <p className="text-xs font-bold mb-0.5" style={{ color: T.text }}>{t(lang, "salesLast30")}</p>
+              <p className="text-xs font-bold mb-0.5" style={{ color: T.text }}>{t(lang, "accountingRevenueChartTitle")}</p>
               <p className="text-[10px] mb-2" style={{ color: T.muted }}>{stripTrailingCurrencyParen(t(lang, "amountAxis"))} ({CURRENT_CURRENCY.symbol})</p>
-              {trendData.length === 0 ? (
+              {statsView.series.length === 0 ? (
                 <p className="text-xs py-4 text-center" style={{ color: T.muted }}>{t(lang, "noSalesYet")}</p>
               ) : (
                 <div dir="ltr">
-                <RechartsLoader>{({ ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line }) => (
+                <RechartsLoader>{({ ResponsiveContainer, AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area }) => (
                 <ResponsiveContainer width="100%" height={200}>
-                  <LineChart data={trendData} margin={{ top: 5, right: 10, left: 0, bottom: 18 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke={darkMode ? "rgba(255,255,255,0.1)" : "#eee"} />
-                    <XAxis dataKey="date" tick={{ fontSize: 10, fill: T.text }} axisLine={{ stroke: T.border }} tickLine={{ stroke: T.border }} label={{ value: t(lang, "dateAxis"), position: "insideBottom", offset: -12, fontSize: 10, fill: T.text }} />
-                    <YAxis tick={{ fontSize: 10, fill: T.text }} axisLine={{ stroke: T.border }} tickLine={{ stroke: T.border }} width={45} tickFormatter={(v) => compactLocalizedNumber(v)} />
-                    <Tooltip formatter={(v) => fcfa(v)} contentStyle={{ background: T.card, border: `1px solid ${T.border}`, color: T.text, fontSize: 12 }} labelStyle={{ color: T.text }} itemStyle={{ color: T.text }} />
-                    <Line type="monotone" dataKey="total" stroke={darkMode ? "#7fb2ff" : INDIGO} strokeWidth={2.5} dot={trendData.length <= 7 ? { r: 3, fill: darkMode ? "#7fb2ff" : INDIGO } : false} />
-                  </LineChart>
+                  <AreaChart data={statsView.series} margin={{ top: 5, right: 10, left: 0, bottom: 4 }}>
+                    <defs>
+                      <linearGradient id="statsAreaFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={darkMode ? "#7fb2ff" : "#2563eb"} stopOpacity={0.35} />
+                        <stop offset="100%" stopColor={darkMode ? "#7fb2ff" : "#2563eb"} stopOpacity={0.02} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={darkMode ? "rgba(255,255,255,0.1)" : "#eee"} />
+                    <XAxis dataKey="date" tick={{ fontSize: 10, fill: T.muted }} axisLine={{ stroke: T.border }} tickLine={false} minTickGap={24} />
+                    <YAxis tick={{ fontSize: 10, fill: T.muted }} axisLine={false} tickLine={false} width={42} tickFormatter={(v) => compactLocalizedNumber(v)} />
+                    <Tooltip formatter={(v) => [fcfa(v), tx(lang, "statsKpiRevenue")]} contentStyle={{ background: T.card, border: `1px solid ${T.border}`, color: T.text, fontSize: 12, borderRadius: 10 }} labelStyle={{ color: T.text }} itemStyle={{ color: T.text }} />
+                    <Area type="monotone" dataKey="total" stroke={darkMode ? "#7fb2ff" : "#2563eb"} strokeWidth={2.5} fill="url(#statsAreaFill)" dot={statsView.series.length <= 7 ? { r: 3, fill: darkMode ? "#7fb2ff" : "#2563eb" } : false} />
+                  </AreaChart>
                 </ResponsiveContainer>
                 )}</RechartsLoader>
                 </div>
               )}
             </div>
+            {/* Meilleurs moments : à quels jours et quelles heures la boutique encaisse le plus.
+                Sert à décider quand ouvrir plus tôt, quand être deux derrière le comptoir,
+                quand aller au marché sans rater de ventes. */}
+            {(() => {
+              const h = statsView.heat;
+              const hoursList = [];
+              for (let x = h.hourFrom; x <= h.hourTo; x++) hoursList.push(x);
+              const shortDay = (idx) => new Date(2024, 0, 7 + idx).toLocaleDateString(getAppLocale(), { weekday: "short" }).replace(/[‎‏؜.]/g, "");
+              const hourText = (x) => new Date(2024, 0, 1, x).toLocaleTimeString(getAppLocale(), { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).replace(/[\u200e\u200f\u061c]/g, "");
+              const base = darkMode ? "127,178,255" : "37,99,235";
+              return (
+                <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <Clock size={13} style={{ color: darkMode ? "#7fb2ff" : INDIGO }} />
+                    <p className="text-xs font-bold" style={{ color: T.text }}>{tx(lang, "statsBestMomentsTitle")}</p>
+                  </div>
+                  {!h.enough ? (
+                    <p className="text-xs py-3 text-center" style={{ color: T.muted }}>{t(lang, "noSalesYet")}</p>
+                  ) : (
+                    <>
+                      <p className="text-[10px] mb-2.5" style={{ color: T.muted }}>{tx(lang, "statsBestMomentsHint")}</p>
+                      <div className="flex gap-2 mb-3">
+                        <div className="flex-1 rounded-xl px-2.5 py-2" style={{ background: darkMode ? "rgba(95,178,255,0.1)" : "#eff6ff" }}>
+                          <p className="text-[10px]" style={{ color: T.muted }}>{tx(lang, "statsBestDay")}</p>
+                          <p className="text-sm font-extrabold" style={{ color: darkMode ? "#7fb2ff" : "#1d4ed8" }}>{weekdayLabel(lang, h.bestDay)}</p>
+                        </div>
+                        <div className="flex-1 rounded-xl px-2.5 py-2" style={{ background: darkMode ? "rgba(95,178,255,0.1)" : "#eff6ff" }}>
+                          <p className="text-[10px]" style={{ color: T.muted }}>{tx(lang, "statsBestHour")}</p>
+                          <p dir="ltr" className="text-sm font-extrabold" style={{ color: darkMode ? "#7fb2ff" : "#1d4ed8", textAlign: "start" }}>{hourText(h.bestHour)} – {hourText((h.bestHour + 1) % 24)}</p>
+                        </div>
+                      </div>
+                      {/* Une seule grille : la colonne des jours prend la largeur du libellé le plus
+                          long (en arabe ou en tamoul le nom abrégé reste long), les heures se
+                          partagent le reste. */}
+                      <div dir="ltr" style={{ display: "grid", gridTemplateColumns: `max-content repeat(${hoursList.length}, minmax(0, 1fr))`, gap: 2, alignItems: "center" }}>
+                        {[1, 2, 3, 4, 5, 6, 0].map((dayIdx) => (
+                          <React.Fragment key={dayIdx}>
+                            <span className="text-[9px] font-semibold" style={{ color: T.muted, paddingRight: 4, whiteSpace: "nowrap" }}>{shortDay(dayIdx)}</span>
+                            {hoursList.map((x) => {
+                              const v = h.grid[dayIdx][x];
+                              const selected = heatSel && heatSel.day === dayIdx && heatSel.hour === x;
+                              return (
+                                <button
+                                  key={x}
+                                  onClick={() => setHeatSel(selected ? null : { day: dayIdx, hour: x })}
+                                  aria-label={`${weekdayLabel(lang, dayIdx)} ${hourText(x)}`}
+                                  style={{ height: 18, borderRadius: 4, padding: 0, border: "none", background: v > 0 ? `rgba(${base},${(0.14 + 0.86 * (v / h.max)).toFixed(2)})` : T.input, outline: selected ? `2px solid ${darkMode ? "#fff" : "#0f172a"}` : "none", outlineOffset: -1 }}
+                                />
+                              );
+                            })}
+                          </React.Fragment>
+                        ))}
+                        <span />
+                        {hoursList.map((x, i) => (
+                          <span key={x} className="text-center text-[8px]" style={{ color: T.muted, whiteSpace: "nowrap", marginTop: 1 }}>{i % 3 === 0 ? localizedNumber(x) : ""}</span>
+                        ))}
+                      </div>
+                      {heatSel && (
+                        <div className="flex items-center justify-between rounded-lg px-2.5 py-1.5 mt-2.5" style={{ background: T.input }}>
+                          <span className="text-[11px] font-semibold" style={{ color: T.text }}>{weekdayLabel(lang, heatSel.day)} · <span dir="ltr">{hourText(heatSel.hour)}</span></span>
+                          <span className="text-[11px] font-extrabold" style={{ color: darkMode ? "#7fb2ff" : "#1d4ed8" }}>{fcfa(h.grid[heatSel.day][heatSel.hour])}</span>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              );
+            })()}
+            {/* Produits les plus rentables : le classement par quantité (plus bas) dit ce qui
+                sort le plus, celui-ci dit ce qui RAPPORTE le plus — ce n'est presque jamais
+                la même liste. Fait partie du rapport de rentabilité (palier Business). */}
+            <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+              <div className="flex items-center gap-1.5 mb-2">
+                <Sparkles size={13} style={{ color: darkMode ? "#8fd6a3" : "#16a34a" }} />
+                <p className="text-xs font-bold" style={{ color: T.text }}>{tx(lang, "statsTopProfitTitle")}</p>
+                {!hasFeatureAccess("shopProfitabilityReport") && <Lock size={12} style={{ color: T.muted }} />}
+              </div>
+              {!hasFeatureAccess("shopProfitabilityReport") ? (
+                <div>
+                  <p className="text-[11px] mb-2" style={{ color: T.muted, lineHeight: 1.4 }}>{tx(lang, "feat_shopProfitabilityReport")}</p>
+                  {!activeEmployee && (
+                    <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="text-xs font-bold underline" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>
+                      {t(lang, "planMenuLabel")}
+                    </button>
+                  )}
+                </div>
+              ) : statsView.topProfit.length === 0 ? (
+                <p className="text-[11px]" style={{ color: T.muted, lineHeight: 1.4 }}>{tx(lang, "cashProfitNoCostPeriod")}</p>
+              ) : (
+                <div className="flex flex-col gap-2.5">
+                  {statsView.topProfit.map((r, i) => (
+                    <div key={i}>
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="text-[11px] font-semibold truncate" style={{ color: T.text }}>{r.name}</p>
+                        <span className="text-[11px] font-extrabold flex-shrink-0" style={{ color: darkMode ? "#8fd6a3" : "#16a34a" }}>{maskAmount(fcfa(r.margin))}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 rounded-full overflow-hidden" style={{ height: 6, background: T.input }}>
+                          <div style={{ width: `${Math.max(4, Math.round((r.margin / statsView.topProfit[0].margin) * 100))}%`, height: "100%", borderRadius: 999, background: "linear-gradient(90deg, #22c55e, #16a34a)" }} />
+                        </div>
+                        <span dir="ltr" className="text-[10px] font-bold flex-shrink-0" style={{ color: T.muted, minWidth: 30, textAlign: "end" }}>{localizedNumber(Math.round((r.margin / r.revenue) * 100))}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            {statsView.topCustomers.length > 0 && (
+              <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <div className="flex items-center gap-1.5 mb-2">
+                  <Users size={13} style={{ color: darkMode ? "#7fb2ff" : INDIGO }} />
+                  <p className="text-xs font-bold" style={{ color: T.text }}>{tx(lang, "statsTopCustomersTitle")}</p>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  {statsView.topCustomers.map((c, i) => (
+                    <div key={i} className="flex items-center gap-2.5 rounded-lg px-2.5 py-1.5" style={{ background: T.input }}>
+                      <span className="flex items-center justify-center text-[10px] font-extrabold flex-shrink-0" style={{ width: 22, height: 22, borderRadius: 11, background: i === 0 ? "#fbbf24" : (darkMode ? "rgba(255,255,255,0.1)" : "#e2e8f0"), color: i === 0 ? "#78350f" : T.muted }}>{localizedNumber(i + 1)}</span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[11px] font-semibold truncate" style={{ color: T.text }}>{c.name}</p>
+                        <p className="text-[10px]" style={{ color: T.muted }}>{tx(lang, "statsPurchases").replace("{n}", localizedNumber(c.count))}</p>
+                      </div>
+                      <span className="text-[11px] font-extrabold flex-shrink-0" style={{ color: T.text }}>{fcfa(c.total)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* Argent qui dort : du stock déjà payé qui ne s'est pas vendu depuis 30 jours.
+                C'est de la trésorerie immobilisée — à solder, à mettre en avant ou à ne
+                plus recommander. */}
+            {statsView.dead.length > 0 && (
+              <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <div className="flex items-center justify-between mb-0.5">
+                  <div className="flex items-center gap-1.5">
+                    <Package size={13} style={{ color: darkMode ? "#f0c869" : "#c2410c" }} />
+                    <p className="text-xs font-bold" style={{ color: T.text }}>{tx(lang, "statsDeadStockTitle")}</p>
+                  </div>
+                  <span className="text-xs font-extrabold" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{fcfa(statsView.deadValue)}</span>
+                </div>
+                <p className="text-[10px] mb-2.5" style={{ color: T.muted }}>{tx(lang, "statsDeadStockHint")}</p>
+                <div className="flex flex-col gap-1.5">
+                  {statsView.dead.slice(0, 6).map((p) => (
+                    <div key={p.id} className="flex items-center justify-between gap-2 rounded-lg px-2.5 py-1.5" style={{ background: T.input }}>
+                      <p className="text-[11px] font-semibold truncate min-w-0" style={{ color: T.text }}>{p.name} <span style={{ color: T.muted, fontWeight: 500 }}>× {localizedQty(p.quantity)}{p.unit ? ` ${p.unit}` : ""}</span></p>
+                      <span className="text-[11px] font-bold flex-shrink-0" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{fcfa(p.value)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             {/* Invendus : l'app enregistrait ces lignes depuis le début (bouton « Nouvelle
                 journée ») mais ne les montrait nulle part — un boulanger ne pouvait donc
                 pas savoir combien il jette, ni ajuster sa production. C'est la seule
@@ -18878,7 +19369,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   const todayStr = todayKey();
                   const statsByEmp = {};
                   employees.forEach((emp) => {
-                    const todaySales = sales.filter((s) => !s.cancelled && s.actorId === emp.id && (s.date || "").slice(0, 10) === todayStr);
+                    const todaySales = sales.filter((s) => !s.cancelled && s.actorId === emp.id && dayKeyOf(s.date || "") === todayStr);
                     statsByEmp[emp.id] = {
                       count: todaySales.length,
                       total: todaySales.reduce((sum, s) => sum + (s.total || 0), 0),
@@ -19199,7 +19690,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
               <div className="flex justify-between mt-1">
                 {cashView.trend7.map((d, di) => (
-                  <span key={di} className="flex-1 text-center text-[9px]" style={{ color: T.muted }}>{new Date(d.day).toLocaleDateString(lang, { weekday: "narrow" })}</span>
+                  <span key={di} className="flex-1 text-center text-[9px]" style={{ color: T.muted }}>{parseDayOrIso(d.day).toLocaleDateString(getAppLocale(), { weekday: "narrow" })}</span>
                 ))}
               </div>
             </div>
@@ -19293,8 +19784,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               ) : (
                 <div className="space-y-1.5">
                   {cashView.journal.slice(0, cashJournalLimit).map((m, idx, arr) => {
-                    const dayKey = String(m.date).slice(0, 10);
-                    const showDay = idx === 0 || String(arr[idx - 1].date).slice(0, 10) !== dayKey;
+                    const dayKey = dayKeyOf(m.date);
+                    const showDay = idx === 0 || dayKeyOf(arr[idx - 1].date) !== dayKey;
                     const isSale = m.kind === "sale";
                     const isCount = m.kind === "count";
                     const isDebt = m.kind === "debt";
@@ -19380,10 +19871,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           // l'historique, alors qu'un rapport de caisse se lit par journée : on ajoute le même
           // sélecteur de période que l'onglet Caisse, réglé sur « Aujourd'hui » par défaut.
           const startDay = cashReportPeriod === "today" ? todayKey()
-            : cashReportPeriod === "7" ? new Date(Date.now() - 6 * 86400000).toISOString().slice(0, 10)
-            : cashReportPeriod === "30" ? new Date(Date.now() - 29 * 86400000).toISOString().slice(0, 10)
+            : cashReportPeriod === "7" ? dayKeyOf(new Date(Date.now() - 6 * 86400000))
+            : cashReportPeriod === "30" ? dayKeyOf(new Date(Date.now() - 29 * 86400000))
             : null;
-          const inReportPeriod = (d) => !startDay || String(d || "").slice(0, 10) >= startDay;
+          const inReportPeriod = (d) => !startDay || dayKeyOf(d || "") >= startDay;
           const people = [{ id: null, name: t(lang, "cashReportOwner") }, ...employees];
           const cards = people.map((person) => {
               const personSales = sales.filter((s) => (s.actorId || null) === person.id && inReportPeriod(s.date));
@@ -19534,11 +20025,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <Lock size={10} /> {tx(lang, "histPermanentNote")}
               </p>
             )}
-            {historyEntries.filter((entry) => {
-              if (!deferredHistorySearch.trim()) return true;
-              const q = deferredHistorySearch.toLowerCase();
-              return entry.product.toLowerCase().includes(q) || entry.customer.toLowerCase().includes(q);
-            }).map((entry) => {
+            {/* L'historique affichait d'un coup TOUTES les lignes depuis l'ouverture de la boutique :
+                après quelques mois, des milliers de cartes à dessiner à chaque ouverture de
+                l'onglet et à chaque lettre tapée dans la recherche — plusieurs secondes de
+                blocage sur un téléphone d'entrée de gamme. On en montre 40, puis 40 de plus à
+                la demande ; la recherche et les filtres portent toujours sur tout l'historique. */}
+            {(() => {
+              const visible = historyEntries.filter((entry) => {
+                if (!deferredHistorySearch.trim()) return true;
+                const q = deferredHistorySearch.toLowerCase();
+                return entry.product.toLowerCase().includes(q) || entry.customer.toLowerCase().includes(q);
+              });
+              return (
+                <>
+                  {visible.slice(0, historyLimit).map((entry) => {
               const h = entry.data;
               const cardStyle = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
               const actorLabel = h.actorName ? h.actorName : "";
@@ -19547,7 +20047,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 const isPartial = h.type === "debtPartial";
                 const evLabel = isPaid ? t(lang, "debtPaidEvent") : isPartial ? t(lang, "partialPaymentEvent") : t(lang, "debtCreatedEvent");
                 const evColor = (isPaid || isPartial) ? "#16a34a" : "#ea580c";
-                const showDebtDate = h.type === "debtCreated" && h.debtDate && h.debtDate.slice(0, 10) !== h.date.slice(0, 10);
+                const showDebtDate = h.type === "debtCreated" && h.debtDate && dayKeyOf(h.debtDate) !== dayKeyOf(h.date);
                 const subtitle = [
                   h.product,
                   `${fullDate(h.date)} ${fullTime(h.date)}`,
@@ -19648,6 +20148,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })}
+                  {visible.length > historyLimit && (
+                    <button onClick={() => setHistoryLimit((v) => v + 40)} className="w-full text-xs font-bold py-3 rounded-xl" style={{ color: darkMode ? "#7fb2ff" : INDIGO, background: darkMode ? "rgba(95,178,255,0.1)" : "rgba(27,58,92,0.06)", border: "none" }}>
+                      {tx(lang, "cashSeeMore")} ({localizedNumber(visible.length - historyLimit)})
+                    </button>
+                  )}
+                </>
+              );
+            })()}
           </div>
         )}
         {tab === "ai" && (
@@ -20424,7 +20932,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               value={newDebtDate}
               onChange={(e) => setNewDebtDate(e.target.value)}
               type="date"
-              max={new Date().toISOString().slice(0, 10)}
+              max={dayKeyOf(new Date())}
               className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2"
               style={{ background: T.input, color: T.text, borderColor: T.border }}
             />
@@ -20594,7 +21102,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <input autoComplete="off"
                     value={settingsSearchQuery}
                     onChange={(e) => setSettingsSearchQuery(e.target.value)}
-                    placeholder="Rechercher un réglage..."
+                    placeholder={t(lang, "search")}
                     style={{
                       width: "100%", background: T.input, border: `1px solid ${T.border}`, borderRadius: 14,
                       padding: "11px 12px 11px 36px", fontSize: 13.5, color: T.text, outline: "none",
@@ -21103,8 +21611,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           style={{ width: 34, height: 34, background: "#fff", borderRadius: 6 }}
                         />
                         <div>
-                          <div className="text-white font-bold text-[10px]">📲 Télécharge Boutipro</div>
-                          <div className="text-[9px]" style={{ color: "rgba(255,255,255,0.65)" }}>Scanne le code ci-contre</div>
+                          <div className="text-white font-bold text-[10px]">📲 {tx(lang, "shareGetApp")} Boutipro</div>
+                          <div className="text-[9px]" style={{ color: "rgba(255,255,255,0.65)" }}>{tx(lang, "shareScanQr")}</div>
                         </div>
                       </div>
                       <div className="text-right text-[9px] font-bold leading-tight" style={{ color: "#fbbf24" }}>
@@ -22229,7 +22737,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 16,
           }}
         >
-          <div style={{ color: "#fff", fontSize: 13, marginBottom: 10, fontWeight: 600 }}>Cadre ta photo</div>
+          <div style={{ color: "#fff", fontSize: 13, marginBottom: 10, fontWeight: 600 }}>{tx(lang, "cropPhotoTitle")}</div>
           <div
             onPointerDown={onCropPointerDown}
             onPointerMove={onCropPointerMove}
@@ -22263,9 +22771,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             style={{ width: CROP_SIZE, marginTop: 14 }}
           />
           <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
-            <button onClick={closeCropModal} style={{ padding: "10px 18px", borderRadius: 10, background: "#374151", color: "#fff", fontWeight: 600, fontSize: 13 }}>Annuler</button>
+            <button onClick={closeCropModal} style={{ padding: "10px 18px", borderRadius: 10, background: "#374151", color: "#fff", fontWeight: 600, fontSize: 13 }}>{t(lang, "cancel")}</button>
             <button onClick={confirmCrop} disabled={photoBusy} style={{ padding: "10px 18px", borderRadius: 10, background: INDIGO, color: "#fff", fontWeight: 600, fontSize: 13, opacity: photoBusy ? 0.6 : 1 }}>
-              {photoBusy ? "Patiente..." : "Valider"}
+              {photoBusy ? "…" : t(lang, "confirmBtn")}
             </button>
           </div>
         </div>
