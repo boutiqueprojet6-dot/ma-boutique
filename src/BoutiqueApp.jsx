@@ -9933,9 +9933,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // demande que le jour de la semaine en plus. 0 = dimanche … 6 = samedi (lundi par défaut).
   const [weeklySummaryEnabled, setWeeklySummaryEnabled] = useState(true);
   const [weeklySummaryDay, setWeeklySummaryDay] = useState(1);
-  const [darkMode, setDarkMode] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
+  const [darkMode, setDarkMode] = useState(getInitialDarkPreference);
   // "system" (suit le téléphone), "light" ou "dark" (choix figé par l'utilisateur).
-  const [themeMode, setThemeMode] = useState("system");
+  const [themeMode, setThemeMode] = useState(getStoredThemeMode);
   const [systemPrefersDark, setSystemPrefersDark] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
@@ -23369,7 +23369,22 @@ function BoutiqueAppInner() {
   // Thème (clair/sombre) pour tout ce qui est affiché avant qu'un compte soit chargé
   // (écran de connexion, onboarding, écrans de chargement) : reprend le dernier choix fait
   // dans un compte s'il existe, sinon suit directement le thème du système dès le premier lancement.
-  const [authDark] = useState(getInitialDarkPreference);
+  // Recalculé à chaque rendu (et non figé au démarrage) : après démo / déconnexion, ou si le
+  // thème du téléphone change en mode "système", l'écran de connexion suit le bon réglage.
+  const [, setThemeTick] = useState(0);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const bump = () => setThemeTick((n) => n + 1);
+    const onVis = () => { if (!document.hidden) bump(); };
+    if (mq.addEventListener) mq.addEventListener("change", bump); else if (mq.addListener) mq.addListener(bump);
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", bump); else if (mq.removeListener) mq.removeListener(bump);
+      document.removeEventListener("visibilitychange", onVis);
+    };
+  }, []);
+  const authDark = getInitialDarkPreference();
   const [showSplash, setShowSplash] = useState(true);
   // Anti-clignotement au démarrage : si une session existe déjà sur cet appareil, on garde
   // l'écran de démarrage affiché jusqu'à ce que Supabase ait répondu (bootResolved), au lieu
