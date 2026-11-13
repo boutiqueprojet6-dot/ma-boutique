@@ -241,73 +241,273 @@ jobs:
         run: |
           mkdir -p android/app/src/main/res/xml
           mkdir -p android/app/src/main/res/layout
+          mkdir -p android/app/src/main/res/drawable
           mkdir -p android/app/src/main/java/com/shopnify/app
 
+          # Widget 4x2 (redimensionnable). previewLayout / targetCell* : Android 12+, ignorés avant.
           cat > android/app/src/main/res/xml/sales_widget_info.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-              android:minWidth="180dp"
+              android:minWidth="250dp"
               android:minHeight="110dp"
+              android:minResizeWidth="180dp"
+              android:minResizeHeight="110dp"
+              android:targetCellWidth="4"
+              android:targetCellHeight="2"
               android:updatePeriodMillis="1800000"
               android:initialLayout="@layout/sales_widget"
+              android:previewLayout="@layout/sales_widget"
+              android:previewImage="@mipmap/ic_launcher"
               android:resizeMode="horizontal|vertical"
-              android:widgetCategory="home_screen"
-              android:previewImage="@mipmap/ic_launcher" />
+              android:widgetCategory="home_screen" />
+          EOF
+
+          # Fond : dégradé bleu nuit -> bleu Boutipro, coins arrondis.
+          cat > android/app/src/main/res/drawable/sales_widget_bg.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+              <gradient android:angle="315" android:startColor="#0F2A47" android:centerColor="#1B3A5C" android:endColor="#2563EB" />
+              <corners android:radius="24dp" />
+          </shape>
+          EOF
+
+          # Pastille d'information (blanc translucide).
+          cat > android/app/src/main/res/drawable/sales_widget_chip.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+              <solid android:color="#29FFFFFF" />
+              <corners android:radius="12dp" />
+          </shape>
+          EOF
+
+          # Pastille d'alerte (stock bas) : ambre.
+          cat > android/app/src/main/res/drawable/sales_widget_chip_alert.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+              <solid android:color="#F59E0B" />
+              <corners android:radius="12dp" />
+          </shape>
+          EOF
+
+          # Bouton « + Vente » : blanc plein.
+          cat > android/app/src/main/res/drawable/sales_widget_add.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+              <solid android:color="#FFFFFF" />
+              <corners android:radius="16dp" />
+          </shape>
+          EOF
+
+          # Barre de progression vers une journée habituelle.
+          cat > android/app/src/main/res/drawable/sales_widget_progress.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+              <item android:id="@android:id/background">
+                  <shape android:shape="rectangle">
+                      <solid android:color="#33FFFFFF" />
+                      <corners android:radius="3dp" />
+                  </shape>
+              </item>
+              <item android:id="@android:id/progress">
+                  <clip>
+                      <shape android:shape="rectangle">
+                          <solid android:color="#4ADE80" />
+                          <corners android:radius="3dp" />
+                      </shape>
+                  </clip>
+              </item>
+          </layer-list>
           EOF
 
           cat > android/app/src/main/res/layout/sales_widget.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/widget_root"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:padding="12dp"
-              android:background="#1B3A5C">
+              android:gravity="center_vertical"
+              android:paddingLeft="14dp"
+              android:paddingRight="14dp"
+              android:paddingTop="10dp"
+              android:paddingBottom="10dp"
+              android:background="@drawable/sales_widget_bg">
 
-              <TextView
-                  android:id="@+id/widget_label"
-                  android:layout_width="wrap_content"
+              <!-- Ligne 1 : logo, « Ventes aujourd'hui · Nom de la boutique », % d'une journée habituelle -->
+              <LinearLayout
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="Ventes du jour"
-                  android:textColor="#FFFFFF"
-                  android:textSize="12sp" />
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical">
 
-              <TextView
-                  android:id="@+id/widget_amount"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="0 FCFA"
-                  android:textColor="#FFFFFF"
-                  android:textSize="22sp"
-                  android:textStyle="bold"
-                  android:layout_marginTop="4dp" />
+                  <ImageView
+                      android:layout_width="16dp"
+                      android:layout_height="16dp"
+                      android:src="@mipmap/ic_launcher"
+                      android:contentDescription="@null" />
 
-              <TextView
-                  android:id="@+id/widget_count"
-                  android:layout_width="wrap_content"
+                  <TextView
+                      android:id="@+id/widget_title"
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:layout_marginLeft="6dp"
+                      android:layout_marginRight="6dp"
+                      android:text="Boutipro"
+                      android:textColor="#D9FFFFFF"
+                      android:textSize="11sp"
+                      android:singleLine="true"
+                      android:ellipsize="end" />
+
+                  <TextView
+                      android:id="@+id/widget_pct"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""
+                      android:textColor="#4ADE80"
+                      android:textSize="11sp"
+                      android:textStyle="bold"
+                      android:singleLine="true" />
+              </LinearLayout>
+
+              <!-- Ligne 2 : montant du jour + bouton « + Vente » -->
+              <LinearLayout
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="0 article(s) vendu(s)"
-                  android:textColor="#CCCCCC"
-                  android:textSize="10sp"
-                  android:layout_marginTop="2dp" />
+                  android:layout_marginTop="2dp"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical">
+
+                  <TextView
+                      android:id="@+id/widget_amount"
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="—"
+                      android:textColor="#FFFFFF"
+                      android:textSize="24sp"
+                      android:textStyle="bold"
+                      android:singleLine="true"
+                      android:ellipsize="end" />
+
+                  <TextView
+                      android:id="@+id/widget_add"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="8dp"
+                      android:paddingLeft="12dp"
+                      android:paddingRight="12dp"
+                      android:paddingTop="5dp"
+                      android:paddingBottom="5dp"
+                      android:background="@drawable/sales_widget_add"
+                      android:text="+"
+                      android:textColor="#1B3A5C"
+                      android:textSize="12sp"
+                      android:textStyle="bold"
+                      android:singleLine="true" />
+              </LinearLayout>
+
+              <!-- Ligne 3 : progression vers une journée habituelle -->
+              <ProgressBar
+                  android:id="@+id/widget_progress"
+                  style="@android:style/Widget.ProgressBar.Horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="5dp"
+                  android:layout_marginTop="4dp"
+                  android:max="100"
+                  android:progress="0"
+                  android:progressDrawable="@drawable/sales_widget_progress" />
+
+              <!-- Ligne 4 : nombre de ventes, produits en stock bas, dettes à encaisser -->
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="6dp"
+                  android:orientation="horizontal">
+
+                  <TextView
+                      android:id="@+id/widget_chip_sales"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="8dp"
+                      android:paddingRight="8dp"
+                      android:paddingTop="3dp"
+                      android:paddingBottom="3dp"
+                      android:background="@drawable/sales_widget_chip"
+                      android:text=""
+                      android:textColor="#FFFFFF"
+                      android:textSize="10sp"
+                      android:singleLine="true" />
+
+                  <TextView
+                      android:id="@+id/widget_chip_stock"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:paddingLeft="8dp"
+                      android:paddingRight="8dp"
+                      android:paddingTop="3dp"
+                      android:paddingBottom="3dp"
+                      android:background="@drawable/sales_widget_chip"
+                      android:text=""
+                      android:textColor="#FFFFFF"
+                      android:textSize="10sp"
+                      android:singleLine="true" />
+
+                  <TextView
+                      android:id="@+id/widget_chip_debts"
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:layout_marginLeft="5dp"
+                      android:paddingLeft="8dp"
+                      android:paddingRight="8dp"
+                      android:paddingTop="3dp"
+                      android:paddingBottom="3dp"
+                      android:background="@drawable/sales_widget_chip"
+                      android:text=""
+                      android:textColor="#FFFFFF"
+                      android:textSize="10sp"
+                      android:singleLine="true"
+                      android:ellipsize="end" />
+              </LinearLayout>
           </LinearLayout>
           EOF
 
           cat > android/app/src/main/java/com/shopnify/app/SalesWidgetProvider.java << 'EOF'
           package com.shopnify.app;
 
+          import android.app.PendingIntent;
           import android.appwidget.AppWidgetManager;
           import android.appwidget.AppWidgetProvider;
           import android.content.ComponentName;
           import android.content.Context;
+          import android.content.Intent;
           import android.content.SharedPreferences;
+          import android.net.Uri;
+          import android.os.Build;
+          import android.view.View;
           import android.widget.RemoteViews;
+          import java.text.SimpleDateFormat;
+          import java.util.Date;
+          import java.util.Locale;
 
+          // Widget « Ventes du jour ». Tous les textes arrivent déjà traduits et formatés depuis
+          // l'app (voir SalesWidgetPlugin) : rien n'est écrit en dur dans une langue ici.
           public class SalesWidgetProvider extends AppWidgetProvider {
 
               public static final String PREFS_NAME = "MaBoutiqueWidgetPrefs";
+              public static final String KEY_DAY = "day";
+              public static final String KEY_TITLE = "title";
               public static final String KEY_TOTAL = "todayTotal";
-              public static final String KEY_COUNT = "todayCount";
+              public static final String KEY_ZERO_TOTAL = "zeroTotal";
+              public static final String KEY_SALES = "salesText";
+              public static final String KEY_ZERO_SALES = "zeroSalesText";
+              public static final String KEY_PCT = "usualPct";
+              public static final String KEY_STOCK = "stockText";
+              public static final String KEY_STOCK_ALERT = "stockAlert";
+              public static final String KEY_DEBTS = "debtsText";
+              public static final String KEY_ADD = "addLabel";
 
               public static void updateAllWidgets(Context context) {
                   AppWidgetManager manager = AppWidgetManager.getInstance(context);
@@ -317,14 +517,71 @@ jobs:
                   }
               }
 
+              private static void setChip(RemoteViews views, int viewId, String text) {
+                  if (text == null || text.length() == 0) {
+                      views.setViewVisibility(viewId, View.GONE);
+                  } else {
+                      views.setViewVisibility(viewId, View.VISIBLE);
+                      views.setTextViewText(viewId, text);
+                  }
+              }
+
               public static void updateWidget(Context context, AppWidgetManager manager, int widgetId) {
                   SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                  String total = prefs.getString(KEY_TOTAL, "0 FCFA");
-                  int count = prefs.getInt(KEY_COUNT, 0);
-
                   RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.sales_widget);
-                  views.setTextViewText(R.id.widget_amount, total);
-                  views.setTextViewText(R.id.widget_count, count + " article(s) vendu(s)");
+
+                  String title = prefs.getString(KEY_TITLE, "");
+                  if (title.length() == 0) {
+                      // Jamais alimenté (app pas encore ouverte, ou déconnexion) : écran neutre.
+                      views.setTextViewText(R.id.widget_title, "Boutipro");
+                      views.setTextViewText(R.id.widget_amount, "—");
+                      views.setTextViewText(R.id.widget_pct, "");
+                      views.setViewVisibility(R.id.widget_progress, View.INVISIBLE);
+                      views.setViewVisibility(R.id.widget_add, View.GONE);
+                      setChip(views, R.id.widget_chip_sales, "");
+                      setChip(views, R.id.widget_chip_stock, "");
+                      setChip(views, R.id.widget_chip_debts, "");
+                  } else {
+                      // Les chiffres appartiennent à un jour précis. Après minuit, tant que l'app n'a
+                      // pas été rouverte, on affiche zéro plutôt que le total d'hier sous le titre
+                      // « Ventes aujourd'hui ».
+                      String today = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
+                      boolean fresh = today.equals(prefs.getString(KEY_DAY, ""));
+                      int pct = fresh ? prefs.getInt(KEY_PCT, -1) : (prefs.getInt(KEY_PCT, -1) >= 0 ? 0 : -1);
+
+                      views.setTextViewText(R.id.widget_title, title);
+                      views.setTextViewText(R.id.widget_amount, fresh ? prefs.getString(KEY_TOTAL, "—") : prefs.getString(KEY_ZERO_TOTAL, "—"));
+                      setChip(views, R.id.widget_chip_sales, fresh ? prefs.getString(KEY_SALES, "") : prefs.getString(KEY_ZERO_SALES, ""));
+                      if (pct >= 0) {
+                          views.setTextViewText(R.id.widget_pct, pct + " %");
+                          views.setTextColor(R.id.widget_pct, pct >= 100 ? 0xFF4ADE80 : 0xFFFFFFFF);
+                          views.setViewVisibility(R.id.widget_progress, View.VISIBLE);
+                          views.setProgressBar(R.id.widget_progress, 100, Math.min(100, pct), false);
+                      } else {
+                          views.setTextViewText(R.id.widget_pct, "");
+                          views.setViewVisibility(R.id.widget_progress, View.INVISIBLE);
+                      }
+                      setChip(views, R.id.widget_chip_stock, prefs.getString(KEY_STOCK, ""));
+                      views.setInt(R.id.widget_chip_stock, "setBackgroundResource",
+                              prefs.getBoolean(KEY_STOCK_ALERT, false) ? R.drawable.sales_widget_chip_alert : R.drawable.sales_widget_chip);
+                      setChip(views, R.id.widget_chip_debts, prefs.getString(KEY_DEBTS, ""));
+                      String add = prefs.getString(KEY_ADD, "");
+                      setChip(views, R.id.widget_add, add);
+                  }
+
+                  int immutable = Build.VERSION.SDK_INT >= 23 ? PendingIntent.FLAG_IMMUTABLE : 0;
+                  // Toucher le widget ouvre l'app.
+                  Intent launch = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+                  if (launch != null) {
+                      views.setOnClickPendingIntent(R.id.widget_root,
+                              PendingIntent.getActivity(context, 0, launch, PendingIntent.FLAG_UPDATE_CURRENT | immutable));
+                  }
+                  // Toucher « + Vente » ouvre l'app directement sur l'onglet Vente.
+                  Intent sale = new Intent(Intent.ACTION_VIEW, Uri.parse("com.shopnify.app://widget/sale"));
+                  sale.setClass(context, MainActivity.class);
+                  sale.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                  views.setOnClickPendingIntent(R.id.widget_add,
+                          PendingIntent.getActivity(context, 1, sale, PendingIntent.FLAG_UPDATE_CURRENT | immutable));
 
                   manager.updateAppWidget(widgetId, views);
               }
@@ -353,17 +610,29 @@ jobs:
 
               @PluginMethod
               public void update(PluginCall call) {
-                  String total = call.getString("total", "0 FCFA");
-                  Integer countInt = call.getInt("count", 0);
-                  int count = countInt != null ? countInt : 0;
-
                   SharedPreferences prefs = getContext().getSharedPreferences(
                           SalesWidgetProvider.PREFS_NAME, Context.MODE_PRIVATE);
-                  prefs.edit()
-                          .putString(SalesWidgetProvider.KEY_TOTAL, total)
-                          .putInt(SalesWidgetProvider.KEY_COUNT, count)
-                          .apply();
-
+                  Boolean clear = call.getBoolean("clear", false);
+                  if (clear != null && clear) {
+                      // Déconnexion : plus aucun chiffre de la boutique sur l'écran d'accueil.
+                      prefs.edit().clear().apply();
+                  } else {
+                      Integer pct = call.getInt("usualPct", -1);
+                      Boolean stockAlert = call.getBoolean("stockAlert", false);
+                      prefs.edit()
+                              .putString(SalesWidgetProvider.KEY_DAY, call.getString("day", ""))
+                              .putString(SalesWidgetProvider.KEY_TITLE, call.getString("title", ""))
+                              .putString(SalesWidgetProvider.KEY_TOTAL, call.getString("total", "—"))
+                              .putString(SalesWidgetProvider.KEY_ZERO_TOTAL, call.getString("zeroTotal", "—"))
+                              .putString(SalesWidgetProvider.KEY_SALES, call.getString("salesText", ""))
+                              .putString(SalesWidgetProvider.KEY_ZERO_SALES, call.getString("zeroSalesText", ""))
+                              .putInt(SalesWidgetProvider.KEY_PCT, pct != null ? pct : -1)
+                              .putString(SalesWidgetProvider.KEY_STOCK, call.getString("stockText", ""))
+                              .putBoolean(SalesWidgetProvider.KEY_STOCK_ALERT, stockAlert != null && stockAlert)
+                              .putString(SalesWidgetProvider.KEY_DEBTS, call.getString("debtsText", ""))
+                              .putString(SalesWidgetProvider.KEY_ADD, call.getString("addLabel", ""))
+                              .apply();
+                  }
                   SalesWidgetProvider.updateAllWidgets(getContext());
                   call.resolve();
               }

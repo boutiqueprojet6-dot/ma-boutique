@@ -6683,7 +6683,26 @@ async function applyPdfTextRendering(doc, langCode, sample) {
   if (PDF_CANVAS_LANGS.has(langCode) || PDF_UNSUPPORTED_SCRIPTS.test(String(sample || ""))) {
     if (applyPdfCanvasText(doc, langCode)) return "canvas";
   }
-  return (await applyPdfUnicodeFont(doc, langCode, sample)) ? "unicode" : "standard";
+  const mode = (await applyPdfUnicodeFont(doc, langCode, sample)) ? "unicode" : "standard";
+  applyPdfSafeSpaces(doc);
+  return mode;
+}
+// En français (et dans quelques autres langues), les milliers sont séparés par une espace
+// fine insécable (U+202F) : « 15 000 ». Les polices standard des PDF ne la connaissent pas et
+// jsPDF la remplaçait par une barre oblique — TOUS les montants des reçus, rapports Z et
+// rapports comptables en français sortaient « 15 /000 FCFA ». Même traitement pour les
+// autres espaces fines et pour le signe moins typographique. Sans effet sur le rendu par
+// canvas (arabe, chinois…), qui dessine ces caractères lui-même.
+function applyPdfSafeSpaces(doc) {
+  const fix = (v) => (typeof v === "string"
+    ? v.replace(/[    ]/g, " ").replace(/−/g, "-")
+    : Array.isArray(v) ? v.map(fix) : v);
+  const nativeText = doc.text.bind(doc);
+  const nativeWidth = doc.getTextWidth.bind(doc);
+  const nativeSplit = doc.splitTextToSize.bind(doc);
+  doc.text = function (text, ...rest) { nativeText(fix(text), ...rest); return doc; };
+  doc.getTextWidth = function (text) { return nativeWidth(fix(text)); };
+  doc.splitTextToSize = function (text, ...rest) { return nativeSplit(fix(text), ...rest); };
 }
 
 const __dateLocaleCache = {};
@@ -10148,7 +10167,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // cliquable avec QR code, pied de page "Page X of Y".
   const generateReceiptPdfBlob = async (receipt) => {
     const { default: jsPDF } = await import("jspdf");
-    const doc = new jsPDF({ unit: "mm", format: "a4" });
+    const doc = new jsPDF({ unit: "mm", format: "a4", compress: true });
     const pageW = 210, pageH = 297;
     const marginX = 18;
     const contentW = pageW - marginX * 2;
@@ -10462,7 +10481,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // associé ou à un employé dont la caisse ne tombe pas juste.
   const generateZReportPdf = async (z) => {
     const { default: jsPDF } = await import("jspdf");
-    const doc = new jsPDF();
+    const doc = new jsPDF({ compress: true });
     await applyPdfTextRendering(doc, lang, [shopName, z.actorName || ""].join(" "));
 
     const pageW = doc.internal.pageSize.getWidth();
@@ -13022,7 +13041,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (bitmap.close) bitmap.close();
       setPPhoto(canvas.toDataURL("image/jpeg", 0.7));
     } catch (err) {
-      setError(t(lang, "productPhotoRequired"));
+      setError(t(lang, "genericError"));
     }
     setPhotoBusy(false);
     closeCropModal();
@@ -13085,11 +13104,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const addProduct = () => {
     if (!pName.trim() || !pQty || !pPrice) return;
-    // Photo obligatoire : nécessaire pour la reconnaissance visuelle à la caisse (Détection Caméra).
-    if (!pPhoto) {
-      setError(t(lang, "productPhotoRequired"));
-      return;
-    }
+    // La photo est facultative (décision du 2026-11-13) : l'exiger obligeait à photographier
+    // chaque article avant de pouvoir vendre, un vrai frein pour une boutique qui démarre avec
+    // 200 références. Sans photo, le produit s'affiche avec une icône de colis.
     setError("");
     if (editingProductId) {
       // Mode modification : on met à jour le produit existant en place,
@@ -15981,14 +15998,77 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // rendu "Chargement…", oui une fois les données chargées) → erreur React #310
   // ("Rendered more hooks than during the previous render"). Tous les hooks doivent
   // être appelés à chaque rendu, donc on le place avant tout retour anticipé.
+  // Widget d'écran d'accueil (Android). L'ancien n'affichait qu'un total et un nombre
+  // d'articles, en français quelle que soit la langue, ne réagissait pas au toucher, et
+  // gardait le total de la veille sous le titre « Ventes du jour » tant qu'on ne rouvrait
+  // pas l'app. Le nouveau reçoit ici tous ses textes déjà traduits et formatés (monnaie,
+  // chiffres) : total du jour, progression vers une journée habituelle, nombre de ventes,
+  // produits en stock bas, dettes à encaisser, et le libellé du bouton « + Vente ».
+  // Confidentialité : un écran d'accueil se lit sans ouvrir l'app. Si le verrouillage par
+  // code PIN est activé, les montants sont masqués ; un employé ne voit que ce que ses
+  // droits lui laissent voir dans l'app.
+  // Calculé dans un effet (donc APRÈS le rendu) : la monnaie et les chiffres de la boutique
+  // sont alors déjà appliqués, fcfa() et localizedNumber() donnent le bon format.
+  const lastWidgetKeyRef = useRef("");
   useEffect(() => {
+    if (!(typeof window !== "undefined" && window.Capacitor?.isNativePlatform?.())) return;
+    const today = todayKey();
+    const firstKey = sales.length > 0 ? sales.reduce((min, s) => { const k = dayKeyOf(s.date); return k < min ? k : min; }, "9999") : null;
+    const usualKeys = firstKey ? [7, 14, 21, 28].map((n) => { const d = new Date(); d.setDate(d.getDate() - n); return dayKeyOf(d); }).filter((k) => k >= firstKey) : [];
+    const usualSet = new Set(usualKeys);
+    let todaySum = 0, usualSum = 0;
+    const tickets = new Set();
+    sales.forEach((s) => {
+      const k = dayKeyOf(s.date);
+      if (k === today) { todaySum += s.total; tickets.add(s.transactionId || s.id); }
+      else if (usualSet.has(k)) usualSum += s.total;
+    });
+    const usualAvg = usualKeys.length >= 2 ? usualSum / usualKeys.length : 0;
+    const seeStats = hasPermission("viewStats");
+    const money = (v) => (appLockEnabled ? "•••••" : fcfa(v));
+    const lowCount = hasPermission("viewStock") ? products.filter((p) => p.quantity <= lowStockThreshold).length : -1;
+    const owed = hasPermission("viewDebts") ? debts.filter((d) => !d.paid).reduce((sum, d) => sum + (d.amount || 0) - (d.paidAmount || 0), 0) : -1;
+    const payload = {
+      day: today,
+      title: t(lang, "todaySales") + (shopName ? " · " + shopName : ""),
+      total: seeStats ? money(todaySum) : "—",
+      zeroTotal: seeStats ? money(0) : "—",
+      salesText: seeStats ? "🧾 " + localizedNumber(tickets.size) : "",
+      zeroSalesText: seeStats ? "🧾 " + localizedNumber(0) : "",
+      usualPct: seeStats && usualAvg > 0 ? Math.min(999, Math.round((todaySum / usualAvg) * 100)) : -1,
+      stockText: lowCount >= 0 ? "📦 " + localizedNumber(lowCount) : "",
+      stockAlert: lowCount > 0,
+      debtsText: owed > 0 ? "👥 " + money(owed) : "",
+      addLabel: hasPermission("sell") ? "+ " + t(lang, "navSale") : "",
+    };
+    const key = JSON.stringify(payload);
+    if (key === lastWidgetKeyRef.current) return; // rien de neuf : on n'appelle pas le pont natif
+    lastWidgetKeyRef.current = key;
+    SalesWidget.update(payload).catch(() => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sales, products, debts, lowStockThreshold, lang, shopName, appLockEnabled, activeEmployee, currency, arabicDigits, todayTotalForWidget]);
+  // Déconnexion (ou changement de compte) : plus aucun chiffre de la boutique ne doit rester
+  // affiché sur l'écran d'accueil du téléphone.
+  useEffect(() => () => {
     if (typeof window !== "undefined" && window.Capacitor?.isNativePlatform?.()) {
-      SalesWidget.update({
-        total: fcfa(todayTotalForWidget),
-        count: todaySalesForWidget.length,
-      }).catch(() => {});
+      SalesWidget.update({ clear: true }).catch(() => {});
     }
-  }, [todayTotalForWidget, todaySalesForWidget.length]);
+  }, []);
+  // Bouton « + Vente » du widget : ouvre l'app directement sur l'onglet Vente. Le lien arrive
+  // à la racine (appUrlOpen), qui le relaie ici ; s'il est arrivé avant que cet écran soit
+  // monté (app lancée à froid), il attend dans window.__boutiproWidgetTab.
+  useEffect(() => {
+    const go = () => {
+      const wanted = typeof window !== "undefined" ? window.__boutiproWidgetTab : null;
+      if (!wanted) return;
+      window.__boutiproWidgetTab = null;
+      if (wanted === "sale" && hasPermission("sell")) { setShowSettings(false); setTab("sale"); }
+    };
+    go();
+    window.addEventListener("boutipro-widget-open", go);
+    return () => window.removeEventListener("boutipro-widget-open", go);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // Même raison que le commentaire ci-dessus : ce hook doit être appelé à CHAQUE rendu,
   // donc avant le "if (loading) return" qui suit. Il était auparavant déclaré plus bas
   // (juste avant generateShopExportPdf), ce qui provoquait la même erreur React #310
@@ -16545,81 +16625,189 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     }
     setBackupBusy(null);
   };
+  // Date d'un document PDF, au format du pays (13/11/2026) : les exports affichaient la clé
+  // technique « 2026-11-13 ». Les marques de direction invisibles sont retirées, sinon une
+  // date entourée de texte arabe se retourne.
+  const pdfDate = (v) => {
+    const d = parseDayOrIso(typeof v === "string" && v.length > 10 ? dayKeyOf(v) : v);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/[‎‏؜]/g, "");
+  };
+  // Raccourcit un texte pour qu'il tienne dans une colonne (« Ibrahim Coulib… ») : avec
+  // maxWidth, jsPDF le passait à la ligne et il recouvrait la rangée suivante.
+  const pdfClip = (doc, text, maxW) => {
+    let s = String(text ?? "");
+    if (doc.getTextWidth(s) <= maxW) return s;
+    while (s.length > 1 && doc.getTextWidth(s + "…") > maxW) s = s.slice(0, -1);
+    return s.trimEnd() + "…";
+  };
+  // Export PDF de la boutique. L'ancien était une liste brute sans mise en forme : dates
+  // techniques, montants non alignés, noms de clients qui débordaient sur la ligne d'en
+  // dessous, ventes les plus anciennes en premier, ni total ni numéro de page, et il annonçait
+  // « 14 produits » sans en montrer un seul. Celui-ci reprend la présentation du rapport
+  // comptable : bandeau, synthèse en quatre cartes, état du stock, puis les ventes de la plus
+  // récente à la plus ancienne.
   const generateShopExportPdf = async () => {
     setPdfExportGenerating(true);
     try {
       const { default: jsPDF } = await import("jspdf");
       const { default: QRCode } = await import("qrcode");
-      const doc = new jsPDF();
-      await applyPdfTextRendering(doc, lang, [shopName, ownerFirstName, ownerLastName, shopPhoneInput].join(" "));
-      const pageWidth = doc.internal.pageSize.getWidth();
-      let y = 22;
-
-      // ---- En-tête : nom de la boutique, propriétaire, app + date ----
-      doc.setFontSize(18);
-      doc.text(shopName || t(lang, "appName"), pageWidth / 2, y, { align: "center" });
-      y += 8;
-      doc.setFontSize(11);
-      doc.setTextColor(90);
+      const doc = new jsPDF({ compress: true });
       const ownerFullName = `${ownerFirstName || ""} ${ownerLastName || ""}`.trim();
-      if (ownerFullName) {
-        doc.text(`${t(lang, "cashReportOwner")} : ${ownerFullName}`, pageWidth / 2, y, { align: "center" });
-        y += 6;
-      }
-      if (shopPhoneInput) {
-        doc.text(shopPhoneInput, pageWidth / 2, y, { align: "center" });
-        y += 6;
-      }
-      doc.setFontSize(9);
-      doc.setTextColor(140);
-      doc.text(
-        `${t(lang, "accountingGeneratedBy")} ${t(lang, "appName")} · ${new Date().toLocaleDateString()}`,
-        pageWidth / 2, y, { align: "center" }
-      );
-      doc.setTextColor(0);
-      y += 10;
-
-      // ---- QR code à scanner pour installer l'application ----
+      await applyPdfTextRendering(doc, lang, [shopName, ownerFullName, shopPhoneInput, ...products.map((p) => p.name || ""), ...sales.slice(-400).map((s) => `${s.productName || ""} ${s.customer || ""}`)].join(" "));
+      const BRAND = [27, 58, 92], ACCENT = [139, 133, 242], OK = [22, 163, 74], KO = [225, 29, 72], GREY = [110, 116, 134], LIGHT = [243, 245, 249];
+      const PAGE_W = 210, PAGE_H = 297, M = 14;
+      const money = (n) => `${localizedNumber(n)} ${CURRENT_CURRENCY.symbol}`;
       const qrDataUrl = await QRCode.toDataURL("https://www.boutipro.com", { margin: 1, width: 240 });
-      const qrSize = 26;
-      doc.addImage(qrDataUrl, "PNG", (pageWidth - qrSize) / 2, y, qrSize, qrSize);
-      y += qrSize + 5;
-      doc.setFontSize(9);
-      doc.setTextColor(120);
-      doc.text(t(lang, "setScannezPourInstaller"), pageWidth / 2, y, { align: "center" });
-      doc.setTextColor(0);
-      y += 10;
-
-      // ---- Résumé + tableau des ventes (même source que l'export CSV) ----
-      doc.setFontSize(12);
-      doc.text(t(lang, "setSaleslengthVentesProductslengthProdui").replace("{s}", localizedNumber(sales.length)).replace("{p}", localizedNumber(products.length)), 14, y);
-      y += 10;
-      doc.setFontSize(9);
-      doc.setTextColor(120);
-      doc.text("Date", 14, y);
-      doc.text(t(lang, "histColProduct"), 46, y);
-      doc.text(t(lang, "histColAmount"), 150, y);
-      doc.text(t(lang, "histColCustomer"), 175, y);
-      doc.setTextColor(0);
-      y += 5;
-      doc.setDrawColor(200);
-      doc.line(14, y, pageWidth - 14, y);
-      y += 5;
-      sales.forEach((s) => {
-        if (y > 280) {
-          doc.addPage();
-          y = 20;
+      const drawLogo = (x, y, s) => {
+        doc.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+        doc.roundedRect(x, y + s * 0.14, s * 0.17, s * 0.70, s * 0.08, s * 0.08, "F");
+        doc.roundedRect(x + s * 0.32, y + s * 0.33, s * 0.17, s * 0.51, s * 0.08, s * 0.08, "F");
+        doc.setFillColor(255, 255, 255);
+        doc.roundedRect(x + s * 0.64, y, s * 0.17, s * 0.84, s * 0.08, s * 0.08, "F");
+      };
+      const drawHeader = (isFirst) => {
+        const h = isFirst ? 40 : 18;
+        doc.setFillColor(BRAND[0], BRAND[1], BRAND[2]);
+        doc.rect(0, 0, PAGE_W, h, "F");
+        drawLogo(M, isFirst ? 9 : 5.5, isFirst ? 11 : 7);
+        doc.setTextColor(255, 255, 255);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(isFirst ? 16 : 10);
+        doc.text(pdfClip(doc, shopName || t(lang, "appName"), isFirst ? 120 : 80), M + (isFirst ? 14 : 9), isFirst ? 17 : 11.5);
+        doc.setFont("helvetica", "normal");
+        if (isFirst) {
+          doc.setFontSize(9.5);
+          doc.setTextColor(200, 210, 225);
+          const sub = [ownerFullName, shopPhoneInput].filter(Boolean);
+          if (sub[0]) doc.text(pdfClip(doc, sub[0], 120), M + 14, 24);
+          if (sub[1]) doc.text(pdfClip(doc, sub[1], 120), M + 14, sub[0] ? 29.5 : 24);
+          doc.setFontSize(8.5);
+          doc.text(pdfDate(new Date()), M + 14, 35);
+          // QR code d'installation, dans une pastille blanche à droite du bandeau.
+          doc.setFillColor(255, 255, 255);
+          doc.roundedRect(PAGE_W - M - 26, 7, 26, 26, 2, 2, "F");
+          doc.addImage(qrDataUrl, "PNG", PAGE_W - M - 24.5, 8.5, 23, 23, "qr");
+        } else {
+          doc.setFontSize(9);
+          doc.setTextColor(200, 210, 225);
+          doc.text(t(lang, "appName"), PAGE_W - M, 11.5, { align: "right" });
         }
-        doc.text(dayKeyOf(s.date || ""), 14, y);
-        doc.text(`${s.productName} x${s.qty}`, 46, y, { maxWidth: 98 });
-        doc.text(String(localizedNumber(s.total)), 150, y);
-        doc.text(s.customer || "—", 175, y, { maxWidth: 24 });
-        y += 6;
-      });
+        doc.setTextColor(0, 0, 0);
+        return h + 12;
+      };
+      let y = drawHeader(true);
+      const newPage = () => { doc.addPage(); y = drawHeader(false); };
 
+      // ---- Synthèse ----
+      const totalRevenue = sales.reduce((sum, s) => sum + s.total, 0);
+      const ticketCount = new Set(sales.map((s) => s.transactionId || s.id)).size;
+      const stockValue = products.reduce((sum, p) => sum + (p.quantity || 0) * (Number(p.price) || 0), 0);
+      const owed = debts.filter((d) => !d.paid).reduce((sum, d) => sum + (d.amount || 0) - (d.paidAmount || 0), 0);
+      doc.setFont("helvetica", "bold"); doc.setFontSize(13);
+      doc.text(t(lang, "accountingSummaryTitle"), M, y);
+      y += 6;
+      const cards = [
+        { label: tx(lang, "statsKpiRevenue"), value: money(totalRevenue), color: OK },
+        { label: tx(lang, "statsKpiSales"), value: localizedNumber(ticketCount), color: BRAND },
+        { label: `${t(lang, "navStock")} (${localizedNumber(products.length)})`, value: money(stockValue), color: BRAND },
+        { label: t(lang, "clientDebts"), value: money(owed), color: owed > 0 ? KO : OK },
+      ];
+      const cw = (PAGE_W - M * 2 - 6) / 2, ch = 22;
+      cards.forEach((c, i) => {
+        const cx = M + (i % 2) * (cw + 6), cy = y + Math.floor(i / 2) * (ch + 6);
+        doc.setFillColor(LIGHT[0], LIGHT[1], LIGHT[2]);
+        doc.roundedRect(cx, cy, cw, ch, 2.5, 2.5, "F");
+        doc.setFillColor(c.color[0], c.color[1], c.color[2]);
+        doc.roundedRect(cx, cy, 1.6, ch, 0.8, 0.8, "F");
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8.5);
+        doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+        doc.text(pdfClip(doc, c.label, cw - 10), cx + 6, cy + 8);
+        doc.setFont("helvetica", "bold"); doc.setFontSize(13);
+        doc.setTextColor(c.color[0], c.color[1], c.color[2]);
+        doc.text(c.value, cx + 6, cy + 17);
+      });
+      y += 2 * (ch + 6) + 6;
+      doc.setTextColor(0, 0, 0);
+
+      // ---- Tableaux ----
+      const tw = PAGE_W - M * 2;
+      const drawTable = (title, cols, rows, footLabel, footValue) => {
+        if (y > PAGE_H - 60) newPage();
+        doc.setFont("helvetica", "bold"); doc.setFontSize(13); doc.setTextColor(0, 0, 0);
+        doc.text(title, M, y); y += 5;
+        const headRow = () => {
+          doc.setFillColor(BRAND[0], BRAND[1], BRAND[2]);
+          doc.rect(M, y, tw, 8, "F");
+          doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(8.5);
+          let cx = M + 3;
+          cols.forEach((c) => { doc.text(pdfClip(doc, c.label, c.w - 5), c.align === "right" ? cx + c.w - 6 : cx, y + 5.5, { align: c.align === "right" ? "right" : "left" }); cx += c.w; });
+          doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "normal");
+          y += 8;
+        };
+        headRow();
+        rows.forEach((r, i) => {
+          if (y > PAGE_H - 24) { newPage(); headRow(); }
+          doc.setFontSize(8.5);
+          if (i % 2 === 1) { doc.setFillColor(248, 249, 252); doc.rect(M, y, tw, 6.5, "F"); }
+          let cx = M + 3;
+          cols.forEach((c, ci) => {
+            if (c.color) { const col = c.color(r); doc.setTextColor(col[0], col[1], col[2]); }
+            doc.text(pdfClip(doc, r[ci], c.w - 6), c.align === "right" ? cx + c.w - 6 : cx, y + 4.6, { align: c.align === "right" ? "right" : "left" });
+            if (c.color) doc.setTextColor(0, 0, 0);
+            cx += c.w;
+          });
+          y += 6.5;
+        });
+        if (rows.length === 0) { doc.setFontSize(8.5); doc.setTextColor(GREY[0], GREY[1], GREY[2]); doc.text("—", M + 3, y + 4.6); doc.setTextColor(0, 0, 0); y += 6.5; }
+        if (footLabel) {
+          doc.setDrawColor(BRAND[0], BRAND[1], BRAND[2]); doc.setLineWidth(0.4);
+          doc.line(M, y + 1, M + tw, y + 1);
+          doc.setFont("helvetica", "bold"); doc.setFontSize(9.5);
+          doc.text(footLabel, M + 3, y + 7);
+          doc.text(footValue, M + tw - 6, y + 7, { align: "right" });
+          doc.setFont("helvetica", "normal");
+          y += 8;
+        }
+        y += 8;
+      };
+      // Stock : les produits à réapprovisionner en premier, en rouge.
+      const stockRows = [...products]
+        .sort((a, b) => ((a.quantity <= lowStockThreshold ? 0 : 1) - (b.quantity <= lowStockThreshold ? 0 : 1)) || String(a.name).localeCompare(String(b.name)))
+        .map((p) => { const row = [p.name || "", `${localizedQty(p.quantity || 0)}${p.sellByMeasure && p.measureUnit ? " " + p.measureUnit : ""}`, money(p.price), money((p.quantity || 0) * (Number(p.price) || 0))]; row.low = (p.quantity || 0) <= lowStockThreshold; return row; });
+      drawTable(t(lang, "navStock"), [
+        { label: t(lang, "histColProduct"), w: 84 },
+        { label: t(lang, "quantity"), w: 34, align: "right", color: (r) => (r.low ? KO : [0, 0, 0]) },
+        { label: stripTrailingCurrencyParen(t(lang, "unitPrice")), w: 32, align: "right" },
+        { label: t(lang, "histColAmount"), w: 32, align: "right" },
+      ], stockRows, tx(lang, "receiptTotalLabel"), money(stockValue));
+      // Ventes : de la plus récente à la plus ancienne. Au-delà de 3 000 lignes le fichier
+      // deviendrait trop lourd à partager : la dernière rangée dit combien n'apparaissent pas.
+      const MAX_ROWS = 3000;
+      const ordered = [...sales].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+      const saleRows = ordered.slice(0, MAX_ROWS).map((s) => [pdfDate(s.date), `${s.productName || ""} × ${localizedQty(s.qty || 0)}`, s.customer || "—", money(s.total)]);
+      if (ordered.length > MAX_ROWS) saleRows.push(["…", `+ ${localizedNumber(ordered.length - MAX_ROWS)}`, "", ""]);
+      drawTable(t(lang, "accountingSalesTableTitle"), [
+        { label: t(lang, "histColDate"), w: 26 },
+        { label: t(lang, "histColProduct"), w: 78 },
+        { label: t(lang, "histColCustomer"), w: 40 },
+        { label: t(lang, "histColAmount"), w: 38, align: "right" },
+      ], saleRows, tx(lang, "receiptTotalLabel"), money(totalRevenue));
+
+      // ---- Pied de page numéroté ----
+      const pages = doc.internal.getNumberOfPages();
+      for (let p = 1; p <= pages; p++) {
+        doc.setPage(p);
+        doc.setDrawColor(226, 232, 240); doc.setLineWidth(0.3);
+        doc.line(M, PAGE_H - 14, PAGE_W - M, PAGE_H - 14);
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8);
+        doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+        doc.text(`${t(lang, "accountingGeneratedBy")} ${t(lang, "appName")} — boutipro.com`, M, PAGE_H - 9);
+        doc.text(`${p} / ${pages}`, PAGE_W - M, PAGE_H - 9, { align: "right" });
+      }
       doc.save(`${shopName}-ventes.pdf`);
     } catch (e) {
-      alert("Erreur PDF : " + (e && e.message ? e.message : String(e)));
+      setError(t(lang, "genericError"));
     } finally {
       setPdfExportGenerating(false);
     }
@@ -16703,8 +16891,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         sortedDays.forEach((d, i) => { const [x, y] = pt(i); ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill(); });
         // Dates : seulement la première et la dernière, sinon elles se chevauchent.
         ctx.fillStyle = "#6b7280"; ctx.font = "15px sans-serif";
-        ctx.textAlign = "left"; ctx.fillText(sortedDays[0], x0, H - 15);
-        if (sortedDays.length > 1) { ctx.textAlign = "right"; ctx.fillText(sortedDays[sortedDays.length - 1], x1, H - 15); }
+        ctx.textAlign = "left"; ctx.fillText(pdfDate(sortedDays[0]), x0, H - 15);
+        if (sortedDays.length > 1) { ctx.textAlign = "right"; ctx.fillText(pdfDate(sortedDays[sortedDays.length - 1]), x1, H - 15); }
       } else {
         ctx.fillStyle = "#9ca3af"; ctx.font = "18px sans-serif"; ctx.textAlign = "center";
         ctx.fillText(t(lang, "noSalesShort"), W / 2, H / 2);
@@ -16743,7 +16931,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
 
       // ---- Construction du PDF ----
       const { default: jsPDF } = await import("jspdf");
-      const doc = new jsPDF();
+      const doc = new jsPDF({ compress: true });
       await applyPdfTextRendering(doc, lang, [shopName, ...periodSales.map((v) => v.productName || ""), ...periodCashOut.map((e) => e.label || "")].join(" "));
 
       // Logo de l'application, dessiné en vectoriel (3 barres montantes, comme dans l'app).
@@ -16771,8 +16959,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           doc.text(shopName || "", M + 14, 26);
           doc.setFontSize(9);
           doc.setTextColor(200, 210, 225);
-          doc.text(`${t(lang, "accountingPeriodLabel")} : ${fromDate} - ${toDate}`, PAGE_W - M, 19, { align: "right" });
-          doc.text(dayKeyOf(new Date()), PAGE_W - M, 26, { align: "right" });
+          // La plage de dates est écrite à part du libellé : dans une phrase en arabe, les deux
+          // dates s'échangeaient (la fin de période passait avant le début).
+          const range = `${pdfDate(fromDate)} – ${pdfDate(toDate)}`;
+          doc.text(range, PAGE_W - M, 19, { align: "right" });
+          doc.text(`${t(lang, "accountingPeriodLabel")} :`, PAGE_W - M - doc.getTextWidth(range) - 2, 19, { align: "right" });
+          doc.text(pdfDate(new Date()), PAGE_W - M, 26, { align: "right" });
         } else {
           doc.setFontSize(9);
           doc.setTextColor(200, 210, 225);
@@ -16862,11 +17054,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           if (i % 2 === 1) { doc.setFillColor(248, 249, 252); doc.rect(M, y, tw, 6.5, "F"); }
           let cx = M + 3;
           cols.forEach((c, ci) => {
-            const val = String(r[ci] ?? "");
-            doc.text(val, c.align === "right" ? cx + c.w - 6 : cx, y + 4.6, {
-              align: c.align === "right" ? "right" : "left",
-              maxWidth: c.w - 6,
-            });
+            doc.text(pdfClip(doc, r[ci], c.w - 6), c.align === "right" ? cx + c.w - 6 : cx, y + 4.6, { align: c.align === "right" ? "right" : "left" });
             cx += c.w;
           });
           y += 6.5;
@@ -16893,7 +17081,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       ];
       drawTable(
         t(lang, "accountingSalesTableTitle"), colsSales,
-        periodSales.slice(0, 400).map((s) => [dayKeyOf(s.date), s.productName || "", localizedNumber(s.qty || 0), money(s.total)]),
+        // Le détail s'arrêtait sans prévenir à 400 lignes alors que la ligne de total additionnait
+        // toute la période : le document ne « tombait pas juste ». Tout est listé (jusqu'à 3 000
+        // lignes ; au-delà, la dernière rangée indique combien il en manque).
+        [...periodSales.slice(0, 3000).map((s) => [pdfDate(s.date), s.productName || "", localizedQty(s.qty || 0), money(s.total)]),
+          ...(periodSales.length > 3000 ? [["…", `+ ${localizedNumber(periodSales.length - 3000)}`, "", ""]] : [])],
         t(lang, "cashReportTotalSales"), totalRevenue,
       );
 
@@ -16904,8 +17096,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       ];
       drawTable(
         t(lang, "accountingExpensesTableTitle"), colsExp,
-        periodCashOut.slice(0, 400).map((e) => [
-          dayKeyOf(e.date),
+        periodCashOut.slice(0, 3000).map((e) => [
+          pdfDate(e.date),
           `${e.label || ""}${e.kind === "withdrawal" ? ` (${tx(lang, "cashOutKindWithdrawal")})` : ""}`,
           money(e.amount),
         ]),
@@ -18007,7 +18199,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
             </div>
             <div className="mb-3">
-              <label className="text-xs block mb-1" style={{ color: T.muted }}>{t(lang, "productPhoto")}</label>
+              <label className="text-xs block mb-1" style={{ color: T.muted }}>{stripTrailingCurrencyParen(t(lang, "productPhoto"))} ({t(lang, "othFacultatif")})</label>
               <div className="flex gap-2 flex-wrap">
                 <button
                   type="button"
@@ -18059,9 +18251,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             <button
               onClick={addProduct}
-              disabled={!(pName.trim() && pQty && pPrice && pPhoto)}
+              disabled={!(pName.trim() && pQty && pPrice)}
               className="w-full py-3 rounded-lg text-white font-semibold text-sm mb-6"
-              style={{ background: INDIGO, opacity: (pName.trim() && pQty && pPrice && pPhoto) ? 1 : 0.4 }}
+              style={{ background: INDIGO, opacity: (pName.trim() && pQty && pPrice) ? 1 : 0.4 }}
             >{t(lang, "save")}</button>
             </div>
           </div>
@@ -23262,7 +23454,19 @@ function BoutiqueAppInner() {
   useEffect(() => {
     if (typeof window === "undefined" || !window.Capacitor) return;
     let removeListener = null;
+    // Lien du widget d'écran d'accueil (com.shopnify.app://widget/sale) : rien à voir avec
+    // la connexion Google, on le relaie à l'écran de la boutique et on s'arrête là.
+    const handleWidgetLink = (url) => {
+      const m = typeof url === "string" ? url.match(/^com\.shopnify\.app:\/\/widget\/([a-z]+)/) : null;
+      if (!m) return false;
+      window.__boutiproWidgetTab = m[1];
+      window.dispatchEvent(new Event("boutipro-widget-open"));
+      return true;
+    };
+    // App lancée à froid depuis le widget : le lien n'arrive pas par appUrlOpen.
+    CapacitorApp.getLaunchUrl().then((res) => { if (res && res.url) handleWidgetLink(res.url); }).catch(() => {});
     CapacitorApp.addListener("appUrlOpen", async ({ url }) => {
+      if (handleWidgetLink(url)) return;
       console.log("[OAuth] appUrlOpen reçu :", url);
       // Le retour de Google peut arriver sous deux formes : le schéma personnalisé
       // (com.shopnify.app://login-callback?code=…, ouvert par la page auth-callback.html)
@@ -23585,7 +23789,7 @@ function LegalSection({ n, title, children }) {
 // caisse ailleurs dans l'app (import à la demande, doc.text/splitTextToSize).
 async function downloadLegalPdf(title, sections, fileName) {
   const { default: jsPDF } = await import("jspdf");
-  const doc = new jsPDF();
+  const doc = new jsPDF({ compress: true });
   const marginX = 14;
   const pageWidth = 182; // largeur utile (A4 210mm - 2*14)
   const pageBottom = 280;
