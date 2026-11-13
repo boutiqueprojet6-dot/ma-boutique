@@ -700,12 +700,14 @@ jobs:
           echo "${{ secrets.ANDROID_DEBUG_KEYSTORE }}" | base64 -d > ~/.android/debug.keystore
           echo "Certificat de signature stable installé"
 
-      - name: Show SHA256 fingerprint (pour assetlinks.json)
+      - name: Show signing fingerprints (SHA1 + SHA256)
         run: |
-          echo "----- Empreinte SHA256 de la clé de signature -----"
-          keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android | grep "SHA256:"
-          echo "-----------------------------------------------------"
-          echo "Copie la valeur ci-dessus (sans 'SHA256: ') dans public/.well-known/assetlinks.json"
+          echo "===== Empreintes de la clé de signature de l'APK ====="
+          keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android | grep -E "SHA1:|SHA256:"
+          echo "======================================================"
+          echo "SHA1  -> a enregistrer dans Google Cloud Console > Identifiants > ID client OAuth"
+          echo "         de type ANDROID (package com.shopnify.app) pour la connexion Google native."
+          echo "SHA256 -> a copier (sans 'SHA256: ') dans public/.well-known/assetlinks.json (App Link)."
 
       - name: Sync Capacitor
         run: npx cap sync android

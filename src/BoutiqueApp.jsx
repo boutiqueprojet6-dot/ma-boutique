@@ -8081,7 +8081,21 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         }
       }
     } catch (err) {
-      setError(t(lang, "googleLoginError"));
+      // Diagnostic : la connexion Google native échoue AVANT d'atteindre Supabase (confirmé
+      // par les logs : aucune tentative id_token côté serveur). On fait donc remonter le
+      // détail réel de l'erreur Google Play Services (sinon masqué par le message générique),
+      // pour pouvoir distinguer les causes : code 10 = empreinte SHA-1 / client OAuth Android
+      // mal configuré dans Google Cloud Console ; 16 = aucun compte/identifiant disponible ;
+      // "canceled"/"cancelled" = l'utilisateur a fermé l'écran ; TIMEOUT/réseau = connexion.
+      const rawMsg = (err && (err.message || err.errorMessage || err.code)) ? String(err.message || err.errorMessage || err.code) : "";
+      try { console.error("[GoogleLogin]", err); } catch (e) {}
+      const isCancel = /cancel/i.test(rawMsg);
+      if (isCancel) {
+        // L'utilisateur a simplement fermé l'écran de choix du compte : pas une vraie erreur.
+        setGoogleLoginBusy(false);
+        return;
+      }
+      setError(t(lang, "googleLoginError") + (rawMsg ? " · (" + rawMsg.slice(0, 140) + ")" : ""));
       setGoogleLoginBusy(false);
     }
   };
