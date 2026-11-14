@@ -8175,7 +8175,17 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         // "Android" enregistré dans Google Cloud Console avec le nom de package de l'app et
         // l'empreinte SHA-1 du certificat de signature utilisé pour la build.)
         const { SocialLogin } = await import("@capgo/capacitor-social-login");
-        const res = await withLoginTimeout(SocialLogin.login({ provider: "google", options: { style: "standard" } }));
+        // Essai 1 : écran "Se connecter avec Google" (style standard). Si Google Play Services
+        // répond « reauth failed » (code 16) sur certains téléphones, essai 2 : feuille de choix
+        // des comptes (style bottom), un autre chemin du Credential Manager.
+        let res;
+        try {
+          res = await withLoginTimeout(SocialLogin.login({ provider: "google", options: { style: "standard" } }));
+        } catch (firstErr) {
+          const m1 = String((firstErr && (firstErr.message || firstErr.errorMessage || firstErr.code)) || "");
+          if (!/reauth|\[16\]/i.test(m1)) throw firstErr;
+          res = await withLoginTimeout(SocialLogin.login({ provider: "google", options: { style: "bottom", filterByAuthorizedAccounts: false } }));
+        }
         const idToken = res && res.result && res.result.idToken;
         if (!idToken) throw new Error("Aucun jeton reçu de Google");
         const { error: oauthError } = await supabase.auth.signInWithIdToken({ provider: "google", token: idToken });
