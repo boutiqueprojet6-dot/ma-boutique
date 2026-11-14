@@ -109,6 +109,7 @@ function renderApp() {
       <BoutiqueApp />
     </React.StrictMode>
   );
+  try { if (window.__boutiproMounted) window.__boutiproMounted(); } catch (e) {}
   // L'app a fini par se charger correctement : on lève le garde-fou anti-boucle, pour
   // qu'un VRAI nouveau problème de cache plus tard dans cette même page (après un futur
   // déploiement) puisse de nouveau déclencher un rechargement automatique.
