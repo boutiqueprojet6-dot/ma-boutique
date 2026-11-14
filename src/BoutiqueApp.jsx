@@ -23443,15 +23443,16 @@ function BoutiqueAppInner() {
     Preferences.get({ key: "_warmup" }).catch(() => {});
   }, []);
   // Initialisation du plugin de connexion Google native (réactivée — voir loginWithGoogle,
-  // branche isCapacitorApp). webClientId = le Client ID OAuth "Web" existant (c'est lui qui
-  // sert à vérifier le jeton côté Supabase, même si la connexion elle-même passe par le
-  // Client ID "Android" enregistré séparément avec le package + l'empreinte SHA-1 de l'app).
+  // branche isCapacitorApp). webClientId = obligatoirement le Client ID OAuth de type "Web"
+  // (GOOGLE_WEB_CLIENT_ID, "Ma Boutique Web") : c'est l'audience du jeton, vérifiée par Supabase.
+  // Le Client ID "Android" (package + SHA-1) n'est PAS passé ici : Google le retrouve tout seul
+  // grâce au package et à la signature de l'APK. Mettre l'ID Android ici = erreur [16] "Account reauth failed".
   useEffect(() => {
     if (!isNativePlatformNow()) return;
     (async () => {
       try {
         const { SocialLogin } = await import("@capgo/capacitor-social-login");
-        await SocialLogin.initialize({ google: { webClientId: "431612912550-f2ruc6a90jhf3logj45nlpgkls40u6ts.apps.googleusercontent.com", mode: "online" } });
+        await SocialLogin.initialize({ google: { webClientId: GOOGLE_WEB_CLIENT_ID, mode: "online" } });
       } catch (err) { /* plateforme/plugin indisponible (ex. web) — pas grave */ }
     })();
   }, []);
