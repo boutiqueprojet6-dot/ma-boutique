@@ -17908,7 +17908,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </span>
                     )}
                   </div>
-                  <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>{localizedNumber(todaySales.length)} {t(lang, "articlesSold")}</p>
+                  <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>{localizedNumber(Math.round(todaySales.reduce((n, s) => n + (Number(s.qty) || 0), 0) * 100) / 100)} {t(lang, "articlesSold")}</p>
                 </div>
                 {usualDay ? (() => {
                   // Anneau de progression vers une journée habituelle (plein et vert à 100 %).
@@ -18759,7 +18759,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div className="flex items-center justify-center gap-2 mt-5 pt-4" style={{ borderTop: `1px solid ${T.border}` }}>
                     <span style={{ fontSize: 18 }}>✨</span>
                     <p className="text-xs" style={{ color: T.muted }}>
-                      {t(lang, "othLocalizednumbertodaysaleslengthVentes").replace("{n}", localizedNumber(todaySales.length))} — <span className="font-bold" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{fcfa(todayTotal)}</span>
+                      {t(lang, "othLocalizednumbertodaysaleslengthVentes").replace("{n}", localizedNumber(new Set(todaySales.map((s) => s.transactionId || s.id)).size))} — <span className="font-bold" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>{fcfa(todayTotal)}</span>
                     </p>
                   </div>
                 )}
