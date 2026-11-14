@@ -6,3 +6,12 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* Mode sombre : les gris Tailwind sont trop pâles sur fond foncé */
+html[data-theme="dark"] .text-gray-400,
+html[data-theme="dark"] .text-gray-500,
+html[data-theme="dark"] .text-gray-600,
+html[data-theme="dark"] .text-slate-400,
+html[data-theme="dark"] .text-slate-500 { color: #c4c7da; }
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder { color: #9a9db3; opacity: 1; }

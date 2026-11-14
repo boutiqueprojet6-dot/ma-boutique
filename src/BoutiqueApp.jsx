@@ -7400,7 +7400,7 @@ function setStoredThemeMode(mode) {
 // Palette partagée entre ShopApp et AuthScreen, pour une transition visuelle cohérente.
 function themePalette(darkMode) {
   return darkMode
-    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
+    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#c4c7da", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
     : { bg: "#F6F7FB", card: "white", text: "#0f172a", muted: "#6B6D85", input: "#F6F7FB", nav: "white", border: "#E4E5F0" };
 }
 function sortByDate(list) {
@@ -7606,7 +7606,7 @@ function SavedBadge({ saving, isOnline, pendingCount, lang }) {
     label = tx(lang, "syncSaving");
   }
   return (
-    <span className="text-[10px] flex items-center gap-1" style={{ color: color === GREEN ? "#8fae9a" : color }}>
+    <span className="text-[10px] flex items-center gap-1" style={{ color: color === GREEN ? "#9fdcb4" : color }}>
       <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: color }} />
       {label}
     </span>
@@ -9979,6 +9979,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [weeklySummaryEnabled, setWeeklySummaryEnabled] = useState(true);
   const [weeklySummaryDay, setWeeklySummaryDay] = useState(1);
   const [darkMode, setDarkMode] = useState(getInitialDarkPreference);
+  useEffect(() => { try { document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light"); } catch (e) {} }, [darkMode]);
   // "system" (suit le téléphone), "light" ou "dark" (choix figé par l'utilisateur).
   const [themeMode, setThemeMode] = useState(getStoredThemeMode);
   const [systemPrefersDark, setSystemPrefersDark] = useState(() => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : false));
@@ -16196,7 +16197,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   };
   const isActive = expiresAt && new Date(expiresAt) > new Date();
   const T = darkMode
-    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a", accent: "#8B85F2" }
+    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#c4c7da", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a", accent: "#8B85F2" }
     : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb", accent: INDIGO };
   const todaySales = sales.filter((s) => dayKeyOf(s.date) === todayKey());
   const todayTotal = todaySales.reduce((sum, s) => sum + s.total, 0);
@@ -17247,7 +17248,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <h3 className="font-bold text-sm">{tx(lang, "shareProductBtn")}</h3>
               <button onClick={() => setShareDialogProduct(null)}><X size={18} /></button>
             </div>
-            <p className="text-xs mb-4" style={{ color: darkMode ? "#9AA0B4" : "#6B6D85" }}>{shareDialogProduct.name}</p>
+            <p className="text-xs mb-4" style={{ color: darkMode ? "#c4c7da" : "#6B6D85" }}>{shareDialogProduct.name}</p>
             <label className="flex items-center gap-3 mb-3 cursor-pointer">
               <input type="checkbox" checked={shareIncludePhone} onChange={(e) => setShareIncludePhone(e.target.checked)} className="w-4 h-4" />
               <span className="text-sm">📞 {tx(lang, "shareShowPhone")} {shopPhone ? `(${shopPhone})` : ""}</span>
@@ -17258,7 +17259,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </label>
             {shareCardAskEachTime && (
               <div className="mb-5">
-                <p className="text-xs font-semibold mb-2" style={{ color: darkMode ? "#9AA0B4" : "#6B6D85" }}>{tx(lang, "shareCardStyle")}</p>
+                <p className="text-xs font-semibold mb-2" style={{ color: darkMode ? "#c4c7da" : "#6B6D85" }}>{tx(lang, "shareCardStyle")}</p>
                 <div className="flex flex-wrap gap-2">
                   {SHARE_CARD_STYLES.map((s) => (
                     <button
@@ -17643,8 +17644,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <span
                         className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
                         style={{
-                          color: salesVsYesterdayPct >= 0 ? "#16a34a" : "#dc2626",
-                          background: salesVsYesterdayPct >= 0 ? "#dcfce7" : "#fee2e2",
+                          color: darkMode ? (salesVsYesterdayPct >= 0 ? "#86efac" : "#fca5a5") : (salesVsYesterdayPct >= 0 ? "#16a34a" : "#dc2626"),
+                          background: darkMode ? (salesVsYesterdayPct >= 0 ? "rgba(34,197,94,0.16)" : "rgba(239,68,68,0.18)") : (salesVsYesterdayPct >= 0 ? "#dcfce7" : "#fee2e2"),
                         }}
                       >
                         {salesVsYesterdayPct >= 0 ? "▲" : "▼"} <span dir="ltr">{salesVsYesterdayText}</span> {tx(lang, "homeVsYesterday")}
@@ -23119,7 +23120,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     transition: "all 0.2s cubic-bezier(0.34,1.56,0.64,1)",
                   }}
                 >
-                  <span style={{ fontSize: moreActive ? 22 : 18, color: moreActive ? "white" : darkMode ? "#9295ab" : "#94a3b8" }}>⋯</span>
+                  <span style={{ fontSize: moreActive ? 22 : 18, color: moreActive ? "white" : darkMode ? "#c4c7da" : "#94a3b8" }}>⋯</span>
                 </div>
                 <span className="font-bold transition-all" style={{ fontSize: moreActive ? 10 : 9, color: moreActive ? "#64748b" : T.text, marginTop: moreActive ? 2 : 0 }}>
                   {t(lang, "navMore")}
