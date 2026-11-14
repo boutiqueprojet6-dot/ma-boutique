@@ -7582,7 +7582,7 @@ function SavedBadge({ saving, isOnline, pendingCount, lang }) {
     </span>
   );
 }
-function SearchBox({ value, onChange, placeholder, compact }) {
+function SearchBox({ value, onChange, placeholder, compact, darkMode }) {
   // compact : utilisé dans les barres d'outils (recherche + tri + vue). Pas de marge basse
   // (sinon la ligne devient plus haute et les boutons voisins se décalent vers le bas) et
   // même hauteur (h-10) que les boutons.
@@ -7594,6 +7594,7 @@ function SearchBox({ value, onChange, placeholder, compact }) {
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={compact ? "w-full border rounded-xl pl-9 pr-3 h-10 text-sm bg-white" : "w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white"}
+        style={darkMode ? { background: "#1f1f2c", color: "#eceef5", borderColor: "#2a2a3a" } : undefined}
       />
     </div>
   );
@@ -12491,7 +12492,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setCashClosures([]);
       setCashFund(10000);
       setLowStockThreshold(5);
-      setDarkMode(false);
+      // Thème : on garde le choix de l'utilisateur (clair/sombre/système) au lieu de forcer le clair —
+      // sinon le réglage affiché (ex. « Système ») ne correspondait plus à l'écran en démo.
+      setThemeMode(getStoredThemeMode());
       setShowBalls(true);
       setSoundsEnabled(true);
       setHapticsEnabled(true);
@@ -16157,8 +16160,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   };
   const isActive = expiresAt && new Date(expiresAt) > new Date();
   const T = darkMode
-    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a" }
-    : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb" };
+    ? { bg: "#0a0a14", card: "#16161f", text: "#eceef5", muted: "#a5a8c0", input: "#1f1f2c", nav: "#12121a", border: "#2a2a3a", accent: "#8B85F2" }
+    : { bg: "#ffffff", card: "white", text: "#0f172a", muted: "#64748b", input: "#f1f5f9", nav: "white", border: "#e5e7eb", accent: INDIGO };
   const todaySales = sales.filter((s) => dayKeyOf(s.date) === todayKey());
   const todayTotal = todaySales.reduce((sum, s) => sum + s.total, 0);
   const yesterdayKeyStr = dayKeyOf(new Date(Date.now() - 86400000));
@@ -17189,7 +17192,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 onClick={unlockAppWithBiometrics}
                 disabled={appLockBiometricBusy}
                 className="w-full mt-2.5 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
-                style={{ background: "transparent", color: INDIGO, border: `1px solid ${T.border}`, opacity: appLockBiometricBusy ? 0.6 : 1 }}
+                style={{ background: "transparent", color: T.accent, border: `1px solid ${T.border}`, opacity: appLockBiometricBusy ? 0.6 : 1 }}
               >
                 <Lock size={14} />
                 {appLockBiometricBusy ? t(lang, "wait") : t(lang, "biometricUnlockBtn")}
@@ -17526,20 +17529,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       <ZigzagStrip />
       </>
       )}
-      {error && <div className="mx-4 mt-3 text-xs px-3 py-2 rounded" style={{ background: "#fce8e0", color: CLAY }}>{error}</div>}
+      {/* Mode sombre : éclaircit les rouges/oranges/verts de texte trop sombres sur fond sombre (contraste WCAG ≥ 4.5). */}
+      {darkMode && <style>{'[style*="color: rgb(225, 29, 72)"]{color:#fb7185 !important}[style*="color: rgb(184, 86, 47)"]{color:#f29a76 !important}[style*="color: rgb(22, 163, 74)"]{color:#4ade80 !important}[style*="color: rgb(220, 38, 38)"]:not([style*="background"]){color:#f87171 !important}'}</style>}
+      {error && <div className="mx-4 mt-3 text-xs px-3 py-2 rounded" style={{ background: darkMode ? "#3a1f17" : "#fce8e0", color: darkMode ? "#f0a98a" : CLAY }}>{error}</div>}
       {isDemo && (
-        <div className="mx-4 mt-3 rounded-xl p-3" style={{ background: "#e5f0e8" }}>
-          <p className="text-xs font-semibold" style={{ color: GREEN }}>👀 {t(lang, "demoMode")}</p>
-          <p className="text-[11px] text-gray-600 mt-0.5">{tx(lang, "demoBannerDesc")}</p>
+        <div className="mx-4 mt-3 rounded-xl p-3" style={{ background: darkMode ? "#14281c" : "#e5f0e8" }}>
+          <p className="text-xs font-semibold" style={{ color: darkMode ? "#5fd08a" : GREEN }}>👀 {t(lang, "demoMode")}</p>
+          <p className="text-[11px] mt-0.5" style={{ color: darkMode ? "#b9c0d0" : "#4b5563" }}>{tx(lang, "demoBannerDesc")}</p>
         </div>
       )}
       {/* Période de grâce : l'abonnement payant a expiré mais reste actif quelques jours
           (SUBSCRIPTION_GRACE_DAYS). Rappel visible sur tous les onglets, réservé au
           propriétaire (un employé ne peut rien y faire). */}
       {subscriptionGraceUntil && !activeEmployee && (
-        <div className="mx-4 mt-3 rounded-xl px-3 py-2.5 flex items-center gap-2" style={{ background: "#fff4e0", border: "1px solid #f5c26b" }}>
-          <Clock size={16} style={{ color: "#b45309", flexShrink: 0 }} />
-          <p className="text-xs flex-1" style={{ color: "#92400e" }}>
+        <div className="mx-4 mt-3 rounded-xl px-3 py-2.5 flex items-center gap-2" style={{ background: darkMode ? "#3a2c10" : "#fff4e0", border: darkMode ? "1px solid #7a5a1c" : "1px solid #f5c26b" }}>
+          <Clock size={16} style={{ color: darkMode ? "#fbbf24" : "#b45309", flexShrink: 0 }} />
+          <p className="text-xs flex-1" style={{ color: darkMode ? "#fcd9a0" : "#92400e" }}>
             {tx(lang, "subscriptionGraceBanner")
               .replace("{date}", expiresAt ? fullDate(expiresAt) : "")
               .replace("{n}", String(Math.max(1, Math.ceil((subscriptionGraceUntil - Date.now()) / 86400000))))}
@@ -17783,7 +17788,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       window.open("https://wa.me/?text=" + encodeURIComponent(lines.join("\n")), "_blank");
                     }}
                     className="flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0 active:scale-95 transition-transform"
-                    style={{ background: "#16a34a", color: "white", border: "none" }}
+                    style={{ background: "#15803d", color: "white", border: "none" }}
                   >
                     <MessageSquare size={11} /> {tx(lang, "reorderShareBtn")}
                   </button>
@@ -18299,7 +18304,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {products.length > 0 && (
               <div className="flex items-center gap-2 mb-3">
-                <div className="flex-1"><SearchBox compact value={stockSearch} onChange={setStockSearch} placeholder={t(lang, "search")} /></div>
+                <div className="flex-1"><SearchBox compact value={stockSearch} onChange={setStockSearch} placeholder={t(lang, "search")} darkMode={darkMode} /></div>
                 {renderSortButton()}
               </div>
             )}
@@ -18716,7 +18721,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
                 <div className="flex items-center gap-2 mb-3">
                   <div className="flex-1">
-                    <SearchBox compact value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} />
+                    <SearchBox compact value={cartSearch} onChange={setCartSearch} placeholder={t(lang, "search")} darkMode={darkMode} />
                   </div>
                   <button
                     onClick={openBarcodeScanner}
@@ -19287,7 +19292,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </button>
               </div>
             )}
-            {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} />}
+            {unpaidDebts.length > 0 && <SearchBox value={debtsSearch} onChange={setDebtsSearch} placeholder={t(lang, "searchClient")} darkMode={darkMode} />}
             {/* Qui doit combien, tous crédits confondus : la liste ci-dessous montre une carte
                 par dette, donc un client avec quatre crédits n'avait son total nulle part.
                 Toucher un nom filtre la liste sur ce client ; retoucher l'enlève. */}
@@ -19732,7 +19737,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <p className="text-xs font-semibold mb-1" style={{ color: T.text }}>
                   {t(lang, "empLimitReached").replace("{n}", planInfo.maxEmployees).replace("{plan}", t(lang, planInfo.nameKey))}
                 </p>
-                <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="text-xs font-bold underline" style={{ color: INDIGO }}>
+                <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="text-xs font-bold underline" style={{ color: T.accent }}>
                   {t(lang, "planMenuLabel")}
                 </button>
               </div>
@@ -19751,7 +19756,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <>
                 <div className="flex items-center gap-2 mb-3">
                   <div className="flex-1">
-                    <SearchBox value={empSearch} onChange={setEmpSearch} placeholder={tx(lang, "empSearchPlaceholder")} compact />
+                    <SearchBox value={empSearch} onChange={setEmpSearch} placeholder={tx(lang, "empSearchPlaceholder")} compact darkMode={darkMode} />
                   </div>
                   <select
                     value={empSortBy}
@@ -19871,7 +19876,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               className="w-full flex items-center justify-between mt-6 mb-2"
             >
               <span className="text-xs font-bold" style={{ color: T.text }}>{t(lang, "empActionLogTitle")}</span>
-              <span className="text-[11px] font-semibold flex items-center gap-1" style={{ color: INDIGO }}>
+              <span className="text-[11px] font-semibold flex items-center gap-1" style={{ color: T.accent }}>
                 {showActionLog ? tx(lang, "empActionLogHide") : tx(lang, "empActionLogShow")}
                 {showActionLog ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
               </span>
@@ -19978,13 +19983,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       {editingGoalShopId === s.id ? (
                         <div className="flex items-center gap-2">
                           <input autoComplete="off" type="number" value={goalInput} onChange={(e) => setGoalInput(e.target.value)} className="flex-1 border rounded-lg px-2 py-1 text-xs" style={{ background: T.input, borderColor: T.border, color: T.text }} />
-                          <button onClick={() => saveSalesGoal(s.id, parseFloat(goalInput) || 0)} className="text-[11px] font-semibold" style={{ color: INDIGO }}>{t(lang, "empSave")}</button>
+                          <button onClick={() => saveSalesGoal(s.id, parseFloat(goalInput) || 0)} className="text-[11px] font-semibold" style={{ color: T.accent }}>{t(lang, "empSave")}</button>
                         </div>
                       ) : salesGoals[s.id] ? (
                         <div>
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-[10px]" style={{ color: T.muted }}>{t(lang, "salesGoalLabel")}</span>
-                            <button onClick={() => { setEditingGoalShopId(s.id); setGoalInput(String(salesGoals[s.id])); }} className="text-[10px] underline" style={{ color: INDIGO }}>{t(lang, "empEdit")}</button>
+                            <button onClick={() => { setEditingGoalShopId(s.id); setGoalInput(String(salesGoals[s.id])); }} className="text-[10px] underline" style={{ color: T.accent }}>{t(lang, "empEdit")}</button>
                           </div>
                           <div className="w-full rounded-full h-2" style={{ background: T.input }}>
                             <div className="h-2 rounded-full" style={{ width: `${Math.min(100, (stats.revenue / salesGoals[s.id]) * 100)}%`, background: stats.revenue >= salesGoals[s.id] ? "#16a34a" : INDIGO }} />
@@ -19992,7 +19997,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <p className="text-[10px] mt-1" style={{ color: T.muted }}>{fcfa(stats.revenue)} / {fcfa(salesGoals[s.id])}</p>
                         </div>
                       ) : (
-                        <button onClick={() => { setEditingGoalShopId(s.id); setGoalInput(""); }} className="text-[11px] font-semibold underline" style={{ color: INDIGO }}>{t(lang, "salesGoalSetBtn")}</button>
+                        <button onClick={() => { setEditingGoalShopId(s.id); setGoalInput(""); }} className="text-[11px] font-semibold underline" style={{ color: T.accent }}>{t(lang, "salesGoalSetBtn")}</button>
                       )}
                     </div>
                   )}
@@ -20350,7 +20355,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "history" && (
           <div className="space-y-2">
-            {historyRaw.length > 0 && <SearchBox value={historySearch} onChange={setHistorySearch} placeholder={t(lang, "searchProductClient")} />}
+            {historyRaw.length > 0 && <SearchBox value={historySearch} onChange={setHistorySearch} placeholder={t(lang, "searchProductClient")} darkMode={darkMode} />}
             {hasFeatureAccess("advancedHistory") ? (
               <div className="flex items-center gap-2">
                 <button onClick={() => setShowHistoryFilters(!showHistoryFilters)} className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-xl" style={{ background: historyFiltersActive ? INDIGO : T.input, color: historyFiltersActive ? "white" : T.text }}>
@@ -21005,7 +21010,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 onClick={unlockWithBiometrics}
                 disabled={biometricUnlockBusy}
                 className="w-full mt-2.5 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
-                style={{ background: "transparent", color: INDIGO, border: `1px solid ${T.border}`, opacity: biometricUnlockBusy ? 0.6 : 1 }}
+                style={{ background: "transparent", color: T.accent, border: `1px solid ${T.border}`, opacity: biometricUnlockBusy ? 0.6 : 1 }}
               >
                 <Lock size={14} />
                 {biometricUnlockBusy ? t(lang, "wait") : t(lang, "biometricUnlockBtn")}
@@ -21096,7 +21101,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <button
                     onClick={() => setEmpShiftSchedule(empShiftSchedule ? null : { mon: [], tue: [], wed: [], thu: [], fri: [], sat: [], sun: [] })}
                     className="text-[11px] font-semibold underline"
-                    style={{ color: INDIGO }}
+                    style={{ color: T.accent }}
                   >
                     {empShiftSchedule ? t(lang, "empShiftDisable") : t(lang, "empShiftEnable")}
                   </button>
@@ -21139,7 +21144,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <button
                           onClick={() => { const next = { ...empShiftSchedule }; next[dayKey] = [...(next[dayKey] || []), { from: "08:00", to: "18:00" }]; setEmpShiftSchedule(next); }}
                           className="text-[10px] font-semibold underline"
-                          style={{ color: INDIGO }}
+                          style={{ color: T.accent }}
                         >
                           + {t(lang, "empShiftAddSlot")}
                         </button>
@@ -21248,7 +21253,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {!qrInviteLoading && qrInviteError && (
               <div className="py-6">
                 <p className="text-xs" style={{ color: CLAY }}>{qrInviteError}</p>
-                <button onClick={() => generateEmployeeInvite(qrEmployee)} className="mt-3 text-xs font-semibold underline" style={{ color: INDIGO }}>
+                <button onClick={() => generateEmployeeInvite(qrEmployee)} className="mt-3 text-xs font-semibold underline" style={{ color: T.accent }}>
                   {t(lang, "empRetryInvite")}
                 </button>
               </div>
@@ -23045,7 +23050,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   className="font-bold transition-all"
                   style={{
                     fontSize: active ? 10 : 9,
-                    color: active ? navItem.grad[0] : T.text,
+                    color: active ? (darkMode ? "#b4bcff" : navItem.grad[0]) : T.text,
                     marginTop: active ? 2 : 0,
                   }}
                 >
