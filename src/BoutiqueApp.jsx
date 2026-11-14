@@ -6074,6 +6074,7 @@ EXTRA_UI.empSortName = { fr: "Nom", en: "Name", es: "Nombre", pt: "Nome", de: "N
 EXTRA_UI.empSortRole = { fr: "Rôle", en: "Role", es: "Rol", pt: "Função", de: "Rolle", it: "Ruolo", nl: "Rol", pl: "Rola", ru: "Роль", tr: "Rol", ar: "الدور", hi: "भूमिका", bn: "ভূমিকা", ur: "کردار", ta: "பங்கு", te: "పాత్ర", th: "บทบาท", zh: "角色", ja: "役割", ko: "역할", id: "Peran", vi: "Vai trò", tl: "Tungkulin", sw: "Jukumu", ha: "Matsayi", yo: "Ipò", zu: "Indima", am: "ሚና", bm: "Jɔyɔrɔ", wo: "Wareef" };
 EXTRA_UI.empSortSales = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empNotInPlan = { fr: "Le palier {plan} n'inclut pas de personnel. Passez à un palier supérieur pour en ajouter.", en: "The {plan} plan doesn't include staff. Upgrade to add staff members.", es: "El plan {plan} no incluye personal. Cambia a un plan superior para añadirlo.", pt: "O plano {plan} não inclui equipe. Mude para um plano superior para adicionar.", de: "Der Tarif {plan} enthält kein Personal. Wechsle zu einem höheren Tarif, um Personal hinzuzufügen.", it: "Il piano {plan} non include personale. Passa a un piano superiore per aggiungerlo.", nl: "Het {plan}-abonnement bevat geen personeel. Upgrade om personeel toe te voegen.", pl: "Plan {plan} nie obejmuje personelu. Przejdź na wyższy plan, aby go dodać.", ru: "Тариф {plan} не включает сотрудников. Перейдите на более высокий тариф, чтобы добавить их.", tr: "{plan} paketi personel içermez. Personel eklemek için üst pakete geçin.", ar: "باقة {plan} لا تتضمن موظفين. انتقل إلى باقة أعلى لإضافتهم.", hi: "{plan} प्लान में स्टाफ़ शामिल नहीं है। स्टाफ़ जोड़ने के लिए ऊँचा प्लान लें।", bn: "{plan} প্ল্যানে কর্মী অন্তর্ভুক্ত নেই। কর্মী যোগ করতে উচ্চতর প্ল্যান নিন।", ur: "{plan} پلان میں عملہ شامل نہیں ہے۔ عملہ شامل کرنے کے لیے اعلیٰ پلان لیں۔", ta: "{plan} திட்டத்தில் பணியாளர்கள் இல்லை. பணியாளர்களைச் சேர்க்க உயர் திட்டத்திற்கு மாறவும்.", te: "{plan} ప్లాన్‌లో సిబ్బంది లేరు. సిబ్బందిని జోడించడానికి ఉన్నత ప్లాన్‌కు మారండి.", th: "แพ็กเกจ {plan} ไม่รวมพนักงาน อัปเกรดเพื่อเพิ่มพนักงาน", zh: "{plan} 套餐不包含员工。升级套餐即可添加员工。", ja: "{plan} プランにはスタッフが含まれません。追加するには上位プランに変更してください。", ko: "{plan} 요금제에는 직원이 포함되지 않습니다. 직원을 추가하려면 상위 요금제로 변경하세요.", id: "Paket {plan} tidak termasuk staf. Tingkatkan paket untuk menambah staf.", vi: "Gói {plan} không bao gồm nhân viên. Nâng cấp gói để thêm nhân viên.", tl: "Walang kasamang staff ang {plan} plan. Mag-upgrade para makapagdagdag ng staff.", sw: "Kifurushi cha {plan} hakijumuishi wafanyakazi. Pandisha kifurushi ili kuwaongeza.", ha: "Tsarin {plan} bai haɗa da ma'aikata ba. Haɓaka tsari don ƙara ma'aikata.", yo: "Ètò {plan} kò ní òṣìṣẹ́ nínú. Gòkè sí ètò tó ga jù láti fi òṣìṣẹ́ kún un.", zu: "Uhlelo lwe-{plan} alufaki abasebenzi. Thuthukisa uhlelo ukuze wengeze abasebenzi.", am: "የ{plan} ዕቅድ ሠራተኞችን አያካትትም። ሠራተኞችን ለመጨመር ወደ ከፍተኛ ዕቅድ ያሻሽሉ።", bm: "{plan} sira tɛ baarakɛlaw sɔn. Sira kɔrɔtɔlen ta walasa ka baarakɛlaw fara a kan.", wo: "Palier {plan} amul ay liggéeykat. Jëlal palier bu gënë kawe ngir yokk ay liggéeykat." };
+EXTRA_UI.debtMarkPaidBtn = { fr: "Marquer payé", en: "Mark as paid", es: "Marcar como pagado", pt: "Marcar como pago", de: "Als bezahlt markieren", it: "Segna come pagato", nl: "Markeer als betaald", pl: "Oznacz jako opłacone", ru: "Отметить оплаченным", tr: "Ödendi olarak işaretle", ar: "تحديد كمدفوع", hi: "भुगतान हुआ चिह्नित करें", bn: "পরিশোধিত চিহ্নিত করুন", ur: "ادا شدہ نشان لگائیں", ta: "செலுத்தியதாகக் குறி", te: "చెల్లించినట్లు గుర్తించు", th: "ทำเครื่องหมายว่าชำระแล้ว", zh: "标记为已还清", ja: "支払い済みにする", ko: "결제 완료로 표시", id: "Tandai lunas", vi: "Đánh dấu đã trả", tl: "Markahang bayad na", sw: "Weka kama imelipwa", ha: "Yi alama an biya", yo: "Sàmì sí ti sanwó", zu: "Maka njengokukhokhiwe", am: "እንደተከፈለ ምልክት አድርግ", bm: "A taamasiyɛn ko a sarala", wo: "Tegg ne fey nañu ko" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -19693,7 +19694,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         setPendingLockAction(() => openConfirm);
                         setShowLockPinModal(true);
                       }} className="flex items-center gap-1 text-xs font-bold px-3 py-2 rounded-xl text-white" style={{ background: GREEN }}>
-                        <Check size={14} /> {t(lang, "paidBtn")}
+                        <Check size={14} /> {tx(lang, "debtMarkPaidBtn")}
                       </button>
                     )}
                     {hasPermission("editDebts") && (
@@ -20543,6 +20544,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <button
             onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }}
             className="font-bold"
+            aria-label={amountsHidden ? t(lang, "unmaskCashFloatingBtn") : t(lang, "maskCashFloatingBtn")}
+            title={amountsHidden ? t(lang, "unmaskCashFloatingBtn") : t(lang, "maskCashFloatingBtn")}
             style={{
               position: "fixed",
               right: 16,
@@ -20554,20 +20557,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               // pour garder un vrai espace visible au-dessus de la barre dans tous les cas.
               bottom: "calc(112px + env(safe-area-inset-bottom, 0px))",
               zIndex: 9999,
+              // Bouton rond compact (icône seule) : la version avec texte cachait une partie des
+              // cartes « Vue d'ensemble » (ex. « Net ») de la Caisse. Le texte reste en
+              // aria-label / title pour l'accessibilité.
               display: "flex",
               alignItems: "center",
-              gap: 6,
-              padding: "10px 16px",
+              justifyContent: "center",
+              width: 48,
+              height: 48,
+              padding: 0,
               borderRadius: 999,
               background: amountsHidden ? INDIGO : (darkMode ? "#1f2937" : CHARCOAL),
               color: "white",
-              fontSize: 12.5,
               border: "none",
               boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
             }}
           >
-            <span style={{ fontSize: 14 }}>{amountsHidden ? "🙈" : "👁️"}</span>
-            {amountsHidden ? t(lang, "unmaskCashFloatingBtn") : t(lang, "maskCashFloatingBtn")}
+            <span style={{ fontSize: 20, lineHeight: 1 }}>{amountsHidden ? "🙈" : "👁️"}</span>
           </button>,
           document.body
         )}
