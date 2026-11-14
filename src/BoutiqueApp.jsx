@@ -5707,6 +5707,25 @@ const COUNTRY_CURRENCY = [
 ];
 // Indicatif téléphonique par pays (clé = id du pays ci-dessus). Utilisé pour
 // pré-remplir le numéro dès que le pays est choisi à l'inscription.
+// Indicatif deviné depuis le fuseau horaire du téléphone, quand le pays de la boutique
+// n'est pas encore renseigné (ex. mode démo, compte tout neuf).
+const TZ_DIAL_CODE = {
+  "Africa/Bamako": "+223", "Africa/Dakar": "+221", "Africa/Abidjan": "+225", "Africa/Ouagadougou": "+226",
+  "Africa/Niamey": "+227", "Africa/Conakry": "+224", "Africa/Lome": "+228", "Africa/Porto-Novo": "+229",
+  "Africa/Nouakchott": "+222", "Africa/Banjul": "+220", "Africa/Bissau": "+245", "Africa/Freetown": "+232",
+  "Africa/Monrovia": "+231", "Africa/Accra": "+233", "Africa/Lagos": "+234", "Africa/Douala": "+237",
+  "Africa/Libreville": "+241", "Africa/Brazzaville": "+242", "Africa/Kinshasa": "+243", "Africa/Lubumbashi": "+243",
+  "Africa/Ndjamena": "+235", "Africa/Bangui": "+236", "Africa/Malabo": "+240", "Africa/Casablanca": "+212",
+  "Africa/El_Aaiun": "+212", "Africa/Algiers": "+213", "Africa/Tunis": "+216", "Africa/Tripoli": "+218",
+  "Africa/Cairo": "+20", "Africa/Khartoum": "+249", "Africa/Addis_Ababa": "+251", "Africa/Nairobi": "+254",
+  "Africa/Kampala": "+256", "Africa/Dar_es_Salaam": "+255", "Africa/Kigali": "+250", "Africa/Bujumbura": "+257",
+  "Africa/Djibouti": "+253", "Africa/Mogadishu": "+252", "Africa/Johannesburg": "+27", "Africa/Maputo": "+258",
+  "Africa/Lusaka": "+260", "Africa/Harare": "+263", "Africa/Luanda": "+244", "Indian/Antananarivo": "+261",
+  "Indian/Comoro": "+269", "Indian/Mauritius": "+230", "Atlantic/Cape_Verde": "+238", "Europe/Paris": "+33",
+  "Europe/Brussels": "+32", "Europe/Zurich": "+41", "Europe/London": "+44", "Europe/Madrid": "+34",
+  "Europe/Rome": "+39", "Europe/Berlin": "+49", "America/Montreal": "+1", "America/Toronto": "+1",
+  "America/New_York": "+1", "Asia/Dubai": "+971", "Asia/Riyadh": "+966",
+};
 const COUNTRY_DIAL_CODE = {
   "Afghanistan": "+93", "Afrique du Sud": "+27", "Albanie": "+355", "Algérie": "+213", "Allemagne": "+49",
   "Andorre": "+376", "Angola": "+244", "Antigua-et-Barbuda": "+1268", "Arabie saoudite": "+966", "Argentine": "+54",
@@ -6186,6 +6205,9 @@ EXTRA_UI.statsDeadStockHint = { fr: "Produits en stock sans aucune vente depuis 
 EXTRA_UI.statsTopCustomersTitle = { fr: "Meilleurs clients", en: "Best customers", am: "ምርጥ ደንበኞች", ar: "أفضل الزبائن", bm: "Sannikɛla ɲumanw", bn: "সেরা গ্রাহক", de: "Beste Kunden", es: "Mejores clientes", ha: "Mafi kyawun abokan ciniki", hi: "सबसे अच्छे ग्राहक", id: "Pelanggan terbaik", it: "Clienti migliori", nl: "Beste klanten", ja: "上位のお客様", ko: "우수 고객", pl: "Najlepsi klienci", pt: "Melhores clientes", ru: "Лучшие клиенты", sw: "Wateja bora", ta: "சிறந்த வாடிக்கையாளர்கள்", te: "ఉత్తమ కస్టమర్లు", th: "ลูกค้าที่ดีที่สุด", tl: "Pinakamahusay na mga customer", tr: "En iyi müşteriler", ur: "بہترین گاہک", vi: "Khách hàng tốt nhất", wo: "Kiliyaan yi gën", yo: "Àwọn oníbàárà tó dára jù", zh: "最佳顾客", zu: "Amakhasimende ahamba phambili" };
 EXTRA_UI.statsPurchases = { fr: "{n} achat(s)", en: "{n} purchase(s)", am: "{n} ግዢ", ar: "{n} عملية شراء", bm: "Sanni {n}", bn: "{n} বার কেনা", de: "{n} Einkauf/Einkäufe", es: "{n} compra(s)", ha: "Sayayya {n}", hi: "{n} खरीद", id: "{n} pembelian", it: "{n} acquisto/i", nl: "{n} aankoop/aankopen", ja: "購入 {n} 回", ko: "구매 {n}회", pl: "Zakupy: {n}", pt: "{n} compra(s)", ru: "Покупок: {n}", sw: "Manunuzi {n}", ta: "{n} வாங்குதல்", te: "{n} కొనుగోళ్లు", th: "ซื้อ {n} ครั้ง", tl: "{n} pagbili", tr: "{n} alışveriş", ur: "{n} خریداری", vi: "{n} lần mua", wo: "{n} jënd", yo: "Ìrajà {n}", zh: "购买 {n} 次", zu: "Ukuthenga okungu-{n}" };
 EXTRA_UI.homeVsYesterday = { fr: "vs hier", en: "vs yesterday", am: "ከትናንት ጋር", ar: "مقارنةً بالأمس", bm: "ka sanga kunu ma", bn: "গতকালের তুলনায়", de: "ggü. gestern", es: "vs ayer", ha: "da jiya", hi: "कल की तुलना में", id: "vs kemarin", it: "vs ieri", nl: "t.o.v. gisteren", ja: "前日比", ko: "어제 대비", pl: "wzgl. wczoraj", pt: "vs ontem", ru: "ко вчера", sw: "dhidi ya jana", ta: "நேற்றுடன் ஒப்பிட", te: "నిన్నటితో పోలిస్తే", th: "เทียบกับเมื่อวาน", tl: "vs kahapon", tr: "düne göre", ur: "کل کے مقابلے میں", vi: "so với hôm qua", wo: "ak démb", yo: "sí àná", zh: "较昨日", zu: "uma kuqhathaniswa nayizolo" };
+EXTRA_UI.shareSoldBy = { fr: "Vendu par {name}", en: "Sold by {name}", am: "ሻጭ፦ {name}", ar: "يبيعه {name}", bm: "{name} de b'a feere", bn: "বিক্রেতা: {name}", de: "Verkauft von {name}", es: "Vendido por {name}", ha: "{name} ne ke sayarwa", hi: "विक्रेता: {name}", id: "Dijual oleh {name}", it: "Venduto da {name}", nl: "Verkocht door {name}", ja: "販売：{name}", ko: "판매처: {name}", pl: "Sprzedawca: {name}", pt: "Vendido por {name}", ru: "Продавец: {name}", sw: "Inauzwa na {name}", ta: "விற்பவர்: {name}", te: "విక్రేత: {name}", th: "จำหน่ายโดย {name}", tl: "Ibinebenta ng {name}", tr: "Satıcı: {name}", ur: "فروخت کنندہ: {name}", vi: "Bán bởi {name}", wo: "{name} moo koy jaay", yo: "{name} ló ń tà á", zh: "销售方：{name}", zu: "Kuthengiswa ngu-{name}" };
+EXTRA_UI.shareAvailQty = { fr: "{n} disponible(s)", en: "{n} available", am: "{n} ይገኛል", ar: "{n} متوفر", bm: "{n} bɛ yen", bn: "{n}টি পাওয়া যাচ্ছে", de: "{n} verfügbar", es: "{n} disponible(s)", ha: "{n} akwai", hi: "{n} उपलब्ध", id: "{n} tersedia", it: "{n} disponibile/i", nl: "{n} beschikbaar", ja: "在庫 {n}", ko: "{n}개 재고", pl: "Dostępne: {n}", pt: "{n} disponível(is)", ru: "В наличии: {n}", sw: "{n} zinapatikana", ta: "{n} கிடைக்கிறது", te: "{n} అందుబాటులో", th: "มี {n} ชิ้น", tl: "{n} available", tr: "{n} adet mevcut", ur: "{n} دستیاب", vi: "Còn {n}", wo: "{n} am na", yo: "{n} wà", zh: "有货 {n} 件", zu: "{n} ezitholakalayo" };
+EXTRA_UI.shareAtShop = { fr: "chez {name}", en: "at {name}", am: "በ{name}", ar: "لدى {name}", bm: "{name} fɛ", bn: "{name}-এ", de: "bei {name}", es: "en {name}", ha: "a {name}", hi: "{name} पर", id: "di {name}", it: "da {name}", nl: "bij {name}", ja: "{name}にて", ko: "{name}에서", pl: "w {name}", pt: "em {name}", ru: "в {name}", sw: "kwa {name}", ta: "{name} இல்", te: "{name} వద్ద", th: "ที่ {name}", tl: "sa {name}", tr: "{name} mağazasında", ur: "{name} پر", vi: "tại {name}", wo: "ca {name}", yo: "ní {name}", zh: "于 {name}", zu: "ku-{name}" };
 EXTRA_UI.homeTopToday = { fr: "Top produits du jour", en: "Top products today", am: "የዛሬ ምርጥ ምርቶች", ar: "أفضل منتجات اليوم", bm: "Bi fɛn feerelenw ɲɛmɔgɔw", bn: "আজকের সেরা পণ্য", de: "Top-Produkte des Tages", es: "Top productos del día", ha: "Manyan kayayyakin yau", hi: "आज के शीर्ष उत्पाद", id: "Produk teratas hari ini", it: "Top prodotti del giorno", nl: "Topproducten van vandaag", ja: "本日の人気商品", ko: "오늘의 인기 상품", pl: "Najlepsze produkty dnia", pt: "Top produtos do dia", ru: "Топ товаров за день", sw: "Bidhaa bora za leo", ta: "இன்றைய முன்னணி பொருட்கள்", te: "ఈ రోజు అగ్ర ఉత్పత్తులు", th: "สินค้าขายดีวันนี้", tl: "Top na produkto ngayong araw", tr: "Günün en çok satanları", ur: "آج کی سرفہرست مصنوعات", vi: "Sản phẩm bán chạy hôm nay", wo: "Marsandiis yi gëna jar tey", yo: "Àwọn ọjà tó ga jù lónìí", zh: "今日热销商品", zu: "Imikhiqizo ehamba phambili namuhla" };
 EXTRA_UI.homeLast7 = { fr: "7 derniers jours", en: "Last 7 days", am: "ያለፉት 7 ቀናት", ar: "آخر 7 أيام", bm: "Tile 7 tɛmɛnenw", bn: "গত ৭ দিন", de: "Letzte 7 Tage", es: "Últimos 7 días", ha: "Kwanaki 7 da suka wuce", hi: "पिछले 7 दिन", id: "7 hari terakhir", it: "Ultimi 7 giorni", nl: "Laatste 7 dagen", ja: "過去7日間", ko: "최근 7일", pl: "Ostatnie 7 dni", pt: "Últimos 7 dias", ru: "Последние 7 дней", sw: "Siku 7 zilizopita", ta: "கடந்த 7 நாட்கள்", te: "గత 7 రోజులు", th: "7 วันที่ผ่านมา", tl: "Nakaraang 7 araw", tr: "Son 7 gün", ur: "پچھلے 7 دن", vi: "7 ngày qua", wo: "7 fan yi weesu", yo: "Ọjọ́ 7 sẹ́yìn", zh: "最近 7 天", zu: "Izinsuku ezingu-7 ezedlule" };
 EXTRA_UI.demoBannerDesc = { fr: "Explorez librement : rien n'est réellement enregistré.", en: "Explore freely: nothing is actually saved.", am: "በነጻነት ያስሱ፦ ምንም ነገር በእውነት አይቀመጥም።", ar: "استكشفوا بحرية: لا شيء يُحفظ فعليًا.", bm: "Aw ye a lajɛ hɔrɔnya la: foyi tɛ mara tiɲɛ na.", bn: "নির্দ্বিধায় ঘুরে দেখুন: আসলে কিছুই সংরক্ষিত হয় না।", de: "Erkunden Sie frei: Es wird nichts wirklich gespeichert.", es: "Explore libremente: nada se guarda realmente.", ha: "Ku bincika cikin 'yanci: babu abin da ake adanawa da gaske.", hi: "खुलकर देखें: असल में कुछ भी सहेजा नहीं जाता।", id: "Jelajahi dengan bebas: tidak ada yang benar-benar disimpan.", it: "Esplori liberamente: nulla viene realmente salvato.", nl: "Verken vrij: er wordt niets echt opgeslagen.", ja: "ご自由にお試しください。実際には何も保存されません。", ko: "자유롭게 둘러보세요. 실제로는 아무것도 저장되지 않습니다.", pl: "Proszę swobodnie zwiedzać: nic nie jest naprawdę zapisywane.", pt: "Explore livremente: nada é realmente guardado.", ru: "Изучайте свободно: на самом деле ничего не сохраняется.", sw: "Chunguza kwa uhuru: hakuna kinachohifadhiwa kihalisi.", ta: "தாராளமாகப் பாருங்கள்: உண்மையில் எதுவும் சேமிக்கப்படாது.", te: "స్వేచ్ఛగా పరిశీలించండి: నిజానికి ఏదీ సేవ్ కాదు.", th: "สำรวจได้อย่างอิสระ: ไม่มีการบันทึกข้อมูลจริง", tl: "Malayang mag-explore: walang talagang nase-save.", tr: "Serbestçe keşfedin: hiçbir şey gerçekten kaydedilmez.", ur: "آزادی سے دیکھیں: کچھ بھی حقیقت میں محفوظ نہیں ہوتا۔", vi: "Hãy khám phá thoải mái: không có gì thực sự được lưu.", wo: "Seetleen ci ndimbal: dara duñu ko denc dëgg.", yo: "Ẹ ṣàwárí láìsí ìdíwọ́: kò sí ohun tí a ń fipamọ́ ní tòótọ́.", zh: "请随意体验：不会真正保存任何内容。", zu: "Hlola ngokukhululeka: akukho okulondolozwa ngempela." };
@@ -10062,6 +10084,18 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [currency, setCurrency] = useState("XOF");
   const [shopCountry, setShopCountry] = useState(""); // pays du compte (pour le format de date)
   const [shopPhone, setShopPhone] = useState("");
+  // Indicatif du boutiquier lui-même : pays de la boutique, sinon indicatif de son propre
+  // numéro, sinon fuseau horaire du téléphone. Sert à pré-remplir (modifiable) le numéro client.
+  const ownDialCode = (() => {
+    if (shopCountry && COUNTRY_DIAL_CODE[shopCountry]) return COUNTRY_DIAL_CODE[shopCountry];
+    const ph = (shopPhone || "").replace(/[^\d+]/g, "");
+    if (ph.startsWith("+")) {
+      const codes = new Set(Object.values(COUNTRY_DIAL_CODE));
+      for (let l = 5; l >= 2; l--) { if (codes.has(ph.slice(0, l))) return ph.slice(0, l); }
+    }
+    try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; if (TZ_DIAL_CODE[tz]) return TZ_DIAL_CODE[tz]; } catch (e) {}
+    return "";
+  })();
   // Style choisi pour l'image de partage produit (fond/couleurs), et si on
   // doit re-proposer le choix avant chaque envoi ou garder ce style partout.
   const [shareCardStyleId, setShareCardStyleId] = useState("midnight");
@@ -10138,6 +10172,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const normalizePhoneForWhatsApp = (raw) => {
     let digits = (raw || "").replace(/[^\d]/g, "");
     if (!digits) return "";
+    // Indicatif seul (pré-rempli, rien d'autre tapé) : ce n'est pas un numéro.
+    const ownDigits = (ownDialCode || "").replace(/\D/g, "");
+    if (ownDigits && digits === ownDigits) return "";
     const dial = COUNTRY_DIAL_CODE[shopCountry];
     const nationalLen = COUNTRY_PHONE_DIGITS[shopCountry];
     if (dial && nationalLen) {
@@ -13527,7 +13564,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ctx.fillText(line, cardX, infoY);
         infoY += 55;
       };
-      if (shopName) drawInfoLine(`Vendu par ${shopName}`);
+      if (shopName) drawInfoLine(tx(lang, "shareSoldBy").replace("{name}", shopName));
       // Description du produit (optionnelle) : affichée juste après le nom de la
       // boutique, et TOUJOURS au-dessus du bandeau du bas (liens de l'application),
       // qui reste inchangé. On limite à 2 lignes avec retour à la ligne automatique
@@ -13598,7 +13635,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ctx.textAlign = "right";
         const rightX = W - 60;
         const lines = [];
-        if (includeQty) lines.push({ text: `📦 ${p.quantity ?? 0} disponible(s)`, color: "#fbbf24" });
+        if (includeQty) lines.push({ text: `📦 ${tx(lang, "shareAvailQty").replace("{n}", localizedNumber(p.quantity ?? 0))}`, color: "#fbbf24" });
         if (includePhone && shopPhone) lines.push({ text: `📞 ${shopPhone}`, color: "#ffffff" });
         const lineH = 46;
         let ry = bandY + bandH / 2 - ((lines.length - 1) * lineH) / 2;
@@ -13618,7 +13655,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         const file = new File([blob], `${safeName}.png`, { type: "image/png" });
         // La description (si renseignée) apparaît d'abord, et le lien de l'application
         // reste ensuite en dernier, comme c'était déjà le cas.
-        const shareText = `${p.name} — ${fcfa(p.price)}${shopName ? ` chez ${shopName}` : ""}${p.description ? `\n${p.description}` : ""}\n📲 ${APP_SHARE_URL}`;
+        const shareText = `${p.name} — ${fcfa(p.price)}${shopName ? ` ${tx(lang, "shareAtShop").replace("{name}", shopName)}` : ""}${p.description ? `\n${p.description}` : ""}\n📲 ${APP_SHARE_URL}`;
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
             // Le lien est déjà à la fin de shareText : on ne le remet pas dans "url",
@@ -14393,7 +14430,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // Le champ téléphone du client est préempli avec l'indicatif du pays du boutiquier
     // (boutiquier et client sont presque toujours dans le même pays) — ça évite de le
     // retaper à chaque vente ; reste entièrement modifiable, y compris pour le supprimer.
-    const prefillDial = shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : "";
+    const prefillDial = ownDialCode ? ownDialCode + " " : "";
     const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: defaultPaymentMethod || "cash", customer: "", phone: prefillDial, received: "" };
     const next = [...draftCarts, newCart];
     saveAll({ draftCarts: next, activeCartId: newCart.id });
@@ -19128,37 +19165,45 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         // par erreur. On continue de stocker le numéro COMPLET (indicatif inclus)
                         // dans activeCart.phone, pour ne rien changer au reste (reçus, dettes,
                         // normalizePhoneForWhatsApp) qui attendent déjà ce format.
-                        const dialCode = shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] : "";
                         const phoneRaw = activeCart.phone || "";
-                        const localPart = dialCode && phoneRaw.startsWith(dialCode) ? phoneRaw.slice(dialCode.length).replace(/^\s+/, "") : phoneRaw;
-                        if (!dialCode) {
-                          return (
-                            <input
-                              type="tel"
-                              autoComplete="off"
-                              value={phoneRaw}
-                              onChange={(e) => updateCartMeta(activeCart.id, "phone", e.target.value)}
-                              placeholder={tx(lang, "receiptPhoneLabel")}
-                              className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5"
-                              style={{ background: T.input, color: T.text, borderColor: T.border }}
-                            />
-                          );
-                        }
+                        const m = phoneRaw.match(/^\s*(\+\d{1,4})\s*(.*)$/);
+                        const code = m ? m[1] : (activeCart.phoneCode != null ? activeCart.phoneCode : ownDialCode);
+                        const localPart = m ? m[2] : phoneRaw;
+                        const savePhone = (rawCode, rawLocal) => {
+                          const digits = (rawCode || "").replace(/\D/g, "").slice(0, 4);
+                          const c2 = digits ? "+" + digits : "";
+                          const l2 = rawLocal || "";
+                          saveAll({ draftCarts: draftCarts.map((c) => (c.id === activeCart.id ? { ...c, phoneCode: c2, phone: l2.trim() ? (c2 ? `${c2} ${l2}` : l2) : "" } : c)) });
+                        };
                         return (
-                          <div className="flex items-stretch mt-1.5 border rounded-xl overflow-hidden" style={{ borderColor: T.border }}>
-                            <span className="flex items-center px-3 text-sm font-bold shrink-0" style={{ background: darkMode ? "rgba(255,255,255,0.06)" : "#eef0f6", color: T.text, borderRight: `1px solid ${T.border}` }}>
-                              {dialCode}
-                            </span>
+                          <>
+                          <label className="text-xs font-semibold block mt-3" style={{ color: T.muted }}>{tx(lang, "receiptPhoneLabel")}</label>
+                          <div className="flex items-stretch gap-2 mt-1.5">
                             <input
                               type="tel"
+                              inputMode="tel"
+                              autoComplete="off"
+                              aria-label="+"
+                              value={code}
+                              onChange={(e) => savePhone(e.target.value, localPart)}
+                              placeholder="+"
+                              className="shrink-0 border rounded-xl px-2 py-2.5 text-sm font-bold text-center outline-none focus:ring-2 focus:ring-indigo-400"
+                              style={{ width: "4.8rem", background: darkMode ? "rgba(255,255,255,0.06)" : "#eef0f6", color: T.text, borderColor: T.border }}
+                              dir="ltr"
+                            />
+                            <input
+                              type="tel"
+                              inputMode="tel"
                               autoComplete="off"
                               value={localPart}
-                              onChange={(e) => updateCartMeta(activeCart.id, "phone", `${dialCode} ${e.target.value}`.replace(/\s+$/, ""))}
-                              placeholder={tx(lang, "receiptPhoneLabel")}
-                              className="flex-1 min-w-0 px-3 py-2.5 text-sm"
-                              style={{ background: T.input, color: T.text, border: "none" }}
+                              onChange={(e) => savePhone(code, e.target.value)}
+                              placeholder="00 00 00 00"
+                              className="flex-1 min-w-0 border rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-400"
+                              style={{ background: T.input, color: T.text, borderColor: T.border }}
+                              dir="ltr"
                             />
                           </div>
+                          </>
                         );
                       })()}
                       {activeCart.payment === "credit" && activeCart.customer.trim() && (() => {
@@ -22046,7 +22091,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <div className="rounded-xl flex items-center justify-center mb-3" style={{ position: "relative", width: "100%", aspectRatio: "1 / 1", background: "rgba(0,0,0,0.25)", fontSize: 40, overflow: "hidden" }}>📦</div>
                     <div className="text-white font-bold text-sm" style={{ position: "relative" }}>{tx(lang, "shareCardSamplePname")}</div>
                     <div className="font-bold text-base mb-2" style={{ position: "relative", background: "linear-gradient(90deg,#34d399,#6ee7b7)", WebkitBackgroundClip: "text", color: "transparent" }}>{tx(lang, "shareCardSamplePrice")}</div>
-                    {shopName && <div className="text-[11px] mb-3" style={{ position: "relative", color: "rgba(255,255,255,0.72)" }}>Vendu par {shopName}</div>}
+                    {shopName && <div className="text-[11px] mb-3" style={{ position: "relative", color: "rgba(255,255,255,0.72)" }}>{tx(lang, "shareSoldBy").replace("{name}", shopName)}</div>}
                     <div className="rounded-lg p-2 flex items-center justify-between gap-2" style={{ position: "relative", background: "rgba(255,255,255,0.08)" }}>
                       <div className="flex items-center gap-2">
                         <img
@@ -22060,7 +22105,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         </div>
                       </div>
                       <div className="text-right text-[9px] font-bold leading-tight" style={{ color: "#fbbf24" }}>
-                        📦 12 disponible(s)
+                        📦 {tx(lang, "shareAvailQty").replace("{n}", localizedNumber(12))}
                         {shopPhone && <><br /><span style={{ color: "#fff" }}>📞 {shopPhone}</span></>}
                       </div>
                     </div>
@@ -22972,7 +23017,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {!normalizePhoneForWhatsApp(pendingReceipt.phone) && !receiptAskingPhone && (
               <button
-                onClick={() => setReceiptAskingPhone(true)}
+                onClick={() => { setReceiptAskingPhone(true); if (!receiptPhoneDraft && ownDialCode) setReceiptPhoneDraft(ownDialCode + " "); }}
                 className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
                 style={{ background: "#25D366" }}
               >
