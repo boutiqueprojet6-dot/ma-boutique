@@ -19496,7 +19496,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div className="grid grid-cols-2 gap-2">
                 {statsView.kpis.map((k) => (
                   <div key={k.id} className="rounded-2xl p-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                    <p className="text-[10px] font-semibold" style={{ color: T.muted, lineHeight: 1.25 }}>{k.label}</p>
+                    <p className="text-[11px] font-bold" style={{ color: darkMode ? "#e2e4ee" : T.muted, lineHeight: 1.25 }}>{k.label}</p>
                     <p
                       onClick={() => { if (k.money && amountsHidden) setShowLockPinModal(true); }}
                       className="font-black tracking-tight mt-1"
@@ -19507,7 +19507,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {k.missing ? (
                       <p className="text-[9px] mt-1" style={{ color: T.muted, lineHeight: 1.3 }}>{tx(lang, "cashProfitNoCostPeriod")}</p>
                     ) : k.delta !== null && !(k.money && amountsHidden) ? (
-                      <span dir="ltr" className="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded-full mt-1.5" style={{ color: k.delta >= 0 ? "#16a34a" : "#dc2626", background: k.delta >= 0 ? (darkMode ? "rgba(22,163,74,0.18)" : "#dcfce7") : (darkMode ? "rgba(220,38,38,0.18)" : "#fee2e2") }}>
+                      <span dir="ltr" className="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded-full mt-1.5" style={{ color: k.delta >= 0 ? (darkMode ? "#4ade80" : "#16a34a") : (darkMode ? "#f87171" : "#dc2626"), background: k.delta >= 0 ? (darkMode ? "rgba(22,163,74,0.18)" : "#dcfce7") : (darkMode ? "rgba(220,38,38,0.18)" : "#fee2e2") }}>
                         {k.delta >= 0 ? "▲" : "▼"} {localizedNumber(Math.abs(k.delta))}%
                       </span>
                     ) : null}
@@ -19533,8 +19533,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={darkMode ? "rgba(255,255,255,0.1)" : "#eee"} />
-                    <XAxis dataKey="date" tick={{ fontSize: 10, fill: T.muted }} axisLine={{ stroke: T.border }} tickLine={false} minTickGap={24} />
-                    <YAxis tick={{ fontSize: 10, fill: T.muted }} axisLine={false} tickLine={false} width={42} tickFormatter={(v) => compactLocalizedNumber(v)} />
+                    <XAxis dataKey="date" tick={{ fontSize: 10, fill: darkMode ? "#d6d8e4" : T.muted }} axisLine={{ stroke: T.border }} tickLine={false} minTickGap={24} />
+                    <YAxis tick={{ fontSize: 10, fill: darkMode ? "#d6d8e4" : T.muted }} axisLine={false} tickLine={false} width={42} tickFormatter={(v) => compactLocalizedNumber(v)} />
                     <Tooltip formatter={(v) => [fcfa(v), tx(lang, "statsKpiRevenue")]} contentStyle={{ background: T.card, border: `1px solid ${T.border}`, color: T.text, fontSize: 12, borderRadius: 10 }} labelStyle={{ color: T.text }} itemStyle={{ color: T.text }} />
                     <Area type="monotone" dataKey="total" stroke={darkMode ? "#7fb2ff" : "#2563eb"} strokeWidth={2.5} fill="url(#statsAreaFill)" dot={statsView.series.length <= 7 ? { r: 3, fill: darkMode ? "#7fb2ff" : "#2563eb" } : false} />
                   </AreaChart>
@@ -23122,7 +23122,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 >
                   <span style={{ fontSize: moreActive ? 22 : 18, color: moreActive ? "white" : darkMode ? "#c4c7da" : "#94a3b8" }}>⋯</span>
                 </div>
-                <span className="font-bold transition-all" style={{ fontSize: moreActive ? 10 : 9, color: moreActive ? "#64748b" : T.text, marginTop: moreActive ? 2 : 0 }}>
+                <span className="font-bold transition-all" style={{ fontSize: moreActive ? 10 : 9, color: moreActive ? (darkMode ? "#b4bcff" : "#64748b") : T.text, marginTop: moreActive ? 2 : 0 }}>
                   {t(lang, "navMore")}
                 </span>
               </button>
