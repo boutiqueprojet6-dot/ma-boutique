@@ -18368,17 +18368,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                   <div className="flex-shrink-0 text-center">
                     {frozen ? (
-                      <span className="text-sm font-extrabold w-10 text-center block" style={{ color: T.muted }}>{localizedQty(p.quantity)}</span>
+                      <span className="text-sm font-extrabold min-w-[2.5rem] text-center block whitespace-nowrap" style={{ color: T.muted }}>{localizedQty(p.quantity)}</span>
                     ) : hasPermission("editStock") ? (
                       <div className="flex items-center gap-2">
                         <button onClick={() => adjustStock(p.id, -1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
-                        <span className="text-sm font-extrabold w-6 text-center" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
+                        <span className="text-sm font-extrabold min-w-[1.5rem] px-0.5 text-center whitespace-nowrap" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
                         <button onClick={() => openRestock(p.id)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Plus size={14} /></button>
                       </div>
                     ) : (
                       // Lecture seule (permission "editStock" absente) : la quantité reste visible,
                       // utile en boutique pour répondre à un client, mais aucune action de modification.
-                      <span className="text-sm font-extrabold w-10 text-center block" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
+                      <span className="text-sm font-extrabold min-w-[2.5rem] text-center block whitespace-nowrap" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
                     )}
                     {/* Sans ce repère, ce gros chiffre (nombre de PAQUETS/CARTONS complets) pouvait
                         être confondu avec le total d'unités individuelles affiché juste à gauche
