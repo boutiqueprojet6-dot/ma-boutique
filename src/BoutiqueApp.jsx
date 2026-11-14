@@ -8721,7 +8721,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           return;
         }
         if (!res || res.error || !res.token || !res.employee) {
-          setEmpScanError(t(lang, "empScanInvalidCode"));
+          setEmpScanError(res && res.error === "too_many_attempts" ? tx(lang, "pinTooManyAttempts").replace("{s}", "60") : t(lang, "empScanInvalidCode"));
           setEmpScanBusy(false);
           return;
         }
