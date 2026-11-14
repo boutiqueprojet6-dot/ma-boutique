@@ -6086,6 +6086,14 @@ EXTRA_UI.debtMarkPaidBtn = { fr: "Marquer payé", en: "Mark as paid", es: "Marca
 EXTRA_UI.pinTooManyAttempts = { fr: "Trop d'essais. Réessayez dans {s} s.", en: "Too many attempts. Try again in {s} s.", es: "Demasiados intentos. Inténtalo de nuevo en {s} s.", pt: "Muitas tentativas. Tente novamente em {s} s.", de: "Zu viele Versuche. Erneut versuchen in {s} s.", it: "Troppi tentativi. Riprova tra {s} s.", nl: "Te veel pogingen. Probeer opnieuw over {s} s.", pl: "Zbyt wiele prób. Spróbuj ponownie za {s} s.", ru: "Слишком много попыток. Повторите через {s} с.", tr: "Çok fazla deneme. {s} sn sonra tekrar deneyin.", ar: "محاولات كثيرة جدًا. حاول مجددًا بعد {s} ث.", hi: "बहुत अधिक प्रयास। {s} सेकंड बाद फिर कोशिश करें।", bn: "অনেক বেশি চেষ্টা। {s} সেকেন্ড পরে আবার চেষ্টা করুন।", ur: "بہت زیادہ کوششیں۔ {s} سیکنڈ بعد دوبارہ کوشش کریں۔", ta: "அதிக முயற்சிகள். {s} வினாடிகளில் மீண்டும் முயலவும்.", te: "చాలా ప్రయత్నాలు. {s} సెకన్లలో మళ్లీ ప్రయత్నించండి.", th: "ลองหลายครั้งเกินไป ลองอีกครั้งใน {s} วินาที", zh: "尝试次数过多。请在 {s} 秒后重试。", ja: "試行回数が多すぎます。{s} 秒後に再試行してください。", ko: "시도 횟수가 너무 많습니다. {s}초 후 다시 시도하세요.", id: "Terlalu banyak percobaan. Coba lagi dalam {s} dtk.", vi: "Quá nhiều lần thử. Thử lại sau {s} giây.", tl: "Sobrang daming subok. Subukan ulit sa loob ng {s} seg.", sw: "Majaribio mengi mno. Jaribu tena baada ya sekunde {s}.", ha: "Ƙoƙari ya yi yawa. Sake gwadawa bayan daƙiƙa {s}.", yo: "Ìgbìyànjú ti pọ̀ jù. Gbìyànjú lẹ́ẹ̀kan sí i ní ìṣẹ́jú-àáyá {s}.", zu: "Imizamo iningi kakhulu. Zama futhi emizuzwaneni engu-{s}.", am: "በጣም ብዙ ሙከራዎች። ከ{s} ሰከንድ በኋላ እንደገና ይሞክሩ።", bm: "Ɲɛɲinini ka ca. I ka segin a kan sekondi {s} kɔfɛ.", wo: "Jéem yi bari na lool. Jéemaatal ci {s} saa." };
 EXTRA_UI.obOptional = { fr: "facultatif", en: "optional", es: "opcional", pt: "opcional", de: "optional", it: "facoltativo", nl: "optioneel", pl: "opcjonalnie", ru: "необязательно", tr: "isteğe bağlı", ar: "اختياري", hi: "वैकल्पिक", bn: "ঐচ্ছিক", ur: "اختیاری", ta: "விருப்பத்தேர்வு", te: "ఐచ్ఛికం", th: "ไม่บังคับ", zh: "可选", ja: "任意", ko: "선택 사항", id: "opsional", vi: "không bắt buộc", tl: "opsyonal", sw: "si lazima", ha: "na zaɓi", yo: "àṣàyàn", zu: "ongakukhetha", am: "አማራጭ", bm: "a ma wajibi", wo: "du lu war" };
 EXTRA_UI.obPinLaterHint = { fr: "Vous pourrez créer votre code PIN plus tard dans Paramètres.", en: "You can create your PIN later in Settings.", es: "Podrás crear tu PIN más tarde en Ajustes.", pt: "Você poderá criar seu PIN mais tarde em Configurações.", de: "Du kannst deine PIN später in den Einstellungen festlegen.", it: "Potrai creare il PIN più tardi nelle Impostazioni.", nl: "Je kunt je pincode later instellen in Instellingen.", pl: "PIN możesz utworzyć później w Ustawieniach.", ru: "PIN-код можно создать позже в Настройках.", tr: "PIN kodunu daha sonra Ayarlar'dan oluşturabilirsin.", ar: "يمكنك إنشاء رمز PIN لاحقًا من الإعدادات.", hi: "आप बाद में सेटिंग्स में PIN बना सकते हैं।", bn: "পরে সেটিংসে PIN তৈরি করতে পারবেন।", ur: "آپ بعد میں ترتیبات میں PIN بنا سکتے ہیں۔", ta: "PIN-ஐ பின்னர் அமைப்புகளில் உருவாக்கலாம்.", te: "PIN‌ను తర్వాత సెట్టింగ్‌లలో సృష్టించవచ్చు.", th: "คุณสร้าง PIN ภายหลังได้ในการตั้งค่า", zh: "你可以稍后在设置中创建 PIN。", ja: "PIN はあとで設定から作成できます。", ko: "PIN은 나중에 설정에서 만들 수 있습니다.", id: "Anda bisa membuat PIN nanti di Pengaturan.", vi: "Bạn có thể tạo mã PIN sau trong Cài đặt.", tl: "Puwede kang gumawa ng PIN mamaya sa Settings.", sw: "Unaweza kuunda PIN baadaye kwenye Mipangilio.", ha: "Za ka iya ƙirƙirar PIN daga baya a Saituna.", yo: "O lè ṣẹ̀dá PIN rẹ lẹ́yìn náà nínú Ètò.", zu: "Ungakha i-PIN yakho kamuva kuZilungiselelo.", am: "ፒንዎን በኋላ በቅንብሮች ውስጥ መፍጠር ይችላሉ።", bm: "I bɛ se ka i ka PIN dilan kɔfɛ Paramɛtiriw kɔnɔ.", wo: "Mën nga sos sa PIN ci kanam ci Paramètres." };
+EXTRA_UI.expDateLabel = { fr: "Date de péremption (facultatif)", en: "Expiry date (optional)", es: "Fecha de caducidad (opcional)", pt: "Data de validade (opcional)", de: "Ablaufdatum (optional)", it: "Data di scadenza (facoltativa)", nl: "Houdbaarheidsdatum (optioneel)", pl: "Data ważności (opcjonalnie)", ru: "Срок годности (необязательно)", tr: "Son kullanma tarihi (isteğe bağlı)", ar: "تاريخ انتهاء الصلاحية (اختياري)", hi: "समाप्ति तिथि (वैकल्पिक)", bn: "মেয়াদ শেষের তারিখ (ঐচ্ছিক)", ur: "میعاد ختم ہونے کی تاریخ (اختیاری)", ta: "காலாவதி தேதி (விருப்பம்)", te: "గడువు తేదీ (ఐచ్ఛికం)", th: "วันหมดอายุ (ไม่บังคับ)", zh: "保质期截止日期（可选）", ja: "賞味・使用期限（任意）", ko: "유통기한 (선택)", id: "Tanggal kedaluwarsa (opsional)", vi: "Hạn sử dụng (không bắt buộc)", tl: "Petsa ng pag-expire (opsyonal)", sw: "Tarehe ya kuisha muda (si lazima)", ha: "Ranar ƙarewar aiki (na zaɓi)", yo: "Ọjọ́ ìparí (àṣàyàn)", zu: "Usuku lokuphelelwa yisikhathi (ongakukhetha)", am: "የሚያበቃበት ቀን (አማራጭ)", bm: "A tile banni don (a ma wajibi)", wo: "Bisu jeex (du lu war)" };
+EXTRA_UI.expDateHint = { fr: "Pour les produits qui périment (frigo, alimentation, médicaments). Quand vous ajoutez du stock, indiquez la date du nouveau lot : les plus anciens sont considérés vendus en premier.", en: "For products that expire (fridge, food, medicine). When you add stock, enter the date of the new batch: the oldest are counted as sold first.", es: "Para productos que caducan (nevera, alimentos, medicamentos). Al añadir stock, indica la fecha del nuevo lote: los más antiguos se cuentan como vendidos primero.", pt: "Para produtos que vencem (geladeira, alimentos, remédios). Ao adicionar estoque, informe a data do novo lote: os mais antigos contam como vendidos primeiro.", de: "Für Produkte, die ablaufen (Kühlschrank, Lebensmittel, Medikamente). Beim Auffüllen das Datum der neuen Charge angeben: die ältesten gelten als zuerst verkauft.", it: "Per i prodotti che scadono (frigo, alimentari, medicinali). Quando aggiungi stock, indica la data del nuovo lotto: i più vecchi contano come venduti per primi.", nl: "Voor producten die bederven (koelkast, voeding, medicijnen). Vul bij het aanvullen de datum van de nieuwe partij in: de oudste tellen als eerst verkocht.", pl: "Dla produktów z terminem ważności (lodówka, żywność, leki). Dodając towar, podaj datę nowej partii: najstarsze liczą się jako sprzedane najpierw.", ru: "Для скоропортящихся товаров (холодильник, продукты, лекарства). При пополнении укажите срок новой партии: старые считаются проданными первыми.", tr: "Bozulan ürünler için (buzdolabı, gıda, ilaç). Stok eklerken yeni partinin tarihini girin: en eskiler önce satılmış sayılır.", ar: "للمنتجات التي تنتهي صلاحيتها (الثلاجة، الأغذية، الأدوية). عند إضافة مخزون، أدخل تاريخ الدفعة الجديدة: تُحتسب الأقدم مبيعة أولًا.", hi: "खराब होने वाले उत्पादों के लिए (फ्रिज, खाद्य, दवाइयाँ)। स्टॉक जोड़ते समय नए लॉट की तारीख दें: सबसे पुराने पहले बिके माने जाते हैं।", bn: "মেয়াদি পণ্যের জন্য (ফ্রিজ, খাবার, ওষুধ)। স্টক যোগ করলে নতুন লটের তারিখ দিন: পুরোনোগুলো আগে বিক্রি ধরা হয়।", ur: "خراب ہونے والی اشیاء کے لیے (فریج، کھانا، ادویات)۔ اسٹاک بڑھاتے وقت نئی کھیپ کی تاریخ لکھیں: پرانی پہلے بکی ہوئی شمار ہوتی ہیں۔", ta: "காலாவதியாகும் பொருட்களுக்கு (குளிர்சாதனம், உணவு, மருந்து). இருப்பு சேர்க்கும்போது புதிய தொகுப்பின் தேதியை இடுங்கள்: பழையவை முதலில் விற்றதாகக் கணக்கிடப்படும்.", te: "గడువు ఉండే వస్తువులకు (ఫ్రిజ్, ఆహారం, మందులు). స్టాక్ జోడించేటప్పుడు కొత్త బ్యాచ్ తేదీ ఇవ్వండి: పాతవి ముందుగా అమ్మినట్లు లెక్కిస్తారు.", th: "สำหรับสินค้าที่มีวันหมดอายุ (ตู้เย็น อาหาร ยา) เมื่อเติมสต็อก ให้ใส่วันที่ของล็อตใหม่ ล็อตเก่าจะถูกนับว่าขายก่อน", zh: "用于会过期的商品（冷藏、食品、药品）。补货时填写新批次的日期：最早的批次视为先卖出。", ja: "期限のある商品向け（冷蔵品・食品・薬）。在庫を追加するときは新しいロットの日付を入力してください。古いものから売れたとみなします。", ko: "유통기한이 있는 상품용(냉장, 식품, 의약품). 재고를 추가할 때 새 묶음의 날짜를 입력하세요. 오래된 것부터 팔린 것으로 계산합니다.", id: "Untuk produk yang kedaluwarsa (kulkas, makanan, obat). Saat menambah stok, isi tanggal batch baru: yang paling lama dianggap terjual lebih dulu.", vi: "Dành cho hàng có hạn dùng (tủ lạnh, thực phẩm, thuốc). Khi nhập thêm, ghi hạn của lô mới: lô cũ nhất được tính là bán trước.", tl: "Para sa mga produktong nag-e-expire (ref, pagkain, gamot). Kapag nagdagdag ng stock, ilagay ang petsa ng bagong batch: ang pinakaluma ang ituturing na unang nabenta.", sw: "Kwa bidhaa zinazoisha muda (friji, chakula, dawa). Ukiongeza stoo, weka tarehe ya mzigo mpya: za zamani huhesabiwa kuuzwa kwanza.", ha: "Don kayan da ke ƙarewa (firji, abinci, magani). Idan ka ƙara kaya, saka ranar sabon kashi: tsofaffi ake ɗauka an fara sayar da su.", yo: "Fún ọjà tó ń parí (fìríìjì, oúnjẹ, oògùn). Tí o bá fi ọjà kún un, kọ ọjọ́ ẹ̀ka tuntun: àwọn tó ti pẹ́ jù ni a kà pé wọ́n kọ́kọ́ tà.", zu: "Okomkhiqizo ophelelwa yisikhathi (ifriji, ukudla, umuthi). Uma wengeza isitokwe, faka usuku lwenqwaba entsha: ezindala zibalwa njengezithengiswe kuqala.", am: "ጊዜያቸው ለሚያልፍ ምርቶች (ፍሪጅ፣ ምግብ፣ መድኃኒት)። ክምችት ሲጨምሩ የአዲሱን ጭነት ቀን ያስገቡ፤ አሮጌዎቹ መጀመሪያ እንደተሸጡ ይቆጠራሉ።", bm: "Fɛn minnu bɛ tiɲɛ (frigo, dumuni, furaw). N'i ye fɛn fara a kan, kura in tile sɛbɛn: kɔrɔw de bɛ jate ko u fɔlɔ feereta.", wo: "Ngir njaay yi di yàqu (frigo, lekk, garab). Bu nga yokkee stock, bindal bisu lot bu bees bi: yu gën a yàgg lañuy jàppe ni ñoo jëkk a jaay." };
+EXTRA_UI.expHomeTitle = { fr: "Dates de péremption", en: "Expiry dates", es: "Fechas de caducidad", pt: "Datas de validade", de: "Ablaufdaten", it: "Date di scadenza", nl: "Houdbaarheidsdata", pl: "Daty ważności", ru: "Сроки годности", tr: "Son kullanma tarihleri", ar: "تواريخ انتهاء الصلاحية", hi: "समाप्ति तिथियाँ", bn: "মেয়াদ শেষের তারিখ", ur: "میعاد ختم ہونے کی تاریخیں", ta: "காலாவதி தேதிகள்", te: "గడువు తేదీలు", th: "วันหมดอายุ", zh: "保质期", ja: "期限", ko: "유통기한", id: "Tanggal kedaluwarsa", vi: "Hạn sử dụng", tl: "Mga petsa ng pag-expire", sw: "Tarehe za kuisha muda", ha: "Ranakun ƙarewar aiki", yo: "Àwọn ọjọ́ ìparí", zu: "Izinsuku zokuphelelwa yisikhathi", am: "የሚያበቁበት ቀናት", bm: "Tiɲɛ donw", wo: "Bisi jeex" };
+EXTRA_UI.expHomeSummary = { fr: "{expired} périmé(s) · {soon} bientôt", en: "{expired} expired · {soon} soon", es: "{expired} caducado(s) · {soon} pronto", pt: "{expired} vencido(s) · {soon} em breve", de: "{expired} abgelaufen · {soon} bald", it: "{expired} scaduto/i · {soon} a breve", nl: "{expired} verlopen · {soon} binnenkort", pl: "{expired} przeterm. · {soon} wkrótce", ru: "{expired} просрочено · {soon} скоро", tr: "{expired} süresi geçmiş · {soon} yakında", ar: "{expired} منتهي الصلاحية · {soon} قريبًا", hi: "{expired} समाप्त · {soon} जल्द", bn: "{expired} মেয়াদোত্তীর্ণ · {soon} শীঘ্রই", ur: "{expired} میعاد ختم · {soon} جلد", ta: "{expired} காலாவதியானவை · {soon} விரைவில்", te: "{expired} గడువు ముగిసినవి · {soon} త్వరలో", th: "{expired} หมดอายุ · {soon} ใกล้หมด", zh: "{expired} 已过期 · {soon} 即将过期", ja: "{expired} 期限切れ · {soon} まもなく", ko: "{expired}개 만료 · {soon}개 임박", id: "{expired} kedaluwarsa · {soon} segera", vi: "{expired} hết hạn · {soon} sắp hết", tl: "{expired} expired · {soon} malapit na", sw: "{expired} zimeisha muda · {soon} karibuni", ha: "{expired} sun ƙare · {soon} nan kusa", yo: "{expired} ti parí · {soon} láìpẹ́", zu: "{expired} eziphelelwe · {soon} maduze", am: "{expired} ያለፈባቸው · {soon} በቅርቡ", bm: "{expired} tiɲɛna · {soon} sɔɔni", wo: "{expired} jeex na · {soon} léegi" };
+EXTRA_UI.expExpired = { fr: "Périmé depuis le {date}", en: "Expired since {date}", es: "Caducado desde el {date}", pt: "Vencido desde {date}", de: "Abgelaufen seit {date}", it: "Scaduto dal {date}", nl: "Verlopen sinds {date}", pl: "Przeterminowane od {date}", ru: "Просрочено с {date}", tr: "{date} tarihinden beri süresi geçmiş", ar: "منتهي الصلاحية منذ {date}", hi: "{date} से समाप्त", bn: "{date} থেকে মেয়াদোত্তীর্ণ", ur: "{date} سے میعاد ختم", ta: "{date} முதல் காலாவதி", te: "{date} నుంచి గడువు ముగిసింది", th: "หมดอายุตั้งแต่ {date}", zh: "自 {date} 起已过期", ja: "{date} から期限切れ", ko: "{date}부터 만료", id: "Kedaluwarsa sejak {date}", vi: "Hết hạn từ {date}", tl: "Expired mula {date}", sw: "Imeisha muda tangu {date}", ha: "Ya ƙare tun {date}", yo: "Ó ti parí láti {date}", zu: "Iphelelwe kusukela ngo-{date}", am: "ከ{date} ጀምሮ ጊዜው አልፏል", bm: "A tiɲɛna kabini {date}", wo: "Jeex na li dale {date}" };
+EXTRA_UI.expSoon = { fr: "Périme le {date}", en: "Expires {date}", es: "Caduca el {date}", pt: "Vence em {date}", de: "Läuft ab am {date}", it: "Scade il {date}", nl: "Verloopt op {date}", pl: "Termin ważności {date}", ru: "Истекает {date}", tr: "{date} tarihinde son", ar: "تنتهي صلاحيته في {date}", hi: "{date} को समाप्त", bn: "{date} তারিখে মেয়াদ শেষ", ur: "{date} کو میعاد ختم", ta: "{date} அன்று காலாவதி", te: "{date}న గడువు", th: "หมดอายุ {date}", zh: "{date} 过期", ja: "{date} 期限", ko: "{date} 만료", id: "Kedaluwarsa {date}", vi: "Hết hạn {date}", tl: "Mag-e-expire sa {date}", sw: "Inaisha muda {date}", ha: "Zai ƙare {date}", yo: "Yóò parí ní {date}", zu: "Iphelelwa ngo-{date}", am: "በ{date} ያበቃል", bm: "A bɛ tiɲɛ {date}", wo: "Dina jeex {date}" };
+EXTRA_UI.expDiscardBtn = { fr: "Jeter", en: "Discard", es: "Desechar", pt: "Descartar", de: "Entsorgen", it: "Scarta", nl: "Weggooien", pl: "Wyrzuć", ru: "Списать", tr: "At", ar: "تخلّص منه", hi: "फेंकें", bn: "ফেলে দিন", ur: "پھینکیں", ta: "அகற்று", te: "పారేయి", th: "ทิ้ง", zh: "丢弃", ja: "廃棄", ko: "폐기", id: "Buang", vi: "Bỏ đi", tl: "Itapon", sw: "Tupa", ha: "Zubar", yo: "Dà nù", zu: "Lahla", am: "ጣል", bm: "A fili", wo: "Sànni" };
+EXTRA_UI.expDiscardDone = { fr: "Retiré du stock et compté comme perte.", en: "Removed from stock and counted as a loss.", es: "Retirado del stock y contado como pérdida.", pt: "Retirado do estoque e contado como perda.", de: "Aus dem Bestand entfernt und als Verlust gezählt.", it: "Tolto dallo stock e contato come perdita.", nl: "Uit voorraad gehaald en als verlies geteld.", pl: "Usunięto ze stanu i policzono jako stratę.", ru: "Списано со склада и учтено как убыток.", tr: "Stoktan çıkarıldı ve zarar olarak sayıldı.", ar: "أُزيل من المخزون واحتُسب خسارة.", hi: "स्टॉक से हटाया गया और नुकसान में गिना गया।", bn: "স্টক থেকে সরানো হয়েছে এবং ক্ষতি হিসেবে গণনা হয়েছে।", ur: "اسٹاک سے نکال دیا گیا اور نقصان میں شمار ہوا۔", ta: "இருப்பிலிருந்து நீக்கப்பட்டு இழப்பாகக் கணக்கிடப்பட்டது.", te: "స్టాక్ నుంచి తీసేసి నష్టంగా లెక్కించాం.", th: "นำออกจากสต็อกและนับเป็นของเสีย", zh: "已从库存移除并计为损失。", ja: "在庫から外し、損失として記録しました。", ko: "재고에서 빼고 손실로 계산했습니다.", id: "Dikeluarkan dari stok dan dihitung sebagai kerugian.", vi: "Đã bỏ khỏi kho và tính là hao hụt.", tl: "Inalis sa stock at binilang na lugi.", sw: "Imeondolewa stooni na kuhesabiwa kama hasara.", ha: "An cire daga kaya kuma an ƙidaya a matsayin asara.", yo: "A ti yọ ọ́ kúrò nínú ọjà, a sì kà á sí àdánù.", zu: "Kususiwe esitokweni kwabalwa njengokulahlekelwa.", am: "ከክምችት ተወግዶ እንደ ኪሳራ ተቆጥሯል።", bm: "A bɔra fɛnw cɛma ani a jatera bɔnɛ ye.", wo: "Génne nañu ko ci stock bi te jàppe nañu ko ni ñàkk." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -6857,6 +6865,37 @@ function dayLabel(iso) {
   // décaleraient l'affichage dans un conteneur gauche→droite.
   return d.toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit" }).replace(/[\u200e\u200f\u061c]/g, "");
 }
+// ---- Dates de péremption (par lots) ----
+// Un produit peut porter des lots { id, date: "AAAA-MM-JJ", qty }. La quantité du produit reste
+// la seule vérité du stock : on considère que les lots les plus ANCIENS partent en premier, donc
+// le stock restant est attribué aux lots les plus récents d'abord. Ainsi aucune vente, annulation
+// ou correction de stock n'a besoin de toucher aux lots.
+function localDayKey(d) {
+  const x = d instanceof Date ? d : new Date(d);
+  return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`;
+}
+function expiryLots(p) {
+  const lots = Array.isArray(p && p.batches) ? p.batches.filter((b) => b && b.date && Number(b.qty) > 0) : [];
+  if (!lots.length) return [];
+  let left = Math.max(0, Number(p.quantity) || 0);
+  const out = [];
+  [...lots].sort((a, b) => (a.date < b.date ? 1 : -1)).forEach((b) => {
+    const r = Math.min(Number(b.qty) || 0, left);
+    left -= r;
+    if (r > 0) out.push({ ...b, remaining: r });
+  });
+  return out.sort((a, b) => (a.date < b.date ? -1 : 1));
+}
+// "expired" | "soon" (3 jours ou moins) | null, pour le lot restant le plus proche.
+function expiryStatus(p, todayKey) {
+  const lots = expiryLots(p);
+  if (!lots.length) return null;
+  const first = lots[0].date;
+  if (first < todayKey) return { status: "expired", date: first };
+  const soonKey = localDayKey(new Date(Date.now() + 3 * 86400000));
+  if (first <= soonKey) return { status: "soon", date: first };
+  return null;
+}
 function fullDate(iso) {
   const d = parseDayOrIso(iso);
   return d.toLocaleDateString(getAppLocale());
@@ -6909,6 +6948,14 @@ function buildDemoData(transportLabel) {
     ["d14", "Cahier 200 pages", 500, 350, 25, 0, 2],
   ];
   const products = catalog.map(([id, name, price, costPrice, quantity]) => ({ id, name, quantity, price, costPrice, photo: null }));
+  // Lots datés d'exemple, pour montrer les alertes de péremption en mode démo.
+  {
+    const dk = (off) => { const d = new Date(); d.setDate(d.getDate() + off); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+    const setLots = (id, lots) => { const p = products.find((x) => x.id === id); if (p) p.batches = lots; };
+    setLots("d5", [{ id: "b1", date: dk(-2), qty: 4 }, { id: "b2", date: dk(40), qty: 11 }]);
+    setLots("d11", [{ id: "b3", date: dk(2), qty: 10 }, { id: "b4", date: dk(90), qty: 25 }]);
+    setLots("d9", [{ id: "b5", date: dk(1), qty: 60 }]);
+  }
   const customers = [["Awa Traoré", 9], ["Moussa Diallo", 7], ["Fatoumata Koné", 5], ["Ibrahim Coulibaly", 4], ["Mariam Sidibé", 3], ["Oumar Keita", 2], ["Aminata Touré", 2], ["Seydou Cissé", 1]];
   const hours = [[8, 1], [9, 2], [10, 3], [11, 3], [12, 2], [13, 1], [14, 1], [15, 1.5], [16, 2], [17, 3.5], [18, 3.5], [19, 2], [20, 1]];
   const weekdayFactor = [0.5, 0.95, 0.9, 1, 1.05, 1.25, 1.6]; // dimanche … samedi
@@ -12296,6 +12343,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Code-barres (EAN, optionnel) — permet de scanner le produit directement à la
   // caisse (onglet Vente) au lieu de le chercher/cliquer dans la liste.
   const [pBarcode, setPBarcode] = useState("");
+  const [pExpiry, setPExpiry] = useState("");
+  const [showExpiryList, setShowExpiryList] = useState(false);
+  const [expiryMsg, setExpiryMsg] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
   // Filet de secours "brouillon produit" : sur Android, ouvrir l'appareil photo natif
   // (input file capture="environment") peut amener le système à décharger complètement
@@ -13493,12 +13543,30 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           sellByMeasure: pSellByMeasure,
           measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
           barcode: pBarcode.trim() || null,
+          batches: (() => {
+            const newQty = pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10);
+            if (!pExpiry) return [];
+            const kept = expiryLots({ ...p, quantity: newQty }).map(({ remaining, ...b }) => ({ ...b, qty: remaining }));
+            const delta = newQty - (Number(p.quantity) || 0);
+            const keptSum = kept.reduce((n, b) => n + b.qty, 0);
+            // Stock ajouté (ou stock jamais daté) : il prend la date saisie, comme un nouveau lot.
+            const undated = Math.max(0, newQty - keptSum);
+            if (undated > 0) {
+              const last = kept[kept.length - 1];
+              if (last && last.date === pExpiry) last.qty += undated;
+              else kept.push({ id: Date.now().toString(36), date: pExpiry, qty: undated });
+            } else if (delta <= 0 && kept.length && kept[kept.length - 1].date !== pExpiry) {
+              // Simple correction de la date du lot le plus récent.
+              kept[kept.length - 1].date = pExpiry;
+            }
+            return kept;
+          })(),
           updatedAt: Date.now(),
         } : p),
       });
       logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}`);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setShowAddProduct(false);
+      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -13526,11 +13594,45 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
       barcode: pBarcode.trim() || null,
       looseUnits: 0,
+      batches: pExpiry ? [{ id: Date.now().toString(36), date: pExpiry, qty: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10) }] : [],
       updatedAt: Date.now(),
     };
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setShowAddProduct(false);
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setShowAddProduct(false);
+  };
+  // Jette les lots périmés d'un produit : stock diminué, perte enregistrée dans unsoldLog
+  // (déjà affiché dans Statistiques > Invendus), action notée dans l'historique.
+  const discardExpired = (productId) => {
+    const p = products.find((x) => x.id === productId);
+    if (!p) return;
+    const todayKey = localDayKey(new Date());
+    const lots = expiryLots(p);
+    const expired = lots.filter((b) => b.date < todayKey);
+    const qty = expired.reduce((n, b) => n + b.remaining, 0);
+    if (qty <= 0) return;
+    const expiredIds = new Set(expired.map((b) => b.id));
+    const nextProducts = products.map((x) => (x.id === productId ? {
+      ...x,
+      quantity: Math.max(0, Math.round(((Number(x.quantity) || 0) - qty) * 1000) / 1000),
+      batches: lots.filter((b) => !expiredIds.has(b.id)).map(({ remaining, ...b }) => ({ ...b, qty: remaining })),
+      updatedAt: Date.now(),
+    } : x));
+    const entry = {
+      id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
+      productId: p.id,
+      productName: p.name,
+      qty,
+      date: new Date().toISOString(),
+      reason: "expired",
+      unitCost: p.costPrice != null && p.costPrice !== "" ? Number(p.costPrice) : Number(p.price) || 0,
+      costKnown: p.costPrice != null && p.costPrice !== "",
+      actorId: activeEmployee ? activeEmployee.id : null,
+      actorName: activeEmployee ? activeEmployee.name : null,
+    };
+    saveAll({ products: nextProducts, unsoldLog: [...unsoldLog, entry] });
+    logAction(`${tx(lang, "expDiscardBtn")} : ${p.name} (${localizedNumber(qty)})`);
+    setExpiryMsg(`${p.name} ×${localizedNumber(qty)} — ${tx(lang, "expDiscardDone")}`);
   };
   // Ouvre le formulaire déjà rempli avec les valeurs du produit, pour corriger
   // une erreur de saisie (nom, quantité, prix, photo...) sans le recréer.
@@ -13550,6 +13652,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPSellByMeasure(!!p.sellByMeasure);
     setPMeasureUnit(p.measureUnit || "");
     setPBarcode(p.barcode || "");
+    { const lots = expiryLots(p); setPExpiry(lots.length ? lots[lots.length - 1].date : ""); }
     setError("");
     setShowAddProduct(true);
   };
@@ -17993,6 +18096,55 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 {fullDateLong()}
               </p>
             </div>
+            {(() => {
+              const todayKey = localDayKey(new Date());
+              const items = products.map((p) => ({ p, ex: expiryStatus(p, todayKey) })).filter((x) => x.ex);
+              if (!items.length) return null;
+              const nExp = items.filter((x) => x.ex.status === "expired").length;
+              const nSoon = items.length - nExp;
+              return (
+                <button type="button" onClick={() => { setExpiryMsg(""); setShowExpiryList(true); }} className="w-full rounded-2xl px-4 py-3 flex items-center justify-between text-left" style={{ background: nExp ? (darkMode ? "rgba(225,29,72,0.14)" : "#fff1f2") : (darkMode ? "rgba(217,119,6,0.14)" : "#fffbeb"), border: `1px solid ${nExp ? (darkMode ? "rgba(225,29,72,0.35)" : "#fecdd3") : (darkMode ? "rgba(217,119,6,0.35)" : "#fde68a")}` }}>
+                  <span>
+                    <span className="block text-sm font-extrabold" style={{ color: T.text }}>📅 {tx(lang, "expHomeTitle")}</span>
+                    <span className="block text-xs font-semibold" style={{ color: nExp ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#f0c869" : "#b45309") }}>{tx(lang, "expHomeSummary").split(" · ").filter((part) => (part.includes("{expired}") ? nExp > 0 : nSoon > 0)).join(" · ").replace("{expired}", localizedNumber(nExp)).replace("{soon}", localizedNumber(nSoon))}</span>
+                  </span>
+                  <ChevronRight size={18} style={{ color: T.muted }} />
+                </button>
+              );
+            })()}
+            {showExpiryList && typeof document !== "undefined" && createPortal(
+              <div className="fixed inset-0 z-[9999] flex items-end justify-center" style={{ background: "rgba(0,0,0,0.45)" }} onClick={() => setShowExpiryList(false)}>
+                <div className="w-full max-w-md rounded-t-3xl p-4 pb-8" style={{ background: T.card, maxHeight: "80vh", overflowY: "auto" }} onClick={(e) => e.stopPropagation()}>
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-base font-extrabold" style={{ color: T.text }}>📅 {tx(lang, "expHomeTitle")}</p>
+                    <button type="button" onClick={() => setShowExpiryList(false)} aria-label="Fermer" className="p-1"><X size={18} style={{ color: T.muted }} /></button>
+                  </div>
+                  {expiryMsg && <p className="text-xs font-semibold mb-3 px-3 py-2 rounded-xl" style={{ background: darkMode ? "rgba(16,185,129,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#047857" }}>✓ {expiryMsg}</p>}
+                  {(() => {
+                    const todayKey = localDayKey(new Date());
+                    const rows = [];
+                    products.forEach((p) => {
+                      const ex = expiryStatus(p, todayKey);
+                      if (!ex) return;
+                      expiryLots(p).filter((b) => b.date <= localDayKey(new Date(Date.now() + 3 * 86400000))).forEach((b) => rows.push({ p, b, expired: b.date < todayKey }));
+                    });
+                    rows.sort((a, b) => (a.b.date < b.b.date ? -1 : 1));
+                    return rows.map(({ p, b, expired }) => (
+                      <div key={p.id + b.id} className="flex items-center justify-between gap-3 py-2.5" style={{ borderBottom: `1px solid ${T.border}` }}>
+                        <div className="min-w-0">
+                          <p className="text-sm font-bold truncate" style={{ color: T.text }}>{p.name} <span style={{ color: T.muted, fontWeight: 600 }}>×{localizedQty ? localizedQty(b.remaining) : localizedNumber(b.remaining)}</span></p>
+                          <p className="text-[11px] font-semibold" style={{ color: expired ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#f0c869" : "#b45309") }}>{tx(lang, expired ? "expExpired" : "expSoon").replace("{date}", fullDate(b.date + "T12:00:00"))}</p>
+                        </div>
+                        {expired && hasPermission("editStock") && (
+                          <button type="button" onClick={() => discardExpired(p.id)} className="shrink-0 px-3 py-2 rounded-xl text-xs font-bold text-white" style={{ background: "#e11d48" }}>🗑️ {tx(lang, "expDiscardBtn")}</button>
+                        )}
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>,
+              document.body
+            )}
             <div className="rounded-2xl overflow-hidden" style={{ background: T.card, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)", border: darkMode ? "none" : `1px solid ${T.border}` }}>
               <div className="px-4 py-3 flex items-center justify-between">
                 <div>
@@ -18489,6 +18641,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <ScanLine size={16} />
               </button>
             </div>
+            <label className="text-xs block mb-1" style={{ color: T.muted }}>📅 {tx(lang, "expDateLabel")}</label>
+            <input type="date" value={pExpiry} onChange={(e) => setPExpiry(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-1" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+            <p className="text-[10px] mb-3" style={{ color: T.muted }}>{tx(lang, "expDateHint")}</p>
             {showProductBarcodeScanner && (
               <div
                 className="fixed inset-0 z-50 flex items-start justify-center px-2"
@@ -18733,6 +18888,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         )}
                       </div>
                       <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {p.sellByMeasure ? (p.measureUnit || t(lang, "othUnite")) : t(lang, "othUnite")}</p>
+                      {(() => {
+                        const ex = expiryStatus(p, localDayKey(new Date()));
+                        if (!ex) return null;
+                        const expired = ex.status === "expired";
+                        return (
+                          <p className="text-[10px] font-bold mt-0.5" style={{ color: expired ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#f0c869" : "#c2410c") }}>
+                            📅 {tx(lang, expired ? "expExpired" : "expSoon").replace("{date}", fullDate(ex.date + "T12:00:00"))}
+                          </p>
+                        );
+                      })()}
                       {/* Rupture prévue dans la semaine, au rythme de vente des 14 derniers jours */}
                       {forecastById[p.id] && p.quantity > 0 && forecastById[p.id].daysLeft <= 7 && (
                         <p className="text-[10px] font-bold mt-0.5" style={{ color: forecastById[p.id].daysLeft <= 3 ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#f0c869" : "#c2410c") }}>
