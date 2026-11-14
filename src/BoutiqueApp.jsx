@@ -20516,8 +20516,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               return (
                 <div key={h.id} className="rounded-2xl p-3" style={cardStyle}>
                   {isCancelled && (
-                    <p className="text-[11px] font-bold flex items-center gap-1.5 mb-1.5" style={{ color: cancelColor }}>
-                      <X size={13} /> {tx(lang, "histSaleCancelled")}
+                    <p className="mb-2">
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full" style={{ color: darkMode ? "#f29a76" : "#be123c", background: darkMode ? "rgba(184,86,47,0.18)" : "#fff1f2", border: `1px solid ${darkMode ? "rgba(242,154,118,0.55)" : "#fda4af"}` }}>
+                        <X size={13} /> {tx(lang, "histSaleCancelled")}
+                      </span>
                     </p>
                   )}
                   <div className="mb-1" style={{ opacity: isCancelled ? 0.7 : 1 }}>
