@@ -420,6 +420,42 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 // Client ID OAuth de type "Application Web" ("Ma Boutique Web" dans Google Cloud Console) —
 // PAS le Client ID "Android" utilisé par le plugin natif (SocialLogin.initialize plus bas) :
 // Google Identity Services sur le web exige obligatoirement un Client ID de type Web.
+// Connexion / liaison par numéro de téléphone (code par WhatsApp, SMS en secours), via le
+// fournisseur Twilio configuré dans Supabase Auth. À passer à true une fois Twilio branché
+// (Supabase > Authentication > Providers > Phone) : avant, l'envoi du code échouerait.
+const PHONE_AUTH_ENABLED = false;
+// Indicatif devinée depuis le fuseau horaire (avant tout compte : pas encore de pays connu).
+// Identifiant d'un compte côté app : son e-mail, sinon son numéro (compte créé par téléphone).
+function authIdOf(user) {
+  if (!user) return "";
+  if (user.email) return user.email;
+  return user.phone ? "+" + String(user.phone).replace(/^\+/, "") : "";
+}
+function guessDialCodeFromTimezone() {
+  try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; return TZ_DIAL_CODE[tz] || ""; } catch (e) { return ""; }
+}
+// Assemble un numéro au format international E.164 (+22376123456) à partir de l'indicatif
+// et du numéro local tapé (espaces, tirets et 0 initial retirés). "" si invalide.
+function toE164(code, local) {
+  const c = String(code || "").replace(/\D/g, "");
+  let l = String(local || "").replace(/\D/g, "");
+  if (!c || !l) return "";
+  if (l.startsWith(c) && l.length > c.length + 6) l = l.slice(c.length); // indicatif retapé dans le numéro
+  l = l.replace(/^0+/, "");
+  const full = c + l;
+  if (full.length < 8 || full.length > 15) return "";
+  return "+" + full;
+}
+// Envoie un code de connexion par WhatsApp, puis par SMS si WhatsApp échoue (ou si demandé).
+async function sendPhoneOtp(phone, channel, extraOptions) {
+  const opts = { ...(extraOptions || {}), channel };
+  const { error } = await supabase.auth.signInWithOtp({ phone, options: opts });
+  if (error && channel === "whatsapp") {
+    const { error: smsError } = await supabase.auth.signInWithOtp({ phone, options: { ...(extraOptions || {}), channel: "sms" } });
+    return { error: smsError, channel: "sms" };
+  }
+  return { error, channel };
+}
 const GOOGLE_WEB_CLIENT_ID = "431612912550-np9pvnq0faokbgle9dba608ab4no5g3j.apps.googleusercontent.com";
 // Charge la bibliothèque Google Identity Services (GIS) à la demande. Cette bibliothèque est
 // ce qui permet, sur le WEB (PWA incluse), d'afficher le même sélecteur de compte natif/épuré
@@ -6208,6 +6244,25 @@ EXTRA_UI.homeVsYesterday = { fr: "vs hier", en: "vs yesterday", am: "ከትና�
 EXTRA_UI.shareSoldBy = { fr: "Vendu par {name}", en: "Sold by {name}", am: "ሻጭ፦ {name}", ar: "يبيعه {name}", bm: "{name} de b'a feere", bn: "বিক্রেতা: {name}", de: "Verkauft von {name}", es: "Vendido por {name}", ha: "{name} ne ke sayarwa", hi: "विक्रेता: {name}", id: "Dijual oleh {name}", it: "Venduto da {name}", nl: "Verkocht door {name}", ja: "販売：{name}", ko: "판매처: {name}", pl: "Sprzedawca: {name}", pt: "Vendido por {name}", ru: "Продавец: {name}", sw: "Inauzwa na {name}", ta: "விற்பவர்: {name}", te: "విక్రేత: {name}", th: "จำหน่ายโดย {name}", tl: "Ibinebenta ng {name}", tr: "Satıcı: {name}", ur: "فروخت کنندہ: {name}", vi: "Bán bởi {name}", wo: "{name} moo koy jaay", yo: "{name} ló ń tà á", zh: "销售方：{name}", zu: "Kuthengiswa ngu-{name}" };
 EXTRA_UI.shareAvailQty = { fr: "{n} disponible(s)", en: "{n} available", am: "{n} ይገኛል", ar: "{n} متوفر", bm: "{n} bɛ yen", bn: "{n}টি পাওয়া যাচ্ছে", de: "{n} verfügbar", es: "{n} disponible(s)", ha: "{n} akwai", hi: "{n} उपलब्ध", id: "{n} tersedia", it: "{n} disponibile/i", nl: "{n} beschikbaar", ja: "在庫 {n}", ko: "{n}개 재고", pl: "Dostępne: {n}", pt: "{n} disponível(is)", ru: "В наличии: {n}", sw: "{n} zinapatikana", ta: "{n} கிடைக்கிறது", te: "{n} అందుబాటులో", th: "มี {n} ชิ้น", tl: "{n} available", tr: "{n} adet mevcut", ur: "{n} دستیاب", vi: "Còn {n}", wo: "{n} am na", yo: "{n} wà", zh: "有货 {n} 件", zu: "{n} ezitholakalayo" };
 EXTRA_UI.shareAtShop = { fr: "chez {name}", en: "at {name}", am: "በ{name}", ar: "لدى {name}", bm: "{name} fɛ", bn: "{name}-এ", de: "bei {name}", es: "en {name}", ha: "a {name}", hi: "{name} पर", id: "di {name}", it: "da {name}", nl: "bij {name}", ja: "{name}にて", ko: "{name}에서", pl: "w {name}", pt: "em {name}", ru: "в {name}", sw: "kwa {name}", ta: "{name} இல்", te: "{name} వద్ద", th: "ที่ {name}", tl: "sa {name}", tr: "{name} mağazasında", ur: "{name} پر", vi: "tại {name}", wo: "ca {name}", yo: "ní {name}", zh: "于 {name}", zu: "ku-{name}" };
+EXTRA_UI.authMethodEmail = { fr: "E-mail", en: "Email", am: "ኢሜይል", ar: "البريد الإلكتروني", bm: "E-mail", bn: "ইমেইল", de: "E-Mail", es: "Correo", ha: "Imel", hi: "ईमेल", id: "Email", it: "Email", nl: "E-mail", ja: "メール", ko: "이메일", pl: "E-mail", pt: "E-mail", ru: "Эл. почта", sw: "Barua pepe", ta: "மின்னஞ்சல்", te: "ఈమెయిల్", th: "อีเมล", tl: "Email", tr: "E-posta", ur: "ای میل", vi: "Email", wo: "Imeel", yo: "Ímeèlì", zh: "邮箱", zu: "I-imeyili" };
+EXTRA_UI.authMethodPhone = { fr: "Téléphone", en: "Phone", am: "ስልክ", ar: "الهاتف", bm: "Telefɔni", bn: "ফোন", de: "Telefon", es: "Teléfono", ha: "Waya", hi: "फ़ोन", id: "Telepon", it: "Telefono", nl: "Telefoon", ja: "電話番号", ko: "전화번호", pl: "Telefon", pt: "Telefone", ru: "Телефон", sw: "Simu", ta: "தொலைபேசி", te: "ఫోన్", th: "โทรศัพท์", tl: "Telepono", tr: "Telefon", ur: "فون", vi: "Điện thoại", wo: "Telefon", yo: "Fóònù", zh: "手机号", zu: "Ifoni" };
+EXTRA_UI.authPhoneLabel = { fr: "Numéro de téléphone", en: "Phone number", am: "ስልክ ቁጥር", ar: "رقم الهاتف", bm: "Telefɔni nimɔrɔ", bn: "ফোন নম্বর", de: "Telefonnummer", es: "Número de teléfono", ha: "Lambar waya", hi: "फ़ोन नंबर", id: "Nomor telepon", it: "Numero di telefono", nl: "Telefoonnummer", ja: "電話番号", ko: "전화번호", pl: "Numer telefonu", pt: "Número de telefone", ru: "Номер телефона", sw: "Nambari ya simu", ta: "தொலைபேசி எண்", te: "ఫోన్ నంబర్", th: "เบอร์โทรศัพท์", tl: "Numero ng telepono", tr: "Telefon numarası", ur: "فون نمبر", vi: "Số điện thoại", wo: "Limeeru telefon", yo: "Nọ́mbà fóònù", zh: "手机号码", zu: "Inombolo yocingo" };
+EXTRA_UI.authInvalidPhone = { fr: "Numéro invalide : vérifiez l'indicatif et le numéro.", en: "Invalid number: check the country code and the number.", am: "ልክ ያልሆነ ቁጥር፦ የሀገር ኮዱን እና ቁጥሩን ያረጋግጡ።", ar: "رقم غير صالح: تحقق من رمز الدولة والرقم.", bm: "Nimɔrɔ man ɲi : jamana kɔdi ni nimɔrɔ lajɛ.", bn: "ভুল নম্বর: দেশের কোড ও নম্বর যাচাই করুন।", de: "Ungültige Nummer: Ländervorwahl und Nummer prüfen.", es: "Número no válido: revisa el prefijo y el número.", ha: "Lambar ba daidai ba: duba lambar ƙasa da lambar.", hi: "अमान्य नंबर: देश कोड और नंबर जाँचें।", id: "Nomor tidak valid: periksa kode negara dan nomornya.", it: "Numero non valido: controlla prefisso e numero.", nl: "Ongeldig nummer: controleer landcode en nummer.", ja: "番号が正しくありません。国番号と番号を確認してください。", ko: "잘못된 번호입니다. 국가 코드와 번호를 확인하세요.", pl: "Nieprawidłowy numer: sprawdź kierunkowy i numer.", pt: "Número inválido: verifique o indicativo e o número.", ru: "Неверный номер: проверьте код страны и номер.", sw: "Nambari si sahihi: angalia msimbo wa nchi na nambari.", ta: "தவறான எண்: நாட்டுக் குறியீடு மற்றும் எண்ணைச் சரிபார்க்கவும்.", te: "చెల్లని నంబర్: దేశ కోడ్ మరియు నంబర్ తనిఖీ చేయండి.", th: "หมายเลขไม่ถูกต้อง: ตรวจสอบรหัสประเทศและหมายเลข", tl: "Hindi wastong numero: suriin ang country code at numero.", tr: "Geçersiz numara: ülke kodunu ve numarayı kontrol edin.", ur: "غلط نمبر: ملک کا کوڈ اور نمبر چیک کریں۔", vi: "Số không hợp lệ: kiểm tra mã quốc gia và số.", wo: "Limeer bi baaxul : seetal kodu réew mi ak limeer bi.", yo: "Nọ́mbà kò tọ́: ṣàyẹ̀wò kóòdù orílẹ̀-èdè àti nọ́mbà.", zh: "号码无效：请检查国家区号和号码。", zu: "Inombolo engalungile: hlola ikhodi yezwe nenombolo." };
+EXTRA_UI.authPhoneUnavailable = { fr: "La connexion par numéro n'est pas encore disponible. Utilisez Google ou l'e-mail.", en: "Phone sign-in isn't available yet. Use Google or email.", am: "በስልክ መግባት ገና አልተገኘም። Google ወይም ኢሜይል ይጠቀሙ።", ar: "تسجيل الدخول بالهاتف غير متاح بعد. استخدم Google أو البريد الإلكتروني.", bm: "Telefɔni sira ma labɛn fɔlɔ. Google walima e-mail kɛ.", bn: "ফোন দিয়ে লগইন এখনো চালু হয়নি। Google বা ইমেইল ব্যবহার করুন।", de: "Anmeldung per Telefon ist noch nicht verfügbar. Nutzen Sie Google oder E-Mail.", es: "El acceso por teléfono aún no está disponible. Usa Google o el correo.", ha: "Shiga da waya bai samu ba tukuna. Yi amfani da Google ko imel.", hi: "फ़ोन से लॉगिन अभी उपलब्ध नहीं है। Google या ईमेल इस्तेमाल करें।", id: "Masuk dengan telepon belum tersedia. Gunakan Google atau email.", it: "L'accesso col telefono non è ancora disponibile. Usa Google o l'email.", nl: "Inloggen met telefoon is nog niet beschikbaar. Gebruik Google of e-mail.", ja: "電話番号でのログインはまだ利用できません。Google またはメールをご利用ください。", ko: "전화번호 로그인은 아직 사용할 수 없습니다. Google 또는 이메일을 사용하세요.", pl: "Logowanie numerem nie jest jeszcze dostępne. Użyj Google lub e-maila.", pt: "O acesso por telefone ainda não está disponível. Use o Google ou o e-mail.", ru: "Вход по номеру пока недоступен. Используйте Google или эл. почту.", sw: "Kuingia kwa simu bado hakupatikani. Tumia Google au barua pepe.", ta: "தொலைபேசி உள்நுழைவு இன்னும் கிடைக்கவில்லை. Google அல்லது மின்னஞ்சலைப் பயன்படுத்தவும்.", te: "ఫోన్ లాగిన్ ఇంకా అందుబాటులో లేదు. Google లేదా ఈమెయిల్ ఉపయోగించండి.", th: "ยังไม่เปิดให้เข้าสู่ระบบด้วยเบอร์โทร ใช้ Google หรืออีเมล", tl: "Hindi pa available ang pag-login gamit ang telepono. Gamitin ang Google o email.", tr: "Telefonla giriş henüz kullanılamıyor. Google veya e-posta kullanın.", ur: "فون سے لاگ اِن ابھی دستیاب نہیں۔ Google یا ای میل استعمال کریں۔", vi: "Chưa hỗ trợ đăng nhập bằng số điện thoại. Hãy dùng Google hoặc email.", wo: "Duggu ak telefon amagul ba leegi. Jëfandikoo Google walla imeel.", yo: "Wíwọlé pẹ̀lú fóònù kò tíì sí. Lo Google tàbí ímeèlì.", zh: "暂不支持手机号登录，请使用 Google 或邮箱。", zu: "Ukungena ngefoni akukatholakali. Sebenzisa i-Google noma i-imeyili." };
+EXTRA_UI.authOtpSentWhatsapp = { fr: "Code envoyé par WhatsApp au {phone}.", en: "Code sent via WhatsApp to {phone}.", am: "ኮዱ በWhatsApp ወደ {phone} ተልኳል።", ar: "أُرسل الرمز عبر واتساب إلى {phone}.", bm: "Kodi ci WhatsApp fɛ {phone} ma.", bn: "WhatsApp-এ {phone} নম্বরে কোড পাঠানো হয়েছে।", de: "Code per WhatsApp an {phone} gesendet.", es: "Código enviado por WhatsApp al {phone}.", ha: "An aika lambar sirri ta WhatsApp zuwa {phone}.", hi: "WhatsApp पर {phone} को कोड भेजा गया।", id: "Kode dikirim lewat WhatsApp ke {phone}.", it: "Codice inviato su WhatsApp al {phone}.", nl: "Code via WhatsApp verstuurd naar {phone}.", ja: "WhatsApp で {phone} にコードを送信しました。", ko: "WhatsApp으로 {phone}에 코드를 보냈습니다.", pl: "Kod wysłany przez WhatsApp na {phone}.", pt: "Código enviado por WhatsApp para {phone}.", ru: "Код отправлен в WhatsApp на {phone}.", sw: "Msimbo umetumwa kwa WhatsApp kwenda {phone}.", ta: "WhatsApp மூலம் {phone} க்கு குறியீடு அனுப்பப்பட்டது.", te: "WhatsApp ద్వారా {phone}కి కోడ్ పంపబడింది.", th: "ส่งรหัสทาง WhatsApp ไปที่ {phone} แล้ว", tl: "Ipinadala ang code sa WhatsApp sa {phone}.", tr: "Kod WhatsApp ile {phone} numarasına gönderildi.", ur: "کوڈ واٹس ایپ پر {phone} کو بھیج دیا گیا۔", vi: "Đã gửi mã qua WhatsApp đến {phone}.", wo: "Yónne nañu kod bi ci WhatsApp ci {phone}.", yo: "A fi kóòdù ránṣẹ́ lórí WhatsApp sí {phone}.", zh: "验证码已通过 WhatsApp 发送至 {phone}。", zu: "Ikhodi ithunyelwe nge-WhatsApp ku-{phone}." };
+EXTRA_UI.authOtpSentSms = { fr: "Code envoyé par SMS au {phone}.", en: "Code sent by SMS to {phone}.", am: "ኮዱ በSMS ወደ {phone} ተልኳል።", ar: "أُرسل الرمز برسالة نصية إلى {phone}.", bm: "Kodi ci SMS fɛ {phone} ma.", bn: "SMS-এ {phone} নম্বরে কোড পাঠানো হয়েছে।", de: "Code per SMS an {phone} gesendet.", es: "Código enviado por SMS al {phone}.", ha: "An aika lambar sirri ta SMS zuwa {phone}.", hi: "SMS से {phone} को कोड भेजा गया।", id: "Kode dikirim lewat SMS ke {phone}.", it: "Codice inviato via SMS al {phone}.", nl: "Code per sms verstuurd naar {phone}.", ja: "SMS で {phone} にコードを送信しました。", ko: "SMS로 {phone}에 코드를 보냈습니다.", pl: "Kod wysłany SMS-em na {phone}.", pt: "Código enviado por SMS para {phone}.", ru: "Код отправлен по SMS на {phone}.", sw: "Msimbo umetumwa kwa SMS kwenda {phone}.", ta: "SMS மூலம் {phone} க்கு குறியீடு அனுப்பப்பட்டது.", te: "SMS ద్వారా {phone}కి కోడ్ పంపబడింది.", th: "ส่งรหัสทาง SMS ไปที่ {phone} แล้ว", tl: "Ipinadala ang code sa SMS sa {phone}.", tr: "Kod SMS ile {phone} numarasına gönderildi.", ur: "کوڈ SMS کے ذریعے {phone} کو بھیج دیا گیا۔", vi: "Đã gửi mã qua SMS đến {phone}.", wo: "Yónne nañu kod bi ci SMS ci {phone}.", yo: "A fi kóòdù ránṣẹ́ nípasẹ̀ SMS sí {phone}.", zh: "验证码已通过短信发送至 {phone}。", zu: "Ikhodi ithunyelwe nge-SMS ku-{phone}." };
+EXTRA_UI.authResendSms = { fr: "Pas reçu ? Recevoir le code par SMS", en: "Didn't get it? Receive the code by SMS", am: "አልደረሰዎትም? ኮዱን በSMS ይቀበሉ", ar: "لم يصلك؟ استلم الرمز برسالة نصية", bm: "A ma se ? Kodi sɔrɔ SMS fɛ", bn: "পাননি? SMS-এ কোড নিন", de: "Nicht erhalten? Code per SMS erhalten", es: "¿No llegó? Recibir el código por SMS", ha: "Ba ka samu ba? Karɓi lambar ta SMS", hi: "नहीं मिला? SMS से कोड पाएँ", id: "Tidak masuk? Terima kode lewat SMS", it: "Non arrivato? Ricevi il codice via SMS", nl: "Niet ontvangen? Code per sms ontvangen", ja: "届きませんか？SMS でコードを受け取る", ko: "받지 못하셨나요? SMS로 코드 받기", pl: "Nie dotarł? Odbierz kod SMS-em", pt: "Não recebeu? Receber o código por SMS", ru: "Не пришёл? Получить код по SMS", sw: "Hukupokea? Pokea msimbo kwa SMS", ta: "கிடைக்கவில்லையா? SMS மூலம் குறியீட்டைப் பெறுக", te: "రాలేదా? SMS ద్వారా కోడ్ పొందండి", th: "ไม่ได้รับ? รับรหัสทาง SMS", tl: "Hindi natanggap? Tanggapin ang code sa SMS", tr: "Gelmedi mi? Kodu SMS ile al", ur: "نہیں ملا؟ کوڈ SMS سے حاصل کریں", vi: "Chưa nhận được? Nhận mã qua SMS", wo: "Agsul ? Jot kod bi ci SMS", yo: "Kò dé? Gba kóòdù nípasẹ̀ SMS", zh: "没收到？改用短信接收", zu: "Awuyitholanga? Thola ikhodi nge-SMS" };
+EXTRA_UI.authChangePhone = { fr: "Changer de numéro", en: "Use another number", am: "ሌላ ቁጥር ይጠቀሙ", ar: "تغيير الرقم", bm: "Nimɔrɔ wɛrɛ kɛ", bn: "নম্বর বদলান", de: "Andere Nummer verwenden", es: "Cambiar de número", ha: "Canza lamba", hi: "नंबर बदलें", id: "Ganti nomor", it: "Cambia numero", nl: "Ander nummer gebruiken", ja: "番号を変更", ko: "번호 변경", pl: "Zmień numer", pt: "Mudar de número", ru: "Изменить номер", sw: "Badilisha nambari", ta: "எண்ணை மாற்று", te: "నంబర్ మార్చండి", th: "เปลี่ยนเบอร์", tl: "Palitan ang numero", tr: "Numarayı değiştir", ur: "نمبر تبدیل کریں", vi: "Đổi số khác", wo: "Soppi limeer bi", yo: "Yí nọ́mbà padà", zh: "更换号码", zu: "Shintsha inombolo" };
+EXTRA_UI.authAddEmail = { fr: "Ajouter mon e-mail", en: "Add my email", am: "ኢሜይሌን አክል", ar: "إضافة بريدي الإلكتروني", bm: "N ka e-mail fara a kan", bn: "আমার ইমেইল যোগ করুন", de: "Meine E-Mail hinzufügen", es: "Añadir mi correo", ha: "Ƙara imel ɗina", hi: "मेरा ईमेल जोड़ें", id: "Tambahkan email saya", it: "Aggiungi la mia email", nl: "Mijn e-mail toevoegen", ja: "メールアドレスを追加", ko: "내 이메일 추가", pl: "Dodaj mój e-mail", pt: "Adicionar o meu e-mail", ru: "Добавить мою почту", sw: "Ongeza barua pepe yangu", ta: "என் மின்னஞ்சலைச் சேர்", te: "నా ఈమెయిల్ జోడించండి", th: "เพิ่มอีเมลของฉัน", tl: "Idagdag ang email ko", tr: "E-postamı ekle", ur: "میرا ای میل شامل کریں", vi: "Thêm email của tôi", wo: "Yokk sama imeel", yo: "Fi ímeèlì mi kún un", zh: "添加我的邮箱", zu: "Engeza i-imeyili yami" };
+EXTRA_UI.authAddEmailDesc = { fr: "Reliez une adresse e-mail à votre compte : vous pourrez vous connecter avec elle aussi, et recevoir vos résumés par e-mail.", en: "Link an email address to your account: you'll be able to sign in with it too and get your summaries by email.", am: "ኢሜይል አድራሻ ከመለያዎ ጋር ያገናኙ፦ በእሱም መግባት እና ማጠቃለያዎችን በኢሜይል መቀበል ይችላሉ።", ar: "اربط بريدًا إلكترونيًا بحسابك: ستتمكن من تسجيل الدخول به أيضًا وتلقي ملخصاتك عبر البريد.", bm: "E-mail dɔ siri i ka jatebɔsɛbɛn na : i bɛ se ka don a fana fɛ, ani ka i ka kunnafoni kuntaalenw sɔrɔ e-mail fɛ.", bn: "আপনার অ্যাকাউন্টে একটি ইমেইল যুক্ত করুন: এটি দিয়েও লগইন করতে ও ইমেইলে সারাংশ পেতে পারবেন।", de: "Verknüpfen Sie eine E-Mail-Adresse mit Ihrem Konto: Sie können sich auch damit anmelden und Ihre Zusammenfassungen per E-Mail erhalten.", es: "Vincula un correo a tu cuenta: también podrás entrar con él y recibir tus resúmenes por correo.", ha: "Haɗa adireshin imel da asusunka: za ka iya shiga da shi kuma ka karɓi taƙaitawa ta imel.", hi: "अपने खाते से एक ईमेल जोड़ें: इससे भी लॉगिन कर सकेंगे और सारांश ईमेल पर पाएँगे।", id: "Tautkan email ke akun Anda: Anda juga bisa masuk dengannya dan menerima ringkasan lewat email.", it: "Collega un'email al tuo account: potrai accedere anche con essa e ricevere i riepiloghi via email.", nl: "Koppel een e-mailadres aan je account: je kunt er ook mee inloggen en je samenvattingen per e-mail krijgen.", ja: "アカウントにメールアドレスを連携すると、そのメールでもログインでき、サマリーをメールで受け取れます。", ko: "계정에 이메일을 연결하면 그 이메일로도 로그인하고 요약을 이메일로 받을 수 있습니다.", pl: "Połącz adres e-mail z kontem: będziesz mógł też się nim logować i otrzymywać podsumowania e-mailem.", pt: "Associe um e-mail à sua conta: poderá entrar também com ele e receber os resumos por e-mail.", ru: "Привяжите почту к аккаунту: сможете входить и по ней и получать сводки на почту.", sw: "Unganisha barua pepe na akaunti yako: utaweza kuingia nayo pia na kupokea muhtasari kwa barua pepe.", ta: "உங்கள் கணக்குடன் ஒரு மின்னஞ்சலை இணைக்கவும்: அதன் மூலமும் உள்நுழையலாம், சுருக்கங்களை மின்னஞ்சலில் பெறலாம்.", te: "మీ ఖాతాకు ఈమెయిల్ జోడించండి: దానితో కూడా లాగిన్ అవ్వవచ్చు, సారాంశాలు ఈమెయిల్‌లో పొందవచ్చు.", th: "เชื่อมอีเมลกับบัญชี: เข้าสู่ระบบด้วยอีเมลนี้ได้ และรับสรุปทางอีเมล", tl: "I-link ang email sa iyong account: makakapag-login ka rin dito at makakatanggap ng buod sa email.", tr: "Hesabınıza bir e-posta bağlayın: onunla da giriş yapabilir ve özetleri e-postayla alabilirsiniz.", ur: "اپنے اکاؤنٹ سے ای میل جوڑیں: اس سے بھی لاگ اِن کر سکیں گے اور خلاصے ای میل پر ملیں گے۔", vi: "Liên kết email với tài khoản: bạn có thể đăng nhập bằng email và nhận bản tóm tắt qua email.", wo: "Boole imeel ak sa kont : dinga mën a dugg ak moom itam, te jot say tënk ci imeel.", yo: "So ímeèlì mọ́ àkọọ́lẹ̀ rẹ: o lè fi wọlé pẹ̀lú rẹ̀, kí o sì gba àkópọ̀ nípasẹ̀ ímeèlì.", zh: "将邮箱绑定到账户：之后也可用邮箱登录，并通过邮件接收摘要。", zu: "Xhuma i-imeyili ne-akhawunti yakho: uzokwazi ukungena ngayo futhi uthole izifinyezo nge-imeyili." };
+EXTRA_UI.authEmailLinkSent = { fr: "Un lien de confirmation a été envoyé à {email}. Ouvrez-le pour terminer.", en: "A confirmation link was sent to {email}. Open it to finish.", am: "የማረጋገጫ ሊንክ ወደ {email} ተልኳል። ለመጨረስ ይክፈቱት።", ar: "أُرسل رابط تأكيد إلى {email}. افتحه لإتمام العملية.", bm: "Sɛmɛntiyali jiriwali ci {email} ma. A da walasa ka a laban.", bn: "{email}-এ একটি নিশ্চিতকরণ লিঙ্ক পাঠানো হয়েছে। শেষ করতে খুলুন।", de: "Ein Bestätigungslink wurde an {email} gesendet. Öffnen Sie ihn, um abzuschließen.", es: "Se envió un enlace de confirmación a {email}. Ábrelo para terminar.", ha: "An aika hanyar tabbatarwa zuwa {email}. Buɗe ta don kammalawa.", hi: "{email} पर पुष्टि लिंक भेजा गया। पूरा करने के लिए उसे खोलें।", id: "Tautan konfirmasi dikirim ke {email}. Buka untuk menyelesaikan.", it: "Un link di conferma è stato inviato a {email}. Aprilo per completare.", nl: "Er is een bevestigingslink naar {email} gestuurd. Open hem om af te ronden.", ja: "{email} に確認リンクを送信しました。開いて完了してください。", ko: "{email}로 확인 링크를 보냈습니다. 링크를 열어 완료하세요.", pl: "Link potwierdzający wysłano na {email}. Otwórz go, aby zakończyć.", pt: "Foi enviado um link de confirmação para {email}. Abra-o para concluir.", ru: "Ссылка для подтверждения отправлена на {email}. Откройте её, чтобы завершить.", sw: "Kiungo cha uthibitisho kimetumwa kwa {email}. Kifungue ili kumaliza.", ta: "{email} க்கு உறுதிப்படுத்தல் இணைப்பு அனுப்பப்பட்டது. முடிக்க அதைத் திறக்கவும்.", te: "{email}కి నిర్ధారణ లింక్ పంపబడింది. పూర్తి చేయడానికి దాన్ని తెరవండి.", th: "ส่งลิงก์ยืนยันไปที่ {email} แล้ว เปิดลิงก์เพื่อดำเนินการให้เสร็จ", tl: "Nagpadala ng confirmation link sa {email}. Buksan ito para matapos.", tr: "{email} adresine onay bağlantısı gönderildi. Tamamlamak için açın.", ur: "{email} پر تصدیقی لنک بھیجا گیا۔ مکمل کرنے کے لیے اسے کھولیں۔", vi: "Đã gửi liên kết xác nhận đến {email}. Mở liên kết để hoàn tất.", wo: "Yónne nañu lëkkalekaay bu wóoral ci {email}. Ubbil ko ngir jeexal.", yo: "A ti fi ìjápọ̀ ìjẹ́rìísí ránṣẹ́ sí {email}. Ṣí i láti parí.", zh: "确认链接已发送至 {email}，请打开链接完成绑定。", zu: "Isixhumanisi sokuqinisekisa sithunyelwe ku-{email}. Sivule ukuze uqedele." };
+EXTRA_UI.authAddPhone = { fr: "Ajouter mon numéro", en: "Add my phone number", am: "ስልክ ቁጥሬን አክል", ar: "إضافة رقم هاتفي", bm: "N ka telefɔni nimɔrɔ fara a kan", bn: "আমার ফোন নম্বর যোগ করুন", de: "Meine Telefonnummer hinzufügen", es: "Añadir mi número", ha: "Ƙara lambar wayata", hi: "मेरा फ़ोन नंबर जोड़ें", id: "Tambahkan nomor saya", it: "Aggiungi il mio numero", nl: "Mijn nummer toevoegen", ja: "電話番号を追加", ko: "내 전화번호 추가", pl: "Dodaj mój numer", pt: "Adicionar o meu número", ru: "Добавить мой номер", sw: "Ongeza nambari yangu", ta: "என் எண்ணைச் சேர்", te: "నా నంబర్ జోడించండి", th: "เพิ่มเบอร์ของฉัน", tl: "Idagdag ang numero ko", tr: "Numaramı ekle", ur: "میرا نمبر شامل کریں", vi: "Thêm số của tôi", wo: "Yokk sama limeer", yo: "Fi nọ́mbà mi kún un", zh: "添加我的手机号", zu: "Engeza inombolo yami" };
+EXTRA_UI.authAddPhoneDesc = { fr: "Reliez votre numéro à votre compte : vous pourrez vous connecter avec lui aussi, et recevoir vos résumés par WhatsApp.", en: "Link your number to your account: you'll be able to sign in with it too and get your summaries on WhatsApp.", am: "ቁጥርዎን ከመለያዎ ጋር ያገናኙ፦ በእሱም መግባት እና ማጠቃለያዎችን በWhatsApp መቀበል ይችላሉ።", ar: "اربط رقمك بحسابك: ستتمكن من تسجيل الدخول به أيضًا وتلقي ملخصاتك عبر واتساب.", bm: "I ka nimɔrɔ siri i ka jatebɔsɛbɛn na : i bɛ se ka don a fana fɛ, ani ka kuntaalenw sɔrɔ WhatsApp kan.", bn: "আপনার নম্বর অ্যাকাউন্টে যুক্ত করুন: এটি দিয়েও লগইন করতে ও WhatsApp-এ সারাংশ পেতে পারবেন।", de: "Verknüpfen Sie Ihre Nummer mit Ihrem Konto: Sie können sich auch damit anmelden und Zusammenfassungen per WhatsApp erhalten.", es: "Vincula tu número a tu cuenta: también podrás entrar con él y recibir tus resúmenes por WhatsApp.", ha: "Haɗa lambarka da asusunka: za ka iya shiga da ita kuma ka karɓi taƙaitawa ta WhatsApp.", hi: "अपना नंबर खाते से जोड़ें: इससे भी लॉगिन कर सकेंगे और सारांश WhatsApp पर पाएँगे।", id: "Tautkan nomor Anda ke akun: Anda juga bisa masuk dengannya dan menerima ringkasan di WhatsApp.", it: "Collega il tuo numero all'account: potrai accedere anche con esso e ricevere i riepiloghi su WhatsApp.", nl: "Koppel je nummer aan je account: je kunt er ook mee inloggen en samenvattingen via WhatsApp krijgen.", ja: "電話番号をアカウントに連携すると、その番号でもログインでき、WhatsApp でサマリーを受け取れます。", ko: "계정에 번호를 연결하면 그 번호로도 로그인하고 WhatsApp으로 요약을 받을 수 있습니다.", pl: "Połącz numer z kontem: będziesz mógł się nim logować i otrzymywać podsumowania na WhatsApp.", pt: "Associe o seu número à conta: poderá entrar também com ele e receber os resumos no WhatsApp.", ru: "Привяжите номер к аккаунту: сможете входить и по нему и получать сводки в WhatsApp.", sw: "Unganisha nambari yako na akaunti: utaweza kuingia nayo pia na kupokea muhtasari kwa WhatsApp.", ta: "உங்கள் எண்ணைக் கணக்குடன் இணைக்கவும்: அதன் மூலமும் உள்நுழையலாம், WhatsApp இல் சுருக்கங்களைப் பெறலாம்.", te: "మీ నంబర్‌ను ఖాతాకు జోడించండి: దానితో కూడా లాగిన్ అవ్వవచ్చు, WhatsAppలో సారాంశాలు పొందవచ్చు.", th: "เชื่อมเบอร์กับบัญชี: เข้าสู่ระบบด้วยเบอร์นี้ได้ และรับสรุปทาง WhatsApp", tl: "I-link ang numero mo sa account: makakapag-login ka rin dito at makakatanggap ng buod sa WhatsApp.", tr: "Numaranızı hesabınıza bağlayın: onunla da giriş yapabilir ve özetleri WhatsApp'tan alabilirsiniz.", ur: "اپنا نمبر اکاؤنٹ سے جوڑیں: اس سے بھی لاگ اِن کر سکیں گے اور خلاصے واٹس ایپ پر ملیں گے۔", vi: "Liên kết số điện thoại với tài khoản: bạn có thể đăng nhập bằng số này và nhận tóm tắt qua WhatsApp.", wo: "Boole sa limeer ak sa kont : dinga mën a dugg ak moom itam, te jot say tënk ci WhatsApp.", yo: "So nọ́mbà rẹ mọ́ àkọọ́lẹ̀ rẹ: o lè fi wọlé, kí o sì gba àkópọ̀ lórí WhatsApp.", zh: "将手机号绑定到账户：之后也可用手机号登录，并通过 WhatsApp 接收摘要。", zu: "Xhuma inombolo yakho ne-akhawunti: uzokwazi ukungena ngayo futhi uthole izifinyezo ku-WhatsApp." };
+EXTRA_UI.authSendCode = { fr: "Envoyer", en: "Send", am: "ላክ", ar: "إرسال", bm: "A ci", bn: "পাঠান", de: "Senden", es: "Enviar", ha: "Aika", hi: "भेजें", id: "Kirim", it: "Invia", nl: "Versturen", ja: "送信", ko: "보내기", pl: "Wyślij", pt: "Enviar", ru: "Отправить", sw: "Tuma", ta: "அனுப்பு", te: "పంపండి", th: "ส่ง", tl: "Ipadala", tr: "Gönder", ur: "بھیجیں", vi: "Gửi", wo: "Yónne", yo: "Fi ránṣẹ́", zh: "发送", zu: "Thumela" };
+EXTRA_UI.authLinkedDone = { fr: "Ajouté à votre compte.", en: "Added to your account.", am: "ወደ መለያዎ ታክሏል።", ar: "تمت الإضافة إلى حسابك.", bm: "A farala i ka jatebɔsɛbɛn kan.", bn: "আপনার অ্যাকাউন্টে যোগ হয়েছে।", de: "Zu Ihrem Konto hinzugefügt.", es: "Añadido a tu cuenta.", ha: "An ƙara a asusunka.", hi: "आपके खाते में जोड़ दिया गया।", id: "Ditambahkan ke akun Anda.", it: "Aggiunto al tuo account.", nl: "Toegevoegd aan je account.", ja: "アカウントに追加しました。", ko: "계정에 추가되었습니다.", pl: "Dodano do konta.", pt: "Adicionado à sua conta.", ru: "Добавлено в ваш аккаунт.", sw: "Imeongezwa kwenye akaunti yako.", ta: "உங்கள் கணக்கில் சேர்க்கப்பட்டது.", te: "మీ ఖాతాకు జోడించబడింది.", th: "เพิ่มในบัญชีของคุณแล้ว", tl: "Naidagdag sa iyong account.", tr: "Hesabınıza eklendi.", ur: "آپ کے اکاؤنٹ میں شامل ہو گیا۔", vi: "Đã thêm vào tài khoản.", wo: "Yokk nañu ko ci sa kont.", yo: "A ti fi kún àkọọ́lẹ̀ rẹ.", zh: "已添加到您的账户。", zu: "Kungezwe ku-akhawunti yakho." };
+EXTRA_UI.authWhatsappSummary = { fr: "Recevoir aussi par WhatsApp", en: "Also receive on WhatsApp", am: "በWhatsAppም ተቀበል", ar: "الاستلام أيضًا عبر واتساب", bm: "A sɔrɔ WhatsApp kan fana", bn: "WhatsApp-এও পান", de: "Auch per WhatsApp erhalten", es: "Recibir también por WhatsApp", ha: "Karɓa ta WhatsApp ma", hi: "WhatsApp पर भी पाएँ", id: "Terima juga di WhatsApp", it: "Ricevi anche su WhatsApp", nl: "Ook via WhatsApp ontvangen", ja: "WhatsApp でも受け取る", ko: "WhatsApp으로도 받기", pl: "Otrzymuj też na WhatsApp", pt: "Receber também no WhatsApp", ru: "Получать также в WhatsApp", sw: "Pokea pia kwa WhatsApp", ta: "WhatsApp இலும் பெறுக", te: "WhatsAppలో కూడా పొందండి", th: "รับทาง WhatsApp ด้วย", tl: "Tanggapin din sa WhatsApp", tr: "WhatsApp'tan da al", ur: "واٹس ایپ پر بھی حاصل کریں", vi: "Nhận cả qua WhatsApp", wo: "Jot ko itam ci WhatsApp", yo: "Gbà á lórí WhatsApp pẹ̀lú", zh: "同时通过 WhatsApp 接收", zu: "Thola naku-WhatsApp" };
+EXTRA_UI.authWhatsappSummaryDesc = { fr: "Le résumé est aussi envoyé en message WhatsApp au {phone}.", en: "The summary is also sent as a WhatsApp message to {phone}.", am: "ማጠቃለያው በWhatsApp መልእክትም ወደ {phone} ይላካል።", ar: "يُرسل الملخص أيضًا في رسالة واتساب إلى {phone}.", bm: "Kuntaalen bɛ ci WhatsApp cikan fana fɛ {phone} ma.", bn: "সারাংশটি WhatsApp বার্তাতেও {phone} নম্বরে পাঠানো হয়।", de: "Die Zusammenfassung wird auch als WhatsApp-Nachricht an {phone} gesendet.", es: "El resumen también se envía en un mensaje de WhatsApp al {phone}.", ha: "Ana kuma aika taƙaitawar ta saƙon WhatsApp zuwa {phone}.", hi: "सारांश WhatsApp संदेश के रूप में {phone} पर भी भेजा जाता है।", id: "Ringkasan juga dikirim sebagai pesan WhatsApp ke {phone}.", it: "Il riepilogo viene inviato anche come messaggio WhatsApp al {phone}.", nl: "De samenvatting wordt ook als WhatsApp-bericht naar {phone} gestuurd.", ja: "サマリーは {phone} に WhatsApp メッセージでも送信されます。", ko: "요약이 WhatsApp 메시지로도 {phone}에 전송됩니다.", pl: "Podsumowanie jest też wysyłane wiadomością WhatsApp na {phone}.", pt: "O resumo também é enviado numa mensagem WhatsApp para {phone}.", ru: "Сводка также приходит сообщением WhatsApp на {phone}.", sw: "Muhtasari pia hutumwa kama ujumbe wa WhatsApp kwa {phone}.", ta: "சுருக்கம் WhatsApp செய்தியாகவும் {phone} க்கு அனுப்பப்படும்.", te: "సారాంశం WhatsApp సందేశంగా కూడా {phone}కి పంపబడుతుంది.", th: "สรุปจะถูกส่งเป็นข้อความ WhatsApp ไปที่ {phone} ด้วย", tl: "Ipinapadala rin ang buod bilang WhatsApp message sa {phone}.", tr: "Özet ayrıca {phone} numarasına WhatsApp mesajı olarak gönderilir.", ur: "خلاصہ واٹس ایپ پیغام کے طور پر بھی {phone} کو بھیجا جاتا ہے۔", vi: "Bản tóm tắt cũng được gửi qua tin nhắn WhatsApp đến {phone}.", wo: "Tënk bi dañu koy yónne itam ci bataaxal WhatsApp ci {phone}.", yo: "A tún ń fi àkópọ̀ ránṣẹ́ gẹ́gẹ́ bí ìfiránṣẹ́ WhatsApp sí {phone}.", zh: "摘要也会以 WhatsApp 消息发送至 {phone}。", zu: "Isifinyezo siphinde sithunyelwe njengomlayezo we-WhatsApp ku-{phone}." };
+EXTRA_UI.authWhatsappNeedsPhone = { fr: "Ajoutez d'abord votre numéro dans Gérer le compte.", en: "First add your number in Manage account.", am: "መጀመሪያ ቁጥርዎን በመለያ አስተዳደር ውስጥ ያክሉ።", ar: "أضف رقمك أولًا في إدارة الحساب.", bm: "Fɔlɔ, i ka nimɔrɔ fara a kan « Jatebɔsɛbɛn ɲɛnabɔ » kɔnɔ.", bn: "প্রথমে অ্যাকাউন্ট পরিচালনায় আপনার নম্বর যোগ করুন।", de: "Fügen Sie zuerst Ihre Nummer unter Konto verwalten hinzu.", es: "Primero añade tu número en Gestionar la cuenta.", ha: "Da farko ƙara lambarka a Sarrafa asusu.", hi: "पहले खाता प्रबंधन में अपना नंबर जोड़ें।", id: "Tambahkan dulu nomor Anda di Kelola akun.", it: "Prima aggiungi il tuo numero in Gestisci account.", nl: "Voeg eerst je nummer toe bij Account beheren.", ja: "まず「アカウント管理」で電話番号を追加してください。", ko: "먼저 계정 관리에서 번호를 추가하세요.", pl: "Najpierw dodaj numer w Zarządzaniu kontem.", pt: "Adicione primeiro o seu número em Gerir conta.", ru: "Сначала добавьте номер в разделе «Управление аккаунтом».", sw: "Kwanza ongeza nambari yako kwenye Dhibiti akaunti.", ta: "முதலில் கணக்கை நிர்வகி பகுதியில் உங்கள் எண்ணைச் சேர்க்கவும்.", te: "ముందుగా ఖాతా నిర్వహణలో మీ నంబర్ జోడించండి.", th: "เพิ่มเบอร์ของคุณใน จัดการบัญชี ก่อน", tl: "Idagdag muna ang numero mo sa Pamahalaan ang account.", tr: "Önce Hesabı yönet bölümünde numaranızı ekleyin.", ur: "پہلے اکاؤنٹ کا انتظام میں اپنا نمبر شامل کریں۔", vi: "Hãy thêm số điện thoại trong Quản lý tài khoản trước.", wo: "Yokkal sa limeer ci « Saytu kont bi » njëkk.", yo: "Kọ́kọ́ fi nọ́mbà rẹ kún un nínú Ṣàkóso àkọọ́lẹ̀.", zh: "请先在“管理账户”中添加手机号。", zu: "Qala ngokwengeza inombolo yakho ku-Phatha i-akhawunti." };
 EXTRA_UI.homeTopToday = { fr: "Top produits du jour", en: "Top products today", am: "የዛሬ ምርጥ ምርቶች", ar: "أفضل منتجات اليوم", bm: "Bi fɛn feerelenw ɲɛmɔgɔw", bn: "আজকের সেরা পণ্য", de: "Top-Produkte des Tages", es: "Top productos del día", ha: "Manyan kayayyakin yau", hi: "आज के शीर्ष उत्पाद", id: "Produk teratas hari ini", it: "Top prodotti del giorno", nl: "Topproducten van vandaag", ja: "本日の人気商品", ko: "오늘의 인기 상품", pl: "Najlepsze produkty dnia", pt: "Top produtos do dia", ru: "Топ товаров за день", sw: "Bidhaa bora za leo", ta: "இன்றைய முன்னணி பொருட்கள்", te: "ఈ రోజు అగ్ర ఉత్పత్తులు", th: "สินค้าขายดีวันนี้", tl: "Top na produkto ngayong araw", tr: "Günün en çok satanları", ur: "آج کی سرفہرست مصنوعات", vi: "Sản phẩm bán chạy hôm nay", wo: "Marsandiis yi gëna jar tey", yo: "Àwọn ọjà tó ga jù lónìí", zh: "今日热销商品", zu: "Imikhiqizo ehamba phambili namuhla" };
 EXTRA_UI.homeLast7 = { fr: "7 derniers jours", en: "Last 7 days", am: "ያለፉት 7 ቀናት", ar: "آخر 7 أيام", bm: "Tile 7 tɛmɛnenw", bn: "গত ৭ দিন", de: "Letzte 7 Tage", es: "Últimos 7 días", ha: "Kwanaki 7 da suka wuce", hi: "पिछले 7 दिन", id: "7 hari terakhir", it: "Ultimi 7 giorni", nl: "Laatste 7 dagen", ja: "過去7日間", ko: "최근 7일", pl: "Ostatnie 7 dni", pt: "Últimos 7 dias", ru: "Последние 7 дней", sw: "Siku 7 zilizopita", ta: "கடந்த 7 நாட்கள்", te: "గత 7 రోజులు", th: "7 วันที่ผ่านมา", tl: "Nakaraang 7 araw", tr: "Son 7 gün", ur: "پچھلے 7 دن", vi: "7 ngày qua", wo: "7 fan yi weesu", yo: "Ọjọ́ 7 sẹ́yìn", zh: "最近 7 天", zu: "Izinsuku ezingu-7 ezedlule" };
 EXTRA_UI.demoBannerDesc = { fr: "Explorez librement : rien n'est réellement enregistré.", en: "Explore freely: nothing is actually saved.", am: "በነጻነት ያስሱ፦ ምንም ነገር በእውነት አይቀመጥም።", ar: "استكشفوا بحرية: لا شيء يُحفظ فعليًا.", bm: "Aw ye a lajɛ hɔrɔnya la: foyi tɛ mara tiɲɛ na.", bn: "নির্দ্বিধায় ঘুরে দেখুন: আসলে কিছুই সংরক্ষিত হয় না।", de: "Erkunden Sie frei: Es wird nichts wirklich gespeichert.", es: "Explore libremente: nada se guarda realmente.", ha: "Ku bincika cikin 'yanci: babu abin da ake adanawa da gaske.", hi: "खुलकर देखें: असल में कुछ भी सहेजा नहीं जाता।", id: "Jelajahi dengan bebas: tidak ada yang benar-benar disimpan.", it: "Esplori liberamente: nulla viene realmente salvato.", nl: "Verken vrij: er wordt niets echt opgeslagen.", ja: "ご自由にお試しください。実際には何も保存されません。", ko: "자유롭게 둘러보세요. 실제로는 아무것도 저장되지 않습니다.", pl: "Proszę swobodnie zwiedzać: nic nie jest naprawdę zapisywane.", pt: "Explore livremente: nada é realmente guardado.", ru: "Изучайте свободно: на самом деле ничего не сохраняется.", sw: "Chunguza kwa uhuru: hakuna kinachohifadhiwa kihalisi.", ta: "தாராளமாகப் பாருங்கள்: உண்மையில் எதுவும் சேமிக்கப்படாது.", te: "స్వేచ్ఛగా పరిశీలించండి: నిజానికి ఏదీ సేవ్ కాదు.", th: "สำรวจได้อย่างอิสระ: ไม่มีการบันทึกข้อมูลจริง", tl: "Malayang mag-explore: walang talagang nase-save.", tr: "Serbestçe keşfedin: hiçbir şey gerçekten kaydedilmez.", ur: "آزادی سے دیکھیں: کچھ بھی حقیقت میں محفوظ نہیں ہوتا۔", vi: "Hãy khám phá thoải mái: không có gì thực sự được lưu.", wo: "Seetleen ci ndimbal: dara duñu ko denc dëgg.", yo: "Ẹ ṣàwárí láìsí ìdíwọ́: kò sí ohun tí a ń fipamọ́ ní tòótọ́.", zh: "请随意体验：不会真正保存任何内容。", zu: "Hlola ngokukhululeka: akukho okulondolozwa ngempela." };
@@ -7395,7 +7450,7 @@ function stripShopLevelKeys(blob) {
   });
   return out;
 }
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "weeklySummaryEnabled", "weeklySummaryDay", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled", "loyaltyRewardThreshold", "loyaltyRewardMode", "debtReminderAutoMode", "defaultPaymentMethod"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "weeklySummaryEnabled", "weeklySummaryDay", "whatsappSummaryEnabled", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled", "loyaltyRewardThreshold", "loyaltyRewardMode", "debtReminderAutoMode", "defaultPaymentMethod"];
 // ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
 // On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
 // "light" / "dark" / "system"), pour que l'écran de connexion garde la même ambiance. Pour un
@@ -7561,6 +7616,8 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     // Rapport hebdomadaire : même logique (activé par défaut, désactivable), jour de la
     // semaine réglable séparément (0=dimanche..6=samedi, lundi par défaut).
     weeklySummaryEnabled: winner.weeklySummaryEnabled !== false,
+    // Résumés aussi par WhatsApp (payant à l'envoi) : désactivé tant que le boutiquier ne l'active pas.
+    whatsappSummaryEnabled: winner.whatsappSummaryEnabled === true,
     weeklySummaryDay: winner.weeklySummaryDay ?? 1,
     darkMode: !!winner.darkMode,
     themeMode: winner.themeMode || (winner.darkMode ? "dark" : "system"),
@@ -7994,6 +8051,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   const [pin, setPin] = useState("");
   // ---- connexion sans mot de passe (code à 6 chiffres envoyé par e-mail, comme Google) ----
   const [loginOtpSent, setLoginOtpSent] = useState(false);
+  // "email" (code par e-mail) ou "phone" (code par WhatsApp / SMS).
+  const [loginMethod, setLoginMethod] = useState("email");
+  const [loginPhoneCode, setLoginPhoneCode] = useState(() => guessDialCodeFromTimezone());
+  const [loginPhoneLocal, setLoginPhoneLocal] = useState("");
+  const [loginOtpChannel, setLoginOtpChannel] = useState("whatsapp");
   const [loginOtpCode, setLoginOtpCode] = useState("");
   const [loginOtpSending, setLoginOtpSending] = useState(false);
   const [loginOtpVerifying, setLoginOtpVerifying] = useState(false);
@@ -8161,7 +8223,24 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   // shouldCreateUser: true — si l'adresse n'a pas encore de compte Supabase Auth, Supabase
   // en amorce un ; verifyLoginOtp() décide ensuite s'il s'agit d'une boutique existante
   // (connexion directe) ou d'une première fois (direction l'onboarding, comme pour Google).
+  const loginPhoneE164 = toE164(loginPhoneCode, loginPhoneLocal);
+  const sendLoginPhoneOtp = async (channel) => {
+    setError("");
+    if (!loginPhoneE164) { setError(tx(lang, "authInvalidPhone")); return; }
+    setLoginOtpSending(true);
+    const res = await sendPhoneOtp(loginPhoneE164, channel || "whatsapp", { shouldCreateUser: true });
+    setLoginOtpSending(false);
+    if (res.error) {
+      const m = String(res.error.message || "");
+      setError(/provider|unsupported|disabled|not enabled/i.test(m) ? tx(lang, "authPhoneUnavailable") : m);
+      return;
+    }
+    setLoginOtpChannel(res.channel);
+    setLoginOtpSent(true);
+    setLoginOtpCode("");
+  };
   const sendLoginOtp = async () => {
+    if (loginMethod === "phone") return sendLoginPhoneOtp("whatsapp");
     setError("");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username.trim())) {
       setError(t(lang, "invalidEmail"));
@@ -8180,11 +8259,12 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   const verifyLoginOtp = async () => {
     setError("");
     setLoginOtpVerifying(true);
-    const { data, error: verifyError } = await supabase.auth.verifyOtp({
-      email: username.trim().toLowerCase(),
-      token: loginOtpCode.trim(),
-      type: "email",
-    });
+    const byPhone = loginMethod === "phone";
+    // Identifiant du compte côté app : l'e-mail, ou le numéro international pour un compte téléphone.
+    const loginId = byPhone ? loginPhoneE164 : username.trim().toLowerCase();
+    const { data, error: verifyError } = byPhone
+      ? await supabase.auth.verifyOtp({ phone: loginPhoneE164, token: loginOtpCode.trim(), type: "sms" })
+      : await supabase.auth.verifyOtp({ email: loginId, token: loginOtpCode.trim(), type: "email" });
     if (verifyError || !data.session) {
       setError(t(lang, "wrongOtpCode"));
       setLoginOtpVerifying(false);
@@ -8197,12 +8277,13 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       .single();
     setLoginOtpVerifying(false);
     if (shopRow) {
-      onLogin(username.trim().toLowerCase(), shopRow.shop_name);
+      onLogin(loginId, shopRow.shop_name);
     } else {
       // Première connexion avec cette adresse : identité déjà vérifiée par e-mail, donc on
       // saute directement au récapitulatif boutique, exactement comme pour "Continuer avec Google".
       setIsGoogleFlow(true);
-      setObUsername(username.trim().toLowerCase());
+      setObUsername(loginId);
+      if (byPhone && !obPhone) setObPhone(`${loginPhoneCode} ${loginPhoneLocal}`.trim());
       setObStep(1);
       setScreen("onboarding");
     }
@@ -8499,6 +8580,49 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </div>
             {!loginOtpSent ? (
               <>
+                {PHONE_AUTH_ENABLED && (
+                  <div className="flex p-1 rounded-xl mb-3" style={{ background: AT.input, border: `1px solid ${AT.border}` }}>
+                    {[["email", tx(lang, "authMethodEmail")], ["phone", tx(lang, "authMethodPhone")]].map(([id, label]) => (
+                      <button
+                        key={id}
+                        type="button"
+                        onClick={() => { setLoginMethod(id); setError(""); }}
+                        className="flex-1 py-2 rounded-lg text-xs font-bold transition-colors"
+                        style={loginMethod === id ? { background: darkMode ? "#4F46E5" : "#15162C", color: "white" } : { background: "transparent", color: AT.muted }}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {loginMethod === "phone" && PHONE_AUTH_ENABLED ? (
+                  <div className="mb-1">
+                    <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{tx(lang, "authPhoneLabel")}</label>
+                    <div className="flex items-stretch gap-2" dir="ltr">
+                      <input
+                        type="tel"
+                        inputMode="tel"
+                        autoComplete="off"
+                        value={loginPhoneCode}
+                        onChange={(e) => { const d = e.target.value.replace(/\D/g, "").slice(0, 4); setLoginPhoneCode(d ? "+" + d : ""); }}
+                        placeholder="+"
+                        className="shrink-0 border rounded-xl px-2 py-2.5 text-sm font-bold text-center"
+                        style={{ width: "4.8rem", background: AT.input, color: AT.text, borderColor: AT.border }}
+                      />
+                      <input
+                        type="tel"
+                        inputMode="tel"
+                        autoComplete="tel-national"
+                        value={loginPhoneLocal}
+                        onChange={(e) => setLoginPhoneLocal(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === "Enter") sendLoginOtp(); }}
+                        placeholder="00 00 00 00"
+                        className="flex-1 min-w-0 border rounded-xl px-3 py-2.5 text-sm"
+                        style={{ background: AT.input, color: AT.text, borderColor: AT.border }}
+                      />
+                    </div>
+                  </div>
+                ) : (
                 <div className="mb-1">
                   <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "identifier")}</label>
                   <input autoComplete="off"
@@ -8511,6 +8635,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                     style={{ background: AT.input, color: AT.text, borderColor: AT.border }}
                   />
                 </div>
+                )}
                 {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
                 <button disabled={loginOtpSending} onClick={sendLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: darkMode ? "#4F46E5" : "#15162C", opacity: loginOtpSending ? 0.75 : 1 }}>
                   {loginOtpSending ? t(lang, "wait") : t(lang, "loginBtn")}
@@ -8519,7 +8644,9 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             ) : (
               <>
                 <p className="text-sm mb-3" style={{ color: AT.muted }}>
-                  {t(lang, "otpSentMessage").replace("{email}", username.trim().toLowerCase())}
+                  {loginMethod === "phone"
+                    ? tx(lang, loginOtpChannel === "sms" ? "authOtpSentSms" : "authOtpSentWhatsapp").replace("{phone}", loginPhoneE164)
+                    : t(lang, "otpSentMessage").replace("{email}", username.trim().toLowerCase())}
                 </p>
                 <div className="mb-1">
                   <input autoComplete="off"
@@ -8537,8 +8664,13 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 <button disabled={loginOtpVerifying || loginOtpCode.trim().length < 6} onClick={verifyLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: darkMode ? "#4F46E5" : "#15162C", opacity: loginOtpVerifying || loginOtpCode.trim().length < 6 ? 0.6 : 1 }}>
                   {loginOtpVerifying ? t(lang, "wait") : t(lang, "otpVerifyBtn")}
                 </button>
+                {loginMethod === "phone" && loginOtpChannel === "whatsapp" && (
+                  <button disabled={loginOtpSending} onClick={() => sendLoginPhoneOtp("sms")} className="block w-full text-center text-[11px] mt-3 font-semibold" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
+                    {tx(lang, "authResendSms")}
+                  </button>
+                )}
                 <button onClick={changeLoginEmail} className="block w-full text-center text-[11px] mt-3 underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
-                  {t(lang, "changeEmailLink")}
+                  {loginMethod === "phone" ? tx(lang, "authChangePhone") : t(lang, "changeEmailLink")}
                 </button>
               </>
             )}
@@ -10002,6 +10134,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // la même heure locale que le résumé quotidien (dailySummaryHour/UtcOffsetMinutes), on ne
   // demande que le jour de la semaine en plus. 0 = dimanche … 6 = samedi (lundi par défaut).
   const [weeklySummaryEnabled, setWeeklySummaryEnabled] = useState(true);
+  const [whatsappSummaryEnabled, setWhatsappSummaryEnabled] = useState(false);
   const [weeklySummaryDay, setWeeklySummaryDay] = useState(1);
   const [darkMode, setDarkMode] = useState(getInitialDarkPreference);
   useEffect(() => { try { document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light"); } catch (e) {} }, [darkMode]);
@@ -11490,6 +11623,65 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [showForgotPin, setShowForgotPin] = useState(false);
   const [forgotPinStep, setForgotPinStep] = useState("start"); // start | code | newpin
   const [forgotPinEmail, setForgotPinEmail] = useState("");
+  const [forgotPinPhone, setForgotPinPhone] = useState("");
+  const [forgotPinChannel, setForgotPinChannel] = useState("whatsapp");
+  // Moyens de connexion rattachés au compte Supabase (e-mail et/ou numéro), pour proposer
+  // « Ajouter mon e-mail » / « Ajouter mon numéro » dans Gérer le compte.
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPhone, setAuthPhone] = useState("");
+  const [linkEmailInput, setLinkEmailInput] = useState("");
+  const [linkPhoneCode, setLinkPhoneCode] = useState("");
+  const [linkPhoneLocal, setLinkPhoneLocal] = useState("");
+  const [linkStep, setLinkStep] = useState("input"); // "input" | "code" | "sent" | "done"
+  const [linkCodeInput, setLinkCodeInput] = useState("");
+  const [linkMsg, setLinkMsg] = useState("");
+  const [linkBusy, setLinkBusy] = useState(false);
+  useEffect(() => {
+    if (isDemo) return;
+    let alive = true;
+    supabase.auth.getUser().then(({ data }) => {
+      if (!alive || !data || !data.user) return;
+      setAuthEmail(data.user.email || "");
+      setAuthPhone(data.user.phone ? "+" + String(data.user.phone).replace(/^\+/, "") : "");
+    }).catch(() => {});
+    return () => { alive = false; };
+  }, [isDemo]);
+  const openLinkField = (field) => {
+    setLinkStep("input"); setLinkMsg(""); setLinkCodeInput(""); setLinkBusy(false);
+    if (field === "linkemail") setLinkEmailInput("");
+    if (field === "linkphone") { setLinkPhoneCode(ownDialCode || guessDialCodeFromTimezone()); setLinkPhoneLocal(""); }
+  };
+  const submitLinkEmail = async () => {
+    const email = linkEmailInput.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setLinkMsg(t(lang, "invalidEmail")); return; }
+    setLinkBusy(true); setLinkMsg("");
+    const { error } = await supabase.auth.updateUser({ email }, { emailRedirectTo: window.location.origin });
+    setLinkBusy(false);
+    if (error) { setLinkMsg(error.message); return; }
+    setLinkStep("sent");
+  };
+  const submitLinkPhone = async () => {
+    const phone = toE164(linkPhoneCode, linkPhoneLocal);
+    if (!phone) { setLinkMsg(tx(lang, "authInvalidPhone")); return; }
+    setLinkBusy(true); setLinkMsg("");
+    const { error } = await supabase.auth.updateUser({ phone });
+    setLinkBusy(false);
+    if (error) {
+      const m = String(error.message || "");
+      setLinkMsg(/provider|unsupported|disabled|not enabled/i.test(m) ? tx(lang, "authPhoneUnavailable") : m);
+      return;
+    }
+    setLinkStep("code"); setLinkCodeInput("");
+  };
+  const verifyLinkPhone = async () => {
+    const phone = toE164(linkPhoneCode, linkPhoneLocal);
+    setLinkBusy(true); setLinkMsg("");
+    const { data, error } = await supabase.auth.verifyOtp({ phone, token: linkCodeInput.trim(), type: "phone_change" });
+    setLinkBusy(false);
+    if (error || !data || !data.user) { setLinkMsg(t(lang, "wrongCode")); return; }
+    setAuthPhone(phone);
+    setLinkStep("done");
+  };
   const [forgotPinCodeInput, setForgotPinCodeInput] = useState("");
   const [forgotPinNewPin, setForgotPinNewPin] = useState("");
   const [forgotPinConfirmPin, setForgotPinConfirmPin] = useState("");
@@ -11505,14 +11697,25 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (isDemo) return;
     try {
       const { data } = await supabase.auth.getUser();
-      setForgotPinEmail(data && data.user ? data.user.email : "");
-    } catch { setForgotPinEmail(""); }
+      setForgotPinEmail(data && data.user ? data.user.email || "" : "");
+      setForgotPinPhone(data && data.user && data.user.phone ? "+" + String(data.user.phone).replace(/^\+/, "") : "");
+    } catch { setForgotPinEmail(""); setForgotPinPhone(""); }
   };
   const sendForgotPinCode = async () => {
     if (isDemo) { setForgotPinStep("code"); return; }
-    if (!forgotPinEmail) { setForgotPinError(t(lang, "genericError")); return; }
+    if (!forgotPinEmail && !forgotPinPhone) { setForgotPinError(t(lang, "genericError")); return; }
     setForgotPinBusy(true);
     setForgotPinError("");
+    // Compte avec e-mail : code par e-mail (comme avant). Compte uniquement téléphone :
+    // code par WhatsApp, SMS en secours.
+    if (!forgotPinEmail) {
+      const res = await sendPhoneOtp(forgotPinPhone, "whatsapp", { shouldCreateUser: false });
+      setForgotPinBusy(false);
+      if (res.error) { setForgotPinError(res.error.message); return; }
+      setForgotPinChannel(res.channel);
+      setForgotPinStep("code");
+      return;
+    }
     const { error } = await supabase.auth.signInWithOtp({
       email: forgotPinEmail,
       options: { shouldCreateUser: false },
@@ -11529,11 +11732,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     setForgotPinBusy(true);
     setForgotPinError("");
-    const { data, error } = await supabase.auth.verifyOtp({
-      email: forgotPinEmail,
-      token: forgotPinCodeInput.trim(),
-      type: "email",
-    });
+    const { data, error } = forgotPinEmail
+      ? await supabase.auth.verifyOtp({ email: forgotPinEmail, token: forgotPinCodeInput.trim(), type: "email" })
+      : await supabase.auth.verifyOtp({ phone: forgotPinPhone, token: forgotPinCodeInput.trim(), type: "sms" });
     setForgotPinBusy(false);
     if (error || !data.session) { setForgotPinError(t(lang, "wrongCode")); return; }
     setForgotPinStep("newpin");
@@ -12365,6 +12566,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setDailySummaryUtcOffsetMinutes(shop.dailySummaryUtcOffsetMinutes ?? -new Date().getTimezoneOffset());
     setDailySummaryEnabled(shop.dailySummaryEnabled !== false);
     setWeeklySummaryEnabled(shop.weeklySummaryEnabled !== false);
+    setWhatsappSummaryEnabled(shop.whatsappSummaryEnabled === true);
     setWeeklySummaryDay(shop.weeklySummaryDay ?? 1);
     setThemeMode(shop.themeMode || (shop.darkMode ? "dark" : "system"));
     setShowBalls(shop.showBalls !== false);
@@ -12797,6 +12999,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       dailySummaryHour: overrides.dailySummaryHour ?? dailySummaryHour,
       dailySummaryEnabled: overrides.dailySummaryEnabled ?? dailySummaryEnabled,
       weeklySummaryEnabled: overrides.weeklySummaryEnabled ?? weeklySummaryEnabled,
+      whatsappSummaryEnabled: overrides.whatsappSummaryEnabled ?? whatsappSummaryEnabled,
       weeklySummaryDay: overrides.weeklySummaryDay ?? weeklySummaryDay,
       // Recalculé à chaque sauvegarde de ce réglage à partir du fuseau horaire ACTUEL
       // de l'appareil (voir le commentaire sur le state dailySummaryHour) : c'est la
@@ -12849,6 +13052,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setDailySummaryUtcOffsetMinutes(next.dailySummaryUtcOffsetMinutes);
     setDailySummaryEnabled(next.dailySummaryEnabled);
     setWeeklySummaryEnabled(next.weeklySummaryEnabled);
+    setWhatsappSummaryEnabled(next.whatsappSummaryEnabled === true);
     setWeeklySummaryDay(next.weeklySummaryDay);
     setDarkMode(next.darkMode);
     setThemeMode(next.themeMode);
@@ -17337,7 +17541,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {forgotPinStep === "start" && (
               <>
                 <p className="text-xs mb-4" style={{ color: T.muted }}>
-                  {t(lang, "forgotPinStartDesc").replace("{email}", forgotPinEmail || "…")}
+                  {t(lang, "forgotPinStartDesc").replace("{email}", forgotPinEmail || forgotPinPhone || "…")}
                 </p>
                 {forgotPinError && <p className="text-xs mb-2" style={{ color: CLAY }}>{forgotPinError}</p>}
                 <button onClick={sendForgotPinCode} disabled={forgotPinBusy} className="w-full py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: INDIGO, opacity: forgotPinBusy ? 0.6 : 1 }}>
@@ -17347,7 +17551,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {forgotPinStep === "code" && (
               <>
-                <p className="text-xs mb-3" style={{ color: T.muted }}>{t(lang, "emailCodeSentNotice").replace("{email}", forgotPinEmail)}</p>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{forgotPinEmail ? t(lang, "emailCodeSentNotice").replace("{email}", forgotPinEmail) : tx(lang, forgotPinChannel === "sms" ? "authOtpSentSms" : "authOtpSentWhatsapp").replace("{phone}", forgotPinPhone)}</p>
                 <input autoComplete="off"
                   value={forgotPinCodeInput}
                   onChange={(e) => setForgotPinCodeInput(e.target.value.replace(/\D/g, "").slice(0, 6))}
@@ -21571,6 +21775,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "categories" && (t(lang, "setCategories"))}
                   {settingsField === "threshold2" && t(lang, "stockAlert")}
                   {settingsField === "sharecard" && tx(lang, "shareCardSettingsTitle")}
+                  {settingsField === "linkemail" && tx(lang, "authAddEmail")}
+                  {settingsField === "linkphone" && tx(lang, "authAddPhone")}
                   {settingsField === "defpayment" && (t(lang, "setPaiementParDefaut"))}
                   {settingsField === "debtdelay" && (t(lang, "setDettesClients"))}
                   {settingsField === "benchmark" && t(lang, "benchmarkTitle")}
@@ -21646,6 +21852,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {settingsView === "account" && !settingsField && [
                 // E-mail : identité de connexion (vérifiée à l'inscription), donc lecture seule.
                 { id: "id", label: t(lang, "identifier"), right: <span style={{ display: "flex", alignItems: "center", gap: 5, color: T.muted, fontSize: 12 }}><Lock size={11} />{username}</span> },
+                ...(!isDemo && authEmail && authPhone && authPhone !== username ? [{ id: "authphoneinfo", label: tx(lang, "authPhoneLabel"), right: <span dir="ltr" style={{ display: "flex", alignItems: "center", gap: 5, color: T.muted, fontSize: 12 }}><Lock size={11} />{authPhone}</span> }] : []),
+                ...(!isDemo && !authEmail ? [{ id: "linkemail", label: tx(lang, "authAddEmail"), right: <span style={{ color: darkMode ? "#8B85F2" : INDIGO, fontSize: 18, fontWeight: 700, lineHeight: 1 }}>+</span> }] : []),
+                ...(!isDemo && PHONE_AUTH_ENABLED && !authPhone ? [{ id: "linkphone", label: tx(lang, "authAddPhone"), right: <span style={{ color: darkMode ? "#8B85F2" : INDIGO, fontSize: 18, fontWeight: 700, lineHeight: 1 }}>+</span> }] : []),
                 { id: "photo", label: t(lang, "shopPhoto"), right: shopPhoto ? <img src={shopPhoto} alt="" style={{ width: 26, height: 26, borderRadius: "50%", objectFit: "cover" }} /> : <Camera size={14} color={T.muted} /> },
                 { id: "ownername", label: `${t(lang, "firstName")} · ${t(lang, "lastName")}`, right: <span style={{ color: T.muted, fontSize: 12 }}>{`${ownerFirstName} ${ownerLastName}`.trim() || "—"}</span> },
                 { id: "name", label: t(lang, "shopName"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopName}</span> },
@@ -21661,6 +21870,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   if (item.id === "ownername") { setOwnerFirstInput(ownerFirstName); setOwnerLastInput(ownerLastName); setOwnerNameMsg(""); }
                   if (item.id === "name") { setShopNameInput(shopName); setShopNameMsg(""); }
                   if (item.id === "phone") { setShopPhoneInput(shopPhone || (shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : "")); setShopPhoneMsg(""); }
+                  if (item.id === "authphoneinfo") return;
+                  if (item.id === "linkemail" || item.id === "linkphone") openLinkField(item.id);
                   if (item.id === "sector") setSectorMsg("");
                   if (item.id === "country") { setCountryMsg(""); setCountrySearchQuery(""); }
                   setSettingsField(item.id);
@@ -22047,6 +22258,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   )}
                 </div>
               )}
+              {/* Résumés aussi par WhatsApp (option payante côté envoi, au numéro du compte) */}
+              {PHONE_AUTH_ENABLED && (settingsField === "dailysummary" || settingsField === "weeklysummary") && (
+                <div style={{ marginTop: 10, padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <div style={{ flex: 1, paddingInlineEnd: 12 }}>
+                      <div style={{ color: T.text, fontSize: 14, fontWeight: 600 }}>{tx(lang, "authWhatsappSummary")}</div>
+                      <div style={{ color: T.muted, fontSize: 11.5, marginTop: 4, lineHeight: 1.5 }}>{authPhone ? tx(lang, "authWhatsappSummaryDesc").replace("{phone}", authPhone) : tx(lang, "authWhatsappNeedsPhone")}</div>
+                    </div>
+                    <button disabled={!authPhone} onClick={() => saveAll({ whatsappSummaryEnabled: !whatsappSummaryEnabled })} style={{ width: 48, height: 28, borderRadius: 14, background: whatsappSummaryEnabled && authPhone ? "#22c55e" : T.border, display: "flex", alignItems: "center", padding: "0 4px", justifyContent: whatsappSummaryEnabled && authPhone ? "flex-end" : "flex-start", flexShrink: 0, border: "none", cursor: authPhone ? "pointer" : "not-allowed", opacity: authPhone ? 1 : 0.5 }}>
+                      <span style={{ width: 20, height: 20, borderRadius: "50%", background: "white", display: "block" }} />
+                    </button>
+                  </div>
+                </div>
+              )}
               {/* Boutique — Rapport hebdomadaire automatique (notification push, 1x/semaine) */}
               {settingsField === "weeklysummary" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -22073,6 +22298,45 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </select>
                       <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{tx(lang, "weeklySummaryTimeNote").replace("{time}", `${String(dailySummaryHour).padStart(2, "0")}:00`)}</p>
                     </div>
+                  )}
+                </div>
+              )}
+              {settingsField === "linkemail" && (
+                <div>
+                  <p className="text-xs mb-3" style={{ color: T.muted, lineHeight: 1.5 }}>{tx(lang, "authAddEmailDesc")}</p>
+                  {linkStep === "sent" ? (
+                    <p className="text-sm font-semibold rounded-xl px-3 py-3" style={{ background: darkMode ? "rgba(34,197,94,0.14)" : "#dcfce7", color: darkMode ? "#86efac" : "#166534" }}>{tx(lang, "authEmailLinkSent").replace("{email}", linkEmailInput.trim().toLowerCase())}</p>
+                  ) : (
+                    <>
+                      <input type="email" autoComplete="email" value={linkEmailInput} onChange={(e) => setLinkEmailInput(e.target.value)} placeholder={t(lang, "identifierPlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} dir="ltr" />
+                      {linkMsg && <p className="text-xs mt-2" style={{ color: CLAY }}>{linkMsg}</p>}
+                      <button disabled={linkBusy} onClick={submitLinkEmail} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-3" style={{ background: INDIGO, opacity: linkBusy ? 0.7 : 1 }}>{linkBusy ? t(lang, "wait") : tx(lang, "authSendCode")}</button>
+                    </>
+                  )}
+                </div>
+              )}
+              {settingsField === "linkphone" && (
+                <div>
+                  <p className="text-xs mb-3" style={{ color: T.muted, lineHeight: 1.5 }}>{tx(lang, "authAddPhoneDesc")}</p>
+                  {linkStep === "done" ? (
+                    <p className="text-sm font-semibold rounded-xl px-3 py-3" style={{ background: darkMode ? "rgba(34,197,94,0.14)" : "#dcfce7", color: darkMode ? "#86efac" : "#166534" }}>✓ {tx(lang, "authLinkedDone")}</p>
+                  ) : linkStep === "code" ? (
+                    <>
+                      <p className="text-xs mb-2" style={{ color: T.muted }}>{tx(lang, "authOtpSentSms").replace("{phone}", toE164(linkPhoneCode, linkPhoneLocal))}</p>
+                      <input inputMode="numeric" value={linkCodeInput} onChange={(e) => setLinkCodeInput(e.target.value.replace(/\D/g, "").slice(0, 6))} placeholder={t(lang, "otpCodePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm text-center tracking-[0.3em] font-semibold" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                      {linkMsg && <p className="text-xs mt-2" style={{ color: CLAY }}>{linkMsg}</p>}
+                      <button disabled={linkBusy || linkCodeInput.length < 6} onClick={verifyLinkPhone} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-3" style={{ background: INDIGO, opacity: linkBusy || linkCodeInput.length < 6 ? 0.6 : 1 }}>{linkBusy ? t(lang, "wait") : t(lang, "otpVerifyBtn")}</button>
+                      <button onClick={() => { setLinkStep("input"); setLinkMsg(""); }} className="block w-full text-center text-[11px] mt-3 underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>{tx(lang, "authChangePhone")}</button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-stretch gap-2" dir="ltr">
+                        <input type="tel" inputMode="tel" value={linkPhoneCode} onChange={(e) => { const d = e.target.value.replace(/\D/g, "").slice(0, 4); setLinkPhoneCode(d ? "+" + d : ""); }} placeholder="+" className="shrink-0 border rounded-xl px-2 py-2.5 text-sm font-bold text-center" style={{ width: "4.8rem", background: T.input, color: T.text, borderColor: T.border }} />
+                        <input type="tel" inputMode="tel" value={linkPhoneLocal} onChange={(e) => setLinkPhoneLocal(e.target.value)} placeholder="00 00 00 00" className="flex-1 min-w-0 border rounded-xl px-3 py-2.5 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                      </div>
+                      {linkMsg && <p className="text-xs mt-2" style={{ color: CLAY }}>{linkMsg}</p>}
+                      <button disabled={linkBusy} onClick={submitLinkPhone} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-3" style={{ background: INDIGO, opacity: linkBusy ? 0.7 : 1 }}>{linkBusy ? t(lang, "wait") : tx(lang, "authSendCode")}</button>
+                    </>
                   )}
                 </div>
               )}
@@ -23690,7 +23954,7 @@ function BoutiqueAppInner() {
               supabase.from("shop_data").select("owner_id, shop_name").eq("owner_id", sessionData.user.id).maybeSingle()
                 .then(({ data: shopRow }) => {
                   if (shopRow) {
-                    Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: sessionData.user.email, shopName: shopRow.shop_name }) }).catch(() => {});
+                    Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: authIdOf(sessionData.user), shopName: shopRow.shop_name }) }).catch(() => {});
                   }
                 }).catch(() => {});
               return;
@@ -23722,9 +23986,9 @@ function BoutiqueAppInner() {
         } else {
           // Compte déjà existant : on connecte directement, sans repasser
           // par l'onboarding ni par l'écran de connexion classique.
-          setSession({ type: "shop", username: sessionData.user.email, shopName: shopRow.shop_name });
+          setSession({ type: "shop", username: authIdOf(sessionData.user), shopName: shopRow.shop_name });
           if (isCapacitorApp) {
-            Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: sessionData.user.email, shopName: shopRow.shop_name }) }).catch(() => {});
+            Preferences.set({ key: CACHE_KEY, value: JSON.stringify({ ownerId: sessionData.user.id, username: authIdOf(sessionData.user), shopName: shopRow.shop_name }) }).catch(() => {});
           }
         }
       } catch (e) {
@@ -23733,7 +23997,7 @@ function BoutiqueAppInner() {
         // affiche l'accueil (ShopApp affiche déjà "Chargement de la boutique…" tant que
         // shopName est vide) plutôt que de renvoyer l'utilisateur au login. Le nom de la
         // boutique sera récupéré au prochain lancement ou à la prochaine action réseau.
-        setSession({ type: "shop", username: sessionData.user.email, shopName: "" });
+        setSession({ type: "shop", username: authIdOf(sessionData.user), shopName: "" });
       } finally {
         setCheckingGoogleOnboarding(false);
       }
