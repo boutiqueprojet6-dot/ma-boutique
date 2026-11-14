@@ -11662,6 +11662,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       swipeStartRef.current = null;
       return;
     }
+    // Si le doigt commence sur une zone qui défile elle-même à l'horizontale (liste de noms de
+    // clients, filtres, catégories, graphiques…), le glisser sert à la faire défiler : on ne
+    // change PAS d'onglet. Détection automatique, valable pour toute zone défilante actuelle ou future.
+    try {
+      let el = target;
+      const root = e.currentTarget;
+      while (el && el !== root && el.nodeType === 1) {
+        const ox = window.getComputedStyle(el).overflowX;
+        if ((ox === "auto" || ox === "scroll") && el.scrollWidth > el.clientWidth + 1) {
+          swipeStartRef.current = null;
+          return;
+        }
+        el = el.parentElement;
+      }
+    } catch (err) { /* sans conséquence : on retombe sur le comportement normal */ }
     const touch = e.touches[0];
     swipeStartRef.current = { x: touch.clientX, y: touch.clientY };
   };
