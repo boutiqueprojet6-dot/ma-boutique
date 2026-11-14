@@ -434,6 +434,14 @@ function authIdOf(user) {
 function guessDialCodeFromTimezone() {
   try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; return TZ_DIAL_CODE[tz] || ""; } catch (e) { return ""; }
 }
+// Pays deviné à partir du fuseau horaire (via l'indicatif), pour préremplir l'inscription :
+// pays, monnaie et indicatif téléphonique déjà choisis = 3 champs de moins à remplir.
+function guessCountryFromTimezone() {
+  const dial = guessDialCodeFromTimezone();
+  if (!dial) return "";
+  const matches = Object.keys(COUNTRY_DIAL_CODE).filter((c) => COUNTRY_DIAL_CODE[c] === dial);
+  return matches.length === 1 ? matches[0] : "";
+}
 // Assemble un numéro au format international E.164 (+22376123456) à partir de l'indicatif
 // et du numéro local tapé (espaces, tirets et 0 initial retirés). "" si invalide.
 function toE164(code, local) {
@@ -6076,6 +6084,8 @@ EXTRA_UI.empSortSales = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas
 EXTRA_UI.empNotInPlan = { fr: "Le palier {plan} n'inclut pas de personnel. Passez à un palier supérieur pour en ajouter.", en: "The {plan} plan doesn't include staff. Upgrade to add staff members.", es: "El plan {plan} no incluye personal. Cambia a un plan superior para añadirlo.", pt: "O plano {plan} não inclui equipe. Mude para um plano superior para adicionar.", de: "Der Tarif {plan} enthält kein Personal. Wechsle zu einem höheren Tarif, um Personal hinzuzufügen.", it: "Il piano {plan} non include personale. Passa a un piano superiore per aggiungerlo.", nl: "Het {plan}-abonnement bevat geen personeel. Upgrade om personeel toe te voegen.", pl: "Plan {plan} nie obejmuje personelu. Przejdź na wyższy plan, aby go dodać.", ru: "Тариф {plan} не включает сотрудников. Перейдите на более высокий тариф, чтобы добавить их.", tr: "{plan} paketi personel içermez. Personel eklemek için üst pakete geçin.", ar: "باقة {plan} لا تتضمن موظفين. انتقل إلى باقة أعلى لإضافتهم.", hi: "{plan} प्लान में स्टाफ़ शामिल नहीं है। स्टाफ़ जोड़ने के लिए ऊँचा प्लान लें।", bn: "{plan} প্ল্যানে কর্মী অন্তর্ভুক্ত নেই। কর্মী যোগ করতে উচ্চতর প্ল্যান নিন।", ur: "{plan} پلان میں عملہ شامل نہیں ہے۔ عملہ شامل کرنے کے لیے اعلیٰ پلان لیں۔", ta: "{plan} திட்டத்தில் பணியாளர்கள் இல்லை. பணியாளர்களைச் சேர்க்க உயர் திட்டத்திற்கு மாறவும்.", te: "{plan} ప్లాన్‌లో సిబ్బంది లేరు. సిబ్బందిని జోడించడానికి ఉన్నత ప్లాన్‌కు మారండి.", th: "แพ็กเกจ {plan} ไม่รวมพนักงาน อัปเกรดเพื่อเพิ่มพนักงาน", zh: "{plan} 套餐不包含员工。升级套餐即可添加员工。", ja: "{plan} プランにはスタッフが含まれません。追加するには上位プランに変更してください。", ko: "{plan} 요금제에는 직원이 포함되지 않습니다. 직원을 추가하려면 상위 요금제로 변경하세요.", id: "Paket {plan} tidak termasuk staf. Tingkatkan paket untuk menambah staf.", vi: "Gói {plan} không bao gồm nhân viên. Nâng cấp gói để thêm nhân viên.", tl: "Walang kasamang staff ang {plan} plan. Mag-upgrade para makapagdagdag ng staff.", sw: "Kifurushi cha {plan} hakijumuishi wafanyakazi. Pandisha kifurushi ili kuwaongeza.", ha: "Tsarin {plan} bai haɗa da ma'aikata ba. Haɓaka tsari don ƙara ma'aikata.", yo: "Ètò {plan} kò ní òṣìṣẹ́ nínú. Gòkè sí ètò tó ga jù láti fi òṣìṣẹ́ kún un.", zu: "Uhlelo lwe-{plan} alufaki abasebenzi. Thuthukisa uhlelo ukuze wengeze abasebenzi.", am: "የ{plan} ዕቅድ ሠራተኞችን አያካትትም። ሠራተኞችን ለመጨመር ወደ ከፍተኛ ዕቅድ ያሻሽሉ።", bm: "{plan} sira tɛ baarakɛlaw sɔn. Sira kɔrɔtɔlen ta walasa ka baarakɛlaw fara a kan.", wo: "Palier {plan} amul ay liggéeykat. Jëlal palier bu gënë kawe ngir yokk ay liggéeykat." };
 EXTRA_UI.debtMarkPaidBtn = { fr: "Marquer payé", en: "Mark as paid", es: "Marcar como pagado", pt: "Marcar como pago", de: "Als bezahlt markieren", it: "Segna come pagato", nl: "Markeer als betaald", pl: "Oznacz jako opłacone", ru: "Отметить оплаченным", tr: "Ödendi olarak işaretle", ar: "تحديد كمدفوع", hi: "भुगतान हुआ चिह्नित करें", bn: "পরিশোধিত চিহ্নিত করুন", ur: "ادا شدہ نشان لگائیں", ta: "செலுத்தியதாகக் குறி", te: "చెల్లించినట్లు గుర్తించు", th: "ทำเครื่องหมายว่าชำระแล้ว", zh: "标记为已还清", ja: "支払い済みにする", ko: "결제 완료로 표시", id: "Tandai lunas", vi: "Đánh dấu đã trả", tl: "Markahang bayad na", sw: "Weka kama imelipwa", ha: "Yi alama an biya", yo: "Sàmì sí ti sanwó", zu: "Maka njengokukhokhiwe", am: "እንደተከፈለ ምልክት አድርግ", bm: "A taamasiyɛn ko a sarala", wo: "Tegg ne fey nañu ko" };
 EXTRA_UI.pinTooManyAttempts = { fr: "Trop d'essais. Réessayez dans {s} s.", en: "Too many attempts. Try again in {s} s.", es: "Demasiados intentos. Inténtalo de nuevo en {s} s.", pt: "Muitas tentativas. Tente novamente em {s} s.", de: "Zu viele Versuche. Erneut versuchen in {s} s.", it: "Troppi tentativi. Riprova tra {s} s.", nl: "Te veel pogingen. Probeer opnieuw over {s} s.", pl: "Zbyt wiele prób. Spróbuj ponownie za {s} s.", ru: "Слишком много попыток. Повторите через {s} с.", tr: "Çok fazla deneme. {s} sn sonra tekrar deneyin.", ar: "محاولات كثيرة جدًا. حاول مجددًا بعد {s} ث.", hi: "बहुत अधिक प्रयास। {s} सेकंड बाद फिर कोशिश करें।", bn: "অনেক বেশি চেষ্টা। {s} সেকেন্ড পরে আবার চেষ্টা করুন।", ur: "بہت زیادہ کوششیں۔ {s} سیکنڈ بعد دوبارہ کوشش کریں۔", ta: "அதிக முயற்சிகள். {s} வினாடிகளில் மீண்டும் முயலவும்.", te: "చాలా ప్రయత్నాలు. {s} సెకన్లలో మళ్లీ ప్రయత్నించండి.", th: "ลองหลายครั้งเกินไป ลองอีกครั้งใน {s} วินาที", zh: "尝试次数过多。请在 {s} 秒后重试。", ja: "試行回数が多すぎます。{s} 秒後に再試行してください。", ko: "시도 횟수가 너무 많습니다. {s}초 후 다시 시도하세요.", id: "Terlalu banyak percobaan. Coba lagi dalam {s} dtk.", vi: "Quá nhiều lần thử. Thử lại sau {s} giây.", tl: "Sobrang daming subok. Subukan ulit sa loob ng {s} seg.", sw: "Majaribio mengi mno. Jaribu tena baada ya sekunde {s}.", ha: "Ƙoƙari ya yi yawa. Sake gwadawa bayan daƙiƙa {s}.", yo: "Ìgbìyànjú ti pọ̀ jù. Gbìyànjú lẹ́ẹ̀kan sí i ní ìṣẹ́jú-àáyá {s}.", zu: "Imizamo iningi kakhulu. Zama futhi emizuzwaneni engu-{s}.", am: "በጣም ብዙ ሙከራዎች። ከ{s} ሰከንድ በኋላ እንደገና ይሞክሩ።", bm: "Ɲɛɲinini ka ca. I ka segin a kan sekondi {s} kɔfɛ.", wo: "Jéem yi bari na lool. Jéemaatal ci {s} saa." };
+EXTRA_UI.obOptional = { fr: "facultatif", en: "optional", es: "opcional", pt: "opcional", de: "optional", it: "facoltativo", nl: "optioneel", pl: "opcjonalnie", ru: "необязательно", tr: "isteğe bağlı", ar: "اختياري", hi: "वैकल्पिक", bn: "ঐচ্ছিক", ur: "اختیاری", ta: "விருப்பத்தேர்வு", te: "ఐచ్ఛికం", th: "ไม่บังคับ", zh: "可选", ja: "任意", ko: "선택 사항", id: "opsional", vi: "không bắt buộc", tl: "opsyonal", sw: "si lazima", ha: "na zaɓi", yo: "àṣàyàn", zu: "ongakukhetha", am: "አማራጭ", bm: "a ma wajibi", wo: "du lu war" };
+EXTRA_UI.obPinLaterHint = { fr: "Vous pourrez créer votre code PIN plus tard dans Paramètres.", en: "You can create your PIN later in Settings.", es: "Podrás crear tu PIN más tarde en Ajustes.", pt: "Você poderá criar seu PIN mais tarde em Configurações.", de: "Du kannst deine PIN später in den Einstellungen festlegen.", it: "Potrai creare il PIN più tardi nelle Impostazioni.", nl: "Je kunt je pincode later instellen in Instellingen.", pl: "PIN możesz utworzyć później w Ustawieniach.", ru: "PIN-код можно создать позже в Настройках.", tr: "PIN kodunu daha sonra Ayarlar'dan oluşturabilirsin.", ar: "يمكنك إنشاء رمز PIN لاحقًا من الإعدادات.", hi: "आप बाद में सेटिंग्स में PIN बना सकते हैं।", bn: "পরে সেটিংসে PIN তৈরি করতে পারবেন।", ur: "آپ بعد میں ترتیبات میں PIN بنا سکتے ہیں۔", ta: "PIN-ஐ பின்னர் அமைப்புகளில் உருவாக்கலாம்.", te: "PIN‌ను తర్వాత సెట్టింగ్‌లలో సృష్టించవచ్చు.", th: "คุณสร้าง PIN ภายหลังได้ในการตั้งค่า", zh: "你可以稍后在设置中创建 PIN。", ja: "PIN はあとで設定から作成できます。", ko: "PIN은 나중에 설정에서 만들 수 있습니다.", id: "Anda bisa membuat PIN nanti di Pengaturan.", vi: "Bạn có thể tạo mã PIN sau trong Cài đặt.", tl: "Puwede kang gumawa ng PIN mamaya sa Settings.", sw: "Unaweza kuunda PIN baadaye kwenye Mipangilio.", ha: "Za ka iya ƙirƙirar PIN daga baya a Saituna.", yo: "O lè ṣẹ̀dá PIN rẹ lẹ́yìn náà nínú Ètò.", zu: "Ungakha i-PIN yakho kamuva kuZilungiselelo.", am: "ፒንዎን በኋላ በቅንብሮች ውስጥ መፍጠር ይችላሉ።", bm: "I bɛ se ka i ka PIN dilan kɔfɛ Paramɛtiriw kɔnɔ.", wo: "Mën nga sos sa PIN ci kanam ci Paramètres." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -8087,10 +8097,12 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   const [obPrenom, setObPrenom] = useState("");
   const [obNom, setObNom] = useState("");
   const [obShopName, setObShopName] = useState("");
-  const [obPhone, setObPhone] = useState("");
+  const [obPhone, setObPhone] = useState(() => { const c = guessCountryFromTimezone(); return c && COUNTRY_DIAL_CODE[c] ? COUNTRY_DIAL_CODE[c] + " " : ""; });
   const [obSecteur, setObSecteur] = useState("");
-  const [obPays, setObPays] = useState("");
-  const [obCurrency, setObCurrency] = useState("");
+  const [obPays, setObPays] = useState(() => guessCountryFromTimezone());
+  const [obCurrency, setObCurrency] = useState(() => { const c = guessCountryFromTimezone(); const f = COUNTRY_CURRENCY.find((x) => x.id === c); return f ? f.currency || "" : ""; });
+  // Code PIN reporté à plus tard (facultatif à l'inscription, créable ensuite dans Paramètres).
+  const [obSkipPin, setObSkipPin] = useState(false);
   const [obLang, setObLang] = useState(lang);
   const [obUsername, setObUsername] = useState("");
   // Flux Google : récupère l'email réel de l'utilisateur déjà connecté, pour
@@ -8310,10 +8322,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
     const errs = {};
     if (n === 1) {
       if (!obShopName.trim()) errs.shopName = true;
-      // Numéro obligatoire, avec le bon nombre de chiffres pour le pays choisi
-      // quand on le connaît précisément (sinon règle générique 8-14 chiffres).
-      if (!isPhoneLengthValid(obPhone)) errs.phone = true;
-      if (!obSecteur) errs.secteur = true;
+      // Numéro et secteur FACULTATIFS : beaucoup d'inscrits abandonnaient à cette étape.
+      // Le numéro n'est vérifié que s'il a été vraiment saisi (au-delà de l'indicatif prérempli).
+      const dialDigits = (COUNTRY_DIAL_CODE[obPays] || "").replace(/\D/g, "");
+      const phoneDigits = (obPhone || "").replace(/\D/g, "");
+      if (phoneDigits.length > dialDigits.length && !isPhoneLengthValid(obPhone)) errs.phone = true;
       if (!obPays) errs.pays = true;
       if (!obCurrency) errs.currency = true;
     }
@@ -8321,11 +8334,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(obUsername.trim())) errs.username = true;
       if (!obEmailVerified) errs.emailNotVerified = true;
     }
-    if (n === 3) {
+    if (n === 3 && !obSkipPin) {
       if (!/^\d{4}$/.test(obLockPin.trim())) errs.lockPin = true;
       if (obConfirmLockPin.trim() !== obLockPin.trim() || !obConfirmLockPin.trim()) errs.confirmLockPin = true;
     }
-    if (n === 4 && isGoogleFlow) {
+    if (n === 4 && isGoogleFlow && !obSkipPin) {
       // Flux Google : le PIN de verrouillage local n'a pas pu être validé à l'étape 3
       // (sautée), donc on le valide ici, juste avant la création du compte.
       if (!/^\d{4}$/.test(obLockPin.trim())) errs.lockPin = true;
@@ -8409,11 +8422,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
         shop_name: obShopName.trim(),
         data: {
           ownerName: `${obPrenom.trim()} ${obNom.trim()}`.trim(),
-          phone: obPhone.trim(),
+          phone: (obPhone || "").replace(/\D/g, "").length > (COUNTRY_DIAL_CODE[obPays] || "").replace(/\D/g, "").length ? obPhone.trim() : "",
           sector: obSecteur,
           country: obPays,
           lang: obLang,
-          lockPin: await hashPin(obLockPin),
+          ...(obSkipPin || !obLockPin.trim() ? {} : { lockPin: await hashPin(obLockPin) }),
           products: [], sales: [], debts: [], debtEvents: [], expenses: [], cashFund: 0,
           draftCarts: [], darkMode: false, showBalls: true, soundsEnabled: true, ballColor: "blue", currency: obCurrency,
         },
@@ -8440,7 +8453,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       // fraîchement créé au même endroit ici, sinon le PIN choisi à l'inscription
       // n'est jamais retrouvé ensuite et la protection ne fonctionne pas.
       try {
-        await window.storage.set(`accounts:${obUsername.trim().toLowerCase()}`, JSON.stringify({ lockPin: await hashPin(obLockPin) }), true);
+        if (!obSkipPin && obLockPin.trim()) await window.storage.set(`accounts:${obUsername.trim().toLowerCase()}`, JSON.stringify({ lockPin: await hashPin(obLockPin) }), true);
       } catch (e) { /* best-effort : le compte reste créé même si cette écriture échoue */ }
       setCreatedShopName(obShopName.trim());
       setLang(obLang);
@@ -8871,7 +8884,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               <textarea autoComplete="off" rows={1} value={obShopName} onChange={(e) => setObShopName(e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} placeholder={t(lang, "shopNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text, resize: "none", overflow: "hidden", ...fieldStyle(obErrors.shopName) }} />
             </div>
             <div className="mb-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "sector")}</label>
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "sector")} <span style={{ fontWeight: 400 }}>({tx(lang, "obOptional")})</span></label>
               <select value={obSecteur} onChange={(e) => setObSecteur(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.secteur) }}>
                 <option value="">{t(lang, "chooseSector")}</option>
                 {SECTORS.map((s, i) => <option key={i} value={secLabel(s)}>{secLabel(s)}</option>)}
@@ -8901,7 +8914,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               />
             </div>
             <div className="mb-3">
-              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{tx(lang, "phoneNumber")}</label>
+              <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{tx(lang, "phoneNumber")} <span style={{ fontWeight: 400 }}>({tx(lang, "obOptional")})</span></label>
               <input autoComplete="off"
                 type="tel"
                 value={obPhone}
@@ -9062,6 +9075,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
               <button onClick={obBack} className="flex-1 py-3 rounded-xl font-semibold text-sm border" style={{ borderColor: AT.border, color: AT.text }}>{t(lang, "backBtn")}</button>
               <button onClick={obNext} className="flex-1 py-3 rounded-xl text-white font-semibold text-sm" style={{ background: "#4F46E5" }}>{t(lang, "continueBtn")}</button>
             </div>
+            <button type="button" onClick={() => { setObSkipPin(true); setObLockPin(""); setObConfirmLockPin(""); setObErrors({}); setObStep(4); }} className="w-full mt-3 py-2 text-xs font-semibold" style={{ color: AT.muted }}>{tx(lang, "installBannerLater")} — {tx(lang, "obPinLaterHint")}</button>
           </div>
         )}
         {/* STEP 4 — Récap */}
@@ -9093,10 +9107,16 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                   <button onClick={() => setObStep(3)} className="text-xs font-bold" style={{ color: INDIGO }}>{t(lang, "editBtn")}</button>
                 </div>
                 <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "emailLabel")}</span><span className="font-semibold">{obUsername}</span></div>
-                <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "setCodePin")}</span><span className="font-semibold">••••</span></div>
+                <div className="flex justify-between text-sm py-1"><span style={{ color: AT.muted }}>{t(lang, "setCodePin")}</span><span className="font-semibold">{obSkipPin ? "—" : "••••"}</span></div>
               </div>
             )}
-            {isGoogleFlow && (
+            {isGoogleFlow && obSkipPin && (
+              <div className="py-3 text-xs" style={{ borderTop: `1px solid ${AT.border}`, color: AT.muted }}>
+                🔒 {tx(lang, "obPinLaterHint")}{" "}
+                <button type="button" onClick={() => setObSkipPin(false)} className="font-bold" style={{ color: INDIGO }}>{t(lang, "setCodePin")}</button>
+              </div>
+            )}
+            {isGoogleFlow && !obSkipPin && (
               <div className="py-3" style={{ borderTop: `1px solid ${AT.border}` }}>
                 {/* Google gère déjà l'identité (email/mot de passe), mais le PIN de
                     verrouillage local est propre à cette appli : il doit être choisi
@@ -9119,6 +9139,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                     <button type="button" onClick={() => setShowObConfirmLockPin(!showObConfirmLockPin)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: AT.muted }}>{showObConfirmLockPin ? "🙈" : "👁"}</button>
                   </div>
                 </div>
+                <button type="button" onClick={() => { setObSkipPin(true); setObLockPin(""); setObConfirmLockPin(""); setObErrors({}); }} className="w-full mt-1 py-2 text-xs font-semibold" style={{ color: AT.muted }}>{tx(lang, "installBannerLater")} — {tx(lang, "obPinLaterHint")}</button>
               </div>
             )}
             {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
