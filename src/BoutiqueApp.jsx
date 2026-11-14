@@ -12664,12 +12664,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         applyShop(merged, null, null);
         writeLocalCache(shopKey, merged);
         writeLocalCache(shopSyncBaseKey, merged);
+        // Les ventes faites hors ligne doivent aussi arriver dans shop_blobs (la source
+        // lue au démarrage, par les sauvegardes automatiques et les résumés), pas
+        // seulement dans kv_store : sinon elles n'y entraient qu'à la prochaine action.
+        try { await persistShopToSupabase(merged); } catch (e) { /* réessayé à la prochaine sauvegarde */ }
         return JSON.stringify(merged);
       }
     } catch (e) { /* toujours hors-ligne au moment de l'essai : on retentera plus tard */ return value; }
     // Rien sur le serveur pour l'instant (tout premier envoi) : notre version
     // devient la référence dès qu'elle sera confirmée écrite.
     writeLocalCache(shopSyncBaseKey, local);
+    try { await persistShopToSupabase(local); } catch (e) { /* réessayé à la prochaine sauvegarde */ }
     return value;
   };
   const { isOnline, pendingCount, persistOffline } = useOfflineSync(resolveShopBeforeFlush);
@@ -16871,6 +16876,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // serveur via la fonction Supabase "auto-backup", ou manuel depuis cet écran) ----
   // (loadShopBackups et son useEffect déclencheur sont déclarés plus haut, avant le
   // "if (loading) return", pour la même raison que pdfExportGenerating — voir ce commentaire.)
+  // Lit TOUTES les données de la boutique active telles qu'enregistrées sur le serveur :
+  // la ligne de compte (shop_data : réglages, profil, PIN) + la ligne de la boutique
+  // (shop_blobs : produits, ventes, dettes, caisse...). Avant, l'export et la sauvegarde
+  // manuelle ne lisaient que shop_data, donc ne contenaient ni ventes ni stock.
+  const readFullShopSnapshot = async (ownerId) => {
+    const { data: row } = await supabase.from("shop_data").select("data, shop_name").eq("owner_id", ownerId).single();
+    let shopPart = {};
+    if (blobShopId) {
+      const { data: blobRow } = await supabase.from("shop_blobs").select("data").eq("owner_id", ownerId).eq("shop_id", blobShopId).maybeSingle();
+      shopPart = (blobRow && blobRow.data) || {};
+    }
+    const accountPart = stripShopLevelKeys((row && row.data) || {});
+    // Sans ligne boutique (compte pas encore migré), les données de boutique sont encore
+    // dans shop_data : on les garde telles quelles.
+    const full = Object.keys(shopPart).length > 0 ? { ...accountPart, ...shopPart } : ((row && row.data) || {});
+    return { full, shopName: row && row.shop_name };
+  };
   const exportShopDataJson = async () => {
     if (isDemo) { setBackupActionMsg(tx(lang, "demoDisabledMsg")); return; }
     setBackupBusy("export");
@@ -16878,13 +16900,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     try {
       const { data: userData } = await getUserFast();
       if (!userData || !userData.user) throw new Error("no_user");
-      const { data: row } = await supabase.from("shop_data").select("data, shop_name").eq("owner_id", userData.user.id).single();
+      const snap = await readFullShopSnapshot(userData.user.id);
       const payload = {
         app: "Boutipro",
         exportType: "full_backup",
         exportedAt: new Date().toISOString(),
-        shopName: (row && row.shop_name) || shopName || "",
-        data: (row && row.data) || {},
+        shopName: shopName || snap.shopName || "",
+        data: snap.full,
       };
       const safeName = (shopName || "boutipro").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "boutipro";
       await saveTextFile(JSON.stringify(payload, null, 2), `${safeName}-sauvegarde-${todayKey()}.json`, "application/json");
@@ -16901,8 +16923,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     try {
       const { data: userData } = await getUserFast();
       if (!userData || !userData.user) throw new Error("no_user");
-      const { data: row } = await supabase.from("shop_data").select("data").eq("owner_id", userData.user.id).single();
-      await supabase.from("shop_backups").insert({ owner_id: userData.user.id, kind: "manual", data: (row && row.data) || {} });
+      const snap = await readFullShopSnapshot(userData.user.id);
+      const { error: insErr } = await supabase.from("shop_backups").insert({ owner_id: userData.user.id, kind: "manual", data: snap.full });
+      if (insErr) throw insErr;
       logAction(tx(lang, "logBackupCreated"));
       await loadShopBackups();
       setBackupActionMsg(tx(lang, "backupCreateDone"));
@@ -16925,9 +16948,32 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         .from("shop_backups").select("data, created_at").eq("id", backupId).eq("owner_id", userData.user.id).single();
       if (readError || !backupRow) throw readError || new Error("not_found");
       const restoredData = backupRow.data || {};
-      const { error: writeError } = await supabase
-        .from("shop_data").update({ data: restoredData, updated_at: new Date().toISOString() }).eq("owner_id", userData.user.id);
-      if (writeError) throw writeError;
+      const { account: restoredAccount, shop: restoredShop } = splitShopBlob(restoredData);
+      const hasShopPart = Object.keys(restoredShop).length > 0;
+      // Données de boutique (produits, ventes, dettes...) : remplacées ENTIÈREMENT dans
+      // shop_blobs, la table réellement lue au démarrage. Avant, la restauration écrivait
+      // tout dans shop_data, donc rien ne revenait après rechargement. Une ancienne
+      // sauvegarde sans données de boutique ne touche pas à la boutique (pas d'effacement).
+      if (hasShopPart && blobShopId) {
+        const { error: blobErr } = await supabase
+          .from("shop_blobs").update({ data: restoredShop, updated_at: new Date().toISOString() })
+          .eq("owner_id", userData.user.id).eq("shop_id", blobShopId);
+        if (blobErr) throw blobErr;
+      }
+      // Partie compte (réglages, profil) : fusionnée, pour ne pas perdre le code PIN ni
+      // le quota IA actuels si la sauvegarde est ancienne.
+      if (Object.keys(restoredAccount).length > 0) {
+        const { error: writeError } = await supabase.rpc("save_shop_data", { p_data: restoredAccount });
+        if (writeError) throw writeError;
+      }
+      if (hasShopPart && blobShopId) {
+        writeLocalCache(shopKey, restoredData);
+        writeLocalCache(shopSyncBaseKey, restoredData);
+        // La copie de fusion multi-appareils (kv_store) doit aussi revenir en arrière,
+        // sinon la prochaine sauvegarde y retrouverait les données d'après la sauvegarde
+        // et les fusionnerait de nouveau.
+        try { if (window.storage) await window.storage.set(shopKey, JSON.stringify(restoredData), true); } catch (e) {}
+      }
       applyShop(restoredData);
       logAction(tx(lang, "logBackupRestored").replace("{date}", `${fullDate(backupRow.created_at)} ${fullTime(backupRow.created_at)}`));
       setConfirmRestoreId(null);
