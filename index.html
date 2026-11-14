@@ -54,6 +54,20 @@
     }
     </script>
   </head>
+    <!-- App Android native : la page de présentation (pour Google) ne doit JAMAIS s'afficher
+         dans l'app installée — elle clignotait une seconde au démarrage entre le logo et l'app.
+         On la masque (elle reste dans le HTML pour les moteurs de recherche sur le site web). -->
+    <style>html.native #root > main { visibility: hidden !important; } html.native, html.native body { background: #1B3A5C; }</style>
+    <script>
+      (function () {
+        try {
+          var c = window.Capacitor;
+          var native = (c && typeof c.isNativePlatform === "function" && c.isNativePlatform()) ||
+            (location.protocol === "https:" && location.hostname === "localhost" && /Android/i.test(navigator.userAgent || ""));
+          if (native) document.documentElement.className += " native";
+        } catch (e) {}
+      })();
+    </script>
   <body>
     <!-- Ce contenu s'affiche brièvement au premier chargement, le temps que
          l'application React démarre, puis est automatiquement remplacé par
