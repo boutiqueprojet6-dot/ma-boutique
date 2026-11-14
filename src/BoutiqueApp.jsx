@@ -6448,7 +6448,11 @@ async function hashPin(pin) {
 }
 function fcfa(n) {
   const amount = localizedNumber(n);
-  return CURRENT_CURRENCY.after ? `${amount} ${CURRENT_CURRENCY.symbol}` : `${CURRENT_CURRENCY.symbol}${amount}`;
+  const out = CURRENT_CURRENCY.after ? `${amount} ${CURRENT_CURRENCY.symbol}` : `${CURRENT_CURRENCY.symbol}${amount}`;
+  // Interface de droite à gauche (arabe, ourdou) : la marque LRM garde « 800 FCFA » dans
+  // le bon ordre au lieu de « FCFA 800 ». Invisible, et retirée des PDF (voir clean()).
+  try { if (typeof document !== "undefined" && document.documentElement.dir === "rtl") return "\u200E" + out; } catch (e) {}
+  return out;
 }
 // ---- Clé de jour LOCALE (AAAA-MM-JJ) ----
 // Toute l'app découpait les journées avec toISOString().slice(0, 10), c'est-à-dire en heure
@@ -7827,7 +7831,7 @@ function LanguagePickerScreen({ onChoose, darkMode }) {
   // immédiatement même après une recherche.
   const sorted = [...filtered].sort((a, b) => (a.id === systemLang ? -1 : b.id === systemLang ? 1 : 0));
   return (
-    <div dir="ltr" className="min-h-screen flex items-center justify-center p-4" style={{ background: AT.bg }}>
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: AT.bg }}>
       <div data-kbscroll="true" className="w-full max-w-sm rounded-3xl p-8 text-center shadow-xl max-h-[90vh] overflow-y-auto" style={{ background: AT.card }}>
         <div className="flex items-center justify-center gap-2 mb-5">
           <svg width="26" height="26" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
@@ -8420,7 +8424,6 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   if (screen === "login") {
     return (
       <div
-        dir="ltr"
         className={isDesktop ? "h-screen w-screen flex items-stretch" : "min-h-screen flex items-center justify-center p-4 md:p-8"}
         style={{ background: AT.bg, userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" }}
         onCopy={(e) => e.preventDefault()}
@@ -8595,7 +8598,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       setEmpScanBusy(false);
     };
     return (
-      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
+      <div className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
         <div className="w-full max-w-sm rounded-3xl overflow-hidden shadow-xl p-7 text-center" style={{ background: AT.card, boxShadow: "0 24px 60px -24px rgba(20,21,50,.25)" }}>
           <button onClick={() => setScreen("login")} className="mb-4 flex items-center gap-1 text-xs font-semibold" style={{ color: AT.muted }}>
             <ChevronLeft size={15} /> {t(lang, "backToShop")}
@@ -8668,7 +8671,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
       return null;
     }
     return (
-      <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
+      <div className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
         <div className="w-full max-w-sm md:max-w-md rounded-3xl p-9 text-center shadow-xl" style={{ background: AT.card }}>
           <div className="w-16 h-16 rounded-full border-[3px] flex items-center justify-center mx-auto mb-5 text-2xl" style={{ borderColor: GREEN, color: GREEN }}>✓</div>
           <h1 className="text-xl font-bold mb-2" style={{ color: AT.text }}>{t(lang, "accountCreatedTitle")}</h1>
@@ -8684,7 +8687,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
   }
   // ================= ONBOARDING SCREEN =================
   return (
-    <div dir="ltr" className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
+    <div className="min-h-screen flex items-center justify-center p-4 md:p-8" style={{ background: AT.bg }}>
       <div data-kbscroll="true" className="w-full max-w-lg md:max-w-2xl rounded-3xl p-7 md:p-10 relative shadow-xl max-h-[90vh] overflow-y-auto" style={{ background: AT.card, WebkitOverflowScrolling: "touch", overscrollBehavior: "contain" }}>
         <button onClick={() => setScreen("login")} className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ background: AT.input, color: AT.muted }}>✕</button>
         <div className="flex items-center gap-2 mb-4">
@@ -11761,7 +11764,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
     if (isPhotoReturnGuardActive()) return;
     const idx = swipeTabOrder.indexOf(tab);
-    const direction = dx < 0 ? 1 : -1;
+    // En arabe/ourdou la barre d'onglets est inversée : le geste l'est aussi.
+    const rtlUi = typeof document !== "undefined" && document.documentElement.dir === "rtl";
+    const direction = (dx < 0) !== rtlUi ? 1 : -1;
     const nextIdx = idx + direction;
     if (nextIdx >= 0 && nextIdx < swipeTabOrder.length) {
       setTab(swipeTabOrder[nextIdx]);
@@ -17238,7 +17243,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     );
   }
   return (
-    <div dir="ltr" className="relative" style={{ background: isDesktop ? (darkMode ? "#050709" : "#e9edf3") : T.bg, color: T.text, fontFamily: "system-ui, sans-serif", display: isDesktop ? "flex" : "flex", flexDirection: isDesktop ? "row" : "column", height: "100vh", overflow: "hidden" }}>
+    <div className="relative" style={{ background: isDesktop ? (darkMode ? "#050709" : "#e9edf3") : T.bg, color: T.text, fontFamily: "system-ui, sans-serif", display: isDesktop ? "flex" : "flex", flexDirection: isDesktop ? "row" : "column", height: "100vh", overflow: "hidden" }}>
       {appLockActive && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-6" style={{ background: darkMode ? "#0a0d14" : "#F6F7FB" }}>
           <div className="w-full max-w-xs rounded-2xl p-6 text-center" style={{ background: T.card }}>
@@ -17550,7 +17555,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       {!isDesktop && (
       <>
       <div style={{ background: INDIGO, position: "relative", zIndex: 1 }} className="text-white px-4 pt-5 pb-3">
-        <div dir="ltr" className="flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {shopPhoto ? (
               <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover border-2 border-white/40" />
@@ -18126,7 +18131,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           );
         })()}
         {tab === "stock" && showAddProduct && (
-          <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+          <div data-kbscroll="true" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
             <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-base" style={{ color: T.text }}>{editingProductId ? (tx(lang, "editProductTitle")) : t(lang, "newProduct")}</h3>
@@ -19178,7 +19183,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         return (
                           <>
                           <label className="text-xs font-semibold block mt-3" style={{ color: T.muted }}>{tx(lang, "receiptPhoneLabel")}</label>
-                          <div className="flex items-stretch gap-2 mt-1.5">
+                          <div className="flex items-stretch gap-2 mt-1.5" dir="ltr">
                             <input
                               type="tel"
                               inputMode="tel"
@@ -20649,7 +20654,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "ai" && (
           <div style={{ paddingBottom: isDesktop ? 12 : "calc(160px + env(safe-area-inset-bottom, 0px))" }}>
-            <div dir="ltr" className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-3">
               <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(95,178,255,0.2)" : "rgba(27,58,92,0.1)" }}>
                 <Sparkles size={16} color={darkMode ? "#7fb2ff" : INDIGO} />
               </span>
@@ -21009,8 +21014,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showAiHistory && (
-        <div dir="ltr" className="absolute inset-0 z-40 flex flex-col" style={{ background: T.bg }}>
-          <div dir="ltr" className="flex items-center gap-3 px-4 py-4 shrink-0" style={{ borderBottom: `1px solid ${T.border}` }}>
+        <div className="absolute inset-0 z-40 flex flex-col" style={{ background: T.bg }}>
+          <div className="flex items-center gap-3 px-4 py-4 shrink-0" style={{ borderBottom: `1px solid ${T.border}` }}>
             <button onClick={() => setShowAiHistory(false)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}>
               <ChevronLeft size={17} color={T.text} />
             </button>
@@ -21047,7 +21052,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showArabicDigitsPrompt && (
-        <div dir="ltr" className="absolute inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+        <div className="absolute inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-5" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-2" style={{ color: T.text }}>{t(lang, "arabicDigitsPromptTitle")}</p>
             <p className="text-xs mb-4" style={{ color: T.muted, lineHeight: 1.5 }}>{t(lang, "arabicDigitsPromptDesc")}</p>
@@ -21063,7 +21068,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showLockPinModal && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-6 text-center" style={{ background: T.card }}>
             <div style={{ fontSize: 36 }}>🔒</div>
             <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{t(lang, "othEntreTonCodePin")}</p>
@@ -21107,7 +21112,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showAddEmployee && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div data-kbscroll="true" className="w-full max-w-sm rounded-2xl p-6 max-h-[85vh] overflow-y-auto" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{editingEmployeeId ? t(lang, "empEditTitle") : t(lang, "empAddTitle")}</p>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "empNameLabel")}</label>
@@ -21251,7 +21256,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showAccountingExport && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowAccountingExport(false)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowAccountingExport(false)}>
           <div className="w-full max-w-sm rounded-2xl p-6" style={{ background: T.card }} onClick={(e) => e.stopPropagation()}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{t(lang, "accountingExportBtn")}</p>
             <label className="text-xs font-semibold block mb-1.5" style={{ color: T.muted }}>{t(lang, "histFilterFromLabel")}</label>
@@ -21273,7 +21278,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showShopSwitcher && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => { setShowShopSwitcher(false); setShopFormError(""); }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => { setShowShopSwitcher(false); setShopFormError(""); }}>
           <div className="w-full max-w-sm rounded-2xl p-6" style={{ background: T.card }} onClick={(e) => e.stopPropagation()}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{t(lang, "switchShopTitle")}</p>
             <div className="space-y-2 mb-4">
@@ -21325,7 +21330,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {qrEmployee && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => { setQrEmployee(null); setQrInvite(null); }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => { setQrEmployee(null); setQrInvite(null); }}>
           <div className="w-full max-w-sm rounded-2xl p-6 text-center" style={{ background: T.card }} onClick={(e) => e.stopPropagation()}>
             <p className="text-sm font-bold mb-1" style={{ color: T.text }}>{t(lang, "empQrModalTitle")}</p>
             <p className="text-xs mb-4" style={{ color: T.muted }}>{qrEmployee.name}</p>
@@ -21359,7 +21364,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {partialPayDebt && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-1" style={{ color: T.text }}>{t(lang, "payInstallmentTitle")}</p>
             <p className="text-xs mb-4" style={{ color: T.muted }}>{partialPayDebt.customer} — {t(lang, "remainingToPay")}: {fcfa(remainingDebt(partialPayDebt))}</p>
@@ -21387,7 +21392,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {showAddDebtModal && (
-        <div dir="ltr" className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card }}>
             <p className="text-sm font-bold mb-4" style={{ color: T.text }}>{t(lang, "debtAddTitle")}</p>
             <textarea autoComplete="off" rows={1}
@@ -21480,7 +21485,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         </div>
       )}
       {confirmModal && (
-        <div dir="ltr" className="absolute inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
+        <div className="absolute inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl" style={{ background: T.card }}>
             <div className="p-6 text-center">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(184,86,47,0.12)" }}>
@@ -21512,9 +21517,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         <TabHelpModal lang={lang} tabId={tab} darkMode={darkMode} onClose={() => setShowTabHelp(false)} />
       )}
       {showSettings && (
-        <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-40" ref={settingsScrollRef} style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+        <div data-kbscroll="true" className="absolute inset-0 z-40" ref={settingsScrollRef} style={{ background: darkMode ? "rgba(4,7,12,0.85)" : "rgba(15,23,42,0.25)", backdropFilter: "blur(4px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
           <div style={{ position: "sticky", top: 0, zIndex: 20, background: T.bg }}>
-            <div dir="ltr" style={{ display: "flex", alignItems: "center", gap: 12, padding: "22px 20px 14px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "22px 20px 14px" }}>
               {(settingsView !== "menu" || settingsField) ? (
                 <button onClick={() => { if (settingsField) setSettingsField(null); else setSettingsView("menu"); }}
                   style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", color: T.muted, cursor: "pointer", flexShrink: 0 }}>
@@ -21587,14 +21592,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {settingsView === "menu" && !settingsField && (
               <div style={{ padding: "0 16px 12px" }}>
                 <div style={{ position: "relative", marginBottom: 2 }}>
-                  <Search size={15} color={T.muted} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)" }} />
+                  <Search size={15} color={T.muted} style={{ position: "absolute", insetInlineStart: 12, top: "50%", transform: "translateY(-50%)" }} />
                   <input autoComplete="off"
                     value={settingsSearchQuery}
                     onChange={(e) => setSettingsSearchQuery(e.target.value)}
                     placeholder={t(lang, "search")}
                     style={{
                       width: "100%", background: T.input, border: `1px solid ${T.border}`, borderRadius: 14,
-                      padding: "11px 12px 11px 36px", fontSize: 13.5, color: T.text, outline: "none",
+                      paddingBlock: 11, paddingInlineStart: 36, paddingInlineEnd: 12, fontSize: 13.5, color: T.text, outline: "none",
                     }}
                   />
                 </div>
@@ -22786,7 +22791,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
               {(settingsView === "help" || settingsView === "about") && showSupportForm && (
-                <div data-kbscroll="true" dir="ltr" className="absolute inset-0 z-50" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+                <div data-kbscroll="true" className="absolute inset-0 z-50" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
                   <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="font-bold text-base" style={{ color: T.text }}>{t(lang, "assistance")}</h3>
@@ -23076,7 +23081,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       )}
       {!isDesktop && !keyboardOpen && (
       <div
-        dir="ltr"
         className="fixed bottom-0 left-0 right-0 flex justify-around items-end px-2 pb-2 pt-1"
         style={{
           background: darkMode
@@ -23177,7 +23181,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       </div>
       )}
       {showMoreMenu && (
-        <div dir="ltr" className="absolute inset-0 z-40 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowMoreMenu(false)}>
+        <div className="absolute inset-0 z-40 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowMoreMenu(false)}>
           <div
             onClick={(e) => e.stopPropagation()}
             className="w-full max-w-lg rounded-t-3xl p-5 pb-8"
@@ -23468,6 +23472,8 @@ function BoutiqueAppInner() {
   }, []);
   const [session, setSession] = useState(null);
   const [lang, setLang] = useState("fr");
+  // Arabe et ourdou se lisent de droite à gauche : on retourne toute l'interface.
+  useEffect(() => { try { const rtl = lang === "ar" || lang === "ur"; document.documentElement.setAttribute("dir", rtl ? "rtl" : "ltr"); document.documentElement.setAttribute("lang", lang || "fr"); } catch (e) {} }, [lang]);
   const [, setLangPackTick] = useState(0); // incrémenté quand une langue finit de se charger
   const [langChosen, setLangChosen] = useState(null); // null = vérification en cours, false = jamais choisi, true = déjà choisi
   // Thème (clair/sombre) pour tout ce qui est affiché avant qu'un compte soit chargé

@@ -15,3 +15,19 @@ html[data-theme="dark"] .text-slate-400,
 html[data-theme="dark"] .text-slate-500 { color: #c4c7da; }
 html[data-theme="dark"] input::placeholder,
 html[data-theme="dark"] textarea::placeholder { color: #9a9db3; opacity: 1; }
+
+/* Contour de focus : remplace le gros contour noir du navigateur par un anneau discret */
+input:focus, textarea:focus, select:focus { outline: none; }
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+textarea:focus, select:focus { box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.45); }
+
+/* Interface de droite à gauche (arabe, ourdou) : icônes de recherche et menus déroulants
+   placés du bon côté */
+[dir="rtl"] .absolute.left-3 { left: auto; right: 0.75rem; }
+[dir="rtl"] .absolute.left-6 { left: auto; right: 1.5rem; }
+[dir="rtl"] .pl-8 { padding-left: 0.75rem; padding-right: 2rem; }
+[dir="rtl"] .pl-9 { padding-left: 0.75rem; padding-right: 2.25rem; }
+[dir="rtl"] .absolute.right-0.mt-1\.5 { right: auto; left: 0; }
+/* Flèches de navigation retournées en droite à gauche */
+[dir="rtl"] svg.lucide-chevron-right, [dir="rtl"] svg.lucide-chevron-left,
+[dir="rtl"] svg.lucide-arrow-right, [dir="rtl"] svg.lucide-arrow-left { transform: scaleX(-1); }

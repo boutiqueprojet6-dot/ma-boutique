@@ -103,6 +103,38 @@ if (!isCapacitorApp && "serviceWorker" in navigator) {
   });
 }
 
+// Champs de saisie simples (recherche, nom de produit, quantités…) : on désactive la
+// saisie automatique du navigateur/téléphone, sinon Android affiche au-dessus du clavier
+// une barre « clé / carte bancaire / localisation » sans rapport avec le champ.
+// Les champs e-mail et mot de passe (connexion) gardent la saisie automatique.
+(function disableAutofillOnPlainFields() {
+  const KEEP = new Set(["email", "password"]);
+  const patch = (el) => {
+    if (!el || (el.tagName !== "INPUT" && el.tagName !== "TEXTAREA")) return;
+    if (KEEP.has((el.type || "").toLowerCase())) return;
+    const ac = (el.getAttribute("autocomplete") || "").toLowerCase();
+    if (ac && ac !== "on") return; // valeur explicite choisie dans le code : on la respecte
+    el.setAttribute("autocomplete", "off");
+    if (!el.hasAttribute("data-lpignore")) el.setAttribute("data-lpignore", "true");
+    if (!el.hasAttribute("data-form-type")) el.setAttribute("data-form-type", "other");
+  };
+  const scan = (root) => {
+    if (!root || !root.querySelectorAll) return;
+    patch(root);
+    root.querySelectorAll("input, textarea").forEach(patch);
+  };
+  try {
+    document.addEventListener("focusin", (e) => patch(e.target), true);
+    const start = () => {
+      scan(document.body);
+      new MutationObserver((muts) => {
+        for (const m of muts) m.addedNodes && m.addedNodes.forEach((n) => n.nodeType === 1 && scan(n));
+      }).observe(document.body, { childList: true, subtree: true });
+    };
+    if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
+  } catch (e) { /* jamais bloquant */ }
+})();
+
 function renderApp() {
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
