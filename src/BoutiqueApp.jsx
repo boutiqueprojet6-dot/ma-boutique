@@ -6075,6 +6075,7 @@ EXTRA_UI.empSortRole = { fr: "Rôle", en: "Role", es: "Rol", pt: "Função", de:
 EXTRA_UI.empSortSales = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empNotInPlan = { fr: "Le palier {plan} n'inclut pas de personnel. Passez à un palier supérieur pour en ajouter.", en: "The {plan} plan doesn't include staff. Upgrade to add staff members.", es: "El plan {plan} no incluye personal. Cambia a un plan superior para añadirlo.", pt: "O plano {plan} não inclui equipe. Mude para um plano superior para adicionar.", de: "Der Tarif {plan} enthält kein Personal. Wechsle zu einem höheren Tarif, um Personal hinzuzufügen.", it: "Il piano {plan} non include personale. Passa a un piano superiore per aggiungerlo.", nl: "Het {plan}-abonnement bevat geen personeel. Upgrade om personeel toe te voegen.", pl: "Plan {plan} nie obejmuje personelu. Przejdź na wyższy plan, aby go dodać.", ru: "Тариф {plan} не включает сотрудников. Перейдите на более высокий тариф, чтобы добавить их.", tr: "{plan} paketi personel içermez. Personel eklemek için üst pakete geçin.", ar: "باقة {plan} لا تتضمن موظفين. انتقل إلى باقة أعلى لإضافتهم.", hi: "{plan} प्लान में स्टाफ़ शामिल नहीं है। स्टाफ़ जोड़ने के लिए ऊँचा प्लान लें।", bn: "{plan} প্ল্যানে কর্মী অন্তর্ভুক্ত নেই। কর্মী যোগ করতে উচ্চতর প্ল্যান নিন।", ur: "{plan} پلان میں عملہ شامل نہیں ہے۔ عملہ شامل کرنے کے لیے اعلیٰ پلان لیں۔", ta: "{plan} திட்டத்தில் பணியாளர்கள் இல்லை. பணியாளர்களைச் சேர்க்க உயர் திட்டத்திற்கு மாறவும்.", te: "{plan} ప్లాన్‌లో సిబ్బంది లేరు. సిబ్బందిని జోడించడానికి ఉన్నత ప్లాన్‌కు మారండి.", th: "แพ็กเกจ {plan} ไม่รวมพนักงาน อัปเกรดเพื่อเพิ่มพนักงาน", zh: "{plan} 套餐不包含员工。升级套餐即可添加员工。", ja: "{plan} プランにはスタッフが含まれません。追加するには上位プランに変更してください。", ko: "{plan} 요금제에는 직원이 포함되지 않습니다. 직원을 추가하려면 상위 요금제로 변경하세요.", id: "Paket {plan} tidak termasuk staf. Tingkatkan paket untuk menambah staf.", vi: "Gói {plan} không bao gồm nhân viên. Nâng cấp gói để thêm nhân viên.", tl: "Walang kasamang staff ang {plan} plan. Mag-upgrade para makapagdagdag ng staff.", sw: "Kifurushi cha {plan} hakijumuishi wafanyakazi. Pandisha kifurushi ili kuwaongeza.", ha: "Tsarin {plan} bai haɗa da ma'aikata ba. Haɓaka tsari don ƙara ma'aikata.", yo: "Ètò {plan} kò ní òṣìṣẹ́ nínú. Gòkè sí ètò tó ga jù láti fi òṣìṣẹ́ kún un.", zu: "Uhlelo lwe-{plan} alufaki abasebenzi. Thuthukisa uhlelo ukuze wengeze abasebenzi.", am: "የ{plan} ዕቅድ ሠራተኞችን አያካትትም። ሠራተኞችን ለመጨመር ወደ ከፍተኛ ዕቅድ ያሻሽሉ።", bm: "{plan} sira tɛ baarakɛlaw sɔn. Sira kɔrɔtɔlen ta walasa ka baarakɛlaw fara a kan.", wo: "Palier {plan} amul ay liggéeykat. Jëlal palier bu gënë kawe ngir yokk ay liggéeykat." };
 EXTRA_UI.debtMarkPaidBtn = { fr: "Marquer payé", en: "Mark as paid", es: "Marcar como pagado", pt: "Marcar como pago", de: "Als bezahlt markieren", it: "Segna come pagato", nl: "Markeer als betaald", pl: "Oznacz jako opłacone", ru: "Отметить оплаченным", tr: "Ödendi olarak işaretle", ar: "تحديد كمدفوع", hi: "भुगतान हुआ चिह्नित करें", bn: "পরিশোধিত চিহ্নিত করুন", ur: "ادا شدہ نشان لگائیں", ta: "செலுத்தியதாகக் குறி", te: "చెల్లించినట్లు గుర్తించు", th: "ทำเครื่องหมายว่าชำระแล้ว", zh: "标记为已还清", ja: "支払い済みにする", ko: "결제 완료로 표시", id: "Tandai lunas", vi: "Đánh dấu đã trả", tl: "Markahang bayad na", sw: "Weka kama imelipwa", ha: "Yi alama an biya", yo: "Sàmì sí ti sanwó", zu: "Maka njengokukhokhiwe", am: "እንደተከፈለ ምልክት አድርግ", bm: "A taamasiyɛn ko a sarala", wo: "Tegg ne fey nañu ko" };
+EXTRA_UI.pinTooManyAttempts = { fr: "Trop d'essais. Réessayez dans {s} s.", en: "Too many attempts. Try again in {s} s.", es: "Demasiados intentos. Inténtalo de nuevo en {s} s.", pt: "Muitas tentativas. Tente novamente em {s} s.", de: "Zu viele Versuche. Erneut versuchen in {s} s.", it: "Troppi tentativi. Riprova tra {s} s.", nl: "Te veel pogingen. Probeer opnieuw over {s} s.", pl: "Zbyt wiele prób. Spróbuj ponownie za {s} s.", ru: "Слишком много попыток. Повторите через {s} с.", tr: "Çok fazla deneme. {s} sn sonra tekrar deneyin.", ar: "محاولات كثيرة جدًا. حاول مجددًا بعد {s} ث.", hi: "बहुत अधिक प्रयास। {s} सेकंड बाद फिर कोशिश करें।", bn: "অনেক বেশি চেষ্টা। {s} সেকেন্ড পরে আবার চেষ্টা করুন।", ur: "بہت زیادہ کوششیں۔ {s} سیکنڈ بعد دوبارہ کوشش کریں۔", ta: "அதிக முயற்சிகள். {s} வினாடிகளில் மீண்டும் முயலவும்.", te: "చాలా ప్రయత్నాలు. {s} సెకన్లలో మళ్లీ ప్రయత్నించండి.", th: "ลองหลายครั้งเกินไป ลองอีกครั้งใน {s} วินาที", zh: "尝试次数过多。请在 {s} 秒后重试。", ja: "試行回数が多すぎます。{s} 秒後に再試行してください。", ko: "시도 횟수가 너무 많습니다. {s}초 후 다시 시도하세요.", id: "Terlalu banyak percobaan. Coba lagi dalam {s} dtk.", vi: "Quá nhiều lần thử. Thử lại sau {s} giây.", tl: "Sobrang daming subok. Subukan ulit sa loob ng {s} seg.", sw: "Majaribio mengi mno. Jaribu tena baada ya sekunde {s}.", ha: "Ƙoƙari ya yi yawa. Sake gwadawa bayan daƙiƙa {s}.", yo: "Ìgbìyànjú ti pọ̀ jù. Gbìyànjú lẹ́ẹ̀kan sí i ní ìṣẹ́jú-àáyá {s}.", zu: "Imizamo iningi kakhulu. Zama futhi emizuzwaneni engu-{s}.", am: "በጣም ብዙ ሙከራዎች። ከ{s} ሰከንድ በኋላ እንደገና ይሞክሩ።", bm: "Ɲɛɲinini ka ca. I ka segin a kan sekondi {s} kɔfɛ.", wo: "Jéem yi bari na lool. Jéemaatal ci {s} saa." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -11574,6 +11575,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       else { playSound("error"); triggerHaptic("error"); setAppLockError(t(lang, "wrongPin")); }
       return;
     }
+    // Même limite d'essais que pour l'affichage des montants (clé partagée mb_pin_fail).
+    let pinFail = { n: 0, until: 0 };
+    try { pinFail = JSON.parse(localStorage.getItem("mb_pin_fail") || "null") || pinFail; } catch (e) {}
+    if (pinFail.until && Date.now() < pinFail.until) {
+      playSound("error"); triggerHaptic("error");
+      setAppLockError(tx(lang, "pinTooManyAttempts").replace("{s}", String(Math.ceil((pinFail.until - Date.now()) / 1000))));
+      return;
+    }
     try {
       const raw = await window.storage.get(`accounts:${username}`, true);
       const account = raw ? JSON.parse(raw.value) : null;
@@ -11584,11 +11593,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       const enteredHash = await hashPin(appLockPinInput.trim());
       if (enteredHash === account.lockPin) {
+        try { localStorage.removeItem("mb_pin_fail"); } catch (e) {}
         setAppLockActive(false);
         setAppLockPinInput("");
       } else {
         playSound("error"); triggerHaptic("error");
-        setAppLockError(t(lang, "wrongPin"));
+        const n = (pinFail.n || 0) + 1;
+        let until = 0;
+        if (n % 5 === 0) until = Date.now() + Math.min(15 * 60, 30 * Math.pow(2, n / 5 - 1)) * 1000;
+        try { localStorage.setItem("mb_pin_fail", JSON.stringify({ n, until })); } catch (e) {}
+        setAppLockError(until ? tx(lang, "pinTooManyAttempts").replace("{s}", String(Math.ceil((until - Date.now()) / 1000))) : t(lang, "wrongPin"));
       }
     } catch {
       playSound("error"); triggerHaptic("error");
@@ -12867,7 +12881,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
               __mark("ShopApp : avant requête shop_data réseau");
               // Les deux lectures partent en parallèle : pas de latence supplémentaire.
               const [accountRes, blobRes] = await Promise.all([
-                supabase.from("shop_data").select("data, updated_at").eq("owner_id", userData.user.id).single(),
+                // Appareil d'employé : la ligne de compte passe par une fonction serveur qui en
+                // retire le code PIN du propriétaire et ses notes privées (lecture directe refusée).
+                employeeSessionToken
+                  ? supabase.rpc("employee_account_data").then((r) => ({ data: r && r.data ? r.data : null, error: r && r.error }))
+                  : supabase.from("shop_data").select("data, updated_at").eq("owner_id", userData.user.id).single(),
                 blobShopId
                   ? supabase.from("shop_blobs").select("data, updated_at").eq("owner_id", userData.user.id).eq("shop_id", blobShopId).maybeSingle()
                   : Promise.resolve({ data: null }),
@@ -14070,6 +14088,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       return;
     }
+    // Limite d'essais : sans elle, quelqu'un qui a le téléphone en main pouvait essayer les
+    // 10 000 codes à 4 chiffres. 5 erreurs => pause de 30 s, doublée à chaque nouvelle série
+    // (plafond 15 min). Gardé sur l'appareil, donc un rechargement ne remet pas à zéro.
+    const PIN_FAIL_KEY = "mb_pin_fail";
+    let pinFail = { n: 0, until: 0 };
+    try { pinFail = JSON.parse(localStorage.getItem(PIN_FAIL_KEY) || "null") || pinFail; } catch (e) {}
+    if (pinFail.until && Date.now() < pinFail.until) {
+      playSound("error"); triggerHaptic("error");
+      setLockPinError(tx(lang, "pinTooManyAttempts").replace("{s}", String(Math.ceil((pinFail.until - Date.now()) / 1000))));
+      return;
+    }
     try {
       const raw = await window.storage.get(`accounts:${username}`, true);
       const account = raw ? JSON.parse(raw.value) : null;
@@ -14085,9 +14114,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const enteredHash = await hashPin(lockPinInput.trim());
       if (enteredHash !== account.lockPin) {
         playSound("error"); triggerHaptic("error");
-        setLockPinError(t(lang, "wrongPin"));
+        const n = (pinFail.n || 0) + 1;
+        let until = 0;
+        if (n % 5 === 0) until = Date.now() + Math.min(15 * 60, 30 * Math.pow(2, n / 5 - 1)) * 1000;
+        try { localStorage.setItem(PIN_FAIL_KEY, JSON.stringify({ n, until })); } catch (e) {}
+        setLockPinError(until ? tx(lang, "pinTooManyAttempts").replace("{s}", String(Math.ceil((until - Date.now()) / 1000))) : t(lang, "wrongPin"));
         return;
       }
+      try { localStorage.removeItem(PIN_FAIL_KEY); } catch (e) {}
       setAmountsHidden(false);
       setShowLockPinModal(false);
       setLockPinInput("");
