@@ -644,6 +644,9 @@ const EMPLOYEE_PERMISSIONS = [
   { id: "viewCash", labelKey: "permViewCash" },
   { id: "editCash", labelKey: "permEditCash" },
   { id: "viewStats", labelKey: "permViewStats" },
+  // Désactivée par défaut (aucun rôle prédéfini ne l'inclut) : l'IA consomme le quota
+  // mensuel du propriétaire, à n'ouvrir qu'aux personnes de confiance.
+  { id: "useAI", labelKey: "permUseAI" },
 ];
 const EMPLOYEE_ROLES = {
   vendeur: {
@@ -6094,6 +6097,7 @@ EXTRA_UI.expExpired = { fr: "Périmé depuis le {date}", en: "Expired since {dat
 EXTRA_UI.expSoon = { fr: "Périme le {date}", en: "Expires {date}", es: "Caduca el {date}", pt: "Vence em {date}", de: "Läuft ab am {date}", it: "Scade il {date}", nl: "Verloopt op {date}", pl: "Termin ważności {date}", ru: "Истекает {date}", tr: "{date} tarihinde son", ar: "تنتهي صلاحيته في {date}", hi: "{date} को समाप्त", bn: "{date} তারিখে মেয়াদ শেষ", ur: "{date} کو میعاد ختم", ta: "{date} அன்று காலாவதி", te: "{date}న గడువు", th: "หมดอายุ {date}", zh: "{date} 过期", ja: "{date} 期限", ko: "{date} 만료", id: "Kedaluwarsa {date}", vi: "Hết hạn {date}", tl: "Mag-e-expire sa {date}", sw: "Inaisha muda {date}", ha: "Zai ƙare {date}", yo: "Yóò parí ní {date}", zu: "Iphelelwa ngo-{date}", am: "በ{date} ያበቃል", bm: "A bɛ tiɲɛ {date}", wo: "Dina jeex {date}" };
 EXTRA_UI.expDiscardBtn = { fr: "Jeter", en: "Discard", es: "Desechar", pt: "Descartar", de: "Entsorgen", it: "Scarta", nl: "Weggooien", pl: "Wyrzuć", ru: "Списать", tr: "At", ar: "تخلّص منه", hi: "फेंकें", bn: "ফেলে দিন", ur: "پھینکیں", ta: "அகற்று", te: "పారేయి", th: "ทิ้ง", zh: "丢弃", ja: "廃棄", ko: "폐기", id: "Buang", vi: "Bỏ đi", tl: "Itapon", sw: "Tupa", ha: "Zubar", yo: "Dà nù", zu: "Lahla", am: "ጣል", bm: "A fili", wo: "Sànni" };
 EXTRA_UI.expDiscardDone = { fr: "Retiré du stock et compté comme perte.", en: "Removed from stock and counted as a loss.", es: "Retirado del stock y contado como pérdida.", pt: "Retirado do estoque e contado como perda.", de: "Aus dem Bestand entfernt und als Verlust gezählt.", it: "Tolto dallo stock e contato come perdita.", nl: "Uit voorraad gehaald en als verlies geteld.", pl: "Usunięto ze stanu i policzono jako stratę.", ru: "Списано со склада и учтено как убыток.", tr: "Stoktan çıkarıldı ve zarar olarak sayıldı.", ar: "أُزيل من المخزون واحتُسب خسارة.", hi: "स्टॉक से हटाया गया और नुकसान में गिना गया।", bn: "স্টক থেকে সরানো হয়েছে এবং ক্ষতি হিসেবে গণনা হয়েছে।", ur: "اسٹاک سے نکال دیا گیا اور نقصان میں شمار ہوا۔", ta: "இருப்பிலிருந்து நீக்கப்பட்டு இழப்பாகக் கணக்கிடப்பட்டது.", te: "స్టాక్ నుంచి తీసేసి నష్టంగా లెక్కించాం.", th: "นำออกจากสต็อกและนับเป็นของเสีย", zh: "已从库存移除并计为损失。", ja: "在庫から外し、損失として記録しました。", ko: "재고에서 빼고 손실로 계산했습니다.", id: "Dikeluarkan dari stok dan dihitung sebagai kerugian.", vi: "Đã bỏ khỏi kho và tính là hao hụt.", tl: "Inalis sa stock at binilang na lugi.", sw: "Imeondolewa stooni na kuhesabiwa kama hasara.", ha: "An cire daga kaya kuma an ƙidaya a matsayin asara.", yo: "A ti yọ ọ́ kúrò nínú ọjà, a sì kà á sí àdánù.", zu: "Kususiwe esitokweni kwabalwa njengokulahlekelwa.", am: "ከክምችት ተወግዶ እንደ ኪሳራ ተቆጥሯል።", bm: "A bɔra fɛnw cɛma ani a jatera bɔnɛ ye.", wo: "Génne nañu ko ci stock bi te jàppe nañu ko ni ñàkk." };
+EXTRA_UI.permUseAI = { fr: "Utiliser l'assistant IA", en: "Use the AI assistant", es: "Usar el asistente IA", pt: "Usar o assistente de IA", de: "KI-Assistenten nutzen", it: "Usare l'assistente IA", nl: "AI-assistent gebruiken", pl: "Korzystanie z asystenta AI", ru: "Пользоваться ИИ-помощником", tr: "Yapay zekâ asistanını kullan", ar: "استخدام المساعد الذكي", hi: "AI सहायक का उपयोग", bn: "AI সহকারী ব্যবহার", ur: "AI معاون استعمال کرنا", ta: "AI உதவியாளரைப் பயன்படுத்துதல்", te: "AI సహాయకుడిని ఉపయోగించడం", th: "ใช้ผู้ช่วย AI", zh: "使用 AI 助手", ja: "AI アシスタントを使う", ko: "AI 도우미 사용", id: "Gunakan asisten AI", vi: "Dùng trợ lý AI", tl: "Gamitin ang AI assistant", sw: "Kutumia msaidizi wa AI", ha: "Amfani da mataimakin AI", yo: "Lílo olùrànlọ́wọ́ AI", zu: "Ukusebenzisa umsizi we-AI", am: "የAI ረዳትን መጠቀም", bm: "AI dɛmɛbaga baara", wo: "Jëfandikoo ndimbalukaay AI" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -11944,7 +11948,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     { id: "debts", hidden: !hasPermission("viewDebts") },
     { id: "history", hidden: false },
     { id: "stats", hidden: !hasPermission("viewStats") },
-    { id: "ai", hidden: false },
+    { id: "ai", hidden: !hasPermission("useAI") },
     { id: "employees", hidden: !!activeEmployee },
     { id: "shopcompare", hidden: !hasFeatureAccess("shopComparison") || !!activeEmployee },
     { id: "cashreport", hidden: !hasFeatureAccess("perEmployeeCashReport") || !!activeEmployee },
@@ -17905,7 +17909,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               { id: "cash", label: t(lang, "setCaisse"), icon: Wallet, grad: ["#059669", "#047857"], hidden: !hasPermission("viewCash") },
               { id: "history", label: t(lang, "navHistory"), icon: History, grad: ["#d97706", "#b45309"] },
               { id: "stats", label: t(lang, "navStats"), icon: BarChart3, grad: ["#7c3aed", "#6d28d9"], hidden: !hasPermission("viewStats") },
-              { id: "ai", label: t(lang, "navAI"), icon: Bot, grad: ["#00bcd4", "#0097a7"] },
+              { id: "ai", label: t(lang, "navAI"), icon: Bot, grad: ["#00bcd4", "#0097a7"], hidden: !hasPermission("useAI") },
               { id: "calculator", label: t(lang, "calcTabLabel"), icon: Calculator, grad: ["#10b981", "#059669"] },
               // La gestion des employés reste TOUJOURS exclusive au propriétaire, quel que
               // soit le rôle de l'employé connecté (même un Gérant ne la voit pas).
@@ -21139,7 +21143,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             })()}
           </div>
         )}
-        {tab === "ai" && (
+        {tab === "ai" && hasPermission("useAI") && (
           <div style={{ paddingBottom: isDesktop ? 12 : "calc(160px + env(safe-area-inset-bottom, 0px))" }}>
             <div className="flex items-center gap-2 mb-3">
               <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(95,178,255,0.2)" : "rgba(27,58,92,0.1)" }}>
@@ -21446,7 +21450,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           "fixed" pour la garder ancrée en bas. En la sortant du conteneur défilant,
           elle reste ancrée en bas exactement comme avant (même position/style), mais
           le défilement des messages au-dessus redevient possible. */}
-      {tab === "ai" && (
+      {tab === "ai" && hasPermission("useAI") && (
         <div className="px-4" style={{
           background: T.bg,
           paddingTop: 8,
@@ -23740,7 +23744,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {[
                 { id: "history", label: t(lang, "navHistory"), icon: History, grad: ["#d97706","#b45309"] },
                 { id: "stats", label: t(lang, "navStats"), icon: BarChart3, grad: ["#7c3aed","#6d28d9"], hidden: !hasPermission("viewStats") },
-                { id: "ai", label: t(lang, "navAI"), icon: Bot, grad: ["#00bcd4","#0097a7"] },
+                { id: "ai", label: t(lang, "navAI"), icon: Bot, grad: ["#00bcd4","#0097a7"], hidden: !hasPermission("useAI") },
                 // La gestion des employés reste TOUJOURS exclusive au propriétaire, quel que
                 // soit le rôle de l'employé connecté (même un Gérant ne la voit pas).
                 { id: "employees", label: t(lang, "empTabLabel"), icon: Users, grad: ["#0ea5e9","#0369a1"], hidden: !!activeEmployee },
