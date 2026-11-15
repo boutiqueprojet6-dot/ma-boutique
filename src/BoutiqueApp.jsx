@@ -12028,7 +12028,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const handleTabSwipeStart = (e) => {
     if (isDesktop || e.touches.length !== 1) { swipeStartRef.current = null; return; }
     const target = e.target;
-    if (target && target.closest && target.closest("input, textarea, select, [data-no-swipe]")) {
+    // Graphiques (Recharts et SVG dessinés à la main) : glisser le doigt dessus sert à lire
+    // les valeurs (info-bulle), pas à changer d'onglet.
+    const chartSvg = target && target.closest ? target.closest("svg") : null;
+    const isChart = !!(chartSvg && chartSvg.getBoundingClientRect().width > 80); // pas les petites icônes
+    if (isChart || (target && target.closest && target.closest("input, textarea, select, [data-no-swipe], .recharts-wrapper"))) {
       swipeStartRef.current = null;
       return;
     }
