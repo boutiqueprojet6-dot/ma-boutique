@@ -13580,6 +13580,60 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     persist(next);
   };
+  // ---- Photos des produits : rangées dans Supabase Storage, plus dans la sauvegarde ----
+  // Une photo prise sur le téléphone est d'abord gardée telle quelle (fonctionne hors
+  // ligne). Dès qu'il y a du réseau, elle est envoyée UNE fois dans le stockage photos et
+  // le produit ne garde plus que son adresse (quelques dizaines d'octets au lieu de ~30 Ko).
+  // Toutes les sauvegardes suivantes deviennent donc beaucoup plus légères. Les photos
+  // déjà existantes sont converties de la même façon, automatiquement.
+  // Uniquement sur l'appareil du propriétaire (un employé sans droit de modifier les
+  // produits verrait sa sauvegarde refusée par le serveur).
+  const saveAllRef = useRef(saveAll);
+  saveAllRef.current = saveAll;
+  const productsRef = useRef(products);
+  productsRef.current = products;
+  const photoUploadBusyRef = useRef(false);
+  useEffect(() => {
+    if (isDemo || loading || employeeSessionToken || activeEmployee || shopReadOnly || !isOnline) return;
+    const hasLocalPhotos = products.some((p) => typeof p.photo === "string" && p.photo.startsWith("data:"));
+    if (!hasLocalPhotos || photoUploadBusyRef.current) return;
+    const timer = setTimeout(async () => {
+      if (photoUploadBusyRef.current) return;
+      photoUploadBusyRef.current = true;
+      try {
+        const { data: userData } = await getUserFast();
+        const ownerId = userData && userData.user ? userData.user.id : null;
+        if (!ownerId) return;
+        const pending = productsRef.current.filter((p) => typeof p.photo === "string" && p.photo.startsWith("data:")).slice(0, 20);
+        const done = {};
+        for (const p of pending) {
+          try {
+            const blob = await (await fetch(p.photo)).blob();
+            const ext = blob.type === "image/png" ? "png" : blob.type === "image/webp" ? "webp" : "jpg";
+            const rand = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID().replace(/-/g, "") : (Date.now().toString(36) + Math.random().toString(36).slice(2));
+            const path = `${ownerId}/${rand}.${ext}`;
+            const { error } = await supabase.storage.from("product-photos").upload(path, blob, { contentType: blob.type || "image/jpeg", cacheControl: "31536000", upsert: false });
+            if (error) break;
+            const { data } = supabase.storage.from("product-photos").getPublicUrl(path);
+            if (data && data.publicUrl) done[p.id] = { from: p.photo, url: data.publicUrl };
+          } catch (e) { break; }
+        }
+        const ids = Object.keys(done);
+        if (ids.length) {
+          const now = Date.now();
+          // On repart de la liste ACTUELLE (le boutiquier a pu agir pendant l'envoi) et on ne
+          // remplace que les photos qui n'ont pas changé entre-temps.
+          const nextProducts = productsRef.current.map((p) => (done[p.id] && p.photo === done[p.id].from ? { ...p, photo: done[p.id].url, updatedAt: now } : p));
+          saveAllRef.current({ products: nextProducts });
+        }
+      } catch (e) {
+        /* réessayé plus tard */
+      } finally {
+        photoUploadBusyRef.current = false;
+      }
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [products, isDemo, loading, isOnline, shopReadOnly, activeEmployee]);
   // ---- Gestion des employés (réservée au propriétaire) ----
   const resetEmployeeForm = () => {
     setEmpName("");
@@ -14173,6 +14227,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     try {
       const loadImage = (src) => new Promise((resolve, reject) => {
         const img = new Image();
+        // Photo hébergée (Supabase Storage) : nécessaire pour pouvoir exporter l'image ensuite.
+        if (typeof src === "string" && /^https?:/.test(src)) img.crossOrigin = "anonymous";
         img.onload = () => resolve(img);
         img.onerror = reject;
         img.src = src;

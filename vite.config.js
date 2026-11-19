@@ -120,6 +120,20 @@ export default defineConfig({
         // vérification échoue silencieusement et Android refuse d'ouvrir l'app
         // automatiquement).
         navigateFallbackDenylist: [/^\/auth-callback\.html$/, /^\/\.well-known\//],
+        // Photos des produits (Supabase Storage) : gardées sur le téléphone après le premier
+        // affichage, pour rester visibles hors ligne. Noms de fichiers uniques et jamais
+        // modifiés : on peut les garder longtemps sans risque d'afficher une ancienne photo.
+        runtimeCaching: [
+          {
+            urlPattern: /\/storage\/v1\/object\/public\/product-photos\//,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "product-photos",
+              expiration: { maxEntries: 2000, maxAgeSeconds: 365 * 24 * 3600 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
       manifest: {
         name: "Boutipro",
