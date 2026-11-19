@@ -11613,8 +11613,24 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Chargé seulement une fois le palier connu (currentPlan), et seulement si le compte a
   // accès à la fonctionnalité multiShop — sinon shops reste vide (comportement mono-boutique
   // inchangé pour tous les autres paliers).
-  const [shops, setShops] = useState([]);
-  const [activeShopId, setActiveShopId] = useState(null);
+  // Liste des boutiques gardée sur l'appareil : au redémarrage SANS réseau, l'app sait quand
+  // même quelle boutique elle gère (sinon les ventes faites hors ligne partaient, au retour
+  // du réseau, dans l'ancien emplacement au lieu de la boutique).
+  const shopsCacheKey = `mb_shops:${username}`;
+  const [shops, setShops] = useState(() => {
+    if (isDemo) return [];
+    try { const v = JSON.parse(window.localStorage.getItem(shopsCacheKey) || "null"); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  });
+  const shopsLoadedRef = useRef(false);
+  const [activeShopId, setActiveShopId] = useState(() => {
+    if (isDemo) return null;
+    try {
+      const v = JSON.parse(window.localStorage.getItem(shopsCacheKey) || "null");
+      if (!Array.isArray(v) || !v.length) return null;
+      const saved = window.localStorage.getItem(ACTIVE_SHOP_KEY_PREFIX + username);
+      return saved && v.some((r) => r.id === saved) ? saved : v[0].id;
+    } catch (e) { return null; }
+  });
   const [showShopSwitcher, setShowShopSwitcher] = useState(false);
   // ---- Notifications push (alertes d'anomalie, Business 1) ----
   // Demande la permission de notification et enregistre le token de cet appareil dans
@@ -11835,7 +11851,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const { data: rows } = await supabase.from("shops").select("id, name, created_at, is_primary").eq("owner_id", userData.user.id)
         .order("is_primary", { ascending: false }).order("created_at").order("id");
       if (rows) {
+        shopsLoadedRef.current = true;
         setShops(rows);
+        try { window.localStorage.setItem(shopsCacheKey, JSON.stringify(rows)); } catch (e) {}
         if (rows.length > 0) {
           // Choix de la boutique à afficher, dans cet ordre :
           //   1) celle déjà active, si elle existe toujours ;
@@ -11860,6 +11878,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDemo]);
   useEffect(() => { loadShops(); }, [loadShops]);
+  // Retour du réseau : on recharge la liste si elle n'avait pas pu l'être.
+  useEffect(() => {
+    const onOnline = () => { if (!shopsLoadedRef.current) loadShops(); };
+    window.addEventListener("online", onOnline);
+    return () => window.removeEventListener("online", onOnline);
+  }, [loadShops]);
   // Mémorise la boutique active sur cet appareil (relue par loadShops au démarrage).
   // Doublée dans le stockage natif, pour survivre à l'arrêt de l'app Android.
   useEffect(() => {
@@ -13331,6 +13355,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     return () => clearInterval(iv);
   }, [isDemo, shopKey]);
   const syncShopToServer = async (localShop) => {
+    // Boutique pas encore identifiée (liste jamais chargée sur cet appareil) : on garde
+    // l'envoi en attente plutôt que de tout écrire au mauvais endroit.
+    if (!blobShopId && !shopsLoadedRef.current) return { ok: false, merged: localShop };
     if (!blobShopId) {
       const r = await persistShopToSupabase(localShop);
       return { ok: !!(r && r.ok), merged: localShop };
@@ -13658,6 +13685,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         if (confirmedRemote) writeLocalCache(shopSyncBaseKey, confirmedRemote);
         // Éléments enregistrés un par un (ventes des autres appareils, historique complet).
         setTimeout(() => { if (pullRecordsRef.current) pullRecordsRef.current(); }, 300);
+        // Éléments encore dans la boîte d'envoi (ex. ventes faites hors ligne) : on les envoie.
+        if (!mustPush && Object.keys(readOutbox(shopKey)).length > 0) {
+          const toSend = shop;
+          setTimeout(() => { try { persist(toSend); } catch (e) {} }, 500);
+        }
       } catch (e) {
         if (!cachedShop) setError(tx(lang, "errLoadFailed"));
       } finally {
