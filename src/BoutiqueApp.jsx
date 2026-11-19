@@ -7412,11 +7412,33 @@ function writeLocalCache(key, value) {
   }
   catch (e) { return false; }
 }
+// Paniers en cours : propres à CET appareil (jamais envoyés au serveur). Un panier n'est
+// qu'un brouillon ; seule la vente finalisée est synchronisée. Avant, les paniers étaient
+// fusionnés entre téléphones à chaque sauvegarde : c'est ce qui faisait réapparaître des
+// paniers abandonnés et disparaître le panier en cours.
+const LOCAL_CARTS_PREFIX = "mb_carts:";
+function readLocalCarts(key) {
+  try {
+    const raw = window.localStorage.getItem(LOCAL_CARTS_PREFIX + key);
+    if (!raw) return null;
+    const v = JSON.parse(raw);
+    return v && Array.isArray(v.draftCarts) ? v : null;
+  } catch (e) { return null; }
+}
+function writeLocalCarts(key, draftCarts, activeCartId) {
+  try {
+    const raw = JSON.stringify({ draftCarts: draftCarts || [], activeCartId: activeCartId ?? null });
+    window.localStorage.setItem(LOCAL_CARTS_PREFIX + key, raw);
+    mirrorToNativeStorage(LOCAL_CARTS_PREFIX + key, raw);
+  } catch (e) {}
+}
 // Marqueur « cet appareil a des changements pas encore confirmés par Supabase » pour une
 // boutique. Indépendant de la file kv_store : si l'app est rechargée (ou tuée) avant la fin
 // de l'envoi d'une vente, le démarrage suivant FUSIONNE le cache local avec le serveur au
 // lieu de remplacer l'un par l'autre — la vente ne peut plus disparaître.
 const UNSYNCED_PREFIX = "mb_unsynced:";
+// Valeur renvoyée par le résolveur de la file quand la boutique a été envoyée à Supabase.
+const SHOP_SYNCED_SENTINEL = "__shop_synced__";
 function markShopUnsynced(key) {
   try { window.localStorage.setItem(UNSYNCED_PREFIX + key, String(Date.now())); mirrorToNativeStorage(UNSYNCED_PREFIX + key, String(Date.now())); } catch (e) {}
 }
@@ -7483,9 +7505,14 @@ function useOfflineSync(resolveBeforeFlush) {
           let valueToSend = item.value;
           if (resolveRef.current) {
             try { valueToSend = await resolveRef.current(item.key, item.value, item.shared); }
-            catch (e) { /* la fusion a échoué : on retente plus tard avec la valeur d'origine */ }
+            catch (e) {
+              // Boutique : échec d'envoi -> on garde l'élément et on réessaiera plus tard.
+              if (String(item.key).startsWith("shop:")) throw e;
+              /* autres clés : on retente plus tard avec la valeur d'origine */
+            }
           }
-          await window.storage.set(item.key, valueToSend, item.shared);
+          // Boutique : déjà envoyée à Supabase par le résolveur (plus d'écriture kv_store).
+          if (valueToSend !== SHOP_SYNCED_SENTINEL) await window.storage.set(item.key, valueToSend, item.shared);
           const remaining = dequeueKey(item.key);
           setPendingCount(remaining);
           queue = readQueue();
@@ -7566,7 +7593,8 @@ function useOfflineSync(resolveBeforeFlush) {
   }, []);
   // Retire une écriture de la file quand elle a été confirmée par un autre chemin (Supabase).
   const clearPending = useCallback((key) => { setPendingCount(dequeueKey(key)); }, []);
-  return { isOnline, pendingCount, persistOffline, flushQueue, clearPending };
+  const setPendingCountExternal = useCallback((n) => { setPendingCount(n); }, []);
+  return { isOnline, pendingCount, persistOffline, flushQueue, clearPending, setPendingCountExternal };
 }
 // ===== Fusion automatique intelligente (multi-appareils) =====
 // Au lieu d'écraser toute la boutique par la dernière écriture, on fusionne
@@ -11245,7 +11273,25 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const effectivePlan = (DEV_TEST_MODE_ENABLED && !isDemo && testPlanOverride) || currentPlan;
+  // Mode test réservé aux comptes administrateurs (table admins) : avant, n'importe qui
+  // pouvait débloquer Pro/Business gratuitement en tapant 7 fois sur « Version 1.0 ».
+  const [isAppAdmin, setIsAppAdmin] = useState(false);
+  useEffect(() => {
+    if (isDemo || employeeSessionToken) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data: userData } = await getUserFast();
+        const uid = userData && userData.user ? userData.user.id : null;
+        if (!uid) return;
+        const { data } = await supabase.from("admins").select("user_id").eq("user_id", uid).maybeSingle();
+        if (!cancelled) setIsAppAdmin(!!data);
+      } catch (e) {}
+    })();
+    return () => { cancelled = true; };
+  }, [isDemo, username]);
+  const devModeAllowed = DEV_TEST_MODE_ENABLED && isAppAdmin;
+  const effectivePlan = (devModeAllowed && !isDemo && testPlanOverride) || currentPlan;
   const planInfo = SUBSCRIPTION_PLANS[effectivePlan] || SUBSCRIPTION_PLANS.free;
   // Plafond quotidien de ventes : uniquement pour le palier Gratuit (Pro et Business sont
   // illimités). Basé sur le palier EFFECTIF, qui tient déjà compte de l'expiration de
@@ -12963,8 +13009,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setHistoryLog(shop.historyLog || []);
     setBenchmarkOptIn(!!shop.benchmarkOptIn);
     setArabicDigits(!!shop.arabicDigits);
-    setDraftCarts(shop.draftCarts || []);
-    setActiveCartId(shop.activeCartId || (shop.draftCarts && shop.draftCarts[0] ? shop.draftCarts[0].id : null));
+    {
+      // Paniers : toujours ceux de CET appareil. Première fois avec cette version : on
+      // reprend ceux du cache local (puis ils restent sur l'appareil).
+      const localCarts = isDemo ? null : readLocalCarts(shopKey);
+      const carts = localCarts ? localCarts.draftCarts : (shop.draftCarts || []);
+      const active = localCarts ? localCarts.activeCartId : shop.activeCartId;
+      if (!localCarts && !isDemo) writeLocalCarts(shopKey, carts, active);
+      setDraftCarts(carts);
+      setActiveCartId(active && carts.some((c) => c.id === active) ? active : (carts[0] ? carts[0].id : null));
+    }
     // employees et actionLog ne viennent plus de window.storage : ils sont chargés séparément
     // depuis Supabase (tables employees/action_log), filtrés par la boutique active — voir le
     // useEffect dédié plus bas, qui se redéclenche automatiquement à chaque changement de boutique.
@@ -12973,47 +13027,30 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // toujours null, et écrasait la vraie date lue dans la table subscriptions (voir
     // le chargement du palier, qui fait désormais setExpiresAt).
     if (account) setShopPhoto(account.shopPhoto || null);
-  }, [shopKey]);
+  }, [shopKey, isDemo]);
   // Résolveur appelé juste avant l'envoi d'une écriture mise en file d'attente
   // (typiquement au retour de connexion) : on relit l'état distant à cet
   // instant précis et on fusionne, plutôt que d'écraser aveuglément ce qu'un
   // autre appareil aurait pu enregistrer entre-temps.
+  // Appelé par la file d'attente quand le réseau revient : renvoie l'état le plus récent
+  // de cet appareil (cache local), fusionné avec le serveur. Lève une erreur en cas
+  // d'échec pour que l'élément reste dans la file et soit retenté plus tard.
   const resolveShopBeforeFlush = async (key, value, shared) => {
     if (key !== shopKey) return value;
-    let local;
-    try { local = JSON.parse(value); } catch (e) { return value; }
-    // L'état le plus récent de cet appareil est dans le cache local (écrit dès chaque
-    // action, voir saveAll) : il peut être plus récent que la valeur mise en file.
-    const cachedNow = readLocalCache(shopKey);
-    if (cachedNow && typeof cachedNow === "object") local = cachedNow;
+    const local = readLocalCache(shopKey);
+    if (!local || typeof local !== "object") return value;
     const genAtStart = shopEditGenRef.current;
-    try {
-      const r = await window.storage.get(shopKey, true);
-      if (r) {
-        const remoteShop = JSON.parse(r.value);
-        const baseShop = readLocalCache(shopSyncBaseKey) || local;
-        const merged = mergeShop(baseShop, local, remoteShop);
-        // Ne jamais écraser à l'écran ce que le boutiquier a fait pendant l'aller-retour
-        // réseau (sinon le panier « revient en arrière » en pleine vente).
-        if (shopEditGenRef.current === genAtStart) {
-          applyShop(merged, null, null);
-          writeLocalCache(shopKey, merged);
-        }
-        writeLocalCache(shopSyncBaseKey, merged);
-        // Les ventes faites hors ligne doivent aussi arriver dans shop_blobs (la source
-        // lue au démarrage, par les sauvegardes automatiques et les résumés), pas
-        // seulement dans kv_store : sinon elles n'y entraient qu'à la prochaine action.
-        try { await persistShopToSupabase(merged); } catch (e) { /* réessayé à la prochaine sauvegarde */ }
-        return JSON.stringify(merged);
-      }
-    } catch (e) { /* toujours hors-ligne au moment de l'essai : on retentera plus tard */ return value; }
-    // Rien sur le serveur pour l'instant (tout premier envoi) : notre version
-    // devient la référence dès qu'elle sera confirmée écrite.
-    writeLocalCache(shopSyncBaseKey, local);
-    try { await persistShopToSupabase(local); } catch (e) { /* réessayé à la prochaine sauvegarde */ }
-    return value;
+    const r = await syncShopToServer(local);
+    if (!r.ok) throw new Error("sync_failed");
+    writeLocalCache(shopSyncBaseKey, r.merged);
+    if (shopEditGenRef.current === genAtStart) {
+      if (r.merged !== local) applyShop(r.merged, null, null);
+      writeLocalCache(shopKey, r.merged);
+      clearShopUnsynced(shopKey);
+    }
+    return SHOP_SYNCED_SENTINEL;
   };
-  const { isOnline, pendingCount, persistOffline, clearPending } = useOfflineSync(resolveShopBeforeFlush);
+  const { isOnline, pendingCount, persistOffline, clearPending, setPendingCountExternal } = useOfflineSync(resolveShopBeforeFlush);
   // Écrit le blob boutique (produits, ventes, dettes, dépenses, réglages...) dans
   // Supabase (table shop_data), en plus du canal window.storage existant. C'est la
   // source fiable : elle fonctionne sur un vrai déploiement, contrairement à
@@ -13058,6 +13095,53 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return { ok: false };
     }
   }, [blobShopId]);
+  // ---- Synchronisation avec UNE seule référence serveur : shop_blobs ----
+  // Plus de lecture/écriture de l'ancienne copie kv_store pour la boutique. Chaque envoi
+  // indique la version serveur sur laquelle il se base (remoteAtRef) : si un autre
+  // appareil a écrit entre-temps, le serveur refuse sans rien écraser, on récupère sa
+  // version, on fusionne et on renvoie. En temps normal : UNE seule requête par envoi.
+  const remoteAtRef = useRef(undefined); // undefined = version serveur pas encore connue
+  const lastAccountJsonRef = useRef(null); // partie « compte » déjà envoyée telle quelle
+  useEffect(() => { remoteAtRef.current = undefined; lastAccountJsonRef.current = null; }, [blobShopId, shopKey]);
+  const syncShopToServer = async (localShop) => {
+    if (!blobShopId) {
+      const r = await persistShopToSupabase(localShop);
+      return { ok: !!(r && r.ok), merged: localShop };
+    }
+    const { data: userData } = await getUserFast();
+    const ownerId = userData && userData.user ? userData.user.id : null;
+    if (!ownerId) return { ok: false, merged: localShop };
+    let merged = localShop;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      if (remoteAtRef.current === undefined) {
+        const { data: row, error } = await supabase.from("shop_blobs").select("data, updated_at").eq("owner_id", ownerId).eq("shop_id", blobShopId).maybeSingle();
+        if (error) return { ok: false, merged };
+        remoteAtRef.current = row ? row.updated_at : null;
+        if (row && row.data) {
+          const { account } = splitShopBlob(merged);
+          const remoteShop = { ...account, ...row.data };
+          const baseShop = readLocalCache(shopSyncBaseKey) || merged;
+          merged = mergeShop(baseShop, merged, remoteShop);
+        }
+      }
+      const { account, shop } = splitShopBlob(merged);
+      // Partie « compte » (réglages, profil...) : envoyée seulement si elle a changé.
+      const accJson = JSON.stringify(account);
+      if (Object.keys(account).length > 0 && accJson !== lastAccountJsonRef.current) {
+        const { data: accOk, error: accErr } = await supabase.rpc("save_shop_data", { p_data: account });
+        if (accErr || accOk !== true) return { ok: false, merged };
+        lastAccountJsonRef.current = accJson;
+      }
+      // Les paniers en cours ne partent jamais au serveur (brouillons de cet appareil).
+      const payload = { ...shop, draftCarts: [], activeCartId: null };
+      const { data: res, error: rpcErr } = await supabase.rpc("save_shop_blob_v2", { p_shop_id: blobShopId, p_data: payload, p_expected_at: remoteAtRef.current });
+      if (rpcErr) return { ok: false, merged };
+      if (res && res.ok) { remoteAtRef.current = res.at; return { ok: true, merged }; }
+      if (res && res.conflict) { remoteAtRef.current = undefined; continue; }
+      return { ok: false, merged };
+    }
+    return { ok: false, merged };
+  };
   // Une seule sauvegarde réseau à la fois. Avant, chaque appui (+, -, chaque chiffre tapé
   // dans « Montant donné ») lançait sa propre sauvegarde complète en parallèle : sur un
   // réseau mobile lent elles s'empilaient (plusieurs secondes chacune), pouvaient arriver
@@ -13095,72 +13179,33 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // "base"). Ventes/dépenses/dettes fusionnées par id, stock fusionné de
       // façon additive, réglages au plus récent. Rien n'est jamais perdu, même
       // si deux téléphones ont travaillé en même temps hors ligne.
+      // Cache local d'abord (déjà écrit par saveAll), puis envoi au serveur en arrière-plan.
       let merged = next;
-      try {
-        // La base ne doit refléter QUE la dernière version confirmée par le
-        // serveur — jamais nos propres écritures locales non confirmées,
-        // sinon on "oublie" les changements faits hors ligne à la prochaine
-        // fusion (leur delta redevient zéro).
-        const baseShop = readLocalCache(shopSyncBaseKey) || next;
-        if (navigator.onLine && window.storage) {
-          try {
-            const r = await window.storage.get(shopKey, true);
-            if (r) {
-              const remoteShop = JSON.parse(r.value);
-              merged = mergeShop(baseShop, next, remoteShop);
-            }
-          } catch (e) { /* pas de réseau ou erreur serveur : on garde "next" tel quel, la fusion se fera au prochain essai */ }
-        }
-      } catch (e) {}
-      // Si le boutiquier a encore agi pendant l'aller-retour réseau, on n'applique pas ce
-      // résultat à l'écran (il est déjà dépassé) : la sauvegarde suivante refera la fusion
-      // avec son état le plus récent. C'était la cause du panier qui « revenait en arrière ».
-      const stillLatest = shopEditGenRef.current === genAtStart;
-      if (merged !== next && stillLatest) applyShop(merged, null, null);
-      const cacheOk = stillLatest ? writeLocalCache(shopKey, merged) : true;
-      // Écriture "offline-first" : le cache local est mis à jour immédiatement,
-      // donc l'app reste pleinement utilisable même sans connexion. La
-      // synchronisation vers le serveur se fait tout de suite si possible,
-      // sinon elle est mise en file d'attente et rejouée automatiquement
-      // dès que la connexion revient (voir useOfflineSync, résolveur de fusion).
-      let cacheFailed = !cacheOk;
-      // Écriture prioritaire et fiable vers Supabase (voir persistShopToSupabase).
-      // En parallèle du canal window.storage ci-dessous, qui reste utile pour la
-      // fusion multi-appareils quand cette API est disponible.
       let supabaseOk = false;
       if (navigator.onLine) {
         try {
-          const supaResult = await persistShopToSupabase(merged);
-          supabaseOk = supaResult.ok;
-        } catch (e) {}
+          const r = await syncShopToServer(next);
+          supabaseOk = r.ok;
+          merged = r.merged || next;
+        } catch (e) { supabaseOk = false; }
       }
-      // Confirmé par Supabase : la base de fusion avance TOUT DE SUITE (pas après l'aller-
-      // retour kv_store), et si rien de nouveau n'a été fait entre-temps, plus rien n'est
-      // « en attente » sur cet appareil.
+      // Si le boutiquier a encore agi pendant l'aller-retour réseau, on n'applique pas ce
+      // résultat à l'écran (il est déjà dépassé) : la sauvegarde suivante refera la fusion.
+      const stillLatest = shopEditGenRef.current === genAtStart;
+      if (merged !== next && stillLatest) applyShop(merged, null, null);
+      let cacheOk = true;
+      if (stillLatest) cacheOk = writeLocalCache(shopKey, merged);
       if (supabaseOk) {
+        // Confirmé par le serveur : nouvelle base de fusion ; plus rien « en attente ».
         writeLocalCache(shopSyncBaseKey, merged);
+        clearPending(shopKey);
         if (shopEditGenRef.current === genAtStart && !persistNextRef.current) clearShopUnsynced(shopKey);
+      } else {
+        // Hors ligne ou échec : mis en file, renvoyé automatiquement dès que possible.
+        const count = enqueueWrite(shopKey, "1", true);
+        setPendingCountExternal(count);
+        if (!cacheOk) setError(tx(lang, "errStorageFull"));
       }
-      try {
-        const result = await persistOffline(shopKey, JSON.stringify(merged), true);
-        if (result && result.cacheFailed) cacheFailed = true;
-        // La base n'avance que si le serveur a réellement confirmé l'écriture
-        // (Supabase ou, à défaut, window.storage). Tant qu'aucun des deux n'a
-        // confirmé, on garde l'ancienne base pour que les prochaines ventes hors
-        // ligne continuent à s'additionner correctement.
-        if (!supabaseOk && result && !result.queued && !result.denied) writeLocalCache(shopSyncBaseKey, merged);
-        // Déjà confirmé par Supabase (source de référence) : rien ne reste « en attente »,
-        // même si l'ancien canal kv_store a échoué — sinon le badge « Synchronisation… (1) »
-        // restait affiché pour toujours et faussait la fusion au démarrage suivant.
-        if (supabaseOk && result && result.queued && navigator.onLine) clearPending(shopKey);
-        // Si on est hors ligne ET que le stockage local du téléphone est plein,
-        // ce changement n'est confirmé nulle part : ni sur le serveur, ni de
-        // façon fiable en attente localement. On le signale clairement plutôt
-        // que de laisser l'échec passer inaperçu (ex : trop de photos produits).
-        if (cacheFailed && !supabaseOk && result && result.queued) {
-          setError(tx(lang, "errStorageFull"));
-        }
-      } catch (e) { /* persistOffline gère déjà ses propres erreurs en interne */ }
   };
   useEffect(() => {
     if (isDemo) {
@@ -13226,6 +13271,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       try {
         let shop = cachedShop || emptyShop;
         let shopConfirmed = false;
+        let supabaseAnswered = false;
         // Essai prioritaire via Supabase (shop_data) : c'est la source fiable,
         // qui fonctionne sur un vrai déploiement (contrairement à window.storage,
         // qui peut ne pas exister selon l'environnement d'hébergement — voir
@@ -13257,7 +13303,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
               const blobData = (blobRes && blobRes.data && blobRes.data.data) || null;
               const accountAt = accountRes && accountRes.data && accountRes.data.updated_at ? new Date(accountRes.data.updated_at).getTime() : 0;
               const blobAt = blobRes && blobRes.data && blobRes.data.updated_at ? new Date(blobRes.data.updated_at).getTime() : 0;
+              // Version serveur connue : la prochaine sauvegarde s'appuie dessus (contrôle de version).
+              if (blobShopId && blobRes && !blobRes.error) remoteAtRef.current = blobRes.data ? blobRes.data.updated_at : null;
               if (accountData || blobData) {
+                supabaseAnswered = true;
                 let remoteShop;
                 if (isSecondaryShop) {
                   // shop_data ne contient JAMAIS les données d'une boutique secondaire :
@@ -13299,7 +13348,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // Filet de sécurité historique (autre canal de synchro) : on ne l'utilise que
         // si Supabase n'a rien confirmé au-dessus, pour ne jamais écraser une version
         // déjà fiable.
-        if (!shopConfirmed && window.storage) {
+        // Seulement si Supabase n'a RIEN renvoyé (ancien compte jamais migré) : sinon cette
+        // vieille copie, parfois figée depuis des jours, était fusionnée par-dessus.
+        if (!shopConfirmed && !supabaseAnswered && window.storage) {
         try {
           const r = await window.storage.get(shopKey, true);
           if (r) {
@@ -13385,6 +13436,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (shopReadOnly && !isReadOnlyAllowedChange(overrides)) {
       playSound("error"); triggerHaptic("error");
       setError(tx(lang, "shopReadOnlyBlocked"));
+      return;
+    }
+    // Paniers : enregistrés uniquement sur cet appareil.
+    const touchesCarts = Object.prototype.hasOwnProperty.call(overrides, "draftCarts") || Object.prototype.hasOwnProperty.call(overrides, "activeCartId");
+    if (touchesCarts && !isDemo) {
+      writeLocalCarts(shopKey, overrides.draftCarts ?? draftCarts, overrides.activeCartId ?? activeCartId);
+    }
+    // Changement qui ne concerne QUE les paniers (+/− sur un article, nom ou montant tapé,
+    // changement de panier) : instantané, rien n'est envoyé au serveur ni réécrit en entier.
+    if (touchesCarts && Object.keys(overrides).every((k) => k === "draftCarts" || k === "activeCartId")) {
+      if (overrides.draftCarts) setDraftCarts(overrides.draftCarts);
+      if (Object.prototype.hasOwnProperty.call(overrides, "activeCartId")) setActiveCartId(overrides.activeCartId);
+      try { persistCriticalNow({ activeCartId: overrides.activeCartId ?? activeCartId, draftCarts: overrides.draftCarts ?? draftCarts }); } catch (e) {}
       return;
     }
     // Sauvegarde de secours dédiée au stock : écrite en tout premier, avant la
@@ -18413,7 +18477,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           "Démasquer les données" quand on scrolle tout en bas. */}
         {tab === "dashboard" && (
           <div className="space-y-2">
-            {DEV_TEST_MODE_ENABLED && testPlanOverride && (
+            {devModeAllowed && testPlanOverride && (
               <div onClick={() => setTestPlanOverride(null)} className="rounded-xl px-3 py-2" style={{ background: "rgba(168,85,247,0.14)", border: "1px dashed #a855f7", cursor: "pointer" }}>
                 <p style={{ color: "#a855f7", fontSize: 11, fontWeight: 700, textAlign: "center" }}>
                   🧪 Mode test — palier simulé : {t(lang, SUBSCRIPTION_PLANS[testPlanOverride].nameKey)} (appuyez pour revenir au réel)
@@ -23716,7 +23780,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       onClick={() => {
                         const next = devTapCount + 1;
                         setDevTapCount(next);
-                        if (DEV_TEST_MODE_ENABLED && next >= 7) { setDevModeUnlocked(true); setDevTapCount(0); }
+                        if (devModeAllowed && next >= 7) { setDevModeUnlocked(true); setDevTapCount(0); }
                       }}
                       style={{ color: T.muted, fontSize: 12, marginTop: 2, cursor: "pointer", userSelect: "none" }}
                     >
@@ -23729,7 +23793,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       {tx(lang, "aboutLastUpdate")} : {(() => { try { return new Date(__BUILD_TIME__).toLocaleString(lang === "bm" || lang === "wo" ? "fr" : lang, { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); } catch (e) { return new Date(__BUILD_TIME__).toISOString().slice(0, 16).replace("T", " "); } })()}
                     </p>
                   </div>
-                  {DEV_TEST_MODE_ENABLED && devModeUnlocked && (
+                  {devModeAllowed && devModeUnlocked && (
                     <div style={{ padding: 14, borderRadius: 14, background: T.input, border: "1px dashed #c084fc", display: "flex", flexDirection: "column", gap: 8 }}>
                       <p style={{ color: "#a855f7", fontSize: 12, fontWeight: 700 }}>🧪 Mode test (développeur)</p>
                       <p style={{ color: T.muted, fontSize: 11, lineHeight: 1.4 }}>
