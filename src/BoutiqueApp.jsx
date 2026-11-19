@@ -568,6 +568,13 @@ async function getUserFast() {
 // exactement la même interface (get/set/list) mais persiste réellement les données dans
 // Supabase (table kv_store — voir supabase-function/kv_store_schema.sql pour la créer),
 // de sorte que le reste du code n'a besoin d'aucun autre changement.
+// Clés kv_store dont l'écriture est refusée de façon définitive par la base (RLS) : une
+// telle écriture ne réussira jamais, il ne faut donc ni la réessayer ni la garder en file
+// d'attente (sinon « Synchronisation… (1) » reste affiché pour toujours).
+const KV_DENIED_KEYS = new Set();
+function isKvDenied(err) {
+  return !!err && (err.code === "42501" || /row-level security/i.test(String(err.message || "")));
+}
 window.storage = {
   async get(key, shared = false) {
     const { data, error } = await supabase.from("kv_store").select("value").eq("key", key).maybeSingle();
@@ -576,10 +583,13 @@ window.storage = {
     return { key, value: data.value, shared };
   },
   async set(key, value, shared = false) {
+    // Écriture déjà refusée par la base pour cette clé (ligne appartenant à un autre compte) :
+    // inutile de renvoyer à chaque appui plusieurs centaines de Ko qui seront refusés.
+    if (KV_DENIED_KEYS.has(key)) { const err = new Error("kv_denied"); err.code = "42501"; throw err; }
     const { data: userData } = await getUserFast();
     const ownerId = userData && userData.user ? userData.user.id : null;
     const { error } = await supabase.from("kv_store").upsert({ key, value, shared, owner_id: ownerId, updated_at: new Date().toISOString() });
-    if (error) throw error;
+    if (error) { if (isKvDenied(error)) KV_DENIED_KEYS.add(key); throw error; }
     return { key, value, shared };
   },
   async delete(key, shared = false) {
@@ -6870,11 +6880,30 @@ function getAppLocale() {
   const ext = (CURRENT_LANG === "ar" ? "-u-ca-gregory" : "-u") + "-nu-" + (USE_ARABIC_DIGITS ? "arab" : "latn");
   return (__dateLocaleCache[key] = base + ext);
 }
+// Formateurs de date mis en cache : toLocaleDateString() reconstruit un formateur Intl
+// complet à CHAQUE appel (très lent sur téléphone). Les graphiques et listes l'appelaient
+// des centaines de fois par affichage — c'était le premier poste de lenteur de l'app.
+// Même résultat exact, juste calculé une seule fois par (langue, format).
+const __dtfCache = new Map();
+function fmtDateCached(d, opts, kind) {
+  if (!(d instanceof Date) || isNaN(d.getTime())) return "Invalid Date";
+  const loc = getAppLocale();
+  const key = loc + "|" + kind + "|" + JSON.stringify(opts || null);
+  let f = __dtfCache.get(key);
+  if (!f) {
+    const o = opts || (kind === "time" ? { hour: "numeric", minute: "numeric", second: "numeric" } : { year: "numeric", month: "numeric", day: "numeric" });
+    try { f = new Intl.DateTimeFormat(loc, o); } catch (e) { f = null; }
+    if (__dtfCache.size > 200) __dtfCache.clear();
+    __dtfCache.set(key, f);
+  }
+  if (!f) return kind === "time" ? d.toLocaleTimeString(loc, opts) : d.toLocaleDateString(loc, opts);
+  return f.format(d);
+}
 function dayLabel(iso) {
   const d = parseDayOrIso(iso);
   // Étiquette courte des graphiques : on retire les marques de direction (arabe/hébreu) qui
   // décaleraient l'affichage dans un conteneur gauche→droite.
-  return d.toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit" }).replace(/[\u200e\u200f\u061c]/g, "");
+  return fmtDateCached(d, { day: "2-digit", month: "2-digit" }, "date").replace(/[\u200e\u200f\u061c]/g, "");
 }
 // ---- Dates de péremption (par lots) ----
 // Un produit peut porter des lots { id, date: "AAAA-MM-JJ", qty }. La quantité du produit reste
@@ -6909,7 +6938,7 @@ function expiryStatus(p, todayKey) {
 }
 function fullDate(iso) {
   const d = parseDayOrIso(iso);
-  return d.toLocaleDateString(getAppLocale());
+  return fmtDateCached(d, null, "date");
 }
 // Le navigateur renvoie les dates "longues" (jour de semaine + mois en toutes lettres)
 // entièrement en minuscules dans la plupart des langues (ex. français : "lundi 3 novembre"),
@@ -6923,11 +6952,11 @@ function capitalizeFirstLetter(str) {
 }
 function fullDateLong(iso) {
   const d = iso ? new Date(iso) : new Date();
-  return capitalizeFirstLetter(d.toLocaleDateString(getAppLocale(), { weekday: "long", day: "numeric", month: "long" }));
+  return capitalizeFirstLetter(fmtDateCached(d, { weekday: "long", day: "numeric", month: "long" }, "date"));
 }
 function fullTime(iso) {
   const d = new Date(iso);
-  return d.toLocaleTimeString(getAppLocale(), { hour: "2-digit", minute: "2-digit" });
+  return fmtDateCached(d, { hour: "2-digit", minute: "2-digit" }, "time");
 }
 // ---- Jeu de données du mode démo ----
 // L'ancienne démo tenait en 4 produits et 4 ventes : presque tous les écrans (statistiques,
@@ -7243,7 +7272,10 @@ const PRODUCTS_BACKUP_PREFIX = "mb_products_backup:";
 // maintient donc une file d'attente par clé pour forcer l'ordre d'écriture.
 const nativeMirrorQueues = {};
 function mirrorToNativeStorage(key, rawValue) {
-  if (typeof window === "undefined" || !window.Capacitor) return;
+  // Uniquement dans l'app Android : sur la PWA, window.Capacitor existe aussi, et chaque
+  // écriture était alors recopiée une 2e fois dans localStorage (plusieurs centaines de Ko
+  // à chaque appui sur « + » dans le panier), ce qui ralentissait nettement l'app.
+  if (typeof window === "undefined" || !isNativePlatformNow()) return;
   const previous = nativeMirrorQueues[key] || Promise.resolve();
   nativeMirrorQueues[key] = previous
     .catch(() => {})
@@ -7256,7 +7288,7 @@ function mirrorToNativeStorage(key, rawValue) {
 // écriture très récente n'aurait pas encore eu le temps de se terminer avant qu'Android
 // ne tue potentiellement le processus.
 function flushAllCacheToNativeStorage() {
-  if (typeof window === "undefined" || !window.Capacitor) return;
+  if (typeof window === "undefined" || !isNativePlatformNow()) return;
   try {
     for (let i = 0; i < window.localStorage.length; i++) {
       const k = window.localStorage.key(i);
@@ -7338,6 +7370,20 @@ function writeLocalCache(key, value) {
   }
   catch (e) { return false; }
 }
+// Marqueur « cet appareil a des changements pas encore confirmés par Supabase » pour une
+// boutique. Indépendant de la file kv_store : si l'app est rechargée (ou tuée) avant la fin
+// de l'envoi d'une vente, le démarrage suivant FUSIONNE le cache local avec le serveur au
+// lieu de remplacer l'un par l'autre — la vente ne peut plus disparaître.
+const UNSYNCED_PREFIX = "mb_unsynced:";
+function markShopUnsynced(key) {
+  try { window.localStorage.setItem(UNSYNCED_PREFIX + key, String(Date.now())); mirrorToNativeStorage(UNSYNCED_PREFIX + key, String(Date.now())); } catch (e) {}
+}
+function clearShopUnsynced(key) {
+  try { window.localStorage.removeItem(UNSYNCED_PREFIX + key); mirrorToNativeStorage(UNSYNCED_PREFIX + key, ""); } catch (e) {}
+}
+function isShopUnsynced(key) {
+  try { return !!window.localStorage.getItem(UNSYNCED_PREFIX + key); } catch (e) { return false; }
+}
 function readQueue() {
   try {
     const raw = window.localStorage.getItem(OFFLINE_QUEUE_KEY);
@@ -7402,6 +7448,13 @@ function useOfflineSync(resolveBeforeFlush) {
           setPendingCount(remaining);
           queue = readQueue();
         } catch (e) {
+          // Refus définitif de la base : cette écriture ne passera jamais, on la retire
+          // (les données sont de toute façon enregistrées dans shop_blobs / shop_data).
+          if (isKvDenied(e)) {
+            setPendingCount(dequeueKey(item.key));
+            queue = readQueue();
+            continue;
+          }
           // Toujours hors-ligne ou erreur réseau : on arrête, on réessaiera plus tard
           break;
         }
@@ -7460,12 +7513,18 @@ function useOfflineSync(resolveBeforeFlush) {
       setPendingCount(count);
       return { queued: false, cacheFailed: !cacheOk };
     } catch (e) {
+      if (isKvDenied(e)) {
+        setPendingCount(dequeueKey(key));
+        return { queued: false, denied: true, cacheFailed: !cacheOk };
+      }
       const count = enqueueWrite(key, value, shared);
       setPendingCount(count);
       return { queued: true, cacheFailed: !cacheOk };
     }
   }, []);
-  return { isOnline, pendingCount, persistOffline, flushQueue };
+  // Retire une écriture de la file quand elle a été confirmée par un autre chemin (Supabase).
+  const clearPending = useCallback((key) => { setPendingCount(dequeueKey(key)); }, []);
+  return { isOnline, pendingCount, persistOffline, flushQueue, clearPending };
 }
 // ===== Fusion automatique intelligente (multi-appareils) =====
 // Au lieu d'écraser toute la boutique par la dernière écriture, on fusionne
@@ -10314,7 +10373,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [shopPhone, setShopPhone] = useState("");
   // Indicatif du boutiquier lui-même : pays de la boutique, sinon indicatif de son propre
   // numéro, sinon fuseau horaire du téléphone. Sert à pré-remplir (modifiable) le numéro client.
-  const ownDialCode = (() => {
+  const ownDialCode = useMemo(() => {
     if (shopCountry && COUNTRY_DIAL_CODE[shopCountry]) return COUNTRY_DIAL_CODE[shopCountry];
     const ph = (shopPhone || "").replace(/[^\d+]/g, "");
     if (ph.startsWith("+")) {
@@ -10323,7 +10382,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; if (TZ_DIAL_CODE[tz]) return TZ_DIAL_CODE[tz]; } catch (e) {}
     return "";
-  })();
+  }, [shopCountry, shopPhone]);
   // Style choisi pour l'image de partage produit (fond/couleurs), et si on
   // doit re-proposer le choix avant chaque envoi ou garder ce style partout.
   const [shareCardStyleId, setShareCardStyleId] = useState("midnight");
@@ -12680,6 +12739,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // données sont réellement chargées.
   const primaryShopId = shops.length > 0 ? shops[0].id : null;
   const blobShopId = isSecondaryShop ? activeShopId : primaryShopId;
+  // Compteur incrémenté à CHAQUE action locale (saveAll). Toute opération réseau note sa
+  // valeur au départ : si elle a changé à l'arrivée, le boutiquier a agi entre-temps, et la
+  // réponse (déjà dépassée) ne doit pas écraser ce qu'il voit à l'écran.
+  const shopEditGenRef = useRef(0);
+  // Dernier état complet enregistré localement par saveAll.
+  const latestShopRef = useRef(null);
   // Applique un objet "shop" (fusionné ou non) à tous les états React.
   // Réutilisé au chargement initial ET après chaque fusion automatique.
   const applyShop = useCallback((shop, sub, account) => {
@@ -12790,14 +12855,23 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (key !== shopKey) return value;
     let local;
     try { local = JSON.parse(value); } catch (e) { return value; }
+    // L'état le plus récent de cet appareil est dans le cache local (écrit dès chaque
+    // action, voir saveAll) : il peut être plus récent que la valeur mise en file.
+    const cachedNow = readLocalCache(shopKey);
+    if (cachedNow && typeof cachedNow === "object") local = cachedNow;
+    const genAtStart = shopEditGenRef.current;
     try {
       const r = await window.storage.get(shopKey, true);
       if (r) {
         const remoteShop = JSON.parse(r.value);
         const baseShop = readLocalCache(shopSyncBaseKey) || local;
         const merged = mergeShop(baseShop, local, remoteShop);
-        applyShop(merged, null, null);
-        writeLocalCache(shopKey, merged);
+        // Ne jamais écraser à l'écran ce que le boutiquier a fait pendant l'aller-retour
+        // réseau (sinon le panier « revient en arrière » en pleine vente).
+        if (shopEditGenRef.current === genAtStart) {
+          applyShop(merged, null, null);
+          writeLocalCache(shopKey, merged);
+        }
         writeLocalCache(shopSyncBaseKey, merged);
         // Les ventes faites hors ligne doivent aussi arriver dans shop_blobs (la source
         // lue au démarrage, par les sauvegardes automatiques et les résumés), pas
@@ -12812,7 +12886,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     try { await persistShopToSupabase(local); } catch (e) { /* réessayé à la prochaine sauvegarde */ }
     return value;
   };
-  const { isOnline, pendingCount, persistOffline } = useOfflineSync(resolveShopBeforeFlush);
+  const { isOnline, pendingCount, persistOffline, clearPending } = useOfflineSync(resolveShopBeforeFlush);
   // Écrit le blob boutique (produits, ventes, dettes, dépenses, réglages...) dans
   // Supabase (table shop_data), en plus du canal window.storage existant. C'est la
   // source fiable : elle fonctionne sur un vrai déploiement, contrairement à
@@ -12857,10 +12931,37 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return { ok: false };
     }
   }, [blobShopId]);
+  // Une seule sauvegarde réseau à la fois. Avant, chaque appui (+, -, chaque chiffre tapé
+  // dans « Montant donné ») lançait sa propre sauvegarde complète en parallèle : sur un
+  // réseau mobile lent elles s'empilaient (plusieurs secondes chacune), pouvaient arriver
+  // au serveur dans le désordre et ralentissaient tout. Désormais, pendant qu'une
+  // sauvegarde est en cours, on ne garde que le DERNIER état demandé, envoyé juste après.
+  const persistRunningRef = useRef(false);
+  const persistNextRef = useRef(null);
   const persist = useCallback(
     async (next) => {
       if (isDemo) { setSaving(true); setTimeout(() => setSaving(false), 300); return; }
+      persistNextRef.current = next;
+      if (persistRunningRef.current) return;
+      persistRunningRef.current = true;
       setSaving(true);
+      try {
+        while (persistNextRef.current) {
+          const n = persistNextRef.current;
+          persistNextRef.current = null;
+          await persistOnceRef.current(n);
+        }
+      } finally {
+        persistRunningRef.current = false;
+        setSaving(false);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isDemo, shopKey, shopSyncBaseKey, persistOffline, applyShop, setError, persistShopToSupabase]
+  );
+  const persistOnceRef = useRef(null);
+  persistOnceRef.current = async (next) => {
+      const genAtStart = shopEditGenRef.current;
       // Fusion automatique intelligente : avant d'écraser la donnée du serveur,
       // on récupère la version distante (si on est en ligne) et on la fusionne
       // avec la nôtre par rapport à la dernière version connue en commun (la
@@ -12884,8 +12985,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           } catch (e) { /* pas de réseau ou erreur serveur : on garde "next" tel quel, la fusion se fera au prochain essai */ }
         }
       } catch (e) {}
-      if (merged !== next) applyShop(merged, null, null);
-      const cacheOk = writeLocalCache(shopKey, merged);
+      // Si le boutiquier a encore agi pendant l'aller-retour réseau, on n'applique pas ce
+      // résultat à l'écran (il est déjà dépassé) : la sauvegarde suivante refera la fusion
+      // avec son état le plus récent. C'était la cause du panier qui « revenait en arrière ».
+      const stillLatest = shopEditGenRef.current === genAtStart;
+      if (merged !== next && stillLatest) applyShop(merged, null, null);
+      const cacheOk = stillLatest ? writeLocalCache(shopKey, merged) : true;
       // Écriture "offline-first" : le cache local est mis à jour immédiatement,
       // donc l'app reste pleinement utilisable même sans connexion. La
       // synchronisation vers le serveur se fait tout de suite si possible,
@@ -12902,6 +13007,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           supabaseOk = supaResult.ok;
         } catch (e) {}
       }
+      // Confirmé par Supabase : la base de fusion avance TOUT DE SUITE (pas après l'aller-
+      // retour kv_store), et si rien de nouveau n'a été fait entre-temps, plus rien n'est
+      // « en attente » sur cet appareil.
+      if (supabaseOk) {
+        writeLocalCache(shopSyncBaseKey, merged);
+        if (shopEditGenRef.current === genAtStart && !persistNextRef.current) clearShopUnsynced(shopKey);
+      }
       try {
         const result = await persistOffline(shopKey, JSON.stringify(merged), true);
         if (result && result.cacheFailed) cacheFailed = true;
@@ -12909,7 +13021,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // (Supabase ou, à défaut, window.storage). Tant qu'aucun des deux n'a
         // confirmé, on garde l'ancienne base pour que les prochaines ventes hors
         // ligne continuent à s'additionner correctement.
-        if (supabaseOk || (result && !result.queued)) writeLocalCache(shopSyncBaseKey, merged);
+        if (!supabaseOk && result && !result.queued && !result.denied) writeLocalCache(shopSyncBaseKey, merged);
+        // Déjà confirmé par Supabase (source de référence) : rien ne reste « en attente »,
+        // même si l'ancien canal kv_store a échoué — sinon le badge « Synchronisation… (1) »
+        // restait affiché pour toujours et faussait la fusion au démarrage suivant.
+        if (supabaseOk && result && result.queued && navigator.onLine) clearPending(shopKey);
         // Si on est hors ligne ET que le stockage local du téléphone est plein,
         // ce changement n'est confirmé nulle part : ni sur le serveur, ni de
         // façon fiable en attente localement. On le signale clairement plutôt
@@ -12918,10 +13034,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           setError(tx(lang, "errStorageFull"));
         }
       } catch (e) { /* persistOffline gère déjà ses propres erreurs en interne */ }
-      setSaving(false);
-    },
-    [shopKey, shopSyncBaseKey, isDemo, persistOffline, applyShop, setError, persistShopToSupabase]
-  );
+  };
   useEffect(() => {
     if (isDemo) {
       const now = Date.now();
@@ -12958,6 +13071,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     (async () => {
       __mark("ShopApp : début du chargement des données");
       const emptyShop = { products: [], sales: [], debts: [], loyaltyCustomers: {}, expenses: [], cashFund: 0, draftCarts: [] };
+      const loadGenAtStart = shopEditGenRef.current;
       // 1) Démarrage instantané depuis le cache local, pour que l'app soit
       //    immédiatement utilisable même sans réseau (mode hors-ligne complet).
       const cachedShop = readLocalCache(shopKey);
@@ -13040,7 +13154,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
                 // que ce cas soit traité comme une vraie version serveur confirmée.
                 if (blobData && !Array.isArray(remoteShop.products)) remoteShop.products = [];
                 if (Array.isArray(remoteShop.products)) {
-                  const hasPending = readQueue().some((item) => item.key === shopKey);
+                  const hasPending = readQueue().some((item) => item.key === shopKey) || (!!cachedShop && isShopUnsynced(shopKey));
                   if (hasPending) {
                     const baseShop = readLocalCache(shopSyncBaseKey) || cachedShop || remoteShop;
                     shop = mergeShop(baseShop, cachedShop || remoteShop, remoteShop);
@@ -13074,7 +13188,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
             // tant qu'il y a une écriture en attente, on la laisse intacte, la
             // file d'attente se chargera de la vraie synchronisation dès que
             // possible (voir useOfflineSync / resolveShopBeforeFlush).
-            const hasPending = readQueue().some((item) => item.key === shopKey);
+            const hasPending = readQueue().some((item) => item.key === shopKey) || (!!cachedShop && isShopUnsynced(shopKey));
             if (hasPending) {
               const baseShop = readLocalCache(shopSyncBaseKey) || cachedShop || remoteShop;
               const merged = mergeShop(baseShop, cachedShop || remoteShop, remoteShop);
@@ -13092,10 +13206,29 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         try { if (window.storage) { const r2 = await window.storage.get(subKey, true); if (r2) { sub = JSON.parse(r2.value); writeLocalCache(subKey, sub); } } } catch (e) {}
         let account = cachedAccount || null;
         try { if (window.storage) { const r3 = await window.storage.get(`accounts:${username}`, true); if (r3) { account = JSON.parse(r3.value); writeLocalCache(`accounts:${username}`, account); } } } catch (e) {}
+        // Version réellement confirmée par le serveur : nouvelle base de référence.
+        const confirmedRemote = shopConfirmed ? shop : null;
+        // Des changements de cet appareil n'avaient pas fini d'être envoyés (app rechargée ou
+        // fermée juste après une vente) : la version fusionnée ci-dessus est renvoyée.
+        const mustPush = !shopConfirmed && !!cachedShop && isShopUnsynced(shopKey);
+        // Le boutiquier a commencé à vendre pendant le chargement réseau (fréquent sur un
+        // réseau lent : plusieurs secondes) : on fusionne la version du serveur AVEC ce qu'il
+        // vient de faire, au lieu de la plaquer telle quelle — c'est ce qui faisait revenir
+        // le panier en arrière et disparaître une vente juste enregistrée.
+        if (shopEditGenRef.current !== loadGenAtStart && latestShopRef.current) {
+          const baseShop = readLocalCache(shopSyncBaseKey) || shop;
+          const localNow = latestShopRef.current;
+          shop = { ...mergeShop(baseShop, localNow, shop), draftCarts: localNow.draftCarts || [], activeCartId: localNow.activeCartId ?? null };
+          writeLocalCache(shopKey, shop);
+          // La fusion contient des actions pas encore envoyées : on les renvoie.
+          const toSend = shop;
+          setTimeout(() => { try { persist(toSend); } catch (e) {} }, 0);
+        } else if (mustPush) {
+          const toSend = shop;
+          setTimeout(() => { try { persist(toSend); } catch (e) {} }, 0);
+        }
         applyShop(shop, sub, account);
-        // Version réellement confirmée par le serveur (pas juste une tentative
-        // hors-ligne) : c'est la nouvelle base de référence pour les prochaines fusions.
-        if (shopConfirmed) writeLocalCache(shopSyncBaseKey, shop);
+        if (confirmedRemote) writeLocalCache(shopSyncBaseKey, confirmedRemote);
       } catch (e) {
         if (!cachedShop) setError(tx(lang, "errLoadFailed"));
       } finally {
@@ -13245,7 +13378,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // deux valeurs n'auront pas encore été mises à jour à ce stade (elles ne le sont
     // qu'après le prochain rendu).
     try { persistCriticalNow({ activeCartId: next.activeCartId, draftCarts: next.draftCarts }); } catch (e) {}
-    try { flushAllCacheToNativeStorage(); } catch (e) {}
+    // Cache local écrit TOUT DE SUITE (avant le réseau) : si la page se recharge ou si
+    // Android ferme l'app juste après une vente, on retrouve la vente et le panier à jour
+    // au lieu d'une version d'il y a quelques secondes (vente « disparue », panier revenu).
+    if (!isDemo) {
+      shopEditGenRef.current += 1;
+      latestShopRef.current = next;
+      writeLocalCache(shopKey, next);
+      markShopUnsynced(shopKey);
+    }
     persist(next);
   };
   // ---- Gestion des employés (réservée au propriétaire) ----
@@ -16629,6 +16770,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   useEffect(() => {
     if (settingsField === "backup") loadShopBackups();
   }, [settingsField]);
+  // Mémoïsation des gros calculs dérivés (historique, transactions, prévisions...). Ils étaient
+  // refaits à CHAQUE affichage — donc à chaque appui sur « + » dans un panier — alors qu'ils
+  // ne dépendent que des ventes/dettes/dépenses. Les hooks ne peuvent pas être appelés après
+  // le « if (loading) return » ci-dessous : on passe donc par un petit cache dans une ref,
+  // recalculé seulement quand l'une de ses dépendances change réellement.
+  const derivedCacheRef = useRef({});
+  const memoDerived = (name, deps, compute) => {
+    const hit = derivedCacheRef.current[name];
+    if (hit && hit.deps.length === deps.length && hit.deps.every((d, i) => Object.is(d, deps[i]))) return hit.value;
+    const value = compute();
+    derivedCacheRef.current[name] = { deps, value };
+    return value;
+  };
   if (loading) {
     return (
       <div style={{ minHeight: "100vh", background: "linear-gradient(160deg, #1e2a5e 0%, #16204a 50%, #101638 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -16706,7 +16860,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // pastille sur chaque produit qui sera épuisé dans la semaine). Les ventes sont rattachées
   // au produit par son identifiant : l'ancien calcul passait par le NOM, donc un produit
   // renommé perdait tout son historique et deux produits homonymes s'additionnaient.
-  const forecastById = (() => {
+  const forecastById = memoDerived("forecast", [sales, products, todayKey()], () => {
     const cutoff = Date.now() - 14 * 86400000;
     const soldById = {}, soldByName = {};
     sales.forEach((s) => {
@@ -16726,7 +16880,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       map[p.id] = { dailyRate, daysLeft: (p.quantity || 0) / dailyRate, suggestedReorder: Math.max(1, Math.ceil(dailyRate * 14)) };
     });
     return map;
-  })();
+  });
   const restockForecast = products
     .filter((p) => forecastById[p.id] && forecastById[p.id].daysLeft <= 10)
     .map((p) => ({ ...p, ...forecastById[p.id] }))
@@ -16869,9 +17023,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     return { cashIn: cashInTotal + debtIn, out: outTotal, withdrawals: withdrawalsTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, trend7 };
   })() : null;
   const days = last30Days();
-  const firstSaleDate = sales.length > 0
+  const firstSaleDate = memoDerived("firstSale", [sales], () => (sales.length > 0
     ? sales.map((s) => dayKeyOf(s.date)).sort()[0]
-    : null;
+    : null));
   // Journée habituelle : moyenne du MÊME jour de semaine sur les 4 dernières semaines (un
   // samedi se compare aux samedis). Sert d'objectif naturel, sans rien avoir à régler. Il
   // faut au moins deux semaines d'historique, sinon la moyenne ne veut rien dire.
@@ -16884,16 +17038,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const avg = sum / wanted.length;
     return avg > 0 ? { avg, pct: Math.round((todayTotal / avg) * 100) } : null;
   })() : null;
-  const trendDays = firstSaleDate
-    ? days.filter((d) => d >= firstSaleDate)
-    : [];
-  const trendData = trendDays.map((d) => ({
-    date: dayLabel(d),
-    total: sales.filter((s) => dayKeyOf(s.date) === d).reduce((sum, s) => sum + s.total, 0),
-  }));
-  const productTotals = {};
-  sales.forEach((s) => { productTotals[s.productName] = (productTotals[s.productName] || 0) + s.qty; });
-  const allTopProducts = Object.entries(productTotals).map(([name, qty]) => ({ name: name.length > 18 ? name.slice(0, 17) + "…" : name, fullName: name, qty })).sort((a, b) => b.qty - a.qty);
+  const allTopProducts = memoDerived("topProducts", [sales], () => {
+    const productTotals = {};
+    sales.forEach((s) => { productTotals[s.productName] = (productTotals[s.productName] || 0) + s.qty; });
+    return Object.entries(productTotals).map(([name, qty]) => ({ name: name.length > 18 ? name.slice(0, 17) + "…" : name, fullName: name, qty })).sort((a, b) => b.qty - a.qty);
+  });
   const TOP_PRODUCTS_LIMIT = 7;
   const topProducts = showAllTopProducts ? allTopProducts : allTopProducts.slice(0, TOP_PRODUCTS_LIMIT);
   const yAxisWidth = topProducts.length === 0 ? 60 : Math.min(160, Math.max(55, Math.max(...topProducts.map((p) => p.name.length)) * 7 + 12));
@@ -16987,14 +17136,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     return { N, kpis, hasFullPrev, series, heat, topProfit, dead, deadValue, topCustomers };
   })() : null;
   // Transactions groupées pour l'historique
-  const transactionsMap = {};
-  sales.forEach((s) => {
-    const key = s.transactionId || s.id;
-    if (!transactionsMap[key]) transactionsMap[key] = { id: key, date: s.date, payment: s.payment, customer: s.customer, change: s.change, actorId: s.actorId ?? null, items: [], total: 0 };
-    transactionsMap[key].items.push(s);
-    transactionsMap[key].total += s.total;
+  const transactions = memoDerived("transactions", [sales], () => {
+    const transactionsMap = {};
+    sales.forEach((s) => {
+      const key = s.transactionId || s.id;
+      if (!transactionsMap[key]) transactionsMap[key] = { id: key, date: s.date, payment: s.payment, customer: s.customer, change: s.change, actorId: s.actorId ?? null, items: [], total: 0 };
+      transactionsMap[key].items.push(s);
+      transactionsMap[key].total += s.total;
+    });
+    return Object.values(transactionsMap).sort((a, b) => new Date(b.date) - new Date(a.date));
   });
-  const transactions = Object.values(transactionsMap).sort((a, b) => new Date(b.date) - new Date(a.date));
   // Onglet Vente > "Ventes récentes" : volontairement limité aux 2 dernières heures, pour ne
   // pas surcharger cet écran — l'historique complet (avec annulation toujours possible) reste
   // disponible dans l'onglet Historique.
@@ -17009,8 +17160,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // Chaque catégorie n'est incluse que si l'employé a la permission de la voir, pour rester
   // cohérent avec le reste des permissions déjà appliquées ailleurs dans l'app.
   // Ventes annulées (par leur référence) : la ligne d'origine reste dans l'historique, marquée comme annulée.
-  const cancelledSaleRefs = new Set(historyLog.filter((h) => h.type === "saleCancelled" && h.originalRef).map((h) => h.originalRef));
-  const historyRaw = [...historyLog, ...deriveLegacyHistory()]
+  const cancelledSaleRefs = memoDerived("cancelledRefs", [historyLog], () => new Set(historyLog.filter((h) => h.type === "saleCancelled" && h.originalRef).map((h) => h.originalRef)));
+  const historyRaw = memoDerived("historyRaw", [historyLog, sales, debtEvents, expenses, activeEmployee], () => [...historyLog, ...deriveLegacyHistory()]
     .filter((h) => {
       const cat = HISTORY_CATEGORY[h.type];
       if (cat === "sale") return hasPermission("viewStock") || hasPermission("sell");
@@ -17025,8 +17176,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       product: h.items ? h.items.map((it) => it.productName).join(", ") : (h.product || ""),
       customer: h.customer || "",
       data: h,
-    }));
-  const historyEntries = historyRaw.filter((entry) => {
+    })));
+  const historyEntries = memoDerived("historyEntries", [historyRaw, histFilterKinds, histFilterFrom, histFilterTo, histFilterProduct, histFilterCustomer, histFilterMinAmount, histFilterMaxAmount], () => historyRaw.filter((entry) => {
     if (!histFilterKinds[entry.kind]) return false;
     if (histFilterFrom && dayKeyOf(entry.date) < histFilterFrom) return false;
     if (histFilterTo && dayKeyOf(entry.date) > histFilterTo) return false;
@@ -17035,7 +17186,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     if (histFilterMinAmount !== "" && entry.amount < parseFloat(histFilterMinAmount)) return false;
     if (histFilterMaxAmount !== "" && entry.amount > parseFloat(histFilterMaxAmount)) return false;
     return true;
-  }).sort((a, b) => new Date(b.date) - new Date(a.date));
+  }).sort((a, b) => new Date(b.date) - new Date(a.date)));
   const historyFiltersActive = histFilterFrom || histFilterTo || histFilterProduct.trim() || histFilterCustomer.trim() || histFilterMinAmount !== "" || histFilterMaxAmount !== "" || !histFilterKinds.sale || !histFilterKinds.debt || !histFilterKinds.expense;
   const exportHistoryCsv = () => {
     const rows = [[t(lang, "histColDate"), t(lang, "histColType"), t(lang, "histColProduct"), t(lang, "histColCustomer"), t(lang, "histColAmount")]];
@@ -18257,7 +18408,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </div>
                   <div className="flex" style={{ gap: 6, marginTop: 3 }}>
                     {week7.map((d, i) => (
-                      <span key={d.day} className="flex-1 text-center text-[9px]" style={{ color: i === 6 ? T.text : T.muted, fontWeight: i === 6 ? 800 : 500 }}>{parseDayOrIso(d.day).toLocaleDateString(getAppLocale(), { weekday: "narrow" })}</span>
+                      <span key={d.day} className="flex-1 text-center text-[9px]" style={{ color: i === 6 ? T.text : T.muted, fontWeight: i === 6 ? 800 : 500 }}>{fmtDateCached(parseDayOrIso(d.day), { weekday: "narrow" }, "date")}</span>
                     ))}
                   </div>
                   <p className="text-[10px] mt-1.5" dir="auto" style={{ color: T.muted }}>
@@ -20714,7 +20865,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
               <div className="flex justify-between mt-1">
                 {cashView.trend7.map((d, di) => (
-                  <span key={di} className="flex-1 text-center text-[9px]" style={{ color: T.muted }}>{parseDayOrIso(d.day).toLocaleDateString(getAppLocale(), { weekday: "narrow" })}</span>
+                  <span key={di} className="flex-1 text-center text-[9px]" style={{ color: T.muted }}>{fmtDateCached(parseDayOrIso(d.day), { weekday: "narrow" }, "date")}</span>
                 ))}
               </div>
             </div>
