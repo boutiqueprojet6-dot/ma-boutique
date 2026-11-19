@@ -6130,6 +6130,7 @@ EXTRA_UI.pushGeneralDesc = { fr: "Résumé du jour chaque matin et alertes impor
 EXTRA_UI.receiptPdfLinkLabel = { fr: "Votre reçu en PDF :", en: "Your receipt as PDF:", es: "Su recibo en PDF:", pt: "O seu recibo em PDF:", de: "Ihr Beleg als PDF:", it: "La tua ricevuta in PDF:", nl: "Uw bon als PDF:", pl: "Twój paragon w PDF:", ru: "Ваш чек в PDF:", tr: "PDF fişiniz:", ar: "إيصالك بصيغة PDF:", hi: "आपकी रसीद PDF में:", bn: "আপনার রসিদ PDF-এ:", ur: "آپ کی رسید PDF میں:", ta: "உங்கள் ரசீது PDF ஆக:", te: "మీ రసీదు PDFగా:", th: "ใบเสร็จของคุณเป็น PDF:", zh: "您的PDF收据：", ja: "PDFの領収書：", ko: "PDF 영수증:", id: "Struk Anda dalam PDF:", vi: "Hóa đơn PDF của bạn:", tl: "Ang resibo mo sa PDF:", sw: "Risiti yako kwa PDF:", ha: "Rasidin ku a PDF:", yo: "Ìwé-ẹ̀rí rẹ ní PDF:", zu: "Irisidi yakho nge-PDF:", am: "ደረሰኝዎ በPDF:", bm: "I ka rεsi PDF kɔnɔ:", wo: "Sa reçu ci PDF:" };
 EXTRA_UI.receiptPdfOpenChat = { fr: "Ouvrir la discussion WhatsApp", en: "Open the WhatsApp chat", es: "Abrir el chat de WhatsApp", pt: "Abrir a conversa do WhatsApp", de: "WhatsApp-Chat öffnen", it: "Apri la chat WhatsApp", nl: "WhatsApp-chat openen", pl: "Otwórz czat WhatsApp", ru: "Открыть чат WhatsApp", tr: "WhatsApp sohbetini aç", ar: "فتح محادثة واتساب", hi: "WhatsApp चैट खोलें", bn: "WhatsApp চ্যাট খুলুন", ur: "واٹس ایپ چیٹ کھولیں", ta: "WhatsApp உரையாடலைத் திற", te: "WhatsApp చాట్ తెరవండి", th: "เปิดแชท WhatsApp", zh: "打开WhatsApp聊天", ja: "WhatsAppのチャットを開く", ko: "WhatsApp 채팅 열기", id: "Buka obrolan WhatsApp", vi: "Mở cuộc trò chuyện WhatsApp", tl: "Buksan ang WhatsApp chat", sw: "Fungua mazungumzo ya WhatsApp", ha: "Buɗe hirar WhatsApp", yo: "Ṣí ìjíròrò WhatsApp", zu: "Vula ingxoxo ye-WhatsApp", am: "የWhatsApp ውይይቱን ክፈት", bm: "WhatsApp baro da wuli", wo: "Ubbi waxtaan WhatsApp bi" };
 EXTRA_UI.receiptPdfPreparing = { fr: "Préparation du PDF…", en: "Preparing the PDF…", es: "Preparando el PDF…", pt: "A preparar o PDF…", de: "PDF wird erstellt…", it: "Preparazione del PDF…", nl: "PDF wordt voorbereid…", pl: "Przygotowywanie PDF…", ru: "Подготовка PDF…", tr: "PDF hazırlanıyor…", ar: "جارٍ تجهيز ملف PDF…", hi: "PDF तैयार हो रहा है…", bn: "PDF প্রস্তুত হচ্ছে…", ur: "PDF تیار ہو رہی ہے…", ta: "PDF தயாராகிறது…", te: "PDF సిద్ధమవుతోంది…", th: "กำลังเตรียม PDF…", zh: "正在准备PDF…", ja: "PDFを準備中…", ko: "PDF 준비 중…", id: "Menyiapkan PDF…", vi: "Đang chuẩn bị PDF…", tl: "Inihahanda ang PDF…", sw: "Inaandaa PDF…", ha: "Ana shirya PDF…", yo: "À ń pèsè PDF…", zu: "Kulungiswa i-PDF…", am: "PDF በመዘጋጀት ላይ…", bm: "PDF bε labεn…", wo: "Ñungi waajal PDF bi…" };
+EXTRA_UI.negStockHint = { fr: "Stock négatif : plus de ventes que le stock enregistré. Vérifiez et corrigez la quantité.", en: "Negative stock: more sold than recorded. Check and correct the quantity.", es: "Stock negativo: se vendió más de lo registrado. Verifique y corrija la cantidad.", pt: "Stock negativo: vendeu-se mais do que o registado. Verifique e corrija a quantidade.", de: "Negativer Bestand: mehr verkauft als erfasst. Bitte Menge prüfen und korrigieren.", it: "Scorte negative: venduto più di quanto registrato. Verifica e correggi la quantità.", nl: "Negatieve voorraad: meer verkocht dan geregistreerd. Controleer en corrigeer de hoeveelheid.", pl: "Ujemny stan: sprzedano więcej niż zapisano. Sprawdź i popraw ilość.", ru: "Отрицательный остаток: продано больше, чем учтено. Проверьте и исправьте количество.", tr: "Negatif stok: kayıtlı olandan fazla satıldı. Miktarı kontrol edip düzeltin.", ar: "مخزون سالب: بيع أكثر من المسجّل. تحقق من الكمية وصحّحها.", hi: "नकारात्मक स्टॉक: दर्ज से ज़्यादा बिका। मात्रा जाँचें और सुधारें।", bn: "ঋণাত্মক স্টক: রেকর্ডের চেয়ে বেশি বিক্রি হয়েছে। পরিমাণ যাচাই করে ঠিক করুন।", ur: "منفی اسٹاک: درج سے زیادہ فروخت ہوا۔ مقدار چیک کر کے درست کریں۔", ta: "எதிர்மறை இருப்பு: பதிவை விட அதிகம் விற்கப்பட்டது. அளவைச் சரிபார்த்து திருத்தவும்.", te: "ప్రతికూల స్టాక్: నమోదు కంటే ఎక్కువ అమ్ముడైంది. పరిమాణాన్ని తనిఖీ చేసి సరిచేయండి.", th: "สต็อกติดลบ: ขายมากกว่าที่บันทึกไว้ ตรวจสอบและแก้ไขจำนวน", zh: "库存为负：售出多于记录。请核对并更正数量。", ja: "在庫がマイナスです：記録より多く売れました。数量を確認して修正してください。", ko: "재고 음수: 기록보다 많이 판매되었습니다. 수량을 확인하고 수정하세요.", id: "Stok minus: terjual lebih banyak dari yang tercatat. Periksa dan koreksi jumlahnya.", vi: "Tồn kho âm: bán nhiều hơn số đã ghi. Hãy kiểm tra và sửa số lượng.", tl: "Negatibong stock: mas marami ang nabenta kaysa nakatala. Suriin at itama ang dami.", sw: "Hisa hasi: imeuzwa zaidi ya iliyorekodiwa. Kagua na urekebishe idadi.", ha: "Kaya ƙasa da sifili: an sayar fiye da abin da aka rubuta. Duba ka gyara adadin.", yo: "Ọjà odi: a ta ju iye tí a kọ sílẹ̀ lọ. Ṣàyẹ̀wò kí o sì ṣàtúnṣe iye náà.", zu: "Isitoko esingaphansi kweqanda: kuthengiswe ngaphezu kokubhalisiwe. Hlola futhi ulungise inani.", am: "አሉታዊ ክምችት፦ ከተመዘገበው በላይ ተሽጧል። ብዛቱን ያረጋግጡና ያስተካክሉ።", bm: "Stock bɛ dugukolo kɔrɔ: feereli caya ni sɛbɛnnen ye. A hakɛ lajɛ ka a latilen.", wo: "Stock bi dafa wàcc ci suuf: jaay nañu lu ëpp li ñu bind. Seetal te defar limu bi." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -7624,7 +7625,7 @@ const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
 const SHOP_LEVEL_KEYS = [
   "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts", "cashClosures",
   "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
-  "historyLog", "categories", "employees", "actionLog",
+  "historyLog", "categories", "employees", "actionLog", "deletedProducts",
 ];
 // Dernière boutique affichée sur CET appareil, pour y revenir au prochain démarrage
 // au lieu de retomber systématiquement sur la boutique principale (suffixée par le
@@ -7702,6 +7703,128 @@ function sanitizeTs(ts) {
   const n = typeof ts === "number" && isFinite(ts) ? ts : 0;
   return Math.min(Math.max(n, 0), Date.now() + CLOCK_SKEW_TOLERANCE_MS);
 }
+// ---- Étape 3 de la synchro : éléments enregistrés un par un (table shop_records) ----
+// Ventes, historique, événements de dette, dépenses, comptages/clôtures de caisse et
+// invendus : chaque élément créé, modifié ou supprimé est mis dans une « boîte d'envoi »
+// propre à l'appareil (une entrée par élément, jamais écrasée par l'état global), puis envoyé
+// au serveur par petits paquets. Le serveur ignore les doublons : renvoyer deux fois la même
+// vente ne la compte qu'une fois. Le gros JSON de la boutique ne garde ensuite que les
+// éléments récents (voir RECORDS_WINDOW_MS), ce qui garde chaque sauvegarde légère.
+const RECORD_KINDS = [
+  ["sales", "sale"], ["historyLog", "history"], ["debtEvents", "debtEvent"], ["expenses", "expense"],
+  ["cashCounts", "cashCount"], ["cashClosures", "cashClosure"], ["unsoldLog", "unsold"],
+];
+const RECORD_FIELD_BY_KIND = Object.fromEntries(RECORD_KINDS.map(([f, k]) => [k, f]));
+const RECORDS_WINDOW_MS = 120 * 24 * 3600 * 1000;
+const OUTBOX_PREFIX = "mb_outbox:";
+const RECORDS_CURSOR_PREFIX = "mb_rec_cursor:";
+const RECORDS_SEEDED_PREFIX = "mb_rec_seeded:";
+function recordTs(item) {
+  if (!item) return 0;
+  const u = sanitizeTs(typeof item.updatedAt === "number" ? item.updatedAt : Date.parse(item.updatedAt || ""));
+  if (u) return u;
+  const d = Date.parse(item.date || item.createdAt || "");
+  return isFinite(d) ? d : 0;
+}
+function readOutbox(key) {
+  try { const raw = window.localStorage.getItem(OUTBOX_PREFIX + key); const v = raw ? JSON.parse(raw) : {}; return v && typeof v === "object" ? v : {}; } catch (e) { return {}; }
+}
+function writeOutbox(key, box) {
+  try {
+    const raw = JSON.stringify(box || {});
+    window.localStorage.setItem(OUTBOX_PREFIX + key, raw);
+    mirrorToNativeStorage(OUTBOX_PREFIX + key, raw);
+    return true;
+  } catch (e) { return false; }
+}
+function outboxAdd(key, entries) {
+  if (!entries || !entries.length) return;
+  const box = readOutbox(key);
+  const stamp = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  entries.forEach((e) => { box[e.kind + ":" + e.id] = { ...e, v: stamp }; });
+  writeOutbox(key, box);
+}
+// Éléments à envoyer après une action : nouveaux, modifiés (nouvel objet) ou supprimés.
+function diffRecordEntries(prevShop, nextShop, fields) {
+  const entries = [];
+  RECORD_KINDS.forEach(([field, kind]) => {
+    if (fields && fields.indexOf(field) === -1) return;
+    const prev = (prevShop && prevShop[field]) || [];
+    const next = (nextShop && nextShop[field]) || [];
+    if (prev === next) return;
+    const prevSet = new Set(prev);
+    const nextIds = new Set();
+    next.forEach((it) => {
+      if (!it || it.id == null) return;
+      nextIds.add(String(it.id));
+      if (!prevSet.has(it)) entries.push({ kind, id: String(it.id), data: it, deleted: false, ts: recordTs(it) });
+    });
+    prev.forEach((it) => {
+      if (it && it.id != null && !nextIds.has(String(it.id))) entries.push({ kind, id: String(it.id), data: { id: it.id }, deleted: true, ts: Date.now() });
+    });
+  });
+  return entries;
+}
+// Version allégée envoyée dans le JSON de la boutique : seulement les éléments récents
+// (les plus anciens sont dans shop_records). Rien n'est retiré de l'appareil lui-même.
+function windowRecordArrays(shop) {
+  const limit = Date.now() - RECORDS_WINDOW_MS;
+  const out = { ...shop };
+  RECORD_KINDS.forEach(([field]) => {
+    if (!Array.isArray(out[field])) return;
+    out[field] = out[field].filter((it) => {
+      const d = Date.parse((it && (it.date || it.createdAt)) || "");
+      return !isFinite(d) || d >= limit;
+    });
+  });
+  return out;
+}
+// Fusionne des éléments reçus du serveur dans un état local (le plus récent gagne ; une vente
+// ou un événement annulé le reste). Renvoie null si rien n'a changé.
+function applyRecordsToShop(shop, records, pendingBox) {
+  if (!shop || !records || !records.length) return null;
+  const next = { ...shop };
+  let changed = false;
+  const byField = {};
+  records.forEach((r) => {
+    const field = RECORD_FIELD_BY_KIND[r.kind];
+    if (!field) return;
+    (byField[field] = byField[field] || []).push(r);
+  });
+  Object.keys(byField).forEach((field) => {
+    const arr = Array.isArray(next[field]) ? [...next[field]] : [];
+    const index = new Map(arr.map((it, i) => [String(it && it.id), i]));
+    let fieldChanged = false;
+    const removed = new Set();
+    byField[field].forEach((r) => {
+      const id = String(r.id);
+      const pending = pendingBox && pendingBox[r.kind + ":" + id];
+      const i = index.get(id);
+      if (r.deleted) {
+        if (pending && !pending.deleted && pending.ts > (r.ts || 0)) return;
+        if (i !== undefined && !removed.has(id)) { removed.add(id); fieldChanged = true; }
+        return;
+      }
+      const remote = r.data || {};
+      if (i === undefined) {
+        if (pending && pending.deleted) return;
+        index.set(id, arr.length); arr.push(remote); fieldChanged = true; return;
+      }
+      const local = arr[i];
+      const cancelledEither = (field === "sales" || field === "debtEvents") && (remote.cancelled || (local && local.cancelled));
+      if (recordTs(remote) > recordTs(local)) {
+        arr[i] = cancelledEither && !remote.cancelled ? { ...remote, cancelled: true } : remote; fieldChanged = true;
+      } else if (cancelledEither && local && !local.cancelled) {
+        arr[i] = { ...local, cancelled: true, cancelledAt: remote.cancelledAt || local.cancelledAt }; fieldChanged = true;
+      }
+    });
+    if (fieldChanged) {
+      next[field] = sortByDate(removed.size ? arr.filter((it) => !removed.has(String(it && it.id))) : arr);
+      changed = true;
+    }
+  });
+  return changed ? next : null;
+}
 // Fusionne deux listes (+ base) par id. En cas de conflit sur un même id,
 // garde la version la plus récente (par updatedAt) ; par défaut la version
 // locale gagne les égalités (utile pour les paniers/conversations en cours).
@@ -7757,16 +7880,20 @@ function mergeProducts(baseList, localList, remoteList) {
     // suppression se fait toujours en étant connecté, directement contre le serveur.
     if (r && !l) { result.push(r); return; }
     if (!l || !r) return;
-    const additive = (field) => {
+    // Stock : peut devenir NÉGATIF quand deux téléphones hors ligne ont vendu la même
+    // dernière unité. La vente n'est jamais perdue ; le stock négatif est signalé sur
+    // l'accueil pour que le boutiquier vérifie (avant, il était ramené à 0 sans rien dire).
+    const additive = (field, allowNegative) => {
       const baseVal = (b && typeof b[field] === "number") ? b[field] : (l[field] ?? r[field] ?? 0);
       const localVal = typeof l[field] === "number" ? l[field] : baseVal;
       const remoteVal = typeof r[field] === "number" ? r[field] : baseVal;
-      return Math.max(0, baseVal + (localVal - baseVal) + (remoteVal - baseVal));
+      const v = baseVal + (localVal - baseVal) + (remoteVal - baseVal);
+      return allowNegative ? Math.round(v * 1000) / 1000 : Math.max(0, v);
     };
     const localTs = sanitizeTs(l.updatedAt);
     const remoteTs = sanitizeTs(r.updatedAt);
     const fieldsSource = localTs >= remoteTs ? l : r;
-    result.push({ ...fieldsSource, quantity: additive("quantity"), looseUnits: additive("looseUnits") });
+    result.push({ ...fieldsSource, quantity: additive("quantity", true), looseUnits: additive("looseUnits") });
   });
   return result;
 }
@@ -7854,7 +7981,15 @@ function mergeShop(baseShop, localShop, remoteShop) {
   return {
     ...local,
     ...settings,
-    products: mergeProducts(base.products, local.products, remote.products),
+    // Produits supprimés : la liste des suppressions voyage avec la boutique, pour qu'un
+    // produit supprimé sur un téléphone ne « ressuscite » pas depuis un autre resté hors
+    // ligne. Un produit modifié APRÈS sa suppression (recréé) est gardé.
+    deletedProducts: mergeById(base.deletedProducts, local.deletedProducts, remote.deletedProducts).slice(-500),
+    products: (() => {
+      const del = new Map(mergeById(base.deletedProducts, local.deletedProducts, remote.deletedProducts).map((d) => [d.id, d]));
+      const merged = mergeProducts(base.products, local.products, remote.products);
+      return del.size ? merged.filter((p) => { const d = del.get(p.id); return !d || sanitizeTs(p.updatedAt) > sanitizeTs(d.at); }) : merged;
+    })(),
     sales: sortByDate(mergeById(base.sales, local.sales, remote.sales)),
     expenses: sortByDate(mergeById(base.expenses, local.expenses, remote.expenses)),
     cashCounts: sortByDate(mergeById(base.cashCounts, local.cashCounts, remote.cashCounts)),
@@ -10361,6 +10496,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Historique des invendus (produits en mode "Quantité du jour") : une entrée par
   // "Nouvelle journée" déclenchée sur un produit qui avait encore du stock restant.
   const [unsoldLog, setUnsoldLog] = useState([]);
+  // Suppressions de produits (id + moment), pour la synchro entre téléphones.
+  const [deletedProducts, setDeletedProducts] = useState([]);
   const [cashFund, setCashFund] = useState(0);
   const [lowStockThreshold, setLowStockThreshold] = useState(5);
   // Heure locale (0-23) à laquelle le propriétaire veut recevoir le résumé quotidien
@@ -12945,6 +13082,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCashCounts(shop.cashCounts || []);
     setCashClosures(shop.cashClosures || []);
     setUnsoldLog(shop.unsoldLog || []);
+    setDeletedProducts(Array.isArray(shop.deletedProducts) ? shop.deletedProducts : []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
     setDailySummaryHour(shop.dailySummaryHour ?? 7);
@@ -13103,6 +13241,72 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const remoteAtRef = useRef(undefined); // undefined = version serveur pas encore connue
   const lastAccountJsonRef = useRef(null); // partie « compte » déjà envoyée telle quelle
   useEffect(() => { remoteAtRef.current = undefined; lastAccountJsonRef.current = null; }, [blobShopId, shopKey]);
+  // Envoie la boîte d'envoi par paquets de 300. Un élément n'est retiré que s'il n'a pas
+  // été modifié entre-temps (sinon sa nouvelle version repartira au prochain envoi).
+  const pushOutbox = async () => {
+    if (!blobShopId) return true;
+    for (let round = 0; round < 40; round++) {
+      const box = readOutbox(shopKey);
+      const keys = Object.keys(box);
+      if (!keys.length) return true;
+      const batch = keys.slice(0, 300).map((k) => box[k]);
+      const { data, error } = await supabase.rpc("push_shop_records", {
+        p_shop_id: blobShopId,
+        p_records: batch.map((e) => ({ kind: e.kind, id: e.id, data: e.data, deleted: !!e.deleted, ts: e.ts || 0 })),
+      });
+      if (error || !data || !data.ok) return false;
+      const cur = readOutbox(shopKey);
+      batch.forEach((e) => { const k = e.kind + ":" + e.id; if (cur[k] && cur[k].v === e.v) delete cur[k]; });
+      writeOutbox(shopKey, cur);
+    }
+    return Object.keys(readOutbox(shopKey)).length === 0;
+  };
+  // Récupère les éléments enregistrés par les autres appareils depuis la dernière fois
+  // (ou tout l'historique sur un nouveau téléphone) et les ajoute à l'affichage.
+  const pullBusyRef = useRef(false);
+  const pullRecords = async () => {
+    if (isDemo || !blobShopId || !navigator.onLine || pullBusyRef.current) return;
+    pullBusyRef.current = true;
+    try {
+      const cursorKey = RECORDS_CURSOR_PREFIX + shopKey;
+      let cursor = null;
+      try { cursor = window.localStorage.getItem(cursorKey); } catch (e) {}
+      const all = [];
+      for (let page = 0; page < 50; page++) {
+        let q = supabase.from("shop_records").select("kind, id, data, deleted, ts, updated_at").eq("shop_id", blobShopId).order("updated_at", { ascending: true }).limit(1000);
+        if (cursor) q = q.gt("updated_at", cursor);
+        const { data, error } = await q;
+        if (error || !data) break;
+        all.push(...data);
+        if (data.length) cursor = data[data.length - 1].updated_at;
+        if (data.length < 1000) break;
+      }
+      if (all.length) {
+        // On repart de l'état le plus récent de l'appareil (cache écrit à chaque action).
+        const current = readLocalCache(shopKey) || latestShopRef.current;
+        const next = applyRecordsToShop(current, all, readOutbox(shopKey));
+        if (next) {
+          writeLocalCache(shopKey, next);
+          latestShopRef.current = next;
+          applyShop(next, null, null);
+        }
+      }
+      if (cursor) { try { window.localStorage.setItem(cursorKey, cursor); } catch (e) {} }
+    } catch (e) {
+      /* réessayé plus tard */
+    } finally {
+      pullBusyRef.current = false;
+    }
+  };
+  const pullRecordsRef = useRef(null);
+  pullRecordsRef.current = pullRecords;
+  useEffect(() => {
+    if (isDemo) return;
+    const iv = setInterval(() => {
+      if (navigator.onLine && !document.hidden && pullRecordsRef.current) pullRecordsRef.current();
+    }, 60000);
+    return () => clearInterval(iv);
+  }, [isDemo, shopKey]);
   const syncShopToServer = async (localShop) => {
     if (!blobShopId) {
       const r = await persistShopToSupabase(localShop);
@@ -13111,6 +13315,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const { data: userData } = await getUserFast();
     const ownerId = userData && userData.user ? userData.user.id : null;
     if (!ownerId) return { ok: false, merged: localShop };
+    const isEmployeeDevice = !!employeeSessionToken;
+    // Première fois avec cette version : tous les éléments existants partent dans la boîte
+    // d'envoi (le serveur ignore ceux qu'il a déjà).
+    let seeded = null;
+    try { seeded = window.localStorage.getItem(RECORDS_SEEDED_PREFIX + shopKey); } catch (e) {}
+    if (!seeded && !isEmployeeDevice) {
+      const all = diffRecordEntries({}, localShop, null);
+      outboxAdd(shopKey, all);
+      try { window.localStorage.setItem(RECORDS_SEEDED_PREFIX + shopKey, "pending"); } catch (e) {}
+      seeded = "pending";
+    }
+    // 1) Les éléments un par un d'abord : ce sont eux qui comptent (ventes...).
+    const pushedOk = await pushOutbox();
+    if (!pushedOk) return { ok: false, merged: localShop };
+    if (seeded === "pending" && Object.keys(readOutbox(shopKey)).length === 0) {
+      try { window.localStorage.setItem(RECORDS_SEEDED_PREFIX + shopKey, "done"); } catch (e) {}
+      seeded = "done";
+    }
+    // Le JSON de la boutique ne garde les anciens éléments que tant qu'ils ne sont pas tous
+    // enregistrés un par un sur le serveur.
+    const canWindow = !isEmployeeDevice && seeded === "done";
     let merged = localShop;
     for (let attempt = 0; attempt < 4; attempt++) {
       if (remoteAtRef.current === undefined) {
@@ -13133,7 +13358,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         lastAccountJsonRef.current = accJson;
       }
       // Les paniers en cours ne partent jamais au serveur (brouillons de cet appareil).
-      const payload = { ...shop, draftCarts: [], activeCartId: null };
+      const payload = { ...(canWindow ? windowRecordArrays(shop) : shop), draftCarts: [], activeCartId: null };
       const { data: res, error: rpcErr } = await supabase.rpc("save_shop_blob_v2", { p_shop_id: blobShopId, p_data: payload, p_expected_at: remoteAtRef.current });
       if (rpcErr) return { ok: false, merged };
       if (res && res.ok) { remoteAtRef.current = res.at; return { ok: true, merged }; }
@@ -13196,6 +13421,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       let cacheOk = true;
       if (stillLatest) cacheOk = writeLocalCache(shopKey, merged);
       if (supabaseOk) {
+        setTimeout(() => { if (pullRecordsRef.current) pullRecordsRef.current(); }, 0);
         // Confirmé par le serveur : nouvelle base de fusion ; plus rien « en attente ».
         writeLocalCache(shopSyncBaseKey, merged);
         clearPending(shopKey);
@@ -13407,6 +13633,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         }
         applyShop(shop, sub, account);
         if (confirmedRemote) writeLocalCache(shopSyncBaseKey, confirmedRemote);
+        // Éléments enregistrés un par un (ventes des autres appareils, historique complet).
+        setTimeout(() => { if (pullRecordsRef.current) pullRecordsRef.current(); }, 300);
       } catch (e) {
         if (!cachedShop) setError(tx(lang, "errLoadFailed"));
       } finally {
@@ -13474,6 +13702,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       cashCounts: overrides.cashCounts ?? cashCounts,
       cashClosures: overrides.cashClosures ?? cashClosures,
       unsoldLog: overrides.unsoldLog ?? unsoldLog,
+      deletedProducts: overrides.deletedProducts ?? deletedProducts,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
       dailySummaryHour: overrides.dailySummaryHour ?? dailySummaryHour,
@@ -13526,6 +13755,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCashCounts(next.cashCounts || []);
     setCashClosures(next.cashClosures || []);
     setUnsoldLog(next.unsoldLog || []);
+    setDeletedProducts(next.deletedProducts || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
     setDailySummaryHour(next.dailySummaryHour);
@@ -13577,6 +13807,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       latestShopRef.current = next;
       writeLocalCache(shopKey, next);
       markShopUnsynced(shopKey);
+      // Boîte d'envoi : chaque vente / dépense / ligne d'historique... modifiée par cette
+      // action est mise de côté individuellement, jusqu'à confirmation du serveur.
+      try {
+        const prevShop = { sales: allSales, historyLog, debtEvents: allDebtEvents, expenses, cashCounts, cashClosures, unsoldLog };
+        const touched = RECORD_KINDS.map(([f]) => f).filter((f) => Object.prototype.hasOwnProperty.call(overrides, f));
+        if (touched.length) outboxAdd(shopKey, diffRecordEntries(prevShop, next, touched));
+      } catch (e) {}
     }
     persist(next);
   };
@@ -14497,7 +14734,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const deleteProduct = (id) => {
     const targetProduct = products.find((pr) => pr.id === id);
-    saveAll({ products: products.filter((p) => p.id !== id) });
+    saveAll({
+      products: products.filter((p) => p.id !== id),
+      deletedProducts: [...deletedProducts.filter((d) => d.id !== id), { id, at: Date.now(), date: new Date().toISOString() }].slice(-500),
+    });
     if (targetProduct) logAction(`${t(lang, "logProductDeleted")} : ${targetProduct.name}`);
   };
   const addExpense = () => {
@@ -17498,7 +17738,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const accountPart = stripShopLevelKeys((row && row.data) || {});
     // Sans ligne boutique (compte pas encore migré), les données de boutique sont encore
     // dans shop_data : on les garde telles quelles.
-    const full = Object.keys(shopPart).length > 0 ? { ...accountPart, ...shopPart } : ((row && row.data) || {});
+    let full = Object.keys(shopPart).length > 0 ? { ...accountPart, ...shopPart } : ((row && row.data) || {});
+    // Le JSON de la boutique ne garde que les éléments récents : on y ajoute tout ce qui est
+    // enregistré un par un (shop_records) pour que la sauvegarde soit complète.
+    if (blobShopId) {
+      const recs = [];
+      for (let page = 0; page < 100; page++) {
+        const { data: rows, error } = await supabase.from("shop_records").select("kind, id, data, deleted, ts").eq("shop_id", blobShopId).order("updated_at", { ascending: true }).range(page * 1000, page * 1000 + 999);
+        if (error || !rows) break;
+        recs.push(...rows);
+        if (rows.length < 1000) break;
+      }
+      const withRecords = applyRecordsToShop(full, recs, null);
+      if (withRecords) full = withRecords;
+    }
     return { full, shopName: row && row.shop_name };
   };
   const exportShopDataJson = async () => {
@@ -18744,6 +18997,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <p className="text-sm font-extrabold" style={{ color: darkMode ? "#f0c869" : "#c2410c" }}>{t(lang, "lowStock")} ({localizedNumber(lowStock.length)})</p>
                     {renderSortButton()}
                   </div>
+                  {lowStock.some((p) => p.quantity < 0) && (
+                    // Stock négatif : vendu plus que le stock enregistré (souvent deux téléphones
+                    // hors ligne qui ont vendu la même dernière unité, ou une livraison pas saisie).
+                    <p className="text-[11px] font-semibold mb-1" style={{ color: darkMode ? "#fda4af" : "#e11d48", lineHeight: 1.35 }}>{tx(lang, "negStockHint")}</p>
+                  )}
                   {/* Liste numérotée : n° · nom du produit · pastille de quantité (rouge = épuisé, orange = critique) */}
                   <div className="mt-1">
                     {lowStockDisplayed.map((p, idx) => {
