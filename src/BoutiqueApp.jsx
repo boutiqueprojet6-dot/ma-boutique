@@ -20490,7 +20490,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div>
                 <p className="text-xs font-bold mb-2 mt-4" style={{ color: T.text }}>{t(lang, "recentSales")}</p>
                 {recentTransactions.length === 0 ? (
-                  <p className="text-xs text-center py-4" style={{ color: T.muted }}>0</p>
+                  <p className="text-xs text-center py-4" style={{ color: T.muted }}>{t(lang, "noSalesShort")}</p>
                 ) : (
                   recentTransactions.slice(0, 5).map((txn) => {
                     // Un employé peut annuler sa propre vente (erreur de caisse) mais pas celle d'un autre.
