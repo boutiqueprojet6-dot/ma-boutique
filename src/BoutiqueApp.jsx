@@ -10219,15 +10219,36 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Termine aussi la session Supabase elle-même et vide le cache local de "dernière
   // boutique" (Capacitor Preferences) : sans ça, la session restait valide en coulisses
   // et rouvrir l'appli reconnectait automatiquement sur l'ancien compte.
-  const handleLogoutClean = useCallback(async () => {
+  // Fonction simple (pas useCallback) : elle lit shopKey/persist, déclarés plus bas.
+  const handleLogoutClean = async () => {
     // Ventes enregistrées hors ligne : elles vivent dans la file d'attente de cet appareil
     // tant que le réseau n'est pas revenu. La déconnexion ne les efface pas, mais plus rien
     // ne les enverra tant que ce MÊME compte ne se reconnecte pas sur ce MÊME téléphone —
     // et si l'appareil change de mains ou que l'app est réinstallée, elles sont perdues.
     // C'est la perte de données la plus souvent reprochée aux applications concurrentes :
     // on prévient clairement au lieu de laisser partir sans rien dire.
+    // Une vente faite juste avant de se déconnecter peut être encore en cours d'envoi
+    // (les envois se font en arrière-plan) : on lui laisse le temps d'arriver au serveur
+    // AVANT de fermer la session, sinon l'envoi échouerait faute de session.
     try {
-      const pending = readQueue().length;
+      const waitSync = async (ms) => {
+        const end = Date.now() + ms;
+        while ((persistRunningRef.current || persistNextRef.current) && Date.now() < end) {
+          await new Promise((r) => setTimeout(r, 200));
+        }
+      };
+      if (!isDemo && navigator.onLine) {
+        await waitSync(12000);
+        if (isShopUnsynced(shopKey) && latestShopRef.current) {
+          persist(latestShopRef.current);
+          await new Promise((r) => setTimeout(r, 50));
+          await waitSync(12000);
+        }
+      }
+    } catch (e) { /* on passe à la vérification ci-dessous */ }
+    try {
+      let pending = readQueue().length;
+      if (!isDemo && pending === 0 && isShopUnsynced(shopKey)) pending = 1;
       if (pending > 0 && !window.confirm(tx(lang, "logoutPendingWarn").replace("{n}", pending))) return;
     } catch (e) { /* file illisible : on ne bloque pas la déconnexion */ }
     clearCriticalState();
@@ -10239,7 +10260,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (isCapacitorApp) await Preferences.remove({ key: "boutipro_last_shop_cache" });
     } catch (e) { /* pas grave si le cache ne peut pas être vidé */ }
     onLogout();
-  }, [onLogout, lang]);
+  };
   const isDesktop = useIsDesktop();
   const { open: keyboardOpen, height: keyboardHeightPx } = useKeyboardOpen();
   const visibleHeight = useVisibleHeight();
