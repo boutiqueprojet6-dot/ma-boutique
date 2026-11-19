@@ -10572,7 +10572,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       SEP,
       ...extraLines,
       ...(extraLines.length ? [""] : []),
-      `🙏 _${tx(lang, "receiptThanks")}_`,
+      `_${tx(lang, "receiptThanks")}_`,
       "",
       "_Boutipro · www.boutipro.com_",
     ];
