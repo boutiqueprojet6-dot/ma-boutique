@@ -577,9 +577,21 @@ function isKvDenied(err) {
 }
 window.storage = {
   async get(key, shared = false) {
-    const { data, error } = await supabase.from("kv_store").select("value").eq("key", key).maybeSingle();
+    const { data, error } = await supabase.from("kv_store").select("value, owner_id").eq("key", key).maybeSingle();
     if (error) throw error;
     if (!data) throw new Error("not_found");
+    // Une copie de boutique (« shop:… ») appartenant à un AUTRE compte n'est jamais la
+    // nôtre : un compte administrateur peut techniquement la lire, et l'app la prenait
+    // pour la version « serveur » de sa boutique. C'était une copie figée depuis des jours
+    // (jamais modifiable) qui, fusionnée à chaque sauvegarde, faisait réapparaître un
+    // vieux « Panier 1 » vide et disparaître le panier en cours.
+    if (key.startsWith("shop:") && data.owner_id) {
+      try {
+        const { data: userData } = await getUserFast();
+        const me = userData && userData.user ? userData.user.id : null;
+        if (me && data.owner_id !== me) throw new Error("not_found");
+      } catch (e) { throw new Error("not_found"); }
+    }
     return { key, value: data.value, shared };
   },
   async set(key, value, shared = false) {
