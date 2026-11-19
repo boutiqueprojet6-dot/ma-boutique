@@ -388,6 +388,27 @@ function setEmployeeSession(token, ownerId) {
   employeeSessionToken = token || null;
   employeeSessionOwnerId = ownerId || null;
 }
+// ---- Mode test : « Simuler hors ligne » (réservé aux comptes administrateurs) ----
+// L'app se comporte comme sans réseau (navigator.onLine = false, aucune requête vers le
+// serveur), alors que le téléphone garde son Wi-Fi. Sert à tester les ventes hors ligne et
+// leur envoi au retour du réseau. Mémorisé sur l'appareil jusqu'à ce qu'on le désactive.
+const SIM_OFFLINE_KEY = "mb_sim_offline";
+let SIM_OFFLINE = false;
+try { SIM_OFFLINE = typeof window !== "undefined" && window.localStorage.getItem(SIM_OFFLINE_KEY) === "1"; } catch (e) {}
+try {
+  if (typeof navigator !== "undefined" && typeof Navigator !== "undefined") {
+    const desc = Object.getOwnPropertyDescriptor(Navigator.prototype, "onLine");
+    if (desc && desc.get) {
+      Object.defineProperty(navigator, "onLine", { configurable: true, get() { return SIM_OFFLINE ? false : desc.get.call(navigator); } });
+    }
+  }
+} catch (e) {}
+function isSimulatedOffline() { return SIM_OFFLINE; }
+function setSimulatedOffline(v) {
+  SIM_OFFLINE = !!v;
+  try { if (v) window.localStorage.setItem(SIM_OFFLINE_KEY, "1"); else window.localStorage.removeItem(SIM_OFFLINE_KEY); } catch (e) {}
+  try { window.dispatchEvent(new Event(v ? "offline" : "online")); } catch (e) {}
+}
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     persistSession: true,
@@ -409,6 +430,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   // RPC de la base en déduisent l'employé et sa boutique (fonctions employee_session_*).
   global: {
     fetch: (input, init) => {
+      if (SIM_OFFLINE) return Promise.reject(new TypeError("Failed to fetch (hors ligne simulé)"));
       if (!employeeSessionToken) return fetch(input, init);
       const headers = new Headers((init && init.headers) || (input && input.headers) || undefined);
       headers.set("x-employee-token", employeeSessionToken);
@@ -11428,6 +11450,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     return () => { cancelled = true; };
   }, [isDemo, username]);
   const devModeAllowed = DEV_TEST_MODE_ENABLED && isAppAdmin;
+  const [simOffline, setSimOffline] = useState(() => isSimulatedOffline());
   const effectivePlan = (devModeAllowed && !isDemo && testPlanOverride) || currentPlan;
   const planInfo = SUBSCRIPTION_PLANS[effectivePlan] || SUBSCRIPTION_PLANS.free;
   // Plafond quotidien de ventes : uniquement pour le palier Gratuit (Pro et Business sont
@@ -18725,6 +18748,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </button>
             </div>
             <SavedBadge saving={saving} isOnline={isOnline} pendingCount={pendingCount} lang={lang} />
+            {simOffline && (
+              <button onClick={() => { setSimulatedOffline(false); setSimOffline(false); }} className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: "#e11d48", color: "white", border: "none" }}>📴 TEST hors ligne ✕</button>
+            )}
           </div>
         </div>
       </div>
@@ -24139,6 +24165,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           Revenir au palier réel ({t(lang, SUBSCRIPTION_PLANS[currentPlan].nameKey)})
                         </button>
                       )}
+                      <button
+                        onClick={() => { const v = !simOffline; setSimulatedOffline(v); setSimOffline(v); }}
+                        style={{ padding: 10, borderRadius: 10, background: simOffline ? "#e11d48" : "transparent", border: `1px solid ${simOffline ? "#e11d48" : "#c084fc"}`, color: simOffline ? "white" : "#a855f7", fontSize: 12, fontWeight: 700, cursor: "pointer" }}
+                      >
+                        {simOffline ? "📴 Hors ligne simulé : ACTIVÉ (appuyer pour remettre le réseau)" : "📴 Simuler hors ligne"}
+                      </button>
                     </div>
                   )}
                   <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
