@@ -6115,6 +6115,9 @@ EXTRA_UI.notifPromptBtn = { fr: "Activer les notifications", en: "Turn on notifi
 EXTRA_UI.notifPromptFooter = { fr: "Vous pourrez les désactiver à tout moment dans Paramètres.", en: "You can turn them off anytime in Settings.", es: "Puedes desactivarlas cuando quieras en Ajustes.", pt: "Você pode desativá-las a qualquer momento em Configurações.", de: "Sie können sie jederzeit in den Einstellungen ausschalten.", it: "Puoi disattivarle quando vuoi nelle Impostazioni.", nl: "Je kunt ze altijd uitzetten in Instellingen.", pl: "Możesz je wyłączyć w każdej chwili w Ustawieniach.", ru: "Их можно отключить в любой момент в Настройках.", tr: "İstediğiniz zaman Ayarlar'dan kapatabilirsiniz.", ar: "يمكنك إيقافها في أي وقت من الإعدادات.", hi: "आप इन्हें कभी भी सेटिंग्स में बंद कर सकते हैं।", bn: "সেটিংসে যেকোনো সময় বন্ধ করতে পারবেন।", ur: "آپ انہیں کسی بھی وقت ترتیبات میں بند کر سکتے ہیں۔", ta: "அமைப்புகளில் எப்போது வேண்டுமானாலும் அணைக்கலாம்.", te: "సెట్టింగ్‌లలో ఎప్పుడైనా ఆఫ్ చేయవచ్చు.", th: "ปิดได้ทุกเมื่อในการตั้งค่า", zh: "可随时在设置中关闭。", ja: "設定からいつでもオフにできます。", ko: "설정에서 언제든 끌 수 있습니다.", id: "Bisa dimatikan kapan saja di Pengaturan.", vi: "Bạn có thể tắt bất cứ lúc nào trong Cài đặt.", tl: "Puwede itong i-off anumang oras sa Settings.", sw: "Unaweza kuzizima wakati wowote kwenye Mipangilio.", ha: "Za ka iya kashe su kowane lokaci a Saituna.", yo: "O lè pa wọ́n nígbàkigbà nínú Ètò.", zu: "Ungazivala noma nini kuZilungiselelo.", am: "በማንኛውም ጊዜ በቅንብሮች ውስጥ ማጥፋት ይችላሉ።", bm: "I bɛ se k'u bɔ waati o waati Paramɛtiriw kɔnɔ.", wo: "Mën nga leen fey saa su la neexee ci Paramètres." };
 EXTRA_UI.pushGeneralTitle = { fr: "Notifications sur ce téléphone", en: "Notifications on this phone", es: "Notificaciones en este teléfono", pt: "Notificações neste telefone", de: "Benachrichtigungen auf diesem Telefon", it: "Notifiche su questo telefono", nl: "Meldingen op deze telefoon", pl: "Powiadomienia na tym telefonie", ru: "Уведомления на этом телефоне", tr: "Bu telefonda bildirimler", ar: "الإشعارات على هذا الهاتف", hi: "इस फ़ोन पर सूचनाएँ", bn: "এই ফোনে নোটিফিকেশন", ur: "اس فون پر اطلاعات", ta: "இந்த தொலைபேசியில் அறிவிப்புகள்", te: "ఈ ఫోన్‌లో నోటిఫికేషన్‌లు", th: "การแจ้งเตือนบนโทรศัพท์นี้", zh: "本手机的通知", ja: "この端末の通知", ko: "이 휴대폰의 알림", id: "Notifikasi di ponsel ini", vi: "Thông báo trên điện thoại này", tl: "Notifications sa teleponong ito", sw: "Arifa kwenye simu hii", ha: "Sanarwa a wannan wayar", yo: "Ìfitónilétí lórí fóònù yìí", zu: "Izaziso kule foni", am: "በዚህ ስልክ ላይ ማሳወቂያዎች", bm: "Kunnafoniw nin telefɔni kan", wo: "Yeesal ci telefon bii" };
 EXTRA_UI.pushGeneralDesc = { fr: "Résumé du jour chaque matin et alertes importantes.", en: "Daily summary every morning and important alerts.", es: "Resumen diario cada mañana y alertas importantes.", pt: "Resumo diário toda manhã e alertas importantes.", de: "Tägliche Übersicht jeden Morgen und wichtige Warnungen.", it: "Riepilogo ogni mattina e avvisi importanti.", nl: "Dagoverzicht elke ochtend en belangrijke meldingen.", pl: "Codzienne podsumowanie rano i ważne alerty.", ru: "Ежедневная сводка по утрам и важные оповещения.", tr: "Her sabah günlük özet ve önemli uyarılar.", ar: "ملخص يومي كل صباح وتنبيهات مهمة.", hi: "हर सुबह दैनिक सारांश और ज़रूरी अलर्ट।", bn: "প্রতিদিন সকালে সারাংশ ও গুরুত্বপূর্ণ সতর্কবার্তা।", ur: "ہر صبح روزانہ خلاصہ اور اہم الرٹس۔", ta: "ஒவ்வொரு காலையும் தினசரி சுருக்கம் மற்றும் முக்கிய எச்சரிக்கைகள்.", te: "ప్రతి ఉదయం రోజువారీ సారాంశం, ముఖ్య హెచ్చరికలు.", th: "สรุปประจำวันทุกเช้าและการแจ้งเตือนสำคัญ", zh: "每天早上的日报和重要提醒。", ja: "毎朝の日次まとめと大事なお知らせ。", ko: "매일 아침 일일 요약과 중요한 알림.", id: "Ringkasan harian setiap pagi dan peringatan penting.", vi: "Tóm tắt hằng ngày mỗi sáng và cảnh báo quan trọng.", tl: "Pang-araw-araw na buod tuwing umaga at mahahalagang alerto.", sw: "Muhtasari wa kila siku asubuhi na arifa muhimu.", ha: "Taƙaitawar yau kowace safiya da muhimman sanarwa.", yo: "Àkópọ̀ ojoojúmọ́ ní òwúrọ̀ àti àwọn ìkìlọ̀ pàtàkì.", zu: "Isifinyezo sansuku zonke ekuseni nezexwayiso ezibalulekile.", am: "በየማለዳው ዕለታዊ ማጠቃለያ እና አስፈላጊ ማንቂያዎች።", bm: "Don o don kunnafoni sɔgɔma ani lasɔmini nafamaw.", wo: "Tënk bés bu nekk suba ak yeesal yu am solo." };
+EXTRA_UI.receiptPdfLinkLabel = { fr: "Votre reçu en PDF :", en: "Your receipt as PDF:", es: "Su recibo en PDF:", pt: "O seu recibo em PDF:", de: "Ihr Beleg als PDF:", it: "La tua ricevuta in PDF:", nl: "Uw bon als PDF:", pl: "Twój paragon w PDF:", ru: "Ваш чек в PDF:", tr: "PDF fişiniz:", ar: "إيصالك بصيغة PDF:", hi: "आपकी रसीद PDF में:", bn: "আপনার রসিদ PDF-এ:", ur: "آپ کی رسید PDF میں:", ta: "உங்கள் ரசீது PDF ஆக:", te: "మీ రసీదు PDFగా:", th: "ใบเสร็จของคุณเป็น PDF:", zh: "您的PDF收据：", ja: "PDFの領収書：", ko: "PDF 영수증:", id: "Struk Anda dalam PDF:", vi: "Hóa đơn PDF của bạn:", tl: "Ang resibo mo sa PDF:", sw: "Risiti yako kwa PDF:", ha: "Rasidin ku a PDF:", yo: "Ìwé-ẹ̀rí rẹ ní PDF:", zu: "Irisidi yakho nge-PDF:", am: "ደረሰኝዎ በPDF:", bm: "I ka rεsi PDF kɔnɔ:", wo: "Sa reçu ci PDF:" };
+EXTRA_UI.receiptPdfOpenChat = { fr: "Ouvrir la discussion WhatsApp", en: "Open the WhatsApp chat", es: "Abrir el chat de WhatsApp", pt: "Abrir a conversa do WhatsApp", de: "WhatsApp-Chat öffnen", it: "Apri la chat WhatsApp", nl: "WhatsApp-chat openen", pl: "Otwórz czat WhatsApp", ru: "Открыть чат WhatsApp", tr: "WhatsApp sohbetini aç", ar: "فتح محادثة واتساب", hi: "WhatsApp चैट खोलें", bn: "WhatsApp চ্যাট খুলুন", ur: "واٹس ایپ چیٹ کھولیں", ta: "WhatsApp உரையாடலைத் திற", te: "WhatsApp చాట్ తెరవండి", th: "เปิดแชท WhatsApp", zh: "打开WhatsApp聊天", ja: "WhatsAppのチャットを開く", ko: "WhatsApp 채팅 열기", id: "Buka obrolan WhatsApp", vi: "Mở cuộc trò chuyện WhatsApp", tl: "Buksan ang WhatsApp chat", sw: "Fungua mazungumzo ya WhatsApp", ha: "Buɗe hirar WhatsApp", yo: "Ṣí ìjíròrò WhatsApp", zu: "Vula ingxoxo ye-WhatsApp", am: "የWhatsApp ውይይቱን ክፈት", bm: "WhatsApp baro da wuli", wo: "Ubbi waxtaan WhatsApp bi" };
+EXTRA_UI.receiptPdfPreparing = { fr: "Préparation du PDF…", en: "Preparing the PDF…", es: "Preparando el PDF…", pt: "A preparar o PDF…", de: "PDF wird erstellt…", it: "Preparazione del PDF…", nl: "PDF wordt voorbereid…", pl: "Przygotowywanie PDF…", ru: "Подготовка PDF…", tr: "PDF hazırlanıyor…", ar: "جارٍ تجهيز ملف PDF…", hi: "PDF तैयार हो रहा है…", bn: "PDF প্রস্তুত হচ্ছে…", ur: "PDF تیار ہو رہی ہے…", ta: "PDF தயாராகிறது…", te: "PDF సిద్ధమవుతోంది…", th: "กำลังเตรียม PDF…", zh: "正在准备PDF…", ja: "PDFを準備中…", ko: "PDF 준비 중…", id: "Menyiapkan PDF…", vi: "Đang chuẩn bị PDF…", tl: "Inihahanda ang PDF…", sw: "Inaandaa PDF…", ha: "Ana shirya PDF…", yo: "À ń pèsè PDF…", zu: "Kulungiswa i-PDF…", am: "PDF በመዘጋጀት ላይ…", bm: "PDF bε labεn…", wo: "Ñungi waajal PDF bi…" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -6687,6 +6690,33 @@ async function applyPdfUnicodeFont(doc, langCode, sample) {
 // fonctionner sans etre reecrit : text, getTextWidth et splitTextToSize.
 const PDF_CANVAS_LANGS = new Set(["ar", "ur", "hi", "bn", "ta", "te", "th", "zh", "ja", "ko", "am"]);
 const PDF_RTL_LANGS = new Set(["ar", "ur"]);
+// Mise en page miroir pour l'arabe et l'ourdou : tout le code des reçus PDF place les
+// libellés à gauche et les montants à droite (sens de lecture latin). En arabe, cela donnait
+// « الإجمالي » à gauche et le montant à droite, les articles alignés à gauche... Ici chaque
+// coordonnée horizontale est retournée (x -> largeur - x, alignement gauche <-> droite) : le
+// même code produit alors un reçu correctement disposé de droite à gauche.
+function applyPdfRtlMirror(doc, pageW) {
+  let depth = 0; // appels internes (texte dessiné en image, lien) : ne pas retourner 2 fois
+  const flipAlign = (o) => {
+    const a = (o && o.align) || "left";
+    return { ...(o || {}), align: a === "left" ? "right" : a === "right" ? "left" : a };
+  };
+  const wrap = (name, fn) => {
+    const orig = doc[name].bind(doc);
+    doc[name] = function (...args) {
+      if (depth > 0) return orig(...args);
+      depth++;
+      try { return fn(orig, ...args); } finally { depth--; }
+    };
+  };
+  wrap("text", (orig, text, x, y, o) => orig(text, pageW - x, y, flipAlign(o)));
+  wrap("textWithLink", (orig, text, x, y, o) => orig(text, pageW - x, y, flipAlign(o)));
+  wrap("addImage", (orig, img, fmt, x, y, w, h, ...rest) => orig(img, fmt, pageW - x - w, y, w, h, ...rest));
+  wrap("rect", (orig, x, y, w, h, ...rest) => orig(pageW - x - w, y, w, h, ...rest));
+  wrap("roundedRect", (orig, x, y, w, h, ...rest) => orig(pageW - x - w, y, w, h, ...rest));
+  wrap("line", (orig, x1, y1, x2, y2, ...rest) => orig(pageW - x1, y1, pageW - x2, y2, ...rest));
+  wrap("circle", (orig, x, y, ...rest) => orig(pageW - x, y, ...rest));
+}
 function applyPdfCanvasText(doc, langCode) {
   if (typeof document === "undefined") return false;
   const canvas = document.createElement("canvas");
@@ -10459,8 +10489,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // plutôt que d'ouvrir WhatsApp sans destinataire précis.
   const [receiptAskingPhone, setReceiptAskingPhone] = useState(false);
   const [receiptPhoneDraft, setReceiptPhoneDraft] = useState("");
+  // Lien WhatsApp prêt (reçu + lien du PDF) après la préparation du PDF.
+  const [receiptPdfWaUrl, setReceiptPdfWaUrl] = useState(null);
   useEffect(() => {
     if (pendingReceipt) { setReceiptAskingPhone(false); setReceiptPhoneDraft(""); }
+    setReceiptPdfWaUrl(null);
   }, [pendingReceipt]);
   // Construit le texte du reçu et le lien WhatsApp correspondant. On ne connaît pas le
   // numéro du client (l'app ne demande qu'un nom) : on ouvre WhatsApp sans destinataire
@@ -10500,21 +10533,54 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     return digits;
   };
-  const buildReceiptWhatsAppUrl = (receipt) => {
+  // Texte du reçu envoyé sur WhatsApp, mis en forme avec la syntaxe WhatsApp (*gras*,
+  // _italique_) et des séparateurs, sur le modèle des reçus numériques des caisses
+  // modernes : en-tête boutique, date/n° de ticket/client, lignes d'articles, total mis en
+  // avant, paiement (+ montant donné et monnaie en espèces), remerciement.
+  // Arabe / ourdou : chaque ligne commence par une marque « droite-à-gauche » invisible,
+  // sinon WhatsApp aligne à gauche toute ligne qui commence par un chiffre ou un nom de
+  // produit en lettres latines (ligne « 2 × Riz » collée à gauche au milieu du texte arabe).
+  const buildReceiptMessage = (receipt, extraLines = []) => {
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
+    const cur = CURRENT_CURRENCY.symbol;
+    const money = (n) => `${localizedNumber(n)} ${cur}`;
+    const rtl = PDF_RTL_LANGS.has(lang);
+    const colon = lang === "fr" ? " : " : ": ";
+    const SEP = "━━━━━━━━━━━━━━";
+    const d = new Date(receipt.date);
+    const dateStr = `${fmtDateCached(d, null, "date")} · ${fmtDateCached(d, { hour: "2-digit", minute: "2-digit" }, "time")}`;
+    const ticket = receipt.ticketId ? String(receipt.ticketId).replace(/[^0-9a-zA-Z]/g, "").slice(-6) : "";
     const lines = [
-      `🧾 ${tx(lang, "receiptHeading")} — ${shopName || "Boutique"}`,
-      new Date(receipt.date).toLocaleString(),
+      `🧾 *${(shopName || t(lang, "appName") || "Boutique").toUpperCase()}*`,
+      ...(shopPhone ? [`📞 ${shopPhone}`] : []),
+      SEP,
+      `📅 ${dateStr}`,
+      ...(ticket ? [`🔖 ${tx(lang, "receiptTicketLabel")}${colon}#${ticket}`] : []),
+      ...(receipt.customer ? [`👤 ${tx(lang, "receiptClientLabel")}${colon}${receipt.customer}`] : []),
+      SEP,
+      ...receipt.items.map((it) => {
+        const q = it.measureUnit ? `${localizedQty(it.qty)} ${it.measureUnit}` : localizedQty(it.qty);
+        return `▫️ ${q} × ${it.name}  →  ${money(it.total)}`;
+      }),
+      SEP,
+      `💰 *${tx(lang, "receiptTotalLabel").toUpperCase()}${colon}${money(receipt.total)}*`,
+      `💳 ${tx(lang, "receiptPaymentLabel")}${colon}${paymentLabel}`,
+      ...(receipt.payment === "cash" && receipt.received != null && receipt.received > 0
+        ? [`💵 ${tx(lang, "receiptAmountGivenLabel")}${colon}${money(receipt.received)}`, `🔄 ${t(lang, "change")}${colon}${money(Math.max(0, receipt.received - receipt.total))}`]
+        : []),
+      ...(receipt.loyalty && receipt.loyalty.count ? [`🎖️ ${tx(lang, "loyaltyPurchaseCount").replace("{n}", receipt.loyalty.count)}`] : []),
+      SEP,
+      ...extraLines,
+      ...(extraLines.length ? [""] : []),
+      `🙏 _${tx(lang, "receiptThanks")}_`,
       "",
-      ...receipt.items.map((it) => `${it.qty} × ${it.name} — ${localizedNumber(it.total)} ${CURRENT_CURRENCY.symbol}`),
-      "",
-      `${tx(lang, "receiptTotalLabel")} : ${localizedNumber(receipt.total)} ${CURRENT_CURRENCY.symbol}`,
-      `${tx(lang, "receiptPaymentLabel")} : ${paymentLabel}`,
-      "",
-      tx(lang, "receiptThanks"),
+      "_Boutipro · www.boutipro.com_",
     ];
+    return lines.map((l) => (rtl && l ? "\u200F" + l : l)).join("\n");
+  };
+  const buildReceiptWhatsAppUrl = (receipt, extraLines) => {
     const phoneDigits = normalizePhoneForWhatsApp(receipt.phone);
-    return `https://wa.me/${phoneDigits}?text=${encodeURIComponent(lines.join("\n"))}`;
+    return `https://wa.me/${phoneDigits}?text=${encodeURIComponent(buildReceiptMessage(receipt, extraLines))}`;
   };
   // Lien WhatsApp pré-rempli pour rappeler à un client qu'il a une dette en cours —
   // même logique que buildReceiptWhatsAppUrl (wa.me + texte encodé), vers le numéro
@@ -10572,6 +10638,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     // Charge la police Unicode si la langue ou les donnees saisies en ont besoin.
     await applyPdfTextRendering(doc, lang, [shopName, shopPhone, receipt.customer, paymentLabel, ...receipt.items.map((it) => it.name)].join(" "));
+    if (PDF_RTL_LANGS.has(lang)) applyPdfRtlMirror(doc, pageW);
 
     // QR code vers le site : généré via la bibliothèque "qrcode" (encodeur pur, sans
     // DOM), chargée à la demande comme jsPDF. Si elle n'est pas installée dans ce
@@ -10652,7 +10719,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const LABEL_GAP = 1.8; // ecart libelle -> valeur, pose a la main : jsPDF ne
       // compte pas toujours l'espace final dans getTextWidth, le libelle venait
       // alors coller la valeur ("Client :Fatoumata").
-      const dateLabel = `${tx(lang, "receiptDateLabel")} :`;
+      const pdfColon = lang === "fr" ? " :" : ":";
+      const dateLabel = `${tx(lang, "receiptDateLabel")}${pdfColon}`;
       const receiptDate = new Date(receipt.date);
       const dateValue = `${receiptDate.toLocaleDateString(getAppLocale(), { day: "2-digit", month: "2-digit", year: "numeric" })}  ${receiptDate.toLocaleTimeString(getAppLocale(), { hour: "2-digit", minute: "2-digit" })}`.replace(/[\u200e\u200f\u061c]/g, "");
       doc.text(dateLabel, marginX, y);
@@ -10676,11 +10744,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         doc.text(value, pageW - marginX, lineY, { align: "right" });
       };
       if (receipt.ticketId) {
-        rightLabelled(`${tx(lang, "receiptTicketLabel")} :`, `#${receipt.ticketId.replace(/[^0-9a-zA-Z]/g, "").slice(-6)}`, y);
+        rightLabelled(`${tx(lang, "receiptTicketLabel")}${pdfColon}`, `#${receipt.ticketId.replace(/[^0-9a-zA-Z]/g, "").slice(-6)}`, y);
       }
       if (receipt.customer) {
         y += 5.5;
-        rightLabelled(`${tx(lang, "receiptClientLabel")} :`, receipt.customer, y);
+        rightLabelled(`${tx(lang, "receiptClientLabel")}${pdfColon}`, receipt.customer, y);
       }
       y += 10;
 
@@ -10824,11 +10892,37 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // boutiquier de le joindre dans la conversation qui vient de s'ouvrir — au lieu de
   // lancer le sélecteur général qui pourrait l'envoyer ailleurs. Sans numéro client,
   // on garde l'ancien comportement (partage général, le boutiquier choisit lui-même).
+  // Envoi du PDF au numéro du client. Aucun site/app web ne peut joindre un FICHIER à la
+  // discussion d'un numéro précis (seul le texte passe par un lien wa.me) : on met donc le
+  // PDF en ligne (dossier privé de la boutique, nom aléatoire impossible à deviner) et on
+  // ouvre la discussion du client avec le reçu en texte + le lien du PDF. Le client reçoit
+  // tout dans SA discussion, comme pour « Envoyer le reçu par WhatsApp ».
+  // Le lien WhatsApp doit être ouvert par un vrai appui (sinon le téléphone le bloque) :
+  // 1er appui = préparation du PDF, le bouton devient « Ouvrir la discussion », 2e appui = envoi.
+  const uploadReceiptPdf = async (blob) => {
+    const { data: userData } = await getUserFast();
+    const ownerId = userData && userData.user ? userData.user.id : null;
+    if (!ownerId) throw new Error("no_owner");
+    const rand = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID().replace(/-/g, "") : (Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2));
+    const path = `${ownerId}/${rand}.pdf`;
+    const { error } = await supabase.storage.from("receipts").upload(path, blob, { contentType: "application/pdf", upsert: false });
+    if (error) throw error;
+    const { data } = supabase.storage.from("receipts").getPublicUrl(path);
+    if (!data || !data.publicUrl) throw new Error("no_url");
+    return data.publicUrl;
+  };
   const shareReceiptAsPdf = async (receipt) => {
     setPdfSharing(true);
     try {
       const phoneDigits = normalizePhoneForWhatsApp(receipt.phone);
       const blob = await generateReceiptPdfBlob(receipt);
+      if (phoneDigits && !isDemo && navigator.onLine) {
+        try {
+          const url = await uploadReceiptPdf(blob);
+          setReceiptPdfWaUrl(buildReceiptWhatsAppUrl(receipt, [`📄 ${tx(lang, "receiptPdfLinkLabel")}`, url]));
+          return;
+        } catch (e) { /* mise en ligne impossible : on retombe sur l'envoi manuel ci-dessous */ }
+      }
       if (phoneDigits) {
         window.open(`https://wa.me/${phoneDigits}`, "_blank");
         const url = URL.createObjectURL(blob);
@@ -23824,14 +23918,27 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </a>
               </div>
             )}
-            <button
-              onClick={() => shareReceiptAsPdf(pendingReceipt)}
-              disabled={pdfSharing}
-              className="w-full py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 mb-2 disabled:opacity-50"
-              style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}
-            >
-              📄 {pdfSharing ? "…" : tx(lang, "receiptSendPdf")}
-            </button>
+            {receiptPdfWaUrl ? (
+              <a
+                href={receiptPdfWaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setPendingReceipt(null)}
+                className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
+                style={{ background: "#128C7E", textDecoration: "none" }}
+              >
+                📄 {tx(lang, "receiptPdfOpenChat")}
+              </a>
+            ) : (
+              <button
+                onClick={() => shareReceiptAsPdf(receiptAskingPhone && receiptPhoneDraft ? { ...pendingReceipt, phone: receiptPhoneDraft } : pendingReceipt)}
+                disabled={pdfSharing}
+                className="w-full py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 mb-2 disabled:opacity-50"
+                style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}
+              >
+                📄 {pdfSharing ? tx(lang, "receiptPdfPreparing") : tx(lang, "receiptSendPdf")}
+              </button>
+            )}
             <button onClick={() => setPendingReceipt(null)} className="w-full py-2.5 rounded-lg text-sm font-semibold" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}>
               {t(lang, "empQrClose")}
             </button>
