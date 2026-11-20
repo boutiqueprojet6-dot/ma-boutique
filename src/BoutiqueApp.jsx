@@ -6174,6 +6174,9 @@ EXTRA_UI.removeReason_adjust = { fr: "Correction", en: "Correction", es: "Correc
 EXTRA_UI.removeReason_broken = { fr: "Cassé / abîmé", en: "Broken / damaged", es: "Roto / dañado", pt: "Partido / danificado", de: "Kaputt / beschädigt", it: "Rotto / danneggiato", nl: "Kapot / beschadigd", pl: "Zepsute / uszkodzone", ru: "Сломано / испорчено", tr: "Kırık / hasarlı", ar: "مكسور / تالف", hi: "टूटा / खराब", bn: "ভাঙা / নষ্ট", ur: "ٹوٹا / خراب", ta: "உடைந்தது / சேதம்", te: "పగిలింది / పాడైంది", th: "แตก / เสียหาย", zh: "破损", ja: "破損", ko: "파손", id: "Rusak", vi: "Hư hỏng", tl: "Sira", sw: "Imevunjika / imeharibika", ha: "Ya karye / ya lalace", yo: "Ó fọ́ / ó bàjẹ́", zu: "Kuphukile / konakele", am: "የተሰበረ / የተበላሸ", bm: "A karilen / a tiɲɛna", wo: "Toj / yàqu" };
 EXTRA_UI.removeReason_lost = { fr: "Perdu / volé", en: "Lost / stolen", es: "Perdido / robado", pt: "Perdido / roubado", de: "Verloren / gestohlen", it: "Perso / rubato", nl: "Kwijt / gestolen", pl: "Zgubione / skradzione", ru: "Потеряно / украдено", tr: "Kayıp / çalıntı", ar: "مفقود / مسروق", hi: "खोया / चोरी", bn: "হারানো / চুরি", ur: "گم / چوری", ta: "தொலைந்தது / திருட்டு", te: "పోయింది / దొంగిలించారు", th: "หาย / ถูกขโมย", zh: "丢失/被盗", ja: "紛失・盗難", ko: "분실 / 도난", id: "Hilang / dicuri", vi: "Mất / bị trộm", tl: "Nawala / ninakaw", sw: "Imepotea / imeibiwa", ha: "Ya ɓace / an sace", yo: "Ó sọnù / wọ́n jí i", zu: "Kulahlekile / kwebiwe", am: "የጠፋ / የተሰረቀ", bm: "A tununna / a sonyalen", wo: "Réer / ñu sàcc ko" };
 EXTRA_UI.removeReason_own = { fr: "Usage personnel", en: "Personal use", es: "Uso personal", pt: "Uso pessoal", de: "Eigenbedarf", it: "Uso personale", nl: "Eigen gebruik", pl: "Użytek własny", ru: "Личное использование", tr: "Kişisel kullanım", ar: "استعمال شخصي", hi: "निजी उपयोग", bn: "ব্যক্তিগত ব্যবহার", ur: "ذاتی استعمال", ta: "சொந்த பயன்பாடு", te: "స్వంత ఉపయోగం", th: "ใช้เอง", zh: "自用", ja: "自家消費", ko: "개인 사용", id: "Dipakai sendiri", vi: "Dùng riêng", tl: "Personal na gamit", sw: "Matumizi binafsi", ha: "Amfanin kai", yo: "Lílò ara ẹni", zu: "Ukusetshenziswa komuntu siqu", am: "የግል አጠቃቀም", bm: "Yɛrɛ ka baara", wo: "Sa bopp jëfandikoo" };
+EXTRA_UI.qtyChangeTitle = { fr: "Pourquoi le stock change ?", en: "Why is the stock changing?", es: "¿Por qué cambia el stock?", pt: "Porque é que o stock muda?", de: "Warum ändert sich der Bestand?", it: "Perché cambia la giacenza?", nl: "Waarom verandert de voorraad?", pl: "Dlaczego zmienia się stan?", ru: "Почему меняется остаток?", tr: "Stok neden değişiyor?", ar: "لماذا يتغير المخزون؟", hi: "स्टॉक क्यों बदल रहा है?", bn: "স্টক কেন বদলাচ্ছে?", ur: "اسٹاک کیوں بدل رہا ہے؟", ta: "இருப்பு ஏன் மாறுகிறது?", te: "స్టాక్ ఎందుకు మారుతోంది?", th: "ทำไมสต็อกเปลี่ยน?", zh: "库存为什么变化？", ja: "在庫が変わる理由は？", ko: "재고가 왜 바뀌나요?", id: "Mengapa stok berubah?", vi: "Vì sao tồn kho thay đổi?", tl: "Bakit nagbabago ang stock?", sw: "Kwa nini stoo inabadilika?", ha: "Me yasa kaya ke canzawa?", yo: "Kí ló dé tí ọjà ń yí padà?", zu: "Kungani isitoko sishintsha?", am: "ክምችቱ ለምን ይቀየራል?", bm: "Mun na stɔki bɛ yɛlɛma?", wo: "Lu tax stock bi soppiku?" };
+EXTRA_UI.qtyChangeLine = { fr: "Stock : {from} → {to}", en: "Stock: {from} → {to}", es: "Stock: {from} → {to}", pt: "Stock: {from} → {to}", de: "Bestand: {from} → {to}", it: "Giacenza: {from} → {to}", nl: "Voorraad: {from} → {to}", pl: "Stan: {from} → {to}", ru: "Остаток: {from} → {to}", tr: "Stok: {from} → {to}", ar: "المخزون: {from} ← {to}", hi: "स्टॉक: {from} → {to}", bn: "স্টক: {from} → {to}", ur: "اسٹاک: {from} ← {to}", ta: "இருப்பு: {from} → {to}", te: "స్టాక్: {from} → {to}", th: "สต็อก: {from} → {to}", zh: "库存：{from} → {to}", ja: "在庫：{from} → {to}", ko: "재고: {from} → {to}", id: "Stok: {from} → {to}", vi: "Tồn kho: {from} → {to}", tl: "Stock: {from} → {to}", sw: "Stoo: {from} → {to}", ha: "Kaya: {from} → {to}", yo: "Ọjà: {from} → {to}", zu: "Isitoko: {from} → {to}", am: "ክምችት፦ {from} → {to}", bm: "Stɔki: {from} → {to}", wo: "Stock: {from} → {to}" };
+EXTRA_UI.removeReason_restock = { fr: "Arrivage / réception", en: "Delivery received", es: "Mercancía recibida", pt: "Mercadoria recebida", de: "Lieferung erhalten", it: "Merce ricevuta", nl: "Levering ontvangen", pl: "Dostawa", ru: "Поступление товара", tr: "Mal kabul", ar: "وصول بضاعة", hi: "माल आया", bn: "মাল এসেছে", ur: "مال آیا", ta: "சரக்கு வந்தது", te: "సరుకు వచ్చింది", th: "รับสินค้าเข้า", zh: "到货", ja: "入荷", ko: "입고", id: "Barang masuk", vi: "Nhập hàng", tl: "Dumating na paninda", sw: "Mzigo umepokelewa", ha: "Kaya sun iso", yo: "Ọjà dé", zu: "Kufike impahla", am: "እቃ ደረሰ", bm: "Fɛnw nana", wo: "Marsandiis ñëw na" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -14608,13 +14611,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     setShopPhotoBusy(false);
   };
-  const addProduct = () => {
+  // Changement de quantité depuis « Modifier » : on demande pourquoi (comme le bouton « − »),
+  // pour que chaque variation du stock ait un motif dans le journal.
+  const [qtyChangePrompt, setQtyChangePrompt] = useState(null);
+  const [qtyChangeReason, setQtyChangeReason] = useState("adjust");
+  const addProduct = (qtyReason) => {
     if (!pName.trim() || !pQty || !pPrice) return;
+    if (typeof qtyReason !== "string") qtyReason = null;
     // La photo est facultative (décision du 2026-11-13) : l'exiger obligeait à photographier
     // chaque article avant de pouvoir vendre, un vrai frein pour une boutique qui démarre avec
     // 200 références. Sans photo, le produit s'affiche avec une icône de colis.
     setError("");
     if (editingProductId) {
+      const editedOld = products.find((x) => x.id === editingProductId);
+      const editedNewQty = pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10);
+      const editedOldQty = editedOld ? Number(editedOld.quantity) || 0 : 0;
+      if (editedOld && isFinite(editedNewQty) && editedNewQty !== editedOldQty && !qtyReason) {
+        setQtyChangeReason(editedNewQty > editedOldQty ? "restock" : "adjust");
+        setQtyChangePrompt({ from: editedOldQty, to: editedNewQty });
+        return;
+      }
       // Mode modification : on met à jour le produit existant en place,
       // sans toucher à son id ni à ses ventes déjà enregistrées.
       saveAll({
@@ -14656,6 +14672,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         } : p),
       });
       logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}`);
+      if (qtyReason && editedNewQty !== editedOldQty) {
+        const d = editedNewQty - editedOldQty;
+        logAction(`${t(lang, "logStockAdjusted")} : ${pName.trim()} (${d > 0 ? "+" : "−"}${localizedNumber(Math.abs(d))}, ${tx(lang, "removeReason_" + qtyReason)})`);
+      }
+      setQtyChangePrompt(null);
       setEditingProductId(null);
       setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setShowAddProduct(false);
       return;
@@ -19783,6 +19804,25 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {qtyChangePrompt && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setQtyChangePrompt(null)}>
+            <div onClick={(e) => e.stopPropagation()} className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card, color: T.text }}>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-bold text-sm">{tx(lang, "qtyChangeTitle")}</h3>
+                <button onClick={() => setQtyChangePrompt(null)}><X size={18} /></button>
+              </div>
+              <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "qtyChangeLine").replace("{from}", localizedQty(qtyChangePrompt.from)).replace("{to}", localizedQty(qtyChangePrompt.to))}</p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {(qtyChangePrompt.to > qtyChangePrompt.from ? ["restock", "adjust"] : ["adjust", "broken", "lost", "own"]).map((r) => (
+                  <button key={r} onClick={() => setQtyChangeReason(r)} className="px-2.5 py-1.5 rounded-full text-[11px] font-bold" style={{ background: qtyChangeReason === r ? INDIGO : T.input, color: qtyChangeReason === r ? "white" : T.text }}>
+                    {tx(lang, "removeReason_" + r)}
+                  </button>
+                ))}
+              </div>
+              <button onClick={() => addProduct(qtyChangeReason)} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "save")}</button>
+            </div>
+          </div>
+        )}
         {removeStockTarget && (() => {
           const rp = products.find((p) => p.id === removeStockTarget);
           if (!rp) return null;
@@ -20051,7 +20091,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               )}
             </div>
             <button
-              onClick={addProduct}
+              onClick={() => addProduct()}
               disabled={!(pName.trim() && pQty && pPrice)}
               className="w-full py-3 rounded-lg text-white font-semibold text-sm mb-6"
               style={{ background: INDIGO, opacity: (pName.trim() && pQty && pPrice) ? 1 : 0.4 }}
