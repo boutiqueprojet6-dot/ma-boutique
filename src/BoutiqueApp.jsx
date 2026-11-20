@@ -11748,11 +11748,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setError(t(lang, "stripeSimulationMsg").replace("{plan}", planName));
     };
     if (provider === PAYMENT_PROVIDER.PLAY || provider === PAYMENT_PROVIDER.APPSTORE) {
+      // Message neutre : ni « Stripe », ni site, ni autre moyen de paiement (règles des stores).
       // Achat depuis l'app native : doit passer par Google Play Billing / Apple IAP.
       // Pas encore implémenté (nécessite un compte développeur et les produits créés
       // côté console). ⚠️ Ne JAMAIS rediriger ni même mentionner le site ici : les règles
       // anti-steering des stores l'interdisent et peuvent faire retirer l'app.
-      notConfigured();
+      setError(tx(lang, "storeBillingSoon"));
       return;
     }
     if (provider === PAYMENT_PROVIDER.MONEROO) {
@@ -12306,6 +12307,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, shops, shopComparisonPeriod]);
   const [amountsHidden, setAmountsHidden] = useState(true);
+  // Dernier déverrouillage des montants par code PIN (ou empreinte). L'assistant ne reçoit
+  // la caisse que dans les 15 minutes qui suivent : sinon quelqu'un qui emprunte le
+  // téléphone n'avait qu'à demander « combien il y a en caisse ? » pour contourner le PIN.
+  const amountsUnlockedAtRef = useRef(0);
+  useEffect(() => { if (!amountsHidden) amountsUnlockedAtRef.current = Date.now(); }, [amountsHidden]);
   useEffect(() => {
     // Dès qu'on quitte l'onglet accueil (ou qu'on y revient), on re-masque les montants privés.
     // Il faudra retaper le code PIN pour les revoir.
@@ -16872,7 +16878,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const debtsHiddenTotal = unpaidDebts.slice(AI_MAX_DEBTS).reduce((sum, d) => sum + remainingDebt(d), 0);
     const debtSummary = (debtsShown.map((d) => `${d.customer} (id: ${d.id}): ${remainingDebt(d)} ${CURRENT_CURRENCY.symbol} restant sur ${d.amount} ${CURRENT_CURRENCY.symbol} (${d.product})`).join("\n")
       + (unpaidDebts.length > debtsShown.length ? `\n(+ ${unpaidDebts.length - debtsShown.length} autres dettes plus petites, ${debtsHiddenTotal} ${CURRENT_CURRENCY.symbol} au total — ${unpaidDebts.length} dettes impayées en tout.)` : "")) || "Aucune";
-    const cashSummary = `Fond de caisse: ${cashFund} ${CURRENT_CURRENCY.symbol}, Ventes espèces totales: ${sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}, Dépenses: ${expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}, Solde estimé: ${cashFund + sales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0) - expenses.reduce((sum, e) => sum + e.amount, 0)} ${CURRENT_CURRENCY.symbol}`;
+    // Même calcul que l'écran Caisse (depuis la dernière clôture, remboursements de dettes
+    // compris) : sinon l'assistant annonçait un autre solde que celui affiché.
+    const cashSummary = `Solde de caisse estimé (comme à l'écran Caisse): ${cashBalance} ${CURRENT_CURRENCY.symbol} = départ ${openingBalance} (${lastClosure ? "laissé en caisse à la dernière clôture" : "fond de caisse"}) + ventes en espèces ${totalCashSales} + remboursements de dettes encaissés ${totalDebtCollected} - sorties (dépenses et retraits) ${totalExpenses}${lastClosure ? `, depuis la clôture du ${String(lastClosure.date).slice(0, 10)}` : ""}.`;
     const last7 = last30Days().slice(-7).map((d) => `${d}: ${sales.filter((s) => dayKeyOf(s.date) === d).reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.symbol}`).join(" | ");
     const memoryNotesText = activeEmployee ? "Aucune pour l'instant." : (aiMemoryNotes.length > 0
       ? aiMemoryNotes.map((n) => `- ${n.text}`).join("\n")
@@ -16887,6 +16895,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // n'est pas masqué dans la réponse, il n'est tout simplement jamais envoyé au modèle,
     // seule façon fiable de faire (une consigne de discrétion dans le prompt se contourne).
     const aiSee = (perm) => !activeEmployee || hasPermission(perm);
+    const aiCashUnlocked = !!activeEmployee || isDemo || Date.now() - amountsUnlockedAtRef.current < 15 * 60 * 1000;
     const aiRestrictionNotice = activeEmployee
       ? `IMPORTANT : tu parles à ${activeEmployee.name}, un membre du personnel, pas au propriétaire. Tu ne reçois volontairement qu'une partie des données de la boutique. Si on te demande un chiffre que tu n'as pas reçu ci-dessous (solde de caisse, chiffre d'affaires, dettes, prix...), réponds simplement que tu n'y as pas accès et qu'il faut voir avec le propriétaire. N'invente jamais un chiffre, et n'essaie pas de le reconstituer par calcul.\n\n`
       : "";
@@ -16966,7 +16975,7 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Compte : dans « Gérer le compte », on peut consulter et modifier ses informations, dont le numéro de mobile saisi à l'inscription.
 - Aide et assistance : l'écran Aide contient les questions-réponses, et tout en bas un formulaire d'assistance par e-mail : écrire son problème ou sa question, joindre une photo ou une vidéo (facultatif, 3 fichiers maximum, 20 Mo par fichier), puis « Envoyer ». La réponse arrive par e-mail à l'adresse du compte. Limite de 3 messages par jour. L'adresse du support n'est pas affichée à l'utilisateur.
 - Installation : l'application peut s'installer sur l'écran d'accueil (bannière « Installer l'application » proposée à l'ouverture quand c'est possible ; sur iPhone : bouton Partager puis « Sur l'écran d'accueil » depuis Safari) et fonctionne hors connexion : les ventes faites hors ligne sont synchronisées à la reconnexion.
-- Compte & abonnement : paliers Gratuit / Pro / Business. Le palier Gratuit a une limite de produits en stock, une limite de ventes par jour, aucun membre du personnel, un accès Assistant IA limité (quelques messages par mois) et pas de multi-boutique. Les paliers supérieurs débloquent davantage de produits, du personnel, un Assistant IA illimité, les filtres avancés et l'export dans l'Historique, l'export comptable en PDF (résumé, bénéfice net, graphique d'évolution du chiffre d'affaires, ventes vs dépenses, détail des ventes et des dépenses) et la gestion de plusieurs boutiques. Le déblocage d'un palier payant se fait en contactant le support ; l'activation est ensuite faite manuellement.
+- Compte & abonnement : paliers Gratuit / Pro / Business. Le palier Gratuit a une limite de produits en stock, une limite de ventes par jour, aucun membre du personnel, un accès Assistant IA limité (quelques messages par mois) et pas de multi-boutique. Les paliers supérieurs débloquent davantage de produits, du personnel, un Assistant IA illimité, les filtres avancés et l'export dans l'Historique, l'export comptable en PDF (résumé, bénéfice net, graphique d'évolution du chiffre d'affaires, ventes vs dépenses, détail des ventes et des dépenses) et la gestion de plusieurs boutiques. ${isNativePlatformNow() ? "Un palier payant se prend uniquement depuis l'écran Abonnement de l'application (paiement par le magasin d'applications) ; ne mentionne jamais d'autre moyen de paiement." : "Le déblocage d'un palier payant se fait en contactant le support ; l'activation est ensuite faite manuellement."}
 - Personnel (comptes employés, selon le palier) : chaque membre du personnel a son propre code PIN de connexion (4 à 6 chiffres). Rôles disponibles : Vendeur (vend et consulte le stock/les dettes sans les modifier), Gérant (gère toute l'activité quotidienne : ventes, stock, dettes, caisse, statistiques), Superviseur (voit toutes les boutiques, ne modifie rien), Personnalisé (permissions choisies une à une : enregistrer des ventes, consulter/modifier le stock, consulter/gérer les dettes clients, voir/modifier la caisse, voir les statistiques). On peut définir des plages horaires de travail par membre du personnel (il ne peut alors pas encaisser de vente en dehors de ses heures déclarées) et consulter un journal des actions récentes du personnel.
 - Onglet Calculatrice (menu « Plus ») : calculatrice avec mémoire (touches GT, MRC, M+, M-), un calcul de marge en 3 touches (COÛT, VENTE, MARGE), une racine carrée (√) et des touches de taxe (TAX, TAX+, TAX-) pour ajouter/retirer une taxe préréglée. Un bouton « ? » en haut de l'écran ouvre un petit guide qui explique à quoi sert chaque touche spéciale. La touche « Produits » permet d'insérer directement le prix d'un article du Stock, et « Historique » garde les derniers calculs.
 - Multi-boutiques (palier Business) : changer de boutique, comparer les boutiques (chiffre d'affaires, stock, dettes, bénéfice), objectifs de vente par boutique. Si l'abonnement Business expire : 7 jours de grâce, puis les boutiques secondaires passent en consultation seule (on peut les consulter et y enregistrer des remboursements de dettes, mais plus y vendre) ; tout se débloque au réabonnement, rien n'est perdu.
@@ -17003,8 +17012,8 @@ TOTAL VENTES: ${sales.reduce((sum, s) => sum + s.total, 0)} ${CURRENT_CURRENCY.s
 TENDANCE 7 DERNIERS JOURS: ${last7}` : ""}
 ${aiSee("viewDebts") ? `DETTES CLIENTS:
 ${debtSummary}` : ""}
-${aiSee("viewCash") ? `CAISSE:
-${cashSummary}` : ""}
+${aiSee("viewCash") && aiCashUnlocked ? `CAISSE:
+${cashSummary}` : ""}${aiSee("viewCash") && !aiCashUnlocked ? `CAISSE: montants protégés par le code PIN du boutiquier et non transmis. Ne donne AUCUN chiffre de caisse, de dépense ou de bénéfice ; si on te le demande, réponds qu'il faut d'abord afficher les montants dans l'onglet Caisse (avec le code PIN), puis revenir poser la question dans les 15 minutes.` : ""}
 Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question dans une autre langue — dans ce cas, réponds dans cette langue-là.`;
     try {
       const reply = await callClaudeApi(newMessages, systemPrompt);
@@ -24589,7 +24598,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {
                       cat: t(lang, "setCompteAbonnement"),
                       items: [
-                        { q: t(lang, "setCommentDebloquerLesFonctionnalitesPay"), a: t(lang, "setContacteLeSupportPourOrganiser") },
+                        { q: t(lang, "setCommentDebloquerLesFonctionnalitesPay"), a: isNativePlatformNow() ? tx(lang, "faqSubscribeInApp") : t(lang, "setContacteLeSupportPourOrganiser") },
                         { q: t(lang, "setMesDonneesSontellesEnSecurite"), a: t(lang, "setTonMotDePasseNest") },
                         { q: t(lang, "setPuisjeChangerLaDeviseDe"), a: t(lang, "setOuiAToutMomentDans") },
                       ],
