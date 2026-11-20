@@ -6162,6 +6162,7 @@ EXTRA_UI.pushStuckEmp = { fr: "{n} vente(s) pas encore envoyée(s) au serveur ma
 EXTRA_UI.pushStuckOwner = { fr: "{n} vente(s) pas encore envoyée(s) au serveur malgré le réseau. Elles restent sur ce téléphone et l'envoi est réessayé automatiquement.", en: "{n} sale(s) not yet sent to the server despite the network. They stay on this phone and sending is retried automatically.", es: "{n} venta(s) aún sin enviar pese a haber red. Siguen en este teléfono y el envío se reintenta automáticamente.", pt: "{n} venda(s) ainda não enviada(s) apesar da rede. Ficam neste telemóvel e o envio é tentado de novo automaticamente.", de: "{n} Verkauf/Verkäufe trotz Netz noch nicht gesendet. Sie bleiben auf diesem Handy, das Senden wird automatisch wiederholt.", it: "{n} vendita/e non ancora inviata/e nonostante la rete. Restano su questo telefono e l'invio viene ritentato automaticamente.", nl: "{n} verkoop/verkopen ondanks netwerk nog niet verzonden. Ze blijven op deze telefoon en verzenden wordt automatisch opnieuw geprobeerd.", pl: "{n} sprzedaż(y) nie wysłano mimo sieci. Zostają w telefonie, wysyłanie jest ponawiane automatycznie.", ru: "{n} продаж(и) не отправлены, хотя сеть есть. Они сохранены на телефоне, отправка повторяется автоматически.", tr: "Ağ olmasına rağmen {n} satış henüz gönderilmedi. Bu telefonda duruyorlar ve gönderim otomatik olarak yeniden deneniyor.", ar: "{n} عملية بيع لم ترسل بعد رغم وجود الشبكة. ما زالت على هذا الهاتف ويعاد الإرسال تلقائيًا.", hi: "नेटवर्क होने के बावजूद {n} बिक्री अभी तक नहीं भेजी गई। वे इसी फ़ोन में हैं और भेजने की कोशिश अपने-आप दोहराई जा रही है।", bn: "নেটওয়ার্ক থাকা সত্ত্বেও {n}টি বিক্রি এখনও পাঠানো হয়নি। সেগুলো এই ফোনেই আছে, আবার পাঠানোর চেষ্টা স্বয়ংক্রিয়ভাবে হচ্ছে।", ur: "نیٹ ورک کے باوجود {n} فروخت ابھی نہیں بھیجی گئی۔ وہ اسی فون پر ہیں اور بھیجنے کی دوبارہ کوشش خود بخود ہو رہی ہے۔", ta: "நெட்வொர்க் இருந்தும் {n} விற்பனை இன்னும் அனுப்பப்படவில்லை. அவை இந்த போனில் உள்ளன, மீண்டும் தானாக அனுப்ப முயற்சிக்கப்படுகிறது.", te: "నెట్‌వర్క్ ఉన్నా {n} అమ్మకం(లు) ఇంకా పంపబడలేదు. అవి ఈ ఫోన్‌లోనే ఉన్నాయి, పంపడం ఆటోమేటిక్‌గా మళ్లీ ప్రయత్నిస్తోంది.", th: "มีสัญญาณแต่ยังส่งยอดขาย {n} รายการไม่ได้ ข้อมูลยังอยู่ในเครื่องนี้และระบบจะลองส่งใหม่เอง", zh: "有网络但仍有 {n} 笔销售未上传，它们保存在这部手机上，系统会自动重试。", ja: "ネットワークがあるのに {n} 件の販売が未送信です。この端末に残っており、自動で再送されます。", ko: "네트워크가 있는데도 판매 {n}건이 아직 전송되지 않았습니다. 이 휴대폰에 남아 있으며 자동으로 다시 시도합니다.", id: "{n} penjualan belum terkirim meski ada jaringan. Data tetap di ponsel ini dan pengiriman dicoba ulang otomatis.", vi: "Có mạng nhưng {n} đơn bán vẫn chưa gửi được. Chúng vẫn nằm trên điện thoại này và sẽ tự động gửi lại.", tl: "May network pero hindi pa naipapadala ang {n} benta. Nasa phone na ito pa rin at kusang susubukang ipadala ulit.", sw: "Mauzo {n} hayajatumwa licha ya mtandao. Yamebaki kwenye simu hii na yanajaribiwa kutumwa tena yenyewe.", ha: "Duk da akwai sadarwa, ba a tura sayarwa {n} ba tukuna. Suna kan wannan wayar kuma ana sake gwada turawa da kansa.", yo: "Títà {n} kò tíì lọ bí ó tilẹ̀ jẹ́ pé nẹ́tíwọ̀ọ̀kì wà. Wọ́n ṣì wà lórí fóònù yìí, a sì ń gbìyànjú láti fi wọ́n ránṣẹ́ fúnra rẹ̀.", zu: "Ukuthengisa okungu-{n} akukathunyelwa nakuba kukhona inethiwekhi. Kusesefonini futhi kuzozanywa futhi ngokuzenzakalelayo.", am: "ኔትወርክ ቢኖርም {n} ሽያጭ(ዎች) ገና አልተላኩም። በዚህ ስልክ ላይ ናቸው፤ መላኩ በራሱ እንደገና ይሞከራል።", bm: "Hali ni rezo bɛ yen, feereli {n} ma ci fɔlɔ. U bɛ telefɔni in kɔnɔ, u cili bɛ segin a yɛrɛ ma.", wo: "Am na réseau waaye {n} jaay yónneegu ñu leen. Ñu ngi ci telefon bii, dinañu jéem yónnee leen ci seen bopp." };
 EXTRA_UI.quotaCancelledPart = { fr: "dont {n} annulée(s)", en: "incl. {n} cancelled", es: "incl. {n} anulada(s)", pt: "incl. {n} anulada(s)", de: "davon {n} storniert", it: "di cui {n} annullata/e", nl: "waarvan {n} geannuleerd", pl: "w tym {n} anulowane", ru: "из них отменено: {n}", tr: "{n} iptal dahil", ar: "منها {n} ملغاة", hi: "जिनमें {n} रद्द", bn: "যার মধ্যে {n}টি বাতিল", ur: "جن میں {n} منسوخ", ta: "அதில் {n} ரத்து", te: "వాటిలో {n} రద్దు", th: "ยกเลิก {n} รายการ", zh: "含已取消 {n} 笔", ja: "うち取消 {n} 件", ko: "취소 {n}건 포함", id: "termasuk {n} dibatalkan", vi: "gồm {n} đã hủy", tl: "kasama ang {n} na kinansela", sw: "ikiwemo {n} zilizofutwa", ha: "har da {n} da aka soke", yo: "pẹ̀lú {n} tí a fagilé", zu: "kuhlanganise no-{n} okukhanseliwe", am: "ከነዚህ {n} የተሰረዙ", bm: "{n} dabilalen bɛ u la", wo: "{n} yu ñu neenal ci biir" };
 EXTRA_UI.quotaLeftHint = { fr: "Encore {n} vente(s) possible(s) aujourd'hui. Passez à Pro pour vendre sans limite.", en: "{n} sale(s) left today. Upgrade to Pro to sell without limit.", es: "Le quedan {n} venta(s) hoy. Pase a Pro para vender sin límite.", pt: "Ainda pode fazer {n} venda(s) hoje. Passe para Pro para vender sem limite.", de: "Heute noch {n} Verkauf/Verkäufe möglich. Mit Pro ohne Limit verkaufen.", it: "Ancora {n} vendita/e possibile/i oggi. Passa a Pro per vendere senza limiti.", nl: "Vandaag nog {n} verkoop/verkopen mogelijk. Ga naar Pro om onbeperkt te verkopen.", pl: "Dziś możesz jeszcze wykonać {n} sprzedaż(y). Przejdź na Pro, by sprzedawać bez limitu.", ru: "Сегодня можно ещё продаж: {n}. Перейдите на Pro, чтобы продавать без ограничений.", tr: "Bugün {n} satış hakkınız kaldı. Sınırsız satış için Pro'ya geçin.", ar: "يمكنك إجراء {n} عملية بيع أخرى اليوم. انتقل إلى Pro للبيع دون حد.", hi: "आज {n} और बिक्री कर सकते हैं। बिना सीमा बेचने के लिए Pro लें।", bn: "আজ আরও {n}টি বিক্রি করা যাবে। সীমাহীন বিক্রির জন্য Pro নিন।", ur: "آج مزید {n} فروخت ممکن ہے۔ بغیر حد کے فروخت کے لیے Pro لیں۔", ta: "இன்று இன்னும் {n} விற்பனை செய்யலாம். வரம்பின்றி விற்க Pro-க்கு மாறுங்கள்.", te: "ఈ రోజు ఇంకా {n} అమ్మకం(లు) చేయవచ్చు. పరిమితి లేకుండా అమ్మడానికి Pro తీసుకోండి.", th: "วันนี้ขายได้อีก {n} รายการ อัปเกรดเป็น Pro เพื่อขายได้ไม่จำกัด", zh: "今天还可销售 {n} 笔。升级到 Pro 即可无限销售。", ja: "今日はあと {n} 件販売できます。Pro にすると無制限で販売できます。", ko: "오늘 {n}건 더 판매할 수 있습니다. Pro로 업그레이드하면 무제한입니다.", id: "Hari ini masih bisa {n} penjualan. Beralih ke Pro untuk jual tanpa batas.", vi: "Hôm nay còn bán được {n} đơn. Nâng cấp Pro để bán không giới hạn.", tl: "May {n} benta pa ngayong araw. Mag-Pro para makapagbenta nang walang limitasyon.", sw: "Mauzo {n} yamebaki leo. Hamia Pro uuze bila kikomo.", ha: "Sauran sayarwa {n} a yau. Koma Pro don sayarwa ba iyaka.", yo: "Títà {n} ló kù lónìí. Lọ sí Pro láti ta láìsí ààlà.", zu: "Kusasele ukuthengisa okungu-{n} namuhla. Thuthukela ku-Pro ukuze uthengise ngaphandle komkhawulo.", am: "ዛሬ {n} ተጨማሪ ሽያጭ ይቻላል። ያለ ገደብ ለመሸጥ ወደ Pro ይቀይሩ።", bm: "Bi feereli {n} tora yen. Taa Pro la walasa ka feereli kɛ dan tɛ min na.", wo: "Des na {n} jaay tey. Jëlal Pro ngir jaay te amul dig." };
+EXTRA_UI.receiptPhoneNeeded = { fr: "Tapez le numéro WhatsApp du client pour lui envoyer le reçu.", en: "Type the customer's WhatsApp number to send them the receipt.", es: "Escriba el número de WhatsApp del cliente para enviarle el recibo.", pt: "Digite o número de WhatsApp do cliente para lhe enviar o recibo.", de: "Geben Sie die WhatsApp-Nummer des Kunden ein, um ihm den Beleg zu senden.", it: "Digita il numero WhatsApp del cliente per inviargli la ricevuta.", nl: "Typ het WhatsApp-nummer van de klant om de bon te sturen.", pl: "Wpisz numer WhatsApp klienta, aby wysłać mu paragon.", ru: "Введите номер WhatsApp клиента, чтобы отправить ему чек.", tr: "Fişi göndermek için müşterinin WhatsApp numarasını yazın.", ar: "اكتب رقم واتساب الزبون لإرسال الإيصال إليه.", hi: "रसीद भेजने के लिए ग्राहक का WhatsApp नंबर लिखें।", bn: "রসিদ পাঠাতে গ্রাহকের WhatsApp নম্বর লিখুন।", ur: "رسید بھیجنے کے لیے گاہک کا WhatsApp نمبر لکھیں۔", ta: "ரசீதை அனுப்ப வாடிக்கையாளரின் WhatsApp எண்ணைத் தட்டச்சு செய்யுங்கள்.", te: "రసీదు పంపడానికి కస్టమర్ WhatsApp నంబర్‌ను టైప్ చేయండి.", th: "พิมพ์หมายเลข WhatsApp ของลูกค้าเพื่อส่งใบเสร็จ", zh: "输入顾客的 WhatsApp 号码以发送收据。", ja: "レシートを送るには、お客様の WhatsApp 番号を入力してください。", ko: "영수증을 보내려면 고객의 WhatsApp 번호를 입력하세요.", id: "Ketik nomor WhatsApp pelanggan untuk mengirim struk.", vi: "Nhập số WhatsApp của khách để gửi hóa đơn.", tl: "I-type ang WhatsApp number ng customer para maipadala ang resibo.", sw: "Andika namba ya WhatsApp ya mteja ili umtumie risiti.", ha: "Rubuta lambar WhatsApp ta abokin ciniki don tura masa rasit.", yo: "Tẹ nọ́mbà WhatsApp oníbàárà láti fi ìwé-ẹ̀rí ránṣẹ́ sí i.", zu: "Thayipha inombolo ye-WhatsApp yekhasimende ukuze umthumele irisidi.", am: "ደረሰኙን ለመላክ የደንበኛውን የWhatsApp ቁጥር ይጻፉ።", bm: "Kiliyan ka WhatsApp nimɔrɔ sɛbɛn walasa ka resi ci a ma.", wo: "Bindal nimero WhatsApp bu kiliyaan bi ngir yónnee ko reçu bi." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -10729,8 +10730,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [receiptPhoneDraft, setReceiptPhoneDraft] = useState("");
   // Lien WhatsApp prêt (reçu + lien du PDF) après la préparation du PDF.
   const [receiptPdfWaUrl, setReceiptPdfWaUrl] = useState(null);
+  const [receiptPhoneError, setReceiptPhoneError] = useState(false);
   useEffect(() => {
-    if (pendingReceipt) { setReceiptAskingPhone(false); setReceiptPhoneDraft(""); }
+    if (pendingReceipt) { setReceiptAskingPhone(false); setReceiptPhoneDraft(""); setReceiptPhoneError(false); }
     setReceiptPdfWaUrl(null);
   }, [pendingReceipt]);
   // Construit le texte du reçu et le lien WhatsApp correspondant. On ne connaît pas le
@@ -11151,6 +11153,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const shareReceiptAsPdf = async (receipt) => {
     setPdfSharing(true);
+    // Lien prêt : la fenêtre du reçu reste ouverte pour afficher « Ouvrir la discussion »
+    // (avant, elle se fermait aussitôt et le lien préparé était perdu : rien ne se passait).
+    let keepOpen = false;
     try {
       const phoneDigits = normalizePhoneForWhatsApp(receipt.phone);
       const blob = await generateReceiptPdfBlob(receipt);
@@ -11158,6 +11163,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         try {
           const url = await uploadReceiptPdf(blob);
           setReceiptPdfWaUrl(buildReceiptWhatsAppUrl(receipt, [`📄 ${tx(lang, "receiptPdfLinkLabel")}`, url]));
+          keepOpen = true;
           return;
         } catch (e) { /* mise en ligne impossible : on retombe sur l'envoi manuel ci-dessous */ }
       }
@@ -11193,7 +11199,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (e && e.name !== "AbortError") alert(tx(lang, "receiptPdfFallback"));
     } finally {
       setPdfSharing(false);
-      setPendingReceipt(null);
+      if (!keepOpen) setPendingReceipt(null);
     }
   };
 
@@ -12577,6 +12583,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // (ouverte par le bouton flottant "Voir la vente"), plutôt qu'en faisant défiler la
   // page jusqu'en bas — le bouton reste donc visible tant que le panier n'est pas vide.
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  // Panier vidé (vente finalisée, abandonnée, changement de panier) : la fenêtre « Voir la
+  // vente » se referme. Sinon elle restait « ouverte » en arrière-plan et réapparaissait
+  // dès le premier « + » de la vente suivante, au lieu de laisser choisir les produits.
+  useEffect(() => {
+    const c = draftCarts.find((x) => x.id === activeCartId) || draftCarts[0] || null;
+    if (!c || !c.items || c.items.length === 0) setShowCheckoutModal(false);
+  }, [draftCarts, activeCartId]);
   // Champ "montant reçu" (paiement espèces) : quand il manque au moment de finaliser,
   // on le surligne en rouge et on y scrolle, exactement comme les champs obligatoires
   // non remplis ailleurs dans l'app (écran d'inscription, etc.).
@@ -24472,74 +24485,85 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })()}
-            {normalizePhoneForWhatsApp(pendingReceipt.phone) && !receiptAskingPhone && (
-              <a
-                href={buildReceiptWhatsAppUrl(pendingReceipt)}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setPendingReceipt(null)}
-                className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
-                style={{ background: "#25D366", textDecoration: "none" }}
-              >
-                💬 {tx(lang, "receiptSendWhatsApp")}
-              </a>
-            )}
-            {!normalizePhoneForWhatsApp(pendingReceipt.phone) && !receiptAskingPhone && (
-              <button
-                onClick={() => { setReceiptAskingPhone(true); if (!receiptPhoneDraft && ownDialCode) setReceiptPhoneDraft(ownDialCode + " "); }}
-                className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
-                style={{ background: "#25D366" }}
-              >
-                💬 {tx(lang, "receiptSendWhatsApp")}
-              </button>
-            )}
-            {receiptAskingPhone && (
-              <div className="flex flex-col gap-2 mb-2">
-                <input
-                  type="tel"
-                  autoFocus
-                  value={receiptPhoneDraft}
-                  onChange={(e) => setReceiptPhoneDraft(e.target.value)}
-                  placeholder={tx(lang, "receiptPhoneLabel")}
-                  className="border rounded-lg px-3 py-2.5 text-sm"
-                  style={{ background: T.input, color: T.text, borderColor: T.border }}
-                />
-                {/* Vrai lien <a>, jamais window.open : un clic JS sur une popup est
-                    silencieusement bloqué par Safari (bug déjà rencontré ailleurs dans
-                    cette app), un clic sur un <a> ne l'est pas. */}
-                <a
-                  href={buildReceiptWhatsAppUrl({ ...pendingReceipt, phone: receiptPhoneDraft })}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setPendingReceipt(null)}
-                  className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2"
-                  style={{ background: "#25D366", textDecoration: "none" }}
-                >
-                  💬 {tx(lang, "receiptSendWhatsApp")}
-                </a>
-              </div>
-            )}
-            {receiptPdfWaUrl ? (
-              <a
-                href={receiptPdfWaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setPendingReceipt(null)}
-                className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
-                style={{ background: "#128C7E", textDecoration: "none" }}
-              >
-                📄 {tx(lang, "receiptPdfOpenChat")}
-              </a>
-            ) : (
-              <button
-                onClick={() => shareReceiptAsPdf(receiptAskingPhone && receiptPhoneDraft ? { ...pendingReceipt, phone: receiptPhoneDraft } : pendingReceipt)}
-                disabled={pdfSharing}
-                className="w-full py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 mb-2 disabled:opacity-50"
-                style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}
-              >
-                📄 {pdfSharing ? tx(lang, "receiptPdfPreparing") : tx(lang, "receiptSendPdf")}
-              </button>
-            )}
+            {(() => {
+              // Numéro du client : celui tapé dans « Voir la vente », sinon celui demandé ici.
+              // Sans numéro valide, aucun bouton n'ouvre WhatsApp (sinon WhatsApp affiche la
+              // liste de TOUS les contacts au lieu de la discussion du client) : on demande
+              // d'abord le numéro, pour le reçu texte comme pour le PDF.
+              const salePhoneOk = !!normalizePhoneForWhatsApp(pendingReceipt.phone);
+              const phone = salePhoneOk ? pendingReceipt.phone : receiptPhoneDraft;
+              const phoneOk = !!normalizePhoneForWhatsApp(phone);
+              const receiptWithPhone = { ...pendingReceipt, phone };
+              const askPhone = () => {
+                if (!receiptAskingPhone) {
+                  setReceiptAskingPhone(true);
+                  if (!receiptPhoneDraft && ownDialCode) setReceiptPhoneDraft(ownDialCode + " ");
+                } else {
+                  setReceiptPhoneError(true);
+                }
+              };
+              return (
+                <>
+                  {!salePhoneOk && receiptAskingPhone && (
+                    <div className="flex flex-col gap-1 mb-2">
+                      <p className="text-[11px] font-semibold" style={{ color: receiptPhoneError && !phoneOk ? "#e11d48" : T.muted }}>{tx(lang, "receiptPhoneNeeded")}</p>
+                      <input
+                        type="tel"
+                        autoFocus
+                        value={receiptPhoneDraft}
+                        onChange={(e) => { setReceiptPhoneDraft(e.target.value); setReceiptPhoneError(false); }}
+                        placeholder={tx(lang, "receiptPhoneLabel")}
+                        className="border rounded-lg px-3 py-2.5 text-sm"
+                        style={{ background: T.input, color: T.text, borderColor: receiptPhoneError && !phoneOk ? "#e11d48" : T.border }}
+                      />
+                    </div>
+                  )}
+                  {/* Vrai lien <a>, jamais window.open : un clic JS sur une popup est
+                      silencieusement bloqué par Safari, un clic sur un <a> ne l'est pas. */}
+                  {phoneOk ? (
+                    <a
+                      href={buildReceiptWhatsAppUrl(receiptWithPhone)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setPendingReceipt(null)}
+                      className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
+                      style={{ background: "#25D366", textDecoration: "none" }}
+                    >
+                      💬 {tx(lang, "receiptSendWhatsApp")}
+                    </a>
+                  ) : (
+                    <button
+                      onClick={askPhone}
+                      className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
+                      style={{ background: "#25D366", opacity: receiptAskingPhone ? 0.55 : 1 }}
+                    >
+                      💬 {tx(lang, "receiptSendWhatsApp")}
+                    </button>
+                  )}
+                  {receiptPdfWaUrl ? (
+                    <a
+                      href={receiptPdfWaUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setPendingReceipt(null)}
+                      className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2 mb-2"
+                      style={{ background: "#128C7E", textDecoration: "none" }}
+                    >
+                      📄 {tx(lang, "receiptPdfOpenChat")}
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => { if (!phoneOk) { askPhone(); return; } shareReceiptAsPdf(receiptWithPhone); }}
+                      disabled={pdfSharing}
+                      className="w-full py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 mb-2 disabled:opacity-50"
+                      style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}
+                    >
+                      📄 {pdfSharing ? tx(lang, "receiptPdfPreparing") : tx(lang, "receiptSendPdf")}
+                    </button>
+                  )}
+                </>
+              );
+            })()}
             <button onClick={() => setPendingReceipt(null)} className="w-full py-2.5 rounded-lg text-sm font-semibold" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", color: darkMode ? "#eceef5" : CHARCOAL }}>
               {t(lang, "empQrClose")}
             </button>
