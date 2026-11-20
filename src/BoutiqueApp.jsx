@@ -7778,6 +7778,75 @@ function recordTs(item) {
   const d = Date.parse(item.date || item.createdAt || "");
   return isFinite(d) ? d : 0;
 }
+// ---- Stock tenu par le serveur à partir des mouvements ----
+// Chaque changement de quantité fait sur cet appareil (vente, annulation, arrivage, retrait,
+// nouvelle journée...) devient un « mouvement » (+/− tant) envoyé au serveur, qui additionne
+// les mouvements de TOUS les appareils dans product_stock. Deux téléphones hors ligne qui
+// vendent le même produit retombent donc toujours sur le bon total, sans dépendre d'une copie
+// « de base » gardée sur le téléphone.
+const STOCK_CACHE_PREFIX = "mb_stock:";
+function readServerStock(key) {
+  try { const raw = window.localStorage.getItem(STOCK_CACHE_PREFIX + key); const v = raw ? JSON.parse(raw) : null; return v && typeof v === "object" && v.rows ? v : { rows: {}, cursor: null }; } catch (e) { return { rows: {}, cursor: null }; }
+}
+function writeServerStock(key, st) {
+  try { window.localStorage.setItem(STOCK_CACHE_PREFIX + key, JSON.stringify(st)); } catch (e) {}
+}
+function mergeServerStockRows(key, rows) {
+  if (!Array.isArray(rows) || !rows.length) return false;
+  const st = readServerStock(key);
+  let cursor = st.cursor;
+  rows.forEach((r) => {
+    if (!r || r.product_id == null) return;
+    st.rows[String(r.product_id)] = { q: Number(r.quantity) || 0, l: Number(r.loose_units) || 0 };
+    if (!cursor || String(r.updated_at) > String(cursor)) cursor = r.updated_at;
+  });
+  st.cursor = cursor;
+  writeServerStock(key, st);
+  return true;
+}
+// Produits dont un mouvement fait sur cet appareil n'est pas encore confirmé par le serveur.
+function pendingStockProductIds(key) {
+  const ids = new Set();
+  try {
+    Object.values(readOutbox(key)).forEach((e) => { if (e && e.kind === "stockMove" && e.data && e.data.productId != null) ids.add(String(e.data.productId)); });
+  } catch (e) {}
+  return ids;
+}
+// Quantités affichées = celles du serveur, sauf pour un produit qui a encore un mouvement
+// local en attente (on garde alors la valeur de l'appareil, qui l'inclut déjà).
+function overlayServerStock(key, products) {
+  if (!Array.isArray(products) || !products.length) return products;
+  const st = readServerStock(key);
+  if (!st.rows || !Object.keys(st.rows).length) return products;
+  const pend = pendingStockProductIds(key);
+  let changed = false;
+  const out = products.map((p) => {
+    if (!p || p.id == null) return p;
+    const r = st.rows[String(p.id)];
+    if (!r || pend.has(String(p.id))) return p;
+    const curL = Number(p.looseUnits) || 0;
+    if ((Number(p.quantity) || 0) === r.q && curL === r.l) return p;
+    changed = true;
+    return { ...p, quantity: r.q, ...(p.looseUnits != null || r.l ? { looseUnits: r.l } : {}) };
+  });
+  return changed ? out : products;
+}
+// Mouvements de stock entre deux listes de produits (avant / après une action sur cet appareil).
+function diffStockMoves(prevProducts, nextProducts, actorId) {
+  const prevMap = new Map((prevProducts || []).filter((p) => p && p.id != null).map((p) => [String(p.id), p]));
+  const out = [];
+  const now = Date.now();
+  (nextProducts || []).forEach((p) => {
+    if (!p || p.id == null) return;
+    const prev = prevMap.get(String(p.id));
+    const dq = Math.round(((Number(p.quantity) || 0) - (prev ? Number(prev.quantity) || 0 : 0)) * 1000) / 1000;
+    const dl = Math.round(((Number(p.looseUnits) || 0) - (prev ? Number(prev.looseUnits) || 0 : 0)) * 1000) / 1000;
+    if (!dq && !dl) return;
+    const id = "m" + now.toString(36) + Math.random().toString(36).slice(2, 9);
+    out.push({ kind: "stockMove", id, data: { id, productId: String(p.id), dq, dl, at: now, actorId: actorId || null, created: !prev }, deleted: false, ts: now });
+  });
+  return out;
+}
 // Date Postgres (« 2026-11-20 13:53:30.909042+00 ») reculée de n secondes, au format ISO.
 function cursorMinusSeconds(cursor, n) {
   try {
@@ -13174,6 +13243,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // synchronisation interrompue). Un vrai vidage intentionnel (reset) met
     // aussi à jour cette copie de secours, donc pas de faux positif possible.
     let restoredProducts = shop.products || [];
+    if (!isDemo) restoredProducts = overlayServerStock(shopKey, restoredProducts);
     if (restoredProducts.length === 0) {
       try {
         const backupRaw = window.localStorage.getItem(PRODUCTS_BACKUP_PREFIX + shopKey);
@@ -13372,6 +13442,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const cur = readOutbox(shopKey);
       batch.forEach((e) => { const k = e.kind + ":" + e.id; if (cur[k] && cur[k].v === e.v) delete cur[k]; });
       writeOutbox(shopKey, cur);
+      // Stock à jour renvoyé par le serveur pour les produits touchés par ce lot.
+      if (mergeServerStockRows(shopKey, data.stock)) applyServerStockToScreen();
     }
     return Object.keys(readOutbox(shopKey)).length === 0;
   };
@@ -13379,6 +13451,34 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // (ou tout l'historique sur un nouveau téléphone) et les ajoute à l'affichage.
   const pullBusyRef = useRef(false);
   const pullSeenRef = useRef(new Map());
+  // Applique le stock du serveur à l'écran (sans créer de mouvement : ce ne sont pas des
+  // actions de cet appareil).
+  const applyServerStockToScreen = () => {
+    setProducts((prev) => {
+      const next = overlayServerStock(shopKey, prev);
+      if (next !== prev && latestShopRef.current) {
+        latestShopRef.current = { ...latestShopRef.current, products: next };
+        writeLocalCache(shopKey, latestShopRef.current);
+      }
+      return next;
+    });
+  };
+  const pullServerStock = async () => {
+    if (isDemo || !blobShopId || !navigator.onLine) return;
+    const st = readServerStock(shopKey);
+    let since = st.cursor ? cursorMinusSeconds(st.cursor, 30) : null;
+    const rows = [];
+    for (let page = 0; page < 20; page++) {
+      let q = supabase.from("product_stock").select("product_id, quantity, loose_units, updated_at").eq("shop_id", blobShopId).order("updated_at", { ascending: true }).limit(1000);
+      if (since) q = q.gt("updated_at", since);
+      const { data, error } = await q;
+      if (error || !data) break;
+      rows.push(...data);
+      if (data.length) since = data[data.length - 1].updated_at;
+      if (data.length < 1000) break;
+    }
+    if (mergeServerStockRows(shopKey, rows)) applyServerStockToScreen();
+  };
   // Ventes encore dans la boîte d'envoi de cet appareil, et envoi qui échoue depuis
   // plus de 2 minutes alors que le réseau est là (ex. : compte employé désactivé).
   const pushFailSinceRef = useRef(0);
@@ -13412,7 +13512,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // Ce qui a déjà été vu (même id, même date de modification) est ignoré.
       let since = cursor ? cursorMinusSeconds(cursor, 30) : null;
       for (let page = 0; page < 50; page++) {
-        let q = supabase.from("shop_records").select("kind, id, data, deleted, ts, updated_at").eq("shop_id", blobShopId).order("updated_at", { ascending: true }).limit(1000);
+        let q = supabase.from("shop_records").select("kind, id, data, deleted, ts, updated_at").eq("shop_id", blobShopId).neq("kind", "stockMove").order("updated_at", { ascending: true }).limit(1000);
         if (since) q = q.gt("updated_at", since);
         const { data, error } = await q;
         if (error || !data) break;
@@ -13440,6 +13540,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         }
       }
       if (cursor) { try { window.localStorage.setItem(cursorKey, cursor); } catch (e) {} }
+      // Stock tenu par le serveur (mouvements de tous les appareils).
+      await pullServerStock();
     } catch (e) {
       /* réessayé plus tard */
     } finally {
@@ -13987,6 +14089,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         const prevShop = { sales: allSales, historyLog, debtEvents: allDebtEvents, expenses, cashCounts, cashClosures, unsoldLog };
         const touched = RECORD_KINDS.map(([f]) => f).filter((f) => Object.prototype.hasOwnProperty.call(overrides, f));
         if (touched.length) outboxAdd(shopKey, diffRecordEntries(prevShop, next, touched));
+        if (overrides.products && blobShopId) {
+          const moves = diffStockMoves(products, next.products, activeEmployee ? activeEmployee.id : null);
+          if (moves.length) outboxAdd(shopKey, moves);
+        }
       } catch (e) {}
     }
     persist(next);
@@ -18035,6 +18141,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           .from("shop_blobs").update({ data: restoredShop, updated_at: new Date().toISOString() })
           .eq("owner_id", userData.user.id).eq("shop_id", blobShopId);
         if (blobErr) throw blobErr;
+        // Le stock tenu par le serveur repart des quantités de la sauvegarde.
+        if (Array.isArray(restoredShop.products)) {
+          const { data: rs } = await supabase.rpc("reset_product_stock", { p_shop_id: blobShopId, p_products: restoredShop.products.map((x) => ({ id: x.id, quantity: x.quantity, looseUnits: x.looseUnits })) });
+          writeServerStock(shopKey, { rows: Object.fromEntries(restoredShop.products.filter((x) => x && x.id != null).map((x) => [String(x.id), { q: Number(x.quantity) || 0, l: Number(x.looseUnits) || 0 }])), cursor: null });
+          // Mouvements locaux non envoyés : sans objet après une restauration.
+          try { const box = readOutbox(shopKey); Object.keys(box).forEach((k) => { if (box[k] && box[k].kind === "stockMove") delete box[k]; }); writeOutbox(shopKey, box); } catch (e) {}
+          void rs;
+        }
       }
       // Partie compte (réglages, profil) : fusionnée, pour ne pas perdre le code PIN ni
       // le quota IA actuels si la sauvegarde est ancienne.
