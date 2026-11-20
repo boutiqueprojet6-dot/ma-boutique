@@ -688,6 +688,8 @@ const EMPLOYEE_PERMISSIONS = [
   { id: "viewCash", labelKey: "permViewCash" },
   { id: "editCash", labelKey: "permEditCash" },
   { id: "viewStats", labelKey: "permViewStats" },
+  // Prix négocié sur une ligne du panier et « Article divers » (montant libre).
+  { id: "editPrice", labelKey: "permEditPrice" },
   // Désactivée par défaut (aucun rôle prédéfini ne l'inclut) : l'IA consomme le quota
   // mensuel du propriétaire, à n'ouvrir qu'aux personnes de confiance.
   { id: "useAI", labelKey: "permUseAI" },
@@ -701,7 +703,7 @@ const EMPLOYEE_ROLES = {
   gerant: {
     labelKey: "roleGerantLabel",
     descKey: "roleGerantDesc",
-    permissions: ["sell", "viewStock", "editStock", "viewDebts", "editDebts", "viewCash", "editCash", "viewStats"],
+    permissions: ["sell", "viewStock", "editStock", "viewDebts", "editDebts", "viewCash", "editCash", "viewStats", "editPrice"],
   },
   personnalise: {
     labelKey: "rolePersoLabel",
@@ -6189,6 +6191,21 @@ EXTRA_UI.aiLocalPriceSimTitle = { fr: "Si vous augmentez tous vos prix de {p} % 
 EXTRA_UI.aiLocalPriceSimRevenue = { fr: "• Ventes : {a} → {b} (+{c}) si vous vendez autant.", en: "• Sales: {a} → {b} (+{c}) if you sell the same amount.", es: "• Ventas: {a} → {b} (+{c}) si vendes lo mismo.", pt: "• Vendas: {a} → {b} (+{c}) se vender o mesmo.", de: "• Umsatz: {a} → {b} (+{c}), wenn du gleich viel verkaufst.", it: "• Vendite: {a} → {b} (+{c}) se vendi le stesse quantità.", nl: "• Verkoop: {a} → {b} (+{c}) als je evenveel verkoopt.", pl: "• Sprzedaż: {a} → {b} (+{c}), jeśli sprzedasz tyle samo.", ru: "• Продажи: {a} → {b} (+{c}), если продавать столько же.", tr: "• Satışlar: {a} → {b} (+{c}), aynı miktarı satarsanız.", ar: "• المبيعات: {a} ← {b} (+{c}) إذا بعت الكمية نفسها.", hi: "• बिक्री: {a} → {b} (+{c}) अगर आप उतना ही बेचें।", bn: "• বিক্রি: {a} → {b} (+{c}) যদি একই পরিমাণ বিক্রি করেন।", ur: "• فروخت: {a} ← {b} (+{c}) اگر آپ اتنا ہی بیچیں۔", ta: "• விற்பனை: {a} → {b} (+{c}) அதே அளவு விற்றால்.", te: "• అమ్మకాలు: {a} → {b} (+{c}) అంతే అమ్మితే.", th: "• ยอดขาย: {a} → {b} (+{c}) ถ้าขายได้เท่าเดิม", zh: "• 销售额：{a} → {b}（+{c}），前提是销量不变。", ja: "• 売上：{a} → {b}（+{c}）、販売数が同じ場合。", ko: "• 매출: {a} → {b} (+{c}), 같은 양을 판다면.", id: "• Penjualan: {a} → {b} (+{c}) jika jumlah terjual sama.", vi: "• Doanh số: {a} → {b} (+{c}) nếu bán được như cũ.", tl: "• Benta: {a} → {b} (+{c}) kung pareho ang dami ng mabebenta.", sw: "• Mauzo: {a} → {b} (+{c}) ukiuza kiasi kilekile.", ha: "• Sayarwa: {a} → {b} (+{c}) idan ka sayar da adadi ɗaya.", yo: "• Títà: {a} → {b} (+{c}) bí o bá ta iye kan náà.", zu: "• Ukuthengisa: {a} → {b} (+{c}) uma uthengisa okufanayo.", am: "• ሽያጭ: {a} → {b} (+{c}) ያንኑ ያህል ከሸጡ።", bm: "• Feerew: {a} → {b} (+{c}) n'i ye o hakɛ kelen feere.", wo: "• Jaay: {a} → {b} (+{c}) su nga jaayee lu tollu." };
 EXTRA_UI.aiLocalPriceSimBreakEven = { fr: "• Vous gagnez plus qu'aujourd'hui tant que vos ventes ne baissent pas de plus de {p} %.", en: "• You earn more than today as long as sales don't drop by more than {p}%.", es: "• Ganas más que hoy mientras las ventas no bajen más de un {p} %.", pt: "• Ganha mais do que hoje enquanto as vendas não caírem mais de {p} %.", de: "• Du verdienst mehr als heute, solange der Absatz um nicht mehr als {p} % sinkt.", it: "• Guadagni più di oggi finché le vendite non calano più del {p}%.", nl: "• Je verdient meer dan nu zolang de verkoop niet meer dan {p}% daalt.", pl: "• Zarobisz więcej niż dziś, dopóki sprzedaż nie spadnie o więcej niż {p}%.", ru: "• Вы заработаете больше, чем сейчас, пока продажи упадут не более чем на {p} %.", tr: "• Satışlarınız %{p}'ten fazla düşmedikçe bugünden fazla kazanırsınız.", ar: "• ستربح أكثر من اليوم ما دامت مبيعاتك لا تنخفض بأكثر من {p}%.", hi: "• जब तक बिक्री {p}% से ज़्यादा न घटे, आप आज से ज़्यादा कमाएँगे।", bn: "• বিক্রি {p}%-এর বেশি না কমলে আপনি আজকের চেয়ে বেশি আয় করবেন।", ur: "• جب تک فروخت {p}% سے زیادہ کم نہ ہو، آپ آج سے زیادہ کمائیں گے۔", ta: "• விற்பனை {p}%க்கு மேல் குறையாத வரை இன்றைவிட அதிகம் சம்பாதிப்பீர்கள்.", te: "• అమ్మకాలు {p}% కంటే ఎక్కువ తగ్గనంత వరకు మీరు ఇప్పటికన్నా ఎక్కువ సంపాదిస్తారు.", th: "• คุณจะได้กำไรมากกว่าตอนนี้ ตราบใดที่ยอดขายไม่ลดเกิน {p}%", zh: "• 只要销量下降不超过 {p}%，您的利润就会比现在高。", ja: "• 販売数の減少が {p}% 以内なら、今より利益が増えます。", ko: "• 판매량이 {p}% 넘게 줄지 않는 한 지금보다 더 벌게 됩니다.", id: "• Anda untung lebih besar selama penjualan tidak turun lebih dari {p}%.", vi: "• Bạn lãi hơn hiện nay miễn là lượng bán không giảm quá {p}%.", tl: "• Mas malaki ang kita mo hangga't hindi bumababa ang benta nang higit sa {p}%.", sw: "• Utapata zaidi ya leo ilimradi mauzo yasishuke zaidi ya {p}%.", ha: "• Za ka fi samun riba fiye da yau muddin sayarwa ba ta ragu fiye da {p}% ba.", yo: "• Wàá jèrè ju ti òní lọ níwọ̀n ìgbà tí títà kò bá dín ju {p}% lọ.", zu: "• Uzozuza ngaphezu kwanamuhla uma nje ukuthengisa kungehli ngaphezu kuka-{p}%.", am: "• ሽያጭዎ ከ{p}% በላይ እስካልቀነሰ ድረስ ከዛሬ የበለጠ ያተርፋሉ።", bm: "• I bɛna tɔnɔ caman sɔrɔ ni bi ye, n'i ka feerew ma dɔgɔya ka tɛmɛ {p}% kan.", wo: "• Dinga gëna am tey, su sa jaay waaniku wul lu ëpp {p}%." };
 EXTRA_UI.aiLocalPriceSimNote = { fr: "Conseil : augmentez d'abord les produits très demandés, un par un, et regardez les ventes de la semaine suivante.", en: "Tip: raise the most popular products first, one at a time, and watch the next week's sales.", es: "Consejo: sube primero los productos más pedidos, uno a uno, y mira las ventas de la semana siguiente.", pt: "Dica: aumente primeiro os produtos mais procurados, um a um, e veja as vendas da semana seguinte.", de: "Tipp: Erhöhe zuerst die gefragtesten Produkte, eins nach dem anderen, und beobachte die Verkäufe der Folgewoche.", it: "Consiglio: aumenta prima i prodotti più richiesti, uno alla volta, e guarda le vendite della settimana dopo.", nl: "Tip: verhoog eerst de populairste producten, één voor één, en bekijk de verkoop van de week erna.", pl: "Rada: podnoś najpierw ceny najchętniej kupowanych produktów, po jednym, i obserwuj sprzedaż w kolejnym tygodniu.", ru: "Совет: поднимайте сначала самые ходовые товары, по одному, и смотрите продажи следующей недели.", tr: "İpucu: önce en çok satan ürünleri teker teker artırın ve sonraki haftanın satışlarına bakın.", ar: "نصيحة: ارفع أولًا أسعار المنتجات الأكثر طلبًا، واحدًا تلو الآخر، وراقب مبيعات الأسبوع التالي.", hi: "सुझाव: पहले सबसे ज़्यादा माँग वाले उत्पादों के दाम एक-एक करके बढ़ाएँ और अगले हफ़्ते की बिक्री देखें।", bn: "পরামর্শ: আগে সবচেয়ে চাহিদার পণ্যের দাম একটি একটি করে বাড়ান, আর পরের সপ্তাহের বিক্রি দেখুন।", ur: "مشورہ: پہلے سب سے زیادہ مانگ والی مصنوعات کی قیمت ایک ایک کر کے بڑھائیں اور اگلے ہفتے کی فروخت دیکھیں۔", ta: "ஆலோசனை: முதலில் அதிகம் விற்கும் பொருட்களின் விலையை ஒவ்வொன்றாக உயர்த்தி, அடுத்த வார விற்பனையைப் பாருங்கள்.", te: "సూచన: ముందుగా ఎక్కువగా అమ్ముడయ్యే ఉత్పత్తుల ధరలు ఒక్కొక్కటిగా పెంచి, వచ్చే వారం అమ్మకాలు చూడండి.", th: "คำแนะนำ: ขึ้นราคาสินค้าขายดีก่อนทีละรายการ แล้วดูยอดขายสัปดาห์ถัดไป", zh: "建议：先逐个上调最畅销的商品，并观察下一周的销量。", ja: "ヒント：まず人気商品から1つずつ値上げし、翌週の売上を確認しましょう。", ko: "팁: 인기 상품부터 하나씩 올리고 다음 주 판매를 지켜보세요.", id: "Tips: naikkan dulu harga produk paling laris, satu per satu, lalu lihat penjualan minggu berikutnya.", vi: "Mẹo: tăng giá các sản phẩm bán chạy trước, từng món một, và theo dõi doanh số tuần sau.", tl: "Tip: unahing itaas ang pinakamabentang produkto, isa-isa, at bantayan ang benta sa susunod na linggo.", sw: "Ushauri: anza kuongeza bei ya bidhaa zinazopendwa zaidi, moja moja, na angalia mauzo ya wiki inayofuata.", ha: "Shawara: fara ƙara farashin kayan da aka fi buƙata, ɗaya bayan ɗaya, ka kalli sayarwar mako mai zuwa.", yo: "Ìmọ̀ràn: kọ́kọ́ gbé iye àwọn ọjà tí wọ́n ń rà jù sókè, ọ̀kan-ọ̀kan, kí o sì wo títà ọ̀sẹ̀ tó tẹ̀lé e.", zu: "Ithiphu: qala ngokukhuphula imikhiqizo ethandwa kakhulu, ngayinye, bese ubheka ukuthengisa kweviki elilandelayo.", am: "ምክር: መጀመሪያ በብዛት የሚፈለጉትን ምርቶች አንድ በአንድ ይጨምሩ፣ የሚቀጥለውን ሳምንት ሽያጭ ይመልከቱ።", bm: "Laadilikan: a daminɛ ni fɛn minnu bɛ san kosɛbɛ, kelen kelen, ka dɔgɔkun nata feerew lajɛ.", wo: "Digle: tàmbalil ci marsandiis yi ñuy gëna jënd, benn-benn, te xool jaay ci ayubés bi ci topp." };
+EXTRA_UI.permEditPrice = { fr: "Changer le prix à la vente (prix négocié, article divers)", en: "Change prices at checkout (negotiated price, misc item)", es: "Cambiar precios al vender (precio negociado, artículo varios)", pt: "Alterar preços na venda (preço negociado, artigo diverso)", de: "Preise beim Verkauf ändern (verhandelter Preis, Sonstiges)", it: "Cambiare i prezzi alla vendita (prezzo trattato, articolo vario)", nl: "Prijzen wijzigen bij verkoop (onderhandelde prijs, divers artikel)", pl: "Zmiana cen przy sprzedaży (cena negocjowana, artykuł różny)", ru: "Менять цену при продаже (торг, прочий товар)", tr: "Satışta fiyat değiştirme (pazarlıklı fiyat, çeşitli ürün)", ar: "تغيير السعر عند البيع (سعر متفاوض عليه، صنف متنوع)", hi: "बिक्री के समय दाम बदलना (मोलभाव वाला दाम, फुटकर सामान)", bn: "বিক্রির সময় দাম বদলানো (দরদাম করা দাম, বিবিধ পণ্য)", ur: "فروخت کے وقت قیمت بدلنا (مول تول والی قیمت، متفرق چیز)", ta: "விற்கும்போது விலை மாற்றுதல் (பேரம் பேசிய விலை, இதர பொருள்)", te: "అమ్మేటప్పుడు ధర మార్చడం (బేరం ధర, ఇతర వస్తువు)", th: "เปลี่ยนราคาตอนขาย (ราคาต่อรอง, สินค้าเบ็ดเตล็ด)", zh: "销售时改价（议价、杂项商品）", ja: "販売時の価格変更（値引き交渉、その他の品）", ko: "판매 시 가격 변경 (흥정 가격, 기타 품목)", id: "Ubah harga saat menjual (harga nego, barang lain-lain)", vi: "Đổi giá khi bán (giá thương lượng, hàng lặt vặt)", tl: "Baguhin ang presyo sa pagbenta (tawad na presyo, sari-saring item)", sw: "Kubadilisha bei wakati wa kuuza (bei ya mapatano, bidhaa nyingine)", ha: "Canza farashi lokacin sayarwa (farashin ciniki, kaya daban-daban)", yo: "Yí iye owó padà nígbà títà (iye ìdúnàádúrà, ọjà oríṣiríṣi)", zu: "Ukushintsha intengo lapho uthengisa (intengo exoxisanwe, into ehlukahlukene)", am: "በሽያጭ ጊዜ ዋጋ መቀየር (የተደራደረ ዋጋ፣ ልዩ ልዩ ዕቃ)", bm: "Sɔngɔ yɛlɛma feereli waati (sɔngɔ sɔsɔlen, fɛn wɛrɛw)", wo: "Soppi njëg bi ci jaay bi (njëg bu ñu waxaale, yeneen marsandiis)" };
+EXTRA_UI.priceEditLabel = { fr: "Prix unitaire négocié", en: "Negotiated unit price", es: "Precio unitario negociado", pt: "Preço unitário negociado", de: "Verhandelter Stückpreis", it: "Prezzo unitario trattato", nl: "Onderhandelde stukprijs", pl: "Negocjowana cena jednostkowa", ru: "Цена за единицу после торга", tr: "Pazarlıklı birim fiyat", ar: "سعر الوحدة بعد التفاوض", hi: "मोलभाव के बाद प्रति नग दाम", bn: "দরদামের পর একক দাম", ur: "مول تول کے بعد فی عدد قیمت", ta: "பேரம் பேசிய ஒரு அலகு விலை", te: "బేరం తర్వాత యూనిట్ ధర", th: "ราคาต่อชิ้นหลังต่อรอง", zh: "议价后的单价", ja: "交渉後の単価", ko: "흥정한 개당 가격", id: "Harga satuan setelah nego", vi: "Đơn giá sau thương lượng", tl: "Tinawarang presyo bawat isa", sw: "Bei ya kipande baada ya mapatano", ha: "Farashin kowane bayan ciniki", yo: "Iye ẹyọ kan lẹ́yìn ìdúnàádúrà", zu: "Intengo yento eyodwa exoxisanwe", am: "የተደራደረ የአንዱ ዋጋ", bm: "Kelen sɔngɔ sɔsɔlen", wo: "Njëgu benn bu ñu waxaale" };
+EXTRA_UI.priceBelowCostWarn = { fr: "En dessous du prix d'achat ({p}) : vous vendez à perte.", en: "Below the cost price ({p}): you are selling at a loss.", es: "Por debajo del precio de compra ({p}): vendes con pérdida.", pt: "Abaixo do preço de compra ({p}): está a vender com prejuízo.", de: "Unter dem Einkaufspreis ({p}): Du verkaufst mit Verlust.", it: "Sotto il prezzo d'acquisto ({p}): vendi in perdita.", nl: "Onder de inkoopprijs ({p}): je verkoopt met verlies.", pl: "Poniżej ceny zakupu ({p}): sprzedajesz ze stratą.", ru: "Ниже закупочной цены ({p}): продажа в убыток.", tr: "Alış fiyatının altında ({p}): zararına satıyorsunuz.", ar: "أقل من سعر الشراء ({p}): أنت تبيع بخسارة.", hi: "खरीद मूल्य ({p}) से कम: आप घाटे में बेच रहे हैं।", bn: "ক্রয়মূল্যের ({p}) নিচে: আপনি লোকসানে বিক্রি করছেন।", ur: "خرید قیمت ({p}) سے کم: آپ نقصان میں بیچ رہے ہیں۔", ta: "கொள்முதல் விலைக்குக் ({p}) கீழே: நஷ்டத்தில் விற்கிறீர்கள்.", te: "కొనుగోలు ధర ({p}) కంటే తక్కువ: మీరు నష్టానికి అమ్ముతున్నారు.", th: "ต่ำกว่าราคาทุน ({p}): คุณกำลังขายขาดทุน", zh: "低于进价（{p}）：您在亏本销售。", ja: "仕入れ価格（{p}）を下回っています：赤字販売です。", ko: "매입가({p})보다 낮습니다: 손해 보고 파는 중입니다.", id: "Di bawah harga beli ({p}): Anda menjual rugi.", vi: "Thấp hơn giá nhập ({p}): bạn đang bán lỗ.", tl: "Mas mababa sa puhunan ({p}): lugi ang benta mo.", sw: "Chini ya bei ya kununua ({p}): unauza kwa hasara.", ha: "Ƙasa da farashin saye ({p}): kana sayarwa da asara.", yo: "Ó kéré ju iye owó rírà lọ ({p}): o ń tà ní àdánù.", zu: "Ngaphansi kwentengo yokuthenga ({p}): uthengisa ngokulahlekelwa.", am: "ከግዢ ዋጋ ({p}) በታች ነው: በኪሳራ እየሸጡ ነው።", bm: "A ka dɔgɔn ni sanni sɔngɔ ye ({p}): i bɛ feere ni bɔnɛ ye.", wo: "Dafa yées njëgu jënd bi ({p}): yaa ngi jaay ci ñàkk." };
+EXTRA_UI.priceBelowCostBlocked = { fr: "Prix trop bas : il ne peut pas être sous le prix d'achat ({p}). Demandez au patron.", en: "Price too low: it can't be below the cost price ({p}). Ask the owner.", es: "Precio demasiado bajo: no puede estar por debajo del precio de compra ({p}). Pregunta al dueño.", pt: "Preço demasiado baixo: não pode ficar abaixo do preço de compra ({p}). Pergunte ao dono.", de: "Preis zu niedrig: Er darf nicht unter dem Einkaufspreis ({p}) liegen. Frag den Chef.", it: "Prezzo troppo basso: non può essere sotto il prezzo d'acquisto ({p}). Chiedi al titolare.", nl: "Prijs te laag: mag niet onder de inkoopprijs ({p}) liggen. Vraag het de eigenaar.", pl: "Cena za niska: nie może być niższa niż cena zakupu ({p}). Zapytaj właściciela.", ru: "Слишком низкая цена: нельзя ниже закупочной ({p}). Спросите хозяина.", tr: "Fiyat çok düşük: alış fiyatının ({p}) altına inemez. Patrona sorun.", ar: "السعر منخفض جدًا: لا يمكن أن يكون أقل من سعر الشراء ({p}). اسأل صاحب المحل.", hi: "दाम बहुत कम: खरीद मूल्य ({p}) से कम नहीं हो सकता। मालिक से पूछें।", bn: "দাম খুব কম: ক্রয়মূল্যের ({p}) নিচে হতে পারে না। মালিককে জিজ্ঞেস করুন।", ur: "قیمت بہت کم: خرید قیمت ({p}) سے کم نہیں ہو سکتی۔ مالک سے پوچھیں۔", ta: "விலை மிகக் குறைவு: கொள்முதல் விலைக்குக் ({p}) கீழே இருக்கக் கூடாது. உரிமையாளரிடம் கேளுங்கள்.", te: "ధర చాలా తక్కువ: కొనుగోలు ధర ({p}) కంటే తక్కువ ఉండకూడదు. యజమానిని అడగండి.", th: "ราคาต่ำเกินไป: ต่ำกว่าราคาทุน ({p}) ไม่ได้ ถามเจ้าของร้าน", zh: "价格过低：不能低于进价（{p}）。请询问店主。", ja: "価格が低すぎます：仕入れ価格（{p}）を下回れません。店主に確認してください。", ko: "가격이 너무 낮습니다: 매입가({p})보다 낮을 수 없습니다. 사장님께 물어보세요.", id: "Harga terlalu rendah: tidak boleh di bawah harga beli ({p}). Tanyakan pemilik.", vi: "Giá quá thấp: không được thấp hơn giá nhập ({p}). Hãy hỏi chủ cửa hàng.", tl: "Masyadong mababa: hindi puwedeng mas mababa sa puhunan ({p}). Tanungin ang may-ari.", sw: "Bei iko chini mno: haiwezi kuwa chini ya bei ya kununua ({p}). Muulize mwenye duka.", ha: "Farashi ya yi ƙasa sosai: ba zai iya zama ƙasa da farashin saye ({p}) ba. Tambayi mai shago.", yo: "Iye owó ti kéré jù: kò lè kéré ju iye owó rírà ({p}) lọ. Béèrè lọ́wọ́ ọ̀gá.", zu: "Intengo iphansi kakhulu: ayikwazi ukuba ngaphansi kwentengo yokuthenga ({p}). Buza umnikazi.", am: "ዋጋው በጣም ዝቅ ብሏል: ከግዢ ዋጋ ({p}) በታች ሊሆን አይችልም። ባለቤቱን ይጠይቁ።", bm: "Sɔngɔ ka dɔgɔ kojugu: a tɛ se ka jigin sanni sɔngɔ ({p}) kɔrɔ. A ɲininka jatigi fɛ.", wo: "Njëg bi dafa yées lool: mënul a yées njëgu jënd bi ({p}). Laajal boroom bitig bi." };
+EXTRA_UI.miscItemBtn = { fr: "Divers", en: "Misc", es: "Varios", pt: "Diversos", de: "Sonstiges", it: "Varie", nl: "Divers", pl: "Inne", ru: "Прочее", tr: "Çeşitli", ar: "متنوع", hi: "फुटकर", bn: "বিবিধ", ur: "متفرق", ta: "இதர", te: "ఇతర", th: "เบ็ดเตล็ด", zh: "杂项", ja: "その他", ko: "기타", id: "Lain-lain", vi: "Khác", tl: "Iba pa", sw: "Mengineyo", ha: "Daban-daban", yo: "Oríṣiríṣi", zu: "Okunye", am: "ልዩ ልዩ", bm: "Fɛn wɛrɛw", wo: "Yeneen" };
+EXTRA_UI.miscItemTitle = { fr: "Article divers", en: "Misc item", es: "Artículo varios", pt: "Artigo diverso", de: "Sonstiger Artikel", it: "Articolo vario", nl: "Divers artikel", pl: "Artykuł różny", ru: "Прочий товар", tr: "Çeşitli ürün", ar: "صنف متنوع", hi: "फुटकर सामान", bn: "বিবিধ পণ্য", ur: "متفرق چیز", ta: "இதர பொருள்", te: "ఇతర వస్తువు", th: "สินค้าเบ็ดเตล็ด", zh: "杂项商品", ja: "その他の品", ko: "기타 품목", id: "Barang lain-lain", vi: "Hàng lặt vặt", tl: "Sari-saring item", sw: "Bidhaa nyingine", ha: "Kaya daban-daban", yo: "Ọjà oríṣiríṣi", zu: "Into ehlukahlukene", am: "ልዩ ልዩ ዕቃ", bm: "Fɛn wɛrɛ", wo: "Yeneen marsandiis" };
+EXTRA_UI.miscItemHint = { fr: "Pour un petit article qui n'est pas dans le stock. Le stock ne change pas.", en: "For a small item that isn't in your stock. Stock doesn't change.", es: "Para un artículo pequeño que no está en el stock. El stock no cambia.", pt: "Para um pequeno artigo que não está no stock. O stock não muda.", de: "Für einen kleinen Artikel, der nicht im Bestand ist. Der Bestand ändert sich nicht.", it: "Per un piccolo articolo che non è in magazzino. La giacenza non cambia.", nl: "Voor een klein artikel dat niet in je voorraad staat. De voorraad verandert niet.", pl: "Dla drobnego artykułu, którego nie ma w magazynie. Stan się nie zmienia.", ru: "Для мелкого товара, которого нет на складе. Остаток не меняется.", tr: "Stokta olmayan küçük bir ürün için. Stok değişmez.", ar: "لصنف صغير غير موجود في المخزون. المخزون لا يتغير.", hi: "ऐसे छोटे सामान के लिए जो स्टॉक में नहीं है। स्टॉक नहीं बदलता।", bn: "স্টকে নেই এমন ছোট পণ্যের জন্য। স্টক বদলায় না।", ur: "ایسی چھوٹی چیز کے لیے جو اسٹاک میں نہیں۔ اسٹاک نہیں بدلتا۔", ta: "இருப்பில் இல்லாத சிறிய பொருளுக்கு. இருப்பு மாறாது.", te: "స్టాక్‌లో లేని చిన్న వస్తువు కోసం. స్టాక్ మారదు.", th: "สำหรับสินค้าเล็ก ๆ ที่ไม่มีในสต็อก สต็อกไม่เปลี่ยน", zh: "用于库存中没有的小商品。库存不变。", ja: "在庫にない小さな品物用です。在庫は変わりません。", ko: "재고에 없는 작은 물건용입니다. 재고는 바뀌지 않습니다.", id: "Untuk barang kecil yang tidak ada di stok. Stok tidak berubah.", vi: "Cho món nhỏ không có trong kho. Tồn kho không thay đổi.", tl: "Para sa maliit na item na wala sa stock. Hindi nagbabago ang stock.", sw: "Kwa bidhaa ndogo isiyo kwenye stoo. Stoo haibadiliki.", ha: "Don ƙaramin kaya da babu a cikin kaya. Kaya ba sa canzawa.", yo: "Fún ọjà kékeré tí kò sí nínú ọjà ìpamọ́. Ọjà ìpamọ́ kò yí padà.", zu: "Kwento encane engekho esitokweni. Isitoko asishintshi.", am: "በክምችት ውስጥ ለሌለ ትንሽ ዕቃ። ክምችቱ አይቀየርም።", bm: "Fɛn fitinin min tɛ i ka stɔki la. Stɔki tɛ yɛlɛma.", wo: "Ngir benn marsandiis bu tuuti bu nekkul ci stock bi. Stock bi du soppiku." };
+EXTRA_UI.miscItemNamePlaceholder = { fr: "Nom (facultatif)", en: "Name (optional)", es: "Nombre (opcional)", pt: "Nome (opcional)", de: "Name (optional)", it: "Nome (facoltativo)", nl: "Naam (optioneel)", pl: "Nazwa (opcjonalnie)", ru: "Название (необязательно)", tr: "Ad (isteğe bağlı)", ar: "الاسم (اختياري)", hi: "नाम (वैकल्पिक)", bn: "নাম (ঐচ্ছিক)", ur: "نام (اختیاری)", ta: "பெயர் (விருப்பம்)", te: "పేరు (ఐచ్ఛికం)", th: "ชื่อ (ไม่บังคับ)", zh: "名称（可选）", ja: "名前（任意）", ko: "이름 (선택)", id: "Nama (opsional)", vi: "Tên (không bắt buộc)", tl: "Pangalan (opsyonal)", sw: "Jina (si lazima)", ha: "Suna (na zaɓi)", yo: "Orúkọ (àṣàyàn)", zu: "Igama (akuphoqelekile)", am: "ስም (አማራጭ)", bm: "Tɔgɔ (n'a diyara i ye)", wo: "Tur (bu la neexee)" };
+EXTRA_UI.miscItemDefaultName = { fr: "Article divers", en: "Misc item", es: "Artículo varios", pt: "Artigo diverso", de: "Sonstiger Artikel", it: "Articolo vario", nl: "Divers artikel", pl: "Artykuł różny", ru: "Прочий товар", tr: "Çeşitli ürün", ar: "صنف متنوع", hi: "फुटकर सामान", bn: "বিবিধ পণ্য", ur: "متفرق چیز", ta: "இதர பொருள்", te: "ఇతర వస్తువు", th: "สินค้าเบ็ดเตล็ด", zh: "杂项商品", ja: "その他の品", ko: "기타 품목", id: "Barang lain-lain", vi: "Hàng lặt vặt", tl: "Sari-saring item", sw: "Bidhaa nyingine", ha: "Kaya daban-daban", yo: "Ọjà oríṣiríṣi", zu: "Into ehlukahlukene", am: "ልዩ ልዩ ዕቃ", bm: "Fɛn wɛrɛ", wo: "Yeneen marsandiis" };
+EXTRA_UI.miscItemAmountPlaceholder = { fr: "Prix", en: "Price", es: "Precio", pt: "Preço", de: "Preis", it: "Prezzo", nl: "Prijs", pl: "Cena", ru: "Цена", tr: "Fiyat", ar: "السعر", hi: "दाम", bn: "দাম", ur: "قیمت", ta: "விலை", te: "ధర", th: "ราคา", zh: "价格", ja: "価格", ko: "가격", id: "Harga", vi: "Giá", tl: "Presyo", sw: "Bei", ha: "Farashi", yo: "Iye owó", zu: "Intengo", am: "ዋጋ", bm: "Sɔngɔ", wo: "Njëg" };
+EXTRA_UI.depositLabel = { fr: "Acompte versé maintenant (facultatif)", en: "Deposit paid now (optional)", es: "Anticipo pagado ahora (opcional)", pt: "Sinal pago agora (opcional)", de: "Jetzt geleistete Anzahlung (optional)", it: "Acconto versato ora (facoltativo)", nl: "Nu betaald voorschot (optioneel)", pl: "Zaliczka wpłacona teraz (opcjonalnie)", ru: "Предоплата сейчас (необязательно)", tr: "Şimdi ödenen kapora (isteğe bağlı)", ar: "العربون المدفوع الآن (اختياري)", hi: "अभी दिया गया अग्रिम (वैकल्पिक)", bn: "এখন দেওয়া অগ্রিম (ঐচ্ছিক)", ur: "ابھی دیا گیا ایڈوانس (اختیاری)", ta: "இப்போது செலுத்திய முன்பணம் (விருப்பம்)", te: "ఇప్పుడు ఇచ్చిన అడ్వాన్స్ (ఐచ్ఛికం)", th: "เงินมัดจำที่จ่ายตอนนี้ (ไม่บังคับ)", zh: "现在支付的定金（可选）", ja: "今支払う頭金（任意）", ko: "지금 받은 선금 (선택)", id: "Uang muka dibayar sekarang (opsional)", vi: "Tiền đặt trước trả ngay (không bắt buộc)", tl: "Paunang bayad ngayon (opsyonal)", sw: "Malipo ya awali sasa (si lazima)", ha: "Kuɗin gaba da aka biya yanzu (na zaɓi)", yo: "Owó ìbẹ̀rẹ̀ tí wọ́n san báyìí (àṣàyàn)", zu: "Idiphozi ekhokhwe manje (akuphoqelekile)", am: "አሁን የተከፈለ ቅድመ ክፍያ (አማራጭ)", bm: "Sara fɔlɔ min sarala sisan (n'a diyara i ye)", wo: "Avance bi ñu fey léegi (bu la neexee)" };
+EXTRA_UI.depositTooHigh = { fr: "L'acompte doit être inférieur au total. Si le client paie tout, choisissez Espèces ou Paiement mobile.", en: "The deposit must be less than the total. If the customer pays everything, choose Cash or Mobile payment.", es: "El anticipo debe ser menor que el total. Si el cliente paga todo, elige Efectivo o Pago móvil.", pt: "O sinal deve ser inferior ao total. Se o cliente paga tudo, escolha Dinheiro ou Pagamento móvel.", de: "Die Anzahlung muss kleiner als der Gesamtbetrag sein. Zahlt der Kunde alles, wähle Bar oder Mobile Zahlung.", it: "L'acconto deve essere inferiore al totale. Se il cliente paga tutto, scegli Contanti o Pagamento mobile.", nl: "Het voorschot moet lager zijn dan het totaal. Betaalt de klant alles, kies dan Contant of Mobiel betalen.", pl: "Zaliczka musi być mniejsza niż suma. Jeśli klient płaci całość, wybierz Gotówkę lub Płatność mobilną.", ru: "Предоплата должна быть меньше суммы. Если клиент платит всё, выберите Наличные или Мобильный платёж.", tr: "Kapora toplamdan az olmalı. Müşteri hepsini ödüyorsa Nakit veya Mobil ödeme seçin.", ar: "يجب أن يكون العربون أقل من المجموع. إذا دفع الزبون كل المبلغ، اختر نقدًا أو الدفع عبر الهاتف.", hi: "अग्रिम कुल से कम होना चाहिए। अगर ग्राहक पूरा दे रहा है, तो नकद या मोबाइल भुगतान चुनें।", bn: "অগ্রিম মোটের চেয়ে কম হতে হবে। গ্রাহক সব দিলে নগদ বা মোবাইল পেমেন্ট বেছে নিন।", ur: "ایڈوانس کل رقم سے کم ہونا چاہیے۔ اگر گاہک سب دے رہا ہے تو نقد یا موبائل ادائیگی چنیں۔", ta: "முன்பணம் மொத்தத்தை விடக் குறைவாக இருக்க வேண்டும். வாடிக்கையாளர் முழுவதும் செலுத்தினால் ரொக்கம் அல்லது மொபைல் கட்டணம் தேர்வு செய்யவும்.", te: "అడ్వాన్స్ మొత్తం కంటే తక్కువ ఉండాలి. కస్టమర్ మొత్తం చెల్లిస్తే నగదు లేదా మొబైల్ చెల్లింపు ఎంచుకోండి.", th: "เงินมัดจำต้องน้อยกว่ายอดรวม ถ้าลูกค้าจ่ายครบ ให้เลือกเงินสดหรือจ่ายผ่านมือถือ", zh: "定金必须小于总额。如果顾客全额付款，请选择现金或手机支付。", ja: "頭金は合計より少なくしてください。全額払う場合は現金かモバイル決済を選んでください。", ko: "선금은 총액보다 적어야 합니다. 고객이 전액을 내면 현금이나 모바일 결제를 선택하세요.", id: "Uang muka harus kurang dari total. Jika pelanggan membayar penuh, pilih Tunai atau Pembayaran seluler.", vi: "Tiền đặt trước phải nhỏ hơn tổng. Nếu khách trả đủ, hãy chọn Tiền mặt hoặc Thanh toán di động.", tl: "Dapat mas mababa sa kabuuan ang paunang bayad. Kung buo ang bayad ng customer, piliin ang Cash o Mobile payment.", sw: "Malipo ya awali lazima yawe chini ya jumla. Mteja akilipa yote, chagua Taslimu au Malipo ya simu.", ha: "Kuɗin gaba dole ya gaza jimilla. Idan abokin ciniki ya biya duka, zaɓi Tsabar kuɗi ko Biyan waya.", yo: "Owó ìbẹ̀rẹ̀ gbọ́dọ̀ kéré ju àpapọ̀ lọ. Bí oníbàárà bá san gbogbo rẹ̀, yan Owó ọwọ́ tàbí Ìsanwó fóònù.", zu: "Idiphozi kufanele ibe ngaphansi kwesamba. Uma ikhasimende likhokha konke, khetha Ukheshi noma Inkokhelo yeselula.", am: "ቅድመ ክፍያው ከጠቅላላው ያነሰ መሆን አለበት። ደንበኛው ሁሉንም ከከፈለ ጥሬ ገንዘብ ወይም የሞባይል ክፍያ ይምረጡ።", bm: "Sara fɔlɔ ka kan ka dɔgɔ ni bɛɛ lajɛlen ye. Ni kiliyan bɛ bɛɛ sara, wari walima telefɔni sara sugandi.", wo: "Avance bi war naa yées li ñu war a fey lépp. Su kiliyaan bi feyee lépp, tannal Xaalis walla Fey ak telefon." };
+EXTRA_UI.restToCredit = { fr: "Mettre le reste ({n}) en dette", en: "Put the rest ({n}) on credit", es: "Dejar el resto ({n}) a crédito", pt: "Pôr o resto ({n}) a crédito", de: "Rest ({n}) anschreiben", it: "Mettere il resto ({n}) a credito", nl: "Rest ({n}) op krediet zetten", pl: "Resztę ({n}) zapisać jako dług", ru: "Остаток ({n}) записать в долг", tr: "Kalanı ({n}) veresiyeye yaz", ar: "تسجيل الباقي ({n}) كدين", hi: "बाकी ({n}) उधार में डालें", bn: "বাকি ({n}) বাকিতে রাখুন", ur: "باقی ({n}) ادھار میں ڈالیں", ta: "மீதியை ({n}) கடனில் வை", te: "మిగతాది ({n}) అప్పుగా పెట్టండి", th: "ลงส่วนที่เหลือ ({n}) เป็นหนี้", zh: "把余额（{n}）记为赊账", ja: "残り（{n}）をツケにする", ko: "나머지({n})를 외상으로", id: "Catat sisanya ({n}) sebagai utang", vi: "Ghi phần còn lại ({n}) vào nợ", tl: "Ilista ang natitira ({n}) bilang utang", sw: "Weka kilichobaki ({n}) kama deni", ha: "Saka sauran ({n}) a bashi", yo: "Fi ìyókù ({n}) sí gbèsè", zu: "Faka okusele ({n}) esikweletini", am: "ቀሪውን ({n}) በዱቤ ያስመዝግቡ", bm: "A tɔ ({n}) bila juru la", wo: "Def li des ({n}) ci bor" };
+EXTRA_UI.receiptDepositLabel = { fr: "Acompte versé", en: "Deposit paid", es: "Anticipo pagado", pt: "Sinal pago", de: "Anzahlung", it: "Acconto versato", nl: "Voorschot betaald", pl: "Wpłacona zaliczka", ru: "Предоплата", tr: "Ödenen kapora", ar: "العربون المدفوع", hi: "दिया गया अग्रिम", bn: "দেওয়া অগ্রিম", ur: "دیا گیا ایڈوانس", ta: "செலுத்திய முன்பணம்", te: "ఇచ్చిన అడ్వాన్స్", th: "เงินมัดจำที่จ่ายแล้ว", zh: "已付定金", ja: "支払済み頭金", ko: "받은 선금", id: "Uang muka dibayar", vi: "Tiền đặt trước", tl: "Paunang bayad", sw: "Malipo ya awali", ha: "Kuɗin gaba da aka biya", yo: "Owó ìbẹ̀rẹ̀ tí a san", zu: "Idiphozi ekhokhiwe", am: "የተከፈለ ቅድመ ክፍያ", bm: "Sara fɔlɔ", wo: "Avance bi ñu fey" };
+EXTRA_UI.logPriceNegotiated = { fr: "Prix négociés", en: "Negotiated prices", es: "Precios negociados", pt: "Preços negociados", de: "Verhandelte Preise", it: "Prezzi trattati", nl: "Onderhandelde prijzen", pl: "Ceny negocjowane", ru: "Цены после торга", tr: "Pazarlıklı fiyatlar", ar: "أسعار متفاوض عليها", hi: "मोलभाव वाले दाम", bn: "দরদাম করা দাম", ur: "مول تول والی قیمتیں", ta: "பேரம் பேசிய விலைகள்", te: "బేరం ధరలు", th: "ราคาที่ต่อรอง", zh: "议价", ja: "交渉後の価格", ko: "흥정 가격", id: "Harga nego", vi: "Giá thương lượng", tl: "Tinawarang presyo", sw: "Bei za mapatano", ha: "Farashin ciniki", yo: "Iye ìdúnàádúrà", zu: "Izintengo ezixoxisanwe", am: "የተደራደሩ ዋጋዎች", bm: "Sɔngɔ sɔsɔlenw", wo: "Njëg yu ñu waxaale" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -11081,6 +11098,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ...(receipt.payment === "cash" && receipt.received != null && receipt.received > 0
         ? [`💵 ${tx(lang, "receiptAmountGivenLabel")}${colon}${money(receipt.received)}`, `🔄 ${t(lang, "change")}${colon}${money(Math.max(0, receipt.received - receipt.total))}`]
         : []),
+      ...(receipt.payment === "credit" && receipt.deposit > 0
+        ? [`💵 ${tx(lang, "receiptDepositLabel")}${colon}${money(receipt.deposit)}`, `📋 ${t(lang, "remainingToPay")}${colon}${money(Math.max(0, receipt.total - receipt.deposit))}`]
+        : []),
       ...(receipt.loyalty && receipt.loyalty.count ? [`🎖️ ${tx(lang, "loyaltyPurchaseCount").replace("{n}", receipt.loyalty.count)}`] : []),
       SEP,
       ...extraLines,
@@ -11174,7 +11194,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const TABLE_HEAD_H = 8;
     // Hauteur reellement consommee par le bloc total : separateur (3+11) + total (11)
     // + paiement (7) + montant donne (7) + monnaie (9) + ligne de remerciement.
-    const TOTAL_BLOCK_H = receipt.payment === "cash" && receipt.received != null ? 52 : 36;
+    const TOTAL_BLOCK_H = (receipt.payment === "cash" && receipt.received != null) || (receipt.payment === "credit" && receipt.deposit > 0) ? 52 : 36;
     const FOOTER_H = 30;
     const BOTTOM_LINE_H = 10;
     const availableForItems = pageH - HEADER_H - META_H - TABLE_HEAD_H - TOTAL_BLOCK_H - FOOTER_H - BOTTOM_LINE_H;
@@ -11337,6 +11357,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           doc.setTextColor(...GREEN_RGB);
           doc.text(t(lang, "change"), marginX, y);
           doc.text(fmt(Math.max(0, receipt.received - receipt.total)), pageW - marginX, y, { align: "right" });
+          y += 9;
+        } else if (receipt.payment === "credit" && receipt.deposit > 0) {
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(...CHARCOAL_RGB);
+          doc.text(tx(lang, "receiptDepositLabel"), marginX, y);
+          doc.text(fmt(receipt.deposit), pageW - marginX, y, { align: "right" });
+          y += 7;
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(...CLAY_RGB);
+          doc.text(t(lang, "remainingToPay"), marginX, y);
+          doc.text(fmt(Math.max(0, receipt.total - receipt.deposit)), pageW - marginX, y, { align: "right" });
           y += 9;
         } else {
           y += 2;
@@ -16134,6 +16165,56 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const updateCartMeta = (cartId, field, value) => {
     saveAll({ draftCarts: draftCarts.map((c) => (c.id === cartId ? { ...c, [field]: value } : c)) });
   };
+  // ---- Prix négocié et « Article divers » ----
+  // Le marchandage fait partie de la vente : on peut changer le prix d'une ligne du panier.
+  // Le prix d'origine est gardé (listPrice) et noté sur la vente et dans le journal. Un
+  // employé a besoin de la permission « editPrice » et ne peut jamais descendre sous le
+  // prix d'achat ; le propriétaire est seulement prévenu.
+  const canEditPrice = !activeEmployee || hasPermission("editPrice");
+  const [priceEditLine, setPriceEditLine] = useState(null);
+  const [priceEditInput, setPriceEditInput] = useState("");
+  const [priceEditError, setPriceEditError] = useState("");
+  const [showMiscItem, setShowMiscItem] = useState(false);
+  const [miscLabel, setMiscLabel] = useState("");
+  const [miscAmount, setMiscAmount] = useState("");
+  const [miscError, setMiscError] = useState("");
+  const lineCostFloor = (it) => {
+    if (!it || it.productId == null) return null;
+    const product = products.find((p) => p.id === it.productId);
+    if (!product || product.costPrice == null || product.costPrice === "") return null;
+    const c = Number(product.costPrice);
+    if (!(c > 0)) return null;
+    return it.mode === "unit" && product.unitsPerPack > 0 ? c / product.unitsPerPack : c;
+  };
+  const openPriceEdit = (it) => { setPriceEditLine(it.id); setPriceEditInput(String(it.unitPrice)); setPriceEditError(""); };
+  const confirmPriceEdit = (cartId) => {
+    const cart = draftCarts.find((c) => c.id === cartId);
+    const it = cart && cart.items.find((i) => i.id === priceEditLine);
+    if (!it || !canEditPrice) { setPriceEditLine(null); return; }
+    const v = parseFloat(String(priceEditInput).replace(",", "."));
+    if (!(v > 0)) { setPriceEditError(t(lang, "invalidAmount")); return; }
+    const floor = lineCostFloor(it);
+    if (activeEmployee && floor != null && v < floor) {
+      setPriceEditError(tx(lang, "priceBelowCostBlocked").replace("{p}", fcfa(floor)));
+      return;
+    }
+    const listPrice = it.listPrice != null ? it.listPrice : it.unitPrice;
+    saveAll({ draftCarts: draftCarts.map((c) => (c.id !== cartId ? c : { ...c, items: c.items.map((i) => (i.id !== it.id ? i : { ...i, unitPrice: v, listPrice: v === listPrice || i.misc ? null : listPrice })) })) });
+    setPriceEditLine(null);
+    setPriceEditError("");
+  };
+  const addMiscItem = () => {
+    if (!activeCart || !canEditPrice) return;
+    const v = parseFloat(String(miscAmount).replace(",", "."));
+    if (!(v > 0)) { setMiscError(t(lang, "invalidAmount")); return; }
+    const item = { id: Date.now().toString() + Math.random().toString(36).slice(2, 6), productId: null, productName: miscLabel.trim() || tx(lang, "miscItemDefaultName"), unitPrice: v, qty: 1, mode: "pack", misc: true };
+    saveAll({ draftCarts: draftCarts.map((c) => (c.id === activeCart.id ? { ...c, items: [...c.items, item] } : c)) });
+    playSound("addToCart");
+    setShowMiscItem(false); setMiscLabel(""); setMiscAmount(""); setMiscError("");
+  };
+  const removeCartLine = (cartId, itemId) => {
+    saveAll({ draftCarts: draftCarts.map((c) => (c.id === cartId ? { ...c, items: c.items.filter((i) => i.id !== itemId) } : c)) });
+  };
 
   // Nombre de ventes (transactions distinctes, pas de lignes d'articles) déjà réalisées
   // aujourd'hui — utilisé pour le plafond du palier Gratuit (et tout palier payant expiré).
@@ -16187,6 +16268,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return;
     }
     setReceivedFieldError(false);
+    // Vente à crédit avec acompte : le client paie une partie tout de suite (espèces ou
+    // Mobile Money), le reste devient une dette. L'acompte doit rester inférieur au total.
+    const cartTotalNow = cart.items.reduce((sum, it) => sum + it.qty * it.unitPrice, 0);
+    const depositNum = cart.payment === "credit" ? Math.max(0, parseFloat(String(cart.deposit || "").replace(",", ".")) || 0) : 0;
+    if (depositNum > 0 && depositNum >= cartTotalNow) {
+      playSound("error"); triggerHaptic("error");
+      setError(tx(lang, "depositTooHigh"));
+      return;
+    }
+    const depositMethod = cart.depositMethod === "mobile" ? "mobile" : "cash";
     // Plafond de ventes : 30/jour pour le palier Gratuit (et tout palier payant expiré),
     // remis à zéro chaque jour sans jamais se cumuler. Pro et Business sont illimités en
     // ventes tant que l'abonnement est actif.
@@ -16221,6 +16312,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         total: it.qty * it.unitPrice,
         // Mode de vente (colis / à l'unité) : nécessaire pour remettre le bon stock si la vente est annulée.
         mode: it.mode || "pack",
+        ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}),
+        ...(it.misc ? { misc: true } : {}),
         costPrice: product && product.costPrice != null ? product.costPrice : null,
         payment: cart.payment,
         customer: cart.customer.trim() || null,
@@ -16258,7 +16351,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       customer: cart.customer.trim(),
       payment: cart.payment,
       change: receivedNum !== null ? receivedNum - total : null,
-      items: cart.items.map((it) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice })),
+      items: cart.items.map((it) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice, ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}) })),
+      ...(depositNum > 0 ? { deposit: depositNum, depositMethod } : {}),
     })];
     if (cart.payment === "credit") {
       const newDebtId = Date.now().toString() + Math.random().toString(36).slice(2, 7) + "-debt";
@@ -16269,7 +16363,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", "),
         date: dateNow,
         paid: false,
-        paidAmount: 0,
+        paidAmount: depositNum,
         updatedAt: Date.now(),
         source: "sale",
         transactionId,
@@ -16292,6 +16386,24 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         transactionId,
       }];
       newHistory.push(makeHistoryEntry("debtCreated", { refId: newDebtId + "-ev", date: dateNow, amount: total, customer: cart.customer.trim(), product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", "), source: "sale" }));
+      if (depositNum > 0) {
+        const depId = newDebtId + "-deposit";
+        nextDebtEvents = [...nextDebtEvents, {
+          id: depId,
+          debtId: newDebtId,
+          type: "partialPayment",
+          customer: cart.customer.trim(),
+          amount: depositNum,
+          method: depositMethod,
+          product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", "),
+          date: dateNow,
+          source: "saleDeposit",
+          transactionId,
+          actorId: activeEmployee ? activeEmployee.id : null,
+          actorName: activeEmployee ? activeEmployee.name : null,
+        }];
+        newHistory.push(makeHistoryEntry("debtPartial", { refId: depId, date: dateNow, amount: depositNum, customer: cart.customer.trim(), product: cart.items.map((i) => `${i.productName} x${i.qty}`).join(", ") }));
+      }
     }
     const nextCarts = draftCarts.filter((c) => c.id !== cartId);
     const { nextLoyaltyCustomers, loyaltyInfo } = incrementLoyalty(cart.phone, cart.customer);
@@ -16305,11 +16417,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       draftCarts: nextCarts,
       activeCartId: activeCartId === cartId ? (nextCarts[0] ? nextCarts[0].id : null) : activeCartId,
     });
-    logAction(`${t(lang, "logSaleRecorded")} : ${cart.items.map((i) => `${i.productName} x${i.qty}`).join(", ")} — ${localizedNumber(total)} (${cart.payment === "credit" ? t(lang, "logPaymentCredit") : cart.payment === "cash" ? t(lang, "logPaymentCash") : cart.payment})`);
+    const negotiated = cart.items.filter((i) => i.listPrice != null && i.listPrice !== i.unitPrice);
+    logAction(`${t(lang, "logSaleRecorded")} : ${cart.items.map((i) => `${i.productName} x${i.qty}`).join(", ")} — ${localizedNumber(total)} (${cart.payment === "credit" ? t(lang, "logPaymentCredit") : cart.payment === "cash" ? t(lang, "logPaymentCash") : cart.payment})`
+      + (depositNum > 0 ? ` · ${tx(lang, "receiptDepositLabel")} ${localizedNumber(depositNum)}${depositMethod === "mobile" ? " 📱" : ""}` : "")
+      + (negotiated.length ? ` · ${tx(lang, "logPriceNegotiated")} : ${negotiated.map((i) => `${i.productName} ${localizedNumber(i.listPrice)} → ${localizedNumber(i.unitPrice)}`).join(", ")}` : ""));
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim(), loyalty: loyaltyInfo });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -16330,7 +16445,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         || debts.find((d) => d.source === "sale" && d.date === first.date && (d.customer || "").trim() === (first.customer || "").trim() && d.amount === total)
         || null;
       // Si le client a déjà payé (même en partie), on ne peut pas simplement effacer la dette.
-      if (linkedDebt && (linkedDebt.paid || (linkedDebt.paidAmount || 0) > 0)) {
+      // Un acompte versé au moment de la vente n'empêche pas l'annulation : il est annulé
+      // avec elle (rendu au client). Tout autre paiement reçu ensuite l'empêche.
+      const onlyDeposit = !!linkedDebt && allDebtEvents.filter((e) => e.debtId === linkedDebt.id && !e.cancelled && (e.type === "partialPayment" || e.type === "paid")).every((e) => e.source === "saleDeposit");
+      if (linkedDebt && (linkedDebt.paid || (linkedDebt.paidAmount || 0) > 0) && !onlyDeposit) {
         setCancelSaleError(tx(lang, "cancelSaleDebtPaid"));
         return;
       }
@@ -17064,6 +17182,7 @@ GUIDE COMPLET DE L'APPLICATION (utilise ceci pour orienter le boutiquier quand i
 - Tableau de bord (Accueil) : voir les ventes du jour, fixer un objectif de ventes du mois, carte « Stock faible » (regroupe les produits dont la quantité est sous le seuil d'alerte défini dans Paramètres > Boutique, ce seuil est modifiable et n'est pas figé à 5 ; par défaut l'affichage se limite aux 5 produits les plus faibles, le bouton « Voir tout » / « Voir moins » affiche ou réduit la liste, et le bouton de tri permet de la trier), rapport de caisse (pour les comptes multi-boutiques : ventes par propriétaire, espèces, Mobile Money, carte, dépenses, paiements de dettes), alertes d'activité inhabituelle (annulations en série, caisse vidée, etc.). Le fond de caisse et les dépenses ne se gèrent plus sur l'Accueil : tout se fait dans l'onglet Caisse.
 - Onglet Caisse (menu « Plus ») : tableau de bord complet de la caisse. En haut : le solde de caisse estimé et trois actions rapides : « Régler le fond de caisse » (indiquer le montant réellement en caisse), « Ajouter une dépense » (montant + raison facultative) et « Compter la caisse » (saisir le montant compté ; l'application indique l'écart, ou « La caisse est juste » s'il n'y en a pas). Plus bas : mini-graphique de tendance sur 7 jours, sélecteur de période (Aujourd'hui / 7 jours / 30 jours / Tout), entrées espèces, dépenses et net, bénéfice estimé et marge sur les ventes (calculés uniquement avec les produits dont le prix d'achat est renseigné), fiabilité de la caisse (historique des comptages et dernier écart), répartition par mode de paiement, principales dépenses et journal des mouvements (ventes, dépenses, comptages) avec « Voir plus ». Le personnel a besoin de la permission « Voir la caisse » ou « Modifier la caisse » pour l'utiliser.
 - Stock : ajouter/modifier/supprimer un produit (bouton « + », nom, quantité, prix, prix d'achat optionnel, photo) ; les catégories sont définies automatiquement d'après les noms de produits ; seuil d'alerte de stock bas configurable dans les paramètres. Un bouton « Trier par » permet d'ordonner la liste : ordre alphabétique, plus vendus, moins vendus, plus disponible, moins disponible, ou ordre par défaut (les mêmes options existent dans l'onglet Vente et sur la carte « Stock faible » de l'Accueil ; « plus/moins vendus » se base sur les quantités totales vendues).
+- Vente : prix négociable sur chaque ligne du panier (crayon dans la fenêtre de paiement, permission « editPrice » pour un employé, jamais sous le prix d'achat pour un employé) ; bouton « Divers » pour un article hors stock à prix libre ; vente à crédit avec acompte (une partie payée tout de suite en espèces ou Mobile Money, le reste devient une dette) — ou, en espèces, bouton « Mettre le reste en dette » quand le client n'a pas assez.
 - Vente : démarrer un panier, plusieurs paniers simultanés possibles (un par client) ; modes de paiement espèces / Mobile Money / carte / crédit ; une vente à crédit demande le nom du client et s'ajoute automatiquement dans Dettes ; un score de confiance client s'affiche à la saisie du nom pour une vente à crédit, basé sur l'historique de remboursement ; calcul automatique du rendu. Le bouton « Trier par » y trie aussi la liste des produits. Annuler une vente récente (vente de test ou client qui se rétracte) : dans l'onglet Vente, ouvrir la vente concernée dans les ventes récentes et appuyer sur « Annuler la vente », puis confirmer ; les quantités sont remises en stock et l'annulation est notée dans l'Historique (« Vente annulée »). L'annulation est impossible si la dette liée à cette vente a déjà été payée, même en partie. Une vente annulée compte quand même dans la limite de ventes par jour du palier Gratuit.
 - Historique : filtres (dates, produit, client, montant min/max), export CSV (les filtres avancés et l'export sont réservés au palier Pro et au-dessus).
 - Dettes : marquer une dette comme payée (bouton « Payé » à côté du nom du client) ou enregistrer un paiement partiel (bouton « Payer une tranche ») ; reste visible pour toujours dans l'Historique. Le bouton « Ajouter une dette » permet aussi d'enregistrer une dette manuellement.
@@ -20522,6 +20641,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <>
                 <div className="flex items-center justify-between rounded-2xl px-4 py-2.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}` }}>
                   <p className="text-xs" style={{ color: T.muted }}>{t(lang, "othPanierDe")} <span className="font-bold" style={{ color: T.text }}>{activeCart.label}</span></p>
+                  {canEditPrice && (
+                    <button onClick={() => { setShowMiscItem(true); setMiscError(""); }} className="text-[11px] font-semibold flex items-center gap-1 px-2.5 py-1.5 rounded-lg ml-auto mr-2" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", border: `1px solid ${darkMode ? "#7fb2ff" : "#2563eb"}`, background: "transparent" }}>
+                      <Plus size={12} /> {tx(lang, "miscItemBtn")}
+                    </button>
+                  )}
                   <button onClick={() => setConfirmModal({ message: t(lang, "abandonCartMsg"), onConfirm: () => deleteCart(activeCart.id) })} className="text-[11px] font-semibold flex items-center gap-1 px-2.5 py-1.5 rounded-lg" style={{ color: "#e11d48", border: "1px solid #e11d48", background: "transparent" }}>
                     <Trash2 size={12} /> {t(lang, "abandonCart")}
                   </button>
@@ -21003,6 +21127,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   })}
                 </div>
                 )}
+                {showMiscItem && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowMiscItem(false)}>
+                    <div className="w-full max-w-xs rounded-2xl p-5" style={{ background: T.card }} onClick={(e) => e.stopPropagation()}>
+                      <p className="text-sm font-bold" style={{ color: T.text }}>🏷️ {tx(lang, "miscItemTitle")}</p>
+                      <p className="text-[11px] mt-1 mb-3" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "miscItemHint")}</p>
+                      <input autoComplete="off" value={miscLabel} onChange={(e) => setMiscLabel(e.target.value.slice(0, 60))} placeholder={tx(lang, "miscItemNamePlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                      <input autoComplete="off" autoFocus value={miscAmount} onChange={(e) => { setMiscAmount(e.target.value.replace(/[^0-9.,]/g, "")); setMiscError(""); }} onKeyDown={(e) => { if (e.key === "Enter") addMiscItem(); }} type="text" inputMode="decimal" placeholder={tx(lang, "miscItemAmountPlaceholder")} className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                      {miscError && <p className="text-xs mb-2" style={{ color: "#e11d48" }}>{miscError}</p>}
+                      <div className="flex gap-2 mt-1">
+                        <button onClick={() => setShowMiscItem(false)} className="flex-1 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>{t(lang, "cancel")}</button>
+                        <button onClick={addMiscItem} className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: INDIGO }}>{t(lang, "addCategoryConfirm")}</button>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 {activeCart.items.length > 0 && showCheckoutModal && typeof document !== "undefined" && createPortal(
                 <div
                   onClick={() => setShowCheckoutModal(false)}
@@ -21035,12 +21174,46 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <p className="text-xs font-bold" style={{ color: darkMode ? T.muted : "#1e40af" }}>{t(lang, "cartContent")}</p>
                       </div>
                       <div className="space-y-1.5 mb-3">
-                        {activeCart.items.map((it) => (
-                          <div key={it.id} className="flex items-center justify-between text-xs">
-                            <span style={{ color: T.text }}>{it.productName} x{localizedQty(it.qty)}{it.measureUnit ? ` ${it.measureUnit}` : ""} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}</span>
-                            <span className="font-bold" style={{ color: T.text }}>{fcfa(it.qty * it.unitPrice)}</span>
+                        {activeCart.items.map((it) => {
+                          const negotiated = it.listPrice != null && it.listPrice !== it.unitPrice;
+                          const editing = priceEditLine === it.id;
+                          const floor = editing ? lineCostFloor(it) : null;
+                          const typed = editing ? parseFloat(String(priceEditInput).replace(",", ".")) : NaN;
+                          return (
+                          <div key={it.id}>
+                          <div className="flex items-center justify-between gap-2 text-xs">
+                            <span style={{ color: T.text }}>{it.misc ? "🏷️ " : ""}{it.productName} x{localizedQty(it.qty)}{it.measureUnit ? ` ${it.measureUnit}` : ""} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}</span>
+                            <span className="flex items-center gap-1.5 shrink-0">
+                              {negotiated && <span className="line-through text-[10px]" style={{ color: T.muted }}>{fcfa(it.qty * it.listPrice)}</span>}
+                              <span className="font-bold" style={{ color: negotiated ? (darkMode ? "#f0c869" : "#b45309") : T.text }}>{fcfa(it.qty * it.unitPrice)}</span>
+                              {canEditPrice && !editing && (
+                                <button type="button" aria-label={tx(lang, "priceEditLabel")} onClick={() => openPriceEdit(it)} className="w-6 h-6 rounded-full flex items-center justify-center active:scale-90" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "white", color: darkMode ? "#7fb2ff" : "#2563eb" }}>
+                                  <Edit3 size={11} />
+                                </button>
+                              )}
+                              {it.misc && (
+                                <button type="button" aria-label={t(lang, "cancel")} onClick={() => removeCartLine(activeCart.id, it.id)} className="w-6 h-6 rounded-full flex items-center justify-center active:scale-90" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "white", color: "#e11d48" }}>
+                                  <X size={11} />
+                                </button>
+                              )}
+                            </span>
                           </div>
-                        ))}
+                          {editing && (
+                            <div className="mt-1.5 mb-1 rounded-xl p-2.5" style={{ background: darkMode ? "rgba(255,255,255,0.05)" : "white" }}>
+                              <label className="text-[11px] font-semibold" style={{ color: T.muted }}>{tx(lang, "priceEditLabel")}{it.mode === "unit" ? ` (${t(lang, "sellUnit")})` : ""}</label>
+                              <div className="flex items-center gap-1.5 mt-1">
+                                <input autoComplete="off" autoFocus type="text" inputMode="decimal" value={priceEditInput} onChange={(e) => { setPriceEditInput(e.target.value.replace(/[^0-9.,]/g, "")); setPriceEditError(""); }} onKeyDown={(e) => { if (e.key === "Enter") confirmPriceEdit(activeCart.id); }} className="flex-1 min-w-0 border rounded-lg px-2.5 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                                <button type="button" onClick={() => confirmPriceEdit(activeCart.id)} className="px-3 py-2 rounded-lg text-xs font-bold text-white" style={{ background: INDIGO }}>{t(lang, "confirmBtn")}</button>
+                                <button type="button" onClick={() => { setPriceEditLine(null); setPriceEditError(""); }} className="px-2.5 py-2 rounded-lg text-xs font-semibold" style={{ background: T.input, color: T.text }}>{t(lang, "cancel")}</button>
+                              </div>
+                              {it.qty !== 1 && typed > 0 && <p className="text-[10px] mt-1" style={{ color: T.muted }}>= {fcfa(typed * it.qty)}</p>}
+                              {!activeEmployee && floor != null && typed > 0 && typed < floor && <p className="text-[10px] mt-1 font-semibold" style={{ color: darkMode ? "#f0c869" : "#b45309" }}>⚠️ {tx(lang, "priceBelowCostWarn").replace("{p}", fcfa(floor))}</p>}
+                              {priceEditError && <p className="text-[10px] mt-1 font-semibold" style={{ color: "#e11d48" }}>{priceEditError}</p>}
+                            </div>
+                          )}
+                          </div>
+                          );
+                        })}
                       </div>
                       <div className="flex items-center justify-between pt-2.5" style={{ borderTop: `1px solid ${darkMode ? T.border : "rgba(37,99,235,0.15)"}` }}>
                         <span className="text-sm font-bold" style={{ color: T.text }}>{t(lang, "cartTotal")}</span>
@@ -21175,6 +21348,30 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         );
                       })()}
                     </div>
+                    {activeCart.payment === "credit" && (() => {
+                      const dep = Math.max(0, parseFloat(String(activeCart.deposit || "").replace(",", ".")) || 0);
+                      const method = activeCart.depositMethod === "mobile" ? "mobile" : "cash";
+                      return (
+                        <div className="rounded-xl p-3" style={{ background: T.input }}>
+                          <label className="text-xs font-semibold" style={{ color: T.muted }}>{tx(lang, "depositLabel")}</label>
+                          <input autoComplete="off" type="text" inputMode="decimal" value={activeCart.deposit || ""} onChange={(e) => { updateCartMeta(activeCart.id, "deposit", e.target.value.replace(/[^0-9.,]/g, "")); if (error) setError(""); }} placeholder="0" className="w-full border-2 rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a", borderColor: dep > 0 && dep >= cartTotal ? "#e11d48" : "transparent" }} />
+                          {dep > 0 && (
+                            <>
+                              <div className="flex gap-2 mt-2">
+                                {getPaymentMethods(lang).filter((m) => m.id === "cash" || m.id === "mobile").map((m) => (
+                                  <button key={m.id} type="button" onClick={() => updateCartMeta(activeCart.id, "depositMethod", m.id)} className="flex-1 py-2 rounded-lg text-xs font-bold" style={{ background: method === m.id ? (m.id === "cash" ? "#16a34a" : "#2563eb") : (darkMode ? "rgba(255,255,255,0.08)" : "white"), color: method === m.id ? "white" : T.text }}>
+                                    {m.id === "cash" ? "💵" : "📱"} {m.label}
+                                  </button>
+                                ))}
+                              </div>
+                              {dep < cartTotal
+                                ? <p className="text-sm font-extrabold mt-2" style={{ color: darkMode ? "#7dd3fc" : "#0369a1" }}>📋 {t(lang, "remainingToPay")} : {fcfa(cartTotal - dep)}</p>
+                                : <p className="text-xs font-bold mt-2" style={{ color: "#e11d48" }}>{tx(lang, "depositTooHigh")}</p>}
+                            </>
+                          )}
+                        </div>
+                      );
+                    })()}
                     {activeCart.payment === "cash" && (
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
                         <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
@@ -21202,7 +21399,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         {activeCart.received !== "" && (() => {
                           const change = parseFloat(activeCart.received) - cartTotal;
                           if (isNaN(change)) return null;
-                          if (change < 0) return <p className="text-xs font-bold mt-2" style={{ color: "#e11d48" }}>{t(lang, "othIlManque")} {fcfa(-change)}</p>;
+                          if (change < 0) return (
+                            <>
+                              <p className="text-xs font-bold mt-2" style={{ color: "#e11d48" }}>{t(lang, "othIlManque")} {fcfa(-change)}</p>
+                              {parseFloat(activeCart.received) > 0 && (
+                                <button type="button" onClick={() => saveAll({ draftCarts: draftCarts.map((c) => (c.id === activeCart.id ? { ...c, payment: "credit", deposit: String(parseFloat(c.received)), depositMethod: "cash" } : c)) })} className="mt-2 w-full py-2.5 rounded-xl text-xs font-bold active:scale-[0.98]" style={{ background: darkMode ? "rgba(2,132,199,0.18)" : "#e0f2fe", color: darkMode ? "#7dd3fc" : "#0369a1" }}>
+                                  📋 {tx(lang, "restToCredit").replace("{n}", fcfa(-change))}
+                                </button>
+                              )}
+                            </>
+                          );
                           return <p className="text-sm font-extrabold mt-2" style={{ color: "#16a34a" }}>💰 {t(lang, "change")} : {fcfa(change)}</p>;
                         })()}
                       </div>
@@ -25025,6 +25231,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <span>{tx(lang, "receiptTotalLabel")}</span>
                 <span>{localizedNumber(pendingReceipt.total)} {CURRENT_CURRENCY.symbol}</span>
               </div>
+              {pendingReceipt.payment === "credit" && pendingReceipt.deposit > 0 && (
+                <>
+                  <div className="flex justify-between text-xs mt-1.5">
+                    <span>{tx(lang, "receiptDepositLabel")}</span>
+                    <span className="font-semibold">{localizedNumber(pendingReceipt.deposit)} {CURRENT_CURRENCY.symbol}</span>
+                  </div>
+                  <div className="flex justify-between text-xs font-bold mt-1" style={{ color: darkMode ? "#7dd3fc" : "#0369a1" }}>
+                    <span>{t(lang, "remainingToPay")}</span>
+                    <span>{localizedNumber(Math.max(0, pendingReceipt.total - pendingReceipt.deposit))} {CURRENT_CURRENCY.symbol}</span>
+                  </div>
+                </>
+              )}
             </div>
             {pendingReceipt.loyalty && (() => {
               // La bannière "récompense" n'apparaît sur le reçu (potentiellement partagé avec le
