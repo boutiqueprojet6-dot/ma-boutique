@@ -22081,7 +22081,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           </div>
         )}
-        {tab === "cash" && hasPermission("viewCash") && cashView && !showLockPinModal && !showMoreMenu && !showSettings && typeof document !== "undefined" && createPortal(
+        {tab === "cash" && hasPermission("viewCash") && cashView && !showLockPinModal && !showMoreMenu && !showSettings && !showTabHelp && typeof document !== "undefined" && createPortal(
           <button
             onClick={() => { if (amountsHidden) setShowLockPinModal(true); else setAmountsHidden(true); }}
             className="font-bold"
