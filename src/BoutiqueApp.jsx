@@ -992,7 +992,7 @@ const TRANSLATIONS = {
     legalConsentText: "En continuant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité.", termsLinkLabel: "Conditions d'utilisation", privacyLinkLabel: "Politique de confidentialité",
     otpSentMessage: "Nous avons envoyé un code à {email}.", otpCodePlaceholder: "Code à 6 chiffres", otpVerifyBtn: "Vérifier le code",
     changeEmailLink: "Modifier l'adresse e-mail", wrongOtpCode: "Code incorrect ou expiré. Réessayez.",
-    noCartYet: "Aucun panier en cours. Un client arrive ? Démarrez un nouveau panier.", newCart: "Nouveau panier",
+    noCartYet: "Aucune vente en cours. Un client arrive ? Démarrez une nouvelle vente.", newCart: "Nouvelle vente",
     abandonCart: "Abandonner ce panier", cartContent: "Contenu du panier", paymentMethod: "Mode de paiement",
     clientName: "Nom du client", amountGiven: "Montant donné par le client (FCFA)",
     change: "Monnaie à rendre", finalizeSale: "Finaliser la vente",
@@ -1075,7 +1075,7 @@ const TRANSLATIONS = {
     payInstallmentBtn: "Payer une tranche", payInstallmentTitle: "Paiement partiel", installmentAmountPlaceholder: "Montant reçu", alreadyPaid: "Déjà payé", remainingToPay: "Reste à payer", invalidAmount: "Montant invalide.", amountExceedsDebt: "Ce montant dépasse ce qui reste dû.", confirmBtn: "Confirmer", partialPaymentEvent: "Paiement partiel", debtAddBtn: "Ajouter une dette", debtAddTitle: "Ajouter une dette", debtCustomerPlaceholder: "Nom du client", debtAmountPlaceholder: "Montant", debtProductPlaceholder: "Description (optionnel)", debtDateLabel: "Date", errDebtCustomer: "Indiquez le nom du client.", errDebtAmount: "Indiquez un montant valide.", debtSourceManual: "Ajoutée manuellement", debtSourceSale: "Depuis une vente", debtSinceLabel: "Depuis le",
     restockForecast: "Prévision de réapprovisionnement", daysLeft: "jour(s) restant(s)", suggestedOrder: "Suggestion : commander environ", trustExcellent: "Excellent payeur", trustGood: "Bon payeur", trustOk: "Payeur correct", trustWatch: "À surveiller", trustHistory: "dette(s) réglée(s) sur", voiceListening: "Je vous écoute…", voiceNotSupported: "Dictée vocale non disponible sur cet appareil", benchmarkTitle: "Comparaison anonyme", benchmarkOptIn: "Comparer ma boutique anonymement", benchmarkOptInDesc: "Partagez vos moyennes de vente de façon anonyme pour voir comment vous vous situez par rapport à des boutiques similaires. Aucune donnée personnelle ou identifiable n'est partagée.", benchmarkYourShop: "Votre boutique", benchmarkAverage: "Moyenne des boutiques similaires", benchmarkNotEnough: "Pas encore assez de boutiques dans votre devise pour comparer.", avgDailySales: "Ventes moyennes/jour",
     arabicDigitsPromptTitle: "Chiffres arabes ou occidentaux ?", arabicDigitsPromptDesc: "Voulez-vous afficher les montants et dates avec les chiffres arabo-indiens (١٢٣) ou les chiffres occidentaux (123), les plus utilisés dans le commerce au quotidien ?", useArabicDigitsBtn: "Chiffres arabes (١٢٣)", useWesternDigitsBtn: "Chiffres occidentaux (123)",
-    setBoutique: "Boutique", setVentesFinances: "Ventes & finances", setDonnees: "Données", setAssistantIa: "Assistant IA", setAPropos: "À propos", setCodePin: "Code PIN", setDevise: "Devise", setInfosBoutique: "Infos boutique", setCategories: "Catégories", setPaiementParDefaut: "Paiement par défaut", setDettesClients: "Dettes clients", setCaisse: "Caisse", setExporterLesDonnees: "Exporter les données", setReinitialiser: "Réinitialiser", setPreferencesAssistant: "Préférences assistant", setAlertes: "Alertes", setProfilPinPhoto: "Profil, PIN, photo", setNomCategoriesSeuils: "Nom, catégories, seuils", setModeSombreLangueBoules: "Mode sombre, langue, boules", setPaiementDettesCaisse: "Paiement, dettes, caisse", setSauvegardeExportReinitialisation: "Sauvegarde, export, réinitialisation", setRechercheWebHistorique: "Recherche web, historique", setNotifications: "Notifications", setStockDettesAbonnement: "Stock, dettes, abonnement", setVersionDeveloppeur: "Version, développeur", setReinitialiserLesDonnees: "Supprimer les données, déconnexion", setActive: "Activé", setDesactive: "Désactivé", setNomAdresseDevise: "Nom, adresse, devise", setProduitsRayons: "Produits & rayons", setSeuilsDeStock: "Seuils de stock", setAlerteStockBas: "Alerte stock bas", setDelaiDeRelance: "Délai de relance", setEffacerToutesLesDonnees: "Effacer toutes les données", setNomDeLaBoutique: "Nom de la boutique", setIdentifiantDeConnexion: "Identifiant de connexion", setCategoriesDeProduits: "Catégories de produits", setLesCategoriesSontDefiniesAutomatiquem: "Les catégories sont définies automatiquement d'après les noms de vos produits. Cette fonctionnalité sera enrichie dans une prochaine version.", setAucunProduitPourLinstant: "Aucun produit pour l'instant.", setActuellementLowstocklengthProduitsEnD: "Actuellement : {n} produit(s) en dessous du seuil.", setChoisisLeModeDePaiement: "Choisissez le mode de paiement par défaut lors d'une vente.", setResumeDesDettesImpayees: "Résumé des dettes impayées", setClientsAvecDettes: "Clients avec dettes", setTotalDu: "Total dû", setSoldeEstime: "Solde estimé", setTuPeuxVoirLaComparaison: "Vous pouvez voir la comparaison dans l'onglet Statistiques.", setExporteTesDonneesDeVentes: "Exportez vos données de ventes en fichier CSV.", setTelechargerLesVentesCsv: "Télécharger les ventes (CSV)", setTelechargerEnPdf: "Télécharger en PDF", setScannezPourInstaller: "Scannez pour installer l'application", saleCatFilterAll: "Toutes", setSaleslengthVentesProductslengthProdui: "{s} ventes · {p} produits", setRechercheWeb: "Recherche web", setPermettreALiaDeChercher: "Permettre à l'IA de chercher sur internet", setHistoriqueDeConversation: "Historique de conversation", setAimessageslengthMessagesDansLaSession: "{n} message(s) dans la session actuelle.", setEffacerLhistorique: "Effacer l'historique", setAlerteStockFaible: "Alerte stock faible", setSeDeclencheEnDessousDe: "Se déclenche en dessous de {n} unités", setDettesImpayees: "Dettes impayées", setUnpaiddebtslengthEnAttente: "{n} en attente", setExpirationAbonnement: "Expiration abonnement", setVersionGratuite: "Version gratuite", setCeCodeSertADemasquer: "Ce code sert à démasquer vos montants privés (solde de caisse, dépenses, confirmation de dettes).", setAncienCodePin: "Ancien code PIN", setNouveauCodePin: "Nouveau code PIN", setConfirmerLeCodePin: "Confirmer le code PIN", setChoisisLaDeviseDeTa: "Choisissez la devise de votre boutique. Entrez vos prix directement dans cette devise — aucune conversion automatique.", setPetitesBoulesQuiFlottentEn: "Petites boules qui flottent en arrière-plan", setSonsVibrations: "Sons", setSonsVibrationsDesc: "Clic léger et sons de succès/erreur dans l'application", setVibrations: "Vibrations", setVibrationsDesc: "Vibration sur les actions importantes (vente réussie, erreur, PIN)", setSonClic: "Son de clic", setSonVenteReussie: "Son de vente réussie", setSonErreur: "Son d'erreur", setChoisirUnSon: "Choisissez un son.", noProductsEmptySubtitle: "Appuyez ci-dessous pour ajouter votre premier produit.", noDebtsEmptySubtitle: "Appuyez ci-dessous pour ajouter une dette.", addProductHeaderTitle: "Un nouveau produit à ajouter ?", debtAddHeaderTitle: "Une nouvelle dette à ajouter ?", setChoisisLaCouleurDesBoules: "Choisissez la couleur des boules.", setUneQuestionEcrisnousDirectement: "Une question ? Écris-nous directement.", setPriseEnMain: "Prise en main", setCommentAjouterMonPremierProduit: "Comment ajouter mon premier produit ?", setVaDansLongletStockAppuie: "Allez dans l'onglet Stock, appuyez sur le bouton « + », remplissez le nom, la quantité et le prix. Vous pouvez aussi ajouter une photo.", setCommentEnregistrerUneVente: "Comment enregistrer une vente ?", setVaDansLongletVenteDemarre: "Allez dans l'onglet Vente, démarrez un nouveau panier, ajoutez les produits vendus avec leurs quantités, choisissez un mode de paiement, puis finalisez.", setPuisjeGererPlusieursClientsEn: "Puis-je gérer plusieurs clients en même temps ?", setOuiTuPeuxOuvrirPlusieurs: "Oui — vous pouvez ouvrir plusieurs paniers en même temps dans l'onglet Vente, un par client, et les finaliser l'un après l'autre.", setDettesVentesACredit: "Dettes & ventes à crédit", setCommentEnregistrerUneVenteA: "Comment enregistrer une vente à crédit ?", setLorsDeLaFinalisationDune: "Lors de la finalisation d'une vente, choisissez « Crédit » comme mode de paiement et indiquez le nom du client — elle s'ajoute automatiquement dans Dettes.", setCommentMarquerUneDetteComme: "Comment marquer une dette comme payée ?", setDansLongletDettesAppuieSur: "Dans l'onglet Dettes, appuyez sur « Payé » à côté du nom du client, puis confirmez. Ça reste visible pour toujours dans l'Historique.", setCestQuoiLeScoreDe: "C'est quoi le score de confiance client ?", setQuandTuTapesLeNom: "Quand vous tapez le nom d'un client pour une vente à crédit, l'appli affiche s'il rembourse fiablement ses dettes passées, basé sur votre propre historique.", setCaisseDepenses: "Caisse & dépenses", setCommentReglerMonFondDe: "Comment régler mon fond de caisse de départ ?", setSurLeTableauDeBord: "Sur le tableau de bord, appuyez sur « Régler le fond de caisse » et indiquez le montant que vous avez physiquement en caisse maintenant.", setCommentEnregistrerUneDepense: "Comment enregistrer une dépense ?", setAppuieSurAjouterUneDepense: "Appuyez sur « Ajouter une dépense » sur le tableau de bord, indiquez le montant sorti de la caisse et une raison facultative.", setLassistantPeutMaiderAvecQuoi: "L'assistant peut m'aider avec quoi ?", setDemandeluiTesVentesTonStock: "Demandez-lui vos ventes, votre stock, vos dettes, ou des conseils business — il connaît les vraies données de votre boutique. Vous pouvez aussi parler au lieu de taper avec le bouton micro.", setPuisjeGarderPlusieursDiscussions: "Puis-je garder plusieurs discussions ?", setOuiAppuieSurLiconeHistorique: "Oui — appuyez sur l'icône historique pour voir vos discussions passées, épinglez celles qui comptent, renommez-les ou supprimez-les.", setCompteAbonnement: "Compte & abonnement", setCommentDebloquerLesFonctionnalitesPay: "Comment débloquer les fonctionnalités payantes ?", setContacteLeSupportPourOrganiser: "Contactez le support pour organiser le paiement ; votre compte est activé manuellement ensuite.", setMesDonneesSontellesEnSecurite: "Mes données sont-elles en sécurité ?", setTonMotDePasseNest: "Votre mot de passe n'est jamais stocké en clair, et vos données de ventes/stock restent liées uniquement à votre compte.", setPuisjeChangerLaDeviseDe: "Puis-je changer la devise de ma boutique plus tard ?", setOuiAToutMomentDans: "Oui, à tout moment dans Paramètres > Interface > Devise. Les montants s'affichent simplement dans la nouvelle devise, sans conversion.", setVersion: "Version", setMaBoutiqueEstUneApplication: "Boutipro est une application simple de gestion de boutique, pensée pour les commerçants — suivez votre stock, vos ventes, vos dettes et votre caisse, dans votre langue et votre devise.", setDeveloppePour: "Développé pour", setBoutiquiersDuMondeEntier: "Boutiquiers du monde entier", setContact: "Contact", setContacterLeDeveloppeur: "Contacter le développeur",
+    setBoutique: "Boutique", setVentesFinances: "Ventes & finances", setDonnees: "Données", setAssistantIa: "Assistant IA", setAPropos: "À propos", setCodePin: "Code PIN", setDevise: "Devise", setInfosBoutique: "Infos boutique", setCategories: "Catégories", setPaiementParDefaut: "Paiement par défaut", setDettesClients: "Dettes clients", setCaisse: "Caisse", setExporterLesDonnees: "Exporter les données", setReinitialiser: "Réinitialiser", setPreferencesAssistant: "Préférences assistant", setAlertes: "Alertes", setProfilPinPhoto: "Profil, PIN, photo", setNomCategoriesSeuils: "Nom, catégories, seuils", setModeSombreLangueBoules: "Mode sombre, langue, boules", setPaiementDettesCaisse: "Paiement, dettes, caisse", setSauvegardeExportReinitialisation: "Sauvegarde, export, réinitialisation", setRechercheWebHistorique: "Recherche web, historique", setNotifications: "Notifications", setStockDettesAbonnement: "Stock, dettes, abonnement", setVersionDeveloppeur: "Version, développeur", setReinitialiserLesDonnees: "Supprimer les données, déconnexion", setActive: "Activé", setDesactive: "Désactivé", setNomAdresseDevise: "Nom, adresse, devise", setProduitsRayons: "Produits & rayons", setSeuilsDeStock: "Seuils de stock", setAlerteStockBas: "Alerte stock bas", setDelaiDeRelance: "Délai de relance", setEffacerToutesLesDonnees: "Effacer toutes les données", setNomDeLaBoutique: "Nom de la boutique", setIdentifiantDeConnexion: "Identifiant de connexion", setCategoriesDeProduits: "Catégories de produits", setLesCategoriesSontDefiniesAutomatiquem: "Les catégories sont définies automatiquement d'après les noms de vos produits. Cette fonctionnalité sera enrichie dans une prochaine version.", setAucunProduitPourLinstant: "Aucun produit pour l'instant.", setActuellementLowstocklengthProduitsEnD: "Actuellement : {n} produit(s) en dessous du seuil.", setChoisisLeModeDePaiement: "Choisissez le mode de paiement par défaut lors d'une vente.", setResumeDesDettesImpayees: "Résumé des dettes impayées", setClientsAvecDettes: "Clients avec dettes", setTotalDu: "Total dû", setSoldeEstime: "Solde estimé", setTuPeuxVoirLaComparaison: "Vous pouvez voir la comparaison dans l'onglet Statistiques.", setExporteTesDonneesDeVentes: "Exportez vos données de ventes en fichier CSV.", setTelechargerLesVentesCsv: "Télécharger les ventes (CSV)", setTelechargerEnPdf: "Télécharger en PDF", setScannezPourInstaller: "Scannez pour installer l'application", saleCatFilterAll: "Toutes", setSaleslengthVentesProductslengthProdui: "{s} ventes · {p} produits", setRechercheWeb: "Recherche web", setPermettreALiaDeChercher: "Permettre à l'IA de chercher sur internet", setHistoriqueDeConversation: "Historique de conversation", setAimessageslengthMessagesDansLaSession: "{n} message(s) dans la session actuelle.", setEffacerLhistorique: "Effacer l'historique", setAlerteStockFaible: "Alerte stock faible", setSeDeclencheEnDessousDe: "Se déclenche en dessous de {n} unités", setDettesImpayees: "Dettes impayées", setUnpaiddebtslengthEnAttente: "{n} en attente", setExpirationAbonnement: "Expiration abonnement", setVersionGratuite: "Version gratuite", setCeCodeSertADemasquer: "Ce code sert à démasquer vos montants privés (solde de caisse, dépenses, confirmation de dettes).", setAncienCodePin: "Ancien code PIN", setNouveauCodePin: "Nouveau code PIN", setConfirmerLeCodePin: "Confirmer le code PIN", setChoisisLaDeviseDeTa: "Choisissez la devise de votre boutique. Entrez vos prix directement dans cette devise — aucune conversion automatique.", setPetitesBoulesQuiFlottentEn: "Petites boules qui flottent en arrière-plan", setSonsVibrations: "Sons", setSonsVibrationsDesc: "Clic léger et sons de succès/erreur dans l'application", setVibrations: "Vibrations", setVibrationsDesc: "Vibration sur les actions importantes (vente réussie, erreur, PIN)", setSonClic: "Son de clic", setSonVenteReussie: "Son de vente réussie", setSonErreur: "Son d'erreur", setChoisirUnSon: "Choisissez un son.", noProductsEmptySubtitle: "Appuyez ci-dessous pour ajouter votre premier produit.", noDebtsEmptySubtitle: "Appuyez ci-dessous pour ajouter une dette.", addProductHeaderTitle: "Un nouveau produit à ajouter ?", debtAddHeaderTitle: "Une nouvelle dette à ajouter ?", setChoisisLaCouleurDesBoules: "Choisissez la couleur des boules.", setUneQuestionEcrisnousDirectement: "Une question ? Écris-nous directement.", setPriseEnMain: "Prise en main", setCommentAjouterMonPremierProduit: "Comment ajouter mon premier produit ?", setVaDansLongletStockAppuie: "Allez dans l'onglet Stock, appuyez sur le bouton « + », remplissez le nom, la quantité et le prix. Vous pouvez aussi ajouter une photo.", setCommentEnregistrerUneVente: "Comment enregistrer une vente ?", setVaDansLongletVenteDemarre: "Allez dans l'onglet Vente, appuyez sur « Nouvelle vente », ajoutez les produits vendus avec leurs quantités, choisissez un mode de paiement, puis finalisez.", setPuisjeGererPlusieursClientsEn: "Puis-je gérer plusieurs clients en même temps ?", setOuiTuPeuxOuvrirPlusieurs: "Oui — vous pouvez ouvrir plusieurs paniers en même temps dans l'onglet Vente, un par client, et les finaliser l'un après l'autre.", setDettesVentesACredit: "Dettes & ventes à crédit", setCommentEnregistrerUneVenteA: "Comment enregistrer une vente à crédit ?", setLorsDeLaFinalisationDune: "Lors de la finalisation d'une vente, choisissez « Crédit » comme mode de paiement et indiquez le nom du client — elle s'ajoute automatiquement dans Dettes.", setCommentMarquerUneDetteComme: "Comment marquer une dette comme payée ?", setDansLongletDettesAppuieSur: "Dans l'onglet Dettes, appuyez sur « Payé » à côté du nom du client, puis confirmez. Ça reste visible pour toujours dans l'Historique.", setCestQuoiLeScoreDe: "C'est quoi le score de confiance client ?", setQuandTuTapesLeNom: "Quand vous tapez le nom d'un client pour une vente à crédit, l'appli affiche s'il rembourse fiablement ses dettes passées, basé sur votre propre historique.", setCaisseDepenses: "Caisse & dépenses", setCommentReglerMonFondDe: "Comment régler mon fond de caisse de départ ?", setSurLeTableauDeBord: "Sur le tableau de bord, appuyez sur « Régler le fond de caisse » et indiquez le montant que vous avez physiquement en caisse maintenant.", setCommentEnregistrerUneDepense: "Comment enregistrer une dépense ?", setAppuieSurAjouterUneDepense: "Appuyez sur « Ajouter une dépense » sur le tableau de bord, indiquez le montant sorti de la caisse et une raison facultative.", setLassistantPeutMaiderAvecQuoi: "L'assistant peut m'aider avec quoi ?", setDemandeluiTesVentesTonStock: "Demandez-lui vos ventes, votre stock, vos dettes, ou des conseils business — il connaît les vraies données de votre boutique. Vous pouvez aussi parler au lieu de taper avec le bouton micro.", setPuisjeGarderPlusieursDiscussions: "Puis-je garder plusieurs discussions ?", setOuiAppuieSurLiconeHistorique: "Oui — appuyez sur l'icône historique pour voir vos discussions passées, épinglez celles qui comptent, renommez-les ou supprimez-les.", setCompteAbonnement: "Compte & abonnement", setCommentDebloquerLesFonctionnalitesPay: "Comment débloquer les fonctionnalités payantes ?", setContacteLeSupportPourOrganiser: "Contactez le support pour organiser le paiement ; votre compte est activé manuellement ensuite.", setMesDonneesSontellesEnSecurite: "Mes données sont-elles en sécurité ?", setTonMotDePasseNest: "Votre mot de passe n'est jamais stocké en clair, et vos données de ventes/stock restent liées uniquement à votre compte.", setPuisjeChangerLaDeviseDe: "Puis-je changer la devise de ma boutique plus tard ?", setOuiAToutMomentDans: "Oui, à tout moment dans Paramètres > Interface > Devise. Les montants s'affichent simplement dans la nouvelle devise, sans conversion.", setVersion: "Version", setMaBoutiqueEstUneApplication: "Boutipro est une application simple de gestion de boutique, pensée pour les commerçants — suivez votre stock, vos ventes, vos dettes et votre caisse, dans votre langue et votre devise.", setDeveloppePour: "Développé pour", setBoutiquiersDuMondeEntier: "Boutiquiers du monde entier", setContact: "Contact", setContacterLeDeveloppeur: "Contacter le développeur",
     othEtapeObstepSurTotalsteps: "Étape {obStep} sur {totalSteps}", othRemplisCorrectementTousLesChamps: "Remplissez correctement tous les champs (surlignés en rouge).", othTransportMarchandise: "Transport marchandise", tapEffectSettingLabel: "Son à l'achat", tapEffectSettingDesc: "Choisissez le son joué quand vous ajoutez un produit à une vente.", tapSoundPop: "Pop", tapSoundCash: "Caisse enregistreuse", tapSoundBell: "Clochette", tapEffectPreviewBtn: "Écouter", sortByCategory: "Par catégorie", noCategory: "Aucune catégorie", addCategoryOption: "+ Nouvelle catégorie", newCategoryPlaceholder: "Nom de la catégorie", addCategoryConfirm: "Ajouter", noCategoriesYet: "Aucune catégorie pour l'instant.", categoryDeleteConfirm: "Supprimer cette catégorie ? Les produits concernés n'auront plus de catégorie.", othJeNaiPasTrouveDe: "Je n'ai pas trouvé de réponse. Reformulez votre question, ou appuyez sur réessayer ci-dessous.", othSouciDeConnexionApresPlusieurs: "Souci de connexion après plusieurs tentatives. Appuyez sur réessayer ci-dessous.", othDeconnexion: "Déconnexion", othFondDeCaisseFcfacashfundVentes: "Fond de caisse {cashFund} + ventes espèces {totalCashSales} − dépenses {totalExpenses}", othUnite: "unité", othAppuieCidessousPourCommencerA: "Appuyez ci-dessous pour commencer à vendre", othLocalizednumbertodaysaleslengthVentes: "{n} vente(s) aujourd'hui", othPanierDe: "Panier de :", othFacultatif: "facultatif", othEncoreDus: "encore dû(s)", othIlManque: "Il manque", othQuestceQueJaiVenduAujourdhui: "Qu'est-ce que j'ai vendu aujourd'hui ?", othQuelProduitEstPresqueEpuise: "Quel produit est presque épuisé ?", othQuiMeDoitDeLargent: "Qui me doit de l'argent ?", othQuelEstMonMeilleurProduit: "Quel est mon meilleur produit ?", othDesConseilsPourAugmenterMes: "Des conseils pour augmenter mes ventes", othResumeDeMaSemaine: "Résumé de ma semaine", othEtSiJaugmentaisMesPrix: "Et si j'augmentais mes prix de 10% ?", othReessayer: "Réessayer", othEntreTonCodePin: "Entrez votre code PIN", othPourVoirLesMontantsPrives: "Pour voir les montants privés", unmaskCashFloatingBtn: "Démasquer les données", maskCashFloatingBtn: "Masquer les données", othRendu: "Rendu :", errCreditNeedsCustomer: "Indiquez le nom du client pour une vente à crédit.", histColDate: "Date", histColType: "Type", histColProduct: "Produit", histColCustomer: "Client", histColAmount: "Montant", histFiltersBtn: "Filtres", histFilterFromLabel: "Du", histFilterToLabel: "Au", histFilterProductLabel: "Produit", histFilterCustomerLabel: "Client", histFilterMinAmountLabel: "Montant min", histFilterMaxAmountLabel: "Montant max", histFilterReset: "Réinitialiser", histExportBtn: "Exporter (CSV)", histTypeSale: "Ventes", histTypeDebt: "Dettes", histTypeExpense: "Dépenses", noResultsFilters: "Aucun résultat pour ces filtres.", planFreeName: "Gratuit", planProName: "Pro", planBusiness2Name: "Business", planMenuLabel: "Abonnement", planCurrentLabel: "Votre palier actuel", planPerMonth: "mois", planNoEmployees: "Pas de personnel", planUnlimitedEmployees: "Personnel illimité", planMaxEmployees: "{n} membres du personnel max", planNoAi: "Pas d'assistant IA", planUnlimitedAi: "Assistant IA illimité", planLimitedAi: "Assistant IA ({n} messages/mois)", planMultiShop: "Plusieurs boutiques", planCurrentBadge: "✓ Palier actuel", planChooseBtn: "Choisir ce palier", empLimitReached: "Votre palier {plan} permet {n} membre(s) du personnel maximum. Passez à un palier supérieur pour en ajouter plus.", histFiltersProBadge: "Filtres avancés et export — passez à Pro pour débloquer", switchShopBtn: "Changer de boutique", switchShopTitle: "Vos boutiques", newShopNameLabel: "Nom de la nouvelle boutique", shopCompareTabLabel: "Comparaison", shopCompareRevenue: "CA", shopCompareStock: "Stock", shopCompareDebts: "Dettes", cashReportTabLabel: "Rapport de caisse", cashReportOwner: "Propriétaire", cashReportTotalSales: "Total ventes", cashReportCash: "Espèces", cashReportMobile: "Mobile Money", cashReportCard: "Carte", cashReportExpenses: "Dépenses", cashReportDebtPayments: "Paiements de dettes", empShiftLabel: "Plages horaires", empShiftEnable: "Activer", empShiftDisable: "Désactiver", empShiftAddSlot: "Ajouter un créneau", empDayMon: "Lundi", empDayTue: "Mardi", empDayWed: "Mercredi", empDayThu: "Jeudi", empDayFri: "Vendredi", empDaySat: "Samedi", empDaySun: "Dimanche", empOutsideShiftTitle: "Hors de vos heures de travail", empOutsideShiftDesc: "Vous ne pouvez pas encaisser de vente en dehors de vos heures déclarées. Contactez votre responsable si besoin.", accountingExportBtn: "Export comptable", accountingPeriodLabel: "Période", accountingGeneratedBy: "Généré par", accountingSummaryTitle: "Résumé", accountingNetProfit: "Bénéfice net", accountingRevenueChartTitle: "Évolution du chiffre d'affaires", accountingComparisonChartTitle: "Ventes vs Dépenses", accountingSalesTableTitle: "Détail des ventes", accountingExpensesTableTitle: "Détail des dépenses", accountingGenerateBtn: "Générer le PDF", logAccountingExport: "Export comptable généré", productCostPrice: "Prix d'achat (optionnel)", roleSupervisorLabel: "Superviseur", roleSupervisorDesc: "Voit toutes les boutiques, ne modifie rien.", salesGoalLabel: "Objectif du mois", salesGoalSetBtn: "Fixer un objectif", pushAnomalyTitle: "Alertes d'activité inhabituelle", pushAnomalyDesc: "Reçois une notification si une action inhabituelle est détectée (annulations en série, caisse vidée, etc.).", pushEnabledBadge: "✓ Activées", pushUnsupported: "Non disponible sur cet appareil/navigateur.", pushEnableBtn: "Activer les notifications", logProductAdded: "Produit ajouté", logStockAdjusted: "Stock ajusté", logProductDeleted: "Produit supprimé", logExpenseAdded: "Dépense enregistrée", logExpenseDeleted: "Dépense supprimée", logCashFundUpdated: "Fond de caisse modifié", logSaleRecorded: "Vente", logDebtSettled: "Dette soldée", logPartialPayment: "Paiement partiel", logPaymentCash: "espèces", logPaymentCredit: "à crédit", saleSuccessLabel: "Vente réussie !",
     empTabLabel: "Personnel", empIntro: "Créez un compte pour chaque membre du personnel et choisissez ce qu'il peut faire. Vous seul(e) pouvez gérer le personnel, l'abonnement et les données de la boutique.", empAddBtn: "Ajouter un membre du personnel", empNoneYet: "Aucun membre du personnel pour l'instant.", empActive: "Actif", empSuspended: "Suspendu", empEdit: "Modifier", empSuspend: "Suspendre", empReactivate: "Réactiver", empActionLogTitle: "Journal des actions récentes", empNoActionsYet: "Aucune action enregistrée pour l'instant.", empEditTitle: "Modifier le membre du personnel", empAddTitle: "Ajouter un membre du personnel", empNameLabel: "Nom du membre du personnel", empPinLabel: "Code PIN du membre du personnel (4 à 6 chiffres)", empRoleLabel: "Rôle", empPermissionsLabel: "Permissions", empSave: "Enregistrer", empAdd: "Ajouter", empErrName: "Entrez le nom du membre du personnel.", empErrPin: "Le code PIN doit contenir entre 4 et 6 chiffres.", empErrPinUsed: "Ce code PIN est déjà utilisé par un autre membre du personnel. Choisissez-en un autre.", roleVendeurLabel: "Vendeur", roleVendeurDesc: "Vend et consulte le stock/dettes, sans les modifier.", roleGerantLabel: "Gérant", roleGerantDesc: "Gère l'activité quotidienne au complet : ventes, stock, dettes, caisse, statistiques.", rolePersoLabel: "Personnalisé", rolePersoDesc: "Choisissez précisément ce que ce membre du personnel peut faire.", permSell: "Enregistrer des ventes", permViewStock: "Consulter le stock", permEditStock: "Modifier le stock", permViewDebts: "Consulter les dettes clients", permEditDebts: "Gérer les dettes clients (marquer payé, etc.)", permViewCash: "Voir la caisse et le solde", permEditCash: "Modifier la caisse (dépenses, fond de caisse)", permViewStats: "Voir les statistiques", empShowQr: "Voir le QR de connexion", empQrModalTitle: "QR de connexion", empQrModalDesc: "Ce membre du personnel scanne ce code depuis l'écran de connexion pour accéder à la boutique. La connexion par QR sera activée prochainement.", empQrClose: "Fermer", loginAsEmployee: "Se connecter en tant que membre du personnel", empScanTitle: "Scanner votre QR", empManualCodeLabel: "Ou entrez ce code sur PC", empRetryInvite: "Réessayer", empScanInvalidCode: "Ce code est invalide, déjà utilisé, ou a expiré.",
   },
@@ -1099,7 +1099,7 @@ const TRANSLATIONS = {
     noProduct: "ምንም ምርት የለም። የመጀመሪያ ዕቃህን ጨምር።",
     newProduct: "አዲስ ምርት", productName: "የምርት ስም", quantity: "በክምችት ያለ ብዛት",
     unitPrice: "የአንድ ዋጋ (FCFA)", productPhoto: "የምርት ፎቶ (አማራጭ)", processing: "ምስል በማስኬድ ላይ…",
-    noCartYet: "ምንም ንቁ ቅርጫት የለም። ደንበኛ መጣ? አዲስ ቅርጫት ጀምር።", newCart: "አዲስ ቅርጫት",
+    noCartYet: "ምንም ንቁ ቅርጫት የለም። ደንበኛ መጣ? አዲስ ቅርጫት ጀምር።", newCart: "አዲስ ሽያጭ",
     abandonCart: "ይህን ቅርጫት ተወው", cartContent: "የቅርጫት ይዘት", paymentMethod: "የክፍያ ዘዴ",
     clientName: "የደንበኛ ስም", amountGiven: "በደንበኛ የተሰጠ መጠን (FCFA)",
     change: "የሚመለስ ገንዘብ", finalizeSale: "ሽያጩን አጠናቅቅ",
@@ -1251,7 +1251,7 @@ const TRANSLATIONS = {
     newProduct: "New product", productName: "Product name", quantity: "Quantity in stock",
     productDescription: "Description (optional)",
     unitPrice: "Unit price (FCFA)", productPhoto: "Product photo (optional)", processing: "Processing image…",
-    noCartYet: "No active cart. A customer arriving? Start a new cart.", newCart: "New cart",
+    noCartYet: "No sale in progress. A customer arriving? Start a new sale.", newCart: "New sale",
     abandonCart: "Abandon this cart", cartContent: "Cart content", paymentMethod: "Payment method",
     clientName: "Customer name", amountGiven: "Amount given by customer (FCFA)",
     change: "Change to give back", finalizeSale: "Finalize sale",
@@ -1396,7 +1396,7 @@ const TRANSLATIONS = {
     noProduct: "Wala pang produkto. Idagdag ang iyong unang item.",
     newProduct: "Bagong produkto", productName: "Pangalan ng produkto", quantity: "Dami sa stock",
     unitPrice: "Presyo bawat piraso (FCFA)", productPhoto: "Larawan ng produkto (opsyonal)", processing: "Pinoproseso ang larawan…",
-    noCartYet: "Walang aktibong cart. May dumating na kliyente? Magsimula ng bagong cart.", newCart: "Bagong cart",
+    noCartYet: "Walang aktibong cart. May dumating na kliyente? Magsimula ng bagong cart.", newCart: "Bagong benta",
     abandonCart: "Iwanan ang cart na ito", cartContent: "Nilalaman ng cart", paymentMethod: "Paraan ng pagbabayad",
     clientName: "Pangalan ng kliyente", amountGiven: "Halagang ibinigay ng kliyente (FCFA)",
     change: "Sukli", finalizeSale: "Tapusin ang benta",
@@ -1547,7 +1547,7 @@ const TRANSLATIONS = {
     noProduct: "ఇంకా ఉత్పత్తులు లేవు. మీ మొదటి వస్తువును జోడించండి.",
     newProduct: "కొత్త ఉత్పత్తి", productName: "ఉత్పత్తి పేరు", quantity: "స్టాక్‌లో పరిమాణం",
     unitPrice: "యూనిట్ ధర (FCFA)", productPhoto: "ఉత్పత్తి ఫోటో (ఐచ్ఛికం)", processing: "చిత్రాన్ని ప్రాసెస్ చేస్తోంది…",
-    noCartYet: "క్రియాశీల కార్ట్ లేదు. కస్టమర్ వస్తున్నారా? కొత్త కార్ట్‌ను ప్రారంభించండి.", newCart: "కొత్త కార్ట్",
+    noCartYet: "క్రియాశీల కార్ట్ లేదు. కస్టమర్ వస్తున్నారా? కొత్త కార్ట్‌ను ప్రారంభించండి.", newCart: "కొత్త అమ్మకం",
     abandonCart: "ఈ కార్ట్‌ను వదిలివేయండి", cartContent: "కార్ట్ కంటెంట్", paymentMethod: "చెల్లింపు విధానం",
     clientName: "కస్టమర్ పేరు", amountGiven: "కస్టమర్ ఇచ్చిన మొత్తం (FCFA)",
     change: "తిరిగి ఇవ్వాల్సిన చిల్లర", finalizeSale: "అమ్మకాన్ని ఖరారు చేయండి",
@@ -1698,7 +1698,7 @@ const TRANSLATIONS = {
     noProduct: "ยังไม่มีสินค้า เพิ่มสินค้าชิ้นแรกของคุณ",
     newProduct: "สินค้าใหม่", productName: "ชื่อสินค้า", quantity: "จำนวนในสต็อก",
     unitPrice: "ราคาต่อหน่วย (FCFA)", productPhoto: "รูปภาพสินค้า (ไม่บังคับ)", processing: "กำลังประมวลผลรูปภาพ…",
-    noCartYet: "ยังไม่มีตะกร้าที่ใช้งานอยู่ มีลูกค้ามาถึง? เริ่มตะกร้าใหม่", newCart: "ตะกร้าใหม่",
+    noCartYet: "ยังไม่มีตะกร้าที่ใช้งานอยู่ มีลูกค้ามาถึง? เริ่มตะกร้าใหม่", newCart: "การขายใหม่",
     abandonCart: "ยกเลิกตะกร้านี้", cartContent: "รายการในตะกร้า", paymentMethod: "วิธีการชำระเงิน",
     clientName: "ชื่อลูกค้า", amountGiven: "จำนวนเงินที่ลูกค้าให้มา (FCFA)",
     change: "เงินทอน", finalizeSale: "ยืนยันการขาย",
@@ -1849,7 +1849,7 @@ const TRANSLATIONS = {
     noProduct: "Amuñu benn article. Yokk sa article bu njëkk.",
     newProduct: "Article bu bees", productName: "Turu article bi", quantity: "Kayit ci stock bi",
     unitPrice: "Njëg unite bi (FCFA)", productPhoto: "Nataal article bi (du sawar)", processing: "Dafay defar nataal bi…",
-    noCartYet: "Amul panier bu doxal. Am na client di ñëw? Tambali panier bu bees.", newCart: "Panier bu bees",
+    noCartYet: "Amul panier bu doxal. Am na client di ñëw? Tambali panier bu bees.", newCart: "Jaay bu bees",
     abandonCart: "Bàyyi panier bii", cartContent: "Lu nekk ci panier bi", paymentMethod: "Ni ñuy fay",
     clientName: "Turu client bi", amountGiven: "Xaalis client bi joxe (FCFA)",
     change: "Reliqua", finalizeSale: "Jeexal jaay bi",
@@ -2000,7 +2000,7 @@ const TRANSLATIONS = {
     noProduct: "Brak produktów. Dodaj swój pierwszy artykuł.",
     newProduct: "Nowy produkt", productName: "Nazwa produktu", quantity: "Ilość w magazynie",
     unitPrice: "Cena jednostkowa (FCFA)", productPhoto: "Zdjęcie produktu (opcjonalnie)", processing: "Przetwarzanie obrazu…",
-    noCartYet: "Brak aktywnego koszyka. Przyszedł klient? Rozpocznij nowy koszyk.", newCart: "Nowy koszyk",
+    noCartYet: "Brak aktywnego koszyka. Przyszedł klient? Rozpocznij nowy koszyk.", newCart: "Nowa sprzedaż",
     abandonCart: "Porzuć ten koszyk", cartContent: "Zawartość koszyka", paymentMethod: "Metoda płatności",
     clientName: "Imię klienta", amountGiven: "Kwota wręczona przez klienta (FCFA)",
     change: "Reszta", finalizeSale: "Zakończ sprzedaż",
@@ -2151,7 +2151,7 @@ const TRANSLATIONS = {
     noProduct: "لا يوجد منتج بعد. أضف أول منتج لك.",
     newProduct: "منتج جديد", productName: "اسم المنتج", quantity: "الكمية في المخزون",
     unitPrice: "سعر الوحدة (فرنك)", productPhoto: "صورة المنتج (اختياري)", processing: "جارٍ معالجة الصورة…",
-    noCartYet: "لا توجد سلة حالياً. عميل قادم؟ ابدأ سلة جديدة.", newCart: "سلة جديدة",
+    noCartYet: "لا توجد سلة حالياً. عميل قادم؟ ابدأ سلة جديدة.", newCart: "بيع جديد",
     abandonCart: "إلغاء هذه السلة", cartContent: "محتوى السلة", paymentMethod: "طريقة الدفع",
     clientName: "اسم العميل", amountGiven: "المبلغ المُعطى من العميل (فرنك)",
     change: "الباقي المُرجَع", finalizeSale: "إتمام البيع",
@@ -2302,7 +2302,7 @@ const TRANSLATIONS = {
     noProduct: "Aún no hay productos. Añada su primer artículo.",
     newProduct: "Nuevo producto", productName: "Nombre del producto", quantity: "Cantidad en stock",
     unitPrice: "Precio unitario (FCFA)", productPhoto: "Foto del producto (opcional)", processing: "Procesando imagen…",
-    noCartYet: "Ningún carrito en curso. ¿Llega un cliente? Inicie un nuevo carrito.", newCart: "Nuevo carrito",
+    noCartYet: "Ningún carrito en curso. ¿Llega un cliente? Inicie un nuevo carrito.", newCart: "Nueva venta",
     abandonCart: "Abandonar este carrito", cartContent: "Contenido del carrito", paymentMethod: "Método de pago",
     clientName: "Nombre del cliente", amountGiven: "Monto entregado por el cliente (FCFA)",
     change: "Cambio a devolver", finalizeSale: "Finalizar venta",
@@ -2453,7 +2453,7 @@ const TRANSLATIONS = {
     noProduct: "Ainda não há produtos. Adicione seu primeiro artigo.",
     newProduct: "Novo produto", productName: "Nome do produto", quantity: "Quantidade em estoque",
     unitPrice: "Preço unitário (FCFA)", productPhoto: "Foto do produto (opcional)", processing: "Processando imagem…",
-    noCartYet: "Nenhum carrinho em andamento. Chegou um cliente? Inicie um novo carrinho.", newCart: "Novo carrinho",
+    noCartYet: "Nenhum carrinho em andamento. Chegou um cliente? Inicie um novo carrinho.", newCart: "Nova venda",
     abandonCart: "Abandonar este carrinho", cartContent: "Conteúdo do carrinho", paymentMethod: "Método de pagamento",
     clientName: "Nome do cliente", amountGiven: "Valor entregue pelo cliente (FCFA)",
     change: "Troco a devolver", finalizeSale: "Finalizar venda",
@@ -2604,7 +2604,7 @@ const TRANSLATIONS = {
     noProduct: "还没有商品，先添加你的第一件商品吧。",
     newProduct: "新增商品", productName: "商品名称", quantity: "库存数量",
     unitPrice: "单价（非洲法郎）", productPhoto: "商品图片（可选）", processing: "图片处理中…",
-    noCartYet: "暂无进行中的订单。有客人来了？开一个新订单吧。", newCart: "新建订单",
+    noCartYet: "暂无进行中的订单。有客人来了？开一个新订单吧。", newCart: "新建销售",
     abandonCart: "取消此订单", cartContent: "订单内容", paymentMethod: "收款方式",
     clientName: "客户姓名", amountGiven: "客户支付金额（非洲法郎）",
     change: "应找零", finalizeSale: "确认收款",
@@ -2755,7 +2755,7 @@ const TRANSLATIONS = {
     noProduct: "Chưa có sản phẩm nào. Hãy thêm sản phẩm đầu tiên của bạn.",
     newProduct: "Sản phẩm mới", productName: "Tên sản phẩm", quantity: "Số lượng trong kho",
     unitPrice: "Giá mỗi đơn vị (FCFA)", productPhoto: "Ảnh sản phẩm (tùy chọn)", processing: "Đang xử lý ảnh…",
-    noCartYet: "Chưa có giỏ hàng nào đang hoạt động. Khách hàng đến rồi? Bắt đầu giỏ hàng mới.", newCart: "Giỏ hàng mới",
+    noCartYet: "Chưa có giỏ hàng nào đang hoạt động. Khách hàng đến rồi? Bắt đầu giỏ hàng mới.", newCart: "Đơn bán mới",
     abandonCart: "Hủy giỏ hàng này", cartContent: "Nội dung giỏ hàng", paymentMethod: "Phương thức thanh toán",
     clientName: "Tên khách hàng", amountGiven: "Số tiền khách đưa (FCFA)",
     change: "Tiền thối lại", finalizeSale: "Hoàn tất bán hàng",
@@ -2906,7 +2906,7 @@ const TRANSLATIONS = {
     noProduct: "Noch keine Produkte. Fügen Sie Ihr erstes Produkt hinzu.",
     newProduct: "Neues Produkt", productName: "Produktname", quantity: "Lagermenge",
     unitPrice: "Stückpreis (FCFA)", productPhoto: "Produktfoto (optional)", processing: "Bild wird verarbeitet…",
-    noCartYet: "Kein laufender Warenkorb. Ein Kunde ist da? Starten Sie einen neuen Warenkorb.", newCart: "Neuer Warenkorb",
+    noCartYet: "Kein laufender Warenkorb. Ein Kunde ist da? Starten Sie einen neuen Warenkorb.", newCart: "Neuer Verkauf",
     abandonCart: "Diesen Warenkorb verwerfen", cartContent: "Warenkorbinhalt", paymentMethod: "Zahlungsmethode",
     clientName: "Kundenname", amountGiven: "Vom Kunden erhaltener Betrag (FCFA)",
     change: "Rückgeld", finalizeSale: "Verkauf abschließen",
@@ -3057,7 +3057,7 @@ const TRANSLATIONS = {
     noProduct: "Товаров пока нет. Добавь свой первый товар.",
     newProduct: "Новый товар", productName: "Название товара", quantity: "Количество на складе",
     unitPrice: "Цена за единицу (FCFA)", productPhoto: "Фото товара (необязательно)", processing: "Обработка изображения…",
-    noCartYet: "Нет активной корзины. Пришёл клиент? Начни новую корзину.", newCart: "Новая корзина",
+    noCartYet: "Нет активной корзины. Пришёл клиент? Начни новую корзину.", newCart: "Новая продажа",
     abandonCart: "Отменить эту корзину", cartContent: "Содержимое корзины", paymentMethod: "Способ оплаты",
     clientName: "Имя клиента", amountGiven: "Сумма, переданная клиентом (FCFA)",
     change: "Сдача", finalizeSale: "Завершить продажу",
@@ -3208,7 +3208,7 @@ const TRANSLATIONS = {
     noProduct: "कोई उत्पाद नहीं है। अपना पहला उत्पाद जोड़ें।",
     newProduct: "नया उत्पाद", productName: "उत्पाद का नाम", quantity: "स्टॉक में मात्रा",
     unitPrice: "प्रति इकाई मूल्य (FCFA)", productPhoto: "उत्पाद की तस्वीर (वैकल्पिक)", processing: "छवि संसाधित हो रही है…",
-    noCartYet: "कोई सक्रिय कार्ट नहीं है। ग्राहक आया? नई कार्ट शुरू करें।", newCart: "नई कार्ट",
+    noCartYet: "कोई सक्रिय कार्ट नहीं है। ग्राहक आया? नई कार्ट शुरू करें।", newCart: "नई बिक्री",
     abandonCart: "इस कार्ट को रद्द करें", cartContent: "कार्ट की सामग्री", paymentMethod: "भुगतान का तरीका",
     clientName: "ग्राहक का नाम", amountGiven: "ग्राहक द्वारा दी गई राशि (FCFA)",
     change: "बाकी पैसे", finalizeSale: "बिक्री पूरी करें",
@@ -3359,7 +3359,7 @@ const TRANSLATIONS = {
     noProduct: "பொருட்கள் இல்லை. உங்கள் முதல் பொருளைச் சேர்க்கவும்.",
     newProduct: "புதிய பொருள்", productName: "பொருளின் பெயர்", quantity: "இருப்பில் அளவு",
     unitPrice: "ஒரு அலகு விலை (FCFA)", productPhoto: "பொருள் புகைப்படம் (விருப்பம்)", processing: "படம் செயலாக்கப்படுகிறது…",
-    noCartYet: "செயலில் உள்ள கூடை இல்லை. வாடிக்கையாளர் வந்தாரா? புதிய கூடையைத் தொடங்கவும்.", newCart: "புதிய கூடை",
+    noCartYet: "செயலில் உள்ள கூடை இல்லை. வாடிக்கையாளர் வந்தாரா? புதிய கூடையைத் தொடங்கவும்.", newCart: "புதிய விற்பனை",
     abandonCart: "இந்த கூடையை ரத்துசெய்", cartContent: "கூடையின் உள்ளடக்கம்", paymentMethod: "கட்டண முறை",
     clientName: "வாடிக்கையாளர் பெயர்", amountGiven: "வாடிக்கையாளர் கொடுத்த தொகை (FCFA)",
     change: "மீதி பணம்", finalizeSale: "விற்பனையை முடிக்கவும்",
@@ -3510,7 +3510,7 @@ const TRANSLATIONS = {
     noProduct: "কোনো পণ্য নেই। আপনার প্রথম পণ্য যোগ করুন।",
     newProduct: "নতুন পণ্য", productName: "পণ্যের নাম", quantity: "স্টকে পরিমাণ",
     unitPrice: "প্রতি ইউনিট মূল্য (FCFA)", productPhoto: "পণ্যের ছবি (ঐচ্ছিক)", processing: "ছবি প্রক্রিয়া করা হচ্ছে…",
-    noCartYet: "কোনো সক্রিয় কার্ট নেই। গ্রাহক এসেছেন? একটি নতুন কার্ট শুরু করুন।", newCart: "নতুন কার্ট",
+    noCartYet: "কোনো সক্রিয় কার্ট নেই। গ্রাহক এসেছেন? একটি নতুন কার্ট শুরু করুন।", newCart: "নতুন বিক্রয়",
     abandonCart: "এই কার্ট বাতিল করুন", cartContent: "কার্টের বিষয়বস্তু", paymentMethod: "পেমেন্টের পদ্ধতি",
     clientName: "গ্রাহকের নাম", amountGiven: "গ্রাহকের দেওয়া পরিমাণ (FCFA)",
     change: "ফেরত টাকা", finalizeSale: "বিক্রয় সম্পন্ন করুন",
@@ -3661,7 +3661,7 @@ const TRANSLATIONS = {
     noProduct: "کوئی پروڈکٹ نہیں ہے۔ اپنی پہلی پروڈکٹ شامل کریں۔",
     newProduct: "نئی پروڈکٹ", productName: "پروڈکٹ کا نام", quantity: "اسٹاک میں مقدار",
     unitPrice: "فی یونٹ قیمت (FCFA)", productPhoto: "پروڈکٹ کی تصویر (اختیاری)", processing: "تصویر پر کارروائی ہو رہی ہے…",
-    noCartYet: "کوئی فعال کارٹ نہیں ہے۔ گاہک آیا؟ نئی کارٹ شروع کریں۔", newCart: "نئی کارٹ",
+    noCartYet: "کوئی فعال کارٹ نہیں ہے۔ گاہک آیا؟ نئی کارٹ شروع کریں۔", newCart: "نئی فروخت",
     abandonCart: "یہ کارٹ منسوخ کریں", cartContent: "کارٹ کا مواد", paymentMethod: "ادائیگی کا طریقہ",
     clientName: "گاہک کا نام", amountGiven: "گاہک کی دی گئی رقم (FCFA)",
     change: "باقی رقم", finalizeSale: "فروخت مکمل کریں",
@@ -3812,7 +3812,7 @@ const TRANSLATIONS = {
     noProduct: "Belum ada produk. Tambahkan produk pertamamu.",
     newProduct: "Produk baru", productName: "Nama produk", quantity: "Jumlah stok",
     unitPrice: "Harga per unit (FCFA)", productPhoto: "Foto produk (opsional)", processing: "Memproses gambar…",
-    noCartYet: "Belum ada keranjang aktif. Ada pelanggan? Mulai keranjang baru.", newCart: "Keranjang baru",
+    noCartYet: "Belum ada keranjang aktif. Ada pelanggan? Mulai keranjang baru.", newCart: "Penjualan baru",
     abandonCart: "Batalkan keranjang ini", cartContent: "Isi keranjang", paymentMethod: "Metode pembayaran",
     clientName: "Nama pelanggan", amountGiven: "Jumlah uang dari pelanggan (FCFA)",
     change: "Kembalian", finalizeSale: "Selesaikan penjualan",
@@ -3963,7 +3963,7 @@ const TRANSLATIONS = {
     noProduct: "Henüz ürün yok. İlk ürününü ekle.",
     newProduct: "Yeni ürün", productName: "Ürün adı", quantity: "Stoktaki miktar",
     unitPrice: "Birim fiyat (FCFA)", productPhoto: "Ürün fotoğrafı (isteğe bağlı)", processing: "Görsel işleniyor…",
-    noCartYet: "Aktif sepet yok. Müşteri geldi mi? Yeni sepet başlat.", newCart: "Yeni sepet",
+    noCartYet: "Aktif sepet yok. Müşteri geldi mi? Yeni sepet başlat.", newCart: "Yeni satış",
     abandonCart: "Bu sepeti iptal et", cartContent: "Sepet içeriği", paymentMethod: "Ödeme yöntemi",
     clientName: "Müşteri adı", amountGiven: "Müşterinin verdiği tutar (FCFA)",
     change: "Para üstü", finalizeSale: "Satışı tamamla",
@@ -4114,7 +4114,7 @@ const TRANSLATIONS = {
     noProduct: "상품이 없습니다. 첫 상품을 추가하세요.",
     newProduct: "새 상품", productName: "상품명", quantity: "재고 수량",
     unitPrice: "단가 (FCFA)", productPhoto: "상품 사진 (선택 사항)", processing: "이미지 처리 중…",
-    noCartYet: "활성화된 장바구니가 없습니다. 고객이 왔나요? 새 장바구니를 시작하세요.", newCart: "새 장바구니",
+    noCartYet: "활성화된 장바구니가 없습니다. 고객이 왔나요? 새 장바구니를 시작하세요.", newCart: "새 판매",
     abandonCart: "이 장바구니 취소", cartContent: "장바구니 내용", paymentMethod: "결제 방식",
     clientName: "고객명", amountGiven: "고객이 지불한 금액 (FCFA)",
     change: "거스름돈", finalizeSale: "판매 완료",
@@ -4265,7 +4265,7 @@ const TRANSLATIONS = {
     noProduct: "商品がありません。最初の商品を追加しましょう。",
     newProduct: "新しい商品", productName: "商品名", quantity: "在庫数",
     unitPrice: "単価（FCFA）", productPhoto: "商品写真（任意）", processing: "画像を処理中…",
-    noCartYet: "アクティブなカートがありません。お客様が来ましたか？新しいカートを開始しましょう。", newCart: "新しいカート",
+    noCartYet: "アクティブなカートがありません。お客様が来ましたか？新しいカートを開始しましょう。", newCart: "新しい販売",
     abandonCart: "このカートをキャンセル", cartContent: "カートの内容", paymentMethod: "支払い方法",
     clientName: "顧客名", amountGiven: "顧客から受け取った金額（FCFA）",
     change: "お釣り", finalizeSale: "販売を完了",
@@ -4416,7 +4416,7 @@ const TRANSLATIONS = {
     noProduct: "Nessun prodotto. Aggiunga il suo primo articolo.",
     newProduct: "Nuovo prodotto", productName: "Nome del prodotto", quantity: "Quantità in magazzino",
     unitPrice: "Prezzo unitario (FCFA)", productPhoto: "Foto del prodotto (facoltativo)", processing: "Elaborazione immagine…",
-    noCartYet: "Nessun carrello in corso. Arriva un cliente? Avvia un nuovo carrello.", newCart: "Nuovo carrello",
+    noCartYet: "Nessun carrello in corso. Arriva un cliente? Avvia un nuovo carrello.", newCart: "Nuova vendita",
     abandonCart: "Abbandona questo carrello", cartContent: "Contenuto del carrello", paymentMethod: "Metodo di pagamento",
     clientName: "Nome del cliente", amountGiven: "Importo dato dal cliente (FCFA)",
     change: "Resto da restituire", finalizeSale: "Finalizza vendita",
@@ -4553,7 +4553,7 @@ const TRANSLATIONS = {
     appName: "Boutipro", chooseLanguage: "Kies uw taal", shopNamePlaceholder: "Naam van de winkel", identifierPlaceholder: "uw@email.com", createAccountBtn: "Mijn account aanmaken", loginBtn: "Inloggen", wait: "Even geduld…",
     privacyNote: "🔒 Uw PIN-code en uw winkelgegevens (voorraad, verkoop, kassa) blijven privé. Alleen u kunt ze zien — zelfs de beheerder heeft er geen toegang toe.", backToShop: "Terug naar winkelaccount", navDashboard: "Start", navStock: "Voorraad", navSale: "Verkoop", navHistory: "Geschiedenis", navDebts: "Schulden", navStats: "Statistieken", navAI: "Assistent",
     aiTitle: "AI-assistent", aiPlaceholder: "Stel uw vraag…", aiThinking: "Aan het nadenken…", aiWelcome: "Hallo! Ik ken uw winkel. Stel me een vraag over uw voorraad, uw verkopen, uw schulden of uw kassa.", settingsTitle: "Instellingen", manageAccount: "Account beheren", interfaceTitle: "Interface", assistance: "Ondersteuning", dangerZone: "Beveiliging", language: "Taal", addProduct: "Een product toevoegen", save: "Opslaan",
-    cancel: "Annuleren", search: "Zoeken…", todaySales: "Verkopen vandaag", articlesSold: "artikel(en) verkocht", paymentBreakdown: "Verdeling per betaalmethode", cash: "Contant", credit: "Krediet", mobilePayment: "Mobiel betalen", card: "Bankkaart", lowStock: "Lage voorraad", clientDebts: "Klantschulden", seeAllLowStock: "Alles bekijken ({n})", seeLessLowStock: "Minder bekijken", sortMenuTitle: "Sorteren op", sortAlpha: "Alfabetische volgorde", sortMostSold: "Meest verkocht", sortLeastSold: "Minst verkocht", sortMostAvailable: "Meest beschikbaar", sortLeastAvailable: "Minst beschikbaar", sortDefault: "Standaardvolgorde", cashBalance: "Geschat kassaldo", setCashFund: "Kassafonds instellen", addExpense: "Een uitgave toevoegen", noProduct: "Geen product. Voeg uw eerste artikel toe.", newProduct: "Nieuw product", productName: "Naam van het product", quantity: "Hoeveelheid in voorraad", unitPrice: "Eenheidsprijs (FCFA)", productPhoto: "Foto van het product (optioneel)", processing: "Afbeelding verwerken…", noCartYet: "Geen lopend winkelmandje. Komt er een klant aan? Start een nieuw winkelmandje.", newCart: "Nieuw winkelmandje",
+    cancel: "Annuleren", search: "Zoeken…", todaySales: "Verkopen vandaag", articlesSold: "artikel(en) verkocht", paymentBreakdown: "Verdeling per betaalmethode", cash: "Contant", credit: "Krediet", mobilePayment: "Mobiel betalen", card: "Bankkaart", lowStock: "Lage voorraad", clientDebts: "Klantschulden", seeAllLowStock: "Alles bekijken ({n})", seeLessLowStock: "Minder bekijken", sortMenuTitle: "Sorteren op", sortAlpha: "Alfabetische volgorde", sortMostSold: "Meest verkocht", sortLeastSold: "Minst verkocht", sortMostAvailable: "Meest beschikbaar", sortLeastAvailable: "Minst beschikbaar", sortDefault: "Standaardvolgorde", cashBalance: "Geschat kassaldo", setCashFund: "Kassafonds instellen", addExpense: "Een uitgave toevoegen", noProduct: "Geen product. Voeg uw eerste artikel toe.", newProduct: "Nieuw product", productName: "Naam van het product", quantity: "Hoeveelheid in voorraad", unitPrice: "Eenheidsprijs (FCFA)", productPhoto: "Foto van het product (optioneel)", processing: "Afbeelding verwerken…", noCartYet: "Geen lopend winkelmandje. Komt er een klant aan? Start een nieuw winkelmandje.", newCart: "Nieuwe verkoop",
     abandonCart: "Dit winkelmandje verlaten", cartContent: "Inhoud van het winkelmandje", paymentMethod: "Betaalmethode", clientName: "Naam van de klant", amountGiven: "Bedrag gegeven door de klant (FCFA)", change: "Terug te geven wisselgeld", finalizeSale: "Verkoop afronden", recentSales: "Recente verkopen", noDebts: "Geen lopende schulden.", noHistory: "Geen verkoop geregistreerd.", noResults: "Geen resultaat voor",
     paidBtn: "Betaald", confirmDelete: "Verwijdering bevestigen", noCancel: "Nee, annuleren", yesDelete: "Ja, verwijderen", abandonCartMsg: "Dit winkelmandje verlaten? Niet-afgeronde artikelen gaan verloren.", demoMode: "Demomodus — voorbeeldgegevens", upgradeCta: "Overstappen naar betaald", identifier: "E-mail", shopPhoto: "Foto van de winkel", shopName: "Naam van de winkel", updatePin: "PIN-code bijwerken",
     darkMode: "Thema", darkModeDesc: "Systeem, licht of donker", themeSystem: "Systeem", themeLight: "Licht", themeDark: "Donker", animBalls: "Geanimeerde bolletjes", ballColor: "Kleur van de bolletjes", stockAlert: "Waarschuwingsdrempel voorraad", stockAlertDesc: "eenhe(i)d(en) resterend activeert de waarschuwing", resetData: "Al mijn gegevens resetten",
@@ -4661,7 +4661,7 @@ const TRANSLATIONS = {
     noProduct: "Hakuna bidhaa bado. Ongeza bidhaa yako ya kwanza.",
     newProduct: "Bidhaa mpya", productName: "Jina la bidhaa", quantity: "Kiasi kilichopo",
     unitPrice: "Bei ya kipande (FCFA)", productPhoto: "Picha ya bidhaa (si lazima)", processing: "Inachakata picha…",
-    noCartYet: "Hakuna kikapu kinachoendelea. Mteja amefika? Anzisha kikapu kipya.", newCart: "Kikapu kipya",
+    noCartYet: "Hakuna kikapu kinachoendelea. Mteja amefika? Anzisha kikapu kipya.", newCart: "Mauzo mapya",
     abandonCart: "Achana na kikapu hiki", cartContent: "Yaliyomo kwenye kikapu", paymentMethod: "Njia ya malipo",
     clientName: "Jina la mteja", amountGiven: "Kiasi alichotoa mteja (FCFA)",
     change: "Chenji ya kurudisha", finalizeSale: "Kamilisha mauzo",
@@ -4812,7 +4812,7 @@ const TRANSLATIONS = {
     noProduct: "Babu kaya. Ƙara kayanka na farko.",
     newProduct: "Sabon kaya", productName: "Sunan kaya", quantity: "Yawan a kaya",
     unitPrice: "Farashin ɗaya (FCFA)", productPhoto: "Hoton kaya (ba tilas ba)", processing: "Ana sarrafa hoto…",
-    noCartYet: "Babu kwandon aiki. Abokin ciniki ya zo? Fara sabon kwando.", newCart: "Sabon kwando",
+    noCartYet: "Babu kwandon aiki. Abokin ciniki ya zo? Fara sabon kwando.", newCart: "Sabon sayarwa",
     abandonCart: "Soke wannan kwando", cartContent: "Abin da ke cikin kwando", paymentMethod: "Hanyar biya",
     clientName: "Sunan abokin ciniki", amountGiven: "Kuɗin da abokin ciniki ya bayar (FCFA)",
     change: "Canjin da za a mayar", finalizeSale: "Kammala sayarwa",
@@ -4963,7 +4963,7 @@ const TRANSLATIONS = {
     noProduct: "Fɛn si tɛ yen. I ka fɛn fɔlɔ fara.",
     newProduct: "Fɛn kura", productName: "Fɛn tɔgɔ", quantity: "A hakɛ marifa la",
     unitPrice: "Kelen sɔngɔ (FCFA)", productPhoto: "Fɛn ja (wajibi tɛ)", processing: "Ja ka baara kɛra…",
-    noCartYet: "Panye baaralen tɛ yen. Kiliya nana wa? Panye kura daminɛ.", newCart: "Panye kura",
+    noCartYet: "Panye baaralen tɛ yen. Kiliya nana wa? Panye kura daminɛ.", newCart: "Feere kura",
     abandonCart: "Nin panye in dabila", cartContent: "Panye kɔnɔfɛnw", paymentMethod: "Wari sarali fɛɛrɛ",
     clientName: "Kiliya tɔgɔ", amountGiven: "Kiliya ye wari min di (FCFA)",
     change: "Wari segin", finalizeSale: "Feerew ban",
@@ -5099,7 +5099,7 @@ const TRANSLATIONS = {
     periodThisMonth: "Le nyanga", periodAllTime: "Umlando wonke", setPinFirstBtn: "Setha ikhodi ye-PIN",
     appName: "Boutipro", chooseLanguage: "Khetha ulimi lwakho", shopNamePlaceholder: "Igama lesitolo", identifierPlaceholder: "wakho@email.com", createAccountBtn: "Dala i-akhawunti yami", loginBtn: "Ngena", wait: "Linda…", privacyNote: "🔒 Ikhodi yakho ye-PIN nedatha yesitolo sakho (isitoko, ukuthengisa, ikheshi) kuhlala kuyimfihlo. Nguwe kuphela ongakubona — ngisho nomphathi akakwazi ukufinyelela kukho.", backToShop: "Buyela ku-akhawunti yesitolo", navDashboard: "Ekhaya", navStock: "Isitoko", navSale: "Ukuthengisa", navHistory: "Umlando", navDebts: "Izikweletu", navStats: "Izibalo", navAI: "Umsizi", aiTitle: "Umsizi we-AI", aiPlaceholder: "Buza umbuzo wakho…", aiThinking: "Iyacabanga…", aiWelcome: "Sawubona! Ngiyasazi isitolo sakho. Ngibuze umbuzo ngesitoko sakho, ukuthengisa kwakho, izikweletu zakho noma ikheshi lakho.",
     settingsTitle: "Izilungiselelo", manageAccount: "Phatha i-akhawunti", interfaceTitle: "Isixhumanisi", assistance: "Usizo", dangerZone: "Ukuphepha", language: "Ulimi", addProduct: "Engeza umkhiqizo", save: "Londoloza", cancel: "Khansela", search: "Sesha…",
-    todaySales: "Ukuthengisa kwanamuhla", articlesSold: "impahla ethengisiwe", paymentBreakdown: "Ukwahlukaniswa ngendlela yokukhokha", cash: "Ukheshi", credit: "Isikweletu", mobilePayment: "Ukukhokha ngeselula", card: "Ikhadi lasebhange", lowStock: "Isitoko esiphansi", clientDebts: "Izikweletu zamakhasimende", seeAllLowStock: "Bona konke ({n})", seeLessLowStock: "Bona kancane", sortMenuTitle: "Hlunga nge", sortAlpha: "Uhlelo lwezinhlamvu", sortMostSold: "Ezithengiswa kakhulu", sortLeastSold: "Ezithengiswa kancane", sortMostAvailable: "Ezitholakala kakhulu", sortLeastAvailable: "Ezitholakala kancane", sortDefault: "Uhlelo oluvamile", cashBalance: "Ibhalansi yekheshi elilinganiselwe", setCashFund: "Setha isisekelo sekheshi", addExpense: "Engeza isindleko", noProduct: "Ayikho impahla. Engeza impahla yakho yokuqala.", newProduct: "Umkhiqizo omusha", productName: "Igama lomkhiqizo", quantity: "Inani elikhona esitokweni", unitPrice: "Intengo yeyunithi (FCFA)", productPhoto: "Isithombe somkhiqizo (akuphoqelekile)", processing: "Kucutshungulwa isithombe…", noCartYet: "Alikho ibhasikidi eliqhubekayo. Kufika ikhasimende? Qala ibhasikidi elisha.", newCart: "Ibhasikidi elisha", abandonCart: "Yeka lelibhasikidi", cartContent: "Okuqukethwe ebhasikidini", paymentMethod: "Indlela yokukhokha", clientName: "Igama lekhasimende", amountGiven: "Imali enikezwe yikhasimende (FCFA)", change: "Ushintshi okumele ubuyiselwe", finalizeSale: "Qedela ukuthengisa", recentSales: "Ukuthengisa kwakamuva",
+    todaySales: "Ukuthengisa kwanamuhla", articlesSold: "impahla ethengisiwe", paymentBreakdown: "Ukwahlukaniswa ngendlela yokukhokha", cash: "Ukheshi", credit: "Isikweletu", mobilePayment: "Ukukhokha ngeselula", card: "Ikhadi lasebhange", lowStock: "Isitoko esiphansi", clientDebts: "Izikweletu zamakhasimende", seeAllLowStock: "Bona konke ({n})", seeLessLowStock: "Bona kancane", sortMenuTitle: "Hlunga nge", sortAlpha: "Uhlelo lwezinhlamvu", sortMostSold: "Ezithengiswa kakhulu", sortLeastSold: "Ezithengiswa kancane", sortMostAvailable: "Ezitholakala kakhulu", sortLeastAvailable: "Ezitholakala kancane", sortDefault: "Uhlelo oluvamile", cashBalance: "Ibhalansi yekheshi elilinganiselwe", setCashFund: "Setha isisekelo sekheshi", addExpense: "Engeza isindleko", noProduct: "Ayikho impahla. Engeza impahla yakho yokuqala.", newProduct: "Umkhiqizo omusha", productName: "Igama lomkhiqizo", quantity: "Inani elikhona esitokweni", unitPrice: "Intengo yeyunithi (FCFA)", productPhoto: "Isithombe somkhiqizo (akuphoqelekile)", processing: "Kucutshungulwa isithombe…", noCartYet: "Alikho ibhasikidi eliqhubekayo. Kufika ikhasimende? Qala ibhasikidi elisha.", newCart: "Ukuthengisa okusha", abandonCart: "Yeka lelibhasikidi", cartContent: "Okuqukethwe ebhasikidini", paymentMethod: "Indlela yokukhokha", clientName: "Igama lekhasimende", amountGiven: "Imali enikezwe yikhasimende (FCFA)", change: "Ushintshi okumele ubuyiselwe", finalizeSale: "Qedela ukuthengisa", recentSales: "Ukuthengisa kwakamuva",
     noDebts: "Azikho izikweletu eziqhubekayo.", noHistory: "Akukho kuthengisa okuqoshiwe.", noResults: "Ayikho imiphumela ye", paidBtn: "Kukhokhiwe", confirmDelete: "Qinisekisa ukususa", noCancel: "Cha, khansela", yesDelete: "Yebo, susa", abandonCartMsg: "Yeka lelibhasikidi? Izimpahla ezingaqedelwanga zizolahleka.",
     demoMode: "Imodi yedemo — idatha yesibonelo", upgradeCta: "Yiya kokukhokhelwayo",
     identifier: "I-imeyili", shopPhoto: "Isithombe sesitolo", shopName: "Igama lesitolo", updatePin: "Buyekeza ikhodi ye-PIN", darkMode: "Itimu", darkModeDesc: "Uhlelo, okukhanyayo noma okumnyama", themeSystem: "Uhlelo", themeLight: "Okukhanyayo", themeDark: "Okumnyama", animBalls: "Amabhola ahambisayo", ballColor: "Umbala wamabhola", stockAlert: "Umkhawulo wesexwayiso sesitoko", stockAlertDesc: "iyunithi(s) esele kuvusa isexwayiso", resetData: "Setha kabusha yonke idatha yami", resetConfirm: "Lokhu kususa ngokuphelele isitoko sakho, ukuthengisa kwakho, izikweletu zakho nekheshi lakho. I-akhawunti yakho isasebenza. Uyaqinisekisa?", yesErase: "Yebo, susa konke",
@@ -5209,7 +5209,7 @@ const TRANSLATIONS = {
     noProduct: "Kò sí ọjà síbẹ̀. Fi ọjà rẹ àkọ́kọ́ kún.",
     newProduct: "Ọjà tuntun", productName: "Orúkọ ọjà", quantity: "Iye tí ó wà ní ọjà",
     unitPrice: "Owó ẹyọ kan (FCFA)", productPhoto: "Fọ́tò ọjà (kìí ṣe dandan)", processing: "Ń ṣiṣẹ́ lórí fọ́tò…",
-    noCartYet: "Kò sí apẹ̀rẹ̀ tí ń lọ lọ́wọ́lọ́wọ́. Oníbàárà kan dé? Bẹ̀rẹ̀ apẹ̀rẹ̀ tuntun.", newCart: "Apẹ̀rẹ̀ tuntun",
+    noCartYet: "Kò sí apẹ̀rẹ̀ tí ń lọ lọ́wọ́lọ́wọ́. Oníbàárà kan dé? Bẹ̀rẹ̀ apẹ̀rẹ̀ tuntun.", newCart: "Títà tuntun",
     abandonCart: "Fi apẹ̀rẹ̀ yìí sílẹ̀", cartContent: "Ohun tí ó wà nínú apẹ̀rẹ̀", paymentMethod: "Ọ̀nà ìsanwó",
     clientName: "Orúkọ oníbàárà", amountGiven: "Iye owó tí oníbàárà fún (FCFA)",
     change: "Ìyókù tí a ó fún un", finalizeSale: "Parí títà",
@@ -6153,6 +6153,15 @@ EXTRA_UI.receiptPdfLinkLabel = { fr: "Votre reçu en PDF :", en: "Your receipt a
 EXTRA_UI.receiptPdfOpenChat = { fr: "Ouvrir la discussion WhatsApp", en: "Open the WhatsApp chat", es: "Abrir el chat de WhatsApp", pt: "Abrir a conversa do WhatsApp", de: "WhatsApp-Chat öffnen", it: "Apri la chat WhatsApp", nl: "WhatsApp-chat openen", pl: "Otwórz czat WhatsApp", ru: "Открыть чат WhatsApp", tr: "WhatsApp sohbetini aç", ar: "فتح محادثة واتساب", hi: "WhatsApp चैट खोलें", bn: "WhatsApp চ্যাট খুলুন", ur: "واٹس ایپ چیٹ کھولیں", ta: "WhatsApp உரையாடலைத் திற", te: "WhatsApp చాట్ తెరవండి", th: "เปิดแชท WhatsApp", zh: "打开WhatsApp聊天", ja: "WhatsAppのチャットを開く", ko: "WhatsApp 채팅 열기", id: "Buka obrolan WhatsApp", vi: "Mở cuộc trò chuyện WhatsApp", tl: "Buksan ang WhatsApp chat", sw: "Fungua mazungumzo ya WhatsApp", ha: "Buɗe hirar WhatsApp", yo: "Ṣí ìjíròrò WhatsApp", zu: "Vula ingxoxo ye-WhatsApp", am: "የWhatsApp ውይይቱን ክፈት", bm: "WhatsApp baro da wuli", wo: "Ubbi waxtaan WhatsApp bi" };
 EXTRA_UI.receiptPdfPreparing = { fr: "Préparation du PDF…", en: "Preparing the PDF…", es: "Preparando el PDF…", pt: "A preparar o PDF…", de: "PDF wird erstellt…", it: "Preparazione del PDF…", nl: "PDF wordt voorbereid…", pl: "Przygotowywanie PDF…", ru: "Подготовка PDF…", tr: "PDF hazırlanıyor…", ar: "جارٍ تجهيز ملف PDF…", hi: "PDF तैयार हो रहा है…", bn: "PDF প্রস্তুত হচ্ছে…", ur: "PDF تیار ہو رہی ہے…", ta: "PDF தயாராகிறது…", te: "PDF సిద్ధమవుతోంది…", th: "กำลังเตรียม PDF…", zh: "正在准备PDF…", ja: "PDFを準備中…", ko: "PDF 준비 중…", id: "Menyiapkan PDF…", vi: "Đang chuẩn bị PDF…", tl: "Inihahanda ang PDF…", sw: "Inaandaa PDF…", ha: "Ana shirya PDF…", yo: "À ń pèsè PDF…", zu: "Kulungiswa i-PDF…", am: "PDF በመዘጋጀት ላይ…", bm: "PDF bε labεn…", wo: "Ñungi waajal PDF bi…" };
 EXTRA_UI.negStockHint = { fr: "Stock négatif : plus de ventes que le stock enregistré. Vérifiez et corrigez la quantité.", en: "Negative stock: more sold than recorded. Check and correct the quantity.", es: "Stock negativo: se vendió más de lo registrado. Verifique y corrija la cantidad.", pt: "Stock negativo: vendeu-se mais do que o registado. Verifique e corrija a quantidade.", de: "Negativer Bestand: mehr verkauft als erfasst. Bitte Menge prüfen und korrigieren.", it: "Scorte negative: venduto più di quanto registrato. Verifica e correggi la quantità.", nl: "Negatieve voorraad: meer verkocht dan geregistreerd. Controleer en corrigeer de hoeveelheid.", pl: "Ujemny stan: sprzedano więcej niż zapisano. Sprawdź i popraw ilość.", ru: "Отрицательный остаток: продано больше, чем учтено. Проверьте и исправьте количество.", tr: "Negatif stok: kayıtlı olandan fazla satıldı. Miktarı kontrol edip düzeltin.", ar: "مخزون سالب: بيع أكثر من المسجّل. تحقق من الكمية وصحّحها.", hi: "नकारात्मक स्टॉक: दर्ज से ज़्यादा बिका। मात्रा जाँचें और सुधारें।", bn: "ঋণাত্মক স্টক: রেকর্ডের চেয়ে বেশি বিক্রি হয়েছে। পরিমাণ যাচাই করে ঠিক করুন।", ur: "منفی اسٹاک: درج سے زیادہ فروخت ہوا۔ مقدار چیک کر کے درست کریں۔", ta: "எதிர்மறை இருப்பு: பதிவை விட அதிகம் விற்கப்பட்டது. அளவைச் சரிபார்த்து திருத்தவும்.", te: "ప్రతికూల స్టాక్: నమోదు కంటే ఎక్కువ అమ్ముడైంది. పరిమాణాన్ని తనిఖీ చేసి సరిచేయండి.", th: "สต็อกติดลบ: ขายมากกว่าที่บันทึกไว้ ตรวจสอบและแก้ไขจำนวน", zh: "库存为负：售出多于记录。请核对并更正数量。", ja: "在庫がマイナスです：記録より多く売れました。数量を確認して修正してください。", ko: "재고 음수: 기록보다 많이 판매되었습니다. 수량을 확인하고 수정하세요.", id: "Stok minus: terjual lebih banyak dari yang tercatat. Periksa dan koreksi jumlahnya.", vi: "Tồn kho âm: bán nhiều hơn số đã ghi. Hãy kiểm tra và sửa số lượng.", tl: "Negatibong stock: mas marami ang nabenta kaysa nakatala. Suriin at itama ang dami.", sw: "Hisa hasi: imeuzwa zaidi ya iliyorekodiwa. Kagua na urekebishe idadi.", ha: "Kaya ƙasa da sifili: an sayar fiye da abin da aka rubuta. Duba ka gyara adadin.", yo: "Ọjà odi: a ta ju iye tí a kọ sílẹ̀ lọ. Ṣàyẹ̀wò kí o sì ṣàtúnṣe iye náà.", zu: "Isitoko esingaphansi kweqanda: kuthengiswe ngaphezu kokubhalisiwe. Hlola futhi ulungise inani.", am: "አሉታዊ ክምችት፦ ከተመዘገበው በላይ ተሽጧል። ብዛቱን ያረጋግጡና ያስተካክሉ።", bm: "Stock bɛ dugukolo kɔrɔ: feereli caya ni sɛbɛnnen ye. A hakɛ lajɛ ka a latilen.", wo: "Stock bi dafa wàcc ci suuf: jaay nañu lu ëpp li ñu bind. Seetal te defar limu bi." };
+EXTRA_UI.overpaidTitle = { fr: "Trop-perçu sur une dette", en: "Debt overpaid", es: "Deuda cobrada de más", pt: "Dívida paga a mais", de: "Schuld überzahlt", it: "Debito pagato in eccesso", nl: "Schuld te veel betaald", pl: "Nadpłata długu", ru: "Переплата по долгу", tr: "Borç fazla ödendi", ar: "دفعة زائدة على دين", hi: "कर्ज़ पर ज़्यादा भुगतान", bn: "দেনায় বেশি পরিশোধ", ur: "قرض پر زائد ادائیگی", ta: "கடனுக்கு அதிகமாகச் செலுத்தப்பட்டது", te: "అప్పుకు ఎక్కువ చెల్లింపు", th: "ชำระหนี้เกิน", zh: "欠款多收", ja: "債務の過払い", ko: "외상 초과 수납", id: "Utang dibayar lebih", vi: "Thu nợ vượt số tiền", tl: "Sobrang bayad sa utang", sw: "Deni limelipwa zaidi", ha: "An biya bashi fiye da kima", yo: "Sísan gbèsè ti pọ̀ jù", zu: "Isikweletu sikhokhelwe ngokweqile", am: "በዕዳ ላይ ትርፍ ክፍያ", bm: "Juru sara ka tɛmɛ", wo: "Bor bu ñu fey ba ëpp" };
+EXTRA_UI.overpaidHint = { fr: "Deux paiements ont été encaissés pour ce client (souvent deux téléphones hors ligne). L'argent est en caisse : vérifiez et rendez la différence si besoin.", en: "Two payments were collected for this customer (often two phones offline). The money is in the till: check and return the difference if needed.", es: "Se cobraron dos pagos a este cliente (a menudo dos teléfonos sin conexión). El dinero está en caja: verifique y devuelva la diferencia si hace falta.", pt: "Foram recebidos dois pagamentos deste cliente (muitas vezes dois telemóveis sem rede). O dinheiro está no caixa: verifique e devolva a diferença se necessário.", de: "Für diesen Kunden wurden zwei Zahlungen kassiert (oft zwei Handys offline). Das Geld ist in der Kasse: prüfen und die Differenz ggf. zurückgeben.", it: "Sono stati incassati due pagamenti per questo cliente (spesso due telefoni offline). I soldi sono in cassa: verifica e restituisci la differenza se serve.", nl: "Er zijn twee betalingen ontvangen voor deze klant (vaak twee telefoons offline). Het geld zit in de kassa: controleer en geef het verschil zo nodig terug.", pl: "Od tego klienta pobrano dwie płatności (często dwa telefony offline). Pieniądze są w kasie: sprawdź i w razie potrzeby oddaj różnicę.", ru: "С этого клиента получено два платежа (часто два телефона без сети). Деньги в кассе: проверьте и при необходимости верните разницу.", tr: "Bu müşteriden iki ödeme alındı (genellikle iki telefon çevrimdışı). Para kasada: kontrol edin ve gerekirse farkı iade edin.", ar: "تم تحصيل دفعتين من هذا الزبون (غالبًا هاتفان دون اتصال). المال في الصندوق: تحقق وأعد الفرق إذا لزم الأمر.", hi: "इस ग्राहक से दो भुगतान लिए गए (अक्सर दो फ़ोन ऑफ़लाइन)। पैसा गल्ले में है: जाँचें और ज़रूरत हो तो अंतर लौटा दें।", bn: "এই গ্রাহকের কাছ থেকে দুটি পেমেন্ট নেওয়া হয়েছে (প্রায়ই দুটি ফোন অফলাইনে)। টাকা ক্যাশে আছে: যাচাই করে প্রয়োজনে পার্থক্য ফেরত দিন।", ur: "اس گاہک سے دو ادائیگیاں وصول ہوئیں (اکثر دو فون آف لائن)۔ رقم گلے میں ہے: جانچ کریں اور ضرورت ہو تو فرق واپس کریں۔", ta: "இந்த வாடிக்கையாளரிடம் இரண்டு கட்டணங்கள் பெறப்பட்டன (பெரும்பாலும் இரண்டு போன்கள் ஆஃப்லைனில்). பணம் கல்லாவில் உள்ளது: சரிபார்த்து தேவைப்பட்டால் வித்தியாசத்தைத் திருப்பிக் கொடுங்கள்.", te: "ఈ కస్టమర్ నుండి రెండు చెల్లింపులు తీసుకున్నారు (తరచుగా రెండు ఫోన్లు ఆఫ్‌లైన్‌లో). డబ్బు గల్లాలో ఉంది: తనిఖీ చేసి అవసరమైతే తేడాను తిరిగి ఇవ్వండి.", th: "รับชำระจากลูกค้ารายนี้สองครั้ง (มักเกิดจากโทรศัพท์สองเครื่องออฟไลน์) เงินอยู่ในลิ้นชัก: ตรวจสอบและคืนส่วนต่างหากจำเป็น", zh: "该顾客被收了两次款（常见于两部手机离线）。钱在收银台里：请核对，必要时退还差额。", ja: "この顧客から2回支払いを受け取りました（2台の端末がオフラインだった場合によくあります）。お金はレジにあります。確認し、必要なら差額を返してください。", ko: "이 고객에게서 두 번 수납했습니다(주로 두 휴대폰이 오프라인일 때). 돈은 금고에 있으니 확인하고 필요하면 차액을 돌려주세요.", id: "Dua pembayaran diterima dari pelanggan ini (sering karena dua ponsel offline). Uangnya ada di kas: periksa dan kembalikan selisihnya bila perlu.", vi: "Đã thu hai lần từ khách này (thường do hai điện thoại ngoại tuyến). Tiền ở trong két: hãy kiểm tra và trả lại phần chênh lệch nếu cần.", tl: "Dalawang bayad ang natanggap mula sa customer na ito (madalas dahil dalawang phone ang offline). Nasa kaha ang pera: suriin at ibalik ang sobra kung kailangan.", sw: "Malipo mawili yamepokelewa kwa mteja huyu (mara nyingi simu mbili bila mtandao). Pesa iko kwenye droo: hakiki na urudishe tofauti ikihitajika.", ha: "An karɓi biyan kuɗi sau biyu daga wannan abokin ciniki (galibi wayoyi biyu ba tare da intanet ba). Kuɗin yana cikin akwati: bincika ka mayar da bambancin idan ya cancanta.", yo: "Wọ́n gba owó lẹ́ẹ̀mejì lọ́wọ́ oníbàárà yìí (nígbà míì fóònù méjì tí kò sí lórí ayélujára). Owó wà nínú àpótí: ṣàyẹ̀wò kí o sì dá ìyàtọ̀ padà tí ó bá yẹ.", zu: "Kwamukelwe izinkokhelo ezimbili kuleli khasimende (ngokuvamile amafoni amabili engaxhunyiwe). Imali isekhawunteni: hlola bese ubuyisela umehluko uma kudingeka.", am: "ከዚህ ደንበኛ ሁለት ክፍያዎች ተቀብለዋል (ብዙውን ጊዜ ሁለት ስልኮች ከመስመር ውጭ ሲሆኑ)። ገንዘቡ በካዝና ውስጥ ነው፤ ያረጋግጡ እና ካስፈለገ ልዩነቱን ይመልሱ።", bm: "Sara fila minɛna nin kiliyan in fɛ (tuma caman telefɔni fila tun tɛ ɛntɛrinɛti kan). Wari bɛ kɛsu kɔnɔ: a lajɛ ani ni a ka kan, tɔ segin a ma.", wo: "Ñaari fey lañu jot ci kiliyaan bii (lu bari ñaari telefon yu amul connexion). Xaalis bi mi ngi ci kees bi: seetal te delloo ko li ëpp su soxlawee." };
+EXTRA_UI.overpaidAck = { fr: "C'est vérifié", en: "Checked", es: "Verificado", pt: "Verificado", de: "Geprüft", it: "Verificato", nl: "Gecontroleerd", pl: "Sprawdzone", ru: "Проверено", tr: "Kontrol edildi", ar: "تم التحقق", hi: "जाँच लिया", bn: "যাচাই করা হয়েছে", ur: "جانچ لیا", ta: "சரிபார்த்தேன்", te: "తనిఖీ చేశాను", th: "ตรวจแล้ว", zh: "已核对", ja: "確認済み", ko: "확인함", id: "Sudah dicek", vi: "Đã kiểm tra", tl: "Nasuri na", sw: "Imehakikiwa", ha: "An bincika", yo: "Mo ti ṣàyẹ̀wò", zu: "Sekuhloliwe", am: "ተረጋግጧል", bm: "N y'a lajɛ", wo: "Seet naa ko" };
+EXTRA_UI.offlineBannerMsg = { fr: "Pas de réseau : vos ventes sont gardées sur le téléphone et partiront toutes seules au retour du réseau.", en: "No network: your sales are kept on the phone and will be sent automatically when the network returns.", es: "Sin red: sus ventas se guardan en el teléfono y se enviarán solas cuando vuelva la red.", pt: "Sem rede: as suas vendas ficam guardadas no telemóvel e serão enviadas sozinhas quando a rede voltar.", de: "Kein Netz: Ihre Verkäufe bleiben auf dem Handy und werden automatisch gesendet, sobald das Netz zurück ist.", it: "Nessuna rete: le vendite restano sul telefono e partiranno da sole al ritorno della rete.", nl: "Geen netwerk: uw verkopen blijven op de telefoon en worden vanzelf verzonden zodra het netwerk terug is.", pl: "Brak sieci: sprzedaż jest zapisana w telefonie i wyśle się sama po powrocie sieci.", ru: "Нет сети: продажи сохранены на телефоне и отправятся сами, когда появится сеть.", tr: "Ağ yok: satışlarınız telefonda saklanır ve ağ geri geldiğinde kendiliğinden gönderilir.", ar: "لا توجد شبكة: مبيعاتك محفوظة على الهاتف وسترسل تلقائيًا عند عودة الشبكة.", hi: "नेटवर्क नहीं है: आपकी बिक्री फ़ोन में सुरक्षित है और नेटवर्क आते ही अपने-आप भेज दी जाएगी।", bn: "নেটওয়ার্ক নেই: আপনার বিক্রি ফোনে রাখা আছে, নেটওয়ার্ক ফিরলে নিজে থেকেই পাঠানো হবে।", ur: "نیٹ ورک نہیں: آپ کی فروخت فون پر محفوظ ہے اور نیٹ ورک واپس آتے ہی خود بخود بھیج دی جائے گی۔", ta: "நெட்வொர்க் இல்லை: உங்கள் விற்பனைகள் போனில் சேமிக்கப்பட்டுள்ளன, நெட்வொர்க் வந்ததும் தானாக அனுப்பப்படும்.", te: "నెట్‌వర్క్ లేదు: మీ అమ్మకాలు ఫోన్‌లో భద్రంగా ఉన్నాయి, నెట్‌వర్క్ రాగానే వాటంతట అవే పంపబడతాయి.", th: "ไม่มีสัญญาณ: ยอดขายถูกเก็บไว้ในโทรศัพท์และจะส่งเองเมื่อสัญญาณกลับมา", zh: "无网络：销售已保存在手机上，网络恢复后会自动上传。", ja: "ネットワークなし：販売は端末に保存され、回線が戻ると自動で送信されます。", ko: "네트워크 없음: 판매는 휴대폰에 저장되며 네트워크가 돌아오면 자동으로 전송됩니다.", id: "Tidak ada jaringan: penjualan Anda tersimpan di ponsel dan akan terkirim sendiri saat jaringan kembali.", vi: "Không có mạng: các đơn bán được lưu trên điện thoại và sẽ tự gửi khi có mạng lại.", tl: "Walang network: nakatabi sa phone ang mga benta mo at kusang ipapadala pagbalik ng network.", sw: "Hakuna mtandao: mauzo yako yamehifadhiwa kwenye simu na yatatumwa yenyewe mtandao ukirudi.", ha: "Babu sadarwa: an adana sayarwarka a waya, za a tura su da kansu idan sadarwa ta dawo.", yo: "Kò sí nẹ́tíwọ̀ọ̀kì: àwọn títà rẹ wà lórí fóònù, wọn yóò lọ fúnra wọn nígbà tí nẹ́tíwọ̀ọ̀kì bá padà.", zu: "Ayikho inethiwekhi: ukuthengisa kwakho kugcinwe efonini futhi kuzothunyelwa ngokwako uma inethiwekhi ibuya.", am: "ኔትወርክ የለም፦ ሽያጮችዎ በስልኩ ላይ ተቀምጠዋል፤ ኔትወርክ ሲመለስ በራሳቸው ይላካሉ።", bm: "Rezo tɛ yen: i ka feereli bɛ telefɔni kɔnɔ, u bɛna taa u yɛrɛ ma ni rezo seginna.", wo: "Amul réseau: say jaay yi ñu ngi ci telefon bi, dinañu dem seen bopp bu réseau bi delsee." };
+EXTRA_UI.offlineBannerPending = { fr: "{n} vente(s) en attente d'envoi", en: "{n} sale(s) waiting to be sent", es: "{n} venta(s) pendientes de envío", pt: "{n} venda(s) à espera de envio", de: "{n} Verkauf/Verkäufe warten auf Versand", it: "{n} vendita/e in attesa di invio", nl: "{n} verkoop/verkopen wacht(en) op verzending", pl: "{n} sprzedaż(y) czeka na wysłanie", ru: "Ожидают отправки: {n}", tr: "Gönderilmeyi bekleyen {n} satış", ar: "{n} عملية بيع بانتظار الإرسال", hi: "{n} बिक्री भेजे जाने की प्रतीक्षा में", bn: "{n}টি বিক্রি পাঠানোর অপেক্ষায়", ur: "{n} فروخت بھیجے جانے کی منتظر", ta: "{n} விற்பனை அனுப்பக் காத்திருக்கிறது", te: "{n} అమ్మకం(లు) పంపడానికి వేచి ఉన్నాయి", th: "{n} รายการขายรอส่ง", zh: "{n} 笔销售待上传", ja: "送信待ちの販売：{n} 件", ko: "전송 대기 중인 판매 {n}건", id: "{n} penjualan menunggu dikirim", vi: "{n} đơn bán đang chờ gửi", tl: "{n} benta ang naghihintay maipadala", sw: "Mauzo {n} yanasubiri kutumwa", ha: "Sayarwa {n} na jiran turawa", yo: "Títà {n} ń dúró láti lọ", zu: "Ukuthengisa okungu-{n} kulindile ukuthunyelwa", am: "{n} ሽያጭ(ዎች) ለመላክ በመጠባበቅ ላይ", bm: "Feereli {n} bɛ makɔnɔ ka ci", wo: "{n} jaay di xaar ñu yónnee leen" };
+EXTRA_UI.pushStuckEmp = { fr: "{n} vente(s) pas encore envoyée(s) au serveur malgré le réseau. Elles restent sur ce téléphone : demandez au propriétaire de vérifier que votre compte est actif.", en: "{n} sale(s) not yet sent to the server despite the network. They stay on this phone: ask the owner to check that your account is active.", es: "{n} venta(s) aún sin enviar pese a haber red. Siguen en este teléfono: pida al dueño que verifique que su cuenta esté activa.", pt: "{n} venda(s) ainda não enviada(s) apesar da rede. Ficam neste telemóvel: peça ao dono para verificar se a sua conta está ativa.", de: "{n} Verkauf/Verkäufe trotz Netz noch nicht gesendet. Sie bleiben auf diesem Handy: Bitten Sie den Inhaber zu prüfen, ob Ihr Konto aktiv ist.", it: "{n} vendita/e non ancora inviata/e nonostante la rete. Restano su questo telefono: chiedi al titolare di verificare che il tuo account sia attivo.", nl: "{n} verkoop/verkopen ondanks netwerk nog niet verzonden. Ze blijven op deze telefoon: vraag de eigenaar te controleren of uw account actief is.", pl: "{n} sprzedaż(y) nie wysłano mimo sieci. Zostają w tym telefonie: poproś właściciela o sprawdzenie, czy Twoje konto jest aktywne.", ru: "{n} продаж(и) не отправлены, хотя сеть есть. Они сохранены на телефоне: попросите владельца проверить, что ваш аккаунт активен.", tr: "Ağ olmasına rağmen {n} satış henüz gönderilmedi. Bu telefonda duruyorlar: sahibinden hesabınızın aktif olduğunu kontrol etmesini isteyin.", ar: "{n} عملية بيع لم ترسل بعد رغم وجود الشبكة. ما زالت على هذا الهاتف: اطلب من المالك التحقق من أن حسابك مفعّل.", hi: "नेटवर्क होने के बावजूद {n} बिक्री अभी तक नहीं भेजी गई। वे इसी फ़ोन में हैं: मालिक से अपना खाता सक्रिय है यह जाँचने को कहें।", bn: "নেটওয়ার্ক থাকা সত্ত্বেও {n}টি বিক্রি এখনও পাঠানো হয়নি। সেগুলো এই ফোনেই আছে: মালিককে আপনার অ্যাকাউন্ট সক্রিয় কিনা দেখতে বলুন।", ur: "نیٹ ورک کے باوجود {n} فروخت ابھی نہیں بھیجی گئی۔ وہ اسی فون پر ہیں: مالک سے کہیں کہ آپ کا اکاؤنٹ فعال ہے یہ چیک کرے۔", ta: "நெட்வொர்க் இருந்தும் {n} விற்பனை இன்னும் அனுப்பப்படவில்லை. அவை இந்த போனில் உள்ளன: உங்கள் கணக்கு செயலில் உள்ளதா என உரிமையாளரிடம் சரிபார்க்கச் சொல்லுங்கள்.", te: "నెట్‌వర్క్ ఉన్నా {n} అమ్మకం(లు) ఇంకా పంపబడలేదు. అవి ఈ ఫోన్‌లోనే ఉన్నాయి: మీ ఖాతా యాక్టివ్‌గా ఉందో లేదో యజమానిని చూడమని అడగండి.", th: "มีสัญญาณแต่ยังส่งยอดขาย {n} รายการไม่ได้ ข้อมูลยังอยู่ในเครื่องนี้: ขอให้เจ้าของตรวจว่าบัญชีของคุณยังใช้งานอยู่", zh: "有网络但仍有 {n} 笔销售未上传，它们保存在这部手机上：请让店主确认您的账号仍有效。", ja: "ネットワークがあるのに {n} 件の販売が未送信です。この端末に残っています。オーナーにアカウントが有効か確認してもらってください。", ko: "네트워크가 있는데도 판매 {n}건이 아직 전송되지 않았습니다. 이 휴대폰에 남아 있으니 사장님께 계정이 활성 상태인지 확인을 요청하세요.", id: "{n} penjualan belum terkirim meski ada jaringan. Data tetap di ponsel ini: minta pemilik memeriksa apakah akun Anda masih aktif.", vi: "Có mạng nhưng {n} đơn bán vẫn chưa gửi được. Chúng vẫn nằm trên điện thoại này: hãy nhờ chủ cửa hàng kiểm tra tài khoản của bạn còn hoạt động.", tl: "May network pero hindi pa naipapadala ang {n} benta. Nasa phone na ito pa rin: hilingin sa may-ari na tingnan kung aktibo ang account mo.", sw: "Mauzo {n} hayajatumwa licha ya mtandao. Yamebaki kwenye simu hii: mwombe mmiliki ahakikishe akaunti yako iko hai.", ha: "Duk da akwai sadarwa, ba a tura sayarwa {n} ba tukuna. Suna kan wannan wayar: roƙi mai shago ya duba ko asusunka yana aiki.", yo: "Títà {n} kò tíì lọ bí ó tilẹ̀ jẹ́ pé nẹ́tíwọ̀ọ̀kì wà. Wọ́n ṣì wà lórí fóònù yìí: ní kí olùní ṣàyẹ̀wò pé àkáǹtì rẹ ṣì ń ṣiṣẹ́.", zu: "Ukuthengisa okungu-{n} akukathunyelwa nakuba kukhona inethiwekhi. Kusesefonini: cela umnikazi ahlole ukuthi i-akhawunti yakho isasebenza.", am: "ኔትወርክ ቢኖርም {n} ሽያጭ(ዎች) ገና አልተላኩም። በዚህ ስልክ ላይ ናቸው፤ ባለቤቱ መለያዎ ንቁ መሆኑን እንዲያረጋግጥ ይጠይቁ።", bm: "Hali ni rezo bɛ yen, feereli {n} ma ci fɔlɔ. U bɛ telefɔni in kɔnɔ: a fɔ butiki tigi ye a ka a lajɛ ni i ka kɔnti bɛ baara la.", wo: "Am na réseau waaye {n} jaay yónneegu ñu leen. Ñu ngi ci telefon bii: laajal boroom bitig bi mu seet ndax sa compte dafa dox." };
+EXTRA_UI.pushStuckOwner = { fr: "{n} vente(s) pas encore envoyée(s) au serveur malgré le réseau. Elles restent sur ce téléphone et l'envoi est réessayé automatiquement.", en: "{n} sale(s) not yet sent to the server despite the network. They stay on this phone and sending is retried automatically.", es: "{n} venta(s) aún sin enviar pese a haber red. Siguen en este teléfono y el envío se reintenta automáticamente.", pt: "{n} venda(s) ainda não enviada(s) apesar da rede. Ficam neste telemóvel e o envio é tentado de novo automaticamente.", de: "{n} Verkauf/Verkäufe trotz Netz noch nicht gesendet. Sie bleiben auf diesem Handy, das Senden wird automatisch wiederholt.", it: "{n} vendita/e non ancora inviata/e nonostante la rete. Restano su questo telefono e l'invio viene ritentato automaticamente.", nl: "{n} verkoop/verkopen ondanks netwerk nog niet verzonden. Ze blijven op deze telefoon en verzenden wordt automatisch opnieuw geprobeerd.", pl: "{n} sprzedaż(y) nie wysłano mimo sieci. Zostają w telefonie, wysyłanie jest ponawiane automatycznie.", ru: "{n} продаж(и) не отправлены, хотя сеть есть. Они сохранены на телефоне, отправка повторяется автоматически.", tr: "Ağ olmasına rağmen {n} satış henüz gönderilmedi. Bu telefonda duruyorlar ve gönderim otomatik olarak yeniden deneniyor.", ar: "{n} عملية بيع لم ترسل بعد رغم وجود الشبكة. ما زالت على هذا الهاتف ويعاد الإرسال تلقائيًا.", hi: "नेटवर्क होने के बावजूद {n} बिक्री अभी तक नहीं भेजी गई। वे इसी फ़ोन में हैं और भेजने की कोशिश अपने-आप दोहराई जा रही है।", bn: "নেটওয়ার্ক থাকা সত্ত্বেও {n}টি বিক্রি এখনও পাঠানো হয়নি। সেগুলো এই ফোনেই আছে, আবার পাঠানোর চেষ্টা স্বয়ংক্রিয়ভাবে হচ্ছে।", ur: "نیٹ ورک کے باوجود {n} فروخت ابھی نہیں بھیجی گئی۔ وہ اسی فون پر ہیں اور بھیجنے کی دوبارہ کوشش خود بخود ہو رہی ہے۔", ta: "நெட்வொர்க் இருந்தும் {n} விற்பனை இன்னும் அனுப்பப்படவில்லை. அவை இந்த போனில் உள்ளன, மீண்டும் தானாக அனுப்ப முயற்சிக்கப்படுகிறது.", te: "నెట్‌వర్క్ ఉన్నా {n} అమ్మకం(లు) ఇంకా పంపబడలేదు. అవి ఈ ఫోన్‌లోనే ఉన్నాయి, పంపడం ఆటోమేటిక్‌గా మళ్లీ ప్రయత్నిస్తోంది.", th: "มีสัญญาณแต่ยังส่งยอดขาย {n} รายการไม่ได้ ข้อมูลยังอยู่ในเครื่องนี้และระบบจะลองส่งใหม่เอง", zh: "有网络但仍有 {n} 笔销售未上传，它们保存在这部手机上，系统会自动重试。", ja: "ネットワークがあるのに {n} 件の販売が未送信です。この端末に残っており、自動で再送されます。", ko: "네트워크가 있는데도 판매 {n}건이 아직 전송되지 않았습니다. 이 휴대폰에 남아 있으며 자동으로 다시 시도합니다.", id: "{n} penjualan belum terkirim meski ada jaringan. Data tetap di ponsel ini dan pengiriman dicoba ulang otomatis.", vi: "Có mạng nhưng {n} đơn bán vẫn chưa gửi được. Chúng vẫn nằm trên điện thoại này và sẽ tự động gửi lại.", tl: "May network pero hindi pa naipapadala ang {n} benta. Nasa phone na ito pa rin at kusang susubukang ipadala ulit.", sw: "Mauzo {n} hayajatumwa licha ya mtandao. Yamebaki kwenye simu hii na yanajaribiwa kutumwa tena yenyewe.", ha: "Duk da akwai sadarwa, ba a tura sayarwa {n} ba tukuna. Suna kan wannan wayar kuma ana sake gwada turawa da kansa.", yo: "Títà {n} kò tíì lọ bí ó tilẹ̀ jẹ́ pé nẹ́tíwọ̀ọ̀kì wà. Wọ́n ṣì wà lórí fóònù yìí, a sì ń gbìyànjú láti fi wọ́n ránṣẹ́ fúnra rẹ̀.", zu: "Ukuthengisa okungu-{n} akukathunyelwa nakuba kukhona inethiwekhi. Kusesefonini futhi kuzozanywa futhi ngokuzenzakalelayo.", am: "ኔትወርክ ቢኖርም {n} ሽያጭ(ዎች) ገና አልተላኩም። በዚህ ስልክ ላይ ናቸው፤ መላኩ በራሱ እንደገና ይሞከራል።", bm: "Hali ni rezo bɛ yen, feereli {n} ma ci fɔlɔ. U bɛ telefɔni in kɔnɔ, u cili bɛ segin a yɛrɛ ma.", wo: "Am na réseau waaye {n} jaay yónneegu ñu leen. Ñu ngi ci telefon bii, dinañu jéem yónnee leen ci seen bopp." };
+EXTRA_UI.quotaCancelledPart = { fr: "dont {n} annulée(s)", en: "incl. {n} cancelled", es: "incl. {n} anulada(s)", pt: "incl. {n} anulada(s)", de: "davon {n} storniert", it: "di cui {n} annullata/e", nl: "waarvan {n} geannuleerd", pl: "w tym {n} anulowane", ru: "из них отменено: {n}", tr: "{n} iptal dahil", ar: "منها {n} ملغاة", hi: "जिनमें {n} रद्द", bn: "যার মধ্যে {n}টি বাতিল", ur: "جن میں {n} منسوخ", ta: "அதில் {n} ரத்து", te: "వాటిలో {n} రద్దు", th: "ยกเลิก {n} รายการ", zh: "含已取消 {n} 笔", ja: "うち取消 {n} 件", ko: "취소 {n}건 포함", id: "termasuk {n} dibatalkan", vi: "gồm {n} đã hủy", tl: "kasama ang {n} na kinansela", sw: "ikiwemo {n} zilizofutwa", ha: "har da {n} da aka soke", yo: "pẹ̀lú {n} tí a fagilé", zu: "kuhlanganise no-{n} okukhanseliwe", am: "ከነዚህ {n} የተሰረዙ", bm: "{n} dabilalen bɛ u la", wo: "{n} yu ñu neenal ci biir" };
+EXTRA_UI.quotaLeftHint = { fr: "Encore {n} vente(s) possible(s) aujourd'hui. Passez à Pro pour vendre sans limite.", en: "{n} sale(s) left today. Upgrade to Pro to sell without limit.", es: "Le quedan {n} venta(s) hoy. Pase a Pro para vender sin límite.", pt: "Ainda pode fazer {n} venda(s) hoje. Passe para Pro para vender sem limite.", de: "Heute noch {n} Verkauf/Verkäufe möglich. Mit Pro ohne Limit verkaufen.", it: "Ancora {n} vendita/e possibile/i oggi. Passa a Pro per vendere senza limiti.", nl: "Vandaag nog {n} verkoop/verkopen mogelijk. Ga naar Pro om onbeperkt te verkopen.", pl: "Dziś możesz jeszcze wykonać {n} sprzedaż(y). Przejdź na Pro, by sprzedawać bez limitu.", ru: "Сегодня можно ещё продаж: {n}. Перейдите на Pro, чтобы продавать без ограничений.", tr: "Bugün {n} satış hakkınız kaldı. Sınırsız satış için Pro'ya geçin.", ar: "يمكنك إجراء {n} عملية بيع أخرى اليوم. انتقل إلى Pro للبيع دون حد.", hi: "आज {n} और बिक्री कर सकते हैं। बिना सीमा बेचने के लिए Pro लें।", bn: "আজ আরও {n}টি বিক্রি করা যাবে। সীমাহীন বিক্রির জন্য Pro নিন।", ur: "آج مزید {n} فروخت ممکن ہے۔ بغیر حد کے فروخت کے لیے Pro لیں۔", ta: "இன்று இன்னும் {n} விற்பனை செய்யலாம். வரம்பின்றி விற்க Pro-க்கு மாறுங்கள்.", te: "ఈ రోజు ఇంకా {n} అమ్మకం(లు) చేయవచ్చు. పరిమితి లేకుండా అమ్మడానికి Pro తీసుకోండి.", th: "วันนี้ขายได้อีก {n} รายการ อัปเกรดเป็น Pro เพื่อขายได้ไม่จำกัด", zh: "今天还可销售 {n} 笔。升级到 Pro 即可无限销售。", ja: "今日はあと {n} 件販売できます。Pro にすると無制限で販売できます。", ko: "오늘 {n}건 더 판매할 수 있습니다. Pro로 업그레이드하면 무제한입니다.", id: "Hari ini masih bisa {n} penjualan. Beralih ke Pro untuk jual tanpa batas.", vi: "Hôm nay còn bán được {n} đơn. Nâng cấp Pro để bán không giới hạn.", tl: "May {n} benta pa ngayong araw. Mag-Pro para makapagbenta nang walang limitasyon.", sw: "Mauzo {n} yamebaki leo. Hamia Pro uuze bila kikomo.", ha: "Sauran sayarwa {n} a yau. Koma Pro don sayarwa ba iyaka.", yo: "Títà {n} ló kù lónìí. Lọ sí Pro láti ta láìsí ààlà.", zu: "Kusasele ukuthengisa okungu-{n} namuhla. Thuthukela ku-Pro ukuze uthengise ngaphandle komkhawulo.", am: "ዛሬ {n} ተጨማሪ ሽያጭ ይቻላል። ያለ ገደብ ለመሸጥ ወደ Pro ይቀይሩ።", bm: "Bi feereli {n} tora yen. Taa Pro la walasa ka feereli kɛ dan tɛ min na.", wo: "Des na {n} jaay tey. Jëlal Pro ngir jaay te amul dig." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -7306,6 +7315,15 @@ function ZigzagStrip() {
   );
 }
 // ===== Mode hors-ligne : cache local + file de synchronisation =====
+// Téléphone d'entrée de gamme (peu de mémoire ou peu de cœurs) : on coupe l'animation
+// décorative des boules en fond, qui coûte du calcul en permanence.
+const LOW_END_DEVICE = (() => {
+  try {
+    const mem = typeof navigator !== "undefined" ? navigator.deviceMemory : undefined;
+    const cores = typeof navigator !== "undefined" ? navigator.hardwareConcurrency : undefined;
+    return (typeof mem === "number" && mem <= 3) || (typeof cores === "number" && cores > 0 && cores <= 4);
+  } catch (e) { return false; }
+})();
 const OFFLINE_CACHE_PREFIX = "offline-cache:";
 const OFFLINE_QUEUE_KEY = "offline-sync-queue";
 // Onglet actif : persisté (localStorage + miroir natif ci-dessous) pour que quitter
@@ -7748,6 +7766,25 @@ function recordTs(item) {
   const d = Date.parse(item.date || item.createdAt || "");
   return isFinite(d) ? d : 0;
 }
+// Date Postgres (« 2026-11-20 13:53:30.909042+00 ») reculée de n secondes, au format ISO.
+function cursorMinusSeconds(cursor, n) {
+  try {
+    const iso = String(cursor).replace(" ", "T").replace(/(\.\d{3})\d+/, "$1").replace(/([+-]\d\d)$/, "$1:00");
+    const ms = Date.parse(iso);
+    if (!isFinite(ms)) return cursor;
+    return new Date(ms - n * 1000).toISOString();
+  } catch (e) { return cursor; }
+}
+// Ligne de boutique (shop_blobs). Un appareil d'employé passe par une fonction serveur
+// qui retire ce qu'il n'a pas le droit de voir (caisse, dépenses sans « voir la caisse »).
+async function fetchShopBlobRow(ownerId, shopId) {
+  if (employeeSessionToken) {
+    const { data, error } = await supabase.rpc("employee_shop_blob", { p_shop_id: shopId });
+    if (error) return { data: null, error };
+    return { data: data && data.updated_at ? { data: data.data, updated_at: data.updated_at } : null, error: null };
+  }
+  return supabase.from("shop_blobs").select("data, updated_at").eq("owner_id", ownerId).eq("shop_id", shopId).maybeSingle();
+}
 function readOutbox(key) {
   try { const raw = window.localStorage.getItem(OUTBOX_PREFIX + key); const v = raw ? JSON.parse(raw) : {}; return v && typeof v === "object" ? v : {}; } catch (e) { return {}; }
 }
@@ -7938,7 +7975,9 @@ function mergeDebts(baseList, localList, remoteList) {
     const localPaid = l.paidAmount || 0;
     const remotePaid = r.paidAmount || 0;
     const totalAmount = l.amount ?? r.amount ?? 0;
-    const mergedPaid = Math.min(totalAmount, Math.max(0, basePaid + (localPaid - basePaid) + (remotePaid - basePaid)));
+    // Pas de plafond au montant dû : si deux téléphones ont encaissé le même client hors
+    // ligne, l'argent est bien en caisse. Le trop-perçu est gardé et signalé sur l'accueil.
+    const mergedPaid = Math.max(0, basePaid + (localPaid - basePaid) + (remotePaid - basePaid));
     const localTs = sanitizeTs(l.updatedAt);
     const remoteTs = sanitizeTs(r.updatedAt);
     const fieldsSource = localTs >= remoteTs ? l : r;
@@ -13301,7 +13340,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         p_shop_id: blobShopId,
         p_records: batch.map((e) => ({ kind: e.kind, id: e.id, data: e.data, deleted: !!e.deleted, ts: e.ts || 0 })),
       });
-      if (error || !data || !data.ok) return false;
+      if (error || !data || !data.ok) {
+        if (!pushFailSinceRef.current) pushFailSinceRef.current = Date.now();
+        return false;
+      }
+      pushFailSinceRef.current = 0;
       const cur = readOutbox(shopKey);
       batch.forEach((e) => { const k = e.kind + ":" + e.id; if (cur[k] && cur[k].v === e.v) delete cur[k]; });
       writeOutbox(shopKey, cur);
@@ -13311,6 +13354,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Récupère les éléments enregistrés par les autres appareils depuis la dernière fois
   // (ou tout l'historique sur un nouveau téléphone) et les ajoute à l'affichage.
   const pullBusyRef = useRef(false);
+  const pullSeenRef = useRef(new Map());
+  // Ventes encore dans la boîte d'envoi de cet appareil, et envoi qui échoue depuis
+  // plus de 2 minutes alors que le réseau est là (ex. : compte employé désactivé).
+  const pushFailSinceRef = useRef(0);
+  const [outboxInfo, setOutboxInfo] = useState({ sales: 0, stuck: false });
+  useEffect(() => {
+    if (isDemo || !shopKey) return;
+    const check = () => {
+      const box = readOutbox(shopKey);
+      const txIds = new Set();
+      Object.values(box).forEach((e) => {
+        if (e && e.kind === "sale" && !e.deleted) txIds.add((e.data && e.data.transactionId) || e.id);
+      });
+      const failSince = pushFailSinceRef.current;
+      const stuck = txIds.size > 0 && navigator.onLine && !!failSince && Date.now() - failSince > 120000;
+      setOutboxInfo((prev) => (prev.sales === txIds.size && prev.stuck === stuck ? prev : { sales: txIds.size, stuck }));
+    };
+    check();
+    const iv = setInterval(check, 4000);
+    return () => clearInterval(iv);
+  }, [isDemo, shopKey]);
   const pullRecords = async () => {
     if (isDemo || !blobShopId || !navigator.onLine || pullBusyRef.current) return;
     pullBusyRef.current = true;
@@ -13319,14 +13383,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       let cursor = null;
       try { cursor = window.localStorage.getItem(cursorKey); } catch (e) {}
       const all = [];
+      // On relit toujours les 30 dernières secondes avant le curseur : un enregistrement
+      // écrit par un autre appareil un peu avant, mais validé un peu après, n'est jamais sauté.
+      // Ce qui a déjà été vu (même id, même date de modification) est ignoré.
+      let since = cursor ? cursorMinusSeconds(cursor, 30) : null;
       for (let page = 0; page < 50; page++) {
         let q = supabase.from("shop_records").select("kind, id, data, deleted, ts, updated_at").eq("shop_id", blobShopId).order("updated_at", { ascending: true }).limit(1000);
-        if (cursor) q = q.gt("updated_at", cursor);
+        if (since) q = q.gt("updated_at", since);
         const { data, error } = await q;
         if (error || !data) break;
-        all.push(...data);
-        if (data.length) cursor = data[data.length - 1].updated_at;
+        data.forEach((row) => {
+          const key = row.kind + ":" + row.id;
+          if (pullSeenRef.current.get(key) === row.updated_at) return;
+          pullSeenRef.current.set(key, row.updated_at);
+          all.push(row);
+        });
+        if (data.length) { cursor = data[data.length - 1].updated_at; since = cursor; }
         if (data.length < 1000) break;
+      }
+      if (pullSeenRef.current.size > 3000) {
+        const keep = [...pullSeenRef.current.entries()].slice(-1500);
+        pullSeenRef.current = new Map(keep);
       }
       if (all.length) {
         // On repart de l'état le plus récent de l'appareil (cache écrit à chaque action).
@@ -13354,6 +13431,24 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }, 60000);
     return () => clearInterval(iv);
   }, [isDemo, shopKey]);
+  // Deux onglets ouverts sur la même boutique : quand l'autre onglet enregistre quelque chose
+  // (vente, stock...), celui-ci affiche aussitôt le même état au lieu d'une version dépassée.
+  useEffect(() => {
+    if (isDemo || !shopKey) return;
+    const cacheKey = OFFLINE_CACHE_PREFIX + shopKey;
+    const onStorage = (e) => {
+      if (e.key !== cacheKey || !e.newValue) return;
+      try {
+        const next = JSON.parse(e.newValue);
+        if (!next || typeof next !== "object") return;
+        shopEditGenRef.current += 1;
+        latestShopRef.current = next;
+        applyShop(next, null, null);
+      } catch (err) { /* ignoré */ }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [isDemo, shopKey, applyShop]);
   const syncShopToServer = async (localShop) => {
     // Boutique pas encore identifiée (liste jamais chargée sur cet appareil) : on garde
     // l'envoi en attente plutôt que de tout écrire au mauvais endroit.
@@ -13389,7 +13484,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     let merged = localShop;
     for (let attempt = 0; attempt < 4; attempt++) {
       if (remoteAtRef.current === undefined) {
-        const { data: row, error } = await supabase.from("shop_blobs").select("data, updated_at").eq("owner_id", ownerId).eq("shop_id", blobShopId).maybeSingle();
+        const { data: row, error } = await fetchShopBlobRow(ownerId, blobShopId);
         if (error) return { ok: false, merged };
         remoteAtRef.current = row ? row.updated_at : null;
         if (row && row.data) {
@@ -13571,7 +13666,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
                   ? supabase.rpc("employee_account_data").then((r) => ({ data: r && r.data ? r.data : null, error: r && r.error }))
                   : supabase.from("shop_data").select("data, updated_at").eq("owner_id", userData.user.id).single(),
                 blobShopId
-                  ? supabase.from("shop_blobs").select("data, updated_at").eq("owner_id", userData.user.id).eq("shop_id", blobShopId).maybeSingle()
+                  ? fetchShopBlobRow(userData.user.id, blobShopId)
                   : Promise.resolve({ data: null }),
               ]);
               __mark("ShopApp : après requête shop_data réseau");
@@ -15661,7 +15756,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     });
     return seen.size;
   };
+  // Dont annulées (affiché à côté du compteur, pour qu'on ne croie pas à des ventes disparues).
+  const salesTodayCancelledCount = () => {
+    const key = todayKey();
+    const seen = new Set();
+    allSales.forEach((s) => {
+      if (s.cancelled && dayKeyOf(s.date) === key) seen.add(s.transactionId || s.id);
+    });
+    return seen.size;
+  };
 
+  const finalizedCartIdsRef = useRef(new Set());
   const finalizeCart = (cartId) => {
     const cart = draftCarts.find((c) => c.id === cartId);
     if (!cart || cart.items.length === 0) return;
@@ -15701,6 +15806,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setSettingsView("subscription");
       return;
     }
+    // Double appui sur « Finaliser » (téléphone lent, l'écran n'a pas encore été redessiné) :
+    // le même panier ne peut être encaissé qu'une seule fois.
+    if (finalizedCartIdsRef.current.has(cartId)) return;
+    finalizedCartIdsRef.current.add(cartId);
     setError("");
     const total = cart.items.reduce((sum, it) => sum + it.qty * it.unitPrice, 0);
     const transactionId = `t${Date.now()}${Math.random().toString(36).slice(2, 7)}`;
@@ -17375,7 +17484,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // Sans vente hier il n'y a rien à comparer : l'ancien code affichait alors « ▲ 100 % »,
   // un chiffre inventé. Et au-delà de +300 % un pourcentage ne se lit plus (« ▲ 1433 % ») :
   // on affiche un multiplicateur (« ×15 »).
-  const salesVsYesterdayPct = yesterdayTotal > 0
+  // Rien d'affiché tant qu'aucune vente n'est faite aujourd'hui : un « ▼ 100 % » rouge le
+  // matin à l'ouverture inquiète pour rien.
+  const salesVsYesterdayPct = yesterdayTotal > 0 && todayTotal > 0
     ? Math.round(((todayTotal - yesterdayTotal) / yesterdayTotal) * 100)
     : null;
   const salesVsYesterdayText = salesVsYesterdayPct === null ? ""
@@ -17452,6 +17563,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     return { level, totalDebts: created.length, paidCount: paid.length, stillOwing, avgDays };
   };
   const remainingDebt = (d) => Math.max(0, d.amount - (d.paidAmount || 0));
+  // Trop-perçu : plus encaissé que le montant dû (deux encaissements hors ligne du même client).
+  const overpaidDebts = debts.filter((d) => (d.paidAmount || 0) - (d.amount || 0) > 0.001 && d.overpaidAck !== d.paidAmount);
+  const ackOverpaid = (debtId) => {
+    saveAll({ debts: debts.map((d) => (d.id === debtId ? { ...d, overpaidAck: d.paidAmount, updatedAt: Date.now() } : d)) });
+  };
   const unpaidDebts = debts.filter((d) => !d.paid);
   const totalOwed = unpaidDebts.reduce((sum, d) => sum + remainingDebt(d), 0);
   // ---- Journée de caisse en cours ----
@@ -18728,7 +18844,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         onContextMenu={(e) => e.preventDefault()}
       >
       <style>{"@keyframes floatSlow { from { transform: translateY(-4px); } to { transform: translateY(4px); } } @keyframes aiSpin { to { transform: rotate(360deg); } } .app-root input, .app-root textarea { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; } @keyframes tapRelease { 0% { transform: scale(0.95); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } } @keyframes navCartPulse { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 65% { transform: scale(0.92); } 100% { transform: scale(1); } }"}</style>
-      {showBalls && <FloatingBalls dark={darkMode} colorId={ballColor} />}
+      {showBalls && !LOW_END_DEVICE && <FloatingBalls dark={darkMode} colorId={ballColor} />}
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column" }}>
       {!isDesktop && (
       <>
@@ -18792,6 +18908,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       {/* Mode sombre : éclaircit les rouges/oranges/verts de texte trop sombres sur fond sombre (contraste WCAG ≥ 4.5). */}
       {darkMode && <style>{'[style*="color: rgb(225, 29, 72)"]{color:#fb7185 !important}[style*="color: rgb(184, 86, 47)"]{color:#f29a76 !important}[style*="color: rgb(22, 163, 74)"]{color:#4ade80 !important}[style*="color: rgb(220, 38, 38)"]:not([style*="background"]){color:#f87171 !important}'}</style>}
       {error && <div className="mx-4 mt-3 text-xs px-3 py-2 rounded" style={{ background: darkMode ? "#3a1f17" : "#fce8e0", color: darkMode ? "#f0a98a" : CLAY }}>{error}</div>}
+      {/* Hors ligne : message rassurant (vendre sans réseau est normal et sans risque). */}
+      {!isDemo && !isOnline && (
+        <div className="mx-4 mt-3 rounded-xl px-3 py-2 text-xs font-semibold" style={{ background: darkMode ? "#14233a" : "#e0ecff", color: darkMode ? "#a9c7ff" : "#1d4ed8", lineHeight: 1.35 }}>
+          📶 {tx(lang, "offlineBannerMsg")}
+          {outboxInfo.sales > 0 && <span className="block font-bold mt-0.5">{tx(lang, "offlineBannerPending").replace("{n}", localizedNumber(outboxInfo.sales))}</span>}
+        </div>
+      )}
+      {/* Réseau présent mais l'envoi échoue depuis plus de 2 minutes. */}
+      {!isDemo && isOnline && outboxInfo.stuck && (
+        <div className="mx-4 mt-3 rounded-xl px-3 py-2 text-xs font-semibold" style={{ background: darkMode ? "#3a1f17" : "#fce8e0", color: darkMode ? "#f0a98a" : CLAY, lineHeight: 1.35 }}>
+          ⚠️ {tx(lang, activeEmployee ? "pushStuckEmp" : "pushStuckOwner").replace("{n}", localizedNumber(outboxInfo.sales))}
+        </div>
+      )}
       {isDemo && (
         <div className="mx-4 mt-3 rounded-xl p-3" style={{ background: darkMode ? "#14281c" : "#e5f0e8" }}>
           <p className="text-xs font-semibold" style={{ color: darkMode ? "#5fd08a" : GREEN }}>👀 {t(lang, "demoMode")}</p>
@@ -19041,6 +19170,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                   ))}
                 </div>
+              </div>
+            )}
+            {overpaidDebts.length > 0 && (!activeEmployee || hasPermission("editDebts")) && (
+              <div className="rounded-2xl p-3.5" style={{ background: T.card, border: `1px solid ${darkMode ? "rgba(225,29,72,0.4)" : "#fecdd3"}` }}>
+                <p className="text-sm font-extrabold mb-1" style={{ color: darkMode ? "#fda4af" : "#e11d48" }}>⚠️ {tx(lang, "overpaidTitle")}</p>
+                <p className="text-[11px] mb-2" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "overpaidHint")}</p>
+                {overpaidDebts.map((d) => (
+                  <div key={d.id} className="flex items-center justify-between gap-2 py-1">
+                    <span className="text-xs font-semibold min-w-0 truncate" style={{ color: T.text }}>{d.customer} · {fcfa((d.paidAmount || 0) - (d.amount || 0))}</span>
+                    <button type="button" onClick={() => ackOverpaid(d.id)} className="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-lg" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "#f1f5f9", color: T.text }}>{tx(lang, "overpaidAck")}</button>
+                  </div>
+                ))}
               </div>
             )}
             {lowStock.length > 0 && (
@@ -19764,6 +19905,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               const salesLimit = dailySalesLimit;
               if (salesLimit === null) return null;
               const used = salesTodayCount();
+              const cancelledToday = salesTodayCancelledCount();
+              const left = Math.max(0, salesLimit - used);
               const ratio = Math.min(1, used / salesLimit);
               const nearLimit = ratio >= 0.8;
               return (
@@ -19771,11 +19914,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-[11px]" style={{ color: nearLimit ? "#e11d48" : T.muted }}>
                       {t(lang, "salesDailyQuotaLabel")} : {used}/{salesLimit}
+                      {cancelledToday > 0 && <> · {tx(lang, "quotaCancelledPart").replace("{n}", localizedNumber(cancelledToday))}</>}
                     </span>
                   </div>
                   <div className="h-1.5 rounded-full overflow-hidden" style={{ background: T.input }}>
                     <div className="h-full rounded-full" style={{ width: `${ratio * 100}%`, background: nearLimit ? "#e11d48" : (darkMode ? "#34d399" : "#059669") }} />
                   </div>
+                  <p className="text-[10px] mt-1" style={{ color: T.muted }}>{tx(lang, "quotaLeftHint").replace("{n}", localizedNumber(left))}</p>
                 </div>
               );
             })()}
@@ -22862,7 +23007,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
           </div>
           <div style={{ minHeight: "100%", background: T.bg, paddingBottom: 40, position: "relative", overflow: "hidden" }}>
-            {showBalls && <FloatingBalls dark={darkMode} colorId={ballColor} />}
+            {showBalls && !LOW_END_DEVICE && <FloatingBalls dark={darkMode} colorId={ballColor} />}
             <div style={{ position: "relative", zIndex: 1 }}>
             <div style={{ padding: "0 16px", display: "flex", flexDirection: "column", gap: 10 }}>
               {settingsView === "menu" && !settingsField && [
