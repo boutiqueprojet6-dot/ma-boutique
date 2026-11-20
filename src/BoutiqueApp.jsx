@@ -8242,10 +8242,40 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     settingsUpdatedAt: Math.max(localTs, remoteTs),
   };
 }
+// ---- Réinitialisation de la boutique ----
+// « Réinitialiser toutes mes données » laisse une marque datée (id "__reset__") dans la
+// liste des produits supprimés, qui voyage déjà avec la boutique sur tous les appareils.
+// Tout ce qui date d'avant cette marque (produits, ventes, dettes, dépenses, caisse...)
+// est retiré partout ; sinon la fusion, qui garde tout ce qu'elle trouve, faisait revenir
+// les produits et les dépenses depuis le serveur ou un autre téléphone. L'historique,
+// permanent, est conservé.
+const RESET_MARK_ID = "__reset__";
+function shopResetAt(shop) {
+  const m = shop && Array.isArray(shop.deletedProducts) ? shop.deletedProducts.find((d) => d && d.id === RESET_MARK_ID) : null;
+  return m ? Number(m.at) || 0 : 0;
+}
+function itemTimeMs(item) {
+  if (!item) return 0;
+  const fromDate = item.date ? Date.parse(item.date) : NaN;
+  const fromCreated = item.createdAt ? (typeof item.createdAt === "number" ? item.createdAt : Date.parse(item.createdAt)) : NaN;
+  const fromId = /^\d{13}/.test(String(item.id || "")) ? Number(String(item.id).slice(0, 13)) : NaN;
+  return Math.max(isFinite(fromDate) ? fromDate : 0, isFinite(fromCreated) ? fromCreated : 0, isFinite(fromId) ? fromId : 0, sanitizeTs(item.updatedAt));
+}
+function applyResetCutoff(shop) {
+  const at = shopResetAt(shop);
+  if (!at || !shop) return shop;
+  const keep = (arr) => (Array.isArray(arr) ? arr.filter((x) => itemTimeMs(x) > at) : arr);
+  const out = { ...shop };
+  ["products", "sales", "debts", "debtEvents", "expenses", "cashCounts", "cashClosures", "unsoldLog"].forEach((k) => { if (Array.isArray(out[k])) out[k] = keep(out[k]); });
+  return out;
+}
 // Point d'entrée : fusionne l'état local ("next", ce que cet appareil vient de
 // modifier) avec l'état distant ("remote", récupéré du serveur), par rapport
 // à la dernière version connue en commun ("base").
 function mergeShop(baseShop, localShop, remoteShop) {
+  return applyResetCutoff(mergeShopRaw(baseShop, localShop, remoteShop));
+}
+function mergeShopRaw(baseShop, localShop, remoteShop) {
   const base = baseShop || {};
   const local = localShop || {};
   const remote = remoteShop || {};
@@ -8256,7 +8286,11 @@ function mergeShop(baseShop, localShop, remoteShop) {
     // Produits supprimés : la liste des suppressions voyage avec la boutique, pour qu'un
     // produit supprimé sur un téléphone ne « ressuscite » pas depuis un autre resté hors
     // ligne. Un produit modifié APRÈS sa suppression (recréé) est gardé.
-    deletedProducts: mergeById(base.deletedProducts, local.deletedProducts, remote.deletedProducts).slice(-500),
+    deletedProducts: (() => {
+      const all = mergeById(base.deletedProducts, local.deletedProducts, remote.deletedProducts);
+      const mark = all.filter((d) => d && d.id === RESET_MARK_ID);
+      return [...all.filter((d) => !d || d.id !== RESET_MARK_ID).slice(-500), ...mark];
+    })(),
     products: (() => {
       const del = new Map(mergeById(base.deletedProducts, local.deletedProducts, remote.deletedProducts).map((d) => [d.id, d]));
       const merged = mergeProducts(base.products, local.products, remote.products);
@@ -13378,13 +13412,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // plutôt que d'afficher un stock vide qui n'en est peut-être pas un (ex :
     // synchronisation interrompue). Un vrai vidage intentionnel (reset) met
     // aussi à jour cette copie de secours, donc pas de faux positif possible.
+    // Boutique réinitialisée (sur cet appareil ou un autre) : on retire tout ce qui date d'avant.
+    shop = applyResetCutoff(shop) || shop;
     let restoredProducts = shop.products || [];
     if (!isDemo) restoredProducts = overlayServerStock(shopKey, restoredProducts);
     if (restoredProducts.length === 0) {
       try {
         const backupRaw = window.localStorage.getItem(PRODUCTS_BACKUP_PREFIX + shopKey);
         const backupProducts = backupRaw ? JSON.parse(backupRaw) : null;
-        if (Array.isArray(backupProducts) && backupProducts.length > 0) restoredProducts = backupProducts;
+        const resetAt = shopResetAt(shop);
+        const usable = Array.isArray(backupProducts) ? (resetAt ? backupProducts.filter((x) => itemTimeMs(x) > resetAt) : backupProducts) : [];
+        if (usable.length > 0) restoredProducts = usable;
       } catch (e) {}
     }
     setProducts(restoredProducts);
@@ -15609,7 +15647,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const resetShopData = () => {
     // L'historique est permanent : avant de vider les ventes/dépenses, on recopie dans le journal
     // ce qui n'y figurait pas encore, pour que rien ne disparaisse de l'onglet Historique.
-    saveAll({ products: [], sales: [], debts: [], loyaltyCustomers: {}, expenses: [], cashFund: 0, draftCarts: [], activeCartId: null, historyLog: [...historyLog, ...deriveLegacyHistory()] });
+    const resetNow = Date.now();
+    saveAll({ deletedProducts: [...deletedProducts.filter((d) => d && d.id !== RESET_MARK_ID), { id: RESET_MARK_ID, at: resetNow, updatedAt: resetNow, date: new Date(resetNow).toISOString() }], debtEvents: [], cashCounts: [], cashClosures: [], unsoldLog: [], products: [], sales: [], debts: [], loyaltyCustomers: {}, expenses: [], cashFund: 0, draftCarts: [], activeCartId: null, historyLog: [...historyLog, ...deriveLegacyHistory()] });
     setConfirmReset(false);
     setShowSettings(false);
   };
