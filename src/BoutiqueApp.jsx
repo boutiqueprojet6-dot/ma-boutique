@@ -6163,6 +6163,17 @@ EXTRA_UI.pushStuckOwner = { fr: "{n} vente(s) pas encore envoyée(s) au serveur 
 EXTRA_UI.quotaCancelledPart = { fr: "dont {n} annulée(s)", en: "incl. {n} cancelled", es: "incl. {n} anulada(s)", pt: "incl. {n} anulada(s)", de: "davon {n} storniert", it: "di cui {n} annullata/e", nl: "waarvan {n} geannuleerd", pl: "w tym {n} anulowane", ru: "из них отменено: {n}", tr: "{n} iptal dahil", ar: "منها {n} ملغاة", hi: "जिनमें {n} रद्द", bn: "যার মধ্যে {n}টি বাতিল", ur: "جن میں {n} منسوخ", ta: "அதில் {n} ரத்து", te: "వాటిలో {n} రద్దు", th: "ยกเลิก {n} รายการ", zh: "含已取消 {n} 笔", ja: "うち取消 {n} 件", ko: "취소 {n}건 포함", id: "termasuk {n} dibatalkan", vi: "gồm {n} đã hủy", tl: "kasama ang {n} na kinansela", sw: "ikiwemo {n} zilizofutwa", ha: "har da {n} da aka soke", yo: "pẹ̀lú {n} tí a fagilé", zu: "kuhlanganise no-{n} okukhanseliwe", am: "ከነዚህ {n} የተሰረዙ", bm: "{n} dabilalen bɛ u la", wo: "{n} yu ñu neenal ci biir" };
 EXTRA_UI.quotaLeftHint = { fr: "Encore {n} vente(s) possible(s) aujourd'hui. Passez à Pro pour vendre sans limite.", en: "{n} sale(s) left today. Upgrade to Pro to sell without limit.", es: "Le quedan {n} venta(s) hoy. Pase a Pro para vender sin límite.", pt: "Ainda pode fazer {n} venda(s) hoje. Passe para Pro para vender sem limite.", de: "Heute noch {n} Verkauf/Verkäufe möglich. Mit Pro ohne Limit verkaufen.", it: "Ancora {n} vendita/e possibile/i oggi. Passa a Pro per vendere senza limiti.", nl: "Vandaag nog {n} verkoop/verkopen mogelijk. Ga naar Pro om onbeperkt te verkopen.", pl: "Dziś możesz jeszcze wykonać {n} sprzedaż(y). Przejdź na Pro, by sprzedawać bez limitu.", ru: "Сегодня можно ещё продаж: {n}. Перейдите на Pro, чтобы продавать без ограничений.", tr: "Bugün {n} satış hakkınız kaldı. Sınırsız satış için Pro'ya geçin.", ar: "يمكنك إجراء {n} عملية بيع أخرى اليوم. انتقل إلى Pro للبيع دون حد.", hi: "आज {n} और बिक्री कर सकते हैं। बिना सीमा बेचने के लिए Pro लें।", bn: "আজ আরও {n}টি বিক্রি করা যাবে। সীমাহীন বিক্রির জন্য Pro নিন।", ur: "آج مزید {n} فروخت ممکن ہے۔ بغیر حد کے فروخت کے لیے Pro لیں۔", ta: "இன்று இன்னும் {n} விற்பனை செய்யலாம். வரம்பின்றி விற்க Pro-க்கு மாறுங்கள்.", te: "ఈ రోజు ఇంకా {n} అమ్మకం(లు) చేయవచ్చు. పరిమితి లేకుండా అమ్మడానికి Pro తీసుకోండి.", th: "วันนี้ขายได้อีก {n} รายการ อัปเกรดเป็น Pro เพื่อขายได้ไม่จำกัด", zh: "今天还可销售 {n} 笔。升级到 Pro 即可无限销售。", ja: "今日はあと {n} 件販売できます。Pro にすると無制限で販売できます。", ko: "오늘 {n}건 더 판매할 수 있습니다. Pro로 업그레이드하면 무제한입니다.", id: "Hari ini masih bisa {n} penjualan. Beralih ke Pro untuk jual tanpa batas.", vi: "Hôm nay còn bán được {n} đơn. Nâng cấp Pro để bán không giới hạn.", tl: "May {n} benta pa ngayong araw. Mag-Pro para makapagbenta nang walang limitasyon.", sw: "Mauzo {n} yamebaki leo. Hamia Pro uuze bila kikomo.", ha: "Sauran sayarwa {n} a yau. Koma Pro don sayarwa ba iyaka.", yo: "Títà {n} ló kù lónìí. Lọ sí Pro láti ta láìsí ààlà.", zu: "Kusasele ukuthengisa okungu-{n} namuhla. Thuthukela ku-Pro ukuze uthengise ngaphandle komkhawulo.", am: "ዛሬ {n} ተጨማሪ ሽያጭ ይቻላል። ያለ ገደብ ለመሸጥ ወደ Pro ይቀይሩ።", bm: "Bi feereli {n} tora yen. Taa Pro la walasa ka feereli kɛ dan tɛ min na.", wo: "Des na {n} jaay tey. Jëlal Pro ngir jaay te amul dig." };
 EXTRA_UI.receiptPhoneNeeded = { fr: "Tapez le numéro WhatsApp du client pour lui envoyer le reçu.", en: "Type the customer's WhatsApp number to send them the receipt.", es: "Escriba el número de WhatsApp del cliente para enviarle el recibo.", pt: "Digite o número de WhatsApp do cliente para lhe enviar o recibo.", de: "Geben Sie die WhatsApp-Nummer des Kunden ein, um ihm den Beleg zu senden.", it: "Digita il numero WhatsApp del cliente per inviargli la ricevuta.", nl: "Typ het WhatsApp-nummer van de klant om de bon te sturen.", pl: "Wpisz numer WhatsApp klienta, aby wysłać mu paragon.", ru: "Введите номер WhatsApp клиента, чтобы отправить ему чек.", tr: "Fişi göndermek için müşterinin WhatsApp numarasını yazın.", ar: "اكتب رقم واتساب الزبون لإرسال الإيصال إليه.", hi: "रसीद भेजने के लिए ग्राहक का WhatsApp नंबर लिखें।", bn: "রসিদ পাঠাতে গ্রাহকের WhatsApp নম্বর লিখুন।", ur: "رسید بھیجنے کے لیے گاہک کا WhatsApp نمبر لکھیں۔", ta: "ரசீதை அனுப்ப வாடிக்கையாளரின் WhatsApp எண்ணைத் தட்டச்சு செய்யுங்கள்.", te: "రసీదు పంపడానికి కస్టమర్ WhatsApp నంబర్‌ను టైప్ చేయండి.", th: "พิมพ์หมายเลข WhatsApp ของลูกค้าเพื่อส่งใบเสร็จ", zh: "输入顾客的 WhatsApp 号码以发送收据。", ja: "レシートを送るには、お客様の WhatsApp 番号を入力してください。", ko: "영수증을 보내려면 고객의 WhatsApp 번호를 입력하세요.", id: "Ketik nomor WhatsApp pelanggan untuk mengirim struk.", vi: "Nhập số WhatsApp của khách để gửi hóa đơn.", tl: "I-type ang WhatsApp number ng customer para maipadala ang resibo.", sw: "Andika namba ya WhatsApp ya mteja ili umtumie risiti.", ha: "Rubuta lambar WhatsApp ta abokin ciniki don tura masa rasit.", yo: "Tẹ nọ́mbà WhatsApp oníbàárà láti fi ìwé-ẹ̀rí ránṣẹ́ sí i.", zu: "Thayipha inombolo ye-WhatsApp yekhasimende ukuze umthumele irisidi.", am: "ደረሰኙን ለመላክ የደንበኛውን የWhatsApp ቁጥር ይጻፉ።", bm: "Kiliyan ka WhatsApp nimɔrɔ sɛbɛn walasa ka resi ci a ma.", wo: "Bindal nimero WhatsApp bu kiliyaan bi ngir yónnee ko reçu bi." };
+EXTRA_UI.deleteProductBtn = { fr: "Supprimer ce produit", en: "Delete this product", es: "Eliminar este producto", pt: "Eliminar este produto", de: "Dieses Produkt löschen", it: "Elimina questo prodotto", nl: "Dit product verwijderen", pl: "Usuń ten produkt", ru: "Удалить этот товар", tr: "Bu ürünü sil", ar: "حذف هذا المنتج", hi: "यह उत्पाद हटाएँ", bn: "এই পণ্যটি মুছুন", ur: "یہ پروڈکٹ حذف کریں", ta: "இந்தப் பொருளை நீக்கு", te: "ఈ ఉత్పత్తిని తొలగించు", th: "ลบสินค้านี้", zh: "删除此商品", ja: "この商品を削除", ko: "이 상품 삭제", id: "Hapus produk ini", vi: "Xóa sản phẩm này", tl: "Burahin ang produktong ito", sw: "Futa bidhaa hii", ha: "Goge wannan kaya", yo: "Pa ọjà yìí rẹ́", zu: "Susa lo mkhiqizo", am: "ይህን ምርት ሰርዝ", bm: "Nin fɛn in jɔsi", wo: "Far produit bii" };
+EXTRA_UI.deleteProductConfirm = { fr: "Supprimer « {name} » du stock ?", en: "Delete “{name}” from stock?", es: "¿Eliminar «{name}» del stock?", pt: "Eliminar «{name}» do stock?", de: "„{name}“ aus dem Bestand löschen?", it: "Eliminare «{name}» dal magazzino?", nl: "„{name}” uit de voorraad verwijderen?", pl: "Usunąć „{name}” z magazynu?", ru: "Удалить «{name}» со склада?", tr: "“{name}” stoktan silinsin mi?", ar: "حذف «{name}» من المخزون؟", hi: "“{name}” को स्टॉक से हटाएँ?", bn: "“{name}” স্টক থেকে মুছবেন?", ur: "“{name}” کو اسٹاک سے حذف کریں؟", ta: "“{name}” ஐ இருப்பிலிருந்து நீக்கவா?", te: "“{name}” ను స్టాక్ నుండి తొలగించాలా?", th: "ลบ “{name}” ออกจากสต็อก?", zh: "从库存中删除“{name}”？", ja: "「{name}」を在庫から削除しますか？", ko: "재고에서 “{name}”을(를) 삭제할까요?", id: "Hapus “{name}” dari stok?", vi: "Xóa “{name}” khỏi kho?", tl: "Burahin ang “{name}” sa stock?", sw: "Futa “{name}” kwenye stoo?", ha: "A goge “{name}” daga kaya?", yo: "Pa “{name}” rẹ́ kúrò nínú ọjà?", zu: "Susa “{name}” esitokweni?", am: "“{name}”ን ከክምችት ይሰርዙ?", bm: "“{name}” jɔsi stɔki la?", wo: "Far “{name}” ci stock bi?" };
+EXTRA_UI.stockActionShare = { fr: "Partager", en: "Share", es: "Compartir", pt: "Partilhar", de: "Teilen", it: "Condividi", nl: "Delen", pl: "Udostępnij", ru: "Поделиться", tr: "Paylaş", ar: "مشاركة", hi: "शेयर", bn: "শেয়ার", ur: "شیئر", ta: "பகிர்", te: "షేర్", th: "แชร์", zh: "分享", ja: "共有", ko: "공유", id: "Bagikan", vi: "Chia sẻ", tl: "Ibahagi", sw: "Shiriki", ha: "Raba", yo: "Pín", zu: "Yabelana", am: "አጋራ", bm: "Tila", wo: "Séddoo" };
+EXTRA_UI.stockActionEdit = { fr: "Modifier", en: "Edit", es: "Editar", pt: "Editar", de: "Bearbeiten", it: "Modifica", nl: "Bewerken", pl: "Edytuj", ru: "Изменить", tr: "Düzenle", ar: "تعديل", hi: "बदलें", bn: "সম্পাদনা", ur: "ترمیم", ta: "திருத்து", te: "సవరించు", th: "แก้ไข", zh: "编辑", ja: "編集", ko: "수정", id: "Ubah", vi: "Sửa", tl: "I-edit", sw: "Hariri", ha: "Gyara", yo: "Ṣàtúnṣe", zu: "Hlela", am: "አርትዕ", bm: "Yɛlɛma", wo: "Soppi" };
+EXTRA_UI.removeStockTitle = { fr: "Retirer du stock", en: "Remove from stock", es: "Retirar del stock", pt: "Retirar do stock", de: "Aus dem Bestand entnehmen", it: "Togli dal magazzino", nl: "Uit voorraad halen", pl: "Zdejmij ze stanu", ru: "Списать со склада", tr: "Stoktan düş", ar: "إخراج من المخزون", hi: "स्टॉक से घटाएँ", bn: "স্টক থেকে কমান", ur: "اسٹاک سے نکالیں", ta: "இருப்பிலிருந்து குறை", te: "స్టాక్ నుండి తీసివేయి", th: "นำออกจากสต็อก", zh: "减少库存", ja: "在庫から減らす", ko: "재고에서 빼기", id: "Kurangi stok", vi: "Bớt khỏi kho", tl: "Bawasan ang stock", sw: "Toa kwenye stoo", ha: "Cire daga kaya", yo: "Yọ kúrò nínú ọjà", zu: "Khipha esitokweni", am: "ከክምችት ቀንስ", bm: "Bɔ stɔki la", wo: "Wàññi ci stock bi" };
+EXTRA_UI.removeStockCurrent = { fr: "en stock : {n}", en: "in stock: {n}", es: "en stock: {n}", pt: "em stock: {n}", de: "auf Lager: {n}", it: "in magazzino: {n}", nl: "op voorraad: {n}", pl: "na stanie: {n}", ru: "на складе: {n}", tr: "stokta: {n}", ar: "في المخزون: {n}", hi: "स्टॉक में: {n}", bn: "স্টকে: {n}", ur: "اسٹاک میں: {n}", ta: "இருப்பில்: {n}", te: "స్టాక్‌లో: {n}", th: "ในสต็อก: {n}", zh: "库存：{n}", ja: "在庫：{n}", ko: "재고: {n}", id: "stok: {n}", vi: "trong kho: {n}", tl: "nasa stock: {n}", sw: "stoo: {n}", ha: "a kaya: {n}", yo: "nínú ọjà: {n}", zu: "esitokweni: {n}", am: "በክምችት፦ {n}", bm: "stɔki kɔnɔ: {n}", wo: "ci stock: {n}" };
+EXTRA_UI.removeStockConfirm = { fr: "Retirer {n}", en: "Remove {n}", es: "Retirar {n}", pt: "Retirar {n}", de: "{n} entnehmen", it: "Togli {n}", nl: "{n} eruit halen", pl: "Zdejmij {n}", ru: "Списать {n}", tr: "{n} düş", ar: "إخراج {n}", hi: "{n} घटाएँ", bn: "{n} কমান", ur: "{n} نکالیں", ta: "{n} குறை", te: "{n} తీసివేయి", th: "นำออก {n}", zh: "减少 {n}", ja: "{n} 減らす", ko: "{n} 빼기", id: "Kurangi {n}", vi: "Bớt {n}", tl: "Bawasan ng {n}", sw: "Toa {n}", ha: "Cire {n}", yo: "Yọ {n}", zu: "Khipha {n}", am: "{n} ቀንስ", bm: "{n} bɔ", wo: "Wàññi {n}" };
+EXTRA_UI.removeReason_adjust = { fr: "Correction", en: "Correction", es: "Corrección", pt: "Correção", de: "Korrektur", it: "Correzione", nl: "Correctie", pl: "Korekta", ru: "Исправление", tr: "Düzeltme", ar: "تصحيح", hi: "सुधार", bn: "সংশোধন", ur: "درستی", ta: "திருத்தம்", te: "సవరణ", th: "แก้ไขยอด", zh: "更正", ja: "修正", ko: "정정", id: "Koreksi", vi: "Điều chỉnh", tl: "Pagwawasto", sw: "Marekebisho", ha: "Gyara", yo: "Àtúnṣe", zu: "Ukulungisa", am: "እርማት", bm: "Latilenni", wo: "Defar" };
+EXTRA_UI.removeReason_broken = { fr: "Cassé / abîmé", en: "Broken / damaged", es: "Roto / dañado", pt: "Partido / danificado", de: "Kaputt / beschädigt", it: "Rotto / danneggiato", nl: "Kapot / beschadigd", pl: "Zepsute / uszkodzone", ru: "Сломано / испорчено", tr: "Kırık / hasarlı", ar: "مكسور / تالف", hi: "टूटा / खराब", bn: "ভাঙা / নষ্ট", ur: "ٹوٹا / خراب", ta: "உடைந்தது / சேதம்", te: "పగిలింది / పాడైంది", th: "แตก / เสียหาย", zh: "破损", ja: "破損", ko: "파손", id: "Rusak", vi: "Hư hỏng", tl: "Sira", sw: "Imevunjika / imeharibika", ha: "Ya karye / ya lalace", yo: "Ó fọ́ / ó bàjẹ́", zu: "Kuphukile / konakele", am: "የተሰበረ / የተበላሸ", bm: "A karilen / a tiɲɛna", wo: "Toj / yàqu" };
+EXTRA_UI.removeReason_lost = { fr: "Perdu / volé", en: "Lost / stolen", es: "Perdido / robado", pt: "Perdido / roubado", de: "Verloren / gestohlen", it: "Perso / rubato", nl: "Kwijt / gestolen", pl: "Zgubione / skradzione", ru: "Потеряно / украдено", tr: "Kayıp / çalıntı", ar: "مفقود / مسروق", hi: "खोया / चोरी", bn: "হারানো / চুরি", ur: "گم / چوری", ta: "தொலைந்தது / திருட்டு", te: "పోయింది / దొంగిలించారు", th: "หาย / ถูกขโมย", zh: "丢失/被盗", ja: "紛失・盗難", ko: "분실 / 도난", id: "Hilang / dicuri", vi: "Mất / bị trộm", tl: "Nawala / ninakaw", sw: "Imepotea / imeibiwa", ha: "Ya ɓace / an sace", yo: "Ó sọnù / wọ́n jí i", zu: "Kulahlekile / kwebiwe", am: "የጠፋ / የተሰረቀ", bm: "A tununna / a sonyalen", wo: "Réer / ñu sàcc ko" };
+EXTRA_UI.removeReason_own = { fr: "Usage personnel", en: "Personal use", es: "Uso personal", pt: "Uso pessoal", de: "Eigenbedarf", it: "Uso personale", nl: "Eigen gebruik", pl: "Użytek własny", ru: "Личное использование", tr: "Kişisel kullanım", ar: "استعمال شخصي", hi: "निजी उपयोग", bn: "ব্যক্তিগত ব্যবহার", ur: "ذاتی استعمال", ta: "சொந்த பயன்பாடு", te: "స్వంత ఉపయోగం", th: "ใช้เอง", zh: "自用", ja: "自家消費", ko: "개인 사용", id: "Dipakai sendiri", vi: "Dùng riêng", tl: "Personal na gamit", sw: "Matumizi binafsi", ha: "Amfanin kai", yo: "Lílò ara ẹni", zu: "Ukusetshenziswa komuntu siqu", am: "የግል አጠቃቀም", bm: "Yɛrɛ ka baara", wo: "Sa bopp jëfandikoo" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -14502,6 +14513,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll({ products: products.map((p) => (p.id === id ? { ...p, quantity: Math.max(0, p.quantity + delta), updatedAt: Date.now() } : p)) });
     if (targetProduct) logAction(`${t(lang, "logStockAdjusted")} : ${targetProduct.name} (${delta > 0 ? "+" : ""}${delta})`);
   };
+  // Bouton « − » du Stock : ouvre une petite fenêtre (combien retirer, et pourquoi) au lieu
+  // de retirer aussitôt une unité — un appui involontaire en faisant défiler la liste
+  // modifiait le stock sans rien dire.
+  const [removeStockTarget, setRemoveStockTarget] = useState(null);
+  const [removeStockQty, setRemoveStockQty] = useState("1");
+  const [removeStockReason, setRemoveStockReason] = useState("adjust");
+  const openRemoveStock = (id) => {
+    if (isProductFrozen(id)) { setError(t(lang, "productFrozenMsg")); return; }
+    setRemoveStockTarget(id); setRemoveStockQty("1"); setRemoveStockReason("adjust");
+  };
+  const confirmRemoveStock = () => {
+    const n = parseFloat(String(removeStockQty).replace(",", "."));
+    const target = products.find((x) => x.id === removeStockTarget);
+    if (!target || !isFinite(n) || n <= 0) return;
+    const cur = Number(target.quantity) || 0;
+    const next = Math.max(Math.min(cur, 0), Math.round((cur - n) * 1000) / 1000);
+    saveAll({ products: products.map((x) => (x.id === target.id ? { ...x, quantity: next, updatedAt: Date.now() } : x)) });
+    logAction(`${t(lang, "logStockAdjusted")} : ${target.name} (−${localizedNumber(cur - next)}, ${tx(lang, "removeReason_" + removeStockReason)})`);
+    setRemoveStockTarget(null);
+  };
   // Ouvre le modal de réapprovisionnement pour le produit "id" (bouton "+" du Stock).
   const openRestock = (id) => {
     if (isProductFrozen(id)) {
@@ -19500,6 +19531,34 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {removeStockTarget && (() => {
+          const rp = products.find((p) => p.id === removeStockTarget);
+          if (!rp) return null;
+          const n = parseFloat(String(removeStockQty).replace(",", "."));
+          const ok = isFinite(n) && n > 0;
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setRemoveStockTarget(null)}>
+              <div data-kbscroll="true" onClick={(e) => e.stopPropagation()} className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-bold text-sm">{tx(lang, "removeStockTitle")}</h3>
+                  <button onClick={() => setRemoveStockTarget(null)}><X size={18} /></button>
+                </div>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{rp.name} · {tx(lang, "removeStockCurrent").replace("{n}", localizedQty(rp.quantity))}</p>
+                <input autoComplete="off" autoFocus inputMode="decimal" type="number" value={removeStockQty} onChange={(e) => setRemoveStockQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {["adjust", "broken", "lost", "own"].map((r) => (
+                    <button key={r} onClick={() => setRemoveStockReason(r)} className="px-2.5 py-1.5 rounded-full text-[11px] font-bold" style={{ background: removeStockReason === r ? INDIGO : T.input, color: removeStockReason === r ? "white" : T.text }}>
+                      {tx(lang, "removeReason_" + r)}
+                    </button>
+                  ))}
+                </div>
+                <button onClick={confirmRemoveStock} disabled={!ok} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: "#e11d48", opacity: ok ? 1 : 0.4 }}>
+                  {tx(lang, "removeStockConfirm").replace("{n}", ok ? localizedNumber(n) : "…")}
+                </button>
+              </div>
+            </div>
+          );
+        })()}
         {restockTarget && (() => {
           const restockProduct = products.find((p) => p.id === restockTarget);
           if (!restockProduct) return null;
@@ -19745,6 +19804,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               className="w-full py-3 rounded-lg text-white font-semibold text-sm mb-6"
               style={{ background: INDIGO, opacity: (pName.trim() && pQty && pPrice) ? 1 : 0.4 }}
             >{t(lang, "save")}</button>
+            {/* « Supprimer » est rangé ici (et non plus sur la liste du Stock), loin du bouton
+                « Modifier » : un appui par erreur ne peut plus effacer un produit. */}
+            {editingProductId && hasPermission("editStock") && (() => {
+              const ep = products.find((x) => x.id === editingProductId);
+              if (!ep) return null;
+              return (
+                <button
+                  onClick={() => setConfirmModal({ message: tx(lang, "deleteProductConfirm").replace("{name}", ep.name), onConfirm: () => { deleteProduct(ep.id); setShowAddProduct(false); setEditingProductId(null); } })}
+                  className="w-full py-3 rounded-lg font-semibold text-sm mb-6 flex items-center justify-center gap-2"
+                  style={{ background: darkMode ? "rgba(225,29,72,0.12)" : "#fee2e2", color: darkMode ? "#fda4af" : "#e11d48" }}
+                >
+                  <Trash2 size={15} /> {tx(lang, "deleteProductBtn")}
+                </button>
+              );
+            })()}
             </div>
           </div>
         )}
@@ -19763,15 +19837,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {hasPermission("editStock") && products.length > 0 && (
-              <div className="rounded-3xl p-5 text-center" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
-                <div style={{ animation: "floatSlow 2.3s ease-in-out infinite alternate" }}>
-                  <div style={{ fontSize: 40 }}>📦</div>
-                </div>
-                <p className="text-sm font-bold mt-2 mb-4" style={{ color: T.text }}>{t(lang, "addProductHeaderTitle")}</p>
-                <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
-                  <Plus size={20} /> {t(lang, "addProduct")}
-                </button>
-              </div>
+              // Des produits existent déjà : simple bouton (la grande carte prenait un quart d'écran).
+              <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl text-white font-extrabold text-sm" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 8px 16px rgba(37,99,235,0.3)" }}>
+                <Plus size={18} /> {t(lang, "addProduct")}
+              </button>
             )}
             {products.length > 0 && (
               <div className="flex items-center gap-2 mb-3">
@@ -19837,9 +19906,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <span className="text-sm font-extrabold min-w-[2.5rem] text-center block whitespace-nowrap" style={{ color: T.muted }}>{localizedQty(p.quantity)}</span>
                     ) : hasPermission("editStock") ? (
                       <div className="flex items-center gap-2">
-                        <button onClick={() => adjustStock(p.id, -1)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
+                        <button onClick={() => openRemoveStock(p.id)} aria-label={tx(lang, "removeStockTitle")} className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Minus size={14} /></button>
                         <span className="text-sm font-extrabold min-w-[1.5rem] px-0.5 text-center whitespace-nowrap" style={{ color: p.quantity <= lowStockThreshold ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(p.quantity)}</span>
-                        <button onClick={() => openRestock(p.id)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Plus size={14} /></button>
+                        <button onClick={() => openRestock(p.id)} aria-label={tx(lang, "restockModalTitle")} className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><Plus size={14} /></button>
                       </div>
                     ) : (
                       // Lecture seule (permission "editStock" absente) : la quantité reste visible,
@@ -19859,41 +19928,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     en dessous — évite d'encombrer la ligne principale, surtout avec un nom
                     de produit long ou plusieurs boutons côte à côte. */}
                 <div className="flex items-center justify-end gap-2 mt-2.5 pt-2.5" style={{ borderTop: `1px solid ${T.border}` }}>
+                  {/* Actions avec leur texte (une icône seule, comme l'avion en papier, n'est pas
+                      comprise par tout le monde). « Supprimer » est dans « Modifier ». */}
                   <button
                     onClick={() => { setShareIncludePhone(false); setShareIncludeQty(false); setShareDialogStyleId(shareCardStyleId); setShareDialogProduct(p); }}
-                    className="w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}
-                    aria-label={tx(lang, "shareProductBtn")}
+                    className="h-8 px-3 rounded-full flex items-center gap-1.5 text-[11px] font-bold"
+                    style={{ background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe", color: darkMode ? "#60a5fa" : "#2563eb" }}
                   >
-                    <Send size={13} color={darkMode ? "#60a5fa" : "#2563eb"} />
+                    <Send size={12} /> {tx(lang, "stockActionShare")}
                   </button>
-                  {hasPermission("editStock") && (
-                    <button
-                      onClick={() => openEditProduct(p)}
-                      className="w-8 h-8 rounded-full flex items-center justify-center"
-                      style={{ background: darkMode ? "rgba(52,211,153,0.12)" : "#d1fae5" }}
-                      aria-label={tx(lang, "editProductTitle")}
-                    >
-                      <Edit3 size={13} color={darkMode ? "#34d399" : "#059669"} />
-                    </button>
-                  )}
                   {p.dailyMode && hasPermission("editStock") && !frozen && (
                     <button
                       onClick={() => { setNewDayTarget(p.id); setNewDayQty(""); }}
-                      className="w-8 h-8 rounded-full flex items-center justify-center"
-                      style={{ background: darkMode ? "rgba(217,119,6,0.12)" : "#fef3c7" }}
-                      aria-label={tx(lang, "startNewDayBtn")}
+                      className="h-8 px-3 rounded-full flex items-center gap-1.5 text-[11px] font-bold"
+                      style={{ background: darkMode ? "rgba(217,119,6,0.12)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#b45309" }}
                     >
-                      <RotateCcw size={13} color={darkMode ? "#fbbf24" : "#b45309"} />
+                      <RotateCcw size={12} /> {tx(lang, "startNewDayBtn")}
                     </button>
                   )}
                   {hasPermission("editStock") && (
                     <button
-                      onClick={() => setConfirmModal({ message: `Supprimer "${p.name}" du stock ?`, onConfirm: () => deleteProduct(p.id) })}
-                      className="w-8 h-8 rounded-full flex items-center justify-center"
-                      style={{ background: darkMode ? "rgba(184,86,47,0.12)" : "#fee2e2" }}
+                      onClick={() => openEditProduct(p)}
+                      className="h-8 px-3 rounded-full flex items-center gap-1.5 text-[11px] font-bold"
+                      style={{ background: darkMode ? "rgba(52,211,153,0.12)" : "#d1fae5", color: darkMode ? "#34d399" : "#059669" }}
                     >
-                      <Trash2 size={13} color={darkMode ? CLAY : "#e11d48"} />
+                      <Edit3 size={12} /> {tx(lang, "stockActionEdit")}
                     </button>
                   )}
                 </div>
