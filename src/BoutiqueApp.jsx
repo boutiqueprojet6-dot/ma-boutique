@@ -7425,9 +7425,99 @@ async function saveTextFile(content, filename, mime = "text/csv") {
     return true;
   } catch (e) { return false; }
 }
+// ---- Copie locale de la boutique dans IndexedDB (site / PWA) ----
+// localStorage est limité à ~5 Mo et chaque écriture bloque l'écran le temps de l'écrire.
+// Sur le site / la PWA, la copie de la boutique (offline-cache:...) est donc gardée dans
+// IndexedDB (pas de limite pratique, écriture en arrière-plan), avec une copie en mémoire
+// pour que les lectures restent instantanées. L'app Android garde son stockage natif
+// (Capacitor Preferences, sans cette limite) : rien ne change pour elle.
+// La boîte d'envoi, les paniers et les petits marqueurs restent dans localStorage (petits,
+// et écrits de façon synchrone : ce sont eux qui garantissent qu'une vente n'est jamais perdue).
+const LOCAL_IDB_NAME = "boutipro-local";
+const LOCAL_IDB_STORE = "kv";
+const localMem = new Map();
+let localIdb = null;
+let localChannel = null;
+const localChangeListeners = new Set();
+function localIdbOpen() {
+  return new Promise((resolve, reject) => {
+    try {
+      const r = indexedDB.open(LOCAL_IDB_NAME, 1);
+      r.onupgradeneeded = () => { try { r.result.createObjectStore(LOCAL_IDB_STORE); } catch (e) {} };
+      r.onsuccess = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+      r.onblocked = () => reject(new Error("blocked"));
+    } catch (e) { reject(e); }
+  });
+}
+function localIdbPut(k, v) {
+  return new Promise((resolve, reject) => {
+    if (!localIdb) { reject(new Error("no_idb")); return; }
+    try {
+      const tx = localIdb.transaction(LOCAL_IDB_STORE, "readwrite");
+      tx.objectStore(LOCAL_IDB_STORE).put(v, k);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error);
+    } catch (e) { reject(e); }
+  });
+}
+function localIdbAll() {
+  return new Promise((resolve, reject) => {
+    try {
+      const out = [];
+      const tx = localIdb.transaction(LOCAL_IDB_STORE, "readonly");
+      const req = tx.objectStore(LOCAL_IDB_STORE).openCursor();
+      req.onsuccess = () => { const c = req.result; if (c) { out.push([String(c.key), c.value]); c.continue(); } else resolve(out); };
+      req.onerror = () => reject(req.error);
+    } catch (e) { reject(e); }
+  });
+}
+// Appelé par main.jsx AVANT d'afficher l'app (au plus ~2,5 s ; sinon on reste sur localStorage).
+export async function initLocalStore() {
+  if (typeof window === "undefined" || typeof indexedDB === "undefined" || isNativePlatformNow()) return;
+  try {
+    const db = await Promise.race([localIdbOpen(), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 2500))]);
+    localIdb = db;
+    (await localIdbAll()).forEach(([k, v]) => { if (typeof v === "string") localMem.set(k, v); });
+    // Copies encore dans localStorage (anciennes versions, ou un vieil onglet resté ouvert) :
+    // elles sont plus récentes que ce qui est déjà dans IndexedDB, on les déplace.
+    const ls = window.localStorage;
+    const toMove = [];
+    for (let i = 0; i < ls.length; i++) { const k = ls.key(i); if (k && k.startsWith(OFFLINE_CACHE_PREFIX)) toMove.push(k); }
+    for (const k of toMove) {
+      const v = ls.getItem(k);
+      if (v == null) continue;
+      localMem.set(k, v);
+      try { await localIdbPut(k, v); ls.removeItem(k); } catch (e) { /* on la garde dans localStorage */ }
+    }
+    // Site / PWA : copies « natives » laissées par d'anciennes versions (jusqu'à ~1,5 Mo),
+    // jamais relues hors de l'app Android.
+    const dead = [OFFLINE_CACHE_PREFIX, OFFLINE_QUEUE_KEY, PRODUCTS_BACKUP_PREFIX, OUTBOX_PREFIX, UNSYNCED_PREFIX, LOCAL_CARTS_PREFIX].map((x) => "CapacitorStorage." + x);
+    const toDrop = [];
+    for (let i = 0; i < ls.length; i++) { const k = ls.key(i); if (k && dead.some((d) => k.startsWith(d))) toDrop.push(k); }
+    toDrop.forEach((k) => { try { ls.removeItem(k); } catch (e) {} });
+    // Deux onglets ouverts : l'autre est prévenu de chaque écriture.
+    try {
+      localChannel = new BroadcastChannel("boutipro-local");
+      localChannel.onmessage = (e) => {
+        const d = e.data;
+        if (!d || typeof d.k !== "string" || typeof d.v !== "string") return;
+        localMem.set(d.k, d.v);
+        localChangeListeners.forEach((fn) => { try { fn(d.k, d.v); } catch (err) {} });
+      };
+    } catch (e) { localChannel = null; }
+  } catch (e) {
+    localIdb = null;
+  }
+}
+function readLocalCacheRaw(fullKey) {
+  if (localIdb && localMem.has(fullKey)) return localMem.get(fullKey);
+  return window.localStorage.getItem(fullKey);
+}
 function readLocalCache(key) {
   try {
-    const raw = window.localStorage.getItem(OFFLINE_CACHE_PREFIX + key);
+    const raw = readLocalCacheRaw(OFFLINE_CACHE_PREFIX + key);
     if (!raw) return null;
     let parsed = JSON.parse(raw);
     // ---- Réparation des caches déjà abîmés sur les appareils existants ----
@@ -7461,15 +7551,26 @@ let LAST_CACHE_WRITE_ERROR = null;
 function writeLocalCache(key, value) {
   try {
     const raw = JSON.stringify(value);
-    window.localStorage.setItem(OFFLINE_CACHE_PREFIX + key, raw);
-    mirrorToNativeStorage(OFFLINE_CACHE_PREFIX + key, raw);
+    const fullKey = OFFLINE_CACHE_PREFIX + key;
+    if (localIdb) {
+      localMem.set(fullKey, raw);
+      localIdbPut(fullKey, raw).catch((e) => {
+        LAST_CACHE_WRITE_ERROR = { at: Date.now(), key, msg: "IndexedDB : " + String((e && (e.name || e.message)) || e) };
+        try { window.localStorage.setItem(fullKey, raw); } catch (err) {}
+      });
+      try { if (localChannel) localChannel.postMessage({ k: fullKey, v: raw }); } catch (e) {}
+      return true;
+    }
+    window.localStorage.setItem(fullKey, raw);
+    mirrorToNativeStorage(fullKey, raw);
     return true;
   }
   catch (e) { LAST_CACHE_WRITE_ERROR = { at: Date.now(), key, msg: String((e && (e.name || e.message)) || e) }; return false; }
 }
 // Diagnostic (mode test administrateur) : place prise sur le téléphone et état du cache.
 function storageDiagnostic(shopKey) {
-  const out = { totalKb: 0, keys: 0, biggest: [], cache: null, outbox: 0, unsynced: false, lastWriteError: LAST_CACHE_WRITE_ERROR };
+  const out = { totalKb: 0, keys: 0, biggest: [], cache: null, outbox: 0, unsynced: false, lastWriteError: LAST_CACHE_WRITE_ERROR, idb: !!localIdb, idbKb: 0 };
+  try { localMem.forEach((v, k) => { out.idbKb += Math.round(((k.length + v.length) * 2) / 1024); }); } catch (e) {}
   try {
     const ls = window.localStorage;
     const sizes = [];
@@ -13607,7 +13708,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       } catch (err) { /* ignoré */ }
     };
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    // Copie gardée dans IndexedDB : l'autre onglet prévient par BroadcastChannel.
+    const onLocal = (k, v) => onStorage({ key: k, newValue: v });
+    localChangeListeners.add(onLocal);
+    return () => { window.removeEventListener("storage", onStorage); localChangeListeners.delete(onLocal); };
   }, [isDemo, shopKey, applyShop]);
   const syncShopToServer = async (localShop) => {
     // Boutique pas encore identifiée (liste jamais chargée sur cet appareil) : on garde
@@ -24576,7 +24680,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </button>
                       {diagInfo && (
                         <pre style={{ fontSize: 10, lineHeight: 1.35, whiteSpace: "pre-wrap", wordBreak: "break-all", color: T.text, background: T.card, padding: 8, borderRadius: 8, margin: 0 }}>
-                          {`Total : ${diagInfo.totalKb} Ko (${diagInfo.keys} clés)\n` +
+                          {`localStorage : ${diagInfo.totalKb} Ko (${diagInfo.keys} clés) · IndexedDB : ${diagInfo.idb ? diagInfo.idbKb + " Ko" : "non utilisé"}\n` +
                            `Cache : ${diagInfo.cache ? `${diagInfo.cache.sales} ventes, dont ${diagInfo.cache.salesToday} aujourd'hui, ${diagInfo.cache.products} produits` : "absent"}\n` +
                            `Écran : ${allSales.length} ventes\n` +
                            `Boîte d'envoi : ${diagInfo.outbox} · non synchronisé : ${diagInfo.unsynced ? "oui" : "non"}\n` +

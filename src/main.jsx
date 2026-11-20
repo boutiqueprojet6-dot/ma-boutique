@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import BoutiqueApp from "./BoutiqueApp.jsx";
+import BoutiqueApp, { initLocalStore } from "./BoutiqueApp.jsx";
 import "./index.css";
 // Import STATIQUE (et non plus dynamique via import()) : BoutiqueApp.jsx importe déjà
 // @capacitor/preferences de façon statique (voir son en-tête et backgroundPersistence.js),
@@ -166,5 +166,7 @@ if (isCapacitorApp) {
     renderApp();
   })();
 } else {
-  renderApp();
+  // Site / PWA : la copie locale de la boutique est dans IndexedDB ; on la charge en mémoire
+  // avant d'afficher l'app (au plus ~2,5 s, sinon l'app repart sur localStorage).
+  initLocalStore().catch(() => {}).finally(renderApp);
 }
