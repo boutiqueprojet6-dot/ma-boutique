@@ -6177,6 +6177,18 @@ EXTRA_UI.removeReason_own = { fr: "Usage personnel", en: "Personal use", es: "Us
 EXTRA_UI.qtyChangeTitle = { fr: "Pourquoi le stock change ?", en: "Why is the stock changing?", es: "¿Por qué cambia el stock?", pt: "Porque é que o stock muda?", de: "Warum ändert sich der Bestand?", it: "Perché cambia la giacenza?", nl: "Waarom verandert de voorraad?", pl: "Dlaczego zmienia się stan?", ru: "Почему меняется остаток?", tr: "Stok neden değişiyor?", ar: "لماذا يتغير المخزون؟", hi: "स्टॉक क्यों बदल रहा है?", bn: "স্টক কেন বদলাচ্ছে?", ur: "اسٹاک کیوں بدل رہا ہے؟", ta: "இருப்பு ஏன் மாறுகிறது?", te: "స్టాక్ ఎందుకు మారుతోంది?", th: "ทำไมสต็อกเปลี่ยน?", zh: "库存为什么变化？", ja: "在庫が変わる理由は？", ko: "재고가 왜 바뀌나요?", id: "Mengapa stok berubah?", vi: "Vì sao tồn kho thay đổi?", tl: "Bakit nagbabago ang stock?", sw: "Kwa nini stoo inabadilika?", ha: "Me yasa kaya ke canzawa?", yo: "Kí ló dé tí ọjà ń yí padà?", zu: "Kungani isitoko sishintsha?", am: "ክምችቱ ለምን ይቀየራል?", bm: "Mun na stɔki bɛ yɛlɛma?", wo: "Lu tax stock bi soppiku?" };
 EXTRA_UI.qtyChangeLine = { fr: "Stock : {from} → {to}", en: "Stock: {from} → {to}", es: "Stock: {from} → {to}", pt: "Stock: {from} → {to}", de: "Bestand: {from} → {to}", it: "Giacenza: {from} → {to}", nl: "Voorraad: {from} → {to}", pl: "Stan: {from} → {to}", ru: "Остаток: {from} → {to}", tr: "Stok: {from} → {to}", ar: "المخزون: {from} ← {to}", hi: "स्टॉक: {from} → {to}", bn: "স্টক: {from} → {to}", ur: "اسٹاک: {from} ← {to}", ta: "இருப்பு: {from} → {to}", te: "స్టాక్: {from} → {to}", th: "สต็อก: {from} → {to}", zh: "库存：{from} → {to}", ja: "在庫：{from} → {to}", ko: "재고: {from} → {to}", id: "Stok: {from} → {to}", vi: "Tồn kho: {from} → {to}", tl: "Stock: {from} → {to}", sw: "Stoo: {from} → {to}", ha: "Kaya: {from} → {to}", yo: "Ọjà: {from} → {to}", zu: "Isitoko: {from} → {to}", am: "ክምችት፦ {from} → {to}", bm: "Stɔki: {from} → {to}", wo: "Stock: {from} → {to}" };
 EXTRA_UI.removeReason_restock = { fr: "Arrivage / réception", en: "Delivery received", es: "Mercancía recibida", pt: "Mercadoria recebida", de: "Lieferung erhalten", it: "Merce ricevuta", nl: "Levering ontvangen", pl: "Dostawa", ru: "Поступление товара", tr: "Mal kabul", ar: "وصول بضاعة", hi: "माल आया", bn: "মাল এসেছে", ur: "مال آیا", ta: "சரக்கு வந்தது", te: "సరుకు వచ్చింది", th: "รับสินค้าเข้า", zh: "到货", ja: "入荷", ko: "입고", id: "Barang masuk", vi: "Nhập hàng", tl: "Dumating na paninda", sw: "Mzigo umepokelewa", ha: "Kaya sun iso", yo: "Ọjà dé", zu: "Kufike impahla", am: "እቃ ደረሰ", bm: "Fɛnw nana", wo: "Marsandiis ñëw na" };
+EXTRA_UI.faqSubscribeInApp = { fr: "Ouvrez Réglages → Abonnement pour voir les paliers. L'abonnement se fera directement dans l'application, par le magasin d'applications du téléphone.", en: "Open Settings → Subscription to see the plans. You will subscribe directly in the app, through your phone's app store.", es: "Abre Ajustes → Suscripción para ver los planes. La suscripción se hará directamente en la app, a través de la tienda de aplicaciones del teléfono.", pt: "Abra Definições → Assinatura para ver os planos. A assinatura será feita diretamente na app, pela loja de aplicações do telemóvel.", de: "Öffne Einstellungen → Abo, um die Tarife zu sehen. Das Abo wird direkt in der App über den App-Store deines Handys abgeschlossen.", it: "Apri Impostazioni → Abbonamento per vedere i piani. L'abbonamento si farà direttamente nell'app, tramite lo store del telefono.", nl: "Open Instellingen → Abonnement om de pakketten te zien. Je abonneert straks direct in de app, via de appwinkel van je telefoon.", pl: "Otwórz Ustawienia → Subskrypcja, aby zobaczyć plany. Subskrypcję wykupisz bezpośrednio w aplikacji, przez sklep z aplikacjami w telefonie.", ru: "Откройте Настройки → Подписка, чтобы увидеть тарифы. Подписка оформляется прямо в приложении, через магазин приложений телефона.", tr: "Paketleri görmek için Ayarlar → Abonelik'i açın. Abonelik doğrudan uygulamada, telefonun uygulama mağazası üzerinden yapılacak.", ar: "افتح الإعدادات ← الاشتراك لرؤية الباقات. سيتم الاشتراك مباشرة داخل التطبيق عبر متجر تطبيقات الهاتف.", hi: "प्लान देखने के लिए सेटिंग्स → सदस्यता खोलें। सदस्यता सीधे ऐप में, फ़ोन के ऐप स्टोर से होगी।", bn: "প্ল্যান দেখতে সেটিংস → সাবস্ক্রিপশন খুলুন। সাবস্ক্রিপশন সরাসরি অ্যাপে, ফোনের অ্যাপ স্টোরের মাধ্যমে হবে।", ur: "پلان دیکھنے کے لیے ترتیبات ← سبسکرپشن کھولیں۔ سبسکرپشن براہِ راست ایپ میں، فون کے ایپ اسٹور سے ہوگی۔", ta: "திட்டங்களைப் பார்க்க அமைப்புகள் → சந்தா திறக்கவும். சந்தா நேரடியாக ஆப்பில், தொலைபேசியின் ஆப் ஸ்டோர் வழியாக நடக்கும்.", te: "ప్లాన్‌లు చూడటానికి సెట్టింగ్‌లు → సబ్‌స్క్రిప్షన్ తెరవండి. సబ్‌స్క్రిప్షన్ నేరుగా యాప్‌లో, ఫోన్ యాప్ స్టోర్ ద్వారా జరుగుతుంది.", th: "เปิด การตั้งค่า → การสมัครสมาชิก เพื่อดูแพ็กเกจ การสมัครจะทำในแอปโดยตรงผ่านร้านแอปของโทรศัพท์", zh: "打开 设置 → 订阅 查看套餐。订阅将直接在应用内通过手机应用商店完成。", ja: "設定 → サブスクリプションでプランを確認できます。購読はアプリ内で、スマホのアプリストアから行います。", ko: "설정 → 구독에서 요금제를 확인하세요. 구독은 휴대폰 앱 스토어를 통해 앱 안에서 바로 진행됩니다.", id: "Buka Pengaturan → Langganan untuk melihat paket. Langganan dilakukan langsung di aplikasi, lewat toko aplikasi ponsel.", vi: "Mở Cài đặt → Gói đăng ký để xem các gói. Việc đăng ký sẽ thực hiện ngay trong ứng dụng, qua kho ứng dụng của điện thoại.", tl: "Buksan ang Settings → Subscription para makita ang mga plano. Sa app mismo ka magsu-subscribe, sa app store ng telepono.", sw: "Fungua Mipangilio → Usajili kuona vifurushi. Utajisajili moja kwa moja ndani ya programu, kupitia duka la programu la simu.", ha: "Bude Saituna → Biyan kuɗi don ganin tsare-tsare. Za a yi rajista kai tsaye a cikin manhajar, ta shagon manhajojin wayar.", yo: "Ṣí Ètò → Ìforúkọsílẹ̀ láti rí àwọn ìpele. Ìforúkọsílẹ̀ yóò wáyé nínú áàpù, nípasẹ̀ ilé ìtajà áàpù fóònù.", zu: "Vula Izilungiselelo → Okubhalisile ukuze ubone amaphakheji. Uzobhalisa ngqo ku-app, ngesitolo sama-app sefoni.", am: "ዕቅዶቹን ለማየት ቅንብሮች → ደንበኝነትን ይክፈቱ። ደንበኝነት በቀጥታ በመተግበሪያው ውስጥ በስልኩ የመተግበሪያ መደብር ይከናወናል።", bm: "Paramɛtiri → Abonman da ka sariyaw ye. Abonman bɛna kɛ appli kɔnɔ yɛrɛ, telefɔni ka appli butigi fɛ.", wo: "Ubbil Paramètres → Abonnement ngir gis tarif yi. Abonnement bi dina def ci biir app bi, jaare ci store bu telefon bi." };
+EXTRA_UI.storeBillingSoon = { fr: "Le paiement dans l'application arrive bientôt. Votre palier actuel reste actif en attendant.", en: "In-app payment is coming soon. Your current plan stays active in the meantime.", es: "El pago dentro de la app llega pronto. Tu plan actual sigue activo mientras tanto.", pt: "O pagamento na app chega em breve. O seu plano atual continua ativo entretanto.", de: "Die Zahlung in der App kommt bald. Dein aktueller Tarif bleibt so lange aktiv.", it: "Il pagamento nell'app arriverà presto. Il tuo piano attuale resta attivo nel frattempo.", nl: "Betalen in de app komt binnenkort. Je huidige pakket blijft zolang actief.", pl: "Płatność w aplikacji już wkrótce. Do tego czasu Twój obecny plan pozostaje aktywny.", ru: "Оплата в приложении скоро появится. Пока что ваш текущий тариф остаётся активным.", tr: "Uygulama içi ödeme yakında geliyor. Bu arada mevcut paketiniz aktif kalır.", ar: "الدفع داخل التطبيق قريبًا. تبقى باقتك الحالية فعّالة في الأثناء.", hi: "ऐप में भुगतान जल्द आ रहा है। तब तक आपका मौजूदा प्लान चालू रहेगा।", bn: "অ্যাপের ভেতরে পেমেন্ট শিগগিরই আসছে। ততদিন আপনার বর্তমান প্ল্যান চালু থাকবে।", ur: "ایپ میں ادائیگی جلد آ رہی ہے۔ تب تک آپ کا موجودہ پلان فعال رہے گا۔", ta: "ஆப்பில் பணம் செலுத்துவது விரைவில் வரும். அதுவரை உங்கள் தற்போதைய திட்டம் செயலில் இருக்கும்.", te: "యాప్‌లో చెల్లింపు త్వరలో వస్తోంది. అప్పటి వరకు మీ ప్రస్తుత ప్లాన్ కొనసాగుతుంది.", th: "การชำระเงินในแอปจะมาเร็ว ๆ นี้ ระหว่างนี้แพ็กเกจปัจจุบันของคุณยังใช้งานได้", zh: "应用内支付即将上线。在此之前，您当前的套餐保持有效。", ja: "アプリ内での支払いはまもなく対応します。それまでは現在のプランが有効です。", ko: "앱 내 결제가 곧 제공됩니다. 그동안 현재 요금제는 계속 유지됩니다.", id: "Pembayaran di aplikasi segera hadir. Paket Anda saat ini tetap aktif sementara itu.", vi: "Thanh toán trong ứng dụng sắp ra mắt. Trong lúc chờ, gói hiện tại của bạn vẫn hoạt động.", tl: "Malapit na ang pagbabayad sa loob ng app. Aktibo pa rin ang kasalukuyan mong plano habang naghihintay.", sw: "Malipo ndani ya programu yanakuja hivi karibuni. Kifurushi chako cha sasa kinaendelea kufanya kazi kwa sasa.", ha: "Biyan kuɗi a cikin manhaja na nan tafe. Tsarinka na yanzu yana nan aiki kafin lokacin.", yo: "Ìsanwó nínú áàpù ń bọ̀ láìpẹ́. Ìpele rẹ lọ́wọ́lọ́wọ́ ṣì ń ṣiṣẹ́ títí di ìgbà náà.", zu: "Ukukhokha ngaphakathi ku-app kuza maduze. Iphakheji yakho yamanje isasebenza okwamanje.", am: "በመተግበሪያው ውስጥ ክፍያ በቅርቡ ይመጣል። እስከዚያው የአሁኑ ዕቅድዎ እንደነቃ ይቆያል።", bm: "Appli kɔnɔ sara bɛ na sɔɔni. Sani o ka se, i ka sariya min bɛ yen bɛ to a cogo la.", wo: "Fey ci biir app bi dina ñëw ci kanam. Ba ci kanam, sa tarif bi nga am léegi dina dox rekk." };
+EXTRA_UI.voiceNeedsInternet = { fr: "La dictée vocale a besoin d'Internet. Tapez le texte, ou réessayez quand le réseau revient.", en: "Voice typing needs the internet. Type the text, or try again when the network is back.", es: "El dictado por voz necesita internet. Escribe el texto o vuelve a intentarlo cuando vuelva la red.", pt: "O ditado por voz precisa de internet. Escreva o texto ou tente de novo quando a rede voltar.", de: "Die Spracheingabe braucht Internet. Tippe den Text oder versuche es erneut, wenn das Netz zurück ist.", it: "La dettatura vocale richiede internet. Scrivi il testo o riprova quando torna la rete.", nl: "Spraakinvoer heeft internet nodig. Typ de tekst of probeer opnieuw als het netwerk terug is.", pl: "Dyktowanie wymaga internetu. Wpisz tekst albo spróbuj ponownie, gdy wróci sieć.", ru: "Для голосового ввода нужен интернет. Введите текст вручную или попробуйте снова, когда появится сеть.", tr: "Sesle yazma internet gerektirir. Metni yazın ya da ağ geri gelince tekrar deneyin.", ar: "الإملاء الصوتي يحتاج إلى الإنترنت. اكتب النص أو أعد المحاولة عند عودة الشبكة.", hi: "बोलकर लिखने के लिए इंटरनेट चाहिए। टेक्स्ट टाइप करें, या नेटवर्क लौटने पर फिर कोशिश करें।", bn: "ভয়েস টাইপিংয়ের জন্য ইন্টারনেট লাগে। লেখাটি টাইপ করুন, বা নেটওয়ার্ক ফিরলে আবার চেষ্টা করুন।", ur: "آواز سے لکھنے کے لیے انٹرنیٹ چاہیے۔ متن ٹائپ کریں، یا نیٹ ورک واپس آنے پر دوبارہ کوشش کریں۔", ta: "குரல் தட்டச்சுக்கு இணையம் தேவை. உரையைத் தட்டச்சு செய்யவும், அல்லது நெட்வொர்க் வந்ததும் மீண்டும் முயலவும்.", te: "వాయిస్ టైపింగ్‌కు ఇంటర్నెట్ అవసరం. టెక్స్ట్ టైప్ చేయండి, లేదా నెట్‌వర్క్ వచ్చాక మళ్లీ ప్రయత్నించండి.", th: "การพิมพ์ด้วยเสียงต้องใช้อินเทอร์เน็ต พิมพ์ข้อความเอง หรือลองใหม่เมื่อสัญญาณกลับมา", zh: "语音输入需要网络。请手动输入，或在网络恢复后重试。", ja: "音声入力にはインターネットが必要です。文字を入力するか、電波が戻ってから再度お試しください。", ko: "음성 입력에는 인터넷이 필요합니다. 직접 입력하거나 네트워크가 돌아오면 다시 시도하세요.", id: "Dikte suara butuh internet. Ketik teksnya, atau coba lagi saat jaringan kembali.", vi: "Nhập bằng giọng nói cần có Internet. Hãy gõ chữ, hoặc thử lại khi có mạng.", tl: "Kailangan ng internet ang voice typing. I-type ang text, o subukan ulit pagbalik ng network.", sw: "Kuandika kwa sauti kunahitaji intaneti. Andika maandishi, au jaribu tena mtandao ukirudi.", ha: "Rubutu da murya yana buƙatar intanet. Rubuta da hannu, ko sake gwadawa idan hanyar sadarwa ta dawo.", yo: "Títẹ̀ pẹ̀lú ohùn nílò íntánẹ́ẹ̀tì. Tẹ ọ̀rọ̀ náà, tàbí gbìyànjú lẹ́ẹ̀kan sí i nígbà tí nẹ́tíwọ̀ọ̀kì bá padà.", zu: "Ukuthayipha ngezwi kudinga i-inthanethi. Thayipha umbhalo, noma uzame futhi uma inethiwekhi ibuya.", am: "በድምፅ መጻፍ ኢንተርኔት ይፈልጋል። ጽሑፉን ይተይቡ፣ ወይም ኔትወርኩ ሲመለስ እንደገና ይሞክሩ።", bm: "Kan fɛ sɛbɛnni mago bɛ ɛntɛrinɛti la. Sɛbɛnni kɛ i bolo la, walima i ka segin a kan ni rezo seginna.", wo: "Bind ak baat dafa soxla internet. Bindal ak sa loxo, walla jéemaat bu réseau bi delsee." };
+EXTRA_UI.profitCoverage = { fr: "Calculé sur {p} % des ventes : ajoutez le prix d'achat des autres produits.", en: "Based on {p}% of sales: add the cost price of the other products.", es: "Calculado sobre el {p} % de las ventas: añade el precio de compra de los demás productos.", pt: "Calculado sobre {p} % das vendas: adicione o preço de compra dos outros produtos.", de: "Berechnet auf {p} % der Verkäufe: Trage den Einkaufspreis der übrigen Produkte ein.", it: "Calcolato sul {p}% delle vendite: aggiungi il prezzo d'acquisto degli altri prodotti.", nl: "Berekend op {p}% van de verkopen: voeg de inkoopprijs van de andere producten toe.", pl: "Liczone na {p}% sprzedaży: dodaj cenę zakupu pozostałych produktów.", ru: "Рассчитано по {p} % продаж: укажите закупочную цену остальных товаров.", tr: "Satışların %{p}'i üzerinden hesaplandı: diğer ürünlerin alış fiyatını ekleyin.", ar: "محسوب على {p}% من المبيعات: أضف سعر الشراء لباقي المنتجات.", hi: "{p}% बिक्री पर आधारित: बाकी उत्पादों का खरीद मूल्य जोड़ें।", bn: "{p}% বিক্রির ভিত্তিতে হিসাব: বাকি পণ্যের ক্রয়মূল্য যোগ করুন।", ur: "{p}% فروخت پر حساب: باقی مصنوعات کی خرید قیمت شامل کریں۔", ta: "{p}% விற்பனையின் அடிப்படையில்: மற்ற பொருட்களின் கொள்முதல் விலையைச் சேர்க்கவும்.", te: "{p}% అమ్మకాలపై లెక్కించబడింది: మిగతా ఉత్పత్తుల కొనుగోలు ధర జోడించండి.", th: "คำนวณจาก {p}% ของยอดขาย: เพิ่มราคาทุนของสินค้าอื่น ๆ", zh: "按 {p}% 的销售额计算：请补充其他商品的进价。", ja: "売上の {p}% をもとに計算：他の商品の仕入れ価格を入力してください。", ko: "판매의 {p}% 기준 계산: 나머지 상품의 매입가를 입력하세요.", id: "Dihitung dari {p}% penjualan: tambahkan harga beli produk lainnya.", vi: "Tính trên {p}% doanh số: hãy thêm giá nhập của các sản phẩm còn lại.", tl: "Batay sa {p}% ng benta: idagdag ang puhunang presyo ng ibang produkto.", sw: "Imehesabiwa kwa {p}% ya mauzo: ongeza bei ya kununua ya bidhaa nyingine.", ha: "An lissafa bisa {p}% na sayarwa: ƙara farashin saye na sauran kayayyaki.", yo: "A ṣírò rẹ̀ lórí {p}% ti títà: fi iye owó rírà àwọn ọjà yòókù kún un.", zu: "Kubalwe ku-{p}% wokuthengisa: engeza intengo yokuthenga yeminye imikhiqizo.", am: "በ{p}% ሽያጭ ላይ የተሰላ: የሌሎቹን ምርቶች የግዢ ዋጋ ያክሉ።", bm: "A jatera feerew {p}% kan: fɛn tɔw sanni sɔngɔ fara a kan.", wo: "Lim nañu ko ci {p}% ci jaay yi: yokkal njëgu jënd bu yeneen marsandiis yi." };
+EXTRA_UI.aiQuickCashQuestion = { fr: "Combien j'ai dans la caisse ?", en: "How much cash is in the drawer?", es: "¿Cuánto dinero hay en la caja?", pt: "Quanto tenho na caixa?", de: "Wie viel Geld ist in der Kasse?", it: "Quanto c'è in cassa?", nl: "Hoeveel geld zit er in de kassa?", pl: "Ile mam w kasie?", ru: "Сколько денег в кассе?", tr: "Kasada ne kadar para var?", ar: "كم يوجد في الصندوق؟", hi: "गल्ले में कितने पैसे हैं?", bn: "ক্যাশে কত টাকা আছে?", ur: "گلے میں کتنے پیسے ہیں؟", ta: "கல்லாவில் எவ்வளவு பணம் உள்ளது?", te: "క్యాష్‌లో ఎంత డబ్బు ఉంది?", th: "ในลิ้นชักเงินมีเท่าไร?", zh: "钱箱里有多少钱？", ja: "レジにいくらありますか？", ko: "금전함에 돈이 얼마 있나요?", id: "Berapa uang di laci kas?", vi: "Trong két có bao nhiêu tiền?", tl: "Magkano ang pera sa kaha?", sw: "Kuna pesa kiasi gani kwenye droo?", ha: "Nawa ne a cikin akwatin kuɗi?", yo: "Mélòó ló wà nínú àpótí owó?", zu: "Kunemali engakanani ekhabetheni?", am: "በካዝናው ውስጥ ምን ያህል ገንዘብ አለ?", bm: "Wari joli bɛ kɛsu kɔnɔ?", wo: "Ñaata xaalis moo nekk ci kees bi?" };
+EXTRA_UI.aiLocalCashLocked = { fr: "Les montants de la caisse sont protégés. Affichez-les d'abord dans l'onglet Caisse avec votre code PIN, puis reposez la question.", en: "Cash amounts are protected. First show them in the Cash tab with your PIN, then ask again.", es: "Los importes de la caja están protegidos. Muéstralos primero en la pestaña Caja con tu PIN y vuelve a preguntar.", pt: "Os valores da caixa estão protegidos. Mostre-os primeiro no separador Caixa com o seu PIN e pergunte de novo.", de: "Die Kassenbeträge sind geschützt. Zeige sie zuerst im Tab Kasse mit deiner PIN an und frag dann erneut.", it: "Gli importi della cassa sono protetti. Mostrali prima nella scheda Cassa con il tuo PIN, poi richiedi.", nl: "De kassabedragen zijn beschermd. Toon ze eerst in het tabblad Kassa met je pincode en vraag het dan opnieuw.", pl: "Kwoty w kasie są chronione. Najpierw odsłoń je w zakładce Kasa kodem PIN, potem zapytaj ponownie.", ru: "Суммы кассы защищены. Сначала откройте их на вкладке Касса с PIN-кодом, затем спросите снова.", tr: "Kasa tutarları korunuyor. Önce Kasa sekmesinde PIN kodunuzla gösterin, sonra tekrar sorun.", ar: "مبالغ الصندوق محمية. اعرضها أولًا في تبويب الصندوق برمزك السري، ثم أعد السؤال.", hi: "गल्ले की रकम सुरक्षित है। पहले कैश टैब में PIN से दिखाएँ, फिर दोबारा पूछें।", bn: "ক্যাশের অঙ্ক সুরক্ষিত। আগে ক্যাশ ট্যাবে PIN দিয়ে দেখান, তারপর আবার জিজ্ঞেস করুন।", ur: "گلے کی رقم محفوظ ہے۔ پہلے کیش ٹیب میں PIN سے دکھائیں، پھر دوبارہ پوچھیں۔", ta: "கல்லா தொகைகள் பாதுகாக்கப்பட்டுள்ளன. முதலில் பணம் தாவலில் PIN மூலம் காட்டி, பின் மீண்டும் கேளுங்கள்.", te: "క్యాష్ మొత్తాలు రక్షించబడ్డాయి. ముందుగా క్యాష్ ట్యాబ్‌లో PINతో చూపించి, మళ్లీ అడగండి.", th: "ยอดเงินในลิ้นชักถูกป้องกันอยู่ ให้แสดงยอดในแท็บเงินสดด้วย PIN ก่อน แล้วค่อยถามใหม่", zh: "钱箱金额受保护。请先在“收银”页用 PIN 显示金额，然后再提问。", ja: "レジの金額は保護されています。まずレジタブで PIN を入れて表示してから、もう一度質問してください。", ko: "금전함 금액은 보호되어 있습니다. 먼저 현금 탭에서 PIN으로 표시한 뒤 다시 물어보세요.", id: "Jumlah kas dilindungi. Tampilkan dulu di tab Kas dengan PIN Anda, lalu tanyakan lagi.", vi: "Số tiền trong két được bảo vệ. Hãy hiển thị trước ở tab Két tiền bằng mã PIN, rồi hỏi lại.", tl: "Protektado ang halaga sa kaha. Ipakita muna ito sa tab na Kaha gamit ang PIN, saka magtanong ulit.", sw: "Kiasi cha droo kimelindwa. Kionyeshe kwanza kwenye kichupo cha Pesa kwa PIN yako, kisha uliza tena.", ha: "An kare kuɗin akwati. Fara nuna su a shafin Kuɗi da PIN ɗinka, sannan ka sake tambaya.", yo: "Iye owó inú àpótí ni a dáàbò bò. Kọ́kọ́ fi hàn ní ojú-ìwé Owó pẹ̀lú PIN rẹ, lẹ́yìn náà béèrè lẹ́ẹ̀kan sí i.", zu: "Amanani ekhabethe avikelwe. Qala uwabonise kuthebhu ethi Imali nge-PIN yakho, bese ubuza futhi.", am: "የካዝናው መጠኖች የተጠበቁ ናቸው። መጀመሪያ በካዝና ትር በፒንዎ ያሳዩዋቸው፣ ከዚያ እንደገና ይጠይቁ።", bm: "Kɛsu wari hakɛw tangalen don. Fɔlɔ k'u yira Kɛsu yɔrɔ la i ka PIN fɛ, o kɔ i ka ɲininkali kɛ tugun.", wo: "Xaalis yu kees bi dañu leen aar. Wonal leen balaa ci onglet Caisse ak sa code PIN, ba noppi laajaat." };
+EXTRA_UI.aiLocalCashTitle = { fr: "Argent estimé dans la caisse : {a}", en: "Estimated cash in the drawer: {a}", es: "Dinero estimado en la caja: {a}", pt: "Dinheiro estimado na caixa: {a}", de: "Geschätztes Bargeld in der Kasse: {a}", it: "Contanti stimati in cassa: {a}", nl: "Geschat geld in de kassa: {a}", pl: "Szacowana gotówka w kasie: {a}", ru: "Примерно в кассе: {a}", tr: "Kasadaki tahmini para: {a}", ar: "المبلغ التقديري في الصندوق: {a}", hi: "गल्ले में अनुमानित नकद: {a}", bn: "ক্যাশে আনুমানিক নগদ: {a}", ur: "گلے میں اندازاً نقد: {a}", ta: "கல்லாவில் மதிப்பிடப்பட்ட பணம்: {a}", te: "క్యాష్‌లో అంచనా నగదు: {a}", th: "เงินสดโดยประมาณในลิ้นชัก: {a}", zh: "钱箱估计现金：{a}", ja: "レジの推定現金：{a}", ko: "금전함 예상 현금: {a}", id: "Perkiraan uang di laci kas: {a}", vi: "Tiền mặt ước tính trong két: {a}", tl: "Tantiyang pera sa kaha: {a}", sw: "Pesa inayokadiriwa kwenye droo: {a}", ha: "Ƙiyasin kuɗi a cikin akwati: {a}", yo: "Owó tí a fojú bù nínú àpótí: {a}", zu: "Imali elinganiselwe ekhabetheni: {a}", am: "በካዝናው ውስጥ የሚገመት ገንዘብ: {a}", bm: "Wari min bɛ kɛsu kɔnɔ (jatemina): {a}", wo: "Xaalis bi ñu foog ci kees bi: {a}" };
+EXTRA_UI.aiLocalCashToday = { fr: "Aujourd'hui en espèces : +{in} entrés, −{out} sortis.", en: "Today in cash: +{in} in, −{out} out.", es: "Hoy en efectivo: +{in} de entrada, −{out} de salida.", pt: "Hoje em dinheiro: +{in} entrou, −{out} saiu.", de: "Heute bar: +{in} rein, −{out} raus.", it: "Oggi in contanti: +{in} entrati, −{out} usciti.", nl: "Vandaag contant: +{in} in, −{out} uit.", pl: "Dziś gotówką: +{in} wpłynęło, −{out} wyszło.", ru: "Сегодня наличными: +{in} пришло, −{out} ушло.", tr: "Bugün nakit: +{in} giriş, −{out} çıkış.", ar: "اليوم نقدًا: +{in} دخل، −{out} خرج.", hi: "आज नकद: +{in} आए, −{out} गए।", bn: "আজ নগদে: +{in} এসেছে, −{out} গেছে।", ur: "آج نقد: +{in} آئے، −{out} گئے۔", ta: "இன்று ரொக்கம்: +{in} வந்தது, −{out} போனது.", te: "ఈరోజు నగదు: +{in} వచ్చింది, −{out} వెళ్లింది.", th: "วันนี้เงินสด: เข้า +{in} ออก −{out}", zh: "今日现金：收入 +{in}，支出 −{out}。", ja: "本日の現金：入金 +{in}、出金 −{out}。", ko: "오늘 현금: 입금 +{in}, 출금 −{out}.", id: "Hari ini tunai: +{in} masuk, −{out} keluar.", vi: "Hôm nay tiền mặt: +{in} vào, −{out} ra.", tl: "Ngayong araw na cash: +{in} pumasok, −{out} lumabas.", sw: "Leo kwa taslimu: +{in} imeingia, −{out} imetoka.", ha: "Yau a tsabar kuɗi: +{in} ya shigo, −{out} ya fita.", yo: "Lónìí ní owó ọwọ́: +{in} wọlé, −{out} jáde.", zu: "Namuhla ngokheshi: +{in} kungenile, −{out} kuphumile.", am: "ዛሬ በጥሬ ገንዘብ: +{in} ገባ፣ −{out} ወጣ።", bm: "Bi wari la: +{in} donna, −{out} bɔra.", wo: "Tey ci xaalis: +{in} dugg na, −{out} génn na." };
+EXTRA_UI.aiLocalPriceSimTitle = { fr: "Si vous augmentez tous vos prix de {p} % (calcul sur les 30 derniers jours) :", en: "If you raise all your prices by {p}% (based on the last 30 days):", es: "Si subes todos tus precios un {p} % (según los últimos 30 días):", pt: "Se aumentar todos os preços em {p} % (com base nos últimos 30 dias):", de: "Wenn du alle Preise um {p} % erhöhst (Basis: letzte 30 Tage):", it: "Se aumenti tutti i prezzi del {p}% (calcolo sugli ultimi 30 giorni):", nl: "Als je al je prijzen met {p}% verhoogt (op basis van de laatste 30 dagen):", pl: "Jeśli podniesiesz wszystkie ceny o {p}% (na podstawie ostatnich 30 dni):", ru: "Если поднять все цены на {p} % (по данным за 30 дней):", tr: "Tüm fiyatlarınızı %{p} artırırsanız (son 30 güne göre):", ar: "إذا رفعت كل أسعارك بنسبة {p}% (حسب آخر 30 يومًا):", hi: "अगर आप सभी दाम {p}% बढ़ाएँ (पिछले 30 दिनों के आधार पर):", bn: "সব দাম {p}% বাড়ালে (গত ৩০ দিনের হিসাবে):", ur: "اگر آپ تمام قیمتیں {p}% بڑھائیں (پچھلے 30 دنوں کی بنیاد پر):", ta: "எல்லா விலைகளையும் {p}% உயர்த்தினால் (கடந்த 30 நாட்கள் அடிப்படையில்):", te: "అన్ని ధరలను {p}% పెంచితే (గత 30 రోజుల ఆధారంగా):", th: "ถ้าขึ้นราคาทุกอย่าง {p}% (คำนวณจาก 30 วันล่าสุด):", zh: "如果所有价格上涨 {p}%（按最近 30 天计算）：", ja: "すべての価格を {p}% 上げた場合（直近30日で計算）：", ko: "모든 가격을 {p}% 올리면 (최근 30일 기준):", id: "Jika semua harga dinaikkan {p}% (berdasarkan 30 hari terakhir):", vi: "Nếu tăng tất cả giá thêm {p}% (tính trên 30 ngày qua):", tl: "Kung itataas mo ang lahat ng presyo nang {p}% (batay sa huling 30 araw):", sw: "Ukiongeza bei zako zote kwa {p}% (kwa siku 30 zilizopita):", ha: "Idan ka ƙara dukkan farashinka da {p}% (bisa kwanaki 30 da suka wuce):", yo: "Bí o bá gbé gbogbo iye owó rẹ sókè ní {p}% (lórí ọjọ́ 30 sẹ́yìn):", zu: "Uma ukhuphula zonke izintengo zakho ngo-{p}% (ngokwezinsuku ezingama-30 ezedlule):", am: "ሁሉንም ዋጋዎች በ{p}% ቢጨምሩ (ባለፉት 30 ቀናት መሠረት):", bm: "N'i ye i ka sɔngɔw bɛɛ yɛlɛ {p}% (tile 30 laban jatebɔ la):", wo: "Su nga yokkee sa njëg yépp {p}% (ci 30 fan yi weesu):" };
+EXTRA_UI.aiLocalPriceSimRevenue = { fr: "• Ventes : {a} → {b} (+{c}) si vous vendez autant.", en: "• Sales: {a} → {b} (+{c}) if you sell the same amount.", es: "• Ventas: {a} → {b} (+{c}) si vendes lo mismo.", pt: "• Vendas: {a} → {b} (+{c}) se vender o mesmo.", de: "• Umsatz: {a} → {b} (+{c}), wenn du gleich viel verkaufst.", it: "• Vendite: {a} → {b} (+{c}) se vendi le stesse quantità.", nl: "• Verkoop: {a} → {b} (+{c}) als je evenveel verkoopt.", pl: "• Sprzedaż: {a} → {b} (+{c}), jeśli sprzedasz tyle samo.", ru: "• Продажи: {a} → {b} (+{c}), если продавать столько же.", tr: "• Satışlar: {a} → {b} (+{c}), aynı miktarı satarsanız.", ar: "• المبيعات: {a} ← {b} (+{c}) إذا بعت الكمية نفسها.", hi: "• बिक्री: {a} → {b} (+{c}) अगर आप उतना ही बेचें।", bn: "• বিক্রি: {a} → {b} (+{c}) যদি একই পরিমাণ বিক্রি করেন।", ur: "• فروخت: {a} ← {b} (+{c}) اگر آپ اتنا ہی بیچیں۔", ta: "• விற்பனை: {a} → {b} (+{c}) அதே அளவு விற்றால்.", te: "• అమ్మకాలు: {a} → {b} (+{c}) అంతే అమ్మితే.", th: "• ยอดขาย: {a} → {b} (+{c}) ถ้าขายได้เท่าเดิม", zh: "• 销售额：{a} → {b}（+{c}），前提是销量不变。", ja: "• 売上：{a} → {b}（+{c}）、販売数が同じ場合。", ko: "• 매출: {a} → {b} (+{c}), 같은 양을 판다면.", id: "• Penjualan: {a} → {b} (+{c}) jika jumlah terjual sama.", vi: "• Doanh số: {a} → {b} (+{c}) nếu bán được như cũ.", tl: "• Benta: {a} → {b} (+{c}) kung pareho ang dami ng mabebenta.", sw: "• Mauzo: {a} → {b} (+{c}) ukiuza kiasi kilekile.", ha: "• Sayarwa: {a} → {b} (+{c}) idan ka sayar da adadi ɗaya.", yo: "• Títà: {a} → {b} (+{c}) bí o bá ta iye kan náà.", zu: "• Ukuthengisa: {a} → {b} (+{c}) uma uthengisa okufanayo.", am: "• ሽያጭ: {a} → {b} (+{c}) ያንኑ ያህል ከሸጡ።", bm: "• Feerew: {a} → {b} (+{c}) n'i ye o hakɛ kelen feere.", wo: "• Jaay: {a} → {b} (+{c}) su nga jaayee lu tollu." };
+EXTRA_UI.aiLocalPriceSimBreakEven = { fr: "• Vous gagnez plus qu'aujourd'hui tant que vos ventes ne baissent pas de plus de {p} %.", en: "• You earn more than today as long as sales don't drop by more than {p}%.", es: "• Ganas más que hoy mientras las ventas no bajen más de un {p} %.", pt: "• Ganha mais do que hoje enquanto as vendas não caírem mais de {p} %.", de: "• Du verdienst mehr als heute, solange der Absatz um nicht mehr als {p} % sinkt.", it: "• Guadagni più di oggi finché le vendite non calano più del {p}%.", nl: "• Je verdient meer dan nu zolang de verkoop niet meer dan {p}% daalt.", pl: "• Zarobisz więcej niż dziś, dopóki sprzedaż nie spadnie o więcej niż {p}%.", ru: "• Вы заработаете больше, чем сейчас, пока продажи упадут не более чем на {p} %.", tr: "• Satışlarınız %{p}'ten fazla düşmedikçe bugünden fazla kazanırsınız.", ar: "• ستربح أكثر من اليوم ما دامت مبيعاتك لا تنخفض بأكثر من {p}%.", hi: "• जब तक बिक्री {p}% से ज़्यादा न घटे, आप आज से ज़्यादा कमाएँगे।", bn: "• বিক্রি {p}%-এর বেশি না কমলে আপনি আজকের চেয়ে বেশি আয় করবেন।", ur: "• جب تک فروخت {p}% سے زیادہ کم نہ ہو، آپ آج سے زیادہ کمائیں گے۔", ta: "• விற்பனை {p}%க்கு மேல் குறையாத வரை இன்றைவிட அதிகம் சம்பாதிப்பீர்கள்.", te: "• అమ్మకాలు {p}% కంటే ఎక్కువ తగ్గనంత వరకు మీరు ఇప్పటికన్నా ఎక్కువ సంపాదిస్తారు.", th: "• คุณจะได้กำไรมากกว่าตอนนี้ ตราบใดที่ยอดขายไม่ลดเกิน {p}%", zh: "• 只要销量下降不超过 {p}%，您的利润就会比现在高。", ja: "• 販売数の減少が {p}% 以内なら、今より利益が増えます。", ko: "• 판매량이 {p}% 넘게 줄지 않는 한 지금보다 더 벌게 됩니다.", id: "• Anda untung lebih besar selama penjualan tidak turun lebih dari {p}%.", vi: "• Bạn lãi hơn hiện nay miễn là lượng bán không giảm quá {p}%.", tl: "• Mas malaki ang kita mo hangga't hindi bumababa ang benta nang higit sa {p}%.", sw: "• Utapata zaidi ya leo ilimradi mauzo yasishuke zaidi ya {p}%.", ha: "• Za ka fi samun riba fiye da yau muddin sayarwa ba ta ragu fiye da {p}% ba.", yo: "• Wàá jèrè ju ti òní lọ níwọ̀n ìgbà tí títà kò bá dín ju {p}% lọ.", zu: "• Uzozuza ngaphezu kwanamuhla uma nje ukuthengisa kungehli ngaphezu kuka-{p}%.", am: "• ሽያጭዎ ከ{p}% በላይ እስካልቀነሰ ድረስ ከዛሬ የበለጠ ያተርፋሉ።", bm: "• I bɛna tɔnɔ caman sɔrɔ ni bi ye, n'i ka feerew ma dɔgɔya ka tɛmɛ {p}% kan.", wo: "• Dinga gëna am tey, su sa jaay waaniku wul lu ëpp {p}%." };
+EXTRA_UI.aiLocalPriceSimNote = { fr: "Conseil : augmentez d'abord les produits très demandés, un par un, et regardez les ventes de la semaine suivante.", en: "Tip: raise the most popular products first, one at a time, and watch the next week's sales.", es: "Consejo: sube primero los productos más pedidos, uno a uno, y mira las ventas de la semana siguiente.", pt: "Dica: aumente primeiro os produtos mais procurados, um a um, e veja as vendas da semana seguinte.", de: "Tipp: Erhöhe zuerst die gefragtesten Produkte, eins nach dem anderen, und beobachte die Verkäufe der Folgewoche.", it: "Consiglio: aumenta prima i prodotti più richiesti, uno alla volta, e guarda le vendite della settimana dopo.", nl: "Tip: verhoog eerst de populairste producten, één voor één, en bekijk de verkoop van de week erna.", pl: "Rada: podnoś najpierw ceny najchętniej kupowanych produktów, po jednym, i obserwuj sprzedaż w kolejnym tygodniu.", ru: "Совет: поднимайте сначала самые ходовые товары, по одному, и смотрите продажи следующей недели.", tr: "İpucu: önce en çok satan ürünleri teker teker artırın ve sonraki haftanın satışlarına bakın.", ar: "نصيحة: ارفع أولًا أسعار المنتجات الأكثر طلبًا، واحدًا تلو الآخر، وراقب مبيعات الأسبوع التالي.", hi: "सुझाव: पहले सबसे ज़्यादा माँग वाले उत्पादों के दाम एक-एक करके बढ़ाएँ और अगले हफ़्ते की बिक्री देखें।", bn: "পরামর্শ: আগে সবচেয়ে চাহিদার পণ্যের দাম একটি একটি করে বাড়ান, আর পরের সপ্তাহের বিক্রি দেখুন।", ur: "مشورہ: پہلے سب سے زیادہ مانگ والی مصنوعات کی قیمت ایک ایک کر کے بڑھائیں اور اگلے ہفتے کی فروخت دیکھیں۔", ta: "ஆலோசனை: முதலில் அதிகம் விற்கும் பொருட்களின் விலையை ஒவ்வொன்றாக உயர்த்தி, அடுத்த வார விற்பனையைப் பாருங்கள்.", te: "సూచన: ముందుగా ఎక్కువగా అమ్ముడయ్యే ఉత్పత్తుల ధరలు ఒక్కొక్కటిగా పెంచి, వచ్చే వారం అమ్మకాలు చూడండి.", th: "คำแนะนำ: ขึ้นราคาสินค้าขายดีก่อนทีละรายการ แล้วดูยอดขายสัปดาห์ถัดไป", zh: "建议：先逐个上调最畅销的商品，并观察下一周的销量。", ja: "ヒント：まず人気商品から1つずつ値上げし、翌週の売上を確認しましょう。", ko: "팁: 인기 상품부터 하나씩 올리고 다음 주 판매를 지켜보세요.", id: "Tips: naikkan dulu harga produk paling laris, satu per satu, lalu lihat penjualan minggu berikutnya.", vi: "Mẹo: tăng giá các sản phẩm bán chạy trước, từng món một, và theo dõi doanh số tuần sau.", tl: "Tip: unahing itaas ang pinakamabentang produkto, isa-isa, at bantayan ang benta sa susunod na linggo.", sw: "Ushauri: anza kuongeza bei ya bidhaa zinazopendwa zaidi, moja moja, na angalia mauzo ya wiki inayofuata.", ha: "Shawara: fara ƙara farashin kayan da aka fi buƙata, ɗaya bayan ɗaya, ka kalli sayarwar mako mai zuwa.", yo: "Ìmọ̀ràn: kọ́kọ́ gbé iye àwọn ọjà tí wọ́n ń rà jù sókè, ọ̀kan-ọ̀kan, kí o sì wo títà ọ̀sẹ̀ tó tẹ̀lé e.", zu: "Ithiphu: qala ngokukhuphula imikhiqizo ethandwa kakhulu, ngayinye, bese ubheka ukuthengisa kweviki elilandelayo.", am: "ምክር: መጀመሪያ በብዛት የሚፈለጉትን ምርቶች አንድ በአንድ ይጨምሩ፣ የሚቀጥለውን ሳምንት ሽያጭ ይመልከቱ።", bm: "Laadilikan: a daminɛ ni fɛn minnu bɛ san kosɛbɛ, kelen kelen, ka dɔgɔkun nata feerew lajɛ.", wo: "Digle: tàmbalil ci marsandiis yi ñuy gëna jënd, benn-benn, te xool jaay ci ayubés bi ci topp." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -7402,6 +7414,20 @@ function flushAllCacheToNativeStorage() {
 // Drive, WhatsApp, e-mail…). Sinon (ordinateur), téléchargement classique — avec le lien
 // attaché au document et libéré avec un délai, sinon certains navigateurs annulent le
 // téléchargement. Renvoie true si l'opération a été lancée (ou annulée par l'utilisateur).
+// CSV sûr pour Excel / Google Sheets : chaque champ entre guillemets, et un texte qui
+// commence par = + - @ (ex. un nom de client ou de produit saisi comme « =HYPERLINK(...) »)
+// est préfixé d'une apostrophe, sinon le tableur l'exécuterait comme une formule.
+// Les nombres (y compris négatifs) restent des nombres.
+function toCsv(rows) {
+  const cell = (v) => {
+    if (v === null || v === undefined) return '""';
+    if (typeof v === "number") return Number.isFinite(v) ? String(v) : '""';
+    let str = String(v);
+    if (/^[=+\-@\t\r]/.test(str) && !/^[-+]?\d+([.,]\d+)?$/.test(str)) str = "'" + str;
+    return '"' + str.replace(/"/g, '""') + '"';
+  };
+  return rows.map((r) => r.map(cell).join(";")).join("\n");
+}
 async function saveTextFile(content, filename, mime = "text/csv") {
   const blob = new Blob(["\uFEFF" + content], { type: mime + ";charset=utf-8" });
   const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
@@ -15821,7 +15847,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     recognition.maxAlternatives = 1;
     recognition.onstart = () => { setIsVoiceCartListening(true); setVoiceCartResult(null); };
     recognition.onend = () => setIsVoiceCartListening(false);
-    recognition.onerror = () => setIsVoiceCartListening(false);
+    // La dictée du téléphone passe le plus souvent par Internet : hors ligne, elle échouait
+    // sans rien dire. On explique pourquoi.
+    recognition.onerror = (e) => { setIsVoiceCartListening(false); if (e && e.error === "network") alert(tx(lang, "voiceNeedsInternet")); };
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setVoiceCartTranscript(transcript);
@@ -16834,6 +16862,46 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       return lines.join("\n");
     }
+
+    // 6. Et si j'augmentais mes prix de X % ? — simple calcul sur les 30 derniers jours.
+    // Strict : seulement la suggestion ou « et si j'augmente(ais) mes prix », jamais un ordre
+    // du type « augmente le prix du riz à 500 », qui doit aller à l'IA (bloc ACTIONS).
+    if (matches("othEtSiJaugmentaisMesPrix", [/^(et )?si j augment(ais|e|ait) (tous )?(mes|les) prix/, /^what if i (raise|increase) (all )?(my )?prices/])) {
+      if (!can("viewStats")) return null;
+      const pm = q.match(/(\d{1,2})\s*(%|pour ?cent|percent)/);
+      const pct = pm ? Math.max(1, Math.min(50, Number(pm[1]))) : 10;
+      const since = dayKeyOf(new Date(Date.now() - 29 * 86400000));
+      const recent = validSales.filter((s) => dayKeyOf(s.date) >= since);
+      if (recent.length === 0) return tx(lang, "aiLocalNoData");
+      const rev = recent.reduce((sum, s) => sum + (s.total || 0), 0);
+      let margin = 0, revCosted = 0;
+      recent.forEach((s) => { if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; revCosted += s.total || 0; } });
+      const extra = Math.round(rev * pct / 100);
+      const lines = [tx(lang, "aiLocalPriceSimTitle").replace("{p}", localizedNumber(pct)), ""];
+      lines.push(tx(lang, "aiLocalPriceSimRevenue").replace("{a}", money(rev)).replace("{b}", money(rev + extra)).replace("{c}", money(extra)));
+      // Baisse de volume tolérable avant de gagner MOINS qu'aujourd'hui (sur la partie dont
+      // on connaît le prix d'achat) : hausse / (marge actuelle + hausse).
+      if (revCosted > 0 && margin > 0) {
+        const up = revCosted * pct / 100;
+        const breakEven = Math.floor((up / (margin + up)) * 100);
+        lines.push(tx(lang, "aiLocalPriceSimBreakEven").replace("{p}", localizedNumber(breakEven)));
+      }
+      lines.push("", tx(lang, "aiLocalPriceSimNote"));
+      return lines.join("\n");
+    }
+
+    // 7. Combien j'ai dans la caisse — même solde que l'onglet Caisse, et même protection :
+    // le propriétaire doit avoir affiché les montants (code PIN) depuis moins de 15 min.
+    if (matches("aiQuickCashQuestion", [/combien.*(caisse|tiroir)/, /(argent|solde|montant).*(caisse|tiroir)/, /how much (cash|money).*(drawer|till|register|box)/, /(cash|till) balance/])) {
+      if (!can("viewCash")) return null;
+      const unlocked = !!activeEmployee || isDemo || Date.now() - amountsUnlockedAtRef.current < 15 * 60 * 1000;
+      if (!unlocked) return tx(lang, "aiLocalCashLocked");
+      const tIn = validSales.filter((s) => dayKeyOf(s.date) === today && s.payment === "cash").reduce((sum, s) => sum + s.total, 0)
+        + debtEvents.filter((ev) => dayKeyOf(ev.date) === today && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
+      const tOut = expenses.filter((e) => dayKeyOf(e.date) === today && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
+      return tx(lang, "aiLocalCashTitle").replace("{a}", money(cashBalance)) + "\n"
+        + tx(lang, "aiLocalCashToday").replace("{in}", money(tIn)).replace("{out}", money(tOut));
+    }
     return null;
   };
 
@@ -17219,7 +17287,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     recognition.maxAlternatives = 1;
     recognition.onstart = () => setIsListening(true);
     recognition.onend = () => setIsListening(false);
-    recognition.onerror = () => setIsListening(false);
+    recognition.onerror = (e) => { setIsListening(false); if (e && e.error === "network") alert(tx(lang, "voiceNeedsInternet")); };
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setAiInput((prev) => (prev ? prev + " " : "") + transcript);
@@ -17882,22 +17950,65 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // pastille sur chaque produit qui sera épuisé dans la semaine). Les ventes sont rattachées
   // au produit par son identifiant : l'ancien calcul passait par le NOM, donc un produit
   // renommé perdait tout son historique et deux produits homonymes s'additionnaient.
+  // Clients déjà connus (dettes, puis ventes récentes) qui contiennent le texte tapé :
+  // proposés sous le champ « Client » de la vente et du formulaire de dette.
+  const suggestCustomers = (typedRaw) => {
+    const typed = (typedRaw || "").trim().toLowerCase();
+    if (typed.length < 1) return [];
+    const known = {};
+    const add = (name, phone, weight) => {
+      const n = (name || "").trim();
+      if (!n) return;
+      const k = n.toLowerCase();
+      if (!known[k]) known[k] = { name: n, phone: "", score: 0 };
+      known[k].score += weight;
+      if (phone && !known[k].phone) known[k].phone = phone;
+    };
+    debts.forEach((d) => add(d.customer, d.phone, 2));
+    for (let i = sales.length - 1; i >= 0 && i >= sales.length - 3000; i--) add(sales[i].customer, "", 1);
+    return Object.values(known).filter((c) => c.name.toLowerCase().includes(typed) && c.name.toLowerCase() !== typed).sort((a, b) => b.score - a.score).slice(0, 4);
+  };
+  // Le rythme n'est calculé que sur les jours où le produit était en rayon : un produit
+  // créé il y a 3 jours, ou resté en rupture une semaine, n'est plus divisé par 14 jours
+  // (ce qui sous-estimait son rythme et annonçait la rupture trop tard). Le stock de chaque
+  // jour passé est reconstitué en remontant les ventes depuis la quantité actuelle.
   const forecastById = memoDerived("forecast", [sales, products, todayKey()], () => {
-    const cutoff = Date.now() - 14 * 86400000;
+    const now = new Date();
+    const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const cutoff = startToday - 13 * 86400000;
+    const dayIdx = (ms) => Math.floor((startToday + 86400000 - 1 - ms) / 86400000); // 0 = aujourd'hui
     const soldById = {}, soldByName = {};
+    const add = (bucket, key, d, packs) => { const b = bucket[key] || (bucket[key] = new Array(14).fill(0)); b[d] += packs; };
     sales.forEach((s) => {
-      if (new Date(s.date).getTime() < cutoff) return;
+      if (s.cancelled) return;
+      const ms = new Date(s.date).getTime();
+      if (!(ms >= cutoff)) return;
+      const d = Math.min(13, Math.max(0, dayIdx(ms)));
       // Une vente à l'unité ne retire qu'une fraction de colis du stock.
       const product = s.mode === "unit" ? products.find((p) => p.id === s.productId) : null;
       const packs = product && product.unitsPerPack > 0 ? s.qty / product.unitsPerPack : s.qty;
-      if (s.productId != null) soldById[s.productId] = (soldById[s.productId] || 0) + packs;
-      else soldByName[s.productName] = (soldByName[s.productName] || 0) + packs;
+      if (s.productId != null) add(soldById, s.productId, d, packs);
+      else add(soldByName, s.productName, d, packs);
     });
     const map = {};
     products.forEach((p) => {
       if (p.dailyMode) return; // production du jour : le stock repart de zéro chaque matin
-      const sold14d = (soldById[p.id] || 0) + (soldByName[p.name] || 0);
-      const dailyRate = sold14d / 14;
+      const a = soldById[p.id], b = soldByName[p.name];
+      if (!a && !b) return;
+      const perDay = new Array(14).fill(0).map((_, d) => (a ? a[d] : 0) + (b ? b[d] : 0));
+      const sold14d = perDay.reduce((x, y) => x + y, 0);
+      if (sold14d <= 0) return;
+      const idStr = String(p.id || "");
+      const createdMs = p.createdAt ? new Date(p.createdAt).getTime() : (/^\d{13}/.test(idStr) ? Number(idStr.slice(0, 13)) : 0);
+      let stockEnd = Math.max(0, p.quantity || 0), activeDays = 0;
+      for (let d = 0; d < 14; d++) {
+        const dayStart = startToday - d * 86400000;
+        if (createdMs && createdMs >= dayStart + 86400000) break; // produit pas encore créé
+        const stockStart = stockEnd + perDay[d];
+        if (perDay[d] > 0 || stockStart > 0) activeDays++;
+        stockEnd = stockStart;
+      }
+      const dailyRate = sold14d / Math.max(3, activeDays);
       if (dailyRate <= 0) return;
       map[p.id] = { dailyRate, daysLeft: (p.quantity || 0) / dailyRate, suggestedReorder: Math.max(1, Math.ceil(dailyRate * 14)) };
     });
@@ -17982,11 +18093,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
 
   const cashCardStyle = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
   // Bénéfice estimé du jour (accueil) : marge des ventes dont le prix d'achat est connu, moins les dépenses du jour.
+  // Part (en %) du chiffre d'affaires dont le prix d'achat est connu. Sous 100 %, le
+  // bénéfice affiché est sous-estimé : on le dit, au lieu de laisser croire qu'il est complet.
+  const coveragePct = (covered, total) => (total > 0 ? Math.min(100, Math.floor((covered / total) * 100)) : 100);
   const todayProfit = (() => {
-    let margin = 0, costed = 0;
-    todaySales.forEach((s) => { if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; } });
+    let margin = 0, costed = 0, rev = 0, revCosted = 0;
+    todaySales.forEach((s) => { rev += s.total || 0; if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; revCosted += s.total || 0; } });
     const exp = todayExpenses.reduce((sum, e) => sum + e.amount, 0);
-    return { margin, costed, exp, net: margin - exp };
+    return { margin, costed, exp, net: margin - exp, coverage: coveragePct(revCosted, rev) };
   })();
   // Onglet Caisse : tout est calculé uniquement quand l'onglet est ouvert.
   const cashView = tab === "cash" ? (() => {
@@ -18030,9 +18144,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       ...pDebtPayments.map((ev) => ({ id: "d-" + ev.id, kind: "debt", date: ev.date, amount: ev.amount, label: (isCashMove(ev) ? "" : "📱 ") + (ev.customer || ""), actorName: ev.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // Bénéfice de la période : marge des ventes dont le prix d'achat est connu, moins les dépenses.
-    let margin = 0, costed = 0;
-    pSales.forEach((sl) => { if (sl.costPrice != null) { margin += sl.total - sl.costPrice * sl.qty; costed++; } });
-    const profit = { margin, costed, net: margin - outExpensesOnly };
+    let margin = 0, costed = 0, revCosted = 0;
+    pSales.forEach((sl) => { if (sl.costPrice != null) { margin += sl.total - sl.costPrice * sl.qty; costed++; revCosted += sl.total || 0; } });
+    const profit = { margin, costed, net: margin - outExpensesOnly, coverage: coveragePct(revCosted, salesTotal) };
     const pCounts = cashCounts.filter((c) => inPeriod(c.date));
     // Tendance : flux net (espèces − dépenses) des 7 derniers jours, pour un coup d'œil visuel.
     const trend7 = last30Days().slice(-7).map((day) => {
@@ -18088,11 +18202,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const revenueOf = (rows) => rows.reduce((sum, s) => sum + s.total, 0);
     const ticketsOf = (rows) => new Set(rows.map((s) => s.transactionId || s.id)).size;
     const profitOf = (rows, from, to) => {
-      let margin = 0, costed = 0;
-      rows.forEach((s) => { if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; } });
+      let margin = 0, costed = 0, rev = 0, revCosted = 0;
+      rows.forEach((s) => { rev += s.total || 0; if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; revCosted += s.total || 0; } });
       // Même règle que la Caisse : un retrait n'est pas une charge, seule une dépense l'est.
       const exp = expenses.filter((e) => e.kind !== "withdrawal").reduce((sum, e) => { const k = dayKeyOf(e.date); return k >= from && (to == null || k < to) ? sum + e.amount : sum; }, 0);
-      return { net: margin - exp, costed };
+      return { net: margin - exp, costed, coverage: coveragePct(revCosted, rev) };
     };
     const revenue = revenueOf(cur), tickets = ticketsOf(cur);
     const prevRevenue = revenueOf(prev), prevTickets = ticketsOf(prev);
@@ -18105,7 +18219,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       { id: "revenue", label: tx(lang, "statsKpiRevenue"), value: fcfa(revenue), delta: delta(revenue, prevRevenue), money: false },
       { id: "tickets", label: tx(lang, "statsKpiSales"), value: localizedNumber(tickets), delta: delta(tickets, prevTickets), money: false },
       { id: "basket", label: tx(lang, "statsKpiBasket"), value: fcfa(tickets > 0 ? revenue / tickets : 0), delta: delta(tickets > 0 ? revenue / tickets : 0, prevTickets > 0 ? prevRevenue / prevTickets : 0), money: false },
-      { id: "profit", label: tx(lang, "cashProfitPeriod"), value: profit.costed > 0 ? fcfa(profit.net) : "—", delta: profit.costed > 0 && prevProfit.costed > 0 && prevProfit.net > 0 ? delta(profit.net, prevProfit.net) : null, money: true, negative: profit.costed > 0 && profit.net < 0, missing: profit.costed === 0 },
+      { id: "profit", label: tx(lang, "cashProfitPeriod"), value: profit.costed > 0 ? fcfa(profit.net) : "—", delta: profit.costed > 0 && prevProfit.costed > 0 && prevProfit.net > 0 ? delta(profit.net, prevProfit.net) : null, money: true, negative: profit.costed > 0 && profit.net < 0, missing: profit.costed === 0, coverage: profit.costed > 0 ? profit.coverage : 100 },
     ];
     const curKeys = keys.slice(N);
     const byDay = {};
@@ -18221,7 +18335,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       const kindLabel = ({ sale: t(lang, "logSaleRecorded"), saleCancelled: tx(lang, "histSaleCancelled"), debtCreated: t(lang, "debtCreatedEvent"), debtPaid: t(lang, "debtPaidEvent"), debtPartial: t(lang, "partialPaymentEvent"), expense: t(lang, "histTypeExpense"), expenseDeleted: tx(lang, "histExpenseDeleted") })[entry.data.type] || entry.kind;
       rows.push([entry.date, kindLabel, entry.product, entry.customer, entry.amount]);
     });
-    const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
+    const csv = toCsv(rows);
     saveTextFile(csv, `${shopName}-historique.csv`);
   };
   // ---- Export comptable CSV (Paramètres > Données) ----
@@ -18243,7 +18357,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     });
     dataRows.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
     const rows = [header, ...dataRows];
-    const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\n");
+    const csv = toCsv(rows);
     saveTextFile(csv, `${shopName}-comptable-${acctCsvFrom}-${acctCsvTo}.csv`);
     logAction(`${t(lang, "logAccountingExport")} : ${acctCsvFrom} - ${acctCsvTo}`);
   };
@@ -19501,6 +19615,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       {maskAmount(fcfa(todayProfit.net))}
                     </p>
                     <p className="text-[10px] mt-1" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "cashProfitNote")}</p>
+                    {todayProfit.coverage < 100 && <p className="text-[10px] mt-0.5 font-semibold" style={{ color: darkMode ? "#f0c869" : "#b45309", lineHeight: 1.35 }}>{tx(lang, "profitCoverage").replace("{p}", localizedNumber(todayProfit.coverage))}</p>}
                   </>
                 ) : (
                   <p className="text-[11px] mt-1.5" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "cashProfitNoCost")}</p>
@@ -20957,20 +21072,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           « Awa Traoré ») : ses dettes, sa fiabilité et son rang dans « Meilleurs
                           clients » se retrouvaient alors éparpillés. Reprend aussi son numéro. */}
                       {(() => {
-                        const typed = (activeCart.customer || "").trim().toLowerCase();
-                        if (typed.length < 1) return null;
-                        const known = {};
-                        const add = (name, phone, weight) => {
-                          const n = (name || "").trim();
-                          if (!n) return;
-                          const k = n.toLowerCase();
-                          if (!known[k]) known[k] = { name: n, phone: "", score: 0 };
-                          known[k].score += weight;
-                          if (phone && !known[k].phone) known[k].phone = phone;
-                        };
-                        debts.forEach((d) => add(d.customer, d.phone, 2));
-                        for (let i = sales.length - 1; i >= 0 && i >= sales.length - 3000; i--) add(sales[i].customer, "", 1);
-                        const matches = Object.values(known).filter((c) => c.name.toLowerCase().includes(typed) && c.name.toLowerCase() !== typed).sort((a, b) => b.score - a.score).slice(0, 4);
+                        const matches = suggestCustomers(activeCart.customer);
                         if (matches.length === 0) return null;
                         return (
                           <div className="flex flex-wrap gap-1.5 mt-1.5">
@@ -21374,6 +21476,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </p>
                     {k.missing ? (
                       <p className="text-[9px] mt-1" style={{ color: T.muted, lineHeight: 1.3 }}>{tx(lang, "cashProfitNoCostPeriod")}</p>
+                    ) : k.coverage != null && k.coverage < 100 ? (
+                      <p className="text-[9px] mt-1 font-semibold" style={{ color: darkMode ? "#f0c869" : "#b45309", lineHeight: 1.3 }}>{tx(lang, "profitCoverage").replace("{p}", localizedNumber(k.coverage))}</p>
                     ) : k.delta !== null && !(k.money && amountsHidden) ? (
                       <span dir="ltr" className="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded-full mt-1.5" style={{ color: k.delta >= 0 ? (darkMode ? "#4ade80" : "#16a34a") : (darkMode ? "#f87171" : "#dc2626"), background: k.delta >= 0 ? (darkMode ? "rgba(22,163,74,0.18)" : "#dcfce7") : (darkMode ? "rgba(220,38,38,0.18)" : "#fee2e2") }}>
                         {k.delta >= 0 ? "▲" : "▼"} {localizedNumber(Math.abs(k.delta))}%
@@ -22028,7 +22132,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <p className="text-[10px] font-semibold" style={{ color: T.muted }}>{tx(lang, "cashProfitPeriod")}</p>
               {cashView.profit.costed > 0 ? (
                 <p onClick={() => { if (amountsHidden) setShowLockPinModal(true); }} className="text-[15px] font-extrabold mt-1" style={{ color: amountsHidden ? T.muted : (cashView.profit.net < 0 ? CLAY : (darkMode ? "#8fd6a3" : "#16a34a")), cursor: amountsHidden ? "pointer" : "default" }}>{amountsHidden ? "•••••" : fcfa(cashView.profit.net)}</p>
-              ) : (
+              ) : null}
+              {cashView.profit.costed > 0 && cashView.profit.coverage < 100 ? (
+                <p className="text-[10px] mt-0.5 font-semibold" style={{ color: darkMode ? "#f0c869" : "#b45309", lineHeight: 1.35 }}>{tx(lang, "profitCoverage").replace("{p}", localizedNumber(cashView.profit.coverage))}</p>
+              ) : null}
+              {cashView.profit.costed > 0 ? null : (
                 <p className="text-[10px] mt-1.5" style={{ color: T.muted, lineHeight: 1.35 }}>{tx(lang, "cashProfitNoCostPeriod")}</p>
               )}
             </div>
@@ -22534,6 +22642,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       t(lang, "othQuestceQueJaiVenduAujourdhui"),
                       t(lang, "othQuelProduitEstPresqueEpuise"),
                       t(lang, "othQuiMeDoitDeLargent"),
+                      ...(!activeEmployee || hasPermission("viewCash") ? [tx(lang, "aiQuickCashQuestion")] : []),
                       t(lang, "othQuelEstMonMeilleurProduit"),
                       t(lang, "othDesConseilsPourAugmenterMes"),
                       t(lang, "othResumeDeMaSemaine"),
@@ -23236,6 +23345,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               className="w-full border rounded-xl px-3 py-2.5 text-sm mb-2"
               style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }}
             />
+            {(() => {
+              const matches = suggestCustomers(newDebtCustomer);
+              if (matches.length === 0) return null;
+              const dialOnly = (v) => !(v || "").replace(/^\+?\d{1,4}\s*$/, "").trim();
+              return (
+                <div className="flex flex-wrap gap-1.5 -mt-1 mb-2">
+                  {matches.map((c) => (
+                    <button key={c.name} type="button" onClick={() => { setNewDebtCustomer(c.name); if (c.phone && dialOnly(newDebtPhone)) setNewDebtPhone(c.phone); }} className="px-2.5 py-1 rounded-full text-[11px] font-semibold active:scale-95 transition-transform" style={{ background: darkMode ? "rgba(95,178,255,0.14)" : "#eff6ff", color: darkMode ? "#7fb2ff" : "#1d4ed8", border: "none" }}>
+                      👤 {c.name}
+                    </button>
+                  ))}
+                </div>
+              );
+            })()}
             <input autoComplete="off"
               value={newDebtAmount}
               onChange={(e) => setNewDebtAmount(e.target.value.replace(/[^0-9.,]/g, ""))}
@@ -24156,9 +24279,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <p style={{ color: T.muted, fontSize: 12 }}>{t(lang, "setExporteTesDonneesDeVentes")}</p>
                   <button onClick={() => {
-                    const rows = [["Date","Produit","Qté","Prix unit.","Total","Paiement","Client"]];
-                    sales.forEach((s) => rows.push([s.date, s.productName, s.qty, s.unitPrice, s.total, s.payment, s.customer || ""]));
-                    const csv = rows.map((r) => r.join(";")).join("\n");
+                    const rows = [["Date","Produit","Qté","Prix unit.","Total","Paiement","Client","Annulée"]];
+                    sales.forEach((s) => rows.push([s.date, s.productName, s.qty, s.unitPrice, s.total, s.payment, s.customer || "", s.cancelled ? "oui" : ""]));
+                    const csv = toCsv(rows);
                     saveTextFile(csv, `${shopName}-ventes.csv`);
                   }} style={{ padding: "14px 16px", borderRadius: 14, background: "#60a5fa1a", border: "1px solid #60a5fa33", color: "#60a5fa", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
                     <FileDown size={18} /> {t(lang, "setTelechargerLesVentesCsv")}
