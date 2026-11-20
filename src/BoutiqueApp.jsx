@@ -7456,6 +7456,8 @@ function readLocalCache(key) {
 // puisse prévenir l'utilisateur si le stockage local est plein (au lieu
 // d'échouer silencieusement, ce qui pourrait faire perdre des changements
 // hors ligne — par ex. beaucoup de photos produits — sans aucun avertissement).
+// Dernier échec d'écriture du cache (mémoire du téléphone pleine...), pour le diagnostic.
+let LAST_CACHE_WRITE_ERROR = null;
 function writeLocalCache(key, value) {
   try {
     const raw = JSON.stringify(value);
@@ -7463,7 +7465,31 @@ function writeLocalCache(key, value) {
     mirrorToNativeStorage(OFFLINE_CACHE_PREFIX + key, raw);
     return true;
   }
-  catch (e) { return false; }
+  catch (e) { LAST_CACHE_WRITE_ERROR = { at: Date.now(), key, msg: String((e && (e.name || e.message)) || e) }; return false; }
+}
+// Diagnostic (mode test administrateur) : place prise sur le téléphone et état du cache.
+function storageDiagnostic(shopKey) {
+  const out = { totalKb: 0, keys: 0, biggest: [], cache: null, outbox: 0, unsynced: false, lastWriteError: LAST_CACHE_WRITE_ERROR };
+  try {
+    const ls = window.localStorage;
+    const sizes = [];
+    for (let i = 0; i < ls.length; i++) {
+      const k = ls.key(i);
+      const v = ls.getItem(k) || "";
+      const kb = Math.round(((k.length + v.length) * 2) / 1024);
+      out.totalKb += kb; out.keys += 1;
+      sizes.push([k.length > 34 ? k.slice(0, 34) + "…" : k, kb]);
+    }
+    out.biggest = sizes.sort((a, b) => b[1] - a[1]).slice(0, 6);
+    const c = readLocalCache(shopKey);
+    if (c) {
+      const today = new Date().toISOString().slice(0, 10);
+      out.cache = { sales: (c.sales || []).length, salesToday: (c.sales || []).filter((x) => String(x.date || "").slice(0, 10) === today).length, products: (c.products || []).length };
+    }
+    out.outbox = Object.keys(readOutbox(shopKey)).length;
+    out.unsynced = isShopUnsynced(shopKey);
+  } catch (e) { out.error = String(e); }
+  return out;
 }
 // Paniers en cours : propres à CET appareil (jamais envoyés au serveur). Un panier n'est
 // qu'un brouillon ; seule la vente finalisée est synchronisée. Avant, les paniers étaient
@@ -13449,8 +13475,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   // Récupère les éléments enregistrés par les autres appareils depuis la dernière fois
   // (ou tout l'historique sur un nouveau téléphone) et les ajoute à l'affichage.
+  const [diagInfo, setDiagInfo] = useState(null);
   const pullBusyRef = useRef(false);
   const pullSeenRef = useRef(new Map());
+  const fullPullDoneRef = useRef(null);
   // Applique le stock du serveur à l'écran (sans créer de mouvement : ce ne sont pas des
   // actions de cet appareil).
   const applyServerStockToScreen = () => {
@@ -13511,6 +13539,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // écrit par un autre appareil un peu avant, mais validé un peu après, n'est jamais sauté.
       // Ce qui a déjà été vu (même id, même date de modification) est ignoré.
       let since = cursor ? cursorMinusSeconds(cursor, 30) : null;
+      // Au premier passage après l'ouverture de l'app : relecture COMPLÈTE depuis le serveur.
+      // Si la copie gardée sur le téléphone est en retard (mémoire pleine, autre onglet...),
+      // tout ce qui manque revient, au lieu de ne récupérer que les tout derniers éléments.
+      const fullPull = fullPullDoneRef.current !== shopKey;
+      if (fullPull) since = null;
       for (let page = 0; page < 50; page++) {
         let q = supabase.from("shop_records").select("kind, id, data, deleted, ts, updated_at").eq("shop_id", blobShopId).neq("kind", "stockMove").order("updated_at", { ascending: true }).limit(1000);
         if (since) q = q.gt("updated_at", since);
@@ -13540,6 +13573,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         }
       }
       if (cursor) { try { window.localStorage.setItem(cursorKey, cursor); } catch (e) {} }
+      if (fullPull) fullPullDoneRef.current = shopKey;
       // Stock tenu par le serveur (mouvements de tous les appareils).
       await pullServerStock();
     } catch (e) {
@@ -24534,6 +24568,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       >
                         {simOffline ? "📴 Hors ligne simulé : ACTIVÉ (appuyer pour remettre le réseau)" : "📴 Simuler hors ligne"}
                       </button>
+                      <button
+                        onClick={() => setDiagInfo(storageDiagnostic(shopKey))}
+                        style={{ padding: 10, borderRadius: 10, background: "transparent", border: "1px solid #c084fc", color: "#a855f7", fontSize: 12, fontWeight: 700, cursor: "pointer" }}
+                      >
+                        🔎 Diagnostic stockage
+                      </button>
+                      {diagInfo && (
+                        <pre style={{ fontSize: 10, lineHeight: 1.35, whiteSpace: "pre-wrap", wordBreak: "break-all", color: T.text, background: T.card, padding: 8, borderRadius: 8, margin: 0 }}>
+                          {`Total : ${diagInfo.totalKb} Ko (${diagInfo.keys} clés)\n` +
+                           `Cache : ${diagInfo.cache ? `${diagInfo.cache.sales} ventes, dont ${diagInfo.cache.salesToday} aujourd'hui, ${diagInfo.cache.products} produits` : "absent"}\n` +
+                           `Écran : ${allSales.length} ventes\n` +
+                           `Boîte d'envoi : ${diagInfo.outbox} · non synchronisé : ${diagInfo.unsynced ? "oui" : "non"}\n` +
+                           `Dernière erreur d'écriture : ${diagInfo.lastWriteError ? `${new Date(diagInfo.lastWriteError.at).toLocaleTimeString()} ${diagInfo.lastWriteError.msg}` : "aucune"}\n` +
+                           `Plus gros : ${diagInfo.biggest.map(([k, kb]) => `${k} ${kb} Ko`).join(" · ")}`}
+                        </pre>
+                      )}
                     </div>
                   )}
                   <div style={{ padding: 14, borderRadius: 14, background: T.input, border: `1px solid ${T.border}` }}>
