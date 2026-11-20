@@ -8250,6 +8250,9 @@ function mergeSettings(baseShop, localShop, remoteShop) {
 // les produits et les dépenses depuis le serveur ou un autre téléphone. L'historique,
 // permanent, est conservé.
 const RESET_MARK_ID = "__reset__";
+// Une dépense ou un remboursement de dette payé par Mobile Money ne passe pas par le tiroir :
+// seul ce qui est en espèces compte dans le solde de caisse (sans choix = espèces, comme avant).
+function isCashMove(x) { return !x || !x.method || x.method === "cash"; }
 function shopResetAt(shop) {
   const m = shop && Array.isArray(shop.deletedProducts) ? shop.deletedProducts.find((d) => d && d.id === RESET_MARK_ID) : null;
   return m ? Number(m.at) || 0 : 0;
@@ -12950,6 +12953,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // prendre 50 000 dans la caisse ou les porter à la banque n'appauvrit pas la boutique,
   // alors que jusqu'ici c'était enregistré comme une charge et faussait le bénéfice.
   const [eKind, setEKind] = useState("expense");
+  const [eMethod, setEMethod] = useState("cash");
   const [countInput, setCountInput] = useState("");
   const [countAdjust, setCountAdjust] = useState(false);
   // Onglet Caisse : période affichée, longueur du journal, fenêtre de comptage.
@@ -13242,6 +13246,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [debtsSearch, setDebtsSearch] = useState("");
   const [partialPayDebt, setPartialPayDebt] = useState(null);
   const [partialPayInput, setPartialPayInput] = useState("");
+  const [partialPayMethod, setPartialPayMethod] = useState("cash");
+  const [partialPayFull, setPartialPayFull] = useState(false);
   const [partialPayError, setPartialPayError] = useState("");
   // Ajout direct d'une dette depuis l'onglet Dettes (sans passer par une vente) — utile
   // pour saisir les dettes clients qui existaient déjà avant l'installation de l'appli.
@@ -15250,6 +15256,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       label: eLabel.trim() || (eKind === "withdrawal" ? tx(lang, "cashOutKindWithdrawal") : tx(lang, "cashOutKindExpense")),
       amount: parseFloat(eAmount),
       kind: eKind,
+      method: eMethod,
       date: new Date().toISOString(),
       actorId: activeEmployee ? activeEmployee.id : null,
       actorName: activeEmployee ? activeEmployee.name : null,
@@ -15259,7 +15266,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       historyLog: [...historyLog, makeHistoryEntry("expense", { refId: expense.id, date: expense.date, amount: expense.amount, label: expense.label })],
     });
     logAction(`${t(lang, "logExpenseAdded")} : ${expense.label} — ${localizedNumber(expense.amount)}`);
-    setELabel(""); setEAmount(""); setEKind("expense"); setShowAddExpense(false);
+    setELabel(""); setEAmount(""); setEKind("expense"); setEMethod("cash"); setShowAddExpense(false);
     setAmountsHidden(true); // la caisse se re-verrouille : la prochaine action sensible redemandera le code
   };
   const deleteExpense = (id) => {
@@ -15463,6 +15470,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         type: fullyPaid ? "paid" : "partialPayment",
         customer: d.customer,
         amount: amountNum,
+        method: partialPayMethod,
         product: d.product,
         date: nowIso,
         actorId: activeEmployee ? activeEmployee.id : null,
@@ -15472,6 +15480,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     logAction(`${fullyPaid ? t(lang, "logDebtSettled") : t(lang, "logPartialPayment")} : ${d.customer} — ${localizedNumber(amountNum)}`);
     setPartialPayDebt(null);
     setPartialPayInput("");
+    setPartialPayMethod("cash");
+    setPartialPayFull(false);
     setPartialPayError("");
   };
   // Crée une dette directement depuis l'onglet Dettes (source: "manual"), sans passer
@@ -17941,12 +17951,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // précédente, sinon son fond de caisse.
   const openingBalance = lastClosure ? Number(lastClosure.carried) || 0 : cashFund;
   const totalCashSales = sales.filter((s) => s.payment === "cash" && afterLastClosure(s.date)).reduce((sum, s) => sum + s.total, 0);
-  const totalExpenses = expenses.filter((e) => afterLastClosure(e.date)).reduce((sum, e) => sum + e.amount, 0);
+  const totalExpenses = expenses.filter((e) => isCashMove(e) && afterLastClosure(e.date)).reduce((sum, e) => sum + e.amount, 0);
   // Les remboursements de dettes entrent physiquement dans la caisse. Ils étaient comptés
   // nulle part dans le solde : un client qui remboursait 10 000 laissait l'argent dans le
   // tiroir sans que le solde estimé bouge, donc un écart permanent au moment de compter.
   const totalDebtCollected = debtEvents
-    .filter((ev) => (ev.type === "paid" || ev.type === "partialPayment") && afterLastClosure(ev.date))
+    .filter((ev) => (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev) && afterLastClosure(ev.date))
     .reduce((sum, ev) => sum + (ev.amount || 0), 0);
   const cashBalance = openingBalance + totalCashSales + totalDebtCollected - totalExpenses;
   // Détail de la journée en cours, affiché dans la fenêtre de clôture et repris tel quel
@@ -17988,15 +17998,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pSales = sales.filter((s) => inPeriod(s.date));
     const pExpenses = expenses.filter((e) => inPeriod(e.date));
     const cashInTotal = pSales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0);
-    const outTotal = pExpenses.reduce((sum, e) => sum + e.amount, 0);
+    const outTotal = pExpenses.filter(isCashMove).reduce((sum, e) => sum + e.amount, 0);
     // Un retrait sort de la caisse mais n'est pas une charge : il ne doit pas entrer dans
     // le calcul du bénéfice, sinon porter sa recette à la banque ferait "perdre" de l'argent.
     const pRealExpenses = pExpenses.filter((e) => e.kind !== "withdrawal");
     const outExpensesOnly = pRealExpenses.reduce((sum, e) => sum + e.amount, 0);
-    const withdrawalsTotal = outTotal - outExpensesOnly;
+    const withdrawalsTotal = pExpenses.filter((e) => e.kind === "withdrawal" && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
     const salesTotal = pSales.reduce((sum, s) => sum + s.total, 0);
     const byMethodP = getPaymentMethods(lang).map((m) => ({ ...m, total: pSales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
-    const debtIn = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + (ev.amount || 0), 0);
+    const debtIn = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
     const groups = {};
     pRealExpenses.forEach((e) => {
       const k = String(e.label || "").trim().toLowerCase();
@@ -18016,8 +18026,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pDebtPayments = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
     const journal = [
       ...Object.values(txn),
-      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", isWithdrawal: e.kind === "withdrawal", date: e.date, amount: e.amount, label: e.label, expenseId: e.id, actorName: e.actorName || null })),
-      ...pDebtPayments.map((ev) => ({ id: "d-" + ev.id, kind: "debt", date: ev.date, amount: ev.amount, label: ev.customer || "", actorName: ev.actorName || null })),
+      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", isWithdrawal: e.kind === "withdrawal", date: e.date, amount: e.amount, label: (isCashMove(e) ? "" : "📱 ") + (e.label || ""), expenseId: e.id, actorName: e.actorName || null })),
+      ...pDebtPayments.map((ev) => ({ id: "d-" + ev.id, kind: "debt", date: ev.date, amount: ev.amount, label: (isCashMove(ev) ? "" : "📱 ") + (ev.customer || ""), actorName: ev.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // Bénéfice de la période : marge des ventes dont le prix d'achat est connu, moins les dépenses.
     let margin = 0, costed = 0;
@@ -18027,8 +18037,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     // Tendance : flux net (espèces − dépenses) des 7 derniers jours, pour un coup d'œil visuel.
     const trend7 = last30Days().slice(-7).map((day) => {
       const dSales = sales.filter((sl) => dayKeyOf(sl.date) === day && sl.payment === "cash").reduce((sum, sl) => sum + sl.total, 0);
-      const dExp = expenses.filter((e) => dayKeyOf(e.date) === day).reduce((sum, e) => sum + e.amount, 0);
-      const dDebt = debtEvents.filter((ev) => dayKeyOf(ev.date) === day && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + (ev.amount || 0), 0);
+      const dExp = expenses.filter((e) => dayKeyOf(e.date) === day && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
+      const dDebt = debtEvents.filter((ev) => dayKeyOf(ev.date) === day && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
       return { day, net: dSales + dDebt - dExp };
     });
     const journalWithCounts = [
@@ -19662,6 +19672,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {eKind === "withdrawal" && (
                 <p className="text-[11px] mb-2 rounded-lg p-2" style={{ background: T.input, color: T.muted }}>{tx(lang, "cashOutKindHint")}</p>
               )}
+              {/* Payé en espèces (sort du tiroir) ou par Mobile Money (ne touche pas au tiroir). */}
+              <div className="flex gap-1.5 mb-2">
+                {[["cash", "💵"], ["mobile", "📱"]].map(([id, icon]) => (
+                  <button key={id} type="button" onClick={() => setEMethod(id)} className="flex-1 text-xs font-semibold py-2 rounded-lg" style={{ background: eMethod === id ? INDIGO : T.input, color: eMethod === id ? "white" : T.text }}>
+                    {icon} {(getPaymentMethods(lang).find((m) => m.id === id) || {}).label || id}
+                  </button>
+                ))}
+              </div>
               <input autoComplete="off" placeholder={t(lang, "amountOut")} type="number" value={eAmount} onChange={(e) => setEAmount(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
               <textarea autoComplete="off" rows={1} placeholder={t(lang, "reasonOpt")} value={eLabel} onChange={(e) => setELabel(e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }} />
               <button onClick={addExpense} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: CLAY }}>{t(lang, "saveExpense")}</button>
@@ -21272,14 +21290,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     )}
                     {hasPermission("editDebts") && (
                       <button onClick={() => {
-                        const openConfirm = () => setConfirmModal({ message: t(lang, "confirmMarkPaid"), onConfirm: () => {
-                          saveAll({
-                            debts: debts.map((x) => (x.id === d.id ? { ...x, paid: true } : x)),
-                            debtEvents: [...allDebtEvents, { id: d.id + "-paidev", debtId: d.id, type: "paid", customer: d.customer, amount: remainingDebt(d), product: d.product, date: new Date().toISOString(), actorId: activeEmployee ? activeEmployee.id : null, actorName: activeEmployee ? activeEmployee.name : null }],
-                            historyLog: [...historyLog, makeHistoryEntry("debtPaid", { refId: d.id + "-paidev", amount: remainingDebt(d), customer: d.customer, product: d.product || "" })],
-                          });
-                          logAction(`${t(lang, "logDebtSettled")} : ${d.customer} — ${localizedNumber(remainingDebt(d))}`);
-                        } });
+                        // Ouvre la fenêtre de paiement déjà remplie avec le reste dû, pour choisir
+                        // espèces ou Mobile Money (le solde de caisse n'en dépend pas pareil).
+                        const openConfirm = () => { setPartialPayDebt(d); setPartialPayInput(String(remainingDebt(d))); setPartialPayMethod("cash"); setPartialPayFull(true); setPartialPayError(""); };
                         setPendingLockAction(() => openConfirm);
                         setShowLockPinModal(true);
                       }} className="flex items-center gap-1 text-xs font-bold px-3 py-2 rounded-xl text-white" style={{ background: GREEN }}>
@@ -23176,7 +23189,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       {partialPayDebt && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-6" style={{ background: T.card }}>
-            <p className="text-sm font-bold mb-1" style={{ color: T.text }}>{t(lang, "payInstallmentTitle")}</p>
+            <p className="text-sm font-bold mb-1" style={{ color: T.text }}>{partialPayFull ? tx(lang, "debtMarkPaidBtn") : t(lang, "payInstallmentTitle")}</p>
             <p className="text-xs mb-4" style={{ color: T.muted }}>{partialPayDebt.customer} — {t(lang, "remainingToPay")}: {fcfa(remainingDebt(partialPayDebt))}</p>
             <input autoComplete="off"
               value={partialPayInput}
@@ -23189,9 +23202,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               className="w-full border rounded-xl px-3 py-3 text-center text-xl mb-2"
               style={{ background: T.input, color: T.text, borderColor: T.border }}
             />
+            <div className="mt-1">
+              <div className="flex gap-1.5 mb-2">
+                {[["cash", "💵"], ["mobile", "📱"]].map(([id, icon]) => (
+                  <button key={id} type="button" onClick={() => setPartialPayMethod(id)} className="flex-1 text-xs font-semibold py-2 rounded-lg" style={{ background: partialPayMethod === id ? INDIGO : T.input, color: partialPayMethod === id ? "white" : T.text }}>
+                    {icon} {(getPaymentMethods(lang).find((m) => m.id === id) || {}).label || id}
+                  </button>
+                ))}
+              </div>
+            </div>
             {partialPayError && <p className="text-xs mb-2" style={{ color: CLAY }}>{partialPayError}</p>}
             <div className="flex gap-2 mt-3">
-              <button onClick={() => { setPartialPayDebt(null); setPartialPayInput(""); setPartialPayError(""); }} className="flex-1 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>
+              <button onClick={() => { setPartialPayDebt(null); setPartialPayInput(""); setPartialPayMethod("cash"); setPartialPayFull(false); setPartialPayError(""); }} className="flex-1 py-2.5 rounded-xl text-sm font-semibold" style={{ background: T.input, color: T.text }}>
                 {t(lang, "cancel")}
               </button>
               <button onClick={submitPartialPayment} className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: INDIGO }}>
