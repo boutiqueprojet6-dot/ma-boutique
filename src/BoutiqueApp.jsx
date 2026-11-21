@@ -6237,6 +6237,42 @@ EXTRA_UI.empQrNeedsInternet = { fr: "Il faut Internet pour créer un code de con
 EXTRA_UI.empQrInactive = { fr: "Ce membre du personnel est désactivé. Réactivez-le d'abord.", en: "This team member is deactivated. Reactivate them first.", es: "Este colaborador está desactivado. Actívelo primero.", pt: "Este colaborador está desativado. Ative-o primeiro.", de: "Dieses Teammitglied ist deaktiviert. Bitte zuerst wieder aktivieren.", it: "Questo collaboratore è disattivato. Riattivalo prima.", nl: "Dit teamlid is gedeactiveerd. Activeer het eerst opnieuw.", pl: "Ten współpracownik jest wyłączony. Najpierw go włącz.", ru: "Этот сотрудник отключён. Сначала включите его.", tr: "Bu ekip üyesi devre dışı. Önce yeniden etkinleştirin.", ar: "هذا الزميل معطّل. فعّله أولًا.", hi: "यह टीम सदस्य निष्क्रिय है। पहले इसे फिर से चालू करें।", bn: "এই সহকর্মী নিষ্ক্রিয়। আগে আবার চালু করুন।", ur: "یہ ساتھی غیر فعال ہے۔ پہلے اسے دوبارہ فعال کریں۔", ta: "இந்த உதவியாளர் முடக்கப்பட்டுள்ளார். முதலில் மீண்டும் இயக்கவும்.", te: "ఈ బృంద సభ్యుడు నిలిపివేయబడ్డారు. ముందుగా మళ్లీ ప్రారంభించండి.", th: "สมาชิกคนนี้ถูกปิดใช้งาน ให้เปิดใช้งานก่อน", zh: "该同事已停用，请先重新启用。", ja: "このスタッフは無効になっています。先に有効にしてください。", ko: "이 팀원은 비활성화되어 있습니다. 먼저 다시 활성화하세요.", id: "Anggota tim ini dinonaktifkan. Aktifkan kembali dulu.", vi: "Thành viên này đã bị tắt. Hãy bật lại trước.", tl: "Naka-deactivate ang miyembrong ito. I-activate muna.", sw: "Mfanyakazi huyu amezimwa. Mwamshe kwanza.", ha: "An kashe wannan ma'aikaci. Ka sake kunna shi tukuna.", yo: "A ti pa òṣìṣẹ́ yìí. Kọ́kọ́ tún un tàn.", zu: "Lesi sisebenzi sicishiwe. Qala usivule futhi.", am: "ይህ ተባባሪ ተሰናክሏል። መጀመሪያ እንደገና ያንቁት።", bm: "Baarakɛla in jɔra. A lakunu fɔlɔ.", wo: "Bokkat bii dañu ko fay. Taalal ko balaa." };
 EXTRA_UI.empScanHint = { fr: "Demandez au propriétaire d'ouvrir Personnel → QR de connexion sur son téléphone, puis scannez le code (ou tapez les 6 chiffres).", en: "Ask the owner to open Team → Sign-in QR on their phone, then scan the code (or type the 6 digits).", es: "Pida al dueño que abra Personal → QR de acceso en su teléfono y escanee el código (o escriba los 6 dígitos).", pt: "Peça ao dono para abrir Equipa → QR de acesso no telemóvel e leia o código (ou escreva os 6 dígitos).", de: "Bitten Sie den Inhaber, auf seinem Handy Team → Anmelde-QR zu öffnen, und scannen Sie den Code (oder tippen Sie die 6 Ziffern).", it: "Chieda al titolare di aprire Personale → QR di accesso sul suo telefono, poi scansioni il codice (o digiti le 6 cifre).", nl: "Vraag de eigenaar om op zijn telefoon Team → Inlog-QR te openen en scan de code (of typ de 6 cijfers).", pl: "Poproś właściciela, by otworzył na telefonie Zespół → QR logowania, i zeskanuj kod (lub wpisz 6 cyfr).", ru: "Попросите владельца открыть на телефоне «Сотрудники → QR для входа» и отсканируйте код (или введите 6 цифр).", tr: "Sahibinden telefonunda Ekip → Giriş QR'ını açmasını isteyin, sonra kodu okutun (veya 6 rakamı yazın).", ar: "اطلب من صاحب المحل فتح «الزملاء ← رمز الدخول» على هاتفه، ثم امسح الرمز (أو اكتب الأرقام الستة).", hi: "मालिक से अपने फ़ोन पर टीम → लॉगिन QR खोलने को कहें, फिर कोड स्कैन करें (या 6 अंक लिखें)।", bn: "মালিককে তাঁর ফোনে টিম → লগইন QR খুলতে বলুন, তারপর কোড স্ক্যান করুন (বা ৬টি সংখ্যা লিখুন)।", ur: "مالک سے کہیں کہ اپنے فون پر ٹیم ← لاگ اِن QR کھولیں، پھر کوڈ اسکین کریں (یا 6 ہندسے لکھیں)۔", ta: "உரிமையாளரிடம் அவர் தொலைபேசியில் குழு → உள்நுழைவு QR திறக்கச் சொல்லி, குறியீட்டை ஸ்கேன் செய்யவும் (அல்லது 6 இலக்கங்களைத் தட்டச்சு செய்யவும்).", te: "యజమానిని తన ఫోన్‌లో బృందం → లాగిన్ QR తెరవమని అడిగి, కోడ్‌ను స్కాన్ చేయండి (లేదా 6 అంకెలు టైప్ చేయండి).", th: "ขอให้เจ้าของร้านเปิด ทีม → QR เข้าสู่ระบบ บนโทรศัพท์ แล้วสแกนรหัส (หรือพิมพ์ตัวเลข 6 หลัก)", zh: "请店主在手机上打开“同事 → 登录二维码”，然后扫描此码（或输入 6 位数字）。", ja: "オーナーにスマホで「スタッフ → ログインQR」を開いてもらい、コードを読み取るか6桁の数字を入力してください。", ko: "사장님께 휴대폰에서 팀원 → 로그인 QR을 열어 달라고 한 뒤 코드를 스캔하세요 (또는 6자리 숫자 입력).", id: "Minta pemilik membuka Tim → QR masuk di ponselnya, lalu pindai kodenya (atau ketik 6 angkanya).", vi: "Nhờ chủ cửa hàng mở Thành viên → QR đăng nhập trên điện thoại, rồi quét mã (hoặc nhập 6 chữ số).", tl: "Pakiusapan ang may-ari na buksan ang Team → Sign-in QR sa telepono niya, saka i-scan ang code (o i-type ang 6 na numero).", sw: "Mwombe mwenye duka afungue Wafanyakazi → QR ya kuingia kwenye simu yake, kisha changanua msimbo (au andika tarakimu 6).", ha: "Roƙi mai shago ya buɗe Ma'aikata → QR na shiga a wayarsa, sannan ka duba lambar (ko ka rubuta lambobi 6).", yo: "Bẹ ọ̀gá láti ṣí Òṣìṣẹ́ → QR ìwọlé lórí fóònù rẹ̀, lẹ́yìn náà ṣàyẹ̀wò kóòdù náà (tàbí tẹ nọ́mbà mẹ́fà).", zu: "Cela umnikazi avule Abasebenzi → I-QR yokungena efonini yakhe, bese uskena ikhodi (noma uthayiphe izinombolo ezi-6).", am: "ባለቤቱ በስልኩ ላይ ተባባሪዎች → የመግቢያ QR እንዲከፍት ይጠይቁ፣ ከዚያ ኮዱን ይቃኙ (ወይም 6ቱን ቁጥሮች ይተይቡ)።", bm: "A fɔ jatigi ye ka Baarakɛlaw → Donni QR da a ka telefɔni kan, o kɔ kodi lajɛ (walima nimɔrɔ 6 sɛbɛn).", wo: "Laajal boroom bitig bi mu ubbi Bokkat yi → QR bu duggu ci telefonam, ba noppi scanner kod bi (walla bind 6 numero yi)." };
 EXTRA_UI.empTypeCodeBtn = { fr: "Taper le code à 6 chiffres", en: "Type the 6-digit code", es: "Escribir el código de 6 dígitos", pt: "Escrever o código de 6 dígitos", de: "6-stelligen Code eingeben", it: "Digitare il codice a 6 cifre", nl: "Typ de 6-cijferige code", pl: "Wpisz 6-cyfrowy kod", ru: "Ввести 6-значный код", tr: "6 haneli kodu yazın", ar: "اكتب الرمز المكوّن من 6 أرقام", hi: "6 अंकों का कोड लिखें", bn: "৬ সংখ্যার কোড লিখুন", ur: "6 ہندسوں کا کوڈ لکھیں", ta: "6 இலக்கக் குறியீட்டைத் தட்டச்சு செய்யவும்", te: "6 అంకెల కోడ్ టైప్ చేయండి", th: "พิมพ์รหัส 6 หลัก", zh: "输入 6 位数字代码", ja: "6桁のコードを入力", ko: "6자리 코드 입력", id: "Ketik kode 6 angka", vi: "Nhập mã 6 chữ số", tl: "I-type ang 6-digit na code", sw: "Andika msimbo wa tarakimu 6", ha: "Rubuta lambar lambobi 6", yo: "Tẹ kóòdù oní-nọ́mbà mẹ́fà", zu: "Thayipha ikhodi yezinombolo ezi-6", am: "ባለ 6 አሃዝ ኮዱን ይተይቡ", bm: "Nimɔrɔ 6 kodi sɛbɛn", wo: "Bind kod bu am 6 numero" };
+EXTRA_UI.receiptInfoTitle = { fr: "Infos légales du reçu", en: "Receipt legal details", es: "Datos legales del recibo", pt: "Dados legais do recibo", de: "Rechtliche Angaben auf dem Beleg", it: "Dati legali della ricevuta", nl: "Wettelijke gegevens op de bon", pl: "Dane prawne na paragonie", ru: "Реквизиты для чека", tr: "Fişteki yasal bilgiler", ar: "البيانات القانونية للإيصال", hi: "रसीद की कानूनी जानकारी", bn: "রসিদের আইনি তথ্য", ur: "رسید کی قانونی معلومات", ta: "ரசீதின் சட்டத் தகவல்", te: "రసీదు చట్టపరమైన వివరాలు", th: "ข้อมูลทางกฎหมายบนใบเสร็จ", zh: "收据上的法定信息", ja: "レシートの事業者情報", ko: "영수증 사업자 정보", id: "Data legal di struk", vi: "Thông tin pháp lý trên hóa đơn", tl: "Legal na detalye sa resibo", sw: "Taarifa za kisheria kwenye risiti", ha: "Bayanan doka na rasit", yo: "Àlàyé òfin lórí gbàrà", zu: "Imininingwane esemthethweni yerisidi", am: "የደረሰኝ ሕጋዊ መረጃ", bm: "Sɛbɛn ka sariya kunnafoniw", wo: "Xibaar yu yoon ci resi bi" };
+EXTRA_UI.receiptInfoHint = { fr: "Affichées en haut de vos reçus (WhatsApp et PDF), y compris ceux faits par votre personnel. Boutipro ne remplace pas la facture normalisée des impôts.", en: "Shown at the top of your receipts (WhatsApp and PDF), including those made by your staff. Boutipro does not replace an official tax invoice.", es: "Aparecen arriba de tus recibos (WhatsApp y PDF), también los hechos por tu personal. Boutipro no sustituye la factura fiscal oficial.", pt: "Aparecem no topo dos seus recibos (WhatsApp e PDF), incluindo os feitos pela sua equipa. O Boutipro não substitui a fatura fiscal oficial.", de: "Erscheinen oben auf deinen Belegen (WhatsApp und PDF), auch auf denen deines Personals. Boutipro ersetzt keine offizielle Steuerrechnung.", it: "Compaiono in alto sulle ricevute (WhatsApp e PDF), anche quelle del personale. Boutipro non sostituisce la fattura fiscale ufficiale.", nl: "Staan bovenaan je bonnen (WhatsApp en pdf), ook die van je personeel. Boutipro vervangt geen officiële belastingfactuur.", pl: "Widoczne na górze paragonów (WhatsApp i PDF), także tych wystawionych przez personel. Boutipro nie zastępuje oficjalnej faktury podatkowej.", ru: "Печатаются вверху ваших чеков (WhatsApp и PDF), в том числе чеков персонала. Boutipro не заменяет официальный налоговый счёт.", tr: "Fişlerinizin üstünde görünür (WhatsApp ve PDF), personelinizinkiler dahil. Boutipro resmi vergi faturasının yerini tutmaz.", ar: "تظهر أعلى إيصالاتك (واتساب وPDF)، بما فيها إيصالات موظفيك. لا يحلّ Boutipro محلّ الفاتورة الضريبية الرسمية.", hi: "आपकी रसीदों (WhatsApp और PDF) के ऊपर दिखती है, आपके कर्मचारियों की रसीदों पर भी। Boutipro आधिकारिक कर बिल की जगह नहीं लेता।", bn: "আপনার রসিদের (WhatsApp ও PDF) উপরে দেখায়, কর্মীদের রসিদেও। Boutipro সরকারি কর-চালানের বিকল্প নয়।", ur: "آپ کی رسیدوں (WhatsApp اور PDF) کے اوپر دکھائی دیتی ہیں، عملے کی رسیدوں پر بھی۔ Boutipro سرکاری ٹیکس انوائس کی جگہ نہیں لیتا۔", ta: "உங்கள் ரசீதுகளின் (WhatsApp, PDF) மேலே காட்டப்படும், பணியாளர்களின் ரசீதுகளிலும். Boutipro அதிகாரப்பூர்வ வரி விலைப்பட்டியலுக்கு மாற்று அல்ல.", te: "మీ రసీదుల (WhatsApp, PDF) పైభాగంలో కనిపిస్తాయి, సిబ్బంది రసీదుల్లో కూడా. Boutipro అధికారిక పన్ను ఇన్వాయిస్‌కు ప్రత్యామ్నాయం కాదు.", th: "แสดงที่ด้านบนของใบเสร็จ (WhatsApp และ PDF) รวมถึงของพนักงาน Boutipro ไม่ใช่ใบกำกับภาษีทางการ", zh: "显示在收据顶部（WhatsApp 和 PDF），包括员工开的收据。Boutipro 不能代替官方税务发票。", ja: "レシート（WhatsApp・PDF）の上部に表示され、スタッフのレシートにも入ります。Boutipro は正式な税務請求書の代わりにはなりません。", ko: "영수증(WhatsApp, PDF) 위쪽에 표시되며 직원이 만든 영수증에도 들어갑니다. Boutipro는 공식 세금계산서를 대신하지 않습니다.", id: "Tampil di bagian atas struk (WhatsApp dan PDF), termasuk buatan karyawan. Boutipro bukan pengganti faktur pajak resmi.", vi: "Hiện ở đầu hóa đơn (WhatsApp và PDF), kể cả hóa đơn do nhân viên lập. Boutipro không thay thế hóa đơn thuế chính thức.", tl: "Lalabas sa itaas ng mga resibo (WhatsApp at PDF), pati sa gawa ng staff. Hindi pumapalit ang Boutipro sa opisyal na tax invoice.", sw: "Zinaonekana juu ya risiti zako (WhatsApp na PDF), pamoja na za wafanyakazi. Boutipro haichukui nafasi ya ankara rasmi ya kodi.", ha: "Suna bayyana a saman rasit ɗinka (WhatsApp da PDF), har da na ma'aikata. Boutipro ba ya maye gurbin takardar haraji ta hukuma.", yo: "Wọ́n ń hàn lókè gbàrà rẹ (WhatsApp àti PDF), títí kan ti òṣìṣẹ́ rẹ. Boutipro kò rọ́pò ìwé owó-orí ti ìjọba.", zu: "Kuvela phezulu kwamarisidi akho (WhatsApp ne-PDF), nawabasebenzi bakho. I-Boutipro ayithathi indawo ye-invoyisi yentela esemthethweni.", am: "በደረሰኞችዎ (WhatsApp እና PDF) ላይ ከላይ ይታያሉ፣ የሠራተኞችዎንም ጨምሮ። Boutipro ይፋዊ የግብር ደረሰኝን አይተካም።", bm: "U bɛ i ka sɛbɛnw (WhatsApp ni PDF) sanfɛ, i ka baarakɛlaw ta fana. Boutipro tɛ lenpo sɛbɛn sariyalen nɔ ta.", wo: "Dinañu feeñ ci kaw sa resi yi (WhatsApp ak PDF), ba ci yu sa liggéeykat yi. Boutipro du wuutu faktiir bu yoon bu galag gi." };
+EXTRA_UI.receiptTaxIdLabel = { fr: "NIF", en: "Tax ID", es: "NIF", pt: "NIF", de: "Steuernummer", it: "Partita IVA", nl: "Btw-nummer", pl: "NIP", ru: "ИНН", tr: "Vergi no", ar: "الرقم الضريبي", hi: "कर पहचान संख्या", bn: "কর শনাক্তকরণ নম্বর", ur: "ٹیکس نمبر", ta: "வரி எண்", te: "పన్ను సంఖ్య", th: "เลขประจำตัวผู้เสียภาษี", zh: "税号", ja: "税番号", ko: "사업자등록번호", id: "NPWP", vi: "Mã số thuế", tl: "TIN", sw: "TIN", ha: "Lambar haraji", yo: "Nọ́mbà owó-orí", zu: "Inombolo yentela", am: "የግብር ከፋይ መለያ", bm: "NIF", wo: "NIF" };
+EXTRA_UI.receiptRccmLabel = { fr: "RCCM", en: "Trade register no.", es: "Registro mercantil", pt: "Registo comercial", de: "Handelsregister-Nr.", it: "Registro imprese", nl: "KvK-nummer", pl: "Nr rejestru handlowego", ru: "Рег. номер", tr: "Ticaret sicil no", ar: "السجل التجاري", hi: "व्यापार पंजीकरण सं.", bn: "ট্রেড রেজিস্ট্রেশন নং", ur: "تجارتی رجسٹریشن نمبر", ta: "வணிகப் பதிவு எண்", te: "వ్యాపార నమోదు సంఖ్య", th: "เลขทะเบียนการค้า", zh: "商业登记号", ja: "商業登記番号", ko: "상업등기번호", id: "Nomor induk berusaha", vi: "Số ĐKKD", tl: "Business reg. no.", sw: "Namba ya usajili wa biashara", ha: "Lambar rajistar kasuwanci", yo: "Nọ́mbà ìforúkọsílẹ̀ okòwò", zu: "Inombolo yokubhaliswa kwebhizinisi", am: "የንግድ ምዝገባ ቁጥር", bm: "RCCM", wo: "RCCM" };
+EXTRA_UI.receiptAddressLabel = { fr: "Adresse", en: "Address", es: "Dirección", pt: "Morada", de: "Adresse", it: "Indirizzo", nl: "Adres", pl: "Adres", ru: "Адрес", tr: "Adres", ar: "العنوان", hi: "पता", bn: "ঠিকানা", ur: "پتہ", ta: "முகவரி", te: "చిరునామా", th: "ที่อยู่", zh: "地址", ja: "住所", ko: "주소", id: "Alamat", vi: "Địa chỉ", tl: "Address", sw: "Anwani", ha: "Adireshi", yo: "Àdírẹ́sì", zu: "Ikheli", am: "አድራሻ", bm: "Sigiyɔrɔ", wo: "Adrees" };
+EXTRA_UI.receiptNoLabel = { fr: "N° de reçu", en: "Receipt no.", es: "N.º de recibo", pt: "N.º do recibo", de: "Beleg-Nr.", it: "N. ricevuta", nl: "Bonnr.", pl: "Nr paragonu", ru: "Чек №", tr: "Fiş no", ar: "رقم الإيصال", hi: "रसीद सं.", bn: "রসিদ নং", ur: "رسید نمبر", ta: "ரசீது எண்", te: "రసీదు నం.", th: "เลขที่ใบเสร็จ", zh: "收据号", ja: "レシート番号", ko: "영수증 번호", id: "No. struk", vi: "Số hóa đơn", tl: "Resibo blg.", sw: "Risiti Na.", ha: "Lambar rasit", yo: "Nọ́mbà gbàrà", zu: "Inombolo yerisidi", am: "የደረሰኝ ቁጥር", bm: "Sɛbɛn nimɔrɔ", wo: "Nimero resi" };
+EXTRA_UI.cond_new = { fr: "Neuf", en: "New", es: "Nuevo", pt: "Novo", de: "Neu", it: "Nuovo", nl: "Nieuw", pl: "Nowy", ru: "Новый", tr: "Yeni", ar: "جديد", hi: "नया", bn: "নতুন", ur: "نیا", ta: "புதியது", te: "కొత్తది", th: "ใหม่", zh: "全新", ja: "新品", ko: "새 제품", id: "Baru", vi: "Mới", tl: "Bago", sw: "Mpya", ha: "Sabo", yo: "Tuntun", zu: "Okusha", am: "አዲስ", bm: "Kura", wo: "Bees" };
+EXTRA_UI.cond_used = { fr: "Occasion", en: "Used", es: "Usado", pt: "Usado", de: "Gebraucht", it: "Usato", nl: "Tweedehands", pl: "Używany", ru: "Б/у", tr: "İkinci el", ar: "مستعمل", hi: "पुराना (इस्तेमाल किया)", bn: "ব্যবহৃত", ur: "استعمال شدہ", ta: "பயன்படுத்தியது", te: "వాడినది", th: "มือสอง", zh: "二手", ja: "中古", ko: "중고", id: "Bekas", vi: "Đã qua sử dụng", tl: "Segunda-mano", sw: "Mtumba", ha: "Gwanjo", yo: "Àlòkù", zu: "Okusetshenzisiwe", am: "ያገለገለ", bm: "Kɔrɔlen", wo: "Ñu ko jëfandikoo" };
+EXTRA_UI.cond_refurb = { fr: "Reconditionné", en: "Refurbished", es: "Reacondicionado", pt: "Recondicionado", de: "Generalüberholt", it: "Ricondizionato", nl: "Refurbished", pl: "Odnowiony", ru: "Восстановленный", tr: "Yenilenmiş", ar: "مُجدَّد", hi: "रीफर्बिश्ड", bn: "রিফারবিশড", ur: "ریفربشڈ", ta: "புதுப்பிக்கப்பட்டது", te: "రీఫర్బిష్డ్", th: "รีเฟอร์บิช", zh: "翻新", ja: "整備済み", ko: "리퍼", id: "Rekondisi", vi: "Tân trang", tl: "Refurbished", sw: "Iliyokarabatiwa", ha: "An gyara", yo: "Àtúnṣe tán", zu: "Okulungisiwe kabusha", am: "የታደሰ", bm: "Labɛnnen kokura", wo: "Ñu defar ko" };
+EXTRA_UI.cond_copy = { fr: "Copie", en: "Copy (non-original)", es: "Copia (no original)", pt: "Cópia (não original)", de: "Nachbau", it: "Copia (non originale)", nl: "Kopie (niet origineel)", pl: "Podróbka (nieoryginał)", ru: "Копия (не оригинал)", tr: "Kopya (orijinal değil)", ar: "نسخة (غير أصلي)", hi: "कॉपी (नकली)", bn: "কপি (আসল নয়)", ur: "کاپی (اصل نہیں)", ta: "நகல் (அசல் அல்ல)", te: "కాపీ (అసలు కాదు)", th: "ของก๊อป", zh: "仿品", ja: "コピー品", ko: "카피 제품", id: "KW (bukan ori)", vi: "Hàng nhái", tl: "Kopya (hindi orihinal)", sw: "Nakala (si halisi)", ha: "Kwafi (ba na asali ba)", yo: "Àdàkọ (kì í ṣe ojúlówó)", zu: "Ikhophi (akusona esokuqala)", am: "ቅጂ (ኦሪጅናል ያልሆነ)", bm: "Kopi (a tɛ yɛrɛ ta ye)", wo: "Kopi (du dëgg)" };
+EXTRA_UI.serialShort = { fr: "IMEI/N°", en: "IMEI/S/N", es: "IMEI/N.º", pt: "IMEI/N.º", de: "IMEI/SN", it: "IMEI/N.", nl: "IMEI/SN", pl: "IMEI/SN", ru: "IMEI/№", tr: "IMEI/SN", ar: "IMEI/الرقم", hi: "IMEI/सं.", bn: "IMEI/নং", ur: "IMEI/نمبر", ta: "IMEI/எண்", te: "IMEI/నం.", th: "IMEI/S/N", zh: "IMEI/序列号", ja: "IMEI/製造番号", ko: "IMEI/일련번호", id: "IMEI/SN", vi: "IMEI/Số", tl: "IMEI/S/N", sw: "IMEI/Na.", ha: "IMEI/Lamba", yo: "IMEI/Nọ́mbà", zu: "IMEI/Inombolo", am: "IMEI/ቁጥር", bm: "IMEI/Nimɔrɔ", wo: "IMEI/Nimero" };
+EXTRA_UI.warrantyUntil = { fr: "Garantie jusqu'au {date}", en: "Warranty until {date}", es: "Garantía hasta el {date}", pt: "Garantia até {date}", de: "Garantie bis {date}", it: "Garanzia fino al {date}", nl: "Garantie tot {date}", pl: "Gwarancja do {date}", ru: "Гарантия до {date}", tr: "{date} tarihine kadar garanti", ar: "ضمان حتى {date}", hi: "{date} तक वारंटी", bn: "{date} পর্যন্ত ওয়ারেন্টি", ur: "{date} تک وارنٹی", ta: "{date} வரை உத்தரவாதம்", te: "{date} వరకు వారంటీ", th: "รับประกันถึง {date}", zh: "保修至 {date}", ja: "{date} まで保証", ko: "{date}까지 보증", id: "Garansi sampai {date}", vi: "Bảo hành đến {date}", tl: "Warranty hanggang {date}", sw: "Dhamana hadi {date}", ha: "Garanti har {date}", yo: "Ìdánilójú títí di {date}", zu: "Iwaranti kuze kube ngu-{date}", am: "ዋስትና እስከ {date}", bm: "Garanti ka se {date} ma", wo: "Garanti ba {date}" };
+EXTRA_UI.serialToggle = { fr: "Demander l'IMEI / le n° de série à la vente", en: "Ask for the IMEI / serial number at sale", es: "Pedir el IMEI / n.º de serie al vender", pt: "Pedir o IMEI / n.º de série na venda", de: "IMEI / Seriennummer beim Verkauf abfragen", it: "Chiedere IMEI / n. di serie alla vendita", nl: "IMEI / serienummer vragen bij verkoop", pl: "Pytaj o IMEI / nr seryjny przy sprzedaży", ru: "Запрашивать IMEI / серийный номер при продаже", tr: "Satışta IMEI / seri no sor", ar: "طلب رقم IMEI / الرقم التسلسلي عند البيع", hi: "बिक्री पर IMEI / सीरियल नंबर पूछें", bn: "বিক্রির সময় IMEI / সিরিয়াল নম্বর চাইবে", ur: "فروخت پر IMEI / سیریل نمبر پوچھیں", ta: "விற்பனையில் IMEI / வரிசை எண் கேட்கவும்", te: "అమ్మకంలో IMEI / సీరియల్ నంబర్ అడగండి", th: "ขอ IMEI / หมายเลขเครื่องตอนขาย", zh: "销售时填写 IMEI / 序列号", ja: "販売時に IMEI / 製造番号を入力", ko: "판매 시 IMEI / 일련번호 입력", id: "Minta IMEI / nomor seri saat jual", vi: "Hỏi IMEI / số sê-ri khi bán", tl: "Hingin ang IMEI / serial number sa benta", sw: "Uliza IMEI / namba ya utambulisho wakati wa kuuza", ha: "Nemi IMEI / lambar na'ura lokacin sayarwa", yo: "Béèrè IMEI / nọ́mbà ẹ̀rọ nígbà títà", zu: "Cela i-IMEI / inombolo yomshini lapho uthengisa", am: "በሽያጭ ጊዜ IMEI / መለያ ቁጥር ይጠይቁ", bm: "IMEI / minɛn nimɔrɔ ɲininka feereli la", wo: "Laaj IMEI / nimero masin bi bu ñuy jaay" };
+EXTRA_UI.serialHint = { fr: "Dans le panier, tapez l'IMEI ou le n° de série : il est imprimé sur le reçu avec l'état et la fin de garantie, et se retrouve en le tapant dans la recherche de l'Historique.", en: "In the cart, type the IMEI or serial number: it's printed on the receipt with the condition and warranty end, and can be found by typing it in the History search.", es: "En el carrito, escribe el IMEI o n.º de serie: se imprime en el recibo con el estado y el fin de la garantía, y se encuentra buscándolo en el Historial.", pt: "No carrinho, escreva o IMEI ou n.º de série: é impresso no recibo com o estado e o fim da garantia, e encontra-se pesquisando no Histórico.", de: "Im Warenkorb IMEI oder Seriennummer eingeben: Sie wird mit Zustand und Garantieende auf den Beleg gedruckt und lässt sich in der Verlaufssuche finden.", it: "Nel carrello digita l'IMEI o il n. di serie: viene stampato sulla ricevuta con stato e fine garanzia, e si ritrova cercandolo nello Storico.", nl: "Typ in het winkelmandje de IMEI of het serienummer: het komt op de bon met staat en einde garantie, en is terug te vinden via zoeken in Geschiedenis.", pl: "W koszyku wpisz IMEI lub nr seryjny: trafi na paragon ze stanem i końcem gwarancji, a znajdziesz go, wyszukując w Historii.", ru: "В корзине введите IMEI или серийный номер: он печатается в чеке вместе с состоянием и сроком гарантии, и его можно найти поиском в Истории.", tr: "Sepette IMEI veya seri no yazın: durum ve garanti bitişiyle fişe basılır, Geçmiş aramasında bulunur.", ar: "في السلة، اكتب رقم IMEI أو الرقم التسلسلي: يُطبع على الإيصال مع الحالة ونهاية الضمان، ويمكن إيجاده بالبحث في السجل.", hi: "कार्ट में IMEI या सीरियल नंबर लिखें: यह हालत और वारंटी की आख़िरी तारीख़ के साथ रसीद पर छपता है, और इतिहास की खोज में मिल जाता है।", bn: "কার্টে IMEI বা সিরিয়াল নম্বর লিখুন: অবস্থা ও ওয়ারেন্টি শেষের তারিখসহ রসিদে ছাপা হয়, আর ইতিহাসে খুঁজলে পাওয়া যায়।", ur: "کارٹ میں IMEI یا سیریل نمبر لکھیں: یہ حالت اور وارنٹی کی آخری تاریخ کے ساتھ رسید پر چھپتا ہے، اور ہسٹری کی تلاش میں مل جاتا ہے۔", ta: "கூடையில் IMEI அல்லது வரிசை எண்ணைத் தட்டச்சு செய்யவும்: நிலை, உத்தரவாத முடிவுடன் ரசீதில் அச்சிடப்படும்; வரலாறு தேடலில் கிடைக்கும்.", te: "కార్ట్‌లో IMEI లేదా సీరియల్ నంబర్ టైప్ చేయండి: స్థితి, వారంటీ ముగింపుతో రసీదుపై ముద్రించబడుతుంది; చరిత్ర శోధనలో దొరుకుతుంది.", th: "ในตะกร้า พิมพ์ IMEI หรือหมายเลขเครื่อง: จะพิมพ์บนใบเสร็จพร้อมสภาพและวันหมดประกัน และค้นหาได้ในประวัติ", zh: "在购物车中输入 IMEI 或序列号：会连同成色和保修截止日期印在收据上，并可在历史记录中搜索到。", ja: "カートで IMEI か製造番号を入力すると、状態と保証期限とともにレシートに印刷され、履歴の検索で見つけられます。", ko: "장바구니에서 IMEI나 일련번호를 입력하면 상태·보증 종료일과 함께 영수증에 인쇄되고, 기록 검색으로 찾을 수 있습니다.", id: "Di keranjang, ketik IMEI atau nomor seri: dicetak di struk bersama kondisi dan akhir garansi, dan bisa dicari di Riwayat.", vi: "Trong giỏ hàng, nhập IMEI hoặc số sê-ri: được in trên hóa đơn cùng tình trạng và ngày hết bảo hành, và tìm lại được trong Lịch sử.", tl: "Sa cart, i-type ang IMEI o serial number: ipi-print ito sa resibo kasama ang kondisyon at katapusan ng warranty, at mahahanap sa paghahanap sa Kasaysayan.", sw: "Kwenye kikapu, andika IMEI au namba ya utambulisho: inachapishwa kwenye risiti pamoja na hali na mwisho wa dhamana, na inapatikana kwa kuitafuta kwenye Historia.", ha: "A cikin kwando, rubuta IMEI ko lambar na'ura: ana buga ta a rasit tare da yanayi da ƙarshen garanti, kuma ana samun ta ta neman a Tarihi.", yo: "Nínú agbọ̀n, tẹ IMEI tàbí nọ́mbà ẹ̀rọ: a ó tẹ̀ ẹ́ sórí gbàrà pẹ̀lú ipò rẹ̀ àti òpin ìdánilójú, a sì lè rí i nínú ìwákiri Ìtàn.", zu: "Ebhasikidini, thayipha i-IMEI noma inombolo yomshini: iphrintwa erisidini nesimo nokuphela kwewaranti, futhi itholakala ngokusesha kuMlando.", am: "በጋሪው ውስጥ IMEI ወይም መለያ ቁጥሩን ይጻፉ፦ ከሁኔታውና ከዋስትናው ማብቂያ ጋር በደረሰኙ ላይ ይታተማል፤ በታሪክ ፍለጋም ይገኛል።", bm: "Pan kɔnɔ, IMEI walima minɛn nimɔrɔ sɛbɛn: a bɛ bɔ sɛbɛn kan ni a cogoya ni garanti laban ye, i bɛ se k'a sɔrɔ Tariku ɲinini na.", wo: "Ci panye bi, bindal IMEI walla nimero masin bi: dinañu ko bind ci resi bi ak ni mu mel ak jeexitalu garanti, te mën nga ko gis su nga ko seetee ci Jaar-jaar bi." };
+EXTRA_UI.conditionLabel = { fr: "État", en: "Condition", es: "Estado", pt: "Estado", de: "Zustand", it: "Condizione", nl: "Staat", pl: "Stan", ru: "Состояние", tr: "Durum", ar: "الحالة", hi: "हालत", bn: "অবস্থা", ur: "حالت", ta: "நிலை", te: "స్థితి", th: "สภาพ", zh: "成色", ja: "状態", ko: "상태", id: "Kondisi", vi: "Tình trạng", tl: "Kondisyon", sw: "Hali", ha: "Yanayi", yo: "Ipò", zu: "Isimo", am: "ሁኔታ", bm: "Cogoya", wo: "Ni mu mel" };
+EXTRA_UI.warrantyMonthsLabel = { fr: "Garantie (en mois)", en: "Warranty (months)", es: "Garantía (meses)", pt: "Garantia (meses)", de: "Garantie (Monate)", it: "Garanzia (mesi)", nl: "Garantie (maanden)", pl: "Gwarancja (miesiące)", ru: "Гарантия (месяцев)", tr: "Garanti (ay)", ar: "الضمان (بالأشهر)", hi: "वारंटी (महीने)", bn: "ওয়ারেন্টি (মাস)", ur: "وارنٹی (مہینے)", ta: "உத்தரவாதம் (மாதங்கள்)", te: "వారంటీ (నెలలు)", th: "รับประกัน (เดือน)", zh: "保修（月）", ja: "保証（か月）", ko: "보증 기간(개월)", id: "Garansi (bulan)", vi: "Bảo hành (tháng)", tl: "Warranty (buwan)", sw: "Dhamana (miezi)", ha: "Garanti (watanni)", yo: "Ìdánilójú (oṣù)", zu: "Iwaranti (izinyanga)", am: "ዋስትና (በወር)", bm: "Garanti (kalo)", wo: "Garanti (weer)" };
+EXTRA_UI.serialInputPlaceholder = { fr: "IMEI / n° de série", en: "IMEI / serial number", es: "IMEI / n.º de serie", pt: "IMEI / n.º de série", de: "IMEI / Seriennummer", it: "IMEI / n. di serie", nl: "IMEI / serienummer", pl: "IMEI / nr seryjny", ru: "IMEI / серийный номер", tr: "IMEI / seri no", ar: "IMEI / الرقم التسلسلي", hi: "IMEI / सीरियल नंबर", bn: "IMEI / সিরিয়াল নম্বর", ur: "IMEI / سیریل نمبر", ta: "IMEI / வரிசை எண்", te: "IMEI / సీరియల్ నంబర్", th: "IMEI / หมายเลขเครื่อง", zh: "IMEI / 序列号", ja: "IMEI / 製造番号", ko: "IMEI / 일련번호", id: "IMEI / nomor seri", vi: "IMEI / số sê-ri", tl: "IMEI / serial number", sw: "IMEI / namba ya utambulisho", ha: "IMEI / lambar na'ura", yo: "IMEI / nọ́mbà ẹ̀rọ", zu: "I-IMEI / inombolo yomshini", am: "IMEI / መለያ ቁጥር", bm: "IMEI / minɛn nimɔrɔ", wo: "IMEI / nimero masin" };
+EXTRA_UI.mode_serial = { fr: "IMEI et garantie", en: "IMEI & warranty", es: "IMEI y garantía", pt: "IMEI e garantia", de: "IMEI & Garantie", it: "IMEI e garanzia", nl: "IMEI en garantie", pl: "IMEI i gwarancja", ru: "IMEI и гарантия", tr: "IMEI ve garanti", ar: "IMEI والضمان", hi: "IMEI और वारंटी", bn: "IMEI ও ওয়ারেন্টি", ur: "IMEI اور وارنٹی", ta: "IMEI & உத்தரவாதம்", te: "IMEI & వారంటీ", th: "IMEI และการรับประกัน", zh: "IMEI 与保修", ja: "IMEI と保証", ko: "IMEI·보증", id: "IMEI & garansi", vi: "IMEI và bảo hành", tl: "IMEI at warranty", sw: "IMEI na dhamana", ha: "IMEI da garanti", yo: "IMEI àti ìdánilójú", zu: "I-IMEI newaranti", am: "IMEI እና ዋስትና", bm: "IMEI ni garanti", wo: "IMEI ak garanti" };
+EXTRA_UI.removeReason_expired = { fr: "Périmé", en: "Expired", es: "Caducado", pt: "Fora de prazo", de: "Abgelaufen", it: "Scaduto", nl: "Over datum", pl: "Przeterminowane", ru: "Просрочено", tr: "Tarihi geçmiş", ar: "منتهي الصلاحية", hi: "एक्सपायर", bn: "মেয়াদোত্তীর্ণ", ur: "میعاد ختم", ta: "காலாவதியானது", te: "గడువు ముగిసింది", th: "หมดอายุ", zh: "过期", ja: "期限切れ", ko: "기한 지남", id: "Kedaluwarsa", vi: "Hết hạn", tl: "Paso na", sw: "Imepitwa na muda", ha: "Ya wuce wa'adi", yo: "Ó ti kọjá ọjọ́", zu: "Kuphelelwe yisikhathi", am: "ጊዜው ያለፈበት", bm: "A waati tɛmɛna", wo: "Jamonoom jeex na" };
+EXTRA_UI.removeReason_tester = { fr: "Testeur / échantillon", en: "Tester / sample", es: "Probador / muestra", pt: "Testador / amostra", de: "Tester / Probe", it: "Tester / campione", nl: "Tester / monster", pl: "Tester / próbka", ru: "Тестер / пробник", tr: "Test ürünü / numune", ar: "تجربة / عيّنة", hi: "टेस्टर / नमूना", bn: "টেস্টার / নমুনা", ur: "ٹیسٹر / نمونہ", ta: "சோதனை / மாதிரி", te: "టెస్టర్ / నమూనా", th: "เทสเตอร์ / ตัวอย่าง", zh: "试用装 / 样品", ja: "テスター / サンプル", ko: "테스터 / 샘플", id: "Tester / sampel", vi: "Hàng dùng thử / mẫu", tl: "Tester / sample", sw: "Sampuli ya kujaribu", ha: "Samfurin gwaji", yo: "Àyẹ̀wò / àpẹẹrẹ", zu: "Okokuhlola / isampula", am: "መሞከሪያ / ናሙና", bm: "Lajɛli fɛn", wo: "Natt / misaal" };
+EXTRA_UI.removeReason_unsold = { fr: "Invendus du jour", en: "Unsold at end of day", es: "No vendido del día", pt: "Sobras do dia", de: "Tagesreste", it: "Invenduto del giorno", nl: "Onverkocht van de dag", pl: "Niesprzedane z dnia", ru: "Непроданное за день", tr: "Günün satılmayanları", ar: "غير المباع في اليوم", hi: "दिन का बिना बिका माल", bn: "দিনের অবিক্রীত", ur: "دن کا بچا مال", ta: "அன்று விற்காதவை", te: "ఆ రోజు అమ్ముడుపోనివి", th: "ขายไม่หมดในวัน", zh: "当日未售出", ja: "当日の売れ残り", ko: "당일 미판매분", id: "Tidak laku hari itu", vi: "Hàng ế trong ngày", tl: "Hindi nabenta sa araw", sw: "Zisizouzwa za siku", ha: "Ragowar ranar", yo: "Èyí tí kò tà lọ́jọ́ náà", zu: "Okungathengiswanga ngalolo suku", am: "የዕለቱ ያልተሸጠ", bm: "Don feerebaliw", wo: "Li jaaxul ci bés bi" };
+EXTRA_UI.lossesTitle = { fr: "Pertes et invendus (30 derniers jours)", en: "Losses and unsold (last 30 days)", es: "Pérdidas y no vendido (últimos 30 días)", pt: "Perdas e sobras (últimos 30 dias)", de: "Verluste und Unverkauftes (letzte 30 Tage)", it: "Perdite e invenduto (ultimi 30 giorni)", nl: "Verlies en onverkocht (laatste 30 dagen)", pl: "Straty i niesprzedane (ostatnie 30 dni)", ru: "Потери и непроданное (30 дней)", tr: "Kayıplar ve satılmayanlar (son 30 gün)", ar: "الخسائر وغير المباع (آخر 30 يومًا)", hi: "नुकसान और बिना बिका (पिछले 30 दिन)", bn: "ক্ষতি ও অবিক্রীত (গত ৩০ দিন)", ur: "نقصان اور بچا مال (پچھلے 30 دن)", ta: "இழப்பும் விற்காதவையும் (கடந்த 30 நாட்கள்)", te: "నష్టాలు, అమ్ముడుపోనివి (గత 30 రోజులు)", th: "ของเสียและขายไม่หมด (30 วันล่าสุด)", zh: "损耗与未售出（近 30 天）", ja: "ロスと売れ残り（過去30日）", ko: "손실 및 미판매(최근 30일)", id: "Kerugian & tidak laku (30 hari terakhir)", vi: "Hao hụt và hàng ế (30 ngày qua)", tl: "Lugi at hindi nabenta (huling 30 araw)", sw: "Hasara na zisizouzwa (siku 30 zilizopita)", ha: "Asara da ragowa (kwanaki 30 da suka wuce)", yo: "Àdánù àti èyí tí kò tà (ọjọ́ 30 sẹ́yìn)", zu: "Ukulahlekelwa nokungathengiswanga (izinsuku ezingu-30)", am: "ኪሳራ እና ያልተሸጠ (ያለፉት 30 ቀናት)", bm: "Bɔnɛw ni feerebaliw (tile 30 tɛmɛnenw)", wo: "Ñàkk ak li jaaxul (30 fan yu wees)" };
+EXTRA_UI.logPricesChanged = { fr: "Prix modifiés", en: "Prices changed", es: "Precios cambiados", pt: "Preços alterados", de: "Preise geändert", it: "Prezzi modificati", nl: "Prijzen gewijzigd", pl: "Zmienione ceny", ru: "Цены изменены", tr: "Fiyatlar değişti", ar: "تم تغيير الأسعار", hi: "दाम बदले गए", bn: "দাম বদলানো হয়েছে", ur: "قیمتیں بدلی گئیں", ta: "விலைகள் மாற்றப்பட்டன", te: "ధరలు మార్చబడ్డాయి", th: "เปลี่ยนราคาแล้ว", zh: "已改价", ja: "価格を変更", ko: "가격 변경", id: "Harga diubah", vi: "Đã đổi giá", tl: "Binago ang presyo", sw: "Bei zimebadilishwa", ha: "An canja farashi", yo: "A ti yí iye padà", zu: "Amanani ashintshiwe", am: "ዋጋዎች ተቀይረዋል", bm: "Sɔngɔw yɛlɛmana", wo: "Njëg yi soppi nañu" };
+EXTRA_UI.bulkPriceDone = { fr: "{n} prix modifié(s)", en: "{n} price(s) changed", es: "{n} precio(s) cambiado(s)", pt: "{n} preço(s) alterado(s)", de: "{n} Preis(e) geändert", it: "{n} prezzo/i modificato/i", nl: "{n} prijs/prijzen gewijzigd", pl: "Zmieniono ceny: {n}", ru: "Изменено цен: {n}", tr: "{n} fiyat değişti", ar: "تم تغيير {n} سعر", hi: "{n} दाम बदले गए", bn: "{n}টি দাম বদলানো হয়েছে", ur: "{n} قیمتیں بدلی گئیں", ta: "{n} விலை(கள்) மாற்றப்பட்டன", te: "{n} ధర(లు) మార్చబడ్డాయి", th: "เปลี่ยนราคา {n} รายการ", zh: "已修改 {n} 个价格", ja: "{n} 件の価格を変更", ko: "{n}개 가격 변경", id: "{n} harga diubah", vi: "Đã đổi {n} giá", tl: "{n} presyo ang binago", sw: "Bei {n} zimebadilishwa", ha: "An canja farashi {n}", yo: "A ti yí iye {n} padà", zu: "Amanani angu-{n} ashintshiwe", am: "{n} ዋጋ(ዎች) ተቀይረዋል", bm: "Sɔngɔ {n} yɛlɛmana", wo: "{n} njëg soppi nañu" };
+EXTRA_UI.bulkPriceBtn = { fr: "Changer les prix", en: "Change prices", es: "Cambiar precios", pt: "Alterar preços", de: "Preise ändern", it: "Cambia prezzi", nl: "Prijzen wijzigen", pl: "Zmień ceny", ru: "Изменить цены", tr: "Fiyatları değiştir", ar: "تغيير الأسعار", hi: "दाम बदलें", bn: "দাম বদলান", ur: "قیمتیں بدلیں", ta: "விலைகளை மாற்று", te: "ధరలు మార్చండి", th: "เปลี่ยนราคา", zh: "批量改价", ja: "価格を変更", ko: "가격 변경", id: "Ubah harga", vi: "Đổi giá", tl: "Baguhin ang presyo", sw: "Badilisha bei", ha: "Canja farashi", yo: "Yí iye padà", zu: "Shintsha amanani", am: "ዋጋዎችን ቀይር", bm: "Sɔngɔw yɛlɛma", wo: "Soppi njëg yi" };
+EXTRA_UI.bulkPriceTitle = { fr: "Changer plusieurs prix", en: "Change several prices", es: "Cambiar varios precios", pt: "Alterar vários preços", de: "Mehrere Preise ändern", it: "Cambia più prezzi", nl: "Meerdere prijzen wijzigen", pl: "Zmień kilka cen", ru: "Изменить несколько цен", tr: "Birden çok fiyatı değiştir", ar: "تغيير عدة أسعار", hi: "कई दाम एक साथ बदलें", bn: "একসাথে কয়েকটি দাম বদলান", ur: "کئی قیمتیں ایک ساتھ بدلیں", ta: "பல விலைகளை மாற்று", te: "పలు ధరలు మార్చండి", th: "เปลี่ยนหลายราคา", zh: "批量修改价格", ja: "複数の価格を変更", ko: "여러 가격 한 번에 변경", id: "Ubah beberapa harga", vi: "Đổi nhiều giá", tl: "Baguhin ang ilang presyo", sw: "Badilisha bei kadhaa", ha: "Canja farashi da yawa", yo: "Yí ọ̀pọ̀ iye padà", zu: "Shintsha amanani amaningana", am: "ብዙ ዋጋዎችን ቀይር", bm: "Sɔngɔ caman yɛlɛma", wo: "Soppi ay njëg" };
+EXTRA_UI.bulkPriceAllProducts = { fr: "Tous les produits", en: "All products", es: "Todos los productos", pt: "Todos os produtos", de: "Alle Produkte", it: "Tutti i prodotti", nl: "Alle producten", pl: "Wszystkie produkty", ru: "Все товары", tr: "Tüm ürünler", ar: "كل المنتجات", hi: "सभी उत्पाद", bn: "সব পণ্য", ur: "تمام مصنوعات", ta: "அனைத்து பொருட்கள்", te: "అన్ని ఉత్పత్తులు", th: "สินค้าทั้งหมด", zh: "全部商品", ja: "すべての商品", ko: "모든 상품", id: "Semua produk", vi: "Tất cả sản phẩm", tl: "Lahat ng produkto", sw: "Bidhaa zote", ha: "Duk kaya", yo: "Gbogbo ọjà", zu: "Yonke imikhiqizo", am: "ሁሉም ምርቶች", bm: "Fɛnw bɛɛ", wo: "Marsandiis yépp" };
+EXTRA_UI.bulkPriceModeSet = { fr: "Prix fixe", en: "Set price", es: "Precio fijo", pt: "Preço fixo", de: "Fester Preis", it: "Prezzo fisso", nl: "Vaste prijs", pl: "Stała cena", ru: "Новая цена", tr: "Sabit fiyat", ar: "سعر ثابت", hi: "तय दाम", bn: "নির্দিষ্ট দাম", ur: "مقررہ قیمت", ta: "நிலையான விலை", te: "స్థిర ధర", th: "ราคาเดียว", zh: "统一价格", ja: "一律の価格", ko: "고정 가격", id: "Harga tetap", vi: "Giá cố định", tl: "Takdang presyo", sw: "Bei moja", ha: "Farashi ɗaya", yo: "Iye kan náà", zu: "Intengo eyodwa", am: "የተወሰነ ዋጋ", bm: "Sɔngɔ kelen", wo: "Njëg bu dëgër" };
+EXTRA_UI.bulkPriceApply = { fr: "Appliquer à {n} produit(s)", en: "Apply to {n} product(s)", es: "Aplicar a {n} producto(s)", pt: "Aplicar a {n} produto(s)", de: "Auf {n} Produkt(e) anwenden", it: "Applica a {n} prodotto/i", nl: "Toepassen op {n} product(en)", pl: "Zastosuj do produktów: {n}", ru: "Применить к товарам: {n}", tr: "{n} ürüne uygula", ar: "تطبيق على {n} منتج", hi: "{n} उत्पादों पर लागू करें", bn: "{n}টি পণ্যে প্রয়োগ করুন", ur: "{n} مصنوعات پر لاگو کریں", ta: "{n} பொருட்களுக்குப் பயன்படுத்து", te: "{n} ఉత్పత్తులకు వర్తింపజేయండి", th: "ใช้กับสินค้า {n} รายการ", zh: "应用到 {n} 个商品", ja: "{n} 件の商品に適用", ko: "{n}개 상품에 적용", id: "Terapkan ke {n} produk", vi: "Áp dụng cho {n} sản phẩm", tl: "Ilapat sa {n} produkto", sw: "Tumia kwa bidhaa {n}", ha: "Yi amfani da shi a kan kaya {n}", yo: "Lò ó fún ọjà {n}", zu: "Faka emikhiqizweni engu-{n}", am: "በ{n} ምርት(ዎች) ላይ ተግብር", bm: "A kɛ fɛn {n} kan", wo: "Def ko ci {n} marsandiis" };
+EXTRA_UI.priceHistoryTitle = { fr: "Historique des prix", en: "Price history", es: "Historial de precios", pt: "Histórico de preços", de: "Preisverlauf", it: "Storico prezzi", nl: "Prijsgeschiedenis", pl: "Historia cen", ru: "История цен", tr: "Fiyat geçmişi", ar: "سجل الأسعار", hi: "दामों का इतिहास", bn: "দামের ইতিহাস", ur: "قیمتوں کی تاریخ", ta: "விலை வரலாறு", te: "ధరల చరిత్ర", th: "ประวัติราคา", zh: "价格记录", ja: "価格の履歴", ko: "가격 기록", id: "Riwayat harga", vi: "Lịch sử giá", tl: "Kasaysayan ng presyo", sw: "Historia ya bei", ha: "Tarihin farashi", yo: "Ìtàn iye", zu: "Umlando wamanani", am: "የዋጋ ታሪክ", bm: "Sɔngɔw tariku", wo: "Jaar-jaaru njëg yi" };
+EXTRA_UI.shopListBtn = { fr: "Liste à acheter", en: "Shopping list", es: "Lista de compras", pt: "Lista de compras", de: "Einkaufsliste", it: "Lista acquisti", nl: "Inkooplijst", pl: "Lista zakupów", ru: "Список закупок", tr: "Alışveriş listesi", ar: "قائمة المشتريات", hi: "ख़रीद सूची", bn: "কেনার তালিকা", ur: "خریداری کی فہرست", ta: "வாங்க வேண்டியவை", te: "కొనుగోలు జాబితా", th: "รายการที่ต้องซื้อ", zh: "进货清单", ja: "仕入れリスト", ko: "구매 목록", id: "Daftar belanja", vi: "Danh sách cần mua", tl: "Listahan ng bibilhin", sw: "Orodha ya kununua", ha: "Jerin abin saye", yo: "Àtòjọ ohun tí a ó rà", zu: "Uhlu lokuthenga", am: "የሚገዙ ዕቃዎች ዝርዝር", bm: "Sanni lisi", wo: "Limu li ñuy jënd" };
+EXTRA_UI.shopListOpenFull = { fr: "Voir toute la liste à acheter", en: "See the full shopping list", es: "Ver toda la lista de compras", pt: "Ver a lista de compras completa", de: "Ganze Einkaufsliste ansehen", it: "Vedi tutta la lista acquisti", nl: "Hele inkooplijst bekijken", pl: "Zobacz całą listę zakupów", ru: "Весь список закупок", tr: "Tüm alışveriş listesini gör", ar: "عرض قائمة المشتريات كاملة", hi: "पूरी ख़रीद सूची देखें", bn: "পুরো কেনার তালিকা দেখুন", ur: "پوری خریداری کی فہرست دیکھیں", ta: "முழு வாங்கும் பட்டியலைப் பார்", te: "పూర్తి కొనుగోలు జాబితా చూడండి", th: "ดูรายการที่ต้องซื้อทั้งหมด", zh: "查看完整进货清单", ja: "仕入れリストをすべて見る", ko: "전체 구매 목록 보기", id: "Lihat seluruh daftar belanja", vi: "Xem toàn bộ danh sách cần mua", tl: "Tingnan ang buong listahan", sw: "Ona orodha yote ya kununua", ha: "Duba cikakken jerin abin saye", yo: "Wo gbogbo àtòjọ ohun tí a ó rà", zu: "Bona lonke uhlu lokuthenga", am: "ሙሉ የግዢ ዝርዝሩን ይመልከቱ", bm: "Sanni lisi bɛɛ lajɛ", wo: "Seet limu li ñuy jënd yépp" };
+EXTRA_UI.shopListHint = { fr: "Produits presque épuisés, avec une quantité pour tenir environ deux semaines au rythme de vente actuel. Corrigez les quantités, décochez ce que vous ne voulez pas, puis envoyez la liste.", en: "Products running low, with a quantity to last about two weeks at the current sales pace. Adjust the quantities, untick what you don't want, then send the list.", es: "Productos casi agotados, con una cantidad para unas dos semanas al ritmo de venta actual. Corrige las cantidades, desmarca lo que no quieras y envía la lista.", pt: "Produtos quase esgotados, com uma quantidade para cerca de duas semanas ao ritmo atual. Corrija as quantidades, desmarque o que não quer e envie a lista.", de: "Fast ausverkaufte Produkte, mit einer Menge für etwa zwei Wochen beim aktuellen Verkaufstempo. Mengen anpassen, Unerwünschtes abwählen, Liste senden.", it: "Prodotti quasi esauriti, con una quantità per circa due settimane al ritmo di vendita attuale. Correggi le quantità, togli la spunta a ciò che non vuoi e invia la lista.", nl: "Bijna uitverkochte producten, met een hoeveelheid voor ongeveer twee weken bij het huidige verkooptempo. Pas aan, vink uit wat je niet wilt en stuur de lijst.", pl: "Produkty na wyczerpaniu, z ilością na ok. dwa tygodnie przy obecnym tempie sprzedaży. Popraw ilości, odznacz zbędne i wyślij listę.", ru: "Заканчивающиеся товары и количество примерно на две недели при текущих продажах. Поправьте количество, снимите лишние отметки и отправьте список.", tr: "Bitmek üzere olan ürünler, mevcut satış hızıyla yaklaşık iki hafta yetecek miktarla. Miktarları düzeltin, istemediklerinizin işaretini kaldırıp listeyi gönderin.", ar: "منتجات على وشك النفاد، مع كمية تكفي نحو أسبوعين بوتيرة البيع الحالية. عدّل الكميات وألغِ تحديد ما لا تريده ثم أرسل القائمة.", hi: "लगभग ख़त्म होते उत्पाद, अभी की बिक्री के हिसाब से लगभग दो हफ़्ते चलने लायक मात्रा के साथ। मात्रा ठीक करें, जो नहीं चाहिए उसका निशान हटाएँ, फिर सूची भेजें।", bn: "প্রায় শেষ হয়ে আসা পণ্য, বর্তমান বিক্রির হারে প্রায় দুই সপ্তাহ চলার মতো পরিমাণসহ। পরিমাণ ঠিক করুন, যা চান না তা আনটিক করুন, তারপর তালিকা পাঠান।", ur: "تقریباً ختم ہوتی مصنوعات، موجودہ فروخت کے حساب سے تقریباً دو ہفتے کی مقدار کے ساتھ۔ مقدار درست کریں، غیر ضروری کا نشان ہٹائیں، پھر فہرست بھیجیں۔", ta: "தீர்ந்துபோகும் பொருட்கள், தற்போதைய விற்பனை வேகத்தில் சுமார் இரண்டு வாரங்களுக்கான அளவுடன். அளவுகளைத் திருத்தி, வேண்டாததைத் தேர்வுநீக்கி, பட்டியலை அனுப்புங்கள்.", te: "అయిపోతున్న ఉత్పత్తులు, ప్రస్తుత అమ్మకాల వేగంతో సుమారు రెండు వారాలకు సరిపోయే పరిమాణంతో. పరిమాణాలు సరిచేసి, వద్దనివాటి టిక్ తీసి, జాబితా పంపండి.", th: "สินค้าใกล้หมด พร้อมจำนวนที่พอขายราว 2 สัปดาห์ตามยอดขายตอนนี้ แก้จำนวน เอาเครื่องหมายออกจากที่ไม่ต้องการ แล้วส่งรายการ", zh: "快卖完的商品，按目前销量给出约两周的数量。可修改数量、取消不需要的，然后发送清单。", ja: "在庫が少ない商品と、今の売れ行きで約2週間分の数量です。数量を直し、不要なもののチェックを外して送信してください。", ko: "곧 떨어질 상품과 현재 판매 속도로 약 2주를 버틸 수량입니다. 수량을 고치고 필요 없는 항목은 체크를 해제한 뒤 목록을 보내세요.", id: "Produk yang hampir habis, dengan jumlah untuk sekitar dua minggu sesuai laju penjualan sekarang. Ubah jumlah, hapus centang yang tidak perlu, lalu kirim daftarnya.", vi: "Sản phẩm sắp hết, kèm số lượng đủ bán khoảng hai tuần theo tốc độ hiện tại. Sửa số lượng, bỏ chọn món không cần rồi gửi danh sách.", tl: "Mga produktong paubos na, may dami para sa mga dalawang linggo ayon sa bilis ng benta ngayon. Ayusin ang dami, alisin ang tsek sa ayaw mo, saka ipadala.", sw: "Bidhaa zinazokaribia kuisha, pamoja na kiasi cha takribani wiki mbili kwa kasi ya mauzo ya sasa. Rekebisha kiasi, ondoa alama kwenye usichotaka, kisha tuma orodha.", ha: "Kayan da suke kusa ƙarewa, tare da adadin da zai kai kusan makonni biyu bisa saurin sayarwa na yanzu. Gyara adadi, cire alama daga abin da ba ka so, sannan ka aika jerin.", yo: "Àwọn ọjà tó fẹ́ tán, pẹ̀lú iye tí yóò tó nǹkan bí ọ̀sẹ̀ méjì bí ìtàjà ṣe ń lọ báyìí. Ṣàtúnṣe iye, yọ àmì kúrò lára èyí tí o kò fẹ́, lẹ́yìn náà fi àtòjọ ránṣẹ́.", zu: "Imikhiqizo esizophela, nenani elingahlala cishe amasonto amabili ngejubane lokuthengisa lamanje. Lungisa amanani, susa uphawu kokungafuneki, bese uthumela uhlu.", am: "ሊያልቁ የተቃረቡ ምርቶች፣ አሁን ባለው የሽያጭ ፍጥነት ለሁለት ሳምንት ገደማ የሚበቃ መጠን ጋር። መጠኖቹን ያስተካክሉ፣ የማይፈልጉትን ምልክት ያንሱ፣ ከዚያ ዝርዝሩን ይላኩ።", bm: "Fɛn minnu bɛ ban, ni hakɛ ye min bɛ se ka dɔgɔkun fila ɲɔgɔn kɛ sisan feereli teliya la. Hakɛw latilen, i t'a fɛ min na, o taamasiyɛn bɔ, o kɔ ka lisi ci.", wo: "Marsandiis yu bëgg a jeex, ak ab lim bu mën a yàgg lu tollu ci ñaari ayu-bés ci ni jaay bi di doxe léegi. Defaral lim yi, far li nga bëggul, te yónnee limu bi." };
+EXTRA_UI.shopListEmpty = { fr: "Rien à racheter pour l'instant.", en: "Nothing to restock for now.", es: "Nada que reponer por ahora.", pt: "Nada para repor por agora.", de: "Im Moment nichts nachzukaufen.", it: "Niente da riacquistare per ora.", nl: "Voorlopig niets bij te kopen.", pl: "Na razie nic do dokupienia.", ru: "Пока нечего докупать.", tr: "Şimdilik alınacak bir şey yok.", ar: "لا شيء يحتاج إلى إعادة شراء حاليًا.", hi: "अभी कुछ ख़रीदना नहीं है।", bn: "এখন কিছু কেনার দরকার নেই।", ur: "ابھی کچھ خریدنے کی ضرورت نہیں۔", ta: "இப்போது வாங்க வேண்டியது எதுவும் இல்லை.", te: "ప్రస్తుతానికి కొనాల్సింది ఏమీ లేదు.", th: "ตอนนี้ยังไม่มีอะไรต้องซื้อเพิ่ม", zh: "目前无需补货。", ja: "今のところ仕入れるものはありません。", ko: "지금은 다시 살 것이 없습니다.", id: "Belum ada yang perlu dibeli lagi.", vi: "Hiện chưa có gì cần mua thêm.", tl: "Wala pang kailangang bilhin.", sw: "Hakuna cha kununua kwa sasa.", ha: "Babu abin da za a sake saya yanzu.", yo: "Kò sí ohun tí a ó tún rà báyìí.", zu: "Akukho okufanele kuthengwe okwamanje.", am: "ለአሁን የሚገዛ ነገር የለም።", bm: "Foyi tɛ yen ka san sisan.", wo: "Amul dara lu ñuy jënd léegi." };
+EXTRA_UI.shopListEstimated = { fr: "Coût estimé", en: "Estimated cost", es: "Costo estimado", pt: "Custo estimado", de: "Geschätzte Kosten", it: "Costo stimato", nl: "Geschatte kosten", pl: "Szacowany koszt", ru: "Примерная стоимость", tr: "Tahmini maliyet", ar: "التكلفة التقديرية", hi: "अनुमानित लागत", bn: "আনুমানিক খরচ", ur: "اندازاً لاگت", ta: "மதிப்பிடப்பட்ட செலவு", te: "అంచనా వ్యయం", th: "ค่าใช้จ่ายโดยประมาณ", zh: "预计成本", ja: "概算費用", ko: "예상 비용", id: "Perkiraan biaya", vi: "Chi phí ước tính", tl: "Tantiyang gastos", sw: "Gharama inayokadiriwa", ha: "Kimanin kuɗi", yo: "Ìnáwó tí a fojú bù", zu: "Izindleko ezilinganiselwe", am: "የተገመተ ወጪ", bm: "Musaka jateminen", wo: "Njëg gu ñu xayma" };
+EXTRA_UI.shopListInStock = { fr: "En stock : {n}", en: "In stock: {n}", es: "En stock: {n}", pt: "Em stock: {n}", de: "Auf Lager: {n}", it: "In magazzino: {n}", nl: "Op voorraad: {n}", pl: "W magazynie: {n}", ru: "В наличии: {n}", tr: "Stokta: {n}", ar: "في المخزون: {n}", hi: "स्टॉक में: {n}", bn: "স্টকে: {n}", ur: "اسٹاک میں: {n}", ta: "இருப்பில்: {n}", te: "స్టాక్‌లో: {n}", th: "คงเหลือ: {n}", zh: "库存：{n}", ja: "在庫：{n}", ko: "재고: {n}", id: "Stok: {n}", vi: "Tồn kho: {n}", tl: "Stock: {n}", sw: "Zilizopo: {n}", ha: "A ajiye: {n}", yo: "Ní ìpamọ́: {n}", zu: "Esitokweni: {n}", am: "በክምችት: {n}", bm: "Maralen: {n}", wo: "Li des: {n}" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -6616,7 +6652,8 @@ const SECTORS = [
 const SECTOR_MODES = {
   food: ["unit", "measure", "expiry", "barcode"],
   clothing: [],
-  electronics: ["barcode"],
+  // Téléphones : IMEI / n° de série, état (neuf, occasion…) et garantie sur le reçu.
+  electronics: ["serial", "barcode"],
   cosmetics: ["expiry", "barcode", "unit"],
   pharmacy: ["expiry", "unit", "barcode"],
   hardware: ["measure", "unit"],
@@ -6634,7 +6671,8 @@ const SECTOR_MODES = {
 };
 // Unité proposée quand on active la vente au poids / à la mesure, selon le secteur.
 const SECTOR_MEASURE_UNIT = { food: "kg", butcher: "kg", wholesale: "kg", bakery: "kg", restaurant: "kg", hardware: "m" };
-const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily"];
+const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily", "serial"];
+const PRODUCT_CONDITIONS = ["new", "used", "refurb", "copy"];
 // Le secteur est enregistré sous forme de code fixe (« food », « bakery »…). Les comptes
 // créés avant gardent un libellé traduit (« Alimentation générale », « General food store »…) :
 // on reconnaît les deux. Affichage : sectorName(id, lang), traduit dans les 30 langues.
@@ -7954,7 +7992,7 @@ const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
 const SHOP_LEVEL_KEYS = [
   "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts", "cashClosures",
   "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
-  "historyLog", "categories", "employees", "actionLog", "deletedProducts",
+  "historyLog", "categories", "employees", "actionLog", "deletedProducts", "receiptInfo",
 ];
 // Dernière boutique affichée sur CET appareil, pour y revenir au prochain démarrage
 // au lieu de retomber systématiquement sur la boutique principale (suffixée par le
@@ -8039,6 +8077,61 @@ function sanitizeTs(ts) {
 // au serveur par petits paquets. Le serveur ignore les doublons : renvoyer deux fois la même
 // vente ne la compte qu'une fois. Le gros JSON de la boutique ne garde ensuite que les
 // éléments récents (voir RECORDS_WINDOW_MS), ce qui garde chaque sauvegarde légère.
+// ---- Numéro de reçu continu ----
+// Chaque appareil a sa propre série (3 caractères tirés au hasard une seule fois et gardés
+// sur le téléphone) et un compteur qui ne fait qu'avancer : « K7P-00042 ». Deux téléphones
+// hors ligne ne donnent donc jamais le même numéro, et la série d'un appareil n'a pas de
+// trou. Si le stockage du téléphone a été vidé, le compteur repart du plus grand numéro de
+// cette série retrouvé dans les ventes.
+const RECEIPT_SERIES_KEY = "mb_receipt_series";
+const RECEIPT_SEQ_PREFIX = "mb_receipt_seq:";
+function receiptSeries() {
+  try {
+    let v = window.localStorage.getItem(RECEIPT_SERIES_KEY);
+    if (!v || !/^[A-Z2-9]{3}$/.test(v)) {
+      const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      const r = new Uint8Array(3);
+      if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(r);
+      else for (let i = 0; i < 3; i++) r[i] = Math.floor(Math.random() * 256);
+      v = A[r[0] % 32] + A[r[1] % 32] + A[r[2] % 32];
+      window.localStorage.setItem(RECEIPT_SERIES_KEY, v);
+    }
+    return v;
+  } catch (e) { return "XXX"; }
+}
+function nextReceiptNo(shopKey, sales) {
+  const series = receiptSeries();
+  let seq = 0;
+  try { seq = parseInt(window.localStorage.getItem(RECEIPT_SEQ_PREFIX + shopKey) || "0", 10) || 0; } catch (e) {}
+  const prefix = series + "-";
+  const list = Array.isArray(sales) ? sales : [];
+  for (let i = list.length - 1; i >= 0 && i >= list.length - 5000; i--) {
+    const no = list[i] && list[i].receiptNo;
+    if (typeof no === "string" && no.indexOf(prefix) === 0) { seq = Math.max(seq, parseInt(no.slice(prefix.length), 10) || 0); break; }
+  }
+  seq += 1;
+  try { window.localStorage.setItem(RECEIPT_SEQ_PREFIX + shopKey, String(seq)); } catch (e) {}
+  return prefix + String(seq).padStart(5, "0");
+}
+// Date de fin de garantie (AAAA-MM-JJ) à partir de la date de vente et d'un nombre de mois.
+function warrantyEndDate(iso, months) {
+  const m = Math.floor(Number(months) || 0);
+  if (m <= 0) return null;
+  const d = new Date(iso);
+  if (!isFinite(d.getTime())) return null;
+  const day = d.getDate();
+  d.setDate(1); d.setMonth(d.getMonth() + m);
+  const last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  d.setDate(Math.min(day, last));
+  return localDayKey(d);
+}
+// Bloc horodaté (infos du reçu…) : on garde la version modifiée le plus récemment.
+function newerStamped(a, b) {
+  const ta = a && typeof a === "object" ? sanitizeTs(a.updatedAt) : -1;
+  const tb = b && typeof b === "object" ? sanitizeTs(b.updatedAt) : -1;
+  if (ta < 0 && tb < 0) return undefined;
+  return ta >= tb ? a : b;
+}
 const RECORD_KINDS = [
   ["sales", "sale"], ["historyLog", "history"], ["debtEvents", "debtEvent"], ["expenses", "expense"],
   ["cashCounts", "cashCount"], ["cashClosures", "cashClosure"], ["unsoldLog", "unsold"],
@@ -8464,6 +8557,7 @@ function mergeShopRaw(baseShop, localShop, remoteShop) {
     employees: mergeById(base.employees, local.employees, remote.employees),
     actionLog: sortByDate(mergeById(base.actionLog, local.actionLog, remote.actionLog)),
     activeCartId: local.activeCartId ?? remote.activeCartId ?? null,
+    receiptInfo: newerStamped(local.receiptInfo, remote.receiptInfo),
   };
 }
 function SavedBadge({ saving, isOnline, pendingCount, lang }) {
@@ -11058,6 +11152,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [currency, setCurrency] = useState("XOF");
   const [shopCountry, setShopCountry] = useState(""); // pays du compte (pour le format de date)
   const [shopPhone, setShopPhone] = useState("");
+  // Infos légales imprimées sur les reçus (NIF, RCCM, adresse). Rangées avec la boutique
+  // (pas avec le compte) pour que les reçus faits par le personnel les portent aussi.
+  const [receiptInfo, setReceiptInfo] = useState({});
   // Indicatif du boutiquier lui-même : pays de la boutique, sinon indicatif de son propre
   // numéro, sinon fuseau horaire du téléphone. Sert à pré-remplir (modifiable) le numéro client.
   const ownDialCode = useMemo(() => {
@@ -11177,6 +11274,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Arabe / ourdou : chaque ligne commence par une marque « droite-à-gauche » invisible,
   // sinon WhatsApp aligne à gauche toute ligne qui commence par un chiffre ou un nom de
   // produit en lettres latines (ligne « 2 × Riz » collée à gauche au milieu du texte arabe).
+  // Lignes « adresse » et « NIF · RCCM » du reçu, si le commerçant les a remplies.
+  const receiptLegalLines = () => {
+    const ri = receiptInfo || {};
+    const out = [];
+    if (ri.address && String(ri.address).trim()) out.push(String(ri.address).trim());
+    const ids = [];
+    if (ri.taxId && String(ri.taxId).trim()) ids.push(`${tx(lang, "receiptTaxIdLabel")} ${String(ri.taxId).trim()}`);
+    if (ri.rccm && String(ri.rccm).trim()) ids.push(`${tx(lang, "receiptRccmLabel")} ${String(ri.rccm).trim()}`);
+    if (ids.length) out.push(ids.join(" · "));
+    return out;
+  };
+  // Sous-ligne d'un article : état (occasion, copie…), IMEI / n° de série, fin de garantie.
+  const receiptItemExtra = (it) => {
+    if (!it) return "";
+    const parts = [];
+    if (it.condition && it.condition !== "new") parts.push(tx(lang, "cond_" + it.condition));
+    if (it.serial) parts.push(`${tx(lang, "serialShort")} ${it.serial}`);
+    if (it.warrantyUntil) parts.push(tx(lang, "warrantyUntil").replace("{date}", fmtDateCached(new Date(it.warrantyUntil + "T12:00:00"), null, "date")));
+    return parts.join(" · ");
+  };
   const buildReceiptMessage = (receipt, extraLines = []) => {
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     const cur = CURRENT_CURRENCY.symbol;
@@ -11187,17 +11304,20 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const d = new Date(receipt.date);
     const dateStr = `${fmtDateCached(d, null, "date")} · ${fmtDateCached(d, { hour: "2-digit", minute: "2-digit" }, "time")}`;
     const ticket = receipt.ticketId ? String(receipt.ticketId).replace(/[^0-9a-zA-Z]/g, "").slice(-6) : "";
+    const legal = receiptLegalLines();
     const lines = [
       `🧾 *${(shopName || t(lang, "appName") || "Commerce").toUpperCase()}*`,
       ...(shopPhone ? [`📞 ${shopPhone}`] : []),
+      ...legal.map((l) => `🏢 ${l}`),
       SEP,
       `📅 ${dateStr}`,
-      ...(ticket ? [`🔖 ${tx(lang, "receiptTicketLabel")}${colon}#${ticket}`] : []),
+      ...(receipt.receiptNo ? [`🔖 ${tx(lang, "receiptNoLabel")}${colon}${receipt.receiptNo}`] : ticket ? [`🔖 ${tx(lang, "receiptTicketLabel")}${colon}#${ticket}`] : []),
       ...(receipt.customer ? [`👤 ${tx(lang, "receiptClientLabel")}${colon}${receipt.customer}`] : []),
       SEP,
       ...receipt.items.map((it) => {
         const q = it.measureUnit ? `${localizedQty(it.qty)} ${it.measureUnit}` : localizedQty(it.qty);
-        return `▫️ ${q} × ${it.name}  →  ${money(it.total)}`;
+        const extra = receiptItemExtra(it);
+        return `▫️ ${q} × ${it.name}  →  ${money(it.total)}` + (extra ? `\n     ${extra}` : "");
       }),
       SEP,
       `💰 *${tx(lang, "receiptTotalLabel").toUpperCase()}${colon}${money(receipt.total)}*`,
@@ -11277,7 +11397,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const fmt = (n) => `${localizedNumber(n)} ${cur}`;
     const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     // Charge la police Unicode si la langue ou les donnees saisies en ont besoin.
-    await applyPdfTextRendering(doc, lang, [shopName, shopPhone, receipt.customer, paymentLabel, ...receipt.items.map((it) => it.name)].join(" "));
+    const legalLines = receiptLegalLines();
+    // Une ligne de tableau par article, plus une sous-ligne (IMEI, garantie…) si besoin.
+    const pdfRows = [];
+    receipt.items.forEach((it) => { pdfRows.push({ it }); const ex = receiptItemExtra(it); if (ex) pdfRows.push({ sub: ex }); });
+    await applyPdfTextRendering(doc, lang, [shopName, shopPhone, receipt.customer, paymentLabel, ...legalLines, ...pdfRows.map((r) => (r.it ? r.it.name : r.sub))].join(" "));
     if (PDF_RTL_LANGS.has(lang)) applyPdfRtlMirror(doc, pageW);
 
     // QR code vers le site : généré via la bibliothèque "qrcode" (encodeur pur, sans
@@ -11296,7 +11420,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // ---- Hauteurs réservées pour tenter de tout faire tenir sur UNE page : on ne
     // bascule en plusieurs pages QUE si même la taille de ligne minimale lisible ne
     // suffit pas pour le nombre d'articles de cette vente.
-    const HEADER_H = 60;
+    const HEADER_H = 60 + legalLines.length * 5;
     const META_H = 16;
     const TABLE_HEAD_H = 8;
     // Hauteur reellement consommee par le bloc total : separateur (3+11) + total (11)
@@ -11306,11 +11430,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const BOTTOM_LINE_H = 10;
     const availableForItems = pageH - HEADER_H - META_H - TABLE_HEAD_H - TOTAL_BLOCK_H - FOOTER_H - BOTTOM_LINE_H;
     const DEFAULT_ROW_H = 8, MIN_ROW_H = 5;
-    const neededH = receipt.items.length * DEFAULT_ROW_H;
-    const rowH = neededH <= availableForItems ? DEFAULT_ROW_H : Math.max(MIN_ROW_H, availableForItems / receipt.items.length);
+    const neededH = pdfRows.length * DEFAULT_ROW_H;
+    const rowH = neededH <= availableForItems ? DEFAULT_ROW_H : Math.max(MIN_ROW_H, availableForItems / pdfRows.length);
     const itemFontSize = rowH >= 7 ? 10 : rowH >= 6 ? 9 : 8;
     const itemsPerPage = Math.max(1, Math.floor(availableForItems / rowH));
-    const totalPages = Math.max(1, Math.ceil(receipt.items.length / itemsPerPage));
+    const totalPages = Math.max(1, Math.ceil(pdfRows.length / itemsPerPage));
 
     for (let page = 0; page < totalPages; page++) {
       if (page > 0) doc.addPage();
@@ -11337,6 +11461,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         y += 6;
       } else {
         y += 2;
+      }
+      if (legalLines.length) {
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(8.5);
+        doc.setTextColor(...MUTED_RGB);
+        legalLines.forEach((l) => { doc.text(l, pageW / 2, y - 1, { align: "center" }); y += 5; });
       }
 
       doc.setDrawColor(210, 210, 210);
@@ -11383,7 +11513,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         doc.setFont("helvetica", "bold");
         doc.text(value, pageW - marginX, lineY, { align: "right" });
       };
-      if (receipt.ticketId) {
+      if (receipt.receiptNo) {
+        rightLabelled(`${tx(lang, "receiptNoLabel")}${pdfColon}`, receipt.receiptNo, y);
+      } else if (receipt.ticketId) {
         rightLabelled(`${tx(lang, "receiptTicketLabel")}${pdfColon}`, `#${receipt.ticketId.replace(/[^0-9a-zA-Z]/g, "").slice(-6)}`, y);
       }
       if (receipt.customer) {
@@ -11405,10 +11537,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       y += rowH - 2;
 
       const startIdx = page * itemsPerPage;
-      const endIdx = Math.min(receipt.items.length, startIdx + itemsPerPage);
+      const endIdx = Math.min(pdfRows.length, startIdx + itemsPerPage);
       doc.setFontSize(itemFontSize);
       for (let idx = startIdx; idx < endIdx; idx++) {
-        const it = receipt.items[idx];
+        if (pdfRows[idx].sub) {
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(Math.max(7, itemFontSize - 1.5));
+          doc.setTextColor(...MUTED_RGB);
+          doc.text(clipTo(pdfRows[idx].sub, contentW - 8), marginX + 6, y - 1.5);
+          doc.setFontSize(itemFontSize);
+          y += rowH;
+          continue;
+        }
+        const it = pdfRows[idx].it;
         const priceText = fmt(it.total);
         doc.setFont("helvetica", "bold");
         const priceW = doc.getTextWidth(priceText);
@@ -13243,6 +13384,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [shopNameInput, setShopNameInput] = useState("");
   const [shopNameMsg, setShopNameMsg] = useState("");
   const [shopPhoneInput, setShopPhoneInput] = useState("");
+  const [receiptInfoDraft, setReceiptInfoDraft] = useState({ taxId: "", rccm: "", address: "" });
+  const [receiptInfoMsg, setReceiptInfoMsg] = useState("");
   const [shopPhoneMsg, setShopPhoneMsg] = useState("");
   // ---- Profil saisi à l'inscription, modifiable dans « Gérer le compte » ----
   const [ownerFirstName, setOwnerFirstName] = useState("");
@@ -13256,7 +13399,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const productSectorId = sectorIdOf(shopSector);
   const productSectorModes = productSectorId && SECTOR_MODES[productSectorId] ? SECTOR_MODES[productSectorId] : null;
   const productModeOrder = productSectorModes ? [...productSectorModes, ...PRODUCT_MODES.filter((m) => productSectorModes.indexOf(m) === -1)] : PRODUCT_MODES;
-  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : !!pDailyMode);
+  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : m === "serial" ? (!!pTrackSerial || (pCondition && pCondition !== "new") || parseInt(pWarrantyMonths, 10) > 0) : !!pDailyMode);
   const modeShown = (m) => !productSectorModes || productSectorModes.indexOf(m) !== -1 || productModeActive(m) || showMoreProductOptions;
   const [sectorMsg, setSectorMsg] = useState("");
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
@@ -13307,6 +13450,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // caisse (onglet Vente) au lieu de le chercher/cliquer dans la liste.
   const [pBarcode, setPBarcode] = useState("");
   const [pExpiry, setPExpiry] = useState("");
+  // Téléphones / électronique : n° de série (IMEI) demandé à la vente, état, garantie.
+  const [pTrackSerial, setPTrackSerial] = useState(false);
+  const [pCondition, setPCondition] = useState("new");
+  const [pWarrantyMonths, setPWarrantyMonths] = useState("");
   const [showExpiryList, setShowExpiryList] = useState(false);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
@@ -13633,6 +13780,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCashCounts(shop.cashCounts || []);
     setCashClosures(shop.cashClosures || []);
     setUnsoldLog(shop.unsoldLog || []);
+    setReceiptInfo(shop.receiptInfo && typeof shop.receiptInfo === "object" ? shop.receiptInfo : {});
     setDeletedProducts(Array.isArray(shop.deletedProducts) ? shop.deletedProducts : []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
@@ -14363,6 +14511,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       cashCounts: overrides.cashCounts ?? cashCounts,
       cashClosures: overrides.cashClosures ?? cashClosures,
       unsoldLog: overrides.unsoldLog ?? unsoldLog,
+      receiptInfo: overrides.receiptInfo ?? receiptInfo,
       deletedProducts: overrides.deletedProducts ?? deletedProducts,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
@@ -14416,6 +14565,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCashCounts(next.cashCounts || []);
     setCashClosures(next.cashClosures || []);
     setUnsoldLog(next.unsoldLog || []);
+    setReceiptInfo(next.receiptInfo || {});
     setDeletedProducts(next.deletedProducts || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
@@ -14848,6 +14998,85 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Changement de quantité depuis « Modifier » : on demande pourquoi (comme le bouton « − »),
   // pour que chaque variation du stock ait un motif dans le journal.
   const [qtyChangePrompt, setQtyChangePrompt] = useState(null);
+  // Sorties de stock qui sont une perte d'argent : enregistrées avec leur motif dans
+  // unsoldLog (le même journal que les invendus du jour), pour être chiffrées dans
+  // Statistiques > Pertes et invendus. Une simple correction de comptage n'en est pas une.
+  const LOSS_REASONS = ["broken", "expired", "tester", "lost", "own"];
+  const makeLossEntry = (p, qty, reason) => ({
+    id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
+    productId: p.id,
+    productName: p.name,
+    qty,
+    date: new Date().toISOString(),
+    reason,
+    unitCost: p.costPrice != null && p.costPrice !== "" ? Number(p.costPrice) : Number(p.price) || 0,
+    costKnown: p.costPrice != null && p.costPrice !== "",
+    actorId: activeEmployee ? activeEmployee.id : null,
+    actorName: activeEmployee ? activeEmployee.name : null,
+  });
+  // Historique du prix de vente d'un produit : les 12 derniers changements (date, ancien
+  // et nouveau prix), affichés dans sa fiche. Utile quand le sucre ou le ciment bougent.
+  const withPriceHistory = (p, newPrice) => {
+    const oldPrice = Number(p.price);
+    if (!(newPrice > 0) || !isFinite(oldPrice) || oldPrice === newPrice) return p;
+    const h = Array.isArray(p.priceHistory) ? p.priceHistory : [];
+    return { ...p, price: newPrice, priceHistory: [...h, { at: new Date().toISOString(), from: oldPrice, to: newPrice }].slice(-12) };
+  };
+  // ---- Changer plusieurs prix d'un coup ----
+  // Le sucre augmente de 500 F le sac, le barème de la viande change : au lieu d'ouvrir
+  // chaque fiche, on choisit une catégorie (ou une recherche), le type de changement
+  // (+ montant, − montant, + %, − %, prix fixe), on décoche les exceptions et on applique.
+  const [showBulkPrice, setShowBulkPrice] = useState(false);
+  const [bulkCat, setBulkCat] = useState("");
+  const [bulkSearch, setBulkSearch] = useState("");
+  const [bulkMode, setBulkMode] = useState("add");
+  const [bulkValue, setBulkValue] = useState("");
+  const [bulkExcluded, setBulkExcluded] = useState({});
+  const [bulkMsg, setBulkMsg] = useState("");
+  const openBulkPrice = () => { setBulkCat(""); setBulkSearch(""); setBulkMode("add"); setBulkValue(""); setBulkExcluded({}); setBulkMsg(""); setShowBulkPrice(true); };
+  const bulkMatches = () => {
+    const q = bulkSearch.trim().toLowerCase();
+    return products.filter((p) => (!bulkCat || (bulkCat === "__none" ? !p.category : p.category === bulkCat)) && (!q || String(p.name || "").toLowerCase().includes(q)) && !isProductFrozen(p.id));
+  };
+  const bulkNewPrice = (price) => {
+    const v = parseFloat(String(bulkValue).replace(",", "."));
+    const p = Number(price) || 0;
+    if (!isFinite(v) || v <= 0) return null;
+    const out = bulkMode === "add" ? p + v : bulkMode === "sub" ? p - v : bulkMode === "pctUp" ? p * (1 + v / 100) : bulkMode === "pctDown" ? p * (1 - v / 100) : v;
+    const r = roundMoney(out);
+    return r > 0 ? r : null;
+  };
+  const applyBulkPrice = () => {
+    const list = bulkMatches().filter((p) => !bulkExcluded[p.id] && bulkNewPrice(p.price) != null && bulkNewPrice(p.price) !== Number(p.price));
+    if (!list.length) return;
+    const ids = new Set(list.map((p) => p.id));
+    const pct = bulkMode === "pctUp" || bulkMode === "pctDown";
+    const nextProducts = products.map((p) => {
+      if (!ids.has(p.id)) return p;
+      let np = withPriceHistory(p, bulkNewPrice(p.price));
+      // En pourcentage, le prix au détail (à l'unité) suit le même mouvement.
+      if (pct && p.sellByUnit && Number(p.unitPrice) > 0) {
+        const f = bulkMode === "pctUp" ? 1 + parseFloat(String(bulkValue).replace(",", ".")) / 100 : 1 - parseFloat(String(bulkValue).replace(",", ".")) / 100;
+        const up = roundMoney(Number(p.unitPrice) * f);
+        if (up > 0) np = { ...np, unitPrice: up };
+      }
+      return { ...np, updatedAt: Date.now() };
+    });
+    saveAll({ products: nextProducts });
+    logAction(`${tx(lang, "logPricesChanged")} : ${list.map((p) => `${p.name} ${localizedNumber(p.price)} → ${localizedNumber(bulkNewPrice(p.price))}`).join(", ")}`);
+    setBulkMsg(tx(lang, "bulkPriceDone").replace("{n}", localizedNumber(list.length)));
+    setBulkValue("");
+  };
+  // ---- Liste à acheter ----
+  // Produits presque épuisés (seuil d'alerte ou rupture prévue dans la semaine) avec une
+  // quantité proposée pour tenir environ deux semaines au rythme de vente actuel. Les
+  // quantités se corrigent, on décoche ce qu'on ne veut pas, puis la liste part sur WhatsApp
+  // (vers le fournisseur, ou à soi-même comme pense-bête) ou est copiée.
+  const [showShopList, setShowShopList] = useState(false);
+  const [shopListQty, setShopListQty] = useState({});
+  const [shopListOff, setShopListOff] = useState({});
+  const [shopListMsg, setShopListMsg] = useState("");
+  const openShopList = () => { setShopListQty({}); setShopListOff({}); setShopListMsg(""); setShowShopList(true); };
   const [qtyChangeReason, setQtyChangeReason] = useState("adjust");
   const addProduct = (qtyReason) => {
     if (!pName.trim() || !pQty || !pPrice) return;
@@ -14867,9 +15096,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       // Mode modification : on met à jour le produit existant en place,
       // sans toucher à son id ni à ses ventes déjà enregistrées.
+      const lossEntry = editedOld && qtyReason && LOSS_REASONS.indexOf(qtyReason) !== -1 && isFinite(editedNewQty) && editedNewQty < editedOldQty
+        ? makeLossEntry(editedOld, editedOldQty - editedNewQty, qtyReason) : null;
       saveAll({
+        ...(lossEntry ? { unsoldLog: [...unsoldLog, lossEntry] } : {}),
         products: products.map((p) => p.id === editingProductId ? {
-          ...p,
+          ...withPriceHistory(p, parseFloat(pPrice)),
+          trackSerial: pTrackSerial,
+          condition: pCondition && pCondition !== "new" ? pCondition : null,
+          warrantyMonths: parseInt(pWarrantyMonths, 10) > 0 ? parseInt(pWarrantyMonths, 10) : null,
           name: pName.trim(),
           quantity: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10),
           price: parseFloat(pPrice),
@@ -14912,7 +15147,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       setQtyChangePrompt(null);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setShowAddProduct(false);
+      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -14939,13 +15174,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       sellByMeasure: pSellByMeasure,
       measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
       barcode: pBarcode.trim() || null,
+      trackSerial: pTrackSerial,
+      condition: pCondition && pCondition !== "new" ? pCondition : null,
+      warrantyMonths: parseInt(pWarrantyMonths, 10) > 0 ? parseInt(pWarrantyMonths, 10) : null,
       looseUnits: 0,
       batches: pExpiry ? [{ id: Date.now().toString(36), date: pExpiry, qty: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10) }] : [],
       updatedAt: Date.now(),
     };
     saveAll({ products: [...products, newProduct] });
     logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setShowAddProduct(false);
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); setShowAddProduct(false);
   };
   // Jette les lots périmés d'un produit : stock diminué, perte enregistrée dans unsoldLog
   // (déjà affiché dans Statistiques > Invendus), action notée dans l'historique.
@@ -14998,6 +15236,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPSellByMeasure(!!p.sellByMeasure);
     setPMeasureUnit(p.measureUnit || "");
     setPBarcode(p.barcode || "");
+    setPTrackSerial(!!p.trackSerial);
+    setPCondition(p.condition || "new");
+    setPWarrantyMonths(p.warrantyMonths > 0 ? String(p.warrantyMonths) : "");
     { const lots = expiryLots(p); setPExpiry(lots.length ? lots[lots.length - 1].date : ""); }
     setError("");
     setShowAddProduct(true);
@@ -15028,7 +15269,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (!target || !isFinite(n) || n <= 0) return;
     const cur = Number(target.quantity) || 0;
     const next = Math.max(Math.min(cur, 0), Math.round((cur - n) * 1000) / 1000);
-    saveAll({ products: products.map((x) => (x.id === target.id ? { ...x, quantity: next, updatedAt: Date.now() } : x)) });
+    const removed = Math.round((cur - next) * 1000) / 1000;
+    const lossEntry = removed > 0 && LOSS_REASONS.indexOf(removeStockReason) !== -1 ? makeLossEntry(target, removed, removeStockReason) : null;
+    saveAll({
+      products: products.map((x) => (x.id === target.id ? { ...x, quantity: next, updatedAt: Date.now() } : x)),
+      ...(lossEntry ? { unsoldLog: [...unsoldLog, lossEntry] } : {}),
+    });
     logAction(`${t(lang, "logStockAdjusted")} : ${target.name} (−${localizedNumber(cur - next)}, ${tx(lang, "removeReason_" + removeStockReason)})`);
     setRemoveStockTarget(null);
   };
@@ -16425,6 +16671,20 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const transactionId = `t${Date.now()}${Math.random().toString(36).slice(2, 7)}`;
     const receivedNum = cart.payment === "cash" && cart.received !== "" ? parseFloat(cart.received) : null;
     const dateNow = new Date().toISOString();
+    const receiptNo = nextReceiptNo(shopKey, allSales);
+    // État / n° de série / garantie : repris du produit (et du n° tapé dans le panier) pour
+    // être imprimés sur le reçu et retrouvés plus tard (« ce téléphone vient de chez moi ? »).
+    const serialInfo = (it) => {
+      const product = it.productId != null ? products.find((p) => p.id === it.productId) : null;
+      if (!product) return {};
+      const out = {};
+      if (product.condition && product.condition !== "new") out.condition = product.condition;
+      const sn = typeof it.serial === "string" ? it.serial.trim() : "";
+      if (sn) out.serial = sn;
+      const wu = product.warrantyMonths > 0 ? warrantyEndDate(dateNow, product.warrantyMonths) : null;
+      if (wu) out.warrantyUntil = wu;
+      return out;
+    };
     const newSales = cart.items.map((it) => {
       // Coût d'achat figé au moment de la vente (utile pour la rentabilité, Business 2) —
       // même si le prix d'achat du produit change plus tard, cette vente garde le bon coût.
@@ -16432,6 +16692,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return {
         id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
         transactionId,
+        receiptNo,
+        ...serialInfo(it),
         productId: it.productId,
         productName: it.productName,
         qty: it.qty,
@@ -16473,12 +16735,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     let nextDebtEvents = allDebtEvents;
     const newHistory = [makeHistoryEntry("sale", {
       refId: transactionId,
+      receiptNo,
       date: dateNow,
       amount: total,
       customer: cart.customer.trim(),
       payment: cart.payment,
       change: receivedNum !== null ? receivedNum - total : null,
-      items: cart.items.map((it) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice, ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}) })),
+      items: cart.items.map((it) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice, ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}), ...(typeof it.serial === "string" && it.serial.trim() ? { serial: it.serial.trim() } : {}) })),
       ...(depositNum > 0 ? { deposit: depositNum, depositMethod } : {}),
     })];
     if (cart.payment === "credit") {
@@ -16551,7 +16814,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it) })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -16826,9 +17089,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         const dateNow = new Date().toISOString();
         const receivedNum = action.payment === "cash" ? (action.received != null ? action.received : total) : null;
         const customer = (action.customer || "").trim();
+        const receiptNo = nextReceiptNo(shopKey, allSales);
         const newSales = resolved.map(({ product, qty, mode, unitPrice }) => ({
           id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
           transactionId,
+          receiptNo,
           productId: product.id,
           productName: product.name,
           qty,
@@ -16879,7 +17144,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         playSound("success");
         triggerHaptic("success");
         setSaleSuccessOverlay({ amount: total, id: transactionId });
-        setPendingReceipt({ items: resolved.map((r) => ({ name: r.product.name, qty: r.qty, total: r.qty * r.unitPrice })), total, payment: action.payment, date: dateNow, phone: action.phone, received: receivedNum, ticketId: transactionId, customer: (action.customer || "").trim() });
+        setPendingReceipt({ items: resolved.map((r) => ({ name: r.product.name, qty: r.qty, total: r.qty * r.unitPrice })), total, payment: action.payment, date: dateNow, phone: action.phone, received: receivedNum, ticketId: transactionId, receiptNo, customer: (action.customer || "").trim() });
         return { ok: true };
       }
       return { ok: false, error: tx(lang, "aiActionErrorNotFound") };
@@ -19994,6 +20259,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <MessageSquare size={11} /> {tx(lang, "reorderShareBtn")}
                   </button>
                 </div>
+                <button onClick={openShopList} className="text-[10px] font-bold mb-1" style={{ color: darkMode ? "#7fb2ff" : INDIGO, background: "transparent", border: "none", padding: 0 }}>🛒 {tx(lang, "shopListOpenFull")}</button>
                 {restockForecast.map((p, idx) => {
                   const days = Math.max(0, Math.round(p.daysLeft));
                   const urgent = days <= 3;
@@ -20267,7 +20533,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
               <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "qtyChangeLine").replace("{from}", localizedQty(qtyChangePrompt.from)).replace("{to}", localizedQty(qtyChangePrompt.to))}</p>
               <div className="flex flex-wrap gap-1.5 mb-4">
-                {(qtyChangePrompt.to > qtyChangePrompt.from ? ["restock", "adjust"] : ["adjust", "broken", "lost", "own"]).map((r) => (
+                {(qtyChangePrompt.to > qtyChangePrompt.from ? ["restock", "adjust"] : ["adjust", ...LOSS_REASONS]).map((r) => (
                   <button key={r} onClick={() => setQtyChangeReason(r)} className="px-2.5 py-1.5 rounded-full text-[11px] font-bold" style={{ background: qtyChangeReason === r ? INDIGO : T.input, color: qtyChangeReason === r ? "white" : T.text }}>
                     {tx(lang, "removeReason_" + r)}
                   </button>
@@ -20292,7 +20558,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <p className="text-xs mb-3" style={{ color: T.muted }}>{rp.name} · {tx(lang, "removeStockCurrent").replace("{n}", localizedQty(rp.quantity))}</p>
                 <input autoComplete="off" autoFocus inputMode="decimal" type="number" value={removeStockQty} onChange={(e) => setRemoveStockQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                 <div className="flex flex-wrap gap-1.5 mb-4">
-                  {["adjust", "broken", "lost", "own"].map((r) => (
+                  {["adjust", ...LOSS_REASONS].map((r) => (
                     <button key={r} onClick={() => setRemoveStockReason(r)} className="px-2.5 py-1.5 rounded-full text-[11px] font-bold" style={{ background: removeStockReason === r ? INDIGO : T.input, color: removeStockReason === r ? "white" : T.text }}>
                       {tx(lang, "removeReason_" + r)}
                     </button>
@@ -20301,6 +20567,113 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <button onClick={confirmRemoveStock} disabled={!ok} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: "#e11d48", opacity: ok ? 1 : 0.4 }}>
                   {tx(lang, "removeStockConfirm").replace("{n}", ok ? localizedNumber(n) : "…")}
                 </button>
+              </div>
+            </div>
+          );
+        })()}
+        {showBulkPrice && (() => {
+          const matches = bulkMatches();
+          const changed = matches.filter((p) => !bulkExcluded[p.id] && bulkNewPrice(p.price) != null && bulkNewPrice(p.price) !== Number(p.price));
+          const catList = Array.from(new Set([...(categories || []), ...products.map((p) => p.category).filter(Boolean)]));
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowBulkPrice(false)}>
+              <div data-kbscroll="true" onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "88vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-bold text-sm flex items-center gap-1.5"><Tag size={15} /> {tx(lang, "bulkPriceTitle")}</h3>
+                  <button onClick={() => setShowBulkPrice(false)}><X size={18} /></button>
+                </div>
+                <select value={bulkCat} onChange={(e) => { setBulkCat(e.target.value); setBulkExcluded({}); setBulkMsg(""); }} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }}>
+                  <option value="">{tx(lang, "bulkPriceAllProducts")}</option>
+                  {catList.map((c) => <option key={c} value={c}>{c}</option>)}
+                  {products.some((p) => !p.category) && catList.length > 0 && <option value="__none">{t(lang, "noCategory")}</option>}
+                </select>
+                <input autoComplete="off" value={bulkSearch} onChange={(e) => { setBulkSearch(e.target.value); setBulkMsg(""); }} placeholder={t(lang, "search")} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {[["add", "+ " + CURRENT_CURRENCY.symbol], ["sub", "− " + CURRENT_CURRENCY.symbol], ["pctUp", "+ %"], ["pctDown", "− %"], ["set", tx(lang, "bulkPriceModeSet")]].map(([m, lbl]) => (
+                    <button key={m} type="button" onClick={() => { setBulkMode(m); setBulkMsg(""); }} className="px-3 py-1.5 rounded-full text-[11px] font-bold" style={{ background: bulkMode === m ? INDIGO : T.input, color: bulkMode === m ? "white" : T.text }}>{lbl}</button>
+                  ))}
+                </div>
+                <input autoComplete="off" type="text" inputMode="decimal" value={bulkValue} onChange={(e) => { setBulkValue(e.target.value.replace(/[^0-9.,]/g, "")); setBulkMsg(""); }} placeholder={bulkMode === "pctUp" || bulkMode === "pctDown" ? "%" : CURRENT_CURRENCY.symbol} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <div className="flex flex-col gap-1 mb-3" style={{ maxHeight: 260, overflowY: "auto" }}>
+                  {matches.length === 0 && <p className="text-xs text-center py-3" style={{ color: T.muted }}>{t(lang, "noProduct")}</p>}
+                  {matches.map((p) => {
+                    const np = bulkNewPrice(p.price);
+                    const off = !!bulkExcluded[p.id];
+                    return (
+                      <label key={p.id} className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 cursor-pointer" style={{ background: T.input, opacity: off ? 0.5 : 1 }}>
+                        <input type="checkbox" checked={!off} onChange={() => setBulkExcluded({ ...bulkExcluded, [p.id]: !off })} />
+                        <span className="flex-1 min-w-0 text-[12px] font-semibold truncate">{p.name}</span>
+                        <span className="text-[11px] flex-shrink-0" style={{ color: T.muted }}>{fcfa(p.price)}{np != null && !off && np !== Number(p.price) ? <> → <b style={{ color: T.text }}>{fcfa(np)}</b></> : null}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+                {bulkMsg && <p className="text-xs font-semibold mb-2" style={{ color: "#16a34a" }}>✓ {bulkMsg}</p>}
+                <button onClick={applyBulkPrice} disabled={!changed.length} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO, opacity: changed.length ? 1 : 0.4 }}>
+                  {tx(lang, "bulkPriceApply").replace("{n}", localizedNumber(changed.length))}
+                </button>
+              </div>
+            </div>
+          );
+        })()}
+        {showShopList && (() => {
+          const rows = products
+            .filter((p) => !p.dailyMode && ((Number(p.quantity) || 0) <= lowStockThreshold || (forecastById[p.id] && forecastById[p.id].daysLeft <= 7)))
+            .map((p) => {
+              const fc = forecastById[p.id];
+              const suggested = fc ? Math.max(1, Math.ceil(fc.dailyRate * 14 - (Number(p.quantity) || 0))) : Math.max(1, lowStockThreshold * 2 - Math.max(0, Math.floor(Number(p.quantity) || 0)));
+              const raw = shopListQty[p.id];
+              const qty = raw === undefined ? suggested : (parseFloat(String(raw).replace(",", ".")) || 0);
+              return { p, fc, suggested, qty, off: !!shopListOff[p.id] };
+            })
+            .sort((a, b) => (a.fc ? a.fc.daysLeft : (Number(a.p.quantity) || 0)) - (b.fc ? b.fc.daysLeft : (Number(b.p.quantity) || 0)));
+          const picked = rows.filter((r) => !r.off && r.qty > 0);
+          const est = picked.reduce((sum, r) => sum + (r.p.costPrice != null && r.p.costPrice !== "" ? Number(r.p.costPrice) * r.qty : 0), 0);
+          const unitOf = (p) => (p.sellByMeasure && p.measureUnit ? " " + p.measureUnit : "");
+          const buildText = () => {
+            const lines = ["🛒 " + tx(lang, "shopListBtn") + (shopName ? " — " + shopName : ""), ""];
+            picked.forEach((r) => lines.push("• " + r.p.name + " × " + localizedNumber(r.qty) + unitOf(r.p)));
+            if (est > 0) { lines.push(""); lines.push(tx(lang, "shopListEstimated") + " : " + fcfa(est)); }
+            return lines.join("\n");
+          };
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowShopList(false)}>
+              <div data-kbscroll="true" onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "88vh", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-bold text-sm flex items-center gap-1.5"><ShoppingCart size={15} /> {tx(lang, "shopListBtn")}</h3>
+                  <button onClick={() => setShowShopList(false)}><X size={18} /></button>
+                </div>
+                <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "shopListHint")}</p>
+                {rows.length === 0 && <p className="text-xs text-center py-6" style={{ color: T.muted }}>✓ {tx(lang, "shopListEmpty")}</p>}
+                <div className="flex flex-col gap-1.5 mb-3">
+                  {rows.map((r) => (
+                    <div key={r.p.id} className="flex items-center gap-2 rounded-lg px-2.5 py-2" style={{ background: T.input, opacity: r.off ? 0.5 : 1 }}>
+                      <input type="checkbox" checked={!r.off} onChange={() => setShopListOff({ ...shopListOff, [r.p.id]: !r.off })} />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[12px] font-semibold truncate">{r.p.name}</p>
+                        <p className="text-[10px]" style={{ color: T.muted }}>{tx(lang, "shopListInStock").replace("{n}", localizedQty(r.p.quantity))}{r.fc ? ` · ≈ ${localizedNumber(Math.max(0, Math.round(r.fc.daysLeft)))} ${t(lang, "daysLeft")}` : ""}</p>
+                      </div>
+                      <input autoComplete="off" type="text" inputMode="decimal" value={shopListQty[r.p.id] !== undefined ? shopListQty[r.p.id] : String(r.suggested)} onChange={(e) => setShopListQty({ ...shopListQty, [r.p.id]: e.target.value.replace(/[^0-9.,]/g, "") })} className="w-16 border rounded-lg px-2 py-1.5 text-sm text-center flex-shrink-0" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                    </div>
+                  ))}
+                </div>
+                {est > 0 && (
+                  <div className="flex items-center justify-between text-xs mb-3 px-1">
+                    <span style={{ color: T.muted }}>{tx(lang, "shopListEstimated")}</span>
+                    <span className="font-extrabold">{maskAmount(fcfa(est))}</span>
+                  </div>
+                )}
+                {shopListMsg && <p className="text-xs font-semibold mb-2" style={{ color: "#16a34a" }}>{shopListMsg}</p>}
+                {picked.length > 0 && (
+                  <div className="flex gap-2">
+                    <button onClick={() => window.open("https://wa.me/?text=" + encodeURIComponent(buildText()), "_blank")} className="flex-1 py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-1.5" style={{ background: "#15803d" }}>
+                      <MessageSquare size={14} /> WhatsApp
+                    </button>
+                    <button onClick={async () => { try { await navigator.clipboard.writeText(buildText()); setShopListMsg(t(lang, "copied")); } catch (e) { setShopListMsg(""); } }} className="px-4 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-1.5" style={{ background: T.input, color: T.text }}>
+                      <Copy size={14} /> {t(lang, "copyMsg")}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           );
@@ -20334,6 +20707,24 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <textarea autoComplete="off" rows={1} placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }} />
             <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <input autoComplete="off" placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            {(() => {
+              const ep = editingProductId ? products.find((x) => x.id === editingProductId) : null;
+              const ph = ep && Array.isArray(ep.priceHistory) ? ep.priceHistory : [];
+              if (!ph.length) return null;
+              return (
+                <details className="mb-3 -mt-1.5 rounded-lg px-3 py-2" style={{ background: T.input }}>
+                  <summary className="text-[11px] font-semibold cursor-pointer" style={{ color: T.muted }}>📈 {tx(lang, "priceHistoryTitle")} ({localizedNumber(ph.length)})</summary>
+                  <div className="mt-1.5 flex flex-col gap-1">
+                    {ph.slice().reverse().map((h, i) => (
+                      <div key={i} className="flex items-center justify-between text-[11px]" style={{ color: T.text }}>
+                        <span style={{ color: T.muted }}>{fullDate(h.at)}</span>
+                        <span>{fcfa(h.from)} → <b style={{ color: h.to > h.from ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#4ade80" : "#15803d") }}>{fcfa(h.to)}</b></span>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              );
+            })()}
             <textarea placeholder={t(lang, "productDescription")} value={pDescription} onChange={(e) => setPDescription(e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2 text-sm mb-3 resize-none" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             <input autoComplete="off" placeholder={t(lang, "productCostPrice")} type="number" value={pCostPrice} onChange={(e) => setPCostPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             {/* Marge en direct : on voit ce que rapporte chaque vente avant d'enregistrer, et on
@@ -20495,6 +20886,29 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
+            ) : m === "serial" ? (
+            /* Téléphones / électronique : l'IMEI (ou n° de série) est demandé dans le panier,
+                puis imprimé sur le reçu avec l'état de l'appareil et la fin de garantie — la
+                preuve d'achat que le client réclame en cas de panne, et une trace en cas de vol. */
+            <div key="serial" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+              <label className="flex items-center justify-between cursor-pointer gap-3">
+                <span className="text-xs font-semibold" style={{ color: T.text }}>{tx(lang, "serialToggle")}</span>
+                <button type="button" onClick={() => setPTrackSerial(!pTrackSerial)} style={{ width: 40, height: 22, borderRadius: 12, background: pTrackSerial ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pTrackSerial ? "flex-end" : "flex-start", border: "none", flexShrink: 0 }}>
+                  <span style={{ width: 16, height: 16, borderRadius: "50%", background: "white", display: "block" }} />
+                </button>
+              </label>
+              {pTrackSerial && <p className="text-[11px] mt-2" style={{ color: T.muted }}>{tx(lang, "serialHint")}</p>}
+              <p className="text-[11px] font-semibold mt-3 mb-1.5" style={{ color: T.muted }}>{tx(lang, "conditionLabel")}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {PRODUCT_CONDITIONS.map((c) => (
+                  <button key={c} type="button" onClick={() => setPCondition(c)} className="px-2.5 py-1.5 rounded-full text-[11px] font-bold" style={{ background: pCondition === c ? INDIGO : T.card, color: pCondition === c ? "white" : T.text, border: `1px solid ${pCondition === c ? INDIGO : T.border}` }}>
+                    {tx(lang, "cond_" + c)}
+                  </button>
+                ))}
+              </div>
+              <label className="text-[11px] font-semibold block mt-3 mb-1" style={{ color: T.muted }}>{tx(lang, "warrantyMonthsLabel")}</label>
+              <input autoComplete="off" type="number" inputMode="numeric" min="0" placeholder="0" value={pWarrantyMonths} onChange={(e) => setPWarrantyMonths(e.target.value.replace(/[^0-9]/g, "").slice(0, 3))} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+            </div>
             ) : (
             /* Mode "Quantité du jour" : pour une production fraîche et non stockable
                 (boulangerie, pâtisserie...). La quantité se gère ensuite exactement comme
@@ -20612,6 +21026,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl text-white font-extrabold text-sm" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 8px 16px rgba(37,99,235,0.3)" }}>
                 <Plus size={18} /> {t(lang, "addProduct")}
               </button>
+            )}
+            {products.length > 0 && (
+              <div className="flex gap-2">
+                <button onClick={openShopList} className="flex-1 h-10 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold" style={{ background: darkMode ? "rgba(22,163,74,0.15)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>
+                  <ShoppingCart size={14} /> {tx(lang, "shopListBtn")}
+                </button>
+                {hasPermission("editStock") && !shopReadOnly && (
+                  <button onClick={openBulkPrice} className="flex-1 h-10 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold" style={{ background: darkMode ? "rgba(217,119,6,0.15)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#b45309" }}>
+                    <Tag size={14} /> {tx(lang, "bulkPriceBtn")}
+                  </button>
+                )}
+              </div>
             )}
             {products.length > 0 && (
               <div className="flex items-center gap-2 mb-3">
@@ -21377,6 +21803,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                               )}
                             </span>
                           </div>
+                          {(() => {
+                            const prod = it.productId != null ? products.find((p) => p.id === it.productId) : null;
+                            if (!prod || !prod.trackSerial) return null;
+                            return (
+                              <input autoComplete="off" type="text" value={it.serial || ""} placeholder={`📱 ${tx(lang, "serialInputPlaceholder")}`}
+                                onChange={(e) => { const v = e.target.value.slice(0, 80); saveAll({ draftCarts: draftCarts.map((c) => (c.id !== activeCart.id ? c : { ...c, items: c.items.map((i) => (i.id === it.id ? { ...i, serial: v } : i)) })) }); }}
+                                className="w-full mt-1 mb-0.5 border rounded-lg px-2.5 py-1.5 text-[12px]" style={{ background: darkMode ? "rgba(255,255,255,0.05)" : "white", color: T.text, borderColor: darkMode ? T.border : "rgba(37,99,235,0.25)" }} />
+                            );
+                          })()}
                           {editing && (
                             <div className="mt-1.5 mb-1 rounded-xl p-2.5" style={{ background: darkMode ? "rgba(255,255,255,0.05)" : "white" }}>
                               <label className="text-[11px] font-semibold" style={{ color: T.muted }}>{tx(lang, "priceEditLabel")}{it.mode === "unit" ? ` (${t(lang, "sellUnit")})` : ""}</label>
@@ -22059,6 +22494,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               const rows = unsoldLog.filter((u) => u && u.date && new Date(u.date).getTime() >= since);
               if (rows.length === 0) return null;
               const byProduct = {};
+              // Pertes par motif (casse, périmé, testeur…) ; les anciennes lignes sans motif
+              // sont les invendus du jour (bouton « Nouvelle journée »).
+              const byReason = {};
+              rows.forEach((u) => {
+                const r = u.reason || "unsold";
+                const fb = (products.find((pr) => pr.id === u.productId) || {}).price || 0;
+                byReason[r] = (byReason[r] || 0) + (Number(u.qty) || 0) * (Number(u.unitCost) || fb);
+              });
+              const reasonList = Object.entries(byReason).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
               rows.forEach((u) => {
                 const k = u.productId || u.productName;
                 if (!byProduct[k]) byProduct[k] = { name: u.productName, qty: 0, value: 0, days: 0 };
@@ -22074,10 +22518,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               return (
                 <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-xs font-bold" style={{ color: T.text }}>{tx(lang, "bakeUnsoldTitle")}</p>
+                    <p className="text-xs font-bold" style={{ color: T.text }}>{tx(lang, "lossesTitle")}</p>
                     <span className="text-xs font-extrabold" style={{ color: CLAY }}>{maskAmount(fcfa(totalValue))}</span>
                   </div>
-                  <p className="text-[10px] mb-2.5" style={{ color: T.muted }}>{tx(lang, "bakeUnsoldHint")}</p>
+                  <p className="text-[10px] mb-2" style={{ color: T.muted }}>{tx(lang, "bakeUnsoldHint")}</p>
+                  {reasonList.length > 1 && (
+                    <div className="flex flex-wrap gap-1.5 mb-2.5">
+                      {reasonList.map(([r, v]) => (
+                        <span key={r} className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: darkMode ? "rgba(184,86,47,0.15)" : "#fef2f2", color: darkMode ? "#f0a98a" : "#9a3412" }}>
+                          {tx(lang, "removeReason_" + r)} · {maskAmount(fcfa(v))}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <div className="flex flex-col gap-1.5">
                     {list.slice(0, 8).map((r, i) => (
                       <div key={i} className="flex items-center justify-between gap-2 rounded-lg px-2.5 py-1.5" style={{ background: T.input }}>
@@ -22842,7 +23295,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               const visible = historyEntries.filter((entry) => {
                 if (!deferredHistorySearch.trim()) return true;
                 const q = deferredHistorySearch.toLowerCase();
-                return entry.product.toLowerCase().includes(q) || entry.customer.toLowerCase().includes(q);
+                const d = entry.data || {};
+                return entry.product.toLowerCase().includes(q) || entry.customer.toLowerCase().includes(q)
+                  || String(d.receiptNo || "").toLowerCase().includes(q)
+                  || (Array.isArray(d.items) && d.items.some((i) => i && i.serial && String(i.serial).toLowerCase().includes(q)));
               });
               return (
                 <>
@@ -22912,11 +23368,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   )}
                   <div className="mb-1" style={{ opacity: isCancelled ? 0.7 : 1 }}>
                     {(h.items || []).map((it, idx) => (
-                      <div key={idx} className="flex items-center justify-between text-xs">
-                        <span>{it.productName} x{it.qty}</span>
-                        <span className="text-[10px]" style={{ color: T.muted }}>{fcfa(it.unitPrice)} / u</span>
+                      <div key={idx}>
+                        <div className="flex items-center justify-between text-xs">
+                          <span>{it.productName} x{it.qty}</span>
+                          <span className="text-[10px]" style={{ color: T.muted }}>{fcfa(it.unitPrice)} / u</span>
+                        </div>
+                        {it.serial && <p className="text-[10px]" style={{ color: T.muted }}>📱 {tx(lang, "serialShort")} {it.serial}</p>}
                       </div>
                     ))}
+                    {h.receiptNo && <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>🔖 {tx(lang, "receiptNoLabel")} {h.receiptNo}</p>}
                   </div>
                   <div className="flex items-center justify-between text-[10px] mt-1" style={{ color: T.muted }}>
                     <span>{fullDate(h.date)} à {fullTime(h.date)}{actorLabel ? ` · ${actorLabel}` : ""}{isCancelledEntry && h.originalDate ? ` · ${t(lang, "histColDate")} : ${fullDate(h.originalDate)}` : ""}</span>
@@ -23902,6 +24362,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "sector" && t(lang, "sector")}
                   {settingsField === "country" && t(lang, "country")}
                   {settingsField === "phone" && tx(lang, "phoneNumber")}
+                  {settingsField === "receiptinfo" && tx(lang, "receiptInfoTitle")}
                   {settingsField === "lockpin" && (t(lang, "setCodePin"))}
                   {settingsField === "darkmode" && t(lang, "darkMode")}
                   {settingsField === "balls" && t(lang, "animBalls")}
@@ -24003,6 +24464,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 { id: "ownername", label: `${t(lang, "firstName")} · ${t(lang, "lastName")}`, right: <span style={{ color: T.muted, fontSize: 12 }}>{`${ownerFirstName} ${ownerLastName}`.trim() || "—"}</span> },
                 { id: "name", label: t(lang, "shopName"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopName}</span> },
                 { id: "phone", label: tx(lang, "phoneNumber"), right: <span style={{ color: T.muted, fontSize: 12 }}>{shopPhone || "—"}</span> },
+                { id: "receiptinfo", label: tx(lang, "receiptInfoTitle"), right: <span style={{ color: T.muted, fontSize: 12, maxWidth: 140, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{(receiptInfo && (receiptInfo.taxId || receiptInfo.rccm)) || "—"}</span> },
                 { id: "sector", label: t(lang, "sector"), right: <span style={{ color: T.muted, fontSize: 12, maxWidth: 160, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{sectorLabelOf(shopSector) || "—"}</span> },
                 { id: "country", label: t(lang, "country"), right: <span style={{ color: T.muted, fontSize: 12 }}>{countryLabelOf(COUNTRY_CURRENCY.find((c) => c.id === shopCountry)) || shopCountry || "—"}</span> },
                 { id: "lang", label: t(lang, "language"), right: <span style={{ color: T.muted, fontSize: 12 }}>{languageLabel(LANGUAGES.find((l) => l.id === lang) || LANGUAGES[0], lang)}</span> },
@@ -24014,6 +24476,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   if (item.id === "ownername") { setOwnerFirstInput(ownerFirstName); setOwnerLastInput(ownerLastName); setOwnerNameMsg(""); }
                   if (item.id === "name") { setShopNameInput(shopName); setShopNameMsg(""); }
                   if (item.id === "phone") { setShopPhoneInput(shopPhone || (shopCountry && COUNTRY_DIAL_CODE[shopCountry] ? COUNTRY_DIAL_CODE[shopCountry] + " " : "")); setShopPhoneMsg(""); }
+                  if (item.id === "receiptinfo") { setReceiptInfoDraft({ taxId: (receiptInfo && receiptInfo.taxId) || "", rccm: (receiptInfo && receiptInfo.rccm) || "", address: (receiptInfo && receiptInfo.address) || "" }); setReceiptInfoMsg(""); }
                   if (item.id === "authphoneinfo") return;
                   if (item.id === "linkemail" || item.id === "linkphone") openLinkField(item.id);
                   if (item.id === "sector") setSectorMsg("");
@@ -24939,6 +25402,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {shopPhoneMsg && <p style={{ color: shopPhoneMsg === "✓" ? "#34d399" : "#f87171", fontSize: 11, marginTop: 6 }}>{shopPhoneMsg}</p>}
                 </div>
               )}
+              {settingsField === "receiptinfo" && (
+                <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ color: T.muted, fontSize: 11.5, lineHeight: 1.5 }}>{tx(lang, "receiptInfoHint")}</p>
+                  {[["taxId", "receiptTaxIdLabel"], ["rccm", "receiptRccmLabel"], ["address", "receiptAddressLabel"]].map(([k, lbl]) => (
+                    <label key={k} style={{ display: "block" }}>
+                      <span style={{ color: T.muted, fontSize: 12 }}>{tx(lang, lbl)}</span>
+                      <input autoComplete="off" type="text" maxLength={k === "address" ? 90 : 40} value={receiptInfoDraft[k]} onChange={(e) => { setReceiptInfoDraft({ ...receiptInfoDraft, [k]: e.target.value }); setReceiptInfoMsg(""); }} style={{ width: "100%", marginTop: 4, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    </label>
+                  ))}
+                  <button onClick={() => {
+                    saveAll({ receiptInfo: { taxId: receiptInfoDraft.taxId.trim(), rccm: receiptInfoDraft.rccm.trim(), address: receiptInfoDraft.address.trim(), updatedAt: Date.now() } });
+                    setReceiptInfoMsg("✓");
+                  }} style={{ background: "#22d3ee", color: "#0a0a0a", borderRadius: 10, padding: "10px 14px", fontSize: 13, fontWeight: 700, border: "none", cursor: "pointer" }}>{t(lang, "save")}</button>
+                  {receiptInfoMsg && <p style={{ color: "#34d399", fontSize: 11 }}>{receiptInfoMsg}</p>}
+                </div>
+              )}
               {settingsField === "lockpin" && (
                 <div style={{ padding: "16px", borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, display: "flex", flexDirection: "column", gap: 10 }}>
                   <p style={{ color: T.muted, fontSize: 11, lineHeight: 1.5 }}>{t(lang, "setCeCodeSertADemasquer")}</p>
@@ -25412,12 +25891,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
           <div className="w-full max-w-xs rounded-2xl p-5" style={{ background: darkMode ? "#1a1a24" : "white", color: darkMode ? "#eceef5" : CHARCOAL }}>
             <p className="text-center text-2xl mb-1">✅</p>
-            <p className="text-center font-bold text-sm mb-3">{tx(lang, "receiptModalTitle")}</p>
+            <p className={`text-center font-bold text-sm ${pendingReceipt.receiptNo ? "mb-0.5" : "mb-3"}`}>{tx(lang, "receiptModalTitle")}</p>
+            {pendingReceipt.receiptNo && <p className="text-center text-[11px] mb-3" style={{ color: darkMode ? "#a1a1aa" : "#6b7280" }}>{tx(lang, "receiptNoLabel")} {pendingReceipt.receiptNo}</p>}
             <div className="rounded-xl px-3 py-2.5 mb-4" style={{ background: darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }}>
               {pendingReceipt.items.map((it, idx) => (
-                <div key={idx} className="flex justify-between text-xs mb-1">
-                  <span>{it.qty} × {it.name}</span>
-                  <span className="font-semibold">{localizedNumber(it.total)} {CURRENT_CURRENCY.symbol}</span>
+                <div key={idx} className="mb-1">
+                  <div className="flex justify-between text-xs">
+                    <span>{it.qty} × {it.name}</span>
+                    <span className="font-semibold">{localizedNumber(it.total)} {CURRENT_CURRENCY.symbol}</span>
+                  </div>
+                  {receiptItemExtra(it) && <p className="text-[10px]" style={{ color: darkMode ? "#a1a1aa" : "#6b7280" }}>{receiptItemExtra(it)}</p>}
                 </div>
               ))}
               <div className="flex justify-between text-sm font-bold mt-2 pt-2" style={{ borderTop: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}` }}>
