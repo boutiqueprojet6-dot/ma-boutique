@@ -6273,6 +6273,25 @@ EXTRA_UI.shopListHint = { fr: "Produits presque épuisés, avec une quantité po
 EXTRA_UI.shopListEmpty = { fr: "Rien à racheter pour l'instant.", en: "Nothing to restock for now.", es: "Nada que reponer por ahora.", pt: "Nada para repor por agora.", de: "Im Moment nichts nachzukaufen.", it: "Niente da riacquistare per ora.", nl: "Voorlopig niets bij te kopen.", pl: "Na razie nic do dokupienia.", ru: "Пока нечего докупать.", tr: "Şimdilik alınacak bir şey yok.", ar: "لا شيء يحتاج إلى إعادة شراء حاليًا.", hi: "अभी कुछ ख़रीदना नहीं है।", bn: "এখন কিছু কেনার দরকার নেই।", ur: "ابھی کچھ خریدنے کی ضرورت نہیں۔", ta: "இப்போது வாங்க வேண்டியது எதுவும் இல்லை.", te: "ప్రస్తుతానికి కొనాల్సింది ఏమీ లేదు.", th: "ตอนนี้ยังไม่มีอะไรต้องซื้อเพิ่ม", zh: "目前无需补货。", ja: "今のところ仕入れるものはありません。", ko: "지금은 다시 살 것이 없습니다.", id: "Belum ada yang perlu dibeli lagi.", vi: "Hiện chưa có gì cần mua thêm.", tl: "Wala pang kailangang bilhin.", sw: "Hakuna cha kununua kwa sasa.", ha: "Babu abin da za a sake saya yanzu.", yo: "Kò sí ohun tí a ó tún rà báyìí.", zu: "Akukho okufanele kuthengwe okwamanje.", am: "ለአሁን የሚገዛ ነገር የለም።", bm: "Foyi tɛ yen ka san sisan.", wo: "Amul dara lu ñuy jënd léegi." };
 EXTRA_UI.shopListEstimated = { fr: "Coût estimé", en: "Estimated cost", es: "Costo estimado", pt: "Custo estimado", de: "Geschätzte Kosten", it: "Costo stimato", nl: "Geschatte kosten", pl: "Szacowany koszt", ru: "Примерная стоимость", tr: "Tahmini maliyet", ar: "التكلفة التقديرية", hi: "अनुमानित लागत", bn: "আনুমানিক খরচ", ur: "اندازاً لاگت", ta: "மதிப்பிடப்பட்ட செலவு", te: "అంచనా వ్యయం", th: "ค่าใช้จ่ายโดยประมาณ", zh: "预计成本", ja: "概算費用", ko: "예상 비용", id: "Perkiraan biaya", vi: "Chi phí ước tính", tl: "Tantiyang gastos", sw: "Gharama inayokadiriwa", ha: "Kimanin kuɗi", yo: "Ìnáwó tí a fojú bù", zu: "Izindleko ezilinganiselwe", am: "የተገመተ ወጪ", bm: "Musaka jateminen", wo: "Njëg gu ñu xayma" };
 EXTRA_UI.shopListInStock = { fr: "En stock : {n}", en: "In stock: {n}", es: "En stock: {n}", pt: "Em stock: {n}", de: "Auf Lager: {n}", it: "In magazzino: {n}", nl: "Op voorraad: {n}", pl: "W magazynie: {n}", ru: "В наличии: {n}", tr: "Stokta: {n}", ar: "في المخزون: {n}", hi: "स्टॉक में: {n}", bn: "স্টকে: {n}", ur: "اسٹاک میں: {n}", ta: "இருப்பில்: {n}", te: "స్టాక్‌లో: {n}", th: "คงเหลือ: {n}", zh: "库存：{n}", ja: "在庫：{n}", ko: "재고: {n}", id: "Stok: {n}", vi: "Tồn kho: {n}", tl: "Stock: {n}", sw: "Zilizopo: {n}", ha: "A ajiye: {n}", yo: "Ní ìpamọ́: {n}", zu: "Esitokweni: {n}", am: "በክምችት: {n}", bm: "Maralen: {n}", wo: "Li des: {n}" };
+EXTRA_UI.mode_variants = { fr: "Tailles / couleurs", en: "Sizes / colors", es: "Tallas / colores", pt: "Tamanhos / cores", de: "Größen / Farben", it: "Taglie / colori", nl: "Maten / kleuren", pl: "Rozmiary / kolory", ru: "Размеры / цвета", tr: "Beden / renk", ar: "المقاسات / الألوان", hi: "साइज़ / रंग", bn: "সাইজ / রং", ur: "سائز / رنگ", ta: "அளவுகள் / நிறங்கள்", te: "సైజులు / రంగులు", th: "ไซซ์ / สี", zh: "尺码 / 颜色", ja: "サイズ / カラー", ko: "사이즈 / 색상", id: "Ukuran / warna", vi: "Cỡ / màu", tl: "Sukat / kulay", sw: "Saizi / rangi", ha: "Girma / launi", yo: "Ìwọ̀n / àwọ̀", zu: "Osayizi / imibala", am: "መጠኖች / ቀለሞች", bm: "Bonya / ɲɛgɛn", wo: "Taay / melo" };
+EXTRA_UI.variantToggle = { fr: "Ce produit existe en plusieurs tailles ou couleurs", en: "This product comes in several sizes or colors", es: "Este producto viene en varias tallas o colores", pt: "Este produto existe em vários tamanhos ou cores", de: "Dieses Produkt gibt es in mehreren Größen oder Farben", it: "Questo prodotto esiste in più taglie o colori", nl: "Dit product bestaat in meerdere maten of kleuren", pl: "Ten produkt ma kilka rozmiarów lub kolorów", ru: "У товара несколько размеров или цветов", tr: "Bu ürünün birden çok beden veya rengi var", ar: "هذا المنتج متوفر بعدة مقاسات أو ألوان", hi: "यह उत्पाद कई साइज़ या रंगों में है", bn: "এই পণ্যটি কয়েকটি সাইজ বা রঙে আছে", ur: "یہ پروڈکٹ کئی سائز یا رنگوں میں ہے", ta: "இந்தப் பொருள் பல அளவுகள் அல்லது நிறங்களில் உள்ளது", te: "ఈ ఉత్పత్తి పలు సైజులు లేదా రంగుల్లో ఉంది", th: "สินค้านี้มีหลายไซซ์หรือหลายสี", zh: "此商品有多个尺码或颜色", ja: "この商品は複数のサイズや色があります", ko: "이 상품은 여러 사이즈나 색상이 있습니다", id: "Produk ini ada beberapa ukuran atau warna", vi: "Sản phẩm này có nhiều cỡ hoặc màu", tl: "May iba't ibang sukat o kulay ang produktong ito", sw: "Bidhaa hii ina saizi au rangi kadhaa", ha: "Wannan kaya yana da girma ko launuka da yawa", yo: "Ọjà yìí ní oríṣiríṣi ìwọ̀n tàbí àwọ̀", zu: "Lo mkhiqizo unosayizi noma imibala eminingi", am: "ይህ ምርት በብዙ መጠኖች ወይም ቀለሞች ይገኛል", bm: "Nin fɛn in bɛ bonya walima ɲɛgɛn caman na", wo: "Marsandiis bii am na ay taay walla ay melo" };
+EXTRA_UI.variantSizesLabel = { fr: "Tailles / modèles (séparés par des virgules)", en: "Sizes / models (comma-separated)", es: "Tallas / modelos (separados por comas)", pt: "Tamanhos / modelos (separados por vírgulas)", de: "Größen / Modelle (durch Kommas getrennt)", it: "Taglie / modelli (separati da virgole)", nl: "Maten / modellen (gescheiden door komma's)", pl: "Rozmiary / modele (oddzielone przecinkami)", ru: "Размеры / модели (через запятую)", tr: "Bedenler / modeller (virgülle ayırın)", ar: "المقاسات / الموديلات (مفصولة بفواصل)", hi: "साइज़ / मॉडल (कॉमा से अलग)", bn: "সাইজ / মডেল (কমা দিয়ে আলাদা)", ur: "سائز / ماڈل (کوما سے الگ)", ta: "அளவுகள் / மாடல்கள் (காற்புள்ளியால் பிரிக்கவும்)", te: "సైజులు / మోడళ్లు (కామాలతో వేరు చేయండి)", th: "ไซซ์ / รุ่น (คั่นด้วยจุลภาค)", zh: "尺码 / 型号（用逗号分隔）", ja: "サイズ / モデル（カンマ区切り）", ko: "사이즈 / 모델 (쉼표로 구분)", id: "Ukuran / model (pisahkan dengan koma)", vi: "Cỡ / mẫu (cách nhau bằng dấu phẩy)", tl: "Sukat / modelo (hiwalay sa kuwit)", sw: "Saizi / mitindo (tenganisha kwa koma)", ha: "Girma / samfura (raba da waƙafi)", yo: "Ìwọ̀n / àwòṣe (fi kọ́mà yà wọ́n)", zu: "Osayizi / amamodeli (hlukanisa ngamakhefu)", am: "መጠኖች / ሞዴሎች (በኮማ ይለዩ)", bm: "Bonyaw / sifaw (ka u faran ni virgule ye)", wo: "Taay yi / modeel yi (xàjjale leen ak koma)" };
+EXTRA_UI.variantSizesPlaceholder = { fr: "S, M, L, XL", en: "S, M, L, XL", es: "S, M, L, XL", pt: "S, M, L, XL", de: "S, M, L, XL", it: "S, M, L, XL", nl: "S, M, L, XL", pl: "S, M, L, XL", ru: "S, M, L, XL", tr: "S, M, L, XL", ar: "S, M, L, XL", hi: "S, M, L, XL", bn: "S, M, L, XL", ur: "S, M, L, XL", ta: "S, M, L, XL", te: "S, M, L, XL", th: "S, M, L, XL", zh: "S, M, L, XL", ja: "S, M, L, XL", ko: "S, M, L, XL", id: "S, M, L, XL", vi: "S, M, L, XL", tl: "S, M, L, XL", sw: "S, M, L, XL", ha: "S, M, L, XL", yo: "S, M, L, XL", zu: "S, M, L, XL", am: "S, M, L, XL", bm: "S, M, L, XL", wo: "S, M, L, XL" };
+EXTRA_UI.variantColorsLabel = { fr: "Couleurs / teintes (facultatif)", en: "Colors / shades (optional)", es: "Colores / tonos (opcional)", pt: "Cores / tons (opcional)", de: "Farben / Töne (optional)", it: "Colori / tonalità (facoltativo)", nl: "Kleuren / tinten (optioneel)", pl: "Kolory / odcienie (opcjonalnie)", ru: "Цвета / оттенки (необязательно)", tr: "Renkler / tonlar (isteğe bağlı)", ar: "الألوان / الدرجات (اختياري)", hi: "रंग / शेड (वैकल्पिक)", bn: "রং / শেড (ঐচ্ছিক)", ur: "رنگ / شیڈ (اختیاری)", ta: "நிறங்கள் / சாயல்கள் (விருப்பம்)", te: "రంగులు / షేడ్‌లు (ఐచ్ఛికం)", th: "สี / เฉดสี (ไม่บังคับ)", zh: "颜色 / 色号（可选）", ja: "カラー / 色番（任意）", ko: "색상 / 호수 (선택)", id: "Warna / shade (opsional)", vi: "Màu / tông (không bắt buộc)", tl: "Kulay / shade (opsyonal)", sw: "Rangi / vivuli (si lazima)", ha: "Launuka (ba dole ba)", yo: "Àwọ̀ (kò pọn dandan)", zu: "Imibala (akuphoqelekile)", am: "ቀለሞች (አማራጭ)", bm: "Ɲɛgɛnw (n'i b'a fɛ)", wo: "Melo yi (su la neexee)" };
+EXTRA_UI.variantColorsPlaceholder = { fr: "Rouge, Bleu, Noir", en: "Red, Blue, Black", es: "Rojo, Azul, Negro", pt: "Vermelho, Azul, Preto", de: "Rot, Blau, Schwarz", it: "Rosso, Blu, Nero", nl: "Rood, Blauw, Zwart", pl: "Czerwony, Niebieski, Czarny", ru: "Красный, Синий, Чёрный", tr: "Kırmızı, Mavi, Siyah", ar: "أحمر، أزرق، أسود", hi: "लाल, नीला, काला", bn: "লাল, নীল, কালো", ur: "سرخ، نیلا، کالا", ta: "சிவப்பு, நீலம், கருப்பு", te: "ఎరుపు, నీలం, నలుపు", th: "แดง, น้ำเงิน, ดำ", zh: "红, 蓝, 黑", ja: "赤, 青, 黒", ko: "빨강, 파랑, 검정", id: "Merah, Biru, Hitam", vi: "Đỏ, Xanh, Đen", tl: "Pula, Asul, Itim", sw: "Nyekundu, Bluu, Nyeusi", ha: "Ja, Shuɗi, Baƙi", yo: "Pupa, Búlúù, Dúdú", zu: "Bomvu, Luhlaza okwesibhakabhaka, Mnyama", am: "ቀይ, ሰማያዊ, ጥቁር", bm: "Bilenman, Bulaman, Finman", wo: "Xonq, Bulo, Ñuul" };
+EXTRA_UI.variantHint = { fr: "Chaque combinaison devient une ligne avec son propre stock. Tapez la quantité de chacune (0 si vous n'en avez pas encore).", en: "Each combination becomes a line with its own stock. Type the quantity of each (0 if you don't have any yet).", es: "Cada combinación es una línea con su propio stock. Escribe la cantidad de cada una (0 si aún no tienes).", pt: "Cada combinação vira uma linha com stock próprio. Escreva a quantidade de cada uma (0 se ainda não tiver).", de: "Jede Kombination wird eine Zeile mit eigenem Bestand. Menge pro Zeile eingeben (0, wenn noch keine da ist).", it: "Ogni combinazione diventa una riga con il proprio stock. Scrivi la quantità di ciascuna (0 se non ne hai ancora).", nl: "Elke combinatie wordt een regel met eigen voorraad. Typ de hoeveelheid per regel (0 als je er nog geen hebt).", pl: "Każda kombinacja to osobna pozycja z własnym stanem. Wpisz ilość każdej (0, jeśli jeszcze nie masz).", ru: "Каждая комбинация — отдельная строка со своим остатком. Введите количество каждой (0, если пока нет).", tr: "Her kombinasyon kendi stoğu olan bir satır olur. Her birinin miktarını yazın (henüz yoksa 0).", ar: "كل تركيبة تصبح سطرًا بمخزونه الخاص. اكتب كمية كل منها (0 إن لم تتوفر بعد).", hi: "हर मेल अपने स्टॉक के साथ एक अलग लाइन बनता है। हर एक की मात्रा लिखें (अभी नहीं है तो 0)।", bn: "প্রতিটি মিশ্রণ নিজস্ব স্টকসহ একটি লাইন হয়। প্রতিটির পরিমাণ লিখুন (এখনও না থাকলে 0)।", ur: "ہر جوڑ اپنے اسٹاک کے ساتھ الگ لائن بنتا ہے۔ ہر ایک کی مقدار لکھیں (ابھی نہیں تو 0)۔", ta: "ஒவ்வொரு சேர்க்கையும் தனி இருப்புடன் ஒரு வரியாகும். ஒவ்வொன்றின் அளவைத் தட்டச்சு செய்யவும் (இன்னும் இல்லையெனில் 0).", te: "ప్రతి కలయిక దాని సొంత స్టాక్‌తో ఒక వరుస అవుతుంది. ప్రతిదాని పరిమాణం టైప్ చేయండి (ఇంకా లేకపోతే 0).", th: "แต่ละแบบจะเป็นหนึ่งรายการที่มีสต็อกของตัวเอง ใส่จำนวนของแต่ละแบบ (ยังไม่มีให้ใส่ 0)", zh: "每种组合都是一行，有自己的库存。填写每行的数量（还没有就填 0）。", ja: "組み合わせごとに在庫を持つ1行になります。それぞれの数量を入力してください（まだなければ0）。", ko: "조합마다 재고가 따로 있는 한 줄이 됩니다. 각각의 수량을 입력하세요(아직 없으면 0).", id: "Tiap kombinasi jadi satu baris dengan stok sendiri. Ketik jumlah masing-masing (0 jika belum ada).", vi: "Mỗi kết hợp là một dòng có tồn kho riêng. Nhập số lượng từng dòng (chưa có thì 0).", tl: "Bawat kombinasyon ay isang linya na may sariling stock. I-type ang dami ng bawat isa (0 kung wala pa).", sw: "Kila mchanganyiko unakuwa mstari wenye hifadhi yake. Andika idadi ya kila mmoja (0 kama bado huna).", ha: "Kowane haɗi zai zama layi mai nasa adadin. Rubuta adadin kowanne (0 idan babu tukuna).", yo: "Àkópọ̀ kọ̀ọ̀kan di ìlà kan pẹ̀lú ìpamọ́ tirẹ̀. Tẹ iye ọ̀kọ̀ọ̀kan (0 tí kò bá sí síbẹ̀).", zu: "Inhlanganisela ngayinye iba umugqa onesitoko sawo. Thayipha inani lakho ngakunye (0 uma ungakabi nakho).", am: "እያንዳንዱ ጥምረት የራሱ ክምችት ያለው መስመር ይሆናል። የእያንዳንዱን ብዛት ይጻፉ (ገና ከሌለ 0)።", bm: "Ɲɔgɔndan kelen-kelen bɛɛ bɛ kɛ sira ye ni a yɛrɛ ka maralen ye. U kelen-kelen hakɛ sɛbɛn (0 n'a ma sɔrɔ fɔlɔ).", wo: "Bépp mboolo dafay nekk benn rëdd ak stock bu boppam. Bindal lim bu nekk (0 su fekkee amaguloo)." };
+EXTRA_UI.variantCreateBtn = { fr: "Créer {n} variantes", en: "Create {n} variants", es: "Crear {n} variantes", pt: "Criar {n} variantes", de: "{n} Varianten anlegen", it: "Crea {n} varianti", nl: "{n} varianten aanmaken", pl: "Utwórz warianty: {n}", ru: "Создать вариантов: {n}", tr: "{n} varyant oluştur", ar: "إنشاء {n} متغيرات", hi: "{n} वेरिएंट बनाएँ", bn: "{n}টি ভ্যারিয়েন্ট তৈরি করুন", ur: "{n} ویریئنٹ بنائیں", ta: "{n} வகைகளை உருவாக்கு", te: "{n} వేరియంట్‌లు సృష్టించండి", th: "สร้าง {n} ตัวเลือก", zh: "创建 {n} 个款式", ja: "{n} 個のバリエーションを作成", ko: "옵션 {n}개 만들기", id: "Buat {n} varian", vi: "Tạo {n} biến thể", tl: "Gumawa ng {n} variant", sw: "Unda aina {n}", ha: "Ƙirƙiri nau'i {n}", yo: "Ṣẹ̀dá oríṣi {n}", zu: "Dala izinhlobo ezingu-{n}", am: "{n} ዓይነቶችን ፍጠር", bm: "Suguya {n} dilan", wo: "Sos {n} xeet" };
+EXTRA_UI.variantNeedValues = { fr: "Tapez au moins une taille ou une couleur.", en: "Type at least one size or color.", es: "Escribe al menos una talla o un color.", pt: "Escreva pelo menos um tamanho ou uma cor.", de: "Mindestens eine Größe oder Farbe eingeben.", it: "Scrivi almeno una taglia o un colore.", nl: "Typ minstens één maat of kleur.", pl: "Wpisz co najmniej jeden rozmiar lub kolor.", ru: "Введите хотя бы один размер или цвет.", tr: "En az bir beden veya renk yazın.", ar: "اكتب مقاسًا أو لونًا واحدًا على الأقل.", hi: "कम से कम एक साइज़ या रंग लिखें।", bn: "অন্তত একটি সাইজ বা রং লিখুন।", ur: "کم از کم ایک سائز یا رنگ لکھیں۔", ta: "குறைந்தது ஒரு அளவு அல்லது நிறத்தைத் தட்டச்சு செய்யவும்.", te: "కనీసం ఒక సైజు లేదా రంగు టైప్ చేయండి.", th: "ใส่ไซซ์หรือสีอย่างน้อยหนึ่งอย่าง", zh: "请至少填写一个尺码或颜色。", ja: "サイズか色を少なくとも1つ入力してください。", ko: "사이즈나 색상을 하나 이상 입력하세요.", id: "Ketik minimal satu ukuran atau warna.", vi: "Nhập ít nhất một cỡ hoặc màu.", tl: "Mag-type ng kahit isang sukat o kulay.", sw: "Andika angalau saizi au rangi moja.", ha: "Rubuta aƙalla girma ko launi ɗaya.", yo: "Tẹ ó kéré tán ìwọ̀n tàbí àwọ̀ kan.", zu: "Thayipha okungenani usayizi noma umbala owodwa.", am: "ቢያንስ አንድ መጠን ወይም ቀለም ይጻፉ።", bm: "Bonya walima ɲɛgɛn kelen sɛbɛn dɔɔni.", wo: "Bindal lu mu néew-néew benn taay walla benn melo." };
+EXTRA_UI.variantLabelField = { fr: "Variante (ex. : M · Rouge)", en: "Variant (e.g. M · Red)", es: "Variante (p. ej.: M · Rojo)", pt: "Variante (ex.: M · Vermelho)", de: "Variante (z. B. M · Rot)", it: "Variante (es. M · Rosso)", nl: "Variant (bv. M · Rood)", pl: "Wariant (np. M · Czerwony)", ru: "Вариант (напр. M · Красный)", tr: "Varyant (örn. M · Kırmızı)", ar: "المتغير (مثال: M · أحمر)", hi: "वेरिएंट (जैसे M · लाल)", bn: "ভ্যারিয়েন্ট (যেমন M · লাল)", ur: "ویریئنٹ (مثلاً M · سرخ)", ta: "வகை (எ.கா. M · சிவப்பு)", te: "వేరియంట్ (ఉదా. M · ఎరుపు)", th: "ตัวเลือก (เช่น M · แดง)", zh: "款式（如：M · 红）", ja: "バリエーション（例：M · 赤）", ko: "옵션 (예: M · 빨강)", id: "Varian (mis. M · Merah)", vi: "Biến thể (vd: M · Đỏ)", tl: "Variant (hal. M · Pula)", sw: "Aina (mf. M · Nyekundu)", ha: "Nau'i (misali M · Ja)", yo: "Oríṣi (àpẹẹrẹ M · Pupa)", zu: "Uhlobo (isb. M · Bomvu)", am: "ዓይነት (ለምሳሌ M · ቀይ)", bm: "Suguya (misali: M · Bilenman)", wo: "Xeet (misaal: M · Xonq)" };
+EXTRA_UI.variantPartOf = { fr: "Variante du modèle « {name} » ({n} variantes). Le nom du modèle se change ci-dessus pour toutes.", en: "Variant of the model “{name}” ({n} variants). Change the model name above for all of them.", es: "Variante del modelo «{name}» ({n} variantes). El nombre del modelo de arriba se cambia para todas.", pt: "Variante do modelo «{name}» ({n} variantes). O nome do modelo acima muda para todas.", de: "Variante des Modells „{name}“ ({n} Varianten). Der Modellname oben gilt für alle.", it: "Variante del modello «{name}» ({n} varianti). Il nome del modello qui sopra cambia per tutte.", nl: "Variant van model „{name}” ({n} varianten). De modelnaam hierboven geldt voor alle.", pl: "Wariant modelu „{name}” (wariantów: {n}). Nazwa modelu powyżej zmienia się dla wszystkich.", ru: "Вариант модели «{name}» (вариантов: {n}). Название модели выше меняется для всех.", tr: "«{name}» modelinin varyantı ({n} varyant). Yukarıdaki model adı hepsi için değişir.", ar: "متغير من الموديل «{name}» ({n} متغيرات). اسم الموديل أعلاه يتغير للجميع.", hi: "मॉडल «{name}» का वेरिएंट ({n} वेरिएंट)। ऊपर मॉडल का नाम बदलने से सबमें बदलता है।", bn: "মডেল «{name}»-এর ভ্যারিয়েন্ট ({n}টি)। উপরের মডেলের নাম বদলালে সবগুলোতে বদলায়।", ur: "ماڈل «{name}» کا ویریئنٹ ({n} ویریئنٹ)۔ اوپر ماڈل کا نام بدلنے سے سب میں بدلتا ہے۔", ta: "«{name}» மாடலின் வகை ({n} வகைகள்). மேலே உள்ள மாடல் பெயர் அனைத்துக்கும் மாறும்.", te: "«{name}» మోడల్ వేరియంట్ ({n} వేరియంట్‌లు). పై మోడల్ పేరు అన్నిటికీ మారుతుంది.", th: "ตัวเลือกของรุ่น «{name}» ({n} ตัวเลือก) ชื่อรุ่นด้านบนจะเปลี่ยนให้ทุกตัว", zh: "款式属于“{name}”（共 {n} 个）。上方的型号名称会同步修改所有款式。", ja: "「{name}」のバリエーション（{n}個）。上のモデル名は全バリエーションに反映されます。", ko: "'{name}' 모델의 옵션({n}개). 위의 모델 이름은 모든 옵션에 적용됩니다.", id: "Varian dari model «{name}» ({n} varian). Nama model di atas berlaku untuk semua.", vi: "Biến thể của mẫu «{name}» ({n} biến thể). Tên mẫu ở trên áp dụng cho tất cả.", tl: "Variant ng modelong «{name}» ({n} variant). Ang pangalan ng modelo sa itaas ay para sa lahat.", sw: "Aina ya mtindo «{name}» (aina {n}). Jina la mtindo hapo juu linabadilika kwa zote.", ha: "Nau'in samfurin «{name}» (nau'i {n}). Sunan samfurin da ke sama yana canzawa ga duka.", yo: "Oríṣi àwòṣe «{name}» (oríṣi {n}). Orúkọ àwòṣe lókè yí padà fún gbogbo wọn.", zu: "Uhlobo lwemodeli «{name}» (izinhlobo ezingu-{n}). Igama lemodeli ngenhla lishintsha kuzo zonke.", am: "የሞዴሉ «{name}» ዓይነት ({n} ዓይነቶች)። ከላይ ያለው የሞዴል ስም ለሁሉም ይቀየራል።", bm: "Sifa «{name}» ka suguya ({n} suguyaw). Sifa tɔgɔ min bɛ sanfɛ, o bɛ yɛlɛma u bɛɛ ye.", wo: "Xeetu modeel «{name}» ({n} xeet). Turu modeel bi ci kaw dafay soppiku ci ñoom ñépp." };
+EXTRA_UI.variantApplyAll = { fr: "Appliquer aussi le prix, le prix d'achat, la catégorie, la photo et la description aux autres variantes", en: "Also apply the price, cost price, category, photo and description to the other variants", es: "Aplicar también el precio, el costo, la categoría, la foto y la descripción a las demás variantes", pt: "Aplicar também o preço, o custo, a categoria, a foto e a descrição às outras variantes", de: "Preis, Einkaufspreis, Kategorie, Foto und Beschreibung auch auf die anderen Varianten anwenden", it: "Applica anche prezzo, costo, categoria, foto e descrizione alle altre varianti", nl: "Ook prijs, inkoopprijs, categorie, foto en beschrijving toepassen op de andere varianten", pl: "Zastosuj też cenę, koszt zakupu, kategorię, zdjęcie i opis do pozostałych wariantów", ru: "Применить цену, закупочную цену, категорию, фото и описание и к другим вариантам", tr: "Fiyat, alış fiyatı, kategori, fotoğraf ve açıklamayı diğer varyantlara da uygula", ar: "تطبيق السعر وسعر الشراء والفئة والصورة والوصف على المتغيرات الأخرى أيضًا", hi: "दाम, ख़रीद दाम, श्रेणी, फ़ोटो और विवरण बाकी वेरिएंट पर भी लागू करें", bn: "দাম, কেনা দাম, ক্যাটাগরি, ছবি ও বিবরণ বাকি ভ্যারিয়েন্টেও প্রয়োগ করুন", ur: "قیمت، خرید قیمت، زمرہ، تصویر اور تفصیل باقی ویریئنٹس پر بھی لاگو کریں", ta: "விலை, கொள்முதல் விலை, வகை, படம், விவரம் ஆகியவற்றை மற்ற வகைகளுக்கும் பயன்படுத்து", te: "ధర, కొనుగోలు ధర, వర్గం, ఫోటో, వివరణను మిగతా వేరియంట్‌లకూ వర్తింపజేయండి", th: "ใช้ราคา ราคาทุน หมวดหมู่ รูป และคำอธิบายกับตัวเลือกอื่นด้วย", zh: "将价格、进价、分类、照片和描述也应用到其他款式", ja: "価格・仕入れ値・カテゴリ・写真・説明を他のバリエーションにも適用", ko: "가격, 매입가, 카테고리, 사진, 설명을 다른 옵션에도 적용", id: "Terapkan juga harga, harga beli, kategori, foto, dan deskripsi ke varian lain", vi: "Áp dụng cả giá, giá nhập, danh mục, ảnh và mô tả cho các biến thể khác", tl: "Ilapat din ang presyo, puhunan, kategorya, larawan at paglalarawan sa ibang variant", sw: "Tumia pia bei, bei ya kununua, kundi, picha na maelezo kwa aina nyingine", ha: "Yi amfani da farashi, farashin saye, rukuni, hoto da bayani ga sauran nau'ikan ma", yo: "Lo iye, iye rírà, ẹ̀ka, àwòrán àti àpèjúwe fún àwọn oríṣi yòókù pẹ̀lú", zu: "Faka nentengo, intengo yokuthenga, isigaba, isithombe nencazelo kwezinye izinhlobo", am: "ዋጋ፣ የግዢ ዋጋ፣ ምድብ፣ ፎቶ እና መግለጫ ለሌሎቹ ዓይነቶችም ተግብር", bm: "Sɔngɔ, sanni sɔngɔ, kulu, ja ani ɲɛfɔli fana kɛ suguya tɔw kan", wo: "Def it njëg gi, njëgu jënd bi, kurél gi, nataal bi ak leeral bi ci yeneen xeet yi" };
+EXTRA_UI.variantOnlyNew = { fr: "Les tailles et couleurs se créent avec un nouveau produit (« Ajouter un produit »).", en: "Sizes and colors are created with a new product (“Add a product”).", es: "Las tallas y colores se crean con un producto nuevo («Añadir un producto»).", pt: "Tamanhos e cores criam-se com um produto novo («Adicionar produto»).", de: "Größen und Farben legst du mit einem neuen Produkt an („Produkt hinzufügen“).", it: "Taglie e colori si creano con un nuovo prodotto («Aggiungi prodotto»).", nl: "Maten en kleuren maak je aan met een nieuw product („Product toevoegen”).", pl: "Rozmiary i kolory tworzy się przy nowym produkcie („Dodaj produkt”).", ru: "Размеры и цвета создаются при добавлении нового товара («Добавить товар»).", tr: "Beden ve renkler yeni ürün eklerken oluşturulur («Ürün ekle»).", ar: "تُنشأ المقاسات والألوان مع منتج جديد («إضافة منتج»).", hi: "साइज़ और रंग नया उत्पाद जोड़ते समय बनते हैं («उत्पाद जोड़ें»)।", bn: "সাইজ ও রং নতুন পণ্য যোগ করার সময় তৈরি হয় («পণ্য যোগ করুন»)।", ur: "سائز اور رنگ نیا پروڈکٹ شامل کرتے وقت بنتے ہیں («پروڈکٹ شامل کریں»)۔", ta: "அளவுகளும் நிறங்களும் புதிய பொருள் சேர்க்கும்போது உருவாகும் («பொருள் சேர்»).", te: "సైజులు, రంగులు కొత్త ఉత్పత్తి జోడించేటప్పుడు సృష్టించబడతాయి («ఉత్పత్తి జోడించు»).", th: "ไซซ์และสีสร้างได้ตอนเพิ่มสินค้าใหม่ («เพิ่มสินค้า»)", zh: "尺码和颜色需在新增商品时创建（“添加商品”）。", ja: "サイズと色は新しい商品の追加時に作成します（「商品を追加」）。", ko: "사이즈와 색상은 새 상품을 추가할 때 만듭니다('상품 추가').", id: "Ukuran dan warna dibuat saat menambah produk baru («Tambah produk»).", vi: "Cỡ và màu được tạo khi thêm sản phẩm mới («Thêm sản phẩm»).", tl: "Ginagawa ang sukat at kulay kapag nagdagdag ng bagong produkto («Magdagdag ng produkto»).", sw: "Saizi na rangi huundwa unapoongeza bidhaa mpya («Ongeza bidhaa»).", ha: "Ana ƙirƙirar girma da launuka lokacin ƙara sabon kaya («Ƙara kaya»).", yo: "A ń ṣẹ̀dá ìwọ̀n àti àwọ̀ nígbà tí a bá ń fi ọjà tuntun kún un («Fi ọjà kún un»).", zu: "Osayizi nemibala kudalwa lapho wengeza umkhiqizo omusha («Engeza umkhiqizo»).", am: "መጠኖችና ቀለሞች አዲስ ምርት ሲጨመር ይፈጠራሉ («ምርት ጨምር»)።", bm: "Bonyaw ni ɲɛgɛnw bɛ dilan fɛn kura farali la («Fɛn fara a kan»).", wo: "Taay yi ak melo yi ñu ngi leen di sos bu ñuy yokk marsandiis bu bees («Yokk marsandiis»)." };
+EXTRA_UI.variantCount = { fr: "{n} variantes", en: "{n} variants", es: "{n} variantes", pt: "{n} variantes", de: "{n} Varianten", it: "{n} varianti", nl: "{n} varianten", pl: "Wariantów: {n}", ru: "Вариантов: {n}", tr: "{n} varyant", ar: "{n} متغيرات", hi: "{n} वेरिएंट", bn: "{n}টি ভ্যারিয়েন্ট", ur: "{n} ویریئنٹ", ta: "{n} வகைகள்", te: "{n} వేరియంట్‌లు", th: "{n} ตัวเลือก", zh: "{n} 个款式", ja: "{n} 種類", ko: "옵션 {n}개", id: "{n} varian", vi: "{n} biến thể", tl: "{n} variant", sw: "Aina {n}", ha: "Nau'i {n}", yo: "Oríṣi {n}", zu: "Izinhlobo ezingu-{n}", am: "{n} ዓይነቶች", bm: "Suguya {n}", wo: "{n} xeet" };
+EXTRA_UI.variantTotalStock = { fr: "Stock total : {n}", en: "Total stock: {n}", es: "Stock total: {n}", pt: "Stock total: {n}", de: "Gesamtbestand: {n}", it: "Stock totale: {n}", nl: "Totale voorraad: {n}", pl: "Łączny stan: {n}", ru: "Всего на складе: {n}", tr: "Toplam stok: {n}", ar: "إجمالي المخزون: {n}", hi: "कुल स्टॉक: {n}", bn: "মোট স্টক: {n}", ur: "کل اسٹاک: {n}", ta: "மொத்த இருப்பு: {n}", te: "మొత్తం స్టాక్: {n}", th: "สต็อกรวม: {n}", zh: "总库存：{n}", ja: "在庫合計：{n}", ko: "총 재고: {n}", id: "Total stok: {n}", vi: "Tổng tồn kho: {n}", tl: "Kabuuang stock: {n}", sw: "Jumla ya hifadhi: {n}", ha: "Jimillar ajiya: {n}", yo: "Àpapọ̀ ìpamọ́: {n}", zu: "Isitoko sisonke: {n}", am: "ጠቅላላ ክምችት: {n}", bm: "Maralen bɛɛ lajɛlen: {n}", wo: "Stock bi lépp: {n}" };
+EXTRA_UI.variantAddBtn = { fr: "Variante", en: "Variant", es: "Variante", pt: "Variante", de: "Variante", it: "Variante", nl: "Variant", pl: "Wariant", ru: "Вариант", tr: "Varyant", ar: "متغير", hi: "वेरिएंट", bn: "ভ্যারিয়েন্ট", ur: "ویریئنٹ", ta: "வகை", te: "వేరియంట్", th: "ตัวเลือก", zh: "款式", ja: "バリエーション", ko: "옵션", id: "Varian", vi: "Biến thể", tl: "Variant", sw: "Aina", ha: "Nau'i", yo: "Oríṣi", zu: "Uhlobo", am: "ዓይነት", bm: "Suguya", wo: "Xeet" };
+EXTRA_UI.variantAddTitle = { fr: "Ajouter une taille ou une couleur", en: "Add a size or color", es: "Añadir una talla o un color", pt: "Adicionar um tamanho ou cor", de: "Größe oder Farbe hinzufügen", it: "Aggiungi una taglia o un colore", nl: "Maat of kleur toevoegen", pl: "Dodaj rozmiar lub kolor", ru: "Добавить размер или цвет", tr: "Beden veya renk ekle", ar: "إضافة مقاس أو لون", hi: "साइज़ या रंग जोड़ें", bn: "সাইজ বা রং যোগ করুন", ur: "سائز یا رنگ شامل کریں", ta: "அளவு அல்லது நிறம் சேர்", te: "సైజు లేదా రంగు జోడించండి", th: "เพิ่มไซซ์หรือสี", zh: "添加尺码或颜色", ja: "サイズまたは色を追加", ko: "사이즈 또는 색상 추가", id: "Tambah ukuran atau warna", vi: "Thêm cỡ hoặc màu", tl: "Magdagdag ng sukat o kulay", sw: "Ongeza saizi au rangi", ha: "Ƙara girma ko launi", yo: "Fi ìwọ̀n tàbí àwọ̀ kún un", zu: "Engeza usayizi noma umbala", am: "መጠን ወይም ቀለም ጨምር", bm: "Bonya walima ɲɛgɛn fara a kan", wo: "Yokk benn taay walla benn melo" };
+EXTRA_UI.variantAddHint = { fr: "Elle reprend le prix, la catégorie et la photo des autres variantes. Modifiez-la ensuite si besoin.", en: "It takes the price, category and photo of the other variants. Edit it afterwards if needed.", es: "Toma el precio, la categoría y la foto de las demás variantes. Modifícala después si hace falta.", pt: "Usa o preço, a categoria e a foto das outras variantes. Altere depois se precisar.", de: "Übernimmt Preis, Kategorie und Foto der anderen Varianten. Danach bei Bedarf bearbeiten.", it: "Prende prezzo, categoria e foto delle altre varianti. Modificala dopo se serve.", nl: "Neemt prijs, categorie en foto van de andere varianten over. Pas daarna aan indien nodig.", pl: "Przejmuje cenę, kategorię i zdjęcie innych wariantów. W razie potrzeby edytuj potem.", ru: "Берёт цену, категорию и фото других вариантов. При необходимости измените потом.", tr: "Diğer varyantların fiyatını, kategorisini ve fotoğrafını alır. Gerekirse sonra düzenleyin.", ar: "يأخذ سعر المتغيرات الأخرى وفئتها وصورتها. عدّله لاحقًا إن لزم.", hi: "यह बाकी वेरिएंट का दाम, श्रेणी और फ़ोटो लेता है। ज़रूरत हो तो बाद में बदलें।", bn: "এটি অন্য ভ্যারিয়েন্টের দাম, ক্যাটাগরি ও ছবি নেয়। দরকার হলে পরে বদলান।", ur: "یہ باقی ویریئنٹس کی قیمت، زمرہ اور تصویر لیتا ہے۔ ضرورت ہو تو بعد میں بدلیں۔", ta: "மற்ற வகைகளின் விலை, வகைப்பாடு, படத்தை எடுத்துக்கொள்ளும். தேவைப்பட்டால் பிறகு திருத்தவும்.", te: "ఇది మిగతా వేరియంట్‌ల ధర, వర్గం, ఫోటోను తీసుకుంటుంది. అవసరమైతే తర్వాత మార్చండి.", th: "ใช้ราคา หมวดหมู่ และรูปเดียวกับตัวเลือกอื่น แก้ไขภายหลังได้", zh: "沿用其他款式的价格、分类和照片，之后可再修改。", ja: "他のバリエーションの価格・カテゴリ・写真を引き継ぎます。必要なら後で編集してください。", ko: "다른 옵션의 가격, 카테고리, 사진을 그대로 씁니다. 필요하면 나중에 수정하세요.", id: "Mengikuti harga, kategori, dan foto varian lain. Ubah nanti jika perlu.", vi: "Lấy giá, danh mục và ảnh của các biến thể khác. Sửa sau nếu cần.", tl: "Kukunin nito ang presyo, kategorya at larawan ng ibang variant. Baguhin mamaya kung kailangan.", sw: "Inachukua bei, kundi na picha ya aina nyingine. Ibadilishe baadaye ikihitajika.", ha: "Yana ɗaukar farashi, rukuni da hoton sauran nau'ikan. Gyara shi daga baya idan ana buƙata.", yo: "Ó máa ń lo iye, ẹ̀ka àti àwòrán àwọn oríṣi yòókù. Ṣàtúnṣe rẹ̀ lẹ́yìn náà tí ó bá yẹ.", zu: "Ithatha intengo, isigaba nesithombe sezinye izinhlobo. Yihlele kamuva uma kudingeka.", am: "የሌሎቹን ዓይነቶች ዋጋ፣ ምድብና ፎቶ ይወስዳል። ካስፈለገ በኋላ ያስተካክሉት።", bm: "A bɛ suguya tɔw ka sɔngɔ, kulu ani ja ta. A latilen o kɔ n'a magoya bɛ.", wo: "Dafay jël njëg gi, kurél gi ak nataalu yeneen xeet yi. Soppi ko ginnaaw bu soxlaa." };
+EXTRA_UI.variantExists = { fr: "Cette variante existe déjà.", en: "This variant already exists.", es: "Esta variante ya existe.", pt: "Esta variante já existe.", de: "Diese Variante gibt es schon.", it: "Questa variante esiste già.", nl: "Deze variant bestaat al.", pl: "Ten wariant już istnieje.", ru: "Такой вариант уже есть.", tr: "Bu varyant zaten var.", ar: "هذا المتغير موجود بالفعل.", hi: "यह वेरिएंट पहले से है।", bn: "এই ভ্যারিয়েন্ট আগে থেকেই আছে।", ur: "یہ ویریئنٹ پہلے سے موجود ہے۔", ta: "இந்த வகை ஏற்கனவே உள்ளது.", te: "ఈ వేరియంట్ ఇప్పటికే ఉంది.", th: "มีตัวเลือกนี้อยู่แล้ว", zh: "该款式已存在。", ja: "このバリエーションは既にあります。", ko: "이미 있는 옵션입니다.", id: "Varian ini sudah ada.", vi: "Biến thể này đã có.", tl: "Mayroon na ang variant na ito.", sw: "Aina hii tayari ipo.", ha: "Wannan nau'in ya riga ya wanzu.", yo: "Oríṣi yìí ti wà tẹ́lẹ̀.", zu: "Lolu hlobo selukhona.", am: "ይህ ዓይነት አስቀድሞ አለ።", bm: "Nin suguya in bɛ yen kaban.", wo: "Xeet bii am na ba pare." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -6651,10 +6670,11 @@ const SECTORS = [
 // daily = production du jour, expiry = date de péremption, barcode = code-barres.
 const SECTOR_MODES = {
   food: ["unit", "measure", "expiry", "barcode"],
-  clothing: [],
+  // Vêtements / chaussures / pagnes : un modèle en plusieurs tailles et couleurs.
+  clothing: ["variants"],
   // Téléphones : IMEI / n° de série, état (neuf, occasion…) et garantie sur le reçu.
-  electronics: ["serial", "barcode"],
-  cosmetics: ["expiry", "barcode", "unit"],
+  electronics: ["serial", "variants", "barcode"],
+  cosmetics: ["expiry", "variants", "barcode", "unit"],
   pharmacy: ["expiry", "unit", "barcode"],
   hardware: ["measure", "unit"],
   school: ["unit", "barcode"],
@@ -6671,7 +6691,7 @@ const SECTOR_MODES = {
 };
 // Unité proposée quand on active la vente au poids / à la mesure, selon le secteur.
 const SECTOR_MEASURE_UNIT = { food: "kg", butcher: "kg", wholesale: "kg", bakery: "kg", restaurant: "kg", hardware: "m" };
-const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily", "serial"];
+const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily", "serial", "variants"];
 const PRODUCT_CONDITIONS = ["new", "used", "refurb", "copy"];
 // Le secteur est enregistré sous forme de code fixe (« food », « bakery »…). Les comptes
 // créés avant gardent un libellé traduit (« Alimentation générale », « General food store »…) :
@@ -13399,7 +13419,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const productSectorId = sectorIdOf(shopSector);
   const productSectorModes = productSectorId && SECTOR_MODES[productSectorId] ? SECTOR_MODES[productSectorId] : null;
   const productModeOrder = productSectorModes ? [...productSectorModes, ...PRODUCT_MODES.filter((m) => productSectorModes.indexOf(m) === -1)] : PRODUCT_MODES;
-  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : m === "serial" ? (!!pTrackSerial || (pCondition && pCondition !== "new") || parseInt(pWarrantyMonths, 10) > 0) : !!pDailyMode);
+  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : m === "serial" ? (!!pTrackSerial || (pCondition && pCondition !== "new") || parseInt(pWarrantyMonths, 10) > 0) : m === "variants" ? (!!pVariantsOn || !!editingVariant) : !!pDailyMode);
   const modeShown = (m) => !productSectorModes || productSectorModes.indexOf(m) !== -1 || productModeActive(m) || showMoreProductOptions;
   const [sectorMsg, setSectorMsg] = useState("");
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
@@ -13454,6 +13474,44 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [pTrackSerial, setPTrackSerial] = useState(false);
   const [pCondition, setPCondition] = useState("new");
   const [pWarrantyMonths, setPWarrantyMonths] = useState("");
+  // ---- Variantes (tailles, couleurs, teintes, capacités…) ----
+  // Chaque variante est un vrai produit (son stock, son prix, son code-barres, ses ventes),
+  // relié aux autres par variantOf (identifiant du modèle), avec groupName (« Chemise
+  // wax ») et variantLabel (« M · Rouge »). Tout le reste de l'app (stock serveur, ventes,
+  // alertes, reçus) fonctionne donc sans changement ; seuls le Stock et la Vente les
+  // regroupent sous une seule carte.
+  const [pVariantsOn, setPVariantsOn] = useState(false);
+  const [pVarA, setPVarA] = useState("");
+  const [pVarB, setPVarB] = useState("");
+  const [pVarQty, setPVarQty] = useState({});
+  const [pVariantLabel, setPVariantLabel] = useState("");
+  const [pVariantApplyAll, setPVariantApplyAll] = useState(true);
+  const splitVariantValues = (v) => Array.from(new Set(String(v || "").split(/[,;\n]/).map((x) => x.trim()).filter(Boolean))).slice(0, 20);
+  const variantCombos = (() => {
+    const a = splitVariantValues(pVarA);
+    const b = splitVariantValues(pVarB);
+    if (!a.length) return b;
+    if (!b.length) return a;
+    const out = [];
+    a.forEach((x) => b.forEach((y) => out.push(x + " · " + y)));
+    return out.slice(0, 60);
+  })();
+  const editingVariant = editingProductId ? (products.find((x) => x.id === editingProductId && x.variantOf) || null) : null;
+  const variantSiblings = editingVariant ? products.filter((x) => x.variantOf === editingVariant.variantOf) : [];
+  const creatingVariants = !editingProductId && pVariantsOn;
+  const resetVariantForm = () => { setPVariantsOn(false); setPVarA(""); setPVarB(""); setPVarQty({}); setPVariantLabel(""); setPVariantApplyAll(true); };
+  const variantMembers = (gid) => products.filter((x) => x.variantOf === gid).sort((a, b) => (a.variantIndex || 0) - (b.variantIndex || 0));
+  const priceRangeLabel = (list) => {
+    const ps = list.map((x) => Number(x.price) || 0);
+    if (!ps.length) return "";
+    const lo = Math.min(...ps), hi = Math.max(...ps);
+    return lo === hi ? fcfa(lo) : `${fcfa(lo)} – ${fcfa(hi)}`;
+  };
+  // Ajouter une taille / couleur plus tard, depuis la carte du modèle dans le Stock.
+  const [addVariantGid, setAddVariantGid] = useState(null);
+  const [addVariantLabel, setAddVariantLabel] = useState("");
+  const [addVariantQty, setAddVariantQty] = useState("");
+  const [addVariantErr, setAddVariantErr] = useState("");
   const [showExpiryList, setShowExpiryList] = useState(false);
   const [expiryMsg, setExpiryMsg] = useState("");
   const [photoBusy, setPhotoBusy] = useState(false);
@@ -15078,8 +15136,55 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [shopListMsg, setShopListMsg] = useState("");
   const openShopList = () => { setShopListQty({}); setShopListOff({}); setShopListMsg(""); setShowShopList(true); };
   const [qtyChangeReason, setQtyChangeReason] = useState("adjust");
+  // Après modification d'une variante : le nom du modèle suit sur toutes ses variantes, et
+  // (case cochée) le prix, le prix d'achat, la catégorie, la photo et la description aussi.
+  const applyVariantGroupEdit = (list) => {
+    if (!editingVariant) return list;
+    const gid = editingVariant.variantOf;
+    const gname = pName.trim();
+    return list.map((x) => {
+      if (x.variantOf !== gid || x.id === editingProductId) return x;
+      let y = { ...x, groupName: gname, name: `${gname} — ${x.variantLabel || ""}`.trim() };
+      if (pVariantApplyAll) {
+        y = {
+          ...withPriceHistory(y, parseFloat(pPrice)),
+          costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
+          category: pCategory || null,
+          photo: pPhoto,
+          description: pDescription.trim() || null,
+        };
+      }
+      return y.name === x.name && !pVariantApplyAll ? x : { ...y, updatedAt: Date.now() };
+    });
+  };
+  const confirmAddVariant = () => {
+    const members = variantMembers(addVariantGid);
+    const label = addVariantLabel.trim();
+    if (!members.length || !label) return;
+    if (members.some((m) => String(m.variantLabel || "").toLowerCase() === label.toLowerCase())) { setAddVariantErr(tx(lang, "variantExists")); return; }
+    const tpl = members[members.length - 1];
+    const q = Math.max(0, parseFloat(String(addVariantQty).replace(",", ".")) || 0);
+    const np = {
+      ...tpl,
+      id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
+      name: `${tpl.groupName || tpl.name} — ${label}`,
+      variantLabel: label,
+      variantIndex: Math.max(...members.map((m) => m.variantIndex || 0)) + 1,
+      quantity: q,
+      looseUnits: 0,
+      batches: [],
+      barcode: null,
+      priceHistory: [],
+      updatedAt: Date.now(),
+    };
+    saveAll({ products: [...products, np] });
+    logAction(`${t(lang, "logProductAdded")} : ${np.name} (qté ${np.quantity})`);
+    setAddVariantGid(null);
+  };
   const addProduct = (qtyReason) => {
-    if (!pName.trim() || !pQty || !pPrice) return;
+    if (!pName.trim() || (!pQty && !creatingVariants) || !pPrice) return;
+    if (creatingVariants && variantCombos.length === 0) { setError(tx(lang, "variantNeedValues")); return; }
+    if (editingVariant && !pVariantLabel.trim()) return;
     if (typeof qtyReason !== "string") qtyReason = null;
     // La photo est facultative (décision du 2026-11-13) : l'exiger obligeait à photographier
     // chaque article avant de pouvoir vendre, un vrai frein pour une boutique qui démarre avec
@@ -15100,12 +15205,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ? makeLossEntry(editedOld, editedOldQty - editedNewQty, qtyReason) : null;
       saveAll({
         ...(lossEntry ? { unsoldLog: [...unsoldLog, lossEntry] } : {}),
-        products: products.map((p) => p.id === editingProductId ? {
+        products: applyVariantGroupEdit(products.map((p) => p.id === editingProductId ? {
           ...withPriceHistory(p, parseFloat(pPrice)),
+          ...(editingVariant ? { groupName: pName.trim(), variantLabel: pVariantLabel.trim() } : {}),
           trackSerial: pTrackSerial,
           condition: pCondition && pCondition !== "new" ? pCondition : null,
           warrantyMonths: parseInt(pWarrantyMonths, 10) > 0 ? parseInt(pWarrantyMonths, 10) : null,
-          name: pName.trim(),
+          name: editingVariant ? `${pName.trim()} — ${pVariantLabel.trim()}` : pName.trim(),
           quantity: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10),
           price: parseFloat(pPrice),
           description: pDescription.trim() || null,
@@ -15138,16 +15244,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
             return kept;
           })(),
           updatedAt: Date.now(),
-        } : p),
+        } : p)),
       });
-      logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}`);
+      logAction(`${tx(lang, "logProductEdited")} : ${pName.trim()}${editingVariant ? " — " + pVariantLabel.trim() : ""}`);
       if (qtyReason && editedNewQty !== editedOldQty) {
         const d = editedNewQty - editedOldQty;
         logAction(`${t(lang, "logStockAdjusted")} : ${pName.trim()} (${d > 0 ? "+" : "−"}${localizedNumber(Math.abs(d))}, ${tx(lang, "removeReason_" + qtyReason)})`);
       }
       setQtyChangePrompt(null);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); setShowAddProduct(false);
+      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -15181,9 +15287,32 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       batches: pExpiry ? [{ id: Date.now().toString(36), date: pExpiry, qty: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10) }] : [],
       updatedAt: Date.now(),
     };
-    saveAll({ products: [...products, newProduct] });
-    logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); setShowAddProduct(false);
+    if (creatingVariants) {
+      const gid = "vg" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      const gname = pName.trim();
+      const created = variantCombos.map((label, i) => {
+        const raw = String(pVarQty[label] || "0").replace(",", ".");
+        const q = Math.max(0, pSellByMeasure ? parseFloat(raw) || 0 : parseInt(raw, 10) || 0);
+        return {
+          ...newProduct,
+          id: Date.now().toString() + i.toString(36) + Math.random().toString(36).slice(2, 6),
+          name: `${gname} — ${label}`,
+          groupName: gname,
+          variantOf: gid,
+          variantLabel: label,
+          variantIndex: i,
+          quantity: q,
+          barcode: null,
+          batches: pExpiry && q > 0 ? [{ id: Date.now().toString(36) + i, date: pExpiry, qty: q }] : [],
+        };
+      });
+      saveAll({ products: [...products, ...created] });
+      logAction(`${t(lang, "logProductAdded")} : ${gname} (${created.map((c) => `${c.variantLabel} ${c.quantity}`).join(", ")})`);
+    } else {
+      saveAll({ products: [...products, newProduct] });
+      logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
+    }
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
   };
   // Jette les lots périmés d'un produit : stock diminué, perte enregistrée dans unsoldLog
   // (déjà affiché dans Statistiques > Invendus), action notée dans l'historique.
@@ -15222,7 +15351,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // une erreur de saisie (nom, quantité, prix, photo...) sans le recréer.
   const openEditProduct = (p) => {
     setEditingProductId(p.id);
-    setPName(p.name || "");
+    setPName(p.variantOf ? (p.groupName || p.name || "") : (p.name || ""));
+    resetVariantForm();
+    setPVariantLabel(p.variantOf ? (p.variantLabel || "") : "");
     setPQty(String(p.quantity ?? ""));
     setPPrice(String(p.price ?? ""));
     setPDescription(p.description || "");
@@ -19531,6 +19662,68 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     ? cartProducts
     : [...cartProducts.filter((p) => selectedProductIds.has(p.id)), ...cartProducts.filter((p) => !selectedProductIds.has(p.id))];
   const cartTotal = activeCart ? activeCart.items.reduce((s, i) => s + i.qty * i.unitPrice, 0) : 0;
+  // Vente : les variantes d'un modèle forment une seule carte avec une pastille par taille /
+  // couleur (stock restant entre parenthèses). Toucher une pastille ajoute 1 au panier.
+  const saleRows = (() => {
+    const rows = [];
+    const seen = new Set();
+    cartProductsOrdered.forEach((p) => {
+      if (!p.variantOf) { rows.push({ p }); return; }
+      if (seen.has(p.variantOf)) return;
+      seen.add(p.variantOf);
+      rows.push({ group: true, gid: p.variantOf, members: cartProducts.filter((x) => x.variantOf === p.variantOf).sort((a, b) => (a.variantIndex || 0) - (b.variantIndex || 0)) });
+    });
+    return rows;
+  })();
+  const renderVariantGroupSale = (row, grid) => {
+    const first = row.members[0];
+    const anyInCart = row.members.some((m) => selectedProductIds.has(m.id));
+    return (
+      <div key={"vg-" + row.gid} className={grid ? "rounded-2xl p-3 col-span-2" : "p-4"} style={{
+        ...(grid ? { background: anyInCart ? (darkMode ? "rgba(37,99,235,0.16)" : "#eff6ff") : T.card, border: anyInCart ? "2px solid #2563eb" : (darkMode ? "none" : `1px solid ${T.border}`), boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }
+          : anyInCart ? { background: darkMode ? "rgba(37,99,235,0.16)" : "#eff6ff", boxShadow: "inset 4px 0 0 #2563eb" } : {}),
+      }}>
+        <div className="flex items-center gap-3">
+          <div className="relative shrink-0" style={{ width: 48, height: 48 }}>
+            {first.photo ? <img src={first.photo} alt={first.groupName} className="w-12 h-12 rounded-xl object-cover" /> : (
+              <div className="rounded-xl flex items-center justify-center w-full h-full" style={{ background: darkMode ? "rgba(37,99,235,0.15)" : "#dbeafe" }}><span style={{ fontSize: 20 }}>👕</span></div>
+            )}
+          </div>
+          <div className="min-w-0">
+            <p className={`${grid ? "text-sm" : "text-base"} font-bold truncate`} style={{ color: T.text }}>{first.groupName || first.name}</p>
+            <p className="text-xs" style={{ color: T.muted }}>{priceRangeLabel(row.members)}</p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-1.5 mt-2.5" style={{ paddingLeft: grid ? 0 : 60 }}>
+          {row.members.map((m) => {
+            const inCart = activeCart.items.find((i) => i.productId === m.id && (i.mode || "pack") === "pack");
+            const dispo = m.quantity - reservedQty(m.id);
+            const frozen = isProductFrozen(m.id);
+            return (
+              <span key={m.id} className="inline-flex items-center rounded-full overflow-hidden" style={{ background: inCart ? "#2563eb" : T.input, opacity: dispo <= 0 && !inCart ? 0.4 : 1 }}>
+                {inCart && (
+                  <button onClick={() => changeCartQty(activeCart.id, m, -1, "pack")} aria-label="−" className="pl-2.5 pr-1 h-9 flex items-center" style={{ color: "white" }}><Minus size={13} /></button>
+                )}
+                <button
+                  disabled={(dispo <= 0 && !m.sellByMeasure) || frozen}
+                  onClick={(e) => {
+                    if (m.sellByMeasure) { setMeasureTarget(m.id); setMeasureQty(inCart ? String(inCart.qty) : ""); return; }
+                    changeCartQty(activeCart.id, m, 1, "pack");
+                    if (dispo > 0) spawnFlyingToken(m, e.currentTarget);
+                  }}
+                  className={`${inCart ? "pl-1 pr-3" : "px-3"} h-9 text-xs font-bold whitespace-nowrap active:scale-95 transition-transform`}
+                  style={{ color: inCart ? "white" : T.text }}
+                >
+                  {m.variantLabel}{inCart ? ` ×${localizedQty(inCart.qty)}` : ""}
+                  <span style={{ opacity: 0.7, fontWeight: 500 }}> ({localizedQty(Math.max(0, dispo))})</span>
+                </button>
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
   // Compte suspendu par un administrateur : bloque tout accès à l'app, avant
   // même le rendu normal, quel que soit l'onglet ou l'état en cours.
   if (accountSuspended) {
@@ -20571,6 +20764,26 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {addVariantGid && (() => {
+          const members = variantMembers(addVariantGid);
+          if (!members.length) return null;
+          return (
+            <div className="fixed inset-0 z-40 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setAddVariantGid(null)}>
+              <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5" style={{ background: T.card, color: T.text }}>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-bold text-sm">{tx(lang, "variantAddTitle")}</h3>
+                  <button onClick={() => setAddVariantGid(null)}><X size={18} /></button>
+                </div>
+                <p className="text-xs mb-3" style={{ color: T.muted }}>{members[0].groupName} · {members.map((m) => m.variantLabel).join(", ")}</p>
+                <input autoComplete="off" autoFocus value={addVariantLabel} onChange={(e) => { setAddVariantLabel(e.target.value.slice(0, 40)); setAddVariantErr(""); }} placeholder={tx(lang, "variantLabelField")} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <input autoComplete="off" type="text" inputMode="decimal" value={addVariantQty} onChange={(e) => setAddVariantQty(e.target.value.replace(/[^0-9.,]/g, ""))} placeholder={t(lang, "quantity")} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "variantAddHint")}</p>
+                {addVariantErr && <p className="text-xs mb-2" style={{ color: "#e11d48" }}>{addVariantErr}</p>}
+                <button onClick={confirmAddVariant} disabled={!addVariantLabel.trim()} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO, opacity: addVariantLabel.trim() ? 1 : 0.4 }}>{t(lang, "save")}</button>
+              </div>
+            </div>
+          );
+        })()}
         {showBulkPrice && (() => {
           const matches = bulkMatches();
           const changed = matches.filter((p) => !bulkExcluded[p.id] && bulkNewPrice(p.price) != null && bulkNewPrice(p.price) !== Number(p.price));
@@ -20705,7 +20918,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <button onClick={() => { if (isPhotoReturnGuardActive()) return; setShowAddProduct(false); setEditingProductId(null); }} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}><X size={18} /></button>
             </div>
             <textarea autoComplete="off" rows={1} placeholder={t(lang, "productName")} value={pName} onChange={(e) => setPName(e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }} />
-            <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            {editingVariant && (
+              <input autoComplete="off" placeholder={tx(lang, "variantLabelField")} value={pVariantLabel} onChange={(e) => setPVariantLabel(e.target.value.slice(0, 40))} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+            )}
+            {!creatingVariants && <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />}
             <input autoComplete="off" placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             {(() => {
               const ep = editingProductId ? products.find((x) => x.id === editingProductId) : null;
@@ -20886,6 +21102,51 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
+            ) : m === "variants" ? (
+            /* Tailles / couleurs : à la création, on tape les tailles et les couleurs, l'app
+                fabrique chaque combinaison avec sa quantité. En modification d'une variante :
+                son nom de variante, et la case pour répercuter prix/catégorie/photo. */
+            <div key="variants" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+              {editingVariant ? (
+                <>
+                  <p className="text-[11px]" style={{ color: T.muted }}>👕 {tx(lang, "variantPartOf").replace("{name}", editingVariant.groupName || "").replace("{n}", localizedNumber(variantSiblings.length))}</p>
+                  <label className="flex items-start gap-2 mt-2.5 text-[11px] font-semibold cursor-pointer" style={{ color: T.text }}>
+                    <input type="checkbox" checked={pVariantApplyAll} onChange={(e) => setPVariantApplyAll(e.target.checked)} className="mt-0.5" />
+                    <span>{tx(lang, "variantApplyAll")}</span>
+                  </label>
+                </>
+              ) : editingProductId ? (
+                <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "variantOnlyNew")}</p>
+              ) : (
+                <>
+                  <label className="flex items-center justify-between cursor-pointer gap-3">
+                    <span className="text-xs font-semibold" style={{ color: T.text }}>{tx(lang, "variantToggle")}</span>
+                    <button type="button" onClick={() => setPVariantsOn(!pVariantsOn)} style={{ width: 40, height: 22, borderRadius: 12, background: pVariantsOn ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pVariantsOn ? "flex-end" : "flex-start", border: "none", flexShrink: 0 }}>
+                      <span style={{ width: 16, height: 16, borderRadius: "50%", background: "white", display: "block" }} />
+                    </button>
+                  </label>
+                  {pVariantsOn && (
+                    <>
+                      <label className="text-[11px] font-semibold block mt-3 mb-1" style={{ color: T.muted }}>{tx(lang, "variantSizesLabel")}</label>
+                      <input autoComplete="off" value={pVarA} onChange={(e) => setPVarA(e.target.value.slice(0, 200))} placeholder={tx(lang, "variantSizesPlaceholder")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                      <label className="text-[11px] font-semibold block mt-2.5 mb-1" style={{ color: T.muted }}>{tx(lang, "variantColorsLabel")}</label>
+                      <input autoComplete="off" value={pVarB} onChange={(e) => setPVarB(e.target.value.slice(0, 200))} placeholder={tx(lang, "variantColorsPlaceholder")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                      <p className="text-[11px] mt-2" style={{ color: T.muted }}>{tx(lang, "variantHint")}</p>
+                      {variantCombos.length > 0 && (
+                        <div className="mt-2 flex flex-col gap-1.5">
+                          {variantCombos.map((label) => (
+                            <div key={label} className="flex items-center gap-2">
+                              <span className="flex-1 min-w-0 text-[12px] font-semibold truncate" style={{ color: T.text }}>{label}</span>
+                              <input autoComplete="off" type="text" inputMode="decimal" placeholder="0" value={pVarQty[label] || ""} onChange={(e) => setPVarQty({ ...pVarQty, [label]: e.target.value.replace(/[^0-9.,]/g, "").slice(0, 7) })} className="w-20 border rounded-lg px-2 py-1.5 text-sm text-center" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </div>
             ) : m === "serial" ? (
             /* Téléphones / électronique : l'IMEI (ou n° de série) est demandé dans le panier,
                 puis imprimé sur le reçu avec l'état de l'appareil et la fin de garantie — la
@@ -20985,10 +21246,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             <button
               onClick={() => addProduct()}
-              disabled={!(pName.trim() && pQty && pPrice)}
+              disabled={!(pName.trim() && (pQty || creatingVariants) && pPrice && (!creatingVariants || variantCombos.length) && (!editingVariant || pVariantLabel.trim()))}
               className="w-full py-3 rounded-lg text-white font-semibold text-sm mb-6"
-              style={{ background: INDIGO, opacity: (pName.trim() && pQty && pPrice) ? 1 : 0.4 }}
-            >{t(lang, "save")}</button>
+              style={{ background: INDIGO, opacity: (pName.trim() && (pQty || creatingVariants) && pPrice && (!creatingVariants || variantCombos.length) && (!editingVariant || pVariantLabel.trim())) ? 1 : 0.4 }}
+            >{creatingVariants && variantCombos.length ? tx(lang, "variantCreateBtn").replace("{n}", localizedNumber(variantCombos.length)) : t(lang, "save")}</button>
             {/* « Supprimer » est rangé ici (et non plus sur la liste du Stock), loin du bouton
                 « Modifier » : un appui par erreur ne peut plus effacer un produit. */}
             {editingProductId && hasPermission("editStock") && (() => {
@@ -21047,10 +21308,45 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {products.length === 0 && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "noProduct")}</p>}
             {products.length > 0 && filteredProducts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResults")} "{stockSearch}".</p>}
-            {filteredProducts.map((p) => {
+            {(() => {
+              // Les variantes d'un même modèle sont regroupées sous une carte d'en-tête
+              // (nom, nombre de variantes, stock total, « + Variante »), à la place du premier
+              // de ses membres dans la liste triée.
+              const rows = [];
+              const seen = new Set();
+              filteredProducts.forEach((p) => {
+                if (!p.variantOf) { rows.push({ p }); return; }
+                if (seen.has(p.variantOf)) return;
+                seen.add(p.variantOf);
+                const members = filteredProducts.filter((x) => x.variantOf === p.variantOf).sort((a, b) => (a.variantIndex || 0) - (b.variantIndex || 0));
+                rows.push({ header: true, gid: p.variantOf, members, all: variantMembers(p.variantOf) });
+                members.forEach((m) => rows.push({ p: m, inGroup: true }));
+              });
+              return rows;
+            })().map((row) => row.header ? (
+              <div key={"vg-" + row.gid} className="rounded-2xl px-3.5 py-3" style={{ background: darkMode ? "rgba(37,99,235,0.10)" : "#eff6ff", border: darkMode ? "none" : "1px solid #bfdbfe" }}>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-3 min-w-0">
+                    {row.all[0] && row.all[0].photo ? <img src={row.all[0].photo} alt="" className="w-11 h-11 rounded-xl object-cover flex-shrink-0" /> : (
+                      <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: darkMode ? T.input : "#dbeafe", fontSize: 20 }}>👕</div>
+                    )}
+                    <div className="min-w-0">
+                      <p className="font-bold text-sm truncate" style={{ color: T.text }}>{(row.all[0] && row.all[0].groupName) || ""}</p>
+                      <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "variantCount").replace("{n}", localizedNumber(row.all.length))} · {priceRangeLabel(row.all)}</p>
+                      <p className="text-[11px] font-semibold" style={{ color: T.text }}>{tx(lang, "variantTotalStock").replace("{n}", localizedQty(row.all.reduce((s, x) => s + (Number(x.quantity) || 0), 0)))}</p>
+                    </div>
+                  </div>
+                  {hasPermission("editStock") && !shopReadOnly && (
+                    <button onClick={() => { setAddVariantGid(row.gid); setAddVariantLabel(""); setAddVariantQty(""); setAddVariantErr(""); }} className="h-8 px-3 rounded-full flex items-center gap-1 text-[11px] font-bold flex-shrink-0" style={{ background: INDIGO, color: "white" }}>
+                      <Plus size={12} /> {tx(lang, "variantAddBtn")}
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : ((p, inGroup) => {
               const frozen = isProductFrozen(p.id);
               return (
-              <div key={p.id} className="rounded-2xl p-3.5" style={{ background: frozen ? (darkMode ? "rgba(184,86,47,0.08)" : "#fffbeb") : T.card, border: frozen ? `1px solid ${darkMode ? "rgba(184,86,47,0.3)" : "#fde68a"}` : (darkMode ? "none" : `1px solid ${T.border}`), boxShadow: darkMode ? "none" : "0 6px 14px rgba(0,0,0,0.06)" }}>
+              <div key={p.id} className={`rounded-2xl p-3.5${inGroup ? " ml-4" : ""}`} style={{ background: frozen ? (darkMode ? "rgba(184,86,47,0.08)" : "#fffbeb") : T.card, border: frozen ? `1px solid ${darkMode ? "rgba(184,86,47,0.3)" : "#fde68a"}` : (darkMode ? "none" : `1px solid ${T.border}`), boxShadow: darkMode ? "none" : "0 6px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-3 min-w-0" style={{ flex: 1 }}>
                     {p.photo ? <img src={p.photo} alt={p.name} className="w-11 h-11 rounded-xl object-cover flex-shrink-0" /> : (
@@ -21061,7 +21357,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <p
                           className="font-bold text-sm"
                           style={{ color: T.text, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
-                        >{p.name}</p>
+                        >{inGroup ? p.variantLabel : p.name}</p>
                         {frozen && (
                           <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 flex-shrink-0" style={{ background: darkMode ? "rgba(184,86,47,0.15)" : "#fef3c7", color: darkMode ? CLAY : "#b45309" }}>
                             <Lock size={9} /> {t(lang, "productFrozenBadge")}
@@ -21155,7 +21451,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               </div>
               );
-            })}
+            })(row.p, row.inGroup))}
           </div>
         )}
         {tab === "sale" && hasBasePermission("sell") && !hasPermission("sell") && (
@@ -21532,7 +21828,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 {saleViewMode === "list" ? (
                 <div className="rounded-2xl divide-y overflow-hidden" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   {cartProducts.length === 0 && <p className="text-xs text-center p-4" style={{ color: T.muted }}>{t(lang, "noProductFound")}</p>}
-                  {cartProductsOrdered.map((p) => {
+                  {saleRows.map((row) => row.group ? renderVariantGroupSale(row, false) : ((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
                     const dispo = p.quantity - reservedQty(p.id);
@@ -21632,12 +21928,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         )}
                       </div>
                     );
-                  })}
+                  })(row.p))}
                 </div>
                 ) : (
                 <div className="grid grid-cols-2 gap-2.5">
                   {cartProducts.length === 0 && <p className="text-xs text-center p-4 col-span-2" style={{ color: T.muted }}>{t(lang, "noProductFound")}</p>}
-                  {cartProductsOrdered.map((p) => {
+                  {saleRows.map((row) => row.group ? renderVariantGroupSale(row, true) : ((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
                     const dispo = p.quantity - reservedQty(p.id);
@@ -21729,7 +22025,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         </div>
                       </div>
                     );
-                  })}
+                  })(row.p))}
                 </div>
                 )}
                 {showMiscItem && (
