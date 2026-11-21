@@ -6580,6 +6580,8 @@ const SECTORS = [
   { id: "hardware", fr: "Quincaillerie & bricolage", en: "Hardware store", ar: "أدوات ومعدات", vi: "Cửa hàng dụng cụ & vật liệu", bn: "হার্ডওয়্যার দোকান", ha: "Kantin kayan aiki", bm: "Baarakɛminɛn feerekɛyɔrɔ", ur: "ہارڈویئر کی دکان" },
   { id: "school", fr: "Fournitures scolaires & papeterie", en: "School & office supplies", ar: "لوازم مدرسية ومكتبية", vi: "Đồ dùng học tập & văn phòng phẩm", bn: "স্কুল ও অফিস সরঞ্জাম", ha: "Kayan makaranta da ofis", bm: "Kalanso ni biro minɛnw", ur: "اسکول اور دفتری سامان" },
   { id: "bakery", fr: "Boulangerie & pâtisserie", en: "Bakery & pastry", ar: "مخبز وحلويات", vi: "Tiệm bánh", bn: "বেকারি ও মিষ্টান্ন", ha: "Gidan burodi da kayan zaƙi", bm: "Buru dilanyɔrɔ", ur: "بیکری اور مٹھائی" },
+  { id: "restaurant", fr: "Restaurant & maquis", en: "Restaurant & eatery", ar: "مطعم", vi: "Nhà hàng & quán ăn", bn: "রেস্তোরাঁ ও খাবারের দোকান", ha: "Gidan abinci", bm: "Dumuni feereyɔrɔ", ur: "ریسٹورنٹ اور ڈھابہ" },
+  { id: "butcher", fr: "Boucherie & poissonnerie", en: "Butcher & fishmonger", ar: "ملحمة ومسمكة", vi: "Hàng thịt & hải sản", bn: "মাংস ও মাছের দোকান", ha: "Mahauta da kifi", bm: "Sogo ni jɛgɛ feereyɔrɔ", ur: "قصاب اور مچھلی کی دکان" },
   { id: "other", fr: "Autre", en: "Other", ar: "أخرى", vi: "Khác", bn: "অন্যান্য", ha: "Wani", bm: "Wɛrɛ", ur: "دیگر" },
 ];
 // Options de la fiche produit mises en avant selon le secteur. Les autres restent
@@ -6595,6 +6597,11 @@ const SECTOR_MODES = {
   hardware: ["measure", "unit"],
   school: ["unit", "barcode"],
   bakery: ["daily", "unit"],
+  // Plats préparés chaque jour (production du jour) ; boissons achetées en casier ou en
+  // pack et vendues à la bouteille (vente au détail).
+  restaurant: ["daily", "unit"],
+  // Viande et poisson pesés à la vente.
+  butcher: ["measure"],
 };
 const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily"];
 function sectorIdOf(value) {
