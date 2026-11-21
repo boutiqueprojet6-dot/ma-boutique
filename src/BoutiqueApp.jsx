@@ -6206,6 +6206,14 @@ EXTRA_UI.depositTooHigh = { fr: "L'avance doit être inférieure au total. Si le
 EXTRA_UI.restToCredit = { fr: "Mettre le reste ({n}) en dette", en: "Put the rest ({n}) on credit", es: "Dejar el resto ({n}) a crédito", pt: "Pôr o resto ({n}) a crédito", de: "Rest ({n}) anschreiben", it: "Mettere il resto ({n}) a credito", nl: "Rest ({n}) op krediet zetten", pl: "Resztę ({n}) zapisać jako dług", ru: "Остаток ({n}) записать в долг", tr: "Kalanı ({n}) veresiyeye yaz", ar: "تسجيل الباقي ({n}) كدين", hi: "बाकी ({n}) उधार में डालें", bn: "বাকি ({n}) বাকিতে রাখুন", ur: "باقی ({n}) ادھار میں ڈالیں", ta: "மீதியை ({n}) கடனில் வை", te: "మిగతాది ({n}) అప్పుగా పెట్టండి", th: "ลงส่วนที่เหลือ ({n}) เป็นหนี้", zh: "把余额（{n}）记为赊账", ja: "残り（{n}）をツケにする", ko: "나머지({n})를 외상으로", id: "Catat sisanya ({n}) sebagai utang", vi: "Ghi phần còn lại ({n}) vào nợ", tl: "Ilista ang natitira ({n}) bilang utang", sw: "Weka kilichobaki ({n}) kama deni", ha: "Saka sauran ({n}) a bashi", yo: "Fi ìyókù ({n}) sí gbèsè", zu: "Faka okusele ({n}) esikweletini", am: "ቀሪውን ({n}) በዱቤ ያስመዝግቡ", bm: "A tɔ ({n}) bila juru la", wo: "Def li des ({n}) ci bor" };
 EXTRA_UI.receiptDepositLabel = { fr: "Avance versée", en: "Deposit paid", es: "Anticipo pagado", pt: "Sinal pago", de: "Anzahlung", it: "Acconto versato", nl: "Voorschot betaald", pl: "Wpłacona zaliczka", ru: "Предоплата", tr: "Ödenen kapora", ar: "العربون المدفوع", hi: "दिया गया अग्रिम", bn: "দেওয়া অগ্রিম", ur: "دیا گیا ایڈوانس", ta: "செலுத்திய முன்பணம்", te: "ఇచ్చిన అడ్వాన్స్", th: "เงินมัดจำที่จ่ายแล้ว", zh: "已付定金", ja: "支払済み頭金", ko: "받은 선금", id: "Uang muka dibayar", vi: "Tiền đặt trước", tl: "Paunang bayad", sw: "Malipo ya awali", ha: "Kuɗin gaba da aka biya", yo: "Owó ìbẹ̀rẹ̀ tí a san", zu: "Idiphozi ekhokhiwe", am: "የተከፈለ ቅድመ ክፍያ", bm: "Sara fɔlɔ", wo: "Avance bi ñu fey" };
 EXTRA_UI.logPriceNegotiated = { fr: "Prix négociés", en: "Negotiated prices", es: "Precios negociados", pt: "Preços negociados", de: "Verhandelte Preise", it: "Prezzi trattati", nl: "Onderhandelde prijzen", pl: "Ceny negocjowane", ru: "Цены после торга", tr: "Pazarlıklı fiyatlar", ar: "أسعار متفاوض عليها", hi: "मोलभाव वाले दाम", bn: "দরদাম করা দাম", ur: "مول تول والی قیمتیں", ta: "பேரம் பேசிய விலைகள்", te: "బేరం ధరలు", th: "ราคาที่ต่อรอง", zh: "议价", ja: "交渉後の価格", ko: "흥정 가격", id: "Harga nego", vi: "Giá thương lượng", tl: "Tinawarang presyo", sw: "Bei za mapatano", ha: "Farashin ciniki", yo: "Iye ìdúnàádúrà", zu: "Izintengo ezixoxisanwe", am: "የተደራደሩ ዋጋዎች", bm: "Sɔngɔ sɔsɔlenw", wo: "Njëg yu ñu waxaale" };
+EXTRA_UI.mode_barcode = { fr: "Code-barres", en: "Barcode", es: "Código de barras", pt: "Código de barras", de: "Strichcode", it: "Codice a barre", nl: "Streepjescode", pl: "Kod kreskowy", ru: "Штрихкод", tr: "Barkod", ar: "الباركود", hi: "बारकोड", bn: "বারকোড", ur: "بارکوڈ", ta: "பார்கோடு", te: "బార్‌కోడ్", th: "บาร์โค้ด", zh: "条形码", ja: "バーコード", ko: "바코드", id: "Kode batang", vi: "Mã vạch", tl: "Barcode", sw: "Msimbo pau", ha: "Lambar barcode", yo: "Kóòdù ìlà", zu: "Ibhakhodi", am: "ባርኮድ", bm: "Barikodi", wo: "Barcode" };
+EXTRA_UI.mode_expiry = { fr: "Date de péremption", en: "Expiry date", es: "Fecha de caducidad", pt: "Data de validade", de: "Haltbarkeitsdatum", it: "Data di scadenza", nl: "Houdbaarheidsdatum", pl: "Data ważności", ru: "Срок годности", tr: "Son kullanma tarihi", ar: "تاريخ الانتهاء", hi: "समाप्ति तिथि", bn: "মেয়াদ শেষের তারিখ", ur: "میعاد ختم ہونے کی تاریخ", ta: "காலாவதி தேதி", te: "గడువు తేదీ", th: "วันหมดอายุ", zh: "保质期", ja: "賞味・使用期限", ko: "유통기한", id: "Tanggal kedaluwarsa", vi: "Hạn sử dụng", tl: "Petsa ng pagkapaso", sw: "Tarehe ya mwisho wa matumizi", ha: "Ranar ƙarewa", yo: "Ọjọ́ ìparí", zu: "Usuku lokuphelelwa", am: "የሚያበቃበት ቀን", bm: "Tɛmɛ don", wo: "Bisu jeex" };
+EXTRA_UI.mode_unit = { fr: "Vente au détail", en: "Sell by piece", es: "Venta al detalle", pt: "Venda a retalho", de: "Einzelverkauf", it: "Vendita al dettaglio", nl: "Per stuk verkopen", pl: "Sprzedaż na sztuki", ru: "Продажа поштучно", tr: "Perakende satış", ar: "البيع بالتجزئة", hi: "खुदरा बिक्री", bn: "খুচরা বিক্রি", ur: "پرچون فروخت", ta: "சில்லறை விற்பனை", te: "చిల్లర అమ్మకం", th: "ขายปลีก", zh: "拆零销售", ja: "バラ売り", ko: "낱개 판매", id: "Jual eceran", vi: "Bán lẻ", tl: "Tingi-tingi", sw: "Kuuza rejareja", ha: "Sayarwa dalla-dalla", yo: "Títà ní wẹ́wẹ́", zu: "Ukuthengisa ngakunye", am: "በችርቻሮ መሸጥ", bm: "Kelen kelen feere", wo: "Jaay benn-benn" };
+EXTRA_UI.mode_measure = { fr: "Vente au poids", en: "Sell by weight", es: "Venta al peso", pt: "Venda ao peso", de: "Verkauf nach Gewicht", it: "Vendita a peso", nl: "Per gewicht verkopen", pl: "Sprzedaż na wagę", ru: "Продажа на вес", tr: "Tartıyla satış", ar: "البيع بالوزن", hi: "वज़न से बिक्री", bn: "ওজনে বিক্রি", ur: "وزن سے فروخت", ta: "எடைக்கு விற்பனை", te: "తూకంతో అమ్మకం", th: "ขายตามน้ำหนัก", zh: "按重量销售", ja: "量り売り", ko: "무게 판매", id: "Jual per berat", vi: "Bán theo cân", tl: "Benta ayon sa timbang", sw: "Kuuza kwa uzito", ha: "Sayarwa da nauyi", yo: "Títà ní ìwọ̀n", zu: "Ukuthengisa ngesisindo", am: "በክብደት መሸጥ", bm: "Girinya la feere", wo: "Jaay ci natt" };
+EXTRA_UI.mode_daily = { fr: "Production du jour", en: "Daily production", es: "Producción del día", pt: "Produção do dia", de: "Tagesproduktion", it: "Produzione del giorno", nl: "Dagproductie", pl: "Produkcja dnia", ru: "Выпечка дня", tr: "Günlük üretim", ar: "إنتاج اليوم", hi: "आज का उत्पादन", bn: "আজকের উৎপাদন", ur: "آج کی پیداوار", ta: "இன்றைய உற்பத்தி", te: "నేటి ఉత్పత్తి", th: "ผลิตรายวัน", zh: "当日生产", ja: "本日の製造分", ko: "오늘 생산분", id: "Produksi harian", vi: "Sản xuất trong ngày", tl: "Gawa ngayong araw", sw: "Uzalishaji wa siku", ha: "Abin da aka yi yau", yo: "Ìṣẹ̀dá ọjọ́ òní", zu: "Okukhiqizwe namuhla", am: "የዕለቱ ምርት", bm: "Bi dilanw", wo: "Li ñu def tey" };
+EXTRA_UI.sectorRecommended = { fr: "Conseillé pour : {s}", en: "Recommended for: {s}", es: "Recomendado para: {s}", pt: "Recomendado para: {s}", de: "Empfohlen für: {s}", it: "Consigliato per: {s}", nl: "Aanbevolen voor: {s}", pl: "Polecane dla: {s}", ru: "Рекомендуется для: {s}", tr: "Önerilen: {s}", ar: "موصى به لـ: {s}", hi: "इसके लिए सुझाया गया: {s}", bn: "যার জন্য প্রস্তাবিত: {s}", ur: "اس کے لیے تجویز کردہ: {s}", ta: "பரிந்துரைக்கப்படுவது: {s}", te: "దీనికి సూచించబడింది: {s}", th: "แนะนำสำหรับ: {s}", zh: "推荐用于：{s}", ja: "おすすめ：{s}", ko: "추천 업종: {s}", id: "Disarankan untuk: {s}", vi: "Gợi ý cho: {s}", tl: "Inirerekomenda para sa: {s}", sw: "Inapendekezwa kwa: {s}", ha: "An ba da shawara don: {s}", yo: "A gbà á níyànjú fún: {s}", zu: "Kunconyelwe: {s}", am: "ለዚህ የሚመከር: {s}", bm: "Laadilikan: {s}", wo: "Ñu digle ko ngir: {s}" };
+EXTRA_UI.sectorModesHint = { fr: "Choisissez votre secteur : les options utiles à ce métier sont mises en avant dans la fiche produit. Les autres restent disponibles dans « Plus d'options ».", en: "Choose your sector: the options useful for your trade are shown first in the product form. The others stay available under “More options”.", es: "Elige tu sector: las opciones útiles para tu oficio aparecen primero en la ficha del producto. Las demás siguen en «Más opciones».", pt: "Escolha o seu setor: as opções úteis para o seu ramo aparecem primeiro na ficha do produto. As outras continuam em «Mais opções».", de: "Wähle deine Branche: Die passenden Optionen stehen im Produktformular oben. Die anderen bleiben unter „Weitere Optionen“.", it: "Scegli il tuo settore: le opzioni utili al tuo mestiere sono in evidenza nella scheda prodotto. Le altre restano in «Altre opzioni».", nl: "Kies je sector: de handige opties voor je vak staan bovenaan in het productformulier. De rest blijft onder „Meer opties”.", pl: "Wybierz branżę: przydatne opcje pojawią się na górze karty produktu. Pozostałe są w „Więcej opcji”.", ru: "Выберите сферу: полезные для неё опции показываются первыми в карточке товара. Остальные — в «Дополнительных опциях».", tr: "Sektörünüzü seçin: işinize yarayan seçenekler ürün formunda öne çıkar. Diğerleri «Ek seçenekler»de kalır.", ar: "اختر قطاعك: تظهر الخيارات المفيدة لنشاطك أولًا في بطاقة المنتج، وتبقى الخيارات الأخرى في «خيارات إضافية».", hi: "अपना क्षेत्र चुनें: आपके काम के लिए उपयोगी विकल्प उत्पाद फ़ॉर्म में पहले दिखेंगे। बाकी «अतिरिक्त विकल्प» में रहेंगे।", bn: "আপনার খাত বেছে নিন: আপনার কাজের দরকারি অপশন পণ্যের ফর্মে আগে দেখাবে। বাকিগুলো «অতিরিক্ত বিকল্প»-এ থাকবে।", ur: "اپنا شعبہ چنیں: آپ کے کام کے مفید اختیارات پروڈکٹ فارم میں پہلے دکھیں گے۔ باقی «اضافی اختیارات» میں رہیں گے۔", ta: "உங்கள் துறையைத் தேர்ந்தெடுக்கவும்: உங்கள் தொழிலுக்கு உதவும் விருப்பங்கள் பொருள் படிவத்தில் முதலில் வரும். மற்றவை «கூடுதல் விருப்பங்கள்» இல் இருக்கும்.", te: "మీ రంగాన్ని ఎంచుకోండి: మీ వ్యాపారానికి ఉపయోగపడే ఎంపికలు ఉత్పత్తి ఫారంలో ముందుగా కనిపిస్తాయి. మిగతావి «మరిన్ని ఎంపికలు»లో ఉంటాయి.", th: "เลือกประเภทร้าน: ตัวเลือกที่มีประโยชน์จะแสดงก่อนในแบบฟอร์มสินค้า ส่วนที่เหลืออยู่ใน «ตัวเลือกเพิ่มเติม»", zh: "选择您的行业：适合该行业的选项会在商品表单中优先显示，其余选项仍在“更多选项”中。", ja: "業種を選ぶと、その仕事に役立つ項目が商品フォームの上に表示されます。ほかの項目は「その他のオプション」にあります。", ko: "업종을 고르면 그 업종에 유용한 옵션이 상품 양식 위쪽에 표시됩니다. 나머지는 '추가 옵션'에 있습니다.", id: "Pilih sektor Anda: opsi yang berguna untuk usaha Anda tampil lebih dulu di formulir produk. Yang lain tetap ada di «Opsi tambahan».", vi: "Chọn lĩnh vực: các tùy chọn hữu ích cho nghề của bạn sẽ hiện trước trong phiếu sản phẩm. Các tùy chọn khác vẫn ở «Tùy chọn khác».", tl: "Piliin ang sektor mo: unang lalabas sa product form ang mga opsyong kapaki-pakinabang sa negosyo mo. Nasa «Higit pang opsyon» ang iba.", sw: "Chagua sekta yako: chaguo muhimu kwa biashara yako zitaonekana kwanza kwenye fomu ya bidhaa. Nyingine zinabaki kwenye «Chaguo zaidi».", ha: "Zaɓi fannin ka: zaɓuɓɓukan da suka dace da sana'arka za su fara bayyana a fom ɗin kaya. Sauran suna nan a «Ƙarin zaɓuɓɓuka».", yo: "Yan ẹ̀ka rẹ: àwọn àṣàyàn tó wúlò fún iṣẹ́ rẹ yóò kọ́kọ́ hàn nínú fọ́ọ̀mù ọjà. Àwọn yòókù wà nínú «Àṣàyàn síwájú sí i».", zu: "Khetha umkhakha wakho: izinketho eziwusizo emsebenzini wakho zivela kuqala efomini lomkhiqizo. Ezinye zisekhona ku-«Okunye okuzokhethwa».", am: "ዘርፍዎን ይምረጡ: ለሥራዎ የሚጠቅሙ አማራጮች በምርት ቅጹ ላይ መጀመሪያ ይታያሉ። ሌሎቹ በ«ተጨማሪ አማራጮች» ውስጥ ይቆያሉ።", bm: "I ka baara suguya sugandi: sugandi minnu nafa ka bon i ka baara la, olu bɛ yira fɔlɔ fɛn sɛbɛn kan. Tɔw bɛ «Sugandi wɛrɛw» la.", wo: "Tannal sa liggéey: option yi am solo ci sa liggéey dinañu jëkk feeñ ci fiche produit bi. Yeneen yi ngi des ci «Yeneen option yi»." };
+EXTRA_UI.sectorChooseHint = { fr: "Choisissez votre secteur d'activité pour voir d'abord les options utiles à votre métier →", en: "Choose your business sector to see the options useful for your trade first →", es: "Elige tu sector para ver primero las opciones útiles para tu oficio →", pt: "Escolha o seu setor para ver primeiro as opções úteis para o seu ramo →", de: "Wähle deine Branche, um zuerst die passenden Optionen zu sehen →", it: "Scegli il tuo settore per vedere prima le opzioni utili al tuo mestiere →", nl: "Kies je sector om eerst de handige opties voor je vak te zien →", pl: "Wybierz branżę, aby najpierw widzieć przydatne opcje →", ru: "Выберите сферу деятельности, чтобы сначала видеть полезные опции →", tr: "İşinize yarayan seçenekleri önce görmek için sektörünüzü seçin →", ar: "اختر قطاع نشاطك لترى الخيارات المفيدة لعملك أولًا ←", hi: "अपने काम के उपयोगी विकल्प पहले देखने के लिए अपना क्षेत्र चुनें →", bn: "আপনার কাজের দরকারি অপশন আগে দেখতে খাত বেছে নিন →", ur: "اپنے کام کے مفید اختیارات پہلے دیکھنے کے لیے اپنا شعبہ چنیں ←", ta: "உங்கள் தொழிலுக்கு உதவும் விருப்பங்களை முதலில் பார்க்க துறையைத் தேர்ந்தெடுக்கவும் →", te: "మీ వ్యాపారానికి ఉపయోగపడే ఎంపికలు ముందుగా చూడటానికి మీ రంగాన్ని ఎంచుకోండి →", th: "เลือกประเภทร้านเพื่อดูตัวเลือกที่มีประโยชน์ก่อน →", zh: "选择您的行业，优先显示适合的选项 →", ja: "業種を選ぶと、役立つ項目が先に表示されます →", ko: "업종을 고르면 유용한 옵션이 먼저 표시됩니다 →", id: "Pilih sektor usaha Anda agar opsi yang berguna tampil lebih dulu →", vi: "Chọn lĩnh vực kinh doanh để thấy trước các tùy chọn hữu ích →", tl: "Piliin ang sektor ng negosyo mo para unang makita ang mga kapaki-pakinabang na opsyon →", sw: "Chagua sekta yako ili uone kwanza chaguo muhimu kwa biashara yako →", ha: "Zaɓi fannin kasuwancinka don ganin zaɓuɓɓuka masu amfani da farko →", yo: "Yan ẹ̀ka iṣẹ́ rẹ láti kọ́kọ́ rí àwọn àṣàyàn tó wúlò →", zu: "Khetha umkhakha webhizinisi lakho ukuze ubone kuqala izinketho eziwusizo →", am: "ለሥራዎ የሚጠቅሙ አማራጮችን መጀመሪያ ለማየት የሥራ ዘርፍዎን ይምረጡ →", bm: "I ka baara suguya sugandi walasa sugandi nafamaw ka yira fɔlɔ →", wo: "Tannal sa liggéey ngir gis bu jëkk option yi am solo →" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -6564,15 +6572,36 @@ const drawCardDecor = (ctx, decor, W, H) => {
   ctx.restore();
 };
 const SECTORS = [
-  { fr: "Alimentation générale", en: "General food store", ar: "مواد غذائية عامة", vi: "Cửa hàng thực phẩm tổng hợp", bn: "সাধারণ খাদ্য দোকান", ha: "Kantin abinci na gaba ɗaya", bm: "Dumunikɛyɔrɔ (balo suguya bɛɛ)", ur: "عمومی خوراک کی دکان" },
-  { fr: "Vêtements & mode", en: "Clothing & fashion", ar: "ملابس وموضة", vi: "Quần áo & thời trang", bn: "পোশাক ও ফ্যাশন", ha: "Tufafi da salo", bm: "Fani ni fasoya", ur: "لباس اور فیشن" },
-  { fr: "Électronique & téléphonie", en: "Electronics & phones", ar: "إلكترونيات وهواتف", vi: "Điện tử & điện thoại", bn: "ইলেকট্রনিক্স ও ফোন", ha: "Na'urorin lantarki da wayoyi", bm: "Fɛnɛfɛnɛnifɛn ni telefɔninw", ur: "الیکٹرانکس اور فون" },
-  { fr: "Cosmétiques & beauté", en: "Cosmetics & beauty", ar: "مستحضرات تجميل", vi: "Mỹ phẩm & làm đẹp", bn: "প্রসাধনী ও সৌন্দর্য", ha: "Kayan kwalliya da kyau", bm: "Kɔrɔsibagafɛnw ni cɛɲi", ur: "کاسمیٹکس اور خوبصورتی" },
-  { fr: "Pharmacie & parapharmacie", en: "Pharmacy", ar: "صيدلية", vi: "Nhà thuốc", bn: "ফার্মেসি", ha: "Kantin magani", bm: "Fura feerekɛyɔrɔ", ur: "فارمیسی" },
-  { fr: "Quincaillerie & bricolage", en: "Hardware store", ar: "أدوات ومعدات", vi: "Cửa hàng dụng cụ & vật liệu", bn: "হার্ডওয়্যার দোকান", ha: "Kantin kayan aiki", bm: "Baarakɛminɛn feerekɛyɔrɔ", ur: "ہارڈویئر کی دکان" },
-  { fr: "Fournitures scolaires & papeterie", en: "School & office supplies", ar: "لوازم مدرسية ومكتبية", vi: "Đồ dùng học tập & văn phòng phẩm", bn: "স্কুল ও অফিস সরঞ্জাম", ha: "Kayan makaranta da ofis", bm: "Kalanso ni biro minɛnw", ur: "اسکول اور دفتری سامان" },
-  { fr: "Autre", en: "Other", ar: "أخرى", vi: "Khác", bn: "অন্যান্য", ha: "Wani", bm: "Wɛrɛ", ur: "دیگر" },
+  { id: "food", fr: "Alimentation générale", en: "General food store", ar: "مواد غذائية عامة", vi: "Cửa hàng thực phẩm tổng hợp", bn: "সাধারণ খাদ্য দোকান", ha: "Kantin abinci na gaba ɗaya", bm: "Dumunikɛyɔrɔ (balo suguya bɛɛ)", ur: "عمومی خوراک کی دکان" },
+  { id: "clothing", fr: "Vêtements & mode", en: "Clothing & fashion", ar: "ملابس وموضة", vi: "Quần áo & thời trang", bn: "পোশাক ও ফ্যাশন", ha: "Tufafi da salo", bm: "Fani ni fasoya", ur: "لباس اور فیشن" },
+  { id: "electronics", fr: "Électronique & téléphonie", en: "Electronics & phones", ar: "إلكترونيات وهواتف", vi: "Điện tử & điện thoại", bn: "ইলেকট্রনিক্স ও ফোন", ha: "Na'urorin lantarki da wayoyi", bm: "Fɛnɛfɛnɛnifɛn ni telefɔninw", ur: "الیکٹرانکس اور فون" },
+  { id: "cosmetics", fr: "Cosmétiques & beauté", en: "Cosmetics & beauty", ar: "مستحضرات تجميل", vi: "Mỹ phẩm & làm đẹp", bn: "প্রসাধনী ও সৌন্দর্য", ha: "Kayan kwalliya da kyau", bm: "Kɔrɔsibagafɛnw ni cɛɲi", ur: "کاسمیٹکس اور خوبصورتی" },
+  { id: "pharmacy", fr: "Pharmacie & parapharmacie", en: "Pharmacy", ar: "صيدلية", vi: "Nhà thuốc", bn: "ফার্মেসি", ha: "Kantin magani", bm: "Fura feerekɛyɔrɔ", ur: "فارمیسی" },
+  { id: "hardware", fr: "Quincaillerie & bricolage", en: "Hardware store", ar: "أدوات ومعدات", vi: "Cửa hàng dụng cụ & vật liệu", bn: "হার্ডওয়্যার দোকান", ha: "Kantin kayan aiki", bm: "Baarakɛminɛn feerekɛyɔrɔ", ur: "ہارڈویئر کی دکان" },
+  { id: "school", fr: "Fournitures scolaires & papeterie", en: "School & office supplies", ar: "لوازم مدرسية ومكتبية", vi: "Đồ dùng học tập & văn phòng phẩm", bn: "স্কুল ও অফিস সরঞ্জাম", ha: "Kayan makaranta da ofis", bm: "Kalanso ni biro minɛnw", ur: "اسکول اور دفتری سامان" },
+  { id: "bakery", fr: "Boulangerie & pâtisserie", en: "Bakery & pastry", ar: "مخبز وحلويات", vi: "Tiệm bánh", bn: "বেকারি ও মিষ্টান্ন", ha: "Gidan burodi da kayan zaƙi", bm: "Buru dilanyɔrɔ", ur: "بیکری اور مٹھائی" },
+  { id: "other", fr: "Autre", en: "Other", ar: "أخرى", vi: "Khác", bn: "অন্যান্য", ha: "Wani", bm: "Wɛrɛ", ur: "دیگر" },
 ];
+// Options de la fiche produit mises en avant selon le secteur. Les autres restent
+// disponibles derrière « Plus d'options ». Secteur inconnu ou « Autre » : tout est affiché.
+// unit = vente au détail (paquet → pièces), measure = vente au poids / à la mesure,
+// daily = production du jour, expiry = date de péremption, barcode = code-barres.
+const SECTOR_MODES = {
+  food: ["unit", "measure", "expiry", "barcode"],
+  clothing: [],
+  electronics: ["barcode"],
+  cosmetics: ["expiry", "barcode", "unit"],
+  pharmacy: ["expiry", "unit", "barcode"],
+  hardware: ["measure", "unit"],
+  school: ["unit", "barcode"],
+  bakery: ["daily", "unit"],
+};
+const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily"];
+function sectorIdOf(value) {
+  if (!value) return null;
+  const found = SECTORS.find((x) => Object.keys(x).some((k) => k !== "id" && x[k] === value));
+  return found ? found.id : null;
+}
 let USE_ARABIC_DIGITS = false;
 function getPaymentMethods(lang) {
   return [
@@ -12991,6 +13020,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   }, [aiInput]);
   const [aiLoading, setAiLoading] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [showMoreProductOptions, setShowMoreProductOptions] = useState(false);
+  useEffect(() => { if (!showAddProduct) setShowMoreProductOptions(false); }, [showAddProduct]);
   // null = mode ajout ; sinon l'id du produit en cours de modification.
   const [editingProductId, setEditingProductId] = useState(null);
   const [showAddExpense, setShowAddExpense] = useState(false);
@@ -13124,6 +13155,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [ownerLastInput, setOwnerLastInput] = useState("");
   const [ownerNameMsg, setOwnerNameMsg] = useState("");
   const [shopSector, setShopSector] = useState("");
+  // Fiche produit : options conseillées pour le secteur (voir SECTOR_MODES). null = secteur
+  // non choisi ou « Autre » : toutes les options sont affichées, comme avant.
+  const productSectorId = sectorIdOf(shopSector);
+  const productSectorModes = productSectorId && SECTOR_MODES[productSectorId] ? SECTOR_MODES[productSectorId] : null;
+  const productModeOrder = productSectorModes ? [...productSectorModes, ...PRODUCT_MODES.filter((m) => productSectorModes.indexOf(m) === -1)] : PRODUCT_MODES;
+  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : !!pDailyMode);
+  const modeShown = (m) => !productSectorModes || productSectorModes.indexOf(m) !== -1 || productModeActive(m) || showMoreProductOptions;
   const [sectorMsg, setSectorMsg] = useState("");
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
   const [countryMsg, setCountryMsg] = useState("");
@@ -15662,7 +15700,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Le secteur est enregistré sous forme de libellé (dans la langue de l'inscription) : on le retrouve
   // quelle que soit la langue d'origine pour l'afficher / le cocher dans la langue actuelle.
   const sectorLabelOf = (value) => {
-    const found = SECTORS.find((x) => Object.values(x).includes(value));
+    const found = SECTORS.find((x) => Object.keys(x).some((k) => k !== "id" && x[k] === value));
     return found ? (found[lang] || found.fr) : (value || "");
   };
   const countryLabelOf = (c) => (c && c.name && (c.name[lang] || c.name.en || c.name.fr)) || (c ? c.id : "");
@@ -20196,25 +20234,6 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               );
             })()}
-            {/* Scanner plutôt que taper : personne ne connaît par cœur les 13 chiffres
-                d'un code-barres. Le bouton ouvre la même caméra que le scan à la vente
-                (handleProductBarcodeScan), remplit le champ automatiquement ; il reste
-                aussi modifiable/saisissable à la main pour qui préfère. */}
-            <div className="flex gap-2 mb-3">
-              <input autoComplete="off" placeholder={tx(lang, "productBarcodeLabel")} type="text" inputMode="numeric" value={pBarcode} onChange={(e) => setPBarcode(e.target.value)} className="flex-1 min-w-0 border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
-              <button
-                type="button"
-                onClick={openProductBarcodeScanner}
-                aria-label={tx(lang, "scanBarcodeBtn")}
-                className="px-3 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: darkMode ? "rgba(37,99,235,0.12)" : "#eff6ff", color: darkMode ? "#60a5fa" : "#2563eb", border: `1px solid ${darkMode ? "rgba(37,99,235,0.3)" : "#bfdbfe"}` }}
-              >
-                <ScanLine size={16} />
-              </button>
-            </div>
-            <label className="text-xs block mb-1" style={{ color: T.muted }}>📅 {tx(lang, "expDateLabel")}</label>
-            <input type="date" value={pExpiry} onChange={(e) => setPExpiry(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-1" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
-            <p className="text-[10px] mb-3" style={{ color: T.muted }}>{tx(lang, "expDateHint")}</p>
             {showProductBarcodeScanner && (
               <div
                 className="fixed inset-0 z-50 flex items-start justify-center px-2"
@@ -20292,7 +20311,43 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
-            <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+            {/* Options conseillées pour le secteur de la boutique d'abord ; les autres sous
+                « Plus d'options » (toujours affichées si elles sont déjà utilisées). */}
+            {!productSectorId && !activeEmployee && !isDemo && (
+              <button type="button" onClick={() => { setShowSettings(true); setSettingsView("account"); setSettingsField("sector"); }} className="w-full text-left text-[11px] font-semibold mb-2" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", background: "transparent", border: "none", padding: 0 }}>
+                ⭐ {tx(lang, "sectorChooseHint")}
+              </button>
+            )}
+            {productModeOrder.some((m) => modeShown(m)) && productSectorModes && productSectorModes.length > 0 && (
+              <p className="text-[11px] font-semibold mb-2" style={{ color: darkMode ? "#7fb2ff" : "#2563eb" }}>⭐ {tx(lang, "sectorRecommended").replace("{s}", sectorLabelOf(shopSector))}</p>
+            )}
+            {productModeOrder.map((m) => !modeShown(m) ? null : m === "barcode" ? (
+              <React.Fragment key="barcode">
+                {/* Scanner plutôt que taper : personne ne connaît par cœur les 13 chiffres
+                    d'un code-barres. Le bouton ouvre la même caméra que le scan à la vente
+                    (handleProductBarcodeScan), remplit le champ automatiquement ; il reste
+                    aussi modifiable/saisissable à la main pour qui préfère. */}
+                <div className="flex gap-2 mb-3">
+                  <input autoComplete="off" placeholder={tx(lang, "productBarcodeLabel")} type="text" inputMode="numeric" value={pBarcode} onChange={(e) => setPBarcode(e.target.value)} className="flex-1 min-w-0 border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                  <button
+                    type="button"
+                    onClick={openProductBarcodeScanner}
+                    aria-label={tx(lang, "scanBarcodeBtn")}
+                    className="px-3 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ background: darkMode ? "rgba(37,99,235,0.12)" : "#eff6ff", color: darkMode ? "#60a5fa" : "#2563eb", border: `1px solid ${darkMode ? "rgba(37,99,235,0.3)" : "#bfdbfe"}` }}
+                  >
+                    <ScanLine size={16} />
+                  </button>
+                </div>
+                  </React.Fragment>
+            ) : m === "expiry" ? (
+              <React.Fragment key="expiry">
+                <label className="text-xs block mb-1" style={{ color: T.muted }}>📅 {tx(lang, "expDateLabel")}</label>
+                <input type="date" value={pExpiry} onChange={(e) => setPExpiry(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-1" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+                <p className="text-[10px] mb-3" style={{ color: T.muted }}>{tx(lang, "expDateHint")}</p>
+                  </React.Fragment>
+            ) : m === "unit" ? (
+            <div key="unit" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
               <label className="flex items-center justify-between cursor-pointer">
                 <span className="text-xs font-semibold" style={{ color: T.text }}>{t(lang, "sellByUnitToggle")}</span>
                 <button type="button" onClick={() => { const v = !pSellByUnit; setPSellByUnit(v); if (v) setPSellByMeasure(false); }} style={{ width: 40, height: 22, borderRadius: 12, background: pSellByUnit ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pSellByUnit ? "flex-end" : "flex-start", border: "none", cursor: "pointer" }}>
@@ -20306,10 +20361,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
-            {/* Vente au poids / à la mesure : la quantité se saisit au lieu de se cliquer,
+            ) : m === "measure" ? (
+            /* Vente au poids / à la mesure : la quantité se saisit au lieu de se cliquer,
                 et elle accepte une virgule. Incompatible avec la vente à l'unité, qui
-                découpe des paquets entiers : les deux ne peuvent pas être actifs ensemble. */}
-            <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+                découpe des paquets entiers : les deux ne peuvent pas être actifs ensemble. */
+            <div key="measure" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
               <label className="flex items-center justify-between cursor-pointer gap-3">
                 <span className="text-xs font-semibold" style={{ color: T.text }}>{tx(lang, "measureToggle")}</span>
                 <button type="button" onClick={() => { const v = !pSellByMeasure; setPSellByMeasure(v); if (v) setPSellByUnit(false); }} style={{ width: 40, height: 22, borderRadius: 12, background: pSellByMeasure ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pSellByMeasure ? "flex-end" : "flex-start", border: "none", cursor: "pointer", flexShrink: 0 }}>
@@ -20323,12 +20379,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
-            {/* Mode "Quantité du jour" : pour une production fraîche et non stockable
+            ) : (
+            /* Mode "Quantité du jour" : pour une production fraîche et non stockable
                 (boulangerie, pâtisserie...). La quantité se gère ensuite exactement comme
                 un stock classique (même "+"/"−") ; ce toggle n'ajoute qu'un comportement en
                 plus, le bouton "Nouvelle journée" (voir startNewDay), visible uniquement
-                sur les produits ainsi marqués. */}
-            <div className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+                sur les produits ainsi marqués. */
+            <div key="daily" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
               <label className="flex items-center justify-between cursor-pointer gap-3">
                 <span className="text-xs font-semibold" style={{ color: T.text }}>{tx(lang, "dailyModeToggle")}</span>
                 <button type="button" onClick={() => setPDailyMode(!pDailyMode)} style={{ width: 40, height: 22, borderRadius: 12, background: pDailyMode ? INDIGO : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: pDailyMode ? "flex-end" : "flex-start", border: "none", cursor: "pointer", flexShrink: 0 }}>
@@ -20339,6 +20396,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <p className="text-[11px] mt-2" style={{ color: T.muted }}>{tx(lang, "dailyModeHint")}</p>
               )}
             </div>
+            ))}
+            {productModeOrder.some((m) => !modeShown(m)) && (
+              <button type="button" onClick={() => setShowMoreProductOptions(true)} className="w-full mb-3 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5" style={{ background: "transparent", color: darkMode ? "#7fb2ff" : "#2563eb", border: `1px dashed ${darkMode ? "rgba(127,178,255,0.5)" : "#93c5fd"}` }}>
+                <Plus size={13} /> {t(lang, "moreOptionsTitle")} : {productModeOrder.filter((m) => !modeShown(m)).map((m) => tx(lang, "mode_" + m)).join(", ")}
+              </button>
+            )}
             <div className="mb-3">
               <label className="text-xs block mb-1" style={{ color: T.muted }}>{stripTrailingCurrencyParen(t(lang, "productPhoto"))} ({t(lang, "othFacultatif")})</label>
               <div className="flex gap-2 flex-wrap">
@@ -24669,12 +24732,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {settingsField === "sector" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {sectorMsg && <p style={{ color: sectorMsg.includes("✓") ? "#34d399" : "#f87171", fontSize: 12 }}>{sectorMsg}</p>}
+                  <p style={{ color: T.muted, fontSize: 12, lineHeight: 1.4 }}>{tx(lang, "sectorModesHint")}</p>
                   {SECTORS.map((sec, idx) => {
                     const label = sec[lang] || sec.fr;
                     const selected = sectorLabelOf(shopSector) === label;
                     return (
                       <button key={idx} onClick={() => saveSector(label)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: selected ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${selected ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
-                        <span style={{ color: selected ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600, textAlign: "left" }}>{label}</span>
+                        <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3, textAlign: "left" }}>
+                          <span style={{ color: selected ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{label}</span>
+                          {SECTOR_MODES[sec.id] && SECTOR_MODES[sec.id].length > 0 && (
+                            <span style={{ color: T.muted, fontSize: 11, fontWeight: 500 }}>⭐ {SECTOR_MODES[sec.id].map((m) => tx(lang, "mode_" + m)).join(" · ")}</span>
+                          )}
+                        </span>
                         {selected && <Check size={16} color="#22d3ee" />}
                       </button>
                     );
