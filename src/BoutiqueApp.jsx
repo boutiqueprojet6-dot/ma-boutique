@@ -12884,6 +12884,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     { id: "cash", hidden: !hasPermission("viewCash") },
     { id: "calculator", hidden: false },
   ].filter((it) => !it.hidden).map((it) => it.id);
+  // Onglet mémorisé sur cet appareil auquel l'utilisateur actuel n'a pas accès (ex. le
+  // propriétaire avait laissé « Assistant », puis un membre du personnel se connecte sur
+  // le même appareil) : l'écran restait vide. On revient au premier onglet autorisé.
+  useEffect(() => {
+    if (activeEmployee && swipeTabOrder.length && !swipeTabOrder.includes(tab)) setTab(swipeTabOrder[0]);
+  }, [tab, activeEmployee, swipeTabOrder.join(",")]);
   // ---- Largeur du panneau latéral bleu, redimensionnable à la souris (desktop) ----
   // Mémorisée dans localStorage pour rester d'une session à l'autre ; limites
   // raisonnables (160 à 320px) pour ne jamais pouvoir le réduire à rien ni envahir
@@ -13999,7 +14005,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const { account, shop } = splitShopBlob(merged);
       // Partie « compte » (réglages, profil...) : envoyée seulement si elle a changé.
       const accJson = JSON.stringify(account);
-      if (Object.keys(account).length > 0 && accJson !== lastAccountJsonRef.current) {
+      // Un membre du personnel n'écrit jamais la partie « compte » (profil, réglages du
+      // propriétaire) : le serveur la lui refuse (401), et ce refus bloquait TOUTE la
+      // sauvegarde qui suit — les dettes de ses ventes à crédit n'arrivaient jamais au serveur.
+      if (!isEmployeeDevice && Object.keys(account).length > 0 && accJson !== lastAccountJsonRef.current) {
         const { data: accOk, error: accErr } = await supabase.rpc("save_shop_data", { p_data: account });
         if (accErr || accOk !== true) return { ok: false, merged };
         lastAccountJsonRef.current = accJson;
@@ -19717,7 +19726,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             <div className="px-1 mb-1">
-              <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 {tx(lang, "debtReminderGreeting")}, {shopName || PRIVACY_APP_NAME}</p>
+              <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 {tx(lang, "debtReminderGreeting")}, {activeEmployee && activeEmployee.name ? activeEmployee.name : (shopName || PRIVACY_APP_NAME)}</p>
               <p className="text-[11px]" style={{ color: T.text }}>
                 {fullDateLong()}
               </p>
