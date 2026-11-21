@@ -138,7 +138,7 @@ export default defineConfig({
       manifest: {
         name: "Boutipro",
         short_name: "Boutipro",
-        description: "Application de gestion de boutique",
+        description: "Application de gestion pour commerçants",
         theme_color: "#1e3a8a",
         background_color: "#ffffff",
         display: "standalone",
