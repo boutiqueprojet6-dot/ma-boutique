@@ -6408,6 +6408,52 @@ EXTRA_UI.invPastLine = { fr: "{n} produits comptés", en: "{n} products counted"
 EXTRA_UI.invAllCounted = { fr: "Tout est compté !", en: "Everything is counted!", es: "¡Todo está contado!", pt: "Tudo foi contado!", de: "Alles gezählt!", it: "Tutto contato!", nl: "Alles is geteld!", pl: "Wszystko policzone!", ru: "Всё посчитано!", tr: "Her şey sayıldı!", ar: "تم عدّ كل شيء!", hi: "सब गिन लिया!", bn: "সব গোনা হয়ে গেছে!", ur: "سب گن لیا گیا!", ta: "அனைத்தும் எண்ணப்பட்டன!", te: "అన్నీ లెక్కించారు!", th: "นับครบแล้ว!", zh: "全部已点完！", ja: "すべてカウント済み！", ko: "모두 셌습니다!", id: "Semua sudah dihitung!", vi: "Đã đếm hết!", tl: "Nabilang na lahat!", sw: "Kila kitu kimehesabiwa!", ha: "An ƙidaya komai!", yo: "A ti ka gbogbo rẹ̀!", zu: "Konke kubaliwe!", am: "ሁሉም ተቆጥሯል!", bm: "Fɛn bɛɛ jatera!", wo: "Lépp lim nañu ko!" };
 EXTRA_UI.removeReason_inventory = { fr: "Écart d'inventaire", en: "Stock count difference", es: "Diferencia de inventario", pt: "Diferença de inventário", de: "Inventurdifferenz", it: "Differenza d'inventario", nl: "Inventarisverschil", pl: "Różnica inwentaryzacyjna", ru: "Недостача по инвентаризации", tr: "Sayım farkı", ar: "فرق الجرد", hi: "गिनती का अंतर", bn: "গণনার ঘাটতি", ur: "گنتی کا فرق", ta: "எண்ணிக்கை வேறுபாடு", te: "లెక్కింపు తేడా", th: "ส่วนต่างจากการตรวจนับ", zh: "盘点差异", ja: "棚卸し差異", ko: "실사 차이", id: "Selisih penghitungan", vi: "Chênh lệch kiểm kê", tl: "Pagkakaiba sa bilang", sw: "Tofauti ya hesabu", ha: "Bambancin ƙidaya", yo: "Ìyàtọ̀ kíka", zu: "Umehluko wokubala", am: "የቆጠራ ልዩነት", bm: "Jateli danfara", wo: "Wuute ci lim" };
 EXTRA_UI.logInventory = { fr: "Inventaire validé", en: "Stock count confirmed", es: "Inventario validado", pt: "Inventário validado", de: "Inventur bestätigt", it: "Inventario confermato", nl: "Inventaris bevestigd", pl: "Inwentaryzacja zatwierdzona", ru: "Инвентаризация подтверждена", tr: "Sayım onaylandı", ar: "تم تأكيد الجرد", hi: "गिनती पुष्ट", bn: "গণনা নিশ্চিত", ur: "گنتی کی تصدیق", ta: "எண்ணிக்கை உறுதிசெய்யப்பட்டது", te: "లెక్కింపు నిర్ధారించబడింది", th: "ยืนยันการตรวจนับ", zh: "盘点已确认", ja: "棚卸し確定", ko: "실사 확정", id: "Penghitungan dikonfirmasi", vi: "Đã xác nhận kiểm kê", tl: "Nakumpirma ang bilang", sw: "Hesabu imethibitishwa", ha: "An tabbatar da ƙidaya", yo: "A ti fọwọ́ sí kíka", zu: "Ukubala kuqinisekisiwe", am: "ቆጠራ ተረጋግጧል", bm: "Jateli sɛmɛntiyara", wo: "Lim bi dëggal nañu ko" };
+EXTRA_UI.supTabClients = { fr: "Clients", en: "Customers", es: "Clientes", pt: "Clientes", de: "Kunden", it: "Clienti", nl: "Klanten", pl: "Klienci", ru: "Клиенты", tr: "Müşteriler", ar: "العملاء", hi: "ग्राहक", bn: "গ্রাহক", ur: "گاہک", ta: "வாடிக்கையாளர்கள்", te: "కస్టమర్లు", th: "ลูกค้า", zh: "客户", ja: "お客様", ko: "고객", id: "Pelanggan", vi: "Khách hàng", tl: "Mga kostumer", sw: "Wateja", ha: "Abokan ciniki", yo: "Àwọn oníbàárà", zu: "Amakhasimende", am: "ደንበኞች", bm: "Sannikɛlaw", wo: "Kiliyaan yi" };
+EXTRA_UI.supTabSuppliers = { fr: "Fournisseurs", en: "Suppliers", es: "Proveedores", pt: "Fornecedores", de: "Lieferanten", it: "Fornitori", nl: "Leveranciers", pl: "Dostawcy", ru: "Поставщики", tr: "Tedarikçiler", ar: "المورّدون", hi: "आपूर्तिकर्ता", bn: "সরবরাহকারী", ur: "سپلائرز", ta: "சப்ளையர்கள்", te: "సరఫరాదారులు", th: "ซัพพลายเออร์", zh: "供应商", ja: "仕入先", ko: "공급업체", id: "Pemasok", vi: "Nhà cung cấp", tl: "Mga supplier", sw: "Wasambazaji", ha: "Masu kawo kaya", yo: "Àwọn olùpèsè", zu: "Abahlinzeki", am: "አቅራቢዎች", bm: "Fɛn lasɔrɔbagaw", wo: "Fournisseur yi" };
+EXTRA_UI.supTotalOwed = { fr: "Vous devez à vos fournisseurs", en: "You owe your suppliers", es: "Debe a sus proveedores", pt: "Deve aos seus fornecedores", de: "Sie schulden Ihren Lieferanten", it: "Dovete ai vostri fornitori", nl: "U bent uw leveranciers verschuldigd", pl: "Jesteś winien dostawcom", ru: "Вы должны поставщикам", tr: "Tedarikçilerinize borcunuz", ar: "المستحق لمورّديك", hi: "आपको आपूर्तिकर्ताओं को देना है", bn: "আপনার সরবরাহকারীদের পাওনা", ur: "آپ کو سپلائرز کو ادا کرنا ہے", ta: "சப்ளையர்களுக்கு நீங்கள் செலுத்த வேண்டியது", te: "మీరు సరఫరాదారులకు చెల్లించాల్సింది", th: "ยอดที่คุณค้างซัพพลายเออร์", zh: "您欠供应商", ja: "仕入先への未払い", ko: "공급업체에 갚을 금액", id: "Utang Anda ke pemasok", vi: "Bạn nợ nhà cung cấp", tl: "Utang mo sa mga supplier", sw: "Unadaiwa na wasambazaji", ha: "Bashin da masu kawo kaya ke binka", yo: "Gbèsè tí o jẹ àwọn olùpèsè", zu: "Okukweletwa abahlinzeki", am: "ለአቅራቢዎች ያለብዎት ዕዳ", bm: "I ka juru fɛn lasɔrɔbagaw fɛ", wo: "Li nga ameel say fournisseur" };
+EXTRA_UI.supOverdueCount = { fr: "{n} dette(s) en retard", en: "{n} overdue", es: "{n} deuda(s) vencida(s)", pt: "{n} dívida(s) em atraso", de: "{n} überfällig", it: "{n} debito/i scaduto/i", nl: "{n} achterstallig", pl: "{n} po terminie", ru: "Просрочено: {n}", tr: "{n} gecikmiş borç", ar: "{n} ديون متأخرة", hi: "{n} बकाया देर से", bn: "{n}টি দেনা বকেয়া", ur: "{n} قرض تاخیر سے", ta: "{n} தாமதமான கடன்கள்", te: "{n} గడువు దాటిన బాకీలు", th: "ค้างชำระเกินกำหนด {n} รายการ", zh: "{n} 笔已逾期", ja: "期限超過 {n} 件", ko: "연체 {n}건", id: "{n} utang terlambat", vi: "{n} khoản quá hạn", tl: "{n} utang na lampas na", sw: "Madeni {n} yamechelewa", ha: "Bashi {n} ya wuce lokaci", yo: "Gbèsè {n} ti kọjá àkókò", zu: "Izikweletu ezingu-{n} sezedlule", am: "{n} ጊዜው ያለፈ ዕዳ", bm: "Juru {n} waati tɛmɛna", wo: "{n} bor yu yàgg" };
+EXTRA_UI.supAddBtn = { fr: "Nouvelle dette fournisseur", en: "New supplier debt", es: "Nueva deuda con proveedor", pt: "Nova dívida a fornecedor", de: "Neue Lieferantenschuld", it: "Nuovo debito fornitore", nl: "Nieuwe leveranciersschuld", pl: "Nowy dług u dostawcy", ru: "Новый долг поставщику", tr: "Yeni tedarikçi borcu", ar: "دين جديد لمورّد", hi: "नया आपूर्तिकर्ता बकाया", bn: "নতুন সরবরাহকারী দেনা", ur: "سپلائر کا نیا قرض", ta: "புதிய சப்ளையர் கடன்", te: "కొత్త సరఫరాదారు బాకీ", th: "หนี้ซัพพลายเออร์ใหม่", zh: "新增供应商欠款", ja: "仕入先への新しい未払い", ko: "새 공급업체 채무", id: "Utang pemasok baru", vi: "Khoản nợ nhà cung cấp mới", tl: "Bagong utang sa supplier", sw: "Deni jipya la msambazaji", ha: "Sabon bashin mai kawo kaya", yo: "Gbèsè olùpèsè tuntun", zu: "Isikweletu esisha somhlinzeki", am: "አዲስ የአቅራቢ ዕዳ", bm: "Fɛn lasɔrɔbaga juru kura", wo: "Bor bu bees ci fournisseur" };
+EXTRA_UI.supNone = { fr: "Aucune dette fournisseur en cours.", en: "No supplier debts right now.", es: "No hay deudas con proveedores.", pt: "Nenhuma dívida a fornecedores.", de: "Keine offenen Lieferantenschulden.", it: "Nessun debito verso fornitori.", nl: "Geen openstaande leveranciersschulden.", pl: "Brak długów u dostawców.", ru: "Долгов поставщикам нет.", tr: "Açık tedarikçi borcu yok.", ar: "لا توجد ديون للمورّدين حاليًا.", hi: "अभी कोई आपूर्तिकर्ता बकाया नहीं।", bn: "এখন কোনো সরবরাহকারী দেনা নেই।", ur: "ابھی سپلائرز کا کوئی قرض نہیں۔", ta: "தற்போது சப்ளையர் கடன் இல்லை.", te: "ప్రస్తుతం సరఫరాదారు బాకీలు లేవు.", th: "ไม่มีหนี้ซัพพลายเออร์ค้างอยู่", zh: "目前没有供应商欠款。", ja: "仕入先への未払いはありません。", ko: "현재 공급업체 채무가 없습니다.", id: "Tidak ada utang pemasok saat ini.", vi: "Hiện không có khoản nợ nhà cung cấp nào.", tl: "Walang utang sa supplier sa ngayon.", sw: "Hakuna deni la msambazaji kwa sasa.", ha: "Babu bashin mai kawo kaya yanzu.", yo: "Kò sí gbèsè olùpèsè lọ́wọ́lọ́wọ́.", zu: "Asikho isikweletu somhlinzeki okwamanje.", am: "አሁን የአቅራቢ ዕዳ የለም።", bm: "Fɛn lasɔrɔbaga juru si tɛ sisan.", wo: "Amul bor ci fournisseur léegi." };
+EXTRA_UI.supDebtsCount = { fr: "{n} achat(s) à crédit", en: "{n} purchase(s) on credit", es: "{n} compra(s) a crédito", pt: "{n} compra(s) a crédito", de: "{n} Kauf/Käufe auf Kredit", it: "{n} acquisto/i a credito", nl: "{n} aankoop/aankopen op krediet", pl: "{n} zakup(ów) na kredyt", ru: "Покупок в долг: {n}", tr: "{n} veresiye alım", ar: "{n} مشتريات بالدين", hi: "{n} उधार खरीद", bn: "{n}টি বাকিতে কেনা", ur: "{n} ادھار خریداری", ta: "{n} கடன் கொள்முதல்", te: "{n} అప్పుపై కొనుగోళ్లు", th: "ซื้อเชื่อ {n} รายการ", zh: "{n} 笔赊购", ja: "掛け仕入れ {n} 件", ko: "외상 매입 {n}건", id: "{n} pembelian kredit", vi: "{n} lần mua chịu", tl: "{n} pagbiling pautang", sw: "Manunuzi {n} kwa mkopo", ha: "Sayayya {n} bashi", yo: "Rírà {n} lórí gbèsè", zu: "Ukuthenga okungu-{n} ngesikweletu", am: "{n} በዱቤ ግዢ", bm: "Sanni {n} juru la", wo: "{n} jënd ci bor" };
+EXTRA_UI.supDueOn = { fr: "À payer le {date}", en: "Due {date}", es: "A pagar el {date}", pt: "A pagar em {date}", de: "Fällig am {date}", it: "Da pagare il {date}", nl: "Te betalen op {date}", pl: "Do zapłaty {date}", ru: "Оплатить до {date}", tr: "{date} tarihinde ödenecek", ar: "يُدفع في {date}", hi: "{date} को देय", bn: "{date} পরিশোধ করতে হবে", ur: "{date} کو ادائیگی", ta: "{date} செலுத்த வேண்டும்", te: "{date} చెల్లించాలి", th: "ครบกำหนด {date}", zh: "{date} 到期", ja: "{date} 支払期限", ko: "{date} 지급 예정", id: "Jatuh tempo {date}", vi: "Hạn trả {date}", tl: "Babayaran sa {date}", sw: "Kulipwa {date}", ha: "A biya ranar {date}", yo: "Sísan ní {date}", zu: "Kukhokhwa ngo-{date}", am: "የሚከፈልበት {date}", bm: "A sara {date}", wo: "Fey ko {date}" };
+EXTRA_UI.supOverdueSince = { fr: "En retard depuis le {date}", en: "Overdue since {date}", es: "Vencida desde el {date}", pt: "Em atraso desde {date}", de: "Überfällig seit {date}", it: "Scaduto dal {date}", nl: "Achterstallig sinds {date}", pl: "Po terminie od {date}", ru: "Просрочено с {date}", tr: "{date} tarihinden beri gecikmiş", ar: "متأخر منذ {date}", hi: "{date} से बकाया", bn: "{date} থেকে বকেয়া", ur: "{date} سے تاخیر", ta: "{date} முதல் தாமதம்", te: "{date} నుండి గడువు దాటింది", th: "เกินกำหนดตั้งแต่ {date}", zh: "自 {date} 起逾期", ja: "{date} から期限超過", ko: "{date}부터 연체", id: "Terlambat sejak {date}", vi: "Quá hạn từ {date}", tl: "Lampas na mula {date}", sw: "Imechelewa tangu {date}", ha: "Ya wuce lokaci tun {date}", yo: "Ti kọjá àkókò láti {date}", zu: "Sekudlule kusukela ngo-{date}", am: "ከ{date} ጀምሮ ዘግይቷል", bm: "Waati tɛmɛna kabini {date}", wo: "Yàgg na li dale {date}" };
+EXTRA_UI.supPayBtn = { fr: "Payer", en: "Pay", es: "Pagar", pt: "Pagar", de: "Bezahlen", it: "Paga", nl: "Betalen", pl: "Zapłać", ru: "Оплатить", tr: "Öde", ar: "دفع", hi: "भुगतान करें", bn: "পরিশোধ করুন", ur: "ادا کریں", ta: "செலுத்து", te: "చెల్లించండి", th: "ชำระ", zh: "付款", ja: "支払う", ko: "지급", id: "Bayar", vi: "Trả", tl: "Magbayad", sw: "Lipa", ha: "Biya", yo: "San", zu: "Khokha", am: "ክፈል", bm: "A sara", wo: "Fey" };
+EXTRA_UI.supDelete = { fr: "Supprimer", en: "Delete", es: "Eliminar", pt: "Eliminar", de: "Löschen", it: "Elimina", nl: "Verwijderen", pl: "Usuń", ru: "Удалить", tr: "Sil", ar: "حذف", hi: "हटाएं", bn: "মুছুন", ur: "حذف کریں", ta: "நீக்கு", te: "తొలగించు", th: "ลบ", zh: "删除", ja: "削除", ko: "삭제", id: "Hapus", vi: "Xóa", tl: "Burahin", sw: "Futa", ha: "Goge", yo: "Pa rẹ́", zu: "Susa", am: "ሰርዝ", bm: "A jɔsi", wo: "Far" };
+EXTRA_UI.supDeleteConfirm = { fr: "Toucher encore pour confirmer la suppression", en: "Tap again to confirm deletion", es: "Toque de nuevo para confirmar", pt: "Toque de novo para confirmar", de: "Zum Bestätigen erneut tippen", it: "Tocca di nuovo per confermare", nl: "Tik nogmaals om te bevestigen", pl: "Dotknij ponownie, aby potwierdzić", ru: "Нажмите ещё раз для подтверждения", tr: "Onaylamak için tekrar dokunun", ar: "المس مرة أخرى لتأكيد الحذف", hi: "पुष्टि के लिए फिर टैप करें", bn: "নিশ্চিত করতে আবার চাপুন", ur: "تصدیق کے لیے دوبارہ ٹیپ کریں", ta: "உறுதிப்படுத்த மீண்டும் தட்டவும்", te: "నిర్ధారించడానికి మళ్లీ నొక్కండి", th: "แตะอีกครั้งเพื่อยืนยันการลบ", zh: "再点一次确认删除", ja: "もう一度タップして削除を確定", ko: "삭제하려면 한 번 더 누르세요", id: "Ketuk lagi untuk konfirmasi", vi: "Chạm lần nữa để xác nhận xóa", tl: "I-tap muli para kumpirmahin", sw: "Gusa tena kuthibitisha", ha: "Taɓa kuma don tabbatarwa", yo: "Tẹ̀ lẹ́ẹ̀kan sí i láti jẹ́rìí", zu: "Thepha futhi ukuqinisekisa", am: "ለማረጋገጥ እንደገና ይንኩ", bm: "Digi tugun ka a sɛmɛntiya", wo: "Bësal ñeel dëggal" };
+EXTRA_UI.supSettled = { fr: "Dettes réglées ({n})", en: "Settled debts ({n})", es: "Deudas saldadas ({n})", pt: "Dívidas quitadas ({n})", de: "Beglichene Schulden ({n})", it: "Debiti saldati ({n})", nl: "Afbetaalde schulden ({n})", pl: "Spłacone długi ({n})", ru: "Погашенные долги ({n})", tr: "Kapanan borçlar ({n})", ar: "ديون مسدَّدة ({n})", hi: "चुकाए गए बकाया ({n})", bn: "পরিশোধিত দেনা ({n})", ur: "ادا شدہ قرض ({n})", ta: "தீர்த்த கடன்கள் ({n})", te: "తీర్చిన బాకీలు ({n})", th: "หนี้ที่ชำระแล้ว ({n})", zh: "已结清 ({n})", ja: "支払済み ({n})", ko: "상환 완료 ({n})", id: "Utang lunas ({n})", vi: "Đã trả hết ({n})", tl: "Bayad na mga utang ({n})", sw: "Madeni yaliyolipwa ({n})", ha: "Bashin da aka biya ({n})", yo: "Gbèsè tí a ti san ({n})", zu: "Izikweletu ezikhokhiwe ({n})", am: "የተከፈሉ ዕዳዎች ({n})", bm: "Juru saralenw ({n})", wo: "Bor yu ñu fey ({n})" };
+EXTRA_UI.supNameLabel = { fr: "Nom du fournisseur", en: "Supplier name", es: "Nombre del proveedor", pt: "Nome do fornecedor", de: "Name des Lieferanten", it: "Nome del fornitore", nl: "Naam van de leverancier", pl: "Nazwa dostawcy", ru: "Имя поставщика", tr: "Tedarikçi adı", ar: "اسم المورّد", hi: "आपूर्तिकर्ता का नाम", bn: "সরবরাহকারীর নাম", ur: "سپلائر کا نام", ta: "சப்ளையர் பெயர்", te: "సరఫరాదారు పేరు", th: "ชื่อซัพพลายเออร์", zh: "供应商名称", ja: "仕入先名", ko: "공급업체 이름", id: "Nama pemasok", vi: "Tên nhà cung cấp", tl: "Pangalan ng supplier", sw: "Jina la msambazaji", ha: "Sunan mai kawo kaya", yo: "Orúkọ olùpèsè", zu: "Igama lomhlinzeki", am: "የአቅራቢው ስም", bm: "Fɛn lasɔrɔbaga tɔgɔ", wo: "Turu fournisseur bi" };
+EXTRA_UI.supPhoneLabel = { fr: "Téléphone (facultatif)", en: "Phone (optional)", es: "Teléfono (opcional)", pt: "Telefone (opcional)", de: "Telefon (optional)", it: "Telefono (facoltativo)", nl: "Telefoon (optioneel)", pl: "Telefon (opcjonalnie)", ru: "Телефон (необязательно)", tr: "Telefon (isteğe bağlı)", ar: "الهاتف (اختياري)", hi: "फ़ोन (वैकल्पिक)", bn: "ফোন (ঐচ্ছিক)", ur: "فون (اختیاری)", ta: "தொலைபேசி (விருப்பம்)", te: "ఫోన్ (ఐచ్ఛికం)", th: "โทรศัพท์ (ไม่บังคับ)", zh: "电话（可选）", ja: "電話番号（任意）", ko: "전화번호 (선택)", id: "Telepon (opsional)", vi: "Điện thoại (không bắt buộc)", tl: "Telepono (opsyonal)", sw: "Simu (si lazima)", ha: "Waya (zaɓi)", yo: "Fóònù (àṣàyàn)", zu: "Ucingo (uyazikhethela)", am: "ስልክ (አማራጭ)", bm: "Telefɔni (n'i b'a fɛ)", wo: "Telefon (bu la neexee)" };
+EXTRA_UI.supAmountLabel = { fr: "Montant dû", en: "Amount owed", es: "Importe adeudado", pt: "Valor devido", de: "Geschuldeter Betrag", it: "Importo dovuto", nl: "Verschuldigd bedrag", pl: "Kwota do zapłaty", ru: "Сумма долга", tr: "Borç tutarı", ar: "المبلغ المستحق", hi: "देय राशि", bn: "পাওনা পরিমাণ", ur: "واجب الادا رقم", ta: "செலுத்த வேண்டிய தொகை", te: "బాకీ మొత్తం", th: "ยอดที่ต้องจ่าย", zh: "欠款金额", ja: "未払い金額", ko: "갚을 금액", id: "Jumlah utang", vi: "Số tiền nợ", tl: "Halagang utang", sw: "Kiasi kinachodaiwa", ha: "Adadin bashi", yo: "Iye gbèsè", zu: "Imali ekweletwayo", am: "የዕዳው መጠን", bm: "Juru hakɛ", wo: "Xaalis bi nga ameel" };
+EXTRA_UI.supNoteLabel = { fr: "Marchandise (facultatif)", en: "Goods (optional)", es: "Mercancía (opcional)", pt: "Mercadoria (opcional)", de: "Ware (optional)", it: "Merce (facoltativo)", nl: "Goederen (optioneel)", pl: "Towar (opcjonalnie)", ru: "Товар (необязательно)", tr: "Mal (isteğe bağlı)", ar: "البضاعة (اختياري)", hi: "माल (वैकल्पिक)", bn: "মালামাল (ঐচ্ছিক)", ur: "سامان (اختیاری)", ta: "சரக்கு (விருப்பம்)", te: "సరుకు (ఐచ్ఛికం)", th: "สินค้า (ไม่บังคับ)", zh: "货物（可选）", ja: "商品（任意）", ko: "물품 (선택)", id: "Barang (opsional)", vi: "Hàng hóa (không bắt buộc)", tl: "Paninda (opsyonal)", sw: "Bidhaa (si lazima)", ha: "Kaya (zaɓi)", yo: "Ọjà (àṣàyàn)", zu: "Izimpahla (uyazikhethela)", am: "ዕቃ (አማራጭ)", bm: "Fɛnw (n'i b'a fɛ)", wo: "Marsandiz (bu la neexee)" };
+EXTRA_UI.supDueLabel = { fr: "À payer avant le (facultatif)", en: "Pay before (optional)", es: "Pagar antes del (opcional)", pt: "Pagar até (opcional)", de: "Zahlen bis (optional)", it: "Da pagare entro (facoltativo)", nl: "Betalen vóór (optioneel)", pl: "Zapłacić do (opcjonalnie)", ru: "Оплатить до (необязательно)", tr: "Son ödeme tarihi (isteğe bağlı)", ar: "يُدفع قبل (اختياري)", hi: "इससे पहले भुगतान करें (वैकल्पिक)", bn: "এর আগে পরিশোধ (ঐচ্ছিক)", ur: "اس سے پہلے ادائیگی (اختیاری)", ta: "இதற்கு முன் செலுத்தவும் (விருப்பம்)", te: "దీనికి ముందు చెల్లించండి (ఐచ్ఛికం)", th: "ชำระก่อนวันที่ (ไม่บังคับ)", zh: "付款截止日期（可选）", ja: "支払期限（任意）", ko: "지급 기한 (선택)", id: "Bayar sebelum (opsional)", vi: "Trả trước ngày (không bắt buộc)", tl: "Bayaran bago ang (opsyonal)", sw: "Lipa kabla ya (si lazima)", ha: "A biya kafin (zaɓi)", yo: "San ṣáájú (àṣàyàn)", zu: "Khokha ngaphambi kuka (uyazikhethela)", am: "ከዚህ በፊት ይክፈሉ (አማራጭ)", bm: "A sara sani (n'i b'a fɛ)", wo: "Fey balaa (bu la neexee)" };
+EXTRA_UI.supSave = { fr: "Enregistrer la dette", en: "Save the debt", es: "Guardar la deuda", pt: "Guardar a dívida", de: "Schuld speichern", it: "Salva il debito", nl: "Schuld opslaan", pl: "Zapisz dług", ru: "Сохранить долг", tr: "Borcu kaydet", ar: "حفظ الدين", hi: "बकाया सहेजें", bn: "দেনা সংরক্ষণ করুন", ur: "قرض محفوظ کریں", ta: "கடனைச் சேமி", te: "బాకీని సేవ్ చేయండి", th: "บันทึกหนี้", zh: "保存欠款", ja: "未払いを保存", ko: "채무 저장", id: "Simpan utang", vi: "Lưu khoản nợ", tl: "I-save ang utang", sw: "Hifadhi deni", ha: "Ajiye bashin", yo: "Fi gbèsè pamọ́", zu: "Gcina isikweletu", am: "ዕዳውን አስቀምጥ", bm: "Juru mara", wo: "Denc bor bi" };
+EXTRA_UI.supNeedNameAmount = { fr: "Indiquez le fournisseur et le montant dû.", en: "Enter the supplier and the amount owed.", es: "Indique el proveedor y el importe adeudado.", pt: "Indique o fornecedor e o valor devido.", de: "Geben Sie Lieferant und Betrag an.", it: "Indicate il fornitore e l'importo dovuto.", nl: "Vul de leverancier en het bedrag in.", pl: "Podaj dostawcę i kwotę.", ru: "Укажите поставщика и сумму долга.", tr: "Tedarikçiyi ve borç tutarını girin.", ar: "أدخل المورّد والمبلغ المستحق.", hi: "आपूर्तिकर्ता और देय राशि दर्ज करें।", bn: "সরবরাহকারী ও পাওনা পরিমাণ লিখুন।", ur: "سپلائر اور واجب رقم درج کریں۔", ta: "சப்ளையர் மற்றும் தொகையை உள்ளிடவும்.", te: "సరఫరాదారు మరియు మొత్తం నమోదు చేయండి.", th: "กรอกชื่อซัพพลายเออร์และยอดที่ต้องจ่าย", zh: "请填写供应商和欠款金额。", ja: "仕入先と金額を入力してください。", ko: "공급업체와 금액을 입력하세요.", id: "Isi pemasok dan jumlah utang.", vi: "Nhập nhà cung cấp và số tiền nợ.", tl: "Ilagay ang supplier at halagang utang.", sw: "Weka msambazaji na kiasi kinachodaiwa.", ha: "Shigar da mai kawo kaya da adadin bashi.", yo: "Tẹ olùpèsè àti iye gbèsè.", zu: "Faka umhlinzeki nemali ekweletwayo.", am: "አቅራቢውን እና መጠኑን ያስገቡ።", bm: "Fɛn lasɔrɔbaga ni juru hakɛ sɛbɛn.", wo: "Bindal fournisseur bi ak xaalis bi." };
+EXTRA_UI.supPayTitle = { fr: "Payer {name}", en: "Pay {name}", es: "Pagar a {name}", pt: "Pagar a {name}", de: "{name} bezahlen", it: "Paga {name}", nl: "{name} betalen", pl: "Zapłać: {name}", ru: "Оплатить: {name}", tr: "{name} ödemesi", ar: "دفع لـ {name}", hi: "{name} को भुगतान", bn: "{name}-কে পরিশোধ", ur: "{name} کو ادائیگی", ta: "{name} க்கு செலுத்து", te: "{name}కు చెల్లించండి", th: "ชำระให้ {name}", zh: "付款给 {name}", ja: "{name} へ支払う", ko: "{name}에 지급", id: "Bayar {name}", vi: "Trả cho {name}", tl: "Bayaran si {name}", sw: "Mlipe {name}", ha: "Biya {name}", yo: "San fún {name}", zu: "Khokhela u-{name}", am: "ለ{name} ክፈል", bm: "{name} sara", wo: "Fey {name}" };
+EXTRA_UI.supPayLeft = { fr: "Reste à payer : {n}", en: "Left to pay: {n}", es: "Queda por pagar: {n}", pt: "Falta pagar: {n}", de: "Noch zu zahlen: {n}", it: "Resta da pagare: {n}", nl: "Nog te betalen: {n}", pl: "Pozostało do zapłaty: {n}", ru: "Осталось оплатить: {n}", tr: "Kalan ödeme: {n}", ar: "المتبقي للدفع: {n}", hi: "बाकी भुगतान: {n}", bn: "বাকি পরিশোধ: {n}", ur: "باقی ادائیگی: {n}", ta: "செலுத்த மீதம்: {n}", te: "చెల్లించాల్సిన మిగతా: {n}", th: "คงเหลือต้องชำระ: {n}", zh: "待付：{n}", ja: "残り支払額：{n}", ko: "남은 금액: {n}", id: "Sisa bayar: {n}", vi: "Còn phải trả: {n}", tl: "Natitirang babayaran: {n}", sw: "Kilichobaki kulipa: {n}", ha: "Saura a biya: {n}", yo: "Èyí tó kù láti san: {n}", zu: "Okusele ukukhokhwa: {n}", am: "የቀረው ክፍያ፦ {n}", bm: "Min tora ka sara: {n}", wo: "Li des ngir fey: {n}" };
+EXTRA_UI.supPayCash = { fr: "Espèces (sort de la caisse)", en: "Cash (from the till)", es: "Efectivo (sale de la caja)", pt: "Dinheiro (sai da caixa)", de: "Bar (aus der Kasse)", it: "Contanti (dalla cassa)", nl: "Contant (uit de kassa)", pl: "Gotówka (z kasy)", ru: "Наличные (из кассы)", tr: "Nakit (kasadan)", ar: "نقدًا (من الصندوق)", hi: "नकद (गल्ले से)", bn: "নগদ (ক্যাশ থেকে)", ur: "نقد (غلے سے)", ta: "ரொக்கம் (கல்லாவிலிருந்து)", te: "నగదు (గల్లా నుండి)", th: "เงินสด (จากลิ้นชัก)", zh: "现金（从收银箱）", ja: "現金（レジから）", ko: "현금 (금고에서)", id: "Tunai (dari kas)", vi: "Tiền mặt (từ quầy)", tl: "Cash (mula sa kaha)", sw: "Taslimu (kutoka sanduku)", ha: "Tsabar kuɗi (daga akwati)", yo: "Owó lọ́wọ́ (láti àpótí)", zu: "Ukheshi (ebhokisini)", am: "ጥሬ ገንዘብ (ከካዝና)", bm: "Wari (kɛsu kɔnɔ)", wo: "Xaalis ci loxo (ci kees bi)" };
+EXTRA_UI.supPayMobile = { fr: "Mobile Money", en: "Mobile Money", es: "Dinero móvil", pt: "Dinheiro móvel", de: "Mobile Money", it: "Mobile Money", nl: "Mobiel geld", pl: "Płatność mobilna", ru: "Мобильные деньги", tr: "Mobil para", ar: "المحفظة الإلكترونية", hi: "मोबाइल मनी", bn: "মোবাইল মানি", ur: "موبائل منی", ta: "மொபைல் பணம்", te: "మొబైల్ మనీ", th: "โมบายมันนี่", zh: "移动支付", ja: "モバイル決済", ko: "모바일 머니", id: "Uang elektronik", vi: "Ví điện tử", tl: "Mobile Money", sw: "Pesa kwa simu", ha: "Kuɗin waya", yo: "Owó alágbèéká", zu: "Imali yeselula", am: "የሞባይል ገንዘብ", bm: "Mobile Money", wo: "Mobile Money" };
+EXTRA_UI.supPayConfirm = { fr: "Confirmer le paiement", en: "Confirm payment", es: "Confirmar el pago", pt: "Confirmar o pagamento", de: "Zahlung bestätigen", it: "Conferma il pagamento", nl: "Betaling bevestigen", pl: "Potwierdź płatność", ru: "Подтвердить оплату", tr: "Ödemeyi onayla", ar: "تأكيد الدفع", hi: "भुगतान की पुष्टि करें", bn: "পরিশোধ নিশ্চিত করুন", ur: "ادائیگی کی تصدیق کریں", ta: "கட்டணத்தை உறுதிசெய்", te: "చెల్లింపును నిర్ధారించండి", th: "ยืนยันการชำระ", zh: "确认付款", ja: "支払いを確定", ko: "지급 확인", id: "Konfirmasi pembayaran", vi: "Xác nhận thanh toán", tl: "Kumpirmahin ang bayad", sw: "Thibitisha malipo", ha: "Tabbatar da biya", yo: "Jẹ́rìí ìsanwó", zu: "Qinisekisa inkokhelo", am: "ክፍያውን አረጋግጥ", bm: "Sarali sɛmɛntiya", wo: "Dëggal fey bi" };
+EXTRA_UI.supPaidMsg = { fr: "Paiement enregistré pour {name}.", en: "Payment saved for {name}.", es: "Pago registrado para {name}.", pt: "Pagamento registado para {name}.", de: "Zahlung an {name} gespeichert.", it: "Pagamento registrato per {name}.", nl: "Betaling aan {name} opgeslagen.", pl: "Zapisano płatność dla: {name}.", ru: "Оплата для {name} сохранена.", tr: "{name} için ödeme kaydedildi.", ar: "تم تسجيل الدفع لـ {name}.", hi: "{name} का भुगतान सहेजा गया।", bn: "{name}-এর পরিশোধ সংরক্ষিত।", ur: "{name} کی ادائیگی محفوظ ہو گئی۔", ta: "{name} க்கான கட்டணம் சேமிக்கப்பட்டது.", te: "{name}కు చెల్లింపు సేవ్ అయింది.", th: "บันทึกการชำระให้ {name} แล้ว", zh: "已记录付给 {name} 的款项。", ja: "{name} への支払いを記録しました。", ko: "{name} 지급이 저장되었습니다.", id: "Pembayaran untuk {name} disimpan.", vi: "Đã lưu khoản trả cho {name}.", tl: "Na-save ang bayad kay {name}.", sw: "Malipo kwa {name} yamehifadhiwa.", ha: "An ajiye biyan {name}.", yo: "A ti fi ìsanwó fún {name} pamọ́.", zu: "Inkokhelo ka-{name} igciniwe.", am: "ለ{name} የተደረገው ክፍያ ተቀምጧል።", bm: "{name} ka sarali marala.", wo: "Fey bu {name} denc nañu ko." };
+EXTRA_UI.supPaidLog = { fr: "Fournisseur payé", en: "Supplier paid", es: "Proveedor pagado", pt: "Fornecedor pago", de: "Lieferant bezahlt", it: "Fornitore pagato", nl: "Leverancier betaald", pl: "Opłacono dostawcę", ru: "Оплата поставщику", tr: "Tedarikçiye ödendi", ar: "تم الدفع للمورّد", hi: "आपूर्तिकर्ता को भुगतान", bn: "সরবরাহকারীকে পরিশোধ", ur: "سپلائر کو ادائیگی", ta: "சப்ளையருக்கு செலுத்தப்பட்டது", te: "సరఫరాదారుకు చెల్లించారు", th: "ชำระซัพพลายเออร์", zh: "已付供应商", ja: "仕入先へ支払い", ko: "공급업체 지급", id: "Pemasok dibayar", vi: "Đã trả nhà cung cấp", tl: "Nabayaran ang supplier", sw: "Msambazaji amelipwa", ha: "An biya mai kawo kaya", yo: "A ti san fún olùpèsè", zu: "Umhlinzeki ukhokhelwe", am: "ለአቅራቢ ተከፍሏል", bm: "Fɛn lasɔrɔbaga sarala", wo: "Fournisseur bi fey nañu ko" };
+EXTRA_UI.supAddedLog = { fr: "Dette fournisseur ajoutée", en: "Supplier debt added", es: "Deuda con proveedor añadida", pt: "Dívida a fornecedor adicionada", de: "Lieferantenschuld hinzugefügt", it: "Debito fornitore aggiunto", nl: "Leveranciersschuld toegevoegd", pl: "Dodano dług u dostawcy", ru: "Добавлен долг поставщику", tr: "Tedarikçi borcu eklendi", ar: "أُضيف دين لمورّد", hi: "आपूर्तिकर्ता बकाया जोड़ा गया", bn: "সরবরাহকারী দেনা যোগ হয়েছে", ur: "سپلائر کا قرض شامل کیا گیا", ta: "சப்ளையர் கடன் சேர்க்கப்பட்டது", te: "సరఫరాదారు బాకీ జోడించారు", th: "เพิ่มหนี้ซัพพลายเออร์แล้ว", zh: "已添加供应商欠款", ja: "仕入先への未払いを追加", ko: "공급업체 채무 추가", id: "Utang pemasok ditambahkan", vi: "Đã thêm khoản nợ nhà cung cấp", tl: "Naidagdag ang utang sa supplier", sw: "Deni la msambazaji limeongezwa", ha: "An ƙara bashin mai kawo kaya", yo: "A ti fi gbèsè olùpèsè kún un", zu: "Isikweletu somhlinzeki sengeziwe", am: "የአቅራቢ ዕዳ ታክሏል", bm: "Fɛn lasɔrɔbaga juru farala", wo: "Bor ci fournisseur yokk nañu ko" };
+EXTRA_UI.supRestockCredit = { fr: "Acheté à crédit (à payer au fournisseur)", en: "Bought on credit (to pay the supplier)", es: "Comprado a crédito (a pagar al proveedor)", pt: "Comprado a crédito (a pagar ao fornecedor)", de: "Auf Kredit gekauft (an Lieferanten zu zahlen)", it: "Acquistato a credito (da pagare al fornitore)", nl: "Op krediet gekocht (te betalen aan leverancier)", pl: "Kupione na kredyt (do zapłaty dostawcy)", ru: "Куплено в долг (оплатить поставщику)", tr: "Veresiye alındı (tedarikçiye ödenecek)", ar: "اشتُري بالدين (يُدفع للمورّد)", hi: "उधार पर खरीदा (आपूर्तिकर्ता को देना है)", bn: "বাকিতে কেনা (সরবরাহকারীকে দিতে হবে)", ur: "ادھار پر خریدا (سپلائر کو دینا ہے)", ta: "கடனில் வாங்கியது (சப்ளையருக்கு செலுத்த வேண்டும்)", te: "అప్పుపై కొన్నది (సరఫరాదారుకు చెల్లించాలి)", th: "ซื้อเชื่อ (ต้องจ่ายซัพพลายเออร์)", zh: "赊购（需付给供应商）", ja: "掛けで仕入れ（仕入先に支払う）", ko: "외상 매입 (공급업체에 지급 예정)", id: "Dibeli kredit (bayar ke pemasok)", vi: "Mua chịu (phải trả nhà cung cấp)", tl: "Binili nang pautang (babayaran sa supplier)", sw: "Imenunuliwa kwa mkopo (kulipa msambazaji)", ha: "An saya bashi (a biya mai kawo kaya)", yo: "A rà á lórí gbèsè (a ó san fún olùpèsè)", zu: "Kuthengwe ngesikweletu (kuzokhokhwa umhlinzeki)", am: "በዱቤ የተገዛ (ለአቅራቢ የሚከፈል)", bm: "A sannna juru la (ka fɛn lasɔrɔbaga sara)", wo: "Jënd ci bor (fey fournisseur bi)" };
+EXTRA_UI.stBtn = { fr: "Statut WhatsApp", en: "WhatsApp Status", es: "Estado de WhatsApp", pt: "Status do WhatsApp", de: "WhatsApp-Status", it: "Stato WhatsApp", nl: "WhatsApp-status", pl: "Status WhatsApp", ru: "Статус WhatsApp", tr: "WhatsApp Durumu", ar: "حالة واتساب", hi: "WhatsApp स्टेटस", bn: "WhatsApp স্ট্যাটাস", ur: "WhatsApp اسٹیٹس", ta: "WhatsApp நிலை", te: "WhatsApp స్టేటస్", th: "สถานะ WhatsApp", zh: "WhatsApp 动态", ja: "WhatsApp ステータス", ko: "WhatsApp 상태", id: "Status WhatsApp", vi: "Trạng thái WhatsApp", tl: "WhatsApp Status", sw: "Hali ya WhatsApp", ha: "Matsayin WhatsApp", yo: "Ìpò WhatsApp", zu: "Isimo se-WhatsApp", am: "የWhatsApp ሁኔታ", bm: "WhatsApp Statut", wo: "Statut WhatsApp" };
+EXTRA_UI.stTitle = { fr: "Image pour le statut WhatsApp", en: "Image for WhatsApp Status", es: "Imagen para el estado de WhatsApp", pt: "Imagem para o status do WhatsApp", de: "Bild für den WhatsApp-Status", it: "Immagine per lo stato WhatsApp", nl: "Afbeelding voor WhatsApp-status", pl: "Obraz na status WhatsApp", ru: "Картинка для статуса WhatsApp", tr: "WhatsApp Durumu için görsel", ar: "صورة لحالة واتساب", hi: "WhatsApp स्टेटस के लिए चित्र", bn: "WhatsApp স্ট্যাটাসের ছবি", ur: "WhatsApp اسٹیٹس کے لیے تصویر", ta: "WhatsApp நிலைக்கான படம்", te: "WhatsApp స్టేటస్ కోసం చిత్రం", th: "รูปสำหรับสถานะ WhatsApp", zh: "WhatsApp 动态图片", ja: "WhatsApp ステータス用の画像", ko: "WhatsApp 상태용 이미지", id: "Gambar untuk status WhatsApp", vi: "Ảnh cho trạng thái WhatsApp", tl: "Larawan para sa WhatsApp Status", sw: "Picha ya hali ya WhatsApp", ha: "Hoto don matsayin WhatsApp", yo: "Àwòrán fún ìpò WhatsApp", zu: "Isithombe sesimo se-WhatsApp", am: "ለWhatsApp ሁኔታ ምስል", bm: "WhatsApp statut ja", wo: "Nataal ngir statut WhatsApp" };
+EXTRA_UI.stHint = { fr: "Choisissez jusqu'à 4 produits. L'image est au format du statut WhatsApp, avec le nom de votre boutique.", en: "Choose up to 4 products. The image is in WhatsApp Status format, with your shop name.", es: "Elija hasta 4 productos. La imagen tiene el formato del estado de WhatsApp, con el nombre de su tienda.", pt: "Escolha até 4 produtos. A imagem fica no formato do status do WhatsApp, com o nome da sua loja.", de: "Wählen Sie bis zu 4 Produkte. Das Bild hat das WhatsApp-Status-Format, mit Ihrem Geschäftsnamen.", it: "Scegliete fino a 4 prodotti. L'immagine è nel formato dello stato WhatsApp, con il nome del vostro negozio.", nl: "Kies tot 4 producten. De afbeelding heeft het WhatsApp-statusformaat, met de naam van uw winkel.", pl: "Wybierz do 4 produktów. Obraz ma format statusu WhatsApp, z nazwą Twojego sklepu.", ru: "Выберите до 4 товаров. Картинка в формате статуса WhatsApp, с названием вашего магазина.", tr: "En fazla 4 ürün seçin. Görsel, mağaza adınızla WhatsApp Durumu formatındadır.", ar: "اختر حتى 4 منتجات. الصورة بمقاس حالة واتساب وتحمل اسم متجرك.", hi: "अधिकतम 4 उत्पाद चुनें। चित्र WhatsApp स्टेटस के आकार में, आपकी दुकान के नाम के साथ बनेगा।", bn: "সর্বোচ্চ ৪টি পণ্য বেছে নিন। ছবিটি WhatsApp স্ট্যাটাসের মাপে, আপনার দোকানের নামসহ তৈরি হবে।", ur: "زیادہ سے زیادہ 4 مصنوعات چنیں۔ تصویر WhatsApp اسٹیٹس کے سائز میں، آپ کی دکان کے نام کے ساتھ بنے گی۔", ta: "4 பொருட்கள் வரை தேர்வு செய்யவும். படம் WhatsApp நிலை அளவில், உங்கள் கடையின் பெயருடன் இருக்கும்.", te: "4 ఉత్పత్తుల వరకు ఎంచుకోండి. చిత్రం WhatsApp స్టేటస్ ఆకారంలో, మీ దుకాణం పేరుతో ఉంటుంది.", th: "เลือกได้สูงสุด 4 สินค้า รูปจะเป็นขนาดสถานะ WhatsApp พร้อมชื่อร้านของคุณ", zh: "最多选择 4 个商品。图片为 WhatsApp 动态尺寸，并带有您的店名。", ja: "最大4つの商品を選んでください。画像はWhatsAppステータスのサイズで、店名が入ります。", ko: "최대 4개 상품을 고르세요. 이미지는 WhatsApp 상태 크기이며 가게 이름이 들어갑니다.", id: "Pilih hingga 4 produk. Gambar berformat status WhatsApp, dengan nama toko Anda.", vi: "Chọn tối đa 4 sản phẩm. Ảnh có kích thước trạng thái WhatsApp, kèm tên cửa hàng của bạn.", tl: "Pumili ng hanggang 4 na produkto. Nasa format ng WhatsApp Status ang larawan, kasama ang pangalan ng tindahan mo.", sw: "Chagua hadi bidhaa 4. Picha iko katika umbo la hali ya WhatsApp, pamoja na jina la duka lako.", ha: "Zaɓi kaya har 4. Hoton yana da girman matsayin WhatsApp, tare da sunan shagonka.", yo: "Yan ọjà tó tó mẹ́rin. Àwòrán náà wà ní ìwọ̀n ìpò WhatsApp, pẹ̀lú orúkọ ṣọ́ọ̀bù rẹ.", zu: "Khetha imikhiqizo efika ku-4. Isithombe sisesimweni se-WhatsApp, sinegama lesitolo sakho.", am: "እስከ 4 ምርቶች ይምረጡ። ምስሉ በWhatsApp ሁኔታ መጠን ከሱቅዎ ስም ጋር ይሆናል።", bm: "Fɛn 4 bɔ ka se a ma. Ja bɛ kɛ WhatsApp statut cogoya la, ni i ka butiki tɔgɔ ye.", wo: "Tànnal ba 4 jaay. Nataal bi dafay am melokaanu statut WhatsApp, ak turu sa bitig." };
+EXTRA_UI.stHeadline = { fr: "Titre", en: "Headline", es: "Título", pt: "Título", de: "Überschrift", it: "Titolo", nl: "Titel", pl: "Tytuł", ru: "Заголовок", tr: "Başlık", ar: "العنوان", hi: "शीर्षक", bn: "শিরোনাম", ur: "عنوان", ta: "தலைப்பு", te: "శీర్షిక", th: "หัวข้อ", zh: "标题", ja: "見出し", ko: "제목", id: "Judul", vi: "Tiêu đề", tl: "Pamagat", sw: "Kichwa", ha: "Taken", yo: "Àkọlé", zu: "Isihloko", am: "ርዕስ", bm: "Kunkɔrɔ", wo: "Tur" };
+EXTRA_UI.stH_new = { fr: "Nouveautés", en: "New in", es: "Novedades", pt: "Novidades", de: "Neuheiten", it: "Novità", nl: "Nieuw", pl: "Nowości", ru: "Новинки", tr: "Yeni ürünler", ar: "جديدنا", hi: "नया माल", bn: "নতুন পণ্য", ur: "نیا مال", ta: "புதியவை", te: "కొత్తవి", th: "สินค้าใหม่", zh: "新品", ja: "新商品", ko: "신상품", id: "Produk baru", vi: "Hàng mới", tl: "Bago", sw: "Bidhaa mpya", ha: "Sabbin kaya", yo: "Ọjà tuntun", zu: "Okusha", am: "አዳዲስ", bm: "Fɛn kuraw", wo: "Yu bees yi" };
+EXTRA_UI.stH_promo = { fr: "Promo", en: "Special offer", es: "Oferta", pt: "Promoção", de: "Angebot", it: "Offerta", nl: "Aanbieding", pl: "Promocja", ru: "Акция", tr: "Kampanya", ar: "عرض خاص", hi: "ऑफ़र", bn: "অফার", ur: "آفر", ta: "சலுகை", te: "ఆఫర్", th: "โปรโมชั่น", zh: "优惠", ja: "セール", ko: "특가", id: "Promo", vi: "Khuyến mãi", tl: "Promo", sw: "Ofa", ha: "Rangwame", yo: "Ẹ̀dínwó", zu: "Isipesheli", am: "ቅናሽ", bm: "Promo", wo: "Promo" };
+EXTRA_UI.stH_today = { fr: "Disponible aujourd'hui", en: "Available today", es: "Disponible hoy", pt: "Disponível hoje", de: "Heute verfügbar", it: "Disponibile oggi", nl: "Vandaag beschikbaar", pl: "Dostępne dziś", ru: "Есть сегодня", tr: "Bugün mevcut", ar: "متوفر اليوم", hi: "आज उपलब्ध", bn: "আজ পাওয়া যাচ্ছে", ur: "آج دستیاب", ta: "இன்று கிடைக்கும்", te: "ఈరోజు అందుబాటులో", th: "มีวันนี้", zh: "今日有货", ja: "本日入荷", ko: "오늘 판매", id: "Tersedia hari ini", vi: "Có hàng hôm nay", tl: "Available ngayon", sw: "Zinapatikana leo", ha: "Akwai yau", yo: "Ó wà lónìí", zu: "Kuyatholakala namuhla", am: "ዛሬ ይገኛል", bm: "A bɛ yen bi", wo: "Am na tey" };
+EXTRA_UI.stH_arrival = { fr: "Nouvel arrivage", en: "New arrivals", es: "Nueva llegada", pt: "Nova chegada", de: "Neue Lieferung", it: "Nuovi arrivi", nl: "Nieuwe levering", pl: "Nowa dostawa", ru: "Новое поступление", tr: "Yeni gelenler", ar: "وصل حديثًا", hi: "नई खेप", bn: "নতুন চালান", ur: "نئی کھیپ", ta: "புதிய வரவு", te: "కొత్త సరుకు", th: "ของเข้าใหม่", zh: "新到货", ja: "新入荷", ko: "신규 입고", id: "Barang baru datang", vi: "Hàng mới về", tl: "Bagong dating", sw: "Mzigo mpya", ha: "Sabon kaya ya iso", yo: "Ọjà tuntun dé", zu: "Okusanda kufika", am: "አዲስ የገባ", bm: "Fɛn kura sera", wo: "Marsandiz yu bees agsi na" };
+EXTRA_UI.stShowPrices = { fr: "Afficher les prix", en: "Show prices", es: "Mostrar precios", pt: "Mostrar preços", de: "Preise zeigen", it: "Mostra i prezzi", nl: "Prijzen tonen", pl: "Pokaż ceny", ru: "Показать цены", tr: "Fiyatları göster", ar: "إظهار الأسعار", hi: "कीमतें दिखाएं", bn: "দাম দেখান", ur: "قیمتیں دکھائیں", ta: "விலைகளைக் காட்டு", te: "ధరలు చూపించు", th: "แสดงราคา", zh: "显示价格", ja: "価格を表示", ko: "가격 표시", id: "Tampilkan harga", vi: "Hiện giá", tl: "Ipakita ang presyo", sw: "Onyesha bei", ha: "Nuna farashi", yo: "Fi iye owó hàn", zu: "Bonisa amanani", am: "ዋጋዎችን አሳይ", bm: "Sɔngɔw jira", wo: "Won njëg yi" };
+EXTRA_UI.stShowPhone = { fr: "Afficher mon numéro", en: "Show my number", es: "Mostrar mi número", pt: "Mostrar o meu número", de: "Meine Nummer zeigen", it: "Mostra il mio numero", nl: "Mijn nummer tonen", pl: "Pokaż mój numer", ru: "Показать мой номер", tr: "Numaramı göster", ar: "إظهار رقمي", hi: "मेरा नंबर दिखाएं", bn: "আমার নম্বর দেখান", ur: "میرا نمبر دکھائیں", ta: "என் எண்ணைக் காட்டு", te: "నా నంబర్ చూపించు", th: "แสดงเบอร์ของฉัน", zh: "显示我的号码", ja: "自分の番号を表示", ko: "내 번호 표시", id: "Tampilkan nomor saya", vi: "Hiện số của tôi", tl: "Ipakita ang numero ko", sw: "Onyesha namba yangu", ha: "Nuna lambata", yo: "Fi nọ́mbà mi hàn", zu: "Bonisa inombolo yami", am: "ቁጥሬን አሳይ", bm: "N ka nimɔrɔ jira", wo: "Won sama nimero" };
+EXTRA_UI.stPickProducts = { fr: "Produits ({n}/{p})", en: "Products ({n}/{p})", es: "Productos ({n}/{p})", pt: "Produtos ({n}/{p})", de: "Produkte ({n}/{p})", it: "Prodotti ({n}/{p})", nl: "Producten ({n}/{p})", pl: "Produkty ({n}/{p})", ru: "Товары ({n}/{p})", tr: "Ürünler ({n}/{p})", ar: "المنتجات ({n}/{p})", hi: "उत्पाद ({n}/{p})", bn: "পণ্য ({n}/{p})", ur: "مصنوعات ({n}/{p})", ta: "பொருட்கள் ({n}/{p})", te: "ఉత్పత్తులు ({n}/{p})", th: "สินค้า ({n}/{p})", zh: "商品（{n}/{p}）", ja: "商品（{n}/{p}）", ko: "상품 ({n}/{p})", id: "Produk ({n}/{p})", vi: "Sản phẩm ({n}/{p})", tl: "Mga produkto ({n}/{p})", sw: "Bidhaa ({n}/{p})", ha: "Kaya ({n}/{p})", yo: "Ọjà ({n}/{p})", zu: "Imikhiqizo ({n}/{p})", am: "ምርቶች ({n}/{p})", bm: "Fɛnw ({n}/{p})", wo: "Jaay yi ({n}/{p})" };
+EXTRA_UI.stCreate = { fr: "Créer l'image", en: "Create the image", es: "Crear la imagen", pt: "Criar a imagem", de: "Bild erstellen", it: "Crea l'immagine", nl: "Afbeelding maken", pl: "Utwórz obraz", ru: "Создать картинку", tr: "Görseli oluştur", ar: "إنشاء الصورة", hi: "चित्र बनाएं", bn: "ছবি তৈরি করুন", ur: "تصویر بنائیں", ta: "படத்தை உருவாக்கு", te: "చిత్రాన్ని సృష్టించండి", th: "สร้างรูป", zh: "生成图片", ja: "画像を作成", ko: "이미지 만들기", id: "Buat gambar", vi: "Tạo ảnh", tl: "Gumawa ng larawan", sw: "Tengeneza picha", ha: "Ƙirƙiri hoto", yo: "Ṣẹ̀dá àwòrán", zu: "Dala isithombe", am: "ምስሉን ፍጠር", bm: "Ja dilan", wo: "Defar nataal bi" };
+EXTRA_UI.stShare = { fr: "Partager (choisir « Mon statut »)", en: "Share (choose \"My status\")", es: "Compartir (elija «Mi estado»)", pt: "Partilhar (escolha «Meu status»)", de: "Teilen („Mein Status“ wählen)", it: "Condividi (scegli «Il mio stato»)", nl: "Delen (kies 'Mijn status')", pl: "Udostępnij (wybierz „Mój status”)", ru: "Поделиться (выберите «Мой статус»)", tr: "Paylaş (\"Durumum\"u seçin)", ar: "مشاركة (اختر «حالتي»)", hi: "साझा करें (\"मेरा स्टेटस\" चुनें)", bn: "শেয়ার করুন (\"আমার স্ট্যাটাস\" বাছুন)", ur: "شیئر کریں (\"میرا اسٹیٹس\" چنیں)", ta: "பகிர் (\"என் நிலை\" தேர்வு செய்யவும்)", te: "షేర్ చేయండి (\"నా స్టేటస్\" ఎంచుకోండి)", th: "แชร์ (เลือก \"สถานะของฉัน\")", zh: "分享（选择“我的动态”）", ja: "共有（「マイステータス」を選択）", ko: "공유 ('내 상태' 선택)", id: "Bagikan (pilih \"Status saya\")", vi: "Chia sẻ (chọn \"Trạng thái của tôi\")", tl: "Ibahagi (piliin ang \"My status\")", sw: "Shiriki (chagua \"Hali yangu\")", ha: "Raba (zaɓi \"Matsayina\")", yo: "Pín (yan \"Ìpò mi\")", zu: "Yabelana (khetha \"Isimo sami\")", am: "አጋራ (\"የእኔ ሁኔታ\" ይምረጡ)", bm: "A tila (\"N ka statut\" sugandi)", wo: "Séddoo (tànnal \"Sama statut\")" };
+EXTRA_UI.stDownload = { fr: "Télécharger l'image", en: "Download the image", es: "Descargar la imagen", pt: "Transferir a imagem", de: "Bild herunterladen", it: "Scarica l'immagine", nl: "Afbeelding downloaden", pl: "Pobierz obraz", ru: "Скачать картинку", tr: "Görseli indir", ar: "تنزيل الصورة", hi: "चित्र डाउनलोड करें", bn: "ছবি ডাউনলোড করুন", ur: "تصویر ڈاؤن لوڈ کریں", ta: "படத்தைப் பதிவிறக்கு", te: "చిత్రాన్ని డౌన్‌లోడ్ చేయండి", th: "ดาวน์โหลดรูป", zh: "下载图片", ja: "画像をダウンロード", ko: "이미지 다운로드", id: "Unduh gambar", vi: "Tải ảnh xuống", tl: "I-download ang larawan", sw: "Pakua picha", ha: "Sauke hoton", yo: "Ṣe ìgbàsílẹ̀ àwòrán", zu: "Landa isithombe", am: "ምስሉን አውርድ", bm: "Ja jigin", wo: "Yebbi nataal bi" };
+EXTRA_UI.stShareHint = { fr: "Dans WhatsApp, choisissez « Mon statut » pour le publier.", en: "In WhatsApp, choose \"My status\" to post it.", es: "En WhatsApp, elija «Mi estado» para publicarla.", pt: "No WhatsApp, escolha «Meu status» para publicar.", de: "Wählen Sie in WhatsApp „Mein Status“, um es zu posten.", it: "In WhatsApp, scegliete «Il mio stato» per pubblicarla.", nl: "Kies in WhatsApp 'Mijn status' om te plaatsen.", pl: "W WhatsApp wybierz „Mój status”, aby opublikować.", ru: "В WhatsApp выберите «Мой статус», чтобы опубликовать.", tr: "Yayınlamak için WhatsApp'ta \"Durumum\"u seçin.", ar: "في واتساب، اختر «حالتي» لنشرها.", hi: "प्रकाशित करने के लिए WhatsApp में \"मेरा स्टेटस\" चुनें।", bn: "প্রকাশ করতে WhatsApp-এ \"আমার স্ট্যাটাস\" বেছে নিন।", ur: "شائع کرنے کے لیے WhatsApp میں \"میرا اسٹیٹس\" چنیں۔", ta: "வெளியிட WhatsApp இல் \"என் நிலை\" தேர்வு செய்யவும்.", te: "పోస్ట్ చేయడానికి WhatsAppలో \"నా స్టేటస్\" ఎంచుకోండి.", th: "ใน WhatsApp ให้เลือก \"สถานะของฉัน\" เพื่อโพสต์", zh: "在 WhatsApp 中选择“我的动态”即可发布。", ja: "WhatsAppで「マイステータス」を選ぶと投稿できます。", ko: "WhatsApp에서 '내 상태'를 선택해 게시하세요.", id: "Di WhatsApp, pilih \"Status saya\" untuk memposting.", vi: "Trong WhatsApp, chọn \"Trạng thái của tôi\" để đăng.", tl: "Sa WhatsApp, piliin ang \"My status\" para i-post.", sw: "Ndani ya WhatsApp, chagua \"Hali yangu\" kuichapisha.", ha: "A WhatsApp, zaɓi \"Matsayina\" don wallafawa.", yo: "Nínú WhatsApp, yan \"Ìpò mi\" láti gbé e jáde.", zu: "Ku-WhatsApp, khetha \"Isimo sami\" ukuze uyithumele.", am: "ለመለጠፍ በWhatsApp \"የእኔ ሁኔታ\" ይምረጡ።", bm: "WhatsApp kɔnɔ, \"N ka statut\" sugandi walasa k'a bila.", wo: "Ci WhatsApp, tànnal \"Sama statut\" ngir ko def." };
+EXTRA_UI.stEdit = { fr: "Modifier", en: "Edit", es: "Modificar", pt: "Modificar", de: "Bearbeiten", it: "Modifica", nl: "Bewerken", pl: "Edytuj", ru: "Изменить", tr: "Düzenle", ar: "تعديل", hi: "बदलें", bn: "সম্পাদনা", ur: "ترمیم", ta: "திருத்து", te: "సవరించు", th: "แก้ไข", zh: "修改", ja: "編集", ko: "수정", id: "Ubah", vi: "Sửa", tl: "I-edit", sw: "Hariri", ha: "Gyara", yo: "Ṣàtúnṣe", zu: "Hlela", am: "አርትዕ", bm: "A yɛlɛma", wo: "Soppi" };
+EXTRA_UI.stOrderCta = { fr: "Commandez sur WhatsApp", en: "Order on WhatsApp", es: "Pida por WhatsApp", pt: "Encomende pelo WhatsApp", de: "Per WhatsApp bestellen", it: "Ordinate su WhatsApp", nl: "Bestel via WhatsApp", pl: "Zamów przez WhatsApp", ru: "Заказывайте в WhatsApp", tr: "WhatsApp'tan sipariş verin", ar: "اطلب عبر واتساب", hi: "WhatsApp पर ऑर्डर करें", bn: "WhatsApp-এ অর্ডার করুন", ur: "WhatsApp پر آرڈر کریں", ta: "WhatsApp இல் ஆர்டர் செய்யவும்", te: "WhatsAppలో ఆర్డర్ చేయండి", th: "สั่งซื้อทาง WhatsApp", zh: "WhatsApp 下单", ja: "WhatsAppで注文", ko: "WhatsApp으로 주문하세요", id: "Pesan lewat WhatsApp", vi: "Đặt hàng qua WhatsApp", tl: "Umorder sa WhatsApp", sw: "Agiza kupitia WhatsApp", ha: "Yi oda ta WhatsApp", yo: "Pàṣẹ lórí WhatsApp", zu: "Oda nge-WhatsApp", am: "በWhatsApp ይዘዙ", bm: "WhatsApp kan ka komandi kɛ", wo: "Komande ci WhatsApp" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -8187,7 +8233,7 @@ const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
 const SHOP_LEVEL_KEYS = [
   "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts", "cashClosures",
   "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
-  "historyLog", "categories", "employees", "actionLog", "deletedProducts", "receiptInfo", "customerTariffs", "stockCount",
+  "historyLog", "categories", "employees", "actionLog", "deletedProducts", "receiptInfo", "customerTariffs", "stockCount", "supplierDebts",
 ];
 // Dernière boutique affichée sur CET appareil, pour y revenir au prochain démarrage
 // au lieu de retomber systématiquement sur la boutique principale (suffixée par le
@@ -8331,6 +8377,22 @@ function isRecipeProduct(p) { return !!(p && Array.isArray(p.components) && p.co
 // Inventaire en cours (partagé entre appareils) : { id, startedAt, by, counts: { [productId]:
 // { q, e, at, by } }, closedAt }. Même inventaire des deux côtés : on garde le comptage le plus
 // récent de chaque produit ; inventaires différents : le plus récemment commencé gagne.
+// Dettes fournisseurs : union par id (le plus récent gagne), et les paiements d'une même
+// dette sont réunis par id — deux paiements faits sur deux téléphones ne s'écrasent pas.
+function mergeSupplierDebts(a, b) {
+  const map = new Map();
+  (b || []).forEach((d) => { if (d && d.id != null) map.set(d.id, d); });
+  (a || []).forEach((d) => {
+    if (!d || d.id == null) return;
+    const o = map.get(d.id);
+    if (!o) { map.set(d.id, d); return; }
+    const newer = sanitizeTs(d.updatedAt) >= sanitizeTs(o.updatedAt) ? d : o;
+    const pays = new Map();
+    [...(o.payments || []), ...(d.payments || [])].forEach((p) => { if (p && p.id != null) pays.set(p.id, p); });
+    map.set(d.id, { ...newer, payments: Array.from(pays.values()).sort((x, y) => (String(x.date) < String(y.date) ? -1 : 1)), ...(d.deleted || o.deleted ? { deleted: true } : {}) });
+  });
+  return Array.from(map.values());
+}
 function mergeStockCount(a, b) {
   const A = a && typeof a === "object" && a.id ? a : null;
   const B = b && typeof b === "object" && b.id ? b : null;
@@ -8745,6 +8807,9 @@ const RESET_MARK_ID = "__reset__";
 // Une dépense ou un remboursement de dette payé par Mobile Money ne passe pas par le tiroir :
 // seul ce qui est en espèces compte dans le solde de caisse (sans choix = espèces, comme avant).
 function isCashMove(x) { return !x || !x.method || x.method === "cash"; }
+// Vraie charge (réduit le bénéfice) : ni un retrait (l'argent change de place), ni un paiement
+// à un fournisseur (le coût de la marchandise est déjà compté via le prix d'achat des ventes).
+function isChargeExpense(e) { return !!e && ["withdrawal", "supplier"].indexOf(e.kind) === -1; }
 function shopResetAt(shop) {
   const m = shop && Array.isArray(shop.deletedProducts) ? shop.deletedProducts.find((d) => d && d.id === RESET_MARK_ID) : null;
   return m ? Number(m.at) || 0 : 0;
@@ -8812,6 +8877,7 @@ function mergeShopRaw(baseShop, localShop, remoteShop) {
     receiptInfo: newerStamped(local.receiptInfo, remote.receiptInfo),
     customerTariffs: mergeCustomerTariffs(local.customerTariffs, remote.customerTariffs),
     stockCount: mergeStockCount(local.stockCount, remote.stockCount),
+    supplierDebts: mergeSupplierDebts(local.supplierDebts, remote.supplierDebts),
   };
 }
 function SavedBadge({ saving, isOnline, pendingCount, lang }) {
@@ -12722,7 +12788,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
             }
           });
         }
-        const expensesTotal = expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+        const expensesTotal = expenses.filter(isChargeExpense).reduce((sum, e) => sum + (e.amount || 0), 0);
         const netProfit = netMargin - expensesTotal;
         results[s.id] = { revenue, stockCount, unpaidDebts, netProfit, marginableRevenue };
       } catch (e) {
@@ -13906,6 +13972,33 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [invScanErr, setInvScanErr] = useState(false);
   const [invMsg, setInvMsg] = useState("");
   const [invPastOpen, setInvPastOpen] = useState(null);
+  // ---- Dettes fournisseurs ----
+  const [supplierDebts, setSupplierDebts] = useState([]);
+  const [debtsView, setDebtsView] = useState("clients");
+  const [showAddSup, setShowAddSup] = useState(false);
+  const [supForm, setSupForm] = useState({ supplier: "", phone: "", amount: "", note: "", dueDate: "" });
+  const [supError, setSupError] = useState("");
+  const [supPay, setSupPay] = useState(null);
+  const [supPayAmount, setSupPayAmount] = useState("");
+  const [supPayMethod, setSupPayMethod] = useState("cash");
+  const [supOpen, setSupOpen] = useState(null);
+  const [supMsg, setSupMsg] = useState("");
+  const [supDelAsk, setSupDelAsk] = useState(null);
+  const [supShowSettled, setSupShowSettled] = useState(false);
+  const [restockCredit, setRestockCredit] = useState(false);
+  const [restockSupName, setRestockSupName] = useState("");
+  const [restockSupAmount, setRestockSupAmount] = useState("");
+  const [restockSupDue, setRestockSupDue] = useState("");
+  // ---- Image pour le statut WhatsApp ----
+  const [showStatusMaker, setShowStatusMaker] = useState(false);
+  const [stHeadline, setStHeadline] = useState("new");
+  const [stSel, setStSel] = useState([]);
+  const [stSearch, setStSearch] = useState("");
+  const [stShowPrices, setStShowPrices] = useState(true);
+  const [stShowPhone, setStShowPhone] = useState(true);
+  const [stPreview, setStPreview] = useState(null);
+  const [stBusy, setStBusy] = useState(false);
+  const stBlobRef = useRef(null);
   const [stockSearch, setStockSearch] = useState("");
   const [historySearch, setHistorySearch] = useState("");
   const [historyLimit, setHistoryLimit] = useState(40); // nombre de lignes d'historique affichées
@@ -14164,6 +14257,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setUnsoldLog(shop.unsoldLog || []);
     setReceiptInfo(shop.receiptInfo && typeof shop.receiptInfo === "object" ? shop.receiptInfo : {});
     setStockCount(shop.stockCount && typeof shop.stockCount === "object" ? shop.stockCount : null);
+    setSupplierDebts(Array.isArray(shop.supplierDebts) ? shop.supplierDebts : []);
     setDeletedProducts(Array.isArray(shop.deletedProducts) ? shop.deletedProducts : []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
@@ -14897,6 +14991,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       unsoldLog: overrides.unsoldLog ?? unsoldLog,
       receiptInfo: overrides.receiptInfo ?? receiptInfo,
       stockCount: overrides.stockCount !== undefined ? overrides.stockCount : stockCount,
+      supplierDebts: overrides.supplierDebts ?? supplierDebts,
       deletedProducts: overrides.deletedProducts ?? deletedProducts,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
@@ -14953,6 +15048,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setUnsoldLog(next.unsoldLog || []);
     setReceiptInfo(next.receiptInfo || {});
     setStockCount(next.stockCount || null);
+    setSupplierDebts(next.supplierDebts || []);
     setDeletedProducts(next.deletedProducts || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
@@ -15794,6 +15890,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setRestockPrice("");
     setRestockDate("");
     setRestockLotNo("");
+    setRestockCredit(false);
+    setRestockSupName("");
+    setRestockSupAmount("");
+    setRestockSupDue("");
   };
   // Valide le réapprovisionnement : ajoute la quantité saisie, et si un nouveau prix
   // d'achat est fourni, recalcule le prix d'achat du produit en moyenne pondérée entre
@@ -15828,6 +15928,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // Moyenne pondérée par les quantités : (ancien stock × ancien prix + nouveau lot × nouveau prix) / stock total.
       nextCost = (oldQty * oldCost + addQty * newLotCost) / (oldQty + addQty);
     }
+    // Acheté à crédit : la somme due au fournisseur devient une dette fournisseur.
+    let supPatch = {};
+    if (restockCredit && hasPermission("editCash")) {
+      const supAmt = parseFloat(String(restockSupAmount).replace(",", ".")) || (newLotCost != null ? addQty * newLotCost : 0);
+      if (!restockSupName.trim() || !(supAmt > 0)) { setError(tx(lang, "supNeedNameAmount")); return; }
+      supPatch = { supplierDebts: [...supplierDebts, makeSupDebt(restockSupName, supAmt, `${target.name} ×${addQty}`, restockSupDue)] };
+    }
     // Nouveau lot daté (et numéroté) : ajouté aux lots existants.
     const lotNoIn = restockLotNo.trim();
     let lotPatch = {};
@@ -15838,7 +15945,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       else kept.push({ id: Date.now().toString(36), date: restockDate, ...(lotNoIn ? { lotNo: lotNoIn } : {}), qty: addQty });
       lotPatch = { batches: kept.sort((a, b) => (a.date < b.date ? -1 : 1)), lotTracked: true };
     }
-    saveAll({ products: products.map((p) => (p.id === target.id ? { ...p, quantity: oldQty + addQty, costPrice: nextCost, ...lotPatch, updatedAt: Date.now() } : p)) });
+    saveAll({ products: products.map((p) => (p.id === target.id ? { ...p, quantity: oldQty + addQty, costPrice: nextCost, ...lotPatch, updatedAt: Date.now() } : p)), ...supPatch });
     logAction(`${t(lang, "logStockAdjusted")} : ${target.name} (+${addQty}${lotNoIn && restockDate ? `, ${tx(lang, "lotLabel")} ${lotNoIn}` : ""})`);
     setRestockTarget(null);
     setRestockQty("");
@@ -15942,6 +16049,272 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const found = products.find((x) => x.barcode && String(x.barcode).trim() === code);
     if (!found) { setInvMsg(tx(lang, "scanBarcodeNotFound")); playSound("error"); triggerHaptic("error"); return; }
     setInvMsg(""); setInvSearch(code); playSound("success"); triggerHaptic("success");
+  };
+  // ---- Dettes fournisseurs : ce que la boutique doit à ses grossistes / fournisseurs.
+  // Un paiement est réparti sur les dettes les plus anciennes du fournisseur et crée une
+  // sortie de caisse de type « supplier » (pas une charge : voir isChargeExpense).
+  const supRemaining = (d) => Math.max(0, r3q((Number(d.amount) || 0) - (d.payments || []).reduce((n, p) => n + (Number(p.amount) || 0), 0)));
+  const supLive = supplierDebts.filter((d) => d && !d.deleted);
+  const supOpenDebts = supLive.filter((d) => supRemaining(d) > 0);
+  const supTotalOwed = supOpenDebts.reduce((n, d) => n + supRemaining(d), 0);
+  const supOverdueCount = supOpenDebts.filter((d) => d.dueDate && d.dueDate < localDayKey(new Date())).length;
+  const supKnownNames = [...new Set(supLive.map((d) => String(d.supplier || "").trim()).filter(Boolean))];
+  const supPhoneOf = (name) => { const k = String(name || "").trim().toLowerCase(); const d = [...supLive].reverse().find((x) => String(x.supplier || "").trim().toLowerCase() === k && x.phone); return d ? d.phone : ""; };
+  const makeSupDebt = (supplier, amount, note, dueDate, phone) => ({
+    id: "sd" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    supplier: String(supplier).trim(),
+    phone: (phone && String(phone).trim()) || supPhoneOf(supplier) || "",
+    amount: r3q(amount),
+    note: note ? String(note).trim().slice(0, 120) : "",
+    date: new Date().toISOString(),
+    dueDate: dueDate || null,
+    payments: [],
+    by: activeEmployee ? activeEmployee.name : null,
+    updatedAt: Date.now(),
+  });
+  const openAddSup = () => { setSupForm({ supplier: "", phone: "", amount: "", note: "", dueDate: "" }); setSupError(""); setShowAddSup(true); };
+  const addSupDebt = () => {
+    if (shopReadOnly || !hasPermission("editCash")) return;
+    const amt = parseFloat(String(supForm.amount).replace(",", "."));
+    if (!supForm.supplier.trim() || !(amt > 0)) { setSupError(tx(lang, "supNeedNameAmount")); return; }
+    const d = makeSupDebt(supForm.supplier, amt, supForm.note, supForm.dueDate, supForm.phone);
+    saveAll({ supplierDebts: [...supplierDebts, d] });
+    logAction(`${tx(lang, "supAddedLog")} : ${d.supplier} — ${localizedNumber(d.amount)}`);
+    setShowAddSup(false);
+    setSupMsg("");
+  };
+  const openSupPay = (g) => { setSupPay(g); setSupPayAmount(String(g.total)); setSupPayMethod("cash"); setSupError(""); };
+  const paySupplier = () => {
+    const g = supPay;
+    if (!g || shopReadOnly || !hasPermission("editCash")) return;
+    const amt = parseFloat(String(supPayAmount).replace(",", "."));
+    if (!(amt > 0)) { setSupError(t(lang, "invalidAmount")); return; }
+    const open = supplierDebts
+      .filter((d) => d && !d.deleted && String(d.supplier || "").trim().toLowerCase() === g.key && supRemaining(d) > 0)
+      .sort((a, b) => (String(a.date) < String(b.date) ? -1 : 1));
+    const total = open.reduce((n, d) => n + supRemaining(d), 0);
+    const pay = r3q(Math.min(amt, total));
+    if (!(pay > 0)) { setSupPay(null); return; }
+    const nowMs = Date.now();
+    const now = new Date(nowMs).toISOString();
+    const expense = {
+      id: nowMs.toString() + Math.random().toString(36).slice(2, 7),
+      label: `🚚 ${g.name}`,
+      amount: pay,
+      kind: "supplier",
+      method: supPayMethod === "mobile" ? "mobile" : "cash",
+      date: now,
+      actorId: activeEmployee ? activeEmployee.id : null,
+      actorName: activeEmployee ? activeEmployee.name : null,
+    };
+    let left = pay;
+    const part = {};
+    open.forEach((d) => { if (left <= 0) return; const n = Math.min(supRemaining(d), left); left = r3q(left - n); part[d.id] = r3q(n); });
+    const next = supplierDebts.map((d) => (part[d.id] ? { ...d, payments: [...(d.payments || []), { id: "sp" + nowMs.toString(36) + Math.random().toString(36).slice(2, 6), amount: part[d.id], date: now, method: expense.method, expenseId: expense.id }], updatedAt: nowMs } : d));
+    saveAll({ supplierDebts: next, expenses: [...expenses, expense], historyLog: [...historyLog, makeHistoryEntry("expense", { refId: expense.id, date: now, amount: pay, label: expense.label })] });
+    logAction(`${tx(lang, "supPaidLog")} : ${g.name} — ${localizedNumber(pay)}`);
+    setSupPay(null);
+    setSupMsg(tx(lang, "supPaidMsg").replace("{name}", g.name));
+  };
+  const deleteSupDebt = (id) => {
+    if (shopReadOnly || !hasPermission("editCash")) return;
+    if (supDelAsk !== id) { setSupDelAsk(id); return; }
+    const d = supplierDebts.find((x) => x.id === id);
+    saveAll({ supplierDebts: supplierDebts.map((x) => (x.id === id ? { ...x, deleted: true, updatedAt: Date.now() } : x)) });
+    if (d) logAction(`${tx(lang, "supDelete")} : ${d.supplier} — ${localizedNumber(d.amount)}`);
+    setSupDelAsk(null);
+  };
+  // ---- Image pour le statut WhatsApp : affiche verticale 1080×1920 (format du statut)
+  // avec le nom de la boutique, un titre (Nouveautés, Promo…), jusqu'à 4 produits avec
+  // photo et prix, et le numéro de la boutique. Partagée via le partage du téléphone.
+  const ST_MAX = 4;
+  const ST_HEADLINES = [["new", "🆕"], ["promo", "🔥"], ["today", "✅"], ["arrival", "📦"]];
+  const openStatusMaker = () => {
+    const pre = products
+      .filter((p) => !isKitProduct(p) && (Number(p.quantity) || 0) > 0 && p.photo)
+      .sort((a, b) => (Number(b.updatedAt) || 0) - (Number(a.updatedAt) || 0))
+      .slice(0, ST_MAX)
+      .map((p) => p.id);
+    setStSel(pre);
+    setStSearch("");
+    setStShowPhone(!!shopPhone);
+    if (stPreview) { try { URL.revokeObjectURL(stPreview); } catch (e) {} }
+    setStPreview(null);
+    stBlobRef.current = null;
+    setShowStatusMaker(true);
+  };
+  const closeStatusMaker = () => {
+    if (stPreview) { try { URL.revokeObjectURL(stPreview); } catch (e) {} }
+    setStPreview(null);
+    stBlobRef.current = null;
+    setShowStatusMaker(false);
+  };
+  const buildStatusImage = async () => {
+    const items = stSel.map((id) => products.find((p) => p.id === id)).filter(Boolean).slice(0, ST_MAX);
+    if (!items.length) return;
+    setStBusy(true);
+    try {
+      const style = shareCardStyleById(shareCardStyleId);
+      const W = 1080, H = 1920;
+      const canvas = document.createElement("canvas");
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext("2d");
+      const loadImage = (src) => new Promise((resolve, reject) => {
+        const img = new Image();
+        if (typeof src === "string" && /^https?:/.test(src)) img.crossOrigin = "anonymous";
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+      const rr = (x, y, w, h, r) => {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      };
+      const fitFont = (text, weight, size, maxW, min) => {
+        let s = size;
+        ctx.font = `${weight} ${s}px system-ui, -apple-system, sans-serif`;
+        while (ctx.measureText(text).width > maxW && s > min) { s -= 2; ctx.font = `${weight} ${s}px system-ui, -apple-system, sans-serif`; }
+        let t = text;
+        while (ctx.measureText(t).width > maxW && t.length > 3) t = t.slice(0, -2) + "…";
+        return t;
+      };
+      // Fond : mêmes styles que la fiche produit (Réglages > Image de partage).
+      const bg = ctx.createLinearGradient(0, 0, 0, H);
+      bg.addColorStop(0, style.colors[0]);
+      bg.addColorStop(1, style.colors[1]);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+      if (style.decor) drawCardDecor(ctx, style.decor, W, H);
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "#ffffff";
+      if (shopName) { const t = fitFont(shopName, "bold", 70, W - 120, 40); ctx.fillText(t, W / 2, 160); }
+      // Titre dans une pastille.
+      const hl = ST_HEADLINES.find((h) => h[0] === stHeadline) || ST_HEADLINES[0];
+      const hlText = fitFont(`${hl[1]} ${tx(lang, "stH_" + hl[0])}`.toUpperCase(), "900", 76, W - 200, 40);
+      const hlW = Math.min(W - 120, ctx.measureText(hlText).width + 90);
+      ctx.save();
+      ctx.fillStyle = "rgba(255,255,255,0.18)";
+      rr((W - hlW) / 2, 240, hlW, 120, 60);
+      ctx.fill();
+      ctx.restore();
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText(hlText, W / 2, 302);
+      // Grille de produits.
+      const n = items.length;
+      const big = n === 1;
+      const cw = big ? 820 : 465;
+      const textH = big ? (stShowPrices ? 200 : 130) : (stShowPrices ? 150 : 100);
+      const ch = (cw - 32) + 32 + textH;
+      const rows = n <= 2 ? 1 : 2;
+      const areaTop = 400, areaBottom = 1650;
+      const gridH = rows * ch + (rows - 1) * 30;
+      const top = areaTop + Math.max(0, (areaBottom - areaTop - gridH) / 2);
+      const pos = [];
+      if (big) pos.push([(W - cw) / 2, top]);
+      else items.forEach((_, i) => {
+        const r = Math.floor(i / 2);
+        const inRow = Math.min(2, n - r * 2);
+        const rowW = inRow * cw + (inRow - 1) * 30;
+        pos.push([(W - rowW) / 2 + (i % 2) * (cw + 30), top + r * (ch + 30)]);
+      });
+      for (let i = 0; i < n; i++) {
+        const p = items[i];
+        const [x, y] = pos[i];
+        ctx.save();
+        ctx.shadowColor = "rgba(0,0,0,0.35)";
+        ctx.shadowBlur = 30;
+        ctx.shadowOffsetY = 12;
+        rr(x, y, cw, ch, 34);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.restore();
+        const ph = cw - 32;
+        ctx.save();
+        rr(x + 16, y + 16, ph, ph, 24);
+        ctx.clip();
+        ctx.fillStyle = "#eef2ff";
+        ctx.fillRect(x + 16, y + 16, ph, ph);
+        let drawn = false;
+        if (p.photo) {
+          try {
+            const img = await loadImage(p.photo);
+            const sc = Math.max(ph / img.width, ph / img.height);
+            const sw = ph / sc, sh = ph / sc;
+            ctx.drawImage(img, (img.width - sw) / 2, (img.height - sh) / 2, sw, sh, x + 16, y + 16, ph, ph);
+            drawn = true;
+          } catch (e) {}
+        }
+        if (!drawn) {
+          ctx.font = `${big ? 220 : 130}px system-ui, sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("📦", x + 16 + ph / 2, y + 16 + ph / 2);
+        }
+        ctx.restore();
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#0f172a";
+        const ty = y + 16 + ph + 16;
+        const nameText = fitFont(p.name || "", "bold", big ? 54 : 36, cw - 40, big ? 34 : 24);
+        ctx.fillText(nameText, x + cw / 2, ty + (big ? 48 : 34));
+        if (stShowPrices) {
+          const priceText = fitFont(fcfa(p.price), "900", big ? 66 : 42, cw - 80, 26);
+          const pw = Math.min(cw - 40, ctx.measureText(priceText).width + (big ? 70 : 44));
+          const py = ty + (big ? 130 : 96);
+          const pg = ctx.createLinearGradient(x, 0, x + cw, 0);
+          pg.addColorStop(0, "#16a34a");
+          pg.addColorStop(1, "#22c55e");
+          ctx.fillStyle = pg;
+          rr(x + (cw - pw) / 2, py - (big ? 44 : 30), pw, big ? 88 : 60, big ? 44 : 30);
+          ctx.fill();
+          ctx.fillStyle = "#ffffff";
+          ctx.fillText(priceText, x + cw / 2, py + 2);
+        }
+      }
+      // Bas : numéro de la boutique + appel à commander.
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#ffffff";
+      if (stShowPhone && shopPhone) {
+        ctx.fillText(fitFont(`📞 ${shopPhone}`, "bold", 60, W - 120, 36), W / 2, 1735);
+        ctx.fillStyle = "rgba(255,255,255,0.85)";
+        ctx.fillText(fitFont(`💬 ${tx(lang, "stOrderCta")}`, "600", 42, W - 120, 28), W / 2, 1810);
+      } else {
+        ctx.fillStyle = "rgba(255,255,255,0.85)";
+        ctx.fillText(fitFont(`💬 ${tx(lang, "stOrderCta")}`, "600", 46, W - 120, 28), W / 2, 1770);
+      }
+      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.font = "26px system-ui, -apple-system, sans-serif";
+      ctx.fillText("Boutipro", W / 2, 1880);
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+      if (!blob) return;
+      stBlobRef.current = blob;
+      if (stPreview) { try { URL.revokeObjectURL(stPreview); } catch (e) {} }
+      setStPreview(URL.createObjectURL(blob));
+    } catch (e) {
+      setError(t(lang, "genericError"));
+    } finally {
+      setStBusy(false);
+    }
+  };
+  const shareStatusImage = async (forceDownload) => {
+    const blob = stBlobRef.current;
+    if (!blob) return;
+    const file = new File([blob], "statut-whatsapp.png", { type: "image/png" });
+    if (!forceDownload && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file] }); return; } catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "statut-whatsapp.png";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
   };
   // "Nouvelle journée" (produits en mode "Quantité du jour", boulangerie/pâtisserie) :
   // déclenché manuellement par la boutique, jamais automatiquement (pas d'heure fixe,
@@ -16704,7 +17077,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // L'historique est permanent : avant de vider les ventes/dépenses, on recopie dans le journal
     // ce qui n'y figurait pas encore, pour que rien ne disparaisse de l'onglet Historique.
     const resetNow = Date.now();
-    saveAll({ deletedProducts: [...deletedProducts.filter((d) => d && d.id !== RESET_MARK_ID), { id: RESET_MARK_ID, at: resetNow, updatedAt: resetNow, date: new Date(resetNow).toISOString() }], debtEvents: [], cashCounts: [], cashClosures: [], unsoldLog: [], products: [], sales: [], debts: [], loyaltyCustomers: {}, expenses: [], cashFund: 0, draftCarts: [], activeCartId: null, historyLog: [...historyLog, ...deriveLegacyHistory()] });
+    saveAll({ deletedProducts: [...deletedProducts.filter((d) => d && d.id !== RESET_MARK_ID), { id: RESET_MARK_ID, at: resetNow, updatedAt: resetNow, date: new Date(resetNow).toISOString() }], debtEvents: [], cashCounts: [], cashClosures: [], unsoldLog: [], products: [], sales: [], debts: [], loyaltyCustomers: {}, expenses: [], cashFund: 0, draftCarts: [], activeCartId: null, supplierDebts: supplierDebts.map((d) => ({ ...d, deleted: true, updatedAt: resetNow })), stockCount: stockCount && !stockCount.closedAt ? { ...stockCount, closedAt: resetNow, cancelled: true } : stockCount, historyLog: [...historyLog, ...deriveLegacyHistory()] });
     setConfirmReset(false);
     setShowSettings(false);
   };
@@ -18294,7 +18667,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       lines.push(`• ${t(lang, "cashReportTotalSales")} : ${money(total)} (${localizedNumber(tickets)})`);
       if (best) lines.push(`• ${tx(lang, "aiLocalBestProduct").split("(")[0].trim()} : ${best[0]} — ${money(best[1])}`);
       if (can("viewCash")) {
-        const exp = expenses.filter((e) => dayKeyOf(e.date) >= since && e.kind !== "withdrawal")
+        const exp = expenses.filter((e) => dayKeyOf(e.date) >= since && isChargeExpense(e))
           .reduce((sum, e) => sum + e.amount, 0);
         lines.push(`• ${t(lang, "cashReportExpenses")} : ${money(exp)}`);
       }
@@ -19530,8 +19903,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     debtCollected: totalDebtCollected,
     // Une sortie de caisse est soit une dépense (elle ampute le bénéfice), soit un retrait
     // (l'argent change seulement de place) : la clôture les sépare, comme le reste de l'app.
-    expenses: sessionExpenseRows.filter((e) => e.kind !== "withdrawal").reduce((sum, e) => sum + e.amount, 0),
-    withdrawals: sessionExpenseRows.filter((e) => e.kind === "withdrawal").reduce((sum, e) => sum + e.amount, 0),
+    expenses: sessionExpenseRows.filter((e) => isChargeExpense(e)).reduce((sum, e) => sum + e.amount, 0),
+    withdrawals: sessionExpenseRows.filter((e) => !isChargeExpense(e)).reduce((sum, e) => sum + e.amount, 0),
     expected: cashBalance,
   };
   const todayExpenses = expenses.filter((e) => dayKeyOf(e.date) === todayKey());
@@ -19544,7 +19917,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const todayProfit = (() => {
     let margin = 0, costed = 0, rev = 0, revCosted = 0;
     todaySales.forEach((s) => { rev += s.total || 0; if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; revCosted += s.total || 0; } });
-    const exp = todayExpenses.reduce((sum, e) => sum + e.amount, 0);
+    const exp = todayExpenses.filter(isChargeExpense).reduce((sum, e) => sum + e.amount, 0);
     return { margin, costed, exp, net: margin - exp, coverage: coveragePct(revCosted, rev) };
   })();
   // Onglet Caisse : tout est calculé uniquement quand l'onglet est ouvert.
@@ -19560,9 +19933,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const outTotal = pExpenses.filter(isCashMove).reduce((sum, e) => sum + e.amount, 0);
     // Un retrait sort de la caisse mais n'est pas une charge : il ne doit pas entrer dans
     // le calcul du bénéfice, sinon porter sa recette à la banque ferait "perdre" de l'argent.
-    const pRealExpenses = pExpenses.filter((e) => e.kind !== "withdrawal");
+    const pRealExpenses = pExpenses.filter((e) => isChargeExpense(e));
     const outExpensesOnly = pRealExpenses.reduce((sum, e) => sum + e.amount, 0);
-    const withdrawalsTotal = pExpenses.filter((e) => e.kind === "withdrawal" && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
+    const withdrawalsTotal = pExpenses.filter((e) => !isChargeExpense(e) && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
     const salesTotal = pSales.reduce((sum, s) => sum + s.total, 0);
     const byMethodP = getPaymentMethods(lang).map((m) => ({ ...m, total: pSales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
     const debtIn = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
@@ -19585,7 +19958,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pDebtPayments = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
     const journal = [
       ...Object.values(txn),
-      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", isWithdrawal: e.kind === "withdrawal", date: e.date, amount: e.amount, label: (isCashMove(e) ? "" : "📱 ") + (e.label || ""), expenseId: e.id, actorName: e.actorName || null })),
+      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", isWithdrawal: !isChargeExpense(e), date: e.date, amount: e.amount, label: (isCashMove(e) ? "" : "📱 ") + (e.label || ""), expenseId: e.id, actorName: e.actorName || null })),
       ...pDebtPayments.map((ev) => ({ id: "d-" + ev.id, kind: "debt", date: ev.date, amount: ev.amount, label: (isCashMove(ev) ? "" : "📱 ") + (ev.customer || ""), actorName: ev.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // Bénéfice de la période : marge des ventes dont le prix d'achat est connu, moins les dépenses.
@@ -19650,7 +20023,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       let margin = 0, costed = 0, rev = 0, revCosted = 0;
       rows.forEach((s) => { rev += s.total || 0; if (s.costPrice != null) { margin += s.total - s.costPrice * s.qty; costed++; revCosted += s.total || 0; } });
       // Même règle que la Caisse : un retrait n'est pas une charge, seule une dépense l'est.
-      const exp = expenses.filter((e) => e.kind !== "withdrawal").reduce((sum, e) => { const k = dayKeyOf(e.date); return k >= from && (to == null || k < to) ? sum + e.amount : sum; }, 0);
+      const exp = expenses.filter((e) => isChargeExpense(e)).reduce((sum, e) => { const k = dayKeyOf(e.date); return k >= from && (to == null || k < to) ? sum + e.amount : sum; }, 0);
       return { net: margin - exp, costed, coverage: coveragePct(revCosted, rev) };
     };
     const revenue = revenueOf(cur), tickets = ticketsOf(cur);
@@ -20190,8 +20563,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       const periodCashOut = expenses.filter((e) => inRange(e.date));
       // Un retrait de caisse (versement en banque, prélèvement du patron) sort de l'argent
       // mais n'est pas une charge : il ne doit pas réduire le bénéfice. Il est présenté à part.
-      const periodExpenses = periodCashOut.filter((e) => e.kind !== "withdrawal");
-      const periodWithdrawals = periodCashOut.filter((e) => e.kind === "withdrawal");
+      const periodExpenses = periodCashOut.filter((e) => isChargeExpense(e));
+      const periodWithdrawals = periodCashOut.filter((e) => !isChargeExpense(e));
       const periodDebtPayments = debtEvents.filter((ev) => inRange(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
 
       const totalRevenue = periodSales.reduce((sum, s) => sum + s.total, 0);
@@ -21934,7 +22307,84 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <input autoComplete="off" value={restockLotNo} onChange={(e) => setRestockLotNo(e.target.value)} placeholder={tx(lang, "lotNoLabel")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                   </div>
                 )}
+                {hasPermission("editCash") && (
+                  <div className="mb-3 rounded-lg p-2.5" style={{ background: T.input }}>
+                    <label className="flex items-center gap-2 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" checked={restockCredit} onChange={(e) => setRestockCredit(e.target.checked)} />
+                      🚚 {tx(lang, "supRestockCredit")}
+                    </label>
+                    {restockCredit && (
+                      <div className="mt-2 flex flex-col gap-2">
+                        <input autoComplete="off" list="sup-names" value={restockSupName} onChange={(e) => setRestockSupName(e.target.value)} placeholder={tx(lang, "supNameLabel")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                        <input autoComplete="off" type="text" inputMode="decimal" value={restockSupAmount} onChange={(e) => setRestockSupAmount(e.target.value.replace(/[^0-9.,]/g, ""))} placeholder={(() => { const q = parseInt(restockQty, 10); const c = parseFloat(restockPrice); return q > 0 && c > 0 ? `${tx(lang, "supAmountLabel")} : ${localizedNumber(q * c)}` : tx(lang, "supAmountLabel"); })()} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                        <label className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "supDueLabel")}</label>
+                        <input type="date" value={restockSupDue} onChange={(e) => setRestockSupDue(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+                      </div>
+                    )}
+                    <datalist id="sup-names">{supKnownNames.map((n) => <option key={n} value={n} />)}</datalist>
+                  </div>
+                )}
                 <button onClick={confirmRestock} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "restockConfirmBtn")}</button>
+              </div>
+            </div>
+          );
+        })()}
+        {tab === "stock" && showStatusMaker && (() => {
+          const q = stSearch.trim().toLowerCase();
+          const pool = products.filter((p) => !isKitProduct(p) && (!q || p.name.toLowerCase().includes(q)));
+          const selected = stSel.map((id) => products.find((p) => p.id === id)).filter(Boolean);
+          const rest = pool.filter((p) => stSel.indexOf(p.id) === -1).sort((a, b) => (b.photo ? 1 : 0) - (a.photo ? 1 : 0) || (Number(b.updatedAt) || 0) - (Number(a.updatedAt) || 0)).slice(0, 60);
+          const toggle = (id) => setStSel((s) => (s.indexOf(id) !== -1 ? s.filter((x) => x !== id) : s.length >= ST_MAX ? s : [...s, id]));
+          const box = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}` };
+          const chip = (on) => ({ background: on ? "#16a34a" : T.input, color: on ? "white" : T.text });
+          const row = (p, on) => (
+            <button key={p.id} type="button" onClick={() => toggle(p.id)} disabled={!on && stSel.length >= ST_MAX} className="w-full flex items-center gap-3 px-3 py-2 text-start disabled:opacity-40" style={{ borderTop: `1px solid ${T.border}` }}>
+              {p.photo ? <img src={p.photo} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" /> : <span className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: T.input }}>📦</span>}
+              <span className="flex-1 min-w-0">
+                <span className="text-sm font-bold block truncate">{p.name}</span>
+                <span className="text-[11px]" style={{ color: T.muted }}>{fcfa(p.price)}</span>
+              </span>
+              <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0" style={{ background: on ? "#16a34a" : T.input, color: "white", border: on ? "none" : `2px solid ${T.border}` }}>{on ? "✓" : ""}</span>
+            </button>
+          );
+          return (
+            <div data-kbscroll="true" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+              <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-lg font-extrabold" style={{ color: T.text }}>📣 {tx(lang, "stTitle")}</h2>
+                  <button type="button" onClick={stPreview ? () => setStPreview(null) : closeStatusMaker} aria-label="Fermer" className="p-1"><X size={22} color={T.muted} /></button>
+                </div>
+                {stPreview ? (
+                  <div>
+                    <img src={stPreview} alt="" className="mx-auto rounded-2xl mb-4" style={{ maxHeight: "58vh", boxShadow: "0 10px 30px rgba(0,0,0,0.25)" }} />
+                    <button type="button" onClick={() => shareStatusImage(false)} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2" style={{ background: "#16a34a" }}>📤 {tx(lang, "stShare")}</button>
+                    <button type="button" onClick={() => shareStatusImage(true)} className="w-full py-3 rounded-xl font-bold text-sm mb-2" style={{ background: T.input, color: T.text }}>⬇️ {tx(lang, "stDownload")}</button>
+                    <p className="text-[11px] text-center mb-3" style={{ color: T.muted }}>{tx(lang, "stShareHint")}</p>
+                    <button type="button" onClick={() => setStPreview(null)} className="w-full py-2 text-xs font-bold" style={{ color: T.muted }}>← {tx(lang, "stEdit")}</button>
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "stHint")}</p>
+                    <p className="text-[11px] font-bold mb-1.5" style={{ color: T.muted }}>{tx(lang, "stHeadline")}</p>
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {ST_HEADLINES.map(([k, emo]) => (
+                        <button key={k} type="button" onClick={() => setStHeadline(k)} className="text-xs font-bold px-3 py-1.5 rounded-full" style={chip(stHeadline === k)}>{emo} {tx(lang, "stH_" + k)}</button>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      <button type="button" onClick={() => setStShowPrices(!stShowPrices)} className="text-xs font-bold px-3 py-1.5 rounded-full" style={chip(stShowPrices)}>{stShowPrices ? "✓ " : ""}{tx(lang, "stShowPrices")}</button>
+                      {shopPhone && <button type="button" onClick={() => setStShowPhone(!stShowPhone)} className="text-xs font-bold px-3 py-1.5 rounded-full" style={chip(stShowPhone)}>{stShowPhone ? "✓ " : ""}{tx(lang, "stShowPhone")}</button>}
+                    </div>
+                    <p className="text-[11px] font-bold mb-1.5" style={{ color: T.muted }}>{tx(lang, "stPickProducts").replace("{n}", localizedNumber(stSel.length)).replace("{p}", localizedNumber(ST_MAX))}</p>
+                    <button type="button" onClick={buildStatusImage} disabled={!stSel.length || stBusy} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-3 disabled:opacity-40" style={{ background: "#16a34a" }}>{stBusy ? "…" : "✨ " + tx(lang, "stCreate")}</button>
+                    <div className="mb-2"><SearchBox compact value={stSearch} onChange={setStSearch} placeholder={t(lang, "search")} darkMode={darkMode} /></div>
+                    <div className="rounded-2xl overflow-hidden" style={box}>
+                      {selected.map((p) => row(p, true))}
+                      {rest.map((p) => row(p, false))}
+                      {!selected.length && !rest.length && <p className="text-xs text-center p-4" style={{ color: T.muted }}>{t(lang, "noProductFound")}</p>}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           );
@@ -22632,10 +23082,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
               </div>
             )}
-            {products.length > 0 && hasPermission("editStock") && !shopReadOnly && (
-              <button onClick={() => { setShowInventory(true); setInvMsg(""); setInvReview(false); }} className="w-full h-10 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold" style={{ background: darkMode ? "rgba(124,58,237,0.16)" : "#ede9fe", color: darkMode ? "#c4b5fd" : "#6d28d9" }}>
-                📋 {invOpen ? tx(lang, "invResumeBtn").replace("{n}", localizedNumber(invCountable().filter((p) => invCountOf(p)).length)).replace("{p}", localizedNumber(invCountable().length)) : tx(lang, "invBtn")}
-              </button>
+            {products.length > 0 && (
+              <div className="flex gap-2">
+                {hasPermission("editStock") && !shopReadOnly && (
+                  <button onClick={() => { setShowInventory(true); setInvMsg(""); setInvReview(false); }} className="flex-1 min-h-[2.5rem] px-2 py-1 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold leading-tight text-center" style={{ background: darkMode ? "rgba(124,58,237,0.16)" : "#ede9fe", color: darkMode ? "#c4b5fd" : "#6d28d9" }}>
+                    📋 {invOpen ? tx(lang, "invResumeBtn").replace("{n}", localizedNumber(invCountable().filter((p) => invCountOf(p)).length)).replace("{p}", localizedNumber(invCountable().length)) : tx(lang, "invBtn")}
+                  </button>
+                )}
+                <button onClick={openStatusMaker} className="flex-1 min-h-[2.5rem] px-2 py-1 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold leading-tight text-center" style={{ background: darkMode ? "rgba(37,211,102,0.15)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>
+                  📣 {tx(lang, "stBtn")}
+                </button>
+              </div>
             )}
             {products.length > 0 && (
               <div className="flex items-center gap-2 mb-3">
@@ -23842,7 +24299,142 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </button>
           </div>
         )}
-        {tab === "debts" && (
+        {tab === "debts" && hasPermission("viewCash") && (
+          <div className="flex gap-1 p-1 rounded-2xl mb-3" style={{ background: darkMode ? T.card : "#e8eaf3" }}>
+            {[["clients", "👥 " + tx(lang, "supTabClients")], ["suppliers", "🚚 " + tx(lang, "supTabSuppliers")]].map(([k, label]) => (
+              <button key={k} type="button" onClick={() => { setDebtsView(k); setSupMsg(""); }} className="flex-1 py-2 rounded-xl text-xs font-bold" style={{ background: debtsView === k ? (darkMode ? "#2a2a3a" : "white") : "transparent", color: debtsView === k ? T.text : T.muted, boxShadow: debtsView === k && !darkMode ? "0 1px 4px rgba(0,0,0,0.08)" : "none" }}>
+                {label}{k === "suppliers" && supOverdueCount > 0 ? <span style={{ color: "#e11d48" }}> ●</span> : null}
+              </button>
+            ))}
+          </div>
+        )}
+        {tab === "debts" && hasPermission("viewCash") && debtsView === "suppliers" && (() => {
+          const today = localDayKey(new Date());
+          const red = darkMode ? "#fda4af" : "#e11d48";
+          const green = darkMode ? "#4ade80" : "#15803d";
+          const box = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" };
+          const canEdit = hasPermission("editCash") && !shopReadOnly;
+          const groups = {};
+          supOpenDebts.forEach((d) => {
+            const name = String(d.supplier || "").trim() || "—";
+            const k = name.toLowerCase();
+            if (!groups[k]) groups[k] = { key: k, name, phone: "", total: 0, debts: [], due: null };
+            const g = groups[k];
+            g.total = r3q(g.total + supRemaining(d));
+            g.debts.push(d);
+            if (d.phone) g.phone = d.phone;
+            if (d.dueDate && (!g.due || d.dueDate < g.due)) g.due = d.dueDate;
+          });
+          const list = Object.values(groups).sort((a, b) => {
+            const ao = a.due && a.due < today ? 1 : 0, bo = b.due && b.due < today ? 1 : 0;
+            return bo - ao || b.total - a.total;
+          });
+          const settled = supLive.filter((d) => supRemaining(d) <= 0).sort((a, b) => (String(a.date) < String(b.date) ? 1 : -1)).slice(0, 20);
+          const dueText = (due) => tx(lang, due < today ? "supOverdueSince" : "supDueOn").replace("{date}", fullDate(due + "T12:00:00"));
+          return (
+            <div className="space-y-2">
+              {supMsg && <p className="text-xs font-semibold px-3 py-2 rounded-xl" style={{ background: darkMode ? "rgba(16,185,129,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#047857" }}>✓ {supMsg}</p>}
+              <div className="rounded-3xl p-5" style={box}>
+                <p className="text-xs font-semibold" style={{ color: T.muted }}>{tx(lang, "supTotalOwed")}</p>
+                <p className="text-2xl font-black mt-0.5" style={{ color: supTotalOwed > 0 ? red : T.text }}>{fcfa(supTotalOwed)}</p>
+                {supOverdueCount > 0 && <p className="text-[11px] font-bold mt-1" style={{ color: red }}>⚠️ {tx(lang, "supOverdueCount").replace("{n}", localizedNumber(supOverdueCount))}</p>}
+                {canEdit && (
+                  <button onClick={openAddSup} className="w-full mt-4 flex items-center justify-center gap-2 py-3.5 rounded-2xl text-white font-extrabold text-sm active:scale-[0.98] transition-transform" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 10px 20px rgba(37,99,235,0.3)" }}>
+                    <Plus size={18} /> {tx(lang, "supAddBtn")}
+                  </button>
+                )}
+              </div>
+              {list.length === 0 && <p className="text-xs text-center py-6" style={{ color: T.muted }}>✓ {tx(lang, "supNone")}</p>}
+              {list.map((g) => {
+                const wa = normalizePhoneForWhatsApp(g.phone);
+                return (
+                  <div key={g.key} className="rounded-2xl p-3.5" style={box}>
+                    <div className="flex items-start justify-between gap-2">
+                      <button type="button" onClick={() => setSupOpen(supOpen === g.key ? null : g.key)} className="min-w-0 flex-1 text-start">
+                        <p className="text-sm font-extrabold truncate">🚚 {g.name}</p>
+                        <p className="text-[11px]" style={{ color: g.due && g.due < today ? red : T.muted }}>{tx(lang, "supDebtsCount").replace("{n}", localizedNumber(g.debts.length))}{g.due ? ` · ${dueText(g.due)}` : ""}</p>
+                      </button>
+                      <span className="text-sm font-black shrink-0" style={{ color: red }}>{fcfa(g.total)}</span>
+                    </div>
+                    <div className="flex gap-2 mt-2.5">
+                      {canEdit && <button type="button" onClick={() => openSupPay(g)} className="flex-1 h-9 rounded-xl text-xs font-bold text-white" style={{ background: "#16a34a" }}>💵 {tx(lang, "supPayBtn")}</button>}
+                      {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer" className="h-9 px-3 rounded-xl text-xs font-bold flex items-center gap-1" style={{ background: darkMode ? "rgba(22,163,74,0.15)" : "#dcfce7", color: green }}><MessageSquare size={13} /> WhatsApp</a>}
+                      <button type="button" onClick={() => setSupOpen(supOpen === g.key ? null : g.key)} className="h-9 px-3 rounded-xl text-xs font-bold" style={{ background: T.input, color: T.text }}>{supOpen === g.key ? "▲" : "▼"}</button>
+                    </div>
+                    {supOpen === g.key && (
+                      <div className="mt-2.5">
+                        {[...g.debts].sort((a, b) => (String(a.date) < String(b.date) ? -1 : 1)).map((d) => (
+                          <div key={d.id} className="py-2 text-[11px]" style={{ borderTop: `1px solid ${T.border}` }}>
+                            <div className="flex justify-between gap-2">
+                              <span className="min-w-0">{fullDate(d.date)}{d.note ? ` · ${d.note}` : ""}</span>
+                              <span className="font-bold shrink-0">{fcfa(supRemaining(d))}{supRemaining(d) < d.amount ? <span style={{ color: T.muted, fontWeight: 500 }}> / {fcfa(d.amount)}</span> : null}</span>
+                            </div>
+                            {d.dueDate && <p style={{ color: d.dueDate < today ? red : T.muted }}>{dueText(d.dueDate)}</p>}
+                            {(d.payments || []).map((p) => <p key={p.id} style={{ color: green }}>✓ {fullDate(p.date)} · {fcfa(p.amount)} {p.method === "mobile" ? "📱" : "💵"}</p>)}
+                            {canEdit && <button type="button" onClick={() => deleteSupDebt(d.id)} className="text-[10px] font-semibold mt-1" style={{ color: red }}>{supDelAsk === d.id ? tx(lang, "supDeleteConfirm") : tx(lang, "supDelete")}</button>}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              {settled.length > 0 && (
+                <div>
+                  <button type="button" onClick={() => setSupShowSettled(!supShowSettled)} className="text-xs font-bold py-2" style={{ color: T.muted }}>{supShowSettled ? "▲" : "▼"} {tx(lang, "supSettled").replace("{n}", localizedNumber(settled.length))}</button>
+                  {supShowSettled && (
+                    <div className="rounded-2xl p-3" style={box}>
+                      {settled.map((d, i) => (
+                        <div key={d.id} className="flex justify-between gap-2 py-1.5 text-[11px]" style={i ? { borderTop: `1px solid ${T.border}` } : null}>
+                          <span className="min-w-0 truncate">✓ {d.supplier}{d.note ? ` · ${d.note}` : ""} <span style={{ color: T.muted }}>({fullDate(d.date)})</span></span>
+                          <span className="font-bold shrink-0" style={{ color: green }}>{fcfa(d.amount)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })()}
+        {showAddSup && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowAddSup(false)}>
+            <div data-kbscroll="true" className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }} onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-sm">🚚 {tx(lang, "supAddBtn")}</h3>
+                <button type="button" onClick={() => setShowAddSup(false)} aria-label="Fermer"><X size={18} /></button>
+              </div>
+              {[["supplier", "supNameLabel", "text"], ["amount", "supAmountLabel", "decimal"], ["note", "supNoteLabel", "text"], ["phone", "supPhoneLabel", "tel"]].map(([k, key, mode]) => (
+                <input key={k} autoComplete="off" list={k === "supplier" ? "sup-names-add" : undefined} type={mode === "tel" ? "tel" : "text"} inputMode={mode === "decimal" ? "decimal" : mode === "tel" ? "tel" : undefined} value={supForm[k]} onChange={(e) => { const v = mode === "decimal" ? e.target.value.replace(/[^0-9.,]/g, "") : e.target.value; setSupForm((f) => ({ ...f, [k]: v })); setSupError(""); }} placeholder={tx(lang, key)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              ))}
+              <datalist id="sup-names-add">{supKnownNames.map((n) => <option key={n} value={n} />)}</datalist>
+              <label className="text-[11px] block mb-1" style={{ color: T.muted }}>{tx(lang, "supDueLabel")}</label>
+              <input type="date" value={supForm.dueDate} onChange={(e) => setSupForm((f) => ({ ...f, dueDate: e.target.value }))} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+              {supError && <p className="text-xs font-semibold mb-2" style={{ color: "#e11d48" }}>{supError}</p>}
+              <button type="button" onClick={addSupDebt} className="w-full py-3 rounded-xl text-white font-bold text-sm" style={{ background: INDIGO }}>{tx(lang, "supSave")}</button>
+            </div>
+          </div>
+        )}
+        {supPay && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setSupPay(null)}>
+            <div className="w-full max-w-sm rounded-2xl p-5" style={{ background: T.card, color: T.text }} onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="font-bold text-sm">💵 {tx(lang, "supPayTitle").replace("{name}", supPay.name)}</h3>
+                <button type="button" onClick={() => setSupPay(null)} aria-label="Fermer"><X size={18} /></button>
+              </div>
+              <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "supPayLeft").replace("{n}", fcfa(supPay.total))}</p>
+              <input autoComplete="off" type="text" inputMode="decimal" value={supPayAmount} onChange={(e) => { setSupPayAmount(e.target.value.replace(/[^0-9.,]/g, "")); setSupError(""); }} className="w-full border rounded-lg px-3 py-2.5 text-base font-bold text-center mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <div className="flex gap-2 mb-3">
+                {[["cash", "supPayCash"], ["mobile", "supPayMobile"]].map(([m, key]) => (
+                  <button key={m} type="button" onClick={() => setSupPayMethod(m)} className="flex-1 py-2 rounded-xl text-[11px] font-bold" style={{ background: supPayMethod === m ? INDIGO : T.input, color: supPayMethod === m ? "white" : T.text }}>{m === "cash" ? "💵 " : "📱 "}{tx(lang, key)}</button>
+                ))}
+              </div>
+              {supError && <p className="text-xs font-semibold mb-2" style={{ color: "#e11d48" }}>{supError}</p>}
+              <button type="button" onClick={paySupplier} className="w-full py-3 rounded-xl text-white font-bold text-sm" style={{ background: "#16a34a" }}>{tx(lang, "supPayConfirm")}</button>
+            </div>
+          </div>
+        )}
+        {tab === "debts" && (debtsView !== "suppliers" || !hasPermission("viewCash")) && (
           <div className="space-y-2">
             {debtReminderAutoMode && debtsNeedingReminder.length > 0 && (
               <div className="rounded-2xl px-4 py-3 flex items-center gap-2.5" style={{ background: "#fef3c7", border: "1px solid #fde68a" }}>
