@@ -6350,6 +6350,27 @@ EXTRA_UI.shopListPartial = { fr: "partiel, prix d'achat manquants", en: "partial
 EXTRA_UI.returnGoodState = { fr: "Bon état", en: "Good condition", es: "Buen estado", pt: "Bom estado", de: "Guter Zustand", it: "Buono stato", nl: "Goede staat", pl: "Dobry stan", ru: "Хорошее состояние", tr: "Sağlam", ar: "حالة جيدة", hi: "ठीक हालत", bn: "ভালো অবস্থা", ur: "اچھی حالت", ta: "நல்ல நிலை", te: "మంచి స్థితి", th: "สภาพดี", zh: "完好", ja: "良品", ko: "양호", id: "Kondisi baik", vi: "Còn tốt", tl: "Maayos", sw: "Hali nzuri", ha: "Lafiya lau", yo: "Ó dára", zu: "Isesimweni esihle", am: "ጥሩ ሁኔታ", bm: "A ka ɲi", wo: "Mu baax" };
 EXTRA_UI.returnDamagedBtn = { fr: "Abîmé", en: "Damaged", es: "Dañado", pt: "Danificado", de: "Beschädigt", it: "Danneggiato", nl: "Beschadigd", pl: "Uszkodzony", ru: "Повреждён", tr: "Hasarlı", ar: "تالف", hi: "ख़राब", bn: "নষ্ট", ur: "خراب", ta: "சேதமானது", te: "పాడైంది", th: "เสียหาย", zh: "已损坏", ja: "破損", ko: "손상", id: "Rusak", vi: "Bị hỏng", tl: "Sira", sw: "Imeharibika", ha: "Ya lalace", yo: "Ó ti bàjẹ́", zu: "Konakele", am: "የተበላሸ", bm: "A tiɲɛna", wo: "Yàqu na" };
 EXTRA_UI.returnPickSerials = { fr: "cochez le(s) téléphone(s) rapporté(s)", en: "tick the phone(s) brought back", es: "marca el/los teléfono(s) devuelto(s)", pt: "marque o(s) telemóvel(eis) devolvido(s)", de: "zurückgebrachte(s) Gerät(e) ankreuzen", it: "spunta il/i telefono/i riportato/i", nl: "vink de teruggebrachte toestel(len) aan", pl: "zaznacz zwrócone telefony", ru: "отметьте возвращённые телефоны", tr: "geri getirilen telefon(lar)ı işaretleyin", ar: "حدّد الهاتف/الهواتف المُرجَعة", hi: "लौटाए गए फ़ोन चुनें", bn: "ফেরত আনা ফোন(গুলো) টিক দিন", ur: "واپس لائے گئے فون منتخب کریں", ta: "திருப்பிய தொலைபேசி(களை)க் குறிக்கவும்", te: "తిరిగి తెచ్చిన ఫోన్(ల)ను టిక్ చేయండి", th: "ติ๊กเครื่องที่นำมาคืน", zh: "勾选退回的手机", ja: "返品された端末にチェック", ko: "반품된 휴대폰을 선택하세요", id: "centang ponsel yang dikembalikan", vi: "đánh dấu máy được trả lại", tl: "i-tsek ang (mga) teleponong ibinalik", sw: "weka alama kwenye simu zilizorudishwa", ha: "yi alama kan wayar(oyin) da aka dawo da su", yo: "sàmì sí fóònù tí wọ́n dá padà", zu: "maka amafoni abuyisiwe", am: "የተመለሱትን ስልኮች ይምረጡ", bm: "telefɔni seginnenw taamasiyɛn kɛ", wo: "tànnal telefon yi ñu delloo" };
+EXTRA_UI.mode_recipe = { fr: "Kit / recette", en: "Kit / recipe", es: "Kit / receta", pt: "Kit / receita", de: "Set / Rezept", it: "Kit / ricetta", nl: "Pakket / recept", pl: "Zestaw / przepis", ru: "Набор / рецепт", tr: "Set / tarif", ar: "طقم / وصفة", hi: "किट / रेसिपी", bn: "কিট / রেসিপি", ur: "کٹ / ترکیب", ta: "தொகுப்பு / செய்முறை", te: "కిట్ / వంటకం", th: "ชุด / สูตร", zh: "套装 / 配方", ja: "セット / レシピ", ko: "세트 / 레시피", id: "Paket / resep", vi: "Bộ / công thức", tl: "Kit / resipe", sw: "Kifurushi / mapishi", ha: "Kaya haɗe / girke-girke", yo: "Àkójọpọ̀ / ìlànà sísè", zu: "Iqoqo / iresiphi", am: "ስብስብ / የአሰራር መመሪያ", bm: "Kiti / dilanni cogoya", wo: "Kit / resett" };
+EXTRA_UI.recipeTitle = { fr: "Composé d'autres produits", en: "Made of other products", es: "Compuesto de otros productos", pt: "Composto por outros produtos", de: "Aus anderen Produkten", it: "Composto da altri prodotti", nl: "Samengesteld uit andere producten", pl: "Złożony z innych produktów", ru: "Состоит из других товаров", tr: "Başka ürünlerden oluşur", ar: "مكوَّن من منتجات أخرى", hi: "दूसरे उत्पादों से बना", bn: "অন্য পণ্য দিয়ে তৈরি", ur: "دوسری مصنوعات سے بنا", ta: "பிற பொருட்களால் ஆனது", te: "ఇతర ఉత్పత్తులతో తయారైంది", th: "ประกอบจากสินค้าอื่น", zh: "由其他商品组成", ja: "他の商品で構成", ko: "다른 상품으로 구성", id: "Terdiri dari produk lain", vi: "Gồm các sản phẩm khác", tl: "Gawa sa ibang produkto", sw: "Imetengenezwa kwa bidhaa nyingine", ha: "An haɗa daga wasu kaya", yo: "A ṣe é láti inú ọjà míì", zu: "Yenziwe ngeminye imikhiqizo", am: "ከሌሎች ምርቶች የተሠራ", bm: "A dilannen don fɛn wɛrɛw la", wo: "Ñu def ko ak yeneen marsandiis" };
+EXTRA_UI.recipeModeSale = { fr: "Kit ou plat", en: "Kit or dish", es: "Kit o plato", pt: "Kit ou prato", de: "Set oder Gericht", it: "Kit o piatto", nl: "Pakket of gerecht", pl: "Zestaw lub danie", ru: "Набор или блюдо", tr: "Set veya yemek", ar: "طقم أو طبق", hi: "किट या डिश", bn: "কিট বা খাবার", ur: "کٹ یا ڈش", ta: "தொகுப்பு அல்லது உணவு", te: "కిట్ లేదా వంటకం", th: "ชุดหรือเมนูอาหาร", zh: "套装或菜品", ja: "セットまたは料理", ko: "세트 또는 요리", id: "Paket atau hidangan", vi: "Bộ hoặc món ăn", tl: "Kit o pagkain", sw: "Kifurushi au mlo", ha: "Kaya haɗe ko abinci", yo: "Àkójọpọ̀ tàbí oúnjẹ", zu: "Iqoqo noma isidlo", am: "ስብስብ ወይም ምግብ", bm: "Kiti walima dumuni", wo: "Kit walla ñam" };
+EXTRA_UI.recipeModeProduction = { fr: "Recette de production", en: "Production recipe", es: "Receta de producción", pt: "Receita de produção", de: "Produktionsrezept", it: "Ricetta di produzione", nl: "Productierecept", pl: "Przepis produkcyjny", ru: "Рецепт производства", tr: "Üretim tarifi", ar: "وصفة إنتاج", hi: "उत्पादन रेसिपी", bn: "উৎপাদনের রেসিপি", ur: "پیداوار کی ترکیب", ta: "உற்பத்தி செய்முறை", te: "ఉత్పత్తి వంటకం", th: "สูตรการผลิต", zh: "生产配方", ja: "製造レシピ", ko: "생산 레시피", id: "Resep produksi", vi: "Công thức sản xuất", tl: "Resipe ng paggawa", sw: "Mapishi ya uzalishaji", ha: "Girke-girken samarwa", yo: "Ìlànà ìṣelọ́pọ̀", zu: "Iresiphi yokukhiqiza", am: "የምርት አሰራር", bm: "Dilanni cogoya", wo: "Resett bu defar" };
+EXTRA_UI.recipeHintSale = { fr: "Chaque vente retire ces produits du stock.", en: "Each sale takes these products out of stock.", es: "Cada venta saca estos productos del stock.", pt: "Cada venda tira estes produtos do stock.", de: "Jeder Verkauf nimmt diese Produkte aus dem Lager.", it: "Ogni vendita toglie questi prodotti dal magazzino.", nl: "Elke verkoop haalt deze producten uit de voorraad.", pl: "Każda sprzedaż zdejmuje te produkty ze stanu.", ru: "Каждая продажа списывает эти товары со склада.", tr: "Her satış bu ürünleri stoktan düşer.", ar: "كل بيعة تُخرج هذه المنتجات من المخزون.", hi: "हर बिक्री पर ये सामान स्टॉक से घटते हैं।", bn: "প্রতি বিক্রিতে এই পণ্যগুলো স্টক থেকে কমে।", ur: "ہر فروخت پر یہ اشیاء اسٹاک سے نکلتی ہیں۔", ta: "ஒவ்வொரு விற்பனையும் இவற்றை இருப்பிலிருந்து குறைக்கும்.", te: "ప్రతి అమ్మకం ఈ వస్తువులను స్టాక్ నుండి తీసేస్తుంది.", th: "ขายแต่ละครั้งจะตัดสินค้าเหล่านี้ออกจากสต็อก", zh: "每次销售都会从库存扣除这些商品。", ja: "販売のたびにこれらの在庫が減ります。", ko: "판매할 때마다 이 상품들의 재고가 빠집니다.", id: "Setiap penjualan mengurangi stok produk ini.", vi: "Mỗi lần bán sẽ trừ các sản phẩm này khỏi kho.", tl: "Bawat benta ay nagbabawas ng mga produktong ito sa stock.", sw: "Kila mauzo yanaondoa bidhaa hizi kwenye hifadhi.", ha: "Kowace sayarwa tana cire waɗannan kaya daga ajiya.", yo: "Gbogbo títà ló ń yọ àwọn ọjà yìí kúrò ní ìpamọ́.", zu: "Ukuthengisa ngakunye kukhipha le mikhiqizo esitokweni.", am: "እያንዳንዱ ሽያጭ እነዚህን ከክምችት ያወጣል።", bm: "Feereli o feereli bɛ nin fɛnw bɔ maralen na.", wo: "Bépp jaay dina wàññi marsandiis yii ci stock bi." };
+EXTRA_UI.recipeHintProduction = { fr: "Les ingrédients sortent du stock quand vous appuyez sur « Produire ».", en: "Ingredients leave the stock when you tap “Produce”.", es: "Los ingredientes salen del stock al pulsar «Producir».", pt: "Os ingredientes saem do stock quando toca em «Produzir».", de: "Die Zutaten verlassen das Lager, wenn du „Produzieren“ tippst.", it: "Gli ingredienti escono dal magazzino quando premi «Produci».", nl: "Ingrediënten gaan uit de voorraad als je op „Produceren” tikt.", pl: "Składniki schodzą ze stanu po naciśnięciu „Wyprodukuj”.", ru: "Ингредиенты списываются, когда вы нажимаете «Произвести».", tr: "Malzemeler «Üret»e bastığınızda stoktan düşer.", ar: "تخرج المكونات من المخزون عند الضغط على «إنتاج».", hi: "«बनाएँ» दबाने पर सामग्री स्टॉक से घटती है।", bn: "«উৎপাদন» চাপলে উপকরণ স্টক থেকে কমে।", ur: "«تیار کریں» دبانے پر اجزا اسٹاک سے نکلتے ہیں۔", ta: "«உற்பத்தி» அழுத்தியதும் பொருட்கள் இருப்பிலிருந்து குறையும்.", te: "«తయారు చేయి» నొక్కినప్పుడు పదార్థాలు స్టాక్ నుండి తగ్గుతాయి.", th: "วัตถุดิบจะถูกตัดออกจากสต็อกเมื่อกด «ผลิต»", zh: "点“生产”时从库存扣除原料。", ja: "「製造」を押すと材料の在庫が減ります。", ko: "'생산'을 누르면 재료 재고가 빠집니다.", id: "Bahan keluar dari stok saat Anda menekan «Produksi».", vi: "Nguyên liệu trừ khỏi kho khi bạn bấm «Sản xuất».", tl: "Nababawasan ang sangkap sa stock kapag pinindot ang «Gumawa».", sw: "Viungo vinatoka kwenye hifadhi ukibonyeza «Zalisha».", ha: "Kayan haɗi suna fita daga ajiya idan ka danna «Samar».", yo: "Àwọn èròjà máa ń jáde ní ìpamọ́ nígbà tí o bá tẹ «Ṣe é».", zu: "Izithako ziphuma esitokweni uma ucindezela «Khiqiza».", am: "«አምርት» ሲጫኑ ግብዓቶቹ ከክምችት ይወጣሉ።", bm: "N'i ye «Dilan» digi, fɛnw bɛ bɔ maralen na.", wo: "Lu ñuy jëfandikoo dañuy génn ci stock bi bu nga bësee «Defar»." };
+EXTRA_UI.recipeYieldLabel = { fr: "Cette recette donne", en: "This recipe makes", es: "Esta receta da", pt: "Esta receita dá", de: "Dieses Rezept ergibt", it: "Questa ricetta dà", nl: "Dit recept levert", pl: "Ten przepis daje", ru: "Рецепт даёт", tr: "Bu tariften çıkan", ar: "تُنتج هذه الوصفة", hi: "इस रेसिपी से बनते हैं", bn: "এই রেসিপিতে হয়", ur: "اس ترکیب سے بنتے ہیں", ta: "இந்தச் செய்முறையில் கிடைப்பது", te: "ఈ వంటకంతో వచ్చేవి", th: "สูตรนี้ได้", zh: "此配方产出", ja: "このレシピでできる数", ko: "이 레시피로 만드는 양", id: "Resep ini menghasilkan", vi: "Công thức này ra", tl: "Ang resipe ay nakakagawa ng", sw: "Mapishi haya yanatoa", ha: "Wannan girke-girke yana bayar da", yo: "Ìlànà yìí ń ṣe", zu: "Le resiphi yenza", am: "ይህ አሰራር የሚሰጠው", bm: "Nin cogoya bɛ min di", wo: "Resett bii dafay jur" };
+EXTRA_UI.recipeAddComponent = { fr: "Ajouter un produit (tapez son nom)", en: "Add a product (type its name)", es: "Añadir un producto (escribe su nombre)", pt: "Adicionar um produto (escreva o nome)", de: "Produkt hinzufügen (Namen eingeben)", it: "Aggiungi un prodotto (scrivi il nome)", nl: "Product toevoegen (typ de naam)", pl: "Dodaj produkt (wpisz nazwę)", ru: "Добавить товар (введите название)", tr: "Ürün ekle (adını yazın)", ar: "إضافة منتج (اكتب اسمه)", hi: "उत्पाद जोड़ें (नाम लिखें)", bn: "পণ্য যোগ করুন (নাম লিখুন)", ur: "پروڈکٹ شامل کریں (نام لکھیں)", ta: "பொருள் சேர் (பெயரைத் தட்டச்சு செய்)", te: "ఉత్పత్తి జోడించండి (పేరు టైప్ చేయండి)", th: "เพิ่มสินค้า (พิมพ์ชื่อ)", zh: "添加商品（输入名称）", ja: "商品を追加（名前を入力）", ko: "상품 추가 (이름 입력)", id: "Tambah produk (ketik namanya)", vi: "Thêm sản phẩm (gõ tên)", tl: "Magdagdag ng produkto (i-type ang pangalan)", sw: "Ongeza bidhaa (andika jina)", ha: "Ƙara kaya (rubuta sunansa)", yo: "Fi ọjà kún un (tẹ orúkọ rẹ̀)", zu: "Engeza umkhiqizo (thayipha igama)", am: "ምርት ጨምር (ስሙን ይጻፉ)", bm: "Fɛn fara a kan (a tɔgɔ sɛbɛn)", wo: "Yokk benn marsandiis (bindal turam)" };
+EXTRA_UI.recipeCostLabel = { fr: "Coût de revient :", en: "Cost price:", es: "Costo:", pt: "Custo:", de: "Selbstkosten:", it: "Costo:", nl: "Kostprijs:", pl: "Koszt własny:", ru: "Себестоимость:", tr: "Maliyet:", ar: "سعر التكلفة:", hi: "लागत:", bn: "খরচ:", ur: "لاگت:", ta: "அடக்க விலை:", te: "ఖర్చు ధర:", th: "ต้นทุน:", zh: "成本：", ja: "原価：", ko: "원가:", id: "Harga pokok:", vi: "Giá vốn:", tl: "Puhunan:", sw: "Gharama:", ha: "Kuɗin samarwa:", yo: "Iye ìnáwó:", zu: "Izindleko:", am: "የወጪ ዋጋ:", bm: "Musaka:", wo: "Njëg gu mu jar:" };
+EXTRA_UI.recipeMarginLabel = { fr: "marge", en: "margin", es: "margen", pt: "margem", de: "Marge", it: "margine", nl: "marge", pl: "marża", ru: "маржа", tr: "kâr", ar: "الهامش", hi: "मुनाफ़ा", bn: "লাভ", ur: "منافع", ta: "லாபம்", te: "లాభం", th: "กำไร", zh: "毛利", ja: "粗利", ko: "마진", id: "margin", vi: "lãi", tl: "tubo", sw: "faida", ha: "riba", yo: "èrè", zu: "inzuzo", am: "ትርፍ", bm: "tɔnɔ", wo: "tono" };
+EXTRA_UI.recipeCostMissing = { fr: "Prix d'achat manquant pour : {names}", en: "Cost price missing for: {names}", es: "Falta el precio de compra de: {names}", pt: "Falta o preço de compra de: {names}", de: "Einkaufspreis fehlt für: {names}", it: "Manca il prezzo d'acquisto di: {names}", nl: "Inkoopprijs ontbreekt voor: {names}", pl: "Brak ceny zakupu dla: {names}", ru: "Нет закупочной цены: {names}", tr: "Alış fiyatı eksik: {names}", ar: "سعر الشراء ناقص لـ: {names}", hi: "ख़रीद दाम नहीं है: {names}", bn: "কেনা দাম নেই: {names}", ur: "خرید قیمت نہیں: {names}", ta: "கொள்முதல் விலை இல்லை: {names}", te: "కొనుగోలు ధర లేదు: {names}", th: "ไม่มีราคาทุนของ: {names}", zh: "缺少进价：{names}", ja: "仕入れ値が未入力：{names}", ko: "매입가 없음: {names}", id: "Harga beli belum ada untuk: {names}", vi: "Thiếu giá nhập của: {names}", tl: "Walang puhunan para sa: {names}", sw: "Bei ya kununua haipo kwa: {names}", ha: "Babu farashin saye na: {names}", yo: "Kò sí iye rírà fún: {names}", zu: "Intengo yokuthenga ayikho ku: {names}", am: "የግዢ ዋጋ የለም ለ: {names}", bm: "Sanni sɔngɔ tɛ: {names}", wo: "Njëgu jënd ñàkk na ci: {names}" };
+EXTRA_UI.kitNotEnough = { fr: "Pas assez de stock pour faire un « {name} » de plus.", en: "Not enough stock to make one more “{name}”.", es: "No hay stock suficiente para otro «{name}».", pt: "Stock insuficiente para mais um «{name}».", de: "Nicht genug Bestand für ein weiteres „{name}“.", it: "Stock insufficiente per un altro «{name}».", nl: "Niet genoeg voorraad voor nog een „{name}”.", pl: "Za mało towaru na kolejny „{name}”.", ru: "Не хватает товаров ещё на один «{name}».", tr: "Bir «{name}» daha için stok yetersiz.", ar: "المخزون لا يكفي لـ «{name}» إضافي.", hi: "एक और «{name}» के लिए स्टॉक काफ़ी नहीं।", bn: "আরেকটি «{name}» এর জন্য স্টক যথেষ্ট নয়।", ur: "ایک اور «{name}» کے لیے اسٹاک کافی نہیں۔", ta: "இன்னொரு «{name}» க்குப் போதுமான இருப்பு இல்லை.", te: "మరో «{name}» కోసం స్టాక్ సరిపోదు.", th: "สต็อกไม่พอทำ «{name}» เพิ่ม", zh: "库存不足，无法再做一份“{name}”。", ja: "「{name}」をもう1つ作る在庫が足りません。", ko: "'{name}'을(를) 하나 더 만들 재고가 부족합니다.", id: "Stok tidak cukup untuk satu «{name}» lagi.", vi: "Không đủ hàng để làm thêm một «{name}».", tl: "Kulang ang stock para sa isa pang «{name}».", sw: "Hifadhi haitoshi kwa «{name}» nyingine.", ha: "Ajiya ba ta isa don wani «{name}» ba.", yo: "Ìpamọ́ kò tó fún «{name}» míì.", zu: "Isitoko asanele enye «{name}».", am: "ለተጨማሪ «{name}» ክምችት በቂ አይደለም።", bm: "Maralen ma bɔ ka «{name}» wɛrɛ dilan.", wo: "Stock bi doyul ngir beneen «{name}»." };
+EXTRA_UI.kitPossible = { fr: "possible(s)", en: "possible", es: "posible(s)", pt: "possível(eis)", de: "möglich", it: "possibili", nl: "mogelijk", pl: "możliwe", ru: "можно", tr: "mümkün", ar: "ممكن", hi: "संभव", bn: "সম্ভব", ur: "ممکن", ta: "சாத்தியம்", te: "సాధ్యం", th: "ทำได้", zh: "可做", ja: "可能", ko: "가능", id: "bisa", vi: "có thể", tl: "posible", sw: "inawezekana", ha: "mai yiwuwa", yo: "ṣeéṣe", zu: "kungenzeka", am: "የሚቻል", bm: "a bɛ se", wo: "mën na" };
+EXTRA_UI.produceBtn = { fr: "Produire", en: "Produce", es: "Producir", pt: "Produzir", de: "Produzieren", it: "Produci", nl: "Produceren", pl: "Wyprodukuj", ru: "Произвести", tr: "Üret", ar: "إنتاج", hi: "बनाएँ", bn: "উৎপাদন", ur: "تیار کریں", ta: "உற்பத்தி", te: "తయారు చేయి", th: "ผลิต", zh: "生产", ja: "製造", ko: "생산", id: "Produksi", vi: "Sản xuất", tl: "Gumawa", sw: "Zalisha", ha: "Samar", yo: "Ṣe é", zu: "Khiqiza", am: "አምርት", bm: "Dilan", wo: "Defar" };
+EXTRA_UI.produceTitle = { fr: "Produire", en: "Produce", es: "Producir", pt: "Produzir", de: "Produzieren", it: "Produci", nl: "Produceren", pl: "Produkcja", ru: "Производство", tr: "Üretim", ar: "إنتاج", hi: "उत्पादन", bn: "উৎপাদন", ur: "پیداوار", ta: "உற்பத்தி", te: "ఉత్పత్తి", th: "ผลิต", zh: "生产", ja: "製造", ko: "생산", id: "Produksi", vi: "Sản xuất", tl: "Paggawa", sw: "Uzalishaji", ha: "Samarwa", yo: "Ìṣelọ́pọ̀", zu: "Ukukhiqiza", am: "ማምረት", bm: "Dilanni", wo: "Defar" };
+EXTRA_UI.produceQtyLabel = { fr: "Quantité produite", en: "Quantity produced", es: "Cantidad producida", pt: "Quantidade produzida", de: "Produzierte Menge", it: "Quantità prodotta", nl: "Geproduceerde hoeveelheid", pl: "Wyprodukowana ilość", ru: "Произведено", tr: "Üretilen miktar", ar: "الكمية المُنتَجة", hi: "बनी हुई मात्रा", bn: "উৎপাদিত পরিমাণ", ur: "تیار شدہ مقدار", ta: "உற்பத்தி அளவு", te: "తయారైన పరిమాణం", th: "จำนวนที่ผลิต", zh: "生产数量", ja: "製造数", ko: "생산 수량", id: "Jumlah diproduksi", vi: "Số lượng làm ra", tl: "Dami na nagawa", sw: "Idadi iliyozalishwa", ha: "Adadin da aka samar", yo: "Iye tí a ṣe", zu: "Inani elikhiqiziwe", am: "የተመረተ ብዛት", bm: "Hakɛ min dilanna", wo: "Lim bi ñu defar" };
+EXTRA_UI.produceUses = { fr: "Sort du stock :", en: "Taken from stock:", es: "Sale del stock:", pt: "Sai do stock:", de: "Aus dem Lager:", it: "Esce dal magazzino:", nl: "Uit voorraad:", pl: "Zejdzie ze stanu:", ru: "Спишется:", tr: "Stoktan düşülecek:", ar: "يخرج من المخزون:", hi: "स्टॉक से घटेगा:", bn: "স্টক থেকে কমবে:", ur: "اسٹاک سے نکلے گا:", ta: "இருப்பிலிருந்து குறையும்:", te: "స్టాక్ నుండి తగ్గేది:", th: "ตัดจากสต็อก:", zh: "从库存扣除：", ja: "在庫から減る分：", ko: "재고에서 빠짐:", id: "Keluar dari stok:", vi: "Trừ khỏi kho:", tl: "Babawasin sa stock:", sw: "Kinatoka kwenye hifadhi:", ha: "Zai fita daga ajiya:", yo: "Yóò jáde ní ìpamọ́:", zu: "Kuzophuma esitokweni:", am: "ከክምችት የሚወጣ:", bm: "Bɛ bɔ maralen na:", wo: "Dina génn ci stock bi:" };
+EXTRA_UI.produceTotalCost = { fr: "total", en: "total", es: "total", pt: "total", de: "gesamt", it: "totale", nl: "totaal", pl: "razem", ru: "итого", tr: "toplam", ar: "الإجمالي", hi: "कुल", bn: "মোট", ur: "کل", ta: "மொத்தம்", te: "మొత్తం", th: "รวม", zh: "合计", ja: "合計", ko: "합계", id: "total", vi: "tổng", tl: "kabuuan", sw: "jumla", ha: "jimilla", yo: "àpapọ̀", zu: "isamba", am: "ጠቅላላ", bm: "bɛɛ lajɛlen", wo: "lépp" };
+EXTRA_UI.produceConfirm = { fr: "Produire {n}", en: "Produce {n}", es: "Producir {n}", pt: "Produzir {n}", de: "{n} produzieren", it: "Produci {n}", nl: "{n} produceren", pl: "Wyprodukuj {n}", ru: "Произвести {n}", tr: "{n} üret", ar: "إنتاج {n}", hi: "{n} बनाएँ", bn: "{n} উৎপাদন করুন", ur: "{n} تیار کریں", ta: "{n} உற்பத்தி செய்", te: "{n} తయారు చేయి", th: "ผลิต {n}", zh: "生产 {n}", ja: "{n} 個製造", ko: "{n}개 생산", id: "Produksi {n}", vi: "Sản xuất {n}", tl: "Gumawa ng {n}", sw: "Zalisha {n}", ha: "Samar da {n}", yo: "Ṣe {n}", zu: "Khiqiza {n}", am: "{n} አምርት", bm: "{n} dilan", wo: "Defar {n}" };
+EXTRA_UI.produceShort = { fr: "Pas assez de stock : {list}", en: "Not enough stock: {list}", es: "No hay stock suficiente: {list}", pt: "Stock insuficiente: {list}", de: "Nicht genug Bestand: {list}", it: "Stock insufficiente: {list}", nl: "Niet genoeg voorraad: {list}", pl: "Za mało towaru: {list}", ru: "Не хватает: {list}", tr: "Stok yetersiz: {list}", ar: "المخزون لا يكفي: {list}", hi: "स्टॉक काफ़ी नहीं: {list}", bn: "স্টক যথেষ্ট নয়: {list}", ur: "اسٹاک کافی نہیں: {list}", ta: "போதுமான இருப்பு இல்லை: {list}", te: "స్టాక్ సరిపోదు: {list}", th: "สต็อกไม่พอ: {list}", zh: "库存不足：{list}", ja: "在庫不足：{list}", ko: "재고 부족: {list}", id: "Stok tidak cukup: {list}", vi: "Không đủ hàng: {list}", tl: "Kulang ang stock: {list}", sw: "Hifadhi haitoshi: {list}", ha: "Ajiya ba ta isa ba: {list}", yo: "Ìpamọ́ kò tó: {list}", zu: "Isitoko asanele: {list}", am: "ክምችት በቂ አይደለም: {list}", bm: "Maralen ma bɔ: {list}", wo: "Stock bi doyul: {list}" };
+EXTRA_UI.logProduced = { fr: "Production", en: "Production", es: "Producción", pt: "Produção", de: "Produktion", it: "Produzione", nl: "Productie", pl: "Produkcja", ru: "Производство", tr: "Üretim", ar: "إنتاج", hi: "उत्पादन", bn: "উৎপাদন", ur: "پیداوار", ta: "உற்பத்தி", te: "ఉత్పత్తి", th: "การผลิต", zh: "生产", ja: "製造", ko: "생산", id: "Produksi", vi: "Sản xuất", tl: "Paggawa", sw: "Uzalishaji", ha: "Samarwa", yo: "Ìṣelọ́pọ̀", zu: "Ukukhiqiza", am: "ምርት", bm: "Dilanni", wo: "Defar" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -6735,11 +6756,11 @@ const SECTOR_MODES = {
   cosmetics: ["expiry", "variants", "barcode", "unit"],
   pharmacy: ["expiry", "unit", "barcode"],
   hardware: ["measure", "unit", "tiers"],
-  school: ["unit", "barcode", "tiers"],
-  bakery: ["daily", "unit", "tiers"],
+  school: ["unit", "recipe", "barcode", "tiers"],
+  bakery: ["daily", "recipe", "unit", "tiers"],
   // Plats préparés chaque jour (production du jour) ; boissons achetées en casier ou en
   // pack et vendues à la bouteille (vente au détail).
-  restaurant: ["daily", "unit"],
+  restaurant: ["daily", "recipe", "unit"],
   // Viande et poisson pesés à la vente.
   butcher: ["measure", "unit"],
   // Grossiste : cartons / sacs vendus entiers ou au détail, au poids (riz, sucre), dates.
@@ -6750,7 +6771,7 @@ const SECTOR_MODES = {
 };
 // Unité proposée quand on active la vente au poids / à la mesure, selon le secteur.
 const SECTOR_MEASURE_UNIT = { food: "kg", butcher: "kg", wholesale: "kg", bakery: "kg", restaurant: "kg", hardware: "m" };
-const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily", "serial", "variants", "tiers"];
+const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily", "serial", "variants", "tiers", "recipe"];
 const PRODUCT_CONDITIONS = ["new", "used", "refurb", "copy"];
 // Le secteur est enregistré sous forme de code fixe (« food », « bakery »…). Les comptes
 // créés avant gardent un libellé traduit (« Alimentation générale », « General food store »…) :
@@ -8204,6 +8225,12 @@ function warrantyEndDate(iso, months) {
   d.setDate(Math.min(day, last));
   return localDayKey(d);
 }
+// Kit / plat : produit composé d'autres produits, qui sortent du stock à chaque vente
+// (liste scolaire, plat du restaurant). Il n'a pas de stock propre : on peut en vendre
+// autant que ses composants le permettent. Recette de production (pain…) : les
+// ingrédients sortent quand on produit, le produit fini a son propre stock.
+function isKitProduct(p) { return !!(p && Array.isArray(p.components) && p.components.length && p.compMode !== "production"); }
+function isRecipeProduct(p) { return !!(p && Array.isArray(p.components) && p.components.length && p.compMode === "production"); }
 // Tarif retenu par client (« revendeur » = demi-gros ou gros) : { nomNormalisé: { t, at } }.
 // Fusion clé par clé, la décision la plus récente gagne (t vide = tarif retiré).
 function mergeCustomerTariffs(a, b) {
@@ -13535,7 +13562,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const productSectorId = sectorIdOf(shopSector);
   const productSectorModes = productSectorId && SECTOR_MODES[productSectorId] ? SECTOR_MODES[productSectorId] : null;
   const productModeOrder = productSectorModes ? [...productSectorModes, ...PRODUCT_MODES.filter((m) => productSectorModes.indexOf(m) === -1)] : PRODUCT_MODES;
-  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : m === "serial" ? (!!pTrackSerial || (pCondition && pCondition !== "new") || parseInt(pWarrantyMonths, 10) > 0) : m === "variants" ? (!!pVariantsOn || !!editingVariant) : m === "tiers" ? (Number(pSemiPrice) > 0 || Number(pBulkPrice) > 0) : !!pDailyMode);
+  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : m === "serial" ? (!!pTrackSerial || (pCondition && pCondition !== "new") || parseInt(pWarrantyMonths, 10) > 0) : m === "variants" ? (!!pVariantsOn || !!editingVariant) : m === "tiers" ? (Number(pSemiPrice) > 0 || Number(pBulkPrice) > 0) : m === "recipe" ? pComponents.length > 0 : !!pDailyMode);
   const modeShown = (m) => !productSectorModes || productSectorModes.indexOf(m) !== -1 || productModeActive(m) || showMoreProductOptions;
   const [sectorMsg, setSectorMsg] = useState("");
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
@@ -13606,6 +13633,24 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const num = (v) => { const n = parseFloat(String(v).replace(",", ".")); return n > 0 ? n : null; };
     return { semiPrice: num(pSemiPrice), semiMinQty: num(pSemiMin), bulkPrice: num(pBulkPrice), bulkMinQty: num(pBulkMin) };
   };
+  // Kit / plat (composants sortis à la vente) ou recette de production (ingrédients sortis
+  // quand on produit, « yield » = nombre d'unités obtenues par recette).
+  const [pCompMode, setPCompMode] = useState("sale");
+  const [pComponents, setPComponents] = useState([]);
+  const [pRecipeYield, setPRecipeYield] = useState("");
+  const [pCompSearch, setPCompSearch] = useState("");
+  const kitFormActive = pCompMode === "sale" && pComponents.length > 0;
+  const compFields = () => {
+    const comps = pComponents.map((c) => ({ productId: c.productId, qty: parseFloat(String(c.qty).replace(",", ".")) || 0 })).filter((c) => c.qty > 0);
+    if (!comps.length) return { components: null, compMode: null, recipeYield: null };
+    return {
+      components: comps,
+      compMode: pCompMode,
+      recipeYield: pCompMode === "production" ? Math.max(1, parseFloat(String(pRecipeYield).replace(",", ".")) || 1) : null,
+      // Un kit n'a pas de stock propre : ce sont ses composants qui sont comptés.
+      ...(pCompMode === "sale" ? { quantity: 0, looseUnits: 0 } : {}),
+    };
+  };
   const [pVarA, setPVarA] = useState("");
   const [pVarB, setPVarB] = useState("");
   const [pVarQty, setPVarQty] = useState({});
@@ -13624,7 +13669,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const editingVariant = editingProductId ? (products.find((x) => x.id === editingProductId && x.variantOf) || null) : null;
   const variantSiblings = editingVariant ? products.filter((x) => x.variantOf === editingVariant.variantOf) : [];
   const creatingVariants = !editingProductId && pVariantsOn;
-  const resetVariantForm = () => { setPSemiPrice(""); setPSemiMin(""); setPBulkPrice(""); setPBulkMin(""); setPVariantsOn(false); setPVarA(""); setPVarB(""); setPVarQty({}); setPVariantLabel(""); setPVariantApplyAll(true); };
+  const resetVariantForm = () => { setPCompMode("sale"); setPComponents([]); setPRecipeYield(""); setPCompSearch(""); setPSemiPrice(""); setPSemiMin(""); setPBulkPrice(""); setPBulkMin(""); setPVariantsOn(false); setPVarA(""); setPVarB(""); setPVarQty({}); setPVariantLabel(""); setPVariantApplyAll(true); };
   const variantMembers = (gid) => products.filter((x) => x.variantOf === gid).sort((a, b) => (a.variantIndex || 0) - (b.variantIndex || 0));
   const priceRangeLabel = (list) => {
     const ps = list.map((x) => Number(x.price) || 0);
@@ -15208,6 +15253,28 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const h = Array.isArray(p.priceHistory) ? p.priceHistory : [];
     return { ...p, price: newPrice, priceHistory: [...h, { at: new Date().toISOString(), from: oldPrice, to: newPrice }].slice(-12) };
   };
+  // ---- Produire (recette) ----
+  const [produceId, setProduceId] = useState(null);
+  const [produceQty, setProduceQty] = useState("");
+  const [produceError, setProduceError] = useState("");
+  const confirmProduce = () => {
+    const p = products.find((x) => x.id === produceId);
+    const n = parseFloat(String(produceQty).replace(",", "."));
+    if (!p || !(n > 0)) return;
+    const uses = componentUses(p.components, n, Number(p.recipeYield) || 1);
+    const short = uses.map((u) => {
+      const comp = products.find((x) => x.id === u.id);
+      if (!comp) return null;
+      const avail = comp.sellByUnit ? (comp.quantity || 0) * (comp.unitsPerPack || 1) + (comp.looseUnits || 0) : (comp.quantity || 0);
+      return avail + 1e-9 < u.qty ? `${comp.name} (${localizedQty(Math.max(0, avail))} / ${localizedQty(u.qty)})` : null;
+    }).filter(Boolean);
+    if (short.length) { setProduceError(tx(lang, "produceShort").replace("{list}", short.join(", "))); return; }
+    let next = applyComponentDelta(products, uses, -1);
+    next = next.map((x) => (x.id === p.id ? { ...x, quantity: Math.round(((x.quantity || 0) + n) * 1000) / 1000, updatedAt: Date.now() } : x));
+    saveAll({ products: next });
+    logAction(`${tx(lang, "logProduced")} : ${p.name} +${localizedQty(n)} (${uses.map((u) => { const c = products.find((x) => x.id === u.id); return `${c ? c.name : "?"} −${localizedQty(u.qty)}`; }).join(", ")})`);
+    setProduceId(null);
+  };
   // ---- Changer plusieurs prix d'un coup ----
   // Le sucre augmente de 500 F le sac, le barème de la viande change : au lieu d'ouvrir
   // chaque fiche, on choisit une catégorie (ou une recherche), le type de changement
@@ -15319,7 +15386,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setAddVariantGid(null);
   };
   const addProduct = (qtyReason) => {
-    if (!pName.trim() || (!pQty && !creatingVariants) || !pPrice) return;
+    if (!pName.trim() || (!pQty && !creatingVariants && !kitFormActive) || !pPrice) return;
     if (creatingVariants && variantCombos.length === 0) { setError(tx(lang, "variantNeedValues")); return; }
     if (editingVariant && !pVariantLabel.trim()) return;
     if (typeof qtyReason !== "string") qtyReason = null;
@@ -15354,6 +15421,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           description: pDescription.trim() || null,
           costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
           ...tierFields(),
+          ...compFields(),
           category: pCategory || null,
           photo: pPhoto,
           sellByUnit: pSellByUnit,
@@ -15408,6 +15476,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       description: pDescription.trim() || null,
       costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
           ...tierFields(),
+          ...compFields(),
       category: pCategory || null,
       // Photo débloquée pour tous les paliers (y compris gratuit) : elle est désormais
       // obligatoire pour permettre la reconnaissance visuelle à la caisse.
@@ -15499,6 +15568,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPCostPrice(p.costPrice != null ? String(p.costPrice) : "");
     setPSemiPrice(p.semiPrice > 0 ? String(p.semiPrice) : ""); setPSemiMin(p.semiMinQty > 0 ? String(p.semiMinQty) : "");
     setPBulkPrice(p.bulkPrice > 0 ? String(p.bulkPrice) : ""); setPBulkMin(p.bulkMinQty > 0 ? String(p.bulkMinQty) : "");
+    setPCompMode(p.compMode === "production" ? "production" : "sale");
+    setPComponents(Array.isArray(p.components) ? p.components.map((c) => ({ productId: c.productId, qty: String(c.qty) })) : []);
+    setPRecipeYield(p.recipeYield > 0 ? String(p.recipeYield) : "");
     setPCategory(p.category || "");
     setPPhoto(p.photo || null);
     setPSellByUnit(!!p.sellByUnit);
@@ -16365,8 +16437,70 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setShowSettings(false);
   };
   // ---- Paniers multiples ----
-  const reservedQty = (productId) => draftCarts.reduce((sum, c) => sum + c.items.filter((i) => i.productId === productId && (i.mode || "pack") === "pack").reduce((s, i) => s + i.qty, 0), 0);
-  const reservedUnits = (productId) => draftCarts.reduce((sum, c) => sum + c.items.filter((i) => i.productId === productId && i.mode === "unit").reduce((s, i) => s + i.qty, 0), 0);
+  // Part d'un composant réservée par les kits des paniers ouverts (en pièces si le
+  // composant se vend au détail, sinon dans son unité).
+  const kitReserved = (productId, wantUnits) => {
+    const comp = products.find((x) => x.id === productId);
+    if (!comp || !!comp.sellByUnit !== wantUnits) return 0;
+    return draftCarts.reduce((sum, c) => sum + c.items.reduce((s, i) => {
+      if ((i.mode || "pack") !== "pack" || i.productId === productId) return s;
+      const kp = products.find((x) => x.id === i.productId);
+      if (!isKitProduct(kp)) return s;
+      const cc = kp.components.find((z) => z.productId === productId);
+      return cc ? s + i.qty * (Number(cc.qty) || 0) : s;
+    }, 0), 0);
+  };
+  const reservedQty = (productId) => draftCarts.reduce((sum, c) => sum + c.items.filter((i) => i.productId === productId && (i.mode || "pack") === "pack").reduce((s, i) => s + i.qty, 0), 0) + kitReserved(productId, false);
+  const reservedUnits = (productId) => draftCarts.reduce((sum, c) => sum + c.items.filter((i) => i.productId === productId && i.mode === "unit").reduce((s, i) => s + i.qty, 0), 0) + kitReserved(productId, true);
+  // Quantité d'un composant encore libre (paniers ouverts déduits).
+  const compAvailable = (c) => (c.sellByUnit
+    ? (c.quantity || 0) * (c.unitsPerPack || 1) + (c.looseUnits || 0) - reservedUnits(c.id) - reservedQty(c.id) * (c.unitsPerPack || 1)
+    : (c.quantity || 0) - reservedQty(c.id));
+  // Combien de kits on peut encore vendre avec le stock des composants.
+  const kitAvailable = (p) => {
+    let m = Infinity;
+    (p.components || []).forEach((c) => {
+      const comp = products.find((x) => x.id === c.productId);
+      const q = Number(c.qty) || 0;
+      if (!comp || q <= 0) { m = 0; return; }
+      m = Math.min(m, Math.floor(compAvailable(comp) / q + 1e-9));
+    });
+    return m === Infinity ? 0 : Math.max(0, m);
+  };
+  // Quantités de composants pour n kits / n unités produites (recette donnant « yieldN »).
+  const componentUses = (comps, n, yieldN = 1) => {
+    const map = {};
+    (comps || []).forEach((c) => { map[c.productId] = (map[c.productId] || 0) + (Number(c.qty) || 0) * n / (yieldN || 1); });
+    return Object.entries(map).map(([id, qty]) => ({ id, qty: Math.round(qty * 1000) / 1000 }));
+  };
+  // Sort (sign = -1) ou remet (sign = +1) des composants dans une liste de produits.
+  const applyComponentDelta = (list, uses, sign) => list.map((x) => {
+    const u = uses.find((y) => y.id === x.id);
+    if (!u || !u.qty) return x;
+    const upd = { ...x, updatedAt: Date.now() };
+    if (x.sellByUnit) {
+      const per = x.unitsPerPack || 1;
+      const total = Math.max(0, (x.quantity || 0) * per + (x.looseUnits || 0) + sign * u.qty);
+      upd.quantity = Math.floor(total / per + 1e-9);
+      upd.looseUnits = Math.round((total - upd.quantity * per) * 1000) / 1000;
+    } else {
+      upd.quantity = Math.max(0, Math.round(((x.quantity || 0) + sign * u.qty) * 1000) / 1000);
+    }
+    return upd;
+  });
+  // Coût de revient d'un kit / d'une unité produite, à partir des prix d'achat des composants.
+  const recipeUnitCost = (comps, mode, yieldN) => {
+    let cost = 0; const missing = [];
+    (comps || []).forEach((c) => {
+      const comp = products.find((x) => x.id === c.productId);
+      if (!comp) return;
+      if (comp.costPrice == null || comp.costPrice === "") { missing.push(comp.name); return; }
+      const u = comp.sellByUnit ? Number(comp.costPrice) / (comp.unitsPerPack || 1) : Number(comp.costPrice);
+      cost += u * (Number(c.qty) || 0);
+    });
+    const y = mode === "production" ? Math.max(1, Number(yieldN) || 1) : 1;
+    return { cost: Math.round((cost / y) * 100) / 100, missing };
+  };
 
   // ---- Caisse vocale "Zero-Click" (moteur NLP à règles, 100% hors-ligne) ----
   // Analyse une phrase du type "2 sacs de riz 5kg et 1 litre d'huile pour le client Oumar" :
@@ -16783,7 +16917,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     const existing = cart.items.find((i) => i.productId === product.id && (i.mode || "pack") === mode);
     const currentQty = existing ? existing.qty : 0;
-    if (delta > 0) {
+    if (delta > 0 && isKitProduct(product)) {
+      if (kitAvailable(product) < delta) { setError(tx(lang, "kitNotEnough").replace("{name}", product.name)); return; }
+    } else if (delta > 0) {
       if (mode === "unit") {
         const totalUnits = (product.quantity || 0) * (product.unitsPerPack || 1) + (product.looseUnits || 0);
         const reserved = reservedUnits(product.id);
@@ -17044,7 +17180,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ...(it.measureUnit ? { measureUnit: it.measureUnit } : {}),
         ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}),
         ...(it.misc ? { misc: true } : {}),
-        costPrice: product && product.costPrice != null ? product.costPrice : null,
+        costPrice: product && product.costPrice != null && product.costPrice !== "" ? product.costPrice : (product && isKitProduct(product) ? recipeUnitCost(product.components, "sale").cost : null),
+        // Composition figée du kit au moment de la vente (pour une annulation ou un retour exact).
+        ...(it.kit ? { kit: it.kit } : product && isKitProduct(product) && it.mode !== "return" ? { kit: product.components.map((c) => ({ productId: c.productId, qty: Number(c.qty) || 0 })) } : {}),
         payment: cart.payment,
         customer: cart.customer.trim() || null,
         // Commande à retirer plus tard (gâteau, mise de côté, livraison…) : la vente est
@@ -17060,7 +17198,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         actorName: activeEmployee ? activeEmployee.name : null,
       };
     });
-    const nextProducts = products.map((p) => {
+    let nextProducts = products.map((p) => {
       const packItem = cart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
       const unitItem = cart.items.find((i) => i.productId === p.id && i.mode === "unit");
       if (!packItem && !unitItem) return p;
@@ -17075,7 +17213,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return updated;
     }).map((p) => {
       // Articles rendus par le client : de retour en stock (sauf abîmés).
-      const back = cart.items.filter((i) => i.productId === p.id && i.mode === "return" && !i.noRestock);
+      const back = cart.items.filter((i) => i.productId === p.id && i.mode === "return" && !i.noRestock && !i.kit && !isKitProduct(p));
       if (!back.length) return p;
       const updated = { ...p };
       back.forEach((i) => {
@@ -17091,6 +17229,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       });
       updated.updatedAt = Date.now();
       return updated;
+    });
+    // Kits / plats vendus : leurs composants sortent du stock (et reviennent si on rend le kit).
+    cart.items.forEach((i) => {
+      const kp = products.find((x) => x.id === i.productId);
+      const def = i.kit || (isKitProduct(kp) ? kp.components : null);
+      if (!def || i.mode === "unit" || (i.mode === "return" && i.noRestock)) return;
+      nextProducts = applyComponentDelta(nextProducts, componentUses(def, Math.abs(Number(i.qty) || 0)), i.qty > 0 ? -1 : 1);
     });
     // Article rendu abîmé : il ne revient pas en stock, c'est une perte chiffrée.
     const damagedReturns = cart.items.filter((i) => i.mode === "return" && i.noRestock).map((i) => {
@@ -17266,6 +17411,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           : (r.line.serial ? { serial: r.line.serial } : {})),
         ...(returnRestock ? {} : { noRestock: true }),
         ...(r.line.measureUnit ? { measureUnit: r.line.measureUnit } : {}),
+        ...(r.line.kit ? { kit: r.line.kit } : {}),
       };
     });
     const prefillDial = ownDialCode ? ownDialCode + " " : "";
@@ -17305,7 +17451,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // Remise en stock : colis rendus tels quels ; unités détail rendues aux unités détachées,
     // puis regroupées en colis complets (opération inverse de deductUnitStock).
     const nextProducts = products.map((p) => {
-      const mine = lines.filter((x) => x.productId === p.id);
+      const mine = lines.filter((x) => x.productId === p.id && !x.kit);
       if (mine.length === 0) return p;
       let packsBack = 0;
       let unitsBack = 0;
@@ -17344,7 +17490,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       restocked: true,
       debtCancelled: !!linkedDebt,
     }));
-    const overrides = { products: nextProducts, sales: nextAllSales, historyLog: [...historyLog, ...newHistory] };
+    let productsAfterKits = nextProducts;
+    lines.forEach((x) => {
+      if (!x.kit || (x.mode === "return" && x.noRestock)) return;
+      productsAfterKits = applyComponentDelta(productsAfterKits, componentUses(x.kit, Math.abs(Number(x.qty) || 0)), x.qty > 0 ? 1 : -1);
+    });
+    const overrides = { products: productsAfterKits, sales: nextAllSales, historyLog: [...historyLog, ...newHistory] };
     if (linkedDebt) {
       overrides.debts = debts.filter((d) => d.id !== linkedDebt.id);
       overrides.debtEvents = allDebtEvents.map((e) => (e.debtId === linkedDebt.id ? { ...e, cancelled: true, updatedAt: nowMs } : e));
@@ -17773,7 +17924,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // 2. Quel produit est presque épuisé
     if (matches("othQuelProduitEstPresqueEpuise", [/(produit|article|stock).*(epuise|fini|bas|faible|manque|rupture)/, /(low|out of) stock/, /(what|which).*(running low)/])) {
       if (!can("viewStock")) return null;
-      const low = products.filter((p) => p.quantity <= lowStockThreshold).sort((a, b) => a.quantity - b.quantity);
+      const low = products.filter((p) => p.quantity <= lowStockThreshold && !isKitProduct(p)).sort((a, b) => a.quantity - b.quantity);
       if (low.length === 0) return tx(lang, "aiLocalNoLowStock");
       const shown = low.slice(0, 15);
       return `${t(lang, "lowStock")} (${localizedNumber(low.length)})\n\n`
@@ -17954,15 +18105,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const soldQty = {};
     sales.forEach((s) => { if (s.productId) soldQty[s.productId] = (soldQty[s.productId] || 0) + (s.qty || 0); });
     const productsForAi = [...products].sort((a, b) => {
-      const aLow = a.quantity <= lowStockThreshold ? 0 : 1;
-      const bLow = b.quantity <= lowStockThreshold ? 0 : 1;
+      const aLow = a.quantity <= lowStockThreshold && !isKitProduct(a) ? 0 : 1;
+      const bLow = b.quantity <= lowStockThreshold && !isKitProduct(b) ? 0 : 1;
       if (aLow !== bLow) return aLow - bLow;
       return (soldQty[b.id] || 0) - (soldQty[a.id] || 0);
     });
     const stockShown = productsForAi.slice(0, AI_MAX_PRODUCTS);
     const stockSummary = stockShown.map((p) => `${p.name} (id: ${p.id}): ${p.quantity} en stock (seuil alerte: ${lowStockThreshold}), prix ${p.price} ${CURRENT_CURRENCY.symbol}`).join("\n")
       + (products.length > stockShown.length ? `\n(+ ${products.length - stockShown.length} autres produits non listés ici — la boutique en compte ${products.length} au total. Si la question porte sur un produit absent de cette liste, demande au boutiquier de préciser son nom plutôt que de conclure qu'il n'existe pas.)` : "");
-    const lowStockList = products.filter((p) => p.quantity <= lowStockThreshold).map((p) => p.name).join(", ") || "Aucun";
+    const lowStockList = products.filter((p) => p.quantity <= lowStockThreshold && !isKitProduct(p)).map((p) => p.name).join(", ") || "Aucun";
     const unpaidDebts = debts.filter((d) => !d.paid);
     const debtsShown = [...unpaidDebts].sort((a, b) => remainingDebt(b) - remainingDebt(a)).slice(0, AI_MAX_DEBTS);
     const debtsHiddenTotal = unpaidDebts.slice(AI_MAX_DEBTS).reduce((sum, d) => sum + remainingDebt(d), 0);
@@ -18756,7 +18907,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const usualAvg = usualKeys.length >= 2 ? usualSum / usualKeys.length : 0;
     const seeStats = hasPermission("viewStats");
     const money = (v) => (appLockEnabled ? "•••••" : fcfa(v));
-    const lowCount = hasPermission("viewStock") ? products.filter((p) => p.quantity <= lowStockThreshold).length : -1;
+    const lowCount = hasPermission("viewStock") ? products.filter((p) => p.quantity <= lowStockThreshold && !isKitProduct(p)).length : -1;
     const owed = hasPermission("viewDebts") ? debts.filter((d) => !d.paid).reduce((sum, d) => sum + (d.amount || 0) - (d.paidAmount || 0), 0) : -1;
     const payload = {
       day: today,
@@ -18918,8 +19069,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   })();
   const byMethod = getPaymentMethods(lang).map((m) => ({ ...m, total: todaySales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
   const lowStock = productSortMode === "default"
-    ? products.filter((p) => p.quantity <= lowStockThreshold).sort((a, b) => a.quantity - b.quantity)
-    : sortProductList(products.filter((p) => p.quantity <= lowStockThreshold));
+    ? products.filter((p) => p.quantity <= lowStockThreshold && !isKitProduct(p)).sort((a, b) => a.quantity - b.quantity)
+    : sortProductList(products.filter((p) => p.quantity <= lowStockThreshold && !isKitProduct(p)));
   const lowStockDisplayed = showAllLowStock ? lowStock : lowStock.slice(0, 5);
   // Prévision de rupture : rythme de vente des 14 derniers jours → jours de stock restants.
   // Calculée pour tous les produits (accueil : les 5 plus urgents ; onglet Stock : une
@@ -18968,7 +19119,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     });
     const map = {};
     products.forEach((p) => {
-      if (p.dailyMode) return; // production du jour : le stock repart de zéro chaque matin
+      if (p.dailyMode || isKitProduct(p)) return; // production du jour (repart de zéro) ; kit (pas de stock propre)
       const a = soldById[p.id], b = soldByName[p.name];
       if (!a && !b) return;
       const perDay = new Array(14).fill(0).map((_, d) => (a ? a[d] : 0) + (b ? b[d] : 0));
@@ -21133,6 +21284,34 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {produceId && (() => {
+          const p = products.find((x) => x.id === produceId);
+          if (!p) return null;
+          const n = parseFloat(String(produceQty).replace(",", ".")) || 0;
+          const uses = n > 0 ? componentUses(p.components, n, Number(p.recipeYield) || 1) : [];
+          const rc = recipeUnitCost(p.components, "production", p.recipeYield);
+          return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setProduceId(null)}>
+              <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5" style={{ background: T.card, color: T.text }}>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-bold text-sm">🍞 {tx(lang, "produceTitle")} — {p.name}</h3>
+                  <button onClick={() => setProduceId(null)}><X size={18} /></button>
+                </div>
+                <label className="text-xs font-semibold block mt-2 mb-1" style={{ color: T.muted }}>{tx(lang, "produceQtyLabel")}</label>
+                <input autoComplete="off" autoFocus type="text" inputMode="decimal" value={produceQty} onChange={(e) => { setProduceQty(e.target.value.replace(/[^0-9.,]/g, "").slice(0, 7)); setProduceError(""); }} className="w-full border rounded-lg px-3 py-2 text-lg font-bold text-center mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                {uses.length > 0 && (
+                  <div className="rounded-lg p-2.5 mb-3" style={{ background: T.input }}>
+                    <p className="text-[11px] font-semibold mb-1" style={{ color: T.muted }}>{tx(lang, "produceUses")}</p>
+                    {uses.map((u) => { const c = products.find((x) => x.id === u.id); return <p key={u.id} className="text-xs" style={{ color: T.text }}>− {localizedQty(u.qty)} {c ? (c.sellByUnit ? t(lang, "sellUnit") : (c.sellByMeasure && c.measureUnit) || "") : ""} {c ? c.name : "?"}</p>; })}
+                    {rc.cost > 0 && <p className="text-xs mt-1.5 font-semibold" style={{ color: T.text }}>{tx(lang, "recipeCostLabel")} {fcfa(rc.cost)} · {tx(lang, "produceTotalCost")} {fcfa(rc.cost * n)}</p>}
+                  </div>
+                )}
+                {produceError && <p className="text-xs mb-2" style={{ color: "#e11d48" }}>{produceError}</p>}
+                <button onClick={confirmProduce} disabled={!(n > 0)} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: "#b45309", opacity: n > 0 ? 1 : 0.4 }}>{tx(lang, "produceConfirm").replace("{n}", localizedQty(n))}</button>
+              </div>
+            </div>
+          );
+        })()}
         {returnTx && (() => {
           const rows = returnableLines(returnTx);
           const totalBack = rows.reduce((s, r) => s + Math.min(r.max, retQ(r.line.id) || 0) * (Number(r.line.unitPrice) || 0), 0);
@@ -21353,7 +21532,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         })()}
         {showShopList && (() => {
           const rows = products
-            .filter((p) => !p.dailyMode && !isProductFrozen(p.id) && ((Number(p.quantity) || 0) <= lowStockThreshold || (forecastById[p.id] && forecastById[p.id].daysLeft <= 7)))
+            .filter((p) => !p.dailyMode && !isKitProduct(p) && !isProductFrozen(p.id) && ((Number(p.quantity) || 0) <= lowStockThreshold || (forecastById[p.id] && forecastById[p.id].daysLeft <= 7)))
             .map((p) => {
               const fc = forecastById[p.id];
               const rawNeed = fc ? fc.dailyRate * 14 - (Number(p.quantity) || 0) : lowStockThreshold * 2 - Math.max(0, Number(p.quantity) || 0);
@@ -21446,7 +21625,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {editingVariant && (
               <input autoComplete="off" placeholder={tx(lang, "variantLabelField")} value={pVariantLabel} onChange={(e) => setPVariantLabel(e.target.value.slice(0, 40))} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             )}
-            {!creatingVariants && <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />}
+            {!creatingVariants && !kitFormActive && <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={pQty} onChange={(e) => setPQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />}
             <input autoComplete="off" placeholder={t(lang, "unitPrice")} type="number" value={pPrice} onChange={(e) => setPPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
             {(() => {
               const ep = editingProductId ? products.find((x) => x.id === editingProductId) : null;
@@ -21627,6 +21806,55 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
+            ) : m === "recipe" ? (
+            <div key="recipe" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+              <p className="text-xs font-semibold mb-2" style={{ color: T.text }}>{tx(lang, "recipeTitle")}</p>
+              <div className="grid grid-cols-2 gap-1.5 mb-2">
+                {[["sale", "🧺", "recipeModeSale"], ["production", "🍞", "recipeModeProduction"]].map(([k, ic, lbl]) => (
+                  <button key={k} type="button" onClick={() => setPCompMode(k)} className="py-2 px-2 rounded-xl text-[11px] font-bold leading-tight" style={{ background: pCompMode === k ? INDIGO : T.card, color: pCompMode === k ? "white" : T.text, border: `1px solid ${pCompMode === k ? INDIGO : T.border}` }}>{ic} {tx(lang, lbl)}</button>
+                ))}
+              </div>
+              <p className="text-xs mb-2" style={{ color: T.muted }}>{tx(lang, pCompMode === "production" ? "recipeHintProduction" : "recipeHintSale")}</p>
+              {pCompMode === "production" && (
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs" style={{ color: T.text }}>{tx(lang, "recipeYieldLabel")}</span>
+                  <input autoComplete="off" type="text" inputMode="decimal" value={pRecipeYield} onChange={(e) => setPRecipeYield(e.target.value.replace(/[^0-9.,]/g, "").slice(0, 6))} placeholder="1" className="w-20 border rounded-lg px-2 py-1.5 text-sm text-center" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                </div>
+              )}
+              <div className="flex flex-col gap-1.5 mb-2">
+                {pComponents.map((c, idx) => {
+                  const comp = products.find((x) => x.id === c.productId);
+                  const unitLbl = comp ? (comp.sellByUnit ? t(lang, "sellUnit") : (comp.sellByMeasure && comp.measureUnit) || "") : "";
+                  return (
+                    <div key={c.productId} className="flex items-center gap-2 rounded-lg px-2.5 py-1.5" style={{ background: T.card }}>
+                      <span className="flex-1 min-w-0 text-xs font-semibold truncate" style={{ color: T.text }}>{comp ? comp.name : "?"}</span>
+                      <input autoComplete="off" type="text" inputMode="decimal" value={c.qty} onChange={(e) => setPComponents(pComponents.map((x, j) => (j === idx ? { ...x, qty: e.target.value.replace(/[^0-9.,]/g, "").slice(0, 7) } : x)))} className="w-16 border rounded-lg px-1.5 py-1 text-sm text-center" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                      {unitLbl && <span className="text-[10px] w-10 truncate" style={{ color: T.muted }}>{unitLbl}</span>}
+                      <button type="button" onClick={() => setPComponents(pComponents.filter((_, j) => j !== idx))}><X size={14} color={T.muted} /></button>
+                    </div>
+                  );
+                })}
+              </div>
+              <input autoComplete="off" value={pCompSearch} onChange={(e) => setPCompSearch(e.target.value)} placeholder={`+ ${tx(lang, "recipeAddComponent")}`} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+              {pCompSearch.trim() && (
+                <div className="flex flex-wrap gap-1.5 mt-1.5">
+                  {products.filter((x) => x.id !== editingProductId && !isKitProduct(x) && !pComponents.some((c) => c.productId === x.id) && String(x.name || "").toLowerCase().includes(pCompSearch.trim().toLowerCase())).slice(0, 6).map((x) => (
+                    <button key={x.id} type="button" onClick={() => { setPComponents([...pComponents, { productId: x.id, qty: "1" }]); setPCompSearch(""); }} className="px-2.5 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: darkMode ? "rgba(37,99,235,0.18)" : "#dbeafe", color: darkMode ? "#93c5fd" : "#1d4ed8" }}>+ {x.name}</button>
+                  ))}
+                </div>
+              )}
+              {pComponents.length > 0 && (() => {
+                const rc = recipeUnitCost(pComponents, pCompMode, pRecipeYield);
+                const price = parseFloat(pPrice) || 0;
+                const margin = price - rc.cost;
+                return (
+                  <div className="mt-2.5 rounded-lg px-2.5 py-2" style={{ background: T.card }}>
+                    <p className="text-xs" style={{ color: T.text }}>{tx(lang, "recipeCostLabel")} <b>{fcfa(rc.cost)}</b>{price > 0 && rc.cost > 0 && <> · {tx(lang, "recipeMarginLabel")} <b style={{ color: margin >= 0 ? (darkMode ? "#4ade80" : "#15803d") : "#e11d48" }}>{fcfa(margin)} ({localizedNumber(Math.round((margin / price) * 100))} %)</b></>}</p>
+                    {rc.missing.length > 0 && <p className="text-[11px] mt-0.5" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>{tx(lang, "recipeCostMissing").replace("{names}", rc.missing.join(", "))}</p>}
+                  </div>
+                );
+              })()}
+            </div>
             ) : m === "tiers" ? (
             /* Prix demi-gros / gros : s'appliquent tout seuls dans le panier à partir de la
                 quantité indiquée, ou pour tout le panier quand on choisit ce tarif (revendeur). */
@@ -21788,9 +22016,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
             <button
               onClick={() => addProduct()}
-              disabled={!(pName.trim() && (pQty || creatingVariants) && pPrice && (!creatingVariants || variantCombos.length) && (!editingVariant || pVariantLabel.trim()))}
+              disabled={!(pName.trim() && (pQty || creatingVariants || kitFormActive) && pPrice && (!creatingVariants || variantCombos.length) && (!editingVariant || pVariantLabel.trim()))}
               className="w-full py-3 rounded-lg text-white font-semibold text-sm mb-6"
-              style={{ background: INDIGO, opacity: (pName.trim() && (pQty || creatingVariants) && pPrice && (!creatingVariants || variantCombos.length) && (!editingVariant || pVariantLabel.trim())) ? 1 : 0.4 }}
+              style={{ background: INDIGO, opacity: (pName.trim() && (pQty || creatingVariants || kitFormActive) && pPrice && (!creatingVariants || variantCombos.length) && (!editingVariant || pVariantLabel.trim())) ? 1 : 0.4 }}
             >{creatingVariants && variantCombos.length ? tx(lang, "variantCreateBtn").replace("{n}", localizedNumber(variantCombos.length)) : t(lang, "save")}</button>
             {/* « Supprimer » est rangé ici (et non plus sur la liste du Stock), loin du bouton
                 « Modifier » : un appui par erreur ne peut plus effacer un produit. */}
@@ -21934,10 +22162,20 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         </p>
                       )}
                       {frozen && <p className="text-[10px] mt-0.5" style={{ color: darkMode ? CLAY : "#b45309" }}>{t(lang, "productFrozenMsg")}</p>}
+                      {Array.isArray(p.components) && p.components.length > 0 && (
+                        <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>
+                          {isKitProduct(p) ? "🧺" : "🍞"} {p.components.map((c) => { const comp = products.find((x) => x.id === c.productId); return comp ? `${comp.name} ${localizedQty(c.qty)}` : "?"; }).join(" + ")}{isRecipeProduct(p) && p.recipeYield > 1 ? ` → ${localizedQty(p.recipeYield)}` : ""}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="flex-shrink-0 text-center">
-                    {frozen ? (
+                    {isKitProduct(p) ? (
+                      <div>
+                        <span className="text-sm font-extrabold block" style={{ color: kitAvailable(p) <= 0 ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(kitAvailable(p))}</span>
+                        <p className="text-[9px]" style={{ color: T.muted }}>{tx(lang, "kitPossible")}</p>
+                      </div>
+                    ) : frozen ? (
                       <span className="text-sm font-extrabold min-w-[2.5rem] text-center block whitespace-nowrap" style={{ color: T.muted }}>{localizedQty(p.quantity)}</span>
                     ) : hasPermission("editStock") ? (
                       <div className="flex items-center gap-2">
@@ -21972,6 +22210,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   >
                     <Send size={12} /> {tx(lang, "stockActionShare")}
                   </button>
+                  {isRecipeProduct(p) && hasPermission("editStock") && !frozen && !shopReadOnly && (
+                    <button onClick={() => { setProduceId(p.id); setProduceQty(p.recipeYield > 0 ? String(p.recipeYield) : ""); setProduceError(""); }} className="h-8 px-3 rounded-full flex items-center gap-1.5 text-[11px] font-bold" style={{ background: darkMode ? "rgba(217,119,6,0.18)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#b45309" }}>
+                      🍞 {tx(lang, "produceBtn")}
+                    </button>
+                  )}
                   {p.dailyMode && hasPermission("editStock") && !frozen && (
                     <button
                       onClick={() => { setNewDayTarget(p.id); setNewDayQty(""); }}
@@ -22390,7 +22633,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {saleRows.map((row) => row.group ? renderVariantGroupSale(row, false) : ((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
-                    const dispo = p.quantity - reservedQty(p.id);
+                    const dispo = isKitProduct(p) ? kitAvailable(p) : p.quantity - reservedQty(p.id);
                     const totalUnits = (p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0);
                     const dispoUnits = totalUnits - reservedUnits(p.id);
                     const pressed = pressedProductId === p.id;
@@ -22500,7 +22743,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {saleRows.map((row) => row.group ? renderVariantGroupSale(row, true) : ((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
-                    const dispo = p.quantity - reservedQty(p.id);
+                    const dispo = isKitProduct(p) ? kitAvailable(p) : p.quantity - reservedQty(p.id);
                     const totalUnits = (p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0);
                     const dispoUnits = totalUnits - reservedUnits(p.id);
                     const pressed = pressedProductId === p.id;
