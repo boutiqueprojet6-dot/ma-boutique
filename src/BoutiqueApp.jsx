@@ -6349,6 +6349,7 @@ EXTRA_UI.tierMinPlaceholder = { fr: "ex. 10", en: "e.g. 10", es: "ej. 10", pt: "
 EXTRA_UI.shopListPartial = { fr: "partiel, prix d'achat manquants", en: "partial, some cost prices missing", es: "parcial, faltan precios de compra", pt: "parcial, faltam preços de compra", de: "unvollständig, Einkaufspreise fehlen", it: "parziale, mancano prezzi d'acquisto", nl: "gedeeltelijk, inkoopprijzen ontbreken", pl: "częściowy, brak cen zakupu", ru: "неполная, нет закупочных цен", tr: "kısmi, alış fiyatları eksik", ar: "جزئية، أسعار شراء ناقصة", hi: "अधूरा, कुछ ख़रीद दाम नहीं हैं", bn: "আংশিক, কিছু কেনা দাম নেই", ur: "نامکمل، کچھ خرید قیمتیں نہیں", ta: "பகுதி, சில கொள்முதல் விலைகள் இல்லை", te: "పాక్షికం, కొన్ని కొనుగోలు ధరలు లేవు", th: "บางส่วน ขาดราคาทุนบางรายการ", zh: "不完整，缺少部分进价", ja: "一部、仕入れ値が未入力の商品あり", ko: "일부, 매입가 누락", id: "sebagian, harga beli belum lengkap", vi: "chưa đủ, thiếu giá nhập", tl: "bahagi lang, kulang ang puhunan", sw: "sehemu, bei za kununua hazipo", ha: "bai cika ba, wasu farashin saye babu", yo: "apá kan, iye rírà kan kò sí", zu: "ingxenye, amanani okuthenga antuleka", am: "ከፊል፣ የግዢ ዋጋዎች ይጎድላሉ", bm: "a tɛ dafalen, sanni sɔngɔ dɔw tɛ yen", wo: "du lépp, ay njëgu jënd ñàkk nañu" };
 EXTRA_UI.returnGoodState = { fr: "Bon état", en: "Good condition", es: "Buen estado", pt: "Bom estado", de: "Guter Zustand", it: "Buono stato", nl: "Goede staat", pl: "Dobry stan", ru: "Хорошее состояние", tr: "Sağlam", ar: "حالة جيدة", hi: "ठीक हालत", bn: "ভালো অবস্থা", ur: "اچھی حالت", ta: "நல்ல நிலை", te: "మంచి స్థితి", th: "สภาพดี", zh: "完好", ja: "良品", ko: "양호", id: "Kondisi baik", vi: "Còn tốt", tl: "Maayos", sw: "Hali nzuri", ha: "Lafiya lau", yo: "Ó dára", zu: "Isesimweni esihle", am: "ጥሩ ሁኔታ", bm: "A ka ɲi", wo: "Mu baax" };
 EXTRA_UI.returnDamagedBtn = { fr: "Abîmé", en: "Damaged", es: "Dañado", pt: "Danificado", de: "Beschädigt", it: "Danneggiato", nl: "Beschadigd", pl: "Uszkodzony", ru: "Повреждён", tr: "Hasarlı", ar: "تالف", hi: "ख़राब", bn: "নষ্ট", ur: "خراب", ta: "சேதமானது", te: "పాడైంది", th: "เสียหาย", zh: "已损坏", ja: "破損", ko: "손상", id: "Rusak", vi: "Bị hỏng", tl: "Sira", sw: "Imeharibika", ha: "Ya lalace", yo: "Ó ti bàjẹ́", zu: "Konakele", am: "የተበላሸ", bm: "A tiɲɛna", wo: "Yàqu na" };
+EXTRA_UI.returnPickSerials = { fr: "cochez le(s) téléphone(s) rapporté(s)", en: "tick the phone(s) brought back", es: "marca el/los teléfono(s) devuelto(s)", pt: "marque o(s) telemóvel(eis) devolvido(s)", de: "zurückgebrachte(s) Gerät(e) ankreuzen", it: "spunta il/i telefono/i riportato/i", nl: "vink de teruggebrachte toestel(len) aan", pl: "zaznacz zwrócone telefony", ru: "отметьте возвращённые телефоны", tr: "geri getirilen telefon(lar)ı işaretleyin", ar: "حدّد الهاتف/الهواتف المُرجَعة", hi: "लौटाए गए फ़ोन चुनें", bn: "ফেরত আনা ফোন(গুলো) টিক দিন", ur: "واپس لائے گئے فون منتخب کریں", ta: "திருப்பிய தொலைபேசி(களை)க் குறிக்கவும்", te: "తిరిగి తెచ్చిన ఫోన్(ల)ను టిక్ చేయండి", th: "ติ๊กเครื่องที่นำมาคืน", zh: "勾选退回的手机", ja: "返品された端末にチェック", ko: "반품된 휴대폰을 선택하세요", id: "centang ponsel yang dikembalikan", vi: "đánh dấu máy được trả lại", tl: "i-tsek ang (mga) teleponong ibinalik", sw: "weka alama kwenye simu zilizorudishwa", ha: "yi alama kan wayar(oyin) da aka dawo da su", yo: "sàmì sí fóònù tí wọ́n dá padà", zu: "maka amafoni abuyisiwe", am: "የተመለሱትን ስልኮች ይምረጡ", bm: "telefɔni seginnenw taamasiyɛn kɛ", wo: "tànnal telefon yi ñu delloo" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -17018,8 +17019,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (it.tier === "semi" || it.tier === "bulk") out.tier = it.tier;
       if (it.mode === "return") { out.returnOf = it.returnOf; out.returnOfLine = it.returnOfLine; out.origMode = it.origMode || "pack"; if (it.noRestock) out.noRestock = true; }
       if (product.condition && product.condition !== "new") out.condition = product.condition;
-      const sn = typeof it.serial === "string" ? it.serial.trim() : "";
-      if (sn) out.serial = sn;
+      const sns = lineSerials(it).map((x) => String(x).trim()).filter(Boolean);
+      if (sns.length) { out.serial = sns.join(", "); out.serials = sns; }
       const wu = product.warrantyMonths > 0 && it.mode !== "return" ? warrantyEndDate(dateNow, product.warrantyMonths) : null;
       if (wu) out.warrantyUntil = wu;
       return out;
@@ -17224,8 +17225,24 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const returnableLines = (txId) => allSales.filter((x) => (x.transactionId || x.id) === txId && !x.cancelled && !x.returnOf && x.productId != null && !x.misc && Number(x.qty) > 0)
     .map((x) => ({ line: x, max: Math.max(0, Math.round((Number(x.qty) - returnedQtyOfLine(x.id)) * 1000) / 1000) }));
+  // N° de série d'une ligne (panier ou vente) : tableau serials, sinon l'ancien champ texte.
+  const lineSerials = (x) => (x && Array.isArray(x.serials) && x.serials.length ? x.serials : (x && typeof x.serial === "string" && x.serial.trim() ? x.serial.split(",").map((s) => s.trim()).filter(Boolean) : []));
+  const returnedSerialsOfLine = (lineId) => {
+    const out = [];
+    allSales.forEach((x) => { if (!x.cancelled && x.returnOfLine === lineId) out.push(...lineSerials(x)); });
+    draftCarts.forEach((c) => c.items.forEach((i) => { if (i.mode === "return" && i.returnOfLine === lineId) out.push(...lineSerials(i)); }));
+    return out;
+  };
+  // Appareils encore chez le client (n° vendus moins n° déjà rapportés), si chaque appareil a son n°.
+  const serialsLeft = (line) => {
+    const all = lineSerials(line);
+    if (!all.length || all.length !== Math.round(Number(line.qty) || 0)) return null;
+    const back = returnedSerialsOfLine(line.id);
+    return all.filter((s) => !back.includes(s));
+  };
+  const [returnSerials, setReturnSerials] = useState({});
   const retQ = (id) => Math.max(0, parseFloat(String(returnQty[id] ?? "").replace(",", ".")) || 0);
-  const openReturn = (txId) => { setReturnTx(txId); setReturnQty({}); setReturnRestock(true); };
+  const openReturn = (txId) => { setReturnTx(txId); setReturnQty({}); setReturnSerials({}); setReturnRestock(true); };
   const confirmReturn = () => {
     if (returnBlockedByDebt(returnTx)) return;
     const rows = returnableLines(returnTx).filter((r) => (retQ(r.line.id) || 0) > 0);
@@ -17244,7 +17261,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         returnOf: returnTx,
         returnOfLine: r.line.id,
         manualPrice: true,
-        ...(r.line.serial ? { serial: r.line.serial } : {}),
+        ...(serialsLeft(r.line) && (returnSerials[r.line.id] || []).length
+          ? { serials: returnSerials[r.line.id], serial: returnSerials[r.line.id].join(", ") }
+          : (r.line.serial ? { serial: r.line.serial } : {})),
         ...(returnRestock ? {} : { noRestock: true }),
         ...(r.line.measureUnit ? { measureUnit: r.line.measureUnit } : {}),
       };
@@ -21133,6 +21152,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {rows.map((r) => {
                     const v = retQ(r.line.id) || 0;
                     const step = r.line.measureUnit ? 0.5 : 1;
+                    const left = r.max > 0 ? serialsLeft(r.line) : null;
+                    if (left && left.length) {
+                      const chosen = returnSerials[r.line.id] || [];
+                      return (
+                        <div key={r.line.id} className="rounded-lg px-2.5 py-2" style={{ background: T.input }}>
+                          <p className="text-[12px] font-semibold truncate">{r.line.productName}</p>
+                          <p className="text-[10px] mb-1.5" style={{ color: T.muted }}>{fcfa(r.line.unitPrice)} · {tx(lang, "returnPickSerials")}</p>
+                          <div className="flex flex-col gap-1">
+                            {left.map((sn) => {
+                              const on = chosen.includes(sn);
+                              return (
+                                <label key={sn} className="flex items-center gap-2 text-[12px] cursor-pointer rounded-md px-2 py-1.5" style={{ background: on ? (darkMode ? "rgba(37,99,235,0.2)" : "#dbeafe") : T.card }}>
+                                  <input type="checkbox" checked={on} onChange={() => {
+                                    const next = on ? chosen.filter((x) => x !== sn) : [...chosen, sn];
+                                    setReturnSerials({ ...returnSerials, [r.line.id]: next });
+                                    setReturnQty({ ...returnQty, [r.line.id]: next.length });
+                                  }} />
+                                  📱 {sn}
+                                </label>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    }
                     return (
                       <div key={r.line.id} className="flex items-center gap-2 rounded-lg px-2.5 py-2" style={{ background: T.input, opacity: r.max > 0 ? 1 : 0.45 }}>
                         <div className="flex-1 min-w-0">
@@ -22622,10 +22666,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           {(() => {
                             const prod = it.productId != null ? products.find((p) => p.id === it.productId) : null;
                             if (!prod || !prod.trackSerial) return null;
+                            // Ligne rendue : on affiche seulement le(s) n° de l'appareil rapporté.
+                            if (it.mode === "return") return it.serial ? <p className="text-[11px] mt-0.5" style={{ color: T.muted }}>📱 {it.serial}</p> : null;
+                            // Un champ par appareil : 2 téléphones = 2 IMEI, pour savoir lequel revient en cas de retour.
+                            const n = Math.min(20, Math.max(1, Math.round(Number(it.qty) || 1)));
+                            const vals = lineSerials(it);
                             return (
-                              <input autoComplete="off" type="text" value={it.serial || ""} placeholder={`📱 ${tx(lang, "serialInputPlaceholder")}`}
-                                onChange={(e) => { const v = e.target.value.slice(0, 80); saveAll({ draftCarts: draftCarts.map((c) => (c.id !== activeCart.id ? c : { ...c, items: c.items.map((i) => (i.id === it.id ? { ...i, serial: v } : i)) })) }); }}
-                                className="w-full mt-1 mb-0.5 border rounded-lg px-2.5 py-1.5 text-[12px]" style={{ background: darkMode ? "rgba(255,255,255,0.05)" : "white", color: T.text, borderColor: darkMode ? T.border : "rgba(37,99,235,0.25)" }} />
+                              <div className="mt-1 mb-0.5 flex flex-col gap-1">
+                                {Array.from({ length: n }).map((_, k) => (
+                                  <input key={k} autoComplete="off" type="text" value={vals[k] || ""} placeholder={`📱 ${tx(lang, "serialInputPlaceholder")}${n > 1 ? " " + (k + 1) : ""}`}
+                                    onChange={(e) => {
+                                      const v = e.target.value.replace(/,/g, " ").slice(0, 40);
+                                      const arr = Array.from({ length: n }, (_, j) => (j === k ? v : vals[j] || ""));
+                                      saveAll({ draftCarts: draftCarts.map((c) => (c.id !== activeCart.id ? c : { ...c, items: c.items.map((i) => (i.id === it.id ? { ...i, serials: arr, serial: arr.map((x) => x.trim()).filter(Boolean).join(", ") } : i)) })) });
+                                    }}
+                                    className="w-full border rounded-lg px-2.5 py-1.5 text-[12px]" style={{ background: darkMode ? "rgba(255,255,255,0.05)" : "white", color: T.text, borderColor: darkMode ? T.border : "rgba(37,99,235,0.25)" }} />
+                                ))}
+                              </div>
                             );
                           })()}
                           {editing && (
