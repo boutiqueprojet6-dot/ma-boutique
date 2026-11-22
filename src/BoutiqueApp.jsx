@@ -6780,6 +6780,8 @@ const SECTORS = [
   { id: "autoparts", fr: "Pièces détachées moto & auto", en: "Motorbike & car parts" },
   { id: "other", fr: "Autre", en: "Other", ar: "أخرى", vi: "Khác", bn: "অন্যান্য", ha: "Wani", bm: "Wɛrɛ", ur: "دیگر" },
 ];
+// Icône de chaque secteur (tuiles de l'inscription et des Réglages).
+const SECTOR_ICON = { food: "🛒", clothing: "👗", electronics: "📱", cosmetics: "💄", pharmacy: "💊", hardware: "🔧", school: "✏️", bakery: "🥖", restaurant: "🍽️", butcher: "🥩", wholesale: "📦", autoparts: "🏍️", other: "🏪" };
 // Options de la fiche produit mises en avant selon le secteur. Les autres restent
 // disponibles derrière « Plus d'options ». Secteur inconnu ou « Autre » : tout est affiché.
 // unit = vente au détail (paquet → pièces), measure = vente au poids / à la mesure,
@@ -10009,10 +10011,29 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             </div>
             <div className="mb-3">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "sector")} <span style={{ fontWeight: 400 }}>({tx(lang, "obOptional")})</span></label>
-              <select value={obSecteur} onChange={(e) => setObSecteur(e.target.value)} className="w-full border rounded-xl px-3 py-2.5 text-sm" style={{ background: AT.input, color: AT.text, ...fieldStyle(obErrors.secteur) }}>
-                <option value="">{t(lang, "chooseSector")}</option>
-                {SECTORS.map((s) => <option key={s.id} value={s.id}>{sectorName(s.id, lang)}</option>)}
-              </select>
+              {/* Grosses tuiles plutôt qu'une liste déroulante : on les voit tout de suite et on
+                  comprend ce que le secteur change (options proposées en premier sur les produits). */}
+              <p className="text-[11px] mb-2" style={{ color: AT.muted }}>{tx(lang, "sectorModesHint")}</p>
+              <div className="grid grid-cols-2 gap-2">
+                {SECTORS.map((s) => {
+                  const on = obSecteur === s.id;
+                  const modes = SECTOR_MODES[s.id] || [];
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => setObSecteur(on ? "" : s.id)}
+                      aria-pressed={on}
+                      className="rounded-xl px-2.5 py-2.5 text-left flex flex-col gap-0.5"
+                      style={{ background: on ? (darkMode ? "rgba(37,99,235,0.22)" : "#dbeafe") : AT.input, border: `2px solid ${on ? "#2563eb" : AT.border}`, minHeight: 74 }}
+                    >
+                      <span style={{ fontSize: 22, lineHeight: 1.1 }}>{SECTOR_ICON[s.id] || "🏪"}</span>
+                      <span className="text-[12px] font-bold leading-tight" style={{ color: on ? (darkMode ? "#93c5fd" : "#1d4ed8") : AT.text }}>{sectorName(s.id, lang)}</span>
+                      {modes.length > 0 && <span className="text-[10px] leading-tight" style={{ color: AT.muted }}>{modes.slice(0, 3).map((m) => tx(lang, "mode_" + m)).join(" · ")}</span>}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
             <div className="mb-3">
               <label className="text-xs font-semibold block mb-1.5" style={{ color: AT.muted }}>{t(lang, "country")}</label>
@@ -27066,7 +27087,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     return (
                       <button key={sec.id} onClick={() => saveSector(sec.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: selected ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${selected ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
                         <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3, textAlign: "left" }}>
-                          <span style={{ color: selected ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}>{label}</span>
+                          <span style={{ color: selected ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}><span style={{ marginInlineEnd: 8 }}>{SECTOR_ICON[sec.id] || "🏪"}</span>{label}</span>
                           {SECTOR_MODES[sec.id] && SECTOR_MODES[sec.id].length > 0 && (
                             <span style={{ color: T.muted, fontSize: 11, fontWeight: 500 }}>⭐ {SECTOR_MODES[sec.id].map((m) => tx(lang, "mode_" + m)).join(" · ")}</span>
                           )}
