@@ -6328,6 +6328,20 @@ EXTRA_UI.orderRestToPay = { fr: "Reste à payer : {p}", en: "Left to pay: {p}", 
 EXTRA_UI.orderCollectRest = { fr: "Encaisser le reste", en: "Collect the rest", es: "Cobrar el resto", pt: "Receber o resto", de: "Rest kassieren", it: "Incassa il resto", nl: "Rest innen", pl: "Pobierz resztę", ru: "Получить остаток", tr: "Kalanı tahsil et", ar: "تحصيل الباقي", hi: "बाकी वसूलें", bn: "বাকি আদায় করুন", ur: "باقی وصول کریں", ta: "மீதியை வசூலி", te: "మిగతాది వసూలు చేయండి", th: "เก็บเงินที่เหลือ", zh: "收取余款", ja: "残金を受け取る", ko: "잔금 받기", id: "Tagih sisanya", vi: "Thu phần còn lại", tl: "Singilin ang natitira", sw: "Pokea salio", ha: "Karɓi sauran", yo: "Gba èyí tó kù", zu: "Qoqa okusele", am: "ቀሪውን ተቀበል", bm: "A tɔ minɛ", wo: "Jël li des" };
 EXTRA_UI.orderDeliveredConfirm = { fr: "Confirmer que {name} a récupéré sa commande ?", en: "Confirm that {name} picked up the order?", es: "¿Confirmar que {name} recogió su pedido?", pt: "Confirmar que {name} levantou a encomenda?", de: "Bestätigen, dass {name} die Bestellung abgeholt hat?", it: "Confermare che {name} ha ritirato l'ordine?", nl: "Bevestigen dat {name} de bestelling heeft opgehaald?", pl: "Potwierdzić, że {name} odebrał(a) zamówienie?", ru: "Подтвердить, что {name} забрал(а) заказ?", tr: "{name} siparişini aldı mı, onaylıyor musunuz?", ar: "تأكيد أن {name} استلم طلبه؟", hi: "पुष्टि करें कि {name} ने ऑर्डर ले लिया?", bn: "নিশ্চিত করবেন যে {name} অর্ডার নিয়ে গেছেন?", ur: "تصدیق کریں کہ {name} نے آرڈر لے لیا؟", ta: "{name} ஆர்டரை எடுத்துச் சென்றதை உறுதிப்படுத்தவா?", te: "{name} ఆర్డర్ తీసుకెళ్లారని నిర్ధారించాలా?", th: "ยืนยันว่า {name} มารับสินค้าแล้ว?", zh: "确认 {name} 已取货？", ja: "{name} さんが受け取ったことを確認しますか？", ko: "{name} 님이 주문을 찾아갔나요?", id: "Konfirmasi {name} sudah mengambil pesanan?", vi: "Xác nhận {name} đã nhận hàng?", tl: "Kumpirmahing nakuha na ni {name} ang order?", sw: "Thibitisha kuwa {name} amechukua oda?", ha: "Tabbatar cewa {name} ya karɓi odarsa?", yo: "Ṣé o fìdí rẹ̀ múlẹ̀ pé {name} ti gba ọjà rẹ̀?", zu: "Qinisekisa ukuthi u-{name} uyithathile i-oda?", am: "{name} ትዕዛዙን እንደወሰደ ያረጋግጡ?", bm: "I b'a sɛmɛntiya ko {name} ye a ka komandi ta wa?", wo: "Ndax {name} jël na komandam?" };
 EXTRA_UI.orderDeliveredBtn = { fr: "Retirée", en: "Picked up", es: "Recogido", pt: "Levantado", de: "Abgeholt", it: "Ritirato", nl: "Opgehaald", pl: "Odebrane", ru: "Забрано", tr: "Alındı", ar: "تم الاستلام", hi: "ले लिया", bn: "নিয়ে গেছেন", ur: "لے لیا", ta: "எடுத்தார்", te: "తీసుకెళ్లారు", th: "รับแล้ว", zh: "已取货", ja: "受け取り済み", ko: "수령 완료", id: "Sudah diambil", vi: "Đã nhận", tl: "Nakuha na", sw: "Imechukuliwa", ha: "An karɓa", yo: "Wọ́n ti gbà á", zu: "Kuthathiwe", am: "ተወስዷል", bm: "A tara", wo: "Jël na ko" };
+EXTRA_UI.returnBtn = { fr: "Retour / échange", en: "Return / exchange", es: "Devolución / cambio", pt: "Devolução / troca", de: "Rückgabe / Umtausch", it: "Reso / cambio", nl: "Retour / ruilen", pl: "Zwrot / wymiana", ru: "Возврат / обмен", tr: "İade / değişim", ar: "إرجاع / استبدال", hi: "वापसी / बदलाव", bn: "ফেরত / বদল", ur: "واپسی / تبادلہ", ta: "திருப்பல் / மாற்றம்", te: "వాపసు / మార్పిడి", th: "คืน / เปลี่ยนสินค้า", zh: "退货 / 换货", ja: "返品 / 交換", ko: "반품 / 교환", id: "Retur / tukar", vi: "Trả / đổi hàng", tl: "Ibalik / palitan", sw: "Rudisha / badilisha", ha: "Mayarwa / musaya", yo: "Dápadà / pàṣípààrọ̀", zu: "Ukubuyisa / ukushintsha", am: "መመለስ / መለወጥ", bm: "Segin / falen", wo: "Delloo / weccee" };
+EXTRA_UI.returnTitle = { fr: "Retour ou échange", en: "Return or exchange", es: "Devolución o cambio", pt: "Devolução ou troca", de: "Rückgabe oder Umtausch", it: "Reso o cambio", nl: "Retour of ruilen", pl: "Zwrot lub wymiana", ru: "Возврат или обмен", tr: "İade veya değişim", ar: "إرجاع أو استبدال", hi: "वापसी या बदलाव", bn: "ফেরত বা বদল", ur: "واپسی یا تبادلہ", ta: "திருப்பல் அல்லது மாற்றம்", te: "వాపసు లేదా మార్పిడి", th: "คืนหรือเปลี่ยนสินค้า", zh: "退货或换货", ja: "返品または交換", ko: "반품 또는 교환", id: "Retur atau tukar", vi: "Trả hoặc đổi hàng", tl: "Ibalik o palitan", sw: "Kurudisha au kubadilisha", ha: "Mayarwa ko musaya", yo: "Ìdápadà tàbí pàṣípààrọ̀", zu: "Ukubuyisa noma ukushintsha", am: "መመለስ ወይም መለወጥ", bm: "Segin walima falen", wo: "Delloo walla weccee" };
+EXTRA_UI.returnHint = { fr: "Choisissez ce que le client rapporte. Un panier « Retour » s'ouvre : ajoutez-y d'autres articles pour un échange (le client paie la différence), ou encaissez tel quel pour lui rendre son argent.", en: "Choose what the customer brings back. A “Return” cart opens: add other items for an exchange (the customer pays the difference), or check out as is to refund them.", es: "Elige lo que devuelve el cliente. Se abre un carrito «Devolución»: añade otros artículos para un cambio (el cliente paga la diferencia) o cobra tal cual para devolverle su dinero.", pt: "Escolha o que o cliente devolve. Abre-se um carrinho «Devolução»: junte outros artigos para uma troca (o cliente paga a diferença) ou finalize assim para lhe devolver o dinheiro.", de: "Wähle, was der Kunde zurückbringt. Ein Warenkorb „Rückgabe“ öffnet sich: Füge andere Artikel für einen Umtausch hinzu (der Kunde zahlt die Differenz) oder schließe so ab, um das Geld zurückzugeben.", it: "Scegli cosa riporta il cliente. Si apre un carrello «Reso»: aggiungi altri articoli per un cambio (il cliente paga la differenza) o chiudi così per rimborsarlo.", nl: "Kies wat de klant terugbrengt. Er opent een mandje „Retour”: voeg andere artikelen toe voor een ruil (klant betaalt het verschil) of reken zo af om terug te betalen.", pl: "Wybierz, co klient oddaje. Otworzy się koszyk „Zwrot”: dodaj inne artykuły, aby wymienić (klient dopłaca różnicę), albo zakończ tak, by oddać pieniądze.", ru: "Выберите, что возвращает клиент. Откроется корзина «Возврат»: добавьте другие товары для обмена (клиент доплачивает разницу) или проведите как есть, чтобы вернуть деньги.", tr: "Müşterinin geri getirdiğini seçin. «İade» sepeti açılır: değişim için başka ürün ekleyin (müşteri farkı öder) ya da parasını iade etmek için olduğu gibi tamamlayın.", ar: "اختر ما يُرجعه العميل. تُفتح سلة «إرجاع»: أضف منتجات أخرى للاستبدال (يدفع العميل الفرق)، أو أنهِ كما هي لإعادة ماله.", hi: "ग्राहक जो लौटा रहा है उसे चुनें। एक «वापसी» कार्ट खुलेगा: बदलाव के लिए दूसरे सामान जोड़ें (ग्राहक अंतर देगा), या पैसे लौटाने के लिए वैसे ही पूरा करें।", bn: "গ্রাহক কী ফেরত আনছেন বেছে নিন। একটি «ফেরত» কার্ট খুলবে: বদলের জন্য অন্য পণ্য যোগ করুন (গ্রাহক পার্থক্য দেবেন), অথবা টাকা ফেরত দিতে এভাবেই শেষ করুন।", ur: "گاہک جو واپس لایا ہے وہ چنیں۔ «واپسی» کارٹ کھلے گی: تبادلے کے لیے دوسری اشیاء شامل کریں (گاہک فرق دے گا)، یا پیسے واپس کرنے کے لیے ایسے ہی مکمل کریں۔", ta: "வாடிக்கையாளர் திருப்பித் தருவதைத் தேர்ந்தெடுக்கவும். «திருப்பல்» கூடை திறக்கும்: மாற்றத்துக்கு வேறு பொருட்களைச் சேர்க்கவும் (வாடிக்கையாளர் வித்தியாசத்தைச் செலுத்துவார்), அல்லது பணம் திருப்ப அப்படியே முடிக்கவும்.", te: "కస్టమర్ తిరిగి తెచ్చినది ఎంచుకోండి. «వాపసు» కార్ట్ తెరుచుకుంటుంది: మార్పిడికి ఇతర వస్తువులు జోడించండి (కస్టమర్ తేడా చెల్లిస్తారు), లేదా డబ్బు తిరిగి ఇవ్వడానికి అలాగే ముగించండి.", th: "เลือกสิ่งที่ลูกค้านำมาคืน ตะกร้า «คืนสินค้า» จะเปิดขึ้น: เพิ่มสินค้าอื่นเพื่อเปลี่ยน (ลูกค้าจ่ายส่วนต่าง) หรือชำระเงินตามนั้นเพื่อคืนเงิน", zh: "选择客户退回的商品。会打开一个“退货”购物车：加入其他商品即为换货（客户补差价），或直接结账给客户退款。", ja: "お客様が持ってきた商品を選んでください。「返品」カートが開きます。交換なら他の商品を追加（差額をお客様が支払う）、返金ならそのまま会計します。", ko: "고객이 가져온 상품을 고르세요. '반품' 장바구니가 열립니다. 교환이면 다른 상품을 추가하고(고객이 차액 지불), 환불이면 그대로 결제하세요.", id: "Pilih barang yang dikembalikan pelanggan. Keranjang «Retur» terbuka: tambahkan barang lain untuk tukar (pelanggan bayar selisih), atau selesaikan begitu saja untuk mengembalikan uang.", vi: "Chọn món khách mang trả. Một giỏ «Trả hàng» sẽ mở: thêm món khác để đổi (khách trả phần chênh lệch), hoặc thanh toán như vậy để hoàn tiền.", tl: "Piliin ang ibinabalik ng customer. Magbubukas ang cart na «Ibinalik»: magdagdag ng ibang item para sa palitan (babayaran ng customer ang diperensiya), o tapusin ito para isauli ang pera.", sw: "Chagua anachorudisha mteja. Kikapu «Rudisha» kitafunguka: ongeza bidhaa nyingine kwa kubadilisha (mteja analipa tofauti), au maliza hivyo hivyo ili kumrudishia pesa.", ha: "Zaɓi abin da abokin ciniki ya dawo da shi. Kwandon «Mayarwa» zai buɗe: ƙara wasu kaya don musaya (abokin ciniki zai biya bambancin), ko ka kammala haka don mayar masa da kuɗinsa.", yo: "Yan ohun tí oníbàárà dá padà. Agbọ̀n «Ìdápadà» yóò ṣí: fi àwọn ọjà míì kún un fún pàṣípààrọ̀ (oníbàárà á san ìyàtọ̀), tàbí parí rẹ̀ bẹ́ẹ̀ láti dá owó rẹ̀ padà.", zu: "Khetha lokho umthengi akubuyisayo. Kuvuleka ibhasikidi elithi «Ukubuyisa»: engeza ezinye izinto ukuze ushintshe (umthengi ukhokha umehluko), noma uqedele kanjalo ukuze umbuyisele imali.", am: "ደንበኛው የመለሰውን ይምረጡ። «መመለሻ» ጋሪ ይከፈታል፦ ለመለወጥ ሌሎች ዕቃዎችን ይጨምሩ (ደንበኛው ልዩነቱን ይከፍላል)፣ ወይም ገንዘቡን ለመመለስ እንዳለ ይጨርሱ።", bm: "Sannikɛla ye min segin, o sugandi. «Segin» pan bɛ dayɛlɛ: fɛn wɛrɛw fara a kan ka falen kɛ (sannikɛla bɛ danfara sara), walima a ban ten k'a ka wari segin a ma.", wo: "Tànnal li kiliyaan bi delloo. Panye «Delloo» dina ubbeeku: yokkal yeneen marsandiis ngir weccee (kiliyaan bi fey wuute bi), walla jeexal ko noonu ngir delloo xaalisam." };
+EXTRA_UI.returnMaxQty = { fr: "jusqu'à {n}", en: "up to {n}", es: "hasta {n}", pt: "até {n}", de: "bis zu {n}", it: "fino a {n}", nl: "tot {n}", pl: "do {n}", ru: "до {n}", tr: "en fazla {n}", ar: "حتى {n}", hi: "{n} तक", bn: "{n} পর্যন্ত", ur: "{n} تک", ta: "{n} வரை", te: "{n} వరకు", th: "สูงสุด {n}", zh: "最多 {n}", ja: "最大 {n}", ko: "최대 {n}", id: "hingga {n}", vi: "tối đa {n}", tl: "hanggang {n}", sw: "hadi {n}", ha: "har {n}", yo: "títí dé {n}", zu: "kuze kube ngu-{n}", am: "እስከ {n}", bm: "ka se {n} ma", wo: "ba {n}" };
+EXTRA_UI.returnAllDone = { fr: "déjà tout rendu", en: "all returned already", es: "ya devuelto todo", pt: "já tudo devolvido", de: "schon alles zurück", it: "già tutto reso", nl: "alles al terug", pl: "wszystko już zwrócone", ru: "всё уже возвращено", tr: "hepsi iade edildi", ar: "أُرجع كله سابقًا", hi: "सब पहले ही लौटाया", bn: "সব আগেই ফেরত", ur: "سب پہلے ہی واپس", ta: "அனைத்தும் ஏற்கனவே திருப்பப்பட்டது", te: "అన్నీ ఇప్పటికే వాపసు", th: "คืนครบแล้ว", zh: "已全部退回", ja: "すべて返品済み", ko: "이미 모두 반품됨", id: "sudah dikembalikan semua", vi: "đã trả hết", tl: "naibalik na lahat", sw: "zote zimeshirudishwa", ha: "an riga an mayar da duka", yo: "gbogbo rẹ̀ ti padà", zu: "konke sekubuyisiwe", am: "ሁሉም ተመልሷል", bm: "a bɛɛ seginna kaban", wo: "lépp delloo nañu ko ba pare" };
+EXTRA_UI.returnRestockLabel = { fr: "Remettre en stock", en: "Put back in stock", es: "Volver a poner en stock", pt: "Repor no stock", de: "Wieder ins Lager", it: "Rimetti in magazzino", nl: "Terug in voorraad", pl: "Przywróć do magazynu", ru: "Вернуть на склад", tr: "Stoğa geri koy", ar: "إعادة إلى المخزون", hi: "स्टॉक में वापस रखें", bn: "স্টকে ফেরত রাখুন", ur: "اسٹاک میں واپس رکھیں", ta: "இருப்பில் மீண்டும் வை", te: "స్టాక్‌లో తిరిగి పెట్టండి", th: "คืนเข้าสต็อก", zh: "放回库存", ja: "在庫に戻す", ko: "재고로 되돌리기", id: "Kembalikan ke stok", vi: "Nhập lại kho", tl: "Ibalik sa stock", sw: "Rudisha kwenye hifadhi", ha: "Mayar cikin ajiya", yo: "Dá a padà sí ìpamọ́", zu: "Buyisela esitokweni", am: "ወደ ክምችት መልስ", bm: "A segin maralen na", wo: "Delloo ko ci stock bi" };
+EXTRA_UI.returnRestockHint = { fr: "Décochez si l'article est abîmé : il sera compté dans les pertes.", en: "Untick if the item is damaged: it will be counted as a loss.", es: "Desmarca si el artículo está dañado: se contará como pérdida.", pt: "Desmarque se o artigo estiver danificado: conta como perda.", de: "Abwählen, wenn der Artikel beschädigt ist: er zählt dann als Verlust.", it: "Togli la spunta se l'articolo è rovinato: sarà contato tra le perdite.", nl: "Vink uit als het artikel beschadigd is: het telt dan als verlies.", pl: "Odznacz, jeśli towar jest uszkodzony: zostanie liczony jako strata.", ru: "Снимите отметку, если товар повреждён: он будет учтён как потеря.", tr: "Ürün hasarlıysa işareti kaldırın: kayıp olarak sayılır.", ar: "ألغِ التحديد إذا كان المنتج تالفًا: سيُحسب ضمن الخسائر.", hi: "सामान ख़राब हो तो निशान हटाएँ: वह नुकसान में गिना जाएगा।", bn: "পণ্য নষ্ট হলে টিক তুলে দিন: ক্ষতি হিসেবে গোনা হবে।", ur: "اگر چیز خراب ہو تو نشان ہٹائیں: اسے نقصان میں گنا جائے گا۔", ta: "பொருள் சேதமடைந்திருந்தால் தேர்வுநீக்கவும்: அது இழப்பாகக் கணக்கிடப்படும்.", te: "వస్తువు పాడైతే టిక్ తీసేయండి: అది నష్టంగా లెక్కించబడుతుంది.", th: "เอาเครื่องหมายออกถ้าสินค้าเสียหาย: จะนับเป็นของเสีย", zh: "如果商品已损坏请取消勾选：会计入损耗。", ja: "商品が傷んでいる場合はチェックを外してください。ロスとして記録されます。", ko: "상품이 손상됐다면 체크를 해제하세요. 손실로 계산됩니다.", id: "Hapus centang jika barang rusak: akan dihitung sebagai kerugian.", vi: "Bỏ chọn nếu hàng bị hỏng: sẽ được tính vào hao hụt.", tl: "Alisin ang tsek kung sira ang item: ibibilang ito sa lugi.", sw: "Ondoa alama ikiwa bidhaa imeharibika: itahesabiwa kama hasara.", ha: "Cire alama idan kayan ya lalace: za a ƙidaya shi a matsayin asara.", yo: "Yọ àmì kúrò tí ọjà náà bá ti bàjẹ́: a ó kà á sí àdánù.", zu: "Susa uphawu uma into yonakele: izobalwa njengokulahlekelwa.", am: "ዕቃው ከተበላሸ ምልክቱን ያንሱ፦ እንደ ኪሳራ ይቆጠራል።", bm: "N'a tiɲɛna, taamasiyɛn bɔ: a bɛna jate bɔnɛ ye.", wo: "Far ko su yàqoo: dinañu ko waññ ci ñàkk yi." };
+EXTRA_UI.returnValue = { fr: "Valeur rendue :", en: "Returned value:", es: "Valor devuelto:", pt: "Valor devolvido:", de: "Rückgabewert:", it: "Valore reso:", nl: "Teruggebrachte waarde:", pl: "Wartość zwrotu:", ru: "Сумма возврата:", tr: "İade değeri:", ar: "قيمة المُرجَع:", hi: "लौटाई गई कीमत:", bn: "ফেরতের মূল্য:", ur: "واپسی کی قیمت:", ta: "திருப்பிய மதிப்பு:", te: "వాపసు విలువ:", th: "มูลค่าที่คืน:", zh: "退回金额：", ja: "返品額：", ko: "반품 금액:", id: "Nilai retur:", vi: "Giá trị trả:", tl: "Halaga ng ibinalik:", sw: "Thamani iliyorudishwa:", ha: "Darajar abin da aka mayar:", yo: "Iye ohun tí a dá padà:", zu: "Inani elibuyisiwe:", am: "የተመለሰው ዋጋ:", bm: "Min seginna, a sɔngɔ:", wo: "Njëgu li ñu delloo:" };
+EXTRA_UI.returnContinue = { fr: "Continuer vers le panier", en: "Continue to the cart", es: "Continuar al carrito", pt: "Continuar para o carrinho", de: "Weiter zum Warenkorb", it: "Continua al carrello", nl: "Verder naar het mandje", pl: "Przejdź do koszyka", ru: "Перейти в корзину", tr: "Sepete devam et", ar: "المتابعة إلى السلة", hi: "कार्ट पर जाएँ", bn: "কার্টে যান", ur: "کارٹ پر جائیں", ta: "கூடைக்குத் தொடர்", te: "కార్ట్‌కు కొనసాగండి", th: "ไปที่ตะกร้า", zh: "前往购物车", ja: "カートへ進む", ko: "장바구니로 계속", id: "Lanjut ke keranjang", vi: "Tiếp tục đến giỏ", tl: "Magpatuloy sa cart", sw: "Endelea kwenye kikapu", ha: "Ci gaba zuwa kwando", yo: "Tẹ̀síwájú sí agbọ̀n", zu: "Qhubeka ebhasikidini", am: "ወደ ጋሪው ቀጥል", bm: "Taa pan na", wo: "Dem ci panye bi" };
+EXTRA_UI.returnCartLabel = { fr: "Retour", en: "Return", es: "Devolución", pt: "Devolução", de: "Rückgabe", it: "Reso", nl: "Retour", pl: "Zwrot", ru: "Возврат", tr: "İade", ar: "إرجاع", hi: "वापसी", bn: "ফেরত", ur: "واپسی", ta: "திருப்பல்", te: "వాపసు", th: "คืนสินค้า", zh: "退货", ja: "返品", ko: "반품", id: "Retur", vi: "Trả hàng", tl: "Ibinalik", sw: "Kurudisha", ha: "Mayarwa", yo: "Ìdápadà", zu: "Ukubuyisa", am: "መመለሻ", bm: "Segin", wo: "Delloo" };
+EXTRA_UI.returnLineLabel = { fr: "Retour", en: "Return", es: "Devolución", pt: "Devolução", de: "Rückgabe", it: "Reso", nl: "Retour", pl: "Zwrot", ru: "Возврат", tr: "İade", ar: "إرجاع", hi: "वापसी", bn: "ফেরত", ur: "واپسی", ta: "திருப்பல்", te: "వాపసు", th: "คืนสินค้า", zh: "退货", ja: "返品", ko: "반품", id: "Retur", vi: "Trả hàng", tl: "Ibinalik", sw: "Imerudishwa", ha: "An mayar", yo: "Ìdápadà", zu: "Kubuyisiwe", am: "የተመለሰ", bm: "Seginnen", wo: "Delloo" };
+EXTRA_UI.returnGiveBack = { fr: "À rendre au client", en: "To give back to the customer", es: "A devolver al cliente", pt: "A devolver ao cliente", de: "An den Kunden zurückzugeben", it: "Da restituire al cliente", nl: "Terug te geven aan de klant", pl: "Do oddania klientowi", ru: "Вернуть клиенту", tr: "Müşteriye iade edilecek", ar: "يُعاد إلى العميل", hi: "ग्राहक को लौटाना है", bn: "গ্রাহককে ফেরত দিতে হবে", ur: "گاہک کو واپس دینا ہے", ta: "வாடிக்கையாளருக்குத் திருப்பித் தர வேண்டியது", te: "కస్టమర్‌కు తిరిగి ఇవ్వాల్సింది", th: "ต้องคืนเงินลูกค้า", zh: "应退还客户", ja: "お客様に返す金額", ko: "고객에게 돌려줄 금액", id: "Dikembalikan ke pelanggan", vi: "Trả lại khách", tl: "Isasauli sa customer", sw: "Kumrudishia mteja", ha: "Za a mayar wa abokin ciniki", yo: "Láti dá padà fún oníbàárà", zu: "Okubuyiselwa umthengi", am: "ለደንበኛው የሚመለስ", bm: "Ka segin sannikɛla ma", wo: "Li ñuy delloo kiliyaan bi" };
+EXTRA_UI.returnNoCredit = { fr: "Pour rendre de l'argent, choisissez Espèces ou Paiement mobile.", en: "To give money back, choose Cash or Mobile payment.", es: "Para devolver dinero, elige Efectivo o Pago móvil.", pt: "Para devolver dinheiro, escolha Numerário ou Pagamento móvel.", de: "Um Geld zurückzugeben, wähle Bargeld oder Mobile Zahlung.", it: "Per restituire denaro, scegli Contanti o Pagamento mobile.", nl: "Kies Contant of Mobiel betalen om geld terug te geven.", pl: "Aby oddać pieniądze, wybierz Gotówkę lub Płatność mobilną.", ru: "Чтобы вернуть деньги, выберите Наличные или Мобильный платёж.", tr: "Para iadesi için Nakit veya Mobil ödeme seçin.", ar: "لإعادة المال، اختر نقدًا أو الدفع عبر الهاتف.", hi: "पैसे लौटाने के लिए नकद या मोबाइल भुगतान चुनें।", bn: "টাকা ফেরত দিতে নগদ বা মোবাইল পেমেন্ট বেছে নিন।", ur: "پیسے واپس کرنے کے لیے نقد یا موبائل ادائیگی چنیں۔", ta: "பணம் திருப்ப, ரொக்கம் அல்லது மொபைல் கட்டணத்தைத் தேர்ந்தெடுக்கவும்.", te: "డబ్బు తిరిగి ఇవ్వడానికి నగదు లేదా మొబైల్ చెల్లింపు ఎంచుకోండి.", th: "หากจะคืนเงิน เลือกเงินสดหรือชำระผ่านมือถือ", zh: "退款请选择现金或手机支付。", ja: "返金するには現金かモバイル決済を選んでください。", ko: "환불하려면 현금 또는 모바일 결제를 선택하세요.", id: "Untuk mengembalikan uang, pilih Tunai atau Pembayaran seluler.", vi: "Để hoàn tiền, chọn Tiền mặt hoặc Thanh toán di động.", tl: "Para magsauli ng pera, piliin ang Cash o Mobile payment.", sw: "Ili kurudisha pesa, chagua Taslimu au Malipo ya simu.", ha: "Don mayar da kuɗi, zaɓi Tsabar kuɗi ko Biyan waya.", yo: "Láti dá owó padà, yan Owó ọwọ́ tàbí Ìsanwó orí fóònù.", zu: "Ukubuyisa imali, khetha Ukheshi noma Inkokhelo yeselula.", am: "ገንዘብ ለመመለስ ጥሬ ገንዘብ ወይም የሞባይል ክፍያ ይምረጡ።", bm: "Ka wari segin, Wari walima Telefɔni sarali sugandi.", wo: "Ngir delloo xaalis, tànnal Espees walla Fey ak telefon." };
+EXTRA_UI.removeReason_returnDamaged = { fr: "Retour abîmé", en: "Damaged return", es: "Devolución dañada", pt: "Devolução danificada", de: "Beschädigte Rückgabe", it: "Reso danneggiato", nl: "Beschadigde retour", pl: "Uszkodzony zwrot", ru: "Возврат с браком", tr: "Hasarlı iade", ar: "مرتجع تالف", hi: "ख़राब वापसी", bn: "নষ্ট ফেরত", ur: "خراب واپسی", ta: "சேதமான திருப்பல்", te: "పాడైన వాపసు", th: "คืนแบบเสียหาย", zh: "损坏退货", ja: "破損返品", ko: "손상 반품", id: "Retur rusak", vi: "Hàng trả bị hỏng", tl: "Sirang ibinalik", sw: "Iliyorudishwa ikiwa imeharibika", ha: "Mayarwa mai lalacewa", yo: "Ìdápadà tó ti bàjẹ́", zu: "Okubuyiswe konakele", am: "የተበላሸ ተመላሽ", bm: "Seginnen tiɲɛnen", wo: "Delloo bu yàqu" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -11388,6 +11402,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const receiptItemExtra = (it) => {
     if (!it) return "";
     const parts = [];
+    if (it.returnOf) parts.push("↩️ " + tx(lang, "returnLineLabel"));
     if (it.tier === "semi" || it.tier === "bulk") parts.push(tx(lang, "tierName_" + it.tier));
     if (it.condition && it.condition !== "new") parts.push(tx(lang, "cond_" + it.condition));
     if (it.serial) parts.push(`${tx(lang, "serialShort")} ${it.serial}`);
@@ -16876,6 +16891,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const seen = new Set();
     // allSales (et non sales) : une vente annulée compte quand même dans la limite du jour.
     allSales.forEach((s) => {
+      if (s.returnOf) return;
       if (dayKeyOf(s.date) === key) seen.add(s.transactionId || s.id);
     });
     return seen.size;
@@ -16915,7 +16931,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // la monnaie à rendre, et le vendeur peut oublier de le saisir). On surligne le champ
     // en rouge et on y scrolle, comme pour les autres champs obligatoires de l'app —
     // sinon le vendeur ne voit pas pourquoi le bouton "ne répond pas" et continue d'appuyer.
-    if (cart.payment === "cash" && (cart.received === "" || cart.received == null || isNaN(parseFloat(cart.received)))) {
+    const cartTotalSigned = cart.items.reduce((sum, it) => sum + it.qty * it.unitPrice, 0);
+    if (cartTotalSigned < 0 && cart.payment === "credit") {
+      playSound("error"); triggerHaptic("error");
+      setError(tx(lang, "returnNoCredit"));
+      return;
+    }
+    if (cart.payment === "cash" && cartTotalSigned > 0 && (cart.received === "" || cart.received == null || isNaN(parseFloat(cart.received)))) {
       playSound("error"); triggerHaptic("error");
       setError(`${t(lang, "othIlManque")} : ${t(lang, "amountGiven")}`);
       setReceivedFieldError(true);
@@ -16962,6 +16984,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (!product) return {};
       const out = {};
       if (it.tier === "semi" || it.tier === "bulk") out.tier = it.tier;
+      if (it.mode === "return") { out.returnOf = it.returnOf; out.returnOfLine = it.returnOfLine; out.origMode = it.origMode || "pack"; if (it.noRestock) out.noRestock = true; }
       if (product.condition && product.condition !== "new") out.condition = product.condition;
       const sn = typeof it.serial === "string" ? it.serial.trim() : "";
       if (sn) out.serial = sn;
@@ -17016,7 +17039,30 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       updated.updatedAt = Date.now();
       return updated;
+    }).map((p) => {
+      // Articles rendus par le client : de retour en stock (sauf abîmés).
+      const back = cart.items.filter((i) => i.productId === p.id && i.mode === "return" && !i.noRestock);
+      if (!back.length) return p;
+      const updated = { ...p };
+      back.forEach((i) => {
+        const n = -(Number(i.qty) || 0);
+        if (i.origMode === "unit") {
+          const perPack = updated.unitsPerPack || 1;
+          const totalUnits = (updated.quantity || 0) * perPack + (updated.looseUnits || 0) + n;
+          updated.quantity = Math.floor(totalUnits / perPack);
+          updated.looseUnits = totalUnits - updated.quantity * perPack;
+        } else {
+          updated.quantity = (updated.quantity || 0) + n;
+        }
+      });
+      updated.updatedAt = Date.now();
+      return updated;
     });
+    // Article rendu abîmé : il ne revient pas en stock, c'est une perte chiffrée.
+    const damagedReturns = cart.items.filter((i) => i.mode === "return" && i.noRestock).map((i) => {
+      const prod = products.find((p) => p.id === i.productId);
+      return prod ? makeLossEntry(prod, -(Number(i.qty) || 0), "returnDamaged") : null;
+    }).filter(Boolean);
     let nextDebts = debts;
     // allDebtEvents (pas debtEvents, déjà filtré sans les événements annulés) : sinon toute
     // vente payée comptant effaçait définitivement les événements de dette annulés.
@@ -17095,6 +17141,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (want !== had) nextCustomerTariffs = { ...customerTariffs, [custKey]: { t: want, at: Date.now() } };
     }
     saveAll({
+      ...(damagedReturns.length ? { unsoldLog: [...unsoldLog, ...damagedReturns] } : {}),
       customerTariffs: nextCustomerTariffs,
       products: nextProducts,
       sales: [...allSales, ...newSales],
@@ -17123,6 +17170,48 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // tout est noté dans l'Historique permanent.
   const [cancelSaleConfirmId, setCancelSaleConfirmId] = useState(null);
   const [cancelSaleError, setCancelSaleError] = useState("");
+  // ---- Retours et échanges ----
+  // Un retour = une ligne en quantité négative (mode "return") dans un panier. On peut y
+  // ajouter d'autres articles : c'est un échange, et le client paie seulement la
+  // différence (ou on lui rend la différence si le total est négatif). Tout le reste
+  // (caisse, stock, statistiques, reçu) suit naturellement, comme pour une vente.
+  // L'article revient en stock, sauf s'il est abîmé : il part alors dans les pertes.
+  const canDoReturns = !activeEmployee || hasPermission("editPrice");
+  const [returnTx, setReturnTx] = useState(null);
+  const [returnQty, setReturnQty] = useState({});
+  const [returnRestock, setReturnRestock] = useState(true);
+  const returnedQtyOfLine = (lineId) => allSales.reduce((s, x) => s + (!x.cancelled && x.returnOfLine === lineId ? -(Number(x.qty) || 0) : 0), 0);
+  const returnableLines = (txId) => allSales.filter((x) => (x.transactionId || x.id) === txId && !x.cancelled && !x.returnOf && x.productId != null && !x.misc && Number(x.qty) > 0)
+    .map((x) => ({ line: x, max: Math.max(0, Math.round((Number(x.qty) - returnedQtyOfLine(x.id)) * 1000) / 1000) }));
+  const openReturn = (txId) => { setReturnTx(txId); setReturnQty({}); setReturnRestock(true); };
+  const confirmReturn = () => {
+    const rows = returnableLines(returnTx).filter((r) => (Number(returnQty[r.line.id]) || 0) > 0);
+    if (!rows.length) return;
+    const first = rows[0].line;
+    const items = rows.map((r) => {
+      const n = Math.min(r.max, Number(returnQty[r.line.id]) || 0);
+      return {
+        id: Date.now().toString() + Math.random().toString(36).slice(2, 6),
+        productId: r.line.productId,
+        productName: r.line.productName,
+        unitPrice: Number(r.line.unitPrice) || 0,
+        qty: -n,
+        mode: "return",
+        origMode: r.line.mode === "unit" ? "unit" : "pack",
+        returnOf: returnTx,
+        returnOfLine: r.line.id,
+        manualPrice: true,
+        ...(returnRestock ? {} : { noRestock: true }),
+        ...(r.line.measureUnit ? { measureUnit: r.line.measureUnit } : {}),
+      };
+    });
+    const prefillDial = ownDialCode ? ownDialCode + " " : "";
+    const cust = (first.customer || "").trim();
+    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `↩️ ${tx(lang, "returnCartLabel")}${cust ? " " + cust : ""}`, items, payment: first.payment === "mobile" ? "mobile" : "cash", customer: cust, phone: prefillDial, received: "", createdAt: Date.now() };
+    saveAll({ draftCarts: [...draftCarts, newCart], activeCartId: newCart.id });
+    setReturnTx(null);
+    setTab("sale");
+  };
   const cancelSale = (txnId) => {
     const lines = sales.filter((x) => (x.transactionId || x.id) === txnId);
     if (lines.length === 0) { setCancelSaleConfirmId(null); return; }
@@ -17153,14 +17242,20 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (mine.length === 0) return p;
       let packsBack = 0;
       let unitsBack = 0;
-      mine.forEach((x) => { if (x.mode === "unit") unitsBack += x.qty; else packsBack += x.qty; });
+      mine.forEach((x) => {
+        // Ligne de retour (quantité négative) : annuler la vente ressort l'article du stock,
+        // sauf s'il n'y était pas revenu (abîmé).
+        if (x.mode === "return" && x.noRestock) return;
+        const m = x.mode === "return" ? (x.origMode || "pack") : x.mode;
+        if (m === "unit") unitsBack += x.qty; else packsBack += x.qty;
+      });
       const updated = { ...p };
-      if (packsBack) updated.quantity = (updated.quantity || 0) + packsBack;
+      if (packsBack) updated.quantity = Math.max(0, (updated.quantity || 0) + packsBack);
       if (unitsBack) {
         const perPack = updated.unitsPerPack || 1;
-        const loose = (updated.looseUnits || 0) + unitsBack;
-        updated.quantity = (updated.quantity || 0) + Math.floor(loose / perPack);
-        updated.looseUnits = loose % perPack;
+        const totalUnits = Math.max(0, (updated.quantity || 0) * perPack + (updated.looseUnits || 0) + unitsBack);
+        updated.quantity = Math.floor(totalUnits / perPack);
+        updated.looseUnits = totalUnits - updated.quantity * perPack;
       }
       updated.updatedAt = Date.now();
       return updated;
@@ -20959,6 +21054,45 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {returnTx && (() => {
+          const rows = returnableLines(returnTx);
+          const totalBack = rows.reduce((s, r) => s + Math.min(r.max, Number(returnQty[r.line.id]) || 0) * (Number(r.line.unitPrice) || 0), 0);
+          const any = rows.some((r) => (Number(returnQty[r.line.id]) || 0) > 0);
+          return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setReturnTx(null)}>
+              <div data-kbscroll="true" onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "88vh" }}>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-bold text-sm">↩️ {tx(lang, "returnTitle")}</h3>
+                  <button onClick={() => setReturnTx(null)}><X size={18} /></button>
+                </div>
+                <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "returnHint")}</p>
+                <div className="flex flex-col gap-1.5 mb-3">
+                  {rows.map((r) => {
+                    const v = Number(returnQty[r.line.id]) || 0;
+                    const step = r.line.measureUnit ? 0.5 : 1;
+                    return (
+                      <div key={r.line.id} className="flex items-center gap-2 rounded-lg px-2.5 py-2" style={{ background: T.input, opacity: r.max > 0 ? 1 : 0.45 }}>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[12px] font-semibold truncate">{r.line.productName}</p>
+                          <p className="text-[10px]" style={{ color: T.muted }}>{fcfa(r.line.unitPrice)} · {r.max > 0 ? tx(lang, "returnMaxQty").replace("{n}", localizedQty(r.max)) : tx(lang, "returnAllDone")}</p>
+                        </div>
+                        <button type="button" disabled={v <= 0} onClick={() => setReturnQty({ ...returnQty, [r.line.id]: Math.max(0, Math.round((v - step) * 1000) / 1000) })} className="w-8 h-8 rounded-full flex items-center justify-center disabled:opacity-30" style={{ background: T.card }}><Minus size={14} /></button>
+                        <span className="w-7 text-center text-sm font-bold">{localizedQty(v)}</span>
+                        <button type="button" disabled={v >= r.max} onClick={() => setReturnQty({ ...returnQty, [r.line.id]: Math.min(r.max, Math.round((v + step) * 1000) / 1000) })} className="w-8 h-8 rounded-full flex items-center justify-center disabled:opacity-30" style={{ background: INDIGO, color: "white" }}><Plus size={14} /></button>
+                      </div>
+                    );
+                  })}
+                </div>
+                <label className="flex items-start gap-2 mb-3 text-[12px] font-semibold cursor-pointer">
+                  <input type="checkbox" checked={returnRestock} onChange={(e) => setReturnRestock(e.target.checked)} className="mt-0.5" />
+                  <span>{tx(lang, "returnRestockLabel")}<span className="block text-[10px] font-normal" style={{ color: T.muted }}>{tx(lang, "returnRestockHint")}</span></span>
+                </label>
+                {any && <p className="text-xs mb-3 text-center" style={{ color: T.muted }}>{tx(lang, "returnValue")} <b style={{ color: T.text }}>{fcfa(totalBack)}</b></p>}
+                <button onClick={confirmReturn} disabled={!any} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO, opacity: any ? 1 : 0.4 }}>{tx(lang, "returnContinue")}</button>
+              </div>
+            </div>
+          );
+        })()}
         {cartDetailsId && (
           <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setCartDetailsId(null)}>
             <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5" style={{ background: T.card, color: T.text }}>
@@ -22397,16 +22531,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           return (
                           <div key={it.id}>
                           <div className="flex items-center justify-between gap-2 text-xs">
-                            <span style={{ color: T.text }}>{it.misc ? "🏷️ " : ""}{it.productName} x{localizedQty(it.qty)}{it.measureUnit ? ` ${it.measureUnit}` : ""} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}{(it.tier === "semi" || it.tier === "bulk") && <span className="ml-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold whitespace-nowrap" style={{ background: darkMode ? "rgba(22,163,74,0.2)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>{tx(lang, "tierName_" + it.tier)}</span>}</span>
+                            <span style={{ color: it.mode === "return" ? (darkMode ? "#fda4af" : "#be123c") : T.text }}>{it.misc ? "🏷️ " : ""}{it.mode === "return" ? `↩️ ${tx(lang, "returnLineLabel")}${it.noRestock ? " (" + tx(lang, "removeReason_returnDamaged") + ")" : ""} · ` : ""}{it.productName} x{localizedQty(it.qty)}{it.measureUnit ? ` ${it.measureUnit}` : ""} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}{(it.tier === "semi" || it.tier === "bulk") && <span className="ml-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold whitespace-nowrap" style={{ background: darkMode ? "rgba(22,163,74,0.2)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>{tx(lang, "tierName_" + it.tier)}</span>}</span>
                             <span className="flex items-center gap-1.5 shrink-0">
                               {negotiated && <span className="line-through text-[10px]" style={{ color: T.muted }}>{fcfa(it.qty * it.listPrice)}</span>}
                               <span className="font-bold" style={{ color: negotiated ? (darkMode ? "#f0c869" : "#b45309") : T.text }}>{fcfa(it.qty * it.unitPrice)}</span>
-                              {canEditPrice && !editing && (
+                              {canEditPrice && !editing && it.mode !== "return" && (
                                 <button type="button" aria-label={tx(lang, "priceEditLabel")} onClick={() => openPriceEdit(it)} className="w-6 h-6 rounded-full flex items-center justify-center active:scale-90" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "white", color: darkMode ? "#7fb2ff" : "#2563eb" }}>
                                   <Edit3 size={11} />
                                 </button>
                               )}
-                              {it.misc && (
+                              {(it.misc || it.mode === "return") && (
                                 <button type="button" aria-label={t(lang, "cancel")} onClick={() => removeCartLine(activeCart.id, it.id)} className="w-6 h-6 rounded-full flex items-center justify-center active:scale-90" style={{ background: darkMode ? "rgba(255,255,255,0.08)" : "white", color: "#e11d48" }}>
                                   <X size={11} />
                                 </button>
@@ -22632,7 +22766,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         </div>
                       );
                     })()}
-                    {activeCart.payment === "cash" && (
+                    {cartTotal < 0 && (
+                      <div className="rounded-xl p-3 text-center" style={{ background: darkMode ? "rgba(225,29,72,0.12)" : "#fff1f2" }}>
+                        <p className="text-xs font-semibold" style={{ color: T.muted }}>↩️ {tx(lang, "returnGiveBack")}</p>
+                        <p className="text-xl font-extrabold" style={{ color: darkMode ? "#fda4af" : "#be123c" }}>{fcfa(-cartTotal)}</p>
+                      </div>
+                    )}
+                    {activeCart.payment === "cash" && cartTotal >= 0 && (
                       <div className="rounded-xl p-3" style={{ background: T.input }}>
                         <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
                         <input autoComplete="off" ref={receivedInputRef} required type="number" value={activeCart.received} onChange={(e) => { updateCartMeta(activeCart.id, "received", e.target.value); if (error) setError(""); if (receivedFieldError) setReceivedFieldError(false); }} className="w-full border-2 rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a", borderColor: receivedFieldError ? "#e11d48" : "transparent" }} />
@@ -22708,6 +22848,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <button onClick={() => { setCancelSaleConfirmId(txn.id); setCancelSaleError(""); }} className="mt-2 text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: cancelColor, borderColor: cancelColor }}>
                             <X size={12} /> {tx(lang, "cancelSaleBtn")}
                           </button>
+                        )}
+                        {!confirming && canDoReturns && returnableLines(txn.id).some((r) => r.max > 0) && (
+                          <div className="mt-2"><button onClick={() => openReturn(txn.id)} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", borderColor: darkMode ? "rgba(127,178,255,0.4)" : "#bfdbfe" }}>↩️ {tx(lang, "returnBtn")}</button></div>
                         )}
                         {confirming && (
                           <div className="mt-2 rounded-xl p-2.5" style={{ background: T.input }}>
@@ -24045,6 +24188,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     const confirming = cancelSaleConfirmId === h.refId;
                     return (
                       <div className="mt-2">
+                        {!confirming && canDoReturns && returnableLines(h.refId).some((r) => r.max > 0) && (
+                          <div className="mb-2"><button onClick={() => openReturn(h.refId)} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", borderColor: darkMode ? "rgba(127,178,255,0.4)" : "#bfdbfe" }}>↩️ {tx(lang, "returnBtn")}</button></div>
+                        )}
                         {!confirming ? (
                           <button onClick={() => { setCancelSaleConfirmId(h.refId); setCancelSaleError(""); }} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: cancelColor, borderColor: cancelColor }}>
                             <X size={12} /> {tx(lang, "cancelSaleBtn")}
