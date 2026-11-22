@@ -6380,6 +6380,34 @@ EXTRA_UI.lotExpires = { fr: "Périme le {date}", en: "Expires {date}", es: "Cadu
 EXTRA_UI.lotInStock = { fr: "Reste en stock", en: "Left in stock", es: "Queda en stock", pt: "Resta em estoque", de: "Noch auf Lager", it: "Rimane in magazzino", nl: "Nog op voorraad", pl: "Zostało w magazynie", ru: "Осталось на складе", tr: "Stokta kalan", ar: "المتبقي في المخزون", hi: "स्टॉक में बचा", bn: "স্টকে বাকি", ur: "اسٹاک میں باقی", ta: "கையிருப்பில் மீதம்", te: "స్టాక్‌లో మిగిలినవి", th: "คงเหลือในสต็อก", zh: "库存剩余", ja: "在庫残り", ko: "남은 재고", id: "Sisa stok", vi: "Còn trong kho", tl: "Natitira sa stock", sw: "Zilizobaki stoo", ha: "Saura a kaya", yo: "Èyí tó kù nínú ọjà", zu: "Okusele esitokweni", am: "በክምችት የቀረ", bm: "Min tora maraka la", wo: "Li des ci stock" };
 EXTRA_UI.lotSoldTo = { fr: "Ventes de ce lot", en: "Sales from this batch", es: "Ventas de este lote", pt: "Vendas deste lote", de: "Verkäufe dieser Charge", it: "Vendite di questo lotto", nl: "Verkopen van deze partij", pl: "Sprzedaż z tej partii", ru: "Продажи этой партии", tr: "Bu partiden satışlar", ar: "مبيعات هذه الدفعة", hi: "इस बैच की बिक्री", bn: "এই ব্যাচের বিক্রি", ur: "اس بیچ کی فروخت", ta: "இந்த தொகுதியின் விற்பனைகள்", te: "ఈ బ్యాచ్ అమ్మకాలు", th: "การขายจากล็อตนี้", zh: "该批次的销售", ja: "このロットの販売", ko: "이 로트의 판매", id: "Penjualan batch ini", vi: "Các lần bán lô này", tl: "Mga benta mula sa batch na ito", sw: "Mauzo ya kundi hili", ha: "Sayar da wannan rukuni", yo: "Títà láti inú àkójọ yìí", zu: "Okuthengisiwe kuleli qoqo", am: "የዚህ ባች ሽያጮች", bm: "Nin lɔti feereliw", wo: "Jaay yu lot bii" };
 EXTRA_UI.lotNoSales = { fr: "Aucune vente de ce lot pour l'instant.", en: "No sales from this batch yet.", es: "Aún no hay ventas de este lote.", pt: "Ainda não há vendas deste lote.", de: "Noch keine Verkäufe dieser Charge.", it: "Nessuna vendita di questo lotto per ora.", nl: "Nog geen verkopen van deze partij.", pl: "Brak sprzedaży z tej partii.", ru: "Продаж этой партии пока нет.", tr: "Bu partiden henüz satış yok.", ar: "لا توجد مبيعات من هذه الدفعة بعد.", hi: "इस बैच की अभी कोई बिक्री नहीं।", bn: "এই ব্যাচের এখনও কোনো বিক্রি নেই।", ur: "اس بیچ کی ابھی کوئی فروخت نہیں۔", ta: "இந்த தொகுதியில் இன்னும் விற்பனை இல்லை.", te: "ఈ బ్యాచ్ నుండి ఇంకా అమ్మకాలు లేవు.", th: "ยังไม่มีการขายจากล็อตนี้", zh: "该批次暂无销售。", ja: "このロットの販売はまだありません。", ko: "이 로트의 판매가 아직 없습니다.", id: "Belum ada penjualan dari batch ini.", vi: "Chưa có lần bán nào từ lô này.", tl: "Wala pang benta mula sa batch na ito.", sw: "Bado hakuna mauzo ya kundi hili.", ha: "Babu sayarwa daga wannan rukuni tukuna.", yo: "Kò sí títà láti inú àkójọ yìí síbẹ̀.", zu: "Akukakabi khona okuthengisiwe kuleli qoqo.", am: "ከዚህ ባች እስካሁን ሽያጭ የለም።", bm: "Nin lɔti ma feere fɔlɔ.", wo: "Amul jaay ci lot bii ba tey." };
+EXTRA_UI.invBtn = { fr: "Faire l'inventaire", en: "Take stock count", es: "Hacer inventario", pt: "Fazer inventário", de: "Inventur machen", it: "Fare l'inventario", nl: "Inventaris opmaken", pl: "Zrób inwentaryzację", ru: "Провести инвентаризацию", tr: "Sayım yap", ar: "إجراء الجرد", hi: "स्टॉक की गिनती करें", bn: "স্টক গণনা করুন", ur: "اسٹاک کی گنتی کریں", ta: "கையிருப்பு எண்ணிக்கை", te: "స్టాక్ లెక్కింపు చేయండి", th: "ตรวจนับสต็อก", zh: "盘点库存", ja: "棚卸しをする", ko: "재고 실사하기", id: "Hitung stok", vi: "Kiểm kê kho", tl: "Bilangin ang stock", sw: "Hesabu bidhaa", ha: "Ƙidaya kaya", yo: "Ka ọjà", zu: "Bala isitoko", am: "ክምችት ቆጠራ", bm: "Maraka fɛnw jate", wo: "Lim marsandiz yi" };
+EXTRA_UI.invResumeBtn = { fr: "Inventaire en cours · {n}/{p} comptés", en: "Count in progress · {n}/{p} counted", es: "Inventario en curso · {n}/{p} contados", pt: "Inventário em curso · {n}/{p} contados", de: "Inventur läuft · {n}/{p} gezählt", it: "Inventario in corso · {n}/{p} contati", nl: "Inventaris bezig · {n}/{p} geteld", pl: "Inwentaryzacja trwa · {n}/{p} policzone", ru: "Инвентаризация идёт · {n}/{p} посчитано", tr: "Sayım sürüyor · {n}/{p} sayıldı", ar: "الجرد جارٍ · {n}/{p} تم عدّها", hi: "गिनती जारी · {n}/{p} गिने गए", bn: "গণনা চলছে · {n}/{p} গোনা হয়েছে", ur: "گنتی جاری · {n}/{p} گنے گئے", ta: "எண்ணிக்கை நடக்கிறது · {n}/{p} எண்ணப்பட்டது", te: "లెక్కింపు జరుగుతోంది · {n}/{p} లెక్కించారు", th: "กำลังตรวจนับ · นับแล้ว {n}/{p}", zh: "盘点进行中 · 已点 {n}/{p}", ja: "棚卸し中 · {n}/{p} 件済み", ko: "실사 진행 중 · {n}/{p} 완료", id: "Penghitungan berjalan · {n}/{p} dihitung", vi: "Đang kiểm kê · đã đếm {n}/{p}", tl: "Kasalukuyang bilang · {n}/{p} nabilang", sw: "Hesabu inaendelea · {n}/{p} zimehesabiwa", ha: "Ana ƙidaya · an ƙidaya {n}/{p}", yo: "Kíka ń lọ · {n}/{p} ti kà", zu: "Ukubala kuyaqhubeka · {n}/{p} kubaliwe", am: "ቆጠራ በሂደት ላይ · {n}/{p} ተቆጥሯል", bm: "Jateli bɛ taa · {n}/{p} jatera", wo: "Lim bi mungi dox · {n}/{p} lim nañu" };
+EXTRA_UI.invTitle = { fr: "Inventaire", en: "Stock count", es: "Inventario", pt: "Inventário", de: "Inventur", it: "Inventario", nl: "Inventaris", pl: "Inwentaryzacja", ru: "Инвентаризация", tr: "Stok sayımı", ar: "الجرد", hi: "स्टॉक गिनती", bn: "স্টক গণনা", ur: "اسٹاک کی گنتی", ta: "கையிருப்பு எண்ணிக்கை", te: "స్టాక్ లెక్కింపు", th: "ตรวจนับสต็อก", zh: "库存盘点", ja: "棚卸し", ko: "재고 실사", id: "Penghitungan stok", vi: "Kiểm kê", tl: "Bilang ng stock", sw: "Hesabu ya bidhaa", ha: "Ƙidayar kaya", yo: "Kíka ọjà", zu: "Ukubalwa kwesitoko", am: "የክምችት ቆጠራ", bm: "Maraka jateli", wo: "Limu marsandiz" };
+EXTRA_UI.invIntro = { fr: "Comptez ce qu'il y a vraiment sur vos étagères. À la fin, l'app montre les écarts et corrige le stock. Vous pouvez vous arrêter et reprendre plus tard, ou compter à plusieurs.", en: "Count what is really on your shelves. At the end, the app shows the differences and corrects the stock. You can stop and resume later, or count with others.", es: "Cuente lo que realmente hay en sus estanterías. Al final, la app muestra las diferencias y corrige el stock. Puede parar y seguir más tarde, o contar entre varios.", pt: "Conte o que há realmente nas prateleiras. No fim, a app mostra as diferenças e corrige o estoque. Pode parar e continuar depois, ou contar em equipe.", de: "Zählen Sie, was wirklich in Ihren Regalen ist. Am Ende zeigt die App die Abweichungen und korrigiert den Bestand. Sie können pausieren und später weitermachen oder zu mehreren zählen.", it: "Contate ciò che c'è davvero sugli scaffali. Alla fine l'app mostra le differenze e corregge lo stock. Potete fermarvi e riprendere più tardi, o contare in più persone.", nl: "Tel wat er echt in uw schappen ligt. Aan het eind toont de app de verschillen en corrigeert de voorraad. U kunt stoppen en later verdergaan, of met meerdere tellen.", pl: "Policz, co naprawdę jest na półkach. Na końcu aplikacja pokaże różnice i poprawi stan. Możesz przerwać i wrócić później albo liczyć w kilka osób.", ru: "Посчитайте, что на самом деле лежит на полках. В конце приложение покажет расхождения и исправит остатки. Можно прерваться и продолжить позже или считать вместе.", tr: "Raflarda gerçekte ne olduğunu sayın. Sonunda uygulama farkları gösterir ve stoğu düzeltir. Durup sonra devam edebilir ya da birlikte sayabilirsiniz.", ar: "عُدّ ما هو موجود فعلًا على الرفوف. في النهاية يعرض التطبيق الفروق ويصحّح المخزون. يمكنك التوقف والمتابعة لاحقًا، أو العدّ مع آخرين.", hi: "अपनी अलमारियों में जो सच में है उसे गिनें। अंत में ऐप अंतर दिखाकर स्टॉक ठीक कर देगा। आप रुककर बाद में जारी रख सकते हैं, या कई लोग मिलकर गिन सकते हैं।", bn: "তাকে আসলে যা আছে তা গুনুন। শেষে অ্যাপ পার্থক্য দেখিয়ে স্টক ঠিক করবে। থেমে পরে আবার শুরু করতে পারেন, বা কয়েকজন মিলে গুনতে পারেন।", ur: "اپنی الماریوں میں جو واقعی ہے وہ گنیں۔ آخر میں ایپ فرق دکھا کر اسٹاک درست کر دے گی۔ آپ رک کر بعد میں جاری رکھ سکتے ہیں، یا کئی لوگ مل کر گن سکتے ہیں۔", ta: "அலமாரிகளில் உண்மையில் உள்ளதை எண்ணுங்கள். முடிவில் வேறுபாடுகளைக் காட்டி செயலி கையிருப்பைத் திருத்தும். நிறுத்தி பின்னர் தொடரலாம், அல்லது பலர் சேர்ந்து எண்ணலாம்.", te: "అల్మారాల్లో నిజంగా ఉన్నది లెక్కించండి. చివర్లో యాప్ తేడాలు చూపించి స్టాక్ సరిచేస్తుంది. ఆపి తర్వాత కొనసాగించవచ్చు, లేదా పలువురు కలిసి లెక్కించవచ్చు.", th: "นับของที่มีอยู่จริงบนชั้น เมื่อเสร็จ แอปจะแสดงส่วนต่างและแก้ไขสต็อกให้ หยุดแล้วทำต่อภายหลังได้ หรือนับหลายคนพร้อมกันก็ได้", zh: "清点货架上的实际数量。结束时，应用会显示差异并修正库存。您可以中途暂停、稍后继续，也可以多人一起盘点。", ja: "棚に実際にある数を数えます。最後にアプリが差異を表示し、在庫を修正します。途中で止めて後で再開したり、複数人で数えたりできます。", ko: "선반에 실제로 있는 수량을 세세요. 마지막에 앱이 차이를 보여 주고 재고를 바로잡습니다. 중간에 멈췄다가 나중에 이어서 하거나 여럿이 함께 셀 수 있습니다.", id: "Hitung apa yang benar-benar ada di rak. Di akhir, aplikasi menunjukkan selisih dan memperbaiki stok. Anda bisa berhenti dan lanjut nanti, atau menghitung bersama.", vi: "Đếm số hàng thực sự có trên kệ. Cuối cùng, ứng dụng hiển thị chênh lệch và sửa tồn kho. Bạn có thể dừng rồi tiếp tục sau, hoặc đếm cùng nhiều người.", tl: "Bilangin ang talagang nasa mga estante. Sa dulo, ipapakita ng app ang mga pagkakaiba at itatama ang stock. Puwede kang huminto at ituloy mamaya, o magbilang nang magkakasama.", sw: "Hesabu kilichopo kweli kwenye rafu. Mwishoni, programu inaonyesha tofauti na kurekebisha stoo. Unaweza kusimama na kuendelea baadaye, au kuhesabu na wengine.", ha: "Ƙidaya abin da ke kan shelf da gaske. A ƙarshe, manhajar za ta nuna bambance-bambance ta gyara kaya. Za ka iya tsayawa ka ci gaba daga baya, ko ku ƙidaya tare.", yo: "Ka ohun tó wà lórí pẹpẹ rẹ gan-an. Ní ìparí, áàpù yóò fi ìyàtọ̀ hàn yóò sì tún ọjà ṣe. O lè dúró kí o tẹ̀síwájú lẹ́yìn náà, tàbí kí ẹ ka papọ̀.", zu: "Bala okukhona ngempela emashalofini. Ekugcineni, uhlelo lukhombisa umehluko bese lulungisa isitoko. Ungama uqhubeke kamuva, noma nibale ndawonye.", am: "በመደርደሪያዎ ላይ በእውነት ያለውን ይቁጠሩ። በመጨረሻ መተግበሪያው ልዩነቶቹን አሳይቶ ክምችቱን ያስተካክላል። ቆም ብለው በኋላ መቀጠል ወይም በጋራ መቁጠር ይችላሉ።", bm: "Fɛn minnu bɛ i ka tabaliw kan tiɲɛ na, olu jate. A laban na, appli bɛ danfaraw jira ani ka maraka latilen. I bɛ se ka jɔ ka segin a kan kɔfɛ, walima ka jate ni mɔgɔ wɛrɛw ye.", wo: "Lim li nekk ci say étagère dëgg. Ci mujj gi, app bi dina won wuute yi te defar stock bi. Mën ngaa taxaw te delsi ci kanam, walla lim ak yeneen." };
+EXTRA_UI.invStart = { fr: "Commencer l'inventaire", en: "Start the count", es: "Empezar el inventario", pt: "Começar o inventário", de: "Inventur starten", it: "Inizia l'inventario", nl: "Inventaris starten", pl: "Rozpocznij inwentaryzację", ru: "Начать инвентаризацию", tr: "Sayıma başla", ar: "بدء الجرد", hi: "गिनती शुरू करें", bn: "গণনা শুরু করুন", ur: "گنتی شروع کریں", ta: "எண்ணிக்கையைத் தொடங்கு", te: "లెక్కింపు ప్రారంభించండి", th: "เริ่มตรวจนับ", zh: "开始盘点", ja: "棚卸しを開始", ko: "실사 시작", id: "Mulai penghitungan", vi: "Bắt đầu kiểm kê", tl: "Simulan ang bilang", sw: "Anza kuhesabu", ha: "Fara ƙidaya", yo: "Bẹ̀rẹ̀ kíka", zu: "Qala ukubala", am: "ቆጠራ ጀምር", bm: "Jateli daminɛ", wo: "Tàmbali lim bi" };
+EXTRA_UI.invProgress = { fr: "{n} / {p} comptés", en: "{n} / {p} counted", es: "{n} / {p} contados", pt: "{n} / {p} contados", de: "{n} / {p} gezählt", it: "{n} / {p} contati", nl: "{n} / {p} geteld", pl: "{n} / {p} policzone", ru: "{n} / {p} посчитано", tr: "{n} / {p} sayıldı", ar: "{n} / {p} تم عدّها", hi: "{n} / {p} गिने गए", bn: "{n} / {p} গোনা হয়েছে", ur: "{n} / {p} گنے گئے", ta: "{n} / {p} எண்ணப்பட்டது", te: "{n} / {p} లెక్కించారు", th: "นับแล้ว {n} / {p}", zh: "已点 {n} / {p}", ja: "{n} / {p} 件済み", ko: "{n} / {p} 완료", id: "{n} / {p} dihitung", vi: "Đã đếm {n} / {p}", tl: "{n} / {p} nabilang", sw: "{n} / {p} zimehesabiwa", ha: "An ƙidaya {n} / {p}", yo: "{n} / {p} ti kà", zu: "{n} / {p} kubaliwe", am: "{n} / {p} ተቆጥሯል", bm: "{n} / {p} jatera", wo: "{n} / {p} lim nañu" };
+EXTRA_UI.invTabTodo = { fr: "À compter", en: "To count", es: "Por contar", pt: "A contar", de: "Zu zählen", it: "Da contare", nl: "Te tellen", pl: "Do policzenia", ru: "Посчитать", tr: "Sayılacak", ar: "للعدّ", hi: "गिनना बाकी", bn: "গোনা বাকি", ur: "گننا باقی", ta: "எண்ண வேண்டியவை", te: "లెక్కించాల్సినవి", th: "ยังไม่นับ", zh: "待点", ja: "未カウント", ko: "셀 항목", id: "Belum dihitung", vi: "Chưa đếm", tl: "Bibilangin", sw: "Za kuhesabu", ha: "Na ƙidaya", yo: "Láti kà", zu: "Okuzobalwa", am: "የሚቆጠሩ", bm: "Ka jate", wo: "Ñu war a lim" };
+EXTRA_UI.invTabDone = { fr: "Comptés", en: "Counted", es: "Contados", pt: "Contados", de: "Gezählt", it: "Contati", nl: "Geteld", pl: "Policzone", ru: "Посчитано", tr: "Sayıldı", ar: "تم عدّها", hi: "गिने गए", bn: "গোনা হয়েছে", ur: "گنے گئے", ta: "எண்ணப்பட்டவை", te: "లెక్కించినవి", th: "นับแล้ว", zh: "已点", ja: "カウント済み", ko: "센 항목", id: "Sudah dihitung", vi: "Đã đếm", tl: "Nabilang", sw: "Zimehesabiwa", ha: "An ƙidaya", yo: "Ti kà", zu: "Kubaliwe", am: "የተቆጠሩ", bm: "Jatera", wo: "Lim nañu" };
+EXTRA_UI.invTabDiff = { fr: "Écarts", en: "Differences", es: "Diferencias", pt: "Diferenças", de: "Abweichungen", it: "Differenze", nl: "Verschillen", pl: "Różnice", ru: "Расхождения", tr: "Farklar", ar: "الفروق", hi: "अंतर", bn: "পার্থক্য", ur: "فرق", ta: "வேறுபாடுகள்", te: "తేడాలు", th: "ส่วนต่าง", zh: "差异", ja: "差異", ko: "차이", id: "Selisih", vi: "Chênh lệch", tl: "Mga pagkakaiba", sw: "Tofauti", ha: "Bambance-bambance", yo: "Ìyàtọ̀", zu: "Umehluko", am: "ልዩነቶች", bm: "Danfaraw", wo: "Wuute yi" };
+EXTRA_UI.invAppSays = { fr: "L'app : {n}", en: "App: {n}", es: "App: {n}", pt: "App: {n}", de: "App: {n}", it: "App: {n}", nl: "App: {n}", pl: "Aplikacja: {n}", ru: "В приложении: {n}", tr: "Uygulama: {n}", ar: "التطبيق: {n}", hi: "ऐप: {n}", bn: "অ্যাপ: {n}", ur: "ایپ: {n}", ta: "செயலி: {n}", te: "యాప్: {n}", th: "ในแอป: {n}", zh: "系统：{n}", ja: "アプリ：{n}", ko: "앱: {n}", id: "Aplikasi: {n}", vi: "Ứng dụng: {n}", tl: "App: {n}", sw: "Programu: {n}", ha: "Manhaja: {n}", yo: "Áàpù: {n}", zu: "Uhlelo: {n}", am: "መተግበሪያ፦ {n}", bm: "Appli: {n}", wo: "App bi: {n}" };
+EXTRA_UI.invSame = { fr: "Juste", en: "Correct", es: "Correcto", pt: "Certo", de: "Stimmt", it: "Giusto", nl: "Klopt", pl: "Zgadza się", ru: "Верно", tr: "Doğru", ar: "صحيح", hi: "सही", bn: "ঠিক", ur: "درست", ta: "சரி", te: "సరైనది", th: "ตรง", zh: "一致", ja: "一致", ko: "맞음", id: "Pas", vi: "Đúng", tl: "Tama", sw: "Sahihi", ha: "Daidai", yo: "Ó tọ̀nà", zu: "Kulungile", am: "ትክክል", bm: "A bɛnnin", wo: "Dëgg la" };
+EXTRA_UI.invAllCategories = { fr: "Tous les rayons", en: "All sections", es: "Todas las secciones", pt: "Todas as secções", de: "Alle Bereiche", it: "Tutti i reparti", nl: "Alle afdelingen", pl: "Wszystkie działy", ru: "Все отделы", tr: "Tüm reyonlar", ar: "كل الأقسام", hi: "सभी खंड", bn: "সব বিভাগ", ur: "تمام حصے", ta: "அனைத்து பிரிவுகளும்", te: "అన్ని విభాగాలు", th: "ทุกหมวด", zh: "所有区域", ja: "すべての売り場", ko: "모든 구역", id: "Semua rak", vi: "Tất cả các khu", tl: "Lahat ng seksyon", sw: "Sehemu zote", ha: "Duk sassa", yo: "Gbogbo ẹ̀ka", zu: "Zonke izigaba", am: "ሁሉም ክፍሎች", bm: "Yɔrɔw bɛɛ", wo: "Rayon yépp" };
+EXTRA_UI.invReviewBtn = { fr: "Voir les écarts et valider", en: "See differences and confirm", es: "Ver diferencias y validar", pt: "Ver diferenças e validar", de: "Abweichungen ansehen und bestätigen", it: "Vedi differenze e conferma", nl: "Verschillen bekijken en bevestigen", pl: "Zobacz różnice i zatwierdź", ru: "Посмотреть расхождения и подтвердить", tr: "Farkları gör ve onayla", ar: "عرض الفروق والتأكيد", hi: "अंतर देखें और पुष्टि करें", bn: "পার্থক্য দেখুন ও নিশ্চিত করুন", ur: "فرق دیکھیں اور تصدیق کریں", ta: "வேறுபாடுகளைப் பார்த்து உறுதிசெய்", te: "తేడాలు చూసి నిర్ధారించండి", th: "ดูส่วนต่างและยืนยัน", zh: "查看差异并确认", ja: "差異を確認して確定", ko: "차이 보고 확정", id: "Lihat selisih dan konfirmasi", vi: "Xem chênh lệch và xác nhận", tl: "Tingnan ang pagkakaiba at kumpirmahin", sw: "Ona tofauti na thibitisha", ha: "Duba bambance-bambance ka tabbatar", yo: "Wo ìyàtọ̀ kí o fọwọ́ sí i", zu: "Bona umehluko bese uqinisekisa", am: "ልዩነቶችን ይመልከቱ እና ያረጋግጡ", bm: "Danfaraw lajɛ ka u sɛmɛntiya", wo: "Xool wuute yi te dëggal" };
+EXTRA_UI.invReviewTitle = { fr: "Écarts de l'inventaire", en: "Count differences", es: "Diferencias del inventario", pt: "Diferenças do inventário", de: "Inventurabweichungen", it: "Differenze dell'inventario", nl: "Verschillen in de inventaris", pl: "Różnice inwentaryzacji", ru: "Расхождения инвентаризации", tr: "Sayım farkları", ar: "فروق الجرد", hi: "गिनती के अंतर", bn: "গণনার পার্থক্য", ur: "گنتی کے فرق", ta: "எண்ணிக்கை வேறுபாடுகள்", te: "లెక్కింపు తేడాలు", th: "ส่วนต่างจากการตรวจนับ", zh: "盘点差异", ja: "棚卸しの差異", ko: "실사 차이", id: "Selisih penghitungan", vi: "Chênh lệch kiểm kê", tl: "Mga pagkakaiba sa bilang", sw: "Tofauti za hesabu", ha: "Bambance-bambancen ƙidaya", yo: "Ìyàtọ̀ kíka", zu: "Umehluko wokubala", am: "የቆጠራ ልዩነቶች", bm: "Jateli danfaraw", wo: "Wuute yi ci lim bi" };
+EXTRA_UI.invMissing = { fr: "Manquants", en: "Missing", es: "Faltantes", pt: "Em falta", de: "Fehlend", it: "Mancanti", nl: "Ontbrekend", pl: "Braki", ru: "Недостача", tr: "Eksik", ar: "النقص", hi: "कमी", bn: "ঘাটতি", ur: "کمی", ta: "குறைவு", te: "తక్కువ", th: "ขาด", zh: "短缺", ja: "不足", ko: "부족", id: "Kurang", vi: "Thiếu", tl: "Kulang", sw: "Zinazokosekana", ha: "Abin da ya ɓace", yo: "Èyí tó dín", zu: "Okushodayo", am: "የጎደለ", bm: "Dɛsɛlenw", wo: "Li ñàkk" };
+EXTRA_UI.invExtra = { fr: "En trop", en: "Extra", es: "Sobrantes", pt: "Em excesso", de: "Überschuss", it: "In più", nl: "Te veel", pl: "Nadwyżki", ru: "Излишек", tr: "Fazla", ar: "الزيادة", hi: "अधिक", bn: "বাড়তি", ur: "زائد", ta: "கூடுதல்", te: "అదనం", th: "เกิน", zh: "盘盈", ja: "過剰", ko: "초과", id: "Lebih", vi: "Thừa", tl: "Sobra", sw: "Za ziada", ha: "Abin da ya yi yawa", yo: "Èyí tó pọ̀ jù", zu: "Okweqile", am: "ትርፍ", bm: "Tɔnɔ", wo: "Li ëpp" };
+EXTRA_UI.invNotCounted = { fr: "{n} produit(s) non compté(s) : leur stock ne change pas.", en: "{n} product(s) not counted: their stock stays the same.", es: "{n} producto(s) sin contar: su stock no cambia.", pt: "{n} produto(s) não contado(s): o estoque deles não muda.", de: "{n} Produkt(e) nicht gezählt: ihr Bestand bleibt gleich.", it: "{n} prodotto/i non contato/i: il loro stock non cambia.", nl: "{n} product(en) niet geteld: hun voorraad blijft gelijk.", pl: "{n} produkt(ów) niepoliczonych: ich stan się nie zmienia.", ru: "{n} товар(ов) не посчитано: их остаток не меняется.", tr: "{n} ürün sayılmadı: stokları değişmez.", ar: "{n} منتج لم يُعدّ: لن يتغيّر مخزونه.", hi: "{n} उत्पाद नहीं गिने गए: उनका स्टॉक नहीं बदलेगा।", bn: "{n}টি পণ্য গোনা হয়নি: সেগুলোর স্টক বদলাবে না।", ur: "{n} مصنوعات نہیں گنی گئیں: ان کا اسٹاک نہیں بدلے گا۔", ta: "{n} பொருட்கள் எண்ணப்படவில்லை: அவற்றின் கையிருப்பு மாறாது.", te: "{n} ఉత్పత్తులు లెక్కించలేదు: వాటి స్టాక్ మారదు.", th: "ยังไม่ได้นับ {n} รายการ: สต็อกของรายการเหล่านี้จะไม่เปลี่ยน", zh: "{n} 个商品未盘点：其库存保持不变。", ja: "{n} 件は未カウント：在庫は変わりません。", ko: "{n}개 상품 미실사: 재고는 그대로입니다.", id: "{n} produk belum dihitung: stoknya tidak berubah.", vi: "{n} sản phẩm chưa đếm: tồn kho của chúng giữ nguyên.", tl: "{n} produkto ang hindi nabilang: hindi magbabago ang stock nila.", sw: "Bidhaa {n} hazijahesabiwa: stoo yake haibadiliki.", ha: "Ba a ƙidaya kaya {n} ba: kayansu ba zai canza ba.", yo: "Ọjà {n} kò tíì kà: ọjà wọn kò ní yí padà.", zu: "Imikhiqizo engu-{n} ayibalwanga: isitoko sayo ngeke sishintshe.", am: "{n} ምርቶች አልተቆጠሩም፦ ክምችታቸው አይለወጥም።", bm: "Fɛn {n} ma jate: u ka maraka tɛ yɛlɛma.", wo: "{n} jaay limuñu ko: seen stock du soppiku." };
+EXTRA_UI.invNoDiff = { fr: "Aucun écart : votre stock est juste.", en: "No differences: your stock is correct.", es: "Sin diferencias: su stock es correcto.", pt: "Sem diferenças: o seu estoque está certo.", de: "Keine Abweichungen: Ihr Bestand stimmt.", it: "Nessuna differenza: il vostro stock è giusto.", nl: "Geen verschillen: uw voorraad klopt.", pl: "Brak różnic: stan się zgadza.", ru: "Расхождений нет: остатки верны.", tr: "Fark yok: stoğunuz doğru.", ar: "لا فروق: مخزونك صحيح.", hi: "कोई अंतर नहीं: आपका स्टॉक सही है।", bn: "কোনো পার্থক্য নেই: আপনার স্টক ঠিক আছে।", ur: "کوئی فرق نہیں: آپ کا اسٹاک درست ہے۔", ta: "வேறுபாடு இல்லை: உங்கள் கையிருப்பு சரியாக உள்ளது.", te: "తేడాలు లేవు: మీ స్టాక్ సరైనది.", th: "ไม่มีส่วนต่าง: สต็อกของคุณถูกต้อง", zh: "无差异：库存准确。", ja: "差異なし：在庫は正確です。", ko: "차이 없음: 재고가 정확합니다.", id: "Tidak ada selisih: stok Anda tepat.", vi: "Không có chênh lệch: tồn kho của bạn chính xác.", tl: "Walang pagkakaiba: tama ang stock mo.", sw: "Hakuna tofauti: stoo yako ni sahihi.", ha: "Babu bambanci: kayanka daidai ne.", yo: "Kò sí ìyàtọ̀: ọjà rẹ tọ̀nà.", zu: "Awukho umehluko: isitoko sakho silungile.", am: "ልዩነት የለም፦ ክምችትዎ ትክክል ነው።", bm: "Danfara si tɛ: i ka maraka bɛnnin.", wo: "Amul wuute: sa stock dëgg la." };
+EXTRA_UI.invApply = { fr: "Valider et corriger le stock", en: "Confirm and correct stock", es: "Validar y corregir el stock", pt: "Validar e corrigir o estoque", de: "Bestätigen und Bestand korrigieren", it: "Conferma e correggi lo stock", nl: "Bevestigen en voorraad corrigeren", pl: "Zatwierdź i popraw stan", ru: "Подтвердить и исправить остатки", tr: "Onayla ve stoğu düzelt", ar: "تأكيد وتصحيح المخزون", hi: "पुष्टि करें और स्टॉक सुधारें", bn: "নিশ্চিত করুন ও স্টক ঠিক করুন", ur: "تصدیق کریں اور اسٹاک درست کریں", ta: "உறுதிசெய்து கையிருப்பைத் திருத்து", te: "నిర్ధారించి స్టాక్ సరిచేయండి", th: "ยืนยันและแก้ไขสต็อก", zh: "确认并修正库存", ja: "確定して在庫を修正", ko: "확정하고 재고 수정", id: "Konfirmasi dan perbaiki stok", vi: "Xác nhận và sửa tồn kho", tl: "Kumpirmahin at itama ang stock", sw: "Thibitisha na urekebishe stoo", ha: "Tabbatar ka gyara kaya", yo: "Fọwọ́ sí i kí o tún ọjà ṣe", zu: "Qinisekisa ulungise isitoko", am: "አረጋግጥ እና ክምችቱን አስተካክል", bm: "Sɛmɛntiya ka maraka latilen", wo: "Dëggal te defar stock bi" };
+EXTRA_UI.invContinue = { fr: "Continuer le comptage", en: "Keep counting", es: "Seguir contando", pt: "Continuar a contar", de: "Weiterzählen", it: "Continua a contare", nl: "Verder tellen", pl: "Licz dalej", ru: "Продолжить подсчёт", tr: "Saymaya devam et", ar: "متابعة العدّ", hi: "गिनती जारी रखें", bn: "গোনা চালিয়ে যান", ur: "گنتی جاری رکھیں", ta: "எண்ணுவதைத் தொடர்", te: "లెక్కింపు కొనసాగించండి", th: "นับต่อ", zh: "继续盘点", ja: "カウントを続ける", ko: "계속 세기", id: "Lanjut menghitung", vi: "Tiếp tục đếm", tl: "Ituloy ang pagbilang", sw: "Endelea kuhesabu", ha: "Ci gaba da ƙidaya", yo: "Máa ka lọ", zu: "Qhubeka ubala", am: "መቁጠር ቀጥል", bm: "Jateli taa a fɛ", wo: "Wéy lim bi" };
+EXTRA_UI.invAbandon = { fr: "Abandonner l'inventaire", en: "Discard this count", es: "Abandonar el inventario", pt: "Abandonar o inventário", de: "Inventur verwerfen", it: "Abbandona l'inventario", nl: "Inventaris annuleren", pl: "Porzuć inwentaryzację", ru: "Отменить инвентаризацию", tr: "Sayımı bırak", ar: "إلغاء الجرد", hi: "गिनती छोड़ें", bn: "গণনা বাতিল করুন", ur: "گنتی چھوڑ دیں", ta: "எண்ணிக்கையைக் கைவிடு", te: "లెక్కింపు విరమించండి", th: "ยกเลิกการตรวจนับ", zh: "放弃本次盘点", ja: "棚卸しを破棄", ko: "실사 취소", id: "Batalkan penghitungan", vi: "Hủy kiểm kê", tl: "Itigil ang bilang", sw: "Acha hesabu hii", ha: "Watsar da ƙidayar", yo: "Pa kíka yìí tì", zu: "Lahla lokhu kubala", am: "ቆጠራውን ተው", bm: "Jateli bila", wo: "Bàyyi lim bi" };
+EXTRA_UI.invAbandonYes = { fr: "Oui, abandonner (comptages perdus)", en: "Yes, discard (counts lost)", es: "Sí, abandonar (se pierde lo contado)", pt: "Sim, abandonar (contagens perdidas)", de: "Ja, verwerfen (Zählungen gehen verloren)", it: "Sì, abbandona (conteggi persi)", nl: "Ja, annuleren (tellingen verloren)", pl: "Tak, porzuć (liczenie przepadnie)", ru: "Да, отменить (подсчёт пропадёт)", tr: "Evet, bırak (sayımlar silinir)", ar: "نعم، إلغاء (ستضيع الأعداد)", hi: "हाँ, छोड़ें (गिनती मिट जाएगी)", bn: "হ্যাঁ, বাতিল (গোনা মুছে যাবে)", ur: "ہاں، چھوڑ دیں (گنتی ضائع ہو جائے گی)", ta: "ஆம், கைவிடு (எண்ணியவை இழக்கப்படும்)", te: "అవును, విరమించు (లెక్కలు పోతాయి)", th: "ใช่ ยกเลิก (ข้อมูลที่นับจะหายไป)", zh: "是，放弃（已点数据将丢失）", ja: "はい、破棄（カウントは失われます）", ko: "예, 취소 (센 기록 삭제)", id: "Ya, batalkan (hitungan hilang)", vi: "Có, hủy (mất số đã đếm)", tl: "Oo, itigil (mawawala ang bilang)", sw: "Ndiyo, acha (hesabu zitapotea)", ha: "Eh, watsar (ƙidaya za ta ɓace)", yo: "Bẹ́ẹ̀ni, pa á tì (kíka yóò sọnù)", zu: "Yebo, lahla (ukubala kuzolahleka)", am: "አዎ፣ ተው (ቆጠራዎቹ ይጠፋሉ)", bm: "Ɔwɔ, a bila (jateliw bɛ tunun)", wo: "Waaw, bàyyi (lim yi dinañu réer)" };
+EXTRA_UI.invDone = { fr: "Inventaire validé : le stock est corrigé.", en: "Count confirmed: stock corrected.", es: "Inventario validado: stock corregido.", pt: "Inventário validado: estoque corrigido.", de: "Inventur bestätigt: Bestand korrigiert.", it: "Inventario confermato: stock corretto.", nl: "Inventaris bevestigd: voorraad gecorrigeerd.", pl: "Inwentaryzacja zatwierdzona: stan poprawiony.", ru: "Инвентаризация подтверждена: остатки исправлены.", tr: "Sayım onaylandı: stok düzeltildi.", ar: "تم تأكيد الجرد: صُحّح المخزون.", hi: "गिनती पुष्ट: स्टॉक सुधार दिया गया।", bn: "গণনা নিশ্চিত: স্টক ঠিক করা হয়েছে।", ur: "گنتی کی تصدیق: اسٹاک درست کر دیا گیا۔", ta: "எண்ணிக்கை உறுதி: கையிருப்பு திருத்தப்பட்டது.", te: "లెక్కింపు నిర్ధారించబడింది: స్టాక్ సరిచేయబడింది.", th: "ยืนยันการตรวจนับแล้ว: แก้ไขสต็อกเรียบร้อย", zh: "盘点已确认：库存已修正。", ja: "棚卸しを確定：在庫を修正しました。", ko: "실사 확정: 재고를 수정했습니다.", id: "Penghitungan dikonfirmasi: stok diperbaiki.", vi: "Đã xác nhận kiểm kê: tồn kho đã được sửa.", tl: "Nakumpirma ang bilang: naitama ang stock.", sw: "Hesabu imethibitishwa: stoo imerekebishwa.", ha: "An tabbatar da ƙidaya: an gyara kaya.", yo: "A ti fọwọ́ sí kíka: a ti tún ọjà ṣe.", zu: "Ukubala kuqinisekisiwe: isitoko silungisiwe.", am: "ቆጠራው ተረጋግጧል፦ ክምችቱ ተስተካክሏል።", bm: "Jateli sɛmɛntiyara: maraka latilenna.", wo: "Lim bi dëggal nañu ko: stock bi defar nañu ko." };
+EXTRA_UI.invPast = { fr: "Inventaires précédents", en: "Previous counts", es: "Inventarios anteriores", pt: "Inventários anteriores", de: "Frühere Inventuren", it: "Inventari precedenti", nl: "Eerdere inventarissen", pl: "Poprzednie inwentaryzacje", ru: "Прошлые инвентаризации", tr: "Önceki sayımlar", ar: "عمليات الجرد السابقة", hi: "पिछली गिनतियाँ", bn: "আগের গণনা", ur: "پچھلی گنتیاں", ta: "முந்தைய எண்ணிக்கைகள்", te: "మునుపటి లెక్కింపులు", th: "การตรวจนับครั้งก่อน", zh: "以往盘点", ja: "過去の棚卸し", ko: "이전 실사", id: "Penghitungan sebelumnya", vi: "Các lần kiểm kê trước", tl: "Mga nakaraang bilang", sw: "Hesabu zilizopita", ha: "Ƙidayoyin baya", yo: "Kíka tẹ́lẹ̀", zu: "Ukubala kwangaphambili", am: "ቀደምት ቆጠራዎች", bm: "Jateli tɛmɛnenw", wo: "Lim yi jiitu" };
+EXTRA_UI.invPastLine = { fr: "{n} produits comptés", en: "{n} products counted", es: "{n} productos contados", pt: "{n} produtos contados", de: "{n} Produkte gezählt", it: "{n} prodotti contati", nl: "{n} producten geteld", pl: "{n} produktów policzonych", ru: "посчитано товаров: {n}", tr: "{n} ürün sayıldı", ar: "تم عدّ {n} منتج", hi: "{n} उत्पाद गिने गए", bn: "{n}টি পণ্য গোনা হয়েছে", ur: "{n} مصنوعات گنی گئیں", ta: "{n} பொருட்கள் எண்ணப்பட்டன", te: "{n} ఉత్పత్తులు లెక్కించారు", th: "นับ {n} รายการ", zh: "盘点 {n} 个商品", ja: "{n} 件をカウント", ko: "{n}개 상품 실사", id: "{n} produk dihitung", vi: "Đã đếm {n} sản phẩm", tl: "{n} produktong nabilang", sw: "Bidhaa {n} zimehesabiwa", ha: "An ƙidaya kaya {n}", yo: "Ọjà {n} ni a kà", zu: "Imikhiqizo engu-{n} ibaliwe", am: "{n} ምርቶች ተቆጥረዋል", bm: "Fɛn {n} jatera", wo: "{n} jaay lim nañu" };
+EXTRA_UI.invAllCounted = { fr: "Tout est compté !", en: "Everything is counted!", es: "¡Todo está contado!", pt: "Tudo foi contado!", de: "Alles gezählt!", it: "Tutto contato!", nl: "Alles is geteld!", pl: "Wszystko policzone!", ru: "Всё посчитано!", tr: "Her şey sayıldı!", ar: "تم عدّ كل شيء!", hi: "सब गिन लिया!", bn: "সব গোনা হয়ে গেছে!", ur: "سب گن لیا گیا!", ta: "அனைத்தும் எண்ணப்பட்டன!", te: "అన్నీ లెక్కించారు!", th: "นับครบแล้ว!", zh: "全部已点完！", ja: "すべてカウント済み！", ko: "모두 셌습니다!", id: "Semua sudah dihitung!", vi: "Đã đếm hết!", tl: "Nabilang na lahat!", sw: "Kila kitu kimehesabiwa!", ha: "An ƙidaya komai!", yo: "A ti ka gbogbo rẹ̀!", zu: "Konke kubaliwe!", am: "ሁሉም ተቆጥሯል!", bm: "Fɛn bɛɛ jatera!", wo: "Lépp lim nañu ko!" };
+EXTRA_UI.removeReason_inventory = { fr: "Écart d'inventaire", en: "Stock count difference", es: "Diferencia de inventario", pt: "Diferença de inventário", de: "Inventurdifferenz", it: "Differenza d'inventario", nl: "Inventarisverschil", pl: "Różnica inwentaryzacyjna", ru: "Недостача по инвентаризации", tr: "Sayım farkı", ar: "فرق الجرد", hi: "गिनती का अंतर", bn: "গণনার ঘাটতি", ur: "گنتی کا فرق", ta: "எண்ணிக்கை வேறுபாடு", te: "లెక్కింపు తేడా", th: "ส่วนต่างจากการตรวจนับ", zh: "盘点差异", ja: "棚卸し差異", ko: "실사 차이", id: "Selisih penghitungan", vi: "Chênh lệch kiểm kê", tl: "Pagkakaiba sa bilang", sw: "Tofauti ya hesabu", ha: "Bambancin ƙidaya", yo: "Ìyàtọ̀ kíka", zu: "Umehluko wokubala", am: "የቆጠራ ልዩነት", bm: "Jateli danfara", wo: "Wuute ci lim" };
+EXTRA_UI.logInventory = { fr: "Inventaire validé", en: "Stock count confirmed", es: "Inventario validado", pt: "Inventário validado", de: "Inventur bestätigt", it: "Inventario confermato", nl: "Inventaris bevestigd", pl: "Inwentaryzacja zatwierdzona", ru: "Инвентаризация подтверждена", tr: "Sayım onaylandı", ar: "تم تأكيد الجرد", hi: "गिनती पुष्ट", bn: "গণনা নিশ্চিত", ur: "گنتی کی تصدیق", ta: "எண்ணிக்கை உறுதிசெய்யப்பட்டது", te: "లెక్కింపు నిర్ధారించబడింది", th: "ยืนยันการตรวจนับ", zh: "盘点已确认", ja: "棚卸し確定", ko: "실사 확정", id: "Penghitungan dikonfirmasi", vi: "Đã xác nhận kiểm kê", tl: "Nakumpirma ang bilang", sw: "Hesabu imethibitishwa", ha: "An tabbatar da ƙidaya", yo: "A ti fọwọ́ sí kíka", zu: "Ukubala kuqinisekisiwe", am: "ቆጠራ ተረጋግጧል", bm: "Jateli sɛmɛntiyara", wo: "Lim bi dëggal nañu ko" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -8157,7 +8185,7 @@ const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
 const SHOP_LEVEL_KEYS = [
   "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts", "cashClosures",
   "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
-  "historyLog", "categories", "employees", "actionLog", "deletedProducts", "receiptInfo", "customerTariffs",
+  "historyLog", "categories", "employees", "actionLog", "deletedProducts", "receiptInfo", "customerTariffs", "stockCount",
 ];
 // Dernière boutique affichée sur CET appareil, pour y revenir au prochain démarrage
 // au lieu de retomber systématiquement sur la boutique principale (suffixée par le
@@ -8298,6 +8326,20 @@ function isKitProduct(p) { return !!(p && Array.isArray(p.components) && p.compo
 function isRecipeProduct(p) { return !!(p && Array.isArray(p.components) && p.components.length && p.compMode === "production"); }
 // Tarif retenu par client (« revendeur » = demi-gros ou gros) : { nomNormalisé: { t, at } }.
 // Fusion clé par clé, la décision la plus récente gagne (t vide = tarif retiré).
+// Inventaire en cours (partagé entre appareils) : { id, startedAt, by, counts: { [productId]:
+// { q, e, at, by } }, closedAt }. Même inventaire des deux côtés : on garde le comptage le plus
+// récent de chaque produit ; inventaires différents : le plus récemment commencé gagne.
+function mergeStockCount(a, b) {
+  const A = a && typeof a === "object" && a.id ? a : null;
+  const B = b && typeof b === "object" && b.id ? b : null;
+  if (!A) return B;
+  if (!B) return A;
+  if (A.id !== B.id) return sanitizeTs(A.startedAt) >= sanitizeTs(B.startedAt) ? A : B;
+  const counts = { ...(B.counts || {}) };
+  Object.keys(A.counts || {}).forEach((k) => { if (!counts[k] || sanitizeTs(A.counts[k] && A.counts[k].at) >= sanitizeTs(counts[k] && counts[k].at)) counts[k] = A.counts[k]; });
+  const closedAt = Math.max(sanitizeTs(A.closedAt), sanitizeTs(B.closedAt)) || null;
+  return { ...B, ...A, counts, closedAt, ...(A.cancelled || B.cancelled ? { cancelled: true } : {}) };
+}
 function mergeCustomerTariffs(a, b) {
   const A = a && typeof a === "object" ? a : {};
   const B = b && typeof b === "object" ? b : {};
@@ -8767,6 +8809,7 @@ function mergeShopRaw(baseShop, localShop, remoteShop) {
     activeCartId: local.activeCartId ?? remote.activeCartId ?? null,
     receiptInfo: newerStamped(local.receiptInfo, remote.receiptInfo),
     customerTariffs: mergeCustomerTariffs(local.customerTariffs, remote.customerTariffs),
+    stockCount: mergeStockCount(local.stockCount, remote.stockCount),
   };
 }
 function SavedBadge({ saving, isOnline, pendingCount, lang }) {
@@ -13827,6 +13870,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [restockLotNo, setRestockLotNo] = useState("");
   // Fiche d'un lot (n°, date, ventes concernées) : { pid, id } ou null.
   const [lotView, setLotView] = useState(null);
+  // ---- Inventaire guidé ----
+  const [stockCount, setStockCount] = useState(null);
+  const stockCountRef = useRef(null);
+  useEffect(() => { stockCountRef.current = stockCount; }, [stockCount]);
+  const [showInventory, setShowInventory] = useState(false);
+  const [invFilter, setInvFilter] = useState("todo");
+  const [invSearch, setInvSearch] = useState("");
+  const [invCategory, setInvCategory] = useState("");
+  const [invInputs, setInvInputs] = useState({});
+  const [invReview, setInvReview] = useState(false);
+  const [invAbandonAsk, setInvAbandonAsk] = useState(false);
+  const [invScan, setInvScan] = useState(false);
+  const [invScanErr, setInvScanErr] = useState(false);
+  const [invMsg, setInvMsg] = useState("");
+  const [invPastOpen, setInvPastOpen] = useState(null);
   const [stockSearch, setStockSearch] = useState("");
   const [historySearch, setHistorySearch] = useState("");
   const [historyLimit, setHistoryLimit] = useState(40); // nombre de lignes d'historique affichées
@@ -14084,6 +14142,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCashClosures(shop.cashClosures || []);
     setUnsoldLog(shop.unsoldLog || []);
     setReceiptInfo(shop.receiptInfo && typeof shop.receiptInfo === "object" ? shop.receiptInfo : {});
+    setStockCount(shop.stockCount && typeof shop.stockCount === "object" ? shop.stockCount : null);
     setDeletedProducts(Array.isArray(shop.deletedProducts) ? shop.deletedProducts : []);
     setCashFund(shop.cashFund || 0);
     setLowStockThreshold(shop.lowStockThreshold || 5);
@@ -14816,6 +14875,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       cashClosures: overrides.cashClosures ?? cashClosures,
       unsoldLog: overrides.unsoldLog ?? unsoldLog,
       receiptInfo: overrides.receiptInfo ?? receiptInfo,
+      stockCount: overrides.stockCount !== undefined ? overrides.stockCount : stockCount,
       deletedProducts: overrides.deletedProducts ?? deletedProducts,
       cashFund: overrides.cashFund ?? cashFund,
       lowStockThreshold: overrides.lowStockThreshold ?? lowStockThreshold,
@@ -14871,6 +14931,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCashClosures(next.cashClosures || []);
     setUnsoldLog(next.unsoldLog || []);
     setReceiptInfo(next.receiptInfo || {});
+    setStockCount(next.stockCount || null);
     setDeletedProducts(next.deletedProducts || []);
     setCashFund(next.cashFund);
     setLowStockThreshold(next.lowStockThreshold);
@@ -15761,6 +15822,105 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setRestockTarget(null);
     setRestockQty("");
     setRestockPrice("");
+  };
+  // ---- Inventaire guidé : on compte ce qu'il y a vraiment, l'app montre les écarts et
+  // corrige le stock. Chaque comptage garde la quantité affichée par l'app à ce moment (e) :
+  // à la validation on applique l'écart (compté − e) au stock ACTUEL, pour ne pas effacer les
+  // ventes faites entre le comptage d'un produit et la validation.
+  const invUnitQty = (p) => (p.sellByUnit ? (Number(p.quantity) || 0) * (p.unitsPerPack || 1) + (Number(p.looseUnits) || 0) : Number(p.quantity) || 0);
+  const invUnitCost = (p) => { const c = p.costPrice != null && p.costPrice !== "" ? Number(p.costPrice) || 0 : Number(p.price) || 0; return p.sellByUnit ? c / (p.unitsPerPack || 1) : c; };
+  const invUnitLabel = (p) => (p.sellByUnit ? t(lang, "sellUnit") : p.sellByMeasure ? p.measureUnit || "" : "");
+  const invOpen = stockCount && !stockCount.closedAt ? stockCount : null;
+  const invCountIn = (sc, p) => { const c = sc && sc.counts ? sc.counts[p.id] : null; return c && c.q != null ? c : null; };
+  const invCountOf = (p) => invCountIn(invOpen, p);
+  const invCountable = () => products.filter((p) => !isKitProduct(p));
+  const invDiffLines = (sc) => invCountable().map((p) => {
+    const c = invCountIn(sc, p);
+    if (!c) return null;
+    const d = r3q(c.q - (Number(c.e) || 0));
+    return d ? { p, c, d, v: d * invUnitCost(p) } : null;
+  }).filter(Boolean).sort((a, b) => Math.abs(b.v) - Math.abs(a.v));
+  const startInventory = () => {
+    if (shopReadOnly || !hasPermission("editStock")) return;
+    const sc = { id: "inv" + Date.now().toString(36), startedAt: Date.now(), by: activeEmployee ? activeEmployee.name : null, counts: {} };
+    stockCountRef.current = sc;
+    saveAll({ stockCount: sc });
+    setInvFilter("todo"); setInvSearch(""); setInvCategory(""); setInvInputs({}); setInvReview(false); setInvMsg(""); setInvAbandonAsk(false);
+  };
+  const setInvCount = (p, raw) => {
+    const cur = stockCountRef.current;
+    if (!cur || cur.closedAt || shopReadOnly || isProductFrozen(p.id)) return;
+    const str = String(raw == null ? "" : raw).trim().replace(",", ".");
+    let qv = null;
+    if (str !== "") {
+      const n = parseFloat(str);
+      if (!isFinite(n) || n < 0) return;
+      qv = p.sellByMeasure ? r3q(n) : Math.round(n);
+    }
+    const prev = cur.counts ? cur.counts[p.id] : null;
+    if ((!prev || prev.q == null) && qv === null) return;
+    if (prev && prev.q === qv) return;
+    const next = { ...cur, counts: { ...(cur.counts || {}), [p.id]: { q: qv, e: invUnitQty(p), at: Date.now(), by: activeEmployee ? activeEmployee.name : null } } };
+    stockCountRef.current = next;
+    saveAll({ stockCount: next });
+  };
+  const applyInventory = () => {
+    const cur = stockCountRef.current;
+    if (!cur || cur.closedAt || shopReadOnly || !hasPermission("editStock")) return;
+    const lines = invDiffLines(cur).filter((l) => !isProductFrozen(l.p.id));
+    const byId = new Map(lines.map((l) => [l.p.id, l]));
+    const now = Date.now();
+    const losses = [];
+    const nextProducts = products.map((p) => {
+      const l = byId.get(p.id);
+      if (!l) return p;
+      const u = { ...p, updatedAt: now };
+      if (p.sellByUnit) {
+        const per = p.unitsPerPack || 1;
+        const total = Math.max(0, invUnitQty(p) + l.d);
+        u.quantity = Math.floor(total / per);
+        u.looseUnits = r3q(total - u.quantity * per);
+      } else {
+        u.quantity = Math.max(0, r3q((Number(p.quantity) || 0) + l.d));
+      }
+      if (l.d < 0) losses.push({ ...makeLossEntry(p, r3q(p.sellByUnit ? -l.d / (p.unitsPerPack || 1) : -l.d), "inventory"), refInv: cur.id });
+      return u;
+    });
+    const counted = invCountable().filter((p) => invCountIn(cur, p)).length;
+    const lossValue = lines.filter((l) => l.d < 0).reduce((n, l) => n - l.v, 0);
+    const gainValue = lines.filter((l) => l.d > 0).reduce((n, l) => n + l.v, 0);
+    const entry = makeHistoryEntry("inventory", {
+      refId: cur.id,
+      startedAt: cur.startedAt,
+      counted,
+      total: invCountable().length,
+      amount: Math.round(lossValue),
+      gain: Math.round(gainValue),
+      lines: lines.slice(0, 300).map((l) => ({ productId: l.p.id, name: l.p.name, e: l.c.e, q: l.c.q, d: l.d, v: Math.round(l.v) })),
+    });
+    const closed = { ...cur, closedAt: now };
+    stockCountRef.current = closed;
+    saveAll({ products: nextProducts, ...(losses.length ? { unsoldLog: [...unsoldLog, ...losses] } : {}), historyLog: [...historyLog, entry], stockCount: closed });
+    logAction(`${tx(lang, "logInventory")} : ${tx(lang, "invPastLine").replace("{n}", localizedNumber(counted))} · ${tx(lang, "invTabDiff")} ${localizedNumber(lines.length)}`);
+    setInvReview(false); setInvInputs({}); setInvAbandonAsk(false);
+    setInvMsg(tx(lang, "invDone"));
+  };
+  const cancelInventory = () => {
+    const cur = stockCountRef.current;
+    if (!cur || cur.closedAt) return;
+    const closed = { ...cur, closedAt: Date.now(), cancelled: true };
+    stockCountRef.current = closed;
+    saveAll({ stockCount: closed });
+    setInvAbandonAsk(false); setInvReview(false); setInvInputs({}); setInvMsg("");
+  };
+  const handleInvScan = (result) => {
+    const raw = Array.isArray(result) ? result[0]?.rawValue : result?.rawValue || result;
+    const code = String(raw || "").trim();
+    if (!code) return;
+    setInvScan(false);
+    const found = products.find((x) => x.barcode && String(x.barcode).trim() === code);
+    if (!found) { setInvMsg(tx(lang, "scanBarcodeNotFound")); playSound("error"); triggerHaptic("error"); return; }
+    setInvMsg(""); setInvSearch(code); playSound("success"); triggerHaptic("success");
   };
   // "Nouvelle journée" (produits en mode "Quantité du jour", boulangerie/pâtisserie) :
   // déclenché manuellement par la boutique, jamais automatiquement (pas d'heure fixe,
@@ -21758,6 +21918,209 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {tab === "stock" && showInventory && (() => {
+          const countable = invCountable();
+          const nCounted = countable.filter((p) => invCountOf(p)).length;
+          const close = () => { setShowInventory(false); setInvReview(false); setInvAbandonAsk(false); };
+          const past = historyLog.filter((h) => h.type === "inventory").sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 10);
+          const cats = [...new Set(countable.map((p) => p.category).filter(Boolean))];
+          const box = { background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}` };
+          const red = darkMode ? "#fda4af" : "#e11d48";
+          const green = darkMode ? "#4ade80" : "#15803d";
+          const violet = "#6d28d9";
+          const sign = (d) => (d > 0 ? "+" : "−") + localizedQty(Math.abs(d));
+          const msg = invMsg ? <p className="text-xs font-semibold mb-3 px-3 py-2 rounded-xl" style={{ background: darkMode ? "rgba(16,185,129,0.15)" : "#ecfdf5", color: darkMode ? "#6ee7b7" : "#047857" }}>{invMsg}</p> : null;
+          let body;
+          if (!invOpen) {
+            body = (
+              <>
+                {msg}
+                <div className="rounded-2xl p-4 mb-4" style={box}>
+                  <p className="text-sm mb-3" style={{ color: T.muted }}>{tx(lang, "invIntro")}</p>
+                  <button onClick={startInventory} className="w-full py-3 rounded-xl text-white font-bold text-sm" style={{ background: violet }}>📋 {tx(lang, "invStart")}</button>
+                </div>
+                {past.length > 0 && <p className="text-xs font-bold mb-2" style={{ color: T.muted }}>{tx(lang, "invPast")}</p>}
+                {past.map((h) => (
+                  <div key={h.id} className="rounded-2xl p-3 mb-2" style={box}>
+                    <button type="button" onClick={() => setInvPastOpen(invPastOpen === h.id ? null : h.id)} className="w-full flex items-center justify-between gap-2 text-left">
+                      <span className="min-w-0">
+                        <span className="text-xs font-bold block">{fullDate(h.date)}{h.actorName ? ` · ${h.actorName}` : ""}</span>
+                        <span className="text-[11px] block" style={{ color: T.muted }}>{tx(lang, "invPastLine").replace("{n}", localizedNumber(h.counted || 0))}</span>
+                      </span>
+                      <span className="text-xs font-extrabold shrink-0" style={{ color: h.amount > 0 ? red : green }}>{h.amount > 0 ? "−" + fcfa(h.amount) : "✓"}</span>
+                    </button>
+                    {invPastOpen === h.id && (
+                      (h.lines || []).length === 0 ? (
+                        <p className="text-[11px] mt-2" style={{ color: T.muted }}>✓ {tx(lang, "invNoDiff")}</p>
+                      ) : (
+                        <div className="mt-2">
+                          {(h.lines || []).map((l, i) => (
+                            <div key={i} className="flex items-center justify-between gap-2 py-1 text-[11px]" style={{ borderTop: `1px solid ${T.border}` }}>
+                              <span className="min-w-0 truncate">{l.name} <span style={{ color: T.muted }}>({localizedQty(l.e)} → {localizedQty(l.q)})</span></span>
+                              <span className="font-bold shrink-0" style={{ color: l.d < 0 ? red : green }}>{sign(l.d)}</span>
+                            </div>
+                          ))}
+                          {h.gain > 0 && <p className="text-[11px] mt-1" style={{ color: green }}>{tx(lang, "invExtra")} : +{fcfa(h.gain)}</p>}
+                        </div>
+                      )
+                    )}
+                  </div>
+                ))}
+              </>
+            );
+          } else if (invReview) {
+            const lines = invDiffLines(invOpen);
+            const lossV = lines.filter((l) => l.d < 0).reduce((n, l) => n - l.v, 0);
+            const gainV = lines.filter((l) => l.d > 0).reduce((n, l) => n + l.v, 0);
+            body = (
+              <>
+                <div className="grid grid-cols-2 gap-2 mb-3">
+                  <div className="rounded-2xl p-3" style={box}>
+                    <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "invMissing")}</p>
+                    <p className="text-base font-extrabold" style={{ color: lossV > 0 ? red : T.text }}>{lossV > 0 ? "−" : ""}{fcfa(Math.round(lossV))}</p>
+                  </div>
+                  <div className="rounded-2xl p-3" style={box}>
+                    <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "invExtra")}</p>
+                    <p className="text-base font-extrabold" style={{ color: gainV > 0 ? green : T.text }}>{gainV > 0 ? "+" : ""}{fcfa(Math.round(gainV))}</p>
+                  </div>
+                </div>
+                {countable.length - nCounted > 0 && <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "invNotCounted").replace("{n}", localizedNumber(countable.length - nCounted))}</p>}
+                {lines.length === 0 ? (
+                  <p className="text-sm text-center py-6" style={{ color: T.muted }}>✓ {tx(lang, "invNoDiff")}</p>
+                ) : (
+                  <div className="rounded-2xl mb-3" style={box}>
+                    {lines.map((l, i) => (
+                      <div key={l.p.id} className="flex items-center justify-between gap-2 px-3 py-2.5" style={i ? { borderTop: `1px solid ${T.border}` } : null}>
+                        <div className="min-w-0">
+                          <p className="text-sm font-bold truncate">{l.p.name}</p>
+                          <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "invAppSays").replace("{n}", localizedQty(l.c.e))} → {localizedQty(l.c.q)} {invUnitLabel(l.p)}</p>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="text-sm font-extrabold" style={{ color: l.d < 0 ? red : green }}>{sign(l.d)}</p>
+                          <p className="text-[10px]" style={{ color: T.muted }}>{l.d < 0 ? "−" : "+"}{fcfa(Math.round(Math.abs(l.v)))}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <button onClick={applyInventory} disabled={nCounted === 0} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2 disabled:opacity-40" style={{ background: "#16a34a" }}>✓ {tx(lang, "invApply")}</button>
+                <button onClick={() => setInvReview(false)} className="w-full py-3 rounded-xl font-bold text-sm" style={{ background: T.input, color: T.text }}>{tx(lang, "invContinue")}</button>
+              </>
+            );
+          } else {
+            const q = invSearch.trim().toLowerCase();
+            const nDiff = countable.filter((p) => { const c = invCountOf(p); return c && r3q(c.q - (Number(c.e) || 0)) !== 0; }).length;
+            const rows = countable.filter((p) => {
+              if (invCategory && (p.category || "") !== invCategory) return false;
+              if (q) return p.name.toLowerCase().includes(q) || (p.barcode && String(p.barcode).trim().toLowerCase() === q);
+              const c = invCountOf(p);
+              if (invFilter === "todo") return !c;
+              if (invFilter === "done") return !!c;
+              if (invFilter === "diff") return !!c && r3q(c.q - (Number(c.e) || 0)) !== 0;
+              return true;
+            });
+            body = (
+              <>
+                <div className="h-2 rounded-full mb-1 overflow-hidden" style={{ background: T.input }}>
+                  <div style={{ width: `${countable.length ? Math.round((nCounted * 100) / countable.length) : 0}%`, height: "100%", background: violet }} />
+                </div>
+                <p className="text-xs font-semibold mb-3" style={{ color: T.muted }}>{tx(lang, "invProgress").replace("{n}", localizedNumber(nCounted)).replace("{p}", localizedNumber(countable.length))}</p>
+                <button onClick={() => { setInvReview(true); setInvAbandonAsk(false); }} disabled={nCounted === 0} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-3 disabled:opacity-40" style={{ background: violet }}>{tx(lang, "invReviewBtn")}</button>
+                {msg}
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex-1"><SearchBox compact value={invSearch} onChange={setInvSearch} placeholder={t(lang, "search")} darkMode={darkMode} /></div>
+                  <button type="button" onClick={() => { setInvScanErr(false); setInvMsg(""); setInvScan(true); }} aria-label={tx(lang, "scanBarcodeTitle")} className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: T.input, color: T.text }}><ScanLine size={16} /></button>
+                </div>
+                {cats.length > 0 && (
+                  <select value={invCategory} onChange={(e) => setInvCategory(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }}>
+                    <option value="">{tx(lang, "invAllCategories")}</option>
+                    {cats.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                )}
+                {!q && (
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {[["todo", countable.length - nCounted], ["done", nCounted], ["diff", nDiff]].map(([k, n]) => (
+                      <button key={k} type="button" onClick={() => setInvFilter(k)} className="text-[11px] font-semibold px-2.5 py-1 rounded-full" style={{ background: invFilter === k ? violet : T.input, color: invFilter === k ? "white" : T.muted }}>
+                        {tx(lang, k === "todo" ? "invTabTodo" : k === "done" ? "invTabDone" : "invTabDiff")} ({localizedNumber(n)})
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <div className="rounded-2xl" style={box}>
+                  {rows.length === 0 && <p className="text-xs text-center p-4" style={{ color: T.muted }}>{invFilter === "todo" && !q ? "✓ " + tx(lang, "invAllCounted") : t(lang, "noProductFound")}</p>}
+                  {rows.slice(0, 150).map((p, i) => {
+                    const c = invCountOf(p);
+                    const d = c ? r3q(c.q - (Number(c.e) || 0)) : null;
+                    const frozenP = isProductFrozen(p.id);
+                    const val = invInputs[p.id] !== undefined ? invInputs[p.id] : (c ? String(c.q) : "");
+                    return (
+                      <div key={p.id} className="flex items-center gap-2 px-3 py-2.5" style={i ? { borderTop: `1px solid ${T.border}` } : null}>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold truncate">{p.name}</p>
+                          <p className="text-[11px]" style={{ color: T.muted }}>
+                            {tx(lang, "invAppSays").replace("{n}", localizedQty(invUnitQty(p)))} {invUnitLabel(p)}
+                            {c ? <span style={{ fontWeight: 800, color: d < 0 ? red : green }}> · {d === 0 ? "✓" : sign(d)}</span> : null}
+                          </p>
+                        </div>
+                        {!c && !frozenP && (
+                          <button type="button" onClick={() => setInvCount(p, String(invUnitQty(p)))} className="h-9 px-2.5 rounded-lg text-[11px] font-bold shrink-0" style={{ background: darkMode ? "rgba(22,163,74,0.15)" : "#dcfce7", color: green }}>✓ {tx(lang, "invSame")}</button>
+                        )}
+                        <input
+                          autoComplete="off" type="text" inputMode="decimal" disabled={frozenP} value={val} placeholder="?"
+                          onChange={(e) => { const v = e.target.value.replace(/[^0-9.,]/g, "").slice(0, 9); setInvInputs((m) => ({ ...m, [p.id]: v })); }}
+                          onBlur={() => { if (invInputs[p.id] !== undefined) { setInvCount(p, invInputs[p.id]); setInvInputs((m) => { const n = { ...m }; delete n[p.id]; return n; }); } }}
+                          onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }}
+                          className="w-16 border rounded-lg px-1 py-2 text-sm text-center font-bold shrink-0"
+                          style={{ background: T.input, color: T.text, borderColor: c ? violet : T.border }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="mt-6">
+                  {invAbandonAsk ? (
+                    <div className="flex gap-2">
+                      <button onClick={cancelInventory} className="flex-1 py-2.5 rounded-xl text-white text-xs font-bold" style={{ background: "#e11d48" }}>{tx(lang, "invAbandonYes")}</button>
+                      <button onClick={() => setInvAbandonAsk(false)} className="flex-1 py-2.5 rounded-xl text-xs font-bold" style={{ background: T.input, color: T.text }}>{tx(lang, "invContinue")}</button>
+                    </div>
+                  ) : (
+                    <button onClick={() => setInvAbandonAsk(true)} className="w-full text-xs font-semibold py-2" style={{ color: red }}>{tx(lang, "invAbandon")}</button>
+                  )}
+                </div>
+              </>
+            );
+          }
+          return (
+            <div data-kbscroll="true" className="absolute inset-0 z-40" style={{ background: T.bg, overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+              <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-extrabold" style={{ color: T.text }}>📋 {tx(lang, invReview && invOpen ? "invReviewTitle" : "invTitle")}</h2>
+                  <button type="button" onClick={invReview && invOpen ? () => setInvReview(false) : close} aria-label="Fermer" className="p-1"><X size={22} color={T.muted} /></button>
+                </div>
+                {body}
+              </div>
+              {invScan && (
+                <div className="fixed inset-0 z-50 flex items-start justify-center px-2" style={{ background: "rgba(0,0,0,0.5)", paddingTop: "calc(8px + env(safe-area-inset-top, 0px))", paddingBottom: isDesktop ? 24 : "calc(112px + env(safe-area-inset-bottom, 0px))" }} onClick={() => setInvScan(false)}>
+                  <div className="w-full max-w-md rounded-3xl p-4 max-h-full overflow-y-auto" style={{ background: T.bg }} onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-sm font-bold" style={{ color: T.text }}>{tx(lang, "scanBarcodeTitle")}</p>
+                      <button onClick={() => setInvScan(false)}><X size={18} color={T.muted} /></button>
+                    </div>
+                    {!invScanErr ? (
+                      <div className="w-full aspect-square rounded-2xl overflow-hidden" style={{ background: "#0b0b12", maxHeight: "min(100vw, 52vh)" }}>
+                        <React.Suspense fallback={null}>
+                          <Scanner onScan={handleInvScan} onError={() => setInvScanErr(true)} constraints={{ facingMode: "environment" }} styles={{ container: { width: "100%", height: "100%" } }} components={{ finder: false }} />
+                        </React.Suspense>
+                      </div>
+                    ) : (
+                      <p className="text-xs text-center p-6" style={{ color: T.muted }}>{tx(lang, "scanBarcodeCameraError")}</p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })()}
         {lotView && (() => {
           const lp = products.find((x) => x.id === lotView.pid);
           const live = lp ? expiryLots(lp).find((b) => b.id === lotView.id) : null;
@@ -22247,6 +22610,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </button>
                 )}
               </div>
+            )}
+            {products.length > 0 && hasPermission("editStock") && !shopReadOnly && (
+              <button onClick={() => { setShowInventory(true); setInvMsg(""); setInvReview(false); }} className="w-full h-10 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold" style={{ background: darkMode ? "rgba(124,58,237,0.16)" : "#ede9fe", color: darkMode ? "#c4b5fd" : "#6d28d9" }}>
+                📋 {invOpen ? tx(lang, "invResumeBtn").replace("{n}", localizedNumber(invCountable().filter((p) => invCountOf(p)).length)).replace("{p}", localizedNumber(invCountable().length)) : tx(lang, "invBtn")}
+              </button>
             )}
             {products.length > 0 && (
               <div className="flex items-center gap-2 mb-3">
