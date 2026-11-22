@@ -6302,6 +6302,32 @@ EXTRA_UI.tierFromN = { fr: "dès {n}", en: "from {n}", es: "desde {n}", pt: "a p
 EXTRA_UI.tiersHint = { fr: "Avec une quantité, le prix change tout seul dans le panier dès qu'on l'atteint. Sans quantité, il ne s'applique que si vous choisissez ce tarif dans le panier (revendeur).", en: "With a quantity, the price switches by itself in the cart once it's reached. Without one, it only applies when you pick this rate in the cart (reseller).", es: "Con una cantidad, el precio cambia solo en el carrito al alcanzarla. Sin cantidad, solo se aplica si eliges esta tarifa en el carrito (revendedor).", pt: "Com uma quantidade, o preço muda sozinho no carrinho quando é atingida. Sem quantidade, só se aplica se escolher esta tarifa no carrinho (revendedor).", de: "Mit Menge wechselt der Preis im Warenkorb automatisch, sobald sie erreicht ist. Ohne Menge gilt er nur, wenn du diesen Tarif im Warenkorb wählst (Wiederverkäufer).", it: "Con una quantità, il prezzo cambia da solo nel carrello quando la si raggiunge. Senza, vale solo se scegli questa tariffa nel carrello (rivenditore).", nl: "Met een hoeveelheid verandert de prijs vanzelf in het mandje zodra die bereikt is. Zonder geldt hij alleen als je dit tarief kiest in het mandje (wederverkoper).", pl: "Z ilością cena zmienia się sama w koszyku po jej osiągnięciu. Bez ilości działa tylko, gdy wybierzesz tę taryfę w koszyku (odsprzedawca).", ru: "С количеством цена в корзине меняется сама, когда оно достигнуто. Без количества — только если выбрать этот тариф в корзине (перекупщик).", tr: "Miktar girilirse, sepette bu miktara ulaşınca fiyat kendiliğinden değişir. Girilmezse yalnızca sepette bu tarifeyi seçtiğinizde uygulanır (bayi).", ar: "مع كمية، يتغير السعر تلقائيًا في السلة عند بلوغها. بدونها، لا يُطبّق إلا إذا اخترت هذه التسعيرة في السلة (بائع تجزئة).", hi: "मात्रा देने पर, कार्ट में वह मात्रा पहुँचते ही दाम अपने आप बदलता है। बिना मात्रा के, यह तभी लगता है जब आप कार्ट में यह दर चुनें (फिर से बेचने वाला)।", bn: "পরিমাণ দিলে, কার্টে সেই পরিমাণ হলেই দাম নিজে বদলায়। না দিলে, কার্টে এই দর বাছলে তবেই প্রযোজ্য (পুনর্বিক্রেতা)।", ur: "مقدار دینے پر، کارٹ میں وہ مقدار ہوتے ہی قیمت خود بدل جاتی ہے۔ مقدار کے بغیر، یہ تب ہی لگتی ہے جب آپ کارٹ میں یہ ریٹ چنیں (دوبارہ بیچنے والا)۔", ta: "அளவு கொடுத்தால், கூடையில் அந்த அளவை எட்டியதும் விலை தானாக மாறும். இல்லையெனில் கூடையில் இந்தக் கட்டணத்தைத் தேர்ந்தெடுத்தால் மட்டுமே (மறுவிற்பனையாளர்).", te: "పరిమాణం ఇస్తే, కార్ట్‌లో అది చేరగానే ధర దానంతట అదే మారుతుంది. ఇవ్వకపోతే, కార్ట్‌లో ఈ ధరను ఎంచుకుంటేనే వర్తిస్తుంది (పునర్విక్రేత).", th: "ถ้าใส่จำนวน ราคาในตะกร้าจะเปลี่ยนเองเมื่อถึงจำนวนนั้น ถ้าไม่ใส่ จะใช้เฉพาะเมื่อเลือกราคานี้ในตะกร้า (ผู้ค้าปลีก)", zh: "填了数量，购物车达到该数量时价格自动切换；不填则只在购物车中选择此价格（转售商）时生效。", ja: "数量を入れると、カートでその数量に達した時点で自動的に価格が変わります。空欄なら、カートでこの料金を選んだときだけ適用されます（再販業者）。", ko: "수량을 넣으면 장바구니에서 그 수량에 도달하는 순간 가격이 자동으로 바뀝니다. 비워 두면 장바구니에서 이 요금을 고를 때만 적용됩니다(재판매자).", id: "Dengan jumlah, harga di keranjang berubah sendiri begitu jumlahnya tercapai. Tanpa jumlah, hanya berlaku jika Anda memilih tarif ini di keranjang (pengecer).", vi: "Có số lượng thì giá trong giỏ tự đổi khi đạt số đó. Không có thì chỉ áp dụng khi bạn chọn mức giá này trong giỏ (người bán lại).", tl: "Kapag may dami, kusa nang magbabago ang presyo sa cart pag naabot ito. Kung wala, gagana lang kapag pinili mo ang rate na ito sa cart (reseller).", sw: "Ukiweka idadi, bei inabadilika yenyewe kwenye kikapu idadi hiyo ikifikiwa. Bila idadi, inatumika tu ukichagua bei hii kwenye kikapu (muuzaji tena).", ha: "Da adadi, farashin zai canza da kansa a kwando idan an kai shi. Ba tare da adadi ba, yana aiki ne kawai idan ka zaɓi wannan farashi a kwando (mai sake sayarwa).", yo: "Pẹ̀lú iye, iye owó yóò yí padà fúnra rẹ̀ nínú agbọ̀n tí ó bá dé ibẹ̀. Láìsí iye, ó máa ń ṣiṣẹ́ nìkan tí o bá yan owó yìí nínú agbọ̀n (olùtajà-padà).", zu: "Ngenani, intengo ishintsha yodwa ebhasikidini uma lifinyelelwe. Ngaphandle kwalo, isebenza kuphela uma ukhetha leli zinga ebhasikidini (umthengisi kabusha).", am: "ብዛት ካስገቡ፣ በጋሪው ውስጥ ያ ብዛት ሲደርስ ዋጋው በራሱ ይቀየራል። ያለ ብዛት፣ ይህን ዋጋ በጋሪው ውስጥ ሲመርጡ ብቻ ይሠራል (መልሶ ሻጭ)።", bm: "N'i ye hakɛ sɛbɛn, sɔngɔ bɛ yɛlɛma a yɛrɛ ma pan kɔnɔ ni o hakɛ sera. N'i m'a sɛbɛn, a bɛ kɛ dɔrɔn n'i ye nin sɔngɔ sugandi pan kɔnɔ (feerekɛla kɔsɔn).", wo: "Su nga bindee ab lim, njëg gi dina soppiku boppam ci panye bi bu limu bi agsee. Su nga ko bindul, du dox su doon nga tànn njëg gii ci panye bi (jaaykat)." };
 EXTRA_UI.tariffLabel = { fr: "Tarif", en: "Rate", es: "Tarifa", pt: "Tarifa", de: "Tarif", it: "Tariffa", nl: "Tarief", pl: "Taryfa", ru: "Тариф", tr: "Tarife", ar: "التسعيرة", hi: "दर", bn: "দর", ur: "ریٹ", ta: "கட்டணம்", te: "ధర రకం", th: "ระดับราคา", zh: "价格档", ja: "料金", ko: "요금", id: "Tarif", vi: "Mức giá", tl: "Rate", sw: "Kiwango cha bei", ha: "Matakin farashi", yo: "Ìpele owó", zu: "Izinga lentengo", am: "የዋጋ ዓይነት", bm: "Sɔngɔ suguya", wo: "Njëg" };
 EXTRA_UI.tariffRemembered = { fr: "Tarif habituel de ce client, repris automatiquement.", en: "This customer's usual rate, applied automatically.", es: "Tarifa habitual de este cliente, aplicada automáticamente.", pt: "Tarifa habitual deste cliente, aplicada automaticamente.", de: "Üblicher Tarif dieses Kunden, automatisch übernommen.", it: "Tariffa abituale di questo cliente, applicata in automatico.", nl: "Gebruikelijk tarief van deze klant, automatisch toegepast.", pl: "Zwykła taryfa tego klienta, zastosowana automatycznie.", ru: "Обычный тариф этого клиента, применён автоматически.", tr: "Bu müşterinin her zamanki tarifesi, otomatik uygulandı.", ar: "التسعيرة المعتادة لهذا العميل، طُبّقت تلقائيًا.", hi: "इस ग्राहक की सामान्य दर, अपने आप लगाई गई।", bn: "এই গ্রাহকের সাধারণ দর, নিজে থেকেই প্রয়োগ হয়েছে।", ur: "اس گاہک کا معمول کا ریٹ، خود بخود لاگو۔", ta: "இந்த வாடிக்கையாளரின் வழக்கமான கட்டணம், தானாகப் பயன்படுத்தப்பட்டது.", te: "ఈ కస్టమర్ సాధారణ ధర, ఆటోమేటిక్‌గా వర్తింపజేయబడింది.", th: "ระดับราคาประจำของลูกค้ารายนี้ ใช้ให้อัตโนมัติ", zh: "该客户的常用价格档，已自动套用。", ja: "このお客様のいつもの料金を自動で適用しました。", ko: "이 고객의 평소 요금이 자동 적용되었습니다.", id: "Tarif biasa pelanggan ini, diterapkan otomatis.", vi: "Mức giá quen của khách này, tự động áp dụng.", tl: "Karaniwang rate ng customer na ito, awtomatikong inilapat.", sw: "Kiwango cha kawaida cha mteja huyu, kimetumika moja kwa moja.", ha: "Matakin farashin da wannan abokin ciniki ya saba, an saka shi kai tsaye.", yo: "Ìpele owó tí oníbàárà yìí máa ń lò, a fi sí i fúnra rẹ̀.", zu: "Izinga elijwayelekile lalo mthengi, lifakwe ngokuzenzakalelayo.", am: "የዚህ ደንበኛ የተለመደ ዋጋ፣ በራሱ ተተግብሯል።", bm: "Nin sannikɛla ka sɔngɔ bɛɛ lajɛlen, a donna a yɛrɛ ma.", wo: "Njëg gi kiliyaan bii miin, ñu def ko ci boppam." };
+EXTRA_UI.pickupNeedsCustomer = { fr: "Indiquez le nom du client qui viendra récupérer la commande.", en: "Enter the name of the customer who will pick up the order.", es: "Indica el nombre del cliente que recogerá el pedido.", pt: "Indique o nome do cliente que vai levantar a encomenda.", de: "Gib den Namen des Kunden ein, der die Bestellung abholt.", it: "Indica il nome del cliente che ritirerà l'ordine.", nl: "Vul de naam in van de klant die de bestelling ophaalt.", pl: "Podaj imię klienta, który odbierze zamówienie.", ru: "Укажите имя клиента, который заберёт заказ.", tr: "Siparişi alacak müşterinin adını girin.", ar: "أدخل اسم العميل الذي سيستلم الطلب.", hi: "ऑर्डर लेने आने वाले ग्राहक का नाम लिखें।", bn: "যে গ্রাহক অর্ডার নিতে আসবেন তার নাম লিখুন।", ur: "آرڈر لینے آنے والے گاہک کا نام لکھیں۔", ta: "ஆர்டரை எடுக்க வரும் வாடிக்கையாளரின் பெயரை உள்ளிடவும்.", te: "ఆర్డర్ తీసుకెళ్లే కస్టమర్ పేరు నమోదు చేయండి.", th: "ใส่ชื่อลูกค้าที่จะมารับสินค้า", zh: "请填写来取货的客户姓名。", ja: "受け取りに来るお客様の名前を入力してください。", ko: "주문을 찾으러 올 고객 이름을 입력하세요.", id: "Masukkan nama pelanggan yang akan mengambil pesanan.", vi: "Nhập tên khách sẽ đến nhận hàng.", tl: "Ilagay ang pangalan ng customer na kukuha ng order.", sw: "Andika jina la mteja atakayechukua oda.", ha: "Rubuta sunan abokin cinikin da zai zo ya karɓi odar.", yo: "Tẹ orúkọ oníbàárà tí yóò wá gba ọjà náà.", zu: "Faka igama lomthengi ozothatha i-oda.", am: "ትዕዛዙን የሚወስደውን ደንበኛ ስም ያስገቡ።", bm: "Sannikɛla min bɛna komandi ta, a tɔgɔ sɛbɛn.", wo: "Bindal turu kiliyaan bi di ñëw jël komand bi." };
+EXTRA_UI.pickupOn = { fr: "À retirer le {date}", en: "Pick up on {date}", es: "Recoger el {date}", pt: "Levantar em {date}", de: "Abholung am {date}", it: "Ritiro il {date}", nl: "Ophalen op {date}", pl: "Odbiór {date}", ru: "Забрать {date}", tr: "{date} tarihinde alınacak", ar: "الاستلام يوم {date}", hi: "{date} को लेना है", bn: "{date} তারিখে নেবেন", ur: "{date} کو لینا ہے", ta: "{date} அன்று எடுக்க வேண்டும்", te: "{date}న తీసుకెళ్లాలి", th: "มารับวันที่ {date}", zh: "{date} 取货", ja: "{date} 受け取り", ko: "{date} 수령", id: "Diambil {date}", vi: "Nhận ngày {date}", tl: "Kukunin sa {date}", sw: "Kuchukua {date}", ha: "Karɓa ranar {date}", yo: "Gbígbà ní {date}", zu: "Kuthathwa ngo-{date}", am: "በ{date} የሚወሰድ", bm: "A tali {date}", wo: "Jël ko {date}" };
+EXTRA_UI.pickupLaterShort = { fr: "À retirer plus tard", en: "To pick up later", es: "Para recoger más tarde", pt: "Para levantar mais tarde", de: "Wird später abgeholt", it: "Da ritirare più tardi", nl: "Later op te halen", pl: "Do odbioru później", ru: "Заберут позже", tr: "Daha sonra alınacak", ar: "يُستلم لاحقًا", hi: "बाद में ले जाएँगे", bn: "পরে নেবেন", ur: "بعد میں لیں گے", ta: "பிறகு எடுப்பார்", te: "తర్వాత తీసుకెళ్తారు", th: "มารับทีหลัง", zh: "稍后取货", ja: "後日受け取り", ko: "나중에 수령", id: "Diambil nanti", vi: "Nhận sau", tl: "Kukunin mamaya", sw: "Atachukua baadaye", ha: "Za a karɓa daga baya", yo: "Wọ́n á gbà á nígbà míì", zu: "Kuzothathwa kamuva", am: "በኋላ የሚወሰድ", bm: "A bɛna ta kɔfɛ", wo: "Dinañu ko jël ci kanam" };
+EXTRA_UI.logOrderDelivered = { fr: "Commande retirée", en: "Order picked up", es: "Pedido recogido", pt: "Encomenda levantada", de: "Bestellung abgeholt", it: "Ordine ritirato", nl: "Bestelling opgehaald", pl: "Zamówienie odebrane", ru: "Заказ забран", tr: "Sipariş alındı", ar: "تم استلام الطلب", hi: "ऑर्डर ले लिया गया", bn: "অর্ডার নিয়ে গেছেন", ur: "آرڈر لے لیا گیا", ta: "ஆர்டர் எடுக்கப்பட்டது", te: "ఆర్డర్ తీసుకెళ్లారు", th: "รับสินค้าแล้ว", zh: "已取货", ja: "受け取り済み", ko: "수령 완료", id: "Pesanan diambil", vi: "Đã nhận hàng", tl: "Nakuha na ang order", sw: "Oda imechukuliwa", ha: "An karɓi odar", yo: "Wọ́n ti gba ọjà", zu: "I-oda ithathiwe", am: "ትዕዛዙ ተወስዷል", bm: "Komandi tara", wo: "Jël nañu komand bi" };
+EXTRA_UI.pickupsDueBanner = { fr: "{n} commande(s) à retirer aujourd'hui ou en retard", en: "{n} order(s) to pick up today or overdue", es: "{n} pedido(s) para recoger hoy o atrasados", pt: "{n} encomenda(s) para levantar hoje ou atrasadas", de: "{n} Bestellung(en) heute abzuholen oder überfällig", it: "{n} ordine/i da ritirare oggi o in ritardo", nl: "{n} bestelling(en) vandaag op te halen of te laat", pl: "Zamówienia do odbioru dziś lub zaległe: {n}", ru: "Заказов к выдаче сегодня или просрочено: {n}", tr: "Bugün alınacak veya geciken {n} sipariş", ar: "{n} طلب للاستلام اليوم أو متأخر", hi: "{n} ऑर्डर आज लेने हैं या देर हो चुकी है", bn: "{n}টি অর্ডার আজ নেওয়ার বা দেরি হয়েছে", ur: "{n} آرڈر آج لینے ہیں یا تاخیر ہو چکی", ta: "இன்று எடுக்க வேண்டிய அல்லது தாமதமான {n} ஆர்டர்கள்", te: "ఈ రోజు తీసుకెళ్లాల్సిన లేదా ఆలస్యమైన {n} ఆర్డర్‌లు", th: "{n} รายการต้องมารับวันนี้หรือเลยกำหนด", zh: "{n} 个订单今天取货或已逾期", ja: "本日受け取りまたは期限切れの注文 {n} 件", ko: "오늘 수령 또는 지연된 주문 {n}건", id: "{n} pesanan diambil hari ini atau terlambat", vi: "{n} đơn cần nhận hôm nay hoặc đã trễ", tl: "{n} order na kukunin ngayon o huli na", sw: "Oda {n} za kuchukuliwa leo au zimechelewa", ha: "Oda {n} da za a karɓa yau ko sun makara", yo: "Ọjà {n} tí wọ́n á gbà lónìí tàbí tí ó ti pẹ́", zu: "Ama-oda angu-{n} azothathwa namuhla noma asephuze", am: "ዛሬ የሚወሰዱ ወይም የዘገዩ {n} ትዕዛዞች", bm: "Komandi {n} ka kan ka ta bi walima u mɛɛnna", wo: "{n} komand yu ñuy jël tey walla yu yéex" };
+EXTRA_UI.ordersBtn = { fr: "Commandes", en: "Orders", es: "Pedidos", pt: "Encomendas", de: "Bestellungen", it: "Ordini", nl: "Bestellingen", pl: "Zamówienia", ru: "Заказы", tr: "Siparişler", ar: "الطلبات", hi: "ऑर्डर", bn: "অর্ডার", ur: "آرڈر", ta: "ஆர்டர்கள்", te: "ఆర్డర్‌లు", th: "ออเดอร์", zh: "订单", ja: "注文", ko: "주문", id: "Pesanan", vi: "Đơn hàng", tl: "Mga order", sw: "Oda", ha: "Oda", yo: "Àṣẹ ọjà", zu: "Ama-oda", am: "ትዕዛዞች", bm: "Komandiw", wo: "Komand yi" };
+EXTRA_UI.pickupLaterToggle = { fr: "Le client récupère plus tard", en: "Customer picks up later", es: "El cliente recoge más tarde", pt: "O cliente levanta mais tarde", de: "Kunde holt später ab", it: "Il cliente ritira più tardi", nl: "Klant haalt later op", pl: "Klient odbierze później", ru: "Клиент заберёт позже", tr: "Müşteri daha sonra alacak", ar: "العميل يستلم لاحقًا", hi: "ग्राहक बाद में ले जाएगा", bn: "গ্রাহক পরে নেবেন", ur: "گاہک بعد میں لے گا", ta: "வாடிக்கையாளர் பிறகு எடுப்பார்", te: "కస్టమర్ తర్వాత తీసుకెళ్తారు", th: "ลูกค้ามารับทีหลัง", zh: "客户稍后取货", ja: "お客様が後日受け取る", ko: "고객이 나중에 수령", id: "Pelanggan ambil nanti", vi: "Khách nhận sau", tl: "Kukunin ng customer mamaya", sw: "Mteja atachukua baadaye", ha: "Abokin ciniki zai karɓa daga baya", yo: "Oníbàárà á gbà á nígbà míì", zu: "Umthengi uzothatha kamuva", am: "ደንበኛው በኋላ ይወስዳል", bm: "Sannikɛla bɛna a ta kɔfɛ", wo: "Kiliyaan bi dina ko jël ci kanam" };
+EXTRA_UI.pickupDateLabel = { fr: "Date de retrait (facultatif)", en: "Pick-up date (optional)", es: "Fecha de recogida (opcional)", pt: "Data de levantamento (opcional)", de: "Abholdatum (optional)", it: "Data di ritiro (facoltativa)", nl: "Ophaaldatum (optioneel)", pl: "Data odbioru (opcjonalnie)", ru: "Дата выдачи (необязательно)", tr: "Teslim tarihi (isteğe bağlı)", ar: "تاريخ الاستلام (اختياري)", hi: "लेने की तारीख़ (वैकल्पिक)", bn: "নেওয়ার তারিখ (ঐচ্ছিক)", ur: "لینے کی تاریخ (اختیاری)", ta: "எடுக்கும் தேதி (விருப்பம்)", te: "తీసుకెళ్లే తేదీ (ఐచ్ఛికం)", th: "วันที่มารับ (ไม่บังคับ)", zh: "取货日期（可选）", ja: "受け取り日（任意）", ko: "수령 날짜 (선택)", id: "Tanggal ambil (opsional)", vi: "Ngày nhận (không bắt buộc)", tl: "Petsa ng pagkuha (opsyonal)", sw: "Tarehe ya kuchukua (si lazima)", ha: "Ranar karɓa (ba dole ba)", yo: "Ọjọ́ gbígbà (kò pọn dandan)", zu: "Usuku lokuthatha (akuphoqelekile)", am: "የሚወሰድበት ቀን (አማራጭ)", bm: "Tali don (n'i b'a fɛ)", wo: "Bisu jël (su la neexee)" };
+EXTRA_UI.pickupLaterHint = { fr: "La vente est enregistrée maintenant et le stock mis de côté. Avec « Crédit », vous pouvez prendre une avance ; le reste se paie dans Dettes. Cochez « Retirée » dans Commandes quand le client passe.", en: "The sale is recorded now and the stock set aside. With “Credit” you can take an advance; the rest is paid in Debts. Tick “Picked up” in Orders when the customer comes.", es: "La venta se registra ahora y el stock queda apartado. Con «Crédito» puedes cobrar un anticipo; el resto se paga en Deudas. Marca «Recogido» en Pedidos cuando venga el cliente.", pt: "A venda fica registada agora e o stock reservado. Com «Crédito» pode receber um adiantamento; o resto paga-se em Dívidas. Marque «Levantado» em Encomendas quando o cliente vier.", de: "Der Verkauf wird jetzt gebucht und die Ware zurückgelegt. Mit „Kredit“ kannst du eine Anzahlung nehmen; der Rest wird unter Schulden bezahlt. Hake in Bestellungen „Abgeholt“ ab, wenn der Kunde kommt.", it: "La vendita è registrata ora e la merce messa da parte. Con «Credito» puoi prendere un anticipo; il resto si paga in Debiti. Segna «Ritirato» in Ordini quando passa il cliente.", nl: "De verkoop wordt nu geboekt en de voorraad apart gelegd. Met „Krediet” kun je een voorschot nemen; de rest betaal je bij Schulden. Vink „Opgehaald” aan in Bestellingen als de klant komt.", pl: "Sprzedaż jest zapisana teraz, a towar odłożony. Przy „Kredycie” możesz wziąć zaliczkę; resztę spłaca się w Długach. Zaznacz „Odebrane” w Zamówieniach, gdy klient przyjdzie.", ru: "Продажа записывается сейчас, товар откладывается. С «Кредитом» можно взять аванс; остаток оплачивается в Долгах. Отметьте «Забрал» в Заказах, когда клиент придёт.", tr: "Satış şimdi kaydedilir ve ürün ayrılır. «Veresiye» ile avans alabilirsiniz; kalan Borçlar'dan ödenir. Müşteri gelince Siparişler'de «Alındı» işaretleyin.", ar: "تُسجَّل البيعة الآن ويُحجز المخزون. مع «آجل» يمكنك أخذ دفعة مقدمة؛ والباقي يُدفع في الديون. علّم «تم الاستلام» في الطلبات عند حضور العميل.", hi: "बिक्री अभी दर्ज होती है और माल अलग रख दिया जाता है। «उधार» के साथ आप एडवांस ले सकते हैं; बाकी उधार में चुकाया जाता है। ग्राहक आने पर ऑर्डर में «ले लिया» चुनें।", bn: "বিক্রি এখনই হিসাবে ওঠে আর মাল আলাদা রাখা হয়। «বাকি»-তে অগ্রিম নিতে পারেন; বাকিটা দেনায় শোধ হয়। গ্রাহক এলে অর্ডারে «নিয়ে গেছেন» চিহ্ন দিন।", ur: "فروخت ابھی درج ہوتی ہے اور مال الگ رکھ دیا جاتا ہے۔ «ادھار» کے ساتھ ایڈوانس لے سکتے ہیں؛ باقی قرضوں میں ادا ہوتا ہے۔ گاہک آئے تو آرڈر میں «لے لیا» نشان لگائیں۔", ta: "விற்பனை இப்போதே பதிவாகி, பொருள் ஒதுக்கி வைக்கப்படும். «கடன்» மூலம் முன்பணம் வாங்கலாம்; மீதி கடன்களில் செலுத்தப்படும். வாடிக்கையாளர் வந்ததும் ஆர்டர்களில் «எடுத்தார்» என்று குறிக்கவும்.", te: "అమ్మకం ఇప్పుడే నమోదై, సరుకు పక్కన పెట్టబడుతుంది. «అప్పు»తో అడ్వాన్స్ తీసుకోవచ్చు; మిగతాది అప్పుల్లో చెల్లిస్తారు. కస్టమర్ వచ్చినప్పుడు ఆర్డర్‌లలో «తీసుకెళ్లారు» టిక్ చేయండి.", th: "บันทึกการขายตอนนี้และกันสต็อกไว้ให้ เลือก «เครดิต» เพื่อรับมัดจำได้ ส่วนที่เหลือจ่ายในหนี้ ติ๊ก «รับแล้ว» ในออเดอร์เมื่อลูกค้ามา", zh: "销售立即记录，库存为客户预留。选择“赊账”可先收定金，余款在欠款中结清。客户来取时在订单里勾选“已取货”。", ja: "販売は今記録され、在庫は取り置かれます。「掛け」なら前金を受け取れ、残りは「貸し」で支払われます。お客様が来たら注文で「受け取り済み」にしてください。", ko: "판매는 지금 기록되고 재고는 따로 보관됩니다. '외상'으로 선금을 받을 수 있고 잔금은 '외상'에서 받습니다. 고객이 오면 주문에서 '수령 완료'를 누르세요.", id: "Penjualan dicatat sekarang dan stok disisihkan. Dengan «Kredit» Anda bisa menerima uang muka; sisanya dibayar di Utang. Centang «Sudah diambil» di Pesanan saat pelanggan datang.", vi: "Đơn bán được ghi ngay và hàng được giữ lại. Chọn «Ghi nợ» để nhận tiền cọc; phần còn lại trả ở mục Nợ. Đánh dấu «Đã nhận» trong Đơn hàng khi khách đến.", tl: "Naitala na ngayon ang benta at nakatabi ang stock. Sa «Utang» puwede kang tumanggap ng paunang bayad; ang natitira ay babayaran sa Mga Utang. I-tsek ang «Nakuha na» sa Mga order pagdating ng customer.", sw: "Mauzo yanarekodiwa sasa na bidhaa zinawekwa kando. Kwa «Mkopo» unaweza kuchukua malipo ya awali; salio linalipwa kwenye Madeni. Weka alama «Imechukuliwa» kwenye Oda mteja akija.", ha: "Ana rubuta sayarwar yanzu kuma an ajiye kayan. Da «Bashi» za ka iya karɓar gaba; sauran ana biya a Basussuka. Yi alama «An karɓa» a Oda idan abokin ciniki ya zo.", yo: "A ti kọ títà náà sílẹ̀ báyìí, a sì ti ya ọjà sọ́tọ̀. Pẹ̀lú «Àwìn» o lè gba owó ìṣáájú; èyí tó kù ni a ó san nínú Gbèsè. Sàmì «Wọ́n ti gbà á» nínú Àṣẹ ọjà nígbà tí oníbàárà bá dé.", zu: "Ukuthengisa kubhalwa manje futhi isitoko sibekelwa eceleni. Nge-«Isikweletu» ungathatha imali yokuqala; okusele kukhokhwa kuZikweletu. Maka «Kuthathiwe» kuma-oda uma umthengi efika.", am: "ሽያጩ አሁን ይመዘገባል፣ ዕቃውም ይቀመጣል። በ«ዱቤ» ቅድመ ክፍያ መውሰድ ይችላሉ፤ ቀሪው በዕዳዎች ይከፈላል። ደንበኛው ሲመጣ በትዕዛዞች «ተወስዷል» ይምረጡ።", bm: "Feereli bɛ sɛbɛn sisan, fɛnw bɛ bila kɛrɛfɛ a ye. «Juru» la, i bɛ se ka wari dɔ ta fɔlɔ; tɔ bɛ sara Juruw la. Sannikɛla nana tuma min, «A tara» taamasiyɛn kɛ Komandiw la.", wo: "Jaay bi bind nañu ko léegi, marsandiis bi ñu denc ko ko. Ak «Bor» mën nga jël ab avaas; li des dees koy fey ci Bor yi. Su kiliyaan bi ñëwee, tànnal «Jël na ko» ci Komand yi." };
+EXTRA_UI.orderDeliveredLabel = { fr: "Commande retirée", en: "Picked up", es: "Recogido", pt: "Levantado", de: "Abgeholt", it: "Ritirato", nl: "Opgehaald", pl: "Odebrane", ru: "Забрано", tr: "Alındı", ar: "تم الاستلام", hi: "ले लिया", bn: "নিয়ে গেছেন", ur: "لے لیا", ta: "எடுத்துச் சென்றார்", te: "తీసుకెళ్లారు", th: "รับแล้ว", zh: "已取货", ja: "受け取り済み", ko: "수령 완료", id: "Sudah diambil", vi: "Đã nhận", tl: "Nakuha na", sw: "Imechukuliwa", ha: "An karɓa", yo: "Wọ́n ti gbà á", zu: "Kuthathiwe", am: "ተወስዷል", bm: "A tara", wo: "Jël na ko" };
+EXTRA_UI.cartDetailsTitle = { fr: "Détails de la commande", en: "Order details", es: "Detalles del pedido", pt: "Detalhes da encomenda", de: "Bestelldetails", it: "Dettagli dell'ordine", nl: "Bestelgegevens", pl: "Szczegóły zamówienia", ru: "Детали заказа", tr: "Sipariş ayrıntıları", ar: "تفاصيل الطلب", hi: "ऑर्डर का विवरण", bn: "অর্ডারের বিবরণ", ur: "آرڈر کی تفصیل", ta: "ஆர்டர் விவரங்கள்", te: "ఆర్డర్ వివరాలు", th: "รายละเอียดออเดอร์", zh: "订单详情", ja: "注文の詳細", ko: "주문 상세", id: "Detail pesanan", vi: "Chi tiết đơn", tl: "Detalye ng order", sw: "Maelezo ya oda", ha: "Bayanan oda", yo: "Àlàyé àṣẹ ọjà", zu: "Imininingwane ye-oda", am: "የትዕዛዝ ዝርዝር", bm: "Komandi kunnafoniw", wo: "Leeral komand bi" };
+EXTRA_UI.cartNameLabel = { fr: "Nom (table, client…)", en: "Name (table, customer…)", es: "Nombre (mesa, cliente…)", pt: "Nome (mesa, cliente…)", de: "Name (Tisch, Kunde…)", it: "Nome (tavolo, cliente…)", nl: "Naam (tafel, klant…)", pl: "Nazwa (stolik, klient…)", ru: "Название (стол, клиент…)", tr: "Ad (masa, müşteri…)", ar: "الاسم (طاولة، عميل…)", hi: "नाम (टेबल, ग्राहक…)", bn: "নাম (টেবিল, গ্রাহক…)", ur: "نام (میز، گاہک…)", ta: "பெயர் (மேசை, வாடிக்கையாளர்…)", te: "పేరు (టేబుల్, కస్టమర్…)", th: "ชื่อ (โต๊ะ ลูกค้า…)", zh: "名称（桌号、客户…）", ja: "名前（テーブル、お客様…）", ko: "이름 (테이블, 고객…)", id: "Nama (meja, pelanggan…)", vi: "Tên (bàn, khách…)", tl: "Pangalan (mesa, customer…)", sw: "Jina (meza, mteja…)", ha: "Suna (tebur, abokin ciniki…)", yo: "Orúkọ (tábìlì, oníbàárà…)", zu: "Igama (ithebula, umthengi…)", am: "ስም (ጠረጴዛ፣ ደንበኛ…)", bm: "Tɔgɔ (tabali, sannikɛla…)", wo: "Tur (taabal, kiliyaan…)" };
+EXTRA_UI.cartNamePlaceholder = { fr: "Ex. : Table 3, Gâteau Awa", en: "E.g. Table 3, Awa's cake", es: "Ej.: Mesa 3, Pastel de Awa", pt: "Ex.: Mesa 3, Bolo da Awa", de: "z. B. Tisch 3, Kuchen Awa", it: "Es.: Tavolo 3, Torta Awa", nl: "Bv. Tafel 3, Taart Awa", pl: "Np. Stolik 3, Tort Awy", ru: "Напр.: Стол 3, Торт Авы", tr: "Örn. Masa 3, Awa'nın pastası", ar: "مثال: طاولة 3، كعكة عوا", hi: "जैसे: टेबल 3, आवा का केक", bn: "যেমন: টেবিল ৩, আওয়ার কেক", ur: "مثلاً: میز 3، آوا کا کیک", ta: "எ.கா.: மேசை 3, அவாவின் கேக்", te: "ఉదా.: టేబుల్ 3, అవా కేక్", th: "เช่น โต๊ะ 3, เค้กของอาวา", zh: "如：3号桌、Awa 的蛋糕", ja: "例：3番テーブル、アワさんのケーキ", ko: "예: 3번 테이블, 아와 케이크", id: "Mis.: Meja 3, Kue Awa", vi: "Vd: Bàn 3, Bánh của Awa", tl: "Hal.: Mesa 3, Cake ni Awa", sw: "Mf.: Meza 3, Keki ya Awa", ha: "Misali: Tebur 3, Kek ɗin Awa", yo: "Àpẹẹrẹ: Tábìlì 3, Kéèkì Awa", zu: "Isb.: Ithebula 3, Ikhekhe lika-Awa", am: "ለምሳሌ: ጠረጴዛ 3፣ የአዋ ኬክ", bm: "Misali: Tabali 3, Awa ka gato", wo: "Misaal: Taabal 3, Gatoo Awa" };
+EXTRA_UI.cartDueLabel = { fr: "Pour le (date et heure, facultatif)", en: "For (date and time, optional)", es: "Para el (fecha y hora, opcional)", pt: "Para (data e hora, opcional)", de: "Für (Datum und Uhrzeit, optional)", it: "Per il (data e ora, facoltativo)", nl: "Voor (datum en tijd, optioneel)", pl: "Na (data i godzina, opcjonalnie)", ru: "К (дата и время, необязательно)", tr: "Ne zamana (tarih ve saat, isteğe bağlı)", ar: "لموعد (التاريخ والوقت، اختياري)", hi: "कब के लिए (तारीख़ और समय, वैकल्पिक)", bn: "কখনের জন্য (তারিখ ও সময়, ঐচ্ছিক)", ur: "کب کے لیے (تاریخ اور وقت، اختیاری)", ta: "எப்போதுக்கு (தேதி, நேரம், விருப்பம்)", te: "ఎప్పటికి (తేదీ, సమయం, ఐచ్ఛికం)", th: "สำหรับ (วันและเวลา ไม่บังคับ)", zh: "预定时间（日期和时间，可选）", ja: "いつまで（日時、任意）", ko: "예정 (날짜와 시간, 선택)", id: "Untuk (tanggal dan jam, opsional)", vi: "Cho lúc (ngày giờ, không bắt buộc)", tl: "Para sa (petsa at oras, opsyonal)", sw: "Kwa (tarehe na saa, si lazima)", ha: "Na (rana da lokaci, ba dole ba)", yo: "Fún (ọjọ́ àti àkókò, kò pọn dandan)", zu: "Okwa- (usuku nesikhathi, akuphoqelekile)", am: "ለ (ቀንና ሰዓት፣ አማራጭ)", bm: "Waati (don ni lɛrɛ, n'i b'a fɛ)", wo: "Ngir (bés ak waxtu, su la neexee)" };
+EXTRA_UI.cartNoteLabel = { fr: "Note (facultatif)", en: "Note (optional)", es: "Nota (opcional)", pt: "Nota (opcional)", de: "Notiz (optional)", it: "Nota (facoltativa)", nl: "Notitie (optioneel)", pl: "Notatka (opcjonalnie)", ru: "Заметка (необязательно)", tr: "Not (isteğe bağlı)", ar: "ملاحظة (اختياري)", hi: "नोट (वैकल्पिक)", bn: "নোট (ঐচ্ছিক)", ur: "نوٹ (اختیاری)", ta: "குறிப்பு (விருப்பம்)", te: "గమనిక (ఐచ్ఛికం)", th: "หมายเหตุ (ไม่บังคับ)", zh: "备注（可选）", ja: "メモ（任意）", ko: "메모 (선택)", id: "Catatan (opsional)", vi: "Ghi chú (không bắt buộc)", tl: "Tala (opsyonal)", sw: "Maelezo (si lazima)", ha: "Bayani (ba dole ba)", yo: "Àkọsílẹ̀ (kò pọn dandan)", zu: "Inothi (akuphoqelekile)", am: "ማስታወሻ (አማራጭ)", bm: "Kunnafoni (n'i b'a fɛ)", wo: "Bind (su la neexee)" };
+EXTRA_UI.cartNotePlaceholder = { fr: "Ex. : sans piment, écrire « Joyeux anniversaire »", en: "E.g. no chili, write “Happy birthday”", es: "Ej.: sin picante, escribir «Feliz cumpleaños»", pt: "Ex.: sem picante, escrever «Feliz aniversário»", de: "z. B. ohne Chili, „Alles Gute“ schreiben", it: "Es.: senza peperoncino, scrivere «Buon compleanno»", nl: "Bv. zonder peper, „Gefeliciteerd” schrijven", pl: "Np. bez chili, napis „Wszystkiego najlepszego”", ru: "Напр.: без перца, написать «С днём рождения»", tr: "Örn. acısız, «Mutlu yıllar» yazılsın", ar: "مثال: بدون فلفل، اكتب «عيد ميلاد سعيد»", hi: "जैसे: मिर्च नहीं, «जन्मदिन मुबारक» लिखें", bn: "যেমন: ঝাল ছাড়া, «শুভ জন্মদিন» লিখুন", ur: "مثلاً: مرچ کے بغیر، «سالگرہ مبارک» لکھیں", ta: "எ.கா.: காரம் இல்லாமல், «பிறந்தநாள் வாழ்த்துகள்» எழுதவும்", te: "ఉదా.: కారం లేకుండా, «పుట్టినరోజు శుభాకాంక్షలు» రాయండి", th: "เช่น ไม่เผ็ด เขียนว่า «สุขสันต์วันเกิด»", zh: "如：不要辣，写“生日快乐”", ja: "例：唐辛子なし、「お誕生日おめでとう」と書く", ko: "예: 고추 빼고, '생일 축하해' 문구", id: "Mis.: tanpa cabai, tulis «Selamat ulang tahun»", vi: "Vd: không ớt, ghi «Chúc mừng sinh nhật»", tl: "Hal.: walang sili, isulat ang «Maligayang kaarawan»", sw: "Mf.: bila pilipili, andika «Heri ya siku ya kuzaliwa»", ha: "Misali: ba barkono, rubuta «Barka da zagayowar ranar haihuwa»", yo: "Àpẹẹrẹ: láìsí ata, kọ «Ẹ kú ọjọ́ìbí»", zu: "Isb.: ngaphandle kopelepele, bhala «Usuku lokuzalwa oluhle»", am: "ለምሳሌ: ያለ በርበሬ፣ «መልካም ልደት» ይጻፍ", bm: "Misali: foronto t'a la, a sɛbɛn «San kura diya»", wo: "Misaal: amul kaani, bind «Bés bu baax ci sa juddu»" };
+EXTRA_UI.ordersTitle = { fr: "Commandes en cours", en: "Current orders", es: "Pedidos en curso", pt: "Encomendas em curso", de: "Offene Bestellungen", it: "Ordini in corso", nl: "Lopende bestellingen", pl: "Bieżące zamówienia", ru: "Текущие заказы", tr: "Açık siparişler", ar: "الطلبات الجارية", hi: "चालू ऑर्डर", bn: "চলমান অর্ডার", ur: "جاری آرڈر", ta: "நடப்பு ஆர்டர்கள்", te: "ప్రస్తుత ఆర్డర్‌లు", th: "ออเดอร์ที่ค้างอยู่", zh: "进行中的订单", ja: "進行中の注文", ko: "진행 중인 주문", id: "Pesanan berjalan", vi: "Đơn đang mở", tl: "Kasalukuyang mga order", sw: "Oda zinazoendelea", ha: "Odojin da ke gudana", yo: "Àṣẹ ọjà tó ń lọ lọ́wọ́", zu: "Ama-oda aqhubekayo", am: "በሂደት ላይ ያሉ ትዕዛዞች", bm: "Komandi minnu bɛ taa", wo: "Komand yi nekk ci yoon" };
+EXTRA_UI.ordersEmpty = { fr: "Aucune commande en cours.", en: "No current orders.", es: "No hay pedidos en curso.", pt: "Nenhuma encomenda em curso.", de: "Keine offenen Bestellungen.", it: "Nessun ordine in corso.", nl: "Geen lopende bestellingen.", pl: "Brak bieżących zamówień.", ru: "Текущих заказов нет.", tr: "Açık sipariş yok.", ar: "لا توجد طلبات جارية.", hi: "कोई चालू ऑर्डर नहीं।", bn: "কোনো চলমান অর্ডার নেই।", ur: "کوئی جاری آرڈر نہیں۔", ta: "நடப்பு ஆர்டர் எதுவும் இல்லை.", te: "ప్రస్తుత ఆర్డర్‌లు లేవు.", th: "ไม่มีออเดอร์ค้าง", zh: "暂无进行中的订单。", ja: "進行中の注文はありません。", ko: "진행 중인 주문이 없습니다.", id: "Tidak ada pesanan berjalan.", vi: "Không có đơn đang mở.", tl: "Walang kasalukuyang order.", sw: "Hakuna oda zinazoendelea.", ha: "Babu odar da ke gudana.", yo: "Kò sí àṣẹ ọjà tó ń lọ lọ́wọ́.", zu: "Awekho ama-oda aqhubekayo.", am: "በሂደት ላይ ያለ ትዕዛዝ የለም።", bm: "Komandi si tɛ taa.", wo: "Amul benn komand bu nekk ci yoon." };
+EXTRA_UI.ordersOpenSection = { fr: "Paniers ouverts", en: "Open carts", es: "Carritos abiertos", pt: "Carrinhos abertos", de: "Offene Warenkörbe", it: "Carrelli aperti", nl: "Open mandjes", pl: "Otwarte koszyki", ru: "Открытые корзины", tr: "Açık sepetler", ar: "السلال المفتوحة", hi: "खुले कार्ट", bn: "খোলা কার্ট", ur: "کھلی کارٹس", ta: "திறந்த கூடைகள்", te: "తెరిచిన కార్ట్‌లు", th: "ตะกร้าที่เปิดอยู่", zh: "未结账的购物车", ja: "開いているカート", ko: "열린 장바구니", id: "Keranjang terbuka", vi: "Giỏ đang mở", tl: "Bukas na cart", sw: "Vikapu vilivyo wazi", ha: "Kwandunan da ke buɗe", yo: "Àwọn agbọ̀n tó ṣí sílẹ̀", zu: "Amabhasikidi avuliwe", am: "ክፍት ጋሪዎች", bm: "Pan dayɛlɛlenw", wo: "Panye yu ubbeeku" };
+EXTRA_UI.orderOpenSince = { fr: "Ouvert depuis {n} min", en: "Open for {n} min", es: "Abierto hace {n} min", pt: "Aberto há {n} min", de: "Seit {n} Min. offen", it: "Aperto da {n} min", nl: "Open sinds {n} min", pl: "Otwarty od {n} min", ru: "Открыт {n} мин", tr: "{n} dakikadır açık", ar: "مفتوح منذ {n} دقيقة", hi: "{n} मिनट से खुला", bn: "{n} মিনিট ধরে খোলা", ur: "{n} منٹ سے کھلا", ta: "{n} நிமிடமாகத் திறந்துள்ளது", te: "{n} నిమిషాలుగా తెరిచి ఉంది", th: "เปิดมา {n} นาที", zh: "已开 {n} 分钟", ja: "{n} 分前から", ko: "{n}분째 열림", id: "Terbuka {n} menit", vi: "Mở {n} phút", tl: "Bukas nang {n} min", sw: "Wazi kwa dakika {n}", ha: "A buɗe tun minti {n}", yo: "Ó ti ṣí fún ìṣẹ́jú {n}", zu: "Kuvulwe imizuzu engu-{n}", am: "ለ{n} ደቂቃ ክፍት", bm: "A dayɛlɛlen don miniti {n}", wo: "Ubbeeku na {n} simili" };
+EXTRA_UI.ordersPickupSection = { fr: "À retirer", en: "To pick up", es: "Para recoger", pt: "Para levantar", de: "Abzuholen", it: "Da ritirare", nl: "Op te halen", pl: "Do odbioru", ru: "К выдаче", tr: "Alınacaklar", ar: "للاستلام", hi: "लेने बाकी", bn: "নেওয়া বাকি", ur: "لینے باقی", ta: "எடுக்க வேண்டியவை", te: "తీసుకెళ్లాల్సినవి", th: "รอมารับ", zh: "待取货", ja: "受け取り待ち", ko: "수령 대기", id: "Belum diambil", vi: "Chờ nhận", tl: "Kukunin pa", sw: "Za kuchukuliwa", ha: "Da za a karɓa", yo: "Tí wọ́n ó gbà", zu: "Okuzothathwa", am: "የሚወሰዱ", bm: "Minnu bɛ ta", wo: "Yu ñuy jël" };
+EXTRA_UI.orderLate = { fr: "en retard", en: "overdue", es: "atrasado", pt: "atrasado", de: "überfällig", it: "in ritardo", nl: "te laat", pl: "spóźnione", ru: "просрочено", tr: "gecikti", ar: "متأخر", hi: "देर हो गई", bn: "দেরি হয়েছে", ur: "تاخیر", ta: "தாமதம்", te: "ఆలస్యం", th: "เลยกำหนด", zh: "已逾期", ja: "期限切れ", ko: "지연", id: "terlambat", vi: "trễ", tl: "huli na", sw: "imechelewa", ha: "ya makara", yo: "ó ti pẹ́", zu: "sekwephuzile", am: "ዘግይቷል", bm: "a mɛɛnna", wo: "yéex na" };
+EXTRA_UI.orderRestToPay = { fr: "Reste à payer : {p}", en: "Left to pay: {p}", es: "Falta pagar: {p}", pt: "Falta pagar: {p}", de: "Noch offen: {p}", it: "Resta da pagare: {p}", nl: "Nog te betalen: {p}", pl: "Pozostało do zapłaty: {p}", ru: "Осталось оплатить: {p}", tr: "Kalan ödeme: {p}", ar: "المتبقي للدفع: {p}", hi: "बाकी भुगतान: {p}", bn: "বাকি পরিশোধ: {p}", ur: "باقی ادائیگی: {p}", ta: "செலுத்த வேண்டிய மீதி: {p}", te: "చెల్లించాల్సిన మిగతా: {p}", th: "ค้างจ่าย: {p}", zh: "待付余款：{p}", ja: "残金：{p}", ko: "남은 금액: {p}", id: "Sisa bayar: {p}", vi: "Còn phải trả: {p}", tl: "Babayaran pa: {p}", sw: "Salio la kulipa: {p}", ha: "Sauran biya: {p}", yo: "Èyí tó kù láti san: {p}", zu: "Okusele ukukhokhwa: {p}", am: "ቀሪ ክፍያ: {p}", bm: "Min tɔ ka sara: {p}", wo: "Li des ci fey: {p}" };
+EXTRA_UI.orderCollectRest = { fr: "Encaisser le reste", en: "Collect the rest", es: "Cobrar el resto", pt: "Receber o resto", de: "Rest kassieren", it: "Incassa il resto", nl: "Rest innen", pl: "Pobierz resztę", ru: "Получить остаток", tr: "Kalanı tahsil et", ar: "تحصيل الباقي", hi: "बाकी वसूलें", bn: "বাকি আদায় করুন", ur: "باقی وصول کریں", ta: "மீதியை வசூலி", te: "మిగతాది వసూలు చేయండి", th: "เก็บเงินที่เหลือ", zh: "收取余款", ja: "残金を受け取る", ko: "잔금 받기", id: "Tagih sisanya", vi: "Thu phần còn lại", tl: "Singilin ang natitira", sw: "Pokea salio", ha: "Karɓi sauran", yo: "Gba èyí tó kù", zu: "Qoqa okusele", am: "ቀሪውን ተቀበል", bm: "A tɔ minɛ", wo: "Jël li des" };
+EXTRA_UI.orderDeliveredConfirm = { fr: "Confirmer que {name} a récupéré sa commande ?", en: "Confirm that {name} picked up the order?", es: "¿Confirmar que {name} recogió su pedido?", pt: "Confirmar que {name} levantou a encomenda?", de: "Bestätigen, dass {name} die Bestellung abgeholt hat?", it: "Confermare che {name} ha ritirato l'ordine?", nl: "Bevestigen dat {name} de bestelling heeft opgehaald?", pl: "Potwierdzić, że {name} odebrał(a) zamówienie?", ru: "Подтвердить, что {name} забрал(а) заказ?", tr: "{name} siparişini aldı mı, onaylıyor musunuz?", ar: "تأكيد أن {name} استلم طلبه؟", hi: "पुष्टि करें कि {name} ने ऑर्डर ले लिया?", bn: "নিশ্চিত করবেন যে {name} অর্ডার নিয়ে গেছেন?", ur: "تصدیق کریں کہ {name} نے آرڈر لے لیا؟", ta: "{name} ஆர்டரை எடுத்துச் சென்றதை உறுதிப்படுத்தவா?", te: "{name} ఆర్డర్ తీసుకెళ్లారని నిర్ధారించాలా?", th: "ยืนยันว่า {name} มารับสินค้าแล้ว?", zh: "确认 {name} 已取货？", ja: "{name} さんが受け取ったことを確認しますか？", ko: "{name} 님이 주문을 찾아갔나요?", id: "Konfirmasi {name} sudah mengambil pesanan?", vi: "Xác nhận {name} đã nhận hàng?", tl: "Kumpirmahing nakuha na ni {name} ang order?", sw: "Thibitisha kuwa {name} amechukua oda?", ha: "Tabbatar cewa {name} ya karɓi odarsa?", yo: "Ṣé o fìdí rẹ̀ múlẹ̀ pé {name} ti gba ọjà rẹ̀?", zu: "Qinisekisa ukuthi u-{name} uyithathile i-oda?", am: "{name} ትዕዛዙን እንደወሰደ ያረጋግጡ?", bm: "I b'a sɛmɛntiya ko {name} ye a ka komandi ta wa?", wo: "Ndax {name} jël na komandam?" };
+EXTRA_UI.orderDeliveredBtn = { fr: "Retirée", en: "Picked up", es: "Recogido", pt: "Levantado", de: "Abgeholt", it: "Ritirato", nl: "Opgehaald", pl: "Odebrane", ru: "Забрано", tr: "Alındı", ar: "تم الاستلام", hi: "ले लिया", bn: "নিয়ে গেছেন", ur: "لے لیا", ta: "எடுத்தார்", te: "తీసుకెళ్లారు", th: "รับแล้ว", zh: "已取货", ja: "受け取り済み", ko: "수령 완료", id: "Sudah diambil", vi: "Đã nhận", tl: "Nakuha na", sw: "Imechukuliwa", ha: "An karɓa", yo: "Wọ́n ti gbà á", zu: "Kuthathiwe", am: "ተወስዷል", bm: "A tara", wo: "Jël na ko" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -11354,6 +11380,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (ids.length) out.push(ids.join(" · "));
     return out;
   };
+  // « À retirer le 24/11 » / « À retirer plus tard ».
+  const pickupDueText = (due) => (due && due !== "later"
+    ? tx(lang, "pickupOn").replace("{date}", fmtDateCached(new Date(due + "T12:00:00"), null, "date"))
+    : tx(lang, "pickupLaterShort"));
   // Sous-ligne d'un article : état (occasion, copie…), IMEI / n° de série, fin de garantie.
   const receiptItemExtra = (it) => {
     if (!it) return "";
@@ -11382,6 +11412,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       SEP,
       `📅 ${dateStr}`,
       ...(receipt.receiptNo ? [`🔖 ${tx(lang, "receiptNoLabel")}${colon}${receipt.receiptNo}`] : ticket ? [`🔖 ${tx(lang, "receiptTicketLabel")}${colon}#${ticket}`] : []),
+      ...(receipt.pickupDue ? [`📦 ${pickupDueText(receipt.pickupDue)}`] : []),
       ...(receipt.customer ? [`👤 ${tx(lang, "receiptClientLabel")}${colon}${receipt.customer}`] : []),
       SEP,
       ...receipt.items.map((it) => {
@@ -16632,12 +16663,32 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setCheckedCameraProductIds([]);
   };
 
+  // ---- Commandes en attente ----
+  // Un panier ouvert = une commande en cours (table de restaurant, commande d'un client…) :
+  // on peut lui donner un nom, une heure « pour le » et une note. Le stock de ses articles
+  // est déjà réservé tant qu'il reste ouvert.
+  const [showOrders, setShowOrders] = useState(false);
+  const [cartDetailsId, setCartDetailsId] = useState(null);
+  const [cdLabel, setCdLabel] = useState("");
+  const [cdDue, setCdDue] = useState("");
+  const [cdNote, setCdNote] = useState("");
+  const dueAtText = (v) => (v ? `${fullDate(v)} ${String(v).slice(11, 16)}`.trim() : "");
+  const openCartDetails = (c) => { setCartDetailsId(c.id); setCdLabel(c.label || ""); setCdDue(c.dueAt || ""); setCdNote(c.note || ""); };
+  const saveCartDetails = () => {
+    const label = cdLabel.trim();
+    saveAll({ draftCarts: draftCarts.map((c) => (c.id !== cartDetailsId ? c : { ...c, label: label || c.label, dueAt: cdDue || null, note: cdNote.trim() || null })) });
+    setCartDetailsId(null);
+  };
+  const markOrderDelivered = (o) => {
+    saveAll({ historyLog: [...historyLog, makeHistoryEntry("orderDelivered", { refId: o.tx, customer: o.customer, amount: o.total })] });
+    logAction(`${tx(lang, "logOrderDelivered")} : ${o.customer || ""} — ${o.items.join(", ")}`);
+  };
   const createCart = () => {
     // Le champ téléphone du client est préempli avec l'indicatif du pays du boutiquier
     // (boutiquier et client sont presque toujours dans le même pays) — ça évite de le
     // retaper à chaque vente ; reste entièrement modifiable, y compris pour le supprimer.
     const prefillDial = ownDialCode ? ownDialCode + " " : "";
-    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: defaultPaymentMethod || "cash", customer: "", phone: prefillDial, received: "" };
+    const newCart = { id: Date.now().toString() + Math.random().toString(36).slice(2, 7), label: `Panier ${draftCarts.length + 1}`, items: [], payment: defaultPaymentMethod || "cash", customer: "", phone: prefillDial, received: "", createdAt: Date.now() };
     const next = [...draftCarts, newCart];
     saveAll({ draftCarts: next, activeCartId: newCart.id });
   };
@@ -16855,6 +16906,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       setError(t(lang, "errCreditNeedsCustomer"));
       return;
     }
+    if (cart.pickupLater && !cart.customer.trim()) {
+      playSound("error"); triggerHaptic("error");
+      setError(tx(lang, "pickupNeedsCustomer"));
+      return;
+    }
     // Montant reçu obligatoire pour un paiement en espèces (sinon impossible de calculer
     // la monnaie à rendre, et le vendeur peut oublier de le saisir). On surligne le champ
     // en rouge et on y scrolle, comme pour les autres champs obligatoires de l'app —
@@ -16934,6 +16990,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         costPrice: product && product.costPrice != null ? product.costPrice : null,
         payment: cart.payment,
         customer: cart.customer.trim() || null,
+        // Commande à retirer plus tard (gâteau, mise de côté, livraison…) : la vente est
+        // faite (stock sorti et mis de côté pour le client), le retrait se coche ensuite
+        // dans « Commandes ». "later" = sans date précise.
+        ...(cart.pickupLater ? { pickupDue: cart.pickupDate || "later" } : {}),
         date: dateNow,
         received: receivedNum,
         change: receivedNum !== null ? receivedNum - total : null,
@@ -16964,6 +17024,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const newHistory = [makeHistoryEntry("sale", {
       refId: transactionId,
       receiptNo,
+      ...(cart.pickupLater ? { pickupDue: cart.pickupDate || "later" } : {}),
       date: dateNow,
       amount: total,
       customer: cart.customer.trim(),
@@ -16990,7 +17051,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // tard sans le retaper. L'échéance, elle, n'est pas demandée à la vente —
         // modifiable ensuite depuis l'onglet Dettes.
         phone: cart.phone || "",
-        dueDate: null,
+        dueDate: cart.pickupLater && cart.pickupDate ? cart.pickupDate : null,
       }];
       nextDebtEvents = [...allDebtEvents, {
         id: newDebtId + "-ev",
@@ -17051,7 +17112,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it) })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
+    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it) })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, pickupDue: cart.pickupLater ? (cart.pickupDate || "later") : null, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
+    // Avec plusieurs commandes ouvertes (tables…), la fenêtre d'encaissement ne doit pas
+    // rester ouverte sur la commande suivante : on la ferme après chaque vente.
+    setShowCheckoutModal(false);
   };
   // ---- Annulation d'une vente récente ----
   // La vente est marquée `cancelled` (jamais supprimée : ça permet à l'annulation de se propager
@@ -19052,6 +19116,31 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // cohérent avec le reste des permissions déjà appliquées ailleurs dans l'app.
   // Ventes annulées (par leur référence) : la ligne d'origine reste dans l'historique, marquée comme annulée.
   const cancelledSaleRefs = memoDerived("cancelledRefs", [historyLog], () => new Set(historyLog.filter((h) => h.type === "saleCancelled" && h.originalRef).map((h) => h.originalRef)));
+  // ---- Commandes ----
+  // À retirer : ventes marquées « retrait plus tard » pas encore cochées « retirée » (entrée
+  // d'historique orderDelivered, ajout seul, donc sûre en multi-appareils et pour le
+  // personnel). Le reste à payer vient de la dette créée par la vente à crédit.
+  const deliveredOrderRefs = memoDerived("deliveredRefs", [historyLog], () => new Set(historyLog.filter((h) => h.type === "orderDelivered" && h.refId).map((h) => h.refId)));
+  const pendingPickups = memoDerived("pendingPickups", [sales, historyLog, debts], () => {
+    const map = {};
+    sales.forEach((sl) => {
+      if (!sl.pickupDue) return;
+      const k = sl.transactionId || sl.id;
+      if (deliveredOrderRefs.has(k)) return;
+      if (!map[k]) map[k] = { tx: k, due: sl.pickupDue, customer: sl.customer || "", date: sl.date, items: [], total: 0, receiptNo: sl.receiptNo || null };
+      map[k].items.push(`${sl.productName} x${localizedQty(sl.qty)}`);
+      map[k].total += Number(sl.total) || 0;
+    });
+    return Object.values(map).map((o) => {
+      const d = debts.find((x) => x.transactionId === o.tx);
+      const rest = d && !d.paid ? Math.max(0, (Number(d.amount) || 0) - (Number(d.paidAmount) || 0)) : 0;
+      return { ...o, rest };
+    }).sort((a, b) => String(a.due).localeCompare(String(b.due)));
+  });
+  const todayKeyOrders = localDayKey(new Date());
+  const pickupsDueNow = pendingPickups.filter((o) => o.due !== "later" && o.due <= todayKeyOrders);
+  const openOrderCarts = draftCarts.filter((c) => c.items.length > 0 || c.dueAt || c.note);
+  const ordersCount = pendingPickups.length + openOrderCarts.length;
   const historyRaw = memoDerived("historyRaw", [historyLog, sales, debtEvents, expenses, activeEmployee], () => [...historyLog, ...deriveLegacyHistory()]
     .filter((h) => {
       const cat = HISTORY_CATEGORY[h.type];
@@ -20870,6 +20959,86 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             </div>
           );
         })()}
+        {cartDetailsId && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setCartDetailsId(null)}>
+            <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5" style={{ background: T.card, color: T.text }}>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-sm">{tx(lang, "cartDetailsTitle")}</h3>
+                <button onClick={() => setCartDetailsId(null)}><X size={18} /></button>
+              </div>
+              <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>{tx(lang, "cartNameLabel")}</label>
+              <input autoComplete="off" value={cdLabel} onChange={(e) => setCdLabel(e.target.value.slice(0, 40))} placeholder={tx(lang, "cartNamePlaceholder")} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>{tx(lang, "cartDueLabel")}</label>
+              <input type="datetime-local" value={cdDue} onChange={(e) => setCdDue(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>{tx(lang, "cartNoteLabel")}</label>
+              <textarea rows={2} value={cdNote} onChange={(e) => setCdNote(e.target.value.slice(0, 200))} placeholder={tx(lang, "cartNotePlaceholder")} className="w-full border rounded-lg px-3 py-2 text-sm mb-4" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              <button onClick={saveCartDetails} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{t(lang, "save")}</button>
+            </div>
+          </div>
+        )}
+        {showOrders && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setShowOrders(false)}>
+            <div data-kbscroll="true" onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "88vh", overscrollBehavior: "contain" }}>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-sm">📋 {tx(lang, "ordersTitle")}</h3>
+                <button onClick={() => setShowOrders(false)}><X size={18} /></button>
+              </div>
+              {ordersCount === 0 && <p className="text-xs text-center py-6" style={{ color: T.muted }}>{tx(lang, "ordersEmpty")}</p>}
+              {openOrderCarts.length > 0 && (
+                <>
+                  <p className="text-[11px] font-bold uppercase tracking-wide mb-1.5" style={{ color: T.muted }}>{tx(lang, "ordersOpenSection")}</p>
+                  <div className="flex flex-col gap-1.5 mb-4">
+                    {openOrderCarts.slice().sort((a, b) => String(a.dueAt || "9").localeCompare(String(b.dueAt || "9"))).map((c) => {
+                      const total = c.items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
+                      const late = c.dueAt && new Date(c.dueAt).getTime() < Date.now();
+                      const mins = c.createdAt ? Math.max(0, Math.round((Date.now() - c.createdAt) / 60000)) : null;
+                      return (
+                        <button key={c.id} onClick={() => { saveAll({ activeCartId: c.id }); setShowOrders(false); }} className="rounded-xl px-3 py-2.5 text-left" style={{ background: T.input, border: c.id === activeCartId ? "2px solid #2563eb" : "2px solid transparent" }}>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[13px] font-bold truncate">🛒 {c.label}</span>
+                            <span className="text-xs font-bold flex-shrink-0">{fcfa(total)}</span>
+                          </div>
+                          <p className="text-[11px] truncate" style={{ color: T.muted }}>{c.items.map((i) => `${i.productName} x${localizedQty(i.qty)}`).join(", ") || "—"}</p>
+                          <p className="text-[10px] mt-0.5" style={{ color: late ? "#e11d48" : T.muted }}>
+                            {c.dueAt ? `⏰ ${dueAtText(c.dueAt)}` : mins != null ? tx(lang, "orderOpenSince").replace("{n}", localizedNumber(mins)) : ""}{c.note ? ` · ${c.note}` : ""}
+                          </p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+              {pendingPickups.length > 0 && (
+                <>
+                  <p className="text-[11px] font-bold uppercase tracking-wide mb-1.5" style={{ color: T.muted }}>{tx(lang, "ordersPickupSection")}</p>
+                  <div className="flex flex-col gap-1.5">
+                    {pendingPickups.map((o) => {
+                      const late = o.due !== "later" && o.due < todayKeyOrders;
+                      const today = o.due === todayKeyOrders;
+                      return (
+                        <div key={o.tx} className="rounded-xl px-3 py-2.5" style={{ background: T.input }}>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[13px] font-bold truncate">👤 {o.customer || "—"}</span>
+                            <span className="text-xs font-bold flex-shrink-0">{fcfa(o.total)}</span>
+                          </div>
+                          <p className="text-[11px]" style={{ color: T.muted }}>{o.items.join(", ")}</p>
+                          <p className="text-[11px] font-semibold mt-0.5" style={{ color: late ? "#e11d48" : today ? (darkMode ? "#fbbf24" : "#b45309") : T.muted }}>📦 {pickupDueText(o.due)}{late ? ` · ${tx(lang, "orderLate")}` : ""}</p>
+                          {o.rest > 0 && <p className="text-[11px] font-bold mt-0.5" style={{ color: "#0369a1" }}>{tx(lang, "orderRestToPay").replace("{p}", fcfa(o.rest))}</p>}
+                          <div className="flex gap-2 mt-2">
+                            {o.rest > 0 && hasPermission("viewDebts") && (
+                              <button onClick={() => { setShowOrders(false); setTab("debts"); }} className="flex-1 py-2 rounded-lg text-[11px] font-bold" style={{ background: darkMode ? "rgba(2,132,199,0.18)" : "#e0f2fe", color: darkMode ? "#7dd3fc" : "#0369a1" }}>{tx(lang, "orderCollectRest")}</button>
+                            )}
+                            <button onClick={() => setConfirmModal({ message: tx(lang, "orderDeliveredConfirm").replace("{name}", o.customer || "—"), onConfirm: () => markOrderDelivered(o) })} className="flex-1 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#15803d" }}>✓ {tx(lang, "orderDeliveredBtn")}</button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        )}
         {addVariantGid && (() => {
           const members = variantMembers(addVariantGid);
           if (!members.length) return null;
@@ -21632,9 +21801,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
               </div>
             )}
+            {pickupsDueNow.length > 0 && (
+              <button onClick={() => setShowOrders(true)} className="w-full rounded-2xl px-4 py-3 flex items-center gap-2.5 text-left" style={{ background: darkMode ? "rgba(217,119,6,0.15)" : "#fffbeb", border: `1px solid ${darkMode ? "rgba(217,119,6,0.35)" : "#fde68a"}` }}>
+                <span style={{ fontSize: 20 }}>📦</span>
+                <span className="flex-1 text-xs font-bold" style={{ color: darkMode ? "#fbbf24" : "#92400e" }}>{tx(lang, "pickupsDueBanner").replace("{n}", localizedNumber(pickupsDueNow.length))}</span>
+                <ChevronRight size={16} color={darkMode ? "#fbbf24" : "#92400e"} />
+              </button>
+            )}
             {/* Chips des paniers */}
-            {(activeCart || draftCarts.length > 0) && (
+            {(activeCart || draftCarts.length > 0 || pendingPickups.length > 0) && (
             <div className="flex items-center gap-2 overflow-x-auto pb-1">
+              {ordersCount > 0 && (
+                <button onClick={() => setShowOrders(true)} className="shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold flex items-center gap-1.5" style={{ background: darkMode ? "rgba(217,119,6,0.18)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#92400e" }}>
+                  📋 {tx(lang, "ordersBtn")} ({localizedNumber(ordersCount)})
+                </button>
+              )}
               {draftCarts.map((c) => (
                 <button
                   key={c.id}
@@ -21647,7 +21828,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     border: c.id === activeCartId ? "none" : `1px solid ${T.border}`,
                   }}
                 >
-                  🛒 {c.label} {c.items.length > 0 && <span className="opacity-80">({c.items.length})</span>}
+                  🛒 {c.label} {c.items.length > 0 && <span className="opacity-80">({c.items.length})</span>}{c.dueAt && <span className="opacity-90">⏰ {String(c.dueAt).slice(11, 16) || ""}</span>}
                 </button>
               ))}
               <button onClick={createCart} className="shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold flex items-center gap-1.5" style={{ background: "linear-gradient(135deg, #16a34a, #15803d)", color: "white", boxShadow: "0 6px 14px rgba(22,163,74,0.3)" }}>
@@ -21664,7 +21845,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             {activeCart && (
               <>
                 <div className="flex items-center justify-between rounded-2xl px-4 py-2.5" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}` }}>
-                  <p className="text-xs" style={{ color: T.muted }}>{t(lang, "othPanierDe")} <span className="font-bold" style={{ color: T.text }}>{activeCart.label}</span></p>
+                  <button type="button" onClick={() => openCartDetails(activeCart)} className="text-xs text-left min-w-0" style={{ color: T.muted }}>
+                    {t(lang, "othPanierDe")} <span className="font-bold" style={{ color: T.text }}>{activeCart.label}</span> <Edit3 size={11} style={{ display: "inline", verticalAlign: "-1px" }} />
+                    {(activeCart.dueAt || activeCart.note) && (
+                      <span className="block text-[10px] truncate" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>{activeCart.dueAt ? `⏰ ${dueAtText(activeCart.dueAt)}` : ""}{activeCart.dueAt && activeCart.note ? " · " : ""}{activeCart.note || ""}</span>
+                    )}
+                  </button>
                   {canEditPrice && (
                     <button onClick={() => { setShowMiscItem(true); setMiscError(""); }} className="text-[11px] font-semibold flex items-center gap-1 px-2.5 py-1.5 rounded-lg ml-auto mr-2" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", border: `1px solid ${darkMode ? "#7fb2ff" : "#2563eb"}`, background: "transparent" }}>
                       <Plus size={12} /> {tx(lang, "miscItemBtn")}
@@ -22274,6 +22460,21 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           );
                         })}
                       </div>
+                    </div>
+                    <div className="rounded-xl p-3" style={{ background: activeCart.pickupLater ? (darkMode ? "rgba(217,119,6,0.12)" : "#fffbeb") : (darkMode ? T.input : "#f8fafc") }}>
+                      <label className="flex items-center justify-between gap-3 cursor-pointer">
+                        <span className="text-xs font-semibold" style={{ color: T.text }}>📦 {tx(lang, "pickupLaterToggle")}</span>
+                        <button type="button" onClick={() => updateCartMeta(activeCart.id, "pickupLater", !activeCart.pickupLater)} style={{ width: 40, height: 22, borderRadius: 12, background: activeCart.pickupLater ? "#d97706" : (darkMode ? "#374151" : "#d1d5db"), display: "flex", alignItems: "center", padding: "0 3px", justifyContent: activeCart.pickupLater ? "flex-end" : "flex-start", border: "none", flexShrink: 0 }}>
+                          <span style={{ width: 16, height: 16, borderRadius: "50%", background: "white", display: "block" }} />
+                        </button>
+                      </label>
+                      {activeCart.pickupLater && (
+                        <>
+                          <label className="text-[11px] font-semibold block mt-2.5 mb-1" style={{ color: T.muted }}>{tx(lang, "pickupDateLabel")}</label>
+                          <input type="date" value={activeCart.pickupDate || ""} min={localDayKey(new Date())} onChange={(e) => updateCartMeta(activeCart.id, "pickupDate", e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                          <p className="text-[11px] mt-1.5" style={{ color: T.muted }}>{tx(lang, "pickupLaterHint")}</p>
+                        </>
+                      )}
                     </div>
                     {(() => {
                       // Tarif du panier : détail (prix normal, paliers par quantité), demi-gros ou
@@ -23822,6 +24023,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </div>
                     ))}
                     {h.receiptNo && <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>🔖 {tx(lang, "receiptNoLabel")} {h.receiptNo}</p>}
+                    {h.pickupDue && <p className="text-[10px] mt-0.5 font-semibold" style={{ color: deliveredOrderRefs.has(h.refId) ? (darkMode ? "#4ade80" : "#15803d") : (darkMode ? "#fbbf24" : "#b45309") }}>📦 {deliveredOrderRefs.has(h.refId) ? tx(lang, "orderDeliveredLabel") : pickupDueText(h.pickupDue)}</p>}
                   </div>
                   <div className="flex items-center justify-between text-[10px] mt-1" style={{ color: T.muted }}>
                     <span>{fullDate(h.date)} à {fullTime(h.date)}{actorLabel ? ` · ${actorLabel}` : ""}{isCancelledEntry && h.originalDate ? ` · ${t(lang, "histColDate")} : ${fullDate(h.originalDate)}` : ""}</span>
@@ -26337,7 +26539,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <div className="w-full max-w-xs rounded-2xl p-5" style={{ background: darkMode ? "#1a1a24" : "white", color: darkMode ? "#eceef5" : CHARCOAL }}>
             <p className="text-center text-2xl mb-1">✅</p>
             <p className={`text-center font-bold text-sm ${pendingReceipt.receiptNo ? "mb-0.5" : "mb-3"}`}>{tx(lang, "receiptModalTitle")}</p>
-            {pendingReceipt.receiptNo && <p className="text-center text-[11px] mb-3" style={{ color: darkMode ? "#a1a1aa" : "#6b7280" }}>{tx(lang, "receiptNoLabel")} {pendingReceipt.receiptNo}</p>}
+            {pendingReceipt.receiptNo && <p className={`text-center text-[11px] ${pendingReceipt.pickupDue ? "" : "mb-3"}`} style={{ color: darkMode ? "#a1a1aa" : "#6b7280" }}>{tx(lang, "receiptNoLabel")} {pendingReceipt.receiptNo}</p>}
+            {pendingReceipt.pickupDue && <p className="text-center text-xs font-bold mb-3" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>📦 {pickupDueText(pendingReceipt.pickupDue)}</p>}
             <div className="rounded-xl px-3 py-2.5 mb-4" style={{ background: darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }}>
               {pendingReceipt.items.map((it, idx) => (
                 <div key={idx} className="mb-1">
