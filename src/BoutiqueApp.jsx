@@ -6292,6 +6292,16 @@ EXTRA_UI.variantAddBtn = { fr: "Variante", en: "Variant", es: "Variante", pt: "V
 EXTRA_UI.variantAddTitle = { fr: "Ajouter une taille ou une couleur", en: "Add a size or color", es: "Añadir una talla o un color", pt: "Adicionar um tamanho ou cor", de: "Größe oder Farbe hinzufügen", it: "Aggiungi una taglia o un colore", nl: "Maat of kleur toevoegen", pl: "Dodaj rozmiar lub kolor", ru: "Добавить размер или цвет", tr: "Beden veya renk ekle", ar: "إضافة مقاس أو لون", hi: "साइज़ या रंग जोड़ें", bn: "সাইজ বা রং যোগ করুন", ur: "سائز یا رنگ شامل کریں", ta: "அளவு அல்லது நிறம் சேர்", te: "సైజు లేదా రంగు జోడించండి", th: "เพิ่มไซซ์หรือสี", zh: "添加尺码或颜色", ja: "サイズまたは色を追加", ko: "사이즈 또는 색상 추가", id: "Tambah ukuran atau warna", vi: "Thêm cỡ hoặc màu", tl: "Magdagdag ng sukat o kulay", sw: "Ongeza saizi au rangi", ha: "Ƙara girma ko launi", yo: "Fi ìwọ̀n tàbí àwọ̀ kún un", zu: "Engeza usayizi noma umbala", am: "መጠን ወይም ቀለም ጨምር", bm: "Bonya walima ɲɛgɛn fara a kan", wo: "Yokk benn taay walla benn melo" };
 EXTRA_UI.variantAddHint = { fr: "Elle reprend le prix, la catégorie et la photo des autres variantes. Modifiez-la ensuite si besoin.", en: "It takes the price, category and photo of the other variants. Edit it afterwards if needed.", es: "Toma el precio, la categoría y la foto de las demás variantes. Modifícala después si hace falta.", pt: "Usa o preço, a categoria e a foto das outras variantes. Altere depois se precisar.", de: "Übernimmt Preis, Kategorie und Foto der anderen Varianten. Danach bei Bedarf bearbeiten.", it: "Prende prezzo, categoria e foto delle altre varianti. Modificala dopo se serve.", nl: "Neemt prijs, categorie en foto van de andere varianten over. Pas daarna aan indien nodig.", pl: "Przejmuje cenę, kategorię i zdjęcie innych wariantów. W razie potrzeby edytuj potem.", ru: "Берёт цену, категорию и фото других вариантов. При необходимости измените потом.", tr: "Diğer varyantların fiyatını, kategorisini ve fotoğrafını alır. Gerekirse sonra düzenleyin.", ar: "يأخذ سعر المتغيرات الأخرى وفئتها وصورتها. عدّله لاحقًا إن لزم.", hi: "यह बाकी वेरिएंट का दाम, श्रेणी और फ़ोटो लेता है। ज़रूरत हो तो बाद में बदलें।", bn: "এটি অন্য ভ্যারিয়েন্টের দাম, ক্যাটাগরি ও ছবি নেয়। দরকার হলে পরে বদলান।", ur: "یہ باقی ویریئنٹس کی قیمت، زمرہ اور تصویر لیتا ہے۔ ضرورت ہو تو بعد میں بدلیں۔", ta: "மற்ற வகைகளின் விலை, வகைப்பாடு, படத்தை எடுத்துக்கொள்ளும். தேவைப்பட்டால் பிறகு திருத்தவும்.", te: "ఇది మిగతా వేరియంట్‌ల ధర, వర్గం, ఫోటోను తీసుకుంటుంది. అవసరమైతే తర్వాత మార్చండి.", th: "ใช้ราคา หมวดหมู่ และรูปเดียวกับตัวเลือกอื่น แก้ไขภายหลังได้", zh: "沿用其他款式的价格、分类和照片，之后可再修改。", ja: "他のバリエーションの価格・カテゴリ・写真を引き継ぎます。必要なら後で編集してください。", ko: "다른 옵션의 가격, 카테고리, 사진을 그대로 씁니다. 필요하면 나중에 수정하세요.", id: "Mengikuti harga, kategori, dan foto varian lain. Ubah nanti jika perlu.", vi: "Lấy giá, danh mục và ảnh của các biến thể khác. Sửa sau nếu cần.", tl: "Kukunin nito ang presyo, kategorya at larawan ng ibang variant. Baguhin mamaya kung kailangan.", sw: "Inachukua bei, kundi na picha ya aina nyingine. Ibadilishe baadaye ikihitajika.", ha: "Yana ɗaukar farashi, rukuni da hoton sauran nau'ikan. Gyara shi daga baya idan ana buƙata.", yo: "Ó máa ń lo iye, ẹ̀ka àti àwòrán àwọn oríṣi yòókù. Ṣàtúnṣe rẹ̀ lẹ́yìn náà tí ó bá yẹ.", zu: "Ithatha intengo, isigaba nesithombe sezinye izinhlobo. Yihlele kamuva uma kudingeka.", am: "የሌሎቹን ዓይነቶች ዋጋ፣ ምድብና ፎቶ ይወስዳል። ካስፈለገ በኋላ ያስተካክሉት።", bm: "A bɛ suguya tɔw ka sɔngɔ, kulu ani ja ta. A latilen o kɔ n'a magoya bɛ.", wo: "Dafay jël njëg gi, kurél gi ak nataalu yeneen xeet yi. Soppi ko ginnaaw bu soxlaa." };
 EXTRA_UI.variantExists = { fr: "Cette variante existe déjà.", en: "This variant already exists.", es: "Esta variante ya existe.", pt: "Esta variante já existe.", de: "Diese Variante gibt es schon.", it: "Questa variante esiste già.", nl: "Deze variant bestaat al.", pl: "Ten wariant już istnieje.", ru: "Такой вариант уже есть.", tr: "Bu varyant zaten var.", ar: "هذا المتغير موجود بالفعل.", hi: "यह वेरिएंट पहले से है।", bn: "এই ভ্যারিয়েন্ট আগে থেকেই আছে।", ur: "یہ ویریئنٹ پہلے سے موجود ہے۔", ta: "இந்த வகை ஏற்கனவே உள்ளது.", te: "ఈ వేరియంట్ ఇప్పటికే ఉంది.", th: "มีตัวเลือกนี้อยู่แล้ว", zh: "该款式已存在。", ja: "このバリエーションは既にあります。", ko: "이미 있는 옵션입니다.", id: "Varian ini sudah ada.", vi: "Biến thể này đã có.", tl: "Mayroon na ang variant na ito.", sw: "Aina hii tayari ipo.", ha: "Wannan nau'in ya riga ya wanzu.", yo: "Oríṣi yìí ti wà tẹ́lẹ̀.", zu: "Lolu hlobo selukhona.", am: "ይህ ዓይነት አስቀድሞ አለ።", bm: "Nin suguya in bɛ yen kaban.", wo: "Xeet bii am na ba pare." };
+EXTRA_UI.mode_tiers = { fr: "Prix de gros", en: "Wholesale prices", es: "Precios al por mayor", pt: "Preços de grosso", de: "Großhandelspreise", it: "Prezzi all'ingrosso", nl: "Groothandelsprijzen", pl: "Ceny hurtowe", ru: "Оптовые цены", tr: "Toptan fiyatlar", ar: "أسعار الجملة", hi: "थोक दाम", bn: "পাইকারি দাম", ur: "تھوک قیمتیں", ta: "மொத்த விலைகள்", te: "టోకు ధరలు", th: "ราคาส่ง", zh: "批发价", ja: "卸値", ko: "도매가", id: "Harga grosir", vi: "Giá sỉ", tl: "Presyong pakyawan", sw: "Bei za jumla", ha: "Farashin sari", yo: "Iye ọjà ní ọ̀pọ̀", zu: "Amanani endaliso", am: "የጅምላ ዋጋዎች", bm: "Jumlan sɔngɔw", wo: "Njëgu lu bari" };
+EXTRA_UI.tiersTitle = { fr: "Prix demi-gros et gros", en: "Semi-wholesale and wholesale prices", es: "Precios de medio mayoreo y mayoreo", pt: "Preços de meio-grosso e grosso", de: "Halbgroß- und Großhandelspreis", it: "Prezzi semi-ingrosso e ingrosso", nl: "Halfgroot- en groothandelsprijs", pl: "Ceny półhurtowe i hurtowe", ru: "Мелкооптовая и оптовая цена", tr: "Yarı toptan ve toptan fiyat", ar: "سعر نصف الجملة والجملة", hi: "अर्ध-थोक और थोक दाम", bn: "আধা-পাইকারি ও পাইকারি দাম", ur: "نیم تھوک اور تھوک قیمت", ta: "அரை மொத்த, மொத்த விலைகள்", te: "సగం టోకు, టోకు ధరలు", th: "ราคากึ่งส่งและราคาส่ง", zh: "小批发价和批发价", ja: "小口卸値と卸値", ko: "준도매가와 도매가", id: "Harga semi-grosir dan grosir", vi: "Giá bán buôn nhỏ và giá sỉ", tl: "Presyong semi-pakyawan at pakyawan", sw: "Bei za nusu jumla na jumla", ha: "Farashin rabin sari da na sari", yo: "Iye ìdajì-ọ̀pọ̀ àti ọ̀pọ̀", zu: "Amanani engxenye yendaliso nawendaliso", am: "የግማሽ ጅምላ እና የጅምላ ዋጋ", bm: "Jumlan fitinin ni jumlan sɔngɔw", wo: "Njëgu demi-gros ak gros" };
+EXTRA_UI.tierName_retail = { fr: "Détail", en: "Retail", es: "Detalle", pt: "Retalho", de: "Einzelhandel", it: "Dettaglio", nl: "Detailhandel", pl: "Detal", ru: "Розница", tr: "Perakende", ar: "تجزئة", hi: "खुदरा", bn: "খুচরা", ur: "پرچون", ta: "சில்லறை", te: "చిల్లర", th: "ปลีก", zh: "零售", ja: "小売", ko: "소매", id: "Eceran", vi: "Bán lẻ", tl: "Tingi", sw: "Rejareja", ha: "Dalla-dalla", yo: "Wẹ́wẹ́", zu: "Okuncane", am: "ችርቻሮ", bm: "Kelen-kelen", wo: "Detaay" };
+EXTRA_UI.tierName_semi = { fr: "Demi-gros", en: "Semi-wholesale", es: "Medio mayoreo", pt: "Meio-grosso", de: "Halbgroß", it: "Semi-ingrosso", nl: "Halfgroot", pl: "Półhurt", ru: "Мелкий опт", tr: "Yarı toptan", ar: "نصف جملة", hi: "अर्ध-थोक", bn: "আধা-পাইকারি", ur: "نیم تھوک", ta: "அரை மொத்தம்", te: "సగం టోకు", th: "กึ่งส่ง", zh: "小批发", ja: "小口卸", ko: "준도매", id: "Semi-grosir", vi: "Buôn nhỏ", tl: "Semi-pakyawan", sw: "Nusu jumla", ha: "Rabin sari", yo: "Ìdajì-ọ̀pọ̀", zu: "Ingxenye yendaliso", am: "ግማሽ ጅምላ", bm: "Jumlan fitinin", wo: "Demi-gros" };
+EXTRA_UI.tierName_bulk = { fr: "Gros", en: "Wholesale", es: "Mayoreo", pt: "Grosso", de: "Großhandel", it: "Ingrosso", nl: "Groothandel", pl: "Hurt", ru: "Опт", tr: "Toptan", ar: "جملة", hi: "थोक", bn: "পাইকারি", ur: "تھوک", ta: "மொத்தம்", te: "టోకు", th: "ส่ง", zh: "批发", ja: "卸", ko: "도매", id: "Grosir", vi: "Sỉ", tl: "Pakyawan", sw: "Jumla", ha: "Sari", yo: "Ọ̀pọ̀", zu: "Endaliso", am: "ጅምላ", bm: "Jumlan", wo: "Gros" };
+EXTRA_UI.tierFromQty = { fr: "dès", en: "from", es: "desde", pt: "a partir de", de: "ab", it: "da", nl: "vanaf", pl: "od", ru: "от", tr: "en az", ar: "ابتداءً من", hi: "कम से कम", bn: "অন্তত", ur: "کم از کم", ta: "குறைந்தது", te: "కనీసం", th: "ตั้งแต่", zh: "起", ja: "以上", ko: "이상", id: "mulai", vi: "từ", tl: "mula", sw: "kuanzia", ha: "daga", yo: "láti", zu: "kusukela ku-", am: "ከ", bm: "ka bɔ", wo: "ci" };
+EXTRA_UI.tierFromN = { fr: "dès {n}", en: "from {n}", es: "desde {n}", pt: "a partir de {n}", de: "ab {n}", it: "da {n}", nl: "vanaf {n}", pl: "od {n}", ru: "от {n}", tr: "{n} ve üzeri", ar: "من {n}", hi: "{n} से", bn: "{n} থেকে", ur: "{n} سے", ta: "{n} முதல்", te: "{n} నుండి", th: "ตั้งแต่ {n}", zh: "{n} 起", ja: "{n} 以上", ko: "{n} 이상", id: "mulai {n}", vi: "từ {n}", tl: "mula {n}", sw: "kuanzia {n}", ha: "daga {n}", yo: "láti {n}", zu: "kusukela ku-{n}", am: "ከ{n} ጀምሮ", bm: "ka bɔ {n} la", wo: "ci {n}" };
+EXTRA_UI.tiersHint = { fr: "Avec une quantité, le prix change tout seul dans le panier dès qu'on l'atteint. Sans quantité, il ne s'applique que si vous choisissez ce tarif dans le panier (revendeur).", en: "With a quantity, the price switches by itself in the cart once it's reached. Without one, it only applies when you pick this rate in the cart (reseller).", es: "Con una cantidad, el precio cambia solo en el carrito al alcanzarla. Sin cantidad, solo se aplica si eliges esta tarifa en el carrito (revendedor).", pt: "Com uma quantidade, o preço muda sozinho no carrinho quando é atingida. Sem quantidade, só se aplica se escolher esta tarifa no carrinho (revendedor).", de: "Mit Menge wechselt der Preis im Warenkorb automatisch, sobald sie erreicht ist. Ohne Menge gilt er nur, wenn du diesen Tarif im Warenkorb wählst (Wiederverkäufer).", it: "Con una quantità, il prezzo cambia da solo nel carrello quando la si raggiunge. Senza, vale solo se scegli questa tariffa nel carrello (rivenditore).", nl: "Met een hoeveelheid verandert de prijs vanzelf in het mandje zodra die bereikt is. Zonder geldt hij alleen als je dit tarief kiest in het mandje (wederverkoper).", pl: "Z ilością cena zmienia się sama w koszyku po jej osiągnięciu. Bez ilości działa tylko, gdy wybierzesz tę taryfę w koszyku (odsprzedawca).", ru: "С количеством цена в корзине меняется сама, когда оно достигнуто. Без количества — только если выбрать этот тариф в корзине (перекупщик).", tr: "Miktar girilirse, sepette bu miktara ulaşınca fiyat kendiliğinden değişir. Girilmezse yalnızca sepette bu tarifeyi seçtiğinizde uygulanır (bayi).", ar: "مع كمية، يتغير السعر تلقائيًا في السلة عند بلوغها. بدونها، لا يُطبّق إلا إذا اخترت هذه التسعيرة في السلة (بائع تجزئة).", hi: "मात्रा देने पर, कार्ट में वह मात्रा पहुँचते ही दाम अपने आप बदलता है। बिना मात्रा के, यह तभी लगता है जब आप कार्ट में यह दर चुनें (फिर से बेचने वाला)।", bn: "পরিমাণ দিলে, কার্টে সেই পরিমাণ হলেই দাম নিজে বদলায়। না দিলে, কার্টে এই দর বাছলে তবেই প্রযোজ্য (পুনর্বিক্রেতা)।", ur: "مقدار دینے پر، کارٹ میں وہ مقدار ہوتے ہی قیمت خود بدل جاتی ہے۔ مقدار کے بغیر، یہ تب ہی لگتی ہے جب آپ کارٹ میں یہ ریٹ چنیں (دوبارہ بیچنے والا)۔", ta: "அளவு கொடுத்தால், கூடையில் அந்த அளவை எட்டியதும் விலை தானாக மாறும். இல்லையெனில் கூடையில் இந்தக் கட்டணத்தைத் தேர்ந்தெடுத்தால் மட்டுமே (மறுவிற்பனையாளர்).", te: "పరిమాణం ఇస్తే, కార్ట్‌లో అది చేరగానే ధర దానంతట అదే మారుతుంది. ఇవ్వకపోతే, కార్ట్‌లో ఈ ధరను ఎంచుకుంటేనే వర్తిస్తుంది (పునర్విక్రేత).", th: "ถ้าใส่จำนวน ราคาในตะกร้าจะเปลี่ยนเองเมื่อถึงจำนวนนั้น ถ้าไม่ใส่ จะใช้เฉพาะเมื่อเลือกราคานี้ในตะกร้า (ผู้ค้าปลีก)", zh: "填了数量，购物车达到该数量时价格自动切换；不填则只在购物车中选择此价格（转售商）时生效。", ja: "数量を入れると、カートでその数量に達した時点で自動的に価格が変わります。空欄なら、カートでこの料金を選んだときだけ適用されます（再販業者）。", ko: "수량을 넣으면 장바구니에서 그 수량에 도달하는 순간 가격이 자동으로 바뀝니다. 비워 두면 장바구니에서 이 요금을 고를 때만 적용됩니다(재판매자).", id: "Dengan jumlah, harga di keranjang berubah sendiri begitu jumlahnya tercapai. Tanpa jumlah, hanya berlaku jika Anda memilih tarif ini di keranjang (pengecer).", vi: "Có số lượng thì giá trong giỏ tự đổi khi đạt số đó. Không có thì chỉ áp dụng khi bạn chọn mức giá này trong giỏ (người bán lại).", tl: "Kapag may dami, kusa nang magbabago ang presyo sa cart pag naabot ito. Kung wala, gagana lang kapag pinili mo ang rate na ito sa cart (reseller).", sw: "Ukiweka idadi, bei inabadilika yenyewe kwenye kikapu idadi hiyo ikifikiwa. Bila idadi, inatumika tu ukichagua bei hii kwenye kikapu (muuzaji tena).", ha: "Da adadi, farashin zai canza da kansa a kwando idan an kai shi. Ba tare da adadi ba, yana aiki ne kawai idan ka zaɓi wannan farashi a kwando (mai sake sayarwa).", yo: "Pẹ̀lú iye, iye owó yóò yí padà fúnra rẹ̀ nínú agbọ̀n tí ó bá dé ibẹ̀. Láìsí iye, ó máa ń ṣiṣẹ́ nìkan tí o bá yan owó yìí nínú agbọ̀n (olùtajà-padà).", zu: "Ngenani, intengo ishintsha yodwa ebhasikidini uma lifinyelelwe. Ngaphandle kwalo, isebenza kuphela uma ukhetha leli zinga ebhasikidini (umthengisi kabusha).", am: "ብዛት ካስገቡ፣ በጋሪው ውስጥ ያ ብዛት ሲደርስ ዋጋው በራሱ ይቀየራል። ያለ ብዛት፣ ይህን ዋጋ በጋሪው ውስጥ ሲመርጡ ብቻ ይሠራል (መልሶ ሻጭ)።", bm: "N'i ye hakɛ sɛbɛn, sɔngɔ bɛ yɛlɛma a yɛrɛ ma pan kɔnɔ ni o hakɛ sera. N'i m'a sɛbɛn, a bɛ kɛ dɔrɔn n'i ye nin sɔngɔ sugandi pan kɔnɔ (feerekɛla kɔsɔn).", wo: "Su nga bindee ab lim, njëg gi dina soppiku boppam ci panye bi bu limu bi agsee. Su nga ko bindul, du dox su doon nga tànn njëg gii ci panye bi (jaaykat)." };
+EXTRA_UI.tariffLabel = { fr: "Tarif", en: "Rate", es: "Tarifa", pt: "Tarifa", de: "Tarif", it: "Tariffa", nl: "Tarief", pl: "Taryfa", ru: "Тариф", tr: "Tarife", ar: "التسعيرة", hi: "दर", bn: "দর", ur: "ریٹ", ta: "கட்டணம்", te: "ధర రకం", th: "ระดับราคา", zh: "价格档", ja: "料金", ko: "요금", id: "Tarif", vi: "Mức giá", tl: "Rate", sw: "Kiwango cha bei", ha: "Matakin farashi", yo: "Ìpele owó", zu: "Izinga lentengo", am: "የዋጋ ዓይነት", bm: "Sɔngɔ suguya", wo: "Njëg" };
+EXTRA_UI.tariffRemembered = { fr: "Tarif habituel de ce client, repris automatiquement.", en: "This customer's usual rate, applied automatically.", es: "Tarifa habitual de este cliente, aplicada automáticamente.", pt: "Tarifa habitual deste cliente, aplicada automaticamente.", de: "Üblicher Tarif dieses Kunden, automatisch übernommen.", it: "Tariffa abituale di questo cliente, applicata in automatico.", nl: "Gebruikelijk tarief van deze klant, automatisch toegepast.", pl: "Zwykła taryfa tego klienta, zastosowana automatycznie.", ru: "Обычный тариф этого клиента, применён автоматически.", tr: "Bu müşterinin her zamanki tarifesi, otomatik uygulandı.", ar: "التسعيرة المعتادة لهذا العميل، طُبّقت تلقائيًا.", hi: "इस ग्राहक की सामान्य दर, अपने आप लगाई गई।", bn: "এই গ্রাহকের সাধারণ দর, নিজে থেকেই প্রয়োগ হয়েছে।", ur: "اس گاہک کا معمول کا ریٹ، خود بخود لاگو۔", ta: "இந்த வாடிக்கையாளரின் வழக்கமான கட்டணம், தானாகப் பயன்படுத்தப்பட்டது.", te: "ఈ కస్టమర్ సాధారణ ధర, ఆటోమేటిక్‌గా వర్తింపజేయబడింది.", th: "ระดับราคาประจำของลูกค้ารายนี้ ใช้ให้อัตโนมัติ", zh: "该客户的常用价格档，已自动套用。", ja: "このお客様のいつもの料金を自動で適用しました。", ko: "이 고객의 평소 요금이 자동 적용되었습니다.", id: "Tarif biasa pelanggan ini, diterapkan otomatis.", vi: "Mức giá quen của khách này, tự động áp dụng.", tl: "Karaniwang rate ng customer na ito, awtomatikong inilapat.", sw: "Kiwango cha kawaida cha mteja huyu, kimetumika moja kwa moja.", ha: "Matakin farashin da wannan abokin ciniki ya saba, an saka shi kai tsaye.", yo: "Ìpele owó tí oníbàárà yìí máa ń lò, a fi sí i fúnra rẹ̀.", zu: "Izinga elijwayelekile lalo mthengi, lifakwe ngokuzenzakalelayo.", am: "የዚህ ደንበኛ የተለመደ ዋጋ፣ በራሱ ተተግብሯል።", bm: "Nin sannikɛla ka sɔngɔ bɛɛ lajɛlen, a donna a yɛrɛ ma.", wo: "Njëg gi kiliyaan bii miin, ñu def ko ci boppam." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -6669,29 +6679,30 @@ const SECTORS = [
 // unit = vente au détail (paquet → pièces), measure = vente au poids / à la mesure,
 // daily = production du jour, expiry = date de péremption, barcode = code-barres.
 const SECTOR_MODES = {
-  food: ["unit", "measure", "expiry", "barcode"],
+  food: ["unit", "measure", "expiry", "barcode", "tiers"],
   // Vêtements / chaussures / pagnes : un modèle en plusieurs tailles et couleurs.
   clothing: ["variants"],
   // Téléphones : IMEI / n° de série, état (neuf, occasion…) et garantie sur le reçu.
   electronics: ["serial", "variants", "barcode"],
   cosmetics: ["expiry", "variants", "barcode", "unit"],
   pharmacy: ["expiry", "unit", "barcode"],
-  hardware: ["measure", "unit"],
-  school: ["unit", "barcode"],
-  bakery: ["daily", "unit"],
+  hardware: ["measure", "unit", "tiers"],
+  school: ["unit", "barcode", "tiers"],
+  bakery: ["daily", "unit", "tiers"],
   // Plats préparés chaque jour (production du jour) ; boissons achetées en casier ou en
   // pack et vendues à la bouteille (vente au détail).
   restaurant: ["daily", "unit"],
   // Viande et poisson pesés à la vente.
   butcher: ["measure", "unit"],
   // Grossiste : cartons / sacs vendus entiers ou au détail, au poids (riz, sucre), dates.
-  wholesale: ["unit", "measure", "expiry"],
+  // Grossiste : trois prix pour un même produit (détail / demi-gros / gros).
+  wholesale: ["tiers", "unit", "measure", "expiry"],
   // Pièces détachées moto / auto : références emballées, vendues à la pièce.
-  autoparts: ["barcode", "unit"],
+  autoparts: ["barcode", "unit", "tiers"],
 };
 // Unité proposée quand on active la vente au poids / à la mesure, selon le secteur.
 const SECTOR_MEASURE_UNIT = { food: "kg", butcher: "kg", wholesale: "kg", bakery: "kg", restaurant: "kg", hardware: "m" };
-const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily", "serial", "variants"];
+const PRODUCT_MODES = ["barcode", "expiry", "unit", "measure", "daily", "serial", "variants", "tiers"];
 const PRODUCT_CONDITIONS = ["new", "used", "refurb", "copy"];
 // Le secteur est enregistré sous forme de code fixe (« food », « bakery »…). Les comptes
 // créés avant gardent un libellé traduit (« Alimentation générale », « General food store »…) :
@@ -8012,7 +8023,7 @@ const SHOP_SYNC_BASE_SUFFIX = ":syncbase";
 const SHOP_LEVEL_KEYS = [
   "products", "sales", "debts", "loyaltyCustomers", "expenses", "cashCounts", "cashClosures",
   "unsoldLog", "cashFund", "draftCarts", "activeCartId", "debtEvents",
-  "historyLog", "categories", "employees", "actionLog", "deletedProducts", "receiptInfo",
+  "historyLog", "categories", "employees", "actionLog", "deletedProducts", "receiptInfo", "customerTariffs",
 ];
 // Dernière boutique affichée sur CET appareil, pour y revenir au prochain démarrage
 // au lieu de retomber systématiquement sur la boutique principale (suffixée par le
@@ -8144,6 +8155,42 @@ function warrantyEndDate(iso, months) {
   const last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
   d.setDate(Math.min(day, last));
   return localDayKey(d);
+}
+// Tarif retenu par client (« revendeur » = demi-gros ou gros) : { nomNormalisé: { t, at } }.
+// Fusion clé par clé, la décision la plus récente gagne (t vide = tarif retiré).
+function mergeCustomerTariffs(a, b) {
+  const A = a && typeof a === "object" ? a : {};
+  const B = b && typeof b === "object" ? b : {};
+  const out = { ...B };
+  Object.keys(A).forEach((k) => { if (!out[k] || (Number(A[k] && A[k].at) || 0) >= (Number(out[k] && out[k].at) || 0)) out[k] = A[k]; });
+  return out;
+}
+// Prix par quantité d'un produit : demi-gros et gros, chacun avec un prix et une quantité
+// minimale facultative (sans minimum, le palier ne s'applique que si on choisit ce tarif
+// dans le panier, pour un revendeur).
+function productPriceTiers(p) {
+  if (!p) return [];
+  const out = [];
+  [["semi", p.semiPrice, p.semiMinQty], ["bulk", p.bulkPrice, p.bulkMinQty]].forEach(([kind, price, min]) => {
+    const pr = Number(price);
+    if (pr > 0) out.push({ kind, price: pr, min: Number(min) > 0 ? Number(min) : 0 });
+  });
+  return out;
+}
+function tierPriceFor(p, qty, tariff) {
+  const base = { price: Number(p && p.price) || 0, tier: null };
+  const tiers = productPriceTiers(p);
+  if (!tiers.length) return base;
+  if (tariff === "bulk" || tariff === "semi") {
+    const forced = tiers.find((x) => x.kind === tariff) || (tariff === "bulk" ? tiers.find((x) => x.kind === "semi") : null);
+    if (forced) return { price: forced.price, tier: forced.kind };
+  }
+  let best = base;
+  tiers.filter((x) => x.min > 0 && qty >= x.min).sort((x, y) => x.min - y.min).forEach((x) => { best = { price: x.price, tier: x.kind }; });
+  return best;
+}
+function normCustomerKey(v) {
+  return String(v || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ");
 }
 // Bloc horodaté (infos du reçu…) : on garde la version modifiée le plus récemment.
 function newerStamped(a, b) {
@@ -8578,6 +8625,7 @@ function mergeShopRaw(baseShop, localShop, remoteShop) {
     actionLog: sortByDate(mergeById(base.actionLog, local.actionLog, remote.actionLog)),
     activeCartId: local.activeCartId ?? remote.activeCartId ?? null,
     receiptInfo: newerStamped(local.receiptInfo, remote.receiptInfo),
+    customerTariffs: mergeCustomerTariffs(local.customerTariffs, remote.customerTariffs),
   };
 }
 function SavedBadge({ saving, isOnline, pendingCount, lang }) {
@@ -11052,6 +11100,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const setSales = setAllSales;
   const [debts, setDebts] = useState([]);
   const [loyaltyCustomers, setLoyaltyCustomers] = useState({});
+  const [customerTariffs, setCustomerTariffs] = useState({});
   // Même principe que pour les ventes : les événements d'une dette liée à une vente annulée
   // sont marqués `cancelled` (et non supprimés) ; `debtEvents` ne garde que les valides.
   const [allDebtEvents, setAllDebtEvents] = useState([]);
@@ -11309,6 +11358,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const receiptItemExtra = (it) => {
     if (!it) return "";
     const parts = [];
+    if (it.tier === "semi" || it.tier === "bulk") parts.push(tx(lang, "tierName_" + it.tier));
     if (it.condition && it.condition !== "new") parts.push(tx(lang, "cond_" + it.condition));
     if (it.serial) parts.push(`${tx(lang, "serialShort")} ${it.serial}`);
     if (it.warrantyUntil) parts.push(tx(lang, "warrantyUntil").replace("{date}", fmtDateCached(new Date(it.warrantyUntil + "T12:00:00"), null, "date")));
@@ -13419,7 +13469,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const productSectorId = sectorIdOf(shopSector);
   const productSectorModes = productSectorId && SECTOR_MODES[productSectorId] ? SECTOR_MODES[productSectorId] : null;
   const productModeOrder = productSectorModes ? [...productSectorModes, ...PRODUCT_MODES.filter((m) => productSectorModes.indexOf(m) === -1)] : PRODUCT_MODES;
-  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : m === "serial" ? (!!pTrackSerial || (pCondition && pCondition !== "new") || parseInt(pWarrantyMonths, 10) > 0) : m === "variants" ? (!!pVariantsOn || !!editingVariant) : !!pDailyMode);
+  const productModeActive = (m) => (m === "barcode" ? !!(pBarcode && String(pBarcode).trim()) : m === "expiry" ? !!pExpiry : m === "unit" ? !!pSellByUnit : m === "measure" ? !!pSellByMeasure : m === "serial" ? (!!pTrackSerial || (pCondition && pCondition !== "new") || parseInt(pWarrantyMonths, 10) > 0) : m === "variants" ? (!!pVariantsOn || !!editingVariant) : m === "tiers" ? (Number(pSemiPrice) > 0 || Number(pBulkPrice) > 0) : !!pDailyMode);
   const modeShown = (m) => !productSectorModes || productSectorModes.indexOf(m) !== -1 || productModeActive(m) || showMoreProductOptions;
   const [sectorMsg, setSectorMsg] = useState("");
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
@@ -13481,6 +13531,15 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // alertes, reçus) fonctionne donc sans changement ; seuls le Stock et la Vente les
   // regroupent sous une seule carte.
   const [pVariantsOn, setPVariantsOn] = useState(false);
+  // Prix demi-gros / gros (et quantité à partir de laquelle ils s'appliquent).
+  const [pSemiPrice, setPSemiPrice] = useState("");
+  const [pSemiMin, setPSemiMin] = useState("");
+  const [pBulkPrice, setPBulkPrice] = useState("");
+  const [pBulkMin, setPBulkMin] = useState("");
+  const tierFields = () => {
+    const num = (v) => { const n = parseFloat(String(v).replace(",", ".")); return n > 0 ? n : null; };
+    return { semiPrice: num(pSemiPrice), semiMinQty: num(pSemiMin), bulkPrice: num(pBulkPrice), bulkMinQty: num(pBulkMin) };
+  };
   const [pVarA, setPVarA] = useState("");
   const [pVarB, setPVarB] = useState("");
   const [pVarQty, setPVarQty] = useState({});
@@ -13499,7 +13558,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const editingVariant = editingProductId ? (products.find((x) => x.id === editingProductId && x.variantOf) || null) : null;
   const variantSiblings = editingVariant ? products.filter((x) => x.variantOf === editingVariant.variantOf) : [];
   const creatingVariants = !editingProductId && pVariantsOn;
-  const resetVariantForm = () => { setPVariantsOn(false); setPVarA(""); setPVarB(""); setPVarQty({}); setPVariantLabel(""); setPVariantApplyAll(true); };
+  const resetVariantForm = () => { setPSemiPrice(""); setPSemiMin(""); setPBulkPrice(""); setPBulkMin(""); setPVariantsOn(false); setPVarA(""); setPVarB(""); setPVarQty({}); setPVariantLabel(""); setPVariantApplyAll(true); };
   const variantMembers = (gid) => products.filter((x) => x.variantOf === gid).sort((a, b) => (a.variantIndex || 0) - (b.variantIndex || 0));
   const priceRangeLabel = (list) => {
     const ps = list.map((x) => Number(x.price) || 0);
@@ -13834,6 +13893,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     // un compteur d'achats par numéro de client, pour signaler automatiquement les
     // clients réguliers (voir finalizeCart) sans dépendre d'une base séparée.
     setLoyaltyCustomers(shop.loyaltyCustomers || {});
+    setCustomerTariffs(shop.customerTariffs && typeof shop.customerTariffs === "object" ? shop.customerTariffs : {});
     setExpenses(shop.expenses || []);
     setCashCounts(shop.cashCounts || []);
     setCashClosures(shop.cashClosures || []);
@@ -14565,6 +14625,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       sales: overrides.sales ?? allSales,
       debts: overrides.debts ?? debts,
       loyaltyCustomers: overrides.loyaltyCustomers ?? loyaltyCustomers,
+      customerTariffs: overrides.customerTariffs ?? customerTariffs,
       expenses: overrides.expenses ?? expenses,
       cashCounts: overrides.cashCounts ?? cashCounts,
       cashClosures: overrides.cashClosures ?? cashClosures,
@@ -14619,6 +14680,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setSales(next.sales);
     setDebts(next.debts);
     setLoyaltyCustomers(next.loyaltyCustomers);
+    setCustomerTariffs(next.customerTariffs || {});
     setExpenses(next.expenses);
     setCashCounts(next.cashCounts || []);
     setCashClosures(next.cashClosures || []);
@@ -15149,6 +15211,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         y = {
           ...withPriceHistory(y, parseFloat(pPrice)),
           costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
+          ...tierFields(),
           category: pCategory || null,
           photo: pPhoto,
           description: pDescription.trim() || null,
@@ -15216,6 +15279,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           price: parseFloat(pPrice),
           description: pDescription.trim() || null,
           costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
+          ...tierFields(),
           category: pCategory || null,
           photo: pPhoto,
           sellByUnit: pSellByUnit,
@@ -15269,6 +15333,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       price: parseFloat(pPrice),
       description: pDescription.trim() || null,
       costPrice: pCostPrice ? parseFloat(pCostPrice) : null,
+          ...tierFields(),
       category: pCategory || null,
       // Photo débloquée pour tous les paliers (y compris gratuit) : elle est désormais
       // obligatoire pour permettre la reconnaissance visuelle à la caisse.
@@ -15358,6 +15423,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPPrice(String(p.price ?? ""));
     setPDescription(p.description || "");
     setPCostPrice(p.costPrice != null ? String(p.costPrice) : "");
+    setPSemiPrice(p.semiPrice > 0 ? String(p.semiPrice) : ""); setPSemiMin(p.semiMinQty > 0 ? String(p.semiMinQty) : "");
+    setPBulkPrice(p.bulkPrice > 0 ? String(p.bulkPrice) : ""); setPBulkMin(p.bulkMinQty > 0 ? String(p.bulkMinQty) : "");
     setPCategory(p.category || "");
     setPPhoto(p.photo || null);
     setPSellByUnit(!!p.sellByUnit);
@@ -16593,6 +16660,20 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     saveAll(overrides);
     if (hadItems) logAction(`${tx(lang, "histSaleCancelled")} : ${cartToCancel.items.map((i) => `${i.productName} x${i.qty}`).join(", ")} — ${localizedNumber(overrides.historyLog[overrides.historyLog.length - 1].amount)}`);
   };
+  // Recalcule le prix des lignes « normales » d'un panier selon le tarif choisi (détail,
+  // demi-gros, gros) et les quantités. Une ligne au prix négocié à la main, un article
+  // divers ou une vente à l'unité (détail d'un paquet) ne bougent pas.
+  const repriceCart = (c) => ({
+    ...c,
+    items: c.items.map((i) => {
+      if (i.misc || i.manualPrice || (i.mode || "pack") !== "pack" || i.productId == null) return i;
+      const product = products.find((p) => p.id === i.productId);
+      if (!product) return i;
+      const r = tierPriceFor(product, i.qty, c.tariff);
+      if (r.price === i.unitPrice && (r.tier || null) === (i.tier || null)) return i;
+      return { ...i, unitPrice: r.price, tier: r.tier };
+    }),
+  });
   const changeCartQty = (cartId, product, delta, mode = "pack") => {
     const cart = draftCarts.find((c) => c.id === cartId);
     if (!cart) return;
@@ -16628,7 +16709,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (newQty <= 0) items = c.items.filter((i) => !(i.productId === product.id && (i.mode || "pack") === mode));
       else if (existing) items = c.items.map((i) => (i.productId === product.id && (i.mode || "pack") === mode ? { ...i, qty: newQty } : i));
       else items = [...c.items, { id: Date.now().toString() + Math.random().toString(36).slice(2, 6), productId: product.id, productName: product.name, unitPrice: unitPriceForMode, qty: newQty, mode }];
-      return { ...c, items };
+      return repriceCart({ ...c, items });
     });
     saveAll({ draftCarts: next });
     // On ajoute (pas on retire) : son d'ajout (variante choisie dans Paramètres >
@@ -16659,15 +16740,30 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (qty <= 0) items = c.items.filter((i) => !(i.productId === product.id && (i.mode || "pack") === "pack"));
       else if (exists) items = c.items.map((i) => (i.productId === product.id && (i.mode || "pack") === "pack" ? { ...i, qty, measureUnit: product.measureUnit || null } : i));
       else items = [...c.items, { id: Date.now().toString() + Math.random().toString(36).slice(2, 6), productId: product.id, productName: product.name, unitPrice: product.price, qty, mode: "pack", measureUnit: product.measureUnit || null }];
-      return { ...c, items };
+      return repriceCart({ ...c, items });
     });
     saveAll({ draftCarts: next });
     if (qty > 0) playSound("addToCart");
     setMeasureTarget(null);
     setMeasureQty("");
   };
-  const updateCartMeta = (cartId, field, value) => {
-    saveAll({ draftCarts: draftCarts.map((c) => (c.id === cartId ? { ...c, [field]: value } : c)) });
+  const updateCartMeta = (cartId, field, value) => updateCartFields(cartId, { [field]: value });
+  const updateCartFields = (cartId, fields) => {
+    const field = "customer" in fields ? "customer" : "tariff" in fields ? "tariff" : null;
+    saveAll({ draftCarts: draftCarts.map((c) => {
+      if (c.id !== cartId) return c;
+      let n = { ...c, ...fields };
+      const value = field ? fields[field] : null;
+      // Client connu comme revendeur : son tarif revient tout seul (sauf si on a déjà
+      // choisi un tarif pour ce panier).
+      if (field === "customer" && !c.tariffChosen) {
+        const rec = customerTariffs[normCustomerKey(value)];
+        const want = rec && (rec.t === "semi" || rec.t === "bulk") ? rec.t : null;
+        if ((n.tariff || null) !== want) n = { ...n, tariff: want, tariffAuto: !!want };
+      }
+      if (field === "tariff") n = { ...n, tariffChosen: true, tariffAuto: false };
+      return field === "customer" || field === "tariff" ? repriceCart(n) : n;
+    }) });
   };
   // ---- Prix négocié et « Article divers » ----
   // Le marchandage fait partie de la vente : on peut changer le prix d'une ligne du panier.
@@ -16703,7 +16799,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return;
     }
     const listPrice = it.listPrice != null ? it.listPrice : it.unitPrice;
-    saveAll({ draftCarts: draftCarts.map((c) => (c.id !== cartId ? c : { ...c, items: c.items.map((i) => (i.id !== it.id ? i : { ...i, unitPrice: v, listPrice: v === listPrice || i.misc ? null : listPrice })) })) });
+    saveAll({ draftCarts: draftCarts.map((c) => (c.id !== cartId ? c : { ...c, items: c.items.map((i) => (i.id !== it.id ? i : { ...i, unitPrice: v, listPrice: v === listPrice || i.misc ? null : listPrice, manualPrice: !i.misc, tier: null })) })) });
     setPriceEditLine(null);
     setPriceEditError("");
   };
@@ -16809,6 +16905,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const product = it.productId != null ? products.find((p) => p.id === it.productId) : null;
       if (!product) return {};
       const out = {};
+      if (it.tier === "semi" || it.tier === "bulk") out.tier = it.tier;
       if (product.condition && product.condition !== "new") out.condition = product.condition;
       const sn = typeof it.serial === "string" ? it.serial.trim() : "";
       if (sn) out.serial = sn;
@@ -16928,7 +17025,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     const nextCarts = draftCarts.filter((c) => c.id !== cartId);
     const { nextLoyaltyCustomers, loyaltyInfo } = incrementLoyalty(cart.phone, cart.customer);
+    // Tarif choisi à la main pour un client nommé : retenu pour ses prochains achats.
+    const custKey = normCustomerKey(cart.customer);
+    let nextCustomerTariffs = customerTariffs;
+    if (custKey && cart.tariffChosen) {
+      const want = cart.tariff === "semi" || cart.tariff === "bulk" ? cart.tariff : "";
+      const had = customerTariffs[custKey] ? customerTariffs[custKey].t || "" : "";
+      if (want !== had) nextCustomerTariffs = { ...customerTariffs, [custKey]: { t: want, at: Date.now() } };
+    }
     saveAll({
+      customerTariffs: nextCustomerTariffs,
       products: nextProducts,
       sales: [...allSales, ...newSales],
       debts: nextDebts,
@@ -21102,6 +21208,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
+            ) : m === "tiers" ? (
+            /* Prix demi-gros / gros : s'appliquent tout seuls dans le panier à partir de la
+                quantité indiquée, ou pour tout le panier quand on choisit ce tarif (revendeur). */
+            <div key="tiers" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
+              <p className="text-xs font-semibold mb-2" style={{ color: T.text }}>{tx(lang, "tiersTitle")}</p>
+              {[["semi", pSemiPrice, setPSemiPrice, pSemiMin, setPSemiMin], ["bulk", pBulkPrice, setPBulkPrice, pBulkMin, setPBulkMin]].map(([k, pr, setPr, mn, setMn]) => (
+                <div key={k} className="mb-2">
+                  <p className="text-[11px] font-semibold mb-1" style={{ color: T.muted }}>{tx(lang, "tierName_" + k)}</p>
+                  <div className="flex items-center gap-2">
+                    <input autoComplete="off" type="text" inputMode="decimal" value={pr} onChange={(e) => setPr(e.target.value.replace(/[^0-9.,]/g, "").slice(0, 10))} placeholder={CURRENT_CURRENCY.symbol} className="flex-1 min-w-0 border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                    <span className="text-[11px] flex-shrink-0" style={{ color: T.muted }}>{tx(lang, "tierFromQty")}</span>
+                    <input autoComplete="off" type="text" inputMode="decimal" value={mn} onChange={(e) => setMn(e.target.value.replace(/[^0-9.,]/g, "").slice(0, 7))} placeholder="—" className="w-16 border rounded-lg px-2 py-2 text-sm text-center" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                  </div>
+                </div>
+              ))}
+              <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "tiersHint")}</p>
+            </div>
             ) : m === "variants" ? (
             /* Tailles / couleurs : à la création, on tape les tailles et les couleurs, l'app
                 fabrique chaque combinaison avec sa quantité. En modification d'une variante :
@@ -21871,6 +21994,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             <div>
                               <p className="text-base font-bold">{p.name}</p>
                               <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)}{p.sellByMeasure ? ` / ${p.measureUnit || ""}` : ""} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · {tx(lang, "measureAvailable")} {localizedQty(dispo)} {p.sellByMeasure ? (p.measureUnit || "") : ""}</p>
+                              {productPriceTiers(p).length > 0 && (
+                                <p className="text-[10px] font-semibold" style={{ color: darkMode ? "#4ade80" : "#15803d" }}>
+                                  {productPriceTiers(p).map((x) => `${tx(lang, "tierName_" + x.kind)} ${fcfa(x.price)}${x.min > 0 ? " " + tx(lang, "tierFromN").replace("{n}", localizedQty(x.min)) : ""}`).join(" · ")}
+                                </p>
+                              )}
                             </div>
                           </div>
                           <div className="flex items-center gap-2.5">
@@ -22083,7 +22211,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           return (
                           <div key={it.id}>
                           <div className="flex items-center justify-between gap-2 text-xs">
-                            <span style={{ color: T.text }}>{it.misc ? "🏷️ " : ""}{it.productName} x{localizedQty(it.qty)}{it.measureUnit ? ` ${it.measureUnit}` : ""} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}</span>
+                            <span style={{ color: T.text }}>{it.misc ? "🏷️ " : ""}{it.productName} x{localizedQty(it.qty)}{it.measureUnit ? ` ${it.measureUnit}` : ""} {it.mode === "unit" ? `(${t(lang, "sellUnit")})` : ""}{(it.tier === "semi" || it.tier === "bulk") && <span className="ml-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold whitespace-nowrap" style={{ background: darkMode ? "rgba(22,163,74,0.2)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>{tx(lang, "tierName_" + it.tier)}</span>}</span>
                             <span className="flex items-center gap-1.5 shrink-0">
                               {negotiated && <span className="line-through text-[10px]" style={{ color: T.muted }}>{fcfa(it.qty * it.listPrice)}</span>}
                               <span className="font-bold" style={{ color: negotiated ? (darkMode ? "#f0c869" : "#b45309") : T.text }}>{fcfa(it.qty * it.unitPrice)}</span>
@@ -22147,6 +22275,27 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         })}
                       </div>
                     </div>
+                    {(() => {
+                      // Tarif du panier : détail (prix normal, paliers par quantité), demi-gros ou
+                      // gros pour tout le panier (revendeur). Affiché seulement si au moins un
+                      // article du panier a un prix de gros.
+                      const has = activeCart.items.some((i) => (i.mode || "pack") === "pack" && productPriceTiers(products.find((p) => p.id === i.productId)).length);
+                      if (!has) return null;
+                      const cur = activeCart.tariff === "semi" || activeCart.tariff === "bulk" ? activeCart.tariff : "retail";
+                      return (
+                        <div>
+                          <label className="text-xs font-semibold" style={{ color: T.muted }}>{tx(lang, "tariffLabel")}</label>
+                          <div className="grid grid-cols-3 gap-1.5 mt-1">
+                            {["retail", "semi", "bulk"].map((k) => (
+                              <button key={k} type="button" disabled={!canEditPrice && k !== cur} onClick={() => updateCartMeta(activeCart.id, "tariff", k === "retail" ? null : k)} className="py-2 rounded-xl text-[11px] font-bold disabled:opacity-40" style={{ background: cur === k ? "#15803d" : (darkMode ? T.input : "#f0fdf4"), color: cur === k ? "white" : (darkMode ? T.text : "#15803d") }}>
+                                {tx(lang, "tierName_" + k)}
+                              </button>
+                            ))}
+                          </div>
+                          {activeCart.tariffAuto && <p className="text-[10px] mt-1" style={{ color: T.muted }}>{tx(lang, "tariffRemembered")}</p>}
+                        </div>
+                      );
+                    })()}
                     <div>
                       <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "clientName")} {activeCart.payment !== "credit" ? `(${t(lang, "othFacultatif")})` : ""}</label>
                       <textarea autoComplete="off" rows={1} value={activeCart.customer} onChange={(e) => updateCartMeta(activeCart.id, "customer", e.target.value.replace(/\n/g, ""))} onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }} className="w-full border rounded-xl px-3 py-2.5 text-sm mt-1.5" style={{ background: T.input, color: T.text, borderColor: T.border, resize: "none", overflow: "hidden" }} />
@@ -22160,7 +22309,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         return (
                           <div className="flex flex-wrap gap-1.5 mt-1.5">
                             {matches.map((c) => (
-                              <button key={c.name} type="button" onClick={() => { updateCartMeta(activeCart.id, "customer", c.name); if (c.phone && !normalizePhoneForWhatsApp(activeCart.phone)) updateCartMeta(activeCart.id, "phone", c.phone); }} className="px-2.5 py-1 rounded-full text-[11px] font-semibold active:scale-95 transition-transform" style={{ background: darkMode ? "rgba(95,178,255,0.14)" : "#eff6ff", color: darkMode ? "#7fb2ff" : "#1d4ed8", border: "none" }}>
+                              <button key={c.name} type="button" onClick={() => { updateCartFields(activeCart.id, { customer: c.name, ...(c.phone && !normalizePhoneForWhatsApp(activeCart.phone) ? { phone: c.phone } : {}) }); }} className="px-2.5 py-1 rounded-full text-[11px] font-semibold active:scale-95 transition-transform" style={{ background: darkMode ? "rgba(95,178,255,0.14)" : "#eff6ff", color: darkMode ? "#7fb2ff" : "#1d4ed8", border: "none" }}>
                                 👤 {c.name}
                               </button>
                             ))}
