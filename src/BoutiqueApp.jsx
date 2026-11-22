@@ -6371,6 +6371,15 @@ EXTRA_UI.produceTotalCost = { fr: "total", en: "total", es: "total", pt: "total"
 EXTRA_UI.produceConfirm = { fr: "Produire {n}", en: "Produce {n}", es: "Producir {n}", pt: "Produzir {n}", de: "{n} produzieren", it: "Produci {n}", nl: "{n} produceren", pl: "Wyprodukuj {n}", ru: "Произвести {n}", tr: "{n} üret", ar: "إنتاج {n}", hi: "{n} बनाएँ", bn: "{n} উৎপাদন করুন", ur: "{n} تیار کریں", ta: "{n} உற்பத்தி செய்", te: "{n} తయారు చేయి", th: "ผลิต {n}", zh: "生产 {n}", ja: "{n} 個製造", ko: "{n}개 생산", id: "Produksi {n}", vi: "Sản xuất {n}", tl: "Gumawa ng {n}", sw: "Zalisha {n}", ha: "Samar da {n}", yo: "Ṣe {n}", zu: "Khiqiza {n}", am: "{n} አምርት", bm: "{n} dilan", wo: "Defar {n}" };
 EXTRA_UI.produceShort = { fr: "Pas assez de stock : {list}", en: "Not enough stock: {list}", es: "No hay stock suficiente: {list}", pt: "Stock insuficiente: {list}", de: "Nicht genug Bestand: {list}", it: "Stock insufficiente: {list}", nl: "Niet genoeg voorraad: {list}", pl: "Za mało towaru: {list}", ru: "Не хватает: {list}", tr: "Stok yetersiz: {list}", ar: "المخزون لا يكفي: {list}", hi: "स्टॉक काफ़ी नहीं: {list}", bn: "স্টক যথেষ্ট নয়: {list}", ur: "اسٹاک کافی نہیں: {list}", ta: "போதுமான இருப்பு இல்லை: {list}", te: "స్టాక్ సరిపోదు: {list}", th: "สต็อกไม่พอ: {list}", zh: "库存不足：{list}", ja: "在庫不足：{list}", ko: "재고 부족: {list}", id: "Stok tidak cukup: {list}", vi: "Không đủ hàng: {list}", tl: "Kulang ang stock: {list}", sw: "Hifadhi haitoshi: {list}", ha: "Ajiya ba ta isa ba: {list}", yo: "Ìpamọ́ kò tó: {list}", zu: "Isitoko asanele: {list}", am: "ክምችት በቂ አይደለም: {list}", bm: "Maralen ma bɔ: {list}", wo: "Stock bi doyul: {list}" };
 EXTRA_UI.logProduced = { fr: "Production", en: "Production", es: "Producción", pt: "Produção", de: "Produktion", it: "Produzione", nl: "Productie", pl: "Produkcja", ru: "Производство", tr: "Üretim", ar: "إنتاج", hi: "उत्पादन", bn: "উৎপাদন", ur: "پیداوار", ta: "உற்பத்தி", te: "ఉత్పత్తి", th: "การผลิต", zh: "生产", ja: "製造", ko: "생산", id: "Produksi", vi: "Sản xuất", tl: "Paggawa", sw: "Uzalishaji", ha: "Samarwa", yo: "Ìṣelọ́pọ̀", zu: "Ukukhiqiza", am: "ምርት", bm: "Dilanni", wo: "Defar" };
+EXTRA_UI.lotNoLabel = { fr: "N° de lot (optionnel)", en: "Batch no. (optional)", es: "N.º de lote (opcional)", pt: "N.º do lote (opcional)", de: "Chargennr. (optional)", it: "N. di lotto (facoltativo)", nl: "Partijnr. (optioneel)", pl: "Nr partii (opcjonalnie)", ru: "№ партии (необязательно)", tr: "Parti no. (isteğe bağlı)", ar: "رقم الدفعة (اختياري)", hi: "बैच नं. (वैकल्पिक)", bn: "ব্যাচ নং (ঐচ্ছিক)", ur: "بیچ نمبر (اختیاری)", ta: "தொகுதி எண் (விருப்பம்)", te: "బ్యాచ్ నం. (ఐచ్ఛికం)", th: "เลขล็อต (ไม่บังคับ)", zh: "批号（可选）", ja: "ロット番号（任意）", ko: "로트 번호 (선택)", id: "No. batch (opsional)", vi: "Số lô (không bắt buộc)", tl: "Blg. ng batch (opsyonal)", sw: "Na. ya kundi (si lazima)", ha: "Lambar rukuni (zaɓi)", yo: "Nọ́mbà àkójọ (àṣàyàn)", zu: "Inombolo yeqoqo (uyazikhethela)", am: "የባች ቁጥር (አማራጭ)", bm: "Lɔti nimɔrɔ (n'i b'a fɛ)", wo: "Nimero lot (bu la neexee)" };
+EXTRA_UI.lotLabel = { fr: "Lot", en: "Batch", es: "Lote", pt: "Lote", de: "Charge", it: "Lotto", nl: "Partij", pl: "Partia", ru: "Партия", tr: "Parti", ar: "دفعة", hi: "बैच", bn: "ব্যাচ", ur: "بیچ", ta: "தொகுதி", te: "బ్యాచ్", th: "ล็อต", zh: "批次", ja: "ロット", ko: "로트", id: "Batch", vi: "Lô", tl: "Batch", sw: "Kundi", ha: "Rukuni", yo: "Àkójọ", zu: "Iqoqo", am: "ባች", bm: "Lɔti", wo: "Lot" };
+EXTRA_UI.fefoFirstLot = { fr: "Vendre d'abord le lot {lot} (périme le {date})", en: "Sell batch {lot} first (expires {date})", es: "Vender primero el lote {lot} (caduca el {date})", pt: "Vender primeiro o lote {lot} (vence em {date})", de: "Zuerst Charge {lot} verkaufen (läuft ab am {date})", it: "Vendere prima il lotto {lot} (scade il {date})", nl: "Eerst partij {lot} verkopen (verloopt {date})", pl: "Najpierw sprzedaj partię {lot} (ważna do {date})", ru: "Сначала продавайте партию {lot} (срок до {date})", tr: "Önce {lot} partisini satın (SKT {date})", ar: "بِع الدفعة {lot} أولًا (تنتهي في {date})", hi: "पहले बैच {lot} बेचें ({date} को समाप्त)", bn: "আগে ব্যাচ {lot} বিক্রি করুন ({date} মেয়াদ শেষ)", ur: "پہلے بیچ {lot} بیچیں ({date} کو میعاد ختم)", ta: "முதலில் தொகுதி {lot} விற்கவும் ({date} காலாவதி)", te: "ముందుగా బ్యాచ్ {lot} అమ్మండి ({date} గడువు)", th: "ขายล็อต {lot} ก่อน (หมดอายุ {date})", zh: "先卖批次 {lot}（{date} 过期）", ja: "先にロット {lot} を販売（{date} 期限）", ko: "로트 {lot} 먼저 판매 ({date} 만료)", id: "Jual batch {lot} dulu (kedaluwarsa {date})", vi: "Bán lô {lot} trước (hết hạn {date})", tl: "Unahing ibenta ang batch {lot} (mapapaso sa {date})", sw: "Uza kundi {lot} kwanza (linaisha {date})", ha: "Fara sayar da rukunin {lot} (zai ƙare {date})", yo: "Ta àkójọ {lot} kọ́kọ́ (yóò parí {date})", zu: "Thengisa iqoqo {lot} kuqala (liphelelwa ngo-{date})", am: "መጀመሪያ ባች {lot} ይሽጡ ({date} ያበቃል)", bm: "Lɔti {lot} feere fɔlɔ ({date} a bɛ ban)", wo: "Jëkk jaay lot {lot} (dina jeex {date})" };
+EXTRA_UI.fefoFirstDate = { fr: "Vendre d'abord ceux qui périment le {date}", en: "Sell the ones expiring {date} first", es: "Vender primero los que caducan el {date}", pt: "Vender primeiro os que vencem em {date}", de: "Zuerst die mit Ablauf {date} verkaufen", it: "Vendere prima quelli che scadono il {date}", nl: "Eerst die verkopen die {date} verlopen", pl: "Najpierw sprzedaj te ważne do {date}", ru: "Сначала продавайте те, что истекают {date}", tr: "Önce {date} tarihinde bitenleri satın", ar: "بِع أولًا ما ينتهي في {date}", hi: "पहले {date} को समाप्त होने वाले बेचें", bn: "আগে {date} মেয়াদ শেষ হওয়াগুলো বিক্রি করুন", ur: "پہلے {date} کو ختم ہونے والے بیچیں", ta: "முதலில் {date} காலாவதியாவதை விற்கவும்", te: "ముందుగా {date} గడువు ఉన్నవి అమ్మండి", th: "ขายชิ้นที่หมดอายุ {date} ก่อน", zh: "先卖 {date} 过期的", ja: "{date} 期限のものを先に販売", ko: "{date} 만료 상품 먼저 판매", id: "Jual dulu yang kedaluwarsa {date}", vi: "Bán trước hàng hết hạn {date}", tl: "Unahing ibenta ang mapapaso sa {date}", sw: "Uza kwanza zinazoisha {date}", ha: "Fara sayar da masu ƙarewa {date}", yo: "Ta àwọn tí yóò parí {date} kọ́kọ́", zu: "Thengisa kuqala eziphelelwa ngo-{date}", am: "መጀመሪያ {date} የሚያበቁትን ይሽጡ", bm: "Minnu bɛ ban {date} olu feere fɔlɔ", wo: "Jëkk jaay yi di jeex {date}" };
+EXTRA_UI.fefoExpiredWarn = { fr: "{n} périmé(s) en stock : ne pas les vendre", en: "{n} expired in stock: do not sell them", es: "{n} caducado(s) en stock: no venderlos", pt: "{n} vencido(s) em estoque: não vender", de: "{n} abgelaufen im Lager: nicht verkaufen", it: "{n} scaduto/i in magazzino: non venderli", nl: "{n} verlopen op voorraad: niet verkopen", pl: "{n} przeterminowane w magazynie: nie sprzedawać", ru: "{n} просрочено на складе: не продавать", tr: "Stokta {n} tarihi geçmiş: satmayın", ar: "{n} منتهية الصلاحية في المخزون: لا تبِعها", hi: "स्टॉक में {n} समाप्त: इन्हें न बेचें", bn: "স্টকে {n}টি মেয়াদোত্তীর্ণ: বিক্রি করবেন না", ur: "اسٹاک میں {n} میعاد ختم: انہیں نہ بیچیں", ta: "கையிருப்பில் {n} காலாவதி: விற்க வேண்டாம்", te: "స్టాక్‌లో {n} గడువు ముగిసినవి: అమ్మవద్దు", th: "หมดอายุในสต็อก {n}: ห้ามขาย", zh: "库存中 {n} 件已过期：请勿出售", ja: "在庫に期限切れ {n}：販売しないでください", ko: "재고 중 {n}개 만료: 판매 금지", id: "{n} kedaluwarsa di stok: jangan dijual", vi: "{n} đã hết hạn trong kho: không bán", tl: "{n} paso na sa stock: huwag ibenta", sw: "{n} zimeisha muda stoo: usiziuze", ha: "{n} sun ƙare a kaya: kada a sayar", yo: "{n} ti parí nínú ọjà: má ṣe tà wọ́n", zu: "{n} eziphelelwe yisikhathi esitokweni: ungazithengisi", am: "በክምችት {n} ጊዜው ያለፈ፡ አይሽጧቸው", bm: "{n} waati tɛmɛna maraka la: kana u feere", wo: "{n} jeex na ci stock: bul leen jaay" };
+EXTRA_UI.lotExpires = { fr: "Périme le {date}", en: "Expires {date}", es: "Caduca el {date}", pt: "Vence em {date}", de: "Läuft ab am {date}", it: "Scade il {date}", nl: "Verloopt {date}", pl: "Ważne do {date}", ru: "Годен до {date}", tr: "SKT {date}", ar: "تنتهي في {date}", hi: "{date} को समाप्त", bn: "{date} মেয়াদ শেষ", ur: "{date} کو میعاد ختم", ta: "{date} காலாவதி", te: "{date} గడువు", th: "หมดอายุ {date}", zh: "{date} 过期", ja: "{date} 期限", ko: "{date} 만료", id: "Kedaluwarsa {date}", vi: "Hết hạn {date}", tl: "Mapapaso sa {date}", sw: "Inaisha {date}", ha: "Zai ƙare {date}", yo: "Yóò parí {date}", zu: "Liphelelwa ngo-{date}", am: "{date} ያበቃል", bm: "A bɛ ban {date}", wo: "Dina jeex {date}" };
+EXTRA_UI.lotInStock = { fr: "Reste en stock", en: "Left in stock", es: "Queda en stock", pt: "Resta em estoque", de: "Noch auf Lager", it: "Rimane in magazzino", nl: "Nog op voorraad", pl: "Zostało w magazynie", ru: "Осталось на складе", tr: "Stokta kalan", ar: "المتبقي في المخزون", hi: "स्टॉक में बचा", bn: "স্টকে বাকি", ur: "اسٹاک میں باقی", ta: "கையிருப்பில் மீதம்", te: "స్టాక్‌లో మిగిలినవి", th: "คงเหลือในสต็อก", zh: "库存剩余", ja: "在庫残り", ko: "남은 재고", id: "Sisa stok", vi: "Còn trong kho", tl: "Natitira sa stock", sw: "Zilizobaki stoo", ha: "Saura a kaya", yo: "Èyí tó kù nínú ọjà", zu: "Okusele esitokweni", am: "በክምችት የቀረ", bm: "Min tora maraka la", wo: "Li des ci stock" };
+EXTRA_UI.lotSoldTo = { fr: "Ventes de ce lot", en: "Sales from this batch", es: "Ventas de este lote", pt: "Vendas deste lote", de: "Verkäufe dieser Charge", it: "Vendite di questo lotto", nl: "Verkopen van deze partij", pl: "Sprzedaż z tej partii", ru: "Продажи этой партии", tr: "Bu partiden satışlar", ar: "مبيعات هذه الدفعة", hi: "इस बैच की बिक्री", bn: "এই ব্যাচের বিক্রি", ur: "اس بیچ کی فروخت", ta: "இந்த தொகுதியின் விற்பனைகள்", te: "ఈ బ్యాచ్ అమ్మకాలు", th: "การขายจากล็อตนี้", zh: "该批次的销售", ja: "このロットの販売", ko: "이 로트의 판매", id: "Penjualan batch ini", vi: "Các lần bán lô này", tl: "Mga benta mula sa batch na ito", sw: "Mauzo ya kundi hili", ha: "Sayar da wannan rukuni", yo: "Títà láti inú àkójọ yìí", zu: "Okuthengisiwe kuleli qoqo", am: "የዚህ ባች ሽያጮች", bm: "Nin lɔti feereliw", wo: "Jaay yu lot bii" };
+EXTRA_UI.lotNoSales = { fr: "Aucune vente de ce lot pour l'instant.", en: "No sales from this batch yet.", es: "Aún no hay ventas de este lote.", pt: "Ainda não há vendas deste lote.", de: "Noch keine Verkäufe dieser Charge.", it: "Nessuna vendita di questo lotto per ora.", nl: "Nog geen verkopen van deze partij.", pl: "Brak sprzedaży z tej partii.", ru: "Продаж этой партии пока нет.", tr: "Bu partiden henüz satış yok.", ar: "لا توجد مبيعات من هذه الدفعة بعد.", hi: "इस बैच की अभी कोई बिक्री नहीं।", bn: "এই ব্যাচের এখনও কোনো বিক্রি নেই।", ur: "اس بیچ کی ابھی کوئی فروخت نہیں۔", ta: "இந்த தொகுதியில் இன்னும் விற்பனை இல்லை.", te: "ఈ బ్యాచ్ నుండి ఇంకా అమ్మకాలు లేవు.", th: "ยังไม่มีการขายจากล็อตนี้", zh: "该批次暂无销售。", ja: "このロットの販売はまだありません。", ko: "이 로트의 판매가 아직 없습니다.", id: "Belum ada penjualan dari batch ini.", vi: "Chưa có lần bán nào từ lô này.", tl: "Wala pang benta mula sa batch na ito.", sw: "Bado hakuna mauzo ya kundi hili.", ha: "Babu sayarwa daga wannan rukuni tukuna.", yo: "Kò sí títà láti inú àkójọ yìí síbẹ̀.", zu: "Akukakabi khona okuthengisiwe kuleli qoqo.", am: "ከዚህ ባች እስካሁን ሽያጭ የለም።", bm: "Nin lɔti ma feere fɔlɔ.", wo: "Amul jaay ci lot bii ba tey." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -7295,6 +7304,62 @@ function expiryStatus(p, todayKey) {
   const soonKey = localDayKey(new Date(Date.now() + 3 * 86400000));
   if (first <= soonKey) return { status: "soon", date: first };
   return null;
+}
+// ---- Lots : sortie FEFO, remise en lot, n° de lot ----
+// Dès qu'un colis est vendu, on enregistre EXPLICITEMENT de quel lot il sort : le lot non périmé
+// qui périme le plus tôt (FEFO), les lots déjà périmés seulement en dernier recours. La vente
+// garde la trace des lots (n°, date, quantité) pour le reçu et pour retrouver les clients
+// en cas de rappel d'un lot. Annulation et retour remettent dans le lot d'origine.
+const r3q = (n) => Math.round((Number(n) || 0) * 1000) / 1000;
+const lotsPlain = (p) => expiryLots(p).map(({ remaining, ...b }) => ({ ...b, qty: remaining }));
+const lotRef = (b, qty) => ({ id: b.id, date: b.date, ...(b.lotNo ? { lotNo: b.lotNo } : {}), qty });
+function lotsTake(p, qty, todayKey) {
+  const lots = lotsPlain(p);
+  if (!lots.length || !(qty > 0)) return null;
+  const order = [...lots.filter((b) => b.date >= todayKey), ...lots.filter((b) => b.date < todayKey)];
+  let left = qty;
+  const used = [];
+  for (const b of order) {
+    if (left <= 0) break;
+    const take = Math.min(b.qty, left);
+    if (take <= 0) continue;
+    b.qty = r3q(b.qty - take);
+    left = r3q(left - take);
+    used.push(lotRef(b, take));
+  }
+  return { batches: lots.filter((b) => b.qty > 0), used };
+}
+function lotsPutBack(p, used, qty) {
+  if (!Array.isArray(used) || !used.length || !(qty > 0)) return null;
+  const lots = lotsPlain(p);
+  let left = qty;
+  const back = [];
+  for (const u of [...used].reverse()) {
+    if (left <= 0) break;
+    const n = Math.min(Number(u.qty) || 0, left);
+    if (n <= 0 || !u.date) continue;
+    const b = lots.find((x) => x.id === u.id);
+    if (b) b.qty = r3q(b.qty + n); else lots.push(lotRef(u, n));
+    left = r3q(left - n);
+    back.push(lotRef(u, n));
+  }
+  return { batches: lots.sort((a, b) => (a.date < b.date ? -1 : 1)), used: back };
+}
+function lotsRemove(p, used) {
+  const lots = lotsPlain(p);
+  (used || []).forEach((u) => {
+    const b = lots.find((x) => x.id === u.id);
+    if (b) b.qty = r3q(Math.max(0, b.qty - (Number(u.qty) || 0)));
+  });
+  return { batches: lots.filter((b) => b.qty > 0) };
+}
+// À la vente : quantité périmée encore en stock, et le lot à sortir d'abord (s'il y a le choix).
+function fefoInfo(p, todayKey) {
+  const lots = expiryLots(p);
+  if (!lots.length) return null;
+  const expiredQty = r3q(lots.filter((b) => b.date < todayKey).reduce((n, b) => n + b.remaining, 0));
+  const good = lots.filter((b) => b.date >= todayKey);
+  return { expiredQty, first: good.length > 1 ? good[0] : null };
 }
 function fullDate(iso) {
   const d = parseDayOrIso(iso);
@@ -11442,6 +11507,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     if (it.tier === "semi" || it.tier === "bulk") parts.push(tx(lang, "tierName_" + it.tier));
     if (it.condition && it.condition !== "new") parts.push(tx(lang, "cond_" + it.condition));
     if (it.serial) parts.push(`${tx(lang, "serialShort")} ${it.serial}`);
+    if (Array.isArray(it.lots) && !it.returnOf) {
+      const named = it.lots.filter((l) => l && l.lotNo);
+      if (named.length) parts.push(named.map((l) => `${tx(lang, "lotLabel")} ${l.lotNo} (${fmtDateCached(new Date(l.date + "T12:00:00"), null, "date")})`).join(", "));
+    }
     if (it.warrantyUntil) parts.push(tx(lang, "warrantyUntil").replace("{date}", fmtDateCached(new Date(it.warrantyUntil + "T12:00:00"), null, "date")));
     return parts.join(" · ");
   };
@@ -13613,6 +13682,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // caisse (onglet Vente) au lieu de le chercher/cliquer dans la liste.
   const [pBarcode, setPBarcode] = useState("");
   const [pExpiry, setPExpiry] = useState("");
+  const [pLotNo, setPLotNo] = useState("");
   // Téléphones / électronique : n° de série (IMEI) demandé à la vente, état, garantie.
   const [pTrackSerial, setPTrackSerial] = useState(false);
   const [pCondition, setPCondition] = useState("new");
@@ -13753,6 +13823,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [restockTarget, setRestockTarget] = useState(null);
   const [restockQty, setRestockQty] = useState("");
   const [restockPrice, setRestockPrice] = useState("");
+  const [restockDate, setRestockDate] = useState("");
+  const [restockLotNo, setRestockLotNo] = useState("");
+  // Fiche d'un lot (n°, date, ventes concernées) : { pid, id } ou null.
+  const [lotView, setLotView] = useState(null);
   const [stockSearch, setStockSearch] = useState("");
   const [historySearch, setHistorySearch] = useState("");
   const [historyLimit, setHistoryLimit] = useState(40); // nombre de lignes d'historique affichées
@@ -15339,7 +15413,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Après modification d'une variante : le nom du modèle suit sur toutes ses variantes, et
   // (case cochée) le prix, le prix d'achat, la catégorie, la photo et la description aussi.
   const resetProductForm = () => {
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm();
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm();
   };
   const applyVariantGroupEdit = (list) => {
     if (!editingVariant) return list;
@@ -15431,6 +15505,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           sellByMeasure: pSellByMeasure,
           measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
           barcode: pBarcode.trim() || null,
+          lotTracked: !!pExpiry,
           batches: (() => {
             const newQty = pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10);
             if (!pExpiry) return [];
@@ -15439,13 +15514,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
             const keptSum = kept.reduce((n, b) => n + b.qty, 0);
             // Stock ajouté (ou stock jamais daté) : il prend la date saisie, comme un nouveau lot.
             const undated = Math.max(0, newQty - keptSum);
+            const lotNoIn = pLotNo.trim();
             if (undated > 0) {
               const last = kept[kept.length - 1];
-              if (last && last.date === pExpiry) last.qty += undated;
-              else kept.push({ id: Date.now().toString(36), date: pExpiry, qty: undated });
-            } else if (delta <= 0 && kept.length && kept[kept.length - 1].date !== pExpiry) {
-              // Simple correction de la date du lot le plus récent.
-              kept[kept.length - 1].date = pExpiry;
+              if (last && last.date === pExpiry && (last.lotNo || "") === lotNoIn) last.qty += undated;
+              else kept.push({ id: Date.now().toString(36), date: pExpiry, ...(lotNoIn ? { lotNo: lotNoIn } : {}), qty: undated });
+            } else if (delta <= 0 && kept.length) {
+              // Simple correction de la date / du n° du lot le plus récent.
+              const last = kept[kept.length - 1];
+              last.date = pExpiry;
+              if (lotNoIn) last.lotNo = lotNoIn; else delete last.lotNo;
             }
             return kept;
           })(),
@@ -15459,7 +15537,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       setQtyChangePrompt(null);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
+      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -15492,7 +15570,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       condition: pCondition && pCondition !== "new" ? pCondition : null,
       warrantyMonths: parseInt(pWarrantyMonths, 10) > 0 ? parseInt(pWarrantyMonths, 10) : null,
       looseUnits: 0,
-      batches: pExpiry ? [{ id: Date.now().toString(36), date: pExpiry, qty: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10) }] : [],
+      lotTracked: !!pExpiry,
+      batches: pExpiry ? [{ id: Date.now().toString(36), date: pExpiry, ...(pLotNo.trim() ? { lotNo: pLotNo.trim() } : {}), qty: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10) }] : [],
       updatedAt: Date.now(),
     };
     if (creatingVariants) {
@@ -15511,7 +15590,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           variantIndex: i,
           quantity: q,
           barcode: null,
-          batches: pExpiry && q > 0 ? [{ id: Date.now().toString(36) + i, date: pExpiry, qty: q }] : [],
+          batches: pExpiry && q > 0 ? [{ id: Date.now().toString(36) + i, date: pExpiry, ...(pLotNo.trim() ? { lotNo: pLotNo.trim() } : {}), qty: q }] : [],
         };
       });
       saveAll({ products: [...products, ...created] });
@@ -15520,7 +15599,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       saveAll({ products: [...products, newProduct] });
       logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
     }
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
+    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
   };
   // Jette les lots périmés d'un produit : stock diminué, perte enregistrée dans unsoldLog
   // (déjà affiché dans Statistiques > Invendus), action notée dans l'historique.
@@ -15583,7 +15662,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPTrackSerial(!!p.trackSerial);
     setPCondition(p.condition || "new");
     setPWarrantyMonths(p.warrantyMonths > 0 ? String(p.warrantyMonths) : "");
-    { const lots = expiryLots(p); setPExpiry(lots.length ? lots[lots.length - 1].date : ""); }
+    { const lots = expiryLots(p); setPExpiry(lots.length ? lots[lots.length - 1].date : ""); setPLotNo(lots.length ? lots[lots.length - 1].lotNo || "" : ""); }
     setError("");
     setShowAddProduct(true);
   };
@@ -15631,6 +15710,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setRestockTarget(id);
     setRestockQty("");
     setRestockPrice("");
+    setRestockDate("");
+    setRestockLotNo("");
   };
   // Valide le réapprovisionnement : ajoute la quantité saisie, et si un nouveau prix
   // d'achat est fourni, recalcule le prix d'achat du produit en moyenne pondérée entre
@@ -15665,8 +15746,18 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // Moyenne pondérée par les quantités : (ancien stock × ancien prix + nouveau lot × nouveau prix) / stock total.
       nextCost = (oldQty * oldCost + addQty * newLotCost) / (oldQty + addQty);
     }
-    saveAll({ products: products.map((p) => (p.id === target.id ? { ...p, quantity: oldQty + addQty, costPrice: nextCost, updatedAt: Date.now() } : p)) });
-    logAction(`${t(lang, "logStockAdjusted")} : ${target.name} (+${addQty})`);
+    // Nouveau lot daté (et numéroté) : ajouté aux lots existants.
+    const lotNoIn = restockLotNo.trim();
+    let lotPatch = {};
+    if (restockDate) {
+      const kept = lotsPlain(target);
+      const same = kept.find((b) => b.date === restockDate && (b.lotNo || "") === lotNoIn);
+      if (same) same.qty = r3q(same.qty + addQty);
+      else kept.push({ id: Date.now().toString(36), date: restockDate, ...(lotNoIn ? { lotNo: lotNoIn } : {}), qty: addQty });
+      lotPatch = { batches: kept.sort((a, b) => (a.date < b.date ? -1 : 1)), lotTracked: true };
+    }
+    saveAll({ products: products.map((p) => (p.id === target.id ? { ...p, quantity: oldQty + addQty, costPrice: nextCost, ...lotPatch, updatedAt: Date.now() } : p)) });
+    logAction(`${t(lang, "logStockAdjusted")} : ${target.name} (+${addQty}${lotNoIn && restockDate ? `, ${tx(lang, "lotLabel")} ${lotNoIn}` : ""})`);
     setRestockTarget(null);
     setRestockQty("");
     setRestockPrice("");
@@ -17161,7 +17252,27 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (wu) out.warrantyUntil = wu;
       return out;
     };
-    const newSales = cart.items.map((it) => {
+    // Lots datés : chaque colis vendu sort du lot qui périme le plus tôt (FEFO, lots périmés
+    // en dernier) ; un article rendu retourne dans son lot d'origine.
+    const lotTodayKey = localDayKey(new Date());
+    const lotRun = {};
+    const lotUsed = {};
+    cart.items.forEach((it, idx) => {
+      const p0 = it.productId != null ? products.find((p) => p.id === it.productId) : null;
+      if (!p0 || isKitProduct(p0)) return;
+      const cur = lotRun[p0.id] || p0;
+      const n = Math.abs(Number(it.qty) || 0);
+      let res = null;
+      if ((it.mode || "pack") === "pack" && it.qty > 0) {
+        res = lotsTake(cur, n, lotTodayKey);
+        if (res) lotRun[p0.id] = { ...cur, batches: res.batches, quantity: Math.max(0, r3q((Number(cur.quantity) || 0) - n)) };
+      } else if (it.mode === "return" && !it.noRestock && (it.origMode || "pack") !== "unit" && Array.isArray(it.lots) && it.lots.length) {
+        res = lotsPutBack(cur, it.lots, n);
+        if (res) lotRun[p0.id] = { ...cur, batches: res.batches, quantity: r3q((Number(cur.quantity) || 0) + n) };
+      }
+      if (res && res.used.length) lotUsed[idx] = res.used;
+    });
+    const newSales = cart.items.map((it, idx) => {
       // Coût d'achat figé au moment de la vente (utile pour la rentabilité, Business 2) —
       // même si le prix d'achat du produit change plus tard, cette vente garde le bon coût.
       const product = products.find((p) => p.id === it.productId);
@@ -17170,6 +17281,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         transactionId,
         receiptNo,
         ...serialInfo(it),
+        ...(lotUsed[idx] ? { lots: lotUsed[idx] } : {}),
         productId: it.productId,
         productName: it.productName,
         qty: it.qty,
@@ -17237,6 +17349,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (!def || i.mode === "unit" || (i.mode === "return" && i.noRestock)) return;
       nextProducts = applyComponentDelta(nextProducts, componentUses(def, Math.abs(Number(i.qty) || 0)), i.qty > 0 ? -1 : 1);
     });
+    Object.keys(lotRun).forEach((pid) => {
+      nextProducts = nextProducts.map((p) => (String(p.id) === pid ? { ...p, batches: lotRun[pid].batches, updatedAt: Date.now() } : p));
+    });
     // Article rendu abîmé : il ne revient pas en stock, c'est une perte chiffrée.
     const damagedReturns = cart.items.filter((i) => i.mode === "return" && i.noRestock).map((i) => {
       const prod = products.find((p) => p.id === i.productId);
@@ -17255,7 +17370,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       customer: cart.customer.trim(),
       payment: cart.payment,
       change: receivedNum !== null ? receivedNum - total : null,
-      items: cart.items.map((it) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice, ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}), ...(typeof it.serial === "string" && it.serial.trim() ? { serial: it.serial.trim() } : {}) })),
+      items: cart.items.map((it, idx) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice, ...(lotUsed[idx] && lotUsed[idx].some((l) => l.lotNo) && it.qty > 0 ? { lots: lotUsed[idx] } : {}), ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}), ...(typeof it.serial === "string" && it.serial.trim() ? { serial: it.serial.trim() } : {}) })),
       ...(depositNum > 0 ? { deposit: depositNum, depositMethod } : {}),
     })];
     if (cart.payment === "credit") {
@@ -17338,7 +17453,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it) })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, pickupDue: cart.pickupLater ? (cart.pickupDate || "later") : null, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
+    setPendingReceipt({ items: cart.items.map((it, idx) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it), ...(lotUsed[idx] ? { lots: lotUsed[idx] } : {}) })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, pickupDue: cart.pickupLater ? (cart.pickupDate || "later") : null, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
     // Avec plusieurs commandes ouvertes (tables…), la fenêtre d'encaissement ne doit pas
     // rester ouverte sur la commande suivante : on la ferme après chaque vente.
     setShowCheckoutModal(false);
@@ -17412,6 +17527,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ...(returnRestock ? {} : { noRestock: true }),
         ...(r.line.measureUnit ? { measureUnit: r.line.measureUnit } : {}),
         ...(r.line.kit ? { kit: r.line.kit } : {}),
+        ...(() => {
+          if (!Array.isArray(r.line.lots) || !r.line.lots.length) return {};
+          const back = {};
+          allSales.filter((s) => !s.cancelled && s.returnOfLine === r.line.id && Array.isArray(s.lots)).forEach((s) => s.lots.forEach((l) => { back[l.id] = (back[l.id] || 0) + (Number(l.qty) || 0); }));
+          const left = r.line.lots.map((l) => ({ ...l, qty: r3q((Number(l.qty) || 0) - (back[l.id] || 0)) })).filter((l) => l.qty > 0);
+          return left.length ? { lots: left } : {};
+        })(),
       };
     });
     const prefillDial = ownDialCode ? ownDialCode + " " : "";
@@ -17470,6 +17592,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         updated.quantity = Math.floor(totalUnits / perPack);
         updated.looseUnits = totalUnits - updated.quantity * perPack;
       }
+      // Lots : la vente annulée retourne dans ses lots ; un retour annulé en ressort.
+      let run = p;
+      mine.forEach((x) => {
+        if (!Array.isArray(x.lots) || !x.lots.length) return;
+        if (x.mode === "return") {
+          if (x.noRestock) return;
+          const r = lotsRemove(run, x.lots);
+          run = { ...run, batches: r.batches, quantity: Math.max(0, r3q((Number(run.quantity) || 0) + (Number(x.qty) || 0))) };
+        } else {
+          const n = Math.abs(Number(x.qty) || 0);
+          const r = lotsPutBack(run, x.lots, n);
+          if (r) run = { ...run, batches: r.batches, quantity: r3q((Number(run.quantity) || 0) + n) };
+        }
+      });
+      if (run !== p) updated.batches = run.batches;
       updated.updatedAt = Date.now();
       return updated;
     });
@@ -18850,7 +18987,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // ⚠️ Ces hooks DOIVENT rester avant tout "return" anticipé (loading, accountSuspended...) :
   // React exige le même nombre de hooks à chaque rendu (sinon erreur #310).
   const filteredProducts = useMemo(
-    () => sortProductList(products.filter((p) => p.name.toLowerCase().includes(deferredStockSearch.toLowerCase()))),
+    () => sortProductList(products.filter((p) => { const q = deferredStockSearch.toLowerCase(); return p.name.toLowerCase().includes(q) || (q.length >= 2 && Array.isArray(p.batches) && p.batches.some((b) => b && b.lotNo && String(b.lotNo).toLowerCase().includes(q))); })),
     [products, deferredStockSearch, sortProductList]
   );
   const filteredDebts = useMemo(
@@ -21609,7 +21746,47 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={restockQty} onChange={(e) => setRestockQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                 <input autoComplete="off" placeholder={tx(lang, "restockPriceLabel")} type="number" value={restockPrice} onChange={(e) => setRestockPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                 <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "restockPriceHint")}</p>
+                {((Array.isArray(restockProduct.batches) && restockProduct.batches.length > 0) || restockProduct.lotTracked || (productSectorModes || []).includes("expiry")) && (
+                  <div className="mb-3">
+                    <label className="text-[11px] block mb-1" style={{ color: T.muted }}>📅 {tx(lang, "expDateLabel")}</label>
+                    <input type="date" value={restockDate} onChange={(e) => setRestockDate(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+                    <input autoComplete="off" value={restockLotNo} onChange={(e) => setRestockLotNo(e.target.value)} placeholder={tx(lang, "lotNoLabel")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                  </div>
+                )}
                 <button onClick={confirmRestock} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "restockConfirmBtn")}</button>
+              </div>
+            </div>
+          );
+        })()}
+        {lotView && (() => {
+          const lp = products.find((x) => x.id === lotView.pid);
+          const live = lp ? expiryLots(lp).find((b) => b.id === lotView.id) : null;
+          const ref = live || (lp && Array.isArray(lp.batches) ? lp.batches.find((b) => b.id === lotView.id) : null);
+          if (!lp || !ref) return null;
+          const rows = allSales
+            .filter((s) => !s.cancelled && s.productId === lp.id && Array.isArray(s.lots) && s.lots.some((l) => l.id === lotView.id))
+            .map((s) => ({ s, q: s.lots.filter((l) => l.id === lotView.id).reduce((n, l) => n + (Number(l.qty) || 0), 0) }))
+            .sort((a, b) => (a.s.date < b.s.date ? 1 : -1));
+          const expired = ref.date < localDayKey(new Date());
+          return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }} onClick={() => setLotView(null)}>
+              <div className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "80vh", overscrollBehavior: "contain" }} onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-bold text-sm">📦 {tx(lang, "lotLabel")} {ref.lotNo || "—"}</h3>
+                  <button type="button" onClick={() => setLotView(null)} aria-label="Fermer"><X size={18} /></button>
+                </div>
+                <p className="text-xs mb-2" style={{ color: T.muted }}>{lp.name}</p>
+                <p className="text-xs font-semibold" style={{ color: expired ? (darkMode ? "#fda4af" : "#e11d48") : T.text }}>📅 {tx(lang, "lotExpires").replace("{date}", fullDate(ref.date + "T12:00:00"))}</p>
+                <p className="text-xs font-semibold mb-3">{tx(lang, "lotInStock")} : {localizedQty(live ? live.remaining : 0)}</p>
+                <p className="text-[11px] font-bold mb-1" style={{ color: T.muted }}>{tx(lang, "lotSoldTo")}</p>
+                {rows.length === 0 ? (
+                  <p className="text-xs" style={{ color: T.muted }}>{tx(lang, "lotNoSales")}</p>
+                ) : rows.map(({ s, q }) => (
+                  <div key={s.id} className="flex items-center justify-between gap-2 py-1.5 text-xs" style={{ borderBottom: `1px solid ${T.border}` }}>
+                    <span className="min-w-0 truncate">{fullDate(s.date)} · {s.customer || "—"}{s.receiptNo ? ` · 🔖 ${s.receiptNo}` : ""}</span>
+                    <span className="shrink-0 font-bold" style={{ color: s.qty < 0 ? (darkMode ? "#4ade80" : "#15803d") : T.text }}>{s.qty < 0 ? "↩️ +" : "×"}{localizedQty(q)}</span>
+                  </div>
+                ))}
               </div>
             </div>
           );
@@ -21771,7 +21948,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <React.Fragment key="expiry">
                 <label className="text-xs block mb-1" style={{ color: T.muted }}>📅 {tx(lang, "expDateLabel")}</label>
                 <input type="date" value={pExpiry} onChange={(e) => setPExpiry(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-1" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
-                <p className="text-[10px] mb-3" style={{ color: T.muted }}>{tx(lang, "expDateHint")}</p>
+                <p className="text-[10px] mb-2" style={{ color: T.muted }}>{tx(lang, "expDateHint")}</p>
+                <input autoComplete="off" value={pLotNo} onChange={(e) => setPLotNo(e.target.value)} placeholder={tx(lang, "lotNoLabel")} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                   </React.Fragment>
             ) : m === "unit" ? (
             <div key="unit" className="rounded-lg p-3 mb-3" style={{ background: T.input }}>
@@ -22148,6 +22326,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <p className="text-[10px] font-bold mt-0.5" style={{ color: expired ? (darkMode ? "#fda4af" : "#e11d48") : (darkMode ? "#f0c869" : "#c2410c") }}>
                             📅 {tx(lang, expired ? "expExpired" : "expSoon").replace("{date}", fullDate(ex.date + "T12:00:00"))}
                           </p>
+                        );
+                      })()}
+                      {(() => {
+                        const lots = expiryLots(p);
+                        if (!lots.length || (lots.length < 2 && !lots.some((b) => b.lotNo))) return null;
+                        return (
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {lots.map((b) => (
+                              <button key={b.id} type="button" onClick={() => setLotView({ pid: p.id, id: b.id })} className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md" style={{ background: T.input, color: b.date < localDayKey(new Date()) ? (darkMode ? "#fda4af" : "#e11d48") : T.text }}>
+                                📦 {b.lotNo ? b.lotNo + " · " : ""}{dayLabel(b.date + "T12:00:00")} ×{localizedQty(b.remaining)}
+                              </button>
+                            ))}
+                          </div>
                         );
                       })()}
                       {/* Rupture prévue dans la semaine, au rythme de vente des 14 derniers jours */}
@@ -22678,6 +22869,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                                   {productPriceTiers(p).map((x) => `${tx(lang, "tierName_" + x.kind)} ${fcfa(x.price)}${x.min > 0 ? " " + tx(lang, "tierFromN").replace("{n}", localizedQty(x.min)) : ""}`).join(" · ")}
                                 </p>
                               )}
+                              {(() => {
+                                const f = fefoInfo(p, localDayKey(new Date()));
+                                if (!f) return null;
+                                return (
+                                  <>
+                                    {f.expiredQty > 0 && <p className="text-[10px] font-bold" style={{ color: darkMode ? "#fda4af" : "#e11d48" }}>⚠️ {tx(lang, "fefoExpiredWarn").replace("{n}", localizedQty(f.expiredQty))}</p>}
+                                    {f.first && <p className="text-[10px] font-semibold" style={{ color: darkMode ? "#f0c869" : "#b45309" }}>👉 {(f.first.lotNo ? tx(lang, "fefoFirstLot").replace("{lot}", f.first.lotNo) : tx(lang, "fefoFirstDate")).replace("{date}", fullDate(f.first.date + "T12:00:00"))}</p>}
+                                  </>
+                                );
+                              })()}
                             </div>
                           </div>
                           <div className="flex items-center gap-2.5">
@@ -24536,6 +24737,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <span className="text-[10px]" style={{ color: T.muted }}>{fcfa(it.unitPrice)} / u</span>
                         </div>
                         {it.serial && <p className="text-[10px]" style={{ color: T.muted }}>📱 {tx(lang, "serialShort")} {it.serial}</p>}
+                        {Array.isArray(it.lots) && it.lots.some((l) => l.lotNo) && <p className="text-[10px]" style={{ color: T.muted }}>📦 {it.lots.filter((l) => l.lotNo).map((l) => `${tx(lang, "lotLabel")} ${l.lotNo} ×${localizedQty(l.qty)}`).join(", ")}</p>}
                       </div>
                     ))}
                     {h.receiptNo && <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>🔖 {tx(lang, "receiptNoLabel")} {h.receiptNo}</p>}
