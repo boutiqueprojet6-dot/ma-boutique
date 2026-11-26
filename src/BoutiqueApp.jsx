@@ -6514,6 +6514,14 @@ EXTRA_UI.mixedToggle = { fr: "Une partie en Mobile Money", en: "Part paid by Mob
 EXTRA_UI.mixedMobileLabel = { fr: "Montant payé en Mobile Money", en: "Amount paid by Mobile Money", es: "Importe pagado con Mobile Money", pt: "Valor pago em Mobile Money", de: "Per Mobile Money bezahlter Betrag", it: "Importo pagato con Mobile Money", nl: "Bedrag betaald via Mobile Money", pl: "Kwota zapłacona przez Mobile Money", ru: "Сумма через Mobile Money", tr: "Mobile Money ile ödenen tutar", ar: "المبلغ المدفوع عبر الهاتف", hi: "मोबाइल मनी से चुकाई गई राशि", bn: "মোবাইল মানিতে পরিশোধিত টাকা", ur: "موبائل منی سے ادا کی گئی رقم", ta: "மொபைல் மணியில் செலுத்திய தொகை", te: "మొబైల్ మనీలో చెల్లించిన మొత్తం", th: "จำนวนที่จ่ายผ่าน Mobile Money", zh: "移动支付金额", ja: "モバイルマネーで支払った金額", ko: "모바일 머니로 낸 금액", id: "Jumlah dibayar lewat Mobile Money", vi: "Số tiền trả qua Mobile Money", tl: "Halagang binayad sa Mobile Money", sw: "Kiasi kilicholipwa kwa pesa za simu", ha: "Kuɗin da aka biya ta Mobile Money", yo: "Iye tí a san pẹ̀lú Mobile Money", zu: "Imali ekhokhwe nge-Mobile Money", am: "በሞባይል ገንዘብ የተከፈለ መጠን", bm: "Wari min sara ni Mobile Money ye", wo: "Xaalis bi ñu fey ci Mobile Money" };
 EXTRA_UI.mixedCashDue = { fr: "Reste à payer en espèces : {n}", en: "Left to pay in cash: {n}", es: "Queda por pagar en efectivo: {n}", pt: "Falta pagar em dinheiro: {n}", de: "Noch in bar zu zahlen: {n}", it: "Resta da pagare in contanti: {n}", nl: "Nog contant te betalen: {n}", pl: "Pozostało do zapłaty gotówką: {n}", ru: "Осталось оплатить наличными: {n}", tr: "Nakit ödenecek kalan: {n}", ar: "المتبقي نقدًا: {n}", hi: "नकद में बाकी: {n}", bn: "নগদে বাকি: {n}", ur: "نقد میں باقی: {n}", ta: "ரொக்கமாகச் செலுத்த வேண்டியது: {n}", te: "నగదుగా చెల్లించాల్సింది: {n}", th: "ต้องจ่ายเงินสดอีก: {n}", zh: "剩余现金支付：{n}", ja: "残りの現金払い：{n}", ko: "현금으로 낼 남은 금액: {n}", id: "Sisa dibayar tunai: {n}", vi: "Còn trả tiền mặt: {n}", tl: "Babayaran pa nang cash: {n}", sw: "Kilichobaki kulipwa taslimu: {n}", ha: "Saura a biya da tsabar kuɗi: {n}", yo: "Èyí tó kù láti san ní owó ọwọ́: {n}", zu: "Okusele ukukhokhwa ngokheshi: {n}", am: "በጥሬ ገንዘብ የሚቀረው: {n}", bm: "Min tora ka sara ni wari ye: {n}", wo: "Li des ngir fey ci xaalis: {n}" };
 EXTRA_UI.mixedInvalid = { fr: "Le montant Mobile Money doit être supérieur à 0 et inférieur au total.", en: "The Mobile Money amount must be above 0 and below the total.", es: "El importe de Mobile Money debe ser mayor que 0 y menor que el total.", pt: "O valor em Mobile Money deve ser maior que 0 e menor que o total.", de: "Der Mobile-Money-Betrag muss über 0 und unter der Gesamtsumme liegen.", it: "L'importo Mobile Money deve essere maggiore di 0 e minore del totale.", nl: "Het Mobile Money-bedrag moet groter dan 0 en kleiner dan het totaal zijn.", pl: "Kwota Mobile Money musi być większa od 0 i mniejsza od sumy.", ru: "Сумма Mobile Money должна быть больше 0 и меньше итога.", tr: "Mobile Money tutarı 0'dan büyük ve toplamdan küçük olmalıdır.", ar: "يجب أن يكون مبلغ الدفع بالهاتف أكبر من 0 وأقل من الإجمالي.", hi: "मोबाइल मनी की राशि 0 से अधिक और कुल से कम होनी चाहिए।", bn: "মোবাইল মানির টাকা ০-এর বেশি এবং মোটের কম হতে হবে।", ur: "موبائل منی کی رقم 0 سے زیادہ اور کل سے کم ہونی چاہیے۔", ta: "மொபைல் மணி தொகை 0-ஐ விட அதிகமாகவும் மொத்தத்தை விடக் குறைவாகவும் இருக்க வேண்டும்.", te: "మొబైల్ మనీ మొత్తం 0 కంటే ఎక్కువ, మొత్తం కంటే తక్కువ ఉండాలి.", th: "จำนวน Mobile Money ต้องมากกว่า 0 และน้อยกว่ายอดรวม", zh: "移动支付金额必须大于 0 且小于总额。", ja: "モバイルマネーの金額は 0 より大きく、合計より小さくしてください。", ko: "모바일 머니 금액은 0보다 크고 합계보다 작아야 합니다.", id: "Jumlah Mobile Money harus di atas 0 dan di bawah total.", vi: "Số tiền Mobile Money phải lớn hơn 0 và nhỏ hơn tổng.", tl: "Ang halaga sa Mobile Money ay dapat higit sa 0 at mas mababa sa kabuuan.", sw: "Kiasi cha pesa za simu lazima kiwe zaidi ya 0 na chini ya jumla.", ha: "Kuɗin Mobile Money dole ya fi 0 kuma ya gaza jimilla.", yo: "Iye Mobile Money gbọ́dọ̀ ju 0 lọ kí ó sì kéré sí àpapọ̀.", zu: "Imali ye-Mobile Money kumele idlule u-0 futhi ibe ngaphansi kwesamba.", am: "የሞባይል ገንዘብ መጠን ከ0 በላይና ከጠቅላላው በታች መሆን አለበት።", bm: "Mobile Money wari ka kan ka caya ni 0 ye, ka dɔgɔya ni bɛɛ lajɛlen ye.", wo: "Xaalisu Mobile Money war na ëpp 0 te gëna tuuti mbooleem bi." };
+EXTRA_UI.expiredSaleTitle = { fr: "Produit périmé dans la vente", en: "Expired product in this sale", es: "Producto caducado en la venta", pt: "Produto fora de prazo na venda", de: "Abgelaufenes Produkt im Verkauf", it: "Prodotto scaduto nella vendita", nl: "Verlopen product in de verkoop", pl: "Przeterminowany produkt w sprzedaży", ru: "Просроченный товар в продаже", tr: "Satışta tarihi geçmiş ürün", ar: "منتج منتهي الصلاحية في البيع", hi: "बिक्री में एक्सपायर्ड उत्पाद", bn: "বিক্রিতে মেয়াদোত্তীর্ণ পণ্য", ur: "فروخت میں میعاد ختم شدہ مال", ta: "விற்பனையில் காலாவதியான பொருள்", te: "అమ్మకంలో గడువు ముగిసిన ఉత్పత్తి", th: "มีสินค้าหมดอายุในการขาย", zh: "销售中有过期商品", ja: "販売に期限切れの商品があります", ko: "판매에 유통기한이 지난 상품이 있습니다", id: "Ada produk kedaluwarsa dalam penjualan", vi: "Có sản phẩm hết hạn trong đơn bán", tl: "May expired na produkto sa benta", sw: "Bidhaa iliyokwisha muda katika mauzo", ha: "Akwai kaya da wa'adinsu ya ƙare a sayarwar", yo: "Ọjà tí ọjọ́ rẹ̀ ti kọjá wà nínú títà", zu: "Kunomkhiqizo ophelelwe yisikhathi ekuthengiseni", am: "በሽያጩ ውስጥ ጊዜው ያለፈበት ምርት አለ", bm: "Minɛn min waati tɛmɛna bɛ feereli in na", wo: "Am na marsandiis bu jeex ci njaay bi" };
+EXTRA_UI.expiredSaleDesc = { fr: "Pour ce produit, il ne reste que des unités dont la date est dépassée. Vendre un produit périmé peut être dangereux pour le client.", en: "Only units past their date remain for this product. Selling an expired product can be dangerous for the customer.", es: "De este producto solo quedan unidades caducadas. Vender un producto caducado puede ser peligroso para el cliente.", pt: "Deste produto só restam unidades fora de prazo. Vender um produto fora de prazo pode ser perigoso para o cliente.", de: "Von diesem Produkt sind nur noch abgelaufene Einheiten übrig. Der Verkauf kann für den Kunden gefährlich sein.", it: "Di questo prodotto restano solo unità scadute. Vendere un prodotto scaduto può essere pericoloso per il cliente.", nl: "Van dit product zijn alleen nog verlopen stuks over. Een verlopen product verkopen kan gevaarlijk zijn voor de klant.", pl: "Z tego produktu zostały tylko przeterminowane sztuki. Sprzedaż przeterminowanego produktu może być niebezpieczna dla klienta.", ru: "От этого товара остались только просроченные единицы. Продажа просроченного товара может быть опасна для покупателя.", tr: "Bu üründen yalnızca tarihi geçmiş birimler kaldı. Tarihi geçmiş ürün satmak müşteri için tehlikeli olabilir.", ar: "لم يبقَ من هذا المنتج إلا وحدات منتهية الصلاحية. بيع منتج منتهي الصلاحية قد يكون خطرًا على الزبون.", hi: "इस उत्पाद की केवल एक्सपायर्ड इकाइयाँ बची हैं। एक्सपायर्ड उत्पाद बेचना ग्राहक के लिए खतरनाक हो सकता है।", bn: "এই পণ্যের শুধু মেয়াদোত্তীর্ণ ইউনিট বাকি আছে। মেয়াদোত্তীর্ণ পণ্য বিক্রি গ্রাহকের জন্য বিপজ্জনক হতে পারে।", ur: "اس مال کی صرف میعاد ختم شدہ اکائیاں بچی ہیں۔ میعاد ختم شدہ مال بیچنا گاہک کے لیے خطرناک ہو سکتا ہے۔", ta: "இந்தப் பொருளில் காலாவதியான அலகுகள் மட்டுமே உள்ளன. காலாவதியான பொருளை விற்பது வாடிக்கையாளருக்கு ஆபத்தாக இருக்கலாம்.", te: "ఈ ఉత్పత్తిలో గడువు ముగిసిన యూనిట్లు మాత్రమే మిగిలాయి. గడువు ముగిసిన ఉత్పత్తిని అమ్మడం కస్టమర్‌కు ప్రమాదకరం కావచ్చు.", th: "สินค้านี้เหลือแต่ชิ้นที่หมดอายุแล้ว การขายสินค้าหมดอายุอาจเป็นอันตรายต่อลูกค้า", zh: "该商品只剩过期的库存。出售过期商品可能危害顾客。", ja: "この商品は期限切れの在庫しか残っていません。期限切れの商品を売るとお客様に危険な場合があります。", ko: "이 상품은 유통기한이 지난 재고만 남았습니다. 기한이 지난 상품 판매는 고객에게 위험할 수 있습니다.", id: "Produk ini hanya tersisa unit yang sudah lewat tanggal. Menjual produk kedaluwarsa bisa berbahaya bagi pelanggan.", vi: "Sản phẩm này chỉ còn hàng đã quá hạn. Bán sản phẩm hết hạn có thể nguy hiểm cho khách.", tl: "Expired na lang ang natitira sa produktong ito. Maaaring mapanganib sa customer ang pagbebenta ng expired na produkto.", sw: "Kwa bidhaa hii zimebaki tu zile zilizopita tarehe. Kuuza bidhaa iliyokwisha muda kunaweza kuwa hatari kwa mteja.", ha: "Daga wannan kaya, sai waɗanda wa'adinsu ya wuce suka rage. Sayar da kaya da wa'adinsa ya ƙare na iya cutar da abokin ciniki.", yo: "Àwọn tí ọjọ́ wọn ti kọjá nìkan ló kù nínú ọjà yìí. Títa ọjà tí ọjọ́ rẹ̀ ti kọjá lè léwu fún oníbàárà.", zu: "Kulo mkhiqizo kusele kuphela okuphelelwe yisikhathi. Ukuthengisa umkhiqizo ophelelwe yisikhathi kungaba yingozi kumthengi.", am: "ከዚህ ምርት ጊዜያቸው ያለፈባቸው ብቻ ቀርተዋል። ጊዜው ያለፈበት ምርት መሸጥ ለደንበኛው አደገኛ ሊሆን ይችላል።", bm: "Nin minɛn na, a waati tɛmɛnenw dɔrɔn de tora. Minɛn waati tɛmɛnen feereli bɛ se ka farati bila sannikɛla la.", wo: "Ci marsandiis bii, li ñu jeexal rekk a des. Jaay lu jeex man na yàq kiliyaan bi." };
+EXTRA_UI.expiredSaleCancel = { fr: "Ne pas vendre", en: "Don't sell", es: "No vender", pt: "Não vender", de: "Nicht verkaufen", it: "Non vendere", nl: "Niet verkopen", pl: "Nie sprzedawaj", ru: "Не продавать", tr: "Satma", ar: "عدم البيع", hi: "न बेचें", bn: "বিক্রি করবেন না", ur: "نہ بیچیں", ta: "விற்க வேண்டாம்", te: "అమ్మవద్దు", th: "ไม่ขาย", zh: "不出售", ja: "販売しない", ko: "판매하지 않기", id: "Jangan jual", vi: "Không bán", tl: "Huwag ibenta", sw: "Usiuze", ha: "Kada a sayar", yo: "Ẹ má tà á", zu: "Ungathengisi", am: "አይሽጡ", bm: "Aw kana a feere", wo: "Bul ko jaay" };
+EXTRA_UI.expiredSaleConfirm = { fr: "Vendre quand même", en: "Sell anyway", es: "Vender de todos modos", pt: "Vender mesmo assim", de: "Trotzdem verkaufen", it: "Vendi comunque", nl: "Toch verkopen", pl: "Sprzedaj mimo to", ru: "Всё равно продать", tr: "Yine de sat", ar: "البيع على أي حال", hi: "फिर भी बेचें", bn: "তবুও বিক্রি করুন", ur: "پھر بھی بیچیں", ta: "இருந்தாலும் விற்கவும்", te: "అయినా అమ్మండి", th: "ขายต่อไป", zh: "仍然出售", ja: "それでも販売する", ko: "그래도 판매", id: "Tetap jual", vi: "Vẫn bán", tl: "Ibenta pa rin", sw: "Uza hata hivyo", ha: "A sayar duk da haka", yo: "Ẹ tà á bákan náà", zu: "Thengisa noma kunjalo", am: "ቢሆንም ይሽጡ", bm: "Aw k'a feere o bɛɛ n'a ta", wo: "Jaay ko waaye" };
+EXTRA_UI.expiryAlertTitle = { fr: "Alerte de péremption", en: "Expiry alert", es: "Alerta de caducidad", pt: "Alerta de validade", de: "Ablaufwarnung", it: "Avviso di scadenza", nl: "Houdbaarheidsmelding", pl: "Alert terminu ważności", ru: "Предупреждение о сроке годности", tr: "Son kullanma uyarısı", ar: "تنبيه انتهاء الصلاحية", hi: "एक्सपायरी अलर्ट", bn: "মেয়াদ সতর্কতা", ur: "میعاد کی اطلاع", ta: "காலாவதி எச்சரிக்கை", te: "గడువు హెచ్చరిక", th: "แจ้งเตือนวันหมดอายุ", zh: "过期提醒", ja: "期限アラート", ko: "유통기한 알림", id: "Peringatan kedaluwarsa", vi: "Cảnh báo hạn dùng", tl: "Alerto sa expiry", sw: "Tahadhari ya kwisha muda", ha: "Faɗakarwar ƙarewar wa'adi", yo: "Ìkìlọ̀ ọjọ́ ìparí", zu: "Isexwayiso sokuphelelwa yisikhathi", am: "የጊዜ ማብቂያ ማስጠንቀቂያ", bm: "Waati banni lasɔmini", wo: "Yeewu ci jeex" };
+EXTRA_UI.expiryAlertDesc = { fr: "Combien de jours avant la date de péremption vous voulez être prévenu. La valeur proposée dépend de votre métier.", en: "How many days before the expiry date you want to be warned. The suggested value depends on your trade.", es: "Cuántos días antes de la fecha de caducidad quiere ser avisado. El valor sugerido depende de su actividad.", pt: "Quantos dias antes do fim da validade quer ser avisado. O valor sugerido depende da sua atividade.", de: "Wie viele Tage vor dem Ablaufdatum Sie gewarnt werden möchten. Der Vorschlag hängt von Ihrer Branche ab.", it: "Quanti giorni prima della scadenza volete essere avvisati. Il valore proposto dipende dalla vostra attività.", nl: "Hoeveel dagen vóór de vervaldatum u gewaarschuwd wilt worden. De voorgestelde waarde hangt af van uw branche.", pl: "Ile dni przed terminem ważności chcesz dostać ostrzeżenie. Proponowana wartość zależy od branży.", ru: "За сколько дней до окончания срока годности вас предупреждать. Предлагаемое значение зависит от вашего вида торговли.", tr: "Son kullanma tarihinden kaç gün önce uyarılmak istediğiniz. Önerilen değer işinize göre değişir.", ar: "كم يومًا قبل تاريخ انتهاء الصلاحية تريدون التنبيه. القيمة المقترحة حسب نشاطكم.", hi: "एक्सपायरी से कितने दिन पहले आपको सूचना चाहिए। सुझाया गया मान आपके व्यवसाय पर निर्भर है।", bn: "মেয়াদ শেষের কত দিন আগে সতর্ক হতে চান। প্রস্তাবিত মান আপনার ব্যবসার ওপর নির্ভর করে।", ur: "میعاد ختم ہونے سے کتنے دن پہلے آپ کو خبردار کیا جائے۔ تجویز کردہ قدر آپ کے کاروبار پر منحصر ہے۔", ta: "காலாவதிக்கு எத்தனை நாள் முன் எச்சரிக்கை வேண்டும். பரிந்துரைக்கப்படும் மதிப்பு உங்கள் தொழிலைப் பொறுத்தது.", te: "గడువుకు ఎన్ని రోజుల ముందు హెచ్చరిక కావాలి. సూచించిన విలువ మీ వ్యాపారంపై ఆధారపడి ఉంటుంది.", th: "ต้องการให้เตือนก่อนวันหมดอายุกี่วัน ค่าที่แนะนำขึ้นกับประเภทธุรกิจของคุณ", zh: "在过期日前多少天提醒您。建议值取决于您的行业。", ja: "期限の何日前に通知するか。おすすめの値は業種によって変わります。", ko: "유통기한 며칠 전에 알릴지 정합니다. 권장값은 업종에 따라 다릅니다.", id: "Berapa hari sebelum tanggal kedaluwarsa Anda ingin diingatkan. Nilai yang disarankan tergantung jenis usaha Anda.", vi: "Bạn muốn được báo trước hạn dùng bao nhiêu ngày. Giá trị gợi ý tùy theo ngành hàng của bạn.", tl: "Ilang araw bago ang expiry gusto ninyong mabigyan ng babala. Depende sa inyong negosyo ang iminumungkahing halaga.", sw: "Mngependa kuonywa siku ngapi kabla ya tarehe ya kwisha. Thamani inayopendekezwa inategemea biashara yenu.", ha: "Kwana nawa kafin ranar ƙarewa kuke son a sanar da ku. Ƙimar da aka ba da shawara ta dogara da sana'arku.", yo: "Ọjọ́ mélòó ṣáájú ọjọ́ ìparí ni ẹ fẹ́ kí a kìlọ̀ fún yín. Iye tí a dábàá dá lórí iṣẹ́ yín.", zu: "Zinsuku ezingaki ngaphambi kosuku lokuphelelwa nifuna ukwaziswa. Inani eliphakanyisiwe lincike ebhizinisini lenu.", am: "ጊዜው ከማብቃቱ ስንት ቀን በፊት እንዲያስጠነቅቅዎ ይፈልጋሉ። የሚመከረው እሴት በሥራዎ ዓይነት ይወሰናል።", bm: "Aw b'a fɛ ka lasɔmi tile joli waati banni ɲɛ. Hakɛ min lalɛnna, o bɛ bɔ aw ka baara la.", wo: "Ñaata fan laata jeex ngeen bëgg ñu yeewu leen. Limu ñu digal bi dafa aju ci seen liggéey." };
+EXTRA_UI.expiryAlertDaysUnit = { fr: "jours avant", en: "days before", es: "días antes", pt: "dias antes", de: "Tage vorher", it: "giorni prima", nl: "dagen vooraf", pl: "dni wcześniej", ru: "дней до", tr: "gün önce", ar: "يومًا قبل", hi: "दिन पहले", bn: "দিন আগে", ur: "دن پہلے", ta: "நாட்கள் முன்", te: "రోజుల ముందు", th: "วันก่อน", zh: "天前", ja: "日前", ko: "일 전", id: "hari sebelum", vi: "ngày trước", tl: "araw bago", sw: "siku kabla", ha: "kwanaki kafin", yo: "ọjọ́ ṣáájú", zu: "izinsuku ngaphambili", am: "ቀናት በፊት", bm: "tile ɲɛ", wo: "fan laata" };
+EXTRA_UI.expiryAlertReset = { fr: "Revenir à la valeur conseillée pour votre métier ({n} jours)", en: "Back to the value suggested for your trade ({n} days)", es: "Volver al valor sugerido para su actividad ({n} días)", pt: "Voltar ao valor sugerido para a sua atividade ({n} dias)", de: "Zurück zum Vorschlag für Ihre Branche ({n} Tage)", it: "Torna al valore consigliato per la vostra attività ({n} giorni)", nl: "Terug naar de voorgestelde waarde voor uw branche ({n} dagen)", pl: "Przywróć wartość zalecaną dla branży ({n} dni)", ru: "Вернуть значение для вашего вида торговли ({n} дн.)", tr: "İşiniz için önerilen değere dön ({n} gün)", ar: "العودة إلى القيمة المقترحة لنشاطكم ({n} يومًا)", hi: "अपने व्यवसाय के सुझाए मान पर लौटें ({n} दिन)", bn: "আপনার ব্যবসার প্রস্তাবিত মানে ফিরুন ({n} দিন)", ur: "اپنے کاروبار کی تجویز کردہ قدر پر واپس جائیں ({n} دن)", ta: "உங்கள் தொழிலுக்கான பரிந்துரை மதிப்புக்குத் திரும்பு ({n} நாட்கள்)", te: "మీ వ్యాపారానికి సూచించిన విలువకు తిరిగి వెళ్ళండి ({n} రోజులు)", th: "กลับไปใช้ค่าที่แนะนำสำหรับธุรกิจของคุณ ({n} วัน)", zh: "恢复为您行业的建议值（{n} 天）", ja: "業種のおすすめ値に戻す（{n} 日）", ko: "업종 권장값으로 되돌리기 ({n}일)", id: "Kembali ke nilai saran untuk usaha Anda ({n} hari)", vi: "Quay lại giá trị gợi ý cho ngành của bạn ({n} ngày)", tl: "Ibalik sa iminungkahing halaga para sa inyong negosyo ({n} araw)", sw: "Rudi kwenye thamani inayopendekezwa kwa biashara yenu (siku {n})", ha: "Koma ga ƙimar da aka ba da shawara don sana'arku (kwanaki {n})", yo: "Padà sí iye tí a dábàá fún iṣẹ́ yín (ọjọ́ {n})", zu: "Buyela enanini eliphakanyiselwe ibhizinisi lenu (izinsuku ezingu-{n})", am: "ለሥራዎ ወደሚመከረው እሴት ይመለሱ ({n} ቀናት)", bm: "Segin hakɛ ma min lalɛnna aw ka baara kama (tile {n})", wo: "Delloo ci limu ñu digal ngir seen liggéey ({n} fan)" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -7437,12 +7445,16 @@ function expiryLots(p) {
   return asc.filter((b) => rem.get(b) > 0).map((b) => ({ ...b, remaining: rem.get(b) }));
 }
 // "expired" | "soon" (3 jours ou moins) | null, pour le lot restant le plus proche.
+// Délai d'alerte « bientôt périmé » : selon le métier (une pharmacie retire ses produits
+// bien plus tôt qu'une épicerie), réglable dans Paramètres. Mis à jour à chaque rendu.
+const SECTOR_EXPIRY_DAYS = { food: 7, bakery: 3, restaurant: 3, butcher: 3, cosmetics: 30, wholesale: 30, pharmacy: 90 };
+let EXPIRY_ALERT_DAYS = 7;
 function expiryStatus(p, todayKey) {
   const lots = expiryLots(p);
   if (!lots.length) return null;
   const first = lots[0].date;
   if (first < todayKey) return { status: "expired", date: first };
-  const soonKey = localDayKey(new Date(Date.now() + 3 * 86400000));
+  const soonKey = localDayKey(new Date(Date.now() + EXPIRY_ALERT_DAYS * 86400000));
   if (first <= soonKey) return { status: "soon", date: first };
   return null;
 }
@@ -8324,7 +8336,7 @@ function stripShopLevelKeys(blob) {
   });
   return out;
 }
-const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "weeklySummaryEnabled", "weeklySummaryDay", "whatsappSummaryEnabled", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled", "loyaltyRewardThreshold", "loyaltyRewardMode", "debtReminderAutoMode", "defaultPaymentMethod"];
+const SETTINGS_KEYS = ["cashFund", "lowStockThreshold", "expiryAlertDays", "dailySummaryHour", "dailySummaryUtcOffsetMinutes", "dailySummaryEnabled", "weeklySummaryEnabled", "weeklySummaryDay", "whatsappSummaryEnabled", "darkMode", "themeMode", "showBalls", "ballColor", "currency", "benchmarkOptIn", "arabicDigits", "shareCardStyleId", "shareCardAskEachTime", "phone", "soundsEnabled", "hapticsEnabled", "soundChoice", "categories", "loyaltyRewardEnabled", "loyaltyRewardThreshold", "loyaltyRewardMode", "debtReminderAutoMode", "defaultPaymentMethod"];
 // ---- Thème (clair/sombre) en dehors d'un compte connecté (écran de connexion, onboarding) ----
 // On se souvient du dernier choix fait à l'intérieur d'un compte (localStorage "app-theme-mode" :
 // "light" / "dark" / "system"), pour que l'écran de connexion garde la même ambiance. Pour un
@@ -8863,6 +8875,7 @@ function mergeSettings(baseShop, localShop, remoteShop) {
     // Désactivé par défaut, comme loyaltyRewardEnabled : c'est au propriétaire de décider
     // s'il veut un signalement automatique des dettes à relancer.
     debtReminderAutoMode: !!winner.debtReminderAutoMode,
+    expiryAlertDays: winner.expiryAlertDays > 0 ? winner.expiryAlertDays : null,
     soundChoice: { ...DEFAULT_SOUND_CHOICE, ...(winner.soundChoice || {}) },
     ballColor: winner.ballColor || "blue",
     categories: Array.isArray(winner.categories) ? winner.categories : [],
@@ -11563,6 +11576,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // sans passer par son API Business payante). "manual" : comportement historique, aucun
   // signalement automatique.
   const [debtReminderAutoMode, setDebtReminderAutoMode] = useState(false);
+  // Délai d'alerte de péremption choisi (null = valeur conseillée pour le métier).
+  const [expiryAlertDays, setExpiryAlertDays] = useState(null);
+  // Vente d'un lot périmé : confirmation avant d'encaisser.
+  const [expiredSaleConfirm, setExpiredSaleConfirm] = useState(null);
+  const expiredOkRef = useRef(null);
   // Son choisi pour chaque catégorie (clic / succès / erreur) — voir SOUND_VARIANTS tout
   // en haut du fichier pour la liste des choix possibles par catégorie.
   const [soundChoice, setSoundChoice] = useState(DEFAULT_SOUND_CHOICE);
@@ -14393,6 +14411,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setLoyaltyRewardThreshold(shop.loyaltyRewardThreshold > 0 ? shop.loyaltyRewardThreshold : 10);
     setLoyaltyRewardMode(shop.loyaltyRewardMode === "auto" ? "auto" : "manual");
     setDebtReminderAutoMode(!!shop.debtReminderAutoMode);
+    setExpiryAlertDays(shop.expiryAlertDays > 0 ? shop.expiryAlertDays : null);
     setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(shop.soundChoice || {}) });
     setBallColor(shop.ballColor || "blue");
     setCategories(Array.isArray(shop.categories) ? shop.categories : []);
@@ -15135,6 +15154,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       loyaltyRewardThreshold: overrides.loyaltyRewardThreshold ?? loyaltyRewardThreshold,
       loyaltyRewardMode: overrides.loyaltyRewardMode ?? loyaltyRewardMode,
       debtReminderAutoMode: overrides.debtReminderAutoMode ?? debtReminderAutoMode,
+      expiryAlertDays: overrides.expiryAlertDays !== undefined ? overrides.expiryAlertDays : expiryAlertDays,
       soundChoice: overrides.soundChoice ?? soundChoice,
       ballColor: overrides.ballColor ?? ballColor,
       categories: overrides.categories ?? categories,
@@ -15185,6 +15205,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setLoyaltyRewardThreshold(next.loyaltyRewardThreshold);
     setLoyaltyRewardMode(next.loyaltyRewardMode);
     setDebtReminderAutoMode(next.debtReminderAutoMode);
+    setExpiryAlertDays(next.expiryAlertDays > 0 ? next.expiryAlertDays : null);
     setSoundChoice({ ...DEFAULT_SOUND_CHOICE, ...(next.soundChoice || {}) });
     setBallColor(next.ballColor);
     setCategories(Array.isArray(next.categories) ? next.categories : []);
@@ -18057,6 +18078,16 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       if (res && res.used.length) lotUsed[idx] = res.used;
     });
+    if (expiredOkRef.current !== cartId) {
+      const expiredNames = cart.items.filter((it, idx) => it.qty > 0 && (lotUsed[idx] || []).some((u) => u.date && u.date < lotTodayKey)).map((it) => it.productName);
+      if (expiredNames.length) {
+        finalizedCartIdsRef.current.delete(cartId);
+        playSound("error"); triggerHaptic("error");
+        setExpiredSaleConfirm({ cartId, names: [...new Set(expiredNames)] });
+        return;
+      }
+    }
+    expiredOkRef.current = null;
     // Part Mobile Money répartie sur les lignes au prorata (la dernière ligne positive prend l'arrondi).
     const mixShares = cart.items.map(() => 0);
     if (mixNum > 0) {
@@ -19949,6 +19980,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   }
   CURRENT_CURRENCY = CURRENCIES.find((c) => c.id === currency) || CURRENCIES[0];
   CURRENT_LANG = lang;
+  EXPIRY_ALERT_DAYS = expiryAlertDays > 0 ? expiryAlertDays : (SECTOR_EXPIRY_DAYS[productSectorId] || 7);
   CURRENT_COUNTRY = shopCountry;
   USE_ARABIC_DIGITS = arabicDigits;
   const maskAmount = (text) => (amountsHidden ? "•••••" : text);
@@ -21601,6 +21633,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           <button onClick={() => onLogout()} className="flex-shrink-0 px-3 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#d97706", maxWidth: 150, lineHeight: 1.2 }}>{tx(lang, "demoCreateCta")}</button>
         </div>
       )}
+      {expiredSaleConfirm && (
+        <div className="fixed inset-0 flex items-center justify-center p-5" style={{ zIndex: 85, background: "rgba(0,0,0,0.55)" }} onClick={() => setExpiredSaleConfirm(null)}>
+          <div className="w-full max-w-sm rounded-2xl p-5" style={{ background: darkMode ? "#1c2030" : "#ffffff" }} onClick={(e) => e.stopPropagation()}>
+            <p className="text-base font-extrabold mb-2" style={{ color: darkMode ? "#fda4af" : "#be123c" }}>⚠️ {tx(lang, "expiredSaleTitle")}</p>
+            <p className="text-sm mb-1" style={{ color: darkMode ? "#e5e7eb" : "#111827", fontWeight: 700 }}>{expiredSaleConfirm.names.join(", ")}</p>
+            <p className="text-sm mb-4" style={{ color: darkMode ? "#b9c0d0" : "#4b5563", lineHeight: 1.5 }}>{tx(lang, "expiredSaleDesc")}</p>
+            <button onClick={() => setExpiredSaleConfirm(null)} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2" style={{ background: INDIGO }}>{tx(lang, "expiredSaleCancel")}</button>
+            <button onClick={() => { const id = expiredSaleConfirm.cartId; setExpiredSaleConfirm(null); expiredOkRef.current = id; finalizeCart(id); }} className="w-full py-2.5 rounded-xl font-semibold text-sm" style={{ color: darkMode ? "#fda4af" : "#be123c" }}>{tx(lang, "expiredSaleConfirm")}</button>
+          </div>
+        </div>
+      )}
       {isDemo && demoWow === "show" && (
         <div className="fixed inset-0 flex items-center justify-center p-5" style={{ zIndex: 80, background: "rgba(0,0,0,0.55)" }} onClick={() => setDemoWow("done")}>
           <div className="w-full max-w-sm rounded-2xl p-5 text-center" style={{ background: darkMode ? "#1c2030" : "#ffffff" }} onClick={(e) => e.stopPropagation()}>
@@ -21701,7 +21744,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     products.forEach((p) => {
                       const ex = expiryStatus(p, todayKey);
                       if (!ex) return;
-                      expiryLots(p).filter((b) => b.date <= localDayKey(new Date(Date.now() + 3 * 86400000))).forEach((b) => rows.push({ p, b, expired: b.date < todayKey }));
+                      expiryLots(p).filter((b) => b.date <= localDayKey(new Date(Date.now() + EXPIRY_ALERT_DAYS * 86400000))).forEach((b) => rows.push({ p, b, expired: b.date < todayKey }));
                     });
                     rows.sort((a, b) => (a.b.date < b.b.date ? -1 : 1));
                     return rows.map(({ p, b, expired }) => (
@@ -27538,6 +27581,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <span style={{ color: T.muted, fontSize: 12 }}>{t(lang, "stockAlertDesc")}</span>
                   </div>
                   <p style={{ color: T.muted, fontSize: 11, marginTop: 10 }}>{t(lang, "setActuellementLowstocklengthProduitsEnD").replace("{n}", localizedNumber(lowStock.length))}</p>
+                </div>
+              )}
+              {settingsField === "threshold2" && ((productSectorModes || []).includes("expiry") || products.some((p) => expiryLots(p).length > 0) || expiryAlertDays > 0) && (
+                <div style={{ padding: 16, borderRadius: 14, background: T.input, border: `1px solid ${T.border}`, marginTop: 12 }}>
+                  <div style={{ color: T.text, fontSize: 14, fontWeight: 600, marginBottom: 4 }}>📅 {tx(lang, "expiryAlertTitle")}</div>
+                  <div style={{ color: T.muted, fontSize: 11.5, marginBottom: 10, lineHeight: 1.5 }}>{tx(lang, "expiryAlertDesc")}</div>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                    <input autoComplete="off" type="number" min="1" max="365" key={"exp-" + (expiryAlertDays || "d")} inputMode="numeric" defaultValue={expiryAlertDays > 0 ? expiryAlertDays : (SECTOR_EXPIRY_DAYS[productSectorId] || 7)} onBlur={(e) => { const v = parseInt(e.target.value, 10); const nv = v > 0 ? Math.min(365, v) : null; if (nv !== (expiryAlertDays > 0 ? expiryAlertDays : null)) saveAll({ expiryAlertDays: nv }); }} onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }} style={{ width: 80, background: T.card, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10, padding: "8px 12px", fontSize: 14 }} />
+                    <span style={{ color: T.muted, fontSize: 12 }}>{tx(lang, "expiryAlertDaysUnit")}</span>
+                  </div>
+                  {expiryAlertDays > 0 && expiryAlertDays !== (SECTOR_EXPIRY_DAYS[productSectorId] || 7) && (
+                    <button type="button" onClick={() => saveAll({ expiryAlertDays: null })} style={{ marginTop: 10, color: INDIGO, fontSize: 12, fontWeight: 700 }}>{tx(lang, "expiryAlertReset").replace("{n}", localizedNumber(SECTOR_EXPIRY_DAYS[productSectorId] || 7))}</button>
+                  )}
                 </div>
               )}
               {/* Boutique — Heure du résumé quotidien automatique (notification push) */}
