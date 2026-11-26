@@ -6510,6 +6510,10 @@ EXTRA_UI.lpB7T = { fr: "Téléphone et ordinateur", en: "Phone and computer", es
 EXTRA_UI.lpB7 = { fr: "Encaissez sur l'ordinateur au comptoir et suivez votre boutique sur téléphone, où que vous soyez.", en: "Ring up sales on the computer at the counter and follow your shop on your phone, wherever you are.", es: "Cobre en el ordenador del mostrador y siga su tienda en el teléfono, esté donde esté.", pt: "Cobre no computador ao balcão e acompanhe a sua loja no telemóvel, onde quer que esteja.", de: "Kassieren Sie am Computer an der Theke und verfolgen Sie Ihr Geschäft auf dem Handy, wo immer Sie sind.", it: "Incassate al computer del bancone e seguite il negozio sul telefono, ovunque siate.", nl: "Reken af op de computer aan de toonbank en volg uw winkel op uw telefoon, waar u ook bent.", pl: "Przyjmuj płatności na komputerze przy ladzie i śledź sklep na telefonie, gdziekolwiek jesteś.", ru: "Принимайте оплату на компьютере у прилавка и следите за магазином с телефона, где бы вы ни были.", tr: "Tezgâhta bilgisayardan tahsilat yapın, nerede olursanız olun dükkânınızı telefondan takip edin.", ar: "حصّلوا المبيعات على الحاسوب في المحل، وتابعوا متجركم على الهاتف أينما كنتم.", hi: "काउंटर पर कंप्यूटर से बिक्री करें और कहीं से भी फ़ोन पर अपनी दुकान देखें।", bn: "কাউন্টারে কম্পিউটারে বিক্রি করুন এবং যেখানেই থাকুন ফোনে দোকান দেখুন।", ur: "کاؤنٹر پر کمپیوٹر سے فروخت کریں اور جہاں بھی ہوں فون پر اپنی دکان دیکھیں۔", ta: "கவுண்டரில் கணினியில் விற்பனை செய்து, எங்கிருந்தாலும் தொலைபேசியில் கடையைக் கண்காணியுங்கள்.", te: "కౌంటర్ వద్ద కంప్యూటర్‌లో అమ్మకం చేసి, ఎక్కడ ఉన్నా ఫోన్‌లో మీ దుకాణాన్ని చూడండి.", th: "คิดเงินบนคอมพิวเตอร์ที่เคาน์เตอร์ และติดตามร้านบนมือถือได้ทุกที่", zh: "在柜台用电脑收银，无论身在何处都能用手机查看店铺。", ja: "カウンターではパソコンで会計し、どこにいてもスマホでお店を確認できます。", ko: "카운터에서는 컴퓨터로 계산하고, 어디서든 휴대폰으로 가게를 확인하세요.", id: "Catat penjualan di komputer kasir dan pantau toko dari ponsel, di mana pun Anda berada.", vi: "Tính tiền trên máy tính tại quầy và theo dõi cửa hàng trên điện thoại, dù bạn ở đâu.", tl: "Mag-kaha sa computer sa counter at subaybayan ang tindahan sa telepono, nasaan man kayo.", sw: "Pokeeni malipo kwenye kompyuta kaunta na fuatilieni duka kwenye simu, popote mlipo.", ha: "Ku karɓi kuɗi a kwamfuta a kanta, ku bi shagonku a waya duk inda kuke.", yo: "Ẹ gba owó lórí kọ̀ǹpútà ní kántà, kí ẹ sì máa wo ṣọ́ọ̀bù yín lórí fóònù níbikíbi tí ẹ bá wà.", zu: "Thengisani ngekhompyutha ekhawuntha futhi nilandelele isitolo ocingweni, noma ngabe nikuphi.", am: "በቆጣሪው ላይ በኮምፒውተር ይሽጡ፤ የትም ቢሆኑ ሱቅዎን በስልክ ይከታተሉ።", bm: "Aw ka feereli kɛ ɔridinatɛri kan konturu la, ka aw ka butiki kɔlɔsi telefɔni kan, aw mana kɛ yɔrɔ o yɔrɔ.", wo: "Jaayleen ci ordinaatëer ci kontuwaar bi te topp seen bitig ci telefon, fu ngeen mënti nekk." };
 EXTRA_UI.lpB8T = { fr: "En 30 langues", en: "In 30 languages", es: "En 30 idiomas", pt: "Em 30 línguas", de: "In 30 Sprachen", it: "In 30 lingue", nl: "In 30 talen", pl: "W 30 językach", ru: "На 30 языках", tr: "30 dilde", ar: "بثلاثين لغة", hi: "30 भाषाओं में", bn: "৩০টি ভাষায়", ur: "30 زبانوں میں", ta: "30 மொழிகளில்", te: "30 భాషల్లో", th: "30 ภาษา", zh: "30 种语言", ja: "30 言語対応", ko: "30개 언어", id: "Dalam 30 bahasa", vi: "30 ngôn ngữ", tl: "Sa 30 wika", sw: "Kwa lugha 30", ha: "A harsuna 30", yo: "Ní èdè 30", zu: "Ngezilimi ezingu-30", am: "በ30 ቋንቋዎች", bm: "Kan 30 la", wo: "Ci 30 làkk" };
 EXTRA_UI.lpB8 = { fr: "Français, anglais, arabe, bambara, wolof, haoussa, swahili… chaque employé choisit la sienne.", en: "French, English, Arabic, Bambara, Wolof, Hausa, Swahili… each employee picks their own.", es: "Francés, inglés, árabe, bambara, wolof, hausa, suajili… cada empleado elige la suya.", pt: "Francês, inglês, árabe, bambara, wolof, hauçá, suaíli… cada funcionário escolhe a sua.", de: "Französisch, Englisch, Arabisch, Bambara, Wolof, Hausa, Swahili … jeder Mitarbeiter wählt seine eigene.", it: "Francese, inglese, arabo, bambara, wolof, hausa, swahili… ogni dipendente sceglie la sua.", nl: "Frans, Engels, Arabisch, Bambara, Wolof, Hausa, Swahili… elke medewerker kiest zijn eigen taal.", pl: "Francuski, angielski, arabski, bambara, wolof, hausa, suahili… każdy pracownik wybiera swój.", ru: "Французский, английский, арабский, бамбара, волоф, хауса, суахили… каждый сотрудник выбирает свой.", tr: "Fransızca, İngilizce, Arapça, Bambara, Wolof, Hausa, Svahili… her çalışan kendi dilini seçer.", ar: "الفرنسية والإنجليزية والعربية والبامبارا والولوف والهوسا والسواحيلية… يختار كل موظف لغته.", hi: "फ़्रेंच, अंग्रेज़ी, अरबी, बम्बारा, वोलोफ़, हौसा, स्वाहिली… हर कर्मचारी अपनी भाषा चुनता है।", bn: "ফরাসি, ইংরেজি, আরবি, বাম্বারা, উলোফ, হাউসা, সোয়াহিলি… প্রত্যেক কর্মী নিজের ভাষা বেছে নেন।", ur: "فرانسیسی، انگریزی، عربی، بمبارا، وولوف، ہاؤسا، سواحلی… ہر ملازم اپنی زبان چنتا ہے۔", ta: "பிரெஞ்சு, ஆங்கிலம், அரபு, பம்பாரா, வோலோஃப், ஹவுசா, சுவாஹிலி… ஒவ்வொரு ஊழியரும் தம் மொழியைத் தேர்வு செய்வார்.", te: "ఫ్రెంచ్, ఇంగ్లీష్, అరబిక్, బంబారా, వొలోఫ్, హౌసా, స్వాహిలి… ప్రతి ఉద్యోగి తమ భాషను ఎంచుకుంటారు.", th: "ฝรั่งเศส อังกฤษ อาหรับ บัมบารา โวลอฟ เฮาซา สวาฮีลี… พนักงานแต่ละคนเลือกภาษาของตนเอง", zh: "法语、英语、阿拉伯语、班巴拉语、沃洛夫语、豪萨语、斯瓦希里语……每位员工可自选语言。", ja: "フランス語、英語、アラビア語、バンバラ語、ウォロフ語、ハウサ語、スワヒリ語…従業員ごとに選べます。", ko: "프랑스어, 영어, 아랍어, 밤바라어, 월로프어, 하우사어, 스와힐리어… 직원마다 원하는 언어를 고릅니다.", id: "Prancis, Inggris, Arab, Bambara, Wolof, Hausa, Swahili… setiap karyawan memilih bahasanya sendiri.", vi: "Tiếng Pháp, Anh, Ả Rập, Bambara, Wolof, Hausa, Swahili… mỗi nhân viên tự chọn ngôn ngữ.", tl: "Pranses, Ingles, Arabe, Bambara, Wolof, Hausa, Swahili… bawat empleyado ay pumipili ng sariling wika.", sw: "Kifaransa, Kiingereza, Kiarabu, Kibambara, Kiwolof, Kihausa, Kiswahili… kila mfanyakazi huchagua lugha yake.", ha: "Faransanci, Turanci, Larabci, Bambara, Wolof, Hausa, Swahili… kowane ma'aikaci yana zaɓar nasa.", yo: "Faranse, Gẹ̀ẹ́sì, Lárúbáwá, Bambara, Wolof, Hausa, Swahili… òṣìṣẹ́ kọ̀ọ̀kan ń yan tirẹ̀.", zu: "IsiFulentshi, isiNgisi, isi-Arabhu, isiBambara, isiWolof, isiHausa, isiSwahili… isisebenzi ngasinye sikhetha olwaso.", am: "ፈረንሳይኛ፣ እንግሊዝኛ፣ ዓረብኛ፣ ባምባራ፣ ዎሎፍ፣ ሐውሳ፣ ስዋሂሊ… እያንዳንዱ ሠራተኛ የራሱን ይመርጣል።", bm: "Faransikan, angilɛkan, arabukan, bamanankan, wolofkan, awusakan, swahilikan… baarakɛla kelen kelen bɛɛ b'a yɛrɛ ta sugandi.", wo: "Farañse, angale, araab, bambara, wolof, hawsa, swahili… benn-benn liggéeykat yi tànn seen làkk." };
+EXTRA_UI.mixedToggle = { fr: "Une partie en Mobile Money", en: "Part paid by Mobile Money", es: "Una parte con Mobile Money", pt: "Uma parte em Mobile Money", de: "Teilweise per Mobile Money", it: "Una parte con Mobile Money", nl: "Deels via Mobile Money", pl: "Część przez Mobile Money", ru: "Часть через Mobile Money", tr: "Bir kısmı Mobile Money ile", ar: "جزء عبر الدفع بالهاتف", hi: "कुछ हिस्सा मोबाइल मनी से", bn: "কিছু অংশ মোবাইল মানিতে", ur: "کچھ حصہ موبائل منی سے", ta: "ஒரு பகுதி மொபைல் மணியில்", te: "కొంత భాగం మొబైల్ మనీలో", th: "บางส่วนจ่ายผ่าน Mobile Money", zh: "部分用移动支付", ja: "一部をモバイルマネーで", ko: "일부는 모바일 머니로", id: "Sebagian lewat Mobile Money", vi: "Một phần qua Mobile Money", tl: "Bahagi sa Mobile Money", sw: "Sehemu kwa pesa za simu", ha: "Wani ɓangare ta Mobile Money", yo: "Apá kan pẹ̀lú Mobile Money", zu: "Ingxenye nge-Mobile Money", am: "ከፊሉ በሞባይል ገንዘብ", bm: "A dɔ ni Mobile Money ye", wo: "Am pàcc ci Mobile Money" };
+EXTRA_UI.mixedMobileLabel = { fr: "Montant payé en Mobile Money", en: "Amount paid by Mobile Money", es: "Importe pagado con Mobile Money", pt: "Valor pago em Mobile Money", de: "Per Mobile Money bezahlter Betrag", it: "Importo pagato con Mobile Money", nl: "Bedrag betaald via Mobile Money", pl: "Kwota zapłacona przez Mobile Money", ru: "Сумма через Mobile Money", tr: "Mobile Money ile ödenen tutar", ar: "المبلغ المدفوع عبر الهاتف", hi: "मोबाइल मनी से चुकाई गई राशि", bn: "মোবাইল মানিতে পরিশোধিত টাকা", ur: "موبائل منی سے ادا کی گئی رقم", ta: "மொபைல் மணியில் செலுத்திய தொகை", te: "మొబైల్ మనీలో చెల్లించిన మొత్తం", th: "จำนวนที่จ่ายผ่าน Mobile Money", zh: "移动支付金额", ja: "モバイルマネーで支払った金額", ko: "모바일 머니로 낸 금액", id: "Jumlah dibayar lewat Mobile Money", vi: "Số tiền trả qua Mobile Money", tl: "Halagang binayad sa Mobile Money", sw: "Kiasi kilicholipwa kwa pesa za simu", ha: "Kuɗin da aka biya ta Mobile Money", yo: "Iye tí a san pẹ̀lú Mobile Money", zu: "Imali ekhokhwe nge-Mobile Money", am: "በሞባይል ገንዘብ የተከፈለ መጠን", bm: "Wari min sara ni Mobile Money ye", wo: "Xaalis bi ñu fey ci Mobile Money" };
+EXTRA_UI.mixedCashDue = { fr: "Reste à payer en espèces : {n}", en: "Left to pay in cash: {n}", es: "Queda por pagar en efectivo: {n}", pt: "Falta pagar em dinheiro: {n}", de: "Noch in bar zu zahlen: {n}", it: "Resta da pagare in contanti: {n}", nl: "Nog contant te betalen: {n}", pl: "Pozostało do zapłaty gotówką: {n}", ru: "Осталось оплатить наличными: {n}", tr: "Nakit ödenecek kalan: {n}", ar: "المتبقي نقدًا: {n}", hi: "नकद में बाकी: {n}", bn: "নগদে বাকি: {n}", ur: "نقد میں باقی: {n}", ta: "ரொக்கமாகச் செலுத்த வேண்டியது: {n}", te: "నగదుగా చెల్లించాల్సింది: {n}", th: "ต้องจ่ายเงินสดอีก: {n}", zh: "剩余现金支付：{n}", ja: "残りの現金払い：{n}", ko: "현금으로 낼 남은 금액: {n}", id: "Sisa dibayar tunai: {n}", vi: "Còn trả tiền mặt: {n}", tl: "Babayaran pa nang cash: {n}", sw: "Kilichobaki kulipwa taslimu: {n}", ha: "Saura a biya da tsabar kuɗi: {n}", yo: "Èyí tó kù láti san ní owó ọwọ́: {n}", zu: "Okusele ukukhokhwa ngokheshi: {n}", am: "በጥሬ ገንዘብ የሚቀረው: {n}", bm: "Min tora ka sara ni wari ye: {n}", wo: "Li des ngir fey ci xaalis: {n}" };
+EXTRA_UI.mixedInvalid = { fr: "Le montant Mobile Money doit être supérieur à 0 et inférieur au total.", en: "The Mobile Money amount must be above 0 and below the total.", es: "El importe de Mobile Money debe ser mayor que 0 y menor que el total.", pt: "O valor em Mobile Money deve ser maior que 0 e menor que o total.", de: "Der Mobile-Money-Betrag muss über 0 und unter der Gesamtsumme liegen.", it: "L'importo Mobile Money deve essere maggiore di 0 e minore del totale.", nl: "Het Mobile Money-bedrag moet groter dan 0 en kleiner dan het totaal zijn.", pl: "Kwota Mobile Money musi być większa od 0 i mniejsza od sumy.", ru: "Сумма Mobile Money должна быть больше 0 и меньше итога.", tr: "Mobile Money tutarı 0'dan büyük ve toplamdan küçük olmalıdır.", ar: "يجب أن يكون مبلغ الدفع بالهاتف أكبر من 0 وأقل من الإجمالي.", hi: "मोबाइल मनी की राशि 0 से अधिक और कुल से कम होनी चाहिए।", bn: "মোবাইল মানির টাকা ০-এর বেশি এবং মোটের কম হতে হবে।", ur: "موبائل منی کی رقم 0 سے زیادہ اور کل سے کم ہونی چاہیے۔", ta: "மொபைல் மணி தொகை 0-ஐ விட அதிகமாகவும் மொத்தத்தை விடக் குறைவாகவும் இருக்க வேண்டும்.", te: "మొబైల్ మనీ మొత్తం 0 కంటే ఎక్కువ, మొత్తం కంటే తక్కువ ఉండాలి.", th: "จำนวน Mobile Money ต้องมากกว่า 0 และน้อยกว่ายอดรวม", zh: "移动支付金额必须大于 0 且小于总额。", ja: "モバイルマネーの金額は 0 より大きく、合計より小さくしてください。", ko: "모바일 머니 금액은 0보다 크고 합계보다 작아야 합니다.", id: "Jumlah Mobile Money harus di atas 0 dan di bawah total.", vi: "Số tiền Mobile Money phải lớn hơn 0 và nhỏ hơn tổng.", tl: "Ang halaga sa Mobile Money ay dapat higit sa 0 at mas mababa sa kabuuan.", sw: "Kiasi cha pesa za simu lazima kiwe zaidi ya 0 na chini ya jumla.", ha: "Kuɗin Mobile Money dole ya fi 0 kuma ya gaza jimilla.", yo: "Iye Mobile Money gbọ́dọ̀ ju 0 lọ kí ó sì kéré sí àpapọ̀.", zu: "Imali ye-Mobile Money kumele idlule u-0 futhi ibe ngaphansi kwesamba.", am: "የሞባይል ገንዘብ መጠን ከ0 በላይና ከጠቅላላው በታች መሆን አለበት።", bm: "Mobile Money wari ka kan ka caya ni 0 ye, ka dɔgɔya ni bɛɛ lajɛlen ye.", wo: "Xaalisu Mobile Money war na ëpp 0 te gëna tuuti mbooleem bi." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -8883,6 +8887,15 @@ function isCashMove(x) { return !x || !x.method || x.method === "cash"; }
 // Vraie charge (réduit le bénéfice) : ni un retrait (l'argent change de place), ni un paiement
 // à un fournisseur (le coût de la marchandise est déjà compté via le prix d'achat des ventes).
 function isChargeExpense(e) { return !!e && ["withdrawal", "supplier"].indexOf(e.kind) === -1; }
+// Paiement mixte : une vente "cash" peut avoir une part réglée en Mobile Money (mobilePart,
+// répartie sur chaque ligne). payPart donne le montant d'une ligne pour un moyen donné.
+function payPart(s, m) {
+  const tot = Number(s && s.total) || 0;
+  const mp = s && s.payment === "cash" ? Number(s.mobilePart) || 0 : 0;
+  if (m === "mobile") return s.payment === "mobile" ? tot : mp;
+  if (m === "cash") return s.payment === "cash" ? tot - mp : 0;
+  return s.payment === m ? tot : 0;
+}
 function shopResetAt(shop) {
   const m = shop && Array.isArray(shop.deletedProducts) ? shop.deletedProducts.find((d) => d && d.id === RESET_MARK_ID) : null;
   return m ? Number(m.at) || 0 : 0;
@@ -11731,7 +11744,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     return parts.join(" · ");
   };
   const buildReceiptMessage = (receipt, extraLines = []) => {
-    const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
+    const paymentLabel = receipt.payment === "cash" && receipt.mobilePart > 0 ? `${t(lang, "cash")} + ${t(lang, "mobilePayment")}` : receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     const cur = CURRENT_CURRENCY.symbol;
     const money = (n) => `${localizedNumber(n)} ${cur}`;
     const rtl = PDF_RTL_LANGS.has(lang);
@@ -11763,8 +11776,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ? `💰 *${tx(lang, "returnGiveBack").toUpperCase()}${colon}${money(-receipt.total)}*`
         : `💰 *${tx(lang, "receiptTotalLabel").toUpperCase()}${colon}${money(receipt.total)}*`,
       `💳 ${tx(lang, "receiptPaymentLabel")}${colon}${paymentLabel}`,
+      ...(receipt.payment === "cash" && receipt.mobilePart > 0 ? [`📱 ${t(lang, "mobilePayment")}${colon}${money(receipt.mobilePart)}`] : []),
       ...(receipt.payment === "cash" && receipt.received != null && receipt.received > 0
-        ? [`💵 ${tx(lang, "receiptAmountGivenLabel")}${colon}${money(receipt.received)}`, `🔄 ${t(lang, "change")}${colon}${money(Math.max(0, receipt.received - receipt.total))}`]
+        ? [`💵 ${tx(lang, "receiptAmountGivenLabel")}${colon}${money(receipt.received)}`, `🔄 ${t(lang, "change")}${colon}${money(Math.max(0, receipt.received - (receipt.total - (receipt.mobilePart || 0))))}`]
         : []),
       ...(receipt.payment === "credit" && receipt.deposit > 0
         ? [`💵 ${tx(lang, "receiptDepositLabel")}${colon}${money(receipt.deposit)}`, `📋 ${t(lang, "remainingToPay")}${colon}${money(Math.max(0, receipt.total - receipt.deposit))}`]
@@ -11836,7 +11850,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const MUTED_RGB = [130, 130, 130];
     const cur = CURRENT_CURRENCY.symbol;
     const fmt = (n) => `${localizedNumber(n)} ${cur}`;
-    const paymentLabel = receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
+    const paymentLabel = receipt.payment === "cash" && receipt.mobilePart > 0 ? `${t(lang, "cash")} + ${t(lang, "mobilePayment")}` : receipt.payment === "cash" ? t(lang, "cash") : receipt.payment === "mobile" ? t(lang, "mobilePayment") : receipt.payment === "card" ? t(lang, "card") : t(lang, "credit");
     // Charge la police Unicode si la langue ou les donnees saisies en ont besoin.
     const legalLines = receiptLegalLines();
     // Une ligne de tableau par article, plus une sous-ligne (IMEI, garantie…) si besoin.
@@ -12053,7 +12067,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           doc.setFont("helvetica", "bold");
           doc.setTextColor(...GREEN_RGB);
           doc.text(t(lang, "change"), marginX, y);
-          doc.text(fmt(Math.max(0, receipt.received - receipt.total)), pageW - marginX, y, { align: "right" });
+          doc.text(fmt(Math.max(0, receipt.received - (receipt.total - (receipt.mobilePart || 0)))), pageW - marginX, y, { align: "right" });
           y += 9;
         } else if (receipt.payment === "credit" && receipt.deposit > 0) {
           doc.setFont("helvetica", "normal");
@@ -17925,6 +17939,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
 
   const finalizedCartIdsRef = useRef(new Set());
+  // Paiement mixte : ce qui reste à payer en espèces une fois la part Mobile Money déduite.
+  const cashDueOf = (c, tot) => {
+    if (!c || !c.mixed) return tot;
+    const m = parseFloat(c.mobilePart) || 0;
+    return m > 0 && m < tot ? tot - m : tot;
+  };
   const finalizeCart = (cartId) => {
     const cart = draftCarts.find((c) => c.id === cartId);
     if (!cart || cart.items.length === 0) return;
@@ -17964,6 +17984,13 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       return;
     }
     setReceivedFieldError(false);
+    const mixTotal = cart.items.reduce((sum, it) => sum + it.qty * it.unitPrice, 0);
+    const mixNum = cart.payment === "cash" && cart.mixed && mixTotal > 0 ? Math.max(0, parseFloat(String(cart.mobilePart || "").replace(",", ".")) || 0) : 0;
+    if (cart.payment === "cash" && cart.mixed && mixTotal > 0 && (!(mixNum > 0) || mixNum >= mixTotal)) {
+      playSound("error"); triggerHaptic("error");
+      setError(tx(lang, "mixedInvalid"));
+      return;
+    }
     // Vente à crédit avec acompte : le client paie une partie tout de suite (espèces ou
     // Mobile Money), le reste devient une dette. L'acompte doit rester inférieur au total.
     const cartTotalNow = cart.items.reduce((sum, it) => sum + it.qty * it.unitPrice, 0);
@@ -18030,6 +18057,19 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       if (res && res.used.length) lotUsed[idx] = res.used;
     });
+    // Part Mobile Money répartie sur les lignes au prorata (la dernière ligne positive prend l'arrondi).
+    const mixShares = cart.items.map(() => 0);
+    if (mixNum > 0) {
+      let left = mixNum; let lastPos = -1;
+      cart.items.forEach((it, idx) => { if (it.qty * it.unitPrice > 0) lastPos = idx; });
+      cart.items.forEach((it, idx) => {
+        const lt = it.qty * it.unitPrice;
+        if (lt <= 0) return;
+        const share = idx === lastPos ? left : Math.min(left, Math.round((lt / total) * mixNum * 100) / 100);
+        mixShares[idx] = share; left -= share;
+      });
+    }
+    const cashDueNum = total - mixNum;
     const newSales = cart.items.map((it, idx) => {
       // Coût d'achat figé au moment de la vente (utile pour la rentabilité, Business 2) —
       // même si le prix d'achat du produit change plus tard, cette vente garde le bon coût.
@@ -18060,8 +18100,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         // dans « Commandes ». "later" = sans date précise.
         ...(cart.pickupLater ? { pickupDue: cart.pickupDate || "later" } : {}),
         date: dateNow,
+        ...(mixShares[idx] > 0 ? { mobilePart: mixShares[idx] } : {}),
         received: receivedNum,
-        change: receivedNum !== null ? receivedNum - total : null,
+        change: receivedNum !== null ? receivedNum - cashDueNum : null,
         // Employé (ou propriétaire) qui a réalisé cette vente — utilisé pour le rapport de
         // caisse par employé (Business 1). null = propriétaire.
         actorId: activeEmployee ? activeEmployee.id : null,
@@ -18127,7 +18168,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       amount: total,
       customer: cart.customer.trim(),
       payment: cart.payment,
-      change: receivedNum !== null ? receivedNum - total : null,
+      ...(mixNum > 0 ? { mobilePart: mixNum } : {}),
+      change: receivedNum !== null ? receivedNum - cashDueNum : null,
       items: cart.items.map((it, idx) => ({ productName: it.productName, qty: it.qty, unitPrice: it.unitPrice, ...(lotUsed[idx] && lotUsed[idx].some((l) => l.lotNo) && it.qty > 0 ? { lots: lotUsed[idx] } : {}), ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}), ...(typeof it.serial === "string" && it.serial.trim() ? { serial: it.serial.trim() } : {}) })),
       ...(depositNum > 0 ? { deposit: depositNum, depositMethod } : {}),
     })];
@@ -18212,7 +18254,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     triggerHaptic("success");
     if (isDemo && !demoWow) setDemoWow("pending");
     setSaleSuccessOverlay({ amount: total, id: transactionId });
-    setPendingReceipt({ items: cart.items.map((it, idx) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it), ...(lotUsed[idx] ? { lots: lotUsed[idx] } : {}) })), total, payment: cart.payment, date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, pickupDue: cart.pickupLater ? (cart.pickupDate || "later") : null, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
+    setPendingReceipt({ items: cart.items.map((it, idx) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it), ...(lotUsed[idx] ? { lots: lotUsed[idx] } : {}) })), total, payment: cart.payment, ...(mixNum > 0 ? { mobilePart: mixNum } : {}), date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, pickupDue: cart.pickupLater ? (cart.pickupDate || "later") : null, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
     // Avec plusieurs commandes ouvertes (tables…), la fenêtre d'encaissement ne doit pas
     // rester ouverte sur la commande suivante : on la ferme après chaque vente.
     setShowCheckoutModal(false);
@@ -18916,7 +18958,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (!can("viewCash")) return null;
       const unlocked = !!activeEmployee || isDemo || Date.now() - amountsUnlockedAtRef.current < 15 * 60 * 1000;
       if (!unlocked) return tx(lang, "aiLocalCashLocked");
-      const tIn = validSales.filter((s) => dayKeyOf(s.date) === today && s.payment === "cash").reduce((sum, s) => sum + s.total, 0)
+      const tIn = validSales.filter((s) => dayKeyOf(s.date) === today).reduce((sum, s) => sum + payPart(s, "cash"), 0)
         + debtEvents.filter((ev) => dayKeyOf(ev.date) === today && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
       const tOut = expenses.filter((e) => dayKeyOf(e.date) === today && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
       return tx(lang, "aiLocalCashTitle").replace("{a}", money(cashBalance)) + "\n"
@@ -19963,7 +20005,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     todaySales.forEach((s) => { byProduct[s.productName] = (byProduct[s.productName] || 0) + (s.qty || 0); });
     return Object.entries(byProduct).sort((a, b) => b[1] - a[1]).slice(0, 3);
   })();
-  const byMethod = getPaymentMethods(lang).map((m) => ({ ...m, total: todaySales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
+  const byMethod = getPaymentMethods(lang).map((m) => ({ ...m, total: todaySales.reduce((sum, s) => sum + payPart(s, m.id), 0) }));
   const lowStock = productSortMode === "default"
     ? products.filter((p) => p.quantity <= lowStockThreshold && !isKitProduct(p)).sort((a, b) => a.quantity - b.quantity)
     : sortProductList(products.filter((p) => p.quantity <= lowStockThreshold && !isKitProduct(p)));
@@ -20084,7 +20126,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // Point de départ : ce que le boutiquier a déclaré laisser en caisse à la clôture
   // précédente, sinon son fond de caisse.
   const openingBalance = lastClosure ? Number(lastClosure.carried) || 0 : cashFund;
-  const totalCashSales = sales.filter((s) => s.payment === "cash" && afterLastClosure(s.date)).reduce((sum, s) => sum + s.total, 0);
+  const totalCashSales = sales.filter((s) => afterLastClosure(s.date)).reduce((sum, s) => sum + payPart(s, "cash"), 0);
   const totalExpenses = expenses.filter((e) => isCashMove(e) && afterLastClosure(e.date)).reduce((sum, e) => sum + e.amount, 0);
   // Les remboursements de dettes entrent physiquement dans la caisse. Ils étaient comptés
   // nulle part dans le solde : un client qui remboursait 10 000 laissait l'argent dans le
@@ -20102,7 +20144,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     openingBalance,
     salesCount: sessionSales.length,
     cashSales: totalCashSales,
-    mobileSales: sessionSales.filter((x) => x.payment === "mobile").reduce((sum, x) => sum + x.total, 0),
+    mobileSales: sessionSales.reduce((sum, x) => sum + payPart(x, "mobile"), 0),
     cardSales: sessionSales.filter((x) => x.payment === "card").reduce((sum, x) => sum + x.total, 0),
     creditSales: sessionSales.filter((x) => x.payment === "credit").reduce((sum, x) => sum + x.total, 0),
     debtCollected: totalDebtCollected,
@@ -20135,7 +20177,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const inPeriod = (iso) => dayKeyOf(iso) >= start;
     const pSales = sales.filter((s) => inPeriod(s.date));
     const pExpenses = expenses.filter((e) => inPeriod(e.date));
-    const cashInTotal = pSales.filter((s) => s.payment === "cash").reduce((sum, s) => sum + s.total, 0);
+    const cashInTotal = pSales.reduce((sum, s) => sum + payPart(s, "cash"), 0);
     const outTotal = pExpenses.filter(isCashMove).reduce((sum, e) => sum + e.amount, 0);
     // Un retrait sort de la caisse mais n'est pas une charge : il ne doit pas entrer dans
     // le calcul du bénéfice, sinon porter sa recette à la banque ferait "perdre" de l'argent.
@@ -20144,7 +20186,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const withdrawalsTotal = pExpenses.filter((e) => e.kind === "withdrawal" && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
     const suppliersTotal = pExpenses.filter((e) => e.kind === "supplier").reduce((sum, e) => sum + e.amount, 0);
     const salesTotal = pSales.reduce((sum, s) => sum + s.total, 0);
-    const byMethodP = getPaymentMethods(lang).map((m) => ({ ...m, total: pSales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
+    const byMethodP = getPaymentMethods(lang).map((m) => ({ ...m, total: pSales.reduce((sum, s) => sum + payPart(s, m.id), 0) }));
     const debtIn = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
     const groups = {};
     pRealExpenses.forEach((e) => {
@@ -20157,7 +20199,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     pSales.filter((s) => s.payment === "cash").forEach((s) => {
       const k = s.transactionId || s.id;
       if (!txn[k]) txn[k] = { id: "s-" + k, kind: "sale", date: s.date, amount: 0, names: [], actorName: s.actorName || null };
-      txn[k].amount += s.total;
+      txn[k].amount += payPart(s, "cash");
       if (s.productName && txn[k].names.indexOf(s.productName) === -1) txn[k].names.push(s.productName);
     });
     // Les remboursements de dettes manquaient au journal : de l'argent entrait dans la
@@ -20175,7 +20217,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pCounts = cashCounts.filter((c) => inPeriod(c.date));
     // Tendance : flux net (espèces − dépenses) des 7 derniers jours, pour un coup d'œil visuel.
     const trend7 = last30Days().slice(-7).map((day) => {
-      const dSales = sales.filter((sl) => dayKeyOf(sl.date) === day && sl.payment === "cash").reduce((sum, sl) => sum + sl.total, 0);
+      const dSales = sales.filter((sl) => dayKeyOf(sl.date) === day).reduce((sum, sl) => sum + payPart(sl, "cash"), 0);
       const dExp = expenses.filter((e) => dayKeyOf(e.date) === day && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
       const dDebt = debtEvents.filter((ev) => dayKeyOf(ev.date) === day && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
       return { day, net: dSales + dDebt - dExp };
@@ -24469,16 +24511,36 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       </div>
                     )}
                     {activeCart.payment === "cash" && cartTotal > 0 && (
-                      <div className="rounded-xl p-3" style={{ background: T.input }}>
+                      <div className="rounded-xl p-3" style={{ background: activeCart.mixed ? (darkMode ? "rgba(37,99,235,0.12)" : "#eff6ff") : T.input }}>
+                        <label className="flex items-center justify-between gap-3 cursor-pointer">
+                          <span className="text-xs font-semibold" style={{ color: T.text }}>📱 {tx(lang, "mixedToggle")}</span>
+                          <button type="button" aria-pressed={!!activeCart.mixed} onClick={() => { updateCartMeta(activeCart.id, "mixed", !activeCart.mixed); if (error) setError(""); }} style={{ width: 40, height: 22, borderRadius: 12, background: activeCart.mixed ? "#2563eb" : (darkMode ? "#3a4256" : "#cbd5e1"), padding: 3, display: "flex", justifyContent: activeCart.mixed ? "flex-end" : "flex-start", flexShrink: 0 }}>
+                            <span style={{ width: 16, height: 16, borderRadius: "50%", background: "white", display: "block" }} />
+                          </button>
+                        </label>
+                        {activeCart.mixed && (
+                          <div className="mt-2.5">
+                            <label className="text-xs font-semibold" style={{ color: T.muted }}>{tx(lang, "mixedMobileLabel")}</label>
+                            <input autoComplete="off" type="number" inputMode="decimal" value={activeCart.mobilePart || ""} onChange={(e) => { updateCartMeta(activeCart.id, "mobilePart", e.target.value); if (error) setError(""); }} className="w-full mt-1 px-3 py-2.5 rounded-xl text-base font-bold outline-none" style={{ background: T.card, color: T.text, border: `1px solid ${T.border}` }} placeholder="0" />
+                            {(() => {
+                              const m = parseFloat(activeCart.mobilePart) || 0;
+                              if (m <= 0) return null;
+                              if (m >= cartTotal) return <p className="text-xs font-bold mt-1.5" style={{ color: "#e11d48" }}>{tx(lang, "mixedInvalid")}</p>;
+                              return <p className="text-xs font-bold mt-1.5" style={{ color: darkMode ? "#7fb2ff" : "#1d4ed8" }}>💵 {tx(lang, "mixedCashDue").replace("{n}", fcfa(cartTotal - m))}</p>;
+                            })()}
+                          </div>
+                        )}
+                        <div className="mt-3" />
                         <label className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "amountGiven")} *</label>
                         <input autoComplete="off" ref={receivedInputRef} required type="number" value={activeCart.received} onChange={(e) => { updateCartMeta(activeCart.id, "received", e.target.value); if (error) setError(""); if (receivedFieldError) setReceivedFieldError(false); }} className="w-full border-2 rounded-xl px-3 py-2.5 text-sm mt-1.5 bg-white" style={{ color: "#1a1a1a", borderColor: receivedFieldError ? "#e11d48" : "transparent" }} />
                         {/* Montants rapides : le compte juste, puis les billets ronds au-dessus.
                             Un appui remplit le champ — plus besoin de taper le montant à chaque
                             vente en espèces. */}
                         {cartTotal > 0 && (() => {
-                          const base = Math.pow(10, Math.max(1, String(Math.round(cartTotal)).length - 1));
-                          const ups = [base / 2, base, base * 5, base * 10].map((step) => Math.ceil(cartTotal / step) * step);
-                          const amounts = [cartTotal, ...ups].filter((v, i, arr) => v >= cartTotal && arr.indexOf(v) === i).slice(0, 4);
+                          const due = cashDueOf(activeCart, cartTotal);
+                          const base = Math.pow(10, Math.max(1, String(Math.round(due)).length - 1));
+                          const ups = [base / 2, base, base * 5, base * 10].map((step) => Math.ceil(due / step) * step);
+                          const amounts = [due, ...ups].filter((v, i, arr) => v >= due && arr.indexOf(v) === i).slice(0, 4);
                           return (
                             <div className="flex flex-wrap gap-1.5 mt-2" dir="ltr">
                               {amounts.map((v, i) => {
@@ -24493,12 +24555,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           );
                         })()}
                         {activeCart.received !== "" && (() => {
-                          const change = parseFloat(activeCart.received) - cartTotal;
+                          const change = parseFloat(activeCart.received) - cashDueOf(activeCart, cartTotal);
                           if (isNaN(change)) return null;
                           if (change < 0) return (
                             <>
                               <p className="text-xs font-bold mt-2" style={{ color: "#e11d48" }}>{t(lang, "othIlManque")} {fcfa(-change)}</p>
-                              {parseFloat(activeCart.received) > 0 && (
+                              {parseFloat(activeCart.received) > 0 && !activeCart.mixed && (
                                 <button type="button" onClick={() => saveAll({ draftCarts: draftCarts.map((c) => (c.id === activeCart.id ? { ...c, payment: "credit", deposit: String(parseFloat(c.received)), depositMethod: "cash" } : c)) })} className="mt-2 w-full py-2.5 rounded-xl text-xs font-bold active:scale-[0.98]" style={{ background: darkMode ? "rgba(2,132,199,0.18)" : "#e0f2fe", color: darkMode ? "#7dd3fc" : "#0369a1" }}>
                                   📋 {tx(lang, "restToCredit").replace("{n}", fcfa(-change))}
                                 </button>
@@ -25775,7 +25837,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           const cards = people.map((person) => {
               const personSales = sales.filter((s) => (s.actorId || null) === person.id && inReportPeriod(s.date));
               const revenueByMethod = { cash: 0, mobile: 0, card: 0, credit: 0 };
-              personSales.forEach((s) => { revenueByMethod[s.payment] = (revenueByMethod[s.payment] || 0) + s.total; });
+              personSales.forEach((s) => { ["cash", "mobile", "card", "credit"].forEach((m) => { revenueByMethod[m] += payPart(s, m); }); });
               const totalRevenue = personSales.reduce((sum, s) => sum + s.total, 0);
               const personExpenses = expenses.filter((e) => (e.actorId || null) === person.id && inReportPeriod(e.date)).reduce((sum, e) => sum + e.amount, 0);
               const personDebtPayments = debtEvents.filter((ev) => (ev.actorId || null) === person.id && inReportPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment")).reduce((sum, ev) => sum + ev.amount, 0);
@@ -28552,6 +28614,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <span>{tx(lang, "receiptTotalLabel")}</span>
                 <span>{localizedNumber(pendingReceipt.total)} {CURRENT_CURRENCY.symbol}</span>
               </div>
+              {pendingReceipt.payment === "cash" && pendingReceipt.mobilePart > 0 && (
+                <>
+                  <div className="flex justify-between text-xs mt-1.5">
+                    <span>📱 {t(lang, "mobilePayment")}</span>
+                    <span className="font-semibold">{localizedNumber(pendingReceipt.mobilePart)} {CURRENT_CURRENCY.symbol}</span>
+                  </div>
+                  <div className="flex justify-between text-xs mt-1">
+                    <span>💵 {t(lang, "cash")}</span>
+                    <span className="font-semibold">{localizedNumber(pendingReceipt.total - pendingReceipt.mobilePart)} {CURRENT_CURRENCY.symbol}</span>
+                  </div>
+                </>
+              )}
               {pendingReceipt.payment === "credit" && pendingReceipt.deposit > 0 && (
                 <>
                   <div className="flex justify-between text-xs mt-1.5">
