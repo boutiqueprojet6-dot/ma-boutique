@@ -81,6 +81,8 @@ import {
   LayoutGrid,
   ArrowUpDown,
   Gift,
+  ClipboardCheck,
+  Megaphone,
 } from "lucide-react";
 // Génère le QR code de connexion employé. Nécessite le package "qrcode.react"
 // (npm install qrcode.react) — composant standard, largement utilisé, pas de logique QR maison.
@@ -6467,6 +6469,9 @@ EXTRA_UI.invNowInStock = { fr: "maintenant : {n}", en: "now: {n}", es: "ahora: {
 EXTRA_UI.invMoreRows = { fr: "+{n} autres produits : utilisez la recherche ou les rayons.", en: "+{n} more products: use search or sections.", es: "+{n} productos más: use la búsqueda o las secciones.", pt: "+{n} outros produtos: use a pesquisa ou as secções.", de: "+{n} weitere Produkte: Suche oder Bereiche nutzen.", it: "+{n} altri prodotti: usate la ricerca o i reparti.", nl: "+{n} andere producten: gebruik zoeken of afdelingen.", pl: "+{n} innych produktów: użyj wyszukiwania lub działów.", ru: "Ещё {n} товаров: используйте поиск или отделы.", tr: "+{n} ürün daha: arama veya reyonları kullanın.", ar: "+{n} منتجات أخرى: استخدم البحث أو الأقسام.", hi: "+{n} और उत्पाद: खोज या खंडों का उपयोग करें।", bn: "আরও {n}টি পণ্য: খোঁজ বা বিভাগ ব্যবহার করুন।", ur: "مزید {n} مصنوعات: تلاش یا حصے استعمال کریں۔", ta: "மேலும் {n} பொருட்கள்: தேடல் அல்லது பிரிவுகளைப் பயன்படுத்தவும்.", te: "మరో {n} ఉత్పత్తులు: శోధన లేదా విభాగాలు ఉపయోగించండి.", th: "อีก {n} รายการ: ใช้การค้นหาหรือหมวด", zh: "还有 {n} 个商品：请使用搜索或区域。", ja: "他に {n} 件：検索か売り場を使ってください。", ko: "상품 {n}개 더: 검색이나 구역을 사용하세요.", id: "+{n} produk lain: gunakan pencarian atau rak.", vi: "Thêm {n} sản phẩm: dùng tìm kiếm hoặc khu.", tl: "+{n} pang produkto: gamitin ang paghahanap o mga seksyon.", sw: "Bidhaa {n} zaidi: tumia utafutaji au sehemu.", ha: "Ƙarin kaya {n}: yi amfani da bincike ko sassa.", yo: "Ọjà {n} mìíràn: lo ìwádìí tàbí ẹ̀ka.", zu: "Eminye imikhiqizo engu-{n}: sebenzisa ukusesha noma izigaba.", am: "ተጨማሪ {n} ምርቶች፦ ፍለጋን ወይም ክፍሎችን ይጠቀሙ።", bm: "Fɛn {n} wɛrɛw: ɲinini walima yɔrɔw kɛ.", wo: "Yeneen {n} jaay: jëfandikool seet bi walla rayon yi." };
 EXTRA_UI.supOverpaidWarn = { fr: "{name} : {n} payé en trop (paiement en double ?)", en: "{name}: {n} overpaid (duplicate payment?)", es: "{name}: {n} pagado de más (¿pago duplicado?)", pt: "{name}: {n} pago a mais (pagamento duplicado?)", de: "{name}: {n} zu viel bezahlt (doppelte Zahlung?)", it: "{name}: {n} pagato in più (pagamento doppio?)", nl: "{name}: {n} te veel betaald (dubbele betaling?)", pl: "{name}: nadpłata {n} (podwójna płatność?)", ru: "{name}: переплата {n} (двойной платёж?)", tr: "{name}: {n} fazla ödendi (çift ödeme mi?)", ar: "{name}: دُفع {n} زيادة (دفع مكرر؟)", hi: "{name}: {n} ज़्यादा भुगतान (दोहरा भुगतान?)", bn: "{name}: {n} বেশি দেওয়া (দুবার পরিশোধ?)", ur: "{name}: {n} زیادہ ادا (دوہری ادائیگی؟)", ta: "{name}: {n} அதிகமாக செலுத்தப்பட்டது (இரட்டைக் கட்டணமா?)", te: "{name}: {n} ఎక్కువ చెల్లించారు (రెండుసార్లు చెల్లింపా?)", th: "{name}: จ่ายเกิน {n} (จ่ายซ้ำหรือไม่?)", zh: "{name}：多付了 {n}（重复付款？）", ja: "{name}：{n} の払いすぎ（二重払い？）", ko: "{name}: {n} 초과 지급 (중복 지급?)", id: "{name}: kelebihan bayar {n} (pembayaran ganda?)", vi: "{name}: trả dư {n} (trả trùng?)", tl: "{name}: sobra ang bayad na {n} (dobleng bayad?)", sw: "{name}: {n} zimelipwa zaidi (malipo mara mbili?)", ha: "{name}: an biya {n} fiye da kima (biya sau biyu?)", yo: "{name}: a san {n} jù (ìsanwó lẹ́ẹ̀mejì?)", zu: "{name}: kukhokhwe ngokweqile {n} (inkokhelo ephindiwe?)", am: "{name}፦ {n} በትርፍ ተከፍሏል (ድርብ ክፍያ?)", bm: "{name}: {n} sarala ka tɛmɛ (sarali siɲɛ fila?)", wo: "{name}: {n} fey nañu ko ba ëpp (fey ñaari yoon?)" };
 EXTRA_UI.supPaymentsLine = { fr: "Paiements fournisseurs", en: "Supplier payments", es: "Pagos a proveedores", pt: "Pagamentos a fornecedores", de: "Lieferantenzahlungen", it: "Pagamenti ai fornitori", nl: "Betalingen aan leveranciers", pl: "Płatności dla dostawców", ru: "Оплаты поставщикам", tr: "Tedarikçi ödemeleri", ar: "مدفوعات المورّدين", hi: "आपूर्तिकर्ता भुगतान", bn: "সরবরাহকারীকে পরিশোধ", ur: "سپلائرز کو ادائیگیاں", ta: "சப்ளையர் கட்டணங்கள்", te: "సరఫరాదారుల చెల్లింపులు", th: "การจ่ายซัพพลายเออร์", zh: "供应商付款", ja: "仕入先への支払い", ko: "공급업체 지급", id: "Pembayaran pemasok", vi: "Thanh toán nhà cung cấp", tl: "Mga bayad sa supplier", sw: "Malipo kwa wasambazaji", ha: "Biyan masu kawo kaya", yo: "Ìsanwó fún àwọn olùpèsè", zu: "Izinkokhelo zabahlinzeki", am: "ለአቅራቢዎች የተከፈለ", bm: "Fɛn lasɔrɔbagaw sarali", wo: "Fey fournisseur yi" };
+EXTRA_UI.restockQtyLabel = { fr: "Quantité reçue", en: "Quantity received", es: "Cantidad recibida", pt: "Quantidade recebida", de: "Erhaltene Menge", it: "Quantità ricevuta", nl: "Ontvangen hoeveelheid", pl: "Otrzymana ilość", ru: "Получено", tr: "Gelen miktar", ar: "الكمية المستلمة", hi: "प्राप्त मात्रा", bn: "প্রাপ্ত পরিমাণ", ur: "موصولہ مقدار", ta: "பெற்ற அளவு", te: "అందిన పరిమాణం", th: "จำนวนที่ได้รับ", zh: "收到数量", ja: "入荷数", ko: "입고 수량", id: "Jumlah diterima", vi: "Số lượng nhận", tl: "Dami na natanggap", sw: "Idadi iliyopokelewa", ha: "Adadin da aka karɓa", yo: "Iye tí a gbà", zu: "Inani elitholiwe", am: "የተቀበለው መጠን", bm: "Hakɛ minɛna", wo: "Lim bi ñu jot" };
+EXTRA_UI.stPhotoTip = { fr: "Ajoutez une photo à ces produits dans Stock pour une plus belle affiche.", en: "Add a photo to these products in Stock for a nicer poster.", es: "Añada una foto a estos productos en Stock para un cartel más bonito.", pt: "Adicione uma foto a estes produtos em Stock para um cartaz mais bonito.", de: "Fügen Sie diesen Produkten im Lager ein Foto hinzu – das Plakat wird schöner.", it: "Aggiungete una foto a questi prodotti in Magazzino per un manifesto più bello.", nl: "Voeg in Voorraad een foto toe aan deze producten voor een mooiere affiche.", pl: "Dodaj zdjęcia tych produktów w Magazynie, aby plakat był ładniejszy.", ru: "Добавьте фото этих товаров в разделе «Склад» — картинка будет красивее.", tr: "Daha güzel bir afiş için Stok'ta bu ürünlere fotoğraf ekleyin.", ar: "أضف صورة لهذه المنتجات في المخزون لملصق أجمل.", hi: "सुंदर पोस्टर के लिए स्टॉक में इन उत्पादों की फ़ोटो जोड़ें।", bn: "সুন্দর পোস্টারের জন্য স্টকে এসব পণ্যের ছবি যোগ করুন।", ur: "خوبصورت پوسٹر کے لیے اسٹاک میں ان مصنوعات کی تصویر شامل کریں۔", ta: "அழகான விளம்பரத்திற்கு கையிருப்பில் இந்தப் பொருட்களுக்கு புகைப்படம் சேர்க்கவும்.", te: "మంచి పోస్టర్ కోసం స్టాక్‌లో ఈ ఉత్పత్తులకు ఫోటో జోడించండి.", th: "เพิ่มรูปสินค้าเหล่านี้ในหน้าสต็อกเพื่อให้โปสเตอร์สวยขึ้น", zh: "在库存中为这些商品添加照片，海报会更好看。", ja: "在庫でこれらの商品に写真を追加すると、より見栄えのよい画像になります。", ko: "재고에서 이 상품들에 사진을 추가하면 더 멋진 포스터가 됩니다.", id: "Tambahkan foto produk ini di Stok agar posternya lebih bagus.", vi: "Thêm ảnh cho các sản phẩm này trong Kho để áp phích đẹp hơn.", tl: "Lagyan ng larawan ang mga produktong ito sa Stock para mas maganda ang poster.", sw: "Ongeza picha ya bidhaa hizi kwenye Stoo kwa tangazo zuri zaidi.", ha: "Ƙara hoton waɗannan kaya a Kaya don hoto mafi kyau.", yo: "Fi fọ́tò kún àwọn ọjà wọ̀nyí nínú Ọjà fún àwòrán tó rẹwà jù.", zu: "Engeza isithombe kule mikhiqizo ku-Stock ukuze iphosta ibe yinhle.", am: "ለተሻለ ፖስተር በክምችት ውስጥ ለእነዚህ ምርቶች ፎቶ ያክሉ።", bm: "Nin fɛnw ja bila Maraka la walasa ja ka ɲɛ.", wo: "Yokkal nataal ci jaay yii ci Stock ngir affiche bu rafet." };
+EXTRA_UI.expiredShort = { fr: "périmé(s)", en: "expired", es: "caducado(s)", pt: "vencido(s)", de: "abgelaufen", it: "scaduto/i", nl: "verlopen", pl: "przeterminowane", ru: "просрочено", tr: "tarihi geçmiş", ar: "منتهية الصلاحية", hi: "समाप्त", bn: "মেয়াদোত্তীর্ণ", ur: "میعاد ختم", ta: "காலாவதி", te: "గడువు ముగిసినవి", th: "หมดอายุ", zh: "已过期", ja: "期限切れ", ko: "만료", id: "kedaluwarsa", vi: "hết hạn", tl: "paso na", sw: "zimeisha muda", ha: "sun ƙare", yo: "ti parí", zu: "eziphelelwe yisikhathi", am: "ጊዜው ያለፈ", bm: "waati tɛmɛna", wo: "jeex na" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -10122,11 +10127,11 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                       onClick={() => setObSecteur(on ? "" : s.id)}
                       aria-pressed={on}
                       className={`rounded-xl px-2.5 py-2.5 text-start flex flex-col gap-0.5${wide ? " col-span-2" : ""}`}
-                      style={{ background: on ? (darkMode ? "rgba(37,99,235,0.22)" : "#dbeafe") : AT.input, border: `2px solid ${on ? "#2563eb" : AT.border}`, minHeight: 74 }}
+                      style={{ background: on ? (darkMode ? "rgba(37,99,235,0.22)" : "#dbeafe") : AT.input, border: `2px solid ${on ? "#2563eb" : AT.border}`, minHeight: 62 }}
                     >
                       <span style={{ fontSize: 22, lineHeight: 1.1 }}>{SECTOR_ICON[s.id] || "🏪"}</span>
                       <span className="text-[12px] font-bold leading-tight" style={{ color: on ? (darkMode ? "#93c5fd" : "#1d4ed8") : AT.text }}>{sectorName(s.id, lang)}</span>
-                      {modes.length > 0 && <span className="text-[10px] leading-tight" style={{ color: AT.muted }}>{modes.slice(0, 3).map((m) => tx(lang, "mode_" + m)).join(" · ")}</span>}
+                      {modes.length > 0 && <span className="text-[10px] leading-tight" style={{ color: AT.muted }}>{modes.slice(0, 2).map((m) => tx(lang, "mode_" + m)).join(" · ")}</span>}
                     </button>
                   );
                 })}
@@ -16000,6 +16005,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // corrige le stock. Chaque comptage garde la quantité affichée par l'app à ce moment (e) :
   // à la validation on applique l'écart (compté − e) au stock ACTUEL, pour ne pas effacer les
   // ventes faites entre le comptage d'un produit et la validation.
+  const ARW = lang === "ar" || lang === "ur" ? "←" : "→";
+  // Aperçu lisible d'une date saisie (le champ date du téléphone suit parfois le format américain).
+  const datePreview = (v) => (v ? <p className="text-[11px] font-semibold -mt-1 mb-2" style={{ color: T.muted }}>📅 {fullDateLong(v + "T12:00:00")}</p> : null);
+  const expiredQtyOf = (p) => { if (isKitProduct(p)) return 0; const f = fefoInfo(p, localDayKey(new Date())); return f ? f.expiredQty : 0; };
   const invUnitQty = (p) => (p.sellByUnit ? (Number(p.quantity) || 0) * (p.unitsPerPack || 1) + (Number(p.looseUnits) || 0) : Number(p.quantity) || 0);
   const invUnitCost = (p) => { const c = p.costPrice != null && p.costPrice !== "" ? Number(p.costPrice) || 0 : Number(p.price) || 0; return p.sellByUnit ? c / (p.unitsPerPack || 1) : c; };
   const invUnitLabel = (p) => (p.sellByUnit ? t(lang, "sellUnit") : p.sellByMeasure ? p.measureUnit || "" : "");
@@ -16293,6 +16302,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, W, H);
       if (style.decor) drawCardDecor(ctx, style.decor, W, H);
+      ctx.direction = lang === "ar" || lang === "ur" ? "rtl" : "ltr";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#ffffff";
@@ -22117,7 +22127,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 {uses.length > 0 && (
                   <div className="rounded-lg p-2.5 mb-3" style={{ background: T.input }}>
                     <p className="text-[11px] font-semibold mb-1" style={{ color: T.muted }}>{tx(lang, "produceUses")}</p>
-                    {uses.map((u) => { const c = products.find((x) => x.id === u.id); return <p key={u.id} className="text-xs" style={{ color: T.text }}>− {localizedQty(u.qty)} {c ? (c.sellByUnit ? t(lang, "sellUnit") : (c.sellByMeasure && c.measureUnit) || "") : ""} {c ? c.name : "?"}</p>; })}
+                    {uses.map((u) => { const c = products.find((x) => x.id === u.id); const lbl = c ? (c.sellByUnit ? t(lang, "sellUnit") : (c.sellByMeasure && c.measureUnit) || "") : ""; const have = c ? (c.sellByUnit ? (c.quantity || 0) * (c.unitsPerPack || 1) + (c.looseUnits || 0) : c.quantity || 0) : 0; return <p key={u.id} className="text-xs" style={{ color: T.text }}>− {localizedQty(u.qty)} {lbl} {c ? c.name : "?"} <span style={{ color: have + 1e-9 < u.qty ? "#e11d48" : T.muted }}>· {tx(lang, "lotInStock")} : {localizedQty(have)} {lbl}</span></p>; })}
                     {rc.cost > 0 && <p className="text-xs mt-1.5 font-semibold" style={{ color: T.text }}>{tx(lang, "recipeCostLabel")} {fcfa(rc.cost)} · {tx(lang, "produceTotalCost")} {fcfa(rc.cost * n)}</p>}
                   </div>
                 )}
@@ -22415,19 +22425,22 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           if (!restockProduct) return null;
           return (
             <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(0,0,0,0.6)" }}>
-              <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-6 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }}>
-                <div className="flex items-center justify-between mb-3">
+              <div data-kbscroll="true" className="w-full max-w-xs rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "min(78vh, calc(100vh - 150px))", overscrollBehavior: "contain" }}>
+                <div className="flex items-center justify-between mb-2">
                   <h3 className="font-bold text-sm">{tx(lang, "restockModalTitle")}</h3>
-                  <button onClick={() => setRestockTarget(null)}><X size={18} /></button>
+                  <button onClick={() => setRestockTarget(null)} aria-label="Fermer" className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: T.input }}><X size={16} /></button>
                 </div>
                 <p className="text-xs mb-3" style={{ color: T.muted }}>{restockProduct.name}</p>
+                <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>🔢 {tx(lang, "restockQtyLabel")}</label>
                 <input autoComplete="off" placeholder={t(lang, "quantity")} type="number" value={restockQty} onChange={(e) => setRestockQty(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>💰 {tx(lang, "restockPriceLabel")}</label>
                 <input autoComplete="off" placeholder={tx(lang, "restockPriceLabel")} type="number" value={restockPrice} onChange={(e) => setRestockPrice(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                 <p className="text-[11px] mb-3" style={{ color: T.muted }}>{tx(lang, "restockPriceHint")}</p>
                 {((Array.isArray(restockProduct.batches) && restockProduct.batches.length > 0) || restockProduct.lotTracked || (productSectorModes || []).includes("expiry")) && (
                   <div className="mb-3">
                     <label className="text-[11px] block mb-1" style={{ color: T.muted }}>📅 {tx(lang, "expDateLabel")}</label>
                     <input type="date" value={restockDate} onChange={(e) => setRestockDate(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+                    {datePreview(restockDate)}
                     <input autoComplete="off" value={restockLotNo} onChange={(e) => setRestockLotNo(e.target.value)} placeholder={tx(lang, "lotNoLabel")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                   </div>
                 )}
@@ -22439,10 +22452,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </label>
                     {restockCredit && (
                       <div className="mt-2 flex flex-col gap-2">
+                        <label className="text-[11px] font-semibold -mb-1" style={{ color: T.muted }}>👤 {tx(lang, "supNameLabel")}</label>
                         <input autoComplete="off" list="sup-names" value={restockSupName} onChange={(e) => { setRestockSupName(e.target.value); setRestockErr(""); }} placeholder={tx(lang, "supNameLabel")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                        <label className="text-[11px] font-semibold -mb-1" style={{ color: T.muted }}>💰 {tx(lang, "supAmountLabel")}</label>
                         <input autoComplete="off" type="text" inputMode="decimal" value={restockSupAmount} onChange={(e) => { setRestockSupAmount(e.target.value.replace(/[^0-9.,]/g, "")); setRestockErr(""); }} placeholder={(() => { const q = parseFloat(String(restockQty).replace(",", ".")); const c = parseFloat(restockPrice); return q > 0 && c > 0 ? `${tx(lang, "supAmountLabel")} : ${localizedNumber(q * c)}` : tx(lang, "supAmountLabel"); })()} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
                         <label className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "supDueLabel")}</label>
                         <input type="date" value={restockSupDue} onChange={(e) => setRestockSupDue(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+                        {restockSupDue ? <p className="text-[11px] font-semibold" style={{ color: T.muted }}>📅 {fullDateLong(restockSupDue + "T12:00:00")}</p> : null}
                       </div>
                     )}
                     <datalist id="sup-names">{supKnownNames.map((n) => <option key={n} value={n} />)}</datalist>
@@ -22477,15 +22493,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-extrabold" style={{ color: T.text }}>📣 {tx(lang, "stTitle")}</h2>
-                  <button type="button" onClick={stPreview ? clearStPreview : closeStatusMaker} aria-label="Fermer" className="p-1"><X size={22} color={T.muted} /></button>
+                  <button type="button" onClick={stPreview ? clearStPreview : closeStatusMaker} aria-label="Fermer" className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: T.input }}><X size={18} color={T.muted} /></button>
                 </div>
                 {stPreview ? (
                   <div>
-                    <img src={stPreview} alt="" className="mx-auto rounded-2xl mb-4" style={{ maxHeight: "58vh", boxShadow: "0 10px 30px rgba(0,0,0,0.25)" }} />
-                    <button type="button" onClick={() => shareStatusImage(false)} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2" style={{ background: "#16a34a" }}>📤 {tx(lang, "stShare")}</button>
-                    <button type="button" onClick={() => shareStatusImage(true)} className="w-full py-3 rounded-xl font-bold text-sm mb-2" style={{ background: T.input, color: T.text }}>⬇️ {tx(lang, "stDownload")}</button>
-                    <p className="text-[11px] text-center mb-3" style={{ color: T.muted }}>{tx(lang, "stShareHint")}</p>
-                    <button type="button" onClick={clearStPreview} className="w-full py-2 text-xs font-bold" style={{ color: T.muted }}>← {tx(lang, "stEdit")}</button>
+                    <img src={stPreview} alt="" className="mx-auto rounded-2xl mb-3" style={{ maxHeight: "42vh", boxShadow: "0 10px 30px rgba(0,0,0,0.25)" }} />
+                    <button type="button" onClick={() => shareStatusImage(false)} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-1.5" style={{ background: "#16a34a" }}>📤 {tx(lang, "stShare")}</button>
+                    <p className="text-[11px] text-center mb-2" style={{ color: T.muted }}>{tx(lang, "stShareHint")}</p>
+                    <div className="flex gap-2">
+                      <button type="button" onClick={clearStPreview} className="flex-1 py-2.5 rounded-xl font-bold text-xs" style={{ background: T.input, color: T.text }}>{lang === "ar" || lang === "ur" ? "→" : "←"} {tx(lang, "stEdit")}</button>
+                      <button type="button" onClick={() => shareStatusImage(true)} className="flex-1 py-2.5 rounded-xl font-bold text-xs" style={{ background: T.input, color: T.text }}>⬇️ {tx(lang, "stDownload")}</button>
+                    </div>
                   </div>
                 ) : (
                   <>
@@ -22501,6 +22519,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       {shopPhone && <button type="button" onClick={() => setStShowPhone(!stShowPhone)} className="text-xs font-bold px-3 py-1.5 rounded-full" style={chip(stShowPhone)}>{stShowPhone ? "✓ " : ""}{tx(lang, "stShowPhone")}</button>}
                     </div>
                     <p className="text-[11px] font-bold mb-1.5" style={{ color: T.muted }}>{tx(lang, "stPickProducts").replace("{n}", localizedNumber(stSel.length)).replace("{p}", localizedNumber(ST_MAX))}</p>
+                    {selected.some((p) => !p.photo) && <p className="text-[11px] font-semibold mb-2 px-2.5 py-2 rounded-lg" style={{ background: darkMode ? "rgba(245,158,11,0.15)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#92400e" }}>📸 {tx(lang, "stPhotoTip")}</p>}
                     <button type="button" onClick={buildStatusImage} disabled={!stSel.length || stBusy} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-3 disabled:opacity-40" style={{ background: "#16a34a" }}>{stBusy ? "…" : "✨ " + tx(lang, "stCreate")}</button>
                     <div className="mb-2"><SearchBox compact value={stSearch} onChange={setStSearch} placeholder={t(lang, "search")} darkMode={darkMode} /></div>
                     <div className="rounded-2xl overflow-hidden" style={box}>
@@ -22548,7 +22567,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 {past.length > 0 && <p className="text-xs font-bold mb-2" style={{ color: T.muted }}>{tx(lang, "invPast")}</p>}
                 {past.map((h) => (
                   <div key={h.id} className="rounded-2xl p-3 mb-2" style={box}>
-                    <button type="button" onClick={() => setInvPastOpen(invPastOpen === h.id ? null : h.id)} className="w-full flex items-center justify-between gap-2 text-left">
+                    <button type="button" onClick={() => setInvPastOpen(invPastOpen === h.id ? null : h.id)} className="w-full flex items-center justify-between gap-2 text-start">
                       <span className="min-w-0">
                         <span className="text-xs font-bold block">{fullDate(h.date)}{h.actorName ? ` · ${h.actorName}` : ""}</span>
                         <span className="text-[11px] block" style={{ color: T.muted }}>{tx(lang, "invPastLine").replace("{n}", localizedNumber(h.counted || 0))}</span>
@@ -22562,7 +22581,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div className="mt-2">
                           {(h.lines || []).map((l, i) => (
                             <div key={i} className="flex items-center justify-between gap-2 py-1 text-[11px]" style={{ borderTop: `1px solid ${T.border}` }}>
-                              <span className="min-w-0 truncate">{l.name} <span style={{ color: T.muted }}>({localizedQty(l.e)} → {localizedQty(l.q)})</span></span>
+                              <span className="min-w-0 truncate">{l.name} <span style={{ color: T.muted }}>({localizedQty(l.e)} {ARW} {localizedQty(l.q)})</span></span>
                               <span className="font-bold shrink-0" style={{ color: l.d < 0 ? red : green }}>{sign(l.d)}</span>
                             </div>
                           ))}
@@ -22599,9 +22618,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <div key={l.p.id} className="flex items-center justify-between gap-2 px-3 py-2.5" style={i ? { borderTop: `1px solid ${T.border}` } : null}>
                         <div className="min-w-0">
                           <p className="text-sm font-bold truncate">{l.p.name}</p>
-                          <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "invAppSays").replace("{n}", localizedQty(l.c.e))} → {localizedQty(l.c.q)} {invUnitLabel(l.p)}</p>
+                          <p className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "invAppSays").replace("{n}", localizedQty(l.c.e))} {ARW} {localizedQty(l.c.q)} {invUnitLabel(l.p)}</p>
                         </div>
-                        <div className="text-right shrink-0">
+                        <div className="text-end shrink-0">
                           <p className="text-sm font-extrabold" style={{ color: l.d < 0 ? red : green }}>{sign(l.d)}</p>
                           <p className="text-[10px]" style={{ color: T.muted }}>{l.d < 0 ? "−" : "+"}{fcfa(Math.round(Math.abs(l.v)))}</p>
                         </div>
@@ -22627,6 +22646,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             });
             body = (
               <>
+                <div className="sticky z-10 -mx-4 px-4 pt-2 pb-1" style={{ top: 0, background: T.bg }}>
                 <div className="h-2 rounded-full mb-1 overflow-hidden" style={{ background: T.input }}>
                   <div style={{ width: `${countable.length ? Math.round((nCounted * 100) / countable.length) : 0}%`, height: "100%", background: violet }} />
                 </div>
@@ -22636,12 +22656,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   Object.entries(invInputs).forEach(([id, v]) => { const pp = products.find((x) => String(x.id) === String(id)); if (pp) setInvCount(pp, v); });
                   setInvInputs({});
                   setInvReview(true); setInvAbandonAsk(false);
-                }} disabled={nCounted === 0 && !pendingInputs} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-3 disabled:opacity-40" style={{ background: violet }}>{tx(lang, "invReviewBtn")}</button>
+                }} disabled={nCounted === 0 && !pendingInputs} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2 disabled:opacity-40" style={{ background: violet }}>{tx(lang, "invReviewBtn")}</button>
                 {openCartsWithItems > 0 && <p className="text-[11px] mb-3 font-bold" style={{ color: red }}>⚠️ {tx(lang, "invOpenCartsWarn").replace("{n}", localizedNumber(openCartsWithItems))}</p>}
                 {msg}
                 <div className="flex items-center gap-2 mb-2">
                   <div className="flex-1"><SearchBox compact value={invSearch} onChange={setInvSearch} placeholder={t(lang, "search")} darkMode={darkMode} /></div>
                   <button type="button" onClick={() => { setInvScanErr(false); setInvMsg(""); setInvScan(true); }} aria-label={tx(lang, "scanBarcodeTitle")} className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: T.input, color: T.text }}><ScanLine size={16} /></button>
+                </div>
                 </div>
                 {cats.length > 0 && (
                   <select value={invCategory} onChange={(e) => setInvCategory(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }}>
@@ -22676,7 +22697,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           </p>
                         </div>
                         {!c && !frozenP && (
-                          <button type="button" onClick={() => setInvCount(p, String(invUnitQty(p)))} className="h-9 px-2.5 rounded-lg text-[11px] font-bold shrink-0" style={{ background: darkMode ? "rgba(22,163,74,0.15)" : "#dcfce7", color: green }}>✓ {tx(lang, "invSame")}</button>
+                          <button type="button" onClick={() => setInvCount(p, String(invUnitQty(p)))} className="h-9 px-2.5 rounded-lg text-[11px] font-bold shrink-0 truncate" style={{ maxWidth: 96, background: darkMode ? "rgba(22,163,74,0.15)" : "#dcfce7", color: green }}>✓ {tx(lang, "invSame")}</button>
                         )}
                         <input
                           autoComplete="off" type="text" inputMode="decimal" disabled={frozenP} value={val} placeholder={p.sellByUnit ? t(lang, "sellUnit") : "?"}
@@ -22710,7 +22731,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-extrabold" style={{ color: T.text }}>📋 {tx(lang, invReview && invOpen ? "invReviewTitle" : "invTitle")}</h2>
-                  <button type="button" onClick={invReview && invOpen ? () => setInvReview(false) : close} aria-label="Fermer" className="p-1"><X size={22} color={T.muted} /></button>
+                  <button type="button" onClick={invReview && invOpen ? () => setInvReview(false) : close} aria-label="Fermer" className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: T.input }}><X size={18} color={T.muted} /></button>
                 </div>
                 {body}
               </div>
@@ -22751,7 +22772,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "80vh", overscrollBehavior: "contain" }} onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="font-bold text-sm">📦 {tx(lang, "lotLabel")} {ref.lotNo || "—"}</h3>
-                  <button type="button" onClick={() => setLotView(null)} aria-label="Fermer"><X size={18} /></button>
+                  <button type="button" onClick={() => setLotView(null)} aria-label="Fermer" className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: T.input }}><X size={16} /></button>
                 </div>
                 <p className="text-xs mb-2" style={{ color: T.muted }}>{lp.name}</p>
                 <p className="text-xs font-semibold" style={{ color: expired ? (darkMode ? "#fda4af" : "#e11d48") : T.text }}>📅 {tx(lang, "lotExpires").replace("{date}", fullDate(ref.date + "T12:00:00"))}</p>
@@ -22926,6 +22947,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <React.Fragment key="expiry">
                 <label className="text-xs block mb-1" style={{ color: T.muted }}>📅 {tx(lang, "expDateLabel")}</label>
                 <input type="date" value={pExpiry} onChange={(e) => setPExpiry(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm mb-1" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+                {datePreview(pExpiry)}
                 <p className="text-[10px] mb-2" style={{ color: T.muted }}>{tx(lang, "expDateHint")}</p>
                 <input autoComplete="off" value={pLotNo} onChange={(e) => setPLotNo(e.target.value)} placeholder={tx(lang, "lotNoLabel")} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
                   </React.Fragment>
@@ -23217,28 +23239,32 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 <Plus size={18} /> {t(lang, "addProduct")}
               </button>
             )}
-            {products.length > 0 && (
-              <div className="flex gap-2">
-                <button onClick={openShopList} className="flex-1 h-10 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold" style={{ background: darkMode ? "rgba(22,163,74,0.15)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>
-                  <ShoppingCart size={14} /> {tx(lang, "shopListBtn")}
-                </button>
-                {hasPermission("editStock") && !shopReadOnly && (
-                  <button onClick={openBulkPrice} className="flex-1 h-10 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold" style={{ background: darkMode ? "rgba(217,119,6,0.15)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#b45309" }}>
-                    <Tag size={14} /> {tx(lang, "bulkPriceBtn")}
-                  </button>
-                )}
-              </div>
+            {products.length > 0 && invOpen && hasPermission("editStock") && !shopReadOnly && (
+              // Inventaire en cours : bandeau bien visible pour le reprendre.
+              <button onClick={() => { setShowInventory(true); setInvMsg(""); setInvReview(false); }} className="w-full min-h-[2.5rem] px-3 py-1.5 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold leading-tight text-center" style={{ background: darkMode ? "rgba(124,58,237,0.22)" : "#ede9fe", color: darkMode ? "#c4b5fd" : "#6d28d9", border: `1px solid ${darkMode ? "rgba(196,181,253,0.35)" : "#c4b5fd"}` }}>
+                <ClipboardCheck size={15} /> {tx(lang, "invResumeBtn").replace("{n}", localizedNumber(invCountable().filter((p) => invCountOf(p)).length)).replace("{p}", localizedNumber(invCountable().length))}
+              </button>
             )}
             {products.length > 0 && (
-              <div className="flex gap-2">
-                {hasPermission("editStock") && !shopReadOnly && (
-                  <button onClick={() => { setShowInventory(true); setInvMsg(""); setInvReview(false); }} className="flex-1 min-h-[2.5rem] px-2 py-1 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold leading-tight text-center" style={{ background: darkMode ? "rgba(124,58,237,0.16)" : "#ede9fe", color: darkMode ? "#c4b5fd" : "#6d28d9" }}>
-                    📋 {invOpen ? tx(lang, "invResumeBtn").replace("{n}", localizedNumber(invCountable().filter((p) => invCountOf(p)).length)).replace("{p}", localizedNumber(invCountable().length)) : tx(lang, "invBtn")}
+              // Outils du stock sur une seule rangée qu'on fait glisser : la liste des produits
+              // remonte, et chaque outil a sa couleur.
+              <div className="flex gap-2 overflow-x-auto -mx-4 px-4 pb-0.5" style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}>
+                <button onClick={openStatusMaker} className="shrink-0 min-h-[2.5rem] px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold leading-tight whitespace-nowrap" style={{ background: darkMode ? "rgba(37,211,102,0.15)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>
+                  <Megaphone size={15} /> {tx(lang, "stBtn")}
+                </button>
+                <button onClick={openShopList} className="shrink-0 min-h-[2.5rem] px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold leading-tight whitespace-nowrap" style={{ background: darkMode ? "rgba(14,165,233,0.15)" : "#e0f2fe", color: darkMode ? "#7dd3fc" : "#0369a1" }}>
+                  <ShoppingCart size={15} /> {tx(lang, "shopListBtn")}
+                </button>
+                {hasPermission("editStock") && !shopReadOnly && !invOpen && (
+                  <button onClick={() => { setShowInventory(true); setInvMsg(""); setInvReview(false); }} className="shrink-0 min-h-[2.5rem] px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold leading-tight whitespace-nowrap" style={{ background: darkMode ? "rgba(124,58,237,0.16)" : "#ede9fe", color: darkMode ? "#c4b5fd" : "#6d28d9" }}>
+                    <ClipboardCheck size={15} /> {tx(lang, "invBtn")}
                   </button>
                 )}
-                <button onClick={openStatusMaker} className="flex-1 min-h-[2.5rem] px-2 py-1 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold leading-tight text-center" style={{ background: darkMode ? "rgba(37,211,102,0.15)" : "#dcfce7", color: darkMode ? "#4ade80" : "#15803d" }}>
-                  📣 {tx(lang, "stBtn")}
-                </button>
+                {hasPermission("editStock") && !shopReadOnly && (
+                  <button onClick={openBulkPrice} className="shrink-0 min-h-[2.5rem] px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold leading-tight whitespace-nowrap" style={{ background: darkMode ? "rgba(217,119,6,0.15)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#b45309" }}>
+                    <Tag size={15} /> {tx(lang, "bulkPriceBtn")}
+                  </button>
+                )}
               </div>
             )}
             {products.length > 0 && (
@@ -23325,12 +23351,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         const lots = expiryLots(p);
                         if (!lots.length || (lots.length < 2 && !lots.some((b) => b.lotNo))) return null;
                         return (
-                          <div className="flex flex-wrap gap-1 mt-1">
-                            {lots.map((b) => (
-                              <button key={b.id} type="button" onClick={() => setLotView({ pid: p.id, id: b.id })} className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md" style={{ background: T.input, color: b.date < localDayKey(new Date()) ? (darkMode ? "#fda4af" : "#e11d48") : T.text }}>
-                                📦 {b.lotNo ? b.lotNo + " · " : ""}{dayLabel(b.date + "T12:00:00")} ×{localizedQty(b.remaining)}
-                              </button>
-                            ))}
+                          <div className="flex flex-wrap gap-1.5 mt-1.5">
+                            {lots.map((b) => {
+                              const today = localDayKey(new Date());
+                              const exp = b.date < today;
+                              const soon = !exp && b.date <= localDayKey(new Date(Date.now() + 30 * 86400000));
+                              const col = exp ? (darkMode ? "#fda4af" : "#be123c") : soon ? (darkMode ? "#fbbf24" : "#b45309") : T.text;
+                              return (
+                                <button key={b.id} type="button" onClick={() => setLotView({ pid: p.id, id: b.id })} className="text-[11px] font-semibold px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1" style={{ minHeight: 32, background: exp ? (darkMode ? "rgba(225,29,72,0.15)" : "#fff1f2") : soon ? (darkMode ? "rgba(245,158,11,0.12)" : "#fffbeb") : T.input, color: col, border: `1px solid ${exp || soon ? col + "55" : T.border}` }}>
+                                  📦 {b.lotNo ? b.lotNo + " · " : ""}{(() => { const [y, m, d] = b.date.split("-"); return `${d}/${m}/${y.slice(2)}`; })()} ×{localizedQty(b.remaining)} <span style={{ opacity: 0.6 }}>›</span>
+                                </button>
+                              );
+                            })}
                           </div>
                         );
                       })()}
@@ -23348,7 +23380,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       {frozen && <p className="text-[10px] mt-0.5" style={{ color: darkMode ? CLAY : "#b45309" }}>{t(lang, "productFrozenMsg")}</p>}
                       {Array.isArray(p.components) && p.components.length > 0 && (
                         <p className="text-[10px] mt-0.5" style={{ color: T.muted }}>
-                          {isKitProduct(p) ? "🧺" : "🍞"} {p.components.map((c) => { const comp = products.find((x) => x.id === c.productId); return comp ? `${comp.name} ${localizedQty(c.qty)}` : "?"; }).join(" + ")}{isRecipeProduct(p) && p.recipeYield > 1 ? ` → ${localizedQty(p.recipeYield)}` : ""}
+                          {isKitProduct(p) ? "🧺" : "🍞"} {p.components.map((c) => { const comp = products.find((x) => x.id === c.productId); return comp ? `${comp.name} ${localizedQty(c.qty)}` : "?"; }).join(" + ")}{isRecipeProduct(p) && p.recipeYield > 1 ? ` ${ARW} ${localizedQty(p.recipeYield)}` : ""}
                         </p>
                       )}
                     </div>
@@ -23357,7 +23389,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {isKitProduct(p) ? (
                       <div>
                         <span className="text-sm font-extrabold block" style={{ color: kitAvailable(p) <= 0 ? (darkMode ? CLAY : "#e11d48") : T.text }}>{localizedNumber(kitAvailable(p))}</span>
-                        <p className="text-[9px]" style={{ color: T.muted }}>{tx(lang, "kitPossible")}</p>
+                        <p className="text-[9px] leading-tight text-center mx-auto" style={{ color: T.muted, maxWidth: 72 }}>{tx(lang, "kitPossible")}</p>
                       </div>
                     ) : frozen ? (
                       <span className="text-sm font-extrabold min-w-[2.5rem] text-center block whitespace-nowrap" style={{ color: T.muted }}>{localizedQty(p.quantity)}</span>
@@ -23856,7 +23888,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             </div>
                             <div>
                               <p className="text-base font-bold">{p.name}</p>
-                              <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)}{p.sellByMeasure ? ` / ${p.measureUnit || ""}` : ""} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · {tx(lang, "measureAvailable")} {localizedQty(dispo)} {p.sellByMeasure ? (p.measureUnit || "") : ""}</p>
+                              <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)}{p.sellByMeasure ? ` / ${p.measureUnit || ""}` : ""} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · {tx(lang, "measureAvailable")} {localizedQty(Math.max(0, r3q(dispo - expiredQtyOf(p))))} {p.sellByMeasure ? (p.measureUnit || "") : ""}</p>
                               {productPriceTiers(p).length > 0 && (
                                 <p className="text-[10px] font-semibold" style={{ color: darkMode ? "#4ade80" : "#15803d" }}>
                                   {productPriceTiers(p).map((x) => `${tx(lang, "tierName_" + x.kind)} ${fcfa(x.price)}${x.min > 0 ? " " + tx(lang, "tierFromN").replace("{n}", localizedQty(x.min)) : ""}`).join(" · ")}
@@ -23982,6 +24014,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div className="p-2 flex-1 flex flex-col">
                           <p className="text-xs font-bold truncate" style={{ color: T.text }}>{p.name}</p>
                           <p className="text-[10px] mb-1.5" style={{ color: T.muted }}>{fcfa(p.price)}{p.sellByMeasure ? ` / ${p.measureUnit || ""}` : ""}</p>
+                          {expiredQtyOf(p) > 0 && <p className="text-[10px] font-extrabold -mt-1 mb-1.5 inline-block px-1.5 py-0.5 rounded-md" style={{ background: darkMode ? "rgba(225,29,72,0.25)" : "#ffe4e6", color: darkMode ? "#fda4af" : "#be123c" }}>⚠️ {localizedQty(expiredQtyOf(p))} {tx(lang, "expiredShort")}</p>}
                           <div className="mt-auto flex items-center gap-1.5">
                             {p.sellByMeasure ? (
                               <button
@@ -24522,7 +24555,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             </div>
                             {d.dueDate && <p style={{ color: d.dueDate < today ? red : T.muted }}>{dueText(d.dueDate)}</p>}
                             {(d.payments || []).filter((p) => p && !p.void).map((p) => <p key={p.id} style={{ color: green }}>✓ {fullDate(p.date)} · {fcfa(p.amount)} {p.method === "mobile" ? "📱" : "💵"}</p>)}
-                            {canEdit && !(d.payments || []).some((p) => p && !p.void) && <button type="button" onClick={() => deleteSupDebt(d.id)} className="text-[10px] font-semibold mt-1" style={{ color: red }}>{supDelAsk === d.id ? tx(lang, "supDeleteConfirm") : tx(lang, "supDelete")}</button>}
+                            {canEdit && !(d.payments || []).some((p) => p && !p.void) && <button type="button" onClick={() => deleteSupDebt(d.id)} className="text-[11px] font-bold mt-1.5 px-3 py-2 rounded-lg" style={{ color: red, background: darkMode ? "rgba(225,29,72,0.12)" : "#fff1f2" }}>{supDelAsk === d.id ? tx(lang, "supDeleteConfirm") : tx(lang, "supDelete")}</button>}
                           </div>
                         ))}
                       </div>
@@ -24553,14 +24586,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div data-kbscroll="true" className="w-full max-w-sm rounded-2xl p-5 overflow-y-auto" style={{ background: T.card, color: T.text, maxHeight: "85vh", overscrollBehavior: "contain" }} onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-bold text-sm">🚚 {tx(lang, "supAddBtn")}</h3>
-                <button type="button" onClick={() => setShowAddSup(false)} aria-label="Fermer"><X size={18} /></button>
+                <button type="button" onClick={() => setShowAddSup(false)} aria-label="Fermer" className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: T.input }}><X size={16} /></button>
               </div>
-              {[["supplier", "supNameLabel", "text"], ["amount", "supAmountLabel", "decimal"], ["note", "supNoteLabel", "text"], ["phone", "supPhoneLabel", "tel"]].map(([k, key, mode]) => (
-                <input key={k} autoComplete="off" list={k === "supplier" ? "sup-names-add" : undefined} type={mode === "tel" ? "tel" : "text"} inputMode={mode === "decimal" ? "decimal" : mode === "tel" ? "tel" : undefined} value={supForm[k]} onChange={(e) => { const v = mode === "decimal" ? e.target.value.replace(/[^0-9.,]/g, "") : e.target.value; setSupForm((f) => ({ ...f, [k]: v })); setSupError(""); }} placeholder={tx(lang, key)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              {[["supplier", "supNameLabel", "text", "👤"], ["amount", "supAmountLabel", "decimal", "💰"], ["note", "supNoteLabel", "text", "📦"], ["phone", "supPhoneLabel", "tel", "📞"]].map(([k, key, mode, ic]) => (
+                <React.Fragment key={k}>
+                <label className="text-[11px] font-semibold block mb-1" style={{ color: T.muted }}>{ic} {tx(lang, key)}</label>
+                <input autoComplete="off" list={k === "supplier" ? "sup-names-add" : undefined} type={mode === "tel" ? "tel" : "text"} inputMode={mode === "decimal" ? "decimal" : mode === "tel" ? "tel" : undefined} value={supForm[k]} onChange={(e) => { const v = mode === "decimal" ? e.target.value.replace(/[^0-9.,]/g, "") : e.target.value; setSupForm((f) => ({ ...f, [k]: v })); setSupError(""); }} placeholder={tx(lang, key)} className="w-full border rounded-lg px-3 py-2 text-sm mb-2" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+                </React.Fragment>
               ))}
               <datalist id="sup-names-add">{supKnownNames.map((n) => <option key={n} value={n} />)}</datalist>
               <label className="text-[11px] block mb-1" style={{ color: T.muted }}>{tx(lang, "supDueLabel")}</label>
               <input type="date" value={supForm.dueDate} onChange={(e) => setSupForm((f) => ({ ...f, dueDate: e.target.value }))} className="w-full border rounded-lg px-3 py-2 text-sm mb-3" style={{ background: T.input, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
+              {datePreview(supForm.dueDate)}
               {supError && <p className="text-xs font-semibold mb-2" style={{ color: "#e11d48" }}>{supError}</p>}
               <button type="button" onClick={addSupDebt} className="w-full py-3 rounded-xl text-white font-bold text-sm" style={{ background: INDIGO }}>{tx(lang, "supSave")}</button>
             </div>
@@ -24571,15 +24608,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <div className="w-full max-w-sm rounded-2xl p-5" style={{ background: T.card, color: T.text }} onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-1">
                 <h3 className="font-bold text-sm">💵 {tx(lang, "supPayTitle").replace("{name}", supPay.name)}</h3>
-                <button type="button" onClick={() => setSupPay(null)} aria-label="Fermer"><X size={18} /></button>
+                <button type="button" onClick={() => setSupPay(null)} aria-label="Fermer" className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: T.input }}><X size={16} /></button>
               </div>
               <p className="text-xs mb-3" style={{ color: T.muted }}>{tx(lang, "supPayLeft").replace("{n}", fcfa(supPay.total))}</p>
               <input autoComplete="off" type="text" inputMode="decimal" value={supPayAmount} onChange={(e) => { setSupPayAmount(e.target.value.replace(/[^0-9.,]/g, "")); setSupError(""); }} className="w-full border rounded-lg px-3 py-2.5 text-base font-bold text-center mb-3" style={{ background: T.input, color: T.text, borderColor: T.border }} />
               <div className="flex gap-2 mb-3">
-                {[["cash", "supPayCash"], ["mobile", "supPayMobile"]].map(([m, key]) => (
-                  <button key={m} type="button" onClick={() => setSupPayMethod(m)} className="flex-1 py-2 rounded-xl text-[11px] font-bold" style={{ background: supPayMethod === m ? INDIGO : T.input, color: supPayMethod === m ? "white" : T.text }}>{m === "cash" ? "💵 " : "📱 "}{tx(lang, key)}</button>
+                {[["cash", "cash"], ["mobile", "supPayMobile"]].map(([m, key]) => (
+                  <button key={m} type="button" onClick={() => setSupPayMethod(m)} className="flex-1 py-2.5 rounded-xl text-xs font-bold leading-tight" style={{ background: supPayMethod === m ? INDIGO : T.input, color: supPayMethod === m ? "white" : T.text }}>{m === "cash" ? "💵 " : "📱 "}{m === "cash" ? t(lang, key) : tx(lang, key)}</button>
                 ))}
               </div>
+              {supPayMethod === "cash" && <p className="text-[11px] -mt-2 mb-3" style={{ color: T.muted }}>{tx(lang, "supPayCash")}</p>}
               {supError && <p className="text-xs font-semibold mb-2" style={{ color: "#e11d48" }}>{supError}</p>}
               <button type="button" onClick={paySupplier} className="w-full py-3 rounded-xl text-white font-bold text-sm" style={{ background: "#16a34a" }}>{tx(lang, "supPayConfirm")}</button>
             </div>
@@ -27835,7 +27873,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     const selected = sectorIdOf(shopSector) === sec.id;
                     return (
                       <button key={sec.id} onClick={() => saveSector(sec.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 14, background: selected ? "rgba(34,211,238,0.15)" : T.input, border: `1px solid ${selected ? "#22d3ee" : T.border}`, cursor: "pointer" }}>
-                        <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3, textAlign: "left" }}>
+                        <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3, textAlign: "start" }}>
                           <span style={{ color: selected ? "#22d3ee" : T.text, fontSize: 14, fontWeight: 600 }}><span style={{ marginInlineEnd: 8 }}>{SECTOR_ICON[sec.id] || "🏪"}</span>{label}</span>
                           {SECTOR_MODES[sec.id] && SECTOR_MODES[sec.id].length > 0 && (
                             <span style={{ color: T.muted, fontSize: 11, fontWeight: 500 }}>⭐ {SECTOR_MODES[sec.id].map((m) => tx(lang, "mode_" + m)).join(" · ")}</span>
