@@ -6454,6 +6454,19 @@ EXTRA_UI.stDownload = { fr: "Télécharger l'image", en: "Download the image", e
 EXTRA_UI.stShareHint = { fr: "Dans WhatsApp, choisissez « Mon statut » pour le publier.", en: "In WhatsApp, choose \"My status\" to post it.", es: "En WhatsApp, elija «Mi estado» para publicarla.", pt: "No WhatsApp, escolha «Meu status» para publicar.", de: "Wählen Sie in WhatsApp „Mein Status“, um es zu posten.", it: "In WhatsApp, scegliete «Il mio stato» per pubblicarla.", nl: "Kies in WhatsApp 'Mijn status' om te plaatsen.", pl: "W WhatsApp wybierz „Mój status”, aby opublikować.", ru: "В WhatsApp выберите «Мой статус», чтобы опубликовать.", tr: "Yayınlamak için WhatsApp'ta \"Durumum\"u seçin.", ar: "في واتساب، اختر «حالتي» لنشرها.", hi: "प्रकाशित करने के लिए WhatsApp में \"मेरा स्टेटस\" चुनें।", bn: "প্রকাশ করতে WhatsApp-এ \"আমার স্ট্যাটাস\" বেছে নিন।", ur: "شائع کرنے کے لیے WhatsApp میں \"میرا اسٹیٹس\" چنیں۔", ta: "வெளியிட WhatsApp இல் \"என் நிலை\" தேர்வு செய்யவும்.", te: "పోస్ట్ చేయడానికి WhatsAppలో \"నా స్టేటస్\" ఎంచుకోండి.", th: "ใน WhatsApp ให้เลือก \"สถานะของฉัน\" เพื่อโพสต์", zh: "在 WhatsApp 中选择“我的动态”即可发布。", ja: "WhatsAppで「マイステータス」を選ぶと投稿できます。", ko: "WhatsApp에서 '내 상태'를 선택해 게시하세요.", id: "Di WhatsApp, pilih \"Status saya\" untuk memposting.", vi: "Trong WhatsApp, chọn \"Trạng thái của tôi\" để đăng.", tl: "Sa WhatsApp, piliin ang \"My status\" para i-post.", sw: "Ndani ya WhatsApp, chagua \"Hali yangu\" kuichapisha.", ha: "A WhatsApp, zaɓi \"Matsayina\" don wallafawa.", yo: "Nínú WhatsApp, yan \"Ìpò mi\" láti gbé e jáde.", zu: "Ku-WhatsApp, khetha \"Isimo sami\" ukuze uyithumele.", am: "ለመለጠፍ በWhatsApp \"የእኔ ሁኔታ\" ይምረጡ።", bm: "WhatsApp kɔnɔ, \"N ka statut\" sugandi walasa k'a bila.", wo: "Ci WhatsApp, tànnal \"Sama statut\" ngir ko def." };
 EXTRA_UI.stEdit = { fr: "Modifier", en: "Edit", es: "Modificar", pt: "Modificar", de: "Bearbeiten", it: "Modifica", nl: "Bewerken", pl: "Edytuj", ru: "Изменить", tr: "Düzenle", ar: "تعديل", hi: "बदलें", bn: "সম্পাদনা", ur: "ترمیم", ta: "திருத்து", te: "సవరించు", th: "แก้ไข", zh: "修改", ja: "編集", ko: "수정", id: "Ubah", vi: "Sửa", tl: "I-edit", sw: "Hariri", ha: "Gyara", yo: "Ṣàtúnṣe", zu: "Hlela", am: "አርትዕ", bm: "A yɛlɛma", wo: "Soppi" };
 EXTRA_UI.stOrderCta = { fr: "Commandez sur WhatsApp", en: "Order on WhatsApp", es: "Pida por WhatsApp", pt: "Encomende pelo WhatsApp", de: "Per WhatsApp bestellen", it: "Ordinate su WhatsApp", nl: "Bestel via WhatsApp", pl: "Zamów przez WhatsApp", ru: "Заказывайте в WhatsApp", tr: "WhatsApp'tan sipariş verin", ar: "اطلب عبر واتساب", hi: "WhatsApp पर ऑर्डर करें", bn: "WhatsApp-এ অর্ডার করুন", ur: "WhatsApp پر آرڈر کریں", ta: "WhatsApp இல் ஆர்டர் செய்யவும்", te: "WhatsAppలో ఆర్డర్ చేయండి", th: "สั่งซื้อทาง WhatsApp", zh: "WhatsApp 下单", ja: "WhatsAppで注文", ko: "WhatsApp으로 주문하세요", id: "Pesan lewat WhatsApp", vi: "Đặt hàng qua WhatsApp", tl: "Umorder sa WhatsApp", sw: "Agiza kupitia WhatsApp", ha: "Yi oda ta WhatsApp", yo: "Pàṣẹ lórí WhatsApp", zu: "Oda nge-WhatsApp", am: "በWhatsApp ይዘዙ", bm: "WhatsApp kan ka komandi kɛ", wo: "Komande ci WhatsApp" };
+EXTRA_UI.produceCompDeleted = { fr: "Un ingrédient de cette recette a été supprimé : modifiez la recette avant de produire.", en: "An ingredient of this recipe was deleted: edit the recipe before producing.", es: "Se eliminó un ingrediente de esta receta: modifique la receta antes de producir.", pt: "Um ingrediente desta receita foi eliminado: modifique a receita antes de produzir.", de: "Eine Zutat dieses Rezepts wurde gelöscht: Bearbeiten Sie das Rezept vor der Produktion.", it: "Un ingrediente di questa ricetta è stato eliminato: modificate la ricetta prima di produrre.", nl: "Een ingrediënt van dit recept is verwijderd: pas het recept aan voordat u produceert.", pl: "Usunięto składnik tego przepisu: popraw przepis przed produkcją.", ru: "Ингредиент этого рецепта удалён: исправьте рецепт перед производством.", tr: "Bu tarifin bir malzemesi silindi: üretmeden önce tarifi düzenleyin.", ar: "حُذف أحد مكونات هذه الوصفة: عدّل الوصفة قبل الإنتاج.", hi: "इस रेसिपी की एक सामग्री हटा दी गई है: बनाने से पहले रेसिपी बदलें।", bn: "এই রেসিপির একটি উপকরণ মুছে ফেলা হয়েছে: তৈরির আগে রেসিপি ঠিক করুন।", ur: "اس ترکیب کا ایک جزو حذف ہو گیا ہے: بنانے سے پہلے ترکیب درست کریں۔", ta: "இந்தச் செய்முறையின் ஒரு பொருள் நீக்கப்பட்டது: தயாரிப்பதற்கு முன் செய்முறையைத் திருத்தவும்.", te: "ఈ వంటకంలోని ఒక పదార్థం తొలగించబడింది: తయారు చేసే ముందు వంటకాన్ని సవరించండి.", th: "วัตถุดิบหนึ่งในสูตรนี้ถูกลบแล้ว: แก้ไขสูตรก่อนผลิต", zh: "此配方的一种原料已被删除：请先修改配方再生产。", ja: "このレシピの材料が削除されています。生産する前にレシピを修正してください。", ko: "이 레시피의 재료가 삭제되었습니다. 생산 전에 레시피를 수정하세요.", id: "Salah satu bahan resep ini telah dihapus: ubah resep sebelum memproduksi.", vi: "Một nguyên liệu của công thức này đã bị xóa: hãy sửa công thức trước khi sản xuất.", tl: "Nabura ang isang sangkap ng recipe na ito: ayusin muna ang recipe bago gumawa.", sw: "Kiungo kimoja cha mapishi haya kimefutwa: rekebisha mapishi kabla ya kuzalisha.", ha: "An goge wani sinadari na wannan girki: gyara girkin kafin a samar.", yo: "A ti pa èròjà kan rẹ́ nínú ìlànà yìí: ṣàtúnṣe ìlànà kí o tó ṣe é.", zu: "Esinye isithako sale recipe sesusiwe: lungisa i-recipe ngaphambi kokukhiqiza.", am: "የዚህ አሰራር አንድ ግብዓት ተሰርዟል፦ ከማምረትዎ በፊት አሰራሩን ያስተካክሉ።", bm: "Nin dilanni fɛn dɔ jɔsira: a dilanni latilen sani i ka dilanni kɛ.", wo: "Benn ci ingrédient yi far nañu ko: soppil recette bi balaa ngay defar." };
+EXTRA_UI.serialDuplicate = { fr: "IMEI en double : chaque téléphone doit avoir son propre numéro.", en: "Duplicate IMEI: each phone must have its own number.", es: "IMEI duplicado: cada teléfono debe tener su propio número.", pt: "IMEI duplicado: cada telefone deve ter o seu próprio número.", de: "Doppelte IMEI: Jedes Telefon braucht eine eigene Nummer.", it: "IMEI doppio: ogni telefono deve avere il proprio numero.", nl: "Dubbele IMEI: elke telefoon moet een eigen nummer hebben.", pl: "Powtórzony IMEI: każdy telefon musi mieć własny numer.", ru: "Повтор IMEI: у каждого телефона свой номер.", tr: "Yinelenen IMEI: her telefonun kendi numarası olmalı.", ar: "IMEI مكرر: لكل هاتف رقمه الخاص.", hi: "दोहराया गया IMEI: हर फ़ोन का अपना नंबर होना चाहिए।", bn: "একই IMEI দুবার: প্রতিটি ফোনের নিজস্ব নম্বর থাকতে হবে।", ur: "دہرایا گیا IMEI: ہر فون کا اپنا نمبر ہونا چاہیے۔", ta: "IMEI இருமுறை: ஒவ்வொரு தொலைபேசிக்கும் தனி எண் வேண்டும்.", te: "IMEI రెండుసార్లు: ప్రతి ఫోన్‌కు దాని సొంత నంబర్ ఉండాలి.", th: "IMEI ซ้ำ: โทรศัพท์แต่ละเครื่องต้องมีหมายเลขของตัวเอง", zh: "IMEI 重复：每部手机必须有自己的号码。", ja: "IMEIが重複しています。電話ごとに別の番号が必要です。", ko: "IMEI 중복: 휴대폰마다 고유 번호가 있어야 합니다.", id: "IMEI ganda: setiap ponsel harus punya nomornya sendiri.", vi: "IMEI bị trùng: mỗi điện thoại phải có số riêng.", tl: "Dobleng IMEI: dapat may sariling numero ang bawat telepono.", sw: "IMEI imerudiwa: kila simu lazima iwe na namba yake.", ha: "IMEI ya maimaitu: kowace waya dole ta sami lambarta.", yo: "IMEI méjì bákan náà: fóònù kọ̀ọ̀kan gbọ́dọ̀ ní nọ́mbà tirẹ̀.", zu: "I-IMEI iphindiwe: ifoni ngayinye kufanele ibe nenombolo yayo.", am: "የተደገመ IMEI፦ እያንዳንዱ ስልክ የራሱ ቁጥር ሊኖረው ይገባል።", bm: "IMEI kelen sɛbɛnna siɲɛ fila: telefɔni kelen-kelen bɛɛ ka kan ka nimɔrɔ kelen sɔrɔ.", wo: "IMEI bi dafa bokk: telefon bu nekk war naa am nimero bu boppam." };
+EXTRA_UI.kitNoVariants = { fr: "Un kit ou un plat ne peut pas avoir de variantes.", en: "A kit or dish cannot have variants.", es: "Un kit o plato no puede tener variantes.", pt: "Um kit ou prato não pode ter variantes.", de: "Ein Set oder Gericht kann keine Varianten haben.", it: "Un kit o un piatto non può avere varianti.", nl: "Een kit of gerecht kan geen varianten hebben.", pl: "Zestaw lub danie nie może mieć wariantów.", ru: "У набора или блюда не может быть вариантов.", tr: "Bir set veya yemeğin çeşidi olamaz.", ar: "لا يمكن أن يكون للطقم أو الطبق متغيرات.", hi: "किट या व्यंजन के प्रकार नहीं हो सकते।", bn: "কিট বা খাবারের ভ্যারিয়েন্ট থাকতে পারে না।", ur: "کِٹ یا ڈش کی اقسام نہیں ہو سکتیں۔", ta: "கிட் அல்லது உணவுக்கு வகைகள் இருக்க முடியாது.", te: "కిట్ లేదా వంటకానికి రకాలు ఉండవు.", th: "ชุดหรือเมนูอาหารมีตัวเลือกย่อยไม่ได้", zh: "套装或菜品不能有规格。", ja: "セットや料理にはバリエーションを付けられません。", ko: "세트나 요리에는 옵션을 둘 수 없습니다.", id: "Paket atau hidangan tidak bisa punya varian.", vi: "Bộ hoặc món ăn không thể có biến thể.", tl: "Hindi puwedeng may variant ang kit o putahe.", sw: "Kifurushi au mlo hauwezi kuwa na aina.", ha: "Kit ko abinci ba zai iya samun nau'i ba.", yo: "Àkójọpọ̀ tàbí oúnjẹ kò lè ní oríṣiríṣi.", zu: "Ikhithi noma isidlo ngeke sibe nezinhlobo.", am: "ኪት ወይም ምግብ ዓይነቶች ሊኖሩት አይችልም።", bm: "Kit walima dumuni tɛ se ka suguya caman sɔrɔ.", wo: "Kit walla lekk du mën a am ay variante." };
+EXTRA_UI.kitIsComponent = { fr: "Ce produit est déjà utilisé dans un autre kit : il ne peut pas devenir un kit.", en: "This product is already used in another kit: it cannot become a kit.", es: "Este producto ya se usa en otro kit: no puede convertirse en kit.", pt: "Este produto já é usado noutro kit: não pode tornar-se um kit.", de: "Dieses Produkt wird bereits in einem anderen Set verwendet: Es kann kein Set werden.", it: "Questo prodotto è già usato in un altro kit: non può diventare un kit.", nl: "Dit product wordt al in een andere kit gebruikt: het kan geen kit worden.", pl: "Ten produkt jest już częścią innego zestawu: nie może stać się zestawem.", ru: "Этот товар уже входит в другой набор: он не может стать набором.", tr: "Bu ürün zaten başka bir sette kullanılıyor: set olamaz.", ar: "هذا المنتج مستخدم في طقم آخر: لا يمكن أن يصبح طقمًا.", hi: "यह उत्पाद पहले से दूसरे किट में है: यह किट नहीं बन सकता।", bn: "এই পণ্যটি অন্য কিটে ব্যবহৃত: এটি কিট হতে পারবে না।", ur: "یہ مصنوعات پہلے ہی کسی اور کِٹ میں ہے: یہ کِٹ نہیں بن سکتی۔", ta: "இந்தப் பொருள் ஏற்கனவே வேறு கிட்டில் உள்ளது: இது கிட் ஆக முடியாது.", te: "ఈ ఉత్పత్తి ఇప్పటికే మరో కిట్‌లో ఉంది: ఇది కిట్ కాలేదు.", th: "สินค้านี้อยู่ในชุดอื่นแล้ว: จึงเป็นชุดไม่ได้", zh: "该商品已用于其他套装，不能再设为套装。", ja: "この商品は別のセットで使われているため、セットにできません。", ko: "이 상품은 이미 다른 세트에 쓰이고 있어 세트가 될 수 없습니다.", id: "Produk ini sudah dipakai di paket lain: tidak bisa menjadi paket.", vi: "Sản phẩm này đã nằm trong bộ khác: không thể trở thành bộ.", tl: "Ginagamit na ang produktong ito sa ibang kit: hindi ito puwedeng maging kit.", sw: "Bidhaa hii tayari iko kwenye kifurushi kingine: haiwezi kuwa kifurushi.", ha: "Ana amfani da wannan kaya a wani kit: ba zai iya zama kit ba.", yo: "A ti lo ọjà yìí nínú àkójọpọ̀ mìíràn: kò lè di àkójọpọ̀.", zu: "Lo mkhiqizo usuvele usetshenziswa kwenye ikhithi: ngeke ube yikhithi.", am: "ይህ ምርት በሌላ ኪት ውስጥ አለ፦ ኪት ሊሆን አይችልም።", bm: "Nin fɛn bɛ kit wɛrɛ kɔnɔ kaban: a tɛ se ka kɛ kit ye.", wo: "Jaay bii mungi ci beneen kit: du mën a nekk kit." };
+EXTRA_UI.recipeUseAsCost = { fr: "Utiliser comme prix d'achat", en: "Use as cost price", es: "Usar como precio de compra", pt: "Usar como preço de compra", de: "Als Einkaufspreis verwenden", it: "Usa come prezzo d'acquisto", nl: "Gebruiken als inkoopprijs", pl: "Użyj jako ceny zakupu", ru: "Использовать как закупочную цену", tr: "Alış fiyatı olarak kullan", ar: "استخدامه كسعر الشراء", hi: "खरीद मूल्य के रूप में उपयोग करें", bn: "ক্রয়মূল্য হিসেবে ব্যবহার করুন", ur: "قیمتِ خرید کے طور پر استعمال کریں", ta: "கொள்முதல் விலையாகப் பயன்படுத்து", te: "కొనుగోలు ధరగా ఉపయోగించండి", th: "ใช้เป็นราคาทุน", zh: "用作进价", ja: "仕入れ価格として使う", ko: "매입가로 사용", id: "Pakai sebagai harga beli", vi: "Dùng làm giá nhập", tl: "Gamitin bilang presyo ng puhunan", sw: "Tumia kama bei ya kununua", ha: "Yi amfani a matsayin farashin saye", yo: "Lò ó bí iye owó rírà", zu: "Sebenzisa njengentengo yokuthenga", am: "እንደ የግዢ ዋጋ ተጠቀም", bm: "A kɛ sanni sɔngɔ ye", wo: "Jëfandikoo ko ni njëgu jënd" };
+EXTRA_UI.invNeedOnline = { fr: "Connectez-vous à Internet pour valider l'inventaire (cela évite qu'il soit appliqué deux fois par deux téléphones).", en: "Connect to the Internet to confirm the count (this prevents two phones from applying it twice).", es: "Conéctese a Internet para validar el inventario (evita que dos teléfonos lo apliquen dos veces).", pt: "Ligue-se à Internet para validar o inventário (evita que dois telefones o apliquem duas vezes).", de: "Verbinden Sie sich mit dem Internet, um die Inventur zu bestätigen (so wird sie nicht von zwei Telefonen doppelt angewendet).", it: "Connettetevi a Internet per confermare l'inventario (evita che due telefoni lo applichino due volte).", nl: "Maak verbinding met internet om de inventaris te bevestigen (zo passen twee telefoons hem niet twee keer toe).", pl: "Połącz się z Internetem, aby zatwierdzić inwentaryzację (dwa telefony nie zastosują jej dwa razy).", ru: "Подключитесь к Интернету, чтобы подтвердить инвентаризацию (так два телефона не применят её дважды).", tr: "Sayımı onaylamak için internete bağlanın (iki telefonun iki kez uygulamasını önler).", ar: "اتصل بالإنترنت لتأكيد الجرد (حتى لا يطبّقه هاتفان مرتين).", hi: "गिनती की पुष्टि के लिए इंटरनेट से जुड़ें (इससे दो फ़ोन इसे दो बार लागू नहीं करेंगे)।", bn: "গণনা নিশ্চিত করতে ইন্টারনেটে যুক্ত হন (দুটি ফোন যেন দুবার প্রয়োগ না করে)।", ur: "گنتی کی تصدیق کے لیے انٹرنیٹ سے جڑیں (تاکہ دو فون اسے دو بار لاگو نہ کریں)۔", ta: "எண்ணிக்கையை உறுதிசெய்ய இணையத்துடன் இணைக்கவும் (இரண்டு தொலைபேசிகள் இருமுறை பயன்படுத்துவதைத் தடுக்கும்).", te: "లెక్కింపు నిర్ధారించడానికి ఇంటర్నెట్‌కు కనెక్ట్ అవ్వండి (రెండు ఫోన్లు రెండుసార్లు వర్తింపజేయకుండా).", th: "เชื่อมต่ออินเทอร์เน็ตเพื่อยืนยันการตรวจนับ (ป้องกันไม่ให้สองเครื่องปรับซ้ำ)", zh: "请连接互联网以确认盘点（防止两部手机重复应用）。", ja: "棚卸しを確定するにはインターネットに接続してください（2台で二重に反映されるのを防ぎます）。", ko: "실사를 확정하려면 인터넷에 연결하세요 (두 휴대폰이 중복 적용하는 것을 막습니다).", id: "Sambungkan ke Internet untuk mengonfirmasi penghitungan (agar tidak diterapkan dua kali oleh dua ponsel).", vi: "Hãy kết nối Internet để xác nhận kiểm kê (tránh hai điện thoại áp dụng hai lần).", tl: "Kumonekta sa Internet para kumpirmahin ang bilang (para hindi ito mailapat nang dalawang beses ng dalawang telepono).", sw: "Unganisha Intaneti kuthibitisha hesabu (ili simu mbili zisiitumie mara mbili).", ha: "Haɗa da Intanet don tabbatar da ƙidaya (don kada wayoyi biyu su yi amfani da ita sau biyu).", yo: "Sopọ̀ mọ́ Íńtánẹ́ẹ̀tì láti jẹ́rìí kíka (kí fóònù méjì má bàa lò ó lẹ́ẹ̀mejì).", zu: "Xhuma ku-inthanethi ukuze uqinisekise ukubala (ukuze amafoni amabili angakusebenzisi kabili).", am: "ቆጠራውን ለማረጋገጥ ከኢንተርኔት ጋር ይገናኙ (ሁለት ስልኮች ሁለቴ እንዳይተገብሩት)።", bm: "I jɛ Ɛntɛrinɛti la walasa ka jateli sɛmɛntiya (telefɔni fila kana a kɛ siɲɛ fila).", wo: "Lëkkaloo ak Internet ngir dëggal lim bi (ngir telefon ñaar duñu ko def ñaari yoon)." };
+EXTRA_UI.invAlreadyClosed = { fr: "Cet inventaire a déjà été validé ou abandonné sur un autre téléphone.", en: "This count was already confirmed or discarded on another phone.", es: "Este inventario ya fue validado o abandonado en otro teléfono.", pt: "Este inventário já foi validado ou abandonado noutro telefone.", de: "Diese Inventur wurde bereits auf einem anderen Telefon bestätigt oder verworfen.", it: "Questo inventario è già stato confermato o abbandonato su un altro telefono.", nl: "Deze inventaris is al op een andere telefoon bevestigd of geannuleerd.", pl: "Ta inwentaryzacja została już zatwierdzona lub porzucona na innym telefonie.", ru: "Эта инвентаризация уже подтверждена или отменена на другом телефоне.", tr: "Bu sayım başka bir telefonda zaten onaylandı veya bırakıldı.", ar: "تم تأكيد هذا الجرد أو إلغاؤه على هاتف آخر.", hi: "यह गिनती किसी दूसरे फ़ोन पर पहले ही पुष्ट या रद्द हो चुकी है।", bn: "এই গণনা অন্য ফোনে আগেই নিশ্চিত বা বাতিল হয়েছে।", ur: "یہ گنتی کسی دوسرے فون پر پہلے ہی تصدیق یا منسوخ ہو چکی ہے۔", ta: "இந்த எண்ணிக்கை ஏற்கனவே வேறு தொலைபேசியில் உறுதிசெய்யப்பட்டது அல்லது கைவிடப்பட்டது.", te: "ఈ లెక్కింపు ఇప్పటికే మరో ఫోన్‌లో నిర్ధారించబడింది లేదా విరమించబడింది.", th: "การตรวจนับนี้ถูกยืนยันหรือยกเลิกในโทรศัพท์อีกเครื่องแล้ว", zh: "此盘点已在另一部手机上确认或放弃。", ja: "この棚卸しは別の電話ですでに確定または破棄されています。", ko: "이 실사는 다른 휴대폰에서 이미 확정되었거나 취소되었습니다.", id: "Penghitungan ini sudah dikonfirmasi atau dibatalkan di ponsel lain.", vi: "Lần kiểm kê này đã được xác nhận hoặc hủy trên điện thoại khác.", tl: "Nakumpirma o naitigil na ang bilang na ito sa ibang telepono.", sw: "Hesabu hii tayari imethibitishwa au kuachwa kwenye simu nyingine.", ha: "An riga an tabbatar ko an watsar da wannan ƙidaya a wata waya.", yo: "A ti jẹ́rìí tàbí pa kíka yìí tì lórí fóònù mìíràn.", zu: "Lokhu kubala sekuqinisekisiwe noma kwalahlwa kwenye ifoni.", am: "ይህ ቆጠራ በሌላ ስልክ ላይ አስቀድሞ ተረጋግጧል ወይም ተትቷል።", bm: "Nin jateli sɛmɛntiyara walima a bilala telefɔni wɛrɛ kan kaban.", wo: "Lim bii dëggal nañu ko walla bàyyi nañu ko ci beneen telefon." };
+EXTRA_UI.invSyncTip = { fr: "Avant de compter : les autres téléphones de la boutique doivent être connectés à Internet, pour que leurs ventes soient déjà comptées.", en: "Before counting: the shop's other phones should be online, so their sales are already included.", es: "Antes de contar: los demás teléfonos de la tienda deben estar conectados, para que sus ventas ya estén incluidas.", pt: "Antes de contar: os outros telefones da loja devem estar ligados à Internet, para que as vendas já estejam incluídas.", de: "Vor dem Zählen: Die anderen Telefone des Geschäfts sollten online sein, damit ihre Verkäufe schon erfasst sind.", it: "Prima di contare: gli altri telefoni del negozio devono essere connessi, così le loro vendite sono già incluse.", nl: "Voor het tellen: de andere telefoons van de winkel moeten online zijn, zodat hun verkopen al meetellen.", pl: "Przed liczeniem: inne telefony sklepu powinny być online, aby ich sprzedaż była już uwzględniona.", ru: "Перед подсчётом другие телефоны магазина должны быть в сети, чтобы их продажи уже учитывались.", tr: "Saymadan önce: mağazanın diğer telefonları internete bağlı olmalı, böylece satışları zaten sayılmış olur.", ar: "قبل العدّ: يجب أن تكون هواتف المتجر الأخرى متصلة بالإنترنت لتُحتسب مبيعاتها.", hi: "गिनने से पहले: दुकान के अन्य फ़ोन इंटरनेट से जुड़े हों, ताकि उनकी बिक्री पहले से गिनी जाए।", bn: "গোনার আগে: দোকানের অন্য ফোনগুলো ইন্টারনেটে যুক্ত থাকুক, যাতে তাদের বিক্রি গোনা থাকে।", ur: "گننے سے پہلے: دکان کے دوسرے فون انٹرنیٹ سے جڑے ہوں تاکہ ان کی فروخت شامل ہو چکی ہو۔", ta: "எண்ணுவதற்கு முன்: கடையின் மற்ற தொலைபேசிகள் இணையத்தில் இருக்க வேண்டும், அவற்றின் விற்பனை சேர்க்கப்பட.", te: "లెక్కించే ముందు: దుకాణంలోని ఇతర ఫోన్లు ఇంటర్నెట్‌లో ఉండాలి, వాటి అమ్మకాలు ముందే లెక్కలోకి రావాలంటే.", th: "ก่อนนับ: โทรศัพท์เครื่องอื่นของร้านควรต่ออินเทอร์เน็ต เพื่อให้ยอดขายถูกรวมแล้ว", zh: "盘点前：店里的其他手机应已联网，以便其销售已计入。", ja: "数える前に：店の他の電話をインターネットに接続し、その販売が反映されている状態にしてください。", ko: "세기 전에: 가게의 다른 휴대폰이 인터넷에 연결되어 판매가 이미 반영되어 있어야 합니다.", id: "Sebelum menghitung: ponsel lain di toko harus online agar penjualannya sudah tercatat.", vi: "Trước khi đếm: các điện thoại khác của cửa hàng cần kết nối Internet để doanh số đã được tính.", tl: "Bago magbilang: dapat naka-online ang ibang telepono ng tindahan para kasama na ang mga benta nila.", sw: "Kabla ya kuhesabu: simu nyingine za duka ziwe mtandaoni ili mauzo yao yawe yamehesabiwa.", ha: "Kafin ƙidaya: sauran wayoyin shagon su kasance a kan Intanet, don a riga an ƙidaya sayarwarsu.", yo: "Kí o tó kà: àwọn fóònù mìíràn ṣọ́ọ̀bù gbọ́dọ̀ wà lórí íńtánẹ́ẹ̀tì, kí wọ́n ti ka títà wọn.", zu: "Ngaphambi kokubala: amanye amafoni esitolo kufanele axhumeke, ukuze okuthengisiwe kwawo sekubaliwe.", am: "ከመቁጠርዎ በፊት፦ የሱቁ ሌሎች ስልኮች ሽያጮቻቸው እንዲቆጠሩ ከኢንተርኔት ጋር ይገናኙ።", bm: "Sani i ka jate: butiki telefɔni tɔw ka kan ka jɛ Ɛntɛrinɛti la, walasa u ka feereliw ka jate kaban.", wo: "Balaa ngay lim: yeneen telefoni bitig bi war nañu lëkkaloo ak Internet, ngir seeni jaay bokk ci." };
+EXTRA_UI.invOpenCartsWarn = { fr: "{n} panier(s) en cours : terminez-les avant de compter, sinon ces articles seront comptés comme manquants.", en: "{n} open cart(s): finish them before counting, or those items will be counted as missing.", es: "{n} carrito(s) abierto(s): termínelos antes de contar, o esos artículos contarán como faltantes.", pt: "{n} carrinho(s) aberto(s): termine-os antes de contar, senão esses artigos contarão como em falta.", de: "{n} offene(r) Warenkorb/Warenkörbe: vor dem Zählen abschließen, sonst gelten diese Artikel als fehlend.", it: "{n} carrello/i aperto/i: chiudeteli prima di contare, altrimenti quegli articoli risulteranno mancanti.", nl: "{n} open winkelmand(en): rond ze af vóór het tellen, anders tellen die artikelen als ontbrekend.", pl: "{n} otwarty(ch) koszyk(ów): zakończ je przed liczeniem, inaczej te towary będą liczone jako braki.", ru: "Открытых корзин: {n}. Завершите их до подсчёта, иначе эти товары будут учтены как недостача.", tr: "{n} açık sepet: saymadan önce bitirin, yoksa bu ürünler eksik sayılır.", ar: "{n} سلة مفتوحة: أكملها قبل العدّ، وإلا ستُحسب هذه المواد ناقصة.", hi: "{n} खुली टोकरी: गिनने से पहले इन्हें पूरा करें, वरना इनके सामान कम गिने जाएंगे।", bn: "{n}টি খোলা কার্ট: গোনার আগে শেষ করুন, না হলে এসব পণ্য ঘাটতি হিসেবে গোনা হবে।", ur: "{n} کھلی ٹوکری: گننے سے پہلے انہیں مکمل کریں، ورنہ یہ اشیا کم شمار ہوں گی۔", ta: "{n} திறந்த கூடை: எண்ணுவதற்கு முன் முடிக்கவும், இல்லையெனில் அவை குறைவாகக் கணக்கிடப்படும்.", te: "{n} తెరిచిన కార్ట్‌లు: లెక్కించే ముందు పూర్తి చేయండి, లేకపోతే ఆ వస్తువులు తక్కువగా లెక్కించబడతాయి.", th: "มีตะกร้าค้างอยู่ {n} รายการ: ปิดก่อนนับ ไม่เช่นนั้นสินค้าเหล่านั้นจะถูกนับว่าขาด", zh: "有 {n} 个未完成的购物车：请先结账，否则这些商品会被算作短缺。", ja: "未完了のカートが {n} 件あります。数える前に終えてください。そうしないとその商品が不足として数えられます。", ko: "열린 장바구니 {n}개: 세기 전에 마치세요. 그렇지 않으면 그 상품이 부족으로 계산됩니다.", id: "{n} keranjang terbuka: selesaikan sebelum menghitung, atau barangnya akan dihitung kurang.", vi: "{n} giỏ hàng đang mở: hãy hoàn tất trước khi đếm, nếu không các món đó sẽ bị tính là thiếu.", tl: "{n} bukas na cart: tapusin muna bago magbilang, o mabibilang na kulang ang mga item na iyon.", sw: "Vikapu {n} viko wazi: vimalize kabla ya kuhesabu, la sivyo bidhaa hizo zitahesabiwa kuwa zimepungua.", ha: "Kwandon {n} a buɗe: kammala su kafin ƙidaya, ko za a ƙidaya kayan a matsayin sun ɓace.", yo: "Àpò ọjà {n} ṣí sílẹ̀: parí wọn kí o tó kà, bí bẹ́ẹ̀ kọ́ a ó ka àwọn ọjà wọ̀nyí bí èyí tó dín.", zu: "Izinqola ezingu-{n} zivuliwe: ziqede ngaphambi kokubala, kungenjalo lezo zinto zizobalwa njengezishodayo.", am: "{n} ክፍት ቅርጫቶች፦ ከመቁጠርዎ በፊት ይጨርሱ፣ አለበለዚያ እቃዎቹ እንደጎደሉ ይቆጠራሉ።", bm: "Pañe {n} bɛ dayɛlɛnen: u ban sani i ka jate, n'o tɛ o fɛnw bɛ jate dɛsɛlenw ye.", wo: "{n} panier yu ubbeeku: jeexal leen balaa ngay lim, lu ko moy dinañu leen lim ni lu ñàkk." };
+EXTRA_UI.invNowInStock = { fr: "maintenant : {n}", en: "now: {n}", es: "ahora: {n}", pt: "agora: {n}", de: "jetzt: {n}", it: "ora: {n}", nl: "nu: {n}", pl: "teraz: {n}", ru: "сейчас: {n}", tr: "şimdi: {n}", ar: "الآن: {n}", hi: "अभी: {n}", bn: "এখন: {n}", ur: "اب: {n}", ta: "இப்போது: {n}", te: "ఇప్పుడు: {n}", th: "ตอนนี้: {n}", zh: "现在：{n}", ja: "現在：{n}", ko: "현재: {n}", id: "sekarang: {n}", vi: "hiện tại: {n}", tl: "ngayon: {n}", sw: "sasa: {n}", ha: "yanzu: {n}", yo: "nísinsìnyí: {n}", zu: "manje: {n}", am: "አሁን፦ {n}", bm: "sisan: {n}", wo: "léegi: {n}" };
+EXTRA_UI.invMoreRows = { fr: "+{n} autres produits : utilisez la recherche ou les rayons.", en: "+{n} more products: use search or sections.", es: "+{n} productos más: use la búsqueda o las secciones.", pt: "+{n} outros produtos: use a pesquisa ou as secções.", de: "+{n} weitere Produkte: Suche oder Bereiche nutzen.", it: "+{n} altri prodotti: usate la ricerca o i reparti.", nl: "+{n} andere producten: gebruik zoeken of afdelingen.", pl: "+{n} innych produktów: użyj wyszukiwania lub działów.", ru: "Ещё {n} товаров: используйте поиск или отделы.", tr: "+{n} ürün daha: arama veya reyonları kullanın.", ar: "+{n} منتجات أخرى: استخدم البحث أو الأقسام.", hi: "+{n} और उत्पाद: खोज या खंडों का उपयोग करें।", bn: "আরও {n}টি পণ্য: খোঁজ বা বিভাগ ব্যবহার করুন।", ur: "مزید {n} مصنوعات: تلاش یا حصے استعمال کریں۔", ta: "மேலும் {n} பொருட்கள்: தேடல் அல்லது பிரிவுகளைப் பயன்படுத்தவும்.", te: "మరో {n} ఉత్పత్తులు: శోధన లేదా విభాగాలు ఉపయోగించండి.", th: "อีก {n} รายการ: ใช้การค้นหาหรือหมวด", zh: "还有 {n} 个商品：请使用搜索或区域。", ja: "他に {n} 件：検索か売り場を使ってください。", ko: "상품 {n}개 더: 검색이나 구역을 사용하세요.", id: "+{n} produk lain: gunakan pencarian atau rak.", vi: "Thêm {n} sản phẩm: dùng tìm kiếm hoặc khu.", tl: "+{n} pang produkto: gamitin ang paghahanap o mga seksyon.", sw: "Bidhaa {n} zaidi: tumia utafutaji au sehemu.", ha: "Ƙarin kaya {n}: yi amfani da bincike ko sassa.", yo: "Ọjà {n} mìíràn: lo ìwádìí tàbí ẹ̀ka.", zu: "Eminye imikhiqizo engu-{n}: sebenzisa ukusesha noma izigaba.", am: "ተጨማሪ {n} ምርቶች፦ ፍለጋን ወይም ክፍሎችን ይጠቀሙ።", bm: "Fɛn {n} wɛrɛw: ɲinini walima yɔrɔw kɛ.", wo: "Yeneen {n} jaay: jëfandikool seet bi walla rayon yi." };
+EXTRA_UI.supOverpaidWarn = { fr: "{name} : {n} payé en trop (paiement en double ?)", en: "{name}: {n} overpaid (duplicate payment?)", es: "{name}: {n} pagado de más (¿pago duplicado?)", pt: "{name}: {n} pago a mais (pagamento duplicado?)", de: "{name}: {n} zu viel bezahlt (doppelte Zahlung?)", it: "{name}: {n} pagato in più (pagamento doppio?)", nl: "{name}: {n} te veel betaald (dubbele betaling?)", pl: "{name}: nadpłata {n} (podwójna płatność?)", ru: "{name}: переплата {n} (двойной платёж?)", tr: "{name}: {n} fazla ödendi (çift ödeme mi?)", ar: "{name}: دُفع {n} زيادة (دفع مكرر؟)", hi: "{name}: {n} ज़्यादा भुगतान (दोहरा भुगतान?)", bn: "{name}: {n} বেশি দেওয়া (দুবার পরিশোধ?)", ur: "{name}: {n} زیادہ ادا (دوہری ادائیگی؟)", ta: "{name}: {n} அதிகமாக செலுத்தப்பட்டது (இரட்டைக் கட்டணமா?)", te: "{name}: {n} ఎక్కువ చెల్లించారు (రెండుసార్లు చెల్లింపా?)", th: "{name}: จ่ายเกิน {n} (จ่ายซ้ำหรือไม่?)", zh: "{name}：多付了 {n}（重复付款？）", ja: "{name}：{n} の払いすぎ（二重払い？）", ko: "{name}: {n} 초과 지급 (중복 지급?)", id: "{name}: kelebihan bayar {n} (pembayaran ganda?)", vi: "{name}: trả dư {n} (trả trùng?)", tl: "{name}: sobra ang bayad na {n} (dobleng bayad?)", sw: "{name}: {n} zimelipwa zaidi (malipo mara mbili?)", ha: "{name}: an biya {n} fiye da kima (biya sau biyu?)", yo: "{name}: a san {n} jù (ìsanwó lẹ́ẹ̀mejì?)", zu: "{name}: kukhokhwe ngokweqile {n} (inkokhelo ephindiwe?)", am: "{name}፦ {n} በትርፍ ተከፍሏል (ድርብ ክፍያ?)", bm: "{name}: {n} sarala ka tɛmɛ (sarali siɲɛ fila?)", wo: "{name}: {n} fey nañu ko ba ëpp (fey ñaari yoon?)" };
+EXTRA_UI.supPaymentsLine = { fr: "Paiements fournisseurs", en: "Supplier payments", es: "Pagos a proveedores", pt: "Pagamentos a fornecedores", de: "Lieferantenzahlungen", it: "Pagamenti ai fornitori", nl: "Betalingen aan leveranciers", pl: "Płatności dla dostawców", ru: "Оплаты поставщикам", tr: "Tedarikçi ödemeleri", ar: "مدفوعات المورّدين", hi: "आपूर्तिकर्ता भुगतान", bn: "সরবরাহকারীকে পরিশোধ", ur: "سپلائرز کو ادائیگیاں", ta: "சப்ளையர் கட்டணங்கள்", te: "సరఫరాదారుల చెల్లింపులు", th: "การจ่ายซัพพลายเออร์", zh: "供应商付款", ja: "仕入先への支払い", ko: "공급업체 지급", id: "Pembayaran pemasok", vi: "Thanh toán nhà cung cấp", tl: "Mga bayad sa supplier", sw: "Malipo kwa wasambazaji", ha: "Biyan masu kawo kaya", yo: "Ìsanwó fún àwọn olùpèsè", zu: "Izinkokhelo zabahlinzeki", am: "ለአቅራቢዎች የተከፈለ", bm: "Fɛn lasɔrɔbagaw sarali", wo: "Fey fournisseur yi" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -7352,9 +7365,9 @@ function dayLabel(iso) {
 }
 // ---- Dates de péremption (par lots) ----
 // Un produit peut porter des lots { id, date: "AAAA-MM-JJ", qty }. La quantité du produit reste
-// la seule vérité du stock : on considère que les lots les plus ANCIENS partent en premier, donc
-// le stock restant est attribué aux lots les plus récents d'abord. Ainsi aucune vente, annulation
-// ou correction de stock n'a besoin de toucher aux lots.
+// la seule vérité du stock : si elle est inférieure au total des lots (vente à l'unité, kit,
+// recette, inventaire, vente faite sur un autre téléphone…), la différence est retirée comme
+// une vente FEFO : lots non périmés qui périment le plus tôt d'abord, lots périmés en dernier.
 function localDayKey(d) {
   const x = d instanceof Date ? d : new Date(d);
   return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`;
@@ -7362,14 +7375,19 @@ function localDayKey(d) {
 function expiryLots(p) {
   const lots = Array.isArray(p && p.batches) ? p.batches.filter((b) => b && b.date && Number(b.qty) > 0) : [];
   if (!lots.length) return [];
-  let left = Math.max(0, Number(p.quantity) || 0);
-  const out = [];
-  [...lots].sort((a, b) => (a.date < b.date ? 1 : -1)).forEach((b) => {
-    const r = Math.min(Number(b.qty) || 0, left);
-    left -= r;
-    if (r > 0) out.push({ ...b, remaining: r });
+  const sum = lots.reduce((n, b) => n + (Number(b.qty) || 0), 0);
+  let deficit = Math.max(0, sum - Math.max(0, Number(p.quantity) || 0));
+  const today = localDayKey(new Date());
+  const asc = [...lots].sort((a, b) => (a.date < b.date ? -1 : 1));
+  const rem = new Map(asc.map((b) => [b, Number(b.qty) || 0]));
+  // Stock manquant par rapport aux lots : retiré comme une vente FEFO.
+  [...asc.filter((b) => b.date >= today), ...asc.filter((b) => b.date < today)].forEach((b) => {
+    if (deficit <= 0) return;
+    const take = Math.min(rem.get(b), deficit);
+    rem.set(b, Math.round((rem.get(b) - take) * 1000) / 1000);
+    deficit -= take;
   });
-  return out.sort((a, b) => (a.date < b.date ? -1 : 1));
+  return asc.filter((b) => rem.get(b) > 0).map((b) => ({ ...b, remaining: rem.get(b) }));
 }
 // "expired" | "soon" (3 jours ou moins) | null, pour le lot restant le plus proche.
 function expiryStatus(p, todayKey) {
@@ -8388,7 +8406,7 @@ function mergeSupplierDebts(a, b) {
     if (!o) { map.set(d.id, d); return; }
     const newer = sanitizeTs(d.updatedAt) >= sanitizeTs(o.updatedAt) ? d : o;
     const pays = new Map();
-    [...(o.payments || []), ...(d.payments || [])].forEach((p) => { if (p && p.id != null) pays.set(p.id, p); });
+    [...(o.payments || []), ...(d.payments || [])].forEach((p) => { if (p && p.id != null) { const q = pays.get(p.id); pays.set(p.id, q && q.void ? q : p); } });
     map.set(d.id, { ...newer, payments: Array.from(pays.values()).sort((x, y) => (String(x.date) < String(y.date) ? -1 : 1)), ...(d.deleted || o.deleted ? { deleted: true } : {}) });
   });
   return Array.from(map.values());
@@ -8398,11 +8416,23 @@ function mergeStockCount(a, b) {
   const B = b && typeof b === "object" && b.id ? b : null;
   if (!A) return B;
   if (!B) return A;
-  if (A.id !== B.id) return sanitizeTs(A.startedAt) >= sanitizeTs(B.startedAt) ? A : B;
+  if (A.id !== B.id) {
+    const nc = (x) => Object.values(x.counts || {}).filter((c) => c && c.q != null).length;
+    if (!A.closedAt && !B.closedAt) return nc(A) !== nc(B) ? (nc(A) > nc(B) ? A : B) : (sanitizeTs(A.startedAt) >= sanitizeTs(B.startedAt) ? A : B);
+    if (A.closedAt && B.closedAt) return sanitizeTs(A.closedAt) >= sanitizeTs(B.closedAt) ? A : B;
+    const open = A.closedAt ? B : A, done = A.closedAt ? A : B;
+    // Un inventaire commencé après la fin de l'autre est le nouveau ; sinon le terminé gagne.
+    return sanitizeTs(open.startedAt) > sanitizeTs(done.closedAt) ? open : done;
+  }
   const counts = { ...(B.counts || {}) };
   Object.keys(A.counts || {}).forEach((k) => { if (!counts[k] || sanitizeTs(A.counts[k] && A.counts[k].at) >= sanitizeTs(counts[k] && counts[k].at)) counts[k] = A.counts[k]; });
   const closedAt = Math.max(sanitizeTs(A.closedAt), sanitizeTs(B.closedAt)) || null;
-  return { ...B, ...A, counts, closedAt, ...(A.cancelled || B.cancelled ? { cancelled: true } : {}) };
+  const validated = !!(A.validated || B.validated);
+  const out = { ...B, ...A, counts, closedAt };
+  delete out.cancelled; delete out.validated;
+  if (validated) out.validated = true;
+  else if (A.cancelled || B.cancelled) out.cancelled = true;
+  return out;
 }
 function mergeCustomerTariffs(a, b) {
   const A = a && typeof a === "object" ? a : {};
@@ -10084,13 +10114,14 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 {SECTORS.map((s) => {
                   const on = obSecteur === s.id;
                   const modes = SECTOR_MODES[s.id] || [];
+                  const wide = SECTORS.length % 2 === 1 && s.id === SECTORS[SECTORS.length - 1].id;
                   return (
                     <button
                       key={s.id}
                       type="button"
                       onClick={() => setObSecteur(on ? "" : s.id)}
                       aria-pressed={on}
-                      className="rounded-xl px-2.5 py-2.5 text-left flex flex-col gap-0.5"
+                      className={`rounded-xl px-2.5 py-2.5 text-start flex flex-col gap-0.5${wide ? " col-span-2" : ""}`}
                       style={{ background: on ? (darkMode ? "rgba(37,99,235,0.22)" : "#dbeafe") : AT.input, border: `2px solid ${on ? "#2563eb" : AT.border}`, minHeight: 74 }}
                     >
                       <span style={{ fontSize: 22, lineHeight: 1.1 }}>{SECTOR_ICON[s.id] || "🏪"}</span>
@@ -12201,6 +12232,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     row(`${t(lang, "cash")} (${localizedNumber(z.salesCount)} ${tx(lang, "zSalesUnit")})`, z.cashSales, { sign: "+" });
     if (z.debtCollected > 0) row(t(lang, "cashReportDebtPayments"), z.debtCollected, { sign: "+" });
     row(tx(lang, "cashOutKindExpense"), -z.expenses, { color: CLAY_RGB });
+    if (z.suppliers > 0) row(tx(lang, "supPaymentsLine"), -z.suppliers, { color: CLAY_RGB });
     row(tx(lang, "cashOutKindWithdrawal"), -z.withdrawals, { color: CLAY_RGB });
     rule();
     row(t(lang, "cashBalance"), z.expected, { strong: true });
@@ -13846,7 +13878,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     return {
       components: comps,
       compMode: pCompMode,
-      recipeYield: pCompMode === "production" ? Math.max(1, parseFloat(String(pRecipeYield).replace(",", ".")) || 1) : null,
+      recipeYield: pCompMode === "production" ? Math.max(0.001, parseFloat(String(pRecipeYield).replace(",", ".")) || 1) : null,
       // Un kit n'a pas de stock propre : ce sont ses composants qui sont comptés.
       ...(pCompMode === "sale" ? { quantity: 0, looseUnits: 0 } : {}),
     };
@@ -13989,6 +14021,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [restockSupName, setRestockSupName] = useState("");
   const [restockSupAmount, setRestockSupAmount] = useState("");
   const [restockSupDue, setRestockSupDue] = useState("");
+  const [restockErr, setRestockErr] = useState("");
   // ---- Image pour le statut WhatsApp ----
   const [showStatusMaker, setShowStatusMaker] = useState(false);
   const [stHeadline, setStHeadline] = useState("new");
@@ -15511,9 +15544,14 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const [produceError, setProduceError] = useState("");
   const confirmProduce = () => {
     const p = products.find((x) => x.id === produceId);
-    const n = parseFloat(String(produceQty).replace(",", "."));
-    if (!p || !(n > 0)) return;
+    const raw = parseFloat(String(produceQty).replace(",", "."));
+    const n = p && p.sellByMeasure ? Math.round(raw * 1000) / 1000 : Math.round(raw);
+    if (!p || !(n > 0) || shopReadOnly || !hasPermission("editStock")) return;
+    if (isProductFrozen(p.id)) { setProduceError(t(lang, "productFrozenMsg")); return; }
     const uses = componentUses(p.components, n, Number(p.recipeYield) || 1);
+    // Ingrédient supprimé depuis : on refuse de produire « gratuitement ».
+    if (uses.some((u) => !products.find((x) => x.id === u.id))) { setProduceError(tx(lang, "produceCompDeleted")); return; }
+    if (uses.some((u) => isProductFrozen(u.id))) { setProduceError(t(lang, "productFrozenMsg")); return; }
     const short = uses.map((u) => {
       const comp = products.find((x) => x.id === u.id);
       if (!comp) return null;
@@ -15640,6 +15678,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const addProduct = (qtyReason) => {
     if (!pName.trim() || (!pQty && !creatingVariants && !kitFormActive) || !pPrice) return;
     if (creatingVariants && variantCombos.length === 0) { setError(tx(lang, "variantNeedValues")); return; }
+    if (kitFormActive && creatingVariants) { setError(tx(lang, "kitNoVariants")); return; }
+    // Un produit qui sert déjà de composant ne peut pas devenir lui-même un kit (le kit parent
+    // tomberait silencieusement à « 0 possible »).
+    if (kitFormActive && editingProductId && products.some((k) => k.id !== editingProductId && isKitProduct(k) && k.components.some((c) => c.productId === editingProductId))) { setError(tx(lang, "kitIsComponent")); return; }
     if (editingVariant && !pVariantLabel.trim()) return;
     if (typeof qtyReason !== "string") qtyReason = null;
     // La photo est facultative (décision du 2026-11-13) : l'exiger obligeait à photographier
@@ -15676,17 +15718,17 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           ...compFields(),
           category: pCategory || null,
           photo: pPhoto,
-          sellByUnit: pSellByUnit,
+          sellByUnit: pSellByUnit && !kitFormActive,
           unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
           unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
           dailyMode: pDailyMode,
           sellByMeasure: pSellByMeasure,
           measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
           barcode: pBarcode.trim() || null,
-          lotTracked: !!pExpiry,
+          lotTracked: !kitFormActive && (!!pExpiry || !!p.lotTracked),
           batches: (() => {
             const newQty = pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10);
-            if (!pExpiry) return [];
+            if (!pExpiry || kitFormActive) return [];
             const kept = expiryLots({ ...p, quantity: newQty }).map(({ remaining, ...b }) => ({ ...b, qty: remaining }));
             const delta = newQty - (Number(p.quantity) || 0);
             const keptSum = kept.reduce((n, b) => n + b.qty, 0);
@@ -15696,7 +15738,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
             if (undated > 0) {
               const last = kept[kept.length - 1];
               if (last && last.date === pExpiry && (last.lotNo || "") === lotNoIn) last.qty += undated;
-              else kept.push({ id: Date.now().toString(36), date: pExpiry, ...(lotNoIn ? { lotNo: lotNoIn } : {}), qty: undated });
+              else kept.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), date: pExpiry, ...(lotNoIn ? { lotNo: lotNoIn } : {}), qty: undated });
             } else if (delta <= 0 && kept.length) {
               // Simple correction de la date / du n° du lot le plus récent.
               const last = kept[kept.length - 1];
@@ -15737,7 +15779,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       // Photo débloquée pour tous les paliers (y compris gratuit) : elle est désormais
       // obligatoire pour permettre la reconnaissance visuelle à la caisse.
       photo: pPhoto,
-      sellByUnit: pSellByUnit,
+      sellByUnit: pSellByUnit && !kitFormActive,
       unitsPerPack: pSellByUnit ? Math.max(1, parseInt(pUnitsPerPack, 10) || 1) : null,
       unitPrice: pSellByUnit ? parseFloat(pUnitPrice) || 0 : null,
       dailyMode: pDailyMode,
@@ -15748,8 +15790,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       condition: pCondition && pCondition !== "new" ? pCondition : null,
       warrantyMonths: parseInt(pWarrantyMonths, 10) > 0 ? parseInt(pWarrantyMonths, 10) : null,
       looseUnits: 0,
-      lotTracked: !!pExpiry,
-      batches: pExpiry ? [{ id: Date.now().toString(36), date: pExpiry, ...(pLotNo.trim() ? { lotNo: pLotNo.trim() } : {}), qty: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10) }] : [],
+      lotTracked: !!pExpiry && !kitFormActive,
+      batches: pExpiry && !kitFormActive ? [{ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), date: pExpiry, ...(pLotNo.trim() ? { lotNo: pLotNo.trim() } : {}), qty: pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10) }] : [],
       updatedAt: Date.now(),
     };
     if (creatingVariants) {
@@ -15891,6 +15933,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setRestockDate("");
     setRestockLotNo("");
     setRestockCredit(false);
+    setRestockErr("");
     setRestockSupName("");
     setRestockSupAmount("");
     setRestockSupDue("");
@@ -15932,8 +15975,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     let supPatch = {};
     if (restockCredit && hasPermission("editCash")) {
       const supAmt = parseFloat(String(restockSupAmount).replace(",", ".")) || (newLotCost != null ? addQty * newLotCost : 0);
-      if (!restockSupName.trim() || !(supAmt > 0)) { setError(tx(lang, "supNeedNameAmount")); return; }
-      supPatch = { supplierDebts: [...supplierDebts, makeSupDebt(restockSupName, supAmt, `${target.name} ×${addQty}`, restockSupDue)] };
+      if (!restockSupName.trim() || !(supAmt > 0)) { setRestockErr(tx(lang, "supNeedNameAmount")); return; }
+      const sd = makeSupDebt(restockSupName, supAmt, `${target.name} ×${addQty}`, restockSupDue);
+      supPatch = { supplierDebts: [...supplierDebts, sd] };
+      logAction(`${tx(lang, "supAddedLog")} : ${sd.supplier} — ${localizedNumber(sd.amount)}`);
     }
     // Nouveau lot daté (et numéroté) : ajouté aux lots existants.
     const lotNoIn = restockLotNo.trim();
@@ -15942,7 +15987,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const kept = lotsPlain(target);
       const same = kept.find((b) => b.date === restockDate && (b.lotNo || "") === lotNoIn);
       if (same) same.qty = r3q(same.qty + addQty);
-      else kept.push({ id: Date.now().toString(36), date: restockDate, ...(lotNoIn ? { lotNo: lotNoIn } : {}), qty: addQty });
+      else kept.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), date: restockDate, ...(lotNoIn ? { lotNo: lotNoIn } : {}), qty: addQty });
       lotPatch = { batches: kept.sort((a, b) => (a.date < b.date ? -1 : 1)), lotTracked: true };
     }
     saveAll({ products: products.map((p) => (p.id === target.id ? { ...p, quantity: oldQty + addQty, costPrice: nextCost, ...lotPatch, updatedAt: Date.now() } : p)), ...supPatch });
@@ -15973,11 +16018,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const sc = { id: "inv" + Date.now().toString(36), startedAt: Date.now(), by: activeEmployee ? activeEmployee.name : null, counts: {} };
     stockCountRef.current = sc;
     saveAll({ stockCount: sc });
+    logAction(tx(lang, "invStart"));
     setInvFilter("todo"); setInvSearch(""); setInvCategory(""); setInvInputs({}); setInvReview(false); setInvMsg(""); setInvAbandonAsk(false);
   };
   const setInvCount = (p, raw) => {
     const cur = stockCountRef.current;
-    if (!cur || cur.closedAt || shopReadOnly || isProductFrozen(p.id)) return;
+    if (!cur || cur.closedAt || shopReadOnly || !hasPermission("editStock") || isProductFrozen(p.id)) return;
     const str = String(raw == null ? "" : raw).trim().replace(",", ".");
     let qv = null;
     if (str !== "") {
@@ -15988,13 +16034,41 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const prev = cur.counts ? cur.counts[p.id] : null;
     if ((!prev || prev.q == null) && qv === null) return;
     if (prev && prev.q === qv) return;
-    const next = { ...cur, counts: { ...(cur.counts || {}), [p.id]: { q: qv, e: invUnitQty(p), at: Date.now(), by: activeEmployee ? activeEmployee.name : null } } };
+    const keepE = prev && prev.q != null && prev.e != null ? prev.e : invUnitQty(p);
+    const next = { ...cur, counts: { ...(cur.counts || {}), [p.id]: { q: qv, e: keepE, at: Date.now(), by: activeEmployee ? activeEmployee.name : null } } };
     stockCountRef.current = next;
     saveAll({ stockCount: next });
   };
-  const applyInventory = () => {
+  const [invApplying, setInvApplying] = useState(false);
+  const applyInventory = async () => {
+    const cur0 = stockCountRef.current;
+    if (!cur0 || cur0.closedAt || shopReadOnly || !hasPermission("editStock") || invApplying) return;
+    if (!isDemo) {
+      if (!isOnline) { setInvMsg(tx(lang, "invNeedOnline")); return; }
+      setInvApplying(true);
+      try {
+        const { data: userData } = await getUserFast();
+        const ownerId = userData && userData.user ? userData.user.id : null;
+        const res = blobShopId ? await fetchShopBlobRow(ownerId, blobShopId) : { data: null, error: null };
+        if (res.error) { setInvMsg(tx(lang, "invNeedOnline")); return; }
+        const remote = res.data && res.data.data ? res.data.data.stockCount : null;
+        if (remote && remote.id === cur0.id && remote.closedAt) {
+          const merged = mergeStockCount(cur0, remote);
+          stockCountRef.current = merged;
+          saveAll({ stockCount: merged });
+          setInvReview(false);
+          setInvMsg(tx(lang, "invAlreadyClosed"));
+          return;
+        }
+      } catch (e) {
+        setInvMsg(tx(lang, "invNeedOnline"));
+        return;
+      } finally {
+        setInvApplying(false);
+      }
+    }
     const cur = stockCountRef.current;
-    if (!cur || cur.closedAt || shopReadOnly || !hasPermission("editStock")) return;
+    if (!cur || cur.closedAt || cur.id !== cur0.id) return;
     const lines = invDiffLines(cur).filter((l) => !isProductFrozen(l.p.id));
     const byId = new Map(lines.map((l) => [l.p.id, l]));
     const now = Date.now();
@@ -16003,21 +16077,26 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       const l = byId.get(p.id);
       if (!l) return p;
       const u = { ...p, updatedAt: now };
+      // Perte = ce qui a vraiment été retiré (le stock ne descend jamais sous 0).
+      let removed;
       if (p.sellByUnit) {
         const per = p.unitsPerPack || 1;
         const total = Math.max(0, invUnitQty(p) + l.d);
         u.quantity = Math.floor(total / per);
         u.looseUnits = r3q(total - u.quantity * per);
+        removed = r3q((invUnitQty(p) - total) / per);
       } else {
         u.quantity = Math.max(0, r3q((Number(p.quantity) || 0) + l.d));
+        removed = r3q((Number(p.quantity) || 0) - u.quantity);
       }
-      if (l.d < 0) losses.push({ ...makeLossEntry(p, r3q(p.sellByUnit ? -l.d / (p.unitsPerPack || 1) : -l.d), "inventory"), refInv: cur.id });
+      // Id fixe (inventaire + produit) : la même perte ne peut pas être comptée deux fois.
+      if (l.d < 0 && removed > 0) losses.push({ ...makeLossEntry(p, removed, "inventory"), id: "invloss-" + cur.id + "-" + p.id, refInv: cur.id });
       return u;
     });
     const counted = invCountable().filter((p) => invCountIn(cur, p)).length;
     const lossValue = lines.filter((l) => l.d < 0).reduce((n, l) => n - l.v, 0);
     const gainValue = lines.filter((l) => l.d > 0).reduce((n, l) => n + l.v, 0);
-    const entry = makeHistoryEntry("inventory", {
+    const entry0 = makeHistoryEntry("inventory", {
       refId: cur.id,
       startedAt: cur.startedAt,
       counted,
@@ -16026,19 +16105,22 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       gain: Math.round(gainValue),
       lines: lines.slice(0, 300).map((l) => ({ productId: l.p.id, name: l.p.name, e: l.c.e, q: l.c.q, d: l.d, v: Math.round(l.v) })),
     });
-    const closed = { ...cur, closedAt: now };
+    const entry = { ...entry0, id: "inv-" + cur.id };
+    const closed = { ...cur, closedAt: now, validated: true };
     stockCountRef.current = closed;
-    saveAll({ products: nextProducts, ...(losses.length ? { unsoldLog: [...unsoldLog, ...losses] } : {}), historyLog: [...historyLog, entry], stockCount: closed });
+    saveAll({ products: nextProducts, ...(losses.length ? { unsoldLog: [...unsoldLog.filter((u) => !losses.some((x) => x.id === u.id)), ...losses] } : {}), historyLog: [...historyLog.filter((h) => h.id !== entry.id), entry], stockCount: closed });
     logAction(`${tx(lang, "logInventory")} : ${tx(lang, "invPastLine").replace("{n}", localizedNumber(counted))} · ${tx(lang, "invTabDiff")} ${localizedNumber(lines.length)}`);
     setInvReview(false); setInvInputs({}); setInvAbandonAsk(false);
     setInvMsg(tx(lang, "invDone"));
   };
   const cancelInventory = () => {
     const cur = stockCountRef.current;
-    if (!cur || cur.closedAt) return;
+    if (!cur || cur.closedAt || shopReadOnly || !hasPermission("editStock")) return;
     const closed = { ...cur, closedAt: Date.now(), cancelled: true };
     stockCountRef.current = closed;
     saveAll({ stockCount: closed });
+    const nCounted = Object.values(cur.counts || {}).filter((c) => c && c.q != null).length;
+    logAction(`${tx(lang, "invAbandon")} : ${tx(lang, "invPastLine").replace("{n}", localizedNumber(nCounted))}`);
     setInvAbandonAsk(false); setInvReview(false); setInvInputs({}); setInvMsg("");
   };
   const handleInvScan = (result) => {
@@ -16053,13 +16135,28 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // ---- Dettes fournisseurs : ce que la boutique doit à ses grossistes / fournisseurs.
   // Un paiement est réparti sur les dettes les plus anciennes du fournisseur et crée une
   // sortie de caisse de type « supplier » (pas une charge : voir isChargeExpense).
-  const supRemaining = (d) => Math.max(0, r3q((Number(d.amount) || 0) - (d.payments || []).reduce((n, p) => n + (Number(p.amount) || 0), 0)));
+  const supNameKey = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+  const supPaidOf = (d) => (d.payments || []).filter((p) => p && !p.void).reduce((n, p) => n + (Number(p.amount) || 0), 0);
   const supLive = supplierDebts.filter((d) => d && !d.deleted);
+  const supRemMap = {};
+  const supOverpaid = {};
+  {
+    const byKey = {};
+    supLive.forEach((d) => { (byKey[supNameKey(d.supplier)] = byKey[supNameKey(d.supplier)] || []).push(d); });
+    Object.entries(byKey).forEach(([k, list]) => {
+      list.sort((a, b) => (String(a.date) < String(b.date) ? -1 : 1));
+      let extra = 0;
+      list.forEach((d) => { const raw = r3q((Number(d.amount) || 0) - supPaidOf(d)); if (raw < 0) { extra = r3q(extra - raw); supRemMap[d.id] = 0; } else supRemMap[d.id] = raw; });
+      list.forEach((d) => { if (extra <= 0 || !(supRemMap[d.id] > 0)) return; const n = Math.min(supRemMap[d.id], extra); supRemMap[d.id] = r3q(supRemMap[d.id] - n); extra = r3q(extra - n); });
+      if (extra > 0) supOverpaid[k] = { name: String(list[list.length - 1].supplier || "").trim(), amount: extra };
+    });
+  }
+  const supRemaining = (d) => (supRemMap[d.id] != null ? supRemMap[d.id] : Math.max(0, r3q((Number(d.amount) || 0) - supPaidOf(d))));
   const supOpenDebts = supLive.filter((d) => supRemaining(d) > 0);
   const supTotalOwed = supOpenDebts.reduce((n, d) => n + supRemaining(d), 0);
   const supOverdueCount = supOpenDebts.filter((d) => d.dueDate && d.dueDate < localDayKey(new Date())).length;
   const supKnownNames = [...new Set(supLive.map((d) => String(d.supplier || "").trim()).filter(Boolean))];
-  const supPhoneOf = (name) => { const k = String(name || "").trim().toLowerCase(); const d = [...supLive].reverse().find((x) => String(x.supplier || "").trim().toLowerCase() === k && x.phone); return d ? d.phone : ""; };
+  const supPhoneOf = (name) => { const k = supNameKey(name); const d = [...supLive].reverse().find((x) => supNameKey(x.supplier) === k && x.phone); return d ? d.phone : ""; };
   const makeSupDebt = (supplier, amount, note, dueDate, phone) => ({
     id: "sd" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
     supplier: String(supplier).trim(),
@@ -16090,7 +16187,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const amt = parseFloat(String(supPayAmount).replace(",", "."));
     if (!(amt > 0)) { setSupError(t(lang, "invalidAmount")); return; }
     const open = supplierDebts
-      .filter((d) => d && !d.deleted && String(d.supplier || "").trim().toLowerCase() === g.key && supRemaining(d) > 0)
+      .filter((d) => d && !d.deleted && supNameKey(d.supplier) === g.key && supRemaining(d) > 0)
       .sort((a, b) => (String(a.date) < String(b.date) ? -1 : 1));
     const total = open.reduce((n, d) => n + supRemaining(d), 0);
     const pay = r3q(Math.min(amt, total));
@@ -16118,8 +16215,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const deleteSupDebt = (id) => {
     if (shopReadOnly || !hasPermission("editCash")) return;
-    if (supDelAsk !== id) { setSupDelAsk(id); return; }
     const d = supplierDebts.find((x) => x.id === id);
+    if (!d || (d.payments || []).some((p) => p && !p.void)) return;
+    if (supDelAsk !== id) { setSupDelAsk(id); return; }
     saveAll({ supplierDebts: supplierDebts.map((x) => (x.id === id ? { ...x, deleted: true, updatedAt: Date.now() } : x)) });
     if (d) logAction(`${tx(lang, "supDelete")} : ${d.supplier} — ${localizedNumber(d.amount)}`);
     setSupDelAsk(null);
@@ -16131,7 +16229,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const ST_HEADLINES = [["new", "🆕"], ["promo", "🔥"], ["today", "✅"], ["arrival", "📦"]];
   const openStatusMaker = () => {
     const pre = products
-      .filter((p) => !isKitProduct(p) && (Number(p.quantity) || 0) > 0 && p.photo)
+      .filter((p) => (isKitProduct(p) ? kitAvailable(p) > 0 : (Number(p.quantity) || 0) > 0) && p.photo)
       .sort((a, b) => (Number(b.updatedAt) || 0) - (Number(a.updatedAt) || 0))
       .slice(0, ST_MAX)
       .map((p) => p.id);
@@ -16142,6 +16240,11 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setStPreview(null);
     stBlobRef.current = null;
     setShowStatusMaker(true);
+  };
+  const clearStPreview = () => {
+    if (stPreview) { try { URL.revokeObjectURL(stPreview); } catch (e) {} }
+    setStPreview(null);
+    stBlobRef.current = null;
   };
   const closeStatusMaker = () => {
     if (stPreview) { try { URL.revokeObjectURL(stPreview); } catch (e) {} }
@@ -16264,7 +16367,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         const nameText = fitFont(p.name || "", "bold", big ? 54 : 36, cw - 40, big ? 34 : 24);
         ctx.fillText(nameText, x + cw / 2, ty + (big ? 48 : 34));
         if (stShowPrices) {
-          const priceText = fitFont(fcfa(p.price), "900", big ? 66 : 42, cw - 80, 26);
+          const priceText = fitFont(fcfa(p.price) + (p.sellByMeasure ? " / " + (p.measureUnit || "kg") : ""), "900", big ? 66 : 42, cw - 80, 26);
           const pw = Math.min(cw - 40, ctx.measureText(priceText).width + (big ? 70 : 44));
           const py = ty + (big ? 130 : 96);
           const pg = ctx.createLinearGradient(x, 0, x + cw, 0);
@@ -16306,7 +16409,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     const blob = stBlobRef.current;
     if (!blob) return;
     const file = new File([blob], "statut-whatsapp.png", { type: "image/png" });
-    if (!forceDownload && navigator.canShare && navigator.canShare({ files: [file] })) {
+    let canShareFile = false;
+    try { canShareFile = !forceDownload && !!navigator.canShare && navigator.canShare({ files: [file] }); } catch (e) {}
+    if (canShareFile) {
       try { await navigator.share({ files: [file] }); return; } catch (e) { if (e && e.name === "AbortError") return; }
     }
     const url = URL.createObjectURL(blob);
@@ -16699,7 +16804,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       newHistory.push(makeHistoryEntry("expenseDeleted", { refId: "del-" + id, amount: targetExpense.amount, label: targetExpense.label, originalDate: targetExpense.date }));
     }
-    saveAll({ expenses: expenses.filter((e) => e.id !== id), historyLog: [...historyLog, ...newHistory] });
+    const supPatch = targetExpense && targetExpense.kind === "supplier"
+      ? { supplierDebts: supplierDebts.map((d) => ((d.payments || []).some((p) => p.expenseId === id) ? { ...d, payments: d.payments.map((p) => (p.expenseId === id ? { ...p, void: true } : p)), updatedAt: Date.now() } : d)) }
+      : {};
+    saveAll({ expenses: expenses.filter((e) => e.id !== id), historyLog: [...historyLog, ...newHistory], ...supPatch });
     if (targetExpense) logAction(`${t(lang, "logExpenseDeleted")} : ${targetExpense.label} — ${localizedNumber(targetExpense.amount)}`);
   };
   const saveFund = () => {
@@ -17097,6 +17205,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   };
   const reservedQty = (productId) => draftCarts.reduce((sum, c) => sum + c.items.filter((i) => i.productId === productId && (i.mode || "pack") === "pack").reduce((s, i) => s + i.qty, 0), 0) + kitReserved(productId, false);
   const reservedUnits = (productId) => draftCarts.reduce((sum, c) => sum + c.items.filter((i) => i.productId === productId && i.mode === "unit").reduce((s, i) => s + i.qty, 0), 0) + kitReserved(productId, true);
+  // Disponible au colis / à la pièce, paniers ouverts (colis, pièces et kits) déduits.
+  const unitDispoOf = (p) => (p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0) - reservedUnits(p.id) - (p.sellByUnit ? reservedQty(p.id) * (p.unitsPerPack || 1) : 0);
+  const packDispoOf = (p) => (p.sellByUnit ? Math.floor(Math.max(0, unitDispoOf(p)) / (p.unitsPerPack || 1) + 1e-9) : (p.quantity || 0) - reservedQty(p.id));
   // Quantité d'un composant encore libre (paniers ouverts déduits).
   const compAvailable = (c) => (c.sellByUnit
     ? (c.quantity || 0) * (c.unitsPerPack || 1) + (c.looseUnits || 0) - reservedUnits(c.id) - reservedQty(c.id) * (c.unitsPerPack || 1)
@@ -17138,12 +17249,12 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     let cost = 0; const missing = [];
     (comps || []).forEach((c) => {
       const comp = products.find((x) => x.id === c.productId);
-      if (!comp) return;
+      if (!comp) { missing.push("?"); return; }
       if (comp.costPrice == null || comp.costPrice === "") { missing.push(comp.name); return; }
       const u = comp.sellByUnit ? Number(comp.costPrice) / (comp.unitsPerPack || 1) : Number(comp.costPrice);
       cost += u * (Number(c.qty) || 0);
     });
-    const y = mode === "production" ? Math.max(1, Number(yieldN) || 1) : 1;
+    const y = mode === "production" ? Math.max(0.001, parseFloat(String(yieldN || "").replace(",", ".")) || 1) : 1;
     return { cost: Math.round((cost / y) * 100) / 100, missing };
   };
 
@@ -17562,19 +17673,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
     const existing = cart.items.find((i) => i.productId === product.id && (i.mode || "pack") === mode);
     const currentQty = existing ? existing.qty : 0;
+    if (delta > 0 && isKitProduct(product) && product.components.some((c) => isProductFrozen(c.productId))) {
+      setError(t(lang, "productFrozenMsg"));
+      return;
+    }
     if (delta > 0 && isKitProduct(product)) {
       if (kitAvailable(product) < delta) { setError(tx(lang, "kitNotEnough").replace("{name}", product.name)); return; }
     } else if (delta > 0) {
       if (mode === "unit") {
-        const totalUnits = (product.quantity || 0) * (product.unitsPerPack || 1) + (product.looseUnits || 0);
-        const reserved = reservedUnits(product.id);
-        if (reserved + delta > totalUnits) {
+        if (unitDispoOf(product) < delta) {
           setError(t(lang, "notEnoughUnits"));
           return;
         }
       } else {
         const reserved = reservedQty(product.id);
-        if (reserved + delta > product.quantity) {
+        if (product.sellByUnit ? packDispoOf(product) < delta : reserved + delta > product.quantity) {
           setError(`Stock insuffisant pour ${product.name} (disponible : ${product.quantity - reserved}).`);
           return;
         }
@@ -17800,7 +17913,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if (it.tier === "semi" || it.tier === "bulk") out.tier = it.tier;
       if (it.mode === "return") { out.returnOf = it.returnOf; out.returnOfLine = it.returnOfLine; out.origMode = it.origMode || "pack"; if (it.noRestock) out.noRestock = true; }
       if (product.condition && product.condition !== "new") out.condition = product.condition;
-      const sns = lineSerials(it).map((x) => String(x).trim()).filter(Boolean);
+      const sns = [...new Set(lineSerials(it).map((x) => String(x).trim()).filter(Boolean))].slice(0, Math.max(1, Math.round(Math.abs(Number(it.qty) || 1))));
       if (sns.length) { out.serial = sns.join(", "); out.serials = sns; }
       const wu = product.warrantyMonths > 0 && it.mode !== "return" ? warrantyEndDate(dateNow, product.warrantyMonths) : null;
       if (wu) out.warrantyUntil = wu;
@@ -17820,9 +17933,9 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       if ((it.mode || "pack") === "pack" && it.qty > 0) {
         res = lotsTake(cur, n, lotTodayKey);
         if (res) lotRun[p0.id] = { ...cur, batches: res.batches, quantity: Math.max(0, r3q((Number(cur.quantity) || 0) - n)) };
-      } else if (it.mode === "return" && !it.noRestock && (it.origMode || "pack") !== "unit" && Array.isArray(it.lots) && it.lots.length) {
+      } else if (it.mode === "return" && (it.origMode || "pack") !== "unit" && Array.isArray(it.lots) && it.lots.length) {
         res = lotsPutBack(cur, it.lots, n);
-        if (res) lotRun[p0.id] = { ...cur, batches: res.batches, quantity: r3q((Number(cur.quantity) || 0) + n) };
+        if (res && !it.noRestock) lotRun[p0.id] = { ...cur, batches: res.batches, quantity: r3q((Number(cur.quantity) || 0) + n) };
       }
       if (res && res.used.length) lotUsed[idx] = res.used;
     });
@@ -17846,7 +17959,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
         ...(it.measureUnit ? { measureUnit: it.measureUnit } : {}),
         ...(it.listPrice != null && it.listPrice !== it.unitPrice ? { listPrice: it.listPrice } : {}),
         ...(it.misc ? { misc: true } : {}),
-        costPrice: product && product.costPrice != null && product.costPrice !== "" ? product.costPrice : (product && isKitProduct(product) ? recipeUnitCost(product.components, "sale").cost : null),
+        costPrice: product && product.costPrice != null && product.costPrice !== "" ? product.costPrice : (product && isKitProduct(product) ? (() => { const rc = recipeUnitCost(product.components, "sale"); return rc.missing.length === 0 && rc.cost > 0 ? rc.cost : null; })() : null),
         // Composition figée du kit au moment de la vente (pour une annulation ou un retour exact).
         ...(it.kit ? { kit: it.kit } : product && isKitProduct(product) && it.mode !== "return" ? { kit: product.components.map((c) => ({ productId: c.productId, qty: Number(c.qty) || 0 })) } : {}),
         payment: cart.payment,
@@ -18100,7 +18213,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   const cancelSale = (txnId) => {
     const lines = sales.filter((x) => (x.transactionId || x.id) === txnId);
     if (lines.length === 0) { setCancelSaleConfirmId(null); return; }
-    if (allSales.some((x) => x.returnOf === txnId && !x.cancelled)) {
+    if (allSales.some((x) => x.returnOf === txnId && !x.cancelled) || draftCarts.some((c) => c.items.some((i) => i.returnOf === txnId))) {
       setCancelSaleError(tx(lang, "cancelSaleHasReturn"));
       return;
     }
@@ -19904,7 +20017,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     // Une sortie de caisse est soit une dépense (elle ampute le bénéfice), soit un retrait
     // (l'argent change seulement de place) : la clôture les sépare, comme le reste de l'app.
     expenses: sessionExpenseRows.filter((e) => isChargeExpense(e)).reduce((sum, e) => sum + e.amount, 0),
-    withdrawals: sessionExpenseRows.filter((e) => !isChargeExpense(e)).reduce((sum, e) => sum + e.amount, 0),
+    withdrawals: sessionExpenseRows.filter((e) => e.kind === "withdrawal").reduce((sum, e) => sum + e.amount, 0),
+    suppliers: sessionExpenseRows.filter((e) => e.kind === "supplier").reduce((sum, e) => sum + e.amount, 0),
     expected: cashBalance,
   };
   const todayExpenses = expenses.filter((e) => dayKeyOf(e.date) === todayKey());
@@ -19935,7 +20049,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     // le calcul du bénéfice, sinon porter sa recette à la banque ferait "perdre" de l'argent.
     const pRealExpenses = pExpenses.filter((e) => isChargeExpense(e));
     const outExpensesOnly = pRealExpenses.reduce((sum, e) => sum + e.amount, 0);
-    const withdrawalsTotal = pExpenses.filter((e) => !isChargeExpense(e) && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
+    const withdrawalsTotal = pExpenses.filter((e) => e.kind === "withdrawal" && isCashMove(e)).reduce((sum, e) => sum + e.amount, 0);
+    const suppliersTotal = pExpenses.filter((e) => e.kind === "supplier").reduce((sum, e) => sum + e.amount, 0);
     const salesTotal = pSales.reduce((sum, s) => sum + s.total, 0);
     const byMethodP = getPaymentMethods(lang).map((m) => ({ ...m, total: pSales.filter((s) => s.payment === m.id).reduce((sum, s) => sum + s.total, 0) }));
     const debtIn = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment") && isCashMove(ev)).reduce((sum, ev) => sum + (ev.amount || 0), 0);
@@ -19958,7 +20073,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     const pDebtPayments = debtEvents.filter((ev) => inPeriod(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
     const journal = [
       ...Object.values(txn),
-      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", isWithdrawal: !isChargeExpense(e), date: e.date, amount: e.amount, label: (isCashMove(e) ? "" : "📱 ") + (e.label || ""), expenseId: e.id, actorName: e.actorName || null })),
+      ...pExpenses.map((e) => ({ id: "e-" + e.id, kind: "expense", isWithdrawal: e.kind === "withdrawal", isSupplier: e.kind === "supplier", date: e.date, amount: e.amount, label: (isCashMove(e) ? "" : "📱 ") + (e.label || ""), expenseId: e.id, actorName: e.actorName || null })),
       ...pDebtPayments.map((ev) => ({ id: "d-" + ev.id, kind: "debt", date: ev.date, amount: ev.amount, label: (isCashMove(ev) ? "" : "📱 ") + (ev.customer || ""), actorName: ev.actorName || null })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // Bénéfice de la période : marge des ventes dont le prix d'achat est connu, moins les dépenses.
@@ -19979,7 +20094,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     // "Entrées" = tout ce qui rentre réellement dans le tiroir : ventes en espèces ET
     // remboursements de dettes (le détail des deux reste visible plus bas dans l'écran).
-    return { cashIn: cashInTotal + debtIn, out: outTotal, withdrawals: withdrawalsTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, trend7 };
+    return { cashIn: cashInTotal + debtIn, out: outTotal, withdrawals: withdrawalsTotal, suppliers: suppliersTotal, salesTotal, byMethod: byMethodP, debtIn, topExp, journal: journalWithCounts, profit, trend7 };
   })() : null;
   const days = last30Days();
   const firstSaleDate = memoDerived("firstSale", [sales], () => (sales.length > 0
@@ -20564,7 +20679,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       // Un retrait de caisse (versement en banque, prélèvement du patron) sort de l'argent
       // mais n'est pas une charge : il ne doit pas réduire le bénéfice. Il est présenté à part.
       const periodExpenses = periodCashOut.filter((e) => isChargeExpense(e));
-      const periodWithdrawals = periodCashOut.filter((e) => !isChargeExpense(e));
+      const periodWithdrawals = periodCashOut.filter((e) => e.kind === "withdrawal");
+      const totalSupplierPaid = periodCashOut.filter((e) => e.kind === "supplier").reduce((sum, e) => sum + e.amount, 0);
       const periodDebtPayments = debtEvents.filter((ev) => inRange(ev.date) && (ev.type === "paid" || ev.type === "partialPayment"));
 
       const totalRevenue = periodSales.reduce((sum, s) => sum + s.total, 0);
@@ -20738,6 +20854,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
       });
       y += 2 * (ch + 6) + 4;
       doc.setTextColor(0, 0, 0);
+      if (totalSupplierPaid > 0) {
+        doc.setFont("helvetica", "normal"); doc.setFontSize(9);
+        doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+        doc.text(`${tx(lang, "supPaymentsLine")} : ${money(totalSupplierPaid)}`, M, y);
+        doc.setTextColor(0, 0, 0);
+        y += 10;
+      }
       if (totalWithdrawals > 0) {
         doc.setFont("helvetica", "normal"); doc.setFontSize(9);
         doc.setTextColor(GREY[0], GREY[1], GREY[2]);
@@ -21816,6 +21939,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     {line(`${t(lang, "cash")} (${localizedNumber(sessionSummary.salesCount)} ${tx(lang, "zSalesUnit")})`, sessionSummary.cashSales, { sign: true })}
                     {sessionSummary.debtCollected > 0 && line(t(lang, "cashReportDebtPayments"), sessionSummary.debtCollected, { sign: true })}
                     {sessionSummary.expenses > 0 && line(tx(lang, "cashOutKindExpense"), -sessionSummary.expenses, { color: CLAY })}
+                    {sessionSummary.suppliers > 0 && line("🚚 " + tx(lang, "supPaymentsLine"), -sessionSummary.suppliers, { color: CLAY })}
                     {sessionSummary.withdrawals > 0 && line(tx(lang, "cashOutKindWithdrawal"), -sessionSummary.withdrawals, { color: CLAY })}
                     <div className="mt-1.5 pt-1.5 flex items-center justify-between text-xs" style={{ borderTop: `1px solid ${T.border}` }}>
                       <span className="font-semibold" style={{ color: T.muted }}>{t(lang, "cashBalance")}</span>
@@ -22315,13 +22439,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </label>
                     {restockCredit && (
                       <div className="mt-2 flex flex-col gap-2">
-                        <input autoComplete="off" list="sup-names" value={restockSupName} onChange={(e) => setRestockSupName(e.target.value)} placeholder={tx(lang, "supNameLabel")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
-                        <input autoComplete="off" type="text" inputMode="decimal" value={restockSupAmount} onChange={(e) => setRestockSupAmount(e.target.value.replace(/[^0-9.,]/g, ""))} placeholder={(() => { const q = parseInt(restockQty, 10); const c = parseFloat(restockPrice); return q > 0 && c > 0 ? `${tx(lang, "supAmountLabel")} : ${localizedNumber(q * c)}` : tx(lang, "supAmountLabel"); })()} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                        <input autoComplete="off" list="sup-names" value={restockSupName} onChange={(e) => { setRestockSupName(e.target.value); setRestockErr(""); }} placeholder={tx(lang, "supNameLabel")} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                        <input autoComplete="off" type="text" inputMode="decimal" value={restockSupAmount} onChange={(e) => { setRestockSupAmount(e.target.value.replace(/[^0-9.,]/g, "")); setRestockErr(""); }} placeholder={(() => { const q = parseFloat(String(restockQty).replace(",", ".")); const c = parseFloat(restockPrice); return q > 0 && c > 0 ? `${tx(lang, "supAmountLabel")} : ${localizedNumber(q * c)}` : tx(lang, "supAmountLabel"); })()} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border }} />
                         <label className="text-[11px]" style={{ color: T.muted }}>{tx(lang, "supDueLabel")}</label>
                         <input type="date" value={restockSupDue} onChange={(e) => setRestockSupDue(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-sm" style={{ background: T.card, color: T.text, borderColor: T.border, colorScheme: darkMode ? "dark" : "light" }} />
                       </div>
                     )}
                     <datalist id="sup-names">{supKnownNames.map((n) => <option key={n} value={n} />)}</datalist>
+                    {restockErr && <p className="text-xs font-semibold mt-2" style={{ color: "#e11d48" }}>{restockErr}</p>}
                   </div>
                 )}
                 <button onClick={confirmRestock} className="w-full py-3 rounded-lg text-white font-semibold text-sm" style={{ background: INDIGO }}>{tx(lang, "restockConfirmBtn")}</button>
@@ -22331,7 +22456,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         })()}
         {tab === "stock" && showStatusMaker && (() => {
           const q = stSearch.trim().toLowerCase();
-          const pool = products.filter((p) => !isKitProduct(p) && (!q || p.name.toLowerCase().includes(q)));
+          const pool = products.filter((p) => !q || p.name.toLowerCase().includes(q));
           const selected = stSel.map((id) => products.find((p) => p.id === id)).filter(Boolean);
           const rest = pool.filter((p) => stSel.indexOf(p.id) === -1).sort((a, b) => (b.photo ? 1 : 0) - (a.photo ? 1 : 0) || (Number(b.updatedAt) || 0) - (Number(a.updatedAt) || 0)).slice(0, 60);
           const toggle = (id) => setStSel((s) => (s.indexOf(id) !== -1 ? s.filter((x) => x !== id) : s.length >= ST_MAX ? s : [...s, id]));
@@ -22352,7 +22477,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <div className="px-4" style={{ minHeight: "100%", paddingBottom: "calc(150px + env(safe-area-inset-bottom, 0px))", paddingTop: 20 }}>
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-extrabold" style={{ color: T.text }}>📣 {tx(lang, "stTitle")}</h2>
-                  <button type="button" onClick={stPreview ? () => setStPreview(null) : closeStatusMaker} aria-label="Fermer" className="p-1"><X size={22} color={T.muted} /></button>
+                  <button type="button" onClick={stPreview ? clearStPreview : closeStatusMaker} aria-label="Fermer" className="p-1"><X size={22} color={T.muted} /></button>
                 </div>
                 {stPreview ? (
                   <div>
@@ -22360,7 +22485,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     <button type="button" onClick={() => shareStatusImage(false)} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2" style={{ background: "#16a34a" }}>📤 {tx(lang, "stShare")}</button>
                     <button type="button" onClick={() => shareStatusImage(true)} className="w-full py-3 rounded-xl font-bold text-sm mb-2" style={{ background: T.input, color: T.text }}>⬇️ {tx(lang, "stDownload")}</button>
                     <p className="text-[11px] text-center mb-3" style={{ color: T.muted }}>{tx(lang, "stShareHint")}</p>
-                    <button type="button" onClick={() => setStPreview(null)} className="w-full py-2 text-xs font-bold" style={{ color: T.muted }}>← {tx(lang, "stEdit")}</button>
+                    <button type="button" onClick={clearStPreview} className="w-full py-2 text-xs font-bold" style={{ color: T.muted }}>← {tx(lang, "stEdit")}</button>
                   </div>
                 ) : (
                   <>
@@ -22392,6 +22517,14 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         {tab === "stock" && showInventory && (() => {
           const countable = invCountable();
           const nCounted = countable.filter((p) => invCountOf(p)).length;
+          const openCartsWithItems = draftCarts.filter((c) => c.items && c.items.some((i) => i.mode !== "return")).length;
+          const pendingInputs = Object.values(invInputs).some((v) => String(v).trim() !== "");
+          const breakdown = (p, units) => {
+            if (!p.sellByUnit) return "";
+            const per = p.unitsPerPack || 1;
+            const packs = Math.floor(units / per + 1e-9);
+            return ` (${localizedNumber(packs)} × ${localizedNumber(per)} + ${localizedQty(r3q(units - packs * per))})`;
+          };
           const close = () => { setShowInventory(false); setInvReview(false); setInvAbandonAsk(false); };
           const past = historyLog.filter((h) => h.type === "inventory").sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 10);
           const cats = [...new Set(countable.map((p) => p.category).filter(Boolean))];
@@ -22407,7 +22540,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               <>
                 {msg}
                 <div className="rounded-2xl p-4 mb-4" style={box}>
-                  <p className="text-sm mb-3" style={{ color: T.muted }}>{tx(lang, "invIntro")}</p>
+                  <p className="text-sm mb-2" style={{ color: T.muted }}>{tx(lang, "invIntro")}</p>
+                  <p className="text-xs mb-3 font-semibold" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>📶 {tx(lang, "invSyncTip")}</p>
+                  {openCartsWithItems > 0 && <p className="text-xs mb-3 font-bold" style={{ color: red }}>⚠️ {tx(lang, "invOpenCartsWarn").replace("{n}", localizedNumber(openCartsWithItems))}</p>}
                   <button onClick={startInventory} className="w-full py-3 rounded-xl text-white font-bold text-sm" style={{ background: violet }}>📋 {tx(lang, "invStart")}</button>
                 </div>
                 {past.length > 0 && <p className="text-xs font-bold mb-2" style={{ color: T.muted }}>{tx(lang, "invPast")}</p>}
@@ -22474,7 +22609,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     ))}
                   </div>
                 )}
-                <button onClick={applyInventory} disabled={nCounted === 0} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2 disabled:opacity-40" style={{ background: "#16a34a" }}>✓ {tx(lang, "invApply")}</button>
+                <button onClick={applyInventory} disabled={nCounted === 0 || invApplying} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-2 disabled:opacity-40" style={{ background: "#16a34a" }}>✓ {tx(lang, "invApply")}</button>
                 <button onClick={() => setInvReview(false)} className="w-full py-3 rounded-xl font-bold text-sm" style={{ background: T.input, color: T.text }}>{tx(lang, "invContinue")}</button>
               </>
             );
@@ -22496,7 +22631,13 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div style={{ width: `${countable.length ? Math.round((nCounted * 100) / countable.length) : 0}%`, height: "100%", background: violet }} />
                 </div>
                 <p className="text-xs font-semibold mb-3" style={{ color: T.muted }}>{tx(lang, "invProgress").replace("{n}", localizedNumber(nCounted)).replace("{p}", localizedNumber(countable.length))}</p>
-                <button onClick={() => { setInvReview(true); setInvAbandonAsk(false); }} disabled={nCounted === 0} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-3 disabled:opacity-40" style={{ background: violet }}>{tx(lang, "invReviewBtn")}</button>
+                <button onClick={() => {
+                  // Saisies pas encore validées (le champ n'a pas perdu le focus) : on les enregistre d'abord.
+                  Object.entries(invInputs).forEach(([id, v]) => { const pp = products.find((x) => String(x.id) === String(id)); if (pp) setInvCount(pp, v); });
+                  setInvInputs({});
+                  setInvReview(true); setInvAbandonAsk(false);
+                }} disabled={nCounted === 0 && !pendingInputs} className="w-full py-3 rounded-xl text-white font-bold text-sm mb-3 disabled:opacity-40" style={{ background: violet }}>{tx(lang, "invReviewBtn")}</button>
+                {openCartsWithItems > 0 && <p className="text-[11px] mb-3 font-bold" style={{ color: red }}>⚠️ {tx(lang, "invOpenCartsWarn").replace("{n}", localizedNumber(openCartsWithItems))}</p>}
                 {msg}
                 <div className="flex items-center gap-2 mb-2">
                   <div className="flex-1"><SearchBox compact value={invSearch} onChange={setInvSearch} placeholder={t(lang, "search")} darkMode={darkMode} /></div>
@@ -22529,24 +22670,27 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-bold truncate">{p.name}</p>
                           <p className="text-[11px]" style={{ color: T.muted }}>
-                            {tx(lang, "invAppSays").replace("{n}", localizedQty(invUnitQty(p)))} {invUnitLabel(p)}
+                            {tx(lang, "invAppSays").replace("{n}", localizedQty(c ? c.e : invUnitQty(p)))} {invUnitLabel(p)}{breakdown(p, c ? c.e : invUnitQty(p))}
                             {c ? <span style={{ fontWeight: 800, color: d < 0 ? red : green }}> · {d === 0 ? "✓" : sign(d)}</span> : null}
+                            {c && r3q(invUnitQty(p) - c.e) !== 0 ? <span> · {tx(lang, "invNowInStock").replace("{n}", localizedQty(invUnitQty(p)))}</span> : null}
                           </p>
                         </div>
                         {!c && !frozenP && (
                           <button type="button" onClick={() => setInvCount(p, String(invUnitQty(p)))} className="h-9 px-2.5 rounded-lg text-[11px] font-bold shrink-0" style={{ background: darkMode ? "rgba(22,163,74,0.15)" : "#dcfce7", color: green }}>✓ {tx(lang, "invSame")}</button>
                         )}
                         <input
-                          autoComplete="off" type="text" inputMode="decimal" disabled={frozenP} value={val} placeholder="?"
+                          autoComplete="off" type="text" inputMode="decimal" disabled={frozenP} value={val} placeholder={p.sellByUnit ? t(lang, "sellUnit") : "?"}
                           onChange={(e) => { const v = e.target.value.replace(/[^0-9.,]/g, "").slice(0, 9); setInvInputs((m) => ({ ...m, [p.id]: v })); }}
+                          aria-label={p.name}
                           onBlur={() => { if (invInputs[p.id] !== undefined) { setInvCount(p, invInputs[p.id]); setInvInputs((m) => { const n = { ...m }; delete n[p.id]; return n; }); } }}
                           onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); }}
-                          className="w-16 border rounded-lg px-1 py-2 text-sm text-center font-bold shrink-0"
+                          className={`${p.sellByUnit ? "w-20" : "w-16"} border rounded-lg px-1 py-2 text-sm text-center font-bold shrink-0`}
                           style={{ background: T.input, color: T.text, borderColor: c ? violet : T.border }}
                         />
                       </div>
                     );
                   })}
+                  {rows.length > 150 && <p className="text-[11px] text-center p-3 font-semibold" style={{ color: T.muted, borderTop: `1px solid ${T.border}` }}>{tx(lang, "invMoreRows").replace("{n}", localizedNumber(rows.length - 150))}</p>}
                 </div>
                 <div className="mt-6">
                   {invAbandonAsk ? (
@@ -22830,7 +22974,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {pCompMode === "production" && (
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xs" style={{ color: T.text }}>{tx(lang, "recipeYieldLabel")}</span>
-                  <input autoComplete="off" type="text" inputMode="decimal" value={pRecipeYield} onChange={(e) => setPRecipeYield(e.target.value.replace(/[^0-9.,]/g, "").slice(0, 6))} placeholder="1" className="w-20 border rounded-lg px-2 py-1.5 text-sm text-center" style={{ background: T.card, color: T.text, borderColor: T.border }} />
+                  <input autoComplete="off" type="text" inputMode="decimal" value={pRecipeYield} onChange={(e) => setPRecipeYield(e.target.value.replace(/[^0-9.,]/g, "").slice(0, 6))} placeholder="ex. 50" className="w-20 border rounded-lg px-2 py-1.5 text-sm text-center" style={{ background: T.card, color: T.text, borderColor: T.border }} />
                 </div>
               )}
               <div className="flex flex-col gap-1.5 mb-2">
@@ -22863,6 +23007,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   <div className="mt-2.5 rounded-lg px-2.5 py-2" style={{ background: T.card }}>
                     <p className="text-xs" style={{ color: T.text }}>{tx(lang, "recipeCostLabel")} <b>{fcfa(rc.cost)}</b>{price > 0 && rc.cost > 0 && <> · {tx(lang, "recipeMarginLabel")} <b style={{ color: margin >= 0 ? (darkMode ? "#4ade80" : "#15803d") : "#e11d48" }}>{fcfa(margin)} ({localizedNumber(Math.round((margin / price) * 100))} %)</b></>}</p>
                     {rc.missing.length > 0 && <p className="text-[11px] mt-0.5" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>{tx(lang, "recipeCostMissing").replace("{names}", rc.missing.join(", "))}</p>}
+                    {pCompMode === "production" && rc.cost > 0 && rc.missing.length === 0 && String(Math.round(rc.cost * 100) / 100) !== String(pCostPrice) && (
+                      <button type="button" onClick={() => setPCostPrice(String(Math.round(rc.cost * 100) / 100))} className="mt-1.5 text-[11px] font-bold px-2.5 py-1 rounded-lg" style={{ background: darkMode ? "rgba(37,99,235,0.2)" : "#dbeafe", color: darkMode ? "#93c5fd" : "#1d4ed8" }}>↳ {tx(lang, "recipeUseAsCost")}</button>
+                    )}
                   </div>
                 );
               })()}
@@ -23670,9 +23817,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {saleRows.map((row) => row.group ? renderVariantGroupSale(row, false) : ((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
-                    const dispo = isKitProduct(p) ? kitAvailable(p) : p.quantity - reservedQty(p.id);
+                    const dispo = isKitProduct(p) ? kitAvailable(p) : packDispoOf(p);
                     const totalUnits = (p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0);
-                    const dispoUnits = totalUnits - reservedUnits(p.id);
+                    const dispoUnits = unitDispoOf(p);
                     const pressed = pressedProductId === p.id;
                     const justReleased = releasedProductId && releasedProductId.id === p.id;
                     return (
@@ -23720,7 +23867,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                                 if (!f) return null;
                                 return (
                                   <>
-                                    {f.expiredQty > 0 && <p className="text-[10px] font-bold" style={{ color: darkMode ? "#fda4af" : "#e11d48" }}>⚠️ {tx(lang, "fefoExpiredWarn").replace("{n}", localizedQty(f.expiredQty))}</p>}
+                                    {f.expiredQty > 0 && <p className="text-[11px] font-extrabold mt-0.5 inline-block px-1.5 py-0.5 rounded-md" style={{ background: darkMode ? "rgba(225,29,72,0.25)" : "#ffe4e6", color: darkMode ? "#fda4af" : "#be123c" }}>⚠️ {tx(lang, "fefoExpiredWarn").replace("{n}", localizedQty(f.expiredQty))}</p>}
                                     {f.first && <p className="text-[10px] font-semibold" style={{ color: darkMode ? "#f0c869" : "#b45309" }}>👉 {(f.first.lotNo ? tx(lang, "fefoFirstLot").replace("{lot}", f.first.lotNo) : tx(lang, "fefoFirstDate")).replace("{date}", fullDate(f.first.date + "T12:00:00"))}</p>}
                                   </>
                                 );
@@ -23790,9 +23937,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {saleRows.map((row) => row.group ? renderVariantGroupSale(row, true) : ((p) => {
                     const inCartPack = activeCart.items.find((i) => i.productId === p.id && (i.mode || "pack") === "pack");
                     const inCartUnit = activeCart.items.find((i) => i.productId === p.id && i.mode === "unit");
-                    const dispo = isKitProduct(p) ? kitAvailable(p) : p.quantity - reservedQty(p.id);
+                    const dispo = isKitProduct(p) ? kitAvailable(p) : packDispoOf(p);
                     const totalUnits = (p.quantity || 0) * (p.unitsPerPack || 1) + (p.looseUnits || 0);
-                    const dispoUnits = totalUnits - reservedUnits(p.id);
+                    const dispoUnits = unitDispoOf(p);
                     const pressed = pressedProductId === p.id;
                     const justReleased = releasedProductId && releasedProductId.id === p.id;
                     return (
@@ -23972,6 +24119,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                                     }}
                                     className="w-full border rounded-lg px-2.5 py-1.5 text-[12px]" style={{ background: darkMode ? "rgba(255,255,255,0.05)" : "white", color: T.text, borderColor: darkMode ? T.border : "rgba(37,99,235,0.25)" }} />
                                 ))}
+                                {(() => { const f = vals.slice(0, n).map((x) => String(x || "").trim()).filter(Boolean); return new Set(f).size < f.length ? <p className="text-[11px] font-semibold" style={{ color: "#e11d48" }}>⚠️ {tx(lang, "serialDuplicate")}</p> : null; })()}
                               </div>
                             );
                           })()}
@@ -24316,8 +24464,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           const canEdit = hasPermission("editCash") && !shopReadOnly;
           const groups = {};
           supOpenDebts.forEach((d) => {
-            const name = String(d.supplier || "").trim() || "—";
-            const k = name.toLowerCase();
+            const name = String(d.supplier || "").trim().replace(/\s+/g, " ") || "—";
+            const k = supNameKey(name);
             if (!groups[k]) groups[k] = { key: k, name, phone: "", total: 0, debts: [], due: null };
             const g = groups[k];
             g.total = r3q(g.total + supRemaining(d));
@@ -24344,6 +24492,9 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   </button>
                 )}
               </div>
+              {Object.values(supOverpaid).map((o) => (
+                <p key={o.name} className="text-xs font-bold px-3 py-2 rounded-xl" style={{ background: darkMode ? "rgba(245,158,11,0.15)" : "#fef3c7", color: darkMode ? "#fbbf24" : "#92400e" }}>⚠️ {tx(lang, "supOverpaidWarn").replace("{name}", o.name).replace("{n}", fcfa(o.amount))}</p>
+              ))}
               {list.length === 0 && <p className="text-xs text-center py-6" style={{ color: T.muted }}>✓ {tx(lang, "supNone")}</p>}
               {list.map((g) => {
                 const wa = normalizePhoneForWhatsApp(g.phone);
@@ -24370,8 +24521,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                               <span className="font-bold shrink-0">{fcfa(supRemaining(d))}{supRemaining(d) < d.amount ? <span style={{ color: T.muted, fontWeight: 500 }}> / {fcfa(d.amount)}</span> : null}</span>
                             </div>
                             {d.dueDate && <p style={{ color: d.dueDate < today ? red : T.muted }}>{dueText(d.dueDate)}</p>}
-                            {(d.payments || []).map((p) => <p key={p.id} style={{ color: green }}>✓ {fullDate(p.date)} · {fcfa(p.amount)} {p.method === "mobile" ? "📱" : "💵"}</p>)}
-                            {canEdit && <button type="button" onClick={() => deleteSupDebt(d.id)} className="text-[10px] font-semibold mt-1" style={{ color: red }}>{supDelAsk === d.id ? tx(lang, "supDeleteConfirm") : tx(lang, "supDelete")}</button>}
+                            {(d.payments || []).filter((p) => p && !p.void).map((p) => <p key={p.id} style={{ color: green }}>✓ {fullDate(p.date)} · {fcfa(p.amount)} {p.method === "mobile" ? "📱" : "💵"}</p>)}
+                            {canEdit && !(d.payments || []).some((p) => p && !p.void) && <button type="button" onClick={() => deleteSupDebt(d.id)} className="text-[10px] font-semibold mt-1" style={{ color: red }}>{supDelAsk === d.id ? tx(lang, "supDeleteConfirm") : tx(lang, "supDelete")}</button>}
                           </div>
                         ))}
                       </div>
@@ -25345,6 +25496,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     );
                   })}
                 </div>
+                {cashView.suppliers > 0 && (
+                  <div className="flex items-center justify-between text-[11px] mt-1.5">
+                    <span style={{ color: T.muted }}>🚚 {tx(lang, "supPaymentsLine")}</span>
+                    <span className="font-bold" style={{ color: T.muted }}>-{maskAmount(fcfa(cashView.suppliers))}</span>
+                  </div>
+                )}
                 {cashView.withdrawals > 0 && (
                   <div className="flex items-center justify-between text-[11px] mt-1.5">
                     <span style={{ color: T.muted }}>🏦 {tx(lang, "cashWithdrawalsLine")}</span>
@@ -25399,7 +25556,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                         <div className="flex items-center justify-between rounded-xl p-2 gap-2" style={{ background: T.input }}>
                           <div className="flex items-center gap-2 min-w-0">
                             <div className="rounded-lg flex items-center justify-center flex-shrink-0" style={{ width: 28, height: 28, background: isCount ? (darkMode ? "rgba(59,91,138,0.25)" : "#e0e7ff") : isIn ? (darkMode ? "rgba(52,211,153,0.15)" : "#dcfce7") : (darkMode ? "rgba(184,86,47,0.15)" : "#fee2e2") }}>
-                              <span style={{ fontSize: 13 }}>{isCount ? "🔎" : isDebt ? "🤝" : isSale ? "💵" : m.isWithdrawal ? "🏦" : "🧾"}</span>
+                              <span style={{ fontSize: 13 }}>{isCount ? "🔎" : isDebt ? "🤝" : isSale ? "💵" : m.isSupplier ? "🚚" : m.isWithdrawal ? "🏦" : "🧾"}</span>
                             </div>
                             <div className="min-w-0">
                               <p className="text-[11px] font-semibold truncate">{isCount ? tx(lang, "cashCountBtn") : isDebt ? `${t(lang, "cashReportDebtPayments")}${m.label ? ` · ${m.label}` : ""}` : isSale ? (m.names.length ? m.names.join(", ") : t(lang, "navSale")) : m.label}</p>
