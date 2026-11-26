@@ -12,6 +12,7 @@ import "./index.css";
 // production ("Cannot access ... before initialization") qui n'apparaissait que sur le
 // bundle déployé (jamais reproduite en local), très probablement liée à ce mélange.
 import { Preferences } from "@capacitor/preferences";
+import { Analytics } from "@vercel/analytics/react";
 
 // IMPORTANT : window.Capacitor existe aussi en dehors de l'app native (PWA/site web),
 // car @capacitor/core l'injecte automatiquement dès qu'il est importé par un plugin
@@ -27,13 +28,9 @@ const isCapacitorApp =
 
 // Mesure d'audience Vercel (Web Analytics) : visites du site et de la PWA, sans cookie.
 // Pas dans l'APK (fichiers locaux, pas de serveur Vercel derrière).
-if (!isCapacitorApp && typeof window !== "undefined" && /boutipro\.com$|vercel\.app$/.test(window.location.hostname)) {
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  const vaScript = document.createElement("script");
-  vaScript.defer = true;
-  vaScript.src = "/_vercel/insights/script.js";
-  document.head.appendChild(vaScript);
-}
+// Le composant Analytics est ajouté directement dans renderApp() ci-dessous, avec la
+// même condition de domaine pour l'activer uniquement sur boutipro.com et vercel.app.
+const shouldUseAnalytics = !isCapacitorApp && typeof window !== "undefined" && /boutipro\.com$|vercel\.app$/.test(window.location.hostname);
 
 // Un déploiement remplace les fichiers JS/CSS par de nouveaux fichiers au nom différent
 // (hash de contenu) et supprime les anciens. Si quelqu'un a déjà cette page ouverte (ou
@@ -149,6 +146,7 @@ function renderApp() {
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
       <BoutiqueApp />
+      {shouldUseAnalytics && <Analytics />}
     </React.StrictMode>
   );
   try { if (window.__boutiproMounted) window.__boutiproMounted(); } catch (e) {}
