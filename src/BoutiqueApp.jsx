@@ -6542,6 +6542,8 @@ EXTRA_UI.mmNetDebts = { fr: "Dettes remboursées", en: "Debts repaid", es: "Deud
 EXTRA_UI.mmNetOut = { fr: "Paiements sortis", en: "Payments out", es: "Pagos realizados", pt: "Pagamentos efetuados", de: "Ausgezahlt", it: "Pagamenti in uscita", nl: "Uitgaande betalingen", pl: "Wypłaty", ru: "Выплаты", tr: "Yapılan ödemeler", ar: "مدفوعات صادرة", hi: "किए गए भुगतान", bn: "প্রদত্ত পেমেন্ট", ur: "کی گئی ادائیگیاں", ta: "செலுத்திய தொகைகள்", te: "చేసిన చెల్లింపులు", th: "จ่ายออก", zh: "支出款项", ja: "支払った額", ko: "지출액", id: "Pembayaran keluar", vi: "Tiền đã chi", tl: "Mga bayad na lumabas", sw: "Malipo yaliyotoka", ha: "Kuɗin da aka fitar", yo: "Owó tí a san jáde", zu: "Izinkokhelo eziphumile", am: "የወጡ ክፍያዎች", bm: "Sarali bɔlenw", wo: "Fey yu génn" };
 EXTRA_UI.mmNetHint = { fr: "Argent reçu ou payé sur le téléphone : il n'est pas dans le tiroir. Comparez avec le solde de votre compte Mobile Money.", en: "Money received or paid by phone: it is not in the drawer. Compare it with your Mobile Money balance.", es: "Dinero recibido o pagado por teléfono: no está en la caja. Compárelo con el saldo de su cuenta Mobile Money.", pt: "Dinheiro recebido ou pago pelo telemóvel: não está na gaveta. Compare com o saldo da sua conta Mobile Money.", de: "Per Handy erhaltenes oder gezahltes Geld liegt nicht in der Kasse. Vergleichen Sie es mit Ihrem Mobile-Money-Guthaben.", it: "Denaro ricevuto o pagato col telefono: non è nel cassetto. Confrontatelo con il saldo del conto Mobile Money.", nl: "Geld ontvangen of betaald via de telefoon zit niet in de lade. Vergelijk het met uw Mobile Money-saldo.", pl: "Pieniądze otrzymane lub zapłacone telefonem nie są w szufladzie. Porównaj z saldem konta Mobile Money.", ru: "Деньги, полученные или оплаченные по телефону, не лежат в кассе. Сверьте с балансом Mobile Money.", tr: "Telefonla alınan veya ödenen para kasada değildir. Mobile Money bakiyenizle karşılaştırın.", ar: "المال المستلم أو المدفوع بالهاتف ليس في الدرج. قارنوه برصيد حساب الدفع بالهاتف.", hi: "फ़ोन से मिला या दिया गया पैसा गल्ले में नहीं है। इसे अपने मोबाइल मनी बैलेंस से मिलाएँ।", bn: "ফোনে পাওয়া বা দেওয়া টাকা ড্রয়ারে নেই। আপনার মোবাইল মানি ব্যালান্সের সাথে মিলিয়ে দেখুন।", ur: "فون پر ملی یا دی گئی رقم دراز میں نہیں۔ اسے اپنے موبائل منی بیلنس سے ملائیں۔", ta: "தொலைபேசியில் பெற்ற அல்லது செலுத்திய பணம் பெட்டியில் இல்லை. உங்கள் மொபைல் மணி இருப்புடன் ஒப்பிடுங்கள்.", te: "ఫోన్‌లో అందిన లేదా చెల్లించిన డబ్బు డ్రాయర్‌లో ఉండదు. మీ మొబైల్ మనీ బ్యాలెన్స్‌తో పోల్చండి.", th: "เงินที่รับหรือจ่ายผ่านมือถือไม่อยู่ในลิ้นชัก เทียบกับยอดในบัญชี Mobile Money ของคุณ", zh: "通过手机收付的钱不在钱箱里。请与您的移动支付余额核对。", ja: "スマホで受け取った・支払ったお金はレジにはありません。モバイルマネー残高と照らし合わせてください。", ko: "휴대폰으로 받거나 낸 돈은 금고에 없습니다. 모바일 머니 잔액과 비교하세요.", id: "Uang yang diterima atau dibayar lewat ponsel tidak ada di laci. Bandingkan dengan saldo Mobile Money Anda.", vi: "Tiền nhận hoặc trả qua điện thoại không nằm trong ngăn kéo. Hãy so với số dư Mobile Money.", tl: "Ang perang natanggap o binayad sa telepono ay wala sa kaha. Ihambing sa balanse ng Mobile Money ninyo.", sw: "Pesa zilizopokelewa au kulipwa kwa simu haziko kwenye droo. Linganisheni na salio la pesa za simu.", ha: "Kuɗin da aka karɓa ko aka biya ta waya ba sa cikin akwati. Ku kwatanta da ma'aunin Mobile Money ɗinku.", yo: "Owó tí a gbà tàbí san lórí fóònù kò sí nínú àpò owó. Ẹ fi wé iye owó Mobile Money yín.", zu: "Imali etholwe noma ekhokhwe ngocingo ayikho ekhabetheni. Iqhathaniseni nebhalansi ye-Mobile Money.", am: "በስልክ የተቀበሉት ወይም የከፈሉት ገንዘብ በመሳቢያው ውስጥ የለም። ከሞባይል ገንዘብ ቀሪ ሂሳብዎ ጋር ያነጻጽሩ።", bm: "Wari min sɔrɔla walima sarala telefɔni fɛ, o tɛ wari bilayɔrɔ la. Aw k'a suma ni aw ka Mobile Money wari ye.", wo: "Xaalis bi ñu jot walla ñu fey ci telefon nekkul ci tiroir bi. Méngaleen ko ak seen solde Mobile Money." };
 EXTRA_UI.mmNetHintClosure = { fr: "Depuis la dernière clôture. Cet argent est sur le téléphone, pas dans le tiroir : comparez avec le solde de votre compte Mobile Money.", en: "Since the last closing. This money is on the phone, not in the drawer: compare it with your Mobile Money balance.", es: "Desde el último cierre. Este dinero está en el teléfono, no en la caja: compárelo con el saldo de Mobile Money.", pt: "Desde o último fecho. Este dinheiro está no telemóvel, não na gaveta: compare com o saldo Mobile Money.", de: "Seit dem letzten Abschluss. Dieses Geld ist auf dem Handy, nicht in der Kasse: vergleichen Sie es mit Ihrem Mobile-Money-Guthaben.", it: "Dall'ultima chiusura. Questo denaro è sul telefono, non nel cassetto: confrontatelo con il saldo Mobile Money.", nl: "Sinds de laatste afsluiting. Dit geld staat op de telefoon, niet in de lade: vergelijk met uw Mobile Money-saldo.", pl: "Od ostatniego zamknięcia. Te pieniądze są w telefonie, nie w szufladzie: porównaj z saldem Mobile Money.", ru: "С последнего закрытия. Эти деньги на телефоне, а не в кассе: сверьте с балансом Mobile Money.", tr: "Son kapanıştan beri. Bu para kasada değil telefonda: Mobile Money bakiyenizle karşılaştırın.", ar: "منذ آخر إقفال. هذا المال على الهاتف وليس في الدرج: قارنوه برصيد الدفع بالهاتف.", hi: "पिछली क्लोज़िंग से। यह पैसा फ़ोन पर है, गल्ले में नहीं: इसे मोबाइल मनी बैलेंस से मिलाएँ।", bn: "শেষ ক্লোজিং থেকে। এই টাকা ফোনে আছে, ড্রয়ারে নয়: মোবাইল মানি ব্যালান্সের সাথে মিলিয়ে দেখুন।", ur: "آخری کلوزنگ سے۔ یہ رقم فون پر ہے، دراز میں نہیں: اسے موبائل منی بیلنس سے ملائیں۔", ta: "கடைசி முடிப்பிலிருந்து. இந்தப் பணம் தொலைபேசியில், பெட்டியில் இல்லை: மொபைல் மணி இருப்புடன் ஒப்பிடுங்கள்.", te: "చివరి ముగింపు నుండి. ఈ డబ్బు ఫోన్‌లో ఉంది, డ్రాయర్‌లో కాదు: మొబైల్ మనీ బ్యాలెన్స్‌తో పోల్చండి.", th: "ตั้งแต่การปิดยอดครั้งล่าสุด เงินนี้อยู่ในมือถือ ไม่ใช่ในลิ้นชัก เทียบกับยอด Mobile Money ของคุณ", zh: "自上次结账以来。这笔钱在手机里，不在钱箱：请与移动支付余额核对。", ja: "前回の締め以降。このお金はレジではなくスマホにあります。モバイルマネー残高と照らし合わせてください。", ko: "지난 마감 이후. 이 돈은 금고가 아니라 휴대폰에 있습니다. 모바일 머니 잔액과 비교하세요.", id: "Sejak penutupan terakhir. Uang ini ada di ponsel, bukan di laci: bandingkan dengan saldo Mobile Money.", vi: "Từ lần chốt sổ gần nhất. Số tiền này ở trong điện thoại, không ở ngăn kéo: hãy so với số dư Mobile Money.", tl: "Mula sa huling pagsasara. Nasa telepono ang perang ito, wala sa kaha: ihambing sa balanse ng Mobile Money.", sw: "Tangu kufunga hesabu mara ya mwisho. Pesa hizi ziko kwenye simu, si kwenye droo: linganisheni na salio la pesa za simu.", ha: "Tun rufewar ƙarshe. Wannan kuɗi na kan waya, ba a akwati ba: ku kwatanta da ma'aunin Mobile Money.", yo: "Láti ìgbà ìpadé ìkẹyìn. Owó yìí wà lórí fóònù, kì í ṣe nínú àpò owó: ẹ fi wé iye owó Mobile Money yín.", zu: "Kusukela ekuvaleni kokugcina. Le mali isocingweni, hhayi ekhabetheni: iqhathaniseni nebhalansi ye-Mobile Money.", am: "ከመጨረሻው መዝጊያ ጀምሮ። ይህ ገንዘብ በስልኩ ላይ ነው እንጂ በመሳቢያው አይደለም፤ ከሞባይል ገንዘብ ቀሪ ሂሳብዎ ጋር ያነጻጽሩ።", bm: "Kabini datugu laban. Nin wari bɛ telefɔni kan, a tɛ wari bilayɔrɔ la: aw k'a suma ni Mobile Money wari ye.", wo: "Li dale ci tëj bu mujj bi. Xaalis bii mu ngi ci telefon bi, nekkul ci tiroir bi: méngaleen ko ak seen solde Mobile Money." };
+EXTRA_UI.productLocationLabel = { fr: "Emplacement / rayon", en: "Location / shelf", es: "Ubicación / estante", pt: "Local / prateleira", de: "Lagerort / Regal", it: "Posizione / scaffale", nl: "Locatie / schap", pl: "Miejsce / półka", ru: "Место / полка", tr: "Konum / raf", ar: "المكان / الرف", hi: "जगह / रैक", bn: "অবস্থান / তাক", ur: "جگہ / شیلف", ta: "இடம் / அலமாரி", te: "స్థానం / అర", th: "ตำแหน่ง / ชั้นวาง", zh: "位置 / 货架", ja: "置き場所 / 棚", ko: "위치 / 선반", id: "Lokasi / rak", vi: "Vị trí / kệ", tl: "Lokasyon / estante", sw: "Mahali / rafu", ha: "Wuri / shiryayye", yo: "Ibùdó / pẹpẹ", zu: "Indawo / ishelufu", am: "ቦታ / መደርደሪያ", bm: "Yɔrɔ / tabali", wo: "Barab / etaasar" };
+EXTRA_UI.productPartRefLabel = { fr: "Référence pièce", en: "Part number", es: "Referencia de pieza", pt: "Referência da peça", de: "Teilenummer", it: "Codice ricambio", nl: "Onderdeelnummer", pl: "Numer części", ru: "Артикул детали", tr: "Parça numarası", ar: "مرجع القطعة", hi: "पार्ट नंबर", bn: "পার্ট নম্বর", ur: "پرزہ نمبر", ta: "பாக எண்", te: "పార్ట్ నంబర్", th: "รหัสชิ้นส่วน", zh: "零件编号", ja: "部品番号", ko: "부품 번호", id: "Nomor suku cadang", vi: "Mã phụ tùng", tl: "Part number", sw: "Namba ya kipuri", ha: "Lambar kayan gyara", yo: "Nọ́ńbà ẹ̀yà", zu: "Inombolo yengxenye", am: "የመለዋወጫ ቁጥር", bm: "Pɛsi nimɔrɔ", wo: "Nimero pees" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -8916,6 +8918,18 @@ function mergeSettings(baseShop, localShop, remoteShop) {
 const RESET_MARK_ID = "__reset__";
 // Une dépense ou un remboursement de dette payé par Mobile Money ne passe pas par le tiroir :
 // seul ce qui est en espèces compte dans le solde de caisse (sans choix = espèces, comme avant).
+// Emplacement (rayon, étagère) et référence constructeur d'un produit : affichés sous le nom
+// et trouvables à la recherche (vente et stock), comme le code-barres.
+function productTagLine(p) {
+  const parts = [];
+  if (p && p.location) parts.push("📍 " + p.location);
+  if (p && p.partRef) parts.push("🔖 " + p.partRef);
+  return parts.join(" · ");
+}
+function productExtraMatch(p, q) {
+  if (!p || !q || q.length < 2) return false;
+  return [p.location, p.partRef, p.barcode].some((v) => v && String(v).toLowerCase().includes(q));
+}
 function isCashMove(x) { return !x || !x.method || x.method === "cash"; }
 // Vraie charge (réduit le bénéfice) : ni un retrait (l'argent change de place), ni un paiement
 // à un fournisseur (le coût de la marchandise est déjà compté via le prix d'achat des ventes).
@@ -14024,6 +14038,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Code-barres (EAN, optionnel) — permet de scanner le produit directement à la
   // caisse (onglet Vente) au lieu de le chercher/cliquer dans la liste.
   const [pBarcode, setPBarcode] = useState("");
+  const [pLocation, setPLocation] = useState("");
+  const [pPartRef, setPPartRef] = useState("");
   const [pExpiry, setPExpiry] = useState("");
   const [pLotNo, setPLotNo] = useState("");
   // Téléphones / électronique : n° de série (IMEI) demandé à la vente, état, garantie.
@@ -15813,7 +15829,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Après modification d'une variante : le nom du modèle suit sur toutes ses variantes, et
   // (case cochée) le prix, le prix d'achat, la catégorie, la photo et la description aussi.
   const resetProductForm = () => {
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm();
+    setPName(""); setPLocation(""); setPPartRef(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm();
   };
   const applyVariantGroupEdit = (list) => {
     if (!editingVariant) return list;
@@ -15909,6 +15925,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
           sellByMeasure: pSellByMeasure,
           measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
           barcode: pBarcode.trim() || null,
+          location: pLocation.trim() || null,
+          partRef: pPartRef.trim() || null,
           lotTracked: !kitFormActive && (!!pExpiry || !!p.lotTracked),
           batches: (() => {
             const newQty = pSellByMeasure ? parseFloat(String(pQty).replace(",", ".")) : parseInt(pQty, 10);
@@ -15941,7 +15959,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       }
       setQtyChangePrompt(null);
       setEditingProductId(null);
-      setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
+      setPName(""); setPLocation(""); setPPartRef(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
       return;
     }
     // Plus de limite sur le nombre de produits, à aucun palier.
@@ -15970,6 +15988,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       sellByMeasure: pSellByMeasure,
       measureUnit: pSellByMeasure ? (pMeasureUnit.trim() || "kg") : null,
       barcode: pBarcode.trim() || null,
+      location: pLocation.trim() || null,
+      partRef: pPartRef.trim() || null,
       trackSerial: pTrackSerial,
       condition: pCondition && pCondition !== "new" ? pCondition : null,
       warrantyMonths: parseInt(pWarrantyMonths, 10) > 0 ? parseInt(pWarrantyMonths, 10) : null,
@@ -16003,7 +16023,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
       saveAll({ products: [...products, newProduct] });
       logAction(`${t(lang, "logProductAdded")} : ${newProduct.name} (qté ${newProduct.quantity})`);
     }
-    setPName(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
+    setPName(""); setPLocation(""); setPPartRef(""); setPQty(""); setPPrice(""); setPDescription(""); setPCostPrice(""); setPCategory(""); setPPhoto(null); setPSellByUnit(false); setPUnitsPerPack(""); setPUnitPrice(""); setPDailyMode(false); setPSellByMeasure(false); setPMeasureUnit(""); setPBarcode(""); setPExpiry(""); setPLotNo(""); setPTrackSerial(false); setPCondition("new"); setPWarrantyMonths(""); resetVariantForm(); setShowAddProduct(false);
   };
   // Jette les lots périmés d'un produit : stock diminué, perte enregistrée dans unsoldLog
   // (déjà affiché dans Statistiques > Invendus), action notée dans l'historique.
@@ -16063,6 +16083,8 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     setPSellByMeasure(!!p.sellByMeasure);
     setPMeasureUnit(p.measureUnit || "");
     setPBarcode(p.barcode || "");
+    setPLocation(p.location || "");
+    setPPartRef(p.partRef || "");
     setPTrackSerial(!!p.trackSerial);
     setPCondition(p.condition || "new");
     setPWarrantyMonths(p.warrantyMonths > 0 ? String(p.warrantyMonths) : "");
@@ -19915,7 +19937,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   // ⚠️ Ces hooks DOIVENT rester avant tout "return" anticipé (loading, accountSuspended...) :
   // React exige le même nombre de hooks à chaque rendu (sinon erreur #310).
   const filteredProducts = useMemo(
-    () => sortProductList(products.filter((p) => { const q = deferredStockSearch.toLowerCase(); return p.name.toLowerCase().includes(q) || (q.length >= 2 && Array.isArray(p.batches) && p.batches.some((b) => b && b.lotNo && String(b.lotNo).toLowerCase().includes(q))); })),
+    () => sortProductList(products.filter((p) => { const q = deferredStockSearch.toLowerCase(); return p.name.toLowerCase().includes(q) || productExtraMatch(p, q.trim()) || (q.length >= 2 && Array.isArray(p.batches) && p.batches.some((b) => b && b.lotNo && String(b.lotNo).toLowerCase().includes(q))); })),
     [products, deferredStockSearch, sortProductList]
   );
   const filteredDebts = useMemo(
@@ -19932,7 +19954,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   );
   const cartProducts = useMemo(
     () => sortProductList(products.filter((p) =>
-      p.name.toLowerCase().includes(deferredCartSearch.toLowerCase()) &&
+      (p.name.toLowerCase().includes(deferredCartSearch.toLowerCase()) || productExtraMatch(p, deferredCartSearch.trim().toLowerCase())) &&
       (!cartCategoryFilter || p.category === cartCategoryFilter)
     )),
     [products, deferredCartSearch, cartCategoryFilter, sortProductList]
@@ -23216,6 +23238,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </div>
               )}
             </div>
+            <div className="flex gap-2 mb-3">
+              <input autoComplete="off" placeholder={`📍 ${tx(lang, "productLocationLabel")}`} value={pLocation} onChange={(e) => setPLocation(e.target.value.slice(0, 40))} className="flex-1 min-w-0 border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              {(["autoparts", "hardware", "electronics", "pharmacy", "wholesale"].includes(productSectorId) || pPartRef) && (
+                <input autoComplete="off" placeholder={`🔖 ${tx(lang, "productPartRefLabel")}`} value={pPartRef} onChange={(e) => setPPartRef(e.target.value.slice(0, 40))} className="flex-1 min-w-0 border rounded-lg px-3 py-2 text-sm" style={{ background: T.input, color: T.text, borderColor: T.border }} />
+              )}
+            </div>
             {/* Options conseillées pour le secteur de la boutique d'abord ; les autres sous
                 « Plus d'options » (toujours affichées si elles sont déjà utilisées). */}
             {!productSectorId && !activeEmployee && !isDemo && (
@@ -23638,6 +23666,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           </span>
                         )}
                       </div>
+                      {productTagLine(p) && <p className="text-[11px] font-semibold" style={{ color: darkMode ? "#a5b4fc" : "#4338ca" }}>{productTagLine(p)}</p>}
                       <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)} / {p.sellByMeasure ? (p.measureUnit || t(lang, "othUnite")) : t(lang, "othUnite")}</p>
                       {(() => {
                         const ex = expiryStatus(p, localDayKey(new Date()));
@@ -24190,6 +24219,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                             </div>
                             <div>
                               <p className="text-base font-bold">{p.name}</p>
+                              {productTagLine(p) && <p className="text-[11px] font-semibold" style={{ color: darkMode ? "#a5b4fc" : "#4338ca" }}>{productTagLine(p)}</p>}
                               <p className="text-xs" style={{ color: T.muted }}>{fcfa(p.price)}{p.sellByMeasure ? ` / ${p.measureUnit || ""}` : ""} {p.sellByUnit ? `(${t(lang, "sellPack")})` : ""} · {tx(lang, "measureAvailable")} {localizedQty(Math.max(0, r3q(dispo - expiredQtyOf(p))))} {p.sellByMeasure ? (p.measureUnit || "") : ""}</p>
                               {productPriceTiers(p).length > 0 && (
                                 <p className="text-[10px] font-semibold" style={{ color: darkMode ? "#4ade80" : "#15803d" }}>
