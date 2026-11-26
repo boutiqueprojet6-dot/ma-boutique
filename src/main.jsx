@@ -25,6 +25,16 @@ const isCapacitorApp =
   typeof window.Capacitor.isNativePlatform === "function" &&
   window.Capacitor.isNativePlatform();
 
+// Mesure d'audience Vercel (Web Analytics) : visites du site et de la PWA, sans cookie.
+// Pas dans l'APK (fichiers locaux, pas de serveur Vercel derrière).
+if (!isCapacitorApp && typeof window !== "undefined" && /boutipro\.com$|vercel\.app$/.test(window.location.hostname)) {
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  const vaScript = document.createElement("script");
+  vaScript.defer = true;
+  vaScript.src = "/_vercel/insights/script.js";
+  document.head.appendChild(vaScript);
+}
+
 // Un déploiement remplace les fichiers JS/CSS par de nouveaux fichiers au nom différent
 // (hash de contenu) et supprime les anciens. Si quelqu'un a déjà cette page ouverte (ou
 // une copie mise en cache par le navigateur/service worker) au moment d'un déploiement,
