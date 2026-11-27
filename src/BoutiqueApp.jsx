@@ -6568,6 +6568,11 @@ EXTRA_UI.stockExpiryAlertsDesc = { fr: "Stock bas, dates de péremption", en: "L
 EXTRA_UI.mixedFromMobile = { fr: "Une partie payée en espèces ? (paiement mixte)", en: "Part paid in cash? (mixed payment)", es: "¿Una parte en efectivo? (pago mixto)", pt: "Uma parte em dinheiro? (pagamento misto)", de: "Teilweise bar bezahlt? (gemischte Zahlung)", it: "Una parte in contanti? (pagamento misto)", nl: "Deels contant betaald? (gemengde betaling)", pl: "Część gotówką? (płatność mieszana)", ru: "Часть наличными? (смешанная оплата)", tr: "Bir kısmı nakit mi? (karma ödeme)", ar: "جزء نقدًا؟ (دفع مختلط)", hi: "कुछ हिस्सा नकद में? (मिश्रित भुगतान)", bn: "কিছু অংশ নগদে? (মিশ্র পেমেন্ট)", ur: "کچھ حصہ نقد میں؟ (ملا جلا ادائیگی)", ta: "ஒரு பகுதி ரொக்கமாக? (கலப்பு கட்டணம்)", te: "కొంత భాగం నగదుగా? (మిశ్రమ చెల్లింపు)", th: "จ่ายเงินสดบางส่วน? (จ่ายแบบผสม)", zh: "部分用现金？（混合支付）", ja: "一部を現金で？（混合払い）", ko: "일부 현금 결제? (혼합 결제)", id: "Sebagian tunai? (pembayaran campuran)", vi: "Một phần tiền mặt? (thanh toán kết hợp)", tl: "May bahaging cash? (halong bayad)", sw: "Sehemu kwa taslimu? (malipo mchanganyiko)", ha: "Wani ɓangare da tsabar kuɗi? (biya gauraye)", yo: "Apá kan ní owó ọwọ́? (ìsanwó àdàlù)", zu: "Ingxenye ngokheshi? (inkokhelo exubile)", am: "ከፊሉ በጥሬ ገንዘብ? (ድብልቅ ክፍያ)", bm: "A dɔ sarala ni wari ye? (sarali ɲagaminen)", wo: "Am pàcc ci xaalis? (fey bu jaxasoo)" };
 EXTRA_UI.debtsByCustomerHint = { fr: "touchez un client pour son relevé", en: "tap a customer for their statement", es: "toque un cliente para ver su estado", pt: "toque num cliente para o extrato", de: "Kunden antippen für den Auszug", it: "toccate un cliente per l'estratto", nl: "tik op een klant voor het overzicht", pl: "dotknij klienta, aby zobaczyć zestawienie", ru: "нажмите на клиента для выписки", tr: "döküm için müşteriye dokunun", ar: "المسوا زبونًا لعرض كشفه", hi: "विवरण के लिए ग्राहक को छुएँ", bn: "বিবরণীর জন্য গ্রাহকে চাপুন", ur: "گوشوارے کے لیے گاہک کو چھوئیں", ta: "அறிக்கைக்கு வாடிக்கையாளரைத் தொடுங்கள்", te: "వివరణ కోసం కస్టమర్‌ను నొక్కండి", th: "แตะลูกค้าเพื่อดูใบแจ้งยอด", zh: "点击顾客查看对账单", ja: "明細はお客様をタップ", ko: "내역서는 고객을 누르세요", id: "ketuk pelanggan untuk laporannya", vi: "chạm vào khách để xem sao kê", tl: "pindutin ang customer para sa statement", sw: "gusa mteja kuona taarifa yake", ha: "taɓa abokin ciniki don bayaninsa", yo: "ẹ tẹ oníbàárà fún àkọsílẹ̀ rẹ̀", zu: "thinta ikhasimende ukuze ubone isitatimende", am: "ለመግለጫው ደንበኛውን ይንኩ", bm: "aw ka sannikɛla digi a ka jatebɔsɛbɛn kama", wo: "bësal kiliyaan ngir waññ bi" };
 EXTRA_UI.fdMissionCash = { fr: "Ouvrez votre caisse du jour", en: "Open today's cash register", es: "Abra su caja del día", pt: "Abra a sua caixa do dia", de: "Öffnen Sie Ihre Tageskasse", it: "Aprite la cassa del giorno", nl: "Open uw kassa van vandaag", pl: "Otwórz dzisiejszą kasę", ru: "Откройте кассу за сегодня", tr: "Günün kasasını açın", ar: "افتحوا صندوق اليوم", hi: "आज का गल्ला खोलें", bn: "আজকের ক্যাশ খুলুন", ur: "آج کا کیش کھولیں", ta: "இன்றைய காசுப் பெட்டியைத் திறக்கவும்", te: "ఈరోజు క్యాష్ తెరవండి", th: "เปิดดูเงินสดของวันนี้", zh: "查看今天的钱箱", ja: "今日のレジを開く", ko: "오늘의 현금함 열기", id: "Buka kas hari ini", vi: "Mở quỹ tiền hôm nay", tl: "Buksan ang kaha ngayong araw", sw: "Fungua fedha za leo", ha: "Buɗe akwatin kuɗin yau", yo: "Ẹ ṣí àpò owó òní", zu: "Vula imali yanamuhla", am: "የዛሬውን ካዝና ይክፈቱ", bm: "Aw ka bi wari bilayɔrɔ dayɛlɛ", wo: "Ubbileen seen kees bu tey" };
+EXTRA_UI.authSubtitle = { fr: "Créez votre boutique gratuite ou connectez-vous.", en: "Create your free shop or log in.", es: "Cree su tienda gratis o inicie sesión.", pt: "Crie a sua loja grátis ou inicie sessão.", de: "Erstellen Sie Ihr kostenloses Geschäft oder melden Sie sich an.", it: "Create il vostro negozio gratuito o accedete.", nl: "Maak uw gratis winkel aan of log in.", pl: "Załóż darmowy sklep lub zaloguj się.", ru: "Создайте бесплатный магазин или войдите.", tr: "Ücretsiz dükkânınızı oluşturun veya giriş yapın.", ar: "أنشئوا متجركم المجاني أو سجّلوا الدخول.", hi: "अपनी मुफ़्त दुकान बनाएं या लॉग इन करें।", bn: "বিনামূল্যে দোকান খুলুন বা লগ ইন করুন।", ur: "اپنی مفت دکان بنائیں یا لاگ ان کریں۔", ta: "இலவசக் கடையை உருவாக்குங்கள் அல்லது உள்நுழையுங்கள்.", te: "ఉచిత దుకాణాన్ని సృష్టించండి లేదా లాగిన్ అవ్వండి.", th: "สร้างร้านฟรีหรือเข้าสู่ระบบ", zh: "免费创建店铺或登录。", ja: "無料でお店を作成、またはログイン。", ko: "무료 가게를 만들거나 로그인하세요.", id: "Buat toko gratis Anda atau masuk.", vi: "Tạo cửa hàng miễn phí hoặc đăng nhập.", tl: "Gumawa ng libreng tindahan o mag-log in.", sw: "Fungueni duka lenu bure au ingieni.", ha: "Ƙirƙiri shagonku kyauta ko shiga.", yo: "Ẹ ṣẹ̀dá ṣọ́ọ̀bù ọ̀fẹ́ yín tàbí ẹ wọlé.", zu: "Dalani isitolo senu mahhala noma ningene.", am: "ነጻ ሱቅዎን ይፍጠሩ ወይም ይግቡ።", bm: "Aw ka butiki fu dilan walima ka don.", wo: "Sosleen seen bitig bu amul pey walla duggleen." };
+EXTRA_UI.authContinueBtn = { fr: "Continuer", en: "Continue", es: "Continuar", pt: "Continuar", de: "Weiter", it: "Continua", nl: "Doorgaan", pl: "Dalej", ru: "Продолжить", tr: "Devam", ar: "متابعة", hi: "जारी रखें", bn: "চালিয়ে যান", ur: "جاری رکھیں", ta: "தொடரவும்", te: "కొనసాగించండి", th: "ดำเนินการต่อ", zh: "继续", ja: "続ける", ko: "계속", id: "Lanjutkan", vi: "Tiếp tục", tl: "Magpatuloy", sw: "Endelea", ha: "Ci gaba", yo: "Tẹ̀síwájú", zu: "Qhubeka", am: "ቀጥል", bm: "Taa a fɛ", wo: "Wéy" };
+EXTRA_UI.authPerk1 = { fr: "Gratuit pour démarrer, sans carte bancaire", en: "Free to start, no bank card", es: "Gratis para empezar, sin tarjeta", pt: "Grátis para começar, sem cartão", de: "Kostenlos starten, ohne Bankkarte", it: "Gratis per iniziare, senza carta", nl: "Gratis starten, zonder bankkaart", pl: "Darmowy start, bez karty", ru: "Бесплатный старт, без карты", tr: "Ücretsiz başlangıç, kart gerekmez", ar: "مجاني للبدء، بدون بطاقة بنكية", hi: "शुरू करना मुफ़्त, बैंक कार्ड नहीं चाहिए", bn: "শুরু বিনামূল্যে, কার্ড লাগবে না", ur: "آغاز مفت، بینک کارڈ کے بغیر", ta: "இலவசமாகத் தொடங்கலாம், வங்கி அட்டை தேவையில்லை", te: "ఉచితంగా ప్రారంభం, బ్యాంక్ కార్డ్ అక్కర్లేదు", th: "เริ่มใช้ฟรี ไม่ต้องใช้บัตร", zh: "免费开始，无需银行卡", ja: "無料で開始、カード不要", ko: "무료로 시작, 카드 불필요", id: "Gratis untuk mulai, tanpa kartu bank", vi: "Bắt đầu miễn phí, không cần thẻ", tl: "Libreng magsimula, walang bank card", sw: "Bure kuanza, bila kadi ya benki", ha: "Kyauta don farawa, babu katin banki", yo: "Ọ̀fẹ́ láti bẹ̀rẹ̀, láìsí káàdì báǹkì", zu: "Mahhala ukuqala, ngaphandle kwekhadi lasebhange", am: "ለመጀመር ነጻ፣ የባንክ ካርድ አያስፈልግም", bm: "Daminɛ ye fu ye, banki karti tɛ", wo: "Tàmbali amul pey, soxlawul kaart" };
+EXTRA_UI.authPerk2 = { fr: "Ventes, stock, caisse et dettes synchronisés", en: "Sales, stock, cash and debts in sync", es: "Ventas, stock, caja y deudas sincronizados", pt: "Vendas, stock, caixa e dívidas sincronizados", de: "Verkäufe, Bestand, Kasse und Schulden synchron", it: "Vendite, scorte, cassa e debiti sincronizzati", nl: "Verkopen, voorraad, kassa en schulden gesynchroniseerd", pl: "Sprzedaż, magazyn, kasa i długi zsynchronizowane", ru: "Продажи, склад, касса и долги синхронизированы", tr: "Satış, stok, kasa ve borçlar senkronize", ar: "المبيعات والمخزون والصندوق والديون متزامنة", hi: "बिक्री, स्टॉक, गल्ला और उधार सिंक", bn: "বিক্রি, স্টক, ক্যাশ ও বাকি সিঙ্ক", ur: "فروخت، اسٹاک، کیش اور ادھار ہم آہنگ", ta: "விற்பனை, இருப்பு, காசு, கடன்கள் ஒத்திசைவில்", te: "అమ్మకాలు, స్టాక్, క్యాష్, బాకీలు సమకాలీకరణలో", th: "ยอดขาย สต็อก เงินสด และหนี้ ซิงก์กัน", zh: "销售、库存、钱箱和欠款同步", ja: "売上・在庫・レジ・掛けを同期", ko: "판매·재고·현금·외상 동기화", id: "Penjualan, stok, kas, dan utang tersinkron", vi: "Bán hàng, tồn kho, quỹ và công nợ đồng bộ", tl: "Naka-sync ang benta, stock, kaha at utang", sw: "Mauzo, stoo, fedha na madeni vinalingana", ha: "Sayarwa, kaya, akwati da bashi suna daidaita", yo: "Títà, ọjà, àpò owó àti gbèsè ń bá ara mu", zu: "Ukuthengisa, isitoko, imali nezikweletu kuhambisana", am: "ሽያጭ፣ ክምችት፣ ካዝናና ዕዳ ተስማምተዋል", bm: "Feereliw, minɛnw, wari ni juruw bɛ bɛn", wo: "Njaay, stock, kees ak bor yi di méngoo" };
+EXTRA_UI.authPerk3 = { fr: "Disponible en 30 langues", en: "Available in 30 languages", es: "Disponible en 30 idiomas", pt: "Disponível em 30 línguas", de: "In 30 Sprachen verfügbar", it: "Disponibile in 30 lingue", nl: "Beschikbaar in 30 talen", pl: "Dostępne w 30 językach", ru: "Доступно на 30 языках", tr: "30 dilde kullanılabilir", ar: "متاح بـ 30 لغة", hi: "30 भाषाओं में उपलब्ध", bn: "৩০টি ভাষায় পাওয়া যায়", ur: "30 زبانوں میں دستیاب", ta: "30 மொழிகளில் கிடைக்கும்", te: "30 భాషల్లో అందుబాటులో ఉంది", th: "มีให้ใช้ 30 ภาษา", zh: "支持 30 种语言", ja: "30 言語に対応", ko: "30개 언어 지원", id: "Tersedia dalam 30 bahasa", vi: "Có 30 ngôn ngữ", tl: "Makukuha sa 30 wika", sw: "Inapatikana kwa lugha 30", ha: "Akwai a harsuna 30", yo: "Wà ní èdè 30", zu: "Iyatholakala ngezilimi ezingu-30", am: "በ30 ቋንቋዎች ይገኛል", bm: "A bɛ sɔrɔ kan 30 la", wo: "Am na ci 30 làkk" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -9900,18 +9905,33 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
           {/* Dark brand panel */}
           <div
             className={isDesktop ? "px-16 text-white w-2/5 flex flex-col justify-center" : "px-7 py-8 text-white md:w-2/5 md:flex md:flex-col md:justify-center"}
-            style={{ background: "radial-gradient(120% 100% at 0% 0%, #272A56 0%, #12132A 60%)" }}
+            style={{ background: "radial-gradient(130% 110% at 0% 0%, #2a3a8f 0%, #1e2a6e 35%, #0f172a 100%)" }}
           >
             <div className="flex items-center gap-2 mb-4" onClick={handleLogoTap} style={{ cursor: "pointer", width: "fit-content" }}>
               <svg width="24" height="24" viewBox="0 0 26 26"><rect x="3" y="4" width="4" height="18" rx="2" fill="#8B85F2"/><rect x="11" y="9" width="4" height="13" rx="2" fill="#8B85F2"/><rect x="19" y="1" width="4" height="21" rx="2" fill="#4F46E5"/></svg>
               <span className="font-bold text-sm tracking-wide">{t(lang, "appName")}</span>
             </div>
-            <p className="text-base italic font-medium leading-snug" style={{ maxWidth: 260 }}>{t(lang, "brandTagline")}</p>
-            <div className="flex items-end gap-2 mt-5" style={{ height: 50 }}>
-              {[18, 32, 24, 40, 16].map((h, i) => (
-                <div key={i} style={{ width: 5, height: h, borderRadius: 3, background: "linear-gradient(180deg, #8B85F2, #4F46E5)" }} />
-              ))}
-            </div>
+            <p className={isDesktop ? "text-2xl font-extrabold leading-snug" : "text-base font-bold leading-snug"} style={{ maxWidth: isDesktop ? 440 : 320, textAlign: "start" }}>{tx(lang, "lpHeroTitle")}</p>
+            {isDesktop && (
+              <div aria-hidden="true" className="relative mt-7 mb-7" style={{ maxWidth: 440, paddingBottom: 26 }}>
+                <div style={{ width: "88%" }}>
+                  <div style={{ background: "#0b0f1f", borderRadius: "12px 12px 0 0", padding: "8px 8px 10px", boxShadow: "0 20px 40px -14px rgba(0,0,0,0.6)" }}>
+                    <img src="/lp-ordinateur.webp" alt="" style={{ width: "100%", display: "block", borderRadius: 4, aspectRatio: "16 / 10", objectFit: "cover", objectPosition: "top" }} />
+                  </div>
+                  <div style={{ height: 11, margin: "0 -5%", background: "linear-gradient(180deg, #d5d8e3, #a9adbd)", borderRadius: "0 0 10px 10px" }} />
+                </div>
+                <div style={{ position: "absolute", bottom: 0, insetInlineEnd: 0, width: "30%", borderRadius: 20, background: "#0b0f1f", padding: 5, boxShadow: "0 20px 40px -10px rgba(0,0,0,0.6)" }}>
+                  <img src="/lp-accueil.webp" alt="" style={{ width: "100%", display: "block", borderRadius: 16 }} />
+                </div>
+              </div>
+            )}
+            {isDesktop && (
+              <div className="space-y-2" style={{ fontSize: 14, fontWeight: 600, color: "rgba(255,255,255,0.88)" }}>
+                <p>✓ {tx(lang, "authPerk1")}</p>
+                <p>✓ {tx(lang, "authPerk2")}</p>
+                <p>✓ {tx(lang, "authPerk3")}</p>
+              </div>
+            )}
           </div>
           {/* Form panel (thème clair/sombre selon la préférence mémorisée) */}
           <div data-kbscroll="true"
@@ -9921,33 +9941,26 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             {/* Largeur du formulaire limitée même sur grand écran, pour rester lisible :
                 seul le fond (panneaux de marque + formulaire) remplit tout l'écran. */}
             <div className="w-full max-w-md mx-auto">
-            <div className="flex justify-start gap-2 mb-4 overflow-x-auto" style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none" }}>
-              {LANGUAGES.map((l) => (
-                <button key={l.id} onClick={() => setLang(l.id)} className="flex-shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full border" style={{ borderColor: darkMode ? "#8B85F2" : INDIGO, background: lang === l.id ? (darkMode ? "#4F46E5" : INDIGO) : AT.card, color: lang === l.id ? "white" : (darkMode ? "#8B85F2" : INDIGO) }}>
-                  {l.label}
-                </button>
-              ))}
+            {/* Langue : menu compact « 🌐 Français ▾ » — la langue active reste toujours visible. */}
+            <div className="flex justify-end mb-4">
+              <label className="relative inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full border whitespace-nowrap" style={{ borderColor: AT.border, color: AT.text, background: AT.input, cursor: "pointer" }}>
+                🌐 {(LANGUAGES.find((l) => l.id === lang) || {}).label || lang} ▾
+                <select aria-label="Language" value={lang} onChange={(e) => setLang(e.target.value)} style={{ position: "absolute", inset: 0, opacity: 0, cursor: "pointer", width: "100%" }}>
+                  {LANGUAGES.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}
+                </select>
+              </label>
             </div>
-            <p className="text-sm font-medium mb-4" style={{ color: AT.muted }}>
-              {t(lang, "loginSubtitle")}
+            <p className="text-base font-bold mb-4" style={{ color: AT.text }}>
+              {tx(lang, "authSubtitle")}
             </p>
-            {canInstallApp && installDismissed && (
-              <button
-                onClick={handleInstallClick}
-                className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2"
-                style={{ background: INDIGO, color: "white" }}
-              >
-                ⬇️ {tx(lang, "installBannerTitle")}
-              </button>
-            )}
             <button
               onClick={loginWithGoogle}
               disabled={googleLoginBusy}
               className="w-full py-3 rounded-xl font-semibold text-sm mb-3 flex items-center justify-center gap-2.5"
-              style={{ background: darkMode ? "#4F46E5" : "#15162C", color: "white", opacity: googleLoginBusy ? 0.75 : 1 }}
+              style={{ background: darkMode ? "#ffffff" : "#ffffff", color: "#1f2937", border: "1px solid #d1d5db", boxShadow: "0 2px 6px rgba(15,23,42,0.08)", opacity: googleLoginBusy ? 0.75 : 1 }}
             >
               {googleLoginBusy ? (
-                <span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.35)", borderTopColor: "white", display: "inline-block", animation: "spin 0.7s linear infinite" }} />
+                <span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid rgba(31,41,55,0.25)", borderTopColor: "#1f2937", display: "inline-block", animation: "spin 0.7s linear infinite" }} />
               ) : (
                 <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20.5H24v7h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.6 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 15.5 4 8.2 8.8 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.5 0 10.5-2.1 14.3-5.6l-6.6-5.6C29.6 35.7 26.9 36.7 24 36.7c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C8.1 40.1 15.5 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20.5H24v7h11.3c-.8 2.3-2.2 4.3-4.1 5.7l6.6 5.6C40.9 36.6 44 30.9 44 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
               )}
@@ -10018,8 +10031,8 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
                 </div>
                 )}
                 {error && <p className="text-xs mt-2" style={{ color: CLAY }}>{error}</p>}
-                <button disabled={loginOtpSending} onClick={sendLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: darkMode ? "#4F46E5" : "#15162C", opacity: loginOtpSending ? 0.75 : 1 }}>
-                  {loginOtpSending ? t(lang, "wait") : t(lang, "loginBtn")}
+                <button disabled={loginOtpSending} onClick={sendLoginOtp} className="w-full py-3 rounded-xl text-white font-semibold text-sm mt-4" style={{ background: "#2563eb", opacity: loginOtpSending ? 0.75 : 1 }}>
+                  {loginOtpSending ? t(lang, "wait") : tx(lang, "authContinueBtn")}
                 </button>
               </>
             ) : (
@@ -10058,7 +10071,7 @@ function AuthScreen({ onLogin, onAdminLogin, onDemo, lang, setLang, startInGoogl
             <p className="text-center mt-4" style={{ fontSize: 11, color: AT.muted, lineHeight: 1.6 }}>
               {renderLegalConsentText(t(lang, "legalConsentText"), t(lang, "termsLinkLabel"), t(lang, "privacyLinkLabel"), darkMode)}
             </p>
-            <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-[11px] mt-3 font-semibold underline" style={{ color: darkMode ? "#8B85F2" : INDIGO }}>
+            <button onClick={() => setScreen("employee-scan")} className="w-full flex items-center justify-center gap-2 text-center text-xs mt-4 py-2.5 rounded-xl border font-semibold" style={{ color: darkMode ? "#a5b4fc" : "#1e3a8a", borderColor: AT.border }}>
               <QrCode size={13} /> {t(lang, "loginAsEmployee")}
             </button>
             </div>
@@ -29992,7 +30005,8 @@ function BoutiqueAppInner() {
   if (!session) {
     return (
       <>
-      <InstallBanner lang={lang} />
+      {/* Pas d'invitation à installer avant la connexion : elle coupait l'élan d'inscription.
+          Elle apparaît une fois dans l'application. */}
       <AuthScreen
         lang={lang}
         setLang={changeLang}
