@@ -23607,10 +23607,15 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
             )}
             {hasPermission("editStock") && products.length > 0 && (
-              // Des produits existent déjà : simple bouton (la grande carte prenait un quart d'écran).
-              <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl text-white font-extrabold text-sm" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 8px 16px rgba(37,99,235,0.3)" }}>
-                <Plus size={18} /> {t(lang, "addProduct")}
-              </button>
+              <div className="rounded-3xl p-5 text-center" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
+                <div style={{ animation: "floatSlow 2.3s ease-in-out infinite alternate" }}>
+                  <div style={{ fontSize: 40 }}>📦</div>
+                </div>
+                <p className="text-sm font-bold mt-2 mb-4" style={{ color: T.text }}>{t(lang, "addProductHeaderTitle")}</p>
+                <button onClick={() => setShowAddProduct(true)} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-extrabold text-base" style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", boxShadow: "0 12px 22px rgba(37,99,235,0.38)" }}>
+                  <Plus size={20} /> {t(lang, "addProduct")}
+                </button>
+              </div>
             )}
             {products.length > 0 && invOpen && hasPermission("editStock") && !shopReadOnly && (
               // Inventaire en cours : bandeau bien visible pour le reprendre.
