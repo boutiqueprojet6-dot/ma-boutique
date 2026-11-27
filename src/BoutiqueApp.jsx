@@ -6573,6 +6573,12 @@ EXTRA_UI.authContinueBtn = { fr: "Continuer", en: "Continue", es: "Continuar", p
 EXTRA_UI.authPerk1 = { fr: "Gratuit pour démarrer, sans carte bancaire", en: "Free to start, no bank card", es: "Gratis para empezar, sin tarjeta", pt: "Grátis para começar, sem cartão", de: "Kostenlos starten, ohne Bankkarte", it: "Gratis per iniziare, senza carta", nl: "Gratis starten, zonder bankkaart", pl: "Darmowy start, bez karty", ru: "Бесплатный старт, без карты", tr: "Ücretsiz başlangıç, kart gerekmez", ar: "مجاني للبدء، بدون بطاقة بنكية", hi: "शुरू करना मुफ़्त, बैंक कार्ड नहीं चाहिए", bn: "শুরু বিনামূল্যে, কার্ড লাগবে না", ur: "آغاز مفت، بینک کارڈ کے بغیر", ta: "இலவசமாகத் தொடங்கலாம், வங்கி அட்டை தேவையில்லை", te: "ఉచితంగా ప్రారంభం, బ్యాంక్ కార్డ్ అక్కర్లేదు", th: "เริ่มใช้ฟรี ไม่ต้องใช้บัตร", zh: "免费开始，无需银行卡", ja: "無料で開始、カード不要", ko: "무료로 시작, 카드 불필요", id: "Gratis untuk mulai, tanpa kartu bank", vi: "Bắt đầu miễn phí, không cần thẻ", tl: "Libreng magsimula, walang bank card", sw: "Bure kuanza, bila kadi ya benki", ha: "Kyauta don farawa, babu katin banki", yo: "Ọ̀fẹ́ láti bẹ̀rẹ̀, láìsí káàdì báǹkì", zu: "Mahhala ukuqala, ngaphandle kwekhadi lasebhange", am: "ለመጀመር ነጻ፣ የባንክ ካርድ አያስፈልግም", bm: "Daminɛ ye fu ye, banki karti tɛ", wo: "Tàmbali amul pey, soxlawul kaart" };
 EXTRA_UI.authPerk2 = { fr: "Ventes, stock, caisse et dettes synchronisés", en: "Sales, stock, cash and debts in sync", es: "Ventas, stock, caja y deudas sincronizados", pt: "Vendas, stock, caixa e dívidas sincronizados", de: "Verkäufe, Bestand, Kasse und Schulden synchron", it: "Vendite, scorte, cassa e debiti sincronizzati", nl: "Verkopen, voorraad, kassa en schulden gesynchroniseerd", pl: "Sprzedaż, magazyn, kasa i długi zsynchronizowane", ru: "Продажи, склад, касса и долги синхронизированы", tr: "Satış, stok, kasa ve borçlar senkronize", ar: "المبيعات والمخزون والصندوق والديون متزامنة", hi: "बिक्री, स्टॉक, गल्ला और उधार सिंक", bn: "বিক্রি, স্টক, ক্যাশ ও বাকি সিঙ্ক", ur: "فروخت، اسٹاک، کیش اور ادھار ہم آہنگ", ta: "விற்பனை, இருப்பு, காசு, கடன்கள் ஒத்திசைவில்", te: "అమ్మకాలు, స్టాక్, క్యాష్, బాకీలు సమకాలీకరణలో", th: "ยอดขาย สต็อก เงินสด และหนี้ ซิงก์กัน", zh: "销售、库存、钱箱和欠款同步", ja: "売上・在庫・レジ・掛けを同期", ko: "판매·재고·현금·외상 동기화", id: "Penjualan, stok, kas, dan utang tersinkron", vi: "Bán hàng, tồn kho, quỹ và công nợ đồng bộ", tl: "Naka-sync ang benta, stock, kaha at utang", sw: "Mauzo, stoo, fedha na madeni vinalingana", ha: "Sayarwa, kaya, akwati da bashi suna daidaita", yo: "Títà, ọjà, àpò owó àti gbèsè ń bá ara mu", zu: "Ukuthengisa, isitoko, imali nezikweletu kuhambisana", am: "ሽያጭ፣ ክምችት፣ ካዝናና ዕዳ ተስማምተዋል", bm: "Feereliw, minɛnw, wari ni juruw bɛ bɛn", wo: "Njaay, stock, kees ak bor yi di méngoo" };
 EXTRA_UI.authPerk3 = { fr: "Disponible en 30 langues", en: "Available in 30 languages", es: "Disponible en 30 idiomas", pt: "Disponível em 30 línguas", de: "In 30 Sprachen verfügbar", it: "Disponibile in 30 lingue", nl: "Beschikbaar in 30 talen", pl: "Dostępne w 30 językach", ru: "Доступно на 30 языках", tr: "30 dilde kullanılabilir", ar: "متاح بـ 30 لغة", hi: "30 भाषाओं में उपलब्ध", bn: "৩০টি ভাষায় পাওয়া যায়", ur: "30 زبانوں میں دستیاب", ta: "30 மொழிகளில் கிடைக்கும்", te: "30 భాషల్లో అందుబాటులో ఉంది", th: "มีให้ใช้ 30 ภาษา", zh: "支持 30 种语言", ja: "30 言語に対応", ko: "30개 언어 지원", id: "Tersedia dalam 30 bahasa", vi: "Có 30 ngôn ngữ", tl: "Makukuha sa 30 wika", sw: "Inapatikana kwa lugha 30", ha: "Akwai a harsuna 30", yo: "Wà ní èdè 30", zu: "Iyatholakala ngezilimi ezingu-30", am: "በ30 ቋንቋዎች ይገኛል", bm: "A bɛ sɔrɔ kan 30 la", wo: "Am na ci 30 làkk" };
+EXTRA_UI.deskLayoutLabel = { fr: "Disposition sur ordinateur", en: "Computer layout", es: "Diseño en ordenador", pt: "Disposição no computador", de: "Anordnung am Computer", it: "Disposizione su computer", nl: "Indeling op computer", pl: "Układ na komputerze", ru: "Вид на компьютере", tr: "Bilgisayar düzeni", ar: "التخطيط على الحاسوب", hi: "कंप्यूटर पर लेआउट", bn: "কম্পিউটারে বিন্যাস", ur: "کمپیوٹر پر ترتیب", ta: "கணினியில் அமைப்பு", te: "కంప్యూటర్‌లో అమరిక", th: "การจัดวางบนคอมพิวเตอร์", zh: "电脑布局", ja: "パソコンでのレイアウト", ko: "컴퓨터 화면 배치", id: "Tata letak di komputer", vi: "Bố cục trên máy tính", tl: "Ayos sa computer", sw: "Mpangilio kwenye kompyuta", ha: "Tsari a kwamfuta", yo: "Ìtòlẹ́sẹẹsẹ lórí kọ̀ǹpútà", zu: "Ukuhlelwa kukhompyutha", am: "በኮምፒውተር ላይ አቀማመጥ", bm: "Ɔridinatɛri kan labɛnni", wo: "Tëralin ci ordinaatëer" };
+EXTRA_UI.deskLayoutDesc = { fr: "Choisissez l'affichage qui vous convient sur cet ordinateur. Rien ne change sur téléphone.", en: "Choose the display that suits you on this computer. Nothing changes on phones.", es: "Elija la vista que prefiera en este ordenador. Nada cambia en el teléfono.", pt: "Escolha a apresentação que prefere neste computador. Nada muda no telemóvel.", de: "Wählen Sie die passende Ansicht für diesen Computer. Auf dem Handy ändert sich nichts.", it: "Scegliete la visualizzazione che preferite su questo computer. Sul telefono non cambia nulla.", nl: "Kies de weergave die u bevalt op deze computer. Op de telefoon verandert niets.", pl: "Wybierz widok, który Ci odpowiada na tym komputerze. Na telefonie nic się nie zmienia.", ru: "Выберите удобный вид на этом компьютере. На телефоне ничего не меняется.", tr: "Bu bilgisayarda size uyan görünümü seçin. Telefonda hiçbir şey değişmez.", ar: "اختاروا العرض الذي يناسبكم على هذا الحاسوب. لا يتغير شيء على الهاتف.", hi: "इस कंप्यूटर पर अपनी पसंद का दृश्य चुनें। फ़ोन पर कुछ नहीं बदलता।", bn: "এই কম্পিউটারে আপনার পছন্দের প্রদর্শন বেছে নিন। ফোনে কিছু বদলায় না।", ur: "اس کمپیوٹر پر اپنی پسند کا ڈسپلے چنیں۔ فون پر کچھ نہیں بدلتا۔", ta: "இந்தக் கணினியில் உங்களுக்கு ஏற்ற காட்சியைத் தேர்வு செய்யுங்கள். தொலைபேசியில் எதுவும் மாறாது.", te: "ఈ కంప్యూటర్‌లో మీకు నచ్చిన ప్రదర్శనను ఎంచుకోండి. ఫోన్‌లో ఏదీ మారదు.", th: "เลือกการแสดงผลที่เหมาะกับคุณบนคอมพิวเตอร์เครื่องนี้ บนมือถือไม่มีอะไรเปลี่ยน", zh: "选择适合您的电脑显示方式。手机上不受影响。", ja: "このパソコンでの表示を選べます。スマホは変わりません。", ko: "이 컴퓨터에 맞는 화면을 고르세요. 휴대폰은 바뀌지 않습니다.", id: "Pilih tampilan yang cocok di komputer ini. Di ponsel tidak ada yang berubah.", vi: "Chọn kiểu hiển thị phù hợp trên máy tính này. Điện thoại không thay đổi.", tl: "Piliin ang ayos na gusto ninyo sa computer na ito. Walang magbabago sa telepono.", sw: "Chagueni mwonekano unaowafaa kwenye kompyuta hii. Hakuna kinachobadilika kwenye simu.", ha: "Zaɓi tsarin da ya dace da ku a wannan kwamfuta. Babu abin da zai canza a waya.", yo: "Ẹ yan ìfihàn tó bá yín mu lórí kọ̀ǹpútà yìí. Kò sí ohun tó yí padà lórí fóònù.", zu: "Khethani ukubukeka okunifanele kule khompyutha. Akukho okushintshayo ocingweni.", am: "በዚህ ኮምፒውተር ላይ የሚስማማዎትን ማሳያ ይምረጡ። በስልክ ላይ ምንም አይለወጥም።", bm: "Aw ka jiracogo min bɛ aw diya sugandi nin ɔridinatɛri in kan. Foyi tɛ yɛlɛma telefɔni kan.", wo: "Tànnleen wone wi leen neex ci ordinaatëer bii. Dara du soppiku ci telefon." };
+EXTRA_UI.deskLayoutWide = { fr: "Large (colonnes)", en: "Wide (columns)", es: "Amplio (columnas)", pt: "Largo (colunas)", de: "Breit (Spalten)", it: "Ampio (colonne)", nl: "Breed (kolommen)", pl: "Szeroki (kolumny)", ru: "Широкий (колонки)", tr: "Geniş (sütunlar)", ar: "عريض (أعمدة)", hi: "चौड़ा (कॉलम)", bn: "প্রশস্ত (কলাম)", ur: "چوڑا (کالم)", ta: "அகலம் (நெடுவரிசைகள்)", te: "విశాలం (నిలువు వరుసలు)", th: "กว้าง (หลายคอลัมน์)", zh: "宽屏（多栏）", ja: "ワイド（列表示）", ko: "넓게 (여러 열)", id: "Lebar (kolom)", vi: "Rộng (nhiều cột)", tl: "Malapad (mga column)", sw: "Pana (safu)", ha: "Fadi (ginshiƙai)", yo: "Fífẹ̀ (àwọn ọ̀wọ̀n)", zu: "Okubanzi (amakholomu)", am: "ሰፊ (ዓምዶች)", bm: "Bonya (kolɔnw)", wo: "Yaatu (ay kolon)" };
+EXTRA_UI.deskLayoutWideDesc = { fr: "Vente en 2 parties (produits à gauche, panier à droite), Accueil et Caisse sur 2 colonnes.", en: "Sale in 2 parts (products left, cart right), Home and Cash in 2 columns.", es: "Venta en 2 partes (productos a la izquierda, carrito a la derecha), Inicio y Caja en 2 columnas.", pt: "Venda em 2 partes (produtos à esquerda, carrinho à direita), Início e Caixa em 2 colunas.", de: "Verkauf in 2 Teilen (Produkte links, Warenkorb rechts), Start und Kasse in 2 Spalten.", it: "Vendita in 2 parti (prodotti a sinistra, carrello a destra), Home e Cassa su 2 colonne.", nl: "Verkoop in 2 delen (producten links, winkelwagen rechts), Start en Kassa in 2 kolommen.", pl: "Sprzedaż w 2 częściach (produkty po lewej, koszyk po prawej), Start i Kasa w 2 kolumnach.", ru: "Продажа в 2 частях (товары слева, корзина справа), Главная и Касса в 2 колонки.", tr: "2 bölümlü satış (ürünler solda, sepet sağda), Ana sayfa ve Kasa 2 sütunda.", ar: "البيع في جزأين (المنتجات يسارًا والسلة يمينًا)، والرئيسية والصندوق في عمودين.", hi: "बिक्री 2 हिस्सों में (उत्पाद बाएँ, टोकरी दाएँ), होम और गल्ला 2 कॉलम में।", bn: "বিক্রি ২ অংশে (বাঁয়ে পণ্য, ডানে ঝুড়ি), হোম ও ক্যাশ ২ কলামে।", ur: "فروخت 2 حصوں میں (بائیں مال، دائیں ٹوکری)، ہوم اور کیش 2 کالم میں۔", ta: "விற்பனை 2 பகுதிகளில் (இடது பொருட்கள், வலது கூடை), முகப்பும் காசும் 2 நெடுவரிசைகளில்.", te: "అమ్మకం 2 భాగాల్లో (ఎడమ ఉత్పత్తులు, కుడి బుట్ట), హోమ్, క్యాష్ 2 వరుసల్లో.", th: "หน้าขาย 2 ส่วน (สินค้าซ้าย ตะกร้าขวา) หน้าแรกและเงินสด 2 คอลัมน์", zh: "销售分两栏（左侧商品、右侧购物车），首页和收银为两栏。", ja: "販売は2分割（左に商品、右にカート）、ホームとレジは2列。", ko: "판매 2분할(왼쪽 상품, 오른쪽 장바구니), 홈·현금 2열.", id: "Penjualan 2 bagian (produk di kiri, keranjang di kanan), Beranda dan Kas 2 kolom.", vi: "Bán hàng chia 2 phần (sản phẩm bên trái, giỏ bên phải), Trang chủ và Quỹ 2 cột.", tl: "Benta sa 2 bahagi (produkto sa kaliwa, basket sa kanan), Home at Kaha sa 2 column.", sw: "Mauzo sehemu 2 (bidhaa kushoto, kikapu kulia), Mwanzo na Fedha safu 2.", ha: "Sayarwa kashi 2 (kaya hagu, kwando dama), Gida da Akwati ginshiƙai 2.", yo: "Títà ní apá 2 (ọjà lósì, agbọ̀n lọ́tùn-ún), Ilé àti Àpò owó ní ọ̀wọ̀n 2.", zu: "Ukuthengisa ezingxenyeni ezi-2 (imikhiqizo kwesobunxele, inqola kwesokudla), Ikhaya neMali ngamakholomu ama-2.", am: "ሽያጭ በ2 ክፍል (ምርቶች በግራ፣ ቅርጫት በቀኝ)፣ መነሻና ካዝና በ2 ዓምድ።", bm: "Feereli tila 2 ye (minɛnw numanyanfan, sɛgɛ kininyanfan), Daminɛ ni Wari kolɔn 2.", wo: "Njaay ci 2 pàcc (marsandiis ci càmmoñ, panye ci ndijoor), Dalal ak Kees ci 2 kolon." };
+EXTRA_UI.deskLayoutClassic = { fr: "Classique (une colonne)", en: "Classic (one column)", es: "Clásico (una columna)", pt: "Clássico (uma coluna)", de: "Klassisch (eine Spalte)", it: "Classico (una colonna)", nl: "Klassiek (één kolom)", pl: "Klasyczny (jedna kolumna)", ru: "Классический (одна колонка)", tr: "Klasik (tek sütun)", ar: "كلاسيكي (عمود واحد)", hi: "क्लासिक (एक कॉलम)", bn: "ক্লাসিক (এক কলাম)", ur: "کلاسیکی (ایک کالم)", ta: "வழக்கமான (ஒரு நெடுவரிசை)", te: "సాధారణ (ఒక వరుస)", th: "แบบคลาสสิก (คอลัมน์เดียว)", zh: "经典（单栏）", ja: "クラシック（1列）", ko: "클래식 (한 열)", id: "Klasik (satu kolom)", vi: "Cổ điển (một cột)", tl: "Klasiko (isang column)", sw: "Ya kawaida (safu moja)", ha: "Na gargajiya (ginshiƙi ɗaya)", yo: "Àtẹ̀yìnwá (ọ̀wọ̀n kan)", zu: "Okujwayelekile (ikholomu eyodwa)", am: "የተለመደ (አንድ ዓምድ)", bm: "Kɔrɔlen (kolɔn kelen)", wo: "Bu cosaan (benn kolon)" };
+EXTRA_UI.deskLayoutClassicDesc = { fr: "Tout sur une seule colonne, comme sur téléphone ; l'encaissement s'ouvre dans une fenêtre.", en: "Everything in one column, like on phones; checkout opens in a window.", es: "Todo en una sola columna, como en el teléfono; el cobro se abre en una ventana.", pt: "Tudo numa só coluna, como no telemóvel; o pagamento abre numa janela.", de: "Alles in einer Spalte wie am Handy; das Kassieren öffnet sich in einem Fenster.", it: "Tutto su una colonna, come sul telefono; l'incasso si apre in una finestra.", nl: "Alles in één kolom, zoals op de telefoon; afrekenen opent in een venster.", pl: "Wszystko w jednej kolumnie, jak na telefonie; płatność otwiera się w oknie.", ru: "Всё в одной колонке, как на телефоне; оплата открывается в окне.", tr: "Telefondaki gibi her şey tek sütunda; tahsilat bir pencerede açılır.", ar: "كل شيء في عمود واحد كما على الهاتف؛ ويُفتح التحصيل في نافذة.", hi: "फ़ोन की तरह सब एक कॉलम में; भुगतान एक विंडो में खुलता है।", bn: "ফোনের মতো সব এক কলামে; পেমেন্ট একটি জানালায় খোলে।", ur: "فون کی طرح سب ایک کالم میں؛ ادائیگی ایک ونڈو میں کھلتی ہے۔", ta: "தொலைபேசி போல அனைத்தும் ஒரே நெடுவரிசையில்; பணம் பெறுதல் சாளரத்தில் திறக்கும்.", te: "ఫోన్‌లా అన్నీ ఒకే వరుసలో; చెల్లింపు ఒక విండోలో తెరుచుకుంటుంది.", th: "ทุกอย่างอยู่คอลัมน์เดียวเหมือนบนมือถือ หน้าชำระเงินเปิดเป็นหน้าต่าง", zh: "与手机一样全部单栏显示；收银在弹窗中打开。", ja: "スマホと同じく1列表示。会計はウィンドウで開きます。", ko: "휴대폰처럼 한 열로 표시되고, 계산은 창으로 열립니다.", id: "Semua dalam satu kolom seperti di ponsel; pembayaran terbuka di jendela.", vi: "Tất cả trong một cột như trên điện thoại; thanh toán mở trong cửa sổ.", tl: "Lahat sa isang column tulad sa telepono; bubukas ang bayaran sa isang window.", sw: "Kila kitu safu moja kama kwenye simu; malipo hufunguka kwenye dirisha.", ha: "Komai a ginshiƙi ɗaya kamar a waya; karɓar kuɗi na buɗewa a taga.", yo: "Gbogbo rẹ̀ ní ọ̀wọ̀n kan bí ti fóònù; ìsanwó ń ṣí nínú fèrèsé.", zu: "Konke kukholomu eyodwa njengasocingweni; ukukhokha kuvuleka ewindini.", am: "እንደ ስልክ ሁሉም በአንድ ዓምድ፤ ክፍያ በመስኮት ይከፈታል።", bm: "Fɛn bɛɛ kolɔn kelen kɔnɔ i n'a fɔ telefɔni kan; sarali bɛ dayɛlɛ finɛtiri kɔnɔ.", wo: "Lépp ci benn kolon niki ci telefon; fey bi dina ubbiku ci palanteer." };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -13788,6 +13794,10 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
   // Ordinateur : l'encaissement s'affiche dans une colonne fixe à droite de la Vente (au lieu
   // d'une fenêtre), rendue dans cet emplacement. Et un panier vierge s'ouvre en arrivant sur Vente.
   const [ckSlot, setCkSlot] = useState(null);
+  // Disposition sur ordinateur : « large » (colonnes, Vente en 2 parties) ou « classique »
+  // (une colonne, comme sur téléphone). Choix propre à cet appareil.
+  const [deskLayout, setDeskLayout] = useState(() => { try { return window.localStorage.getItem("boutipro_desk_layout") === "classic" ? "classic" : "wide"; } catch (e) { return "wide"; } });
+  const chooseDeskLayout = (v) => { setDeskLayout(v); try { window.localStorage.setItem("boutipro_desk_layout", v); } catch (e) { /* ignoré */ } };
   const [ckMore, setCkMore] = useState(false);
   useEffect(() => { setCkMore(false); }, [activeCartId]);
   const [winW, setWinW] = useState(() => (typeof window !== "undefined" ? window.innerWidth : 0));
@@ -21340,9 +21350,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const activeCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
   // Barre latérale resserrée quand l'écran est peu haut (PC portable) : tout tient sans défiler.
   const sbTight = typeof window !== "undefined" && window.innerHeight / 1.35 < 760;
-  const splitCheckout = isDesktop && winW >= 1100 && tab === "sale" && hasPermission("sell") && !!activeCart;
+  const wideLayout = isDesktop && winW >= 1100 && deskLayout !== "classic";
+  const splitCheckout = wideLayout && tab === "sale" && hasPermission("sell") && !!activeCart;
   autoCartRef.current = () => {
-    if (tab === "sale" && isDesktop && hasPermission("sell") && !activeCart && draftCarts.length === 0) createCart();
+    if (tab === "sale" && wideLayout && hasPermission("sell") && !activeCart && draftCarts.length === 0) createCart();
   };
   // Colonne d'encaissement (ordinateur) : client, devis et retrait repliés par défaut pour que
   // « Finaliser la vente » reste visible ; dépliés d'office pour un crédit ou un client déjà saisi.
@@ -21940,7 +21951,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
           "Démasquer les données" quand on scrolle tout en bas. */}
         {tab === "dashboard" && (
-          <div className={isDesktop && winW >= 1100 ? "dk-cols" : "space-y-2"}>
+          <div className={wideLayout ? "dk-cols" : "space-y-2"}>
             {devModeAllowed && testPlanOverride && (
               <div onClick={() => setTestPlanOverride(null)} className="rounded-xl px-3 py-2" style={{ background: "rgba(168,85,247,0.14)", border: "1px dashed #a855f7", cursor: "pointer" }}>
                 <p style={{ color: "#a855f7", fontSize: 11, fontWeight: 700, textAlign: "center" }}>
@@ -23746,7 +23757,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {products.length === 0 && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "noProduct")}</p>}
             {products.length > 0 && filteredProducts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResults")} "{stockSearch}".</p>}
-            <div className={isDesktop && winW >= 1100 ? "dk-grid2" : "space-y-3"}>
+            <div className={wideLayout ? "dk-grid2" : "space-y-3"}>
             {(() => {
               // Les variantes d'un même modèle sont regroupées sous une carte d'en-tête
               // (nom, nombre de variantes, stock total, « + Variante »), à la place du premier
@@ -25244,7 +25255,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               );
             })()}
             {unpaidDebts.length > 0 && filteredDebts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResultsFilters")}</p>}
-            <div className={isDesktop && winW >= 1100 ? "dk-grid2" : "space-y-2"}>
+            <div className={wideLayout ? "dk-grid2" : "space-y-2"}>
             {filteredDebts.map((d) => {
               // En retard : une échéance a été fixée et elle est passée (comparaison de
               // simples chaînes "YYYY-MM-DD", comme todayKey() — pas de fuseau à gérer).
@@ -25976,7 +25987,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         )}
         {tab === "cash" && hasPermission("viewCash") && cashView && (
-          <div className={isDesktop && winW >= 1100 ? "dk-cols" : "space-y-2"}>
+          <div className={wideLayout ? "dk-cols" : "space-y-2"}>
             {amountsHidden && (
               <button onClick={() => setShowLockPinModal(true)} className="w-full rounded-xl px-3 py-2 text-xs font-bold flex items-center justify-center gap-1.5" style={{ background: darkMode ? "rgba(251,191,36,0.12)" : "#fffbeb", color: darkMode ? "#fbbf24" : "#92400e", border: `1px solid ${darkMode ? "rgba(251,191,36,0.3)" : "#fde68a"}`, columnSpan: "all" }}>
                 👁️ {tx(lang, "amountsHiddenPill")}
@@ -26304,7 +26315,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               return (
                 <div key={person.id || "owner"} className="rounded-2xl p-4 mb-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   <p className="text-sm font-bold mb-3">{person.name}</p>
-                  <div className={"grid gap-2 mb-3 " + (isDesktop && winW >= 1100 ? "grid-cols-4" : "grid-cols-2")}>
+                  <div className={"grid gap-2 mb-3 " + (wideLayout ? "grid-cols-4" : "grid-cols-2")}>
                     <div>
                       <p className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "cashReportTotalSales")}</p>
                       <p className="text-sm font-extrabold" style={{ color: darkMode ? "#8fd6a3" : "#16a34a" }}>{fcfa(totalRevenue)}</p>
@@ -27531,6 +27542,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   {settingsField === "lockpin" && (t(lang, "setCodePin"))}
                   {settingsField === "darkmode" && t(lang, "darkMode")}
                   {settingsField === "balls" && t(lang, "animBalls")}
+                  {settingsField === "desklayout" && tx(lang, "deskLayoutLabel")}
                   {settingsField === "sounds" && t(lang, "setSonsVibrations")}
                   {settingsField === "haptics" && t(lang, "setVibrations")}
                   {settingsField === "soundclick" && t(lang, "setSonClic")}
@@ -27666,6 +27678,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {settingsView === "appearance" && !settingsField && [
                 { id: "darkmode", label: t(lang, "darkMode"), right: themeMode === "system" ? t(lang, "themeSystem") : themeMode === "dark" ? t(lang, "themeDark") : t(lang, "themeLight") },
                 { id: "lang", label: t(lang, "language"), right: languageLabel(LANGUAGES.find((l) => l.id === lang) || LANGUAGES[0], lang) },
+                ...(isDesktop ? [{ id: "desklayout", label: tx(lang, "deskLayoutLabel"), right: deskLayout === "classic" ? tx(lang, "deskLayoutClassic") : tx(lang, "deskLayoutWide") }] : []),
                 { id: "balls", label: t(lang, "animBalls"), right: showBalls ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "sounds", label: t(lang, "setSonsVibrations"), right: soundsEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
                 { id: "haptics", label: t(lang, "setVibrations"), right: hapticsEnabled ? (t(lang, "setActive")) : (t(lang, "setDesactive")) },
@@ -28685,6 +28698,34 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       {currency === c.id && <Check size={16} color="#22d3ee" />}
                     </button>
                   ))}
+                </div>
+              )}
+              {settingsField === "desklayout" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ color: T.muted, fontSize: 12, lineHeight: 1.5, margin: "0 0 4px" }}>{tx(lang, "deskLayoutDesc")}</p>
+                  {[["wide", "deskLayoutWide", "deskLayoutWideDesc"], ["classic", "deskLayoutClassic", "deskLayoutClassicDesc"]].map(([id, lk, dk]) => {
+                    const on = deskLayout === id;
+                    return (
+                      <button key={id} onClick={() => chooseDeskLayout(id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: 14, borderRadius: 14, background: T.input, border: `2px solid ${on ? "#2563eb" : T.border}`, textAlign: "start" }}>
+                        <div aria-hidden="true" style={{ width: 64, height: 44, borderRadius: 8, background: darkMode ? "#1f2433" : "#e5e7eb", padding: 5, display: "flex", gap: 3, flexShrink: 0 }}>
+                          <div style={{ width: 10, borderRadius: 3, background: "#1B3A5C" }} />
+                          {id === "wide" ? (
+                            <>
+                              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}><div style={{ flex: 1, borderRadius: 3, background: "#93c5fd" }} /><div style={{ flex: 1, borderRadius: 3, background: "#93c5fd" }} /></div>
+                              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}><div style={{ flex: 2, borderRadius: 3, background: "#86efac" }} /><div style={{ flex: 1, borderRadius: 3, background: "#93c5fd" }} /></div>
+                            </>
+                          ) : (
+                            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}><div style={{ flex: 1, borderRadius: 3, background: "#93c5fd" }} /><div style={{ flex: 1, borderRadius: 3, background: "#93c5fd" }} /><div style={{ flex: 1, borderRadius: 3, background: "#93c5fd" }} /></div>
+                          )}
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: T.text, fontSize: 14, fontWeight: 700 }}>{tx(lang, lk)}</div>
+                          <div style={{ color: T.muted, fontSize: 11.5, marginTop: 2, lineHeight: 1.4 }}>{tx(lang, dk)}</div>
+                        </div>
+                        {on && <Check size={18} color="#2563eb" />}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
               {settingsField === "balls" && (
