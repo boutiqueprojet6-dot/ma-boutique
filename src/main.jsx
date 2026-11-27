@@ -29,10 +29,18 @@ const isCapacitorApp =
 // Pas dans l'APK (fichiers locaux, pas de serveur Vercel derrière).
 if (!isCapacitorApp && typeof window !== "undefined" && /boutipro\.com$|vercel\.app$/.test(window.location.hostname)) {
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  const vaScript = document.createElement("script");
-  vaScript.defer = true;
-  vaScript.src = "/_vercel/insights/script.js";
-  document.head.appendChild(vaScript);
+  // On vérifie d'abord que Vercel sert bien le script (sinon la page renvoie index.html et le
+  // navigateur afficherait « Unexpected token '<' »), puis on l'ajoute.
+  fetch("/_vercel/insights/script.js", { cache: "no-store" })
+    .then((r) => {
+      const ct = (r.headers.get("content-type") || "").toLowerCase();
+      if (!r.ok || ct.indexOf("javascript") === -1) return;
+      const vaScript = document.createElement("script");
+      vaScript.defer = true;
+      vaScript.src = "/_vercel/insights/script.js";
+      document.head.appendChild(vaScript);
+    })
+    .catch(() => {});
 }
 
 // Un déploiement remplace les fichiers JS/CSS par de nouveaux fichiers au nom différent
