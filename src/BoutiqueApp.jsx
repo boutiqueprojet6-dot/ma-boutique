@@ -6550,6 +6550,17 @@ EXTRA_UI.fdMissionProduct = { fr: "Ajoutez votre premier produit", en: "Add your
 EXTRA_UI.fdMissionSale = { fr: "Enregistrez votre première vente", en: "Record your first sale", es: "Registre su primera venta", pt: "Registe a sua primeira venda", de: "Erfassen Sie Ihren ersten Verkauf", it: "Registrate la vostra prima vendita", nl: "Registreer uw eerste verkoop", pl: "Zapisz pierwszą sprzedaż", ru: "Проведите первую продажу", tr: "İlk satışınızı kaydedin", ar: "سجّلوا أول عملية بيع", hi: "अपनी पहली बिक्री दर्ज करें", bn: "আপনার প্রথম বিক্রি লিখুন", ur: "اپنی پہلی فروخت درج کریں", ta: "உங்கள் முதல் விற்பனையைப் பதிவு செய்யுங்கள்", te: "మీ మొదటి అమ్మకాన్ని నమోదు చేయండి", th: "บันทึกการขายครั้งแรก", zh: "记录第一笔销售", ja: "最初の販売を記録", ko: "첫 판매 기록하기", id: "Catat penjualan pertama Anda", vi: "Ghi đơn bán đầu tiên", tl: "Itala ang una ninyong benta", sw: "Rekodini mauzo yenu ya kwanza", ha: "Rubuta sayarku ta farko", yo: "Ẹ kọ títà àkọ́kọ́ yín sílẹ̀", zu: "Bhalani ukuthengisa kwenu kokuqala", am: "የመጀመሪያ ሽያጭዎን ይመዝግቡ", bm: "Aw ka feereli fɔlɔ sɛbɛn", wo: "Bindleen seen njaay bu jëkk" };
 EXTRA_UI.fdMissionDebt = { fr: "Notez une dette client", en: "Note a customer debt", es: "Anote una deuda de cliente", pt: "Registe uma dívida de cliente", de: "Notieren Sie eine Kundenschuld", it: "Annotate un debito cliente", nl: "Noteer een klantschuld", pl: "Zapisz dług klienta", ru: "Запишите долг клиента", tr: "Bir müşteri borcu kaydedin", ar: "سجّلوا دين زبون", hi: "किसी ग्राहक का उधार लिखें", bn: "একজন গ্রাহকের বাকি লিখুন", ur: "کسی گاہک کا ادھار لکھیں", ta: "ஒரு வாடிக்கையாளர் கடனைக் குறியுங்கள்", te: "ఒక కస్టమర్ బాకీని నమోదు చేయండి", th: "จดหนี้ของลูกค้า", zh: "记下一笔客户欠款", ja: "お客様の掛けを記録", ko: "고객 외상 기록하기", id: "Catat utang pelanggan", vi: "Ghi một khoản nợ của khách", tl: "Itala ang utang ng isang customer", sw: "Andikeni deni la mteja", ha: "Rubuta bashin abokin ciniki", yo: "Ẹ kọ gbèsè oníbàárà kan sílẹ̀", zu: "Bhalani isikweletu somthengi", am: "የደንበኛ ዕዳ ይመዝግቡ", bm: "Aw ka sannikɛla ka juru sɛbɛn", wo: "Bindleen bor kiliyaan" };
 EXTRA_UI.fdHide = { fr: "Masquer", en: "Hide", es: "Ocultar", pt: "Ocultar", de: "Ausblenden", it: "Nascondi", nl: "Verbergen", pl: "Ukryj", ru: "Скрыть", tr: "Gizle", ar: "إخفاء", hi: "छिपाएं", bn: "লুকান", ur: "چھپائیں", ta: "மறை", te: "దాచు", th: "ซ่อน", zh: "隐藏", ja: "非表示", ko: "숨기기", id: "Sembunyikan", vi: "Ẩn", tl: "Itago", sw: "Ficha", ha: "Ɓoye", yo: "Fi pamọ́", zu: "Fihla", am: "ደብቅ", bm: "Dogo", wo: "Nëbb" };
+EXTRA_UI.splitEmptyTitle = { fr: "Panier vide", en: "Empty cart", es: "Carrito vacío", pt: "Carrinho vazio", de: "Leerer Warenkorb", it: "Carrello vuoto", nl: "Lege winkelwagen", pl: "Pusty koszyk", ru: "Корзина пуста", tr: "Sepet boş", ar: "السلة فارغة", hi: "टोकरी खाली है", bn: "ঝুড়ি খালি", ur: "ٹوکری خالی ہے", ta: "கூடை காலியாக உள்ளது", te: "బుట్ట ఖాళీగా ఉంది", th: "ตะกร้าว่าง", zh: "购物车为空", ja: "カートは空です", ko: "장바구니가 비어 있습니다", id: "Keranjang kosong", vi: "Giỏ hàng trống", tl: "Walang laman ang basket", sw: "Kikapu ni tupu", ha: "Kwandon babu komai", yo: "Agbọ̀n ṣófo", zu: "Inqola ayinalutho", am: "ቅርጫቱ ባዶ ነው", bm: "Sɛgɛ lankolon don", wo: "Panye bi amul dara" };
+EXTRA_UI.splitEmptyDesc = { fr: "Touchez un produit à gauche pour l'ajouter ici.", en: "Tap a product on the left to add it here.", es: "Toque un producto a la izquierda para añadirlo aquí.", pt: "Toque num produto à esquerda para o adicionar aqui.", de: "Tippen Sie links auf ein Produkt, um es hier hinzuzufügen.", it: "Toccate un prodotto a sinistra per aggiungerlo qui.", nl: "Tik links op een product om het hier toe te voegen.", pl: "Dotknij produktu po lewej, aby go tu dodać.", ru: "Нажмите на товар слева, чтобы добавить его сюда.", tr: "Buraya eklemek için soldaki bir ürüne dokunun.", ar: "المسوا منتجًا على اليسار لإضافته هنا.", hi: "यहाँ जोड़ने के लिए बाईं ओर कोई उत्पाद छुएँ।", bn: "এখানে যোগ করতে বাঁ দিকের একটি পণ্যে চাপুন।", ur: "یہاں شامل کرنے کے لیے بائیں جانب کسی مال کو چھوئیں۔", ta: "இங்கே சேர்க்க இடப்பக்கத்தில் ஒரு பொருளைத் தொடுங்கள்.", te: "ఇక్కడ జోడించడానికి ఎడమవైపు ఒక ఉత్పత్తిని నొక్కండి.", th: "แตะสินค้าทางซ้ายเพื่อเพิ่มที่นี่", zh: "点击左侧商品即可加入此处。", ja: "左の商品をタップするとここに追加されます。", ko: "왼쪽 상품을 눌러 여기에 추가하세요.", id: "Ketuk produk di kiri untuk menambahkannya di sini.", vi: "Chạm vào một sản phẩm bên trái để thêm vào đây.", tl: "Pindutin ang isang produkto sa kaliwa para idagdag dito.", sw: "Gusa bidhaa upande wa kushoto kuiongeza hapa.", ha: "Taɓa wani kaya a hagu don ƙara shi nan.", yo: "Tẹ ọjà kan ní apá òsì láti fi kún un níbí.", zu: "Thinta umkhiqizo ngakwesobunxele ukuwufaka lapha.", am: "እዚህ ለማከል በግራ በኩል ያለውን ምርት ይንኩ።", bm: "Aw ka minɛn dɔ digi numanyanfan fɛ walasa k'a fara yan.", wo: "Bësal benn marsandiis ci càmmoñ ngir yokk ko fii." };
+EXTRA_UI.lockedNavHint = { fr: "Disponible avec une formule payante", en: "Available with a paid plan", es: "Disponible con un plan de pago", pt: "Disponível com um plano pago", de: "Mit einem kostenpflichtigen Tarif verfügbar", it: "Disponibile con un piano a pagamento", nl: "Beschikbaar met een betaald abonnement", pl: "Dostępne w płatnym planie", ru: "Доступно в платном тарифе", tr: "Ücretli planla kullanılabilir", ar: "متاح مع اشتراك مدفوع", hi: "सशुल्क योजना के साथ उपलब्ध", bn: "পেইড প্ল্যানে পাওয়া যায়", ur: "ادا شدہ پلان کے ساتھ دستیاب", ta: "கட்டணத் திட்டத்தில் கிடைக்கும்", te: "చెల్లింపు ప్లాన్‌తో అందుబాటులో ఉంది", th: "ใช้ได้กับแพ็กเกจแบบชำระเงิน", zh: "付费方案可用", ja: "有料プランで利用できます", ko: "유료 요금제에서 이용 가능", id: "Tersedia dengan paket berbayar", vi: "Có trong gói trả phí", tl: "Makukuha sa bayad na plano", sw: "Inapatikana kwa mpango wa kulipia", ha: "Akwai da tsarin biya", yo: "Wà pẹ̀lú ètò tí a ń sanwó fún", zu: "Iyatholakala ngohlelo olukhokhelwayo", am: "በክፍያ ዕቅድ ይገኛል", bm: "A bɛ sɔrɔ ni sara tɛmɛsira ye", wo: "Am na ko ci formule bu ñuy fey" };
+EXTRA_UI.cmpOneShopTitle = { fr: "Vous n'avez qu'un seul commerce pour l'instant", en: "You only have one business for now", es: "Por ahora solo tiene un negocio", pt: "Por agora só tem um negócio", de: "Sie haben bisher nur ein Geschäft", it: "Per ora avete un solo negozio", nl: "U hebt voorlopig maar één zaak", pl: "Na razie masz tylko jeden sklep", ru: "Пока у вас только одна точка", tr: "Şimdilik yalnızca bir işletmeniz var", ar: "لديكم متجر واحد فقط حاليًا", hi: "अभी आपकी केवल एक दुकान है", bn: "এখন আপনার একটি মাত্র দোকান আছে", ur: "ابھی آپ کی صرف ایک دکان ہے", ta: "இப்போது உங்களிடம் ஒரே ஒரு கடை உள்ளது", te: "ప్రస్తుతం మీకు ఒకే ఒక దుకాణం ఉంది", th: "ตอนนี้คุณมีร้านเดียว", zh: "您目前只有一家店", ja: "現在お店は 1 つだけです", ko: "지금은 가게가 하나뿐입니다", id: "Saat ini Anda baru punya satu usaha", vi: "Hiện bạn chỉ có một cửa hàng", tl: "Iisa pa lang ang negosyo ninyo", sw: "Kwa sasa mna biashara moja tu", ha: "A yanzu kuna da shago ɗaya kawai", yo: "Ṣọ́ọ̀bù kan ṣoṣo ni ẹ ní báyìí", zu: "Okwamanje ninebhizinisi elilodwa kuphela", am: "ለአሁን አንድ ሱቅ ብቻ አለዎት", bm: "Sisan aw ka butiki kelen dɔrɔn de bɛ", wo: "Fi mu ngi nii, benn bitig rekk ngeen am" };
+EXTRA_UI.cmpOneShopDesc = { fr: "Ajoutez un deuxième point de vente pour comparer ici vos chiffres d'affaires, vos stocks et vos dettes côte à côte.", en: "Add a second shop to compare your sales, stock and debts side by side here.", es: "Añada un segundo punto de venta para comparar aquí ventas, inventario y deudas lado a lado.", pt: "Adicione um segundo ponto de venda para comparar aqui vendas, stock e dívidas lado a lado.", de: "Fügen Sie ein zweites Geschäft hinzu, um hier Umsatz, Bestand und Schulden nebeneinander zu vergleichen.", it: "Aggiungete un secondo punto vendita per confrontare qui vendite, magazzino e debiti fianco a fianco.", nl: "Voeg een tweede verkooppunt toe om hier omzet, voorraad en schulden naast elkaar te vergelijken.", pl: "Dodaj drugi punkt sprzedaży, aby porównać tu obroty, magazyn i długi obok siebie.", ru: "Добавьте вторую точку, чтобы сравнивать здесь выручку, склад и долги рядом.", tr: "Satış, stok ve borçları burada yan yana karşılaştırmak için ikinci bir satış noktası ekleyin.", ar: "أضيفوا نقطة بيع ثانية لمقارنة المبيعات والمخزون والديون جنبًا إلى جنب هنا.", hi: "बिक्री, स्टॉक और उधार की यहाँ तुलना करने के लिए दूसरी दुकान जोड़ें।", bn: "এখানে বিক্রি, স্টক ও বাকি পাশাপাশি তুলনা করতে দ্বিতীয় দোকান যোগ করুন।", ur: "یہاں فروخت، اسٹاک اور ادھار کا موازنہ کرنے کے لیے دوسری دکان شامل کریں۔", ta: "விற்பனை, இருப்பு, கடன்களை இங்கே ஒப்பிட இரண்டாவது கடையைச் சேர்க்கவும்.", te: "అమ్మకాలు, స్టాక్, బాకీలను ఇక్కడ పోల్చడానికి రెండో దుకాణాన్ని జోడించండి.", th: "เพิ่มร้านที่สองเพื่อเปรียบเทียบยอดขาย สต็อก และหนี้ได้ที่นี่", zh: "再添加一家店，即可在此并排比较销售、库存和欠款。", ja: "2 店舗目を追加すると、売上・在庫・掛けをここで並べて比較できます。", ko: "두 번째 가게를 추가하면 매출, 재고, 외상을 여기서 나란히 비교할 수 있습니다.", id: "Tambahkan toko kedua untuk membandingkan penjualan, stok, dan utang di sini.", vi: "Thêm cửa hàng thứ hai để so sánh doanh thu, tồn kho và công nợ tại đây.", tl: "Magdagdag ng ikalawang tindahan para maikumpara dito ang benta, stock at utang.", sw: "Ongezeni duka la pili kulinganisha mauzo, stoo na madeni hapa.", ha: "Ƙara shago na biyu don kwatanta sayarwa, kaya da bashi a nan.", yo: "Ẹ fi ṣọ́ọ̀bù kejì kún un láti fi títà, ọjà àti gbèsè wé ara wọn níbí.", zu: "Engezani isitolo sesibili ukuze niqhathanise ukuthengisa, isitoko nezikweletu lapha.", am: "ሽያጭ፣ ክምችትና ዕዳ እዚህ ጎን ለጎን ለማነጻጸር ሁለተኛ ሱቅ ያክሉ።", bm: "Aw ka butiki filanan fara a kan walasa ka feereliw, minɛnw ni juruw suma yan.", wo: "Yokkleen ñaareelu bitig ngir méngale fii seen njaay, stock ak bor." };
+EXTRA_UI.cmpAddShop = { fr: "Ajouter un commerce", en: "Add a business", es: "Añadir un negocio", pt: "Adicionar um negócio", de: "Geschäft hinzufügen", it: "Aggiungi un negozio", nl: "Zaak toevoegen", pl: "Dodaj sklep", ru: "Добавить точку", tr: "İşletme ekle", ar: "إضافة متجر", hi: "दुकान जोड़ें", bn: "দোকান যোগ করুন", ur: "دکان شامل کریں", ta: "கடையைச் சேர்", te: "దుకాణాన్ని జోడించండి", th: "เพิ่มร้าน", zh: "添加店铺", ja: "店舗を追加", ko: "가게 추가", id: "Tambah usaha", vi: "Thêm cửa hàng", tl: "Magdagdag ng negosyo", sw: "Ongeza biashara", ha: "Ƙara shago", yo: "Fi ṣọ́ọ̀bù kún un", zu: "Engeza ibhizinisi", am: "ሱቅ ያክሉ", bm: "Butiki fara a kan", wo: "Yokk bitig" };
+EXTRA_UI.upProfitBtn = { fr: "Voir ce qui vous rapporte le plus — formule Business", en: "See what earns you the most — Business plan", es: "Vea lo que más le rinde — plan Business", pt: "Veja o que mais lhe rende — plano Business", de: "Sehen, was am meisten einbringt — Business-Tarif", it: "Scoprite cosa vi rende di più — piano Business", nl: "Zie wat het meest oplevert — Business-abonnement", pl: "Zobacz, co zarabia najwięcej — plan Business", ru: "Узнайте, что приносит больше всего — тариф Business", tr: "En çok ne kazandırıyor görün — Business planı", ar: "اعرفوا ما يربحكم أكثر — اشتراك Business", hi: "देखें किससे सबसे ज़्यादा कमाई — Business योजना", bn: "কোনটায় সবচেয়ে বেশি লাভ দেখুন — Business প্ল্যান", ur: "دیکھیں کس سے سب سے زیادہ کمائی — Business پلان", ta: "எது அதிகம் லாபம் தருகிறது பாருங்கள் — Business திட்டம்", te: "ఏది ఎక్కువ లాభం ఇస్తుందో చూడండి — Business ప్లాన్", th: "ดูว่าอะไรทำกำไรมากที่สุด — แพ็กเกจ Business", zh: "看看哪些最赚钱 — Business 方案", ja: "いちばん儲かる商品を見る — Business プラン", ko: "가장 많이 남는 상품 보기 — Business 요금제", id: "Lihat yang paling menguntungkan — paket Business", vi: "Xem món nào lời nhất — gói Business", tl: "Tingnan kung alin ang pinakamalaki ang kita — Business plan", sw: "Ona kinachowaletea faida zaidi — mpango wa Business", ha: "Duba abin da ya fi kawo riba — tsarin Business", yo: "Ẹ wo ohun tó ń mú èrè jù lọ wá — ètò Business", zu: "Bonani okunizuzisa kakhulu — uhlelo lwe-Business", am: "ብዙ የሚያተርፍልዎትን ይመልከቱ — Business ዕቅድ", bm: "Aw ka a lajɛ min bɛ tɔnɔ caman di — Business", wo: "Seetlu li gëna jural — formule Business" };
+EXTRA_UI.upStaffBenefit1 = { fr: "Voyez ce que chaque vendeur encaisse", en: "See what each seller takes in", es: "Vea lo que cobra cada vendedor", pt: "Veja o que cada vendedor recebe", de: "Sehen, was jeder Verkäufer kassiert", it: "Vedete quanto incassa ogni venditore", nl: "Zie wat elke verkoper ontvangt", pl: "Zobacz, ile przyjmuje każdy sprzedawca", ru: "Видите, сколько принимает каждый продавец", tr: "Her satıcının ne tahsil ettiğini görün", ar: "اعرفوا ما يحصّله كل بائع", hi: "देखें हर विक्रेता कितना जमा करता है", bn: "প্রত্যেক বিক্রেতা কত নেন দেখুন", ur: "دیکھیں ہر فروخت کنندہ کتنا وصول کرتا ہے", ta: "ஒவ்வொரு விற்பனையாளரும் வசூலிப்பதைப் பாருங்கள்", te: "ప్రతి అమ్మకందారు ఎంత వసూలు చేస్తున్నారో చూడండి", th: "ดูว่าพนักงานขายแต่ละคนรับเงินเท่าไร", zh: "查看每位店员收了多少钱", ja: "販売員ごとの受け取り額がわかります", ko: "판매원별 수금액을 확인하세요", id: "Lihat setoran tiap penjual", vi: "Xem mỗi người bán thu được bao nhiêu", tl: "Tingnan ang nakokolekta ng bawat tindero", sw: "Ona kila muuzaji anachopokea", ha: "Ga abin da kowane mai sayarwa ke karɓa", yo: "Ẹ wo ohun tí olùtajà kọ̀ọ̀kan ń gbà", zu: "Bonani okutholwa umthengisi ngamunye", am: "እያንዳንዱ ሻጭ የሚቀበለውን ይመልከቱ", bm: "Aw bɛ a ye feerelikɛla kelen kelen bɛ wari min minɛ", wo: "Gis li jaaykat bu nekk di jot" };
+EXTRA_UI.upStaffBenefit2 = { fr: "Empêchez les changements de prix ou de stock sans votre accord", en: "Block price or stock changes without your approval", es: "Impida cambios de precio o inventario sin su permiso", pt: "Impeça alterações de preço ou stock sem a sua autorização", de: "Preis- oder Bestandsänderungen ohne Ihre Zustimmung verhindern", it: "Impedite modifiche a prezzi o magazzino senza il vostro consenso", nl: "Voorkom prijs- of voorraadwijzigingen zonder uw akkoord", pl: "Blokuj zmiany cen lub stanów bez Twojej zgody", ru: "Запретите менять цены и остатки без вашего согласия", tr: "Onayınız olmadan fiyat veya stok değişikliğini engelleyin", ar: "امنعوا تغيير الأسعار أو المخزون دون موافقتكم", hi: "आपकी अनुमति के बिना कीमत या स्टॉक बदलना रोकें", bn: "আপনার অনুমতি ছাড়া দাম বা স্টক বদল আটকান", ur: "اپنی اجازت کے بغیر قیمت یا اسٹاک کی تبدیلی روکیں", ta: "உங்கள் அனுமதியின்றி விலை அல்லது இருப்பு மாற்றத்தைத் தடுக்கவும்", te: "మీ అనుమతి లేకుండా ధర లేదా స్టాక్ మార్పులను ఆపండి", th: "ป้องกันการแก้ราคาหรือสต็อกโดยไม่ได้รับอนุญาต", zh: "未经您同意，禁止修改价格或库存", ja: "許可なく価格や在庫を変更させません", ko: "승인 없이 가격이나 재고를 바꾸지 못하게 하세요", id: "Cegah perubahan harga atau stok tanpa izin Anda", vi: "Ngăn sửa giá hoặc tồn kho khi chưa có sự đồng ý của bạn", tl: "Pigilan ang pagbago ng presyo o stock nang walang pahintulot ninyo", sw: "Zuia kubadilisha bei au stoo bila idhini yenu", ha: "Hana canza farashi ko kaya ba tare da izininku ba", yo: "Ẹ dènà yíyí iye owó tàbí ọjà padà láìgbà àṣẹ yín", zu: "Vimbela ukushintshwa kwamanani noma isitoko ngaphandle kwemvume yenu", am: "ያለ እርስዎ ፈቃድ የዋጋ ወይም የክምችት ለውጥን ይከልክሉ", bm: "Aw ka sɔngɔ walima minɛnw yɛlɛmali bali ni aw ma sɔn", wo: "Tere ñu soppi njëg walla stock te ngeen nangul" };
+EXTRA_UI.upStaffBtn = { fr: "Voir les formules avec personnel", en: "See plans with staff", es: "Ver los planes con personal", pt: "Ver os planos com pessoal", de: "Tarife mit Personal ansehen", it: "Vedi i piani con personale", nl: "Bekijk abonnementen met personeel", pl: "Zobacz plany z personelem", ru: "Тарифы с сотрудниками", tr: "Personelli planları gör", ar: "عرض الاشتراكات مع الموظفين", hi: "कर्मचारियों वाली योजनाएँ देखें", bn: "কর্মীসহ প্ল্যান দেখুন", ur: "عملے والے پلان دیکھیں", ta: "பணியாளர்களுடன் கூடிய திட்டங்களைப் பார்க்கவும்", te: "సిబ్బందితో ఉన్న ప్లాన్‌లు చూడండి", th: "ดูแพ็กเกจที่มีพนักงาน", zh: "查看含员工的方案", ja: "スタッフ付きプランを見る", ko: "직원 포함 요금제 보기", id: "Lihat paket dengan karyawan", vi: "Xem các gói có nhân viên", tl: "Tingnan ang mga plano na may staff", sw: "Ona mipango yenye wafanyakazi", ha: "Duba tsare-tsare masu ma'aikata", yo: "Ẹ wo àwọn ètò tó ní òṣìṣẹ́", zu: "Bonani izinhlelo ezinabasebenzi", am: "ሠራተኛ ያላቸውን ዕቅዶች ይመልከቱ", bm: "Baarakɛlaw ka tɛmɛsiraw lajɛ", wo: "Seetlu formule yi am liggéeykat" };
+EXTRA_UI.amountsHiddenPill = { fr: "Montants masqués — appuyez pour les afficher", en: "Amounts hidden — tap to show them", es: "Importes ocultos — toque para mostrarlos", pt: "Valores ocultos — toque para os mostrar", de: "Beträge ausgeblendet — tippen zum Anzeigen", it: "Importi nascosti — toccate per mostrarli", nl: "Bedragen verborgen — tik om ze te tonen", pl: "Kwoty ukryte — dotknij, aby pokazać", ru: "Суммы скрыты — нажмите, чтобы показать", tr: "Tutarlar gizli — göstermek için dokunun", ar: "المبالغ مخفية — المسوا لإظهارها", hi: "राशियाँ छिपी हैं — दिखाने के लिए छुएँ", bn: "টাকার অঙ্ক লুকানো — দেখাতে চাপুন", ur: "رقمیں چھپی ہیں — دکھانے کے لیے چھوئیں", ta: "தொகைகள் மறைக்கப்பட்டுள்ளன — காட்டத் தொடுங்கள்", te: "మొత్తాలు దాచబడ్డాయి — చూపించడానికి నొక్కండి", th: "ซ่อนยอดเงินอยู่ — แตะเพื่อแสดง", zh: "金额已隐藏 — 点击显示", ja: "金額は非表示です — タップで表示", ko: "금액 숨김 — 눌러서 표시", id: "Jumlah disembunyikan — ketuk untuk menampilkan", vi: "Số tiền đang ẩn — chạm để hiện", tl: "Nakatago ang halaga — pindutin para ipakita", sw: "Kiasi kimefichwa — gusa kukionyesha", ha: "An ɓoye adadi — taɓa don nuna su", yo: "A fi iye owó pamọ́ — ẹ tẹ̀ láti fi hàn", zu: "Amanani afihliwe — thinta ukuze uwabone", am: "መጠኖቹ ተደብቀዋል — ለማሳየት ይንኩ", bm: "Wari hakɛw dogolen don — digi walasa k'u jira", wo: "Xaalis yi nëbbu nañu — bësal ngir wone leen" };
 EXTRA_UI.empTodaySalesLabel = { fr: "Ventes du jour", en: "Today's sales", es: "Ventas de hoy", pt: "Vendas de hoje", de: "Heutige Verkäufe", it: "Vendite di oggi", nl: "Verkopen van vandaag", pl: "Dzisiejsza sprzedaż", ru: "Продажи за сегодня", tr: "Bugünkü satışlar", ar: "مبيعات اليوم", hi: "आज की बिक्री", bn: "আজকের বিক্রয়", ur: "آج کی فروخت", ta: "இன்றைய விற்பனை", te: "నేటి అమ్మకాలు", th: "ยอดขายวันนี้", zh: "今日销售额", ja: "本日の売上", ko: "오늘 판매", id: "Penjualan hari ini", vi: "Doanh số hôm nay", tl: "Benta ngayong araw", sw: "Mauzo ya leo", ha: "Siyar da yau", yo: "Títà òní", zu: "Ukuthengisa kwanamuhla", am: "የዛሬ ሽያጭ", bm: "Bi feerew", wo: "Jaaywu tey" };
 EXTRA_UI.empActionLogShow = { fr: "Afficher le journal", en: "Show the log", es: "Mostrar el registro", pt: "Mostrar o registo", de: "Protokoll anzeigen", it: "Mostra il registro", nl: "Logboek tonen", pl: "Pokaż dziennik", ru: "Показать журнал", tr: "Günlüğü göster", ar: "إظهار السجل", hi: "लॉग दिखाएँ", bn: "লগ দেখান", ur: "لاگ دکھائیں", ta: "பதிவைக் காட்டு", te: "లాగ్‌ను చూపించు", th: "แสดงบันทึก", zh: "显示日志", ja: "ログを表示", ko: "로그 표시", id: "Tampilkan log", vi: "Hiện nhật ký", tl: "Ipakita ang log", sw: "Onyesha kumbukumbu", ha: "Nuna rajista", yo: "Fi àkọsílẹ̀ hàn", zu: "Bonisa ilogi", am: "መዝገቡን አሳይ", bm: "Sɛbɛnni jira", wo: "Won rapport bi" };
 EXTRA_UI.empActionLogHide = { fr: "Masquer le journal", en: "Hide the log", es: "Ocultar el registro", pt: "Ocultar o registo", de: "Protokoll ausblenden", it: "Nascondi il registro", nl: "Logboek verbergen", pl: "Ukryj dziennik", ru: "Скрыть журнал", tr: "Günlüğü gizle", ar: "إخفاء السجل", hi: "लॉग छिपाएँ", bn: "লগ লুকান", ur: "لاگ چھپائیں", ta: "பதிவை மறை", te: "లాగ్‌ను దాచు", th: "ซ่อนบันทึก", zh: "隐藏日志", ja: "ログを非表示", ko: "로그 숨기기", id: "Sembunyikan log", vi: "Ẩn nhật ký", tl: "Itago ang log", sw: "Ficha kumbukumbu", ha: "Ɓoye rajista", yo: "Fi àkọsílẹ̀ pamọ́", zu: "Fihla ilogi", am: "መዝገቡን ደብቅ", bm: "Sɛbɛnni dogo", wo: "Nëbb rapport bi" };
@@ -8939,6 +8950,8 @@ function productExtraMatch(p, q) {
 function isCashMove(x) { return !x || !x.method || x.method === "cash"; }
 // Vraie charge (réduit le bénéfice) : ni un retrait (l'argent change de place), ni un paiement
 // à un fournisseur (le coût de la marchandise est déjà compté via le prix d'achat des ventes).
+// Libellés du graphique « Produits les plus vendus » : plus longs sur ordinateur (place disponible).
+const STATS_LABEL_MAX = typeof window !== "undefined" && window.innerWidth >= 1024 ? 30 : 18;
 function isChargeExpense(e) { return !!e && ["withdrawal", "supplier"].indexOf(e.kind) === -1; }
 // Paiement mixte : une vente "cash" peut avoir une part réglée en Mobile Money (mobilePart,
 // répartie sur chaque ligne). payPart donne le montant d'une ligne pour un moyen donné.
@@ -10837,9 +10850,12 @@ function CalculatorTab({ T, darkMode, lang, products }) {
       // Position du haut de la calculatrice dans la page, indépendante du défilement actuel.
       let scroller = el.parentElement;
       while (scroller && !/(auto|scroll)/.test(window.getComputedStyle(scroller).overflowY)) scroller = scroller.parentElement;
-      const top = el.getBoundingClientRect().top + (scroller ? scroller.scrollTop : 0);
-      const NAV_RESERVE = 120; // barre de navigation du bas + marge
-      setAvailHeight(Math.max(Math.floor(window.innerHeight - top - NAV_RESERVE), 380));
+      // Sur ordinateur le contenu est agrandi (zoom) : on convertit les pixels écran en pixels CSS.
+      const z = el.offsetWidth ? el.getBoundingClientRect().width / el.offsetWidth : 1;
+      const desk = window.innerWidth >= 1024 && z > 1.05;
+      const top = el.getBoundingClientRect().top + (scroller ? scroller.scrollTop * z : 0);
+      const NAV_RESERVE = desk ? 40 : 120; // barre de navigation du bas (téléphone) + marge
+      setAvailHeight(Math.max(Math.floor((window.innerHeight - top - NAV_RESERVE) / (z || 1)), 380));
     };
     measure();
     const timer = setTimeout(measure, 300); // 2e mesure une fois la mise en page stabilisée
@@ -11140,7 +11156,7 @@ function CalculatorTab({ T, darkMode, lang, products }) {
   const lineFontSize = rawLine.length <= 9 ? 34 : rawLine.length <= 13 ? 24 : rawLine.length <= 19 ? 19 : 15;
 
   return (
-    <div ref={rootRef} className="flex flex-col relative" style={{ height: availHeight || "calc(100vh - 300px)", overflow: "hidden" }}>
+    <div ref={rootRef} className="flex flex-col relative" style={{ height: availHeight || "calc(100vh - 300px)", overflow: "hidden", maxWidth: 460, width: "100%", margin: "0 auto" }}>
       <div className="flex items-center gap-2 mb-2 shrink-0">
         <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: darkMode ? "rgba(16,185,129,0.2)" : "rgba(16,185,129,0.1)" }}>
           <Calculator size={16} color={darkMode ? "#34d399" : "#059669"} />
@@ -13747,6 +13763,21 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     }
   };
   const [showPaymentShortcut, setShowPaymentShortcut] = useState(false);
+  // Ordinateur : l'encaissement s'affiche dans une colonne fixe à droite de la Vente (au lieu
+  // d'une fenêtre), rendue dans cet emplacement. Et un panier vierge s'ouvre en arrivant sur Vente.
+  const [ckSlot, setCkSlot] = useState(null);
+  const [winW, setWinW] = useState(() => (typeof window !== "undefined" ? window.innerWidth : 0));
+  useEffect(() => {
+    const onR = () => setWinW(window.innerWidth);
+    window.addEventListener("resize", onR);
+    return () => window.removeEventListener("resize", onR);
+  }, []);
+  const autoCartRef = useRef(null);
+  const autoCartAfterSaleRef = useRef(false);
+  useEffect(() => { if (autoCartRef.current) autoCartRef.current(); }, [tab, isDesktop]);
+  useEffect(() => {
+    if (autoCartAfterSaleRef.current && autoCartRef.current) { autoCartAfterSaleRef.current = false; autoCartRef.current(); }
+  }, [draftCarts.length]);
   // Le résumé du panier + le paiement s'affichent désormais dans une fenêtre dédiée
   // (ouverte par le bouton flottant "Voir la vente"), plutôt qu'en faisant défiler la
   // page jusqu'en bas — le bouton reste donc visible tant que le panier n'est pas vide.
@@ -18412,6 +18443,7 @@ function ShopApp({ username, shopName, loginAsEmployee, onLogout, onRenameShop, 
     playSound("success");
     triggerHaptic("success");
     if (isDemo && !demoWow) setDemoWow("pending");
+    if (isDesktop) autoCartAfterSaleRef.current = true;
     setSaleSuccessOverlay({ amount: total, id: transactionId });
     setPendingReceipt({ items: cart.items.map((it, idx) => ({ name: it.productName, qty: it.qty, total: it.qty * it.unitPrice, measureUnit: it.measureUnit || null, ...serialInfo(it), ...(lotUsed[idx] ? { lots: lotUsed[idx] } : {}) })), total, payment: cart.payment, ...(mixNum > 0 ? { mobilePart: mixNum } : {}), date: dateNow, phone: cart.phone, received: receivedNum, ticketId: transactionId, receiptNo, pickupDue: cart.pickupLater ? (cart.pickupDate || "later") : null, customer: cart.customer.trim(), loyalty: loyaltyInfo, deposit: depositNum > 0 ? depositNum : null });
     // Avec plusieurs commandes ouvertes (tables…), la fenêtre d'encaissement ne doit pas
@@ -20409,11 +20441,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
   const allTopProducts = memoDerived("topProducts", [sales], () => {
     const productTotals = {};
     sales.forEach((s) => { productTotals[s.productName] = (productTotals[s.productName] || 0) + s.qty; });
-    return Object.entries(productTotals).map(([name, qty]) => ({ name: name.length > 18 ? name.slice(0, 17) + "…" : name, fullName: name, qty })).sort((a, b) => b.qty - a.qty);
+    return Object.entries(productTotals).map(([name, qty]) => ({ name: name.length > STATS_LABEL_MAX ? name.slice(0, STATS_LABEL_MAX - 1) + "…" : name, fullName: name, qty })).sort((a, b) => b.qty - a.qty);
   });
   const TOP_PRODUCTS_LIMIT = 7;
   const topProducts = showAllTopProducts ? allTopProducts : allTopProducts.slice(0, TOP_PRODUCTS_LIMIT);
-  const yAxisWidth = topProducts.length === 0 ? 60 : Math.min(160, Math.max(55, Math.max(...topProducts.map((p) => p.name.length)) * 7 + 12));
+  const yAxisWidth = topProducts.length === 0 ? 60 : Math.min(STATS_LABEL_MAX > 18 ? 230 : 160, Math.max(55, Math.max(...topProducts.map((p) => p.name.length)) * 7 + 12));
   // ---- Onglet Stats : analyse de la période choisie ----
   // L'onglet se résumait à une courbe sur 30 jours et un classement par quantité : il
   // montrait ce qui s'était passé, jamais ce qu'il fallait en conclure. Tout ce qui suit
@@ -21278,6 +21310,25 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
     setAccountingGenerating(false);
   };
   const activeCart = draftCarts.find((c) => c.id === activeCartId) || draftCarts[0] || null;
+  // Barre latérale resserrée quand l'écran est peu haut (PC portable) : tout tient sans défiler.
+  const sbTight = typeof window !== "undefined" && window.innerHeight / 1.35 < 760;
+  const splitCheckout = isDesktop && winW >= 1100 && tab === "sale" && hasPermission("sell") && !!activeCart;
+  autoCartRef.current = () => {
+    if (tab === "sale" && isDesktop && hasPermission("sell") && !activeCart && draftCarts.length === 0) createCart();
+  };
+  const ckWrap = (inner) => {
+    if (splitCheckout) {
+      return ckSlot ? createPortal(inner, ckSlot) : null;
+    }
+    return createPortal(
+      <div onClick={() => setShowCheckoutModal(false)} className="fixed inset-0 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)", zIndex: 9999 }}>
+        <div onClick={(e) => e.stopPropagation()} className="w-full flex flex-col" style={{ background: darkMode ? T.bg : "#f8fafc", maxHeight: "88vh", borderTopLeftRadius: 24, borderTopRightRadius: 24, boxShadow: "0 -8px 30px rgba(0,0,0,0.3)", paddingBottom: "env(safe-area-inset-bottom, 0px)", ...(isDesktop ? { maxWidth: 672, marginBottom: "auto", marginTop: "auto", borderRadius: 24 } : {}) }}>
+          {inner}
+        </div>
+      </div>,
+      document.body
+    );
+  };
   // Produits déjà dans le panier : remontés en tête de la liste de vente et mis en couleur,
   // pour qu'on voie d'un coup d'œil ce qui est sélectionné (surtout pendant un scan en rafale).
   const selectedProductIds = new Set(activeCart ? activeCart.items.map((i) => i.productId) : []);
@@ -21528,7 +21579,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
            rendu final (après zoom) occupe exactement 100vh, comme pour la zone de contenu
            principale à droite (où le zoom est lui appliqué à un conteneur interne défilant
            plutôt qu'au conteneur externe de hauteur fixe — la même règle s'applique ici). */
-        <div className="shrink-0" style={{ width: sidebarCollapsed ? SIDEBAR_COLLAPSED_W : sidebarWidth, position: "relative", background: darkMode ? "linear-gradient(165deg, #10131f 0%, #0a0d14 55%, #060810 100%)" : "linear-gradient(165deg, #22466d 0%, #1B3A5C 55%, #122a44 100%)", boxShadow: "4px 0 24px rgba(0,0,0,0.25)", height: "calc(100vh / 1.35)", padding: sidebarCollapsed ? "24px 8px" : "24px 14px", display: "flex", flexDirection: "column", zoom: 1.35, userSelect: "none", WebkitUserSelect: "none", transition: sidebarResizing ? "none" : "width 0.18s ease, padding 0.18s ease" }}>
+        <div className="shrink-0" style={{ width: sidebarCollapsed ? SIDEBAR_COLLAPSED_W : sidebarWidth, position: "relative", background: darkMode ? "linear-gradient(165deg, #10131f 0%, #0a0d14 55%, #060810 100%)" : "linear-gradient(165deg, #22466d 0%, #1B3A5C 55%, #122a44 100%)", boxShadow: "4px 0 24px rgba(0,0,0,0.25)", height: "calc(100vh / 1.35)", padding: sidebarCollapsed ? (sbTight ? "14px 8px" : "24px 8px") : (sbTight ? "14px 14px" : "24px 14px"), display: "flex", flexDirection: "column", zoom: 1.35, userSelect: "none", WebkitUserSelect: "none", transition: sidebarResizing ? "none" : "width 0.18s ease, padding 0.18s ease" }}>
           {/* Poignée de redimensionnement : fine zone sur le bord droit du panneau, entre
               le bleu et le blanc — glisser latéralement change sa largeur (160 à 320px),
               mémorisé pour les prochaines sessions. La zone cliquable (8px) reste plus
@@ -21570,7 +21621,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           >
             {sidebarCollapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
           </button>
-          <div className={"flex items-center gap-2 px-2 mb-8 shrink-0" + (sidebarCollapsed ? " justify-center" : "")}>
+          <div className={"flex items-center gap-2 px-2 shrink-0" + (sbTight ? " mb-2" : " mb-8") + (sidebarCollapsed ? " justify-center" : "")}>
             {shopPhoto ? (
               <img src={shopPhoto} alt={shopName} className="w-9 h-9 rounded-full object-cover shrink-0" style={{ border: "2px solid rgba(255,255,255,0.35)", boxShadow: "0 2px 10px rgba(0,0,0,0.3)" }} />
             ) : (
@@ -21597,7 +21648,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               où la place manque) : sur ordinateur, autant tout afficher directement.
               Cette zone scrolle seule si la liste dépasse la hauteur de l'écran, pour que
               Paramètres et Déconnexion, juste en dessous, restent toujours visibles. */}
-          <div data-kbscroll="true" className="flex flex-col gap-1 flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
+          <div data-kbscroll="true" className={"flex flex-col flex-1 overflow-y-auto" + (sbTight ? " gap-0" : " gap-1")} style={{ minHeight: 0 }}>
             {[
               // emoji + grad : mêmes couleurs que les badges de la barre de navigation mobile
               // (et du menu "Plus" mobile pour les onglets secondaires), pour que le menu
@@ -21615,17 +21666,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               // La gestion des employés reste TOUJOURS exclusive au propriétaire, quel que
               // soit le rôle de l'employé connecté (même un Gérant ne la voit pas).
               { id: "employees", label: t(lang, "empTabLabel"), icon: Users, grad: ["#0ea5e9", "#0369a1"], hidden: !!activeEmployee },
-              { id: "shopcompare", label: t(lang, "shopCompareTabLabel"), icon: BarChart3, grad: ["#c084fc", "#9333ea"], hidden: !hasFeatureAccess("shopComparison") || !!activeEmployee },
-              { id: "cashreport", label: t(lang, "cashReportTabLabel"), icon: Wallet, grad: ["#fbbf24", "#d97706"], hidden: !hasFeatureAccess("perEmployeeCashReport") || !!activeEmployee },
+              // Écrans des formules payantes : visibles avec un cadenas en Gratuit (ils mènent
+              // aux formules), pour qu'on sache qu'ils existent.
+              { id: "shopcompare", label: t(lang, "shopCompareTabLabel"), icon: BarChart3, grad: ["#c084fc", "#9333ea"], hidden: !!activeEmployee, locked: !hasFeatureAccess("shopComparison") },
+              { id: "cashreport", label: t(lang, "cashReportTabLabel"), icon: Wallet, grad: ["#fbbf24", "#d97706"], hidden: !!activeEmployee, locked: !hasFeatureAccess("perEmployeeCashReport") },
             ].filter((item) => !item.hidden).map((item) => {
               const Icon = item.icon;
               const active = tab === item.id;
               return (
                 <button
                   key={item.id}
-                  onClick={() => { setTab(item.id); setShowAddProduct(false); setShowSettings(false); }}
-                  title={sidebarCollapsed ? item.label : ""}
-                  className={"relative flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0" + (sidebarCollapsed ? " justify-center px-0" : " px-3")}
+                  onClick={() => { if (item.locked) { setShowSettings(true); setSettingsView("subscription"); return; } setTab(item.id); setShowAddProduct(false); setShowSettings(false); }}
+                  title={sidebarCollapsed ? item.label : item.locked ? tx(lang, "lockedNavHint") : ""}
+                  className={"relative flex items-center gap-3 rounded-xl text-sm font-semibold transition-all shrink-0" + (sbTight ? " py-1" : " py-2.5") + (sidebarCollapsed ? " justify-center px-0" : " px-3")}
                   style={{
                     background: active ? "rgba(255,255,255,0.12)" : "transparent",
                     boxShadow: active ? "inset 0 0 0 1px rgba(255,255,255,0.08)" : "none",
@@ -21637,7 +21690,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                   )}
                   <div
                     className="flex items-center justify-center rounded-lg shrink-0"
-                    style={{ width: 28, height: 28, background: `linear-gradient(145deg, ${item.grad[0]}, ${item.grad[1]})`, boxShadow: active ? `0 2px 10px ${item.grad[0]}88` : `0 2px 6px ${item.grad[0]}55`, transition: "box-shadow 0.2s ease" }}
+                    style={{ width: sbTight ? 22 : 28, height: sbTight ? 22 : 28, background: `linear-gradient(145deg, ${item.grad[0]}, ${item.grad[1]})`, boxShadow: active ? `0 2px 10px ${item.grad[0]}88` : `0 2px 6px ${item.grad[0]}55`, transition: "box-shadow 0.2s ease", opacity: item.locked ? 0.55 : 1 }}
                   >
                     {item.emoji ? (
                       <span style={{ fontSize: 15 }}>{item.emoji}</span>
@@ -21645,18 +21698,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <Icon size={15} color="white" strokeWidth={2.25} />
                     )}
                   </div>
-                  {!sidebarCollapsed && item.label}
+                  {!sidebarCollapsed && <span className="truncate" style={{ opacity: item.locked ? 0.6 : 1, minWidth: 0, textAlign: "start" }}>{item.label}</span>}
+                  {!sidebarCollapsed && item.locked && <span className="ml-auto" style={{ fontSize: 11 }}>🔒</span>}
                 </button>
               );
             })}
           </div>
           <div className="shrink-0">
             <div style={{ height: 1, background: "rgba(255,255,255,0.1)", margin: sidebarCollapsed ? "4px 2px 10px" : "4px 10px 10px" }} />
-            <button onClick={() => setShowSettings(true)} title={sidebarCollapsed ? t(lang, "settingsTitle") : ""} className={"flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold w-full transition-all" + (sidebarCollapsed ? " justify-center px-0" : " px-3")} style={{ background: showSettings ? "rgba(255,255,255,0.15)" : "transparent", color: showSettings ? "white" : "rgba(255,255,255,0.65)" }}>
+            <button onClick={() => setShowSettings(true)} title={sidebarCollapsed ? t(lang, "settingsTitle") : ""} className={"flex items-center gap-3 rounded-xl text-sm font-semibold w-full" + (sbTight ? " py-1.5" : " py-2.5") + " transition-all" + (sidebarCollapsed ? " justify-center px-0" : " px-3")} style={{ background: showSettings ? "rgba(255,255,255,0.15)" : "transparent", color: showSettings ? "white" : "rgba(255,255,255,0.65)" }}>
               <Settings size={17} strokeWidth={2.25} />
               {!sidebarCollapsed && t(lang, "settingsTitle")}
             </button>
-            <button onClick={() => { if (window.confirm(t(lang, "logoutConfirm"))) handleLogoutClean(); }} title={sidebarCollapsed ? t(lang, "othDeconnexion") : ""} className={"flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold w-full" + (sidebarCollapsed ? " justify-center px-0" : " px-3")} style={{ color: "rgba(255,255,255,0.5)" }}>
+            <button onClick={() => { if (window.confirm(t(lang, "logoutConfirm"))) handleLogoutClean(); }} title={sidebarCollapsed ? t(lang, "othDeconnexion") : ""} className={"flex items-center gap-3 rounded-xl text-sm font-semibold w-full" + (sbTight ? " py-1.5" : " py-2.5") + "" + (sidebarCollapsed ? " justify-center px-0" : " px-3")} style={{ color: "rgba(255,255,255,0.5)" }}>
               <LogOut size={17} strokeWidth={2.25} />
               {!sidebarCollapsed && t(lang, "othDeconnexion")}
             </button>
@@ -21674,7 +21728,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         onCut={(e) => e.preventDefault()}
         onContextMenu={(e) => e.preventDefault()}
       >
-      <style>{"@keyframes floatSlow { from { transform: translateY(-4px); } to { transform: translateY(4px); } } @keyframes aiSpin { to { transform: rotate(360deg); } } .app-root input, .app-root textarea { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; } @keyframes tapRelease { 0% { transform: scale(0.95); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } } @keyframes navCartPulse { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 65% { transform: scale(0.92); } 100% { transform: scale(1); } }"}</style>
+      <style>{".dk-cols { column-count: 2; column-gap: 14px; } .dk-cols > * { break-inside: avoid; margin-top: 0 !important; margin-bottom: 10px; } .dk-grid2 { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .dk-grid2 > * { margin-top: 0 !important; } @keyframes floatSlow { from { transform: translateY(-4px); } to { transform: translateY(4px); } } @keyframes aiSpin { to { transform: rotate(360deg); } } .app-root input, .app-root textarea { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; } @keyframes tapRelease { 0% { transform: scale(0.95); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } } @keyframes navCartPulse { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 65% { transform: scale(0.92); } 100% { transform: scale(1); } }"}</style>
       {showBalls && !LOW_END_DEVICE && <FloatingBalls dark={darkMode} colorId={ballColor} />}
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column" }}>
       {!isDesktop && (
@@ -21758,7 +21812,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             <p className="text-xs font-bold" style={{ color: darkMode ? "#fbbf24" : "#b45309" }}>👀 {t(lang, "demoMode")}</p>
             <p className="text-[11px] mt-0.5" style={{ color: darkMode ? "#fcd9a0" : "#92400e" }}>{tx(lang, "demoBannerDesc")}</p>
           </div>
-          <button onClick={() => onLogout()} className="flex-shrink-0 px-3 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#d97706", maxWidth: 150, lineHeight: 1.2 }}>{tx(lang, "demoCreateCta")}</button>
+          <button onClick={() => onLogout()} className="flex-shrink-0 px-3 py-2 rounded-lg text-[11px] font-bold text-white" style={{ background: "#d97706", maxWidth: isDesktop ? "none" : 150, whiteSpace: isDesktop ? "nowrap" : "normal", lineHeight: 1.2 }}>{tx(lang, "demoCreateCta")}</button>
         </div>
       )}
       {serialScan && typeof document !== "undefined" && createPortal(
@@ -21853,7 +21907,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           d'une liste (ex. journal de caisse) ne se retrouve pas caché sous le bouton flottant
           "Démasquer les données" quand on scrolle tout en bas. */}
         {tab === "dashboard" && (
-          <div className="space-y-2">
+          <div className={isDesktop && winW >= 1100 ? "dk-cols" : "space-y-2"}>
             {devModeAllowed && testPlanOverride && (
               <div onClick={() => setTestPlanOverride(null)} className="rounded-xl px-3 py-2" style={{ background: "rgba(168,85,247,0.14)", border: "1px dashed #a855f7", cursor: "pointer" }}>
                 <p style={{ color: "#a855f7", fontSize: 11, fontWeight: 700, textAlign: "center" }}>
@@ -21861,7 +21915,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 </p>
               </div>
             )}
-            <div className="px-1 mb-1">
+            <div className="px-1 mb-1" style={{ columnSpan: "all" }}>
               <p className="font-black" style={{ fontSize: 17, color: T.text }}>👋 {tx(lang, "debtReminderGreeting")}, {activeEmployee && activeEmployee.name ? activeEmployee.name : (shopName || PRIVACY_APP_NAME)}</p>
               <p className="text-[11px]" style={{ color: T.text }}>
                 {fullDateLong()}
@@ -23653,6 +23707,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
             )}
             {products.length === 0 && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "noProduct")}</p>}
             {products.length > 0 && filteredProducts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResults")} "{stockSearch}".</p>}
+            <div className={isDesktop && winW >= 1100 ? "dk-grid2" : "space-y-3"}>
             {(() => {
               // Les variantes d'un même modèle sont regroupées sous une carte d'en-tête
               // (nom, nombre de variantes, stock total, « + Variante »), à la place du premier
@@ -23832,6 +23887,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
               );
             })(row.p, row.inGroup))}
+            </div>
           </div>
         )}
         {tab === "sale" && hasBasePermission("sell") && !hasPermission("sell") && (
@@ -23842,7 +23898,8 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         )}
         {tab === "sale" && hasPermission("sell") && (
-          <div className="space-y-3">
+          <div className={splitCheckout ? "flex items-start gap-4" : ""}>
+          <div className="space-y-3" style={splitCheckout ? { flex: 1, minWidth: 0 } : undefined}>
             {(() => {
               // Barre de progression des ventes du jour, visible en permanence en haut de
               // l'onglet Vente (pas seulement quand un panier est ouvert) pour que le
@@ -24457,29 +24514,23 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </div>
                   </div>
                 )}
-                {activeCart.items.length > 0 && showCheckoutModal && typeof document !== "undefined" && createPortal(
-                <div
-                  onClick={() => setShowCheckoutModal(false)}
-                  className="fixed inset-0 flex items-end justify-center"
-                  style={{ background: "rgba(0,0,0,0.5)", zIndex: 9999 }}
-                >
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="w-full flex flex-col"
-                  style={{
-                    background: darkMode ? T.bg : "#f8fafc",
-                    maxHeight: "88vh",
-                    borderTopLeftRadius: 24,
-                    borderTopRightRadius: 24,
-                    boxShadow: "0 -8px 30px rgba(0,0,0,0.3)",
-                    paddingBottom: "env(safe-area-inset-bottom, 0px)",
-                  }}
-                >
+                {splitCheckout && activeCart.items.length === 0 && ckSlot && createPortal(
+                  <div className="p-6 text-center">
+                    <div style={{ fontSize: 40 }}>🧾</div>
+                    <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{tx(lang, "splitEmptyTitle")}</p>
+                    <p className="text-xs mt-1" style={{ color: T.muted }}>{tx(lang, "splitEmptyDesc")}</p>
+                  </div>,
+                  ckSlot
+                )}
+                {activeCart.items.length > 0 && (showCheckoutModal || splitCheckout) && typeof document !== "undefined" && ckWrap(
+                <>
                   <div className="flex items-center justify-between px-4 py-3 shrink-0" style={{ borderBottom: `1px solid ${T.border}` }}>
-                    <p className="text-base font-bold" style={{ color: T.text }}>{t(lang, "paymentShortcut")}</p>
+                    <p className="text-base font-bold" style={{ color: T.text }}>{splitCheckout ? `🧾 ${activeCart.label || t(lang, "paymentShortcut")}` : t(lang, "paymentShortcut")}</p>
+                    {!splitCheckout && (
                     <button onClick={() => setShowCheckoutModal(false)} className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.input, color: T.text }}>
                       <X size={18} />
                     </button>
+                    )}
                   </div>
                   <div className="space-y-2 overflow-y-auto p-3">
                   <div className="rounded-2xl overflow-hidden" style={{ background: darkMode ? T.card : "linear-gradient(135deg, #eff6ff, #dbeafe)", boxShadow: darkMode ? "none" : "0 8px 18px rgba(37,99,235,0.15)" }}>
@@ -24831,9 +24882,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                     </button>
                   </div>
                   </div>
-                </div>
-                </div>,
-                document.body
+                </>
                 )}
               </>
             )}
@@ -24854,13 +24903,17 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                           <span style={{ color: T.text }}>{txn.items.map((i) => i.productName).join(", ")}</span>
                           <span className="font-bold" style={{ color: T.text }}>{fcfa(txn.total)}</span>
                         </div>
+                        {!confirming && (
+                        <div className="mt-2 flex flex-wrap items-start gap-2">
+                        {!confirming && canDoReturns && returnableLines(txn.id).some((r) => r.max > 0) && (
+                          <div><button onClick={() => openReturn(txn.id)} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", borderColor: darkMode ? "rgba(127,178,255,0.4)" : "#bfdbfe" }}>↩️ {tx(lang, "returnBtn")}</button></div>
+                        )}
                         {canCancel && !confirming && (
-                          <button onClick={() => { setCancelSaleConfirmId(txn.id); setCancelSaleError(""); }} className="mt-2 text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: cancelColor, borderColor: cancelColor }}>
+                          <button onClick={() => { setCancelSaleConfirmId(txn.id); setCancelSaleError(""); }} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: cancelColor, borderColor: cancelColor }}>
                             <X size={12} /> {tx(lang, "cancelSaleBtn")}
                           </button>
                         )}
-                        {!confirming && canDoReturns && returnableLines(txn.id).some((r) => r.max > 0) && (
-                          <div className="mt-2"><button onClick={() => openReturn(txn.id)} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", borderColor: darkMode ? "rgba(127,178,255,0.4)" : "#bfdbfe" }}>↩️ {tx(lang, "returnBtn")}</button></div>
+                        </div>
                         )}
                         {confirming && (
                           <div className="mt-2 rounded-xl p-2.5" style={{ background: T.input }}>
@@ -24878,6 +24931,10 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                 )}
               </div>
             )}
+          </div>
+          {splitCheckout && (
+            <div ref={setCkSlot} className="flex flex-col overflow-hidden" style={{ width: 330, flexShrink: 0, position: "sticky", top: 0, maxHeight: Math.max(420, (typeof window !== "undefined" ? window.innerHeight : 800) / 1.35 - 70), background: darkMode ? T.card : "#f8fafc", borderRadius: 22, border: `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 10px 28px -14px rgba(15,23,42,0.25)" }} />
+          )}
           </div>
         )}
         {false && tab === "debts" && !isActive && (
@@ -25118,6 +25175,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               );
             })()}
             {unpaidDebts.length > 0 && filteredDebts.length === 0 && <p className="text-sm text-center mt-4" style={{ color: T.muted }}>{t(lang, "noResultsFilters")}</p>}
+            <div className={isDesktop && winW >= 1100 ? "dk-grid2" : "space-y-2"}>
             {filteredDebts.map((d) => {
               // En retard : une échéance a été fixée et elle est passée (comparaison de
               // simples chaînes "YYYY-MM-DD", comme todayKey() — pas de fuseau à gérer).
@@ -25195,6 +25253,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
               );
             })}
+            </div>
           </div>
         )}
         {false && tab === "stats" && !isActive && (
@@ -25209,6 +25268,11 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
         )}
         {tab === "stats" && (
           <div className="space-y-4">
+            {amountsHidden && (
+              <button onClick={() => setShowLockPinModal(true)} className="w-full rounded-xl px-3 py-2 text-xs font-bold flex items-center justify-center gap-1.5" style={{ background: darkMode ? "rgba(251,191,36,0.12)" : "#fffbeb", color: darkMode ? "#fbbf24" : "#92400e", border: `1px solid ${darkMode ? "rgba(251,191,36,0.3)" : "#fde68a"}` }}>
+                👁️ {tx(lang, "amountsHiddenPill")}
+              </button>
+            )}
             {benchmarkOptIn && (
               <div className="rounded-2xl p-3.5" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                 <div className="flex items-center gap-2 mb-2.5">
@@ -25374,10 +25438,19 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               </div>
               {!hasFeatureAccess("shopProfitabilityReport") ? (
                 <div>
+                  {/* Aperçu flouté : montre à quoi ressemble le classement, sans les vrais chiffres. */}
+                  <div aria-hidden="true" className="space-y-2 mb-3" style={{ filter: "blur(3px)", opacity: 0.7, pointerEvents: "none", userSelect: "none" }}>
+                    {[["██████ ████", 82, "32 %"], ["████ █████", 64, "27 %"], ["███████", 45, "19 %"]].map(([n, w, pc], i) => (
+                      <div key={i}>
+                        <div className="flex justify-between text-[11px] mb-1" style={{ color: T.text }}><span>{n}</span><span>{pc}</span></div>
+                        <div className="h-2 rounded-full" style={{ background: T.input }}><div className="h-2 rounded-full" style={{ width: w + "%", background: "#16a34a" }} /></div>
+                      </div>
+                    ))}
+                  </div>
                   <p className="text-[11px] mb-2" style={{ color: T.muted, lineHeight: 1.4 }}>{tx(lang, "feat_shopProfitabilityReport")}</p>
                   {!activeEmployee && (
-                    <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="text-xs font-bold underline" style={{ color: darkMode ? "#7fb2ff" : INDIGO }}>
-                      {t(lang, "planMenuLabel")}
+                    <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="w-full py-2.5 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1.5" style={{ background: "#16a34a" }}>
+                      <Lock size={12} /> {tx(lang, "upProfitBtn")}
                     </button>
                   )}
                 </div>
@@ -25541,19 +25614,25 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               {t(lang, "empIntro")}
             </p>
             {planInfo.maxEmployees !== null && employees.length >= planInfo.maxEmployees ? (
-              <div className="w-full mb-4 py-3 rounded-xl text-center" style={{ background: T.input }}>
-                <p className="text-xs font-semibold mb-1" style={{ color: T.text }}>
+              <div className="w-full mb-4 p-4 rounded-2xl text-center" style={{ background: darkMode ? "rgba(37,99,235,0.10)" : "#eff6ff", border: `1px solid ${darkMode ? "rgba(37,99,235,0.3)" : "#bfdbfe"}` }}>
+                <p className="text-xs font-semibold mb-2" style={{ color: T.text }}>
                   {(planInfo.maxEmployees === 0 ? tx(lang, "empNotInPlan") : t(lang, "empLimitReached").replace("{n}", planInfo.maxEmployees)).replace("{plan}", t(lang, planInfo.nameKey))}
                 </p>
-                <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="text-xs font-bold underline" style={{ color: T.accent }}>
-                  {t(lang, "planMenuLabel")}
+                {planInfo.maxEmployees === 0 && (
+                  <div className="text-[11px] mb-3 space-y-1" style={{ color: T.muted, textAlign: "start", display: "inline-block" }}>
+                    <p>✅ {tx(lang, "upStaffBenefit1")}</p>
+                    <p>✅ {tx(lang, "upStaffBenefit2")}</p>
+                  </div>
+                )}
+                <button onClick={() => { setShowSettings(true); setSettingsView("subscription"); }} className="w-full py-2.5 rounded-xl text-xs font-bold text-white" style={{ background: "#2563eb" }}>
+                  {tx(lang, "upStaffBtn")}
                 </button>
               </div>
             ) : (
               <button
                 onClick={openAddEmployee}
                 className="w-full mb-4 py-3 rounded-xl font-semibold text-sm text-white flex items-center justify-center gap-2"
-                style={{ background: INDIGO }}
+                style={{ background: "#2563eb" }}
               >
                 <Plus size={16} /> {t(lang, "empAddBtn")}
               </button>
@@ -25746,6 +25825,18 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               ))}
             </div>
             {shopComparisonLoading && <p className="text-sm text-center mt-8" style={{ color: T.muted }}>{t(lang, "wait")}</p>}
+            {!shopComparisonLoading && shops.length < 2 && (
+              <div className="rounded-3xl p-6 text-center mb-3" style={{ background: T.card, border: darkMode ? "none" : `1px solid ${T.border}` }}>
+                <div style={{ fontSize: 38 }}>🏪🏪</div>
+                <p className="text-sm font-bold mt-2" style={{ color: T.text }}>{tx(lang, "cmpOneShopTitle")}</p>
+                <p className="text-xs mt-1 mb-4" style={{ color: T.muted, lineHeight: 1.5 }}>{tx(lang, "cmpOneShopDesc")}</p>
+                {!isDemo && (
+                  <button onClick={() => setShowShopSwitcher(true)} className="px-5 py-3 rounded-2xl text-white text-sm font-bold inline-flex items-center gap-2" style={{ background: "#2563eb" }}>
+                    <Plus size={15} /> {tx(lang, "cmpAddShop")}
+                  </button>
+                )}
+              </div>
+            )}
             {/* Classement par rentabilité (Business, voir shopProfitabilityReport) : du plus
                 au moins rentable, seulement affiché s'il y a plus d'une boutique à comparer —
                 sinon un classement d'un seul élément n'a pas de sens. */}
@@ -25816,7 +25907,12 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         )}
         {tab === "cash" && hasPermission("viewCash") && cashView && (
-          <div className="space-y-2">
+          <div className={isDesktop && winW >= 1100 ? "dk-cols" : "space-y-2"}>
+            {amountsHidden && (
+              <button onClick={() => setShowLockPinModal(true)} className="w-full rounded-xl px-3 py-2 text-xs font-bold flex items-center justify-center gap-1.5" style={{ background: darkMode ? "rgba(251,191,36,0.12)" : "#fffbeb", color: darkMode ? "#fbbf24" : "#92400e", border: `1px solid ${darkMode ? "rgba(251,191,36,0.3)" : "#fde68a"}`, columnSpan: "all" }}>
+                👁️ {tx(lang, "amountsHiddenPill")}
+              </button>
+            )}
             {(
               <div className="rounded-2xl overflow-hidden p-4 relative" style={{ background: cashBalance < 0 ? (darkMode ? "linear-gradient(135deg, #3a1f1f, #241010)" : "linear-gradient(135deg, #b8562f, #92400e)") : (darkMode ? "linear-gradient(135deg, #0f2f26, #08201a)" : "linear-gradient(135deg, #059669, #047857)"), boxShadow: darkMode ? "none" : `0 10px 22px ${cashBalance < 0 ? "rgba(184,86,47,0.28)" : "rgba(5,150,105,0.28)"}` }}>
                 <div className="flex items-center justify-between">
@@ -26139,27 +26235,27 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
               return (
                 <div key={person.id || "owner"} className="rounded-2xl p-4 mb-3" style={{ background: T.card, color: T.text, border: darkMode ? "none" : `1px solid ${T.border}`, boxShadow: darkMode ? "none" : "0 4px 14px rgba(0,0,0,0.06)" }}>
                   <p className="text-sm font-bold mb-3">{person.name}</p>
-                  <div className="grid grid-cols-2 gap-2 mb-3">
+                  <div className={"grid gap-2 mb-3 " + (isDesktop && winW >= 1100 ? "grid-cols-4" : "grid-cols-2")}>
                     <div>
-                      <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "cashReportTotalSales")}</p>
+                      <p className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "cashReportTotalSales")}</p>
                       <p className="text-sm font-extrabold" style={{ color: darkMode ? "#8fd6a3" : "#16a34a" }}>{fcfa(totalRevenue)}</p>
                     </div>
                     <div>
-                      <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "cashReportCash")}</p>
+                      <p className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "cashReportCash")}</p>
                       <p className="text-sm font-extrabold">{fcfa(revenueByMethod.cash)}</p>
                     </div>
                     <div>
-                      <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "cashReportMobile")}</p>
+                      <p className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "cashReportMobile")}</p>
                       <p className="text-sm font-extrabold">{fcfa(revenueByMethod.mobile)}</p>
                     </div>
                     <div>
-                      <p className="text-[10px]" style={{ color: T.muted }}>{t(lang, "cashReportCard")}</p>
+                      <p className="text-xs font-semibold" style={{ color: T.muted }}>{t(lang, "cashReportCard")}</p>
                       <p className="text-sm font-extrabold">{fcfa(revenueByMethod.card)}</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-between text-xs pt-2" style={{ borderTop: `1px solid ${T.border}` }}>
                     <span style={{ color: T.muted }}>{t(lang, "cashReportExpenses")}</span>
-                    <span className="font-bold" style={{ color: darkMode ? CLAY : "#e11d48" }}>-{fcfa(personExpenses)}</span>
+                    <span className="font-bold" style={{ color: personExpenses > 0 ? (darkMode ? CLAY : "#e11d48") : T.muted }}>{personExpenses > 0 ? "-" : ""}{fcfa(personExpenses)}</span>
                   </div>
                   <div className="flex items-center justify-between text-xs mt-1">
                     <span style={{ color: T.muted }}>{t(lang, "cashReportDebtPayments")}</span>
@@ -26394,16 +26490,16 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
                       <div className="mt-2"><button onClick={() => openReturn(h.refId)} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", borderColor: darkMode ? "rgba(127,178,255,0.4)" : "#bfdbfe" }}>↩️ {tx(lang, "returnBtn")}</button></div>
                     );
                     return (
-                      <div className="mt-2">
+                      <div className="mt-2 flex flex-wrap items-start gap-2">
                         {!confirming && canReturn && (
-                          <div className="mb-2"><button onClick={() => openReturn(h.refId)} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", borderColor: darkMode ? "rgba(127,178,255,0.4)" : "#bfdbfe" }}>↩️ {tx(lang, "returnBtn")}</button></div>
+                          <div><button onClick={() => openReturn(h.refId)} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: darkMode ? "#7fb2ff" : "#2563eb", borderColor: darkMode ? "rgba(127,178,255,0.4)" : "#bfdbfe" }}>↩️ {tx(lang, "returnBtn")}</button></div>
                         )}
                         {!confirming ? (
                           <button onClick={() => { setCancelSaleConfirmId(h.refId); setCancelSaleError(""); }} className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border" style={{ color: cancelColor, borderColor: cancelColor }}>
                             <X size={12} /> {tx(lang, "cancelSaleBtn")}
                           </button>
                         ) : (
-                          <div className="rounded-xl p-2.5" style={{ background: T.input }}>
+                          <div className="rounded-xl p-2.5 w-full" style={{ background: T.input }}>
                             <p className="text-[11px] mb-2" style={{ color: T.text }}>{tx(lang, "cancelSaleConfirmMsg")}</p>
                             {cancelSaleError && <p className="text-[11px] mb-2" style={{ color: CLAY }}>{cancelSaleError}</p>}
                             <div className="flex gap-2">
@@ -28867,7 +28963,7 @@ Réponds par défaut en ${langLabel}, sauf si l'utilisateur a écrit sa question
           </div>
         </div>
       )}
-      {showPaymentShortcut && !showCheckoutModal && !showTabHelp && !showSettings && activeCart && typeof document !== "undefined" && createPortal(
+      {showPaymentShortcut && !showCheckoutModal && !splitCheckout && !showTabHelp && !showSettings && activeCart && typeof document !== "undefined" && createPortal(
         <button
           onClick={() => setShowCheckoutModal(true)}
           className="fixed left-1/2 flex items-center gap-2 px-5 py-3 rounded-full text-white font-extrabold text-sm active:scale-95"
